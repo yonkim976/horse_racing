@@ -119,3 +119,13 @@ def test_dashboard_health_check(tmp_path: Path) -> None:
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        response = client.get("/?date=2026-08-21&meet=")
+
+    assert response.status_code == 200
+    assert "전체 경마장" in response.text

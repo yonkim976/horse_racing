@@ -31,14 +31,15 @@ def create_app(
     def dashboard(
         request: Request,
         race_date: Annotated[date | None, Query(alias="date")] = None,
-        meet: Annotated[int | None, Query()] = None,
+        meet: Annotated[str | None, Query()] = None,
         race_id: Annotated[int | None, Query()] = None,
     ) -> HTMLResponse:
+        selected_meet = int(meet) if meet and meet.isdigit() else None
         with session_factory() as session:
             data = load_dashboard(
                 session,
                 selected_date=race_date,
-                selected_meet=meet,
+                selected_meet=selected_meet,
                 selected_race_id=race_id,
             )
         return templates.TemplateResponse(
