@@ -11,7 +11,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from horse_racing.collectors.kra_api import (
@@ -24,6 +24,7 @@ from horse_racing.collectors.kra_api import (
     RACE_PLAN_ENDPOINT,
     RACE_PLAN_OPERATION,
     KraApiClient,
+    response_body,
 )
 from horse_racing.db.models import (
     Horse,
@@ -80,7 +81,83 @@ class RaceDayIngestionSummary:
         return sum(stage.records_written for stage in self.stages.values())
 
 
-def ingest_race_day(
+def result_data_exists(
+    client: KraApiClient,
+    *,
+    race_date: str,
+    meet: int,
+) -> bool:
+    fetched = next(
+        client.iter_pages(
+            endpoint=AI_RACE_RESULT_ENDPOINT,
+            operation=AI_RACE_RESULT_OPERATION,
+            public_params={"rccrs_cd": meet, "race_dt": race_date, "_type": "json"},
+            page_size=1,
+        )
+    )
+    body = response_body(fetched.payload)
+    try:
+        return int(body.get("totalCount") or 0) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def race_day_is_complete(
+    session: Session,
+    *,
+    race_date: date,
+    meet: int,
+) -> bool:
+    all_race_count = session.scalar(
+        select(func.count())
+        .select_from(Race)
+        .join(Race.racecourse)
+        .where(
+            Racecourse.kra_meet_code == meet,
+            Race.race_date_local == race_date,
+        )
+    )
+    race_ids = list(
+        session.scalars(
+            select(Race.id)
+            .join(Race.racecourse)
+            .where(
+                Racecourse.kra_meet_code == meet,
+                Race.race_date_local == race_date,
+                Race.status == "completed",
+            )
+        )
+    )
+    if not race_ids or all_race_count != len(race_ids):
+        return False
+    entry_count = session.scalar(
+        select(func.count()).select_from(RaceEntry).where(RaceEntry.race_id.in_(race_ids))
+    )
+    result_count = session.scalar(
+        select(func.count())
+        .select_from(RaceResult)
+        .join(RaceEntry)
+        .where(RaceEntry.race_id.in_(race_ids))
+    )
+    odds_count = session.scalar(
+        select(func.count()).select_from(OddsSnapshot).where(OddsSnapshot.race_id.in_(race_ids))
+    )
+    completed_dividend_run = session.scalar(
+        select(func.count())
+        .select_from(IngestionRun)
+        .join(SourceDocument)
+        .where(
+            IngestionRun.data_type == "final_dividend",
+            IngestionRun.status == "completed",
+            func.json_extract(SourceDocument.request_params_json, "$.meet") == meet,
+            func.json_extract(SourceDocument.request_params_json, "$.rc_date")
+            == race_date.strftime("%Y%m%d"),
+        )
+    )
+    return bool(entry_count and result_count and odds_count and completed_dividend_run)
+
+
+def ingest_race_schedule(
     session: Session,
     client: KraApiClient,
     *,
@@ -89,7 +166,6 @@ def ingest_race_day(
     raw_data_dir: Path,
     page_size: int = 1000,
 ) -> RaceDayIngestionSummary:
-    """Collect the five foundational datasets for one racecourse and race date."""
     common = {"rccrs_cd": meet, "race_dt": race_date, "_type": "json"}
     stages: dict[str, IngestionSummary] = {}
     stages["race_plan"] = _ingest_dataset(
@@ -117,6 +193,29 @@ def ingest_race_day(
         raw_data_dir=raw_data_dir,
         page_size=page_size,
     )
+    return RaceDayIngestionSummary(stages=stages)
+
+
+def ingest_race_day(
+    session: Session,
+    client: KraApiClient,
+    *,
+    race_date: str,
+    meet: int,
+    raw_data_dir: Path,
+    page_size: int = 1000,
+) -> RaceDayIngestionSummary:
+    """Collect the five foundational datasets for one racecourse and race date."""
+    common = {"rccrs_cd": meet, "race_dt": race_date, "_type": "json"}
+    schedule_summary = ingest_race_schedule(
+        session,
+        client,
+        race_date=race_date,
+        meet=meet,
+        raw_data_dir=raw_data_dir,
+        page_size=page_size,
+    )
+    stages = dict(schedule_summary.stages)
     stages["ai_race_result"] = _ingest_dataset(
         session,
         client,
@@ -398,7 +497,10 @@ def _write_final_dividends(
 ) -> int:
     racecourse = _upsert_racecourse(session, meet)
     observed_at_ms = _now_ms()
+    records_written = 0
     for item in items:
+        if item.odds is None:
+            continue
         race = _find_race(session, racecourse, item.race_date, item.race_number)
         if race is None:
             raise ValueError(
@@ -413,7 +515,8 @@ def _write_final_dividends(
             odds=item.odds,
             observed_at_ms=observed_at_ms,
         )
-    return len(items)
+        records_written += 1
+    return records_written
 
 
 def _upsert_race(

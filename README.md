@@ -92,6 +92,24 @@ UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing collect-race
 최종 배당률 API는 한 경주일의 조합별 배당이 많으므로 기본 페이지 크기는 1,000건이며,
 전체 건수가 더 많으면 자동으로 다음 페이지까지 수집합니다.
 
+기간 내 결과가 존재하는 경주일을 자동 탐색하여 일괄 수집할 수도 있습니다. 완료된
+날짜는 경주·결과·확정배당 저장 상태를 확인한 뒤 자동으로 건너뜁니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing backfill-results \
+  --start 20260101 \
+  --end 20260821 \
+  --meets 1 2 3
+```
+
+아직 결과가 나오지 않은 날짜는 경주계획과 출전표만 별도로 수집합니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing collect-schedule \
+  --dates 20260822 20260823 \
+  --meets 1 2 3
+```
+
 ## 일정·결과 대시보드
 
 로컬 SQLite에 저장된 데이터를 날짜와 경마장별로 조회할 수 있습니다. 경주 목록에서 한

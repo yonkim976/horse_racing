@@ -1,6 +1,6 @@
 import argparse
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from sqlalchemy import inspect, text
@@ -10,7 +10,12 @@ from horse_racing.config import get_settings
 from horse_racing.db.engine import create_engine_for_url
 from horse_racing.db.session import SessionLocal
 from horse_racing.services.entry_sheet import MEET_METADATA, ingest_entry_sheet
-from horse_racing.services.race_day import ingest_race_day
+from horse_racing.services.race_day import (
+    ingest_race_day,
+    ingest_race_schedule,
+    race_day_is_complete,
+    result_data_exists,
+)
 
 
 def database_path(database_url: str) -> Path | None:
@@ -121,6 +126,122 @@ def collect_race_day(race_date: str, meet: int, page_size: int) -> int:
     return 0
 
 
+def collect_schedule(race_dates: list[str], meets: list[int], page_size: int) -> int:
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print(
+            "HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.",
+            file=sys.stderr,
+        )
+        return 2
+
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        for race_date in race_dates:
+            for meet in meets:
+                summary = ingest_race_schedule(
+                    session,
+                    client,
+                    race_date=race_date,
+                    meet=meet,
+                    raw_data_dir=settings.raw_data_dir,
+                    page_size=page_size,
+                )
+                fetched = summary.records_fetched
+                if fetched:
+                    print(
+                        f"일정 수집: 날짜={race_date}, 경마장={MEET_METADATA[meet][1]}, "
+                        f"fetched={fetched}",
+                        flush=True,
+                    )
+                session.expunge_all()
+    return 0
+
+
+def backfill_results(
+    start_date: str,
+    end_date: str,
+    meets: list[int],
+    page_size: int,
+) -> int:
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print(
+            "HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.",
+            file=sys.stderr,
+        )
+        return 2
+
+    start = datetime.strptime(start_date, "%Y%m%d").date()
+    end = datetime.strptime(end_date, "%Y%m%d").date()
+    if start > end:
+        raise ValueError("시작일은 종료일보다 늦을 수 없습니다.")
+
+    checked = 0
+    found = 0
+    collected = 0
+    skipped = 0
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        current = start
+        while current <= end:
+            race_date = current.strftime("%Y%m%d")
+            for meet in meets:
+                checked += 1
+                if race_day_is_complete(session, race_date=current, meet=meet):
+                    found += 1
+                    skipped += 1
+                    print(
+                        f"기존 완료 데이터 유지: {race_date} {MEET_METADATA[meet][1]}",
+                        flush=True,
+                    )
+                    continue
+                if not result_data_exists(client, race_date=race_date, meet=meet):
+                    if checked % 21 == 0:
+                        print(
+                            f"결과일 탐색 중: {race_date} / 확인 {checked}건",
+                            flush=True,
+                        )
+                    continue
+
+                found += 1
+                summary = ingest_race_day(
+                    session,
+                    client,
+                    race_date=race_date,
+                    meet=meet,
+                    raw_data_dir=settings.raw_data_dir,
+                    page_size=page_size,
+                )
+                collected += 1
+                print(
+                    f"결과 수집 완료: {race_date} {MEET_METADATA[meet][1]} / "
+                    f"fetched={summary.records_fetched}",
+                    flush=True,
+                )
+                session.expunge_all()
+            current += timedelta(days=1)
+
+    print(
+        f"백필 완료: 기간={start_date}~{end_date}, 확인={checked}, "
+        f"경주일={found}, 신규수집={collected}, 기존완료={skipped}",
+        flush=True,
+    )
+    return 0
+
+
 def serve_dashboard(host: str, port: int, reload: bool) -> int:
     import uvicorn
 
@@ -153,6 +274,25 @@ def main() -> int:
     race_day_parser.add_argument("--date", required=True, type=valid_race_date)
     race_day_parser.add_argument("--meet", required=True, type=int, choices=sorted(MEET_METADATA))
     race_day_parser.add_argument("--page-size", type=int, default=1000)
+    schedule_parser = subparsers.add_parser(
+        "collect-schedule",
+        help="Collect race plans and entry sheets for one or more dates",
+    )
+    schedule_parser.add_argument("--dates", required=True, nargs="+", type=valid_race_date)
+    schedule_parser.add_argument(
+        "--meets", nargs="+", type=int, choices=sorted(MEET_METADATA), default=[1, 2, 3]
+    )
+    schedule_parser.add_argument("--page-size", type=int, default=1000)
+    backfill_parser = subparsers.add_parser(
+        "backfill-results",
+        help="Discover and collect every completed race day in a date range",
+    )
+    backfill_parser.add_argument("--start", required=True, type=valid_race_date)
+    backfill_parser.add_argument("--end", required=True, type=valid_race_date)
+    backfill_parser.add_argument(
+        "--meets", nargs="+", type=int, choices=(1, 2, 3), default=[1, 2, 3]
+    )
+    backfill_parser.add_argument("--page-size", type=int, default=1000)
     dashboard_parser = subparsers.add_parser(
         "serve-dashboard",
         help="Run the local race schedule and result dashboard",
@@ -175,6 +315,18 @@ def main() -> int:
             return collect_race_day(args.date, args.meet, args.page_size)
         except (KraApiError, ValueError) as exc:
             print(f"수집 실패: {exc}", file=sys.stderr)
+            return 1
+    if args.command == "collect-schedule":
+        try:
+            return collect_schedule(args.dates, args.meets, args.page_size)
+        except (KraApiError, ValueError) as exc:
+            print(f"일정 수집 실패: {exc}", file=sys.stderr)
+            return 1
+    if args.command == "backfill-results":
+        try:
+            return backfill_results(args.start, args.end, args.meets, args.page_size)
+        except (KraApiError, ValueError) as exc:
+            print(f"백필 실패: {exc}", file=sys.stderr)
             return 1
     if args.command == "serve-dashboard":
         return serve_dashboard(args.host, args.port, args.reload)

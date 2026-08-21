@@ -17,8 +17,17 @@ from horse_racing.db.models import (
     RaceResult,
     SourceDocument,
 )
-from horse_racing.parsers.race_day import parse_body_weight, parse_track_status
-from horse_racing.services.race_day import ingest_race_day
+from horse_racing.parsers.race_day import (
+    AiRaceResultItem,
+    FinalDividendItem,
+    parse_body_weight,
+    parse_track_status,
+)
+from horse_racing.services.race_day import (
+    ingest_race_day,
+    race_day_is_complete,
+    result_data_exists,
+)
 
 ENTRY_FIXTURE = Path(__file__).parent / "fixtures" / "entry_sheet_page.json"
 
@@ -193,6 +202,26 @@ def test_race_day_parsing_helpers() -> None:
     assert parse_track_status("건조 (3%)") == ("건조", 3.0)
 
 
+def test_zero_finish_time_and_position_are_treated_as_missing() -> None:
+    item = ai_result_payload()["response"]["body"]["items"]["item"][0]
+    item["rk"] = "0"
+    item["raceRcd"] = "0"
+
+    parsed = AiRaceResultItem.model_validate(item)
+
+    assert parsed.finish_position is None
+    assert parsed.finish_time_ms is None
+
+
+def test_zero_final_dividend_is_treated_as_unsold() -> None:
+    item = final_dividend_payload()["response"]["body"]["items"]["item"][0]
+    item["odds"] = "0"
+
+    parsed = FinalDividendItem.model_validate(item)
+
+    assert parsed.odds is None
+
+
 def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> None:
     entry_payload = json.loads(ENTRY_FIXTURE.read_text(encoding="utf-8"))
     responses = {
@@ -272,3 +301,23 @@ def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> 
         assert qnl is not None
         assert qnl.odds == 4.8
         assert all(run.status == "completed" for run in session.scalars(select(IngestionRun)))
+        assert race_day_is_complete(
+            session,
+            race_date=race.race_date_local,
+            meet=1,
+        )
+
+
+def test_result_data_exists_uses_lightweight_probe() -> None:
+    payload = ai_result_payload()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.url.params["numOfRows"] == "1"
+        assert request.url.params["race_dt"] == "20260822"
+        return httpx.Response(200, json=payload, request=request)
+
+    with KraApiClient(
+        "secret-test-key",
+        transport=httpx.MockTransport(handler),
+    ) as client:
+        assert result_data_exists(client, race_date="20260822", meet=1)

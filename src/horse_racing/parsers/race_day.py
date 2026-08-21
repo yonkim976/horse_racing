@@ -89,10 +89,15 @@ class AiRaceResultItem(KraItem):
     def parse_date(cls, value: Any) -> date:
         return _parse_date(value)
 
-    @field_validator("race_number", "distance_m", "horse_number", "finish_position", mode="before")
+    @field_validator("race_number", "distance_m", "horse_number", mode="before")
     @classmethod
     def parse_integer(cls, value: Any) -> int | None:
         return _parse_int(value)
+
+    @field_validator("finish_position", mode="before")
+    @classmethod
+    def parse_finish_position(cls, value: Any) -> int | None:
+        return _parse_positive_int(value)
 
     @field_validator("horse_id", mode="before")
     @classmethod
@@ -183,7 +188,6 @@ class DetailedRaceResultItem(KraItem):
         "distance_m",
         "race_day_count",
         "horse_number",
-        "finish_position",
         "prize_money_krw",
         "bonus_prize_money_krw",
         mode="before",
@@ -191,6 +195,11 @@ class DetailedRaceResultItem(KraItem):
     @classmethod
     def parse_integer(cls, value: Any) -> int | None:
         return _parse_int(value)
+
+    @field_validator("finish_position", mode="before")
+    @classmethod
+    def parse_finish_position(cls, value: Any) -> int | None:
+        return _parse_positive_int(value)
 
     @field_validator("horse_id", mode="before")
     @classmethod
@@ -253,7 +262,7 @@ class FinalDividendItem(KraItem):
     horse_number_1: int = Field(alias="chulNo")
     horse_number_2: int = Field(default=0, alias="chulNo2")
     horse_number_3: int = Field(default=0, alias="chulNo3")
-    odds: float
+    odds: float | None
 
     @field_validator("race_date", mode="before")
     @classmethod
@@ -273,11 +282,9 @@ class FinalDividendItem(KraItem):
 
     @field_validator("odds", mode="before")
     @classmethod
-    def parse_odds(cls, value: Any) -> float:
+    def parse_odds(cls, value: Any) -> float | None:
         parsed = _parse_float(value)
-        if parsed is None or parsed <= 0:
-            raise ValueError("배당률은 0보다 커야 합니다.")
-        return parsed
+        return parsed if parsed is not None and parsed > 0 else None
 
     @property
     def selection_key(self) -> str:
@@ -353,13 +360,19 @@ def _parse_float(value: Any) -> float | None:
         return None
 
 
+def _parse_positive_int(value: Any) -> int | None:
+    parsed = _parse_int(value)
+    return parsed if parsed is not None and parsed > 0 else None
+
+
 def _parse_race_time_ms(value: Any) -> int | None:
     text = _text_or_none(value)
     if text is None:
         return None
     if ":" not in text:
         try:
-            return round(float(text) * 1000)
+            milliseconds = round(float(text) * 1000)
+            return milliseconds if milliseconds > 0 else None
         except ValueError:
             return None
     parts = text.split(":")
@@ -372,7 +385,8 @@ def _parse_race_time_ms(value: Any) -> int | None:
             return None
     except ValueError:
         return None
-    return round(seconds * 1000)
+    milliseconds = round(seconds * 1000)
+    return milliseconds if milliseconds > 0 else None
 
 
 def _required_id(value: Any, label: str) -> str:
