@@ -81,6 +81,59 @@ class RaceDayIngestionSummary:
         return sum(stage.records_written for stage in self.stages.values())
 
 
+@dataclass(frozen=True, slots=True)
+class EntryPeopleRepairSummary:
+    examined: int
+    repaired: int
+    unresolved: int
+
+
+def repair_missing_entry_people(session: Session) -> EntryPeopleRepairSummary:
+    missing_entries = list(
+        session.scalars(
+            select(RaceEntry).where(
+                (RaceEntry.trainer_id.is_(None)) | (RaceEntry.owner_id.is_(None))
+            )
+        )
+    )
+    repaired = 0
+    for entry in missing_entries:
+        if entry.trainer_id is None:
+            trainer_ids = list(
+                session.scalars(
+                    select(RaceEntry.trainer_id)
+                    .where(
+                        RaceEntry.horse_id == entry.horse_id,
+                        RaceEntry.trainer_id.is_not(None),
+                    )
+                    .distinct()
+                )
+            )
+            if len(trainer_ids) == 1:
+                entry.trainer_id = trainer_ids[0]
+        if entry.owner_id is None:
+            owner_ids = list(
+                session.scalars(
+                    select(RaceEntry.owner_id)
+                    .where(
+                        RaceEntry.horse_id == entry.horse_id,
+                        RaceEntry.owner_id.is_not(None),
+                    )
+                    .distinct()
+                )
+            )
+            if len(owner_ids) == 1:
+                entry.owner_id = owner_ids[0]
+        if entry.trainer_id is not None and entry.owner_id is not None:
+            repaired += 1
+    session.commit()
+    return EntryPeopleRepairSummary(
+        examined=len(missing_entries),
+        repaired=repaired,
+        unresolved=len(missing_entries) - repaired,
+    )
+
+
 def result_data_exists(
     client: KraApiClient,
     *,
@@ -142,6 +195,39 @@ def race_day_is_complete(
     odds_count = session.scalar(
         select(func.count()).select_from(OddsSnapshot).where(OddsSnapshot.race_id.in_(race_ids))
     )
+    completed_dividend_run = final_dividend_is_complete(
+        session,
+        race_date=race_date,
+        meet=meet,
+    )
+    return bool(entry_count and result_count and odds_count and completed_dividend_run)
+
+
+def result_day_is_stored(
+    session: Session,
+    *,
+    race_date: date,
+    meet: int,
+) -> bool:
+    race_count = session.scalar(
+        select(func.count())
+        .select_from(Race)
+        .join(Race.racecourse)
+        .where(
+            Racecourse.kra_meet_code == meet,
+            Race.race_date_local == race_date,
+            Race.status == "completed",
+        )
+    )
+    return bool(race_count)
+
+
+def final_dividend_is_complete(
+    session: Session,
+    *,
+    race_date: date,
+    meet: int,
+) -> bool:
     completed_dividend_run = session.scalar(
         select(func.count())
         .select_from(IngestionRun)
@@ -154,7 +240,7 @@ def race_day_is_complete(
             == race_date.strftime("%Y%m%d"),
         )
     )
-    return bool(entry_count and result_count and odds_count and completed_dividend_run)
+    return bool(completed_dividend_run)
 
 
 def ingest_race_schedule(
@@ -204,6 +290,7 @@ def ingest_race_day(
     meet: int,
     raw_data_dir: Path,
     page_size: int = 1000,
+    include_dividends: bool = True,
 ) -> RaceDayIngestionSummary:
     """Collect the five foundational datasets for one racecourse and race date."""
     common = {"rccrs_cd": meet, "race_dt": race_date, "_type": "json"}
@@ -250,7 +337,28 @@ def ingest_race_day(
         raw_data_dir=raw_data_dir,
         page_size=page_size,
     )
-    stages["final_dividend"] = _ingest_dataset(
+    if include_dividends:
+        stages["final_dividend"] = ingest_final_dividends(
+            session,
+            client,
+            race_date=race_date,
+            meet=meet,
+            raw_data_dir=raw_data_dir,
+            page_size=page_size,
+        )
+    return RaceDayIngestionSummary(stages=stages)
+
+
+def ingest_final_dividends(
+    session: Session,
+    client: KraApiClient,
+    *,
+    race_date: str,
+    meet: int,
+    raw_data_dir: Path,
+    page_size: int = 20_000,
+) -> IngestionSummary:
+    return _ingest_dataset(
         session,
         client,
         definition=DatasetDefinition(
@@ -267,7 +375,6 @@ def ingest_race_day(
         raw_data_dir=raw_data_dir,
         page_size=page_size,
     )
-    return RaceDayIngestionSummary(stages=stages)
 
 
 def _ingest_dataset[ItemT: BaseModel](
@@ -460,15 +567,19 @@ def _write_detailed_results(
             body_weight_text=item.body_weight_text,
         )
         entry.equipment = item.equipment
-        entry.jockey = _upsert_person(
+        jockey = _upsert_person(
             session, Jockey, "kra_jockey_id", item.jockey_id, item.jockey_name, None
         )
-        entry.trainer = _upsert_person(
+        trainer = _upsert_person(
             session, Trainer, "kra_trainer_id", item.trainer_id, item.trainer_name, None
         )
-        entry.owner = _upsert_person(
-            session, Owner, "kra_owner_id", item.owner_id, item.owner_name, None
-        )
+        owner = _upsert_person(session, Owner, "kra_owner_id", item.owner_id, item.owner_name, None)
+        if jockey is not None:
+            entry.jockey = jockey
+        if trainer is not None:
+            entry.trainer = trainer
+        if owner is not None:
+            entry.owner = owner
         _upsert_result(
             session,
             entry,

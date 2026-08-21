@@ -1,20 +1,25 @@
 import argparse
 import sys
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
 from sqlalchemy import inspect, text
 
-from horse_racing.collectors.kra_api import KraApiClient, KraApiError
+from horse_racing.collectors.kra_api import KraApiClient, KraApiError, KraApiRateLimitError
 from horse_racing.config import get_settings
 from horse_racing.db.engine import create_engine_for_url
 from horse_racing.db.session import SessionLocal
 from horse_racing.services.entry_sheet import MEET_METADATA, ingest_entry_sheet
 from horse_racing.services.race_day import (
+    final_dividend_is_complete,
+    ingest_final_dividends,
     ingest_race_day,
     ingest_race_schedule,
     race_day_is_complete,
+    repair_missing_entry_people,
     result_data_exists,
+    result_day_is_stored,
 )
 
 
@@ -169,6 +174,7 @@ def backfill_results(
     end_date: str,
     meets: list[int],
     page_size: int,
+    include_dividends: bool,
 ) -> int:
     settings = get_settings()
     if settings.data_go_kr_service_key is None:
@@ -200,7 +206,12 @@ def backfill_results(
             race_date = current.strftime("%Y%m%d")
             for meet in meets:
                 checked += 1
-                if race_day_is_complete(session, race_date=current, meet=meet):
+                day_is_complete = (
+                    race_day_is_complete(session, race_date=current, meet=meet)
+                    if include_dividends
+                    else result_day_is_stored(session, race_date=current, meet=meet)
+                )
+                if day_is_complete:
                     found += 1
                     skipped += 1
                     print(
@@ -224,6 +235,7 @@ def backfill_results(
                     meet=meet,
                     raw_data_dir=settings.raw_data_dir,
                     page_size=page_size,
+                    include_dividends=include_dividends,
                 )
                 collected += 1
                 print(
@@ -242,6 +254,79 @@ def backfill_results(
     return 0
 
 
+def backfill_dividends(
+    start_date: str,
+    end_date: str,
+    meets: list[int],
+    page_size: int,
+) -> int:
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print(
+            "HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.",
+            file=sys.stderr,
+        )
+        return 2
+
+    start = datetime.strptime(start_date, "%Y%m%d").date()
+    end = datetime.strptime(end_date, "%Y%m%d").date()
+    if start > end:
+        raise ValueError("시작일은 종료일보다 늦을 수 없습니다.")
+
+    stored_days = 0
+    collected = 0
+    skipped = 0
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        current = start
+        while current <= end:
+            race_date = current.strftime("%Y%m%d")
+            for meet in meets:
+                if not result_day_is_stored(session, race_date=current, meet=meet):
+                    continue
+                stored_days += 1
+                if final_dividend_is_complete(session, race_date=current, meet=meet):
+                    skipped += 1
+                    continue
+                while True:
+                    try:
+                        summary = ingest_final_dividends(
+                            session,
+                            client,
+                            race_date=race_date,
+                            meet=meet,
+                            raw_data_dir=settings.raw_data_dir,
+                            page_size=page_size,
+                        )
+                    except KraApiRateLimitError as exc:
+                        print(f"확정배당 호출 제한 대기: {exc}", flush=True)
+                        time.sleep(55)
+                        continue
+                    break
+                collected += 1
+                print(
+                    f"확정배당 수집 완료: {race_date} {MEET_METADATA[meet][1]} / "
+                    f"pages={summary.pages}, fetched={summary.records_fetched}, "
+                    f"written={summary.records_written}",
+                    flush=True,
+                )
+                session.expunge_all()
+            current += timedelta(days=1)
+
+    print(
+        f"확정배당 백필 완료: 저장된 경주일={stored_days}, 신규수집={collected}, "
+        f"기존완료={skipped}",
+        flush=True,
+    )
+    return 0
+
+
 def serve_dashboard(host: str, port: int, reload: bool) -> int:
     import uvicorn
 
@@ -252,6 +337,16 @@ def serve_dashboard(host: str, port: int, reload: bool) -> int:
         reload=reload,
     )
     return 0
+
+
+def repair_entry_links() -> int:
+    with SessionLocal() as session:
+        summary = repair_missing_entry_people(session)
+    print(
+        f"관계자 연결 복구: 확인={summary.examined}, 복구={summary.repaired}, "
+        f"미해결={summary.unresolved}"
+    )
+    return 0 if summary.unresolved == 0 else 1
 
 
 def main() -> int:
@@ -293,6 +388,17 @@ def main() -> int:
         "--meets", nargs="+", type=int, choices=(1, 2, 3), default=[1, 2, 3]
     )
     backfill_parser.add_argument("--page-size", type=int, default=1000)
+    backfill_parser.add_argument("--skip-dividends", action="store_true")
+    dividend_parser = subparsers.add_parser(
+        "backfill-dividends",
+        help="Collect final dividends for stored result days missing them",
+    )
+    dividend_parser.add_argument("--start", required=True, type=valid_race_date)
+    dividend_parser.add_argument("--end", required=True, type=valid_race_date)
+    dividend_parser.add_argument(
+        "--meets", nargs="+", type=int, choices=(1, 2, 3), default=[1, 2, 3]
+    )
+    dividend_parser.add_argument("--page-size", type=int, default=20_000)
     dashboard_parser = subparsers.add_parser(
         "serve-dashboard",
         help="Run the local race schedule and result dashboard",
@@ -300,6 +406,10 @@ def main() -> int:
     dashboard_parser.add_argument("--host", default="127.0.0.1")
     dashboard_parser.add_argument("--port", type=int, default=8000)
     dashboard_parser.add_argument("--reload", action="store_true")
+    subparsers.add_parser(
+        "repair-entry-links",
+        help="Repair missing trainer and owner links from stable horse history",
+    )
     args = parser.parse_args()
 
     if args.command == "db-info":
@@ -324,11 +434,25 @@ def main() -> int:
             return 1
     if args.command == "backfill-results":
         try:
-            return backfill_results(args.start, args.end, args.meets, args.page_size)
+            return backfill_results(
+                args.start,
+                args.end,
+                args.meets,
+                args.page_size,
+                not args.skip_dividends,
+            )
         except (KraApiError, ValueError) as exc:
             print(f"백필 실패: {exc}", file=sys.stderr)
             return 1
+    if args.command == "backfill-dividends":
+        try:
+            return backfill_dividends(args.start, args.end, args.meets, args.page_size)
+        except (KraApiError, ValueError) as exc:
+            print(f"확정배당 백필 실패: {exc}", file=sys.stderr)
+            return 1
     if args.command == "serve-dashboard":
         return serve_dashboard(args.host, args.port, args.reload)
+    if args.command == "repair-entry-links":
+        return repair_entry_links()
     parser.error(f"unknown command: {args.command}")
     return 2

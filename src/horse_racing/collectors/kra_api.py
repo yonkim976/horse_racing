@@ -29,6 +29,10 @@ class KraApiTransientError(KraApiError):
     """Raised for retryable transport and server failures."""
 
 
+class KraApiRateLimitError(KraApiTransientError):
+    """Raised when the public data gateway daily quota is exhausted."""
+
+
 @dataclass(frozen=True, slots=True)
 class FetchedPage:
     endpoint: str
@@ -104,8 +108,8 @@ class KraApiClient:
         page_size: int = 1000,
         service_key_parameter: str = "serviceKey",
     ) -> Iterator[FetchedPage]:
-        if page_size < 1 or page_size > 1000:
-            raise ValueError("page_size는 1 이상 1000 이하여야 합니다.")
+        if page_size < 1 or page_size > 20_000:
+            raise ValueError("page_size는 1 이상 20,000 이하여야 합니다.")
 
         page_no = 1
         while True:
@@ -132,8 +136,8 @@ class KraApiClient:
 
     @retry(
         retry=retry_if_exception_type((httpx.TransportError, KraApiTransientError)),
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=4),
+        stop=stop_after_attempt(6),
+        wait=wait_exponential(multiplier=1, min=1, max=30),
         reraise=True,
     )
     def _fetch_json(
@@ -152,6 +156,10 @@ class KraApiClient:
             raise KraApiTransientError("KRA API 네트워크 연결에 실패했습니다.") from exc
         retrieved_at_ms = _now_ms()
 
+        if response.status_code == 429:
+            raise KraApiRateLimitError(
+                "KRA API 호출 제한에 도달했습니다. 잠시 후 재시도합니다."
+            )
         if response.status_code >= 500:
             raise KraApiTransientError(f"KRA API 서버 오류: HTTP {response.status_code}")
         try:

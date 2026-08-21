@@ -102,6 +102,23 @@ UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing backfill-res
   --meets 1 2 3
 ```
 
+확정배당 API의 일일 호출 제한에 도달한 경우 결과 본체와 배당을 분리해 이어받을 수
+있습니다. 배당 전용 백필은 이미 완료된 날짜를 자동으로 건너뜁니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing backfill-results \
+  --start 20250101 --end 20251231 --meets 1 2 3 --skip-dividends
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing backfill-dividends \
+  --start 20250101 --end 20251231 --meets 1 2 3 --page-size 20000
+```
+
+출전취소처럼 원천 API에서 조교사·마주 ID를 생략한 출전행은 같은 말의 다른 출전에서
+관계자가 한 사람으로 일관될 때만 다음 명령으로 안전하게 복구합니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing repair-entry-links
+```
+
 아직 결과가 나오지 않은 날짜는 경주계획과 출전표만 별도로 수집합니다.
 
 ```bash

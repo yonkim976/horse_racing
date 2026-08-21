@@ -1,4 +1,5 @@
 import json
+from datetime import timedelta
 from pathlib import Path
 
 import httpx
@@ -26,6 +27,7 @@ from horse_racing.parsers.race_day import (
 from horse_racing.services.race_day import (
     ingest_race_day,
     race_day_is_complete,
+    repair_missing_entry_people,
     result_data_exists,
 )
 
@@ -141,12 +143,12 @@ def detailed_result_payload() -> dict[str, object]:
                 "pthrRatg": "40",
                 "pthrWeg": "480(+2)" if number == 1 else "470(-3)",
                 "pthrEquip": "망사눈가면",
-                "hrmJckyId": jockey_id,
-                "hrmJckyNm": "김기수" if number == 1 else "최기수",
-                "hrmTrarId": f"07000{number}",
-                "hrmTrarNm": "이조교",
-                "hrmOwnerId": f"06000{number}",
-                "hrmOwnerNm": "박마주",
+                "hrmJckyId": "-" if number == 1 else jockey_id,
+                "hrmJckyNm": "-" if number == 1 else "최기수",
+                "hrmTrarId": "-" if number == 1 else f"07000{number}",
+                "hrmTrarNm": "-" if number == 1 else "이조교",
+                "hrmOwnerId": "-" if number == 1 else f"06000{number}",
+                "hrmOwnerNm": "-" if number == 1 else "박마주",
                 "rsutRk": rank,
                 "rsutRaceRcd": time,
                 "rsutMargin": "머리" if number == 2 else "-",
@@ -287,6 +289,12 @@ def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> 
         assert winning_entry.body_weight_kg == 480
         assert winning_entry.body_weight_change_kg == 2
         assert winning_entry.equipment == "망사눈가면"
+        assert winning_entry.jockey is not None
+        assert winning_entry.jockey.kra_jockey_id == "080001"
+        assert winning_entry.trainer is not None
+        assert winning_entry.trainer.kra_trainer_id == "070001"
+        assert winning_entry.owner is not None
+        assert winning_entry.owner.kra_owner_id == "060001"
         assert winning_entry.result is not None
         assert winning_entry.result.finish_position == 1
         assert winning_entry.result.finish_time_ms == 75_200
@@ -306,6 +314,41 @@ def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> 
             race_date=race.race_date_local,
             meet=1,
         )
+
+        known_trainer = winning_entry.trainer
+        known_owner = winning_entry.owner
+        known_horse = winning_entry.horse
+        known_jockey = winning_entry.jockey
+        history_race = Race(
+            racecourse=race.racecourse,
+            race_date_local=race.race_date_local + timedelta(days=1),
+            race_number=1,
+            distance_m=1200,
+            status="scheduled",
+        )
+        session.add(history_race)
+        session.flush()
+        session.add(
+            RaceEntry(
+                race=history_race,
+                horse=known_horse,
+                jockey=known_jockey,
+                trainer=known_trainer,
+                owner=known_owner,
+                horse_number=1,
+            )
+        )
+        winning_entry.trainer = None
+        winning_entry.owner = None
+        session.commit()
+
+        repair = repair_missing_entry_people(session)
+
+        assert repair.examined == 1
+        assert repair.repaired == 1
+        assert repair.unresolved == 0
+        assert winning_entry.trainer_id == known_trainer.id
+        assert winning_entry.owner_id == known_owner.id
 
 
 def test_result_data_exists_uses_lightweight_probe() -> None:
