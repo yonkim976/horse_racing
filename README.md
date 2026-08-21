@@ -2,6 +2,16 @@
 
 한국마사회 경주 데이터를 로컬에서 수집, 정규화, 분석하기 위한 프로젝트입니다.
 
+## 프로젝트 문서
+
+장기 설계, 현재 구현 상태, 데이터 운영법과 다음 개발 순서는 다음 문서에서 관리합니다.
+
+- [문서 안내](docs/README.md)
+- [전체 프로젝트 블루프린트](docs/BLUEPRINT.md)
+- [현재 상태와 작업 이력](docs/CURRENT_STATUS.md)
+- [데이터 구조와 운영 가이드](docs/DATA_AND_OPERATIONS.md)
+- [단계별 개발 로드맵](docs/ROADMAP.md)
+
 ## 기술 구성
 
 - Python 3.12, uv
