@@ -42,6 +42,14 @@ class EntrySheetItem(BaseModel):
     def parse_race_date(cls, value: Any) -> date:
         return datetime.strptime(str(value).strip(), "%Y%m%d").date()
 
+    @field_validator("horse_id", mode="before")
+    @classmethod
+    def normalize_horse_id(cls, value: Any) -> str:
+        cleaned = str(value).strip()
+        if not cleaned:
+            raise ValueError("마번(고유번호)이 비어 있습니다.")
+        return cleaned
+
     @field_validator(
         "race_number",
         "horse_number",

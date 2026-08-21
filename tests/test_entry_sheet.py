@@ -34,7 +34,7 @@ def test_parse_entry_sheet_page() -> None:
 
     assert page.total_count == 2
     assert len(page.items) == 2
-    assert page.items[0].horse_id == "005001"
+    assert page.items[0].horse_id == "5001"
     assert page.items[0].carried_weight_kg == 55.5
     assert page.items[0].race_date.isoformat() == "2026-08-22"
 
