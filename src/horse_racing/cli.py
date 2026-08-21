@@ -121,6 +121,18 @@ def collect_race_day(race_date: str, meet: int, page_size: int) -> int:
     return 0
 
 
+def serve_dashboard(host: str, port: int, reload: bool) -> int:
+    import uvicorn
+
+    uvicorn.run(
+        "horse_racing.web.app:app",
+        host=host,
+        port=port,
+        reload=reload,
+    )
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="horse-racing")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -141,6 +153,13 @@ def main() -> int:
     race_day_parser.add_argument("--date", required=True, type=valid_race_date)
     race_day_parser.add_argument("--meet", required=True, type=int, choices=sorted(MEET_METADATA))
     race_day_parser.add_argument("--page-size", type=int, default=1000)
+    dashboard_parser = subparsers.add_parser(
+        "serve-dashboard",
+        help="Run the local race schedule and result dashboard",
+    )
+    dashboard_parser.add_argument("--host", default="127.0.0.1")
+    dashboard_parser.add_argument("--port", type=int, default=8000)
+    dashboard_parser.add_argument("--reload", action="store_true")
     args = parser.parse_args()
 
     if args.command == "db-info":
@@ -157,5 +176,7 @@ def main() -> int:
         except (KraApiError, ValueError) as exc:
             print(f"수집 실패: {exc}", file=sys.stderr)
             return 1
+    if args.command == "serve-dashboard":
+        return serve_dashboard(args.host, args.port, args.reload)
     parser.error(f"unknown command: {args.command}")
     return 2

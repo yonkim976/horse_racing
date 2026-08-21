@@ -92,6 +92,20 @@ UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing collect-race
 최종 배당률 API는 한 경주일의 조합별 배당이 많으므로 기본 페이지 크기는 1,000건이며,
 전체 건수가 더 많으면 자동으로 다음 페이지까지 수집합니다.
 
+## 일정·결과 대시보드
+
+로컬 SQLite에 저장된 데이터를 날짜와 경마장별로 조회할 수 있습니다. 경주 목록에서 한
+경주를 선택하면 출전마, 기수, 조교사, 부담중량, 마체중, 레이팅과 함께 완료 경주의 순위,
+기록, 단승·연승 배당 및 상금을 확인할 수 있습니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv sync --group web
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run --group web horse-racing serve-dashboard
+```
+
+브라우저에서 `http://127.0.0.1:8000`을 열면 됩니다. 개발 중 파일 변경을 자동 반영하려면
+`serve-dashboard --reload`로 실행합니다.
+
 ## 향후 웹 구조
 
 FastAPI가 JSON API와 HTML을 함께 제공합니다. HTML은 Jinja2 템플릿을 사용하고,

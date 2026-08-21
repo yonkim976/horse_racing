@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="한국마사회 경주 일정과 결과를 한눈에 확인하는 로컬 데이터 대시보드">
+    <title>한국 경마 데이터 보드</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="한국 경마 데이터 보드 홈">
+          <span class="brand-mark">HR</span>
+          <span>
+            <strong>한국 경마 데이터 보드</strong>
+            <small>KRA RACE CONTROL</small>
+          </span>
+        </a>
+        <div class="data-state">
+          <span class="live-dot" aria-hidden="true"></span>
+          로컬 DB 연결됨
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="page-intro">
+        <div>
+          <p class="eyebrow">RACE CALENDAR & RESULTS</p>
+          <h1>경주 일정과 결과</h1>
+          <p>수집한 경주일을 선택하고, 경주별 출전 정보와 최종 결과를 확인하세요.</p>
+        </div>
+
+        <form class="filters" method="get" data-filter-form>
+          <label>
+            <span>경주일</span>
+            <select name="date" aria-label="경주일 선택">
+              {% for available_date in dashboard.available_dates %}
+                <option value="{{ available_date.isoformat() }}"
+                  {% if available_date == dashboard.selected_date %}selected{% endif %}>
+                  {{ available_date.strftime('%Y.%m.%d') }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            <span>경마장</span>
+            <select name="meet" aria-label="경마장 선택">
+              <option value="">전체 경마장</option>
+              {% for racecourse in dashboard.racecourses %}
+                <option value="{{ racecourse.meet_code }}"
+                  {% if racecourse.meet_code == dashboard.selected_meet %}selected{% endif %}>
+                  {{ racecourse.name }}
+                </option>
+              {% endfor %}
+            </select>
+          </label>
+          <button type="submit">조회</button>
+        </form>
+      </section>
+
+      <section class="summary-grid" aria-label="선택일 요약">
+        <article class="summary-card primary">
+          <span>전체 경주</span>
+          <strong>{{ dashboard.race_count }}</strong>
+          <small>RACES</small>
+        </article>
+        <article class="summary-card">
+          <span>출전마</span>
+          <strong>{{ dashboard.entry_count }}</strong>
+          <small>ENTRIES</small>
+        </article>
+        <article class="summary-card">
+          <span>종료 경주</span>
+          <strong>{{ dashboard.completed_count }}</strong>
+          <small>COMPLETED</small>
+        </article>
+        <article class="summary-card">
+          <span>결과 데이터</span>
+          <strong>{{ dashboard.result_count }}</strong>
+          <small>RESULTS</small>
+        </article>
+      </section>
+
+      <section class="board-layout">
+        <article class="panel schedule-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">DAILY CARD</p>
+              <h2>경주 일정</h2>
+            </div>
+            {% if dashboard.selected_date %}
+              <time>{{ dashboard.selected_date.strftime('%Y년 %m월 %d일') }}</time>
+            {% endif %}
+          </div>
+
+          {% if dashboard.races %}
+            <div class="table-scroll">
+              <table class="race-table">
+                <thead>
+                  <tr>
+                    <th>경주</th>
+                    <th>출발</th>
+                    <th>조건</th>
+                    <th>출전</th>
+                    <th>상태</th>
+                    <th>우승마 / 기록</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for race in dashboard.races %}
+                    <tr class="clickable-row {% if dashboard.selected_race and race.id == dashboard.selected_race.id %}selected{% endif %}"
+                      tabindex="0"
+                      data-href="/?date={{ dashboard.selected_date.isoformat() }}{% if dashboard.selected_meet %}&meet={{ dashboard.selected_meet }}{% endif %}&race_id={{ race.id }}">
+                      <td>
+                        <strong class="race-number">{{ race.course_name }} {{ race.race_number }}R</strong>
+                        <span>{{ race.distance }}</span>
+                      </td>
+                      <td class="numeric">{{ race.start_time }}</td>
+                      <td>{{ race.race_label }}</td>
+                      <td class="numeric">{{ race.entry_count }}두</td>
+                      <td><span class="status {{ race.status }}">{{ race.status_label }}</span></td>
+                      <td>
+                        <strong>{{ race.winner }}</strong>
+                        <span>{{ race.winning_time }}</span>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="empty-state">
+              <strong>표시할 경주가 없습니다.</strong>
+              <p>다른 경주일이나 경마장을 선택해 주세요.</p>
+            </div>
+          {% endif %}
+        </article>
+
+        {% if dashboard.selected_race %}
+          <article class="panel detail-panel">
+            <div class="race-hero">
+              <div class="race-badge">
+                <span>{{ dashboard.selected_race.course_name }}</span>
+                <strong>{{ dashboard.selected_race.race_number }}R</strong>
+              </div>
+              <div class="race-hero-copy">
+                <div class="race-title-row">
+                  <div>
+                    <p>{{ dashboard.selected_race.date_label }} · {{ dashboard.selected_race.start_time }} 출발</p>
+                    <h2>{{ dashboard.selected_race.race_name }}</h2>
+                  </div>
+                  <span class="status {{ dashboard.selected_race.status }}">
+                    {{ dashboard.selected_race.status_label }}
+                  </span>
+                </div>
+                <div class="race-meta">
+                  <span>{{ dashboard.selected_race.distance }}</span>
+                  <span>{{ dashboard.selected_race.grade }}</span>
+                  <span>{{ dashboard.selected_race.weather_track }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-heading entries-heading">
+              <div>
+                <p class="panel-kicker">RUNNERS & PLACINGS</p>
+                <h2>출전마 및 결과</h2>
+              </div>
+              <span>{{ dashboard.selected_race.entries | length }}두</span>
+            </div>
+
+            <div class="table-scroll">
+              <table class="entry-table">
+                <thead>
+                  <tr>
+                    <th>순위</th>
+                    <th>마번 / 마명</th>
+                    <th>기수 / 조교사</th>
+                    <th>부담중량</th>
+                    <th>마체중</th>
+                    <th>레이팅</th>
+                    <th>기록</th>
+                    <th>단승</th>
+                    <th>연승</th>
+                    <th>상금</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for entry in dashboard.selected_race.entries %}
+                    <tr class="{% if entry.finish_sort <= 3 %}placed placed-{{ entry.finish_sort }}{% endif %}">
+                      <td><strong class="placing">{{ entry.finish_position }}</strong></td>
+                      <td>
+                        <div class="horse-cell">
+                          <span class="silk-number">{{ entry.horse_number }}</span>
+                          <span><strong>{{ entry.horse_name }}</strong><small>{{ entry.horse_meta }}</small></span>
+                        </div>
+                      </td>
+                      <td><strong>{{ entry.jockey_name }}</strong><span>{{ entry.trainer_name }}</span></td>
+                      <td class="numeric">{{ entry.carried_weight }}</td>
+                      <td class="numeric">{{ entry.body_weight }}</td>
+                      <td class="numeric">{{ entry.rating }}</td>
+                      <td class="numeric result-time">{{ entry.finish_time }}</td>
+                      <td class="numeric odds">{{ entry.win_odds }}</td>
+                      <td class="numeric odds">{{ entry.place_odds }}</td>
+                      <td class="numeric prize">{{ entry.prize_money }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </article>
+        {% endif %}
+      </section>
+    </main>
+
+    <footer>
+      <span>HORSE RACING DATA PLATFORM</span>
+      <span>한국마사회 공공데이터 기반 · 로컬 분석용</span>
+    </footer>
+  </body>
+</html>
