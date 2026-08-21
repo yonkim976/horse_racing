@@ -229,7 +229,8 @@ def _upsert_race(session: Session, racecourse: Racecourse, item: EntrySheetItem)
         race.race_name = item.race_name
     if scheduled_at_ms := _scheduled_at_ms(item.race_date, item.scheduled_time):
         race.scheduled_at_ms = scheduled_at_ms
-    race.status = "scheduled"
+    if race.status != "completed":
+        race.status = "scheduled"
     session.flush()
     return race
 

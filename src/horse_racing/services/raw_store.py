@@ -22,11 +22,32 @@ def store_entry_sheet_page(
     run_id: int,
     page_no: int,
 ) -> StoredRawDocument:
+    return store_kra_page(
+        fetched,
+        raw_data_dir=raw_data_dir,
+        data_type="entry_sheet",
+        race_date=race_date,
+        meet=meet,
+        run_id=run_id,
+        page_no=page_no,
+    )
+
+
+def store_kra_page(
+    fetched: FetchedPage,
+    *,
+    raw_data_dir: Path,
+    data_type: str,
+    race_date: str,
+    meet: int,
+    run_id: int,
+    page_no: int,
+) -> StoredRawDocument:
     digest = hashlib.sha256(fetched.body).hexdigest()
     target_dir = (
         raw_data_dir
         / "kra"
-        / "entry_sheet"
+        / data_type
         / race_date[:4]
         / race_date[4:6]
         / race_date[6:8]

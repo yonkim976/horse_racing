@@ -11,6 +11,14 @@ from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_ex
 
 ENTRY_SHEET_ENDPOINT = "/API26_2/entrySheet_2"
 ENTRY_SHEET_OPERATION = "entrySheet_2"
+RACE_PLAN_ENDPOINT = "/API154/racePlan"
+RACE_PLAN_OPERATION = "racePlan"
+AI_RACE_RESULT_ENDPOINT = "/API155/raceResult"
+AI_RACE_RESULT_OPERATION = "raceResult"
+DETAILED_RACE_RESULT_ENDPOINT = "/API156/raceRsutDtl"
+DETAILED_RACE_RESULT_OPERATION = "raceRsutDtl"
+FINAL_DIVIDEND_ENDPOINT = "/API301/Dividend_rate_total"
+FINAL_DIVIDEND_OPERATION = "Dividend_rate_total"
 
 
 class KraApiError(RuntimeError):
@@ -75,16 +83,43 @@ class KraApiClient:
         if page_size < 1 or page_size > 1000:
             raise ValueError("page_size는 1 이상 1000 이하여야 합니다.")
 
-        page_no = 1
-        while True:
-            public_params: dict[str, str | int] = {
-                "pageNo": page_no,
-                "numOfRows": page_size,
+        yield from self.iter_pages(
+            endpoint=ENTRY_SHEET_ENDPOINT,
+            operation=ENTRY_SHEET_OPERATION,
+            public_params={
                 "meet": meet,
                 "rc_date": race_date,
                 "_type": "json",
+            },
+            page_size=page_size,
+            service_key_parameter="ServiceKey",
+        )
+
+    def iter_pages(
+        self,
+        *,
+        endpoint: str,
+        operation: str,
+        public_params: Mapping[str, str | int],
+        page_size: int = 1000,
+        service_key_parameter: str = "serviceKey",
+    ) -> Iterator[FetchedPage]:
+        if page_size < 1 or page_size > 1000:
+            raise ValueError("page_size는 1 이상 1000 이하여야 합니다.")
+
+        page_no = 1
+        while True:
+            page_params = {
+                **public_params,
+                "pageNo": page_no,
+                "numOfRows": page_size,
             }
-            fetched = self._fetch_json(ENTRY_SHEET_ENDPOINT, public_params)
+            fetched = self._fetch_json(
+                endpoint,
+                operation,
+                page_params,
+                service_key_parameter=service_key_parameter,
+            )
             yield fetched
 
             body = response_body(fetched.payload)
@@ -104,10 +139,13 @@ class KraApiClient:
     def _fetch_json(
         self,
         endpoint: str,
+        operation: str,
         public_params: Mapping[str, str | int],
+        *,
+        service_key_parameter: str = "serviceKey",
     ) -> FetchedPage:
         requested_at_ms = _now_ms()
-        request_params = {**public_params, "ServiceKey": self._service_key}
+        request_params = {**public_params, service_key_parameter: self._service_key}
         try:
             response = self._client.get(endpoint.lstrip("/"), params=request_params)
         except httpx.TransportError as exc:
@@ -137,7 +175,7 @@ class KraApiClient:
         redacted_url = str(httpx.URL(str(response.request.url).split("?")[0], params=public_params))
         return FetchedPage(
             endpoint=endpoint,
-            operation=ENTRY_SHEET_OPERATION,
+            operation=operation,
             source_url=redacted_url,
             public_params=dict(public_params),
             requested_at_ms=requested_at_ms,

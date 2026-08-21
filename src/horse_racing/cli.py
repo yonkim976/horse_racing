@@ -10,6 +10,7 @@ from horse_racing.config import get_settings
 from horse_racing.db.engine import create_engine_for_url
 from horse_racing.db.session import SessionLocal
 from horse_racing.services.entry_sheet import MEET_METADATA, ingest_entry_sheet
+from horse_racing.services.race_day import ingest_race_day
 
 
 def database_path(database_url: str) -> Path | None:
@@ -82,6 +83,44 @@ def collect_entry_sheet(race_date: str, meet: int, page_size: int) -> int:
     return 0
 
 
+def collect_race_day(race_date: str, meet: int, page_size: int) -> int:
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print(
+            "HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다. "
+            ".env에 공공데이터포털 일반 인증키(Decoding)를 입력하세요.",
+            file=sys.stderr,
+        )
+        return 2
+
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        summary = ingest_race_day(
+            session,
+            client,
+            race_date=race_date,
+            meet=meet,
+            raw_data_dir=settings.raw_data_dir,
+            page_size=page_size,
+        )
+
+    meet_name = MEET_METADATA[meet][1]
+    print(f"하루치 수집 완료: 경마장={meet_name}, 날짜={race_date}")
+    for stage_name, stage in summary.stages.items():
+        print(
+            f"  {stage_name}: run={stage.run_id}, pages={stage.pages}, "
+            f"fetched={stage.records_fetched}, written={stage.records_written}"
+        )
+    print(f"합계: fetched={summary.records_fetched}, written={summary.records_written}")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="horse-racing")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -95,6 +134,13 @@ def main() -> int:
         "--meet", required=True, type=int, choices=sorted(MEET_METADATA)
     )
     entry_sheet_parser.add_argument("--page-size", type=int, default=100)
+    race_day_parser = subparsers.add_parser(
+        "collect-race-day",
+        help="Collect plans, entries, results, details, and final dividends",
+    )
+    race_day_parser.add_argument("--date", required=True, type=valid_race_date)
+    race_day_parser.add_argument("--meet", required=True, type=int, choices=sorted(MEET_METADATA))
+    race_day_parser.add_argument("--page-size", type=int, default=1000)
     args = parser.parse_args()
 
     if args.command == "db-info":
@@ -102,6 +148,12 @@ def main() -> int:
     if args.command == "collect-entry-sheet":
         try:
             return collect_entry_sheet(args.date, args.meet, args.page_size)
+        except (KraApiError, ValueError) as exc:
+            print(f"수집 실패: {exc}", file=sys.stderr)
+            return 1
+    if args.command == "collect-race-day":
+        try:
+            return collect_race_day(args.date, args.meet, args.page_size)
         except (KraApiError, ValueError) as exc:
             print(f"수집 실패: {exc}", file=sys.stderr)
             return 1

@@ -68,6 +68,30 @@ UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing collect-entr
 SHA-256 체크섬이 `source_documents`에 기록됩니다. 이후 경주, 말, 기수, 조교사, 마주,
 출전정보가 정규화 테이블에 반복 실행 가능한 upsert 방식으로 저장됩니다.
 
+## 하루치 기본 데이터 수집
+
+완료된 경주일을 대상으로 다음 5개 데이터를 순서대로 수집할 수 있습니다.
+
+1. 경주계획
+2. 출전표 상세정보
+3. AI 경주결과
+4. 경주상세결과
+5. 최종 배당률
+
+각 원본 응답을 먼저 보존한 뒤 경주, 출전마, 관계자, 결과, 배당을 하나의 데이터 모델로
+연결합니다. 동일한 날짜를 다시 실행하면 정규화 테이블은 upsert되어 중복 행이 생기지
+않으며, 수집 이력과 원본 문서는 실행별로 보존됩니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run alembic upgrade head
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing collect-race-day \
+  --date 20260821 \
+  --meet 2
+```
+
+최종 배당률 API는 한 경주일의 조합별 배당이 많으므로 기본 페이지 크기는 1,000건이며,
+전체 건수가 더 많으면 자동으로 다음 페이지까지 수집합니다.
+
 ## 향후 웹 구조
 
 FastAPI가 JSON API와 HTML을 함께 제공합니다. HTML은 Jinja2 템플릿을 사용하고,
