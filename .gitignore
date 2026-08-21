@@ -1,0 +1,22 @@
+.DS_Store
+.env
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+
+# Local data and database files
+data/raw/**
+data/parquet/**
+data/exports/**
+data/*.sqlite3
+data/*.sqlite3-*
+!data/raw/.gitkeep
+!data/parquet/.gitkeep
+!data/exports/.gitkeep
+
+# Local backups and generated model artifacts
+backups/
+models/
+
