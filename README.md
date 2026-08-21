@@ -44,9 +44,32 @@ UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run pytest
 모든 관측 시각은 UTC epoch milliseconds로 저장하고, 경주일은 한국시간 기준 날짜로
 별도 저장합니다.
 
+## 출전표 수집
+
+공식 공공데이터포털의 `한국마사회 출전표 상세정보` API를 사용합니다. 먼저 해당 API를
+활용 신청한 뒤 `.env.example`을 `.env`로 복사하고 일반 인증키 중 `Decoding` 값을
+설정합니다. `.env`는 Git에서 제외됩니다.
+
+```dotenv
+HORSE_RACING_DATA_GO_KR_SERVICE_KEY=발급받은_Decoding_인증키
+```
+
+DB를 최신 상태로 만든 뒤 날짜와 경마장을 지정해 실행합니다.
+
+```bash
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run alembic upgrade head
+UV_CACHE_DIR=/private/tmp/horse-racing-uv-cache uv run horse-racing collect-entry-sheet \
+  --date 20260822 \
+  --meet 1
+```
+
+경마장 코드는 `1=서울`, `2=제주`, `3=부산경남`, `4=영천`입니다. API 응답 원문은
+`data/raw/kra/entry_sheet` 아래에 먼저 보존되고, 서비스키를 제외한 요청 메타데이터와
+SHA-256 체크섬이 `source_documents`에 기록됩니다. 이후 경주, 말, 기수, 조교사, 마주,
+출전정보가 정규화 테이블에 반복 실행 가능한 upsert 방식으로 저장됩니다.
+
 ## 향후 웹 구조
 
 FastAPI가 JSON API와 HTML을 함께 제공합니다. HTML은 Jinja2 템플릿을 사용하고,
 브라우저 동작과 스타일은 `web/static/js`, `web/static/css`의 일반 JavaScript와 CSS로
 구성합니다.
-

@@ -53,15 +53,26 @@ class SourceDocument(Base):
         ForeignKey("ingestion_runs.id", ondelete="CASCADE"), nullable=False
     )
     source_url: Mapped[str] = mapped_column(Text, nullable=False)
+    endpoint: Mapped[str | None] = mapped_column(String(200))
+    operation: Mapped[str | None] = mapped_column(String(100))
+    request_params_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+    requested_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
     retrieved_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    http_status_code: Mapped[int | None] = mapped_column(Integer)
     content_type: Mapped[str | None] = mapped_column(String(100))
+    response_bytes: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     local_path: Mapped[str] = mapped_column(Text, nullable=False)
     sha256: Mapped[str] = mapped_column(String(64), nullable=False)
 
     ingestion_run: Mapped[IngestionRun] = relationship(back_populates="documents")
 
     __table_args__ = (
-        UniqueConstraint("source_url", "sha256", name="source_url_sha256"),
+        UniqueConstraint(
+            "ingestion_run_id",
+            "source_url",
+            "sha256",
+            name="ingestion_run_source_url_sha256",
+        ),
         Index("ix_source_documents_retrieved_at_ms", "retrieved_at_ms"),
     )
 

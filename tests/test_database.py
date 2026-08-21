@@ -34,7 +34,7 @@ def test_initial_migration_creates_expected_tables(tmp_path: Path) -> None:
     assert set(inspect(engine).get_table_names()) == EXPECTED_TABLES
     with engine.connect() as connection:
         revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-    assert revision == "20260821_0001"
+    assert revision == "20260821_0002"
 
 
 def test_sqlite_pragmas_are_enabled(tmp_path: Path) -> None:
