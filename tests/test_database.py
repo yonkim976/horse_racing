@@ -8,16 +8,33 @@ from horse_racing.db.engine import create_engine_for_url
 
 EXPECTED_TABLES = {
     "alembic_version",
+    "entry_equipment",
+    "horse_grade_changes",
+    "horse_medical",
+    "horse_profile_snapshots",
+    "horse_rating_snapshots",
+    "horse_start_training",
+    "horse_training",
+    "horse_weight_history",
     "horses",
     "ingestion_runs",
+    "jockey_changes",
     "jockeys",
     "odds_snapshots",
     "owners",
+    "model_predictions",
+    "prediction_outcomes",
+    "prediction_runs",
+    "prediction_settlements",
     "race_entries",
     "race_results",
+    "race_scratches",
     "race_section_results",
+    "race_steward_reports",
     "racecourses",
     "races",
+    "running_trial_results",
+    "running_trials",
     "source_documents",
     "trainers",
 }
@@ -34,7 +51,7 @@ def test_initial_migration_creates_expected_tables(tmp_path: Path) -> None:
     assert set(inspect(engine).get_table_names()) == EXPECTED_TABLES
     with engine.connect() as connection:
         revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-    assert revision == "20260821_0003"
+        assert revision == "20260828_0009"
 
 
 def test_sqlite_pragmas_are_enabled(tmp_path: Path) -> None:

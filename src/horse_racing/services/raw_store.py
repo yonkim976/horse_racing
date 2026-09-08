@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from horse_racing.collectors.kra_api import FetchedPage
+from horse_racing.collectors.kra_text import FetchedTextReport, KraTextFile
 
 
 @dataclass(frozen=True, slots=True)
@@ -59,3 +60,32 @@ def store_kra_page(
     target_path = target_dir / filename
     target_path.write_bytes(fetched.body)
     return StoredRawDocument(path=target_path, sha256=digest)
+
+
+def store_kra_text_report(
+    fetched: FetchedTextReport,
+    *,
+    raw_data_dir: Path,
+) -> StoredRawDocument:
+    digest = hashlib.sha256(fetched.body).hexdigest()
+    target_dir = kra_text_report_path(fetched.file, raw_data_dir=raw_data_dir).parent
+    target_dir.mkdir(parents=True, exist_ok=True)
+    target_path = target_dir / fetched.file.filename
+    temporary_path = target_path.with_suffix(f"{target_path.suffix}.part")
+    temporary_path.write_bytes(fetched.body)
+    temporary_path.replace(target_path)
+    return StoredRawDocument(path=target_path, sha256=digest)
+
+
+def kra_text_report_path(file: KraTextFile, *, raw_data_dir: Path) -> Path:
+    target_dir = raw_data_dir / "kra_text" / file.file_type / f"meet={file.meet}"
+    if file.file_date is None:
+        target_dir = target_dir / "year=unknown"
+    else:
+        target_dir = (
+            target_dir
+            / f"year={file.file_date.year:04d}"
+            / f"month={file.file_date.month:02d}"
+            / f"day={file.file_date.day:02d}"
+        )
+    return target_dir / file.filename

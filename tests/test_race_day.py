@@ -1,6 +1,7 @@
 import json
-from datetime import timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import httpx
 from alembic import command
@@ -14,6 +15,7 @@ from horse_racing.db.models import (
     IngestionRun,
     OddsSnapshot,
     Race,
+    Racecourse,
     RaceEntry,
     RaceResult,
     SourceDocument,
@@ -25,9 +27,12 @@ from horse_racing.parsers.race_day import (
     parse_track_status,
 )
 from horse_racing.services.race_day import (
+    _is_date_echo_time,
     ingest_race_day,
+    ingest_race_schedule,
     race_day_is_complete,
     repair_missing_entry_people,
+    repair_planned_weather,
     result_data_exists,
 )
 
@@ -202,6 +207,8 @@ def test_race_day_parsing_helpers() -> None:
     assert parse_body_weight("480(+2)") == (480, 2)
     assert parse_body_weight("470(-3)") == (470, -3)
     assert parse_track_status("건조 (3%)") == ("건조", 3.0)
+    assert _is_date_echo_time(date(2026, 8, 22), "10:08:22")
+    assert not _is_date_echo_time(date(2026, 8, 22), "10:36:05")
 
 
 def test_zero_finish_time_and_position_are_treated_as_missing() -> None:
@@ -226,11 +233,15 @@ def test_zero_final_dividend_is_treated_as_unsold() -> None:
 
 def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> None:
     entry_payload = json.loads(ENTRY_FIXTURE.read_text(encoding="utf-8"))
+    detailed_payload = detailed_result_payload()
+    for item in detailed_payload["response"]["body"]["items"]["item"]:
+        item["cndStrtPargTim"] = "10:08:22"
+        item["rsutRlStrtTim"] = "10:08:22"
     responses = {
         "/B551015/API154/racePlan": race_plan_payload(),
         "/B551015/API26_2/entrySheet_2": entry_payload,
         "/B551015/API155/raceResult": ai_result_payload(),
-        "/B551015/API156/raceRsutDtl": detailed_result_payload(),
+        "/B551015/API156/raceRsutDtl": detailed_payload,
         "/B551015/API301/Dividend_rate_total": final_dividend_payload(),
     }
 
@@ -282,7 +293,12 @@ def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> 
         assert race.field_size == 2
         assert race.track_condition == "건조"
         assert race.track_moisture_percent == 3.0
-        assert race.actual_start_at_ms is not None
+        scheduled_at = datetime.fromtimestamp(
+            race.scheduled_at_ms / 1000,
+            tz=ZoneInfo("Asia/Seoul"),
+        )
+        assert (scheduled_at.hour, scheduled_at.minute) == (10, 35)
+        assert race.actual_start_at_ms is None
 
         winning_entry = session.scalar(select(RaceEntry).where(RaceEntry.horse_number == 1))
         assert winning_entry is not None
@@ -364,3 +380,164 @@ def test_result_data_exists_uses_lightweight_probe() -> None:
         transport=httpx.MockTransport(handler),
     ) as client:
         assert result_data_exists(client, race_date="20260822", meet=1)
+
+
+def test_race_plan_upsert_fills_planned_weather(tmp_path: Path) -> None:
+    entry_payload = json.loads(ENTRY_FIXTURE.read_text(encoding="utf-8"))
+    responses = {
+        "/B551015/API154/racePlan": race_plan_payload(),
+        "/B551015/API26_2/entrySheet_2": entry_payload,
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses[request.url.path], request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        ingest_race_schedule(
+            session,
+            client,
+            race_date="20260822",
+            meet=1,
+            raw_data_dir=tmp_path / "raw",
+        )
+        race = session.scalar(select(Race))
+        assert race is not None
+        assert race.weather == "맑음"
+        assert race.track_condition == "건조"
+        assert race.track_moisture_percent == 3.0
+        assert race.weather_planned == "맑음"
+        assert race.track_condition_planned == "건조"
+        assert race.track_moisture_percent_planned == 3.0
+
+
+def test_result_upsert_does_not_overwrite_planned_weather(tmp_path: Path) -> None:
+    entry_payload = json.loads(ENTRY_FIXTURE.read_text(encoding="utf-8"))
+    detailed = detailed_result_payload()
+    for item in detailed["response"]["body"]["items"]["item"]:
+        item["rsutWetr"] = "흐림"
+        item["rsutTrckStus"] = "포화 (12%)"
+    responses = {
+        "/B551015/API154/racePlan": race_plan_payload(),
+        "/B551015/API26_2/entrySheet_2": entry_payload,
+        "/B551015/API155/raceResult": ai_result_payload(),
+        "/B551015/API156/raceRsutDtl": detailed,
+        "/B551015/API301/Dividend_rate_total": final_dividend_payload(),
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses[request.url.path], request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        ingest_race_day(
+            session,
+            client,
+            race_date="20260822",
+            meet=1,
+            raw_data_dir=tmp_path / "raw",
+        )
+        race = session.scalar(select(Race))
+        assert race is not None
+        assert race.weather == "흐림"
+        assert race.track_condition == "포화"
+        assert race.track_moisture_percent == 12.0
+        assert race.weather_planned == "맑음"
+        assert race.track_condition_planned == "건조"
+        assert race.track_moisture_percent_planned == 3.0
+
+
+def test_repair_planned_weather_is_idempotent(tmp_path: Path) -> None:
+    early_path = tmp_path / "early.json"
+    late_path = tmp_path / "late.json"
+    early_path.write_text(json.dumps(race_plan_payload()), encoding="utf-8")
+    late_payload = race_plan_payload()
+    late_item = late_payload["response"]["body"]["items"]["item"][0]
+    late_item["wetr"] = "비"
+    late_item["going"] = "포화 (12%)"
+    late_path.write_text(json.dumps(late_payload), encoding="utf-8")
+
+    session_factory = migrated_session(tmp_path)
+    with session_factory() as session:
+        racecourse = Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울")
+        session.add(racecourse)
+        session.flush()
+        race = Race(
+            racecourse=racecourse,
+            race_date_local=date(2026, 8, 22),
+            race_number=1,
+            distance_m=1200,
+            weather="흐림",
+            track_condition="포화",
+            track_moisture_percent=12.0,
+            status="completed",
+        )
+        session.add(race)
+        run = IngestionRun(
+            source="data.go.kr/B551015/API154",
+            data_type="race_plan",
+            started_at_ms=1,
+            status="completed",
+        )
+        session.add(run)
+        session.flush()
+        params = json.dumps(
+            {"_type": "json", "race_dt": "20260822", "rccrs_cd": 1},
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        session.add(
+            SourceDocument(
+                ingestion_run_id=run.id,
+                source_url="https://example.test/racePlan?early=1",
+                endpoint="/API154/racePlan",
+                operation="racePlan",
+                request_params_json=params,
+                requested_at_ms=1_000,
+                retrieved_at_ms=1_000,
+                response_bytes=early_path.stat().st_size,
+                local_path=str(early_path),
+                sha256="a" * 64,
+            )
+        )
+        session.add(
+            SourceDocument(
+                ingestion_run_id=run.id,
+                source_url="https://example.test/racePlan?late=1",
+                endpoint="/API154/racePlan",
+                operation="racePlan",
+                request_params_json=params,
+                requested_at_ms=2_000,
+                retrieved_at_ms=2_000,
+                response_bytes=late_path.stat().st_size,
+                local_path=str(late_path),
+                sha256="b" * 64,
+            )
+        )
+        session.commit()
+
+        first = repair_planned_weather(session)
+        session.refresh(race)
+        assert first.documents == 2
+        assert first.races_updated == 1
+        assert first.races_unchanged == 0
+        assert race.weather == "흐림"
+        assert race.weather_planned == "맑음"
+        assert race.track_condition_planned == "건조"
+        assert race.track_moisture_percent_planned == 3.0
+
+        second = repair_planned_weather(session)
+        session.refresh(race)
+        assert second.documents == 2
+        assert second.races_updated == 0
+        assert second.races_unchanged == 1
+        assert race.weather_planned == "맑음"
+        assert race.track_condition_planned == "건조"
+        assert race.track_moisture_percent_planned == 3.0

@@ -11,8 +11,8 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel
-from sqlalchemy import func, select
-from sqlalchemy.orm import Session
+from sqlalchemy import func, or_, select
+from sqlalchemy.orm import Session, joinedload
 
 from horse_racing.collectors.kra_api import (
     AI_RACE_RESULT_ENDPOINT,
@@ -24,6 +24,7 @@ from horse_racing.collectors.kra_api import (
     RACE_PLAN_ENDPOINT,
     RACE_PLAN_OPERATION,
     KraApiClient,
+    KraApiError,
     response_body,
 )
 from horse_racing.db.models import (
@@ -49,6 +50,7 @@ from horse_racing.parsers.race_day import (
     parse_track_status,
 )
 from horse_racing.services.entry_sheet import (
+    MEET_METADATA,
     IngestionSummary,
     _upsert_person,
     _upsert_racecourse,
@@ -57,6 +59,7 @@ from horse_racing.services.entry_sheet import (
 from horse_racing.services.raw_store import store_kra_page
 
 Writer = Callable[[Session, int, list[Any]], int]
+_MEET_NAME_TO_CODE = {name_ko: meet for meet, (_code, name_ko) in MEET_METADATA.items()}
 
 
 @dataclass(frozen=True, slots=True)
@@ -86,6 +89,14 @@ class EntryPeopleRepairSummary:
     examined: int
     repaired: int
     unresolved: int
+
+
+@dataclass(frozen=True, slots=True)
+class PlannedWeatherRepairSummary:
+    documents: int
+    races_updated: int
+    races_unchanged: int
+    races_unmatched: int
 
 
 def repair_missing_entry_people(session: Session) -> EntryPeopleRepairSummary:
@@ -132,6 +143,115 @@ def repair_missing_entry_people(session: Session) -> EntryPeopleRepairSummary:
         repaired=repaired,
         unresolved=len(missing_entries) - repaired,
     )
+
+
+def repair_planned_weather(session: Session) -> PlannedWeatherRepairSummary:
+    documents = list(
+        session.scalars(
+            select(SourceDocument)
+            .join(SourceDocument.ingestion_run)
+            .where(
+                or_(
+                    SourceDocument.operation == RACE_PLAN_OPERATION,
+                    IngestionRun.data_type == "race_plan",
+                    SourceDocument.endpoint.contains("racePlan"),
+                )
+            )
+            .order_by(SourceDocument.retrieved_at_ms.asc(), SourceDocument.id.asc())
+        )
+    )
+    earliest: dict[tuple[int, date, int], tuple[str | None, str | None, float | None]] = {}
+    documents_read = 0
+    for document in documents:
+        parsed = _planned_weather_from_source_document(document)
+        if parsed is None:
+            continue
+        documents_read += 1
+        for identity, planned in parsed.items():
+            earliest.setdefault(identity, planned)
+
+    races = list(session.scalars(select(Race).options(joinedload(Race.racecourse))))
+    race_by_identity = {
+        (race.racecourse.kra_meet_code, race.race_date_local, race.race_number): race
+        for race in races
+    }
+    updated = 0
+    unchanged = 0
+    unmatched = 0
+    for identity, planned in earliest.items():
+        race = race_by_identity.get(identity)
+        if race is None:
+            unmatched += 1
+            continue
+        weather, condition, moisture = planned
+        if (
+            race.weather_planned == weather
+            and race.track_condition_planned == condition
+            and race.track_moisture_percent_planned == moisture
+        ):
+            unchanged += 1
+            continue
+        race.weather_planned = weather
+        race.track_condition_planned = condition
+        race.track_moisture_percent_planned = moisture
+        updated += 1
+    session.commit()
+    return PlannedWeatherRepairSummary(
+        documents=documents_read,
+        races_updated=updated,
+        races_unchanged=unchanged,
+        races_unmatched=unmatched,
+    )
+
+
+def _planned_weather_from_source_document(
+    document: SourceDocument,
+) -> dict[tuple[int, date, int], tuple[str | None, str | None, float | None]] | None:
+    path = Path(document.local_path)
+    if not path.is_file():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+    try:
+        items = parse_items(payload, RacePlanItem)
+    except (KraApiError, ValueError):
+        return None
+    meet_from_params = _meet_code_from_request_params(document.request_params_json)
+    planned: dict[tuple[int, date, int], tuple[str | None, str | None, float | None]] = {}
+    for item in items:
+        meet = (
+            meet_from_params
+            if meet_from_params is not None
+            else _MEET_NAME_TO_CODE.get(item.meet_name)
+        )
+        if meet is None:
+            continue
+        identity = (meet, item.race_date, item.race_number)
+        if identity in planned:
+            continue
+        condition, moisture = parse_track_status(item.track_status)
+        planned[identity] = (item.weather, condition, moisture)
+    return planned
+
+
+def _meet_code_from_request_params(raw: str) -> int | None:
+    try:
+        params = json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(params, dict):
+        return None
+    value = params.get("rccrs_cd")
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def result_data_exists(
@@ -480,8 +600,13 @@ def _write_race_plans(session: Session, meet: int, items: list[RacePlanItem]) ->
         race.rating_condition = item.rating_condition
         race.newcomer_condition = item.newcomer_condition
         race.scheduled_at_ms = _local_datetime_ms(item.race_date, item.scheduled_time)
+        track_condition, moisture = parse_track_status(item.track_status)
         race.weather = item.weather
-        race.track_condition, race.track_moisture_percent = parse_track_status(item.track_status)
+        race.track_condition = track_condition
+        race.track_moisture_percent = moisture
+        race.weather_planned = item.weather
+        race.track_condition_planned = track_condition
+        race.track_moisture_percent_planned = moisture
         if race.status != "completed":
             race.status = "scheduled"
     return len(items)
@@ -544,8 +669,19 @@ def _write_detailed_results(
         race.age_condition = item.age_condition
         race.sex_condition = item.sex_condition
         race.rating_condition = item.rating_condition
-        race.scheduled_at_ms = _local_datetime_ms(item.race_date, item.scheduled_time)
-        race.actual_start_at_ms = _local_datetime_ms(item.race_date, item.actual_start_time)
+        scheduled_at_ms = _local_datetime_ms(item.race_date, item.scheduled_time)
+        if _is_date_echo_time(item.race_date, item.scheduled_time):
+            if race.scheduled_at_ms == scheduled_at_ms:
+                race.scheduled_at_ms = None
+        elif race.scheduled_at_ms is None:
+            race.scheduled_at_ms = scheduled_at_ms
+
+        actual_start_at_ms = _local_datetime_ms(item.race_date, item.actual_start_time)
+        if _is_date_echo_time(item.race_date, item.actual_start_time):
+            if race.actual_start_at_ms == actual_start_at_ms:
+                race.actual_start_at_ms = None
+        elif actual_start_at_ms is not None:
+            race.actual_start_at_ms = actual_start_at_ms
         race.start_time_change_reason = item.start_time_change_reason
         race.weather = item.weather
         race.track_condition, race.track_moisture_percent = parse_track_status(item.track_status)
@@ -711,6 +847,8 @@ def _upsert_entry(
     else:
         entry.horse = horse
         entry.horse_number = horse_number
+    # 결과 API의 출주번호도 API78의 출발번호와 동일함을 표본 대조했다.
+    entry.gate_number = horse_number
     entry.scratched = False
     session.flush()
     return entry
@@ -825,6 +963,16 @@ def _local_datetime_ms(race_date: date, time_text: str | None) -> int | None:
         return None
     local_datetime = datetime.combine(race_date, local_time, tzinfo=ZoneInfo("Asia/Seoul"))
     return int(local_datetime.timestamp() * 1000)
+
+
+def _is_date_echo_time(race_date: date, time_text: str | None) -> bool:
+    """Detect API156 values whose minute/second repeat the race month/day."""
+    if not time_text:
+        return False
+    digits = "".join(character for character in time_text if character.isdigit())
+    if len(digits) != 6:
+        return False
+    return int(digits[2:4]) == race_date.month and int(digits[4:]) == race_date.day
 
 
 def _now_ms() -> int:

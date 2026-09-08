@@ -1,0 +1,497 @@
+{% extends "base.html" %}
+{% from "_macros.html" import silk %}
+
+{% block title %}{{ detail.name_ko }} · {{ detail.kind.label }} · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}{{ detail.name_ko }}의 기본 정보와 출전 이력을 확인합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro">
+  <div>
+    <p class="eyebrow">{{ detail.kind.label | upper }} PROFILE</p>
+    <h1>{{ detail.name_ko }}</h1>
+    <p>{{ detail.kind.id_label }} {{ detail.official_id }}</p>
+    {% if detail.kind.slug == 'horses' %}
+      <p class="history-jump">
+        <a href="#horse-profile">프로필</a>
+        ·
+        <a href="#start-history">출전</a>
+        {% if detail.running_trials or detail.ratings or detail.weights or detail.training or detail.medical or detail.grade_changes or detail.equipment or detail.start_training or detail.jockey_changes or detail.scratches %}
+          <span> · </span><a href="#horse-history">이력</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  </div>
+  <a class="back-link" href="/{{ detail.kind.slug }}">← {{ detail.kind.plural_label }} 목록</a>
+</section>
+
+<section class="summary-grid" aria-label="성적 요약">
+  <article class="summary-card primary">
+    <span>출전</span>
+    <strong data-countup>{{ detail.entry_count }}</strong>
+    <small>STARTS</small>
+  </article>
+  <article class="summary-card">
+    <span>1위</span>
+    <strong data-countup>{{ detail.win_count }}</strong>
+    <small>WINS</small>
+  </article>
+  <article class="summary-card">
+    <span>입상(1~3위)</span>
+    <strong data-countup>{{ detail.place_count }}</strong>
+    <small>PLACES</small>
+  </article>
+  <article class="summary-card">
+    <span>승률</span>
+    <strong class="rate">{{ detail.win_rate }}</strong>
+    <small>WIN RATE</small>
+  </article>
+</section>
+
+<section class="board-layout entity-detail-layout">
+  <article id="horse-profile" class="panel">
+    <div class="panel-heading">
+      <div>
+        <p class="panel-kicker">PROFILE</p>
+        <h2>기본 정보</h2>
+      </div>
+    </div>
+    <dl class="meta-list">
+      {% for label, value in detail.meta_rows %}
+        <div>
+          <dt>{{ label }}</dt>
+          <dd>{{ value }}</dd>
+        </div>
+      {% endfor %}
+    </dl>
+    {% if detail.kind.slug == 'horses' and detail.profile %}
+      <p class="panel-note">통산·올해 성적은 수집 시점 기준입니다.</p>
+    {% endif %}
+  </article>
+
+  <article id="start-history" class="panel">
+    <div class="panel-heading">
+      <div>
+        <p class="panel-kicker">START HISTORY</p>
+        <h2>출전 이력</h2>
+      </div>
+      <span>최신순{% if detail.entry_count > detail.history | length %} · 최근 {{ detail.history | length }}건{% endif %}</span>
+    </div>
+
+    {% if detail.history %}
+      <div class="table-scroll">
+        <table class="entry-table">
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>경주</th>
+              <th>마번 / 마명</th>
+              <th>기수</th>
+              <th>조교사</th>
+              <th>마주</th>
+              <th>순위</th>
+              <th>기록</th>
+              <th>착차</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in detail.history %}
+              <tr class="clickable-row {% if row.finish_sort <= 3 %}placed placed-{{ row.finish_sort }}{% elif row.finish_sort >= 1000 %}non-finisher{% endif %}"
+                tabindex="0" data-href="{{ row.dashboard_href }}">
+                <td class="numeric">{{ row.race_date.strftime('%Y.%m.%d') }}</td>
+                <td>
+                  <a class="race-number" href="{{ row.dashboard_href }}">{{ row.course_name }} {{ row.race_number }}R</a>
+                  <span>{{ row.distance }}</span>
+                </td>
+                <td>
+                  <div class="horse-cell">
+                    {{ silk(row.horse_number) }}
+                    <span>
+                      {% if detail.kind.slug != 'horses' and row.horse_id %}
+                        <a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a>
+                      {% else %}
+                        <strong>{{ row.horse_name }}</strong>
+                      {% endif %}
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  {% if detail.kind.slug != 'jockeys' and row.jockey_id %}
+                    <a class="entity-link" href="/jockeys/{{ row.jockey_id }}">{{ row.jockey_name }}</a>
+                  {% else %}
+                    {{ row.jockey_name }}
+                  {% endif %}
+                </td>
+                <td>
+                  {% if detail.kind.slug != 'trainers' and row.trainer_id %}
+                    <a class="entity-link" href="/trainers/{{ row.trainer_id }}">{{ row.trainer_name }}</a>
+                  {% else %}
+                    {{ row.trainer_name }}
+                  {% endif %}
+                </td>
+                <td>
+                  {% if detail.kind.slug != 'owners' and row.owner_id %}
+                    <a class="entity-link" href="/owners/{{ row.owner_id }}">{{ row.owner_name }}</a>
+                  {% else %}
+                    {{ row.owner_name }}
+                  {% endif %}
+                </td>
+                <td><strong class="placing">{{ row.finish_position }}</strong></td>
+                <td class="numeric result-time">{{ row.finish_time }}</td>
+                <td class="numeric margin">{{ row.margin }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <strong>출전 이력이 없습니다.</strong>
+        <p>아직 연결된 출전 데이터가 없습니다.</p>
+      </div>
+    {% endif %}
+  </article>
+</section>
+
+{% if detail.kind.slug == 'horses' %}
+  {% set ns = namespace(tabs=[], first='') %}
+  {% if detail.running_trials %}{% set ns.tabs = ns.tabs + [('running-trial', '주행심사', detail.running_trial_count)] %}{% endif %}
+  {% if detail.ratings %}{% set ns.tabs = ns.tabs + [('rating', '레이팅', detail.rating_count)] %}{% endif %}
+  {% if detail.weights %}{% set ns.tabs = ns.tabs + [('weight', '체중', detail.weight_count)] %}{% endif %}
+  {% if detail.training %}{% set ns.tabs = ns.tabs + [('training', '훈련', detail.training_count)] %}{% endif %}
+  {% if detail.medical %}{% set ns.tabs = ns.tabs + [('medical', '진료', detail.medical_count)] %}{% endif %}
+  {% if detail.grade_changes %}{% set ns.tabs = ns.tabs + [('grade', '등급', detail.grade_change_count)] %}{% endif %}
+  {% if detail.equipment %}{% set ns.tabs = ns.tabs + [('equipment', '장구', detail.equipment_count)] %}{% endif %}
+  {% if detail.start_training %}{% set ns.tabs = ns.tabs + [('start-gate', '출발훈련', detail.start_training_count)] %}{% endif %}
+  {% if detail.jockey_changes %}{% set ns.tabs = ns.tabs + [('jockey-change', '기수변경', detail.jockey_change_count)] %}{% endif %}
+  {% if detail.scratches %}{% set ns.tabs = ns.tabs + [('scratch', '출전취소', detail.scratch_count)] %}{% endif %}
+  {% if ns.tabs %}{% set ns.first = ns.tabs[0][0] %}{% endif %}
+
+  {% if ns.tabs %}
+<section id="horse-history" class="panel history-tabs-panel" data-history-tabs>
+  <div class="panel-heading">
+    <div>
+      <p class="panel-kicker">HISTORY</p>
+      <h2>말 이력</h2>
+    </div>
+  </div>
+  <div class="history-tabs" role="tablist">
+    {% for key, label, count in ns.tabs %}
+      <button type="button" role="tab" data-tab="{{ key }}"
+        class="{% if key == ns.first %}is-active{% endif %}"
+        aria-selected="{{ 'true' if key == ns.first else 'false' }}">
+        {{ label }} <span>{{ count }}</span>
+      </button>
+    {% endfor %}
+  </div>
+
+  {% if detail.running_trials %}
+  <div class="history-pane {% if ns.first == 'running-trial' %}is-active{% endif %}" data-pane="running-trial">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>심사</th>
+            <th>판정</th>
+            <th>순위</th>
+            <th>기록</th>
+            <th>마체중</th>
+            <th>구간</th>
+            <th>기수 / 조교사</th>
+            <th>검사 사유</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.running_trials %}
+            <tr>
+              <td class="numeric">{{ row.trial_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.race_label }} · {{ row.distance }}</td>
+              <td><span class="trial-judgement {{ row.judgement_class }}">{{ row.judgement }}</span></td>
+              <td><strong>{{ row.position }}</strong></td>
+              <td class="numeric result-time">{{ row.finish_time }}</td>
+              <td class="numeric">{{ row.body_weight }}</td>
+              <td class="numeric trial-sections">{{ row.sections }}</td>
+              <td>{{ row.jockey_name }} · {{ row.trainer_name }}</td>
+              <td>{{ row.reason }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.ratings %}
+  <div class="history-pane {% if ns.first == 'rating' %}is-active{% endif %}" data-pane="rating">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>관측</th>
+            <th>경마장</th>
+            <th>R1</th>
+            <th>R2</th>
+            <th>R3</th>
+            <th>R4</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.ratings %}
+            <tr>
+              <td class="numeric">{{ row.observed_label }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td class="numeric">{{ row.rating_1 }}</td>
+              <td class="numeric">{{ row.rating_2 }}</td>
+              <td class="numeric">{{ row.rating_3 }}</td>
+              <td class="numeric"><strong>{{ row.rating_4 }}</strong></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.weights %}
+  <div class="history-pane {% if ns.first == 'weight' %}is-active{% endif %}" data-pane="weight">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>경주</th>
+            <th>체중</th>
+            <th>증감</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.weights %}
+            <tr>
+              <td class="numeric">{{ row.race_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.race_label }}</td>
+              <td class="numeric"><strong>{{ row.body_weight }}</strong></td>
+              <td class="numeric">{{ row.change }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.training %}
+  <div class="history-pane {% if ns.first == 'training' %}is-active{% endif %}" data-pane="training">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>조교사</th>
+            <th>시간</th>
+            <th>구보</th>
+            <th>습보</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.training %}
+            <tr>
+              <td class="numeric">{{ row.training_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.trainer_name }}</td>
+              <td class="numeric">{{ row.duration }}</td>
+              <td class="numeric">{{ row.canter }}</td>
+              <td class="numeric">{{ row.gallop }}</td>
+              <td>{{ row.entry_plan }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.medical %}
+  <div class="history-pane {% if ns.first == 'medical' %}is-active{% endif %}" data-pane="medical">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>병원</th>
+            <th>진단</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.medical %}
+            <tr>
+              <td class="numeric">{{ row.clinic_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.hospital }}</td>
+              <td>{{ row.diagnosis }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.grade_changes %}
+  <div class="history-pane {% if ns.first == 'grade' %}is-active{% endif %}" data-pane="grade">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>적용일</th>
+            <th>종료일</th>
+            <th>경마장</th>
+            <th>이전</th>
+            <th>이후</th>
+            <th>혈통</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.grade_changes %}
+            <tr>
+              <td class="numeric">{{ row.start_date }}</td>
+              <td class="numeric">{{ row.end_date }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.grade_before }}</td>
+              <td><strong>{{ row.grade_after }}</strong></td>
+              <td>{{ row.blood_type }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.equipment %}
+  <div class="history-pane {% if ns.first == 'equipment' %}is-active{% endif %}" data-pane="equipment">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>경주</th>
+            <th>장구</th>
+            <th>폐출혈</th>
+            <th>이상</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.equipment %}
+            <tr>
+              <td class="numeric">{{ row.race_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.race_label }}</td>
+              <td>{{ row.equipment }}</td>
+              <td>{{ row.bleeding }}</td>
+              <td>{{ row.illness }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.start_training %}
+  <div class="history-pane {% if ns.first == 'start-gate' %}is-active{% endif %}" data-pane="start-gate">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>기승</th>
+            <th>마방</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.start_training %}
+            <tr>
+              <td class="numeric">{{ row.training_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.rider_name }}</td>
+              <td>{{ row.stable }}</td>
+              <td>{{ row.remark }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.jockey_changes %}
+  <div class="history-pane {% if ns.first == 'jockey-change' %}is-active{% endif %}" data-pane="jockey-change">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>경주</th>
+            <th>변경 전</th>
+            <th>변경 후</th>
+            <th>사유</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.jockey_changes %}
+            <tr>
+              <td class="numeric">{{ row.race_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.race_label }}</td>
+              <td>{{ row.before_name }}</td>
+              <td><strong>{{ row.after_name }}</strong></td>
+              <td>{{ row.reason }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if detail.scratches %}
+  <div class="history-pane {% if ns.first == 'scratch' %}is-active{% endif %}" data-pane="scratch">
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>경마장</th>
+            <th>경주</th>
+            <th>사유</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in detail.scratches %}
+            <tr>
+              <td class="numeric">{{ row.race_date.strftime('%Y.%m.%d') }}</td>
+              <td>{{ row.meet_label }}</td>
+              <td>{{ row.race_label }}</td>
+              <td>{{ row.reason }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+</section>
+  {% endif %}
+{% endif %}
+{% endblock %}

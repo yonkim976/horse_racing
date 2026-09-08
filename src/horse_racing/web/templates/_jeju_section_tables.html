@@ -1,0 +1,52 @@
+<div class="panel-heading"><h3>말별 통과순위·누적기록</h3></div>
+<p class="section-note">각 말이 해당 지점에 도착한 순위와 출발부터 걸린 시간입니다. 경주 전체의 선두마 통과타임과 구분됩니다.</p>
+<div class="table-scroll">
+  <table class="entry-table section-table">
+    <thead>
+      <tr><th rowspan="2">착순</th><th rowspan="2">마번 / 마명</th>
+        {% for column in page.section_columns %}
+        <th colspan="2" scope="colgroup" class="section-head section-group-{{ loop.index0 % 2 }}">{{ column.label }}<small>{{ column.location }}</small></th>
+        {% endfor %}
+      </tr>
+      <tr class="section-subhead">{% for column in page.section_columns %}
+        <th class="section-group-start section-group-{{ loop.index0 % 2 }}">{{ '착순' if column.code == 'FIN' else '통과순위' }}</th>
+        <th class="section-group-{{ loop.index0 % 2 }}">{{ '전체 기록' if column.code == 'FIN' else '출발부터 누적' }}</th>
+      {% endfor %}</tr>
+    </thead>
+    <tbody>{% for row in page.section_rows %}
+      <tr><td>{{ row.finish_position }}</td><td><div class="horse-cell">{{ silk(row.horse_number) }}<a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a></div></td>
+      {% for cell in row.cells %}
+        <td class="numeric section-pos section-group-start section-group-{{ loop.index0 % 2 }}" {% if cell.position_inferred %}title="원자료 통과순위 미제공 · 누적시간 기준 보완"{% endif %}>{{ cell.position }}{% if cell.position_inferred %}<sup>*</sup>{% endif %}</td>
+        <td class="numeric result-time section-group-{{ loop.index0 % 2 }}">{{ cell.cumulative_time }}</td>
+      {% endfor %}</tr>
+    {% endfor %}</tbody>
+  </table>
+</div>
+<p class="section-note">S1F/1C·S1F/2C·3C/G3F처럼 일치하는 통과 지점은 묶어 표시합니다. 1C·2C를 포함해 실제 통과 순서로 나열하므로, 1,300m에서는 2C가 S1F보다 먼저 나옵니다. G3F 지점의 누적시간은 마지막 600m 주파기록과 다릅니다. *는 누적시간으로 보완한 순위입니다.</p>
+
+<div class="panel-heading"><h3>말별 구간 주파기록</h3></div>
+<div class="table-scroll">
+  <table class="entry-table section-table">
+    <thead>
+      <tr><th rowspan="2">착순</th><th rowspan="2">마번 / 마명</th>
+        <th colspan="{{ page.section_columns|length }}" class="section-head" scope="colgroup">연속 구간 · 직전 지점부터</th>
+        <th colspan="2" class="section-head section-group-0" scope="colgroup">막판 기록 · 결승까지</th>
+      </tr>
+      <tr>{% for column in page.section_columns %}
+        <th class="section-head section-group-{{ loop.index0 % 2 }}">{{ column.segment_label }}<small>{{ column.segment_distance }}</small></th>
+      {% endfor %}
+        <th class="section-head section-group-0">마지막 600m<small>3F-G · G3F → FIN</small></th>
+        <th class="section-head section-group-0">마지막 200m<small>1F-G · G1F → FIN</small></th>
+      </tr>
+    </thead>
+    <tbody>{% for row in page.section_rows %}
+      <tr><td>{{ row.finish_position }}</td><td><div class="horse-cell">{{ silk(row.horse_number) }}<a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a></div></td>
+        {% for cell in row.cells %}<td class="numeric result-time section-group-start section-group-{{ loop.index0 % 2 }}">{{ cell.segment_time }}</td>{% endfor %}
+        <td class="numeric result-time section-group-start section-group-0">{{ row.closing_600 }}</td>
+        <td class="numeric result-time section-group-0">{{ row.closing_200 }}</td>
+      </tr>
+    {% endfor %}</tbody>
+  </table>
+</div>
+<p class="section-note">연속 구간은 각 말의 누적기록 차이로 계산합니다. 양쪽 지점 중 기록이 없으면 —로 표시합니다. 막판 기록은 제공된 원자료이며 연속 구간과 겹치므로 더하지 않습니다.</p>
+<p class="section-note">제주 S1F는 출발 후 {{ 210 if page.distance_m in [1110, 1610] else 200 }}m입니다. 1,110m·1,610m 경주는 210m가 적용됩니다. 코너 기준 거리는 근사값입니다. <a class="entity-link" href="https://race.kra.co.kr/raceScore/scoretableLayerExplanation.do?meet=2" target="_blank" rel="noopener">제주 공식 용어해설 ↗</a></p>

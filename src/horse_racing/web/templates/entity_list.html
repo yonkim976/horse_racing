@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_data.kind.plural_label }} · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}수집된 {{ page_data.kind.plural_label }} 목록을 검색하고 출전 이력을 확인합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro">
+  <div>
+    <p class="eyebrow">DIRECTORY</p>
+    <h1>{{ page_data.kind.plural_label }}</h1>
+    <p>
+      {% if page_data.kind.slug == 'horses' %}
+        이름 또는 마번으로 검색하세요. 기본은 출전이 많은 순입니다.
+      {% else %}
+        이름 또는 {{ page_data.kind.id_label }}로 검색하세요. 기본은 출전이 많은 순입니다.
+      {% endif %}
+    </p>
+  </div>
+
+  <form class="filters search-filters" method="get" action="/{{ page_data.kind.slug }}">
+    <label class="search-field">
+      <span>검색</span>
+      <input type="search" name="q" value="{{ page_data.query }}"
+        placeholder="이름 또는 {{ page_data.kind.id_label }}"
+        aria-label="{{ page_data.kind.plural_label }} 검색">
+    </label>
+    <label>
+      <span>정렬</span>
+      <select name="sort" aria-label="정렬">
+        <option value="starts" {% if page_data.sort == 'starts' %}selected{% endif %}>출전 많은 순</option>
+        <option value="name" {% if page_data.sort == 'name' %}selected{% endif %}>이름순</option>
+      </select>
+    </label>
+    <button type="submit">검색</button>
+  </form>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div>
+      <p class="panel-kicker">{{ page_data.kind.plural_label | upper }}</p>
+      <h2>{{ page_data.kind.plural_label }} 목록</h2>
+    </div>
+    <span>{{ page_data.total_count }}건 · {{ page_data.page }}/{{ page_data.total_pages }}페이지</span>
+  </div>
+  {% if page_data.history_coverage %}
+    <p class="coverage-line">
+      적재 레이팅 {{ "{:,}".format(page_data.history_coverage.rating_snapshots) }}
+      · 체중 {{ "{:,}".format(page_data.history_coverage.weight_rows) }}
+      · 훈련 {{ "{:,}".format(page_data.history_coverage.training_rows) }}
+      · 진료 {{ "{:,}".format(page_data.history_coverage.medical_rows) }}
+    </p>
+  {% endif %}
+
+  {% if page_data.items %}
+    <div class="table-scroll">
+      <table data-sortable>
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>{{ page_data.kind.id_label }}</th>
+            <th>정보</th>
+            <th>출전</th>
+            {% if page_data.kind.slug == 'horses' %}
+              <th>레이팅</th>
+              <th>체중</th>
+              <th>훈련</th>
+              <th>진료</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in page_data.items %}
+            <tr class="clickable-row" tabindex="0"
+              data-href="/{{ page_data.kind.slug }}/{{ item.id }}">
+              <td>
+                <a class="entity-link" href="/{{ page_data.kind.slug }}/{{ item.id }}">
+                  <strong>{{ item.name_ko }}</strong>
+                </a>
+              </td>
+              <td class="numeric">{{ item.official_id }}</td>
+              <td>{{ item.subtitle }}</td>
+              <td class="numeric">{{ item.entry_count }}회</td>
+              {% if page_data.kind.slug == 'horses' %}
+                <td class="numeric">{{ item.latest_rating }}</td>
+                <td class="numeric">{{ item.weight_count }}</td>
+                <td class="numeric">{{ item.training_count }}</td>
+                <td class="numeric">{{ item.medical_count }}</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if page_data.total_pages > 1 %}
+      <nav class="pagination" aria-label="페이지 이동">
+        {% if page_data.page > 1 %}
+          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&page={{ page_data.page - 1 }}">이전</a>
+        {% else %}
+          <span class="disabled">이전</span>
+        {% endif %}
+        <span class="page-numbers">
+          {% for item in page_data.page_items %}
+            {% if item == 0 %}
+              <span class="ellipsis">…</span>
+            {% elif item == page_data.page %}
+              <strong>{{ item }}</strong>
+            {% else %}
+              <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&page={{ item }}">{{ item }}</a>
+            {% endif %}
+          {% endfor %}
+        </span>
+        {% if page_data.page < page_data.total_pages %}
+          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&page={{ page_data.page + 1 }}">다음</a>
+        {% else %}
+          <span class="disabled">다음</span>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <div class="empty-state">
+      <strong>검색 결과가 없습니다.</strong>
+      <p>다른 이름이나 {{ page_data.kind.id_label }}로 다시 검색해 보세요.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

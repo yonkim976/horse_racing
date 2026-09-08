@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block meta_description %}한국마사회 경주 데이터를 조회하는 로컬 데이터 대시보드{% endblock %}">
+    <meta name="theme-color" content="#0a0f0d">
+    <title>{% block title %}한국 경마 데이터 보드{% endblock %}</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("hr-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (error) { /* private mode 등에서 무시 */ }
+      })();
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=13">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=6" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="한국 경마 데이터 보드 홈">
+          <span class="brand-mark">HR</span>
+          <span>
+            <strong>한국 경마 데이터 보드</strong>
+            <small>KRA RACE CONTROL</small>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="/" class="{% if active_nav == 'races' %}active{% endif %}">경주</a>
+          <a href="/racecourses/jeju/distances" class="{% if active_nav == 'distances' %}active{% endif %}">거리별 분석</a>
+          <a href="/predictions" class="{% if active_nav == 'predictions' %}active{% endif %}">예측 원장</a>
+          <a href="/horses" class="{% if active_nav == 'horses' %}active{% endif %}">말</a>
+          <a href="/jockeys" class="{% if active_nav == 'jockeys' %}active{% endif %}">기수</a>
+          <a href="/trainers" class="{% if active_nav == 'trainers' %}active{% endif %}">조교사</a>
+          <a href="/owners" class="{% if active_nav == 'owners' %}active{% endif %}">마주</a>
+          <a href="/data-status" class="{% if active_nav == 'data-status' %}active{% endif %}">데이터</a>
+        </nav>
+        <div class="header-actions">
+          <div class="data-state">
+            <span class="live-dot" aria-hidden="true"></span>
+            로컬 데이터
+          </div>
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="라이트 모드로 전환">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <span>HORSE RACING DATA PLATFORM</span>
+      <span>한국마사회 공공데이터 기반 · 로컬 분석용</span>
+    </footer>
+  </body>
+</html>

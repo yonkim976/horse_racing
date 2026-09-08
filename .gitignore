@@ -10,13 +10,20 @@ __pycache__/
 data/raw/**
 data/parquet/**
 data/exports/**
+data/logs/**
+data/predictions/**
 data/*.sqlite3
 data/*.sqlite3-*
+data/*.db
+data/datasets/
+data/experiments/
 !data/raw/.gitkeep
 !data/parquet/.gitkeep
 !data/exports/.gitkeep
+!data/logs/.gitkeep
+!data/predictions/.gitkeep
 
 # Local backups and generated model artifacts
 backups/
 models/
-
+data/experiments/models/**

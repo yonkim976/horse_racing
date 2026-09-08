@@ -180,6 +180,8 @@ def _upsert_items(session: Session, *, meet: int, items: list[EntrySheetItem]) -
             else:
                 entry.horse = horse
         entry.horse_number = item.horse_number
+        # KRA API78 대조 결과 출주번호(chulNo)와 출발번호(gtno)는 동일하다.
+        entry.gate_number = item.horse_number
         entry.carried_weight_kg = item.carried_weight_kg
         entry.rating = item.rating
         entry.jockey = jockey

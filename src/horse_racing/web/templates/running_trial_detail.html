@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% from "_macros.html" import silk %}
+
+{% block title %}{{ page.course_name }} 주행심사 {{ page.race_number }}R · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}{{ page.date_label }} {{ page.course_name }} 주행심사 결과와 구간기록을 확인합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro">
+  <nav class="crumb-nav" aria-label="주행심사 이동">
+    <a class="back-link" href="/?{{ page.back_query }}">← 통합 달력</a>
+    {% if page.prev_trial_id %}<a class="chip-link trial-chip" href="/running-trials/{{ page.prev_trial_id }}">이전 심사</a>{% else %}<span class="chip-link disabled">이전 심사</span>{% endif %}
+    {% if page.next_trial_id %}<a class="chip-link trial-chip" href="/running-trials/{{ page.next_trial_id }}">다음 심사</a>{% else %}<span class="chip-link disabled">다음 심사</span>{% endif %}
+  </nav>
+</section>
+
+<section class="panel race-detail-hero trial-detail-hero">
+  <div class="race-hero">
+    <div class="race-badge trial-badge">
+      <span>{{ page.course_name }}</span>
+      <strong>{{ page.race_number }}R</strong>
+    </div>
+    <div class="race-hero-copy">
+      <div class="race-title-row">
+        <div>
+          <p>{{ page.date_label }} · {{ page.trial_round }}</p>
+          <h1 class="race-page-title">주행심사 결과</h1>
+        </div>
+        <div class="trial-title-badges">
+          <span class="event-type trial">주행심사</span>
+          <span class="model-scope-badge">예측 대상 아님 · 과거 변수로만 사용</span>
+        </div>
+      </div>
+      <div class="race-meta">
+        <span>{{ page.distance }}</span><span>{{ page.weather_track }}</span>
+        <span>참가 {{ page.entries | length }}두</span><span>합격 {{ page.pass_count }}두</span>
+      </div>
+      <nav class="page-toc" aria-label="이 주행심사 목차">
+        <a href="#trial-result">심사 결과</a><a href="#trial-sections">구간기록</a><a href="#trial-reasons">검사 사유</a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section id="trial-result" class="panel">
+  <div class="panel-heading entries-heading">
+    <div><p class="panel-kicker trial-kicker">QUALIFYING RESULT</p><h2>참가마 및 판정</h2></div>
+    <span>합격 {{ page.pass_count }} · 불합격 {{ page.fail_count }}</span>
+  </div>
+  <div class="table-scroll">
+    <table class="entry-table trial-result-table" data-sortable>
+      <thead><tr><th>순위</th><th>마번 / 마명</th><th>판정</th><th>기수</th><th>조교사</th><th>부담중량</th><th>마체중</th><th>기록</th><th>착차</th></tr></thead>
+      <tbody>
+        {% for row in page.entries %}
+        <tr class="{{ row.row_class }}">
+          <td><strong class="placing">{{ row.finish_position }}</strong></td>
+          <td><div class="horse-cell">{{ silk(row.horse_number) }}<span>{% if row.horse_id %}<a class="entity-link" href="/horses/{{ row.horse_id }}"><strong>{{ row.horse_name }}</strong></a>{% else %}<strong>{{ row.horse_name }}</strong>{% endif %}<small>{{ row.horse_meta }}</small></span></div></td>
+          <td><span class="trial-judgement {{ row.judgement_class }}">{{ row.judgement }}</span></td>
+          <td>{% if row.jockey_id %}<a class="entity-link" href="/jockeys/{{ row.jockey_id }}">{{ row.jockey_name }}</a>{% else %}{{ row.jockey_name }}{% endif %}</td>
+          <td>{% if row.trainer_id %}<a class="entity-link" href="/trainers/{{ row.trainer_id }}">{{ row.trainer_name }}</a>{% else %}{{ row.trainer_name }}{% endif %}</td>
+          <td class="numeric">{{ row.carried_weight }}</td><td class="numeric">{{ row.body_weight }}</td><td class="numeric result-time">{{ row.finish_time }}</td><td>{{ row.margin }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="trial-sections" class="panel">
+  <div class="panel-heading"><div><p class="panel-kicker trial-kicker">SECTION TIMES</p><h2>구간기록 · 전개</h2></div><span>S1F · G3F · G1F</span></div>
+  <div class="table-scroll">
+    <table class="entry-table trial-section-table">
+      <thead><tr><th>마번</th><th>마명</th><th>S1F</th><th>G3F</th><th>G1F</th><th>통과순위</th></tr></thead>
+      <tbody>{% for row in page.entries %}<tr><td>{{ silk(row.horse_number) }}</td><td>{% if row.horse_id %}<a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a>{% else %}{{ row.horse_name }}{% endif %}</td><td class="numeric result-time">{{ row.s1f }}</td><td class="numeric result-time">{{ row.g3f }}</td><td class="numeric result-time">{{ row.g1f }}</td><td>{{ row.passing_order }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+
+<section id="trial-reasons" class="panel">
+  <div class="panel-heading"><div><p class="panel-kicker trial-kicker">EXAMINATION</p><h2>검사 사유와 불합격 사유</h2></div></div>
+  <div class="trial-reason-grid">
+    {% for row in page.entries %}
+    <article><div>{{ silk(row.horse_number) }}<strong>{{ row.horse_name }}</strong><span class="trial-judgement {{ row.judgement_class }}">{{ row.judgement }}</span></div><dl><dt>검사 사유</dt><dd>{{ row.inspection_reason }}</dd><dt>불합격 사유</dt><dd>{{ row.failure_reason }}</dd></dl></article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

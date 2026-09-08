@@ -11,6 +11,8 @@ from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_ex
 
 ENTRY_SHEET_ENDPOINT = "/API26_2/entrySheet_2"
 ENTRY_SHEET_OPERATION = "entrySheet_2"
+GATE_ENTRY_SHEET_ENDPOINT = "/API78/chulmainfo"
+GATE_ENTRY_SHEET_OPERATION = "chulmainfo"
 RACE_PLAN_ENDPOINT = "/API154/racePlan"
 RACE_PLAN_OPERATION = "racePlan"
 AI_RACE_RESULT_ENDPOINT = "/API155/raceResult"
@@ -19,6 +21,32 @@ DETAILED_RACE_RESULT_ENDPOINT = "/API156/raceRsutDtl"
 DETAILED_RACE_RESULT_OPERATION = "raceRsutDtl"
 FINAL_DIVIDEND_ENDPOINT = "/API301/Dividend_rate_total"
 FINAL_DIVIDEND_OPERATION = "Dividend_rate_total"
+RACE_RESULT_WITH_SECTIONS_ENDPOINT = "/API4_3/raceResult_3"
+RACE_RESULT_WITH_SECTIONS_OPERATION = "raceResult_3"
+RACE_DETAIL_SECTION_RECORD_ENDPOINT = "/API6_1/raceDetailSectionRecord_1"
+RACE_DETAIL_SECTION_RECORD_OPERATION = "raceDetailSectionRecord_1"
+RACE_HORSE_RATING_ENDPOINT = "/API77/raceHorseRating"
+RACE_HORSE_RATING_OPERATION = "raceHorseRating"
+ENTRY_HORSE_WEIGHT_ENDPOINT = "/API25_1/entryHorseWeightInfo_1"
+ENTRY_HORSE_WEIGHT_OPERATION = "entryHorseWeightInfo_1"
+DAILY_TRAINING_ENDPOINT = "/API18_1/dailyTraining_1"
+DAILY_TRAINING_OPERATION = "dailyTraining_1"
+RACE_HORSE_CLINIC_ENDPOINT = "/API16_1/raceHorseClinic_1"
+RACE_HORSE_CLINIC_OPERATION = "raceHorseClinic_1"
+RACE_HORSE_INFO_ENDPOINT = "/API8_2/raceHorseInfo_2"
+RACE_HORSE_INFO_OPERATION = "raceHorseInfo_2"
+JOCKEY_CHANGE_ENDPOINT = "/API10_1/jockeyChangeInfo_1"
+JOCKEY_CHANGE_OPERATION = "jockeyChangeInfo_1"
+RACE_HORSE_CANCEL_ENDPOINT = "/API9_1/raceHorseCancelInfo_1"
+RACE_HORSE_CANCEL_OPERATION = "raceHorseCancelInfo_1"
+HORSE_EQUIPMENT_ENDPOINT = "/API24_1/horseMedicalAndEquipment_1"
+HORSE_EQUIPMENT_OPERATION = "horseMedicalAndEquipment_1"
+HORSE_GRADE_CHANGE_ENDPOINT = "/raceHorseRatingChangeInfo_2/raceHorseRatingChangeInfo_2"
+HORSE_GRADE_CHANGE_OPERATION = "raceHorseRatingChangeInfo_2"
+START_TRAINING_ENDPOINT = "/API22_1/startingTranning_1"
+START_TRAINING_OPERATION = "startingTranning_1"
+JUDGE_REPORT_ENDPOINT = "/API215/JudgeReport"
+JUDGE_REPORT_OPERATION = "JudgeReport"
 
 
 class KraApiError(RuntimeError):
@@ -97,6 +125,30 @@ class KraApiClient:
             },
             page_size=page_size,
             service_key_parameter="ServiceKey",
+        )
+
+    def iter_gate_entry_sheet_pages(
+        self,
+        *,
+        race_date: str,
+        meet: int,
+        page_size: int = 1000,
+    ) -> Iterator[FetchedPage]:
+        """Fetch the official entry card containing ``gtno`` (starting gate number)."""
+        if meet not in {1, 2, 3, 4}:
+            raise ValueError("meet는 1(서울), 2(제주), 3(부산경남), 4(영천) 중 하나여야 합니다.")
+        if page_size < 1 or page_size > 1000:
+            raise ValueError("page_size는 1 이상 1000 이하여야 합니다.")
+
+        yield from self.iter_pages(
+            endpoint=GATE_ENTRY_SHEET_ENDPOINT,
+            operation=GATE_ENTRY_SHEET_OPERATION,
+            public_params={
+                "rccrs_cd": meet,
+                "race_dt": race_date,
+                "_type": "json",
+            },
+            page_size=page_size,
         )
 
     def iter_pages(

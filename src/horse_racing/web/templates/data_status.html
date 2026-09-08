@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}데이터 최신화 현황 · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}경주·말 상태·주행심사 데이터의 적재 현황과 최근 수집 실행을 확인합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro status-intro">
+  <div>
+    <p class="eyebrow">DATA OPERATIONS</p>
+    <h1>데이터 최신화 현황</h1>
+    <p class="intro-note">통합 갱신 명령: <code>uv run horse-racing sync-latest</code></p>
+  </div>
+  <div class="data-command-card">
+    <span>전체 최신화</span>
+    <strong>일정 → 결과 → 말 상태 → 주행심사</strong>
+    <small>이 화면은 로컬 DB를 새로고침하면 즉시 갱신됩니다.</small>
+  </div>
+</section>
+
+<section class="summary-grid" aria-label="데이터 현황 요약">
+  <article class="summary-card primary"><span>표시 원천</span><strong>{{ page.sources | length }}</strong><small>SOURCES</small></article>
+  <article class="summary-card"><span>전체 행</span><strong>{{ "{:,}".format(page.total_rows) }}</strong><small>ROWS</small></article>
+  <article class="summary-card"><span>최근 성공</span><strong>{{ page.completed_runs }}</strong><small>COMPLETED</small></article>
+  <article class="summary-card"><span>최근 실패</span><strong>{{ page.failed_runs }}</strong><small>FAILED</small></article>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">LOCAL COVERAGE</p><h2>원천별 저장 현황</h2></div>
+    <span>공식 경주와 주행심사는 별도 집계</span>
+  </div>
+  <div class="table-scroll">
+    <table class="entry-table status-table">
+      <thead><tr><th>분류</th><th>데이터</th><th>행 수</th><th>최신 데이터 날짜</th></tr></thead>
+      <tbody>
+        {% for row in page.sources %}
+        <tr>
+          <td><span class="source-kind source-{{ 'trial' if row.category == '심사' else 'race' }}">{{ row.category }}</span></td>
+          <td><strong>{{ row.label }}</strong></td>
+          <td class="numeric">{{ "{:,}".format(row.row_count) }}</td>
+          <td class="numeric">{{ row.latest_date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">LATEST INGESTION</p><h2>원천별 최근 실행</h2></div>
+    <span>{{ page.runs | length }}개 데이터 유형</span>
+  </div>
+  <div class="table-scroll">
+    <table class="entry-table status-table">
+      <thead><tr><th>데이터 유형</th><th>상태</th><th>완료 시각</th><th>조회</th><th>처리</th><th>오류</th></tr></thead>
+      <tbody>
+        {% for row in page.runs %}
+        <tr>
+          <td><strong>{{ row.data_type }}</strong></td>
+          <td><span class="status {{ row.status }}">{{ row.status_label }}</span></td>
+          <td class="numeric">{{ row.completed_at }}</td>
+          <td class="numeric">{{ "{:,}".format(row.fetched) }}</td>
+          <td class="numeric">{{ "{:,}".format(row.written) }}</td>
+          <td class="status-error">{{ row.error }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

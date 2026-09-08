@@ -1,0 +1,78 @@
+{% macro silk(number) -%}
+  <span class="silk-number silk-{{ number }}">{{ number }}</span>
+{%- endmacro %}
+
+{% macro entry_table(entries) %}
+  <div class="table-scroll">
+    <table class="entry-table" data-sortable>
+      <thead>
+        <tr>
+          <th>순위</th>
+          <th>마번 / 마명</th>
+          <th>기수</th>
+          <th>조교사</th>
+          <th>마주</th>
+          <th>부담중량</th>
+          <th>마체중</th>
+          <th>레이팅</th>
+          <th>기록</th>
+          <th>착차</th>
+          <th>단승</th>
+          <th>연승</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+          <tr class="{{ entry.row_class }}">
+            <td>
+              <strong class="placing {% if entry.special_outcome %}special{% endif %}">
+                {{ entry.finish_position }}
+              </strong>
+            </td>
+            <td>
+              <div class="horse-cell">
+                {{ silk(entry.horse_number) }}
+                <span>
+                  <a class="entity-link" href="/horses/{{ entry.horse_id }}">
+                    <strong>{{ entry.horse_name }}</strong>
+                  </a>
+                  <small>{{ entry.horse_meta }}</small>
+                </span>
+              </div>
+            </td>
+            <td>
+              {% if entry.jockey_id %}
+                <a class="entity-link" href="/jockeys/{{ entry.jockey_id }}">{{ entry.jockey_name }}</a>
+              {% else %}
+                {{ entry.jockey_name }}
+              {% endif %}
+            </td>
+            <td>
+              {% if entry.trainer_id %}
+                <a class="entity-link" href="/trainers/{{ entry.trainer_id }}">{{ entry.trainer_name }}</a>
+              {% else %}
+                {{ entry.trainer_name }}
+              {% endif %}
+            </td>
+            <td>
+              {% if entry.owner_id %}
+                <a class="entity-link" href="/owners/{{ entry.owner_id }}">{{ entry.owner_name }}</a>
+              {% else %}
+                {{ entry.owner_name }}
+              {% endif %}
+            </td>
+            <td class="numeric">{{ entry.carried_weight }}</td>
+            <td class="numeric {% if entry.weight_delta and entry.weight_delta > 0 %}delta-up{% elif entry.weight_delta and entry.weight_delta < 0 %}delta-down{% endif %}">
+              {{ entry.body_weight }}
+            </td>
+            <td class="numeric">{{ entry.rating }}</td>
+            <td class="numeric result-time">{{ entry.finish_time }}</td>
+            <td class="numeric margin">{{ entry.margin }}</td>
+            <td class="numeric odds">{{ entry.win_odds }}</td>
+            <td class="numeric odds">{{ entry.place_odds }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endmacro %}

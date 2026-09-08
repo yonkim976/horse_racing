@@ -1,0 +1,518 @@
+{% extends "base.html" %}
+{% from "_macros.html" import entry_table, silk %}
+
+{% block title %}{{ page.course_name }} {{ page.race_number }}R · 경주 상세 · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}{{ page.date_label }} {{ page.course_name }} {{ page.race_number }}R 결과와 구간기록을 확인합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro">
+  <nav class="crumb-nav" aria-label="경주 이동">
+    <a class="back-link" href="/?{{ page.back_query }}">← 목록</a>
+    {% if page.prev_race_id %}
+      <a class="chip-link" href="/races/{{ page.prev_race_id }}">이전 경주</a>
+    {% else %}
+      <span class="chip-link disabled">이전 경주</span>
+    {% endif %}
+    {% if page.next_race_id %}
+      <a class="chip-link" href="/races/{{ page.next_race_id }}">다음 경주</a>
+    {% else %}
+      <span class="chip-link disabled">다음 경주</span>
+    {% endif %}
+  </nav>
+</section>
+
+<section class="panel race-detail-hero">
+  <div class="race-hero">
+    <div class="race-badge">
+      <span>{{ page.course_name }}</span>
+      <strong>{{ page.race_number }}R</strong>
+    </div>
+    <div class="race-hero-copy">
+      <div class="race-title-row">
+        <div>
+          <p>{{ page.date_label }} · {{ page.start_time }} 출발</p>
+          <h1 class="race-page-title">{{ page.race_name }}</h1>
+        </div>
+        <span class="status {{ page.status }}">{{ page.status_label }}</span>
+      </div>
+      <div class="race-meta">
+        <span>{{ page.distance }}</span>
+        {% if page.show_grade %}
+          <span>{{ page.grade }}</span>
+        {% endif %}
+        <span>{{ page.weather_track }}</span>
+        <span>출전 {{ page.entries | length }}두</span>
+      </div>
+      <nav class="page-toc" aria-label="이 경주 목차">
+        {% if page.racecourse_map %}<a href="#racecourse-map">경주로</a>{% endif %}
+        <a href="#race-result">결과</a>
+        {% if page.has_sections %}<a href="#race-sections">구간</a>{% endif %}
+        {% if page.dividends %}<a href="#race-dividends">배당</a>{% endif %}
+        {% if page.jockey_changes %}<a href="#race-jockey-changes">기수변경</a>{% endif %}
+        {% if page.scratches %}<a href="#race-scratches">출전취소</a>{% endif %}
+        {% if page.equipment %}<a href="#race-equipment">장구</a>{% endif %}
+        {% if page.steward_report %}<a href="#race-steward">심판</a>{% endif %}
+      </nav>
+    </div>
+  </div>
+</section>
+
+{% if page.racecourse_map %}
+{% set track = page.racecourse_map %}
+{% set map_key = "seoul" if track.meet_code == 1 else "jeju" %}
+<section id="racecourse-map" class="panel racecourse-panel" data-racecourse-map="{{ map_key }}">
+  <div class="panel-heading entries-heading">
+    <div>
+      <p class="panel-kicker">COURSE MAP · MEASURED SCHEMATIC</p>
+      <h2>{{ track.course_name }} 경주로 · {{ page.distance }} 주행 경로</h2>
+    </div>
+    {% if track.meet_code == 1 %}
+      <span>외주 1,800m · 내주 1,600m</span>
+    {% else %}
+      <span>1주 1,600m · 폭 20m</span>
+    {% endif %}
+  </div>
+
+  <div class="racecourse-svg-wrap">
+    <svg
+      class="racecourse-svg"
+      viewBox="{{ track.view_box }}"
+      role="img"
+      aria-labelledby="{{ map_key }}-track-title {{ map_key }}-track-desc"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <title id="{{ map_key }}-track-title">{{ track.course_name }} {{ page.distance }} 경주로 주행 경로</title>
+      <desc id="{{ map_key }}-track-desc">
+        {% if track.meet_code == 1 %}
+          외주로 1,800미터와 내주로 1,600미터, 1,000미터 연장주로 및 2,300미터 출발 연장부에
+        {% else %}
+          직선 493.7미터, 곡선 반경 97.5미터, 폭 20미터인 제주 경주로에
+        {% endif %}
+        {{ page.distance }} 출발점과 결승선, 펄롱 위치를 표시한 수치 기반 구조도입니다.
+      </desc>
+      <defs>
+        <marker id="{{ map_key }}-direction-arrow" viewBox="0 0 10 10" refX="8" refY="5"
+          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 Z" class="racecourse-arrow-head"></path>
+        </marker>
+      </defs>
+
+      <path class="racecourse-infield" d="{{ track.inner_path }}"></path>
+      <path class="racecourse-edge" d="{{ track.loop_path }}"></path>
+      <path class="racecourse-surface" d="{{ track.loop_path }}"></path>
+      {% if track.inner_course_path %}
+        <path class="racecourse-edge racecourse-inner-course" d="{{ track.inner_course_path }}"></path>
+        <path class="racecourse-surface racecourse-inner-course" d="{{ track.inner_course_path }}"></path>
+      {% endif %}
+      <path class="racecourse-edge racecourse-chute" d="{{ track.chute_path }}"></path>
+      <path class="racecourse-surface racecourse-chute" d="{{ track.chute_path }}"></path>
+      {% if track.extension_path %}
+        <path class="racecourse-edge racecourse-extension" d="{{ track.extension_path }}"></path>
+        <path class="racecourse-surface racecourse-extension" d="{{ track.extension_path }}"></path>
+      {% endif %}
+      <path class="racecourse-centerline" d="{{ track.loop_path }}"></path>
+      {% if track.inner_course_path %}
+        <path class="racecourse-centerline racecourse-inner-course" d="{{ track.inner_course_path }}"></path>
+        <path class="racecourse-finish-straight" d="M 0 {{ track.bottom_y }} H 450"></path>
+      {% endif %}
+
+      <path class="racecourse-route" d="{{ track.route_path }}"></path>
+
+      <g class="racecourse-dimension" aria-hidden="true">
+        {% if track.meet_code == 1 %}
+          <line x1="0" y1="-205" x2="450" y2="-205"></line>
+          <line x1="0" y1="-211" x2="0" y2="-199"></line>
+          <line x1="450" y1="-211" x2="450" y2="-199"></line>
+          <text x="225" y="-212" text-anchor="middle">직선 450m</text>
+          <text x="612" y="-54" text-anchor="middle">외주 곡선 450m · R143.24m</text>
+          <text x="225" y="-78" text-anchor="middle">내주 곡선 350m · R111.44m</text>
+          <text x="-223" y="-221" text-anchor="middle">직선 130m</text>
+        {% else %}
+          <line x1="0" y1="-145" x2="493.7" y2="-145"></line>
+          <line x1="0" y1="-151" x2="0" y2="-139"></line>
+          <line x1="493.7" y1="-151" x2="493.7" y2="-139"></line>
+          <text x="246.85" y="-151" text-anchor="middle">직선 493.7m</text>
+          <text x="565" y="-35" text-anchor="middle">곡선 R 97.5m</text>
+          <text x="420" y="70" text-anchor="middle">폭 20m</text>
+        {% endif %}
+      </g>
+
+      <g class="racecourse-corners" aria-hidden="true">
+        {% if track.meet_code == 1 %}
+          <text x="405" y="76">1C</text>
+          <text x="405" y="-73">2C</text>
+          <text x="32" y="-73">3C</text>
+          <text x="32" y="76">4C</text>
+        {% else %}
+          <text x="24" y="74">1C</text>
+          <text x="24" y="-65">2C</text>
+          <text x="462" y="-65">3C</text>
+          <text x="462" y="74">4C</text>
+        {% endif %}
+      </g>
+
+      <g class="racecourse-directions" aria-hidden="true">
+        {% if track.meet_code == 1 %}
+          <line x1="285" y1="-143.24" x2="205" y2="-143.24" marker-end="url(#seoul-direction-arrow)"></line>
+          <line x1="165" y1="143.24" x2="245" y2="143.24" marker-end="url(#seoul-direction-arrow)"></line>
+        {% else %}
+          <line x1="195" y1="-97.5" x2="270" y2="-97.5" marker-end="url(#jeju-direction-arrow)"></line>
+          <line x1="330" y1="97.5" x2="255" y2="97.5" marker-end="url(#jeju-direction-arrow)"></line>
+        {% endif %}
+      </g>
+
+      <g class="racecourse-furlongs" aria-label="펄롱 위치">
+        {% for marker in track.furlong_markers %}
+          <g transform="translate({{ '%.3f' | format(marker.x) }} {{ '%.3f' | format(marker.y) }})">
+            <circle r="10"></circle>
+            <text text-anchor="middle" dominant-baseline="central">{{ marker.label }}</text>
+          </g>
+        {% endfor %}
+      </g>
+
+      <g class="racecourse-starts" aria-label="출발 위치">
+        {% for marker in track.start_markers %}
+          <g class="racecourse-start-marker {% if marker.selected %}selected{% endif %}">
+            <circle cx="{{ '%.3f' | format(marker.x) }}" cy="{{ '%.3f' | format(marker.y) }}" r="5"></circle>
+            <line
+              x1="{{ '%.3f' | format(marker.x) }}" y1="{{ '%.3f' | format(marker.y) }}"
+              x2="{{ '%.3f' | format(marker.label_x) }}" y2="{{ '%.3f' | format(marker.label_y) }}"
+            ></line>
+            <text
+              x="{{ '%.3f' | format(marker.label_x) }}"
+              y="{{ '%.3f' | format(marker.label_y - 5) }}"
+              text-anchor="middle"
+            >{{ marker.label }}</text>
+          </g>
+        {% endfor %}
+      </g>
+
+      <g class="racecourse-goal" aria-label="결승선">
+        <line x1="{{ track.goal_x }}" y1="{{ track.bottom_y - 13 }}"
+          x2="{{ track.goal_x }}" y2="{{ track.bottom_y + 13 }}"></line>
+        <text x="{{ track.goal_x }}" y="{{ track.bottom_y + 31 }}" text-anchor="middle">GOAL</text>
+      </g>
+
+      <g class="racecourse-selected-start" aria-label="선택 경주 출발점">
+        <circle cx="{{ '%.3f' | format(track.selected_start.x) }}"
+          cy="{{ '%.3f' | format(track.selected_start.y) }}" r="9"></circle>
+        <circle cx="{{ '%.3f' | format(track.selected_start.x) }}"
+          cy="{{ '%.3f' | format(track.selected_start.y) }}" r="3"></circle>
+      </g>
+
+      {% if track.meet_code == 1 %}
+        <text class="racecourse-lap-label" x="225" y="-9" text-anchor="middle">SEOUL · OUTER 1,800m</text>
+        <text class="racecourse-lap-label secondary" x="225" y="14" text-anchor="middle">INNER 1,600m</text>
+      {% else %}
+        <text class="racecourse-lap-label" x="246.85" y="4" text-anchor="middle">JEJU · 1,600m</text>
+      {% endif %}
+    </svg>
+  </div>
+
+  <div class="racecourse-legend" aria-label="경주로 범례">
+    <span><i class="route-key" aria-hidden="true"></i>{{ page.distance }} 선택 경로</span>
+    <span><i class="start-key" aria-hidden="true"></i>출발점</span>
+    <span><i class="furlong-key" aria-hidden="true"></i>200m 펄롱</span>
+    <span><i class="goal-key" aria-hidden="true"></i>결승선</span>
+  </div>
+  <p class="racecourse-equation">{{ track.geometry_note }}</p>
+  <p class="section-note">
+    한국마사회 공개 치수를 수학적으로 변환한 구조도입니다. 실제 GPS·측량 좌표가 아니며 고저차는 표시하지 않습니다.
+    {% if track.meet_code == 1 %}가장 안쪽의 얇은 경계선은 별도 경주로로 표시하지 않았습니다.{% endif %}
+    {% if not track.supported_distance %}이 거리의 출발 위치는 추가 검증이 필요합니다.{% endif %}
+  </p>
+</section>
+{% endif %}
+
+<section id="race-result" class="panel">
+  <div class="panel-heading entries-heading">
+    <div>
+      <p class="panel-kicker">FINAL RESULT</p>
+      <h2>출전마 및 결과</h2>
+    </div>
+    <span>{{ page.entries | length }}두</span>
+  </div>
+
+  {% if page.entries %}
+    {{ entry_table(page.entries) }}
+  {% else %}
+    <div class="empty-state compact">
+      <p>출전 데이터가 없습니다.</p>
+    </div>
+  {% endif %}
+</section>
+
+<section id="race-sections" class="panel">
+  <div class="panel-heading entries-heading">
+    <div>
+      <p class="panel-kicker">SECTION TIMES</p>
+      <h2>구간기록 · 전개</h2>
+    </div>
+    {% if page.has_sections %}
+      <span>{{ page.section_columns | length }}개 표시 지점</span>
+    {% else %}
+      <span>데이터 없음</span>
+    {% endif %}
+  </div>
+
+  {% if page.has_sections %}
+    <script type="application/json" id="section-chart-data">{{ page.chart_data | tojson }}</script>
+    <div class="section-chart" data-section-chart>
+      <div class="section-chart-frame">
+        <svg data-chart-svg role="img" aria-label="구간 통과순위 전개 차트"></svg>
+        <div class="chart-tooltip" data-chart-tooltip hidden></div>
+      </div>
+      <div class="chart-legend" data-chart-legend aria-label="출전마 선택"></div>
+      <p class="section-note chart-help">
+        기본은 착순 상위 5두를 강조합니다. 범례를 클릭해 말을 켜고 끌 수 있습니다.
+        세로축 위쪽이 앞순위, 가로축은 표시 지점을 통과하는 순서입니다.
+        {% if page.meet_code == 2 %}지점 간 간격은 실제 거리 비율이 아닙니다.{% endif %}
+      </p>
+    </div>
+
+    {% if page.meet_code == 2 %}
+      {% include "_jeju_section_tables.html" %}
+    {% else %}
+    <div class="table-scroll">
+      <table class="entry-table section-table">
+        <thead>
+          <tr>
+            <th>순위</th>
+            <th>마번 / 마명</th>
+            {% for column in page.section_columns %}
+              <th class="section-head section-group-{{ loop.index0 % 2 }}" colspan="3" scope="colgroup">
+                {{ column.label }}
+                <small>{{ page.section_columns[loop.index0 - 1].label if loop.index0 else 'START' }} → {{ column.label }}</small>
+              </th>
+            {% endfor %}
+          </tr>
+          <tr class="section-subhead">
+            <th></th>
+            <th></th>
+            {% for column in page.section_columns %}
+              <th class="numeric section-group-start section-group-{{ loop.index0 % 2 }}">통과</th>
+              <th class="numeric section-group-{{ loop.index0 % 2 }}">구간</th>
+              <th class="numeric section-group-{{ loop.index0 % 2 }}">누적</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in page.section_rows %}
+            <tr class="{% if row.finish_sort <= 3 %}placed placed-{{ row.finish_sort }}{% elif row.finish_sort >= 1000 %}non-finisher{% endif %}">
+              <td><strong class="placing">{{ row.finish_position }}</strong></td>
+              <td>
+                <div class="horse-cell">
+                  {{ silk(row.horse_number) }}
+                  <a class="entity-link" href="/horses/{{ row.horse_id }}">
+                    <strong>{{ row.horse_name }}</strong>
+                  </a>
+                </div>
+              </td>
+              {% for cell in row.cells %}
+                <td
+                  class="numeric section-pos section-group-start section-group-{{ loop.index0 % 2 }} {% if cell.sort_position <= 3 %}section-lead{% endif %}"
+                  {% if cell.position_inferred %}title="원자료 통과순위 미제공 · 누적시간 기준 보완"{% endif %}
+                >
+                  {{ cell.position }}{% if cell.position_inferred %}<sup>*</sup>{% endif %}
+                </td>
+                <td class="numeric result-time section-segment-time section-group-{{ loop.index0 % 2 }} {% if cell.segment_time == '동일 지점' %}section-same-checkpoint{% endif %}">
+                  {{ cell.segment_time }}
+                </td>
+                <td class="numeric result-time section-cumulative-time section-group-{{ loop.index0 % 2 }}">{{ cell.cumulative_time }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="section-note">
+      구간=직전 표시 지점부터 현재 지점까지, 누적=출발부터 현재 지점까지의 기록입니다.
+      FIN 구간은 마지막 표시 지점부터 결승까지, FIN 누적은 전체 경주기록입니다.
+      원본의 코너 누적값과 골전 구간값은 같은 기준으로 변환해 표시합니다.
+      여러 출전마의 누적시간과 제공된 통과순위가 일치하는 지점은 3C/G3F처럼 묶어 표시합니다. 기록이 다르거나 비교 자료가 부족하면 별도로 표시합니다.
+      통과순위의 * 표시는 원자료에 순위가 없어 해당 지점 누적시간으로 보완한 값입니다.
+    </p>
+    {% endif %}
+  {% else %}
+    <div class="empty-state compact">
+      <p>이 경주의 구간기록이 아직 없습니다.</p>
+    </div>
+  {% endif %}
+</section>
+
+{% if page.dividends %}
+<section id="race-dividends" class="panel">
+  <div class="panel-heading">
+    <div>
+      <p class="panel-kicker">DIVIDENDS</p>
+      <h2>확정배당</h2>
+    </div>
+    <span>{{ page.dividends | length }}개 승식</span>
+  </div>
+  <div class="dividend-grid">
+    {% for pool in page.dividends %}
+      <article class="dividend-pool">
+        <h3>{{ pool.label }}</h3>
+        <table>
+          <tbody>
+            {% for row in pool.rows %}
+              <tr>
+                <td>{{ row.selection }}</td>
+                <td class="numeric odds">{{ row.odds }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if page.jockey_changes or page.scratches or page.equipment or page.steward_report %}
+<section class="board-layout">
+    {% if page.jockey_changes %}
+    <article id="race-jockey-changes" class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">JOCKEY CHANGE</p>
+          <h2>기수변경</h2>
+        </div>
+        <span>{{ page.jockey_changes | length }}건</span>
+      </div>
+      <div class="table-scroll">
+        <table class="entry-table">
+          <thead>
+            <tr>
+              <th>마번</th>
+              <th>마명</th>
+              <th>변경 전</th>
+              <th>변경 후</th>
+              <th>사유</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in page.jockey_changes %}
+              <tr>
+                <td class="numeric">{{ row.horse_number }}</td>
+                <td>
+                  {% if row.horse_id %}
+                    <a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a>
+                  {% else %}
+                    {{ row.horse_name }}
+                  {% endif %}
+                </td>
+                <td>{{ row.before_name }}</td>
+                <td><strong>{{ row.after_name }}</strong></td>
+                <td>{{ row.reason }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </article>
+    {% endif %}
+
+    {% if page.scratches %}
+    <article id="race-scratches" class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">SCRATCH</p>
+          <h2>출전취소</h2>
+        </div>
+        <span>{{ page.scratches | length }}건</span>
+      </div>
+      <div class="table-scroll">
+        <table class="entry-table">
+          <thead>
+            <tr>
+              <th>마번</th>
+              <th>마명</th>
+              <th>사유</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in page.scratches %}
+              <tr>
+                <td class="numeric">{{ row.horse_number }}</td>
+                <td>
+                  {% if row.horse_id %}
+                    <a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a>
+                  {% else %}
+                    {{ row.horse_name }}
+                  {% endif %}
+                </td>
+                <td>{{ row.reason }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </article>
+    {% endif %}
+
+    {% if page.equipment %}
+    <article id="race-equipment" class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">EQUIPMENT</p>
+          <h2>장구 · 폐출혈</h2>
+        </div>
+        <span>{{ page.equipment | length }}건</span>
+      </div>
+      <div class="table-scroll">
+        <table class="entry-table">
+          <thead>
+            <tr>
+              <th>마번</th>
+              <th>마명</th>
+              <th>장구</th>
+              <th>폐출혈</th>
+              <th>이상</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in page.equipment %}
+              <tr>
+                <td class="numeric">{{ row.horse_number }}</td>
+                <td>
+                  {% if row.horse_id %}
+                    <a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a>
+                  {% else %}
+                    {{ row.horse_name }}
+                  {% endif %}
+                </td>
+                <td>{{ row.equipment }}</td>
+                <td>{{ row.bleeding }}</td>
+                <td>{{ row.illness }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </article>
+    {% endif %}
+
+    {% if page.steward_report %}
+    <article id="race-steward" class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">STEWARD</p>
+          <h2>심판리포트</h2>
+        </div>
+        <span>{{ page.steward_report.weather }}</span>
+      </div>
+      <dl class="meta-list">
+        <div><dt>위원</dt><dd>{{ page.steward_report.members }}</dd></div>
+        <div><dt>기수변경</dt><dd>{{ page.steward_report.jockey_change_note }}</dd></div>
+      </dl>
+      <p class="steward-body">{{ page.steward_report.judgement }}</p>
+      {% if page.steward_report.additional_judgement != '—' %}
+        <p class="steward-body">{{ page.steward_report.additional_judgement }}</p>
+      {% endif %}
+    </article>
+    {% endif %}
+</section>
+{% endif %}
+<script src="{{ url_for('static', path='/js/race-chart.js') }}?v=5" defer></script>
+{% endblock %}

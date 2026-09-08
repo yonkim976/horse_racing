@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}제주 거리별 분석 · 한국 경마 데이터 보드{% endblock %}
+{% block content %}
+<section class="page-intro compact-intro">
+  <div>
+    <p class="eyebrow">JEJU · DISTANCE RECORDS</p>
+    <h1>제주 거리별 분석</h1>
+    <p>거리를 선택하고 등급별 경주 기록을 살펴보세요.</p>
+  </div>
+  <a class="entity-link" href="/?meet=2">제주 일정 보기 →</a>
+</section>
+
+<section class="panel distance-controls" aria-label="경주 검색 조건">
+  <form class="filters" method="get" action="/racecourses/jeju/distances">
+    <input type="hidden" name="distance" value="{{ data.distance }}">
+    <label><span>연도</span><select name="year">
+      <option value="0" {% if data.year == 0 %}selected{% endif %}>전체 기간</option>
+      {% if data.year and data.year|string not in data.years %}<option value="{{ data.year }}" selected>{{ data.year }}년</option>{% endif %}
+      {% for year in data.years %}<option value="{{ year }}" {% if year|int == data.year %}selected{% endif %}>{{ year }}년</option>{% endfor %}
+    </select></label>
+    <label><span>등급</span><select name="grade">
+      <option value="">전체 등급</option>
+      {% for grade in data.grade_labels %}<option value="{{ grade }}" {% if grade == data.grade %}selected{% endif %}>{{ grade }}{% if grade == '미분류' %} · 과거 등급 확인 필요{% endif %}</option>{% endfor %}
+    </select></label>
+    <button type="submit">필터 적용</button>
+    <a class="entity-link" href="{{ data.reset_url }}">초기화</a>
+  </form>
+  <nav class="distance-options" aria-label="경주거리 선택">
+    <a href="{{ data.all_url }}" {% if not data.distance %}aria-current="page"{% endif %}><strong>전체 거리</strong><span>거리별 분포</span></a>
+    {% for item in data.distances %}
+    <a href="{{ item.url }}" {% if data.distance == item.distance %}aria-current="page"{% endif %}>
+      <strong>{{ "{:,}".format(item.distance) }}<small> m</small></strong><span>{{ "{:,}".format(item.count) }}경주</span>
+    </a>
+    {% endfor %}
+  </nav>
+  <p class="distance-note">거리별 건수에도 선택한 연도·등급이 적용됩니다. 정규 경주 중 완료된 기록만 표시하며, 주행심사는 포함하지 않습니다.</p>
+</section>
+
+<section class="summary-grid" aria-label="선택 조건 통계">
+  <article class="summary-card primary"><span>완료 경주</span><strong>{{ "{:,}".format(data.total) }}</strong><small>{{ data.grade or '전체 등급' }} · {{ data.year or '전체 기간' }}</small></article>
+  <article class="summary-card"><span>출전 기록</span><strong>{{ "{:,}".format(data.entries) }}</strong><small>기록 집계 대상 {{ "{:,}".format(data.timed) }}건</small></article>
+  <article class="summary-card"><span>평균 완주시간</span><strong>{{ data.average }}</strong><small>{{ '정상 완주마 기준' if data.distance else '거리 선택 후 표시' }}</small></article>
+  <article class="summary-card"><span>최단 완주시간</span><strong>{{ data.best }}</strong><small>{{ '현재 필터 내 기록' if data.distance else '거리 선택 후 표시' }}</small></article>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">RACE HISTORY</p><h2>{{ "{:,}m".format(data.distance) if data.distance else '전체 거리' }} 경주 기록</h2></div>
+    <span>{{ data.first or '—' }} ~ {{ data.last or '—' }} · 최신순</span>
+  </div>
+  <p class="distance-note">시간 통계는 착순 1~89위의 유효 기록만 사용하며 취소·실격은 제외합니다. 전체 등급에는 과거 한라마도 포함됩니다. ‘미분류’는 원문에서 등급을 확정할 수 없는 기록입니다.</p>
+  {% if data["items"] %}
+  <div class="table-scroll">
+    <table class="entry-table">
+      <thead><tr><th>경주일</th><th>경주</th><th>거리</th><th>등급</th><th>출전</th><th>기록 보유</th><th>우승 기록</th><th>주로</th></tr></thead>
+      <tbody>{% for row in data["items"] %}
+        <tr>
+          <td class="numeric">{{ row.race_date_local }}</td>
+          <td><a class="entity-link" href="/races/{{ row.id }}">제주 {{ row.race_number }}경주 →</a>{% if row.race_name and row.race_name not in ['일반', '일반경주'] %}<small class="distance-subtitle">{{ row.race_name }}</small>{% endif %}</td>
+          <td class="numeric">{{ "{:,}".format(row.distance_m) }}m</td>
+          <td>{{ row.display_grade }}{% if row.grade != row.display_grade %}<small class="distance-subtitle">원문: {{ row.grade or '없음' }}</small>{% endif %}</td>
+          <td class="numeric">{{ row.entries or 0 }}두</td><td class="numeric">{{ row.timed or 0 }}두</td>
+          <td class="numeric">{{ row.winner_time }}</td><td>{{ row.track_condition or '—' }}</td>
+        </tr>
+      {% endfor %}</tbody>
+    </table>
+  </div>
+  <nav class="pagination" aria-label="경주 기록 페이지">
+    {% if data.previous %}<a href="{{ data.previous }}">이전</a>{% else %}<span class="disabled">이전</span>{% endif %}
+    <span>{{ data.page }} / {{ data.total_pages }}페이지 · {{ data.total }}경주</span>
+    {% if data.next %}<a href="{{ data.next }}">다음</a>{% else %}<span class="disabled">다음</span>{% endif %}
+  </nav>
+  {% else %}
+  <div class="empty-state"><strong>선택한 조건의 경주 기록이 없습니다.</strong><p>다른 거리·등급·연도를 선택해 보세요.</p><a href="{{ data.all_url }}">전체 거리 보기</a></div>
+  {% endif %}
+</section>
+{% endblock %}

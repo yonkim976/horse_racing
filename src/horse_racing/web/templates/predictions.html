@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}공개 예측 검증 원장 · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}경주 전에 고정한 확률과 결과 후 검증 지표를 공개합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro status-intro">
+  <div>
+    <p class="eyebrow">IMMUTABLE FORECAST LEDGER</p>
+    <h1>공개 예측 검증 원장</h1>
+    <p class="intro-note">발행 후 수정·삭제할 수 없는 확률과 결과 정산 이력입니다. 과거 검증은 사전 공개 실적과 분리합니다.</p>
+  </div>
+  <div class="data-command-card">
+    <span>검증 원칙</span>
+    <strong>출발 전 발행 → SHA-256 고정 → 결과 후 1회 정산</strong>
+    <small>시장 수익이 아니라 확률 품질과 재현성을 공개합니다.</small>
+  </div>
+</section>
+
+<section class="summary-grid" aria-label="사전 공개 예측 요약">
+  <article class="summary-card primary"><span>사전 공개</span><strong>{{ page.live_publications }}</strong><small>PUBLICATIONS</small></article>
+  <article class="summary-card"><span>정산 완료</span><strong>{{ page.live_settlements }}</strong><small>SETTLED</small></article>
+  <article class="summary-card"><span>평가 경주</span><strong>{{ page.aggregate_scored_races }}</strong><small>RACES</small></article>
+  <article class="summary-card"><span>누적 Win Log Loss</span><strong>{{ page.aggregate_win_log_loss }}</strong><small>LOWER IS BETTER</small></article>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">PROSPECTIVE PERFORMANCE</p><h2>사전 공개 누적 지표</h2></div>
+    <span>ECE {{ page.aggregate_ece }} · Top1 {{ page.aggregate_top1 }}</span>
+  </div>
+  <div class="table-scroll">
+    <table class="entry-table status-table">
+      <thead><tr><th>경주일</th><th>구분</th><th>발행시각</th><th>경주/출전</th><th>상태</th><th>Win LL</th><th>Top1</th><th>예측 해시</th></tr></thead>
+      <tbody>
+        {% for row in page.rows %}
+        <tr>
+          <td><strong>{{ row.race_date }}</strong></td>
+          <td><span class="source-kind source-{{ 'race' if row.mode == 'live' else 'trial' }}">{{ row.mode_label }}</span></td>
+          <td class="numeric">{{ row.published_at }}</td>
+          <td class="numeric">{{ row.race_count }} / {{ row.entry_count }}</td>
+          <td><span class="status {{ 'completed' if row.status == 'settled' else 'running' }}">{{ row.status_label }}</span></td>
+          <td class="numeric">{{ row.win_log_loss }}</td>
+          <td class="numeric">{{ row.top1 }}</td>
+          <td class="numeric"><code title="{{ row.public_id }}">{{ row.hash_short }}</code></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8">아직 발행된 예측이 없습니다. 다음 실제 경주부터 사전 공개 기록을 시작합니다.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if page.historical_publications %}
+  <p class="intro-note">과거 검증 publication {{ page.historical_publications }}건은 누적 사전 실적에서 제외했습니다.</p>
+  {% endif %}
+</section>
+{% endblock %}
