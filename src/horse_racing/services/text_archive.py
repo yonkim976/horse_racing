@@ -41,6 +41,7 @@ def download_text_archive(
     max_pages: int = 500,
     max_files: int | None = None,
     delay_seconds: float = 0.1,
+    allow_empty_paths: set[str] | None = None,
 ) -> TextArchiveDownloadSummary:
     """Download one KRA Text category with a durable append-only manifest."""
     if not meets or any(meet not in {1, 2, 3} for meet in meets):
@@ -113,8 +114,12 @@ def download_text_archive(
                     skipped += 1
                     continue
 
+                allow_empty = listed_file.remote_path in (allow_empty_paths or set())
                 try:
-                    fetched = client.fetch_file(listed_file)
+                    if allow_empty:
+                        fetched = client.fetch_file(listed_file, allow_empty=True)
+                    else:
+                        fetched = client.fetch_file(listed_file)
                 except Exception as exc:
                     manifest.append({**base_event, "status": "failed", "error": str(exc)[:2000]})
                     raise
@@ -122,7 +127,12 @@ def download_text_archive(
                 bytes_fetched += len(fetched.body)
                 digest = hashlib.sha256(fetched.body).hexdigest()
                 canonical_path = known_digests.get(digest)
-                if canonical_path is not None and canonical_path.is_file():
+                if not fetched.body:
+                    stored = store_kra_text_report(fetched, raw_data_dir=raw_data_dir)
+                    stored_path = stored.path
+                    event_status = "verified_empty_source"
+                    written += 1
+                elif canonical_path is not None and canonical_path.is_file():
                     stored_path = canonical_path
                     event_status = "skipped_duplicate_sha256"
                     skipped += 1

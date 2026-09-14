@@ -1,0 +1,46 @@
+.seoul-explorer { --seoul-surface: #293a32; --seoul-field: #15251c; --seoul-rail: #779080; }
+[data-theme="light"] .seoul-explorer { --seoul-surface: #e4ebe5; --seoul-field: #f4f8f3; --seoul-rail: #8ea396; }
+.seoul-map-body { padding:0 28px 22px; border-top:1px solid var(--border); background:linear-gradient(180deg,var(--surface-2),var(--surface-1)); }
+.seoul-viewport { overflow:auto; }
+.seoul-plan { display:block; width:100%; max-height:620px; }
+.seoul-plan [hidden] { display:none; }
+.seoul-surface { fill:var(--seoul-surface); stroke:var(--border-strong); stroke-width:2; }
+.seoul-field { fill:var(--seoul-field); stroke:var(--seoul-rail); stroke-width:1.5; }
+.seoul-rail { fill:none; stroke:var(--seoul-rail); stroke-width:3; stroke-linecap:round; }
+.seoul-route-halo { stroke:var(--surface-1); stroke-width:9; fill:none; opacity:.8; stroke-linejoin:round; }
+.seoul-route { stroke:var(--course-accent); stroke-width:5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+[data-route-arrows] { stroke:var(--ink-strong); stroke-width:1.6; fill:none; }
+.seoul-gate circle { fill:var(--course-accent); stroke:var(--surface-1); stroke-width:2; }
+.seoul-gate path { stroke:var(--course-accent); fill:none; stroke-width:1; }
+.seoul-gate text { fill:var(--course-accent); font-size:13px; font-weight:700; }
+.seoul-corners text { fill:var(--muted); font:600 12px var(--font-mono); text-anchor:middle; }
+.seoul-center text { text-anchor:middle; fill:var(--ink-strong); font:500 36px var(--font-mono); }
+.seoul-center .seoul-center-title { font:500 13px var(--font-mono); letter-spacing:.25em; fill:var(--muted); }
+.seoul-center .seoul-center-small { font:400 13px var(--font-sans); fill:var(--muted); }
+.seoul-finish path { stroke:var(--ink-strong); stroke-width:3; }
+.seoul-finish text { fill:var(--ink-strong); font-size:13px; font-weight:700; }
+.seoul-grandstand rect { fill:var(--surface-3); }
+.seoul-grandstand text { fill:var(--muted); font-size:11px; }
+.seoul-route-caption { display:flex; align-items:baseline; flex-wrap:wrap; gap:10px 20px; padding:15px 0; border-bottom:1px solid var(--border); }
+.seoul-route-caption strong { color:var(--course-accent); font-size:14px; }
+.seoul-route-caption span { color:var(--muted); font-size:12px; }
+.seoul-official img { width:100%; display:block; background:white; border-radius:8px; }
+.seoul-official p { font-size:11px; color:var(--muted); }
+.seoul-viewport.with-source { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:20px; }
+.seoul-viewport.zoomed .seoul-plan { min-width:1100px; max-height:none; }
+.seoul-viewport.zoomed.with-source { display:block; }
+.seoul-explorer button:focus-visible { outline:2px solid var(--course-blue); outline-offset:3px; }
+.seoul-metric-focus { fill:none; stroke:var(--course-blue); stroke-width:9; pointer-events:none; }
+.seoul-metric-point { cursor:pointer; }
+.seoul-metric-point circle { fill:var(--surface-1); stroke:var(--ink-strong); stroke-width:2; }
+.seoul-metric-point .seoul-metric-hit { fill:transparent; stroke:none; }
+.seoul-metric-point text { fill:var(--ink-strong); font:600 12px var(--font-mono); paint-order:stroke; stroke:var(--surface-1); stroke-width:4px; stroke-linejoin:round; }
+
+@media(max-width:850px) { .seoul-viewport.with-source { grid-template-columns:1fr; } }
+@media(max-width:600px) { .seoul-map-body { padding:0 12px 18px; } .seoul-plan { min-width:420px; } }
+
+/* Busan's infield separates the outer and inner racing lanes. Open ends
+   reproduce the transfer gaps in the official plan. */
+.busan-lane-border { fill:none; stroke:var(--seoul-rail); stroke-width:24; stroke-linecap:round; stroke-linejoin:round; }
+.busan-lane { fill:none; stroke:var(--seoul-surface); stroke-width:21; stroke-linecap:round; stroke-linejoin:round; }
+.busan-training { fill:none; stroke:var(--seoul-rail); stroke-width:1; opacity:.5; }

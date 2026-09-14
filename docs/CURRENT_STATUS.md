@@ -1,10 +1,36 @@
 # 현재 상태와 작업 이력
 
-기준 시각: **2026-08-28** (`sync-latest` 이후 비현역 프로필과 2015~2024 Text 결과 적재 포함)
+최종 갱신: **2026-09-11**<br>
+아래 상세 DB 건수의 원 기준은 **2026-08-28**이며, 이후 변경은 먼저 최신 변경 요약에 기록한다.
 
 > **완료 vs 다음 작업:** [PROGRESS](PROGRESS.md)<br>
 > **수집·백필·UI:** [SESSION_SUMMARY_2026-08-25](SESSION_SUMMARY_2026-08-25.md)<br>
-> **대시보드 디자인:** [SESSION_SUMMARY_2026-08-26](SESSION_SUMMARY_2026-08-26.md)
+> **대시보드 디자인:** [SESSION_SUMMARY_2026-08-26](SESSION_SUMMARY_2026-08-26.md)<br>
+> **모델 연구 전체 색인:** [MODEL_RESEARCH_INDEX](MODEL_RESEARCH_INDEX.md)<br>
+> **산출물 저장 감사:** [ARTIFACT_STORAGE_AUDIT_2026-09-11](ARTIFACT_STORAGE_AUDIT_2026-09-11.md)
+
+## 0. 2026-09-11 최신 변경 요약
+
+- 모델·배팅 연구를 목적, 결론, 채택 상태, run ID로 연결한
+  [통합 색인](MODEL_RESEARCH_INDEX.md)을 추가했다.
+- 실험 원장 131개, 모델 artifact 74개, 데이터셋 manifest 34개, 자동 보고서 145개를
+  대조했다. 누락 artifact·누락 manifest·미등록 모델 디렉터리·중복 run ID는 모두 0이다.
+- 한라마 2015~2022 자료는 운영 DB에서 제거하고
+  [`data/archives/halla_2015_2022_20260908`](../data/archives/halla_2015_2022_20260908)에
+  복구 가능한 Parquet archive로 보존했다.
+- 제주 전용 최근·장기 데이터셋을 분리하고 `한국`/`제` 표기를 feature에서 `제주마`로
+  정상화했다. 최신 제주 V2 후보는 `20047697-0b2e-4dac-9a4d-762271f5e1f9`이며
+  valid Top1 32.96%, 우승마 Top3 포함 68.72%다. 아직 미래 test 판정 전이다.
+- 서울 구간기록 복구·대시보드 지도 개편은 각각
+  [저장 감사](SEOUL_SECTION_AUDIT_2026-09-08.md),
+  [복원 결과](SEOUL_SECTION_REPAIR_2026-09-08.md),
+  [지도 개편](SEOUL_MAP_REDESIGN_2026-09-08.md)에 기록했다.
+- DB migration은 `20260908_0010` head까지 적용됐다.
+- 2026-09-13 영천 첫 시행 6경주·54출전을 meet code 4로 수집했으며, 일정·출전표·
+  출발번호·결과·확정배당은 공통 갱신 경로에 연결했다. 첫 실제 결과 검증 전까지 구간기록과
+  주행심사는 보류한다. 상세는 [영천 첫 시행 지원](YEONGCHEON_SUPPORT_2026-09-11.md)에 있다.
+- 상세 저장 감사 결과와 남은 백업 위험은
+  [파일 저장 감사](ARTIFACT_STORAGE_AUDIT_2026-09-11.md)를 기준으로 한다.
 
 ## 1. 한눈에 보기
 
@@ -13,7 +39,7 @@
 PASS했지만 M6 Gate G2는 시장 대비 증분 신호가 없어 FAIL했다.
 
 - GitHub 저장소 연결 및 `main` 브랜치 푸시 완료
-- SQLite/Alembic 정규화 스키마 (`20260828_0009` head, 주행심사·불변 예측 원장 포함)
+- SQLite/Alembic 정규화 스키마 (`20260908_0010` head, 구간시간 기준·주행심사·불변 예측 원장 포함)
 - 공식 KRA OpenAPI **다수 LIVE 통합** (일정·출발번호·결과·구간·배당 + 말 이력 + 보강 6종)
 - 원본 응답 파일과 수집 메타데이터 보존
 - 2025·2026 결과·확정배당·구간기록 백필 완료 (구간 일부 API 공백은 아래 개방 이슈)

@@ -34,6 +34,30 @@ from horse_racing.db.models import (
 from horse_racing.web.app import create_app
 
 
+def test_yeongcheon_schedule_and_detail(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        course = Racecourse(kra_meet_code=4, code="YEONGCHEON", name_ko="영천")
+        race = Race(
+            racecourse=course, race_date_local=date(2026, 9, 13), race_number=1,
+            distance_m=1800, grade="혼OPEN", race_name="렛츠런파크 영천 개장기념",
+            status="scheduled",
+        )
+        session.add(race)
+        session.commit()
+        race_id = race.id
+    client = TestClient(create_app(session_factory=factory))
+    response = client.get("/?date=2026-09-13&meet=4")
+    assert response.status_code == 200
+    assert 'value="4"' in response.text
+    assert "영천 개장기념" in response.text
+    response = client.get(f"/races/{race_id}")
+    assert response.status_code == 200
+    assert "영천" in response.text
+    assert "서울은 3C" not in response.text
+    assert 'id="racecourse-map"' not in response.text
+
+
 def seeded_session(tmp_path: Path) -> sessionmaker[Session]:
     database_url = f"sqlite:///{tmp_path / 'dashboard.sqlite3'}"
     config = Config("alembic.ini")
@@ -381,6 +405,10 @@ def test_race_detail_page_shows_results_and_sections(tmp_path: Path) -> None:
     assert response.status_code == 200
     assert "제주 1R" in response.text
     assert 'data-racecourse-map="jeju"' in response.text
+    assert 'data-course-explorer data-distance="900"' in response.text
+    assert 'data-course-focus' in response.text
+    assert 'data-course-select="0"' in response.text
+    assert 'data-course-detail="0" hidden' in response.text
     assert "제주 경주로 · 900m 주행 경로" in response.text
     assert "직선 493.7m" in response.text
     assert "곡선 R 97.5m" in response.text
@@ -570,7 +598,7 @@ def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) ->
     assert ".silk-8 { background: #ef7eb2" in css.text
     assert ".silk-11 {" in css.text
     assert "repeating-linear-gradient" in css.text
-    assert "dashboard.css?v=13" in page.text
+    assert "dashboard.css?v=14" in page.text
 
 
 def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:

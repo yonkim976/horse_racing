@@ -102,6 +102,7 @@ def fetch_prediction_base_rows(
     race_date: str | date,
     publication_mode: str = "live",
     race_ids: list[int] | None = None,
+    meet_codes: list[int] | tuple[int, ...] | None = None,
 ) -> pl.DataFrame:
     """Read non-scratched entries without joining results or labels."""
     if publication_mode not in {"live", "historical"}:
@@ -112,7 +113,15 @@ def fetch_prediction_base_rows(
         query += " AND r.status = 'scheduled'"
     else:
         query += " AND r.status IN ('scheduled', 'completed')"
-    rows = session.execute(text(query), {"race_date": race_date_iso}).mappings().all()
+    params: dict[str, object] = {"race_date": race_date_iso}
+    if meet_codes:
+        placeholders = []
+        for index, meet_code in enumerate(meet_codes):
+            name = f"meet_code_{index}"
+            placeholders.append(f":{name}")
+            params[name] = int(meet_code)
+        query += f" AND rc.kra_meet_code IN ({', '.join(placeholders)})"
+    rows = session.execute(text(query), params).mappings().all()
     if not rows:
         mode_name = "예정" if publication_mode == "live" else "예정/완료"
         raise PredictionFrameError(f"{race_date_iso}에 조건과 맞는 {mode_name} 경주가 없습니다.")
@@ -186,6 +195,7 @@ def build_prediction_frame(
     expected_feature_names: list[str],
     publication_mode: str = "live",
     race_ids: list[int] | None = None,
+    expected_meet_codes: list[int] | tuple[int, ...] | None = None,
 ) -> PredictionFrameResult:
     """Build one race day's label-free model input with an exact feature contract."""
     if as_of_policy not in AS_OF_POLICIES:
@@ -201,6 +211,7 @@ def build_prediction_frame(
         race_date=race_date_iso,
         publication_mode=publication_mode,
         race_ids=race_ids,
+        meet_codes=expected_meet_codes,
     )
     if base.filter(pl.col("scheduled_at_ms").is_null()).height:
         missing = sorted(
@@ -223,7 +234,9 @@ def build_prediction_frame(
     if as_of_policy == "day_before_18":
         frame = frame.drop([name for name in RACE_DAY_ONLY_COLUMNS if name in frame.columns])
 
-    sources = load_source_frames(session)
+    # Keep same-day prior-race sources for feature sets whose existing contract
+    # permits them, while excluding all later calendar dates at query time.
+    sources = load_source_frames(session, race_date_max=race_date_iso)
     sources = replace(
         sources,
         past_results=_append_prediction_anchors(base, sources.past_results),

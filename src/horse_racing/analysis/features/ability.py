@@ -10,7 +10,6 @@ after every race on the date has been scored.
 from __future__ import annotations
 
 import math
-from collections import defaultdict
 from datetime import date
 
 import polars as pl

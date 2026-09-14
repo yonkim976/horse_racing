@@ -101,6 +101,7 @@ def ingest_dacom11_reports(
                 for race in parse_dacom11_report(raw)
                 if start_date <= race.race_date <= end_date
             ]
+            _validate_report_meet(parsed_races, meet)
             _copy_source_document(session, run.id, document)
             counters["files"] += 1
             counters["races_parsed"] += len(parsed_races)
@@ -157,6 +158,17 @@ def ingest_dacom11_reports(
         raise
 
     return Dacom11IngestionSummary(run_id=run.id, **counters)
+
+
+def _validate_report_meet(races: list[Dacom11Race], meet: int) -> None:
+    """Archive routes can contain another venue's report (e.g. Yeongcheon)."""
+    names = {1: {"서울"}, 2: {"제주"}, 3: {"부경", "부산", "부산경남"}}
+    for race in races:
+        if race.meet_name not in names.get(meet, set()):
+            raise ValueError(
+                f"성적표 경기장 불일치: 자료실 meet={meet}, 본문={race.meet_name}, "
+                f"{race.race_date} {race.race_number}R. 원천 경로만으로 저장하지 않습니다."
+            )
 
 
 def _source_documents(
@@ -468,6 +480,8 @@ def _write_sections(session: Session, entry: RaceEntry, item: Dacom11Entry) -> N
                     race_entry=entry,
                     section_code=code,
                     elapsed_time_ms=elapsed,
+                    time_basis="closing" if code in ("G3F", "G1F") else "cumulative",
+                    source_kind="dacom11",
                     position=positions.get(code),
                     group_notation_raw=item.passing_order_raw,
                 )

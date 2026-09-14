@@ -1,11 +1,12 @@
 # 진행 현황: 완료와 다음 작업
 
-기준 시각: **2026-09-01**
+기준 시각: **2026-09-11**
 
 이 문서는 "지금 어디까지 됐고, 다음에 무엇을 하는가"만 본다.
 목표·아키텍처는 [BLUEPRINT](BLUEPRINT.md), 단계별 전체 경로는 [ROADMAP](ROADMAP.md),
 모델 설계·판정 수치는 [MODELING_ROADMAP](MODELING_ROADMAP.md), 데이터 건수는
-[CURRENT_STATUS](CURRENT_STATUS.md)를 본다.
+[CURRENT_STATUS](CURRENT_STATUS.md)를 본다. 과거 모델·배팅 연구의 전체 연결은
+[MODEL_RESEARCH_INDEX](MODEL_RESEARCH_INDEX.md)를 기준으로 한다.
 
 ---
 
@@ -42,6 +43,22 @@ G3는 "구매 시점 배당으로도 재현되는가".
 ---
 
 ## 2. 완료된 것
+
+### 최신: 제주 전용 모델·산출물 정리 — 2026-09-11
+
+- 한라마 2015~2022 자료를 운영 DB에서 제거하고 Parquet archive로 보존
+- 제주 meet code 2 전용 최근 11,637행·장기 62,301행 데이터셋 생성
+- `한국`/`제` 산지 표기를 feature 단계에서 `제주마`로 통합해 재생성 안정성 확보
+- 기수 승률 제거·gain 완화와 제주 전용 규제 강도를 비교하고 악화 후보는 미채택
+- 최근 75%+장기 25% 제주 V2 후보 확정: `20047697-0b2e-4dac-9a4d-762271f5e1f9`
+- 179경주 valid: Top1 32.96%, 우승마 Top3 68.72%, 우승마 Top5 82.68%
+- 실험 원장·모델·데이터셋·보고서 연결 감사 PASS
+- 영천 meet code 4 첫 시행 일정·출전 54건 수집과 공통 갱신 연결 완료;
+  첫 결과 검증 전까지 구간기록·주행심사는 보류
+
+상세는 [제주 V2](JEJU_STANDALONE_V2.md), 전체 흐름은
+[모델 연구 색인](MODEL_RESEARCH_INDEX.md), 저장 상태는
+[산출물 감사](ARTIFACT_STORAGE_AUDIT_2026-09-11.md)를 본다.
 
 ### 2.0 2차 순수 능력모델 V5 보정 속도지수 challenger — 2026-08-31
 

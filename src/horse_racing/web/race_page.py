@@ -27,7 +27,13 @@ from horse_racing.web.formatting import (
     format_odds,
     format_race_time,
 )
-from horse_racing.web.racecourse import RacecourseMapView, build_racecourse_map
+from horse_racing.web.race_scope import is_retired_halla_race
+from horse_racing.web.race_video import race_video_url
+from horse_racing.web.racecourse import (
+    RacecourseMapView,
+    build_racecourse_map,
+    jeju_checkpoint_point,
+)
 
 SECTION_LABELS: dict[str, str] = {
     "S1F": "S1F",
@@ -154,6 +160,7 @@ class RacePageData:
     section_rows: list[SectionEntryRow]
     has_sections: bool
     chart_data: dict[str, object]
+    map_checkpoints: list[dict]
     back_query: str
     prev_race_id: int | None
     next_race_id: int | None
@@ -162,6 +169,7 @@ class RacePageData:
     scratches: list[RaceScratchRow]
     equipment: list[RaceEquipmentRow]
     steward_report: StewardReportView | None
+    video_url: str | None = None
 
 
 def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
@@ -178,7 +186,7 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
             selectinload(Race.entries).selectinload(RaceEntry.section_results),
         )
     )
-    if race is None:
+    if race is None or is_retired_halla_race(race):
         return None
 
     odds = {
@@ -211,6 +219,8 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
     prev_race_id, next_race_id = _neighbor_race_ids(session, race)
 
     return RacePageData(
+        video_url=race_video_url(meet_code=meet_code, race_date=race.race_date_local,
+                                 race_number=race.race_number, status=race.status),
         id=race.id,
         course_name=race.racecourse.name_ko,
         meet_code=meet_code,
@@ -235,6 +245,8 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
         section_rows=section_rows,
         has_sections=bool(section_columns),
         chart_data=chart_data,
+        map_checkpoints=_map_checkpoints(race.distance_m, section_columns)
+        if meet_code == 2 else _seoul_map_checkpoints(section_columns),
         back_query=back_query,
         prev_race_id=prev_race_id,
         next_race_id=next_race_id,
@@ -524,6 +536,10 @@ def _section_columns(race: Race) -> list[SectionColumn]:
             code,
         ),
     )
+    if race.racecourse.kra_meet_code == 3:
+        from horse_racing.web.busan_diagram import timing_points
+        busan_positions = timing_points(race.distance_m)
+        ordered.sort(key=lambda code: busan_positions.get(code, float("inf")))
     # Compare normalized elapsed times, never the raw closing-window durations.
     # Require multiple matching horses and no conflicting time/rank observations.
     observations = [
@@ -535,6 +551,14 @@ def _section_columns(race: Race) -> list[SectionColumn]:
     ]
 
     def equivalent(left: str, right: str) -> bool:
+        if race.racecourse.kra_meet_code == 1:
+            partner = {1000: "3C", 1600: "2C", 1700: "1C"}.get(race.distance_m)
+            if partner is None or {left, right} != {"S1F", partner}:
+                return False
+        if race.racecourse.kra_meet_code == 3:
+            if (busan_positions.get(left) is None
+                    or busan_positions.get(left) != busan_positions.get(right)):
+                return False
         matches = 0
         for times, positions in observations:
             if left in times and right in times:
@@ -564,7 +588,67 @@ def _section_columns(race: Race) -> list[SectionColumn]:
     columns.append(SectionColumn(code=FINISH_LABEL, label=FINISH_LABEL))
     if race.racecourse.kra_meet_code == 2:
         columns = _jeju_column_descriptions(columns, race.distance_m)
+    elif race.racecourse.kra_meet_code == 1:
+        columns = _seoul_column_descriptions(columns, race.distance_m)
+    elif race.racecourse.kra_meet_code == 3:
+        columns = _busan_column_descriptions(columns, race.distance_m)
     return columns
+
+
+def _busan_column_descriptions(columns, distance):
+    from horse_racing.web.busan_diagram import timing_points
+
+    points = timing_points(distance)
+    previous, label = 0, "START"
+    result = []
+    for column in columns:
+        point = points.get(column.code)
+        length = point - previous if point is not None and previous is not None else None
+        result.append(
+            replace(
+                column,
+                location="결승"
+                if column.code == "FIN"
+                else f"출발 후 {point:,}m"
+                if point is not None
+                else "위치 미확인",
+                segment_label=f"{label} → {column.label}",
+                segment_distance=f"{length:,}m"
+                if length is not None and length > 0
+                else "동일 지점"
+                if length == 0
+                else "거리 확인 필요",
+            )
+        )
+        previous, label = point, column.label
+    return result
+
+
+def _seoul_column_descriptions(columns: list[SectionColumn], distance: int) -> list[SectionColumn]:
+    # Corner distances depend on the course/start configuration. Do not transfer
+    # Jeju's positions or the generic outer-course guide to every Seoul route.
+    points = {"S1F": 200, "G3F": distance - 600, "G1F": distance - 200, "FIN": distance}
+    previous, previous_label = 0, "START"
+    result = []
+    for column in columns:
+        point = points.get(column.code)
+        location = ("출발 후 200m" if column.code == "S1F" else
+                    "결승" if column.code == "FIN" else
+                    f"결승 {distance - point}m 전" if point is not None else
+                    f"{column.code[0]}코너 · 거리별 주로 기준")
+        length = point - previous if point is not None and previous is not None else None
+        result.append(replace(column, location=location,
+                              segment_label=f"{previous_label} → {column.label}",
+                              segment_distance=f"{length:,}m" if length is not None and length > 0
+                              else "코너 포함 · 거리 미확정"))
+        previous, previous_label = point, column.label
+    return result
+
+
+def _seoul_map_checkpoints(columns: list[SectionColumn]) -> list[dict]:
+    return [dict(index=i, number=i + 1, label=c.label, location=c.location,
+                 segment=c.segment_label, length=c.segment_distance)
+            for i, c in enumerate(columns)]
 
 
 def _jeju_column_descriptions(columns: list[SectionColumn], distance: int) -> list[SectionColumn]:
@@ -595,6 +679,26 @@ def _jeju_column_descriptions(columns: list[SectionColumn], distance: int) -> li
         previous_point = point if valid else None
         previous_label, previous_approximate = column.label, approximate
     return described
+
+
+def _map_checkpoints(distance: int, columns: list[SectionColumn]) -> list[dict]:
+    early = 210 if distance in (1110, 1610) else 200
+    remaining = {"S1F": distance - early, "1C": 1400, "2C": 1200,
+                 "3C": 600, "G3F": 600, "4C": 400, "G1F": 200, "FIN": 0}
+    result = []
+    previous = 0
+    for index, column in enumerate(columns):
+        left = remaining.get(column.code)
+        if left is None or not 0 <= left <= distance:
+            continue
+        point = jeju_checkpoint_point(left)
+        elapsed = distance - left
+        result.append(dict(index=index, number=len(result) + 1, label=column.label,
+                           location=column.location, segment=column.segment_label,
+                           length=column.segment_distance, elapsed=elapsed, remaining=left,
+                           start=previous, span=max(0, elapsed-previous), x=point.x, y=point.y))
+        previous = elapsed
+    return result
 
 
 def _section_rows(
@@ -665,10 +769,8 @@ def _section_rows(
                 finish_position=finish_label,
                 finish_sort=finish_sort,
                 cells=cells,
-                closing_600=format_race_time(by_code["G3F"].elapsed_time_ms)
-                if meet_code == 2 and "G3F" in by_code else "—",
-                closing_200=format_race_time(by_code["G1F"].elapsed_time_ms)
-                if meet_code == 2 and "G1F" in by_code else "—",
+                closing_600=_closing_time(entry, "G3F", meet_code),
+                closing_200=_closing_time(entry, "G1F", meet_code),
             )
         )
     rows.sort(key=lambda row: (row.finish_sort, row.horse_number))
@@ -744,6 +846,7 @@ def _entry_cumulative_times(entry: RaceEntry, *, meet_code: int) -> dict[str, in
         raw_times,
         finish_time_ms=finish_time_ms,
         meet_code=meet_code,
+        time_bases={s.section_code: s.time_basis for s in entry.section_results},
     )
     if finish_time_ms is not None:
         cumulative[FINISH_LABEL] = finish_time_ms
@@ -755,6 +858,7 @@ def derive_section_cumulative_times(
     *,
     finish_time_ms: int | None,
     meet_code: int,
+    time_bases: dict[str, str | None] | None = None,
 ) -> dict[str, int]:
     """Normalize checkpoint and closing-window times to elapsed time from START."""
     g3f = raw_times.get("G3F")
@@ -768,12 +872,28 @@ def derive_section_cumulative_times(
     )
     cumulative: dict[str, int] = {}
     for code, raw_time_ms in raw_times.items():
-        if closing_window_times and _is_goal_furlong(code):
+        basis = (time_bases or {}).get(code)
+        is_closing = basis == "closing" or (
+            basis is None and closing_window_times and _is_goal_furlong(code)
+        )
+        if is_closing:
             if finish_time_ms is not None and finish_time_ms >= raw_time_ms:
                 cumulative[code] = finish_time_ms - raw_time_ms
             continue
         cumulative[code] = raw_time_ms
     return cumulative
+
+
+def _closing_time(entry: RaceEntry, code: str, meet_code: int) -> str:
+    section = next((s for s in entry.section_results if s.section_code == code), None)
+    if section is None or section.elapsed_time_ms is None:
+        return "—"
+    if section.time_basis == "closing" or (section.time_basis is None and meet_code == 2):
+        return format_race_time(section.elapsed_time_ms)
+    cumulative = _entry_cumulative_times(entry, meet_code=meet_code)
+    if "FIN" in cumulative and code in cumulative and cumulative["FIN"] >= cumulative[code]:
+        return format_race_time(cumulative["FIN"] - cumulative[code])
+    return "—"
 
 
 def _is_goal_furlong(code: str) -> bool:

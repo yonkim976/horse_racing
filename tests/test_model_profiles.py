@@ -166,6 +166,26 @@ def test_sand_event_profile_keeps_only_stable_incident_and_exposure_inputs() -> 
     ]
 
 
+def test_jeju_profile_removes_jockey_rates_but_keeps_experience_and_chemistry() -> None:
+    features = [
+        "distance_m",
+        "jockey_starts_90d",
+        "jockey_win_rate_90d",
+        "jockey_win_rate_365d",
+        "jockey_top3_rate_90d",
+        "jockey_win_rate_90d_race_z",
+        "jockey_win_rate_90d_race_rank",
+        "horse_jockey_starts",
+        "horse_jockey_wins",
+    ]
+    assert select_profile_features(features, "racefit_jeju_v2") == [
+        "distance_m",
+        "jockey_starts_90d",
+        "horse_jockey_starts",
+        "horse_jockey_wins",
+    ]
+
+
 def test_remediation_features_are_opt_in_and_do_not_change_v5_contract() -> None:
     features = [
         "distance_m",

@@ -1,7 +1,12 @@
 import pytest
 
 from horse_racing.db.models import Horse, Race, Racecourse, RaceEntry, RaceResult, RaceSectionResult
-from horse_racing.web.race_page import _section_columns, _section_rows, build_section_chart_data
+from horse_racing.web.race_page import (
+    _map_checkpoints,
+    _section_columns,
+    _section_rows,
+    build_section_chart_data,
+)
 
 
 def make_race():
@@ -115,6 +120,11 @@ def test_1300_second_corner_precedes_s1f():
     assert columns[0].segment_label == "START → 2C"
     assert columns[0].segment_distance == "약 100m"
     assert columns[1].segment_distance == "약 100m"
+    points = _map_checkpoints(race.distance_m, columns)
+    assert [(p["label"], p["start"], p["span"]) for p in points[:2]] == [
+        ("2C", 0, 100), ("S1F", 100, 100)
+    ]
+    assert sum(p["span"] for p in points) == 1300
 
 
 def test_1610_groups_first_corner_with_s1f_and_keeps_second_corner():
@@ -135,3 +145,43 @@ def test_1610_groups_first_corner_with_s1f_and_keeps_second_corner():
     assert [c.label for c in columns][:2] == ["S1F/1C", "2C"]
     assert columns[0].location == "출발 후 210m"
     assert columns[1].segment_distance == "약 200m"
+    points = _map_checkpoints(race.distance_m, columns)
+    assert [(p["label"], p["start"], p["span"]) for p in points[:2]] == [
+        ("S1F/1C", 0, 210), ("2C", 210, 200)
+    ]
+    assert sum(p["span"] for p in points) == 1610
+    assert points[-1]["remaining"] == 0
+
+
+def test_explicit_time_basis_overrides_numeric_guess():
+    from horse_racing.web.race_page import derive_section_cumulative_times
+    assert derive_section_cumulative_times(
+        {"G3F": 50000, "G1F": 45000}, finish_time_ms=100000, meet_code=1,
+        time_bases={"G3F": "cumulative", "G1F": "cumulative"},
+    ) == {"G3F": 50000, "G1F": 45000}
+    assert derive_section_cumulative_times(
+        {"G1F": 60000}, finish_time_ms=100000, meet_code=1,
+        time_bases={"G1F": "closing"},
+    ) == {"G1F": 40000}
+
+
+def test_seoul_keeps_corners_distinct_and_displays_closing_windows():
+    race = Race(racecourse=Racecourse(kra_meet_code=1), distance_m=1200)
+    for number in (1, 2):
+        entry = RaceEntry(race=race, horse_id=number, horse_number=number, scratched=False,
+                          horse=Horse(id=number, name_ko=f"말{number}"))
+        entry.result = RaceResult(finish_position=number, finish_time_ms=80000)
+        entry.section_results = [RaceSectionResult(section_code=code, elapsed_time_ms=time,
+                                                  time_basis="cumulative", position=number)
+                                 for code, time in [("S1F", 14000), ("3C", 28000),
+                                                    ("G3F", 40000), ("4C", 45000), ("G1F", 66000)]]
+    columns = _section_columns(race)
+    assert [c.label for c in columns] == ["S1F", "3C", "G3F", "4C", "G1F", "FIN"]
+    row = _section_rows(race.entries, columns, meet_code=1)[0]
+    assert row.closing_600 == "40.0초"
+    assert row.closing_200 == "14.0초"
+    assert row.cells[2].segment_time == "12.0초"
+    # Equal rounded times cannot make different Seoul corner/furlong locations merge.
+    for entry in race.entries:
+        entry.section_results[2].elapsed_time_ms = 28000
+    assert "3C/G3F" not in [c.label for c in _section_columns(race)]

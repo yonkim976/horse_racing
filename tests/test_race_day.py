@@ -28,12 +28,14 @@ from horse_racing.parsers.race_day import (
 )
 from horse_racing.services.race_day import (
     _is_date_echo_time,
+    final_dividend_is_complete,
     ingest_race_day,
     ingest_race_schedule,
     race_day_is_complete,
     repair_missing_entry_people,
     repair_planned_weather,
     result_data_exists,
+    result_day_is_stored,
 )
 
 ENTRY_FIXTURE = Path(__file__).parent / "fixtures" / "entry_sheet_page.json"
@@ -229,6 +231,47 @@ def test_zero_final_dividend_is_treated_as_unsold() -> None:
     parsed = FinalDividendItem.model_validate(item)
 
     assert parsed.odds is None
+
+
+def test_pre_race_result_placeholders_do_not_complete_race_or_store_dividends(
+    tmp_path: Path,
+) -> None:
+    ai = ai_result_payload()
+    for item in ai["response"]["body"]["items"]["item"]:
+        item["rk"] = "0"
+        item["raceRcd"] = "0"
+    detailed = detailed_result_payload()
+    for item in detailed["response"]["body"]["items"]["item"]:
+        item["rsutRk"] = "0"
+        item["rsutRaceRcd"] = "0"
+    responses = {
+        "/B551015/API154/racePlan": race_plan_payload(),
+        "/B551015/API26_2/entrySheet_2": json.loads(
+            ENTRY_FIXTURE.read_text(encoding="utf-8")
+        ),
+        "/B551015/API155/raceResult": ai,
+        "/B551015/API156/raceRsutDtl": detailed,
+        "/B551015/API301/Dividend_rate_total": final_dividend_payload(),
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses[request.url.path], request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        ingest_race_day(
+            session, client, race_date="20260822", meet=1, raw_data_dir=tmp_path / "raw"
+        )
+        race = session.scalar(select(Race))
+        assert race is not None
+        assert race.status == "scheduled"
+        assert session.scalar(select(func.count()).select_from(OddsSnapshot)) == 0
+        assert not result_day_is_stored(session, race_date=race.race_date_local, meet=1)
+        assert not final_dividend_is_complete(session, race_date=race.race_date_local, meet=1)
+        assert not race_day_is_complete(session, race_date=race.race_date_local, meet=1)
 
 
 def test_ingest_race_day_connects_datasets_and_is_idempotent(tmp_path: Path) -> None:

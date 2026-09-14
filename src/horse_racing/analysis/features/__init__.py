@@ -10,6 +10,7 @@ import polars as pl
 
 from horse_racing.analysis.features import (
     ability,
+    canonical_energy,
     competition,
     condition,
     context,
@@ -155,6 +156,15 @@ FEATURE_SETS = {
         state,
         people,
         relative,
+    ],
+    "racefit_canonical_rich": [
+        context, entry, form, lifecycle, speed_figure, canonical_energy, ability,
+        style, competition, gate_bias, early_gate_bias, sand_response, condition,
+        training_state, state, trials, remediation, people, relative,
+    ],
+    "racefit_canonical_history": [
+        context, entry, form, lifecycle, speed_figure, canonical_energy, ability,
+        style, competition, gate_bias, early_gate_bias, state, people, relative,
     ],
 }
 

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오프라인 경마 예상지 | 2쪽 펼침면 시안</title>
+  <style>
+    :root { --ink:#17232b; --muted:#56636a; --line:#bac4c7; --paper:#fff; --pale:#eef3f2; --accent:#0c6b63; --warm:#f4f0e8; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; color:var(--ink); font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif; }
+    body { background:#d9dede; }
+    .guide { max-width:440mm; margin:18px auto 0; padding:0 8px; color:#37484b; font-size:13px; }
+    .spread { display:flex; gap:5mm; justify-content:center; align-items:flex-start; padding:12px 10px 30px; }
+    .page { width:210mm; height:297mm; padding:10mm 10mm 8mm; background:var(--paper); box-shadow:0 4px 22px #0002; overflow:hidden; display:flex; flex-direction:column; position:relative; }
+    .sample-mark { position:absolute; right:10mm; top:5.5mm; border:1px solid #7c8c91; color:#5d6b70; padding:1mm 2.1mm; font-size:7.5pt; font-weight:700; letter-spacing:.05em; }
+    .mast { display:flex; justify-content:space-between; align-items:baseline; border-bottom:2.2mm solid var(--ink); padding-bottom:2.1mm; margin-bottom:4mm; }
+    .brand { font-size:12pt; font-weight:900; letter-spacing:-.04em; }
+    .mast small { color:var(--muted); font-size:8pt; }
+    .eyebrow { font-size:8pt; font-weight:800; color:var(--accent); letter-spacing:.06em; }
+    .race-title { display:flex; justify-content:space-between; align-items:end; gap:4mm; }
+    h1 { font-size:23pt; line-height:1; letter-spacing:-.065em; margin:1mm 0 1.6mm; }
+    .race-meta { color:#435057; font-size:9.2pt; font-weight:700; }
+    .race-id { font-size:23pt; font-weight:900; letter-spacing:-.05em; white-space:nowrap; }
+    .race-id span { color:var(--accent); }
+    .rule { border-top:1px solid var(--line); margin:3.4mm 0; }
+    .hero { display:grid; grid-template-columns:1.35fr .65fr; gap:3mm; margin-top:3.5mm; }
+    .hero-card { background:var(--pale); border-left:1.1mm solid var(--accent); padding:3.2mm; min-height:23mm; }
+    .hero-card strong { display:block; font-size:8pt; color:var(--accent); margin-bottom:1mm; }
+    .hero-card p { margin:0; font-size:10.3pt; font-weight:800; line-height:1.45; }
+    .hero-side { border:1px solid var(--line); padding:3mm; }
+    .hero-side b { display:block; font-size:8pt; color:var(--muted); }
+    .hero-side strong { font-size:13pt; }
+    .hero-side small { display:block; font-size:7.4pt; line-height:1.4; color:var(--muted); margin-top:1mm; }
+    .section-heading { display:flex; align-items:baseline; justify-content:space-between; gap:3mm; margin:5mm 0 1.8mm; }
+    h2 { font-size:12pt; letter-spacing:-.04em; margin:0; }
+    .section-heading small { font-size:7.5pt; color:var(--muted); }
+    table { border-collapse:collapse; width:100%; font-size:8.4pt; }
+    thead th { background:var(--ink); color:white; padding:2mm 1.3mm; font-size:7.7pt; text-align:center; }
+    thead th:nth-child(2), tbody td:nth-child(2) { text-align:left; }
+    tbody td { border-bottom:1px solid #d9e0e1; padding:1.85mm 1.3mm; text-align:center; white-space:nowrap; }
+    tbody tr:nth-child(even) { background:#f5f7f7; }
+    tbody tr.hot { background:#e7f1ee; }
+    .num { font-size:10pt; font-weight:900; }
+    .horse { font-weight:800; }
+    .symbol { color:var(--accent); font-weight:900; font-size:10pt; }
+    .mini { font-size:7.5pt; color:var(--muted); }
+    .pace { display:grid; grid-template-columns:repeat(3,1fr); gap:2mm; }
+    .pace-step { border-top:1.2mm solid var(--ink); background:#f3f5f4; padding:2.4mm; min-height:29mm; }
+    .pace-step b { display:block; font-size:8pt; color:var(--accent); margin-bottom:1.3mm; }
+    .pace-step span { display:block; font-size:8.4pt; line-height:1.35; }
+    .pace-note { margin-top:2mm; color:var(--muted); font-size:8pt; }
+    .risk { margin-top:4.2mm; border:1px solid #b5b4a6; background:var(--warm); padding:3mm; }
+    .risk b { font-size:8.5pt; }
+    .risk p { margin:1mm 0 0; font-size:8.6pt; line-height:1.4; }
+    .page-footer { margin-top:auto; padding-top:2.5mm; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:end; color:var(--muted); font-size:7.3pt; }
+    .page-no { color:var(--ink); font-weight:900; font-size:11pt; }
+    .right-intro { display:flex; align-items:end; justify-content:space-between; margin:1mm 0 3mm; }
+    .right-intro h1 { font-size:20pt; margin:0; }
+    .right-intro p { margin:0; font-size:8.4pt; color:var(--muted); }
+    .legend { display:flex; gap:3mm; background:var(--pale); padding:2mm 3mm; font-size:7.8pt; margin-bottom:2.5mm; }
+    .legend b { color:var(--accent); }
+    .horse-grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:repeat(6,1fr); grid-auto-flow:column; gap:2mm 2.5mm; flex:1; min-height:0; }
+    .horse-card { border:1px solid var(--line); padding:2.25mm; overflow:hidden; }
+    .horse-card.lead { border-top:1.3mm solid var(--accent); }
+    .card-top { display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid #d7dedf; padding-bottom:1.1mm; margin-bottom:1.2mm; }
+    .card-top .identity { font-size:9.6pt; font-weight:900; letter-spacing:-.04em; }
+    .card-top .identity b { display:inline-block; min-width:5mm; color:var(--accent); }
+    .card-top .rank { color:var(--muted); font-size:7.2pt; font-weight:800; }
+    .card-meta { font-size:7.2pt; color:var(--muted); margin-bottom:1.1mm; }
+    .card-text { font-size:8.6pt; line-height:1.44; letter-spacing:-.025em; }
+    .card-text p { margin:.5mm 0; }
+    .card-text b { color:var(--accent); }
+    .bottom-band { display:flex; justify-content:space-between; align-items:center; gap:3mm; border:1px solid var(--line); padding:2mm 2.6mm; margin-top:2.5mm; min-height:12mm; }
+    .reader-note { margin-top:4mm; color:var(--muted); font-size:7.8pt; }
+    .reader-note span { display:inline-block; width:78%; margin-left:2mm; border-bottom:1px solid #c5cfd0; }
+    .bottom-band strong { font-size:8pt; }
+    .bottom-band span { font-size:7.1pt; color:var(--muted); }
+    .qr { width:8mm; height:8mm; border:1px dashed #8a999c; display:flex; align-items:center; justify-content:center; flex:none; font-size:5.5pt; color:#637477; }
+    @page { size:A4; margin:0; }
+    @media print {
+      html,body { background:white; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .guide { display:none; }
+      .spread { display:block; padding:0; }
+      .page { box-shadow:none; width:210mm; height:297mm; break-after:page; page-break-after:always; }
+      .page:last-child { break-after:auto; page-break-after:auto; }
+    }
+    @media screen and (max-width:1150px) { .spread { flex-direction:column; align-items:center; } }
+  </style>
+</head>
+<body>
+  <p class="guide">A4 2쪽 펼침면 시안 · 모든 마명과 수치는 가상 데이터입니다. 브라우저 인쇄에서 A4·배율 100%·배경 그래픽 켜기를 선택하세요.</p>
+  <main class="spread">
+    <article class="page">
+      <div class="sample-mark">레이아웃 시안 · 가상 데이터</div>
+      <header class="mast"><div class="brand">TRACK NOTE <span style="color:#0c6b63">/</span> 경주를 읽다</div><small>2026. 09. 00 · 발행 기준 목 17:00</small></header>
+      <div class="eyebrow">RACE AT A GLANCE / 경주 한눈에 보기</div>
+      <div class="race-title"><div><h1>선행 경쟁이 승부를 가른다</h1><div class="race-meta">서울 · 국산 6등급 · 1200m · 12두 · 11:40 출발</div></div><div class="race-id"><span>서</span> 04R</div></div>
+      <div class="hero"><div class="hero-card"><strong>이 경주의 핵심</strong><p>7·3·10번의 초반 자리 싸움. 빠른 흐름이 되면 뒤에서 따라가는 말의 기회가 커진다.</p></div><div class="hero-side"><b>경주 구도</b><strong>혼전</strong><small>1순위도 우승확률 28%<br>자료 충분 9두 / 부족 3두</small></div></div>
+      <div class="section-heading"><h2>전체 출전마 비교</h2><small>기호는 순위 탐색용 · 확률은 예시값</small></div>
+      <table aria-label="시안용 전체 출전마 비교"><thead><tr><th>번호</th><th>마명</th><th>기호</th><th>우승</th><th>2착 이내</th><th>3착 이내</th><th>주행</th><th>메모</th></tr></thead><tbody>
+        <tr><td class="num">1</td><td class="horse">예시마 01</td><td class="symbol">·</td><td>3%</td><td>7%</td><td>14%</td><td>추입</td><td class="mini">거리 첫 도전</td></tr>
+        <tr><td class="num">2</td><td class="horse">예시마 02</td><td class="symbol">△</td><td>10%</td><td>22%</td><td>33%</td><td>선입</td><td class="mini">안정적 위치</td></tr>
+        <tr class="hot"><td class="num">3</td><td class="horse">예시마 03</td><td class="symbol">◎</td><td>19%</td><td>37%</td><td>50%</td><td>선행</td><td class="mini">초반 경합 위험</td></tr>
+        <tr><td class="num">4</td><td class="horse">예시마 04</td><td class="symbol">·</td><td>2%</td><td>4%</td><td>9%</td><td>선입</td><td class="mini">최근 기록 부족</td></tr>
+        <tr><td class="num">5</td><td class="horse">예시마 05</td><td class="symbol">※</td><td>8%</td><td>18%</td><td>28%</td><td>추입</td><td class="mini">빠른 흐름 유리</td></tr>
+        <tr><td class="num">6</td><td class="horse">예시마 06</td><td class="symbol">·</td><td>3%</td><td>6%</td><td>11%</td><td>중위</td><td class="mini">휴양 복귀</td></tr>
+        <tr class="hot"><td class="num">7</td><td class="horse">예시마 07</td><td class="symbol">★</td><td>28%</td><td>48%</td><td>62%</td><td>선행</td><td class="mini">선두 유지가 관건</td></tr>
+        <tr><td class="num">8</td><td class="horse">예시마 08</td><td class="symbol">·</td><td>5%</td><td>10%</td><td>18%</td><td>선입</td><td class="mini">게이트 적응</td></tr>
+        <tr><td class="num">9</td><td class="horse">예시마 09</td><td class="symbol">○</td><td>14%</td><td>29%</td><td>40%</td><td>추입</td><td class="mini">직선 탄력</td></tr>
+        <tr><td class="num">10</td><td class="horse">예시마 10</td><td class="symbol">·</td><td>6%</td><td>14%</td><td>22%</td><td>선행</td><td class="mini">앞선 경쟁</td></tr>
+        <tr><td class="num">11</td><td class="horse">예시마 11</td><td class="symbol">·</td><td>1%</td><td>3%</td><td>7%</td><td>중위</td><td class="mini">표본 부족</td></tr>
+        <tr><td class="num">12</td><td class="horse">예시마 12</td><td class="symbol">·</td><td>1%</td><td>2%</td><td>6%</td><td>추입</td><td class="mini">전개 의존</td></tr>
+      </tbody></table>
+      <div class="section-heading"><h2>예상 전개</h2><small>과거 주행 습관 기반 · 당일 주로 미반영</small></div>
+      <div class="pace"><div class="pace-step"><b>① 초반 / 자리 선점</b><span>7 · 3 · 10번이 앞쪽으로 움직일 가능성</span></div><div class="pace-step"><b>② 코너 / 속도 조절</b><span>선행 경쟁이 이어지면 2번이 유리한 위치</span></div><div class="pace-step"><b>③ 직선 / 변수</b><span>앞선이 지치면 9 · 5번의 추격 기회</span></div></div>
+      <div class="pace-note">예상 전개는 확정 사실이 아닙니다. 출전취소와 주로 변화가 생기면 달라질 수 있습니다.</div>
+      <div class="risk"><b>이 예상이 빗나갈 조건</b><p>10번이 선행에 가담하지 않거나 주로가 앞선에 매우 유리하면, 7번의 우세가 커지고 9·5번의 추격 가능성은 낮아진다.</p></div>
+      <div class="reader-note">나의 메모 <span>&nbsp;</span></div>
+      <footer class="page-footer"><span>발행 버전 V1 · 인쇄 전 공식 출전표 대조 필수 · 예시 수치는 실제 예측이 아님</span><span class="page-no">04</span></footer>
+    </article>
+    <article class="page">
+      <div class="sample-mark">레이아웃 시안 · 가상 데이터</div>
+      <header class="mast"><div class="brand">TRACK NOTE <span style="color:#0c6b63">/</span> 경주를 읽다</div><small>서울 04R · 모든 말 분석</small></header>
+      <div class="right-intro"><h1>한 마리씩 살펴보기</h1><p>말번호순 · 후보 밖의 말도 같은 기준으로 평가</p></div>
+      <div class="legend"><span><b>최근</b> 이전 경주의 내용</span><span><b>강점</b> 이번에 유리한 조건</span><span><b>위험</b> 예상이 틀릴 이유</span></div>
+      <section class="horse-grid" aria-label="12두 개별 분석">
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>01</b> 예시마 01</span><span class="rank">예상 9위 · 3%</span></div><div class="card-meta">선입/추입 · 동일 거리 기록 1회</div><div class="card-text"><p><b>최근</b> 막판 순위 상승이 있었지만 상대 수준은 낮았다.</p><p><b>강점</b> 앞선 과열 때 추격. <b>위험</b> 거리 표본 부족.</p><p><b>승부</b> 초반에 뒤처지지 않아야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>02</b> 예시마 02</span><span class="rank">예상 4위 · 10%</span></div><div class="card-meta">선입 · 최근 3전 꾸준한 중위권</div><div class="card-text"><p><b>최근</b> 초반 무리하지 않고 자리를 잡는 편.</p><p><b>강점</b> 앞선 뒤 빈자리. <b>위험</b> 직선 결정력.</p><p><b>승부</b> 코너에서 안쪽 자리를 지켜야 한다.</p></div></div>
+        <div class="horse-card lead"><div class="card-top"><span class="identity"><b>03</b> 예시마 03</span><span class="rank">◎ 예상 2위 · 19%</span></div><div class="card-meta">선행 · 최근 2전 초반 선두</div><div class="card-text"><p><b>최근</b> 선두일 때 안정적이지만 압박에는 약했다.</p><p><b>강점</b> 빠른 출발. <b>위험</b> 7·10번과 경합.</p><p><b>승부</b> 초반 300m에서 무리하지 않아야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>04</b> 예시마 04</span><span class="rank">예상 10위 · 2%</span></div><div class="card-meta">선입 · 최근 유효 기록 1회</div><div class="card-text"><p><b>최근</b> 비교 가능한 기록이 적어 평가 폭이 넓다.</p><p><b>강점</b> 중간 자리. <b>위험</b> 자료 부족.</p><p><b>승부</b> 기존 기록보다 한 단계 나아져야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>05</b> 예시마 05</span><span class="rank">※ 예상 5위 · 8%</span></div><div class="card-meta">추입 · 최근 직선 순위 상승</div><div class="card-text"><p><b>최근</b> 초반은 느렸지만 막판에 차이를 좁혔다.</p><p><b>강점</b> 빠른 전개. <b>위험</b> 느린 흐름.</p><p><b>승부</b> 선두 다툼이 끝까지 이어져야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>06</b> 예시마 06</span><span class="rank">예상 8위 · 3%</span></div><div class="card-meta">중위 · 휴양 복귀 첫 출전</div><div class="card-text"><p><b>최근</b> 과거 기록은 있으나 현재 상태와 거리가 멀다.</p><p><b>강점</b> 예전 능력. <b>위험</b> 복귀 상태 미확인.</p><p><b>승부</b> 당일 상태 확인이 특히 중요하다.</p></div></div>
+        <div class="horse-card lead"><div class="card-top"><span class="identity"><b>07</b> 예시마 07</span><span class="rank">★ 예상 1위 · 28%</span></div><div class="card-meta">선행 · 동일 거리 기록 3회</div><div class="card-text"><p><b>최근</b> 빠른 출발과 안정된 코너 진입을 보였다.</p><p><b>강점</b> 초반 속도. <b>위험</b> 앞선 압박.</p><p><b>승부</b> 3·10번과 속도 경쟁을 피해야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>08</b> 예시마 08</span><span class="rank">예상 7위 · 5%</span></div><div class="card-meta">선입 · 외곽 게이트</div><div class="card-text"><p><b>최근</b> 중간 위치에서 일정한 걸음을 유지했다.</p><p><b>강점</b> 흐름 대응. <b>위험</b> 바깥쪽 주행.</p><p><b>승부</b> 초반에 무리 없이 안쪽으로 들어와야 한다.</p></div></div>
+        <div class="horse-card lead"><div class="card-top"><span class="identity"><b>09</b> 예시마 09</span><span class="rank">○ 예상 3위 · 14%</span></div><div class="card-meta">추입 · 최근 직선 탄력 양호</div><div class="card-text"><p><b>최근</b> 코너 뒤 속도를 올리는 모습이 있었다.</p><p><b>강점</b> 앞선 경합. <b>위험</b> 느린 흐름.</p><p><b>승부</b> 코너 전에 거리를 너무 벌리지 않아야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>10</b> 예시마 10</span><span class="rank">예상 6위 · 6%</span></div><div class="card-meta">선행 · 출발 편차 있음</div><div class="card-text"><p><b>최근</b> 출발이 좋을 때와 늦을 때 차이가 컸다.</p><p><b>강점</b> 앞선 가담. <b>위험</b> 출발 편차.</p><p><b>승부</b> 출발 직후 원하는 위치를 잡아야 한다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>11</b> 예시마 11</span><span class="rank">예상 11위 · 1%</span></div><div class="card-meta">중위 · 첫 출전급 표본</div><div class="card-text"><p><b>최근</b> 비교할 공식 경주 이력이 부족하다.</p><p><b>강점</b> 평가되지 않은 여지. <b>위험</b> 근거 부족.</p><p><b>승부</b> 출발과 당일 상태가 핵심이다.</p></div></div>
+        <div class="horse-card"><div class="card-top"><span class="identity"><b>12</b> 예시마 12</span><span class="rank">예상 12위 · 1%</span></div><div class="card-meta">추입 · 뒤쪽 전개 빈도 높음</div><div class="card-text"><p><b>최근</b> 뒤에서 따라왔으나 순위 상승은 제한적.</p><p><b>강점</b> 아주 빠른 흐름. <b>위험</b> 위치 손실.</p><p><b>승부</b> 이번에는 중간 지점부터 속도를 내야 한다.</p></div></div>
+      </section>
+      <div class="bottom-band"><div><strong>인쇄 후 변경 확인</strong><br><span>출전취소 · 기수변경 · 당일 주로 · 마체중 / 웹 주소 또는 QR</span></div><div class="qr">QR</div></div>
+      <footer class="page-footer"><span>모든 마명·해설·확률은 조판 확인용 가상 자료 · 실제 발행 전 데이터 검수 필요</span><span class="page-no">05</span></footer>
+    </article>
+  </main>
+</body>
+</html>

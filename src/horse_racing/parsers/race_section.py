@@ -52,12 +52,17 @@ MEET_SECTION_SPECS: dict[int, list[SectionSpec]] = {
     ],
 }
 
+# First Yeongcheon API4_3 response (2026-09-13) uses bu* cumulative fields.
+# All 54 runners' finish/S1F/closing G3F/G1F matched the official text report.
+MEET_SECTION_SPECS[4] = list(MEET_SECTION_SPECS[3])
+
 
 @dataclass(frozen=True, slots=True)
 class ParsedSectionValue:
     section_code: str
     elapsed_time_ms: int | None
     position: int | None
+    time_basis: str | None = None
 
 
 class RaceResultSectionItem(KraItem):
@@ -118,6 +123,8 @@ def parse_section_values(item: RaceResultSectionItem, meet: int) -> list[ParsedS
             continue
         sections.append(
             ParsedSectionValue(
+                time_basis="closing" if meet == 2 and spec.code in ("G3F", "G1F")
+                else "cumulative",
                 section_code=spec.code,
                 elapsed_time_ms=elapsed_time_ms,
                 position=position,

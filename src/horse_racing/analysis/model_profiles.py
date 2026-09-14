@@ -202,6 +202,19 @@ REMEDIAL_TRIAL_FEATURES = frozenset(
     }
 )
 
+# 제주 전용 표본에서는 기수의 절대 승률이 말의 능력·편성 효과까지 대리하며
+# 과도하게 선택되는 현상이 확인됐다. 기수 출주 경험과 말×기수 호흡은 남기되,
+# 변동성이 큰 절대 승률/복승률 및 그 경주 내 상대값만 제외한다.
+JOCKEY_RATE_FEATURES = frozenset(
+    {
+        "jockey_win_rate_90d",
+        "jockey_win_rate_365d",
+        "jockey_top3_rate_90d",
+        "jockey_win_rate_90d_race_z",
+        "jockey_win_rate_90d_race_rank",
+    }
+)
+
 
 @dataclass(frozen=True)
 class ModelProfile:
@@ -306,6 +319,22 @@ PROFILES: dict[str, ModelProfile] = {
             | EXPERIMENTAL_GATE_BIAS_FEATURES
             | EXPERIMENTAL_CONDITION_STATE_FEATURES
             | (EXPERIMENTAL_SAND_RESPONSE_FEATURES - SAND_EVENT_FEATURES)
+        ),
+    ),
+    "racefit_jeju_v2": ModelProfile(
+        name="racefit_jeju_v2",
+        description=(
+            "제주 전용 RaceFit V5 안정형: 변동성이 큰 기수 절대 승률 계열을 "
+            "제외하고 기수 출주 경험·말과의 호흡은 유지"
+        ),
+        excluded_features=(
+            RATING_FEATURES
+            | STRICT_PROXY_FEATURES
+            | REDUNDANT_INTERACTION_KEYS
+            | EXPERIMENTAL_GATE_BIAS_FEATURES
+            | EXPERIMENTAL_CONDITION_STATE_FEATURES
+            | (EXPERIMENTAL_SAND_RESPONSE_FEATURES - SAND_EVENT_FEATURES)
+            | JOCKEY_RATE_FEATURES
         ),
     ),
     "racefit_v6_remediation": ModelProfile(

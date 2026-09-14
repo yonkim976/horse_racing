@@ -1293,6 +1293,8 @@ def backfill_sections(
     meets: list[int],
     page_size: int,
 ) -> int:
+    if not meets:
+        return 0
     settings = get_settings()
     if settings.data_go_kr_service_key is None:
         print("HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.", file=sys.stderr)
@@ -1455,6 +1457,9 @@ def sync_latest(
     print(f"  말 상태: {history_start}~{history_end}")
     print(f"  주행심사: {trial_start}~{trial_end}")
     print("  기준정보: 레이팅·현역 말 프로필·등급변동")
+    print(f"  경마장: {', '.join(MEET_METADATA[m][1] for m in meets)}")
+    if 4 in meets:
+        print("  영천 주행심사: 원천 형식 검증 전으로 수집 보류")
     if dry_run:
         print("dry-run: 외부 호출 없이 종료합니다.")
         return 0
@@ -1509,7 +1514,7 @@ def sync_latest(
         ),
         (
             "주행심사",
-            lambda: collect_running_trials(trial_start, trial_end, meets),
+            lambda: collect_running_trials(trial_start, trial_end, [m for m in meets if m != 4]),
         ),
         ("레이팅", lambda: collect_ratings(format_yyyymmdd(today), page_size)),
         (
@@ -1534,6 +1539,8 @@ def sync_latest(
             exit_code = 1
             continue
         status = "완료" if code == 0 else f"경고({code})"
+        if code == 0 and 4 in meets and label == "주행심사":
+            status = "영천 보류" if meets == [4] else "완료 (영천 보류)"
         results.append((label, status))
         if code != 0:
             exit_code = code if exit_code == 0 else exit_code
@@ -1586,6 +1593,7 @@ def build_dataset_command(
     output_dir: str,
     with_features: bool = True,
     feature_set: str = "rich",
+    meet_codes: list[int] | None = None,
 ) -> int:
     from horse_racing.analysis.dataset import DatasetValidationError, build_dataset
 
@@ -1602,6 +1610,7 @@ def build_dataset_command(
                 as_of_policy=as_of_policy,
                 start_date=to_iso(start_date),
                 end_date=to_iso(end_date),
+                meet_codes=meet_codes,
                 output_dir=Path(output_dir),
                 with_features=with_features,
                 feature_set=feature_set,
@@ -2055,7 +2064,14 @@ def run_walk_forward_command(
         dataset_version=f"{version}/{as_of_policy}",
         dataset_manifest={
             key: manifest.get(key)
-            for key in ("version", "as_of_policy", "row_count", "race_count", "feature_hash")
+            for key in (
+                "version",
+                "as_of_policy",
+                "row_count",
+                "race_count",
+                "feature_hash",
+                "meet_codes",
+            )
         },
         feature_names=selected_features,
         model_type=f"lightgbm_{model_kind}_walk_forward",
@@ -2111,13 +2127,18 @@ def train_ranking_command(
     relevance_depth: int = 3,
     relevance_mode: str = "finish_order",
     margin_performance: bool = False,
+    regularization: str = "default",
 ) -> int:
     import polars as pl
 
     from horse_racing.analysis.baselines import assign_split
     from horse_racing.analysis.experiments import ModelRun, new_run_id, record_run
     from horse_racing.analysis.lightgbm_model import ModelInputError
-    from horse_racing.analysis.model_profiles import ModelProfileError, select_profile_features
+    from horse_racing.analysis.model_profiles import (
+        JOCKEY_RATE_FEATURES,
+        ModelProfileError,
+        select_profile_features,
+    )
     from horse_racing.analysis.ranking_model import (
         rank_comparison_frame,
         render_ranking_report,
@@ -2132,10 +2153,35 @@ def train_ranking_command(
         print(f"데이터셋 또는 manifest 없음: {dataset_root}", file=sys.stderr)
         return 1
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    regularization_presets = {
+        "default": {},
+        "jeju_moderate": {
+            "num_leaves": 15,
+            "min_child_samples": 120,
+            "colsample_bytree": 0.75,
+            "reg_lambda": 3.0,
+        },
+        "jeju_strong": {
+            "num_leaves": 7,
+            "min_child_samples": 160,
+            "colsample_bytree": 0.7,
+            "reg_lambda": 5.0,
+        },
+        "jeju_jockey_soft": {},
+    }
     try:
         selected_features = select_profile_features(
             list(manifest.get("feature_names") or []), profile
         )
+        regularization_params = dict(regularization_presets[regularization])
+        if regularization == "jeju_jockey_soft":
+            # LightGBM feature_contri는 각 feature의 split gain 상한을 곱한다.
+            # 기수 승률 정보는 보존하되 다른 능력·전개 변수보다 독점적으로
+            # 선택되지 않도록 절반의 gain만 인정한다.
+            regularization_params["feature_contri"] = [
+                0.5 if name in JOCKEY_RATE_FEATURES else 1.0
+                for name in selected_features
+            ]
         frame = pl.read_parquet(dataset_path)
         result = train_ranking_model(
             frame,
@@ -2147,6 +2193,7 @@ def train_ranking_command(
             relevance_depth=relevance_depth,
             relevance_mode=relevance_mode,
             margin_performance=margin_performance,
+            hyperparameters=regularization_params,
         )
     except (ModelInputError, ModelProfileError) as exc:
         print(f"Ranking 학습 실패: {exc}", file=sys.stderr)
@@ -2187,7 +2234,14 @@ def train_ranking_command(
             dataset_version=f"{version}/{as_of_policy}",
             dataset_manifest={
                 key: manifest.get(key)
-                for key in ("version", "as_of_policy", "row_count", "race_count", "feature_hash")
+                for key in (
+                    "version",
+                    "as_of_policy",
+                    "row_count",
+                    "race_count",
+                    "feature_hash",
+                    "meet_codes",
+                )
             },
             feature_names=selected_features,
             model_type="lightgbm_ranking_bundle",
@@ -2195,6 +2249,7 @@ def train_ranking_command(
                 **result.bundle.hyperparameters,
                 "artifact_path": str(model_path),
                 "model_profile": profile,
+                "regularization_preset": regularization,
                 "best_iteration": result.bundle.best_iteration,
                 "softmax_beta": result.bundle.softmax_beta,
                 "calibration_objective": result.bundle.calibration_objective,
@@ -2572,7 +2627,14 @@ def run_ablation_command(
         dataset_version=f"{version}/{as_of_policy}",
         dataset_manifest={
             key: manifest.get(key)
-            for key in ("version", "as_of_policy", "row_count", "race_count", "feature_hash")
+            for key in (
+                "version",
+                "as_of_policy",
+                "row_count",
+                "race_count",
+                "feature_hash",
+                "meet_codes",
+            )
         },
         feature_names=feature_names,
         model_type="lightgbm_feature_group_ablation",
@@ -2753,7 +2815,14 @@ def build_ensemble_command(
         dataset_version=f"{version}/{as_of_policy}",
         dataset_manifest={
             key: manifest.get(key)
-            for key in ("version", "as_of_policy", "row_count", "race_count", "feature_hash")
+            for key in (
+                "version",
+                "as_of_policy",
+                "row_count",
+                "race_count",
+                "feature_hash",
+                "meet_codes",
+            )
         },
         feature_names=ensemble_features,
         model_type="probability_ensemble",
@@ -3608,6 +3677,7 @@ def build_prediction_frame_command(
                 expected_feature_names=run.feature_names,
                 publication_mode=publication_mode,
                 race_ids=race_ids,
+                expected_meet_codes=run.dataset_manifest.get("meet_codes"),
             )
         cutoff_at_ms = time.time_ns() // 1_000_000
         if publication_mode == "live":
@@ -3699,6 +3769,7 @@ def predict_and_publish_command(
                 expected_feature_names=run.feature_names,
                 publication_mode=publication_mode,
                 race_ids=race_ids,
+                expected_meet_codes=run.dataset_manifest.get("meet_codes"),
             )
             calibration_path = (
                 Path(probability_calibration_path)
@@ -3998,7 +4069,7 @@ def main() -> int:
     )
     schedule_parser.add_argument("--dates", required=True, nargs="+", type=valid_race_date)
     schedule_parser.add_argument(
-        "--meets", nargs="+", type=int, choices=sorted(MEET_METADATA), default=[1, 2, 3]
+        "--meets", nargs="+", type=int, choices=sorted(MEET_METADATA), default=sorted(MEET_METADATA)
     )
     schedule_parser.add_argument("--page-size", type=int, default=1000)
     gate_parser = subparsers.add_parser(
@@ -4337,8 +4408,8 @@ def main() -> int:
         "--meets",
         nargs="+",
         type=int,
-        choices=(1, 2, 3),
-        default=[1, 2, 3],
+        choices=sorted(MEET_METADATA),
+        default=sorted(MEET_METADATA),
     )
     sync_parser.add_argument(
         "--schedule-days",
@@ -4372,8 +4443,8 @@ def main() -> int:
         "--meets",
         nargs="+",
         type=int,
-        choices=(1, 2, 3),
-        default=[1, 2, 3],
+        choices=sorted(MEET_METADATA),
+        default=sorted(MEET_METADATA),
     )
     latest_parser.add_argument("--schedule-days", type=int, default=7)
     latest_parser.add_argument("--recent-lookback-days", type=int, default=7)
@@ -4400,6 +4471,14 @@ def main() -> int:
     build_dataset_parser.add_argument("--start", type=valid_race_date, default=None)
     build_dataset_parser.add_argument("--end", type=valid_race_date, default=None)
     build_dataset_parser.add_argument(
+        "--meets",
+        nargs="+",
+        type=int,
+        choices=(1, 2, 3),
+        default=None,
+        help="학습 대상 경마장 코드(예: 제주 전용은 --meets 2)",
+    )
+    build_dataset_parser.add_argument(
         "--output-dir",
         default="data/datasets",
         help="출력 디렉터리 (기본: data/datasets)",
@@ -4418,6 +4497,8 @@ def main() -> int:
             "racefit_history",
             "racefit_v2_rich",
             "racefit_v2_history",
+            "racefit_canonical_rich",
+            "racefit_canonical_history",
         ],
         default="rich",
         help=(
@@ -4609,6 +4690,12 @@ def main() -> int:
         help="Top5 순위모델에 연속 착차 성능 회귀축을 보정구간 선택 비중으로 결합",
     )
     ranking_parser.add_argument(
+        "--regularization",
+        choices=["default", "jeju_moderate", "jeju_strong", "jeju_jockey_soft"],
+        default="default",
+        help="표본이 작은 제주 전용 모델의 복잡도 규제 사전설정",
+    )
+    ranking_parser.add_argument(
         "--profile",
         choices=[
             "legacy_all",
@@ -4620,6 +4707,7 @@ def main() -> int:
             "racefit_v4_gate_pace",
             "racefit_v5_sand",
             "racefit_v5_sand_event",
+            "racefit_jeju_v2",
             "racefit_v6_remediation",
             "racefit_v5_sand_state",
             "racefit_v5_sand_gate_pace",
@@ -5162,6 +5250,7 @@ def main() -> int:
             args.output_dir,
             with_features=not args.no_features,
             feature_set=args.feature_set,
+            meet_codes=args.meets,
         )
     if args.command == "write-feature-catalog":
         return write_feature_catalog_command(args.output)
@@ -5211,6 +5300,7 @@ def main() -> int:
             relevance_depth=args.relevance_depth,
             relevance_mode=args.relevance_mode,
             margin_performance=args.margin_performance,
+            regularization=args.regularization,
         )
     if args.command == "train-racefit":
         return train_racefit_command(

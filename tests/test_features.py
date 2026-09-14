@@ -86,6 +86,15 @@ def test_entry_features_prefer_official_gate_number() -> None:
     assert result.get_column("horse_number_pct").to_list() == [1.0, 2 / 3, 1 / 3]
 
 
+def test_entry_features_normalize_jeju_origin_labels_only_for_jeju() -> None:
+    jeju = base_frame().with_columns(pl.lit(2).alias("meet_code"))
+    jeju_result = apply_features(jeju, sources_with_static())
+    assert jeju_result.get_column("horse_origin").to_list() == ["제주마", "제주마", "미국"]
+
+    seoul_result = apply_features(base_frame(), sources_with_static())
+    assert seoul_result.get_column("horse_origin").to_list() == ["한국", "한국", "미국"]
+
+
 def test_relative_features_z_and_rank() -> None:
     frame = base_frame().with_columns(pl.lit(None).alias("race_date"))
     result = add_relative(frame, SourceFrames())

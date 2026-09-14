@@ -9,11 +9,28 @@ from horse_racing.web.racecourse import (
     build_jeju_racecourse_map,
     build_racecourse_map,
     build_seoul_racecourse_map,
+    jeju_checkpoint_point,
 )
 
 
 def test_jeju_measured_geometry_closes_at_official_lap_distance() -> None:
     assert JEJU_LAP_M == pytest.approx(1600.0105, abs=0.001)
+
+
+def test_jeju_checkpoint_finish_and_last_furlong_share_finish_straight() -> None:
+    finish = jeju_checkpoint_point(0)
+    last_furlong = jeju_checkpoint_point(200)
+    assert finish.x == pytest.approx(147.8)
+    assert finish.y == last_furlong.y == 97.5
+    assert last_furlong.x - finish.x == pytest.approx(200)
+
+
+@pytest.mark.parametrize("remaining", [800, 1000, 1300, 1400])
+def test_jeju_checkpoint_uses_same_geometry_as_route_start(remaining) -> None:
+    point = jeju_checkpoint_point(remaining)
+    start = build_jeju_racecourse_map(remaining).selected_start
+    assert point.x == pytest.approx(start.x)
+    assert point.y == pytest.approx(start.y)
 
 
 @pytest.mark.parametrize(
@@ -55,16 +72,16 @@ def test_seoul_official_lap_distances_are_preserved() -> None:
 @pytest.mark.parametrize(
     ("distance_m", "expected_x", "expected_y"),
     [
-        (1000, -170.0, -240.0),
-        (1200, 350.0, -143.24),
-        (1300, 450.0, -143.24),
-        (1400, 542.073, -109.728),
-        (1600, 574.05, 71.619),
-        (1700, 300.0, 111.44),
-        (1800, 200.0, 111.44),
-        (1900, 100.0, 111.44),
-        (2000, 0.0, 111.44),
-        (2300, -100.0, 143.24),
+        (1000, 234, 43),
+        (1200, 516, 151),
+        (1300, 598, 151),
+        (1400, 684, 151),
+        (1600, 741, 345),
+        (1700, 468, 392),
+        (1800, 383, 392),
+        (1900, 296, 392),
+        (2000, 296, 392),
+        (2300, 122, 418),
     ],
 )
 def test_seoul_start_points_follow_official_course_layout(
@@ -83,12 +100,12 @@ def test_seoul_start_points_follow_official_course_layout(
 def test_seoul_long_distance_route_uses_inner_course_then_outer_finish() -> None:
     view = build_seoul_racecourse_map(1800)
 
-    assert view.inner_course_path
-    assert view.extension_path
-    assert "L 0 143.240 H 400.000" in view.route_path
+    assert len(view.diagram["rails"]) == 2
+    assert view.route_path.endswith("H 555")
+    assert " L " not in view.route_path
 
 
 def test_racecourse_map_supports_seoul_and_jeju() -> None:
     assert build_racecourse_map(meet_code=1, distance_m=1200) is not None
-    assert build_racecourse_map(meet_code=3, distance_m=1200) is None
+    assert build_racecourse_map(meet_code=3, distance_m=1200) is not None
     assert build_racecourse_map(meet_code=2, distance_m=1200) is not None

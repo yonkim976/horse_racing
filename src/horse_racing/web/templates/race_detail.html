@@ -33,7 +33,13 @@
           <p>{{ page.date_label }} · {{ page.start_time }} 출발</p>
           <h1 class="race-page-title">{{ page.race_name }}</h1>
         </div>
-        <span class="status {{ page.status }}">{{ page.status_label }}</span>
+        <div class="race-hero-actions">
+          <span class="status {{ page.status }}">{{ page.status_label }}</span>
+          {% if page.video_url %}<a class="race-video-button" href="{{ page.video_url }}" target="_blank" rel="noopener noreferrer" data-race-video aria-label="{{ page.course_name }} {{ page.race_number }}경주 영상 · 새 창" title="공식 경주영상 · 영상 공개 후 시청할 수 있습니다">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M 8 5 L 19 12 L 8 19 Z" fill="currentColor"/></svg>
+            경주 영상 <span aria-hidden="true">↗</span>
+          </a>{% endif %}
+        </div>
       </div>
       <div class="race-meta">
         <span>{{ page.distance }}</span>
@@ -60,168 +66,11 @@
 {% if page.racecourse_map %}
 {% set track = page.racecourse_map %}
 {% set map_key = "seoul" if track.meet_code == 1 else "jeju" %}
-<section id="racecourse-map" class="panel racecourse-panel" data-racecourse-map="{{ map_key }}">
-  <div class="panel-heading entries-heading">
-    <div>
-      <p class="panel-kicker">COURSE MAP · MEASURED SCHEMATIC</p>
-      <h2>{{ track.course_name }} 경주로 · {{ page.distance }} 주행 경로</h2>
-    </div>
-    {% if track.meet_code == 1 %}
-      <span>외주 1,800m · 내주 1,600m</span>
-    {% else %}
-      <span>1주 1,600m · 폭 20m</span>
-    {% endif %}
-  </div>
-
-  <div class="racecourse-svg-wrap">
-    <svg
-      class="racecourse-svg"
-      viewBox="{{ track.view_box }}"
-      role="img"
-      aria-labelledby="{{ map_key }}-track-title {{ map_key }}-track-desc"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <title id="{{ map_key }}-track-title">{{ track.course_name }} {{ page.distance }} 경주로 주행 경로</title>
-      <desc id="{{ map_key }}-track-desc">
-        {% if track.meet_code == 1 %}
-          외주로 1,800미터와 내주로 1,600미터, 1,000미터 연장주로 및 2,300미터 출발 연장부에
-        {% else %}
-          직선 493.7미터, 곡선 반경 97.5미터, 폭 20미터인 제주 경주로에
-        {% endif %}
-        {{ page.distance }} 출발점과 결승선, 펄롱 위치를 표시한 수치 기반 구조도입니다.
-      </desc>
-      <defs>
-        <marker id="{{ map_key }}-direction-arrow" viewBox="0 0 10 10" refX="8" refY="5"
-          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M 0 0 L 10 5 L 0 10 Z" class="racecourse-arrow-head"></path>
-        </marker>
-      </defs>
-
-      <path class="racecourse-infield" d="{{ track.inner_path }}"></path>
-      <path class="racecourse-edge" d="{{ track.loop_path }}"></path>
-      <path class="racecourse-surface" d="{{ track.loop_path }}"></path>
-      {% if track.inner_course_path %}
-        <path class="racecourse-edge racecourse-inner-course" d="{{ track.inner_course_path }}"></path>
-        <path class="racecourse-surface racecourse-inner-course" d="{{ track.inner_course_path }}"></path>
-      {% endif %}
-      <path class="racecourse-edge racecourse-chute" d="{{ track.chute_path }}"></path>
-      <path class="racecourse-surface racecourse-chute" d="{{ track.chute_path }}"></path>
-      {% if track.extension_path %}
-        <path class="racecourse-edge racecourse-extension" d="{{ track.extension_path }}"></path>
-        <path class="racecourse-surface racecourse-extension" d="{{ track.extension_path }}"></path>
-      {% endif %}
-      <path class="racecourse-centerline" d="{{ track.loop_path }}"></path>
-      {% if track.inner_course_path %}
-        <path class="racecourse-centerline racecourse-inner-course" d="{{ track.inner_course_path }}"></path>
-        <path class="racecourse-finish-straight" d="M 0 {{ track.bottom_y }} H 450"></path>
-      {% endif %}
-
-      <path class="racecourse-route" d="{{ track.route_path }}"></path>
-
-      <g class="racecourse-dimension" aria-hidden="true">
-        {% if track.meet_code == 1 %}
-          <line x1="0" y1="-205" x2="450" y2="-205"></line>
-          <line x1="0" y1="-211" x2="0" y2="-199"></line>
-          <line x1="450" y1="-211" x2="450" y2="-199"></line>
-          <text x="225" y="-212" text-anchor="middle">직선 450m</text>
-          <text x="612" y="-54" text-anchor="middle">외주 곡선 450m · R143.24m</text>
-          <text x="225" y="-78" text-anchor="middle">내주 곡선 350m · R111.44m</text>
-          <text x="-223" y="-221" text-anchor="middle">직선 130m</text>
-        {% else %}
-          <line x1="0" y1="-145" x2="493.7" y2="-145"></line>
-          <line x1="0" y1="-151" x2="0" y2="-139"></line>
-          <line x1="493.7" y1="-151" x2="493.7" y2="-139"></line>
-          <text x="246.85" y="-151" text-anchor="middle">직선 493.7m</text>
-          <text x="565" y="-35" text-anchor="middle">곡선 R 97.5m</text>
-          <text x="420" y="70" text-anchor="middle">폭 20m</text>
-        {% endif %}
-      </g>
-
-      <g class="racecourse-corners" aria-hidden="true">
-        {% if track.meet_code == 1 %}
-          <text x="405" y="76">1C</text>
-          <text x="405" y="-73">2C</text>
-          <text x="32" y="-73">3C</text>
-          <text x="32" y="76">4C</text>
-        {% else %}
-          <text x="24" y="74">1C</text>
-          <text x="24" y="-65">2C</text>
-          <text x="462" y="-65">3C</text>
-          <text x="462" y="74">4C</text>
-        {% endif %}
-      </g>
-
-      <g class="racecourse-directions" aria-hidden="true">
-        {% if track.meet_code == 1 %}
-          <line x1="285" y1="-143.24" x2="205" y2="-143.24" marker-end="url(#seoul-direction-arrow)"></line>
-          <line x1="165" y1="143.24" x2="245" y2="143.24" marker-end="url(#seoul-direction-arrow)"></line>
-        {% else %}
-          <line x1="195" y1="-97.5" x2="270" y2="-97.5" marker-end="url(#jeju-direction-arrow)"></line>
-          <line x1="330" y1="97.5" x2="255" y2="97.5" marker-end="url(#jeju-direction-arrow)"></line>
-        {% endif %}
-      </g>
-
-      <g class="racecourse-furlongs" aria-label="펄롱 위치">
-        {% for marker in track.furlong_markers %}
-          <g transform="translate({{ '%.3f' | format(marker.x) }} {{ '%.3f' | format(marker.y) }})">
-            <circle r="10"></circle>
-            <text text-anchor="middle" dominant-baseline="central">{{ marker.label }}</text>
-          </g>
-        {% endfor %}
-      </g>
-
-      <g class="racecourse-starts" aria-label="출발 위치">
-        {% for marker in track.start_markers %}
-          <g class="racecourse-start-marker {% if marker.selected %}selected{% endif %}">
-            <circle cx="{{ '%.3f' | format(marker.x) }}" cy="{{ '%.3f' | format(marker.y) }}" r="5"></circle>
-            <line
-              x1="{{ '%.3f' | format(marker.x) }}" y1="{{ '%.3f' | format(marker.y) }}"
-              x2="{{ '%.3f' | format(marker.label_x) }}" y2="{{ '%.3f' | format(marker.label_y) }}"
-            ></line>
-            <text
-              x="{{ '%.3f' | format(marker.label_x) }}"
-              y="{{ '%.3f' | format(marker.label_y - 5) }}"
-              text-anchor="middle"
-            >{{ marker.label }}</text>
-          </g>
-        {% endfor %}
-      </g>
-
-      <g class="racecourse-goal" aria-label="결승선">
-        <line x1="{{ track.goal_x }}" y1="{{ track.bottom_y - 13 }}"
-          x2="{{ track.goal_x }}" y2="{{ track.bottom_y + 13 }}"></line>
-        <text x="{{ track.goal_x }}" y="{{ track.bottom_y + 31 }}" text-anchor="middle">GOAL</text>
-      </g>
-
-      <g class="racecourse-selected-start" aria-label="선택 경주 출발점">
-        <circle cx="{{ '%.3f' | format(track.selected_start.x) }}"
-          cy="{{ '%.3f' | format(track.selected_start.y) }}" r="9"></circle>
-        <circle cx="{{ '%.3f' | format(track.selected_start.x) }}"
-          cy="{{ '%.3f' | format(track.selected_start.y) }}" r="3"></circle>
-      </g>
-
-      {% if track.meet_code == 1 %}
-        <text class="racecourse-lap-label" x="225" y="-9" text-anchor="middle">SEOUL · OUTER 1,800m</text>
-        <text class="racecourse-lap-label secondary" x="225" y="14" text-anchor="middle">INNER 1,600m</text>
-      {% else %}
-        <text class="racecourse-lap-label" x="246.85" y="4" text-anchor="middle">JEJU · 1,600m</text>
-      {% endif %}
-    </svg>
-  </div>
-
-  <div class="racecourse-legend" aria-label="경주로 범례">
-    <span><i class="route-key" aria-hidden="true"></i>{{ page.distance }} 선택 경로</span>
-    <span><i class="start-key" aria-hidden="true"></i>출발점</span>
-    <span><i class="furlong-key" aria-hidden="true"></i>200m 펄롱</span>
-    <span><i class="goal-key" aria-hidden="true"></i>결승선</span>
-  </div>
-  <p class="racecourse-equation">{{ track.geometry_note }}</p>
-  <p class="section-note">
-    한국마사회 공개 치수를 수학적으로 변환한 구조도입니다. 실제 GPS·측량 좌표가 아니며 고저차는 표시하지 않습니다.
-    {% if track.meet_code == 1 %}가장 안쪽의 얇은 경계선은 별도 경주로로 표시하지 않았습니다.{% endif %}
-    {% if not track.supported_distance %}이 거리의 출발 위치는 추가 검증이 필요합니다.{% endif %}
-  </p>
-</section>
+{% if track.meet_code == 2 %}
+{% include "_jeju_course_explorer.html" %}
+{% else %}
+{% include "_seoul_course_explorer.html" %}
+{% endif %}
 {% endif %}
 
 <section id="race-result" class="panel">
@@ -266,12 +115,12 @@
       <p class="section-note chart-help">
         기본은 착순 상위 5두를 강조합니다. 범례를 클릭해 말을 켜고 끌 수 있습니다.
         세로축 위쪽이 앞순위, 가로축은 표시 지점을 통과하는 순서입니다.
-        {% if page.meet_code == 2 %}지점 간 간격은 실제 거리 비율이 아닙니다.{% endif %}
+        {% if page.meet_code in [1, 2] %}지점 간 간격은 실제 거리 비율이 아닙니다.{% endif %}
       </p>
     </div>
 
-    {% if page.meet_code == 2 %}
-      {% include "_jeju_section_tables.html" %}
+    {% if page.meet_code in [1, 2] %}
+      {% include "_section_time_tables.html" %}
     {% else %}
     <div class="table-scroll">
       <table class="entry-table section-table">
@@ -514,5 +363,6 @@
     {% endif %}
 </section>
 {% endif %}
+<script src="{{ url_for('static', path='/js/race-video.js') }}?v=1" defer></script>
 <script src="{{ url_for('static', path='/js/race-chart.js') }}?v=5" defer></script>
 {% endblock %}

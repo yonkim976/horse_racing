@@ -2586,3 +2586,8 @@ th[aria-sort] {
   .distance-options a { padding: 12px 8px; }
   .distance-options strong { font-size: 17px; }
 }
+
+.race-video-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 15px; border:1px solid rgb(255 255 255 / 35%); border-radius:12px; background:#d5f5a5; color:#173b29; font-size:13px; font-weight:750; text-decoration:none; white-space:nowrap; transition:background .15s, box-shadow .15s; }
+.race-video-button:hover { background:#e6ffc4; box-shadow:0 3px 12px rgb(0 0 0 / 12%); }
+.race-video-button:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+@media(max-width:600px) { .race-title-row { flex-wrap:wrap; } .race-hero-actions { flex-direction:row; align-items:center; flex-wrap:wrap; } }

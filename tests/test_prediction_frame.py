@@ -114,6 +114,21 @@ def test_build_prediction_frame_blocks_feature_contract_drift(tmp_path) -> None:
         session.close()
 
 
+def test_build_prediction_frame_enforces_model_racecourse_scope(tmp_path) -> None:
+    session = _session(tmp_path)
+    try:
+        with pytest.raises(PredictionFrameError, match="조건과 맞는 예정"):
+            build_prediction_frame(
+                session,
+                race_date="20330520",
+                as_of_policy="start_minus_30m",
+                expected_feature_names=feature_names(),
+                expected_meet_codes=[2],
+            )
+    finally:
+        session.close()
+
+
 def test_build_prediction_frame_allows_ordered_profile_subset(tmp_path) -> None:
     session = _session(tmp_path)
     expected = feature_names()[::2]

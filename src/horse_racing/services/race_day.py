@@ -329,17 +329,28 @@ def result_day_is_stored(
     race_date: date,
     meet: int,
 ) -> bool:
-    race_count = session.scalar(
-        select(func.count())
-        .select_from(Race)
+    races = session.execute(
+        select(Race.id, Race.status)
         .join(Race.racecourse)
         .where(
             Racecourse.kra_meet_code == meet,
             Race.race_date_local == race_date,
-            Race.status == "completed",
+        )
+    ).all()
+    if not races or any(status != "completed" for _, status in races):
+        return False
+    winner_race_ids = set(
+        session.scalars(
+            select(RaceEntry.race_id)
+            .join(RaceResult)
+            .where(
+                RaceEntry.race_id.in_([race_id for race_id, _ in races]),
+                RaceResult.finish_position == 1,
+            )
+            .distinct()
         )
     )
-    return bool(race_count)
+    return all(race_id in winner_race_ids for race_id, _ in races)
 
 
 def final_dividend_is_complete(
@@ -348,6 +359,16 @@ def final_dividend_is_complete(
     race_date: date,
     meet: int,
 ) -> bool:
+    races = session.execute(
+        select(Race.id, Race.status)
+        .join(Race.racecourse)
+        .where(
+            Racecourse.kra_meet_code == meet,
+            Race.race_date_local == race_date,
+        )
+    ).all()
+    if not races or any(status != "completed" for _, status in races):
+        return False
     completed_dividend_run = session.scalar(
         select(func.count())
         .select_from(IngestionRun)
@@ -360,7 +381,19 @@ def final_dividend_is_complete(
             == race_date.strftime("%Y%m%d"),
         )
     )
-    return bool(completed_dividend_run)
+    if not completed_dividend_run:
+        return False
+    covered_races = set(
+        session.scalars(
+            select(OddsSnapshot.race_id)
+            .where(
+                OddsSnapshot.race_id.in_([race_id for race_id, _ in races]),
+                OddsSnapshot.bet_type == "QNL",
+            )
+            .distinct()
+        )
+    )
+    return all(race_id in covered_races for race_id, _ in races)
 
 
 def ingest_race_schedule(
@@ -618,7 +651,9 @@ def _write_ai_results(session: Session, meet: int, items: list[AiRaceResultItem]
     for item in items:
         race = _upsert_race(session, racecourse, item.race_date, item.race_number, item.distance_m)
         race.race_name = item.race_name or race.race_name
-        race.status = "completed"
+        # The result API also publishes pre-race rows with blank placings.
+        if item.finish_position is not None:
+            race.status = "completed"
         horse = _upsert_horse(
             session,
             kra_horse_id=item.horse_id,
@@ -642,14 +677,15 @@ def _write_ai_results(session: Session, meet: int, items: list[AiRaceResultItem]
             finish_time_ms=item.finish_time_ms,
             margin_text=item.margin_text,
         )
-        _write_individual_odds(
-            session,
-            race,
-            item.horse_number,
-            item.win_odds,
-            item.place_odds,
-            observed_at_ms,
-        )
+        if item.finish_position is not None:
+            _write_individual_odds(
+                session,
+                race,
+                item.horse_number,
+                item.win_odds,
+                item.place_odds,
+                observed_at_ms,
+            )
     return len(items)
 
 
@@ -685,7 +721,9 @@ def _write_detailed_results(
         race.start_time_change_reason = item.start_time_change_reason
         race.weather = item.weather
         race.track_condition, race.track_moisture_percent = parse_track_status(item.track_status)
-        race.status = "completed"
+        # Detailed records can exist before the race; blank ranks are not results.
+        if item.finish_position is not None:
+            race.status = "completed"
 
         horse = _upsert_horse(
             session,
@@ -726,14 +764,15 @@ def _write_detailed_results(
             bonus_prize_money_krw=item.bonus_prize_money_krw,
             rank_remark=item.rank_remark,
         )
-        _write_individual_odds(
-            session,
-            race,
-            item.horse_number,
-            item.win_odds,
-            item.place_odds,
-            observed_at_ms,
-        )
+        if item.finish_position is not None:
+            _write_individual_odds(
+                session,
+                race,
+                item.horse_number,
+                item.win_odds,
+                item.place_odds,
+                observed_at_ms,
+            )
     return len(items)
 
 
@@ -754,6 +793,10 @@ def _write_final_dividends(
                 f"배당과 연결할 경주가 없습니다: meet={meet}, "
                 f"date={item.race_date}, race={item.race_number}"
             )
+        # API can expose provisional prices for races without a placing yet.
+        # This table represents settled dividends, so do not ingest them.
+        if race.status != "completed":
+            continue
         _upsert_final_odds(
             session,
             race,

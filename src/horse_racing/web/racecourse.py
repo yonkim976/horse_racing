@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from math import cos, hypot, pi, sin
 
+from horse_racing.web.busan_diagram import build_busan_diagram
+from horse_racing.web.seoul_diagram import build_seoul_diagram
+
 JEJU_STRAIGHT_M = 493.7
 JEJU_CURVE_RADIUS_M = 97.5
 JEJU_TRACK_WIDTH_M = 20.0
@@ -25,8 +28,6 @@ SEOUL_FINISH_STRAIGHT_WIDTH_M = 30.0
 SEOUL_GOAL_FROM_LEFT_TANGENT_M = 400.0
 
 SEOUL_DIAGRAM_STARTS = (1000, 1200, 1300, 1400, 1600, 1700, 1800, 1900, 2000, 2300)
-SEOUL_OUTER_STARTS = frozenset((1200, 1300, 1400, 1600))
-SEOUL_INNER_STARTS = frozenset((1700, 1800, 1900, 2000))
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,6 +66,7 @@ class RacecourseMapView:
     geometry_note: str
     inner_course_path: str = ""
     extension_path: str = ""
+    diagram: dict | None = None
 
 
 def build_racecourse_map(*, meet_code: int, distance_m: int) -> RacecourseMapView | None:
@@ -72,7 +74,14 @@ def build_racecourse_map(*, meet_code: int, distance_m: int) -> RacecourseMapVie
         return build_seoul_racecourse_map(distance_m)
     if meet_code == 2:
         return build_jeju_racecourse_map(distance_m)
+    if meet_code == 3:
+        return build_busan_racecourse_map(distance_m)
     return None
+
+
+def jeju_checkpoint_point(remaining_m: int) -> MapPoint:
+    """Position a timing checkpoint by distance remaining, including a repeated lap."""
+    return _point_on_forward_loop((JEJU_LAP_M - remaining_m) % JEJU_LAP_M)
 
 
 def build_jeju_racecourse_map(distance_m: int) -> RacecourseMapView:
@@ -109,6 +118,11 @@ def build_jeju_racecourse_map(distance_m: int) -> RacecourseMapView:
         furlong_markers=furlongs,
         selected_start=selected_start,
         geometry_note=(f"중심선 기준 2×493.7m + 2π×97.5m = {JEJU_LAP_M:,.2f}m (공식 1주 1,600m)"),
+        diagram={"variants": [
+            {"distance": d, "path": route, "x": start.x, "y": start.y}
+            for d in sorted(set(JEJU_DIAGRAM_STARTS) | {distance_m})
+            for start, route, _supported in [_jeju_route(d)]
+        ]},
     )
 
 
@@ -275,197 +289,58 @@ def _custom_start_marker(distance_m: int, start: MapPoint) -> MapMarker:
 
 def _furlong_marker(number: int) -> MapMarker:
     distance_to_goal = number * 200
-    point = _point_on_forward_loop(JEJU_LAP_M - distance_to_goal)
-    center = MapPoint(JEJU_STRAIGHT_M / 2, 0)
-    dx = center.x - point.x
-    dy = center.y - point.y
-    scale = 22 / max(hypot(dx, dy), 1)
-    return MapMarker(
-        label=str(number),
-        x=point.x + dx * scale,
-        y=point.y + dy * scale,
-        label_x=point.x + dx * scale,
-        label_y=point.y + dy * scale,
-    )
-
-
-def build_seoul_racecourse_map(distance_m: int) -> RacecourseMapView:
-    selected_start, route_path, supported = _seoul_route(distance_m)
-    starts = [
-        _seoul_start_marker(distance, selected=distance == distance_m)
-        for distance in SEOUL_DIAGRAM_STARTS
-    ]
-    if distance_m not in SEOUL_DIAGRAM_STARTS:
-        starts.append(_seoul_custom_start_marker(distance_m, selected_start))
-
-    inner_infield_radius = SEOUL_INNER_RADIUS_M - SEOUL_TRACK_WIDTH_M / 2
-    return RacecourseMapView(
-        meet_code=1,
-        course_name="서울",
-        distance_m=distance_m,
-        supported_distance=supported,
-        view_box="-348 -292 1002 505",
-        loop_path=_seoul_loop_path(SEOUL_OUTER_RADIUS_M),
-        inner_path=_seoul_loop_path(inner_infield_radius),
-        inner_course_path=_seoul_loop_path(SEOUL_INNER_RADIUS_M),
-        chute_path=_seoul_thousand_chute_path(),
-        extension_path=(f"M -100.000 {SEOUL_OUTER_RADIUS_M:.3f} H {SEOUL_OUTER_STRAIGHT_M:.3f}"),
-        route_path=route_path,
-        goal_x=SEOUL_GOAL_FROM_LEFT_TANGENT_M,
-        top_y=-SEOUL_OUTER_RADIUS_M,
-        bottom_y=SEOUL_OUTER_RADIUS_M,
-        start_markers=starts,
-        furlong_markers=[_seoul_furlong_marker(number) for number in range(1, 9)],
-        selected_start=selected_start,
-        geometry_note=("외주로 2×450m + 2×450m = 1,800m · 내주로 2×450m + 2×350m = 1,600m"),
-    )
-
-
-def _seoul_loop_path(radius: float) -> str:
-    length = SEOUL_OUTER_STRAIGHT_M
-    return (
-        f"M 0 {radius:.3f} H {length:.3f} "
-        f"A {radius:.3f} {radius:.3f} 0 0 0 {length:.3f} {-radius:.3f} "
-        f"H 0 A {radius:.3f} {radius:.3f} 0 0 0 0 {radius:.3f} Z"
-    )
-
-
-def _seoul_thousand_chute_path() -> str:
-    radius = SEOUL_OUTER_RADIUS_M
-    return (
-        "M -170.000 -240.000 L -275.000 -163.000 "
-        f"C -335.000 -60.000 -278.000 {radius - 18:.3f} 0 {radius:.3f}"
-    )
-
-
-def _seoul_route(distance_m: int) -> tuple[MapPoint, str, bool]:
-    radius = SEOUL_OUTER_RADIUS_M
-    goal = SEOUL_GOAL_FROM_LEFT_TANGENT_M
-    length = SEOUL_OUTER_STRAIGHT_M
-
-    if distance_m == 1000:
-        start = MapPoint(-170.0, -240.0)
-        return start, f"{_seoul_thousand_chute_path()} H {goal:.3f}", True
-
-    if distance_m in SEOUL_INNER_STARTS:
-        start_x = 2000.0 - distance_m
-        start = MapPoint(start_x, SEOUL_INNER_RADIUS_M)
-        inner_radius = SEOUL_INNER_RADIUS_M
-        path = (
-            f"M {start_x:.3f} {inner_radius:.3f} H {length:.3f} "
-            f"A {inner_radius:.3f} {inner_radius:.3f} 0 0 0 "
-            f"{length:.3f} {-inner_radius:.3f} H 0 "
-            f"A {inner_radius:.3f} {inner_radius:.3f} 0 0 0 "
-            f"0 {inner_radius:.3f} L 0 {radius:.3f} H {goal:.3f}"
-        )
-        return start, path, True
-
-    if distance_m == 2300:
-        start = MapPoint(-100.0, radius)
-        path = (
-            f"M -100.000 {radius:.3f} H {length:.3f} "
-            f"A {radius:.3f} {radius:.3f} 0 0 0 {length:.3f} {-radius:.3f} "
-            f"H 0 A {radius:.3f} {radius:.3f} 0 0 0 0 {radius:.3f} "
-            f"H {goal:.3f}"
-        )
-        return start, path, True
-
-    if 0 < distance_m <= SEOUL_OUTER_LAP_M:
-        start, path = _seoul_outer_route(distance_m)
-        return start, path, distance_m in SEOUL_OUTER_STARTS
-
-    fallback = MapPoint(goal, radius)
-    return fallback, _seoul_loop_path(radius), False
-
-
-def _seoul_outer_route(distance_m: float) -> tuple[MapPoint, str]:
-    radius = SEOUL_OUTER_RADIUS_M
-    length = SEOUL_OUTER_STRAIGHT_M
-    goal = SEOUL_GOAL_FROM_LEFT_TANGENT_M
-
-    if distance_m <= goal:
-        start = MapPoint(goal - distance_m, radius)
-        return start, f"M {start.x:.3f} {radius:.3f} H {goal:.3f}"
-
-    if distance_m <= goal + SEOUL_OUTER_CURVE_M:
-        curve_remaining = distance_m - goal
-        angle = -3 * pi / 2 + curve_remaining / radius
-        start = MapPoint(radius * cos(angle), radius * sin(angle))
-        path = (
-            f"M {start.x:.3f} {start.y:.3f} "
-            f"A {radius:.3f} {radius:.3f} 0 0 0 0 {radius:.3f} H {goal:.3f}"
-        )
-        return start, path
-
-    if distance_m <= goal + SEOUL_OUTER_CURVE_M + length:
-        start = MapPoint(distance_m - goal - SEOUL_OUTER_CURVE_M, -radius)
-        path = (
-            f"M {start.x:.3f} {-radius:.3f} H 0 "
-            f"A {radius:.3f} {radius:.3f} 0 0 0 0 {radius:.3f} H {goal:.3f}"
-        )
-        return start, path
-
-    if distance_m <= goal + 2 * SEOUL_OUTER_CURVE_M + length:
-        curve_remaining = distance_m - goal - SEOUL_OUTER_CURVE_M - length
-        angle = -pi / 2 + curve_remaining / radius
-        start = MapPoint(length + radius * cos(angle), radius * sin(angle))
-        path = (
-            f"M {start.x:.3f} {start.y:.3f} "
-            f"A {radius:.3f} {radius:.3f} 0 0 0 {length:.3f} {-radius:.3f} "
-            f"H 0 A {radius:.3f} {radius:.3f} 0 0 0 0 {radius:.3f} H {goal:.3f}"
-        )
-        return start, path
-
-    start = MapPoint(goal + SEOUL_OUTER_LAP_M - distance_m, radius)
-    path = (
-        f"M {start.x:.3f} {radius:.3f} H {length:.3f} "
-        f"A {radius:.3f} {radius:.3f} 0 0 0 {length:.3f} {-radius:.3f} "
-        f"H 0 A {radius:.3f} {radius:.3f} 0 0 0 0 {radius:.3f} H {goal:.3f}"
-    )
-    return start, path
-
-
-def _seoul_start_marker(distance_m: int, *, selected: bool) -> MapMarker:
-    start, _path, _supported = _seoul_route(distance_m)
-    if distance_m in SEOUL_INNER_STARTS:
-        label = MapPoint(start.x, 198.0)
-    elif distance_m == 2300:
-        label = MapPoint(start.x, 198.0)
-    elif distance_m == 1000:
-        label = MapPoint(start.x, start.y - 25)
-    else:
-        center = MapPoint(SEOUL_OUTER_STRAIGHT_M / 2, 0)
-        dx = start.x - center.x
-        dy = start.y - center.y
-        scale = 31 / max(hypot(dx, dy), 1)
-        label = MapPoint(start.x + dx * scale, start.y + dy * scale)
-    return MapMarker(
-        label=f"{distance_m:,}m",
-        x=start.x,
-        y=start.y,
-        label_x=label.x,
-        label_y=label.y,
-        selected=selected,
-    )
-
-
-def _seoul_custom_start_marker(distance_m: int, start: MapPoint) -> MapMarker:
-    return MapMarker(
-        label=f"{distance_m:,}m",
-        x=start.x,
-        y=start.y,
-        label_x=start.x,
-        label_y=start.y - 28,
-        selected=True,
-    )
-
-
-def _seoul_furlong_marker(number: int) -> MapMarker:
-    point, _path = _seoul_outer_route(number * 200)
+    point = jeju_checkpoint_point(distance_to_goal)
     return MapMarker(
         label=str(number),
         x=point.x,
         y=point.y,
         label_x=point.x,
-        label_y=point.y,
+        label_y=point.y + (-28 if point.y < 0 else 32),
+    )
+
+
+def build_seoul_racecourse_map(distance_m: int) -> RacecourseMapView:
+    diagram = build_seoul_diagram(distance_m)
+    selected = diagram["selected"]
+    starts = [MapMarker(label=f"{v['distance']:,}m", x=v["start_x"], y=v["start_y"],
+                        label_x=v["start_x"], label_y=v["start_y"] - 22,
+                        selected=v["selected"]) for v in diagram["variants"]]
+    return RacecourseMapView(
+        meet_code=1, course_name="서울", distance_m=distance_m,
+        supported_distance=selected is not None, view_box="0 0 790 530",
+        loop_path=diagram["surface"], inner_path=diagram["field"], chute_path="",
+        route_path=selected["path"] if selected else "", goal_x=555, top_y=151, bottom_y=418,
+        start_markers=starts, furlong_markers=[],
+        selected_start=MapPoint(selected["start_x"], selected["start_y"]) if selected
+        else MapPoint(555, 418),
+        geometry_note="외주로 1,800m · 내주로 1,600m · 직선 450m · 폭 25m / 결승직선 30m",
+        diagram=diagram,
+    )
+
+
+def build_busan_racecourse_map(distance_m: int) -> RacecourseMapView:
+    diagram = build_busan_diagram(distance_m)
+    selected = diagram["selected"]
+    return RacecourseMapView(
+        meet_code=3,
+        course_name="부경",
+        distance_m=distance_m,
+        supported_distance=selected is not None,
+        view_box="0 0 790 520",
+        loop_path=diagram["surface"],
+        inner_path=diagram["field"],
+        chute_path="",
+        route_path=selected["path"] if selected else "",
+        goal_x=525,
+        top_y=170,
+        bottom_y=390,
+        start_markers=[],
+        furlong_markers=[],
+        selected_start=MapPoint(selected["start_x"], selected["start_y"])
+        if selected
+        else MapPoint(525, 390),
+        geometry_note=("공식 평면도 기준 내주로 1,460m · 외주로 2,008m · 폭 25m. "
+                       "주로 현황 페이지의 1,470m·2,000m 표기와 차이가 있어 "
+                       "평면도를 기준으로 재구성한 개략 경로입니다"),
+        diagram=diagram,
     )

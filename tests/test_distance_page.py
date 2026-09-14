@@ -102,8 +102,9 @@ def test_filters_statistics_and_pagination(factory):
         assert last["page"] == 2
         assert len(last["items"]) == 2
         assert last["items"][-1]["winner_time"] == "1:10.0"
-        historic = load_distance_page(session, year=0, distance=400, grade="한OPEN", page=1)
-        assert historic["total"] == 1
+        historic = load_distance_page(session, year=0, distance=400, grade="", page=1)
+        assert historic["total"] == 0
+        assert all(not grade.startswith("한") for grade in all_data["grade_labels"])
         unknown = load_distance_page(session, year=0, distance=0, grade="미분류", page=1)
         assert unknown["total"] == 1
 
@@ -117,5 +118,28 @@ def test_render_empty_and_validation(factory):
     empty = client.get("/racecourses/jeju/distances?year=2026&distance=400")
     assert empty.status_code == 200
     assert "선택한 조건의 경주 기록이 없습니다" in empty.text
-    for query in ("grade=invalid", "year=-1", "distance=-1", "page=0"):
+    for query in ("grade=invalid", "grade=한OPEN", "year=-1", "distance=-1", "page=0"):
         assert client.get(f"/racecourses/jeju/distances?{query}").status_code == 422
+    with factory() as session:
+        retired_race_id = session.query(Race.id).filter(Race.grade.like("한%")).scalar()
+    assert client.get(f"/races/{retired_race_id}").status_code == 404
+
+
+def test_seoul_distance_page_is_separate_and_validates_course(factory):
+    with factory() as session:
+        course = session.query(Racecourse).filter_by(kra_meet_code=1).one()
+        session.add(Race(racecourse=course, race_date_local=date(2026, 9, 6), race_number=99,
+                         distance_m=1700, grade="혼4", status="completed"))
+        session.commit()
+    client = TestClient(create_app(session_factory=factory))
+    response = client.get("/racecourses/seoul/distances?year=2026&grade=혼4등급&distance=1700")
+    assert response.status_code == 200
+    assert "서울 거리별 분석" in response.text
+    assert 'action="/racecourses/seoul/distances"' in response.text
+    assert '1,700' in response.text
+    assert client.get("/racecourses/unknown/distances").status_code == 404
+    with factory() as session:
+        data = load_distance_page(session, year=2026, distance=1700, grade="혼4등급",
+                                  page=1, meet_code=1)
+        assert data["total"] == 1
+        assert data["items"][0]["display_grade"] == "혼4등급"

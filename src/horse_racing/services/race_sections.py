@@ -201,6 +201,8 @@ def _upsert_section_result(
         session.add(row)
     row.elapsed_time_ms = section.elapsed_time_ms
     row.position = section.position
+    row.time_basis = section.time_basis
+    row.source_kind = "api4_3"
 
 
 def _ingest_dataset[ItemT: BaseModel](

@@ -4,6 +4,7 @@ import hashlib
 from datetime import date
 from pathlib import Path
 
+import pytest
 from sqlalchemy import func, select
 from test_race_day import migrated_session
 
@@ -29,8 +30,21 @@ from horse_racing.parsers.dacom11 import (
 from horse_racing.services.dacom11 import (
     _EntityResolver,
     _horse_names_match,
+    _validate_report_meet,
     ingest_dacom11_reports,
 )
+
+
+def test_archive_route_cannot_assign_yeongcheon_report_to_busan():
+    races = parse_dacom11_report(REPORT.replace("(서울)", "(영천)").encode("cp949"))
+    with pytest.raises(ValueError, match="본문=영천"):
+        _validate_report_meet(races, 3)
+
+
+@pytest.mark.parametrize("meet,name", [(1, "서울"), (2, "제주"), (3, "부경")])
+def test_report_venue_matches_archive_route(meet, name):
+    races = parse_dacom11_report(REPORT.replace("(서울)", f"({name})").encode("cp949"))
+    _validate_report_meet(races, meet)
 
 
 def test_jeju_fixed_columns_keep_empty_fields_and_all_corners():
@@ -255,7 +269,7 @@ def test_ingest_dacom11_writes_normalized_race(tmp_path: Path) -> None:
         assert race.field_size == 2
         assert session.scalar(select(func.count()).select_from(RaceEntry)) == 2
         assert session.scalar(select(func.count()).select_from(RaceResult)) == 2
-        assert session.scalar(select(func.count()).select_from(RaceSectionResult)) == 6
+        assert session.scalar(select(func.count()).select_from(RaceSectionResult)) == 10
         assert session.scalar(select(func.count()).select_from(OddsSnapshot)) == 4
 
 
@@ -384,3 +398,35 @@ def test_dacom11_resolver_uses_birth_year_and_visiting_home_meet(tmp_path: Path)
         assert visitor_status == "resolved"
         assert visitor is not None and visitor.kra_horse_id == "0036560"
         assert _horse_names_match("페르디도포머로이", "[부]페르디도포머로")
+
+
+def test_seoul_missing_closing_time_and_single_odds_do_not_shift_cells():
+    entries = parse_dacom11_report(REPORT.encode("cp949"))[0].entries
+    header = "순위 마번    G-3Ｆ   S-1F  １코너  ２코너  ３코너  ４코너    G-1F  단승식 연승식"
+    _parse_section_table([
+        header, "-" * 94,
+        "  1    8   #####   0:13.5                  0:24.3  0:50.7   32.8     65.6    9.6",
+        "  2    4   38.9    0:13.7                  0:37.2  0:56.4   13.5     15.2       ",
+        "-" * 94,
+    ], entries)
+    assert entries[0].g3f_ms is None
+    assert entries[0].s1f_ms == 13500
+    assert entries[0].corner_times_ms == {"3C": 24300, "4C": 50700}
+    assert entries[1].g1f_ms == 13500
+    assert entries[1].win_odds == 15.2
+    assert entries[1].place_odds is None
+
+
+def test_regional_long_name_truncation_does_not_drop_finish():
+    from horse_racing.parsers.dacom11 import _parse_body_table
+    entries = parse_dacom11_report(REPORT.encode("cp949"))[0].entries
+    entries[0].horse_name = "[부]페르디도포머로"
+    entries[0].finish_time_ms = None
+    _parse_body_table([
+        "순위 마번 마명 마체중 기록 도착차", "-" * 94,
+        "  1    8  [부]페르디도포머로이497( -9) 1:12.1            1-  -  - 1- 1- 1",
+        "-" * 94,
+    ], entries)
+    assert entries[0].horse_name == "페르디도포머로이"
+    assert entries[0].finish_time_ms == 72100
+    assert entries[0].body_weight_kg == 497

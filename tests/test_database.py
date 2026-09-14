@@ -51,7 +51,9 @@ def test_initial_migration_creates_expected_tables(tmp_path: Path) -> None:
     assert set(inspect(engine).get_table_names()) == EXPECTED_TABLES
     with engine.connect() as connection:
         revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-        assert revision == "20260828_0009"
+        assert revision == "20260908_0010"
+        columns = {c["name"] for c in inspect(engine).get_columns("race_section_results")}
+        assert {"time_basis", "source_kind"} <= columns
 
 
 def test_sqlite_pragmas_are_enabled(tmp_path: Path) -> None:

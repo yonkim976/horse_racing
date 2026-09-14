@@ -1,17 +1,18 @@
 {% extends "base.html" %}
-{% block title %}제주 거리별 분석 · 한국 경마 데이터 보드{% endblock %}
+{% block title %}{{ data.course_name }} 거리별 분석 · 한국 경마 데이터 보드{% endblock %}
 {% block content %}
 <section class="page-intro compact-intro">
   <div>
-    <p class="eyebrow">JEJU · DISTANCE RECORDS</p>
-    <h1>제주 거리별 분석</h1>
+    <p class="eyebrow">{{ data.course|upper }} · DISTANCE RECORDS</p>
+    <h1>{{ data.course_name }} 거리별 분석</h1>
     <p>거리를 선택하고 등급별 경주 기록을 살펴보세요.</p>
   </div>
-  <a class="entity-link" href="/?meet=2">제주 일정 보기 →</a>
+  <a class="entity-link" href="/?meet={{ data.meet_code }}">{{ data.course_name }} 일정 보기 →</a>
 </section>
 
+<nav class="distance-options" aria-label="경마장 선택"><a href="/racecourses/seoul/distances" {% if data.meet_code == 1 %}aria-current="page"{% endif %}>서울</a><a href="/racecourses/jeju/distances" {% if data.meet_code == 2 %}aria-current="page"{% endif %}>제주</a><a href="/racecourses/busan/distances" {% if data.meet_code == 3 %}aria-current="page"{% endif %}>부경</a></nav>
 <section class="panel distance-controls" aria-label="경주 검색 조건">
-  <form class="filters" method="get" action="/racecourses/jeju/distances">
+  <form class="filters" method="get" action="{{ data.base_url }}">
     <input type="hidden" name="distance" value="{{ data.distance }}">
     <label><span>연도</span><select name="year">
       <option value="0" {% if data.year == 0 %}selected{% endif %}>전체 기간</option>
@@ -48,7 +49,7 @@
     <div><p class="panel-kicker">RACE HISTORY</p><h2>{{ "{:,}m".format(data.distance) if data.distance else '전체 거리' }} 경주 기록</h2></div>
     <span>{{ data.first or '—' }} ~ {{ data.last or '—' }} · 최신순</span>
   </div>
-  <p class="distance-note">시간 통계는 착순 1~89위의 유효 기록만 사용하며 취소·실격은 제외합니다. 전체 등급에는 과거 한라마도 포함됩니다. ‘미분류’는 원문에서 등급을 확정할 수 없는 기록입니다.</p>
+  <p class="distance-note">시간 통계는 착순 1~89위의 유효 기록만 사용하며 취소·실격은 제외합니다. ‘미분류’는 원문에서 등급을 확정할 수 없는 기록입니다.</p>
   {% if data["items"] %}
   <div class="table-scroll">
     <table class="entry-table">

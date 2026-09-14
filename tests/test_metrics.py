@@ -12,6 +12,7 @@ from horse_racing.analysis.metrics import (
     calibration_table,
     evaluate_probabilities,
     expected_calibration_error,
+    expected_topk_inclusion,
     log_loss,
     race_level_metrics,
 )
@@ -79,6 +80,22 @@ def test_uniform_ties_get_expected_value_not_free_hit() -> None:
     result = race_level_metrics(frame, "probability")
     assert result["top1_hit_rate"] == pytest.approx(0.2)
     assert result["top3_inclusion_rate"] == pytest.approx(0.6)
+
+
+def test_probability_tie_expectation_is_order_invariant() -> None:
+    probabilities = [0.4, 0.3, 0.3, 0.3]
+    labels = [0, 1, 0, 0]
+    expected = expected_topk_inclusion(probabilities, labels, k=2)
+    assert expected == pytest.approx(1 / 3)
+    assert expected_topk_inclusion(
+        list(reversed(probabilities)), list(reversed(labels)), k=2
+    ) == pytest.approx(expected)
+
+
+def test_result_dead_heat_is_separate_from_probability_tie() -> None:
+    # Two official winners occupy the three-way prediction tie at the boundary.
+    # Selecting one of the three tied runners hits the winner event with probability 2/3.
+    assert expected_topk_inclusion([0.5, 0.4, 0.4, 0.4], [0, 1, 1, 0], k=2) == pytest.approx(2 / 3)
 
 
 def test_top3_excludes_winner_ranked_fourth() -> None:

@@ -27,6 +27,7 @@ from horse_racing.web.formatting import (
     format_rating,
     group_dates_by_month,
 )
+from horse_racing.web.race_scope import active_race_clause
 
 
 @dataclass(frozen=True, slots=True)
@@ -166,7 +167,11 @@ def load_dashboard(
 ) -> DashboardData:
     race_dates = list(
         session.scalars(
-            select(Race.race_date_local).distinct().order_by(Race.race_date_local.desc())
+            select(Race.race_date_local)
+            .join(Racecourse)
+            .where(active_race_clause())
+            .distinct()
+            .order_by(Race.race_date_local.desc())
         )
     )
     trial_dates = list(
@@ -179,7 +184,10 @@ def load_dashboard(
     race_date_set = set(race_dates)
     available_dates = sorted(race_date_set | set(trial_dates), reverse=True)
     date_status_rows = session.execute(
-        select(Race.race_date_local, Race.status).distinct()
+        select(Race.race_date_local, Race.status)
+        .join(Racecourse)
+        .where(active_race_clause())
+        .distinct()
     ).all()
     statuses_by_date: dict[date, set[str]] = {}
     for race_date, status in date_status_rows:
@@ -192,6 +200,7 @@ def load_dashboard(
     course_rows = session.execute(
         select(Racecourse.kra_meet_code, Racecourse.name_ko)
         .join(Race)
+        .where(active_race_clause())
         .distinct()
         .order_by(Racecourse.kra_meet_code)
     ).all()
@@ -208,6 +217,7 @@ def load_dashboard(
             selectinload(Race.entries).joinedload(RaceEntry.owner),
             selectinload(Race.entries).joinedload(RaceEntry.result),
         )
+        .where(active_race_clause())
     )
     if selected_date is not None:
         statement = statement.where(Race.race_date_local == selected_date)

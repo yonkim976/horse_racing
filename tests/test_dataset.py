@@ -141,9 +141,13 @@ def test_base_dataset_query_explicitly_excludes_running_trials(tmp_path) -> None
         session.commit()
 
         frame = fetch_base_rows(session)
+        seoul_only = fetch_base_rows(session, meet_codes=[1])
+        jeju_only = fetch_base_rows(session, meet_codes=[2])
         race_id = race.id
 
     assert frame.height == 1
+    assert seoul_only.height == 1
+    assert jeju_only.height == 0
     assert frame.get_column("race_id").to_list() == [race_id]
     assert "running_trial_id" not in frame.columns
     assert {"finish_time_ms", "margin_text"} <= set(frame.columns)

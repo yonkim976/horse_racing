@@ -14,7 +14,7 @@ from sqlalchemy.orm import Session
 from horse_racing.db.session import SessionLocal
 from horse_racing.web.dashboard import load_dashboard
 from horse_racing.web.data_status import load_data_status
-from horse_racing.web.distance_page import GRADE_LABELS, load_distance_page
+from horse_racing.web.distance_page import GRADE_LABELS, SEOUL_GRADE_LABELS, load_distance_page
 from horse_racing.web.entities import (
     DEFAULT_PAGE_SIZE,
     ENTITY_KINDS,
@@ -89,19 +89,24 @@ def create_app(
             context={"active_nav": "races", "page": page},
         )
 
-    @app.get("/racecourses/jeju/distances", response_class=HTMLResponse)
-    def jeju_distances(
+    @app.get("/racecourses/{course}/distances", response_class=HTMLResponse)
+    def course_distances(
         request: Request,
+        course: str,
         year: Annotated[int | None, Query(ge=0, le=9999)] = None,
         distance: Annotated[int, Query(ge=0, le=10000)] = 0,
         grade: str = "",
         page: Annotated[int, Query(ge=1)] = 1,
     ) -> HTMLResponse:
-        if grade and grade not in GRADE_LABELS:
+        if course not in ("jeju", "seoul", "busan"):
+            raise HTTPException(status_code=404, detail="지원하지 않는 경마장입니다.")
+        meet_code = {"seoul": 1, "jeju": 2, "busan": 3}[course]
+        allowed_grades = GRADE_LABELS if meet_code == 2 else SEOUL_GRADE_LABELS
+        if grade and grade not in allowed_grades:
             raise HTTPException(status_code=422, detail="지원하지 않는 등급입니다.")
         with session_factory() as session:
             data = load_distance_page(
-                session, year=year, distance=distance, grade=grade, page=page,
+                session, year=year, distance=distance, grade=grade, page=page, meet_code=meet_code,
             )
         return templates.TemplateResponse(
             request=request, name="distance_page.html",

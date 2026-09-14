@@ -1,4 +1,4 @@
-"""Distance browsing of completed Jeju races, without changing source records."""
+"""Distance browsing of completed Seoul and Jeju races, without changing source records."""
 
 from datetime import date
 from math import ceil
@@ -9,20 +9,25 @@ from sqlalchemy.orm import Session
 
 from horse_racing.db.models import Race, Racecourse, RaceEntry, RaceResult
 from horse_racing.web.formatting import format_race_time
+from horse_racing.web.race_scope import active_race_clause
 
 PAGE_SIZE = 30
 GRADE_LABELS = (
     [f"제{i}등급" for i in range(6, 0, -1)]
     + ["제OPEN"]
-    + [f"한{i}등급" for i in range(4, 0, -1)]
-    + ["한OPEN", "미분류"]
+    + ["미분류"]
 )
 
 
-def grade_expression():
+SEOUL_GRADE_LABELS = ([f"국{i}등급" for i in range(6, 0, -1)]
+                      + [f"혼{i}등급" for i in range(4, 0, -1)]
+                      + ["2등급", "1등급", "국OPEN", "혼OPEN", "미분류"])
+
+
+def grade_expression(meet_code=2):
     # Historical imports sometimes put age conditions in grade. Do not infer a grade.
     conditions = []
-    for prefix, maximum in (("제", 6), ("한", 4)):
+    for prefix, maximum in ((("제", 6),) if meet_code == 2 else (("국", 6), ("혼", 4))):
         for number in range(1, maximum + 1):
             label = f"{prefix}{number}등급"
             conditions.append(
@@ -31,6 +36,8 @@ def grade_expression():
         conditions.append(
             (Race.grade.like(f"{prefix}OPEN%") | Race.grade.like(f"{prefix}오픈%"), f"{prefix}OPEN")
         )
+    if meet_code in (1, 3):
+        conditions.extend((Race.grade.like(f"{n}등급%"), f"{n}등급") for n in (1, 2))
     return case(*conditions, else_="미분류")
 
 
@@ -41,8 +48,15 @@ def load_distance_page(
     distance: int,
     grade: str,
     page: int,
+    meet_code: int = 2,
 ) -> dict:
-    base = [Racecourse.kra_meet_code == 2, Race.status == "completed"]
+    course = {1: "seoul", 2: "jeju", 3: "busan"}[meet_code]
+    base_url = f"/racecourses/{course}/distances"
+    base = [
+        Racecourse.kra_meet_code == meet_code,
+        Race.status == "completed",
+        active_race_clause(),
+    ]
     years = list(
         session.scalars(
             select(func.substr(Race.race_date_local, 1, 4))
@@ -61,14 +75,14 @@ def load_distance_page(
                 Race.race_date_local <= date(selected_year, 12, 31),
             ]
         )
-    normalized_grade = grade_expression()
+    normalized_grade = grade_expression(meet_code)
     if grade:
         conditions.append(normalized_grade == grade)
 
     def link(**changes):
         values = dict(year=selected_year, distance=distance, grade=grade)
         values.update(changes)
-        return "/racecourses/jeju/distances?" + urlencode(values)
+        return base_url + "?" + urlencode(values)
 
     distances = session.execute(
         select(Race.distance_m, func.count(Race.id))
@@ -146,11 +160,13 @@ def load_distance_page(
     )
     items = [dict(row, winner_time=format_race_time(row["winner_time"])) for row in rows]
     return dict(
+        course_name={1: "서울", 2: "제주", 3: "부경"}[meet_code],
+        course=course, meet_code=meet_code, base_url=base_url,
         years=years,
         year=selected_year,
         distance=distance,
         grade=grade,
-        grade_labels=GRADE_LABELS,
+        grade_labels=GRADE_LABELS if meet_code == 2 else SEOUL_GRADE_LABELS,
         total=total,
         entries=entries,
         timed=timed,
@@ -160,7 +176,7 @@ def load_distance_page(
         last=last,
         distances=[dict(distance=d, count=n, url=link(distance=d)) for d, n in distances],
         all_url=link(distance=0),
-        reset_url="/racecourses/jeju/distances",
+        reset_url=base_url,
         items=items,
         page=page,
         total_pages=total_pages,

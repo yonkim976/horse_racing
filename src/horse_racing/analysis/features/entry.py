@@ -78,8 +78,12 @@ FEATURES = [
     FeatureSpec(
         name="horse_origin",
         group=GROUP,
-        description="산지 (범주)",
-        source="horses.origin_country (불변 속성)",
+        description="산지 (범주, 제주 경주는 한국/제를 제주마로 정규화)",
+        source="horses.origin_country (현재 스냅샷)",
+        leakage_note=(
+            "med — 원천의 한국/제 표기가 수집 시점에 따라 바뀔 수 있어 "
+            "meet_code=2에서는 제주마로 통합"
+        ),
     ),
 ]
 
@@ -107,6 +111,21 @@ def add_features(frame: pl.DataFrame, sources: SourceFrames) -> pl.DataFrame:
     if "gate_number" in frame.columns:
         frame = frame.with_columns(
             pl.coalesce("gate_number", "horse_number").alias("horse_number")
+        )
+
+    # 제주마의 산지가 KRA 원천 갱신 시점에 따라 '한국'과 '제' 사이에서 바뀌면
+    # 현재 horse 스냅샷을 과거 경주에 조인하는 순간 동일 경주의 feature가 재생성
+    # 시점마다 달라진다. 원천값은 DB에 보존하고, 제주 경주 학습 feature에서만
+    # 두 표기를 하나의 안정된 범주로 통합한다.
+    if "meet_code" in frame.columns:
+        frame = frame.with_columns(
+            pl.when(
+                (pl.col("meet_code") == 2)
+                & pl.col("horse_origin").is_in(["한국", "제"])
+            )
+            .then(pl.lit("제주마"))
+            .otherwise(pl.col("horse_origin"))
+            .alias("horse_origin")
         )
 
     expressions = [

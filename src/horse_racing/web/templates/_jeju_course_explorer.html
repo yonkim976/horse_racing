@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="{{ url_for('static', path='/css/course-explorer.css') }}?v=6">
+<section id="racecourse-map" class="panel course-explorer" data-racecourse-map="jeju" data-course-explorer data-distance="{{ page.distance_m }}">
+  <header class="course-heading">
+    <div><p class="panel-kicker">JEJU · COURSE EXPLORER</p><h2>제주 경주로 <span>{{ page.distance }}</span></h2><p>출발부터 결승까지, 경로와 구간 기록을 살펴보세요.</p></div>
+    <a class="course-record-link" href="https://race.kra.co.kr/chulmainfo/trackView.do?Act=02&Sub=9&meet=2" target="_blank" rel="noopener">공식 안내 ↗</a>
+  </header>
+  <div class="course-map-body">
+    <div class="course-main">
+      <div class="course-toolbar course-view-tools" aria-label="지도 표시 옵션">
+        <span data-course-view-label>현재 경주 · {{ page.distance }}</span>
+        <label><input type="checkbox" data-course-layer="starts"> 다른 출발점</label>
+        <label><input type="checkbox" data-course-layer="furlongs"> 200m 표시</label>
+        <button type="button" data-course-zoom aria-pressed="false">확대 보기</button>
+      </div>
+      <div class="course-canvas" data-course-viewport>
+        <svg viewBox="-145 -164 785 355" class="course-map" role="group" aria-label="제주 {{ page.distance }} 주행 경로와 측정 지점">
+          <title>제주 경주로 · {{ page.distance }} 주행 경로</title>
+          <desc>시계 방향 주행. 숫자를 선택하면 해당 지점과 직전 구간 기록을 확인할 수 있습니다.</desc>
+          <defs><marker id="course-direction" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="currentColor" stroke-width="2"/></marker></defs>
+          <path class="course-field" d="{{ track.inner_path }}"/>
+          <path class="course-rail" d="{{ track.loop_path }}"/>
+          <path class="course-road" d="{{ track.loop_path }}"/>
+          <path class="course-rail" d="{{ track.chute_path }}"/>
+          <path class="course-road" d="{{ track.chute_path }}"/>
+          <path class="course-route" d="{{ track.route_path }}" data-jeju-route/>
+          {% set early = 210 if page.distance_m in [1110, 1610] else 200 %}
+          {% for code, start, span in [('early', 0, early), ('middle', page.distance_m - 600, 400), ('last', page.distance_m - 200, 200)] %}
+          <path class="course-band course-band-{{ code }}" data-jeju-band="{{ code }}" d="{{ track.route_path }}" pathLength="{{ page.distance_m }}" stroke-dasharray="{{ span }} {{ page.distance_m + 1 }}" stroke-dashoffset="{{ -start }}"/>
+          {% endfor %}
+          <path class="course-focus" d="{{ track.route_path }}" pathLength="{{ page.distance_m }}" data-course-focus hidden/>
+          <g class="course-arrows" aria-hidden="true"><path d="M 230 -97.5 h 22" marker-end="url(#course-direction)"/><path d="M 300 97.5 h -22" marker-end="url(#course-direction)"/></g>
+          <g class="course-center" aria-hidden="true"><text x="247" y="-20" class="course-center-label">제주경마공원</text><text x="247" y="27" class="course-center-distance" data-jeju-distance>{{ "{:,}".format(page.distance_m) }}<tspan> m</tspan></text><text x="247" y="53" class="course-center-label" data-jeju-direction>시계 방향{% if page.distance_m > 1600 %} · 결승선 첫 통과 후 한 바퀴{% endif %}</text></g>
+          <g data-course-overlay="furlongs" class="course-furlongs" hidden aria-label="결승까지 남은 거리">
+            {% for marker in track.furlong_markers %}<g><circle cx="{{ marker.x }}" cy="{{ marker.y }}" r="4"/><text x="{{ marker.label_x }}" y="{{ marker.label_y }}" text-anchor="middle">{{ marker.label|int * 200 }}m</text></g>{% endfor %}
+          </g>
+          <g data-course-overlay="starts" class="course-other-starts" hidden aria-label="다른 거리의 출발점">
+            {% for marker in track.start_markers %}<g data-other-start="{{ marker.label }}" {% if marker.selected %}hidden{% endif %}><circle cx="{{ marker.x }}" cy="{{ marker.y }}" r="3"/><text x="{{ marker.label_x }}" y="{{ marker.label_y - 5 }}" text-anchor="middle">{{ marker.label }}</text></g>{% endfor %}
+          </g>
+          <g class="course-start" data-jeju-start aria-label="출발 {{ page.distance }}">
+            <circle cx="{{ track.selected_start.x }}" cy="{{ track.selected_start.y }}" r="{{ 4 if page.distance_m == 1610 else 8 }}"/>
+            <path d="M {{ track.selected_start.x }} {{ track.selected_start.y }} l {{ 78 if track.selected_start.y > 0 else 0 }} {{ 48 if track.selected_start.y > 0 else -40 }}"/>
+            <text x="{{ track.selected_start.x + (78 if track.selected_start.y > 0 else 0) }}" y="{{ track.selected_start.y + (65 if track.selected_start.y > 0 else -49) }}" text-anchor="middle">출발</text>
+          </g>
+          <g class="course-finish" aria-label="결승선"><path d="M {{ track.goal_x }} 83 v 29"/><text x="{{ track.goal_x - 14 }}" y="143" text-anchor="end">결승</text></g>
+          {% for point in page.map_checkpoints %}
+          <g class="course-point" data-course-point="{{ point.index }}" role="button" tabindex="0" aria-label="{{ point.number }}. {{ point.label }} · {{ point.location }}" aria-pressed="false" transform="translate({{ point.x }} {{ point.y }})">
+            <circle class="course-hit" r="22"/><circle class="course-dot" r="12"/><text text-anchor="middle" dominant-baseline="central">{{ point.number }}</text>
+          </g>
+          {% endfor %}
+        </svg>
+      </div>
+      {% include '_course_color_key.html' %}
+      <nav class="course-distance-picker" aria-label="거리별 표준 경로 미리보기">{% for v in track.diagram.variants %}<button type="button" data-jeju-preview="{{ v.distance }}" data-route="{{ v.path }}" data-x="{{ v.x }}" data-y="{{ v.y }}" aria-pressed="{{ 'true' if v.distance == page.distance_m else 'false' }}">{{ '{:,}'.format(v.distance) }}<small>m</small>{% if v.distance == page.distance_m %}<span>현재 경주</span>{% endif %}</button>{% endfor %}</nav>
+      <p class="course-hint" data-course-map-note>지도 지점을 선택하면 직전 구간과 말별 기록을 확인합니다. 아래 기록은 현재 {{ page.distance }} 경주의 기록입니다.</p>
+    </div>
+  </div>
+  {% include '_course_records.html' %}
+  <details class="course-method"><summary>지도 기준과 정확도 <span>공식 치수 기반 구조도</span></summary>
+    <p>한국마사회 공개 치수로 만든 구조도입니다. 직선 493.7m · 곡선 R 97.5m · 폭 20m. {{ track.geometry_note }}. 실제 GPS·측량 좌표가 아니며 고저차는 표시하지 않습니다.</p>
+    <p>숫자는 말별 기록의 측정 지점입니다. 코너의 기하학적 시작·끝과 구분되며, 코너 기준 거리는 근사값입니다. 동일 지점은 통합하고 출발 후 거리 순서로 표시합니다. 1,110m·1,610m 경주의 S1F는 210m입니다.</p>
+    {% if not track.supported_distance %}<p>이 거리의 출발 위치는 추가 검증이 필요합니다.</p>{% endif %}
+    <a href="https://race.kra.co.kr/chulmainfo/trackView.do?Act=02&Sub=9&meet=2" target="_blank" rel="noopener">마사회 공식 경주로 안내 ↗</a>
+  </details>
+</section>
+<script src="{{ url_for('static', path='/js/course-explorer.js') }}?v=6" defer></script>

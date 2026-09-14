@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import polars as pl
+from test_lightgbm_model import _synthetic_frame
 
 from horse_racing.analysis.segment_correction import run_segment_correction_walk_forward
-from test_lightgbm_model import _synthetic_frame
 
 
 def test_segment_correction_walk_forward_runs() -> None:

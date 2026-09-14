@@ -305,6 +305,10 @@ class RaceSectionResult(Base):
     section_code: Mapped[str] = mapped_column(String(20), nullable=False)
     distance_from_start_m: Mapped[int | None] = mapped_column(Integer)
     elapsed_time_ms: Mapped[int | None] = mapped_column(Integer)
+    # cumulative = START to checkpoint; closing = checkpoint to FINISH.
+    # NULL is retained for legacy records until their source is replayed.
+    time_basis: Mapped[str | None] = mapped_column(String(20))
+    source_kind: Mapped[str | None] = mapped_column(String(30))
     position: Mapped[int | None] = mapped_column(Integer)
     gap_to_leader_lengths: Mapped[float | None] = mapped_column(Float)
     group_notation_raw: Mapped[str | None] = mapped_column(Text)

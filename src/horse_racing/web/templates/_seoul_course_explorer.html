@@ -1,0 +1,45 @@
+{% set diagram = track.diagram %}
+{% set busan = track.meet_code == 3 %}
+{% set course_en = "BUSAN" if busan else "SEOUL" %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/course-explorer.css') }}?v=11">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/seoul-map.css') }}?v=11">
+<section id="racecourse-map" class="panel course-explorer seoul-explorer" data-racecourse-map="{{ 'busan' if busan else 'seoul' }}" data-course-name="{{ track.course_name }}" data-course-explorer data-distance="{{ page.distance_m }}" data-seoul-map>
+  <header class="course-heading"><div><p class="panel-kicker">{{ course_en }} · COURSE EXPLORER</p><h2>{{ track.course_name }} 경주로 <span>{{ page.distance }}</span></h2><p>출발부터 결승까지, 경로와 구간 기록을 살펴보세요.</p></div><a class="course-record-link" href="{{ diagram.guide_url }}" target="_blank" rel="noopener">공식 안내 ↗</a></header>
+  <div class="seoul-map-body">
+    <div class="course-view-tools"><span data-seoul-view-label>현재 경주 · {{ page.distance }}</span><div><button type="button" data-seoul-source aria-pressed="false">공식 도면 비교</button><button type="button" data-seoul-zoom aria-pressed="false">확대 보기</button></div></div>
+    <div class="seoul-viewport" data-seoul-viewport>
+      <svg viewBox="0 0 790 520" class="seoul-plan" role="group" aria-label="{{ track.course_name }} 수치 평면도 기반 경주로와 구간 선택">
+        <title>{{ track.course_name }} 경주로 · {{ page.distance }} 주행 경로</title><desc>{% if busan %}공식 부경 평면도의 출발점과 내·외주로를 재구성한 개략 경로입니다.{% else %}주로 면과 열린 안쪽 펜스, 1,000m·1,400m·1,600m·2,300m 보조 출발부를 구분한 표준 경로 구조도입니다.{% endif %}</desc>
+        <path class="seoul-surface" d="{{ diagram.surface }}"/><path class="seoul-field" d="{{ diagram.field }}"/>
+        {% if busan %}<path class="busan-lane-border" d="{{ diagram.inner_lane }}"/><path class="busan-lane" d="{{ diagram.inner_lane }}"/><path class="busan-lane" d="{{ diagram.connectors }}"/><path class="busan-training" d="{{ diagram.training }}"/>{% endif %}
+        {% for rail in diagram.rails %}<path class="seoul-rail" d="{{ rail }}"/>{% endfor %}
+        {% for v in diagram.variants %}<g data-seoul-route="{{ v.distance }}" aria-hidden="{{ 'false' if v.selected else 'true' }}" {% if not v.selected %}hidden{% endif %}>
+          <path class="seoul-route-halo" d="{{ v.path }}"/><path class="seoul-route" d="{{ v.path }}" data-route-line/>
+          <path class="course-band course-band-early" d="{{ v.metric.early }}"/>
+          <path class="course-band course-band-middle" d="{{ v.metric.closing400 }}"/>
+          <path class="course-band course-band-last" d="{{ v.metric.closing200 }}"/>
+          {% for action, path in [('early', v.metric.early), ('600', v.metric.closing600), ('200', v.metric.closing200)] %}<path class="seoul-metric-focus" data-seoul-focus="{{ action }}" d="{{ path }}" hidden/>{% endfor %}
+          {% for interval in v.metric.intervals %}<path class="seoul-metric-focus" data-seoul-interval data-start="{{ interval.start }}" data-end="{{ interval.end }}" d="{{ interval.path }}" hidden/>{% endfor %}
+          {% for marker in v.metric.markers %}<g class="seoul-metric-point" role="button" tabindex="{{ 0 if v.selected else -1 }}" aria-pressed="false" data-seoul-marker="{{ marker.action }}" data-marker-distance="{{ v.distance }}" data-marker-codes="{{ marker.aliases|join('/') }}" data-marker-metres="{{ marker.elapsed }}" aria-label="{{ marker.aliases|join('/') }} · 출발 후 {{ marker.elapsed }}m {{ '도면 기반 개략 위치' if busan else ('기록 대조 참고 위치' if marker.aliases|length > 1 or marker.code.endswith('C') else '지점') }}" transform="translate({{ marker.x }} {{ marker.y }})"><circle class="seoul-metric-hit" r="20"/><circle r="7"/><text x="{{ marker.label_x if busan else (23 if marker.y < 400 else 0) }}" y="{{ marker.label_y if busan else (5 if marker.y < 400 else 30) }}" text-anchor="{{ marker.label_anchor if busan else ('start' if marker.y < 400 else 'middle') }}">{{ marker.aliases|join('/') }}</text></g>{% endfor %}
+          <g class="seoul-gate"><circle cx="{{ v.start_x }}" cy="{{ v.start_y }}" r="7"/><path d="M {{ v.start_x }} {{ v.start_y }} v {{ 58 if v.start_y >= 370 else -24 }}"/><text x="{{ v.start_x }}" y="{{ v.start_y + (75 if v.start_y >= 370 else -34) }}" text-anchor="middle">{{ '{:,}'.format(v.distance) }}m 출발</text></g>
+          <g data-route-arrows aria-hidden="true"></g>
+        </g>{% endfor %}
+        {% if busan %}<g class="seoul-corners">{% for corner in diagram.corners %}<text x="{{ corner.x }}" y="{{ corner.y }}">{{ corner.label }}</text>{% endfor %}</g>{% else %}        <g class="seoul-corners"><text x="202" y="123">3코너 구역</text><text x="588" y="123">2코너 구역</text><text x="624" y="459">1코너 구역</text><text x="202" y="459">4코너 구역</text></g>
+{% endif %}
+        <g class="seoul-center"><text x="{{ 340 if busan else 401 }}" y="253" class="seoul-center-title">{{ course_en }}</text><text x="{{ 340 if busan else 401 }}" y="286" data-seoul-center-distance>{{ page.distance }}</text><text x="{{ 340 if busan else 401 }}" y="312" class="seoul-center-small">반시계 방향 ↺</text></g>
+        <g class="seoul-finish"><path d="M {{ track.goal_x }} {{ track.bottom_y - 9 }} v 27"/><text x="{{ track.goal_x }}" y="{{ 431 if busan else 459 }}" text-anchor="middle">결승</text></g>
+        <g class="seoul-grandstand"><rect x="{{ 480 if busan else 298 }}" y="{{ 447 if busan else 485 }}" width="{{ 116 if busan else 288 }}" height="22" rx="5"/><text x="{{ 538 if busan else 442 }}" y="{{ 462 if busan else 500 }}" text-anchor="middle">{{ "관람대" if busan else "관람대 · 럭키빌 / 해피빌" }}</text></g>
+      </svg>
+      <div class="seoul-official" data-seoul-official hidden><img src="{{ diagram.plan_url }}" loading="lazy" alt="한국마사회 공식 {{ track.course_name }} 경주로 평면도"><p>한국마사회 공식 도면 · 출발부와 펜스의 배치를 비교하세요.</p></div>
+    </div>
+    <div class="seoul-route-caption" aria-live="polite"><strong data-seoul-route-title>{{ diagram.selected.label if diagram.selected else '공식 도면에 없는 거리' }}</strong><span data-seoul-route-description>{{ diagram.selected.description if diagram.selected else '이 거리의 출발점은 확정할 수 없어 경로를 표시하지 않습니다.' }}</span></div>
+    {% include '_course_color_key.html' %}
+    <p class="course-hint" data-seoul-map-note>{{ "지도 지점은 거리 기준 개략 위치입니다. 코너 이름은 구역 안내이며 기록 측정 지점과 구분됩니다." if busan else "지도 지점을 선택하면 기록을 확인합니다. 코너 점은 공식 기록과 대조한 참고 위치이며, 측량 좌표는 아닙니다." }}</p>
+    <nav class="course-distance-picker" aria-label="거리별 표준 경로 미리보기">{% for v in diagram.variants %}<button type="button" data-seoul-distance="{{ v.distance }}" data-route-title="{{ v.label }}" data-route-description="{{ v.description }}" aria-pressed="{{ 'true' if v.selected else 'false' }}">{{ '{:,}'.format(v.distance) }}<small>m</small>{% if v.selected %}<span>현재 경주</span>{% endif %}</button>{% endfor %}</nav>
+    <p class="course-hint">{{ "1,500m·1,900m는 과거 거리입니다. 경로는 공식 평면도를 재구성한 개략도입니다." if busan else "현재 출발점과 표준 주로를 표시합니다. 2023년 이전의 예외 경로는 반영하지 않습니다." }} 아래 기록은 현재 {{ page.distance }} 경주의 기록입니다.</p>
+  </div>
+  {% include '_course_records.html' %}
+  <details class="course-method"><summary>도면 기준과 표시 범위 <span>공식 평면도 재구성</span></summary><p>{{ track.geometry_note }}. 공식 평면도의 배치와 열린 펜스를 벡터로 재구성했습니다. 도면 좌표는 화면 표시용이며 실측 m 좌표가 아닙니다.</p>{% if busan %}<p>측정 거리는 S1F 출발 후 200m, G 지점은 결승까지 남은 거리로 계산합니다. 1,300m는 G6F가 S1F보다 먼저 나옵니다. 내·외주로의 직선과 곡선을 나누어 도면 거리로 보정했으며, 출발부와 합류부에는 도면 반올림에 따른 오차가 있습니다. 지도 위치는 측량 좌표가 아닙니다.</p>{% else %}<p>거리별 표준 경로를 개략적으로 표시합니다. 1,900m와 2,000m의 공통 출발부 및 2코너 분기를 구분했습니다. 2024년부터 야간 1,800m·1,900m도 당초 출발점으로 정상화됐습니다. 과거 예외는 적용하지 않습니다. 지도 위 코너 이름은 구역 안내입니다. 원형 코너 점은 2026년 공식 성적표의 코너 기록과 별도 통과거리 기록을 대조해 배치한 참고 위치입니다. 측정선의 실측 좌표는 아닙니다. 4C 전체, 내주로 3C, 2,300m의 1C 등 대조 근거가 부족한 지점은 아래 순서도에서 기록만 표시합니다. S1F·G3F·G1F는 직선·곡선별 공식 거리를 따로 적용한 개략 위치입니다. 직선 전체 450m 중 결승까지는 400m이며, 지도 픽셀을 일괄적으로 미터로 환산하지 않습니다.</p><a href="{{ diagram.guide_url }}" target="_blank" rel="noopener">마사회 공식 경주로 구조 ↗</a> · <a href="https://race.kra.co.kr/down/raceplan2024_20240828.pdf#page=11" target="_blank" rel="noopener">2024년 출발점 정상화 근거 ↗</a>{% endif %}</details>
+</section>
+<script src="{{ url_for('static', path='/js/course-explorer.js') }}?v=11" defer></script>
+<script src="{{ url_for('static', path='/js/seoul-map.js') }}?v=11" defer></script>

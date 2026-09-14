@@ -193,3 +193,57 @@ def test_list_files_keeps_undated_reference_file() -> None:
     assert len(files) == 1
     assert files[0].filename == "db7.rpt"
     assert files[0].file_date is None
+
+
+def test_explicit_empty_source_is_preserved_after_default_failure(tmp_path: Path) -> None:
+    filename = "20061217dacom12.rpt"
+    remote_path = f"chollian/seoul/sokbo/horse-weight/{filename}"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("textDataList.do"):
+            if b"pageIndex=1" in request.content:
+                return httpx.Response(200, content=_list_html(remote_path, filename))
+            return httpx.Response(200, content=b"<html></html>")
+        return httpx.Response(200, content=b"", headers={"content-type": "text/plain"})
+
+    session_factory = migrated_session(tmp_path)
+    raw_dir = tmp_path / "raw"
+    with (
+        KraTextClient(transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        with pytest.raises(KraTextError, match="비어 있습니다"):
+            download_text_archive(
+                session,
+                client,
+                file_type="dacom12",
+                code_name="출전마체중안내",
+                meets=[1],
+                raw_data_dir=raw_dir,
+                start_date=date(2006, 12, 17),
+                end_date=date(2006, 12, 17),
+                delay_seconds=0,
+            )
+        summary = download_text_archive(
+            session,
+            client,
+            file_type="dacom12",
+            code_name="출전마체중안내",
+            meets=[1],
+            raw_data_dir=raw_dir,
+            start_date=date(2006, 12, 17),
+            end_date=date(2006, 12, 17),
+            delay_seconds=0,
+            allow_empty_paths={remote_path},
+        )
+
+    assert summary.files_fetched == 1
+    assert summary.files_written == 1
+    events = [json.loads(line) for line in summary.manifest_path.read_text().splitlines()]
+    assert [event["status"] for event in events] == [
+        "discovered",
+        "failed",
+        "discovered",
+        "verified_empty_source",
+    ]
+    assert Path(events[-1]["local_path"]).read_bytes() == b""

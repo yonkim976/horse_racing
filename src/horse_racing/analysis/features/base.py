@@ -94,14 +94,23 @@ WHERE r.status = 'completed'
 _SECTIONS_QUERY = """
 SELECT
     e.horse_id AS horse_id,
+    e.id AS race_entry_id,
     r.id AS race_id,
+    rc.kra_meet_code AS meet_code,
     r.race_date_local AS race_date,
+    r.distance_m AS distance_m,
     s.section_code AS section_code,
     s.position AS position,
-    s.elapsed_time_ms AS elapsed_time_ms
+    s.elapsed_time_ms AS elapsed_time_ms,
+    s.time_basis AS time_basis,
+    s.source_kind AS source_kind,
+    res.finish_position AS finish_position,
+    res.finish_time_ms AS finish_time_ms
 FROM race_section_results AS s
 JOIN race_entries AS e ON e.id = s.race_entry_id
 JOIN races AS r ON r.id = e.race_id
+JOIN racecourses AS rc ON rc.id = r.racecourse_id
+LEFT JOIN race_results AS res ON res.race_entry_id = e.id
 WHERE r.status = 'completed'
 """
 
@@ -180,34 +189,64 @@ JOIN races AS r
 """
 
 
-def _fetch(session: Session, query: str, date_columns: tuple[str, ...]) -> pl.DataFrame:
-    rows = session.execute(text(query)).mappings().all()
+def _fetch(
+    session: Session,
+    query: str,
+    date_columns: tuple[str, ...],
+    params: dict[str, object] | None = None,
+) -> pl.DataFrame:
+    rows = session.execute(text(query), params or {}).mappings().all()
     if not rows:
         return pl.DataFrame()
     frame = pl.DataFrame([dict(row) for row in rows], infer_schema_length=None)
     return as_date(frame, *date_columns)
 
 
-def load_source_frames(session: Session) -> SourceFrames:
+def load_source_frames(
+    session: Session,
+    *,
+    race_date_max: str | None = None,
+) -> SourceFrames:
     """feature 계산에 필요한 원천을 DB에서 한 번에 읽는다.
 
     past_results는 정상 착순(1~89)만 포함하며, 경주별 출주 두수(starters)를 붙인다.
     horse_static은 불변 속성(생년월일·산지)만 사용한다. sex는 현재 스냅샷 값이라
     거세 전 경주에 소급 적용될 수 있다(카탈로그에 누수 위험 med로 기록).
     """
-    past = _fetch(session, _PAST_RESULTS_QUERY, ("race_date",))
+    range_params: dict[str, object] = {}
+    past_query = _PAST_RESULTS_QUERY
+    sections_query = _SECTIONS_QUERY
+    training_query = _TRAINING_QUERY
+    start_training_query = _START_TRAINING_QUERY
+    medical_query = _MEDICAL_QUERY
+    equipment_query = _EQUIPMENT_QUERY
+    jockey_changes_query = _JOCKEY_CHANGES_QUERY
+    running_trials_query = _RUNNING_TRIALS_QUERY
+    steward_reports_query = _STEWARD_REPORTS_QUERY
+    if race_date_max is not None:
+        past_query += " AND r.race_date_local <= :race_date_max"
+        sections_query += " AND r.race_date_local <= :race_date_max"
+        training_query += " WHERE ht.training_date_local <= :race_date_max"
+        start_training_query += " WHERE training_date_local <= :race_date_max"
+        medical_query += " WHERE clinic_date_local <= :race_date_max"
+        equipment_query += " AND race_date_local <= :race_date_max"
+        jockey_changes_query += " AND race_date_local <= :race_date_max"
+        running_trials_query += " AND rt.trial_date_local <= :race_date_max"
+        steward_reports_query += " WHERE sr.race_date_local <= :race_date_max"
+        range_params["race_date_max"] = race_date_max
+    past = _fetch(session, past_query, ("race_date",), range_params)
     if past.height > 0:
         past = past.with_columns(pl.len().over("race_id").alias("starters"))
     return SourceFrames(
         past_results=past,
-        sections=_fetch(session, _SECTIONS_QUERY, ("race_date",)),
-        training=_fetch(session, _TRAINING_QUERY, ("event_date",)),
-        start_training=_fetch(session, _START_TRAINING_QUERY, ("event_date",)),
-        medical=_fetch(session, _MEDICAL_QUERY, ("event_date",)),
-        equipment=_fetch(session, _EQUIPMENT_QUERY, ("race_date",)),
-        jockey_changes=_fetch(session, _JOCKEY_CHANGES_QUERY, ("race_date",)),
-        running_trials=_fetch(session, _RUNNING_TRIALS_QUERY, ("event_date",)),
-        steward_reports=_fetch(session, _STEWARD_REPORTS_QUERY, ("race_date",)),
+        sections=_fetch(session, sections_query, ("race_date",), range_params),
+        training=_fetch(session, training_query, ("event_date",), range_params),
+        start_training=_fetch(session, start_training_query, ("event_date",), range_params),
+        medical=_fetch(session, medical_query, ("event_date",), range_params),
+        equipment=_fetch(session, equipment_query, ("race_date",), range_params),
+        jockey_changes=_fetch(session, jockey_changes_query, ("race_date",), range_params),
+        running_trials=_fetch(session, running_trials_query, ("event_date",), range_params),
+        steward_reports=_fetch(session, steward_reports_query, ("race_date",), range_params),
         horse_static=_fetch(session, _HORSE_STATIC_QUERY, ("birth_date",)),
     )
 

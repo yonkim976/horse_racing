@@ -7,7 +7,9 @@ docs/MODELING_ROADMAP.md §2를 따른다.
 
 from __future__ import annotations
 
+import hashlib
 import json
+import subprocess
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -21,6 +23,7 @@ from sqlalchemy.orm import Session
 from horse_racing.analysis.experiments import current_git_commit, hash_feature_names, now_ms
 
 KST = ZoneInfo("Asia/Seoul")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 AS_OF_POLICIES = ("start_minus_30m", "day_before_18")
 
@@ -80,6 +83,45 @@ class BuildResult:
     exclusions: ExclusionStats = field(default_factory=ExclusionStats)
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _canonical_reproducibility() -> dict[str, Any]:
+    relative_paths = (
+        "src/horse_racing/analysis/features/base.py",
+        "src/horse_racing/analysis/features/canonical_sections.py",
+        "src/horse_racing/analysis/features/canonical_energy.py",
+        "src/horse_racing/analysis/features/__init__.py",
+        "src/horse_racing/analysis/dataset.py",
+    )
+    hashes = {
+        name: _sha256_file(PROJECT_ROOT / name)
+        for name in relative_paths
+        if (PROJECT_ROOT / name).is_file()
+    }
+    diff = subprocess.run(
+        ["git", "diff", "--", *relative_paths],
+        cwd=PROJECT_ROOT,
+        check=False,
+        capture_output=True,
+    ).stdout
+    source_manifest = PROJECT_ROOT / "data/logs/canonical_section_source_audit_20260911.json"
+    return {
+        "transform_version": "canonical_sections_v1",
+        "code_sha256": hashes,
+        "tracked_worktree_diff_sha256": hashlib.sha256(diff).hexdigest(),
+        "source_manifest": str(source_manifest.relative_to(PROJECT_ROOT)),
+        "source_manifest_sha256": (
+            _sha256_file(source_manifest) if source_manifest.is_file() else None
+        ),
+    }
+
+
 _BASE_QUERY = """
 SELECT
     r.id AS race_id,
@@ -123,6 +165,7 @@ def fetch_base_rows(
     *,
     start_date: str | None = None,
     end_date: str | None = None,
+    meet_codes: list[int] | tuple[int, ...] | None = None,
 ) -> pl.DataFrame:
     """완료 경주의 출전 행을 DB에서 읽어 polars DataFrame으로 반환한다."""
     query = _BASE_QUERY
@@ -133,6 +176,13 @@ def fetch_base_rows(
     if end_date:
         query += " AND r.race_date_local <= :end_date"
         params["end_date"] = end_date
+    if meet_codes:
+        placeholders = []
+        for index, meet_code in enumerate(meet_codes):
+            name = f"meet_code_{index}"
+            placeholders.append(f":{name}")
+            params[name] = str(int(meet_code))
+        query += f" AND rc.kra_meet_code IN ({', '.join(placeholders)})"
 
     rows = session.execute(text(query), params).mappings().all()
     if not rows:
@@ -300,6 +350,7 @@ def build_dataset(
     as_of_policy: str = "start_minus_30m",
     start_date: str | None = None,
     end_date: str | None = None,
+    meet_codes: list[int] | tuple[int, ...] | None = None,
     output_dir: Path | None = None,
     with_features: bool = True,
     feature_set: str = "rich",
@@ -308,7 +359,12 @@ def build_dataset(
     if as_of_policy not in AS_OF_POLICIES:
         raise ValueError(f"알 수 없는 as-of 정책: {as_of_policy}. 지원: {AS_OF_POLICIES}")
 
-    base = fetch_base_rows(session, start_date=start_date, end_date=end_date)
+    base = fetch_base_rows(
+        session,
+        start_date=start_date,
+        end_date=end_date,
+        meet_codes=meet_codes,
+    )
     if base.height == 0:
         raise DatasetValidationError("조건에 맞는 완료 경주가 없습니다.")
 
@@ -334,7 +390,7 @@ def build_dataset(
             load_source_frames,
         )
 
-        sources = load_source_frames(session)
+        sources = load_source_frames(session, race_date_max=end_date)
         frame = apply_features(frame, sources, feature_set=feature_set)
         from horse_racing.analysis.features.style import attach_early_position_target
 
@@ -359,6 +415,7 @@ def build_dataset(
         "source_row_count": total_rows,
         "date_range": {"start": date_range[0], "end": date_range[1]},
         "requested_range": {"start": start_date, "end": end_date},
+        "meet_codes": sorted(set(meet_codes)) if meet_codes else None,
         "exclusions": stats.as_dict(),
         "label_stats": {label: float(frame.get_column(label).mean()) for label in LABEL_COLUMNS},
         "auxiliary_target_coverage": {
@@ -379,6 +436,15 @@ def build_dataset(
         "feature_set": feature_set if with_features else None,
         "field_publication_assumptions": FIELD_PUBLICATION_ASSUMPTIONS,
     }
+    if feature_set.startswith("racefit_canonical_"):
+        manifest["canonical_reproducibility"] = _canonical_reproducibility()
+        manifest["canonical_contract"] = {
+            "unknown_time_basis": "unavailable; never inferred from magnitude or racecourse",
+            "closing_conversion": "finish_time_ms - cumulative checkpoint time",
+            "middle_400": "last_600_ms - last_200_ms when strictly positive",
+            "source_race_date_max": end_date,
+            "target_result_usage": "historical normal finish only; target excluded by shift(1)",
+        }
 
     dataset_path: Path | None = None
     manifest_path: Path | None = None
@@ -388,6 +454,7 @@ def build_dataset(
         dataset_path = target_dir / "dataset.parquet"
         manifest_path = target_dir / "manifest.json"
         frame.write_parquet(dataset_path)
+        manifest["dataset_sha256"] = _sha256_file(dataset_path)
         manifest_path.write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
         )

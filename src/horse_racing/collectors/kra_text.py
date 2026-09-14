@@ -230,7 +230,7 @@ class KraTextClient:
         wait=wait_exponential(multiplier=1, min=1, max=30),
         reraise=True,
     )
-    def fetch_file(self, file: KraTextFile) -> FetchedTextReport:
+    def fetch_file(self, file: KraTextFile, *, allow_empty: bool = False) -> FetchedTextReport:
         requested_at_ms = _now_ms()
         try:
             response = self._client.get(
@@ -241,7 +241,7 @@ class KraTextClient:
             raise KraTextTransientError("KRA Text 파일 연결에 실패했습니다.") from exc
         retrieved_at_ms = _now_ms()
         _raise_for_status(response, context=file.filename)
-        if not response.content:
+        if not response.content and not allow_empty:
             raise KraTextError(f"KRA Text 파일이 비어 있습니다: {file.filename}")
         return FetchedTextReport(
             file=file,

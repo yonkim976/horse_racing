@@ -210,10 +210,23 @@ def _parse_body_table(lines: list[str], entries: list[Dacom11Entry]) -> None:
         if prefix is None:
             continue
         entry = by_number.get(int(prefix.group("number")))
-        if entry is None or not prefix.group("rest").startswith(entry.horse_name):
+        if entry is None:
             continue
-        remainder = prefix.group("rest")[len(entry.horse_name) :].strip()
+        # Regional prefixes can make a long name run into the weight column.
+        rest = re.sub(r"^\[[^]]+\]", "", prefix.group("rest"))
+        name = re.sub(r"^\[[^]]+\]", "", entry.horse_name)
+        if not rest.startswith(name):
+            continue
+        remainder = rest[len(name) :].strip()
         body = _BODY.match(remainder)
+        if body is None:
+            # The entry table itself may truncate a regional horse's final syllable.
+            weight = re.search(r"\d{3}(?=\(\s*[+-]?\d+\)|[+-]\d+)", rest)
+            if weight is not None:
+                full_name = rest[:weight.start()].strip()
+                if full_name.startswith(name):
+                    entry.horse_name = full_name
+                    body = _BODY.match(rest[weight.start():])
         if body is None:
             continue
         entry.body_weight_kg = _int_or_none(body.group("body"))
@@ -247,12 +260,36 @@ def _parse_section_table(lines: list[str], entries: list[Dacom11Entry]) -> None:
     jeju_fixed = lines[header_index].strip() == (
         "순위  마번  G-3F   S-1F   1코너  2코너  3코너  4코너  G-1F   단승식  연승식"
     )
+    seoul_fixed = lines[header_index].strip() == (
+        "순위 마번    G-3Ｆ   S-1F  １코너  ２코너  ３코너  ４코너    G-1F  단승식 연승식"
+    )
     for line in _table_rows(lines, header_index):
         prefix_match = re.match(r"^\s*\S+\s+(?P<number>\d+)\s+(?P<values>.+)$", line)
         if prefix_match is None:
             continue
         entry = by_number.get(int(prefix_match.group("number")))
         if entry is None:
+            continue
+        if seoul_fixed:
+            times = {}
+            for code, offset in zip(
+                ("G3F", "S1F", "1C", "2C", "3C", "4C", "G1F"), range(9, 65, 8),
+                strict=True,
+            ):
+                value = line[offset:offset + 8].strip()
+                if not value or set(value) == {"#"}:
+                    times[code] = None
+                elif re.fullmatch(r"(?:\d+:)?\d+\.\d+", value):
+                    times[code] = _section_time_ms(value)
+                else:
+                    raise KraTextError(f"서울 구간 고정폭 형식 불일치: {value!r}")
+            entry.g3f_ms, entry.s1f_ms, entry.g1f_ms = (
+                times["G3F"], times["S1F"], times["G1F"]
+            )
+            entry.corner_times_ms = {code: times[code] for code in ("1C", "2C", "3C", "4C")
+                                     if times[code] is not None}
+            entry.win_odds = _float_or_none(line[65:73].strip())
+            entry.place_odds = _float_or_none(line[73:].strip())
             continue
         if jeju_fixed:
             times = {}

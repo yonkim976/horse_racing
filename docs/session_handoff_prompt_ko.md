@@ -1,4 +1,16 @@
-# RaceFit V5 Sand Event 새 세션 인수인계 프롬프트
+# 경마 예측 모델 새 세션 인수인계 프롬프트
+
+갱신: **2026-09-11**
+
+아래 RaceFit V5는 서울·부경을 포함한 기존 실전 분석 모델이다. 제주 경주는 별도 후보가
+추가되었으므로 새 세션에서 두 모델을 혼동하지 않는다.
+
+- 제주 전용 후보: `20047697-0b2e-4dac-9a4d-762271f5e1f9`
+- 구성: 제주 최근 모델 75% + 제주 장기 모델 25%
+- artifact: `/Users/kimyongjin/Desktop/horse_racing/data/experiments/models/20047697-0b2e-4dac-9a4d-762271f5e1f9/model.pkl`
+- 검증: 제주 179경주 Top1 32.96%, 우승마 Top3 68.72%, 우승마 Top5 82.68%
+- 상태: 미래 test 판정 전 challenger. 상세는 `docs/JEJU_STANDALONE_V2.md`
+- 전체 연구와 현재 상태는 `docs/MODEL_RESEARCH_INDEX.md`를 먼저 확인한다.
 
 아래 내용을 새 Codex 세션의 첫 메시지로 그대로 붙여넣는다.
 
@@ -96,4 +108,3 @@ live frame 생성 예
 
 먼저 현재 날짜·시간, 대상 경주, 공식 최신 데이터 상태, 실제 남은 예산을 확인하고 기존 모델로 계속 분석해라.
 ```
-

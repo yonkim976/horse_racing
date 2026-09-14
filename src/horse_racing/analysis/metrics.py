@@ -16,6 +16,41 @@ from horse_racing.analysis.dataset import compute_auc
 PROB_EPSILON = 1e-15
 
 
+def expected_topk_inclusion(
+    probabilities: list[float],
+    labels: list[int],
+    *,
+    k: int,
+) -> float:
+    """Expected event hit under result-independent random prediction tie-breaking.
+
+    Multiple positive labels represent an official result dead heat. They are
+    treated as one winning event, separately from equal predicted probabilities.
+    """
+    if len(probabilities) != len(labels) or not probabilities:
+        raise ValueError("probabilities와 labels는 같은 길이의 비어 있지 않은 목록이어야 합니다.")
+    if k <= 0:
+        raise ValueError("k는 양수여야 합니다.")
+    if not any(label == 1 for label in labels):
+        return 0.0
+    if k >= len(probabilities):
+        return 1.0
+
+    boundary = sorted(probabilities, reverse=True)[k - 1]
+    above = [index for index, probability in enumerate(probabilities) if probability > boundary]
+    if any(labels[index] == 1 for index in above):
+        return 1.0
+    tied = [index for index, probability in enumerate(probabilities) if probability == boundary]
+    winner_ties = sum(labels[index] == 1 for index in tied)
+    if winner_ties == 0:
+        return 0.0
+    slots = k - len(above)
+    nonwinner_ties = len(tied) - winner_ties
+    if slots > nonwinner_ties:
+        return 1.0
+    return 1.0 - math.comb(nonwinner_ties, slots) / math.comb(len(tied), slots)
+
+
 def log_loss(probabilities: list[float], labels: list[int]) -> float:
     """이진 로그 손실. 확률은 [eps, 1-eps]로 클리핑한다."""
     if len(probabilities) != len(labels):
@@ -104,19 +139,14 @@ def race_level_metrics(
     top1_total = 0.0
     top3_total = 0.0
     n_races = 0
-    for (_, group) in per_race.group_by(race_column):
-        winner_probs = group.filter(pl.col(label_column) == 1)[probability_column].to_list()
-        if not winner_probs:
+    for _, group in per_race.group_by(race_column):
+        labels = group[label_column].cast(pl.Int64).to_list()
+        if not any(label == 1 for label in labels):
             continue
         n_races += 1
-        winner_prob = max(winner_probs)
         probs = group[probability_column].to_list()
-        greater = sum(1 for p in probs if p > winner_prob)
-        tied = sum(1 for p in probs if p == winner_prob)
-        if greater == 0:
-            top1_total += 1.0 / tied
-        if greater < 3:
-            top3_total += min(1.0, (3 - greater) / tied)
+        top1_total += expected_topk_inclusion(probs, labels, k=1)
+        top3_total += expected_topk_inclusion(probs, labels, k=3)
     if n_races == 0:
         raise ValueError("우승마가 있는 경주가 없습니다.")
     return {

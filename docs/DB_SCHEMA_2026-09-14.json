@@ -1,0 +1,3916 @@
+[
+  {
+    "name": "alembic_version",
+    "rows": 1,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "version_num",
+        "type": "VARCHAR(32)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_alembic_version_1",
+        "unique": 1,
+        "origin": "pk",
+        "partial": 0,
+        "columns": [
+          "version_num"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE alembic_version (\n\tversion_num VARCHAR(32) NOT NULL, \n\tCONSTRAINT alembic_version_pkc PRIMARY KEY (version_num)\n)"
+  },
+  {
+    "name": "entry_equipment",
+    "rows": 44803,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "race_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "equipment_raw",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "bleeding_count",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "bleeding_date_raw",
+        "type": "VARCHAR(40)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "illness_note",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_entry_equipment_horse_date",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "race_date_local"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_entry_equipment_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "meet_code",
+          "race_date_local",
+          "race_number",
+          "horse_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE entry_equipment (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER, \n\tmeet_code INTEGER NOT NULL, \n\trace_date_local DATE NOT NULL, \n\trace_number INTEGER NOT NULL, \n\thorse_number INTEGER, \n\tequipment_raw VARCHAR(200), \n\tbleeding_count INTEGER, \n\tbleeding_date_raw VARCHAR(40), \n\tillness_note VARCHAR(200), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_entry_equipment PRIMARY KEY (id), \n\tCONSTRAINT fk_entry_equipment_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE SET NULL, \n\tCONSTRAINT uq_entry_equipment_natural UNIQUE (meet_code, race_date_local, race_number, horse_number)\n)"
+  },
+  {
+    "name": "horse_grade_changes",
+    "rows": 13457,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "blood_type",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "grade_before",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "grade_after",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "start_date_local",
+        "type": "DATE",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "end_date_local",
+        "type": "DATE",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_grade_changes_horse_start",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "start_date_local"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_grade_changes_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "start_date_local",
+          "grade_before",
+          "grade_after"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_grade_changes (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER, \n\tblood_type VARCHAR(50), \n\tgrade_before VARCHAR(30), \n\tgrade_after VARCHAR(30), \n\tstart_date_local DATE, \n\tend_date_local DATE, \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_grade_changes PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_grade_changes_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_grade_changes_natural UNIQUE (horse_id, start_date_local, grade_before, grade_after)\n)"
+  },
+  {
+    "name": "horse_medical",
+    "rows": 176811,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "clinic_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "stable_part",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "hospital_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "diagnosis_1",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "diagnosis_2",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_medical_horse_date",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "clinic_date_local"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_medical_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "meet_code",
+          "clinic_date_local",
+          "hospital_name",
+          "diagnosis_1",
+          "diagnosis_2"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_medical (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER NOT NULL, \n\tclinic_date_local DATE NOT NULL, \n\tstable_part INTEGER, \n\thospital_name VARCHAR(100), \n\tdiagnosis_1 VARCHAR(200), \n\tdiagnosis_2 VARCHAR(200), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_medical PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_medical_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_medical_natural UNIQUE (horse_id, meet_code, clinic_date_local, hospital_name, diagnosis_1, diagnosis_2)\n)"
+  },
+  {
+    "name": "horse_profile_snapshots",
+    "rows": 94854,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "grade",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "rating",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "race_count_total",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "race_count_year",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "win_count_total",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "win_count_year",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "second_count_total",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "second_count_year",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "third_count_total",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "third_count_year",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "prize_money_total_krw",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "last_sale_amount_raw",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 15,
+        "name": "trainer_kra_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 16,
+        "name": "trainer_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 17,
+        "name": "owner_kra_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 18,
+        "name": "owner_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 19,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_profile_snapshots_horse_observed",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "observed_at_ms"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_profile_snapshots_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "observed_at_ms"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_profile_snapshots (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER, \n\tgrade VARCHAR(30), \n\trating FLOAT, \n\trace_count_total INTEGER, \n\trace_count_year INTEGER, \n\twin_count_total INTEGER, \n\twin_count_year INTEGER, \n\tsecond_count_total INTEGER, \n\tsecond_count_year INTEGER, \n\tthird_count_total INTEGER, \n\tthird_count_year INTEGER, \n\tprize_money_total_krw INTEGER, \n\tlast_sale_amount_raw VARCHAR(100), \n\ttrainer_kra_id VARCHAR(30), \n\ttrainer_name VARCHAR(100), \n\towner_kra_id VARCHAR(30), \n\towner_name VARCHAR(100), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_profile_snapshots PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_profile_snapshots_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_profile_snapshots_horse_observed UNIQUE (horse_id, observed_at_ms)\n)"
+  },
+  {
+    "name": "horse_rating_snapshots",
+    "rows": 206505,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "rating_1",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "rating_2",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "rating_3",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "rating_4",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_rating_snapshots_horse_observed",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "observed_at_ms"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_rating_snapshots_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "observed_at_ms"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_rating_snapshots (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER, \n\trating_1 FLOAT, \n\trating_2 FLOAT, \n\trating_3 FLOAT, \n\trating_4 FLOAT, \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_rating_snapshots PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_rating_snapshots_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_rating_snapshots_horse_observed UNIQUE (horse_id, observed_at_ms)\n)"
+  },
+  {
+    "name": "horse_start_training",
+    "rows": 70068,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "training_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "stable_part",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "stable_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "rider_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "remark",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_start_training_horse_date",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "training_date_local"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_start_training_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "meet_code",
+          "training_date_local",
+          "stable_part",
+          "stable_number",
+          "rider_name"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_start_training (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER NOT NULL, \n\ttraining_date_local DATE NOT NULL, \n\tstable_part INTEGER, \n\tstable_number INTEGER, \n\trider_name VARCHAR(100), \n\tremark VARCHAR(200), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_start_training PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_start_training_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_start_training_natural UNIQUE (horse_id, meet_code, training_date_local, stable_part, stable_number, rider_name)\n)"
+  },
+  {
+    "name": "horse_training",
+    "rows": 752358,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "training_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "stable_part",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "stable_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "trainer_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "rider_type",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "rider_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "started_at_raw",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "ended_at_raw",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "duration_seconds",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "canter_count",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "gallop_count",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "entry_plan",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 15,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_training_horse_date",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "training_date_local"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_training_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "meet_code",
+          "training_date_local",
+          "started_at_raw",
+          "ended_at_raw"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_training (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER NOT NULL, \n\ttraining_date_local DATE NOT NULL, \n\tstable_part INTEGER, \n\tstable_number INTEGER, \n\ttrainer_name VARCHAR(100), \n\trider_type VARCHAR(30), \n\trider_id VARCHAR(30), \n\tstarted_at_raw VARCHAR(20), \n\tended_at_raw VARCHAR(20), \n\tduration_seconds INTEGER, \n\tcanter_count INTEGER, \n\tgallop_count INTEGER, \n\tentry_plan VARCHAR(50), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_training PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_training_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_training_natural UNIQUE (horse_id, meet_code, training_date_local, started_at_raw, ended_at_raw)\n)"
+  },
+  {
+    "name": "horse_weight_history",
+    "rows": 44803,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "race_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "body_weight_kg",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "body_weight_change_kg",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_horse_weight_history_horse_date",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "race_date_local"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_horse_weight_history_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "meet_code",
+          "race_date_local",
+          "race_number",
+          "horse_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horse_weight_history (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tmeet_code INTEGER NOT NULL, \n\trace_date_local DATE NOT NULL, \n\trace_number INTEGER, \n\thorse_number INTEGER, \n\tbody_weight_kg INTEGER, \n\tbody_weight_change_kg INTEGER, \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_horse_weight_history PRIMARY KEY (id), \n\tCONSTRAINT fk_horse_weight_history_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE CASCADE, \n\tCONSTRAINT uq_horse_weight_history_natural UNIQUE (horse_id, meet_code, race_date_local, race_number, horse_number)\n)"
+  },
+  {
+    "name": "horses",
+    "rows": 60645,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "kra_horse_id",
+        "type": "VARCHAR(30)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name_ko",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "name_en",
+        "type": "VARCHAR(150)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "sex",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "birth_date",
+        "type": "DATE",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "origin_country",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "grade",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "sire_kra_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "sire_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "dam_kra_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "dam_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "last_sale_amount_raw",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "profile_observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_horses_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "kra_horse_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE horses (\n\tid INTEGER NOT NULL, \n\tkra_horse_id VARCHAR(30) NOT NULL, \n\tname_ko VARCHAR(100) NOT NULL, \n\tname_en VARCHAR(150), \n\tsex VARCHAR(20), \n\tbirth_date DATE, \n\torigin_country VARCHAR(50), grade VARCHAR(30), meet_code INTEGER, sire_kra_id VARCHAR(30), sire_name VARCHAR(100), dam_kra_id VARCHAR(30), dam_name VARCHAR(100), last_sale_amount_raw VARCHAR(100), profile_observed_at_ms BIGINT, \n\tCONSTRAINT pk_horses PRIMARY KEY (id), \n\tCONSTRAINT uq_horses_kra_horse_id UNIQUE (kra_horse_id)\n)"
+  },
+  {
+    "name": "ingestion_runs",
+    "rows": 15307,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "source",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "data_type",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "started_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "completed_at_ms",
+        "type": "BIGINT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "records_fetched",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "records_written",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "error_message",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [],
+    "ddl": "CREATE TABLE ingestion_runs (\n\tid INTEGER NOT NULL, \n\tsource VARCHAR(100) NOT NULL, \n\tdata_type VARCHAR(100) NOT NULL, \n\tstarted_at_ms BIGINT NOT NULL, \n\tcompleted_at_ms BIGINT, \n\tstatus VARCHAR(20) NOT NULL, \n\trecords_fetched INTEGER NOT NULL, \n\trecords_written INTEGER NOT NULL, \n\terror_message TEXT, \n\tCONSTRAINT pk_ingestion_runs PRIMARY KEY (id), \n\tCONSTRAINT ck_ingestion_runs_valid_status CHECK (status IN ('running', 'completed', 'failed', 'partial'))\n)"
+  },
+  {
+    "name": "jockey_changes",
+    "rows": 887,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "race_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "jockey_before_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "jockey_before_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "jockey_after_id",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "jockey_after_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "carried_weight_before_kg",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "carried_weight_after_kg",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "reason",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_jockey_changes_date_meet",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_date_local",
+          "meet_code"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_jockey_changes_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "meet_code",
+          "race_date_local",
+          "race_number",
+          "horse_number",
+          "jockey_before_id",
+          "jockey_after_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE jockey_changes (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER, \n\tmeet_code INTEGER NOT NULL, \n\trace_date_local DATE NOT NULL, \n\trace_number INTEGER NOT NULL, \n\thorse_number INTEGER NOT NULL, \n\tjockey_before_id VARCHAR(30), \n\tjockey_before_name VARCHAR(100), \n\tjockey_after_id VARCHAR(30), \n\tjockey_after_name VARCHAR(100), \n\tcarried_weight_before_kg FLOAT, \n\tcarried_weight_after_kg FLOAT, \n\treason VARCHAR(200), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_jockey_changes PRIMARY KEY (id), \n\tCONSTRAINT fk_jockey_changes_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE SET NULL, \n\tCONSTRAINT uq_jockey_changes_natural UNIQUE (meet_code, race_date_local, race_number, horse_number, jockey_before_id, jockey_after_id)\n)"
+  },
+  {
+    "name": "jockeys",
+    "rows": 294,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "kra_jockey_id",
+        "type": "VARCHAR(30)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name_ko",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "name_en",
+        "type": "VARCHAR(150)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_jockeys_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "kra_jockey_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE jockeys (\n\tid INTEGER NOT NULL, \n\tkra_jockey_id VARCHAR(30) NOT NULL, \n\tname_ko VARCHAR(100) NOT NULL, \n\tname_en VARCHAR(150), \n\tCONSTRAINT pk_jockeys PRIMARY KEY (id), \n\tCONSTRAINT uq_jockeys_kra_jockey_id UNIQUE (kra_jockey_id)\n)"
+  },
+  {
+    "name": "model_predictions",
+    "rows": 326,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "prediction_run_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "race_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_entry_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "prob_win",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "prob_top2",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "prob_top3",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "races",
+        "from": "race_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "race_entries",
+        "from": "race_entry_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "prediction_runs",
+        "from": "prediction_run_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_model_predictions_race",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_id",
+          "prediction_run_id"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_model_predictions_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "prediction_run_id",
+          "race_entry_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE model_predictions (\n\tid INTEGER NOT NULL, \n\tprediction_run_id INTEGER NOT NULL, \n\trace_id INTEGER NOT NULL, \n\trace_entry_id INTEGER NOT NULL, \n\thorse_number INTEGER NOT NULL, \n\tprob_win FLOAT NOT NULL, \n\tprob_top2 FLOAT NOT NULL, \n\tprob_top3 FLOAT NOT NULL, \n\tCONSTRAINT pk_model_predictions PRIMARY KEY (id), \n\tCONSTRAINT ck_model_predictions_ck_model_predictions_positive_horse CHECK (horse_number > 0), \n\tCONSTRAINT ck_model_predictions_ck_model_predictions_win_probability CHECK (prob_win >= 0 AND prob_win <= 1), \n\tCONSTRAINT ck_model_predictions_ck_model_predictions_top2_probability CHECK (prob_top2 >= 0 AND prob_top2 <= 1), \n\tCONSTRAINT ck_model_predictions_ck_model_predictions_top3_probability CHECK (prob_top3 >= 0 AND prob_top3 <= 1), \n\tCONSTRAINT fk_model_predictions_prediction_run_id_prediction_runs FOREIGN KEY(prediction_run_id) REFERENCES prediction_runs (id) ON DELETE RESTRICT, \n\tCONSTRAINT fk_model_predictions_race_entry_id_race_entries FOREIGN KEY(race_entry_id) REFERENCES race_entries (id) ON DELETE RESTRICT, \n\tCONSTRAINT fk_model_predictions_race_id_races FOREIGN KEY(race_id) REFERENCES races (id) ON DELETE RESTRICT, \n\tCONSTRAINT uq_model_predictions_run_entry UNIQUE (prediction_run_id, race_entry_id)\n)"
+  },
+  {
+    "name": "odds_snapshots",
+    "rows": 5639948,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "race_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "bet_type",
+        "type": "VARCHAR(30)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "selection_key",
+        "type": "VARCHAR(50)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "odds",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "races",
+        "from": "race_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_odds_snapshots_race_time",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_id",
+          "observed_at_ms"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_odds_snapshots_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "race_id",
+          "bet_type",
+          "selection_key",
+          "observed_at_ms"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE odds_snapshots (\n\tid INTEGER NOT NULL, \n\trace_id INTEGER NOT NULL, \n\tbet_type VARCHAR(30) NOT NULL, \n\tselection_key VARCHAR(50) NOT NULL, \n\todds FLOAT NOT NULL, \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_odds_snapshots PRIMARY KEY (id), \n\tCONSTRAINT odds_observation UNIQUE (race_id, bet_type, selection_key, observed_at_ms), \n\tCONSTRAINT ck_odds_snapshots_positive_odds CHECK (odds > 0), \n\tCONSTRAINT fk_odds_snapshots_race_id_races FOREIGN KEY(race_id) REFERENCES races (id) ON DELETE CASCADE\n)"
+  },
+  {
+    "name": "owners",
+    "rows": 1487,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "kra_owner_id",
+        "type": "VARCHAR(30)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name_ko",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "name_en",
+        "type": "VARCHAR(150)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_owners_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "kra_owner_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE owners (\n\tid INTEGER NOT NULL, \n\tkra_owner_id VARCHAR(30) NOT NULL, \n\tname_ko VARCHAR(100) NOT NULL, \n\tname_en VARCHAR(150), \n\tCONSTRAINT pk_owners PRIMARY KEY (id), \n\tCONSTRAINT uq_owners_kra_owner_id UNIQUE (kra_owner_id)\n)"
+  },
+  {
+    "name": "prediction_outcomes",
+    "rows": 0,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "settlement_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "model_prediction_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "finish_position",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "is_scored",
+        "type": "BOOLEAN",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "exclusion_reason",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "win",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "top2",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "top3",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "win_log_loss",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "prediction_settlements",
+        "from": "settlement_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "model_predictions",
+        "from": "model_prediction_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_prediction_outcomes_settlement",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "settlement_id"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_prediction_outcomes_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "model_prediction_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE prediction_outcomes (\n\tid INTEGER NOT NULL, \n\tsettlement_id INTEGER NOT NULL, \n\tmodel_prediction_id INTEGER NOT NULL, \n\tfinish_position INTEGER, \n\tis_scored BOOLEAN NOT NULL, \n\texclusion_reason VARCHAR(100), \n\twin BOOLEAN, \n\ttop2 BOOLEAN, \n\ttop3 BOOLEAN, \n\twin_log_loss FLOAT, \n\tCONSTRAINT pk_prediction_outcomes PRIMARY KEY (id), \n\tCONSTRAINT ck_prediction_outcomes_ck_prediction_outcomes_positive_finish CHECK (finish_position IS NULL OR finish_position > 0), \n\tCONSTRAINT ck_prediction_outcomes_ck_prediction_outcomes_scoring_state CHECK ((is_scored = 1 AND exclusion_reason IS NULL AND win IS NOT NULL AND top2 IS NOT NULL AND top3 IS NOT NULL AND win_log_loss IS NOT NULL) OR (is_scored = 0 AND exclusion_reason IS NOT NULL AND win IS NULL AND top2 IS NULL AND top3 IS NULL AND win_log_loss IS NULL)), \n\tCONSTRAINT fk_prediction_outcomes_model_prediction_id_model_predictions FOREIGN KEY(model_prediction_id) REFERENCES model_predictions (id) ON DELETE RESTRICT, \n\tCONSTRAINT fk_prediction_outcomes_settlement_id_prediction_settlements FOREIGN KEY(settlement_id) REFERENCES prediction_settlements (id) ON DELETE RESTRICT, \n\tCONSTRAINT uq_prediction_outcomes_model_prediction_id UNIQUE (model_prediction_id)\n)"
+  },
+  {
+    "name": "prediction_runs",
+    "rows": 2,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "public_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "experiment_run_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "model_type",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "dataset_version",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "as_of_policy",
+        "type": "VARCHAR(50)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "feature_cutoff_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "published_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "publication_mode",
+        "type": "VARCHAR(20)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "model_artifact_sha256",
+        "type": "VARCHAR(64)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "feature_hash",
+        "type": "VARCHAR(64)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "predictions_sha256",
+        "type": "VARCHAR(64)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "notes",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_prediction_runs_date_mode",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_date_local",
+          "publication_mode"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_prediction_runs_2",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "public_id"
+        ]
+      },
+      {
+        "seq": 2,
+        "name": "sqlite_autoindex_prediction_runs_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "predictions_sha256"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE prediction_runs (\n\tid INTEGER NOT NULL, \n\tpublic_id VARCHAR(36) NOT NULL, \n\texperiment_run_id VARCHAR(36) NOT NULL, \n\tmodel_type VARCHAR(100) NOT NULL, \n\tdataset_version VARCHAR(100) NOT NULL, \n\tas_of_policy VARCHAR(50) NOT NULL, \n\trace_date_local DATE NOT NULL, \n\tfeature_cutoff_at_ms BIGINT NOT NULL, \n\tpublished_at_ms BIGINT NOT NULL, \n\tpublication_mode VARCHAR(20) NOT NULL, \n\tmodel_artifact_sha256 VARCHAR(64) NOT NULL, \n\tfeature_hash VARCHAR(64) NOT NULL, \n\tpredictions_sha256 VARCHAR(64) NOT NULL, \n\tnotes TEXT, \n\tCONSTRAINT pk_prediction_runs PRIMARY KEY (id), \n\tCONSTRAINT ck_prediction_runs_ck_prediction_runs_publication_mode CHECK (publication_mode IN ('live', 'historical')), \n\tCONSTRAINT ck_prediction_runs_ck_prediction_runs_cutoff_before_publication CHECK (feature_cutoff_at_ms <= published_at_ms), \n\tCONSTRAINT uq_prediction_runs_predictions_sha256 UNIQUE (predictions_sha256), \n\tCONSTRAINT uq_prediction_runs_public_id UNIQUE (public_id)\n)"
+  },
+  {
+    "name": "prediction_settlements",
+    "rows": 0,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "public_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "prediction_run_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "settled_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "outcomes_sha256",
+        "type": "VARCHAR(64)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "n_races",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "n_entries",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "n_excluded_races",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": "'0'",
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "win_log_loss",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "win_brier",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "win_ece",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "win_top1_hit_rate",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "win_top3_inclusion_rate",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "top2_log_loss",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "top3_log_loss",
+        "type": "FLOAT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "prediction_runs",
+        "from": "prediction_run_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_prediction_settlements_settled",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "settled_at_ms"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_prediction_settlements_3",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "public_id"
+        ]
+      },
+      {
+        "seq": 2,
+        "name": "sqlite_autoindex_prediction_settlements_2",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "prediction_run_id"
+        ]
+      },
+      {
+        "seq": 3,
+        "name": "sqlite_autoindex_prediction_settlements_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "outcomes_sha256"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE prediction_settlements (\n\tid INTEGER NOT NULL, \n\tpublic_id VARCHAR(36) NOT NULL, \n\tprediction_run_id INTEGER NOT NULL, \n\tsettled_at_ms BIGINT NOT NULL, \n\toutcomes_sha256 VARCHAR(64) NOT NULL, \n\tn_races INTEGER NOT NULL, \n\tn_entries INTEGER NOT NULL, \n\tn_excluded_races INTEGER DEFAULT '0' NOT NULL, \n\twin_log_loss FLOAT NOT NULL, \n\twin_brier FLOAT NOT NULL, \n\twin_ece FLOAT NOT NULL, \n\twin_top1_hit_rate FLOAT NOT NULL, \n\twin_top3_inclusion_rate FLOAT NOT NULL, \n\ttop2_log_loss FLOAT NOT NULL, \n\ttop3_log_loss FLOAT NOT NULL, \n\tCONSTRAINT pk_prediction_settlements PRIMARY KEY (id), \n\tCONSTRAINT ck_prediction_settlements_ck_prediction_settlements_positive_races CHECK (n_races > 0), \n\tCONSTRAINT ck_prediction_settlements_ck_prediction_settlements_positive_entries CHECK (n_entries > 0), \n\tCONSTRAINT ck_prediction_settlements_ck_prediction_settlements_excluded_races CHECK (n_excluded_races >= 0 AND n_excluded_races < n_races), \n\tCONSTRAINT fk_prediction_settlements_prediction_run_id_prediction_runs FOREIGN KEY(prediction_run_id) REFERENCES prediction_runs (id) ON DELETE RESTRICT, \n\tCONSTRAINT uq_prediction_settlements_outcomes_sha256 UNIQUE (outcomes_sha256), \n\tCONSTRAINT uq_prediction_settlements_prediction_run_id UNIQUE (prediction_run_id), \n\tCONSTRAINT uq_prediction_settlements_public_id UNIQUE (public_id)\n)"
+  },
+  {
+    "name": "race_entries",
+    "rows": 288606,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "race_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "jockey_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "trainer_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "owner_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "gate_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "carried_weight_kg",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "body_weight_kg",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "body_weight_change_kg",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "rating",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "running_style",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "scratched",
+        "type": "BOOLEAN",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "equipment",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "owners",
+        "from": "owner_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "trainers",
+        "from": "trainer_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "jockeys",
+        "from": "jockey_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      },
+      {
+        "id": 4,
+        "seq": 0,
+        "table": "races",
+        "from": "race_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_race_entries_horse_race",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "race_id"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_race_entries_2",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "race_id",
+          "horse_id"
+        ]
+      },
+      {
+        "seq": 2,
+        "name": "sqlite_autoindex_race_entries_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "race_id",
+          "horse_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE race_entries (\n\tid INTEGER NOT NULL, \n\trace_id INTEGER NOT NULL, \n\thorse_id INTEGER NOT NULL, \n\tjockey_id INTEGER, \n\ttrainer_id INTEGER, \n\towner_id INTEGER, \n\thorse_number INTEGER NOT NULL, \n\tgate_number INTEGER, \n\tcarried_weight_kg FLOAT, \n\tbody_weight_kg INTEGER, \n\tbody_weight_change_kg INTEGER, \n\trating FLOAT, \n\trunning_style VARCHAR(30), \n\tscratched BOOLEAN NOT NULL, equipment TEXT, \n\tCONSTRAINT pk_race_entries PRIMARY KEY (id), \n\tCONSTRAINT race_horse_number UNIQUE (race_id, horse_number), \n\tCONSTRAINT race_horse UNIQUE (race_id, horse_id), \n\tCONSTRAINT ck_race_entries_positive_horse_number CHECK (horse_number > 0), \n\tCONSTRAINT fk_race_entries_race_id_races FOREIGN KEY(race_id) REFERENCES races (id) ON DELETE CASCADE, \n\tCONSTRAINT fk_race_entries_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE RESTRICT, \n\tCONSTRAINT fk_race_entries_jockey_id_jockeys FOREIGN KEY(jockey_id) REFERENCES jockeys (id), \n\tCONSTRAINT fk_race_entries_trainer_id_trainers FOREIGN KEY(trainer_id) REFERENCES trainers (id), \n\tCONSTRAINT fk_race_entries_owner_id_owners FOREIGN KEY(owner_id) REFERENCES owners (id)\n)"
+  },
+  {
+    "name": "race_results",
+    "rows": 288606,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "race_entry_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "finish_position",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "finish_time_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "margin_text",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "prize_money_krw",
+        "type": "BIGINT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "disqualified",
+        "type": "BOOLEAN",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "bonus_prize_money_krw",
+        "type": "BIGINT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "rank_remark",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "race_entries",
+        "from": "race_entry_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_race_results_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "race_entry_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE race_results (\n\tid INTEGER NOT NULL, \n\trace_entry_id INTEGER NOT NULL, \n\tfinish_position INTEGER, \n\tfinish_time_ms INTEGER, \n\tmargin_text VARCHAR(50), \n\tprize_money_krw BIGINT, \n\tdisqualified BOOLEAN NOT NULL, bonus_prize_money_krw BIGINT, rank_remark VARCHAR(200), \n\tCONSTRAINT pk_race_results PRIMARY KEY (id), \n\tCONSTRAINT ck_race_results_positive_finish_position CHECK (finish_position IS NULL OR finish_position > 0), \n\tCONSTRAINT ck_race_results_positive_time CHECK (finish_time_ms IS NULL OR finish_time_ms > 0), \n\tCONSTRAINT uq_race_results_race_entry_id UNIQUE (race_entry_id), \n\tCONSTRAINT fk_race_results_race_entry_id_race_entries FOREIGN KEY(race_entry_id) REFERENCES race_entries (id) ON DELETE CASCADE\n)"
+  },
+  {
+    "name": "race_scratches",
+    "rows": 534,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "race_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "reason",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_race_scratches_date_meet",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_date_local",
+          "meet_code"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_race_scratches_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "meet_code",
+          "race_date_local",
+          "race_number",
+          "horse_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE race_scratches (\n\tid INTEGER NOT NULL, \n\thorse_id INTEGER, \n\tmeet_code INTEGER NOT NULL, \n\trace_date_local DATE NOT NULL, \n\trace_number INTEGER NOT NULL, \n\thorse_number INTEGER, \n\treason VARCHAR(200), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_race_scratches PRIMARY KEY (id), \n\tCONSTRAINT fk_race_scratches_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE SET NULL, \n\tCONSTRAINT uq_race_scratches_natural UNIQUE (meet_code, race_date_local, race_number, horse_id)\n)"
+  },
+  {
+    "name": "race_section_results",
+    "rows": 1334304,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "race_entry_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "section_code",
+        "type": "VARCHAR(20)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "distance_from_start_m",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "elapsed_time_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "position",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "gap_to_leader_lengths",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "group_notation_raw",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "time_basis",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "source_kind",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "race_entries",
+        "from": "race_entry_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_race_section_results_code",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "section_code"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_race_section_results_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "race_entry_id",
+          "section_code"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE race_section_results (\n\tid INTEGER NOT NULL, \n\trace_entry_id INTEGER NOT NULL, \n\tsection_code VARCHAR(20) NOT NULL, \n\tdistance_from_start_m INTEGER, \n\telapsed_time_ms INTEGER, \n\tposition INTEGER, \n\tgap_to_leader_lengths FLOAT, \n\tgroup_notation_raw TEXT, time_basis VARCHAR(20), source_kind VARCHAR(30), \n\tCONSTRAINT pk_race_section_results PRIMARY KEY (id), \n\tCONSTRAINT entry_section UNIQUE (race_entry_id, section_code), \n\tCONSTRAINT ck_race_section_results_nonnegative_distance CHECK (distance_from_start_m IS NULL OR distance_from_start_m >= 0), \n\tCONSTRAINT ck_race_section_results_positive_position CHECK (position IS NULL OR position > 0), \n\tCONSTRAINT fk_race_section_results_race_entry_id_race_entries FOREIGN KEY(race_entry_id) REFERENCES race_entries (id) ON DELETE CASCADE\n)"
+  },
+  {
+    "name": "race_steward_reports",
+    "rows": 4251,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "weather",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "members",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "judgement",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "additional_judgement",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "jockey_change_note",
+        "type": "TEXT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_race_steward_reports_date_meet",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_date_local",
+          "meet_code"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_race_steward_reports_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "meet_code",
+          "race_date_local",
+          "race_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE race_steward_reports (\n\tid INTEGER NOT NULL, \n\tmeet_code INTEGER NOT NULL, \n\trace_date_local DATE NOT NULL, \n\trace_number INTEGER NOT NULL, \n\tweather VARCHAR(100), \n\tmembers TEXT, \n\tjudgement TEXT, \n\tadditional_judgement TEXT, \n\tjockey_change_note TEXT, \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_race_steward_reports PRIMARY KEY (id), \n\tCONSTRAINT uq_race_steward_reports_natural UNIQUE (meet_code, race_date_local, race_number)\n)"
+  },
+  {
+    "name": "racecourses",
+    "rows": 4,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "kra_meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "code",
+        "type": "VARCHAR(30)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "name_ko",
+        "type": "VARCHAR(50)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "name_en",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_racecourses_2",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "code"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_racecourses_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "kra_meet_code"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE racecourses (\n\tid INTEGER NOT NULL, \n\tkra_meet_code INTEGER NOT NULL, \n\tcode VARCHAR(30) NOT NULL, \n\tname_ko VARCHAR(50) NOT NULL, \n\tname_en VARCHAR(100), \n\tCONSTRAINT pk_racecourses PRIMARY KEY (id), \n\tCONSTRAINT uq_racecourses_kra_meet_code UNIQUE (kra_meet_code), \n\tCONSTRAINT uq_racecourses_code UNIQUE (code)\n)"
+  },
+  {
+    "name": "races",
+    "rows": 27129,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "racecourse_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "race_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "race_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "distance_m",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "grade",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "race_name",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "scheduled_at_ms",
+        "type": "BIGINT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "weather",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "track_condition",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "track_moisture_percent",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "race_day_count",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "field_size",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "burden_type",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 15,
+        "name": "age_condition",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 16,
+        "name": "sex_condition",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 17,
+        "name": "rating_condition",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 18,
+        "name": "newcomer_condition",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 19,
+        "name": "actual_start_at_ms",
+        "type": "BIGINT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 20,
+        "name": "start_time_change_reason",
+        "type": "VARCHAR(300)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 21,
+        "name": "weather_planned",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 22,
+        "name": "track_condition_planned",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 23,
+        "name": "track_moisture_percent_planned",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "racecourses",
+        "from": "racecourse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "RESTRICT",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_races_date_course",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "race_date_local",
+          "racecourse_id"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_races_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "racecourse_id",
+          "race_date_local",
+          "race_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE races (\n\tid INTEGER NOT NULL, \n\tracecourse_id INTEGER NOT NULL, \n\trace_date_local DATE NOT NULL, \n\trace_number INTEGER NOT NULL, \n\tdistance_m INTEGER NOT NULL, \n\tgrade VARCHAR(50), \n\trace_name VARCHAR(200), \n\tscheduled_at_ms BIGINT, \n\tweather VARCHAR(30), \n\ttrack_condition VARCHAR(30), \n\ttrack_moisture_percent FLOAT, \n\tstatus VARCHAR(20) NOT NULL, race_day_count INTEGER, field_size INTEGER, burden_type VARCHAR(50), age_condition VARCHAR(100), sex_condition VARCHAR(100), rating_condition VARCHAR(100), newcomer_condition VARCHAR(100), actual_start_at_ms BIGINT, start_time_change_reason VARCHAR(300), weather_planned VARCHAR(30), track_condition_planned VARCHAR(30), track_moisture_percent_planned FLOAT, \n\tCONSTRAINT pk_races PRIMARY KEY (id), \n\tCONSTRAINT race_identity UNIQUE (racecourse_id, race_date_local, race_number), \n\tCONSTRAINT ck_races_positive_distance CHECK (distance_m > 0), \n\tCONSTRAINT ck_races_positive_race_number CHECK (race_number > 0), \n\tCONSTRAINT fk_races_racecourse_id_racecourses FOREIGN KEY(racecourse_id) REFERENCES racecourses (id) ON DELETE RESTRICT\n)"
+  },
+  {
+    "name": "running_trial_results",
+    "rows": 8680,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "running_trial_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "horse_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "jockey_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "trainer_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "horse_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "horse_name_raw",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "finish_position",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "finish_rank_raw",
+        "type": "VARCHAR(10)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "origin_country",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "sex",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "age",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "carried_weight_base_kg",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 13,
+        "name": "carried_weight_extra_kg",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 14,
+        "name": "carried_weight_raw",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 15,
+        "name": "jockey_name_raw",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 16,
+        "name": "trainer_name_raw",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 17,
+        "name": "body_weight_kg",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 18,
+        "name": "finish_time_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 19,
+        "name": "margin_text",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 20,
+        "name": "judgement",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 21,
+        "name": "failure_reason",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 22,
+        "name": "inspection_reason",
+        "type": "VARCHAR(150)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 23,
+        "name": "g3f_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 24,
+        "name": "s1f_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 25,
+        "name": "corner_3_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 26,
+        "name": "corner_4_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 27,
+        "name": "g1f_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 28,
+        "name": "section_400_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 29,
+        "name": "final_400_ms",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 30,
+        "name": "passing_order_raw",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 31,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "trainers",
+        "from": "trainer_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 1,
+        "seq": 0,
+        "table": "running_trials",
+        "from": "running_trial_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      },
+      {
+        "id": 2,
+        "seq": 0,
+        "table": "jockeys",
+        "from": "jockey_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      },
+      {
+        "id": 3,
+        "seq": 0,
+        "table": "horses",
+        "from": "horse_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_running_trial_results_horse_trial",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "horse_id",
+          "running_trial_id"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_running_trial_results_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "running_trial_id",
+          "horse_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE running_trial_results (\n\tid INTEGER NOT NULL, \n\trunning_trial_id INTEGER NOT NULL, \n\thorse_id INTEGER, \n\tjockey_id INTEGER, \n\ttrainer_id INTEGER, \n\thorse_number INTEGER NOT NULL, \n\thorse_name_raw VARCHAR(100) NOT NULL, \n\tfinish_position INTEGER, \n\tfinish_rank_raw VARCHAR(10), \n\torigin_country VARCHAR(30), \n\tsex VARCHAR(20), \n\tage INTEGER, \n\tcarried_weight_base_kg FLOAT, \n\tcarried_weight_extra_kg FLOAT, \n\tcarried_weight_raw VARCHAR(30), \n\tjockey_name_raw VARCHAR(100), \n\ttrainer_name_raw VARCHAR(100), \n\tbody_weight_kg INTEGER, \n\tfinish_time_ms INTEGER, \n\tmargin_text VARCHAR(50), \n\tjudgement VARCHAR(20), \n\tfailure_reason VARCHAR(100), \n\tinspection_reason VARCHAR(150), \n\tg3f_ms INTEGER, \n\ts1f_ms INTEGER, \n\tcorner_3_ms INTEGER, \n\tcorner_4_ms INTEGER, \n\tg1f_ms INTEGER, \n\tsection_400_ms INTEGER, \n\tfinal_400_ms INTEGER, \n\tpassing_order_raw VARCHAR(100), \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_running_trial_results PRIMARY KEY (id), \n\tCONSTRAINT ck_running_trial_results_ck_running_trial_results_positive_horse_number CHECK (horse_number > 0), \n\tCONSTRAINT ck_running_trial_results_ck_running_trial_results_positive_finish_position CHECK (finish_position IS NULL OR finish_position > 0), \n\tCONSTRAINT fk_running_trial_results_horse_id_horses FOREIGN KEY(horse_id) REFERENCES horses (id) ON DELETE SET NULL, \n\tCONSTRAINT fk_running_trial_results_jockey_id_jockeys FOREIGN KEY(jockey_id) REFERENCES jockeys (id) ON DELETE SET NULL, \n\tCONSTRAINT fk_running_trial_results_running_trial_id_running_trials FOREIGN KEY(running_trial_id) REFERENCES running_trials (id) ON DELETE CASCADE, \n\tCONSTRAINT fk_running_trial_results_trainer_id_trainers FOREIGN KEY(trainer_id) REFERENCES trainers (id) ON DELETE SET NULL, \n\tCONSTRAINT uq_running_trial_results_natural UNIQUE (running_trial_id, horse_number)\n)"
+  },
+  {
+    "name": "running_trials",
+    "rows": 865,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "source_document_id",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "meet_code",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "trial_date_local",
+        "type": "DATE",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "trial_round",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "trial_race_number",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "distance_m",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "weather",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "track_condition",
+        "type": "VARCHAR(30)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "track_moisture_percent",
+        "type": "FLOAT",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "observed_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "source_documents",
+        "from": "source_document_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_running_trials_date_meet",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "trial_date_local",
+          "meet_code"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_running_trials_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "meet_code",
+          "trial_date_local",
+          "trial_race_number"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE running_trials (\n\tid INTEGER NOT NULL, \n\tsource_document_id INTEGER, \n\tmeet_code INTEGER NOT NULL, \n\ttrial_date_local DATE NOT NULL, \n\ttrial_round INTEGER, \n\ttrial_race_number INTEGER NOT NULL, \n\tdistance_m INTEGER NOT NULL, \n\tweather VARCHAR(30), \n\ttrack_condition VARCHAR(30), \n\ttrack_moisture_percent FLOAT, \n\tobserved_at_ms BIGINT NOT NULL, \n\tCONSTRAINT pk_running_trials PRIMARY KEY (id), \n\tCONSTRAINT ck_running_trials_ck_running_trials_positive_race CHECK (trial_race_number > 0), \n\tCONSTRAINT ck_running_trials_ck_running_trials_positive_distance CHECK (distance_m > 0), \n\tCONSTRAINT fk_running_trials_source_document_id_source_documents FOREIGN KEY(source_document_id) REFERENCES source_documents (id) ON DELETE SET NULL, \n\tCONSTRAINT uq_running_trials_natural UNIQUE (meet_code, trial_date_local, trial_race_number)\n)"
+  },
+  {
+    "name": "source_documents",
+    "rows": 35519,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "ingestion_run_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "source_url",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "retrieved_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 4,
+        "name": "content_type",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 5,
+        "name": "local_path",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 6,
+        "name": "sha256",
+        "type": "VARCHAR(64)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 7,
+        "name": "endpoint",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 8,
+        "name": "operation",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 9,
+        "name": "request_params_json",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 10,
+        "name": "requested_at_ms",
+        "type": "BIGINT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 11,
+        "name": "http_status_code",
+        "type": "INTEGER",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 12,
+        "name": "response_bytes",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "ingestion_runs",
+        "from": "ingestion_run_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "ix_source_documents_retrieved_at_ms",
+        "unique": 0,
+        "origin": "c",
+        "partial": 0,
+        "columns": [
+          "retrieved_at_ms"
+        ]
+      },
+      {
+        "seq": 1,
+        "name": "sqlite_autoindex_source_documents_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "ingestion_run_id",
+          "source_url",
+          "sha256"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE \"source_documents\" (\n\tid INTEGER NOT NULL, \n\tingestion_run_id INTEGER NOT NULL, \n\tsource_url TEXT NOT NULL, \n\tretrieved_at_ms BIGINT NOT NULL, \n\tcontent_type VARCHAR(100), \n\tlocal_path TEXT NOT NULL, \n\tsha256 VARCHAR(64) NOT NULL, \n\tendpoint VARCHAR(200), \n\toperation VARCHAR(100), \n\trequest_params_json TEXT NOT NULL, \n\trequested_at_ms BIGINT NOT NULL, \n\thttp_status_code INTEGER, \n\tresponse_bytes INTEGER NOT NULL, \n\tCONSTRAINT pk_source_documents PRIMARY KEY (id), \n\tCONSTRAINT fk_source_documents_ingestion_run_id_ingestion_runs FOREIGN KEY(ingestion_run_id) REFERENCES ingestion_runs (id) ON DELETE CASCADE, \n\tCONSTRAINT ingestion_run_source_url_sha256 UNIQUE (ingestion_run_id, source_url, sha256)\n)"
+  },
+  {
+    "name": "trainers",
+    "rows": 554,
+    "columns": [
+      {
+        "cid": 0,
+        "name": "id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "kra_trainer_id",
+        "type": "VARCHAR(30)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 2,
+        "name": "name_ko",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      },
+      {
+        "cid": 3,
+        "name": "name_en",
+        "type": "VARCHAR(150)",
+        "notnull": 0,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "seq": 0,
+        "name": "sqlite_autoindex_trainers_1",
+        "unique": 1,
+        "origin": "u",
+        "partial": 0,
+        "columns": [
+          "kra_trainer_id"
+        ]
+      }
+    ],
+    "ddl": "CREATE TABLE trainers (\n\tid INTEGER NOT NULL, \n\tkra_trainer_id VARCHAR(30) NOT NULL, \n\tname_ko VARCHAR(100) NOT NULL, \n\tname_en VARCHAR(150), \n\tCONSTRAINT pk_trainers PRIMARY KEY (id), \n\tCONSTRAINT uq_trainers_kra_trainer_id UNIQUE (kra_trainer_id)\n)"
+  }
+]
