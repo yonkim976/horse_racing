@@ -393,4 +393,174 @@
   }
 
   initScrollSpy();
+
+  function initMobileMenu() {
+    const drawer = document.querySelector("[data-mobile-menu]");
+    if (!drawer) {
+      return;
+    }
+    const openButtons = document.querySelectorAll("[data-mobile-menu-open]");
+    const closeButtons = drawer.querySelectorAll("[data-mobile-menu-close]");
+
+    const setOpen = (open) => {
+      drawer.hidden = !open;
+      document.body.classList.toggle("mobile-menu-open", open);
+      openButtons.forEach((button) => button.setAttribute("aria-expanded", open ? "true" : "false"));
+    };
+
+    openButtons.forEach((button) => {
+      button.addEventListener("click", () => setOpen(drawer.hidden));
+    });
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => setOpen(false));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !drawer.hidden) {
+        setOpen(false);
+      }
+    });
+  }
+
+  initMobileMenu();
+
+  /* ------------------------------------------------------------------
+     더비온 앱 열기 (한국마사회 공식 앱, 스토어 미등록)
+     2.0이 있으면 2.0, 없으면 1.0(구 더비온)으로 연결한다.
+     2.0: mycard5 / kr.co.kra.m.mycard5
+     1.0: mycard4 / kr.co.kra.m.mycard4
+     ------------------------------------------------------------------ */
+  const DERBYON_V2 = { scheme: "mycard5", pkg: "kr.co.kra.m.mycard5" };
+  const DERBYON_V1 = { scheme: "mycard4", pkg: "kr.co.kra.m.mycard4" };
+  const DERBYON_FALLBACK = "https://m.kra.co.kr/comp/view/kraAppList.do";
+  const DERBYON_WAIT_MS = 900;
+
+  function derbyOnLeftPage() {
+    return document.hidden || document.visibilityState === "hidden";
+  }
+
+  function derbyOnAfterWait(fn) {
+    const started = Date.now();
+    const timer = window.setTimeout(() => {
+      if (derbyOnLeftPage()) {
+        return;
+      }
+      if (Date.now() - started < DERBYON_WAIT_MS - 80) {
+        return;
+      }
+      fn();
+    }, DERBYON_WAIT_MS);
+    const cancel = () => window.clearTimeout(timer);
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        if (derbyOnLeftPage()) {
+          cancel();
+        }
+      },
+      { once: true }
+    );
+    window.addEventListener("pagehide", cancel, { once: true });
+  }
+
+  function androidLaunchIntent(app, fallback) {
+    let url =
+      "intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=" +
+      app.pkg;
+    if (fallback) {
+      url += ";S.browser_fallback_url=" + encodeURIComponent(fallback);
+    }
+    return url + ";end";
+  }
+
+  function openDerbyOnApp() {
+    const ua = navigator.userAgent || "";
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+    if (isAndroid) {
+      window.location.href = androidLaunchIntent(DERBYON_V2);
+      derbyOnAfterWait(() => {
+        window.location.href = androidLaunchIntent(DERBYON_V1, DERBYON_FALLBACK);
+      });
+      return;
+    }
+
+    if (isIOS) {
+      window.location.href = DERBYON_V2.scheme + "://";
+      derbyOnAfterWait(() => {
+        window.location.href = DERBYON_V1.scheme + "://";
+        derbyOnAfterWait(() => {
+          window.location.href = DERBYON_FALLBACK;
+        });
+      });
+      return;
+    }
+
+    window.location.href = DERBYON_FALLBACK;
+  }
+
+  document.querySelectorAll("[data-open-derbyon]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openDerbyOnApp();
+    });
+  });
+
+  function mobileStickyClearance() {
+    const topbar = document.querySelector(".mobile-topbar");
+    const chrome = document.querySelector(".mobile-day-chrome");
+    let bottom = 0;
+    if (topbar) {
+      bottom = Math.max(bottom, topbar.getBoundingClientRect().bottom);
+    }
+    if (chrome) {
+      const box = chrome.getBoundingClientRect();
+      if (box.bottom > 0) {
+        bottom = Math.max(bottom, box.bottom);
+      }
+    }
+    return bottom + 12;
+  }
+
+  function syncMobileStickyClearance() {
+    document.documentElement.style.setProperty(
+      "--mobile-sticky-clearance",
+      `${Math.round(mobileStickyClearance())}px`
+    );
+  }
+
+  function scrollToMobileRound(id) {
+    const target = document.getElementById(id);
+    if (!target) {
+      return;
+    }
+    syncMobileStickyClearance();
+    const top = window.scrollY + target.getBoundingClientRect().top - mobileStickyClearance();
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+  }
+
+  document.querySelectorAll(".mobile-round-jump a[href^='#']").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const id = decodeURIComponent((link.hash || "").slice(1));
+      if (!id) {
+        return;
+      }
+      event.preventDefault();
+      if (history.replaceState) {
+        history.replaceState(null, "", `#${id}`);
+      } else {
+        location.hash = id;
+      }
+      scrollToMobileRound(id);
+    });
+  });
+
+  if (document.body.classList.contains("mobile-home")) {
+    syncMobileStickyClearance();
+    window.addEventListener("resize", syncMobileStickyClearance);
+    const initial = decodeURIComponent((location.hash || "").slice(1));
+    if (initial.startsWith("round")) {
+      requestAnimationFrame(() => scrollToMobileRound(initial));
+    }
+  }
 })();

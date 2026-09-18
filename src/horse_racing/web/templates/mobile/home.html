@@ -1,0 +1,110 @@
+{% extends "mobile/base.html" %}
+{% block body_class %}mobile-home{% endblock %}
+{% block title %}경주 일정과 결과 · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}한국마사회 경주 일정과 결과를 한눈에 확인하는 로컬 데이터 대시보드{% endblock %}
+
+{% block content %}
+{% set by_round = dashboard.race_groups and dashboard.race_groups[0].kind == 'round' %}
+<nav class="mobile-day-chrome" aria-label="경주일과 경마장">
+  <div class="mobile-weekend-bar" aria-label="경주일">
+    {% for day in dashboard.weekend_days %}
+      <a href="{{ day.href }}" class="{% if day.selected %}active{% endif %}" {% if day.selected %}aria-current="page"{% endif %}>
+        <strong>{{ day.month_day }}</strong>
+        <span>{{ day.weekday }}</span>
+      </a>
+    {% endfor %}
+  </div>
+  {% if dashboard.day_meets %}
+  <div class="mobile-meet-bar" aria-label="경마장">
+    {% for meet in dashboard.day_meets %}
+      <a href="{{ meet.href }}" class="{% if meet.selected %}active{% endif %}" {% if meet.selected %}aria-current="page"{% endif %}>{{ meet.label }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if by_round and dashboard.race_groups|length > 1 %}
+  <nav class="mobile-round-jump" aria-label="라운드">
+    {% for group in dashboard.race_groups %}
+    <a href="#round-group-{{ group.races[0].race_number }}">
+      <strong>{{ group.course_name }}</strong>
+    </a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+</nav>
+
+<section class="mobile-race-card" aria-label="선택일 경주 목록">
+  {% if dashboard.races %}
+    {% for group in dashboard.race_groups %}
+      {% set meet_name = group.course_name or group.races[0].course_name %}
+      <section class="mobile-meet-block">
+        <h2 class="mobile-meet"{% if by_round %} id="round-group-{{ group.races[0].race_number }}"{% endif %}>{{ meet_name }}</h2>
+        {% if group.races|length > 1 or not by_round %}
+        <nav class="mobile-round-jump" aria-label="{% if by_round %}{{ meet_name }} 경마장{% else %}{{ meet_name }} 라운드{% endif %}">
+          {% for race in group.races %}
+          <a href="#round-{{ race.id }}">
+            <strong>{% if by_round %}{{ race.course_name }}{% else %}{{ race.race_number }}R{% endif %}</strong>
+            <span>{{ race.runner_count }}두</span>
+          </a>
+          {% endfor %}
+        </nav>
+        {% endif %}
+        {% for race in group.races %}
+        <section class="mobile-round" id="round-{{ race.id }}">
+          <header class="mobile-round-head">
+            <div class="mobile-round-title">
+              {% if by_round %}
+              <strong class="mobile-race-no">{{ race.course_name }}</strong>
+              <span class="mobile-round-race">{{ race.race_number }}R</span>
+              {% else %}
+              <strong class="mobile-race-no">{{ race.race_number }}R</strong>
+              {% endif %}
+              <span class="mobile-round-field">{{ race.runner_count }}두</span>
+              <a class="mobile-round-analysis" href="{{ race.analysis_href }}" aria-label="{{ race.course_name }} {{ race.race_number }}R 경주 분석">분석</a>
+            </div>
+            <p class="mobile-round-meta">{{ race.start_time }} · {{ race.race_label }} · {{ race.distance }}{% if race.posters|selectattr("win_pct")|list %} · 확률 높은 순{% endif %}</p>
+          </header>
+          <div class="mobile-poster-row">
+            {% for horse in race.posters %}
+            <a class="mobile-poster{% if horse.scratched %} is-scratched{% endif %}" href="/m/analysis?race_id={{ race.id }}&entry={{ horse.entry_id }}">
+              <span class="mobile-poster-cap silk-{{ horse.number }}" aria-hidden="true"></span>
+              <span class="mobile-poster-num">{{ horse.number }}</span>
+              <strong>{{ horse.name }}</strong>
+              <span class="mobile-poster-odds" data-role="{{ horse.win_label or '후착혼전' }}">
+                <span class="mobile-poster-pct">{{ horse.win_pct or '00%' }}</span>
+                <span class="mobile-poster-role">{{ horse.win_label or '후착혼전' }}</span>
+              </span>
+              <span class="mobile-poster-meta">{{ horse.jockey }}</span>
+              <span class="mobile-poster-meta">{{ horse.form }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  {% endif %}
+
+  {% if dashboard.trials %}
+    <p class="mobile-section-label">주행심사 · 예측 대상 제외</p>
+    <ul class="mobile-race-list">
+      {% for trial in dashboard.trials %}
+        <li>
+          <a href="{{ trial.detail_href }}">
+            <span class="mobile-race-no">{{ trial.race_number }}R</span>
+            <span class="mobile-race-time">{{ trial.trial_round }}</span>
+            <span class="mobile-race-label">{{ trial.course_name }} · {{ trial.distance }}</span>
+            <span class="mobile-race-field">{{ trial.entry_count }}두</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if not dashboard.races and not dashboard.trials %}
+    <div class="mobile-empty">
+      <strong>표시할 경주나 주행심사가 없습니다.</strong>
+      <p>다른 날짜나 경마장을 선택해 주세요.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

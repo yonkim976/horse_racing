@@ -115,6 +115,20 @@ def test_default_selects_today_including_completed_and_explicit_date_selects_who
     assert "공개된 출전표가 없습니다" in empty.selection_note
 
 
+def test_meet_filter_keeps_other_tracks_available_on_the_same_day(session):
+    seoul, jeju, runner = course(session, meet=1), course(session, meet=2), horse(session)
+    seoul_race = race(session, seoul, date(2026, 9, 18), number=1)
+    jeju_race = race(session, jeju, date(2026, 9, 18), number=1)
+    entry(session, seoul_race, runner)
+    entry(session, jeju_race, runner)
+    seoul_page = load_race_analysis_page(session, race_date=date(2026, 9, 18), meet=1)
+    assert {item.meet_code for item in seoul_page.races} == {1, 2}
+    assert seoul_page.selected_race.id == seoul_race.id
+    jeju_page = load_race_analysis_page(session, race_date=date(2026, 9, 18), meet=2)
+    assert {item.meet_code for item in jeju_page.races} == {1, 2}
+    assert jeju_page.selected_race.id == jeju_race.id
+
+
 def test_no_today_uses_nearest_published_date_and_explains_fallback(session):
     track, runner = course(session), horse(session)
     previous = race(session, track, date(2026, 9, 17))
@@ -239,6 +253,8 @@ def test_debutant_gets_prior_trials_and_training_but_no_target_day_evidence(sess
     page = load_race_analysis_page(session, race_id=target.id)
     result = page.runners[0]
     assert result.history == []
+    assert result.form_kind == "trial"
+    assert result.form_tokens == ["2합"]
     assert len(result.trials) == 1
     assert result.trials[0].date == "2026-09-16"
     assert result.trials[0].judgement == "합격"
@@ -514,6 +530,14 @@ def test_pace_stages_use_distinct_observed_checkpoint_ranks_and_prefer_fourth_co
     assert all(stage["samples"] == 2 for stage in stages.values())
     assert "결승 200m 전" in stages["late"]["label"]
     assert page.runners[0].pace_stages == stages
+    early, middle, late = page.pace_board
+    assert [lane.title for lane in page.pace_board] == ["초반", "중반", "종반"]
+    assert any(chip.number == 1 for chip in early.slots[9])
+    assert any(chip.number == 1 for chip in middle.slots[5])
+    assert any(chip.number == 1 for chip in late.slots[8])
+    assert page.pace_summaries[0]["early"] == "앞"
+    assert page.pace_summaries[0]["middle"] == "앞쪽"
+    assert page.pace_summaries[0]["late"] == "앞"
 
 
 def test_busan_middle_uses_g3f_checkpoint_and_missing_late_stays_unknown(session):
@@ -530,6 +554,10 @@ def test_busan_middle_uses_g3f_checkpoint_and_missing_late_stays_unknown(session
     # The known winning finish cannot stand in for an absent G1F observation.
     assert stages["late"]["normalized"] is None
     assert stages["late"]["samples"] == 0
+    board = load_race_analysis_page(session, race_id=target.id)
+    assert any(chip.number == 1 for chip in board.pace_board[1].slots[3])
+    assert board.pace_board[2].missing[0].number == 1
+    assert board.pace_summaries[0]["late"] == "기록 없음"
 
 
 @pytest.mark.parametrize("meet,distance", [(1, 1000), (2, 800)])

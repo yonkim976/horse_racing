@@ -2,7 +2,7 @@
 <html lang="ko" data-theme="dark">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="{% block meta_description %}한국마사회 경주 데이터를 조회하는 로컬 데이터 대시보드{% endblock %}">
     <meta name="theme-color" content="#0a0f0d">
     <title>{% block title %}한국 경마 데이터 보드{% endblock %}</title>
@@ -21,12 +21,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=14">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=1">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=6" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=10" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
     {% block extra_head %}{% endblock %}
   </head>
-  <body>
+  <body class="{% block body_class %}{% endblock %}">
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="한국 경마 데이터 보드 홈">

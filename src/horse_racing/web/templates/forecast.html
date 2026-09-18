@@ -37,46 +37,7 @@
 </nav>
 
 {% if page.selected_race %}
-<section class="race-heading-line">
-  <div><p class="panel-kicker">{{ page.selected_race.date }} · {{ page.selected_race.meet }}</p><h2>{{ page.selected_race.number }}경주 · {{ page.selected_race.distance }}m · {{ page.selected_race.grade }}</h2></div>
-  <span class="status {{ 'completed' if page.model else 'running' }}">{{ page.selected_race.prediction_state }}</span>
-</section>
-
-{% if page.model %}
-<section class="model-receipt" aria-label="예측 메타데이터">
-  <div><span>구분</span><strong>{{ page.model.mode }}</strong></div><div><span>모델</span><strong>{{ page.model.model }}</strong></div><div><span>버전</span><strong>{{ page.model.version }}</strong></div><div><span>발행</span><strong>{{ page.model.published }}</strong></div><div><span>데이터 마감</span><strong>{{ page.model.cutoff }}</strong></div><div><span>정책</span><strong>{{ page.model.policy }}</strong></div>
-</section>
-{% else %}
-<div class="notice-box warning"><strong>정식 예측 미발행</strong><span>이 경주의 모델 결과가 불변 원장에 없습니다. 아래 과거 성적과 전개 추정은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.</span></div>
-{% endif %}
-
-<section class="panel pace-panel" data-pace-root>
-  <div class="panel-heading">
-    <div><p class="panel-kicker">SCENARIO, NOT OBSERVATION</p><h2>예상 전개 탐색</h2></div>
-    <div class="pace-controls">
-      <button type="button" class="icon-button" data-pace-play aria-label="전개 재생">▶</button>
-      <label>단계<input type="range" min="0" max="3" value="0" step="1" data-pace-stage aria-label="전개 단계"></label>
-      <label>흐름<select data-pace-scenario aria-label="전개 흐름"><option value="slow">느림</option><option value="normal" selected>보통</option><option value="fast">빠름</option></select></label>
-    </div>
-  </div>
-  <div class="pace-layout">
-    <div class="track-visual" data-pace-track role="img" aria-label="말별 추정 전개 위치"></div>
-    <aside class="pace-legend"><strong data-pace-label>출발</strong><p>표시 위치는 공식 GPS가 아닌 과거 구간 통과순위와 전개 성향을 단순 배치한 값입니다.</p><div data-pace-list></div></aside>
-  </div>
-  <script type="application/json" data-pace-data>{{ page.pace_json()|tojson }}</script>
-</section>
-
-<section class="panel">
-  <div class="panel-heading"><div><p class="panel-kicker">RUNNERS & EVIDENCE</p><h2>출전마 비교</h2></div><span>과거 이력은 현재 경주일 이전만 집계</span></div>
-  <div class="table-scroll"><table class="entry-table insight-table" data-sortable data-runner-table>
-    <thead><tr><th>마번</th><th>출전마 / 상태</th><th>기수</th><th>부담중량</th><th>예상순위</th><th>우승</th><th>입상</th><th>최근 5회</th><th>통산</th><th>동일거리</th><th>전개 근거</th></tr></thead>
-    <tbody>{% for row in page.runners %}<tr data-entry-id="{{ row.entry_id }}" class="{% if row.scratched %}is-muted{% endif %}" tabindex="0">
-      <td><button type="button" class="runner-number" data-highlight="{{ row.entry_id }}">{{ row.number }}</button></td>
-      <td><a href="/horses/{{ row.horse_id }}"><strong>{{ row.horse }}</strong></a><small class="cell-note">{{ row.state }}</small></td>
-      <td>{{ row.jockey }}</td><td class="numeric">{{ row.weight }}</td><td class="numeric">{{ row.predicted_rank or '—' }}</td><td class="numeric">{{ row.prob_win }}</td><td class="numeric">{{ row.prob_top3 }}</td><td class="numeric">{{ row.recent_finishes }}</td><td>{{ row.starts }}전 · 승 {{ row.win_rate }} · 입상 {{ row.top3_rate }}</td><td>{{ row.same_distance }}</td><td><strong>{{ row.style }}</strong><small class="cell-note">{{ row.style_reason }}{% if row.closing_time is not none %} · G1F 평균 {{ row.closing_time }}초{% endif %}</small></td>
-    </tr>{% endfor %}</tbody>
-  </table></div>
-</section>
+{% include "_forecast_embed.html" %}
 {% endif %}
 {% else %}
 <section class="empty-state"><strong>조건에 맞는 예정 경주가 없습니다.</strong><p>로컬 출전표가 최신인지 데이터 메뉴에서 확인해 주세요.</p></section>
