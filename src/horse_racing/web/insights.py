@@ -8,6 +8,7 @@ model probabilities.
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from datetime import date, timedelta
 from itertools import combinations
@@ -29,6 +30,7 @@ from horse_racing.db.models import (
     RaceResult,
     RaceSectionResult,
 )
+from horse_racing.web.formatting import MAX_NORMAL_FINISH
 
 KST = ZoneInfo("Asia/Seoul")
 MEET_NAMES = {1: "서울", 2: "제주", 3: "부산경남", 4: "영천"}
@@ -36,6 +38,193 @@ MEET_NAMES = {1: "서울", 2: "제주", 3: "부산경남", 4: "영천"}
 
 def _pct(value: float | None) -> str:
     return "—" if value is None else f"{value:.1%}"
+
+
+def displayed_win_points(value: float | None) -> int | None:
+    if value is None:
+        return None
+    percent = int(round(value * 100))
+    if value > 0 and percent == 0:
+        percent = 1
+    return percent
+
+
+def format_win_pct(value: float | None) -> str | None:
+    percent = displayed_win_points(value)
+    return None if percent is None else f"{percent}%"
+
+
+_CLOSE_PP = 5
+_AXIS_PP = 8
+_MIXED_PP = 8
+_CHALLENGER_PP = 8
+_INCLUDE_PP = 12
+WIN_LABELS = ("강축", "축", "상대", "복병", "접전", "혼전", "후착혼전")
+
+
+def assign_win_labels(
+    entries: Sequence[tuple[int, float | None, bool]],
+) -> dict[int, str]:
+    """Assign one of the seven contention terms from displayed win percents."""
+    ranked = sorted(
+        (
+            (entry_id, points)
+            for entry_id, probability, scratched in entries
+            if not scratched
+            for points in (displayed_win_points(probability),)
+            if points is not None
+        ),
+        key=lambda item: (-item[1], item[0]),
+    )
+    if not ranked:
+        return {}
+
+    points = [item[1] for item in ranked]
+    count = len(ranked)
+    top = points[0]
+    second = points[1] if count > 1 else None
+    top_gap = 0 if second is None else top - second
+
+    def cluster(start: int, anchor: int) -> list[int]:
+        return [
+            index
+            for index, value in enumerate(points)
+            if index >= start and anchor - value <= _CLOSE_PP
+        ]
+
+    def fill_rest(start: int, *, allow_challenger: bool) -> dict[int, str]:
+        labels: dict[int, str] = {}
+        challengers = 0
+        previous_value: int | None = None
+        previous_label: str | None = None
+        for index in range(start, count):
+            entry_id, value = ranked[index]
+            if previous_label is not None and value == previous_value:
+                labels[entry_id] = previous_label
+                continue
+            if allow_challenger and challengers < 2 and value >= _CHALLENGER_PP:
+                label = "상대"
+                challengers += 1
+            else:
+                label = "복병"
+            labels[entry_id] = label
+            previous_value = value
+            previous_label = label
+        return labels
+
+    if count == 1:
+        return {ranked[0][0]: "강축" if top >= _AXIS_PP else "축"}
+
+    leader_cluster = cluster(0, top)
+    place_cluster = cluster(1, second) if second is not None else []
+
+    if top_gap >= _AXIS_PP and len(place_cluster) >= 2:
+        labels = {ranked[0][0]: "강축"}
+        labels.update({ranked[index][0]: "후착혼전" for index in place_cluster})
+        labels.update(fill_rest(max(place_cluster) + 1, allow_challenger=False))
+        return labels
+
+    if len(leader_cluster) >= 4:
+        pack_end = leader_cluster[-1]
+        while pack_end + 1 < count and top - points[pack_end + 1] <= _MIXED_PP:
+            pack_end += 1
+        labels = {ranked[index][0]: "혼전" for index in range(pack_end + 1)}
+        labels.update(fill_rest(pack_end + 1, allow_challenger=False))
+        return labels
+
+    if 2 <= len(leader_cluster) <= 3:
+        last = leader_cluster[-1]
+        next_points = points[last + 1] if last + 1 < count else 0
+        bunched_field = [index for index, value in enumerate(points) if top - value <= _MIXED_PP]
+        if last + 1 < count and points[last] - next_points < _CLOSE_PP and len(bunched_field) >= 4:
+            labels = {ranked[index][0]: "혼전" for index in bunched_field}
+            labels.update(fill_rest(bunched_field[-1] + 1, allow_challenger=False))
+            return labels
+        labels = {ranked[index][0]: "접전" for index in leader_cluster}
+        labels.update(fill_rest(last + 1, allow_challenger=True))
+        return labels
+
+    if top_gap >= _AXIS_PP:
+        labels = {ranked[0][0]: "강축"}
+        if second is not None and (second >= _INCLUDE_PP or top_gap <= 15):
+            labels[ranked[1][0]] = "축"
+            labels.update(fill_rest(2, allow_challenger=True))
+        else:
+            labels.update(fill_rest(1, allow_challenger=True))
+        return labels
+
+    labels = {ranked[0][0]: "축"}
+    if second is not None and top_gap <= _CLOSE_PP:
+        labels[ranked[1][0]] = "축"
+        labels.update(fill_rest(2, allow_challenger=True))
+    else:
+        labels.update(fill_rest(1, allow_challenger=True))
+    return labels
+
+
+_SKIP_TRIAL_JUDGEMENTS = {"출", "심", "주"}
+_TRIAL_FORM_MARKS = {"합", "불", "연", "유"}
+
+
+def format_trial_form_token(position: int | None, judgement: str | None) -> str | None:
+    """Compact running-trial token such as 1합, 7, or 연."""
+    code = (judgement or "").strip()
+    if code in _SKIP_TRIAL_JUDGEMENTS:
+        return None
+    pos = str(position) if position is not None and 1 <= position <= MAX_NORMAL_FINISH else ""
+    mark = code if code in _TRIAL_FORM_MARKS else ""
+    token = f"{pos}{mark}"
+    return token or None
+
+
+def format_trial_form_line(tokens: Sequence[str], *, limit: int = 5) -> str:
+    picked = [token for token in tokens if token][:limit]
+    if not picked:
+        return ""
+    return "심 " + "-".join(picked)
+
+
+def latest_win_probabilities(session: Session, race_ids: Sequence[int]) -> dict[int, float]:
+    """Latest published run's top-3 probability keyed by race entry id."""
+    if not race_ids:
+        return {}
+    rows = session.execute(
+        select(
+            ModelPrediction.race_id,
+            ModelPrediction.race_entry_id,
+            ModelPrediction.prob_top3,
+            PredictionRun.id,
+        )
+        .join(PredictionRun, PredictionRun.id == ModelPrediction.prediction_run_id)
+        .where(ModelPrediction.race_id.in_(list(race_ids)))
+        .order_by(PredictionRun.published_at_ms.desc(), PredictionRun.id.desc())
+    ).all()
+    chosen_run: dict[int, int] = {}
+    probabilities: dict[int, float] = {}
+    for race_id, entry_id, probability, run_id in rows:
+        if race_id not in chosen_run:
+            chosen_run[race_id] = run_id
+        if run_id != chosen_run[race_id]:
+            continue
+        probabilities[entry_id] = probability
+    return probabilities
+
+
+def win_probability_sort_key(
+    *,
+    scratched: bool,
+    number: int | None,
+    win_prob: float | None,
+    has_field_predictions: bool,
+) -> tuple:
+    if not has_field_predictions:
+        return (number or 99,)
+    return (
+        scratched,
+        win_prob is None,
+        -(win_prob or 0.0),
+        number or 99,
+    )
 
 
 def _time(value: int | None) -> str:
@@ -176,13 +365,16 @@ def load_forecast_page(
     distances = sorted({row.distance_m for row in option_rows})
     grades = sorted({row.grade for row in option_rows if row.grade})
 
-    conditions = [Race.status == "scheduled", Race.race_date_local == selected_date]
-    if meet:
-        conditions.append(Racecourse.kra_meet_code == meet)
-    if distance:
-        conditions.append(Race.distance_m == distance)
-    if grade:
-        conditions.append(Race.grade == grade)
+    if race_id:
+        conditions = [Race.id == race_id]
+    else:
+        conditions = [Race.status == "scheduled", Race.race_date_local == selected_date]
+        if meet:
+            conditions.append(Racecourse.kra_meet_code == meet)
+        if distance:
+            conditions.append(Race.distance_m == distance)
+        if grade:
+            conditions.append(Race.grade == grade)
     race_rows = session.execute(
         select(
             Race.id,

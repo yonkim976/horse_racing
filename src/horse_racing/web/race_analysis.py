@@ -39,6 +39,13 @@ from horse_racing.web.formatting import (
     format_race_time,
     today_seoul,
 )
+from horse_racing.web.insights import (
+    assign_win_labels,
+    format_trial_form_token,
+    format_win_pct,
+    latest_win_probabilities,
+    win_probability_sort_key,
+)
 from horse_racing.web.race_video import race_video_url, running_trial_video_url
 
 SECTION_CODES = ("S1F", "1C", "2C", "3C", "4C", "G3F", "G1F")
@@ -120,6 +127,7 @@ class TrialStart:
     passing_order: str = "—"
     source_label: str = "운영 DB 공식 주행심사"
     horse_number: int | None = None
+    form_token: str | None = None
 
 
 @dataclass(slots=True)
@@ -155,6 +163,11 @@ class AnalysisRunner:
     early_sample: int = 0
     metrics: dict[str, Any] = field(default_factory=dict)
     pace_stages: dict[str, dict[str, Any]] = field(default_factory=dict)
+    win_pct: str | None = None
+    win_prob: float | None = None
+    win_label: str | None = None
+    form_kind: str = ""
+    form_tokens: list[str] = field(default_factory=list)
 
 
 @dataclass(slots=True)
@@ -172,6 +185,26 @@ class RaceAnalysisPage:
     pace: dict[str, Any] = field(default_factory=dict)
     coverage: dict[str, Any] = field(default_factory=dict)
     notes: list[str] = field(default_factory=list)
+    pace_board: list[PaceBoardLane] = field(default_factory=list)
+    pace_summaries: list[dict[str, Any]] = field(default_factory=list)
+
+
+@dataclass(slots=True)
+class PaceBoardChip:
+    entry_id: int
+    number: int
+    horse: str
+    samples: int
+
+
+@dataclass(slots=True)
+class PaceBoardLane:
+    key: str
+    title: str
+    hint: str
+    slots: list[list[PaceBoardChip]]
+    missing: list[PaceBoardChip]
+    has_marks: bool
 
 
 def load_race_analysis_page(
@@ -208,11 +241,20 @@ def load_race_analysis_page(
             f"오늘({today.isoformat()})은 공개된 출전표가 없어 "
             f"가장 가까운 공개 경주일 {selected_date.isoformat()}을 표시합니다."
         )
-    races = _races_on_date(session, conditions, selected_date)
+    races = _races_on_date(
+        session,
+        _race_conditions(meet=None, distance=distance, grade=grade),
+        selected_date,
+    )
     if selected is not None and selected.date == selected_date.isoformat():
         selected = next((item for item in races if item.id == selected.id), selected)
-    else:
-        selected = races[0] if races else None
+        if meet is not None and selected.meet_code != meet:
+            selected = None
+    if selected is None:
+        if meet is not None:
+            selected = next((item for item in races if item.meet_code == meet), None)
+        if selected is None:
+            selected = races[0] if races else None
     filters = {
         "race_id": selected.id if selected else None,
         "race_date": selected_date.isoformat(),
@@ -279,6 +321,7 @@ def load_race_analysis_page(
         .mappings()
         .all()
     )
+    win_probs = latest_win_probabilities(session, [selected.id])
     horse_ids = [row["horse_id"] for row in entries]
     jockey_ids = list({row["jockey_id"] for row in entries if row["jockey_id"] is not None})
     histories, totals = _load_histories(
@@ -331,6 +374,8 @@ def load_race_analysis_page(
             )
             for item in history
         )
+        horse_trials = trials.get(horse_id, [])
+        form_kind, form_tokens = _record_form(history, horse_trials)
         runner = AnalysisRunner(
             entry_id=entry["entry_id"],
             horse_id=horse_id,
@@ -356,7 +401,7 @@ def load_race_analysis_page(
                 "origin": entry["origin_country"],
             },
             history_total=totals.get(horse_id, 0),
-            trials=trials.get(horse_id, []),
+            trials=horse_trials,
             trial_total=trial_totals.get(horse_id, 0),
             training=training.get(horse_id, []),
             start_training=start_training.get(horse_id, []),
@@ -375,6 +420,10 @@ def load_race_analysis_page(
                 distance_stats.get(horse_id, {}),
             ),
             pace_stages=_pace_stages(history, selected.meet_code),
+            win_pct=format_win_pct(win_probs.get(entry["entry_id"])),
+            win_prob=win_probs.get(entry["entry_id"]),
+            form_kind=form_kind,
+            form_tokens=form_tokens,
         )
         page.runners.append(runner)
         for item in history:
@@ -431,6 +480,24 @@ def load_race_analysis_page(
         "truncated_field": selected.field_size > MAX_RUNNERS,
         **archive_coverage,
     }
+    win_labels = assign_win_labels(
+        [
+            (runner.entry_id, runner.win_prob, runner.state == "출전취소")
+            for runner in page.runners
+        ]
+    )
+    for runner in page.runners:
+        runner.win_label = win_labels.get(runner.entry_id)
+    if any(runner.win_prob is not None for runner in page.runners):
+        page.runners.sort(
+            key=lambda runner: win_probability_sort_key(
+                scratched=runner.state == "출전취소",
+                number=runner.number,
+                win_prob=runner.win_prob,
+                has_field_predictions=True,
+            )
+        )
+    page.pace_board, page.pace_summaries = _pace_board(page.runners)
     return page
 
 
@@ -845,6 +912,7 @@ def _load_trials(session, horse_ids, cutoff):
                 finish_time_ms=finish_ms,
                 passing_order=result.passing_order_raw or "—",
                 horse_number=result.horse_number,
+                form_token=format_trial_form_token(result.finish_position, result.judgement),
             )
         )
     return output, totals
@@ -1157,7 +1225,23 @@ def _archive_trial(row):
         passing_order=row.get("passing_order") or "—",
         source_label=row["source_label"],
         horse_number=row.get("horse_number"),
+        form_token=format_trial_form_token(row.get("finish_position"), row.get("judgement")),
     )
+
+
+def _record_form(
+    history: list[PastStart],
+    trials: list[TrialStart],
+) -> tuple[str, list[str]]:
+    if history:
+        tokens = [
+            str(item.finish_position) if item.valid_finish else "–" for item in history[:5]
+        ]
+        return "race", tokens
+    tokens = [trial.form_token for trial in trials if trial.form_token][:5]
+    if tokens:
+        return "trial", tokens
+    return "", []
 
 
 def _trial_judgement(value):
@@ -1290,6 +1374,72 @@ def _empty_training_summary():
         "start_sessions": 0,
         "truncated": False,
     }
+
+
+PACE_LANE_META = (
+    ("early", "초반", "출발 직후"),
+    ("middle", "중반", "코너"),
+    ("late", "종반", "결승 직전"),
+)
+
+
+def _pace_band(normalized: float | None) -> str:
+    if normalized is None:
+        return "기록 없음"
+    if normalized <= 0.25:
+        return "앞"
+    if normalized <= 0.5:
+        return "앞쪽"
+    if normalized <= 0.75:
+        return "뒤쪽"
+    return "뒤"
+
+
+def _pace_board(runners: list[AnalysisRunner]) -> tuple[list[PaceBoardLane], list[dict[str, Any]]]:
+    active = [runner for runner in runners if runner.state != "출전취소"]
+    lanes: list[PaceBoardLane] = []
+    for key, title, hint in PACE_LANE_META:
+        slots: list[list[PaceBoardChip]] = [[] for _ in range(11)]
+        missing: list[PaceBoardChip] = []
+        for runner in active:
+            stage = runner.pace_stages.get(key) or {}
+            normalized = stage.get("normalized")
+            samples = int(stage.get("samples") or 0)
+            chip = PaceBoardChip(
+                entry_id=runner.entry_id,
+                number=runner.number,
+                horse=runner.horse,
+                samples=samples,
+            )
+            if normalized is None or samples <= 0:
+                missing.append(chip)
+                continue
+            slot = max(0, min(10, int(round((1 - float(normalized)) * 10))))
+            slots[slot].append(chip)
+        lanes.append(
+            PaceBoardLane(
+                key=key,
+                title=title,
+                hint=hint,
+                slots=slots,
+                missing=missing,
+                has_marks=any(slots),
+            )
+        )
+    summaries = []
+    for runner in active:
+        stages = runner.pace_stages or {}
+        summaries.append(
+            {
+                "entry_id": runner.entry_id,
+                "number": runner.number,
+                "horse": runner.horse,
+                "early": _pace_band((stages.get("early") or {}).get("normalized")),
+                "middle": _pace_band((stages.get("middle") or {}).get("normalized")),
+                "late": _pace_band((stages.get("late") or {}).get("normalized")),
+            }
+        )
+    return lanes, summaries
 
 
 def _normalized_position(position, field_size):

@@ -99,6 +99,24 @@
 .empty-state { display: grid; min-height: 260px; color: var(--muted); text-align: center; place-content: center; }
 .empty-state strong { color: var(--ink-strong); font-size: 22px; }
 
+.forecast-embed {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 20px;
+  scroll-margin-top: calc(var(--ra-header-offset, 69px) + 64px);
+}
+.forecast-embed-intro h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+.forecast-embed-intro p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 @media (max-width: 1100px) {
   .insight-filter, .validation-filter, .analysis-filter { grid-template-columns: repeat(3, 1fr); }
   .analysis-grid { grid-template-columns: 1fr; }

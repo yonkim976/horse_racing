@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, timedelta
 from itertools import groupby
 
 from sqlalchemy import select
@@ -12,7 +13,9 @@ from horse_racing.db.models import (
     Race,
     Racecourse,
     RaceEntry,
+    RaceResult,
     RunningTrial,
+    RunningTrialResult,
 )
 from horse_racing.services.entry_sheet import MEET_METADATA
 from horse_racing.web.formatting import (
@@ -27,6 +30,14 @@ from horse_racing.web.formatting import (
     format_rating,
     group_dates_by_month,
 )
+from horse_racing.web.insights import (
+    assign_win_labels,
+    format_trial_form_line,
+    format_trial_form_token,
+    format_win_pct,
+    latest_win_probabilities,
+    win_probability_sort_key,
+)
 from horse_racing.web.race_scope import active_race_clause
 
 
@@ -37,32 +48,66 @@ class RacecourseOption:
 
 
 @dataclass(frozen=True, slots=True)
+class PosterHorse:
+    number: int
+    name: str
+    jockey: str
+    form: str
+    scratched: bool
+    entry_id: int
+    win_pct: str | None = None
+    win_label: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class RaceRow:
     id: int
     href: str
     detail_href: str
+    analysis_href: str
     course_name: str
+    meet_code: int
     race_number: int
     start_time: str
     distance: str
     race_label: str
     entry_count: int
+    runner_count: int
     status: str
     status_label: str
     winner: str
     winning_time: str
+    posters: list[PosterHorse]
 
 
 @dataclass(frozen=True, slots=True)
 class RaceGroup:
     course_name: str
     races: list[RaceRow]
+    kind: str = "course"
 
 
 @dataclass(frozen=True, slots=True)
 class DateGroup:
     label: str
     dates: list[date]
+
+
+@dataclass(frozen=True, slots=True)
+class DayMeet:
+    code: int | None
+    label: str
+    href: str
+    selected: bool
+
+
+@dataclass(frozen=True, slots=True)
+class WeekendDay:
+    value: str
+    href: str
+    month_day: str
+    weekday: str
+    selected: bool
 
 
 @dataclass(frozen=True, slots=True)
@@ -137,6 +182,8 @@ class DashboardData:
     available_dates: list[date]
     date_groups: list[DateGroup]
     calendar_dates: list[CalendarDateOption]
+    weekend_days: list[WeekendDay]
+    day_meets: list[DayMeet]
     prev_date: date | None
     next_date: date | None
     racecourses: list[RacecourseOption]
@@ -164,6 +211,7 @@ def load_dashboard(
     selected_meet: int | None,
     selected_race_id: int | None,
     selected_trial_id: int | None = None,
+    home_path: str = "/",
 ) -> DashboardData:
     race_dates = list(
         session.scalars(
@@ -245,8 +293,17 @@ def load_dashboard(
         chosen_race = races[0]
 
     filter_query = _filter_query(selected_date, selected_meet)
-    race_rows = [_race_row(race, filter_query) for race in races]
-    race_groups = _race_groups(race_rows, grouped=selected_meet is None)
+    horse_ids = [entry.horse_id for race in races for entry in race.entries]
+    form_by_horse = _recent_form_by_horse(session, horse_ids, selected_date)
+    debut_ids = [horse_id for horse_id in horse_ids if horse_id not in form_by_horse]
+    if debut_ids:
+        form_by_horse.update(_recent_trial_form_by_horse(session, debut_ids, selected_date))
+    win_probs = latest_win_probabilities(session, [race.id for race in races])
+    race_rows = [_race_row(race, filter_query, form_by_horse, win_probs) for race in races]
+    if home_path == "/m" and selected_meet is None:
+        race_groups = _round_groups(race_rows)
+    else:
+        race_groups = _race_groups(race_rows, grouped=True)
     detail = _race_detail(session, chosen_race) if chosen_race is not None else None
     trial_rows = [_trial_row(trial) for trial in trials]
     entry_count = sum(len(race.entries) for race in races)
@@ -270,6 +327,8 @@ def load_dashboard(
             )
             for available_date in available_dates
         ],
+        weekend_days=_weekend_days(selected_date, selected_meet, home_path),
+        day_meets=_day_meets(session, selected_date, selected_meet, home_path),
         prev_date=older_date,
         next_date=newer_date,
         racecourses=racecourses,
@@ -289,6 +348,85 @@ def load_dashboard(
         scheduled_count=scheduled_count,
         meet_count=meet_count,
     )
+
+
+_WEEKEND_WEEKDAYS = ("금요일", "토요일", "일요일")
+_MEET_SHORT = {1: "서울", 2: "제주", 3: "부경", 4: "영천"}
+
+
+def _friday_of_race_weekend(anchor: date) -> date:
+    weekday = anchor.weekday()
+    if weekday <= 3:
+        return anchor + timedelta(days=4 - weekday)
+    return anchor - timedelta(days=weekday - 4)
+
+
+def _weekend_days(
+    selected_date: date | None,
+    selected_meet: int | None,
+    home_path: str = "/",
+) -> list[WeekendDay]:
+    friday = _friday_of_race_weekend(selected_date or date.today())
+    meet_query = f"&meet={selected_meet}" if selected_meet is not None else ""
+    days: list[WeekendDay] = []
+    for offset, weekday_name in enumerate(_WEEKEND_WEEKDAYS):
+        day = friday + timedelta(days=offset)
+        days.append(
+            WeekendDay(
+                value=day.isoformat(),
+                href=f"{home_path}?date={day.isoformat()}{meet_query}",
+                month_day=f"{day.month}월 {day.day}일",
+                weekday=weekday_name,
+                selected=selected_date == day,
+            )
+        )
+    return days
+
+
+def _day_meets(
+    session: Session,
+    selected_date: date | None,
+    selected_meet: int | None,
+    home_path: str = "/",
+) -> list[DayMeet]:
+    if selected_date is None:
+        return []
+    date_query = f"date={selected_date.isoformat()}"
+    race_rows = session.execute(
+        select(Racecourse.kra_meet_code, Racecourse.name_ko)
+        .join(Race, Race.racecourse_id == Racecourse.id)
+        .where(active_race_clause(), Race.race_date_local == selected_date)
+        .distinct()
+        .order_by(Racecourse.kra_meet_code)
+    ).all()
+    labels = {row[0]: row[1] for row in race_rows}
+    for code in session.scalars(
+        select(RunningTrial.meet_code)
+        .where(RunningTrial.trial_date_local == selected_date)
+        .distinct()
+    ):
+        labels.setdefault(code, MEET_METADATA.get(code, (str(code), str(code)))[1])
+    ordered = sorted(labels.items())
+    meets: list[DayMeet] = []
+    if len(ordered) > 1:
+        meets.append(
+            DayMeet(
+                code=None,
+                label="전체",
+                href=f"{home_path}?{date_query}",
+                selected=selected_meet is None,
+            )
+        )
+    for code, name in ordered:
+        meets.append(
+            DayMeet(
+                code=code,
+                label=_MEET_SHORT.get(code, name),
+                href=f"{home_path}?{date_query}&meet={code}",
+                selected=selected_meet == code or (selected_meet is None and len(ordered) == 1),
+            )
+        )
+    return meets
 
 
 def _calendar_status(statuses: set[str]) -> str:
@@ -334,7 +472,102 @@ def _race_groups(rows: list[RaceRow], *, grouped: bool) -> list[RaceGroup]:
     return groups
 
 
-def _race_row(race: Race, filter_query: str) -> RaceRow:
+def _round_groups(rows: list[RaceRow]) -> list[RaceGroup]:
+    ordered = sorted(rows, key=lambda row: (row.race_number, row.meet_code, row.id))
+    groups: list[RaceGroup] = []
+    for race_number, items in groupby(ordered, key=lambda row: row.race_number):
+        groups.append(
+            RaceGroup(course_name=f"{race_number}R", races=list(items), kind="round")
+        )
+    return groups
+
+
+def _recent_form_by_horse(
+    session: Session,
+    horse_ids: list[int],
+    before: date | None,
+) -> dict[int, str]:
+    if not horse_ids or before is None:
+        return {}
+    rows = session.execute(
+        select(
+            RaceEntry.horse_id,
+            Race.race_date_local,
+            Race.id,
+            RaceResult.finish_position,
+            RaceResult.disqualified,
+        )
+        .join(Race, Race.id == RaceEntry.race_id)
+        .join(RaceResult, RaceResult.race_entry_id == RaceEntry.id)
+        .where(
+            RaceEntry.horse_id.in_(horse_ids),
+            Race.race_date_local < before,
+            RaceResult.finish_position.is_not(None),
+        )
+        .order_by(RaceEntry.horse_id, Race.race_date_local.desc(), Race.id.desc())
+    ).all()
+    form: dict[int, list[str]] = defaultdict(list)
+    for horse_id, _race_date, _race_id, position, disqualified in rows:
+        finishes = form[horse_id]
+        if len(finishes) >= 5:
+            continue
+        if disqualified or position >= 90:
+            finishes.append("-")
+        else:
+            finishes.append(str(position))
+    return {
+        horse_id: "-".join(finishes) if finishes else "—"
+        for horse_id, finishes in form.items()
+    }
+
+
+def _recent_trial_form_by_horse(
+    session: Session,
+    horse_ids: list[int],
+    before: date | None,
+) -> dict[int, str]:
+    if not horse_ids or before is None:
+        return {}
+    rows = session.execute(
+        select(
+            RunningTrialResult.horse_id,
+            RunningTrial.trial_date_local,
+            RunningTrial.id,
+            RunningTrialResult.finish_position,
+            RunningTrialResult.judgement,
+        )
+        .join(RunningTrial, RunningTrial.id == RunningTrialResult.running_trial_id)
+        .where(
+            RunningTrialResult.horse_id.in_(horse_ids),
+            RunningTrial.trial_date_local < before,
+        )
+        .order_by(
+            RunningTrialResult.horse_id,
+            RunningTrial.trial_date_local.desc(),
+            RunningTrial.id.desc(),
+        )
+    ).all()
+    form: dict[int, list[str]] = defaultdict(list)
+    for horse_id, _trial_date, _trial_id, position, judgement in rows:
+        tokens = form[horse_id]
+        if len(tokens) >= 5:
+            continue
+        token = format_trial_form_token(position, judgement)
+        if token:
+            tokens.append(token)
+    return {
+        horse_id: format_trial_form_line(tokens)
+        for horse_id, tokens in form.items()
+        if tokens
+    }
+
+
+def _race_row(
+    race: Race,
+    filter_query: str,
+    form_by_horse: dict[int, str],
+    win_probs: dict[int, float],
+) -> RaceRow:
     winner_entry = next(
         (
             entry
@@ -351,20 +584,56 @@ def _race_row(race: Race, filter_query: str) -> RaceRow:
     )
     status, status_label = _status(race.status)
     query = f"{filter_query}&race_id={race.id}" if filter_query else f"race_id={race.id}"
+    has_field_predictions = any(entry.id in win_probs for entry in race.entries)
+    win_labels = assign_win_labels(
+        [
+            (entry.id, win_probs.get(entry.id), entry.scratched)
+            for entry in race.entries
+        ]
+    )
+    posters = [
+        PosterHorse(
+            number=entry.horse_number or 0,
+            name=entry.horse.name_ko,
+            jockey=entry.jockey.name_ko if entry.jockey else "미정",
+            form=form_by_horse.get(entry.horse_id, "—"),
+            scratched=entry.scratched,
+            entry_id=entry.id,
+            win_pct=format_win_pct(win_probs.get(entry.id)),
+            win_label=win_labels.get(entry.id),
+        )
+        for entry in sorted(
+            race.entries,
+            key=lambda item: win_probability_sort_key(
+                scratched=item.scratched,
+                number=item.horse_number,
+                win_prob=win_probs.get(item.id),
+                has_field_predictions=has_field_predictions,
+            ),
+        )
+    ]
+    meet_code = race.racecourse.kra_meet_code
     return RaceRow(
         id=race.id,
         href=f"/?{query}",
         detail_href=f"/races/{race.id}",
+        analysis_href=(
+            f"/m/analysis?date={race.race_date_local.isoformat()}"
+            f"&meet={meet_code}&race_id={race.id}"
+        ),
         course_name=race.racecourse.name_ko,
+        meet_code=meet_code,
         race_number=race.race_number,
         start_time=format_clock(race.scheduled_at_ms),
         distance=f"{race.distance_m:,}m",
         race_label=display_race_title(race.grade, race.race_name),
         entry_count=len(race.entries),
+        runner_count=sum(not entry.scratched for entry in race.entries),
         status=status,
         status_label=status_label,
         winner=winner,
         winning_time=winning_time,
+        posters=posters,
     )
 
 

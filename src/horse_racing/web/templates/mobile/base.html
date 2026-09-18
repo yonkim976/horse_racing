@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="{% block meta_description %}한국마사회 경주 데이터를 조회하는 로컬 데이터 대시보드{% endblock %}">
+    <meta name="theme-color" content="#0a0f0d">
+    <title>{% block title %}한국 경마 데이터 보드{% endblock %}</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("hr-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (error) { /* private mode 등에서 무시 */ }
+      })();
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=14">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/mobile.css') }}?v=44">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=10" defer></script>
+    <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="mobile-app {% block body_class %}{% endblock %}">
+    <header class="mobile-topbar">
+      <strong>{% block topbar_title %}한국 경마 데이터 보드{% endblock %}</strong>
+      <div class="mobile-topbar-actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="라이트 모드로 전환">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <main class="page-shell">
+      {% block content %}{% endblock %}
+    </main>
+    <nav class="mobile-tabbar" aria-label="모바일 주요 메뉴">
+      <a href="/m" {% if active_nav == 'races' %}aria-current="page"{% endif %}>경주</a>
+      <a href="/m/analysis" {% if active_nav == 'analysis' %}aria-current="page"{% endif %}>경주 분석</a>
+      <a href="https://m.kra.co.kr/comp/view/kraAppList.do" data-open-derbyon rel="noopener noreferrer" aria-label="더비온 앱 열기">더비온</a>
+    </nav>
+  </body>
+</html>

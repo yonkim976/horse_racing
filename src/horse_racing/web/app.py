@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import csv
+import re
 from collections import defaultdict, deque
 from collections.abc import Callable
 from dataclasses import asdict
@@ -13,7 +14,7 @@ from time import monotonic
 from typing import Annotated, TypeVar
 
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, Response
+from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
@@ -40,6 +41,20 @@ from horse_racing.web.trial_page import load_running_trial_page
 
 WEB_ROOT = Path(__file__).parent
 T = TypeVar("T")
+_MOBILE_UA = re.compile(
+    r"Android.+Mobile|iPhone|iPod|iPad|webOS|BlackBerry|IEMobile|Opera Mini",
+    re.I,
+)
+
+
+def _is_mobile_request(request: Request) -> bool:
+    return bool(_MOBILE_UA.search(request.headers.get("user-agent", "")))
+
+
+def _mobile_redirect(request: Request, mobile_path: str) -> RedirectResponse:
+    query = request.url.query
+    target = f"{mobile_path}?{query}" if query else mobile_path
+    return RedirectResponse(url=target, status_code=302)
 
 
 def create_app(
@@ -102,15 +117,17 @@ def create_app(
                 bucket.append(now)
 
         cacheable = request.method == "GET" and (
-            request.url.path in {"/", "/forecast", "/validation", "/analysis"}
+            request.url.path in {"/", "/m", "/forecast", "/validation", "/analysis", "/m/analysis"}
             or request.url.path.startswith("/races/")
         )
+        view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
         # Template responses contain absolute URLs generated from the request
         # origin. Keep caches isolated per origin so the apex, www, and
-        # run.app hosts never receive HTML rendered for another host.
+        # run.app hosts never receive HTML rendered for another host, while
+        # mobile and desktop variants remain separate within the same host.
         response_key = (
             f"{request.url.scheme}://{request.url.netloc}"
-            f"{request.url.path}?{request.url.query}"
+            f"|{view_bit}:{request.url.path}?{request.url.query}"
         )
         if cacheable:
             cached_response = response_cache.get(response_key)
@@ -143,7 +160,7 @@ def create_app(
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
-        if request.url.path in {"/forecast", "/validation", "/analysis"}:
+        if request.url.path in {"/forecast", "/validation", "/analysis", "/m/analysis"}:
             response.headers["Cache-Control"] = "private, max-age=20"
         response.headers["Content-Security-Policy"] = (
             "default-src 'self'; script-src 'self' 'unsafe-inline'; "
@@ -183,8 +200,33 @@ def create_app(
             raise HTTPException(status_code=503, detail="database unavailable") from exc
         return {"status": "ready"}
 
-    @app.get("/", response_class=HTMLResponse)
+    @app.get("/", response_class=HTMLResponse, response_model=None)
     def dashboard(
+        request: Request,
+        race_date: Annotated[date | None, Query(alias="date")] = None,
+        meet: Annotated[str | None, Query()] = None,
+        race_id: Annotated[int | None, Query()] = None,
+        trial_id: Annotated[int | None, Query()] = None,
+    ) -> HTMLResponse | RedirectResponse:
+        if _is_mobile_request(request):
+            return _mobile_redirect(request, "/m")
+        selected_meet = int(meet) if meet and meet.isdigit() else None
+        with session_factory() as session:
+            data = load_dashboard(
+                session,
+                selected_date=race_date,
+                selected_meet=selected_meet,
+                selected_race_id=race_id,
+                selected_trial_id=trial_id,
+            )
+        return templates.TemplateResponse(
+            request=request,
+            name="dashboard.html",
+            context={"active_nav": "races", "dashboard": data},
+        )
+
+    @app.get("/m", response_class=HTMLResponse)
+    def mobile_dashboard(
         request: Request,
         race_date: Annotated[date | None, Query(alias="date")] = None,
         meet: Annotated[str | None, Query()] = None,
@@ -199,10 +241,11 @@ def create_app(
                 selected_meet=selected_meet,
                 selected_race_id=race_id,
                 selected_trial_id=trial_id,
+                home_path="/m",
             )
         return templates.TemplateResponse(
             request=request,
-            name="dashboard.html",
+            name="mobile/home.html",
             context={"active_nav": "races", "dashboard": data},
         )
 
@@ -384,7 +427,66 @@ def create_app(
             load,
         )
 
-    @app.get("/analysis", response_class=HTMLResponse)
+    def _render_analysis(
+        request: Request,
+        *,
+        layout: str,
+        template_name: str,
+        race_date: date | None,
+        history_limit: int,
+        race_id: int | None,
+        start: date | None,
+        end: date | None,
+        meet: int | None,
+        distance: int | None,
+        grade: str,
+        horse: list[int],
+        jockey_id: int | None,
+        q: str,
+    ) -> HTMLResponse:
+        page = _analysis_data(
+            race_id=race_id,
+            race_date=race_date,
+            history_limit=history_limit,
+            start=start,
+            end=end,
+            meet=meet,
+            distance=distance,
+            grade=grade,
+            horse=horse,
+            jockey_id=jockey_id,
+            q=q,
+        )
+        forecast = None
+        if page.selected_race is not None:
+            selected = page.selected_race
+
+            def load_forecast():
+                with session_factory() as session:
+                    return load_forecast_page(
+                        session,
+                        selected_date=date.fromisoformat(selected.date),
+                        meet=selected.meet_code,
+                        race_id=selected.id,
+                    )
+
+            forecast = cached(("forecast-embed", selected.id), load_forecast)
+        return templates.TemplateResponse(
+            request=request,
+            name=template_name,
+            context={
+                "layout": layout,
+                "active_nav": "analysis",
+                "page": page,
+                "forecast": forecast,
+                "analysis_payload": {
+                    "race": asdict(page.selected_race) if page.selected_race else None,
+                    "runners": [asdict(runner) for runner in page.runners],
+                },
+            },
+        )
+
+    @app.get("/analysis", response_class=HTMLResponse, response_model=None)
     def analysis_workspace(
         request: Request,
         race_date: Annotated[date | None, Query(alias="date")] = None,
@@ -398,11 +500,16 @@ def create_app(
         horse: Annotated[list[int] | None, Query()] = None,
         jockey_id: Annotated[int | None, Query(ge=1)] = None,
         q: Annotated[str, Query(max_length=50)] = "",
-    ) -> HTMLResponse:
-        page = _analysis_data(
-            race_id=race_id,
+    ) -> HTMLResponse | RedirectResponse:
+        if _is_mobile_request(request):
+            return _mobile_redirect(request, "/m/analysis")
+        return _render_analysis(
+            request,
+            layout="base.html",
+            template_name="analysis.html",
             race_date=race_date,
             history_limit=history_limit,
+            race_id=race_id,
             start=start,
             end=end,
             meet=meet,
@@ -412,17 +519,37 @@ def create_app(
             jockey_id=jockey_id,
             q=q,
         )
-        return templates.TemplateResponse(
-            request=request,
-            name="analysis.html",
-            context={
-                "active_nav": "analysis",
-                "page": page,
-                "analysis_payload": {
-                    "race": asdict(page.selected_race) if page.selected_race else None,
-                    "runners": [asdict(runner) for runner in page.runners],
-                },
-            },
+
+    @app.get("/m/analysis", response_class=HTMLResponse)
+    def mobile_analysis_workspace(
+        request: Request,
+        race_date: Annotated[date | None, Query(alias="date")] = None,
+        history_limit: Annotated[int, Query(ge=1, le=60)] = 12,
+        race_id: Annotated[int | None, Query(ge=1)] = None,
+        start: Annotated[date | None, Query()] = None,
+        end: Annotated[date | None, Query()] = None,
+        meet: Annotated[int | None, Query(ge=1, le=4)] = None,
+        distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
+        grade: Annotated[str, Query(max_length=50)] = "",
+        horse: Annotated[list[int] | None, Query()] = None,
+        jockey_id: Annotated[int | None, Query(ge=1)] = None,
+        q: Annotated[str, Query(max_length=50)] = "",
+    ) -> HTMLResponse:
+        return _render_analysis(
+            request,
+            layout="mobile/base.html",
+            template_name="mobile/analysis.html",
+            race_date=race_date,
+            history_limit=history_limit,
+            race_id=race_id,
+            start=start,
+            end=end,
+            meet=meet,
+            distance=distance,
+            grade=grade,
+            horse=horse or [],
+            jockey_id=jockey_id,
+            q=q,
         )
 
     @app.get("/api/analysis/export.csv")
