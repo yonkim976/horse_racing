@@ -226,6 +226,13 @@ class Race(Base):
         CheckConstraint("distance_m > 0", name="positive_distance"),
         CheckConstraint("race_number > 0", name="positive_race_number"),
         Index("ix_races_date_course", "race_date_local", "racecourse_id"),
+        Index(
+            "ix_races_status_date_distance_grade",
+            "status",
+            "race_date_local",
+            "distance_m",
+            "grade",
+        ),
     )
 
 
@@ -267,6 +274,7 @@ class RaceEntry(Base):
         UniqueConstraint("race_id", "horse_id", name="race_horse"),
         CheckConstraint("horse_number > 0", name="positive_horse_number"),
         Index("ix_race_entries_horse_race", "horse_id", "race_id"),
+        Index("ix_race_entries_jockey_race", "jockey_id", "race_id"),
     )
 
 

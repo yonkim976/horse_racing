@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}경주 분석 · 한국 경마 데이터 보드{% endblock %}
+{% block meta_description %}당일 출전마의 과거 경주, 주행심사, 영상과 조교 기록을 한 화면에서 비교합니다.{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-analysis.css') }}?v=4">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/analysis-pace.css') }}?v=4">
+<script src="{{ url_for('static', path='/js/race-analysis.js') }}?v=4" defer></script>
+<script src="{{ url_for('static', path='/js/analysis-pace.js') }}?v=4" defer></script>
+{% endblock %}
+
+{% macro stone(number) -%}<span class="ra-stone" data-number="{{ number }}">{{ number }}</span>{%- endmacro %}
+{% macro video(url, title) -%}
+{% if url %}<a class="ra-video-link" href="{{ url }}" target="_blank" rel="noopener noreferrer" data-analysis-video data-video-title="{{ title }}" aria-label="{{ title }} 영상 보기">▶ 영상</a>{% else %}<span class="ra-muted" title="공식 영상 연결이 확인되지 않았습니다">—</span>{% endif %}
+{%- endmacro %}
+{% macro section_cell(record, code) -%}
+{% set cell = record.section_details.get(code, {}) %}
+<span{% if cell.get('raw_time_ms') and not cell.get('time_ms') %} class="ra-raw-section"{% endif %} title="{{ cell.get('label', '') }} · {{ cell.get('note', '') }}">{{ cell.get('time', '—') if cell.get('time_ms') else cell.get('display', '—') }}</span>
+{%- endmacro %}
+{% macro checkpoint_details(record) -%}
+<span>날씨·주로·함수율 {{ record.condition }}</span>
+{% if record.horse_number %}<span>당시 {{ record.horse_number }}번 · 마체중 {{ record.body_weight }}</span>{% endif %}
+{% for code, cell in record.section_details.items() %}{% if cell.get('position') or (code not in ['S1F','G3F','G1F'] and cell.get('raw_time_ms')) %}<span title="{{ cell.get('note', '') }}">{{ code }} · {{ cell.get('display', '—') }}</span>{% endif %}{% endfor %}
+{%- endmacro %}
+{% macro trial_table(runner) %}
+{% if runner.trials %}
+<div class="ra-table-scroll" tabindex="0" aria-label="{{ runner.horse }} 주행심사 기록">
+<table class="ra-record-table">
+<thead><tr><th>심사일 · 경기장</th><th>거리</th><th>착순 · 판정</th><th>총기록</th><th>S1F <small>초반 구간</small></th><th>G3F <small>마지막 600m</small></th><th>G1F <small>마지막 200m</small></th><th>기수</th><th>마체중</th><th>영상</th></tr></thead>
+<tbody>{% for trial in runner.trials %}
+<tr><td><details class="ra-past-detail"><summary>{{ trial.date }}</summary><div>{{ checkpoint_details(trial) }}</div></details><small>{{ trial.meet }} {{ trial.number }}차{% if trial.horse_number %} · 당시 {{ trial.horse_number }}번{% endif %}</small></td><td>{{ trial.distance }}m</td><td><strong>{{ trial.finish }}</strong><small>{{ trial.judgement }}{% if trial.reason %} · {{ trial.reason }}{% endif %}</small></td><td class="ra-number">{{ trial.time }}</td><td class="ra-number">{{ section_cell(trial, 'S1F') }}</td><td class="ra-number">{{ section_cell(trial, 'G3F') }}</td><td class="ra-number">{{ section_cell(trial, 'G1F') }}</td><td>{{ trial.jockey }}</td><td>{{ trial.body_weight }}</td><td>{{ video(trial.video_url, runner.horse ~ ' · ' ~ trial.date ~ ' 주행심사 ' ~ trial.number ~ '차' ~ (' · 당시 ' ~ trial.horse_number ~ '번' if trial.horse_number else '')) }}</td></tr>
+{% endfor %}</tbody></table></div>
+<p class="ra-footnote">주행심사는 실제 경주와 구분해 비교하세요. 심사 조건·거리·판정이 다르며, 영상 제공 여부는 공식 플레이어에서 확인됩니다.</p>
+{% else %}<div class="ra-empty"><strong>연결된 주행심사 기록이 없습니다.</strong><span>미수집 또는 말 식별정보 미연결일 수 있습니다. 주행심사를 받지 않았다는 뜻은 아닙니다.</span></div>{% endif %}
+{% endmacro %}
+
+{% block content %}
+<div class="ra-workspace" data-race-workspace data-race-id="{{ page.selected_race.id if page.selected_race else '' }}">
+<header class="ra-intro"><div><p class="ra-eyebrow">RACE STUDY</p><h1>경주 분석</h1><p>출전마의 기록을 읽고, 비교하고, 전개를 그려보세요.</p></div><span class="ra-intro-label">출전표에서 시작하는 데이터 분석</span></header>
+<section class="ra-browser" aria-label="분석할 경주 선택">
+<form action="/analysis" method="get" class="ra-date-form">
+<label for="analysis-date">경주일</label><input id="analysis-date" name="date" type="date" value="{{ page.selected_date }}" list="race-dates">
+<datalist id="race-dates">{% for day in page.date_options %}<option value="{{ day }}">{% endfor %}</datalist>
+{% if page.selected_race %}<input type="hidden" name="meet" value="{{ page.selected_race.meet_code }}">{% endif %}
+<button class="ra-button" type="submit">조회</button><a href="/analysis" class="ra-today-link">오늘</a>
+<span class="ra-selection-note">{{ page.selection_note }}</span>
+</form>
+<nav class="ra-meets" aria-label="경기장 선택">
+{% for code, name in [(1,'서울'),(2,'제주'),(3,'부산경남'),(4,'영천')] %}
+<a href="/analysis?date={{ page.selected_date }}&meet={{ code }}" class="{% if (page.selected_race and page.selected_race.meet_code == code) or (not page.selected_race and page.filters.meet == code) %}active{% endif %}" {% if (page.selected_race and page.selected_race.meet_code == code) or (not page.selected_race and page.filters.meet == code) %}aria-current="true"{% endif %}>{{ name }}</a>
+{% endfor %}
+</nav>
+{% if page.races %}<nav class="ra-rounds" aria-label="경주 선택">{% for race in page.races %}{% if not page.selected_race or race.meet_code == page.selected_race.meet_code %}
+<a href="/analysis?date={{ race.date }}&meet={{ race.meet_code }}&race_id={{ race.id }}" class="{% if page.selected_race and race.id == page.selected_race.id %}active{% endif %}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="true"{% endif %}><strong>{{ race.number }}R</strong><span>{{ race.start_time }}</span><small>{{ race.distance }}m</small></a>
+{% endif %}{% endfor %}</nav>{% endif %}
+</section>
+{% if page.selected_race %}
+<section class="ra-race-title" data-selected-race-id="{{ page.selected_race.id }}"><div><p>{{ page.selected_race.date }} · {{ page.selected_race.start_time }} · {{ page.selected_race.meet }}</p><h2>{{ page.selected_race.meet }} <b>{{ page.selected_race.number }}경주</b><span>{{ page.selected_race.distance }}m</span></h2><p>{{ page.selected_race.grade }} · {{ page.selected_race.name }} · 출전 {{ page.selected_race.field_size }}두</p></div><div class="ra-title-links"><a href="/forecast?race_id={{ page.selected_race.id }}">모델 예측 ↗</a><a href="/races/{{ page.selected_race.id }}">기본 경주 상세 ↗</a></div></section>
+<nav class="ra-section-nav" aria-label="분석 영역"><a href="#field-overview">출전마 비교</a><a href="#runner-records">말별 기록·영상</a><a href="#pace-workbench">전개 그리기</a><a href="#race-memo">메모</a><span>{{ page.selected_race.date }} 이전 기록 기준</span></nav>
+
+<section id="field-overview" class="ra-panel">
+<div class="ra-panel-heading"><div><h2>현재 출전마 <span>{{ page.runners|length }}</span></h2><p>말 이름으로 기록을 열고, 체크한 말은 나란히 비교하세요.</p></div><div class="ra-field-controls"><label class="ra-search-label"><span class="ra-sr-only">출전마 또는 기수 검색</span><input type="search" data-runner-search placeholder="말 · 기수 검색"></label><button type="button" class="ra-button" data-clear-comparison>선택 해제</button></div></div>
+<div class="ra-table-scroll"><table class="ra-field-table" data-field-table><thead><tr><th>비교</th><th><button data-sort="number" type="button">마번 ↕</button></th><th>출전마 · 각질</th><th>기수 · 중량</th><th>최근 착순 <small>최신 → 과거</small></th><th>동일거리 <small>{{ page.selected_race.distance }}m</small></th><th>최근 주행심사</th><th>최근 28일 조교</th><th><button data-sort="rating" type="button">레이팅 ↕</button></th></tr></thead><tbody>
+{% for runner in page.runners %}<tr data-field-entry="{{ runner.entry_id }}" data-runner-name="{{ runner.horse }} {{ runner.jockey }}" data-number="{{ runner.number }}" data-rating="{{ runner.rating }}" class="{% if runner.state == '출전취소' %}ra-scratched{% endif %}">
+<td><input type="checkbox" data-compare-entry="{{ runner.entry_id }}" aria-label="{{ runner.number }}번 {{ runner.horse }} 비교"></td><td>{{ stone(runner.number) }}</td><td><button type="button" class="ra-horse-button" data-select-runner="{{ runner.entry_id }}">{{ runner.horse }}</button><small><span class="ra-style-tag" title="{{ runner.style_note }}">{{ runner.style }}</span>{% if runner.state == '출전취소' %} · 출전취소{% elif not runner.history_total %} · 경주 이력 없음{% endif %}</small></td><td>{{ runner.jockey }}<small>{{ runner.weight }} · 게이트 {{ runner.gate }}</small></td><td><span class="ra-form-chips">{% for past in runner.history[:5] %}<span class="{% if past.valid_finish and past.finish_position <= 3 %}placed{% endif %}" title="{{ past.date }} {{ past.distance }}m · {{ past.finish }}">{{ past.finish_position if past.valid_finish else '–' }}</span>{% else %}<span class="ra-no-form">경주 이력 없음</span>{% endfor %}</span></td><td>{{ runner.same_distance_starts }}전<small>{% if runner.history_total %}수집된 과거 {{ runner.history_total }}전{% else %}주행심사 먼저 확인{% endif %}</small></td><td>{% if runner.trials %}<button type="button" class="ra-inline-button" data-select-runner="{{ runner.entry_id }}" data-open-tab="trials">{{ runner.trials[0].time }}</button><small>{{ runner.trials[0].date }} · {{ runner.trials[0].distance }}m</small>{% else %}—<small>연결된 자료 없음</small>{% endif %}</td><td>{% if runner.training_summary.sessions %}{{ runner.training_summary.sessions }}회<small>{{ runner.training_summary.minutes if runner.training_summary.minutes is not none else '—' }}분 · 출발 {{ runner.training_summary.start_sessions }}회</small>{% else %}—<small>수집된 조교 없음</small>{% endif %}</td><td class="ra-number">{{ runner.rating }}</td>
+</tr>{% endfor %}</tbody></table></div><p class="ra-footnote" data-field-status aria-live="polite">각질은 수집된 과거 초반 통과순위에 따른 추정입니다. 기록이 없는 항목은 ‘—’로 표시합니다.</p>
+</section>
+<section class="ra-panel ra-comparison" data-comparison-panel hidden aria-label="선택한 말 비교"><div class="ra-panel-heading"><div><h2>나란히 비교 <span data-comparison-count></span></h2><p>최대 4두 · 경주 기록과 주행심사를 구분해 확인하세요.</p></div><button type="button" class="ra-button" data-clear-comparison>비교 닫기</button></div><div class="ra-compare-grid" data-comparison-content></div></section>
+
+<section id="runner-records" class="ra-panel ra-records-panel">
+<div class="ra-panel-heading"><div><h2>말별 기록과 영상</h2><p>경주·심사·조교를 한곳에서 확인하고, 영상은 공식 플레이어 창으로 바로 엽니다.</p></div><label class="ra-check-label"><input type="checkbox" data-same-distance> 현재 거리 {{ page.selected_race.distance }}m만</label></div>
+<div class="ra-record-workspace"><aside class="ra-horse-rail" aria-label="상세 기록 출전마 선택">{% for runner in page.runners %}<button type="button" data-select-runner="{{ runner.entry_id }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ stone(runner.number) }}<span><strong>{{ runner.horse }}</strong><small>{{ runner.style }} · {{ runner.jockey }}</small></span></button>{% endfor %}</aside>
+<div class="ra-dossiers">{% for runner in page.runners %}
+<article class="ra-dossier {% if loop.first %}is-active{% endif %}" data-dossier="{{ runner.entry_id }}" id="runner-{{ runner.entry_id }}">
+<header class="ra-dossier-heading"><div class="ra-runner-identity">{{ stone(runner.number) }}<div><h3>{{ runner.horse }}</h3><p>{{ runner.profile.get('sex') or '—' }} · {{ runner.profile.get('age') if runner.profile.get('age') is not none else '—' }}세 · {{ runner.weight }} · {{ runner.jockey }} 기수 · {{ runner.trainer }} 조교사</p></div></div><span class="ra-style-tag" title="{{ runner.style_note }}">{{ runner.style }}</span></header>
+<p class="ra-style-explanation">{{ runner.style_note }}</p>
+<div class="ra-record-tabs" role="tablist" aria-label="{{ runner.horse }} 기록 종류">
+{% for key, label in [('history','과거 경주'),('trials','주행심사'),('training','조교·훈련'),('jockey','기수·호흡')] %}
+<button type="button" role="tab" id="tab-{{ runner.entry_id }}-{{ key }}" aria-controls="pane-{{ runner.entry_id }}-{{ key }}" data-record-tab="{{ key }}" aria-selected="{{ 'true' if (key == 'history' and runner.history_total) or (key == 'trials' and not runner.history_total) else 'false' }}">{{ label }}{% if key == 'history' %}<span>{{ runner.history_total }}</span>{% elif key == 'trials' %}<span>{{ runner.trials|length }}</span>{% endif %}</button>
+{% endfor %}</div>
+<div data-record-pane="history" id="pane-{{ runner.entry_id }}-history" role="tabpanel" aria-labelledby="tab-{{ runner.entry_id }}-history">
+{% if runner.history %}<div class="ra-record-toolbar"><span>최근 {{ runner.history|length }}경주 / 수집된 {{ runner.history_total }}경주</span><span>S1F 초반 200m (제주 1110·1610m는 210m) · 원문 표시는 시간 기준 미확인</span></div>
+<div class="ra-table-scroll" tabindex="0" aria-label="{{ runner.horse }} 과거 경주 기록"><table class="ra-record-table"><thead><tr><th>경주일 · 조건</th><th>거리 · 등급</th><th>착순 / 두수</th><th>총기록</th><th>S1F <small>초반 구간</small></th><th>G3F <small>마지막 600m</small></th><th>G1F <small>마지막 200m</small></th><th>기수 · 중량</th><th>영상</th></tr></thead><tbody>
+{% for past in runner.history %}<tr data-history-distance="{{ past.distance }}"><td><details class="ra-past-detail"><summary>{{ past.date }}</summary><div><strong>{{ past.meet }} {{ past.race_number }}R</strong>{{ checkpoint_details(past) }}<span>게이트 {{ past.gate }} · 이전 출전과 간격 {{ past.days_since_previous if past.days_since_previous is not none else '—' }}일</span>{% if past.race_id %}<a href="/races/{{ past.race_id }}" target="_blank" rel="noopener">전체 경주 상세 ↗</a>{% else %}<span>검증된 공식 과거자료</span>{% endif %}</div></details><small>{{ past.meet }} {{ past.race_number }}R{% if past.horse_number %} · 당시 {{ past.horse_number }}번{% endif %} · {{ past.condition }}</small></td><td><strong>{{ past.distance }}m</strong><small>{{ past.grade }}</small></td><td><strong class="{% if past.valid_finish and past.finish_position <= 3 %}ra-placed{% endif %}">{{ past.finish }}</strong><small>/ {{ past.field_size }}두</small></td><td class="ra-number">{{ past.time }}</td><td class="ra-number">{{ section_cell(past,'S1F') }}{% if past.early_position %}<small>{{ past.early_position }}위 통과</small>{% endif %}</td><td class="ra-number">{{ section_cell(past,'G3F') }}</td><td class="ra-number">{{ section_cell(past,'G1F') }}</td><td>{{ past.jockey }}<small>{{ past.carried_weight }}</small></td><td>{{ video(past.video_url, runner.horse ~ ' · ' ~ past.date ~ ' ' ~ past.meet ~ ' ' ~ past.race_number ~ 'R' ~ (' · 당시 ' ~ past.horse_number ~ '번' if past.horse_number else '')) }}</td></tr>{% endfor %}
+</tbody></table></div><p class="ra-footnote" data-history-count>날짜를 펼치면 코너 통과순위·기록과 출전 간격을 확인할 수 있습니다. 거리·주로 조건이 다른 총기록을 그대로 비교하지 마세요.</p>
+{% if runner.history_total > page.history_limit %}<a class="ra-more-link" href="/analysis?race_id={{ page.selected_race.id }}&history_limit=60{% if page.filters.start %}&start={{ page.filters.start }}{% endif %}{% if page.filters.end %}&end={{ page.filters.end }}{% endif %}#runner-{{ runner.entry_id }}">최근 60경주까지 펼치기 ↓</a>{% endif %}
+{% else %}<div class="ra-empty"><strong>수집된 과거 경주 기록이 없습니다.</strong><span>신마 여부와 주행심사 기록을 먼저 확인하세요. 선택한 기간 밖에 기록이 있을 수도 있습니다.</span></div>{% endif %}
+</div>
+<div data-record-pane="trials" id="pane-{{ runner.entry_id }}-trials" role="tabpanel" aria-labelledby="tab-{{ runner.entry_id }}-trials">{{ trial_table(runner) }}</div>
+<div data-record-pane="training" id="pane-{{ runner.entry_id }}-training" role="tabpanel" aria-labelledby="tab-{{ runner.entry_id }}-training">
+<div class="ra-training-summary"><div><span>최근 28일 조교</span><strong>{{ runner.training_summary.sessions }}<small>회</small></strong></div><div><span>총 조교시간</span><strong>{{ runner.training_summary.minutes if runner.training_summary.minutes is not none else '—' }}<small>분</small></strong></div><div><span>출발조교</span><strong>{{ runner.training_summary.start_sessions }}<small>회</small></strong></div></div>
+<div data-training-content="{{ runner.entry_id }}"></div><p class="ra-footnote">조교 횟수와 시간은 수집된 기록의 합계입니다. 강도나 컨디션을 직접 측정한 값은 아닙니다.</p>
+</div>
+<div data-record-pane="jockey" id="pane-{{ runner.entry_id }}-jockey" role="tabpanel" aria-labelledby="tab-{{ runner.entry_id }}-jockey"><div data-jockey-content="{{ runner.entry_id }}"></div></div>
+</article>{% endfor %}</div></div>
+<details class="ra-history-filter"><summary>과거 경주 조회 기간 · 데이터 기준</summary><form method="get" action="/analysis"><input type="hidden" name="race_id" value="{{ page.selected_race.id }}"><input type="hidden" name="history_limit" value="{{ page.history_limit }}"><label>과거 시작일<input name="start" type="date" value="{{ page.filters.start }}"></label><label>과거 종료일<input name="end" type="date" value="{{ page.filters.end }}" max="{{ page.selected_race.date }}"></label><button class="ra-button" type="submit">적용</button><a href="/analysis?race_id={{ page.selected_race.id }}">기간 초기화</a><a href="/api/analysis/export.csv?race_id={{ page.selected_race.id }}&history_limit={{ page.history_limit }}{% if page.filters.start %}&start={{ page.filters.start }}{% endif %}{% if page.filters.end %}&end={{ page.filters.end }}{% endif %}">현재 기록 CSV</a></form>{% for note in page.notes %}<p>{{ note }}</p>{% endfor %}</details>
+</section>
+<section id="pace-workbench">{% include '_analysis_pace.html' %}</section>
+<section id="race-memo" class="ra-panel ra-memo"><div class="ra-panel-heading"><div><h2>경주 메모</h2><p>후보마와 전개 가정을 기록해 두세요.</p></div><span data-race-memo-state aria-live="polite">이 브라우저에 저장</span></div><label class="ra-sr-only" for="race-note">경주 분석 메모</label><textarea id="race-note" data-race-memo maxlength="4000" rows="3" placeholder="예: 초반 선행 경합 여부, 휴양 후 주행심사, 거리 변화…"></textarea></section>
+<script id="race-study-data" type="application/json">{{ analysis_payload | tojson }}</script>
+{% else %}<section class="ra-empty ra-panel"><strong>선택한 날짜·경기장의 출전표가 없습니다.</strong><span>다른 날짜 또는 경기장을 선택하세요. 자료가 없다는 것이 경주 미시행을 뜻하지는 않습니다.</span></section>{% endif %}
+<aside class="ra-video-dock" data-video-dock hidden role="region" aria-label="경주 영상 플레이어"><div class="ra-video-heading"><div><span>공식 경주 영상</span><strong data-video-heading></strong></div><button type="button" class="ra-button" data-close-video aria-label="영상 닫기">닫기 ×</button></div><p class="ra-video-message">팝업이 차단되었습니다. 아래 링크로 영상을 열면 분석 화면은 그대로 유지됩니다.</p><div class="ra-video-footer"><span>공식 영상 플레이어</span><a data-video-popup target="_blank" rel="noopener noreferrer">공식 팝업 ↗</a></div></aside>
+<div class="ra-toast" data-analysis-toast role="status" hidden></div>
+</div>
+{% endblock %}

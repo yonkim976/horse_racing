@@ -25,9 +25,15 @@
           <p>{{ page.date_label }} · {{ page.trial_round }}</p>
           <h1 class="race-page-title">주행심사 결과</h1>
         </div>
-        <div class="trial-title-badges">
-          <span class="event-type trial">주행심사</span>
-          <span class="model-scope-badge">예측 대상 아님 · 과거 변수로만 사용</span>
+        <div class="race-hero-actions">
+          <div class="trial-title-badges">
+            <span class="event-type trial">주행심사</span>
+            <span class="model-scope-badge">예측 대상 아님 · 과거 변수로만 사용</span>
+          </div>
+          {% if page.video_url %}<a class="race-video-button" href="{{ page.video_url }}" target="_blank" rel="noopener noreferrer" data-race-video aria-label="{{ page.course_name }} {{ page.race_number }}경주 주행심사 영상 · 새 창" title="KRA 공식 주행심사 영상 · 영상 공개 후 시청할 수 있습니다">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M 8 5 L 19 12 L 8 19 Z" fill="currentColor"/></svg>
+            주행심사 영상 <span aria-hidden="true">↗</span>
+          </a>{% endif %}
         </div>
       </div>
       <div class="race-meta">
@@ -83,4 +89,5 @@
     {% endfor %}
   </div>
 </section>
+<script src="{{ url_for('static', path='/js/race-video.js') }}?v=1" defer></script>
 {% endblock %}

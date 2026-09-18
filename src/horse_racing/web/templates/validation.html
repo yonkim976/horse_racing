@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}예측 검증 · 한국 경마 데이터 보드{% endblock %}
+{% block content %}
+<section class="page-intro compact-intro insight-intro"><div><p class="eyebrow">FORECAST vs OUTCOME</p><h1>예측 검증</h1><p class="intro-note">경주 전에 고정한 사전 공개 예측과 사후 과거 재현을 섞지 않고 비교합니다.</p></div><div class="trust-card"><span>현재 조회 표본</span><strong>{{ page.summary.races }}경주 · {{ page.summary.entries }}두</strong><small>평가 포함 결과만 지표 계산</small></div></section>
+
+<form class="insight-filter validation-filter" method="get" action="/validation">
+  <label>시작일<input name="start" type="date" value="{{ page.filters.start }}"></label><label>종료일<input name="end" type="date" value="{{ page.filters.end }}"></label>
+  <label>경마장<select name="meet"><option value="">전체</option>{% for code, name in page.meets %}<option value="{{ code }}" {% if code == page.filters.meet %}selected{% endif %}>{{ name }}</option>{% endfor %}</select></label>
+  <label>거리<input name="distance" type="number" min="800" max="4000" step="10" value="{{ page.filters.distance or '' }}" placeholder="전체"></label>
+  <label>등급<select name="grade"><option value="">전체</option>{% for value in page.grades %}<option value="{{ value }}" {% if value == page.filters.grade %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+  <label>모델 버전<select name="model"><option value="">전체</option>{% for value in page.models %}<option value="{{ value }}" {% if value == page.filters.model %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+  <label>예측 구분<select name="mode"><option value="">분리 요약</option><option value="live" {% if page.filters.mode == 'live' %}selected{% endif %}>사전 공개</option><option value="historical" {% if page.filters.mode == 'historical' %}selected{% endif %}>과거 재현</option></select></label>
+  <button class="button-primary" type="submit">적용</button>
+</form>
+
+<section class="metric-grid">
+  <article><span>우승 Top1 적중</span><strong>{{ page.summary.top1 }}</strong><small>실제 우승마의 예상순위 = 1</small></article><article><span>우승마 Top3 포함</span><strong>{{ page.summary.top3 }}</strong><small>실제 우승마 예상순위 ≤ 3</small></article><article><span>평균 순위 오차</span><strong>{{ page.summary.mae }}</strong><small>말별 |예상−실제|</small></article><article><span>Win Log Loss</span><strong>{{ page.summary.log_loss }}</strong><small>낮을수록 좋음 · 말별 {{ page.summary.entries }}건</small></article>
+</section>
+
+<section class="mode-compare">
+  {% for item in page.mode_summaries %}<article class="{% if item.mode == 'live' %}live-mode{% else %}historical-mode{% endif %}"><span>{{ item.label }}</span><strong>{{ item.published_races }}경주 발행 · {{ item.races }}경주 정산</strong><p>Top1 {{ item.top1 }} · MAE {{ item.mae }} · LL {{ item.log_loss }}</p><small>{{ '경주 전 저장된 불변 예측' if item.mode == 'live' else '과거 데이터로 재현한 별도 평가' }} · 평가 {{ item.entries }}/발행 {{ item.published_entries }}두</small></article>{% else %}<div class="notice-box">발행된 예측이 없습니다.</div>{% endfor %}
+</section>
+
+<details class="rules-panel"><summary>지표와 예외 처리 기준</summary><div><p>표본은 정산 시 <code>is_scored=true</code>로 고정된 말만 포함합니다. 출전 취소로 출전 구성이 바뀐 경주는 경주 전체를 제외하고, 미완주·실격·취소·중지로 정상 순위를 확정할 수 없는 행도 제외 사유를 보존합니다.</p><p>동착은 저장된 공식 순위를 그대로 비교합니다. 확률 지표는 불변 원장의 <code>prob_win</code>만 사용하며 사후 점수 변환을 합산하지 않습니다. 현재 표는 최대 250행입니다.</p></div></details>
+
+<section class="panel"><div class="panel-heading"><div><p class="panel-kicker">RUNNER LEVEL</p><h2>예상과 실제</h2></div><span>사전 공개와 과거 재현을 배지로 구분</span></div><div class="table-scroll"><table class="entry-table insight-table" data-sortable><thead><tr><th>경주</th><th>구분 / 모델</th><th>말</th><th>예상</th><th>실제</th><th>차이</th><th>우승확률</th><th>입상확률</th><th>평가 상태</th></tr></thead><tbody>{% for row in page.rows %}<tr><td><a href="/races/{{ row.race_id }}"><strong>{{ row.date }} {{ row.meet }} {{ row.race_number }}R</strong></a><small class="cell-note">{{ row.distance }}m · {{ row.grade }}</small></td><td><span class="source-kind source-{{ 'race' if row.mode == 'live' else 'trial' }}">{{ row.mode_label }}</span><small class="cell-note">{{ row.model }} · {{ row.version }}</small></td><td><strong>{{ row.number }} {{ row.horse }}</strong></td><td class="numeric">{{ row.predicted_rank }}위</td><td class="numeric">{{ row.actual_rank }}위</td><td class="numeric">{{ row.difference }}</td><td class="numeric">{{ row.prob_win }}</td><td class="numeric">{{ row.prob_top3 }}</td><td>{{ row.result_state }}</td></tr>{% else %}<tr><td colspan="9">조건에 맞는 예측이 없습니다.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

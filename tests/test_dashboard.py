@@ -1,4 +1,6 @@
+import csv
 from datetime import date, datetime
+from io import StringIO
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -503,6 +505,211 @@ def test_prediction_ledger_page_and_api_separate_prospective_metrics(
     assert payload["prospective"]["settlements"] == 1
     assert payload["prospective"]["scored_races"] == 1
     assert payload["runs"][0]["mode"] == "live"
+
+
+def test_forecast_page_uses_only_published_probabilities(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        race = session.get(Race, 1)
+        assert race is not None
+        race.status = "scheduled"
+        session.commit()
+    app = create_app(factory)
+
+    with TestClient(app) as client:
+        response = client.get("/forecast?date=2026-08-21&race_id=1")
+
+    assert response.status_code == 200
+    assert "미래 경주 예측" in response.text
+    assert "probability_ensemble" in response.text
+    assert "100.0%" in response.text
+    assert "SCENARIO, NOT OBSERVATION" in response.text
+    assert "공식 GPS가 아닌" in response.text
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert "frame-ancestors 'none'" in response.headers["content-security-policy"]
+
+
+def test_validation_page_reports_sample_and_keeps_mode_visible(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        response = client.get("/validation")
+
+    assert response.status_code == 200
+    assert "예측 검증" in response.text
+    assert "1경주 · 1두" in response.text
+    assert "사전 공개" in response.text
+    assert "확률 지표는 불변 원장" in response.text
+    assert "1위" in response.text
+
+
+def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
+    tmp_path: Path,
+) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        page = client.get("/analysis?start=2026-08-01&end=2026-08-31&horse=1")
+        exported = client.get("/api/analysis/export.csv?start=2026-08-01&end=2026-08-31&horse=1")
+        invalid = client.get("/analysis?start=2026-09-01&end=2026-08-01")
+
+    assert page.status_code == 200
+    assert "경주 분석" in page.text
+    assert "내 분석" not in page.text
+    assert "바람의별" in page.text
+    assert "이 브라우저에 저장" in page.text
+    assert "말별 기록과 영상" in page.text
+    assert "현재 출전마" in page.text
+    assert "수집된 과거 경주 기록이 없습니다" in page.text
+    assert 'data-selected-race-id="1"' in page.text
+    assert exported.status_code == 200
+    assert exported.headers["content-type"].startswith("text/csv")
+    assert "track_condition" in exported.text
+    assert "S1F" in exported.text
+    assert invalid.status_code == 422
+
+
+def test_analysis_busan_csv_uses_course_sections_and_preserves_unverified_raw_time(
+    tmp_path: Path,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        course = Racecourse(kra_meet_code=3, code="BUSAN", name_ko="부경")
+        horse = Horse(kra_horse_id="BUSAN-CSV-1", name_ko="부경검증마", meet_code=3)
+        past = Race(
+            racecourse=course,
+            race_date_local=date(2026, 9, 11),
+            race_number=1,
+            distance_m=1400,
+            field_size=10,
+            status="completed",
+        )
+        upcoming = Race(
+            racecourse=course,
+            race_date_local=date(2026, 9, 19),
+            race_number=1,
+            distance_m=1400,
+            status="scheduled",
+        )
+        prior_entry = RaceEntry(race=past, horse=horse, horse_number=1)
+        session.add_all(
+            [
+                RaceEntry(race=upcoming, horse=horse, horse_number=1),
+                RaceResult(
+                    race_entry=prior_entry, finish_position=2, finish_time_ms=87_200
+                ),
+                RaceSectionResult(
+                    race_entry=prior_entry,
+                    section_code="G6F",
+                    elapsed_time_ms=19_400,
+                    position=3,
+                    time_basis=None,
+                ),
+                RaceSectionResult(
+                    race_entry=prior_entry,
+                    section_code="G3F",
+                    elapsed_time_ms=36_400,
+                    position=2,
+                    time_basis="closing",
+                ),
+            ]
+        )
+        session.commit()
+        race_id = upcoming.id
+
+    with TestClient(create_app(factory)) as client:
+        response = client.get(f"/api/analysis/export.csv?race_id={race_id}")
+
+    assert response.status_code == 200
+    reader = csv.DictReader(StringIO(response.text))
+    assert reader.fieldnames is not None
+    assert reader.fieldnames[-7:] == ["S1F", "G8F", "G6F", "G4F", "G3F", "G2F", "G1F"]
+    assert not {"1C", "2C", "3C", "4C"}.intersection(reader.fieldnames)
+    rows = list(reader)
+    assert len(rows) == 1
+    assert rows[0]["horse"] == "부경검증마"
+    assert rows[0]["G8F"] == "—"
+    assert rows[0]["G6F"].startswith("원문 ")
+    assert "19.4" in rows[0]["G6F"]
+    assert "기준 미확인" in rows[0]["G6F"]
+    assert "36.4" in rows[0]["G3F"]
+    assert "기준 미확인" not in rows[0]["G3F"]
+
+
+def test_analysis_defaults_to_nearest_upcoming_race_and_allows_explicit_selection(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        "horse_racing.web.race_analysis.today_seoul", lambda: date(2099, 9, 18)
+    )
+    factory = seeded_session(tmp_path)
+    early_start = int(
+        datetime(2099, 9, 18, 10, 50, tzinfo=ZoneInfo("Asia/Seoul")).timestamp() * 1000
+    )
+    late_start = int(
+        datetime(2099, 9, 18, 11, 40, tzinfo=ZoneInfo("Asia/Seoul")).timestamp() * 1000
+    )
+    with factory() as session:
+        course = session.query(Racecourse).filter_by(kra_meet_code=2).one()
+        horse = session.query(Horse).filter_by(name_ko="바람의별").one()
+        jockey = session.query(Jockey).filter_by(name_ko="한기수").one()
+        trainer = session.query(Trainer).filter_by(name_ko="김조교").one()
+        first = Race(
+            racecourse=course,
+            race_date_local=date(2099, 9, 18),
+            race_number=1,
+            distance_m=900,
+            grade="제6등급",
+            scheduled_at_ms=early_start,
+            status="scheduled",
+        )
+        second = Race(
+            racecourse=course,
+            race_date_local=date(2099, 9, 18),
+            race_number=2,
+            distance_m=1000,
+            grade="제5등급",
+            scheduled_at_ms=late_start,
+            status="scheduled",
+        )
+        session.add_all(
+            [
+                RaceEntry(
+                    race=first,
+                    horse=horse,
+                    jockey=jockey,
+                    trainer=trainer,
+                    horse_number=1,
+                    gate_number=1,
+                    carried_weight_kg=55,
+                ),
+                RaceEntry(
+                    race=second,
+                    horse=horse,
+                    jockey=jockey,
+                    trainer=trainer,
+                    horse_number=2,
+                    gate_number=2,
+                    carried_weight_kg=55,
+                ),
+            ]
+        )
+        session.commit()
+        first_id = first.id
+        second_id = second.id
+
+    app = create_app(session_factory=factory)
+    with TestClient(app) as client:
+        default_page = client.get("/analysis")
+        explicit_page = client.get(f"/analysis?race_id={second_id}")
+
+    assert default_page.status_code == 200
+    assert f'data-selected-race-id="{first_id}"' in default_page.text
+    assert "2099-09-18 · 10:50 · 제주" in default_page.text
+    assert "날씨·주로·함수율" in default_page.text
+    assert "S1F" in default_page.text
+    assert f'data-selected-race-id="{second_id}"' in explicit_page.text
 
 
 def test_section_chart_data_includes_finish_checkpoint() -> None:

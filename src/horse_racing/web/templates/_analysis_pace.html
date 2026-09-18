@@ -1,0 +1,60 @@
+<section class="panel analysis-pace" data-analysis-pace aria-labelledby="analysis-pace-title">
+  <div class="analysis-pace-heading">
+    <div>
+      <p class="panel-kicker">나의 전개 시나리오</p>
+      <h2 id="analysis-pace-title">흐름을 직접 그려보세요</h2>
+      <p>마번을 끌어서 옮기고, 구간마다 예상하는 자리를 남겨보세요.</p>
+    </div>
+    <span class="analysis-pace-context" data-ap-context></span>
+  </div>
+  <div class="analysis-pace-toolbar">
+    <div class="analysis-pace-tabs" role="tablist" aria-label="전개 구간">
+      <button type="button" role="tab" id="analysis-pace-tab-early" aria-controls="analysis-pace-board" aria-selected="true" tabindex="0" data-ap-stage="early"><span>01</span> 초반 직선</button>
+      <button type="button" role="tab" id="analysis-pace-tab-middle" aria-controls="analysis-pace-board" aria-selected="false" tabindex="-1" data-ap-stage="middle"><span>02</span> 중반 코너</button>
+      <button type="button" role="tab" id="analysis-pace-tab-late" aria-controls="analysis-pace-board" aria-selected="false" tabindex="-1" data-ap-stage="late"><span>03</span> 종반 직선</button>
+    </div>
+    <div class="analysis-pace-actions">
+      <button type="button" data-ap-undo disabled>되돌리기</button>
+      <button type="button" data-ap-restore>추정 배치 복원</button>
+      <button type="button" data-ap-clear>배치 비우기</button>
+    </div>
+  </div>
+  <div class="analysis-pace-graphic-head">
+    <span class="analysis-pace-mode" data-ap-mode>과거 구간 순위 기반 참고 배치</span>
+    <span data-ap-direction></span>
+  </div>
+  <div class="analysis-pace-board" id="analysis-pace-board" role="tabpanel" aria-labelledby="analysis-pace-tab-early" aria-describedby="analysis-pace-help">
+    <svg class="analysis-pace-track" viewBox="0 0 1000 340" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="analysis-pace-track-gradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="currentColor" stop-opacity=".075"/>
+          <stop offset="100%" stop-color="currentColor" stop-opacity=".025"/>
+        </linearGradient>
+        <marker id="analysis-pace-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 2 2 L 8 5 L 2 8" fill="none" stroke="currentColor" stroke-width="1.6"/></marker>
+      </defs>
+      <path class="analysis-pace-road" data-ap-road d="M 0 147 H 1000"/>
+      <path class="analysis-pace-rail" data-ap-rail-one d="M 0 85 H 1000"/>
+      <path class="analysis-pace-rail" data-ap-rail-two d="M 0 209 H 1000"/>
+      <path class="analysis-pace-lane" data-ap-lane d="M 0 147 H 1000"/>
+      <path class="analysis-pace-flow" d="M 420 28 H 580" marker-end="url(#analysis-pace-arrow)"/>
+    </svg>
+    <span class="analysis-pace-rear" aria-hidden="true">후미</span><span class="analysis-pace-front" aria-hidden="true">선두</span>
+    <span class="analysis-pace-waiting-label" aria-hidden="true">배치 대기</span>
+    <div class="analysis-pace-stones" data-ap-stones></div>
+    <p class="analysis-pace-empty" data-ap-empty hidden>배치할 출전마가 없습니다.</p>
+  </div>
+  <div class="analysis-pace-feedback">
+    <p data-ap-selection>말을 선택하면 배치 근거가 표시됩니다.</p>
+    <span data-ap-save-state>이 브라우저에 자동 저장</span>
+  </div>
+  <div class="analysis-pace-roster" data-ap-roster aria-label="전개도 출전마와 배치 근거"></div>
+  <div class="analysis-pace-footnote" id="analysis-pace-help">
+    <p><strong>직접 만드는 개념 전개도</strong> · 실제 경주로의 모양·축척·측정 위치를 나타내지 않습니다. 왼쪽은 후미, 오른쪽은 선두입니다.</p>
+    <p data-ap-method>기본 배치는 구간별 과거 통과순위를 출전두수로 정규화한 참고 위치입니다. 초반은 S1F와 각질, 중반은 수집된 4C·3C·G3F 지점 순위, 종반은 G1F 지점 순위를 참고하며 말마다 근거와 표본 수를 표시합니다. 해당 구간 근거가 없으면 초반 기록으로 대체하고, 초반 기록도 없으면 대기 영역에 표시합니다. 안팎 위치는 실제 주행 라인이 아니며, 예상하는 흐름은 직접 수정할 수 있습니다.</p>
+    <p>마번을 끌거나 선택 후 방향키로 이동하세요. Shift + 방향키는 크게 이동, Enter는 대기마 배치, Delete는 대기로 이동합니다. 세 구간의 배치를 각각 저장합니다.</p>
+    <span data-ap-cutoff></span>
+  </div>
+  <noscript><p class="analysis-pace-noscript">전개도를 직접 배치하려면 브라우저의 JavaScript를 켜 주세요.</p></noscript>
+  <p class="analysis-pace-error" data-ap-error hidden></p>
+</section>
+<script type="application/json" id="analysis-pace-data">{{ page.pace | tojson }}</script>

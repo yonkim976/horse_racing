@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, selectinload
 from horse_racing.db.models import RunningTrial, RunningTrialResult
 from horse_racing.services.entry_sheet import MEET_METADATA
 from horse_racing.web.formatting import format_race_time
+from horse_racing.web.race_video import running_trial_video_url
 
 JUDGEMENT_LABELS = {
     "합": "합격",
@@ -64,6 +65,7 @@ class RunningTrialPageData:
     back_query: str
     prev_trial_id: int | None
     next_trial_id: int | None
+    video_url: str | None
 
 
 def load_running_trial_page(
@@ -106,6 +108,11 @@ def load_running_trial_page(
         ),
         prev_trial_id=previous_id,
         next_trial_id=next_id,
+        video_url=running_trial_video_url(
+            meet_code=trial.meet_code,
+            trial_date=trial.trial_date_local,
+            trial_race_number=trial.trial_race_number,
+        ),
     )
 
 
