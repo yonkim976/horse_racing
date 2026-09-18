@@ -36,6 +36,20 @@ from horse_racing.db.models import (
 from horse_racing.web.app import create_app
 
 
+def test_dashboard_cache_is_isolated_per_origin(tmp_path: Path) -> None:
+    app = create_app(session_factory=seeded_session(tmp_path))
+    client = TestClient(app)
+
+    www_response = client.get("https://www.mapilog.xyz/")
+    apex_response = client.get("https://mapilog.xyz/")
+
+    assert www_response.status_code == 200
+    assert apex_response.status_code == 200
+    assert 'href="https://www.mapilog.xyz/static/css/dashboard.css?v=14"' in www_response.text
+    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=14"' in apex_response.text
+    assert "https://www.mapilog.xyz/static/" not in apex_response.text
+
+
 def test_yeongcheon_schedule_and_detail(tmp_path: Path) -> None:
     factory = seeded_session(tmp_path)
     with factory() as session:
@@ -529,6 +543,16 @@ def test_forecast_page_uses_only_published_probabilities(tmp_path: Path) -> None
     assert "frame-ancestors 'none'" in response.headers["content-security-policy"]
 
 
+def test_jeju_distance_page_uses_portable_year_extraction(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        response = client.get("/racecourses/jeju/distances")
+
+    assert response.status_code == 200
+    assert "제주" in response.text
+
+
 def test_validation_page_reports_sample_and_keeps_mode_visible(tmp_path: Path) -> None:
     app = create_app(seeded_session(tmp_path))
 
@@ -785,9 +809,12 @@ def test_dashboard_health_check(tmp_path: Path) -> None:
 
     with TestClient(app) as client:
         response = client.get("/health")
+        readiness = client.get("/health/ready")
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+    assert readiness.status_code == 200
+    assert readiness.json() == {"status": "ready"}
 
 
 def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) -> None:

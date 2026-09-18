@@ -15,6 +15,8 @@ from horse_racing.db.engine import create_engine_for_url
 from horse_racing.db.models import (
     Horse,
     ModelPrediction,
+    ModelPredictionExplanation,
+    PredictionModelComponent,
     PredictionOutcome,
     PredictionRun,
     Race,
@@ -23,8 +25,10 @@ from horse_racing.db.models import (
     RaceResult,
 )
 from horse_racing.services.prediction_ledger import (
+    PredictionComponentMetadata,
     PredictionLedgerError,
     PredictionModelMetadata,
+    PredictionPublicationContext,
     publish_predictions,
     settle_prediction_run,
     verify_prediction_hash,
@@ -102,6 +106,44 @@ def _metadata() -> PredictionModelMetadata:
         feature_hash="a" * 64,
         model_artifact_sha256="b" * 64,
     )
+
+
+def _runner_details() -> pl.DataFrame:
+    return _predictions().select("race_entry_id").with_columns(
+        pl.int_range(0, pl.len()).over(pl.lit(1)).alias("_row")
+    ).with_columns(
+        (pl.col("_row") % 3 + 1).alias("a_rank_in_race"),
+        pl.lit(3).alias("field_size"),
+        (pl.col("_row") / 10).alias("raw_a_top3_score"),
+        (pl.col("_row") / 11).alias("raw_bc_top3_score"),
+        (pl.col("_row") / 12).alias("raw_win_score"),
+        pl.lit("starter").alias("starter_status"),
+        pl.lit("[]").alias("data_quality_flags_json"),
+    ).drop("_row")
+
+
+def _explanations() -> pl.DataFrame:
+    rows = []
+    for entry_id in range(1, 7):
+        for direction, sign in (("positive", 1.0), ("negative", -1.0)):
+            for rank in (1, 2, 3):
+                rows.append(
+                    {
+                        "race_entry_id": entry_id,
+                        "component": "A",
+                        "feature_name": f"feature_{direction}_{rank}",
+                        "readable_feature_name": f"설명 {direction} {rank}",
+                        "feature_value": rank,
+                        "field_percentile": rank / 4,
+                        "contribution_direction": direction,
+                        "contribution_value": sign / rank,
+                        "contribution_rank": rank,
+                        "explanation_type": "interpretable",
+                        "explanation_method": "lightgbm_pred_contrib",
+                        "source_cutoff_at_ms": PUBLISHED_AT - 60_000,
+                    }
+                )
+    return pl.DataFrame(rows)
 
 
 def _publish(session: Session, predictions: pl.DataFrame | None = None):
@@ -272,3 +314,133 @@ def test_historical_publication_allows_past_races_but_is_labeled(tmp_path: Path)
         )
 
         assert summary.publication_mode == "historical"
+
+
+def test_enriched_publication_is_saved_in_one_immutable_run(tmp_path: Path) -> None:
+    factory = _factory(tmp_path)
+    with factory() as session:
+        summary = publish_predictions(
+            session,
+            _predictions(),
+            metadata=_metadata(),
+            feature_cutoff_at_ms=PUBLISHED_AT - 60_000,
+            published_at_ms=PUBLISHED_AT,
+            publication_context=PredictionPublicationContext(
+                domain="thoroughbred",
+                prediction_stage="initial_card",
+                registry_sha256="c" * 64,
+                input_card_sha256="d" * 64,
+                source_card_at_ms=PUBLISHED_AT - 120_000,
+                history_cutoff_date=date(2033, 5, 19),
+                data_availability_status="complete",
+                probability_contract="thoroughbred_abc_runner_v1",
+                combination_algorithm_version="top3_set_joint_v1",
+            ),
+            model_components=(
+                PredictionComponentMetadata(
+                    component="A",
+                    model_version="v5_rolling_all",
+                    candidate_name="current_A",
+                    artifact_sha256="e" * 64,
+                    parameters={"temperature": 1.25},
+                ),
+            ),
+            runner_details=_runner_details(),
+            explanations=_explanations(),
+        )
+
+        run = session.get(PredictionRun, summary.prediction_run_id)
+        assert run is not None
+        assert run.domain == "thoroughbred"
+        assert run.prediction_stage == "initial_card"
+        assert summary.publication_content_sha256 == run.publication_content_sha256
+        assert len(session.scalars(select(PredictionModelComponent)).all()) == 1
+        assert len(session.scalars(select(ModelPredictionExplanation)).all()) == 36
+        stored = session.scalars(select(ModelPrediction).order_by(ModelPrediction.id)).all()
+        assert [item.a_rank_in_race for item in stored] == [1, 2, 3, 1, 2, 3]
+        assert all(item.raw_a_top3_score is not None for item in stored)
+
+        with pytest.raises(DatabaseError, match="immutable prediction ledger"):
+            session.execute(
+                update(ModelPredictionExplanation)
+                .where(ModelPredictionExplanation.id == 1)
+                .values(readable_feature_name="tampered")
+            )
+
+
+def test_pre_race_update_appends_to_live_initial_card_lineage(tmp_path: Path) -> None:
+    factory = _factory(tmp_path)
+    component = (
+        PredictionComponentMetadata(
+            component="A",
+            model_version="v5_rolling_all",
+            candidate_name="current_A",
+            artifact_sha256="e" * 64,
+            parameters={"temperature": 1.25},
+        ),
+    )
+    initial_context = PredictionPublicationContext(
+        domain="thoroughbred",
+        prediction_stage="initial_card",
+        registry_sha256="c" * 64,
+        input_card_sha256="d" * 64,
+        source_card_at_ms=PUBLISHED_AT - 120_000,
+        history_cutoff_date=date(2033, 5, 19),
+        data_availability_status="partial",
+        probability_contract="thoroughbred_abc_runner_v1",
+        combination_algorithm_version="top3_set_joint_v1",
+    )
+    with factory() as session:
+        initial = publish_predictions(
+            session,
+            _predictions(),
+            metadata=_metadata(),
+            feature_cutoff_at_ms=PUBLISHED_AT - 60_000,
+            published_at_ms=PUBLISHED_AT,
+            publication_context=initial_context,
+            model_components=component,
+            runner_details=_runner_details(),
+            explanations=_explanations(),
+        )
+        revised = _predictions().with_columns(
+            pl.when(pl.col("horse_number") == 1)
+            .then(0.5)
+            .when(pl.col("horse_number") == 2)
+            .then(0.35)
+            .otherwise(0.15)
+            .alias("prob_win"),
+            pl.when(pl.col("horse_number") == 1)
+            .then(0.75)
+            .when(pl.col("horse_number") == 2)
+            .then(0.7)
+            .otherwise(0.55)
+            .alias("prob_top2"),
+        )
+        update = publish_predictions(
+            session,
+            revised,
+            metadata=_metadata(),
+            feature_cutoff_at_ms=PUBLISHED_AT + 120_000,
+            published_at_ms=PUBLISHED_AT + 180_000,
+            publication_context=PredictionPublicationContext(
+                domain="thoroughbred",
+                prediction_stage="pre_race_update",
+                registry_sha256="c" * 64,
+                input_card_sha256="f" * 64,
+                source_card_at_ms=PUBLISHED_AT + 120_000,
+                history_cutoff_date=date(2033, 5, 19),
+                data_availability_status="complete",
+                probability_contract="thoroughbred_abc_runner_v1",
+                combination_algorithm_version="top3_set_joint_v1",
+                parent_public_id=initial.public_id,
+            ),
+            model_components=component,
+            runner_details=_runner_details(),
+            explanations=_explanations(),
+        )
+
+        stored_update = session.get(PredictionRun, update.prediction_run_id)
+        assert stored_update is not None
+        assert stored_update.prediction_stage == "pre_race_update"
+        assert stored_update.parent_prediction_run_id == initial.prediction_run_id
+        assert session.scalars(select(PredictionRun)).all().__len__() == 2

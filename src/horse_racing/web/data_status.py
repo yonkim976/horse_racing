@@ -98,22 +98,19 @@ SOURCE_QUERIES = (
     (
         "레이팅 스냅샷",
         "기준정보",
-        "SELECT COUNT(*) row_count, "
-        "DATE(MAX(observed_at_ms) / 1000, 'unixepoch', '+9 hours') latest_date "
+        "SELECT COUNT(*) row_count, MAX(observed_at_ms) latest_ms "
         "FROM horse_rating_snapshots",
     ),
     (
         "말 프로필 스냅샷",
         "기준정보",
-        "SELECT COUNT(*) row_count, "
-        "DATE(MAX(observed_at_ms) / 1000, 'unixepoch', '+9 hours') latest_date "
+        "SELECT COUNT(*) row_count, MAX(observed_at_ms) latest_ms "
         "FROM horse_profile_snapshots",
     ),
     (
         "등급변동",
         "기준정보",
-        "SELECT COUNT(*) row_count, "
-        "DATE(MAX(observed_at_ms) / 1000, 'unixepoch', '+9 hours') latest_date "
+        "SELECT COUNT(*) row_count, MAX(observed_at_ms) latest_ms "
         "FROM horse_grade_changes",
     ),
     (
@@ -151,12 +148,16 @@ def load_data_status(session: Session) -> DataStatusPage:
     sources: list[DataSourceStatus] = []
     for label, category, query in SOURCE_QUERIES:
         row = session.execute(text(query)).one()
+        latest_date = getattr(row, "latest_date", None)
+        latest_ms = getattr(row, "latest_ms", None)
+        if latest_ms is not None:
+            latest_date = datetime.fromtimestamp(latest_ms / 1000, tz=KST).date().isoformat()
         sources.append(
             DataSourceStatus(
                 label=label,
                 category=category,
                 row_count=int(row.row_count),
-                latest_date=str(getattr(row, "latest_date", None) or "—"),
+                latest_date=str(latest_date or "—"),
             )
         )
 

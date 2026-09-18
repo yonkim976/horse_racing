@@ -13,12 +13,13 @@
 - [예측 모델 로드맵](docs/MODELING_ROADMAP.md)
 - [공개 예측 검증 원장](docs/PREDICTION_LEDGER.md)
 - [데이터 구조와 운영 가이드](docs/DATA_AND_OPERATIONS.md)
+- [Supabase 이전 실행 절차](docs/SUPABASE_MIGRATION.md)
 - [단계별 개발 로드맵](docs/ROADMAP.md)
 
 ## 기술 구성
 
 - Python 3.12, uv
-- SQLite, SQLAlchemy 2, Alembic
+- SQLite/PostgreSQL, SQLAlchemy 2, Alembic, Supabase CLI
 - Polars, DuckDB, Parquet
 - LightGBM, CatBoost, scikit-learn
 - 향후 웹 계층: FastAPI + HTML/CSS/JavaScript

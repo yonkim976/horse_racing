@@ -4,7 +4,7 @@ from datetime import date
 from math import ceil
 from urllib.parse import urlencode
 
-from sqlalchemy import case, func, select
+from sqlalchemy import Integer, case, extract, func, select
 from sqlalchemy.orm import Session
 
 from horse_racing.db.models import Race, Racecourse, RaceEntry, RaceResult
@@ -57,13 +57,14 @@ def load_distance_page(
         Race.status == "completed",
         active_race_clause(),
     ]
+    race_year = extract("year", Race.race_date_local).cast(Integer)
     years = list(
         session.scalars(
-            select(func.substr(Race.race_date_local, 1, 4))
+            select(race_year)
             .join(Racecourse)
             .where(*base)
             .distinct()
-            .order_by(func.substr(Race.race_date_local, 1, 4).desc())
+            .order_by(race_year.desc())
         )
     )
     selected_year = year if year is not None else (int(years[0]) if years else 0)

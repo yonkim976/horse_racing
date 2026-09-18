@@ -45,7 +45,7 @@
   </div>
   {% if page_data.history_coverage %}
     <p class="coverage-line">
-      적재 레이팅 {{ "{:,}".format(page_data.history_coverage.rating_snapshots) }}
+      적재{% if page_data.history_coverage.approximate %} 추정{% endif %} 레이팅 {{ "{:,}".format(page_data.history_coverage.rating_snapshots) }}
       · 체중 {{ "{:,}".format(page_data.history_coverage.weight_rows) }}
       · 훈련 {{ "{:,}".format(page_data.history_coverage.training_rows) }}
       · 진료 {{ "{:,}".format(page_data.history_coverage.medical_rows) }}

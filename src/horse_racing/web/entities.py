@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 
-from sqlalchemy import Select, func, or_, select
+from sqlalchemy import Select, func, or_, select, text
 from sqlalchemy.orm import Session, joinedload
 
 from horse_racing.db.models import (
@@ -110,9 +110,7 @@ class HorseHistoryCoverage:
     weight_rows: int
     training_rows: int
     medical_rows: int
-    horses_with_weights: int
-    horses_with_training: int
-    horses_with_medical: int
+    approximate: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -339,13 +337,21 @@ def load_entity_list(
     total_pages = max((total_count + page_size - 1) // page_size, 1) if total_count else 1
     page = min(page, total_pages)
 
-    entry_count = (
-        select(func.count(RaceEntry.id))
-        .where(_entry_foreign_key(kind) == model.id)
-        .correlate(model)
-        .scalar_subquery()
+    entry_foreign_key = _entry_foreign_key(kind)
+    entry_counts = (
+        select(
+            entry_foreign_key.label("entity_id"),
+            func.count(RaceEntry.id).label("entry_count"),
+        )
+        .where(entry_foreign_key.is_not(None))
+        .group_by(entry_foreign_key)
+        .subquery()
     )
-    statement = select(model, entry_count.label("entry_count"))
+    entry_count = func.coalesce(entry_counts.c.entry_count, 0).label("entry_count")
+    statement = select(model, entry_count).outerjoin(
+        entry_counts,
+        entry_counts.c.entity_id == model.id,
+    )
     if sort_key == "name":
         statement = statement.order_by(model.name_ko, model.id)
     else:
@@ -922,7 +928,7 @@ def _format_bleeding(count: int | None, date_raw: str | None) -> str:
     return " · ".join(parts) if parts else "—"
 
 
-def _format_stable(part: int | None, number: int | None) -> str:
+def _format_stable(part: int | None, number: int | str | None) -> str:
     if part is None and number is None:
         return "—"
     if part is not None and number is not None:
@@ -1085,6 +1091,32 @@ def _count_for_horse(session: Session, model: type, horse_id: int) -> int:
 
 
 def _load_history_coverage(session: Session) -> HorseHistoryCoverage:
+    if session.get_bind().dialect.name == "postgresql":
+        rows = session.execute(
+            text(
+                """
+                SELECT relname, n_live_tup::bigint
+                FROM pg_stat_user_tables
+                WHERE schemaname = 'public'
+                  AND relname IN (
+                    'horse_rating_snapshots',
+                    'horse_weight_history',
+                    'horse_training',
+                    'horse_medical'
+                  )
+                """
+            )
+        ).all()
+        estimates = {name: int(count) for name, count in rows}
+        if len(estimates) == 4:
+            return HorseHistoryCoverage(
+                rating_snapshots=estimates["horse_rating_snapshots"],
+                weight_rows=estimates["horse_weight_history"],
+                training_rows=estimates["horse_training"],
+                medical_rows=estimates["horse_medical"],
+                approximate=True,
+            )
+
     return HorseHistoryCoverage(
         rating_snapshots=int(
             session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) or 0
@@ -1092,15 +1124,6 @@ def _load_history_coverage(session: Session) -> HorseHistoryCoverage:
         weight_rows=int(session.scalar(select(func.count()).select_from(HorseWeightHistory)) or 0),
         training_rows=int(session.scalar(select(func.count()).select_from(HorseTraining)) or 0),
         medical_rows=int(session.scalar(select(func.count()).select_from(HorseMedical)) or 0),
-        horses_with_weights=int(
-            session.scalar(select(func.count(func.distinct(HorseWeightHistory.horse_id)))) or 0
-        ),
-        horses_with_training=int(
-            session.scalar(select(func.count(func.distinct(HorseTraining.horse_id)))) or 0
-        ),
-        horses_with_medical=int(
-            session.scalar(select(func.count(func.distinct(HorseMedical.horse_id)))) or 0
-        ),
     )
 
 

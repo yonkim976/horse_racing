@@ -81,7 +81,7 @@ FROM race_entries AS e
 JOIN races AS r ON r.id = e.race_id
 JOIN racecourses AS rc ON rc.id = r.racecourse_id
 WHERE r.race_date_local = :race_date
-  AND e.scratched = 0
+  AND e.scratched = FALSE
 """
 
 

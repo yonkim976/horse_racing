@@ -7,6 +7,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from sqlalchemy import inspect, text
+from sqlalchemy.engine import make_url
 
 from horse_racing.collectors.kra_api import KraApiClient, KraApiError, KraApiRateLimitError
 from horse_racing.collectors.kra_text import TEXT_FILE_TYPES, KraTextClient, KraTextError
@@ -68,16 +69,23 @@ def db_info() -> int:
     engine = create_engine_for_url(settings.database_url)
     inspector = inspect(engine)
 
-    with engine.connect() as connection:
-        sqlite_version = connection.execute(text("select sqlite_version()")).scalar_one()
-        journal_mode = connection.execute(text("PRAGMA journal_mode")).scalar_one()
-        foreign_keys = connection.execute(text("PRAGMA foreign_keys")).scalar_one()
-
     path = database_path(settings.database_url)
-    print(f"database: {path or settings.database_url}")
-    print(f"sqlite_version: {sqlite_version}")
-    print(f"journal_mode: {journal_mode}")
-    print(f"foreign_keys: {'on' if foreign_keys else 'off'}")
+    safe_url = make_url(settings.database_url).render_as_string(hide_password=True)
+    print(f"database: {path or safe_url}")
+    print(f"dialect: {engine.dialect.name}")
+    with engine.connect() as connection:
+        if engine.dialect.name == "sqlite":
+            sqlite_version = connection.execute(text("select sqlite_version()")).scalar_one()
+            journal_mode = connection.execute(text("PRAGMA journal_mode")).scalar_one()
+            foreign_keys = connection.execute(text("PRAGMA foreign_keys")).scalar_one()
+            print(f"sqlite_version: {sqlite_version}")
+            print(f"journal_mode: {journal_mode}")
+            print(f"foreign_keys: {'on' if foreign_keys else 'off'}")
+        else:
+            server_version = connection.execute(text("select version()")).scalar_one()
+            current_schema = connection.execute(text("select current_schema()")).scalar_one()
+            print(f"server_version: {server_version}")
+            print(f"schema: {current_schema}")
     print(f"tables: {', '.join(sorted(inspector.get_table_names())) or '(none)'}")
     return 0
 
@@ -1203,7 +1211,7 @@ def _backfill_dated(
             rows = session.execute(
                 text(
                     """
-                    SELECT DISTINCT strftime('%Y%m%d', r.race_date_local) AS d,
+                    SELECT DISTINCT r.race_date_local AS d,
                            c.kra_meet_code AS meet
                     FROM races r
                     JOIN racecourses c ON c.id = r.racecourse_id
@@ -1213,7 +1221,15 @@ def _backfill_dated(
                 ),
                 {"start": start.isoformat(), "end": end.isoformat()},
             ).all()
-            race_day_set = {(str(row.d), int(row.meet)) for row in rows}
+            race_day_set = {
+                (
+                    row.d.strftime("%Y%m%d")
+                    if hasattr(row.d, "strftime")
+                    else str(row.d).replace("-", ""),
+                    int(row.meet),
+                )
+                for row in rows
+            }
 
         current = start
         while current <= end:
@@ -4046,7 +4062,7 @@ def compare_model_runs(run_ids: list[str], *, ledger_path: Path | None = None) -
 def main() -> int:
     parser = argparse.ArgumentParser(prog="horse-racing")
     subparsers = parser.add_subparsers(dest="command", required=True)
-    subparsers.add_parser("db-info", help="Show local SQLite database information")
+    subparsers.add_parser("db-info", help="Show database connection information")
     entry_sheet_parser = subparsers.add_parser(
         "collect-entry-sheet",
         help="Collect a KRA entry sheet from data.go.kr",

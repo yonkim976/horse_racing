@@ -45,6 +45,30 @@ class IngestionRun(Base):
     )
 
 
+class HistoricalBackfillBatch(Base):
+    __tablename__ = "historical_backfill_batches"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    batch_key: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
+    source_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    source_path: Mapped[str] = mapped_column(Text, nullable=False)
+    source_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    cutoff_policy_json: Mapped[str] = mapped_column(Text, nullable=False)
+    started_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    completed_at_ms: Mapped[int | None] = mapped_column(BigInteger)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="running")
+    records_written_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+    validation_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('running', 'completed', 'failed')",
+            name="valid_historical_backfill_status",
+        ),
+        Index("ix_historical_backfill_batches_started", "started_at_ms"),
+    )
+
+
 class SourceDocument(Base):
     __tablename__ = "source_documents"
 
@@ -148,7 +172,7 @@ class Jockey(Base):
     __tablename__ = "jockeys"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    kra_jockey_id: Mapped[str] = mapped_column(String(30), nullable=False, unique=True)
+    kra_jockey_id: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
     name_ko: Mapped[str] = mapped_column(String(100), nullable=False)
     name_en: Mapped[str | None] = mapped_column(String(150))
 
@@ -162,7 +186,7 @@ class Trainer(Base):
     __tablename__ = "trainers"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    kra_trainer_id: Mapped[str] = mapped_column(String(30), nullable=False, unique=True)
+    kra_trainer_id: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
     name_ko: Mapped[str] = mapped_column(String(100), nullable=False)
     name_en: Mapped[str | None] = mapped_column(String(150))
 
@@ -176,7 +200,7 @@ class Owner(Base):
     __tablename__ = "owners"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    kra_owner_id: Mapped[str] = mapped_column(String(30), nullable=False, unique=True)
+    kra_owner_id: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
     name_ko: Mapped[str] = mapped_column(String(100), nullable=False)
     name_en: Mapped[str | None] = mapped_column(String(150))
 
@@ -211,7 +235,7 @@ class Race(Base):
     weather_planned: Mapped[str | None] = mapped_column(String(30))
     track_condition_planned: Mapped[str | None] = mapped_column(String(30))
     track_moisture_percent_planned: Mapped[float | None] = mapped_column(Float)
-    status: Mapped[str] = mapped_column(String(20), nullable=False, default="scheduled")
+    status: Mapped[str] = mapped_column(Text, nullable=False, default="scheduled")
 
     racecourse: Mapped[Racecourse] = relationship(back_populates="races")
     entries: Mapped[list[RaceEntry]] = relationship(
@@ -275,6 +299,8 @@ class RaceEntry(Base):
         CheckConstraint("horse_number > 0", name="positive_horse_number"),
         Index("ix_race_entries_horse_race", "horse_id", "race_id"),
         Index("ix_race_entries_jockey_race", "jockey_id", "race_id"),
+        Index("ix_race_entries_trainer_id", "trainer_id"),
+        Index("ix_race_entries_owner_id", "owner_id"),
     )
 
 
@@ -376,7 +402,7 @@ class HorseProfileSnapshot(Base):
     second_count_year: Mapped[int | None] = mapped_column(Integer)
     third_count_total: Mapped[int | None] = mapped_column(Integer)
     third_count_year: Mapped[int | None] = mapped_column(Integer)
-    prize_money_total_krw: Mapped[int | None] = mapped_column(Integer)
+    prize_money_total_krw: Mapped[int | None] = mapped_column(BigInteger)
     last_sale_amount_raw: Mapped[str | None] = mapped_column(String(100))
     trainer_kra_id: Mapped[str | None] = mapped_column(String(30))
     trainer_name: Mapped[str | None] = mapped_column(String(100))
@@ -505,9 +531,9 @@ class JockeyChange(Base):
     race_date_local: Mapped[date] = mapped_column(Date, nullable=False)
     race_number: Mapped[int] = mapped_column(Integer, nullable=False)
     horse_number: Mapped[int] = mapped_column(Integer, nullable=False)
-    jockey_before_id: Mapped[str | None] = mapped_column(String(30))
+    jockey_before_id: Mapped[str | None] = mapped_column(Text)
     jockey_before_name: Mapped[str | None] = mapped_column(String(100))
-    jockey_after_id: Mapped[str | None] = mapped_column(String(30))
+    jockey_after_id: Mapped[str | None] = mapped_column(Text)
     jockey_after_name: Mapped[str | None] = mapped_column(String(100))
     carried_weight_before_kg: Mapped[float | None] = mapped_column(Float)
     carried_weight_after_kg: Mapped[float | None] = mapped_column(Float)
@@ -527,6 +553,7 @@ class JockeyChange(Base):
             name="uq_jockey_changes_natural",
         ),
         Index("ix_jockey_changes_date_meet", "race_date_local", "meet_code"),
+        Index("ix_jockey_changes_horse_id", "horse_id"),
     )
 
 
@@ -555,6 +582,7 @@ class RaceScratch(Base):
             name="uq_race_scratches_natural",
         ),
         Index("ix_race_scratches_date_meet", "race_date_local", "meet_code"),
+        Index("ix_race_scratches_horse_id", "horse_id"),
     )
 
 
@@ -628,7 +656,7 @@ class HorseStartTraining(Base):
     meet_code: Mapped[int] = mapped_column(Integer, nullable=False)
     training_date_local: Mapped[date] = mapped_column(Date, nullable=False)
     stable_part: Mapped[int | None] = mapped_column(Integer)
-    stable_number: Mapped[int | None] = mapped_column(Integer)
+    stable_number: Mapped[str | None] = mapped_column(Text)
     rider_name: Mapped[str | None] = mapped_column(String(100))
     remark: Mapped[str | None] = mapped_column(String(200))
     observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
@@ -687,7 +715,7 @@ class RunningTrial(Base):
     trial_race_number: Mapped[int] = mapped_column(Integer, nullable=False)
     distance_m: Mapped[int] = mapped_column(Integer, nullable=False)
     weather: Mapped[str | None] = mapped_column(String(30))
-    track_condition: Mapped[str | None] = mapped_column(String(30))
+    track_condition: Mapped[str | None] = mapped_column(Text)
     track_moisture_percent: Mapped[float | None] = mapped_column(Float)
     observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
 
@@ -705,6 +733,7 @@ class RunningTrial(Base):
         CheckConstraint("trial_race_number > 0", name="ck_running_trials_positive_race"),
         CheckConstraint("distance_m > 0", name="ck_running_trials_positive_distance"),
         Index("ix_running_trials_date_meet", "trial_date_local", "meet_code"),
+        Index("ix_running_trials_source_document_id", "source_document_id"),
     )
 
 
@@ -775,6 +804,8 @@ class RunningTrialResult(Base):
             "horse_id",
             "running_trial_id",
         ),
+        Index("ix_running_trial_results_jockey_id", "jockey_id"),
+        Index("ix_running_trial_results_trainer_id", "trainer_id"),
     )
 
 
@@ -821,6 +852,21 @@ class PredictionRun(Base):
     model_artifact_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
     feature_hash: Mapped[str] = mapped_column(String(64), nullable=False)
     predictions_sha256: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    publication_content_sha256: Mapped[str | None] = mapped_column(
+        String(64), unique=True
+    )
+    domain: Mapped[str | None] = mapped_column(String(20))
+    prediction_stage: Mapped[str | None] = mapped_column(String(30))
+    parent_prediction_run_id: Mapped[int | None] = mapped_column(
+        ForeignKey("prediction_runs.id", ondelete="RESTRICT")
+    )
+    registry_sha256: Mapped[str | None] = mapped_column(String(64))
+    input_card_sha256: Mapped[str | None] = mapped_column(String(64))
+    source_card_at_ms: Mapped[int | None] = mapped_column(BigInteger)
+    history_cutoff_date: Mapped[date | None] = mapped_column(Date)
+    data_availability_status: Mapped[str | None] = mapped_column(String(30))
+    probability_contract: Mapped[str | None] = mapped_column(String(100))
+    combination_algorithm_version: Mapped[str | None] = mapped_column(String(100))
     notes: Mapped[str | None] = mapped_column(Text)
 
     predictions: Mapped[list[ModelPrediction]] = relationship(
@@ -828,6 +874,9 @@ class PredictionRun(Base):
     )
     settlement: Mapped[PredictionSettlement | None] = relationship(
         back_populates="prediction_run", uselist=False
+    )
+    model_components: Mapped[list[PredictionModelComponent]] = relationship(
+        back_populates="prediction_run", cascade="all, delete-orphan"
     )
 
     __table_args__ = (
@@ -839,7 +888,22 @@ class PredictionRun(Base):
             "feature_cutoff_at_ms <= published_at_ms",
             name="ck_prediction_runs_cutoff_before_publication",
         ),
+        CheckConstraint(
+            "domain IS NULL OR domain IN ('thoroughbred', 'jeju')",
+            name="ck_prediction_runs_domain",
+        ),
+        CheckConstraint(
+            "prediction_stage IS NULL OR prediction_stage IN "
+            "('initial_card', 'pre_race_update')",
+            name="ck_prediction_runs_stage",
+        ),
+        CheckConstraint(
+            "data_availability_status IS NULL OR data_availability_status IN "
+            "('complete', 'partial', 'not_available')",
+            name="ck_prediction_runs_availability",
+        ),
         Index("ix_prediction_runs_date_mode", "race_date_local", "publication_mode"),
+        Index("ix_prediction_runs_parent_id", "parent_prediction_run_id"),
     )
 
 
@@ -862,10 +926,31 @@ class ModelPrediction(Base):
     prob_win: Mapped[float] = mapped_column(Float, nullable=False)
     prob_top2: Mapped[float] = mapped_column(Float, nullable=False)
     prob_top3: Mapped[float] = mapped_column(Float, nullable=False)
+    a_rank_in_race: Mapped[int | None] = mapped_column(Integer)
+    field_size: Mapped[int | None] = mapped_column(Integer)
+    raw_a_top3_score: Mapped[float | None] = mapped_column(Float)
+    raw_bc_top3_score: Mapped[float | None] = mapped_column(Float)
+    raw_win_score: Mapped[float | None] = mapped_column(Float)
+    raw_rank_score: Mapped[float | None] = mapped_column(Float)
+    raw_order_score: Mapped[float | None] = mapped_column(Float)
+    beta_set: Mapped[float | None] = mapped_column(Float)
+    beta_order: Mapped[float | None] = mapped_column(Float)
+    runner_identifier: Mapped[str | None] = mapped_column(String(50))
+    jockey_identifier: Mapped[str | None] = mapped_column(String(50))
+    trainer_identifier: Mapped[str | None] = mapped_column(String(50))
+    owner_identifier: Mapped[str | None] = mapped_column(String(50))
+    starter_status: Mapped[str | None] = mapped_column(String(30))
+    cancellation_status: Mapped[str | None] = mapped_column(String(30))
+    body_weight_kg: Mapped[float | None] = mapped_column(Float)
+    body_weight_change_kg: Mapped[float | None] = mapped_column(Float)
+    data_quality_flags_json: Mapped[str | None] = mapped_column(Text)
 
     prediction_run: Mapped[PredictionRun] = relationship(back_populates="predictions")
     outcome: Mapped[PredictionOutcome | None] = relationship(
         back_populates="model_prediction", uselist=False
+    )
+    explanations: Mapped[list[ModelPredictionExplanation]] = relationship(
+        back_populates="model_prediction", cascade="all, delete-orphan"
     )
 
     __table_args__ = (
@@ -887,7 +972,98 @@ class ModelPrediction(Base):
             "prob_top3 >= 0 AND prob_top3 <= 1",
             name="ck_model_predictions_top3_probability",
         ),
+        CheckConstraint(
+            "a_rank_in_race IS NULL OR a_rank_in_race > 0",
+            name="ck_model_predictions_positive_rank",
+        ),
+        CheckConstraint(
+            "field_size IS NULL OR field_size > 0",
+            name="ck_model_predictions_positive_field_size",
+        ),
         Index("ix_model_predictions_race", "race_id", "prediction_run_id"),
+        Index("ix_model_predictions_race_entry_id", "race_entry_id"),
+    )
+
+
+class PredictionModelComponent(Base):
+    """Hash-verified model component used by one immutable publication."""
+
+    __tablename__ = "prediction_model_components"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    prediction_run_id: Mapped[int] = mapped_column(
+        ForeignKey("prediction_runs.id", ondelete="RESTRICT"), nullable=False
+    )
+    component: Mapped[str] = mapped_column(String(30), nullable=False)
+    model_version: Mapped[str] = mapped_column(String(150), nullable=False)
+    candidate_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    artifact_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    metadata_sha256: Mapped[str | None] = mapped_column(String(64))
+    algorithm_version: Mapped[str | None] = mapped_column(String(100))
+    parameters_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+
+    prediction_run: Mapped[PredictionRun] = relationship(back_populates="model_components")
+
+    __table_args__ = (
+        UniqueConstraint(
+            "prediction_run_id",
+            "component",
+            name="uq_prediction_model_components_run_component",
+        ),
+        Index("ix_prediction_model_components_run_id", "prediction_run_id"),
+    )
+
+
+class ModelPredictionExplanation(Base):
+    """Top positive/negative raw-score contribution for one runner."""
+
+    __tablename__ = "model_prediction_explanations"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    model_prediction_id: Mapped[int] = mapped_column(
+        ForeignKey("model_predictions.id", ondelete="RESTRICT"), nullable=False
+    )
+    component: Mapped[str] = mapped_column(String(30), nullable=False, default="A")
+    feature_name: Mapped[str] = mapped_column(String(150), nullable=False)
+    readable_feature_name: Mapped[str] = mapped_column(String(150), nullable=False)
+    feature_value_json: Mapped[str] = mapped_column(Text, nullable=False)
+    field_percentile: Mapped[float | None] = mapped_column(Float)
+    contribution_direction: Mapped[str] = mapped_column(String(10), nullable=False)
+    contribution_value: Mapped[float] = mapped_column(Float, nullable=False)
+    contribution_rank: Mapped[int] = mapped_column(Integer, nullable=False)
+    explanation_type: Mapped[str] = mapped_column(String(30), nullable=False)
+    explanation_method: Mapped[str] = mapped_column(String(50), nullable=False)
+    source_cutoff_at_ms: Mapped[int | None] = mapped_column(BigInteger)
+
+    model_prediction: Mapped[ModelPrediction] = relationship(back_populates="explanations")
+
+    __table_args__ = (
+        UniqueConstraint(
+            "model_prediction_id",
+            "component",
+            "contribution_direction",
+            "contribution_rank",
+            name="uq_model_prediction_explanations_direction_rank",
+        ),
+        CheckConstraint(
+            "contribution_direction IN ('positive', 'negative')",
+            name="ck_model_prediction_explanations_direction",
+        ),
+        CheckConstraint(
+            "contribution_rank >= 1 AND contribution_rank <= 3",
+            name="ck_model_prediction_explanations_rank",
+        ),
+        CheckConstraint(
+            "explanation_type IN "
+            "('interpretable', 'categorical_model_effect', 'data_quality_flag')",
+            name="ck_model_prediction_explanations_type",
+        ),
+        CheckConstraint(
+            "field_percentile IS NULL OR "
+            "(field_percentile >= 0 AND field_percentile <= 1)",
+            name="ck_model_prediction_explanations_percentile",
+        ),
+        Index("ix_model_prediction_explanations_prediction_id", "model_prediction_id"),
     )
 
 
@@ -959,9 +1135,9 @@ class PredictionOutcome(Base):
             name="ck_prediction_outcomes_positive_finish",
         ),
         CheckConstraint(
-            "(is_scored = 1 AND exclusion_reason IS NULL AND win IS NOT NULL "
+            "(is_scored AND exclusion_reason IS NULL AND win IS NOT NULL "
             "AND top2 IS NOT NULL AND top3 IS NOT NULL AND win_log_loss IS NOT NULL) "
-            "OR (is_scored = 0 AND exclusion_reason IS NOT NULL AND win IS NULL "
+            "OR (NOT is_scored AND exclusion_reason IS NOT NULL AND win IS NULL "
             "AND top2 IS NULL AND top3 IS NULL AND win_log_loss IS NULL)",
             name="ck_prediction_outcomes_scoring_state",
         ),

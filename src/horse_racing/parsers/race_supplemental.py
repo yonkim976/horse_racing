@@ -221,7 +221,7 @@ class StartTrainingItem(KraItem):
     meet_code: int = Field(alias="meet")
     training_date: date = Field(alias="trDate")
     stable_part: int | None = Field(default=None, alias="part")
-    stable_number: int | None = Field(default=None, alias="partNo")
+    stable_number: str | None = Field(default=None, alias="partNo")
     rider_name: str | None = Field(default=None, alias="prName")
     remark: str | None = Field(default=None, alias="remark")
 
@@ -245,10 +245,15 @@ class StartTrainingItem(KraItem):
     def parse_date(cls, value: Any) -> date:
         return _parse_yyyymmdd(value)
 
-    @field_validator("stable_part", "stable_number", mode="before")
+    @field_validator("stable_part", mode="before")
     @classmethod
     def parse_optional_int(cls, value: Any) -> int | None:
         return _parse_int(value)
+
+    @field_validator("stable_number", mode="before")
+    @classmethod
+    def normalize_stable_number(cls, value: Any) -> str | None:
+        return _blank_to_none(value)
 
     @field_validator("rider_name", "remark", mode="before")
     @classmethod

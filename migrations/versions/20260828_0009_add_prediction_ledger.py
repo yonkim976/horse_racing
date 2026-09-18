@@ -18,6 +18,18 @@ depends_on: str | Sequence[str] | None = None
 
 def _install_immutable_triggers(table_name: str) -> None:
     bind = op.get_bind()
+    if bind.dialect.name == "postgresql":
+        trigger = f"trg_{table_name}_immutable"
+        op.execute(
+            sa.text(
+                f"""
+                CREATE TRIGGER {trigger}
+                BEFORE UPDATE OR DELETE ON {table_name}
+                FOR EACH ROW EXECUTE FUNCTION prevent_prediction_ledger_mutation()
+                """
+            )
+        )
+        return
     if bind.dialect.name != "sqlite":
         return
     for action in ("UPDATE", "DELETE"):
@@ -36,6 +48,21 @@ def _install_immutable_triggers(table_name: str) -> None:
 
 
 def upgrade() -> None:
+    if op.get_bind().dialect.name == "postgresql":
+        op.execute(
+            sa.text(
+                """
+                CREATE FUNCTION prevent_prediction_ledger_mutation()
+                RETURNS trigger
+                LANGUAGE plpgsql
+                AS $$
+                BEGIN
+                    RAISE EXCEPTION 'immutable prediction ledger';
+                END;
+                $$
+                """
+            )
+        )
     op.create_table(
         "prediction_runs",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -188,9 +215,9 @@ def upgrade() -> None:
             name="ck_prediction_outcomes_positive_finish",
         ),
         sa.CheckConstraint(
-            "(is_scored = 1 AND exclusion_reason IS NULL AND win IS NOT NULL "
+            "(is_scored AND exclusion_reason IS NULL AND win IS NOT NULL "
             "AND top2 IS NOT NULL AND top3 IS NOT NULL AND win_log_loss IS NOT NULL) "
-            "OR (is_scored = 0 AND exclusion_reason IS NOT NULL AND win IS NULL "
+            "OR (NOT is_scored AND exclusion_reason IS NOT NULL AND win IS NULL "
             "AND top2 IS NULL AND top3 IS NULL AND win_log_loss IS NULL)",
             name="ck_prediction_outcomes_scoring_state",
         ),
@@ -236,3 +263,5 @@ def downgrade() -> None:
     op.drop_table("model_predictions")
     op.drop_index("ix_prediction_runs_date_mode", table_name="prediction_runs")
     op.drop_table("prediction_runs")
+    if op.get_bind().dialect.name == "postgresql":
+        op.execute(sa.text("DROP FUNCTION prevent_prediction_ledger_mutation()"))

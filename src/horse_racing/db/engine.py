@@ -15,8 +15,19 @@ def create_engine_for_url(database_url: str, *, echo: bool = False) -> Engine:
     """Create an engine with SQLite safety and concurrency pragmas enabled."""
 
     _ensure_sqlite_parent(database_url)
-    connect_args = {"check_same_thread": False} if database_url.startswith("sqlite:") else {}
-    engine = create_engine(database_url, echo=echo, connect_args=connect_args)
+    is_sqlite = database_url.startswith("sqlite:")
+    connect_args = {"check_same_thread": False} if is_sqlite else {}
+    engine_options: dict[str, object] = {
+        "echo": echo,
+        "connect_args": connect_args,
+        "pool_pre_ping": not is_sqlite,
+        "pool_recycle": 300 if not is_sqlite else -1,
+    }
+    if not is_sqlite:
+        # Keep each autoscaled Cloud Run instance from reserving SQLAlchemy's
+        # much larger default connection pool against a small Supabase tier.
+        engine_options.update(pool_size=2, max_overflow=1, pool_timeout=15)
+    engine = create_engine(database_url, **engine_options)
 
     if database_url.startswith("sqlite:"):
 

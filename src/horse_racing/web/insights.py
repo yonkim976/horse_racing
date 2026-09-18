@@ -201,7 +201,7 @@ def load_forecast_page(
         .outerjoin(RaceEntry, RaceEntry.race_id == Race.id)
         .outerjoin(ModelPrediction, ModelPrediction.race_id == Race.id)
         .where(*conditions)
-        .group_by(Race.id)
+        .group_by(Race.id, Racecourse.kra_meet_code, Racecourse.name_ko)
         .order_by(Race.race_number)
         .limit(40)
     ).all()
@@ -296,7 +296,10 @@ def load_forecast_page(
     run_row = session.execute(
         select(PredictionRun)
         .join(ModelPrediction, ModelPrediction.prediction_run_id == PredictionRun.id)
-        .where(ModelPrediction.race_id == selected.id)
+        .where(
+            ModelPrediction.race_id == selected.id,
+            PredictionRun.publication_mode == "live",
+        )
         .order_by(PredictionRun.published_at_ms.desc())
         .limit(1)
     ).scalar_one_or_none()
@@ -308,7 +311,10 @@ def load_forecast_page(
                 ModelPrediction.prediction_run_id == run_row.id,
                 ModelPrediction.race_id == selected.id,
             )
-            .order_by(ModelPrediction.prob_win.desc())
+            .order_by(
+                ModelPrediction.prob_top3.desc(),
+                ModelPrediction.horse_number.asc(),
+            )
         ).all()
         prediction_by_entry = {
             item.race_entry_id: (rank, item) for rank, item in enumerate(predictions, 1)

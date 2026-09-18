@@ -16,6 +16,7 @@ EXPECTED_TABLES = {
     "horse_start_training",
     "horse_training",
     "horse_weight_history",
+    "historical_backfill_batches",
     "horses",
     "ingestion_runs",
     "jockey_changes",
@@ -23,7 +24,9 @@ EXPECTED_TABLES = {
     "odds_snapshots",
     "owners",
     "model_predictions",
+    "model_prediction_explanations",
     "prediction_outcomes",
+    "prediction_model_components",
     "prediction_runs",
     "prediction_settlements",
     "race_entries",
@@ -51,7 +54,7 @@ def test_initial_migration_creates_expected_tables(tmp_path: Path) -> None:
     assert set(inspect(engine).get_table_names()) == EXPECTED_TABLES
     with engine.connect() as connection:
         revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-        assert revision == "20260916_0011"
+        assert revision == "20260919_0013"
         columns = {c["name"] for c in inspect(engine).get_columns("race_section_results")}
         assert {"time_basis", "source_kind"} <= columns
 

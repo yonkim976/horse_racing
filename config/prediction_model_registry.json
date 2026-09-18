@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "selection_rule": "Only an explicitly promoted and hash-verified champion may be used for publication. Experiments never self-promote.",
+  "domains": {
+    "thoroughbred": {
+      "active_profile": "thoroughbred-main-20260919-v1"
+    },
+    "jeju": {
+      "active_profile": "jeju-hy-r-form-20260919-v1"
+    }
+  },
+  "profiles": {
+    "thoroughbred-main-20260919-v1": {
+      "domain": "thoroughbred",
+      "status": "production",
+      "selection_policy": "promoted_champion_only",
+      "champion_id": "thoroughbred-abc-current-a-b-c-20260919",
+      "promoted_at": "2026-09-19T00:00:00+09:00",
+      "probability_contract": "thoroughbred_abc_runner_v1",
+      "combination_algorithm_version": "top3_set_joint_v1",
+      "components": {
+        "A": {
+          "candidate": "current_A",
+          "model_version": "v5_2026H2_rolling_all",
+          "artifact": "A_model",
+          "metadata": "A_metadata"
+        },
+        "B": {
+          "candidate": "current_B",
+          "model_version": "v4_2026_top3_growth_strength",
+          "artifact": "BC_model",
+          "metadata": "BC_metadata"
+        },
+        "C": {
+          "candidate": "current_C",
+          "model_version": "v4_2026_top3_growth_strength+v2_2026_H3_relative",
+          "artifact": "BC_model",
+          "metadata": "BC_metadata",
+          "order_artifact": "WIN_ORDER_model",
+          "order_metadata": "WIN_ORDER_metadata"
+        }
+      },
+      "artifacts": {
+        "A_model": {
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt",
+          "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+        },
+        "A_metadata": {
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/metadata.json",
+          "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+        },
+        "BC_model": {
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt",
+          "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+        },
+        "BC_metadata": {
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/metadata.json",
+          "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+        },
+        "WIN_ORDER_model": {
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt",
+          "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+        },
+        "WIN_ORDER_metadata": {
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/metadata.json",
+          "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+        },
+        "reference_inference": {
+          "path": "data/research/thoroughbred_boundary_20260918_v6/infer.py",
+          "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+        },
+        "frozen_selection": {
+          "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+          "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+        },
+        "baseline_verification": {
+          "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+          "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+        },
+        "latest_challenger_review": {
+          "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+          "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+        }
+      },
+      "verification_gates": [
+        {
+          "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+          "requires": {
+            "passed": true,
+            "frozen_source_and_code_hashes_match": true
+          }
+        },
+        {
+          "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+          "requires": {
+            "by_target.A.selected": "current_A",
+            "by_target.B.selected": "current_B",
+            "by_target.C.selected": "current_C"
+          }
+        },
+        {
+          "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+          "requires": {
+            "passed": true,
+            "selected.A": "current_A",
+            "selected.B": "current_B",
+            "selected.C": "current_C",
+            "production_changed": false
+          }
+        }
+      ]
+    },
+    "jeju-hy-r-form-20260919-v1": {
+      "domain": "jeju",
+      "status": "production",
+      "selection_policy": "promoted_champion_only",
+      "champion_id": "HY_R_FORM",
+      "promoted_at": "2026-09-19T00:00:00+09:00",
+      "probability_contract": "jeju_hy_r_form_runner_v1",
+      "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+      "components": {
+        "A_B_C": {
+          "candidate": "HY_R_FORM",
+          "model_version": "frozen_2026_HY_R_FORM",
+          "artifact": "HY_R_FORM_model",
+          "set_score": "rank_score",
+          "order_score": "order_score"
+        }
+      },
+      "artifacts": {
+        "HY_R_FORM_model": {
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+          "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+        },
+        "reference_inference": {
+          "path": "scripts/predict_jeju_live_hy_r_form.py",
+          "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+        },
+        "baseline_verification": {
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+          "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+        },
+        "latest_challenger_decision": {
+          "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+          "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+        },
+        "latest_challenger_verification": {
+          "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+          "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+        }
+      },
+      "verification_gates": [
+        {
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+          "requires": {
+            "passed": true,
+            "prediction_lock_verified": true,
+            "primary_intervals_and_decision_rebuilt": true,
+            "post_evaluation_refits": 0
+          }
+        },
+        {
+          "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+          "requires": {
+            "active_reference": "HY_R_FORM",
+            "promotion": false
+          }
+        },
+        {
+          "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+          "requires": {
+            "passed": true,
+            "baseline_and_order_preserved": true,
+            "operating_model_unchanged": true
+          }
+        }
+      ]
+    }
+  }
+}

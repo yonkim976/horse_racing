@@ -173,7 +173,15 @@ def test_parse_start_training_numeric_horse_id() -> None:
     )
     assert item.horse_id == "3104784"
     assert item.meet_code == 2
+    assert item.stable_number == "21"
     assert item.rider_name == "김길홍"
+
+
+def test_parse_start_training_text_stable_number() -> None:
+    payload = start_training_payload()["response"]["body"]["items"]["item"][0]
+    payload["partNo"] = "신마"
+    item = StartTrainingItem.model_validate(payload)
+    assert item.stable_number == "신마"
 
 
 def test_ingest_jockey_changes(tmp_path: Path) -> None:

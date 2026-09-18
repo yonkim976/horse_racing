@@ -16,6 +16,7 @@ from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from horse_racing.db.session import SessionLocal
@@ -104,7 +105,13 @@ def create_app(
             request.url.path in {"/", "/forecast", "/validation", "/analysis"}
             or request.url.path.startswith("/races/")
         )
-        response_key = f"{request.url.path}?{request.url.query}"
+        # Template responses contain absolute URLs generated from the request
+        # origin. Keep caches isolated per origin so the apex, www, and
+        # run.app hosts never receive HTML rendered for another host.
+        response_key = (
+            f"{request.url.scheme}://{request.url.netloc}"
+            f"{request.url.path}?{request.url.query}"
+        )
         if cacheable:
             cached_response = response_cache.get(response_key)
             if cached_response and cached_response[0] > monotonic():
@@ -166,6 +173,15 @@ def create_app(
     @app.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @app.get("/health/ready")
+    def readiness() -> dict[str, str]:
+        try:
+            with session_factory() as session:
+                session.execute(text("SELECT 1"))
+        except Exception as exc:
+            raise HTTPException(status_code=503, detail="database unavailable") from exc
+        return {"status": "ready"}
 
     @app.get("/", response_class=HTMLResponse)
     def dashboard(
@@ -497,21 +513,25 @@ def create_app(
     def entity_list(
         request: Request,
         kind_slug: str,
-        q: Annotated[str, Query()] = "",
+        q: Annotated[str, Query(max_length=100)] = "",
         page: Annotated[int, Query(ge=1)] = 1,
         sort: Annotated[str, Query()] = "starts",
     ) -> HTMLResponse:
         if kind_slug not in ENTITY_KINDS:
             raise HTTPException(status_code=404, detail="Not found")
-        with session_factory() as session:
-            data = load_entity_list(
-                session,
-                kind_slug=kind_slug,
-                query=q,
-                page=page,
-                page_size=DEFAULT_PAGE_SIZE,
-                sort=sort,
-            )
+
+        def load():  # type: ignore[no-untyped-def]
+            with session_factory() as session:
+                return load_entity_list(
+                    session,
+                    kind_slug=kind_slug,
+                    query=q,
+                    page=page,
+                    page_size=DEFAULT_PAGE_SIZE,
+                    sort=sort,
+                )
+
+        data = cached(("entity-list", kind_slug, q, page, sort), load, ttl=60.0)
         if data is None:
             raise HTTPException(status_code=404, detail="Not found")
         return templates.TemplateResponse(

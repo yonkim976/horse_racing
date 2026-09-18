@@ -11,7 +11,8 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel
-from sqlalchemy import func, or_, select
+from sqlalchemy import cast, func, or_, select
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Session, joinedload
 
 from horse_racing.collectors.kra_api import (
@@ -369,6 +370,13 @@ def final_dividend_is_complete(
     ).all()
     if not races or any(status != "completed" for _, status in races):
         return False
+    if session.get_bind().dialect.name == "postgresql":
+        request_params = cast(SourceDocument.request_params_json, JSONB)
+        request_meet = request_params["meet"].as_integer()
+        request_race_date = request_params["rc_date"].as_string()
+    else:
+        request_meet = func.json_extract(SourceDocument.request_params_json, "$.meet")
+        request_race_date = func.json_extract(SourceDocument.request_params_json, "$.rc_date")
     completed_dividend_run = session.scalar(
         select(func.count())
         .select_from(IngestionRun)
@@ -376,9 +384,8 @@ def final_dividend_is_complete(
         .where(
             IngestionRun.data_type == "final_dividend",
             IngestionRun.status == "completed",
-            func.json_extract(SourceDocument.request_params_json, "$.meet") == meet,
-            func.json_extract(SourceDocument.request_params_json, "$.rc_date")
-            == race_date.strftime("%Y%m%d"),
+            request_meet == meet,
+            request_race_date == race_date.strftime("%Y%m%d"),
         )
     )
     if not completed_dividend_run:

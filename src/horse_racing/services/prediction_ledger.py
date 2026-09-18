@@ -7,8 +7,8 @@ import json
 import math
 import time
 import uuid
-from dataclasses import dataclass
-from datetime import datetime, timedelta
+from dataclasses import asdict, dataclass
+from datetime import date, datetime, timedelta
 from datetime import time as datetime_time
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -20,6 +20,8 @@ from sqlalchemy.orm import Session, selectinload
 from horse_racing.analysis.metrics import evaluate_probabilities, log_loss
 from horse_racing.db.models import (
     ModelPrediction,
+    ModelPredictionExplanation,
+    PredictionModelComponent,
     PredictionOutcome,
     PredictionRun,
     PredictionSettlement,
@@ -55,6 +57,31 @@ class PredictionModelMetadata:
 
 
 @dataclass(frozen=True, slots=True)
+class PredictionPublicationContext:
+    domain: str
+    prediction_stage: str
+    registry_sha256: str
+    input_card_sha256: str
+    source_card_at_ms: int
+    history_cutoff_date: date
+    data_availability_status: str
+    probability_contract: str
+    combination_algorithm_version: str
+    parent_public_id: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class PredictionComponentMetadata:
+    component: str
+    model_version: str
+    candidate_name: str
+    artifact_sha256: str
+    metadata_sha256: str | None = None
+    algorithm_version: str | None = None
+    parameters: dict[str, object] | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class PublicationSummary:
     public_id: str
     prediction_run_id: int
@@ -63,6 +90,7 @@ class PublicationSummary:
     race_count: int
     entry_count: int
     predictions_sha256: str
+    publication_content_sha256: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -106,15 +134,22 @@ def _sha256_json(value: object) -> str:
 
 
 def _canonical_prediction_rows(frame: pl.DataFrame) -> list[dict[str, int | float]]:
+    def database_float(value: object) -> float:
+        # The production Postgres path round-trips IEEE doubles through the
+        # pooler at 15 significant digits.  Hash the stable database value,
+        # rather than driver-specific extra digits, so read-back verification
+        # remains deterministic across SQLite and Postgres.
+        return float(format(float(value), ".15g"))
+
     ordered = frame.select(PREDICTION_COLUMNS).sort("race_id", "horse_number")
     return [
         {
             "race_id": int(row["race_id"]),
             "race_entry_id": int(row["race_entry_id"]),
             "horse_number": int(row["horse_number"]),
-            "prob_win": float(row["prob_win"]),
-            "prob_top2": float(row["prob_top2"]),
-            "prob_top3": float(row["prob_top3"]),
+            "prob_win": database_float(row["prob_win"]),
+            "prob_top2": database_float(row["prob_top2"]),
+            "prob_top3": database_float(row["prob_top3"]),
         }
         for row in ordered.to_dicts()
     ]
@@ -122,6 +157,257 @@ def _canonical_prediction_rows(frame: pl.DataFrame) -> list[dict[str, int | floa
 
 def prediction_payload_hash(frame: pl.DataFrame) -> str:
     return _sha256_json(_canonical_prediction_rows(frame))
+
+
+def _valid_sha256(value: str) -> bool:
+    return len(value) == 64 and all(char in "0123456789abcdef" for char in value.lower())
+
+
+def _validate_publication_context(context: PredictionPublicationContext) -> None:
+    if context.domain not in {"thoroughbred", "jeju"}:
+        raise PredictionLedgerError("domain은 thoroughbred 또는 jeju여야 합니다.")
+    if context.prediction_stage not in {"initial_card", "pre_race_update"}:
+        raise PredictionLedgerError(
+            "prediction_stage는 initial_card 또는 pre_race_update여야 합니다."
+        )
+    if context.data_availability_status not in {"complete", "partial", "not_available"}:
+        raise PredictionLedgerError("지원하지 않는 data_availability_status입니다.")
+    for label, value in (
+        ("registry_sha256", context.registry_sha256),
+        ("input_card_sha256", context.input_card_sha256),
+    ):
+        if not _valid_sha256(value):
+            raise PredictionLedgerError(f"{label}는 64자리 SHA-256이어야 합니다.")
+    if context.source_card_at_ms <= 0:
+        raise PredictionLedgerError("source_card_at_ms는 양수여야 합니다.")
+    if context.prediction_stage == "initial_card" and context.parent_public_id is not None:
+        raise PredictionLedgerError("initial_card 실행은 parent_public_id를 가질 수 없습니다.")
+    if context.prediction_stage == "pre_race_update" and context.parent_public_id is None:
+        raise PredictionLedgerError("pre_race_update 실행에는 parent_public_id가 필요합니다.")
+
+
+def _canonical_component_rows(
+    components: tuple[PredictionComponentMetadata, ...],
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    seen: set[str] = set()
+    for component in sorted(components, key=lambda item: item.component):
+        if component.component in seen:
+            raise PredictionLedgerError(f"중복 모델 component: {component.component}")
+        seen.add(component.component)
+        if not _valid_sha256(component.artifact_sha256):
+            raise PredictionLedgerError(
+                f"component={component.component} artifact_sha256가 올바르지 않습니다."
+            )
+        if component.metadata_sha256 is not None and not _valid_sha256(
+            component.metadata_sha256
+        ):
+            raise PredictionLedgerError(
+                f"component={component.component} metadata_sha256가 올바르지 않습니다."
+            )
+        rows.append(
+            {
+                "component": component.component,
+                "model_version": component.model_version,
+                "candidate_name": component.candidate_name,
+                "artifact_sha256": component.artifact_sha256,
+                "metadata_sha256": component.metadata_sha256,
+                "algorithm_version": component.algorithm_version,
+                "parameters": component.parameters or {},
+            }
+        )
+    if not rows:
+        raise PredictionLedgerError("모델 component 메타데이터가 비어 있습니다.")
+    return rows
+
+
+COMMON_DETAIL_COLUMNS = {
+    "race_entry_id",
+    "a_rank_in_race",
+    "field_size",
+    "starter_status",
+}
+THOROUGHBRED_DETAIL_COLUMNS = {
+    "raw_a_top3_score",
+    "raw_bc_top3_score",
+    "raw_win_score",
+}
+JEJU_DETAIL_COLUMNS = {"raw_rank_score", "raw_order_score", "beta_set", "beta_order"}
+OPTIONAL_DETAIL_COLUMNS = (
+    "runner_identifier",
+    "jockey_identifier",
+    "trainer_identifier",
+    "owner_identifier",
+    "cancellation_status",
+    "body_weight_kg",
+    "body_weight_change_kg",
+    "data_quality_flags_json",
+)
+
+
+def _validate_runner_details(
+    frame: pl.DataFrame,
+    selected: pl.DataFrame,
+    domain: str,
+) -> list[dict[str, object]]:
+    required = COMMON_DETAIL_COLUMNS | (
+        THOROUGHBRED_DETAIL_COLUMNS if domain == "thoroughbred" else JEJU_DETAIL_COLUMNS
+    )
+    missing = sorted(required - set(frame.columns))
+    if missing:
+        raise PredictionLedgerError(f"말별 상세 컬럼 없음: {', '.join(missing)}")
+    detail_columns = sorted(required) + [
+        column for column in OPTIONAL_DETAIL_COLUMNS if column in frame.columns
+    ]
+    details = frame.select(detail_columns)
+    if details["race_entry_id"].n_unique() != details.height:
+        raise PredictionLedgerError("말별 상세에 중복 race_entry_id가 있습니다.")
+    expected_ids = set(selected["race_entry_id"].to_list())
+    actual_ids = set(details["race_entry_id"].to_list())
+    if actual_ids != expected_ids:
+        raise PredictionLedgerError("말별 상세와 확률 payload의 race_entry_id가 다릅니다.")
+    required_without_status = sorted(required - {"starter_status"})
+    if details.select(required_without_status).null_count().select(
+        pl.sum_horizontal(pl.all())
+    ).item():
+        raise PredictionLedgerError("필수 말별 상세값에 null이 있습니다.")
+    if details.filter(pl.col("starter_status").is_null()).height:
+        raise PredictionLedgerError("starter_status가 null인 말이 있습니다.")
+    selected_by_entry = {
+        int(row["race_entry_id"]): row for row in selected.iter_rows(named=True)
+    }
+    for row in details.iter_rows(named=True):
+        probability_row = selected_by_entry[int(row["race_entry_id"])]
+        if int(row["field_size"]) <= 0 or int(row["a_rank_in_race"]) <= 0:
+            raise PredictionLedgerError("field_size와 a_rank_in_race는 양수여야 합니다.")
+        if int(row["a_rank_in_race"]) > int(row["field_size"]):
+            raise PredictionLedgerError("a_rank_in_race가 field_size보다 큽니다.")
+        if probability_row["horse_number"] <= 0:
+            raise PredictionLedgerError("horse_number는 양수여야 합니다.")
+    joined = selected.select("race_id", "race_entry_id").join(
+        details.select("race_entry_id", "a_rank_in_race", "field_size"),
+        on="race_entry_id",
+    )
+    for race_id, group in joined.group_by("race_id"):
+        key = race_id[0] if isinstance(race_id, tuple) else race_id
+        sizes = group["field_size"].unique().to_list()
+        ranks = sorted(group["a_rank_in_race"].cast(pl.Int64).to_list())
+        if sizes != [group.height]:
+            raise PredictionLedgerError(f"race_id={key} field_size가 출전마 수와 다릅니다.")
+        if ranks != list(range(1, group.height + 1)):
+            raise PredictionLedgerError(f"race_id={key} A 순위가 순열이 아닙니다.")
+    return sorted(details.to_dicts(), key=lambda row: int(row["race_entry_id"]))
+
+
+EXPLANATION_COLUMNS = {
+    "race_entry_id",
+    "component",
+    "feature_name",
+    "readable_feature_name",
+    "feature_value",
+    "field_percentile",
+    "contribution_direction",
+    "contribution_value",
+    "contribution_rank",
+    "explanation_type",
+    "explanation_method",
+    "source_cutoff_at_ms",
+}
+
+
+def _canonical_explanation_rows(
+    frame: pl.DataFrame,
+    entry_ids: set[int],
+) -> list[dict[str, object]]:
+    missing = sorted(EXPLANATION_COLUMNS - set(frame.columns))
+    if missing:
+        raise PredictionLedgerError(f"설명 컬럼 없음: {', '.join(missing)}")
+    rows = frame.select(sorted(EXPLANATION_COLUMNS)).to_dicts()
+    if not rows:
+        raise PredictionLedgerError("말별 설명이 비어 있습니다.")
+    by_runner: dict[int, dict[str, list[int]]] = {}
+    canonical: list[dict[str, object]] = []
+    for row in rows:
+        entry_id = int(row["race_entry_id"])
+        if entry_id not in entry_ids:
+            raise PredictionLedgerError(f"설명에 알 수 없는 race_entry_id={entry_id}")
+        direction = str(row["contribution_direction"])
+        rank = int(row["contribution_rank"])
+        contribution = float(row["contribution_value"])
+        if direction not in {"positive", "negative"} or rank not in {1, 2, 3}:
+            raise PredictionLedgerError("설명 방향 또는 순위가 올바르지 않습니다.")
+        if (direction == "positive" and contribution < 0) or (
+            direction == "negative" and contribution > 0
+        ):
+            raise PredictionLedgerError("설명 방향과 기여도 부호가 다릅니다.")
+        explanation_type = str(row["explanation_type"])
+        if explanation_type not in {
+            "interpretable",
+            "categorical_model_effect",
+            "data_quality_flag",
+        }:
+            raise PredictionLedgerError("지원하지 않는 explanation_type입니다.")
+        percentile = row["field_percentile"]
+        if percentile is not None and not 0 <= float(percentile) <= 1:
+            raise PredictionLedgerError("field_percentile은 0~1이어야 합니다.")
+        feature_name = str(row["feature_name"])
+        id_tokens = ("jockey_id", "trainer_id", "owner_id", "horse_id")
+        if any(token in feature_name.lower() for token in id_tokens) and explanation_type != (
+            "categorical_model_effect"
+        ):
+            raise PredictionLedgerError(
+                f"ID 효과는 categorical_model_effect여야 합니다: {feature_name}"
+            )
+        ranks = by_runner.setdefault(entry_id, {"positive": [], "negative": []})
+        ranks[direction].append(rank)
+        canonical.append(
+            {
+                **row,
+                "race_entry_id": entry_id,
+                "field_percentile": None if percentile is None else float(percentile),
+                "contribution_value": contribution,
+                "contribution_rank": rank,
+                "feature_value": row["feature_value"],
+            }
+        )
+    if set(by_runner) != entry_ids:
+        missing_ids = sorted(entry_ids - set(by_runner))
+        raise PredictionLedgerError(f"설명이 없는 race_entry_id: {missing_ids[:10]}")
+    for entry_id, directions in by_runner.items():
+        for direction, ranks in directions.items():
+            if sorted(ranks) != [1, 2, 3]:
+                raise PredictionLedgerError(
+                    f"race_entry_id={entry_id} {direction} 설명은 정확히 3개여야 합니다."
+                )
+    return sorted(
+        canonical,
+        key=lambda row: (
+            int(row["race_entry_id"]),
+            str(row["component"]),
+            str(row["contribution_direction"]),
+            int(row["contribution_rank"]),
+        ),
+    )
+
+
+def _publication_content_hash(
+    selected: pl.DataFrame,
+    context: PredictionPublicationContext,
+    components: list[dict[str, object]],
+    details: list[dict[str, object]],
+    explanations: list[dict[str, object]],
+) -> str:
+    context_payload = asdict(context)
+    context_payload["history_cutoff_date"] = context.history_cutoff_date.isoformat()
+    return _sha256_json(
+        {
+            "context": context_payload,
+            "components": components,
+            "predictions": _canonical_prediction_rows(selected),
+            "runner_details": details,
+            "explanations": explanations,
+        }
+    )
 
 
 def _validate_probability_frame(frame: pl.DataFrame) -> pl.DataFrame:
@@ -188,6 +474,10 @@ def publish_predictions(
     publication_mode: str = "live",
     published_at_ms: int | None = None,
     notes: str | None = None,
+    publication_context: PredictionPublicationContext | None = None,
+    model_components: tuple[PredictionComponentMetadata, ...] = (),
+    runner_details: pl.DataFrame | None = None,
+    explanations: pl.DataFrame | None = None,
 ) -> PublicationSummary:
     """Atomically append one complete prediction publication.
 
@@ -202,6 +492,62 @@ def publish_predictions(
     if feature_cutoff_at_ms > published:
         raise PredictionLedgerError("feature cutoff은 실제 발행시각보다 늦을 수 없습니다.")
     selected = _validate_probability_frame(predictions)
+    component_rows: list[dict[str, object]] = []
+    detail_rows: list[dict[str, object]] = []
+    explanation_rows: list[dict[str, object]] = []
+    content_hash: str | None = None
+    parent_prediction_run_id: int | None = None
+    parent_run: PredictionRun | None = None
+    if publication_context is not None:
+        _validate_publication_context(publication_context)
+        if runner_details is None or explanations is None:
+            raise PredictionLedgerError(
+                "확장 publication에는 말별 상세와 설명 데이터가 모두 필요합니다."
+            )
+        component_rows = _canonical_component_rows(model_components)
+        detail_rows = _validate_runner_details(
+            runner_details,
+            selected,
+            publication_context.domain,
+        )
+        explanation_rows = _canonical_explanation_rows(
+            explanations,
+            set(int(value) for value in selected["race_entry_id"].to_list()),
+        )
+        content_hash = _publication_content_hash(
+            selected,
+            publication_context,
+            component_rows,
+            detail_rows,
+            explanation_rows,
+        )
+        if session.scalar(
+            select(PredictionRun.id).where(
+                PredictionRun.publication_content_sha256 == content_hash
+            )
+        ) is not None:
+            raise PredictionLedgerError(
+                f"동일 확장 publication payload가 이미 발행됐습니다: {content_hash}"
+            )
+        if publication_context.parent_public_id is not None:
+            parent = session.scalar(
+                select(PredictionRun).where(
+                    PredictionRun.public_id == publication_context.parent_public_id
+                )
+            )
+            if parent is None:
+                raise PredictionLedgerError(
+                    "알 수 없는 parent_public_id: "
+                    f"{publication_context.parent_public_id}"
+                )
+            if parent.prediction_stage != "initial_card":
+                raise PredictionLedgerError("pre_race_update의 부모는 initial_card여야 합니다.")
+            if parent.publication_mode != "live":
+                raise PredictionLedgerError("pre_race_update의 부모는 live 발행이어야 합니다.")
+            if parent.domain != publication_context.domain:
+                raise PredictionLedgerError("부모 실행과 domain이 다릅니다.")
+            parent_prediction_run_id = parent.id
+            parent_run = parent
     entry_ids = selected["race_entry_id"].to_list()
     db_rows = session.execute(
         select(
@@ -233,26 +579,56 @@ def publish_predictions(
 
     race_ids = sorted(selected["race_id"].unique().to_list())
     if publication_mode == "live":
-        existing_live_races = sorted(
-            set(
+        existing_live = session.execute(
+            select(
+                ModelPrediction.race_id,
+                PredictionRun.id,
+                PredictionRun.parent_prediction_run_id,
+            )
+            .join(
+                PredictionRun,
+                PredictionRun.id == ModelPrediction.prediction_run_id,
+            )
+            .where(
+                PredictionRun.publication_mode == "live",
+                ModelPrediction.race_id.in_(race_ids),
+            )
+        ).all()
+        if existing_live:
+            is_update = (
+                publication_context is not None
+                and publication_context.prediction_stage == "pre_race_update"
+                and parent_run is not None
+            )
+            if not is_update:
+                existing_live_races = sorted({row.race_id for row in existing_live})
+                raise PredictionLedgerError(
+                    "이미 live 예측이 발행된 경주는 initial_card로 다시 발행할 수 없습니다: "
+                    f"{existing_live_races}"
+                )
+            parent_race_ids = set(
                 session.scalars(
-                    select(ModelPrediction.race_id)
-                    .join(
-                        PredictionRun,
-                        PredictionRun.id == ModelPrediction.prediction_run_id,
-                    )
-                    .where(
-                        PredictionRun.publication_mode == "live",
-                        ModelPrediction.race_id.in_(race_ids),
+                    select(ModelPrediction.race_id).where(
+                        ModelPrediction.prediction_run_id == parent_run.id
                     )
                 )
             )
-        )
-        if existing_live_races:
-            raise PredictionLedgerError(
-                "이미 live 예측이 발행된 경주는 다시 발행할 수 없습니다: "
-                f"{existing_live_races}"
+            if not set(race_ids).issubset(parent_race_ids):
+                raise PredictionLedgerError(
+                    "pre_race_update 경주는 부모 initial_card 경주의 부분집합이어야 합니다."
+                )
+            unrelated = sorted(
+                {
+                    row.race_id
+                    for row in existing_live
+                    if row.id != parent_run.id
+                    and row.parent_prediction_run_id != parent_run.id
+                }
             )
+            if unrelated:
+                raise PredictionLedgerError(
+                    "다른 live 계보가 이미 존재하는 경주입니다: " f"{unrelated}"
+                )
     expected_rows = session.execute(
         select(RaceEntry.id, RaceEntry.race_id)
         .where(RaceEntry.race_id.in_(race_ids), RaceEntry.scratched.is_(False))
@@ -317,12 +693,84 @@ def publish_predictions(
         model_artifact_sha256=metadata.model_artifact_sha256,
         feature_hash=metadata.feature_hash,
         predictions_sha256=payload_hash,
+        publication_content_sha256=content_hash,
+        domain=publication_context.domain if publication_context else None,
+        prediction_stage=(
+            publication_context.prediction_stage if publication_context else None
+        ),
+        parent_prediction_run_id=parent_prediction_run_id,
+        registry_sha256=(publication_context.registry_sha256 if publication_context else None),
+        input_card_sha256=(
+            publication_context.input_card_sha256 if publication_context else None
+        ),
+        source_card_at_ms=(
+            publication_context.source_card_at_ms if publication_context else None
+        ),
+        history_cutoff_date=(
+            publication_context.history_cutoff_date if publication_context else None
+        ),
+        data_availability_status=(
+            publication_context.data_availability_status if publication_context else None
+        ),
+        probability_contract=(
+            publication_context.probability_contract if publication_context else None
+        ),
+        combination_algorithm_version=(
+            publication_context.combination_algorithm_version
+            if publication_context
+            else None
+        ),
         notes=notes,
     )
     session.add(prediction_run)
     session.flush()
+    for row in component_rows:
+        parameters = row.pop("parameters")
+        session.add(
+            PredictionModelComponent(
+                prediction_run_id=prediction_run.id,
+                parameters_json=json.dumps(
+                    parameters,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    allow_nan=False,
+                ),
+                **row,
+            )
+        )
+    details_by_entry = {
+        int(row["race_entry_id"]): row.copy() for row in detail_rows
+    }
+    predictions_by_entry: dict[int, ModelPrediction] = {}
     for row in _canonical_prediction_rows(selected):
-        session.add(ModelPrediction(prediction_run_id=prediction_run.id, **row))
+        entry_id = int(row["race_entry_id"])
+        details = details_by_entry.get(entry_id, {})
+        details.pop("race_entry_id", None)
+        prediction = ModelPrediction(
+            prediction_run_id=prediction_run.id,
+            **row,
+            **details,
+        )
+        session.add(prediction)
+        predictions_by_entry[entry_id] = prediction
+    session.flush()
+    for row in explanation_rows:
+        entry_id = int(row.pop("race_entry_id"))
+        feature_value = row.pop("feature_value")
+        session.add(
+            ModelPredictionExplanation(
+                model_prediction_id=predictions_by_entry[entry_id].id,
+                feature_value_json=json.dumps(
+                    feature_value,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    allow_nan=False,
+                ),
+                **row,
+            )
+        )
     session.commit()
     return PublicationSummary(
         public_id=prediction_run.public_id,
@@ -332,6 +780,7 @@ def publish_predictions(
         race_count=len(race_ids),
         entry_count=selected.height,
         predictions_sha256=payload_hash,
+        publication_content_sha256=content_hash,
     )
 
 
