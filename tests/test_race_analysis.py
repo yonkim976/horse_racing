@@ -260,6 +260,9 @@ def test_debutant_gets_prior_trials_and_training_but_no_target_day_evidence(sess
     assert result.trials[0].judgement == "합격"
     assert result.trials[0].video_url.endswith("vod_type=t")
     assert result.trials[0].section_details["G3F"]["time_ms"] == 48000
+    assert [row["kind"] for row in result.recent_records] == ["trial"]
+    assert result.recent_records[0]["record"] is result.trials[0]
+    assert result.same_distance_history == []
     assert result.training_summary["sessions"] == 2
     assert result.training_summary["minutes"] == 20.0
     assert result.training_summary["start_sessions"] == 2
@@ -457,6 +460,7 @@ def test_archive_supplements_unlinked_old_trials_but_preserves_operational_recor
     assert selected.trials[1].id is None
     assert selected.trials[1].horse_number == 7
     assert selected.trials[1].video_url.endswith("vod_type=t")
+    assert [row["record"].date for row in selected.recent_records] == ["2026-09-16"]
 
 
 def test_past_horse_number_is_the_actual_recorded_number_not_current_number_or_gate(session):
@@ -535,9 +539,9 @@ def test_pace_stages_use_distinct_observed_checkpoint_ranks_and_prefer_fourth_co
     assert any(chip.number == 1 for chip in early.slots[9])
     assert any(chip.number == 1 for chip in middle.slots[5])
     assert any(chip.number == 1 for chip in late.slots[8])
-    assert page.pace_summaries[0]["early"] == "앞"
-    assert page.pace_summaries[0]["middle"] == "앞쪽"
-    assert page.pace_summaries[0]["late"] == "앞"
+    assert page.pace_summaries[0]["early"] == "선행권"
+    assert page.pace_summaries[0]["middle"] == "선입권"
+    assert page.pace_summaries[0]["late"] == "선행권"
 
 
 def test_busan_middle_uses_g3f_checkpoint_and_missing_late_stays_unknown(session):
@@ -557,7 +561,7 @@ def test_busan_middle_uses_g3f_checkpoint_and_missing_late_stays_unknown(session
     board = load_race_analysis_page(session, race_id=target.id)
     assert any(chip.number == 1 for chip in board.pace_board[1].slots[3])
     assert board.pace_board[2].missing[0].number == 1
-    assert board.pace_summaries[0]["late"] == "기록 없음"
+    assert board.pace_summaries[0]["late"] == "자료 부족"
 
 
 @pytest.mark.parametrize("meet,distance", [(1, 1000), (2, 800)])

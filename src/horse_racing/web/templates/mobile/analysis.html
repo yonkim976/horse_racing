@@ -1,25 +1,118 @@
 {% extends "mobile/base.html" %}
 {% block body_class %}mobile-analysis{% endblock %}
-{% block title %}경주 분석 · 한국 경마 데이터 보드{% endblock %}
-{% block topbar_title %}경주 분석{% endblock %}
+{% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block extra_head %}
-<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=5" defer></script>
+<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=9" defer></script>
 {% endblock %}
 
 {% macro kr_date(value) -%}
-{%- if value and value|length >= 10 -%}{{ value[5:7]|int }}월 {{ value[8:10]|int }}일
+{%- if value and value|length >= 10 -%}{{ value[0:4] }}년 {{ value[5:7]|int }}월 {{ value[8:10]|int }}일
 {%- else -%}{{ value }}{%- endif -%}
+{%- endmacro %}
+{% macro short_date(value) -%}
+{%- if value and value|length >= 10 -%}{{ value[2:4] }}.{{ value[5:7]|int }}.{{ value[8:10]|int }}
+{%- else -%}{{ value }}{%- endif -%}
+{%- endmacro %}
+{% macro compact_grade(value) -%}
+{%- if value and value != "—" -%}{{ value|replace("등급", "")|replace(" ", "") }}{%- endif -%}
+{%- endmacro %}
+{% macro role_name(value) -%}
+{%- if value == "입상후보" -%}관심마{%- else -%}{{ value or "예측없음" }}{%- endif -%}
 {%- endmacro %}
 {% macro split_time(record, code) -%}
 {%- set cell = record.section_details.get(code, {}) -%}
 {%- if cell.get("time_ms") -%}{{ cell.get("time") }}{%- else -%}—{%- endif -%}
 {%- endmacro %}
-{% macro split_row(record) -%}
-<p class="ma-record-splits">
-  <span><small>S1F</small><strong>{{ split_time(record, "S1F") }}</strong></span>
-  <span><small>G3F</small><strong>{{ split_time(record, "G3F") }}</strong></span>
-  <span><small>G1F</small><strong>{{ split_time(record, "G1F") }}</strong></span>
-</p>
+{% macro record_video(url, title) -%}
+{%- if url -%}<a class="ma-record-video" href="{{ url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ title }} 영상 보기">영상</a>{%- endif -%}
+{%- endmacro %}
+{% macro record_sections(record) -%}
+{% set ns = namespace(count=0) %}
+{% for code, cell in record.section_details.items() %}
+  {% if code not in ["400M", "FINAL400"] and cell.get("position") is not none %}{% set ns.count = ns.count + 1 %}{% endif %}
+{% endfor %}
+<div class="ma-record-sections" style="--record-section-count: {{ ns.count if ns.count else 1 }}">
+  <div class="ma-record-section-row ma-record-section-ranks" aria-label="구간별 통과순위">
+    {% for code, cell in record.section_details.items() %}
+      {% if code not in ["400M", "FINAL400"] and cell.get("position") is not none %}
+      <span><small>{{ code }}</small><strong>{{ cell.get("position") }}</strong></span>
+      {% endif %}
+    {% endfor %}
+    {% if not ns.count %}<span class="ma-record-section-empty">통과순위 자료 없음</span>{% endif %}
+  </div>
+  <div class="ma-record-section-row ma-record-section-times" aria-label="구간별 기록">
+    <span><small>S1F</small><strong>{{ split_time(record, "S1F") }}</strong></span>
+    <span><small>G3F</small><strong>{{ split_time(record, "G3F") }}</strong></span>
+    <span><small>G1F</small><strong>{{ split_time(record, "G1F") }}</strong></span>
+  </div>
+</div>
+{%- endmacro %}
+{% macro race_record(past) -%}
+<li data-history-distance="{{ past.distance }}">
+  <div class="ma-record-head">
+    <div class="ma-record-head-copy">
+      <p class="ma-record-meta">{{ short_date(past.date) }} · {{ past.meet }} {{ past.race_number }}R{% if past.grade and past.grade != "—" %} · {{ compact_grade(past.grade) }}{% endif %} · {{ past.distance }}m</p>
+      {% if past.condition and past.condition != "—" %}<p class="ma-record-condition">{{ past.condition }}</p>{% endif %}
+    </div>
+    {{ record_video(past.video_url, past.meet ~ ' ' ~ past.race_number ~ 'R') }}
+  </div>
+  <p class="ma-record-result">
+    <strong>{{ past.jockey }}</strong>
+    <span>{{ past.finish }}{% if past.field_size %} · {{ past.field_size }}두{% endif %}</span>
+    <b>{{ past.time }}</b>
+  </p>
+  {{ record_sections(past) }}
+</li>
+{%- endmacro %}
+{% macro trial_record(trial) -%}
+<li data-history-distance="{{ trial.distance }}">
+  <div class="ma-record-head">
+    <div class="ma-record-head-copy">
+      <p class="ma-record-meta">{{ short_date(trial.date) }} · {{ trial.meet }} 주행심사 {{ trial.number }}차 · {{ trial.distance }}m</p>
+      {% if trial.condition and trial.condition != "—" %}<p class="ma-record-condition">{{ trial.condition }}</p>{% endif %}
+    </div>
+    {{ record_video(trial.video_url, trial.meet ~ ' 주행심사 ' ~ trial.number ~ '차') }}
+  </div>
+  <p class="ma-record-result">
+    <strong>{{ trial.jockey }}</strong>
+    <span>{{ trial.finish }}{% if trial.judgement %} · {{ trial.judgement }}{% endif %}</span>
+    <b>{{ trial.time }}</b>
+  </p>
+  {{ record_sections(trial) }}
+</li>
+{%- endmacro %}
+{% macro runner_row(runner) -%}
+<button type="button" class="ma-horse-row{% if runner.state == '출전취소' %} is-scratched{% endif %}" data-select-runner="{{ runner.entry_id }}" data-runner-card aria-expanded="false" aria-controls="runner-details-{{ runner.entry_id }}">
+  <span class="ma-horse-main">
+    <span class="ma-num">{{ runner.number }}</span>
+    <span class="ma-horse-copy">
+      <span class="ma-horse-name">
+        <strong>{{ runner.horse }}</strong>
+      </span>
+      <span>{{ runner.jockey }} · {{ runner.weight }}</span>
+      <span class="ma-form">
+        {% if runner.form_kind == "trial" %}심사 {{ runner.form_tokens|join("-") }}
+        {% elif runner.form_tokens %}{{ runner.form_tokens|join("-") }}
+        {% else %}최근 착순 없음{% endif %}
+      </span>
+      {% if runner.state == '경주 완료' and runner.win_pct %}<span class="ma-result-prediction">예측 {{ runner.win_pct }}{% if runner.win_label %} · {{ role_name(runner.win_label) }}{% endif %}</span>{% endif %}
+      {% if runner.state == '출전취소' %}<span class="ma-scratch-label">출전 취소</span>{% endif %}
+    </span>
+  </span>
+  <span class="ma-horse-silk silk-{{ runner.number }}">
+    {% if runner.state == '경주 완료' and runner.result_label != '—' %}
+    <span class="ma-win-block ma-result-block">
+      <span class="ma-win-pct">{{ runner.result_label }}</span>
+      <span class="ma-win-role">{{ runner.result_time }}</span>
+    </span>
+    {% else %}
+    <span class="ma-win-block" data-role="{{ role_name(runner.win_label) }}">
+      <span class="ma-win-pct">{{ runner.win_pct or '00%' }}</span>
+      <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
+    </span>
+    {% endif %}
+  </span>
+</button>
 {%- endmacro %}
 
 {% block content %}
@@ -39,9 +132,9 @@
     <div class="ma-rounds" aria-label="경주 선택">
       {% for race in page.races %}
         {% if not page.selected_race or race.meet_code == page.selected_race.meet_code %}
-        <a href="/m/analysis?date={{ race.date }}&amp;meet={{ race.meet_code }}&amp;race_id={{ race.id }}" class="{% if page.selected_race and race.id == page.selected_race.id %}active{% endif %}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>
+        <a href="/m/analysis?date={{ race.date }}&amp;meet={{ race.meet_code }}&amp;race_id={{ race.id }}" class="{% if page.selected_race and race.id == page.selected_race.id %}active{% endif %}{% if race.is_current %} is-next{% endif %}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>
           <strong>{{ race.number }}R</strong>
-          <span>{{ race.start_time }}</span>
+          <span>{% if race.status == 'completed' %}<span class="ma-finished-label">종료 · </span>{% elif race.is_current %}<span class="ma-next-label">예정 · </span>{% endif %}{{ race.start_time }}</span>
         </a>
         {% endif %}
       {% endfor %}
@@ -52,54 +145,60 @@
   {% if page.selected_race %}
   <header class="ma-title">
     <p>{{ kr_date(page.selected_race.date) }} · {{ page.selected_race.meet }}</p>
-    <h1>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</h1>
+    <div class="ma-title-line">
+      <h1>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</h1>
+      {% if page.selected_race.status == 'completed' %}<span class="ma-race-status">종료</span>{% endif %}
+    </div>
     <p>{{ page.selected_race.start_time }} · {{ page.selected_race.distance }}m · {{ page.selected_race.grade }} · {{ page.selected_race.field_size }}두</p>
+    {% if page.prediction_state %}
+    <section class="ma-race-summary" aria-label="경주 예측 요약">
+      <div class="ma-race-summary-head">
+        <div>
+          <strong>전력 구도</strong>
+          <span>{{ page.selected_race.field_size }}두</span>
+        </div>
+        <span class="mobile-field-state" data-state="{{ page.prediction_state }}">{{ page.prediction_state }}</span>
+      </div>
+      <div class="ma-summary-groups">
+        {% for group in page.prediction_groups %}
+        <div class="ma-summary-group" data-role="{{ role_name(group.key) }}">
+          <div class="ma-summary-group-title">
+            <strong>{{ group.title }}</strong>
+            <span>{{ group.runners|length }}두</span>
+          </div>
+          <div class="ma-summary-numbers" aria-label="{{ group.title }} 마번">
+            {% for runner in group.runners %}
+            <span class="ma-summary-number silk-{{ runner.number }}" title="예측 {{ runner.prediction_rank or '없음' }} · {{ runner.horse }}">
+              <span>{{ runner.number }}</span>
+            </span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
   </header>
 
-  <section class="ma-section" aria-label="출전마 목록">
-    <h2>출전마 {{ page.runners|length }}두</h2>
-    {% if page.runners|selectattr("win_pct")|list %}
-    <p class="ma-note">입상 확률 높은 순입니다.</p>
-    {% else %}
-    <p class="ma-note">이 경주는 아직 정식 예측이 없습니다. 아래 출전마를 눌러 최근 기록을 보세요.</p>
-    {% endif %}
-    {% if page.runners|selectattr("form_kind", "equalto", "trial")|list %}
-    <p class="ma-note">첫 출전마는 주행심사 착순입니다. 실전 착순과 같은 숫자가 아닙니다.</p>
-    {% endif %}
+  {% set completed_race = page.selected_race.status == 'completed' %}
+  {% set card_runners = page.runners|sort(attribute='finish_sort,number') if completed_race else page.runners %}
+  <section class="ma-section ma-field-section" aria-label="{{ '실제 착순별 출전마' if completed_race else '예측 순위별 출전마' }}">
     <div class="ma-field">
-      {% for runner in page.runners %}
-      <button type="button" class="ma-horse-row{% if runner.state == '출전취소' %} is-scratched{% endif %}" data-select-runner="{{ runner.entry_id }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">
-        <span class="ma-horse-main">
-          <span class="ma-num">{{ runner.number }}</span>
-          <span class="ma-horse-copy">
-            <strong>{{ runner.horse }}</strong>
-            <span>{{ runner.jockey }} · {{ runner.weight }}</span>
-            <span class="ma-form">
-              {% if runner.form_kind == "trial" %}심사 {{ runner.form_tokens|join("-") }}
-              {% elif runner.form_tokens %}{{ runner.form_tokens|join("-") }}
-              {% else %}최근 착순 없음{% endif %}
-            </span>
-            {% if runner.state == '출전취소' %}<span class="ma-scratch-label">출전 취소</span>{% endif %}
-          </span>
-        </span>
-        <span class="ma-horse-silk silk-{{ runner.number }}">
-          <span class="ma-win-block" data-role="{{ runner.win_label or '후착혼전' }}">
-            <span class="ma-win-pct">{{ runner.win_pct or '00%' }}</span>
-            <span class="ma-win-role">{{ runner.win_label or '후착혼전' }}</span>
-          </span>
-        </span>
-      </button>
-      {% endfor %}
+    {% for runner in card_runners %}
+      <div class="ma-runner-accordion" data-runner-shell="{{ runner.entry_id }}">
+        {{ runner_row(runner) }}
+      </div>
+    {% endfor %}
     </div>
   </section>
 
   {% if page.pace_board %}
-  <section class="ma-section ma-pace" data-pace-board aria-label="구간 위치">
-    <h2>구간 위치</h2>
-    <p class="ma-note">이전 경주에서 실제로 지나간 평균 자리입니다. 이번 경주 예상이 아닙니다.</p>
+  <section class="ma-section ma-pace" data-pace-board aria-label="과거 전개 성향">
+    <h2>과거 전개 성향</h2>
+    <p class="ma-note">최근 최대 6회 정상 완주의 실제 통과순위를 출전두수 기준으로 맞춘 성향입니다. 이번 경주 예측값은 아닙니다.</p>
     <p class="ma-pace-summary" data-pace-summary>
       {% if page.pace_summaries %}
-      {{ page.pace_summaries[0].number }}번 {{ page.pace_summaries[0].horse }} · 초반 {{ page.pace_summaries[0].early }} · 중반 {{ page.pace_summaries[0].middle }} · 종반 {{ page.pace_summaries[0].late }}
+      {{ page.pace_summaries[0].number }}번 {{ page.pace_summaries[0].horse }} · 초반 {{ page.pace_summaries[0].early }} · 코너 {{ page.pace_summaries[0].middle }} · 종반 {{ page.pace_summaries[0].late }}
       {% endif %}
     </p>
     {% for lane in page.pace_board %}
@@ -108,14 +207,19 @@
         <strong>{{ lane.title }}</strong>
         <span>{{ lane.hint }}</span>
       </div>
+      <div class="ma-pace-scale" aria-hidden="true">
+        <span>추입권</span>
+        <span>중위권</span>
+        <span>선입권</span>
+        <span>선행권</span>
+      </div>
       <div class="ma-pace-track" aria-label="{{ lane.title }} 뒤부터 앞">
-        <span class="ma-pace-end">뒤</span>
         <div class="ma-pace-scroller" data-pace-scroll>
           <div class="ma-pace-slots">
             {% for slot in lane.slots %}
             <div class="ma-pace-slot">
               {% for chip in slot %}
-              <button type="button" class="ma-pace-chip silk-{{ chip.number }}" data-select-runner="{{ chip.entry_id }}" aria-label="{{ chip.number }}번 {{ chip.horse }} {{ lane.title }}">
+              <button type="button" class="ma-pace-chip silk-{{ chip.number }}" data-select-runner="{{ chip.entry_id }}" aria-label="{{ chip.number }}번 {{ chip.horse }} {{ lane.title }} 최근 {{ chip.samples }}회 평균">
                 <span>{{ chip.number }}</span>
               </button>
               {% endfor %}
@@ -123,11 +227,10 @@
             {% endfor %}
           </div>
         </div>
-        <span class="ma-pace-end">앞</span>
       </div>
       {% if lane.missing %}
       <p class="ma-pace-missing">
-        <span>이 구간 기록 없음</span>
+        <span>자료 부족</span>
         {% for chip in lane.missing %}
         <button type="button" class="ma-pace-chip silk-{{ chip.number }}" data-select-runner="{{ chip.entry_id }}" aria-label="{{ chip.number }}번 {{ chip.horse }} {{ lane.title }} 기록 없음">
           <span>{{ chip.number }}</span>
@@ -141,61 +244,36 @@
   </section>
   {% endif %}
 
-  <section class="ma-section" id="ma-records" aria-label="말 기록">
-    <h2>이 말 기록</h2>
+  <div class="ma-record-store" data-record-store hidden>
     {% for runner in page.runners %}
-    <article class="ma-dossier{% if loop.first %} is-active{% endif %}" data-dossier="{{ runner.entry_id }}" {% if not loop.first %}hidden{% endif %}>
-      <header class="ma-dossier-head">
-        <span class="ma-num">{{ runner.number }}</span>
-        <div>
-          <h3>{{ runner.horse }} · {{ runner.win_pct or '00%' }} <span class="ma-dossier-role" data-role="{{ runner.win_label or '후착혼전' }}">{{ runner.win_label or '후착혼전' }}</span></h3>
-          <p>{{ runner.jockey }} 기수 · {{ runner.trainer }} 조교사 · {{ runner.weight }}</p>
-          {% if runner.style and runner.style != "자료 부족" %}<p>{{ runner.style }}</p>{% endif %}
-        </div>
-      </header>
+    <article class="ma-dossier ma-inline-dossier" id="runner-details-{{ runner.entry_id }}" data-dossier="{{ runner.entry_id }}" hidden>
       <div class="ma-tabs" role="tablist" aria-label="{{ runner.horse }} 기록">
-        <button type="button" role="tab" data-record-tab="history" aria-selected="{{ 'true' if runner.history_total else 'false' }}">최근 경주 {{ runner.history_total }}</button>
-        <button type="button" role="tab" data-record-tab="trials" aria-selected="{{ 'true' if not runner.history_total else 'false' }}">주행심사 {{ runner.trials|length }}</button>
+        <button type="button" role="tab" data-record-tab="recent" aria-selected="true">최근 기록 {{ runner.recent_records|length }}</button>
+        <button type="button" role="tab" data-record-tab="distance" aria-selected="false">동일 거리 경주 {{ runner.same_distance_history|length }}</button>
       </div>
-      <div data-record-pane="history" {% if not runner.history_total %}hidden{% endif %}>
-        {% if runner.history %}
+      <div data-record-pane="recent">
+        {% if runner.recent_records %}
         <ol class="ma-record-list">
-          {% for past in runner.history %}
-          <li data-history-distance="{{ past.distance }}">
-            <p><strong>{{ kr_date(past.date) }}</strong> · {{ past.meet }} {{ past.race_number }}R</p>
-            <p>{{ past.distance }}m · {{ past.grade }}</p>
-            {% if past.condition and past.condition != "—" %}<p>{{ past.condition }}</p>{% endif %}
-            <p class="ma-record-result"><strong>{{ past.finish }}</strong>{% if past.field_size %} / {{ past.field_size }}두{% endif %} · {{ past.time }}</p>
-            {{ split_row(past) }}
-            <p>{{ past.jockey }}{% if past.video_url %} · <a href="{{ past.video_url }}" target="_blank" rel="noopener noreferrer">영상 보기</a>{% endif %}</p>
-          </li>
+          {% for row in runner.recent_records %}
+            {% if row.kind == "trial" %}{{ trial_record(row.record) }}{% else %}{{ race_record(row.record) }}{% endif %}
           {% endfor %}
         </ol>
         {% else %}
-        <p class="ma-note">수집된 과거 경주 기록이 없습니다. 주행심사를 먼저 확인해 주세요.</p>
+        <p class="ma-note">최근 1년 내 경주·주행심사 기록이 없습니다.</p>
         {% endif %}
       </div>
-      <div data-record-pane="trials" {% if runner.history_total %}hidden{% endif %}>
-        {% if runner.trials %}
+      <div data-record-pane="distance" hidden>
+        {% if runner.same_distance_history %}
         <ol class="ma-record-list">
-          {% for trial in runner.trials %}
-          <li>
-            <p><strong>{{ kr_date(trial.date) }}</strong> · {{ trial.meet }} {{ trial.number }}차</p>
-            <p>{{ trial.distance }}m · {{ trial.judgement }}</p>
-            {% if trial.condition and trial.condition != "—" %}<p>{{ trial.condition }}</p>{% endif %}
-            <p class="ma-record-result"><strong>{{ trial.finish }}</strong> · {{ trial.time }}</p>
-            {{ split_row(trial) }}
-            <p>{{ trial.jockey }}{% if trial.video_url %} · <a href="{{ trial.video_url }}" target="_blank" rel="noopener noreferrer">영상 보기</a>{% endif %}</p>
-          </li>
-          {% endfor %}
+          {% for past in runner.same_distance_history %}{{ race_record(past) }}{% endfor %}
         </ol>
         {% else %}
-        <p class="ma-note">연결된 주행심사 기록이 없습니다.</p>
+        <p class="ma-note">최근 1년 내 동일 거리 경주 기록이 없습니다.</p>
         {% endif %}
       </div>
     </article>
     {% endfor %}
-  </section>
+  </div>
   {% else %}
   <div class="mobile-empty">
     <strong>선택한 날짜의 출전표가 없습니다.</strong>

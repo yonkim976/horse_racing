@@ -3,9 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="{% block meta_description %}한국마사회 경주 데이터를 조회하는 로컬 데이터 대시보드{% endblock %}">
+    <meta name="naver-site-verification" content="a71202c329d9767a2c3589e8637e278720be227f">
+    <meta name="description" content="{% block meta_description %}한국 경마 일정과 결과, 출전마 기록과 예측 확률을 확인하는 마필로그 Mapilog{% endblock %}">
+    <link rel="canonical" href="https://mapilog.xyz{{ request.url.path }}">
+    {% if request.url.path == "/" %}
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://mapilog.xyz/m">
+    {% elif request.url.path == "/analysis" %}
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://mapilog.xyz/m/analysis">
+    {% endif %}
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:site_name" content="마필로그 Mapilog">
+    <meta property="og:title" content="{{ self.title()|striptags }}">
+    <meta property="og:description" content="{{ self.meta_description()|striptags }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ self.title()|striptags }}">
+    <meta name="twitter:description" content="{{ self.meta_description()|striptags }}">
     <meta name="theme-color" content="#0a0f0d">
-    <title>{% block title %}한국 경마 데이터 보드{% endblock %}</title>
+    <title>{% block title %}마필로그 | Mapilog 경마 분석 및 예측{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', path='/images/brand/mapilog-favicon-final.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ url_for('static', path='/images/brand/mapilog-favicon.png') }}" type="image/png" sizes="224x224">
     <script>
       (function () {
         try {
@@ -20,21 +37,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=14">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=15">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=10" defer></script>
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=15" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
     {% block extra_head %}{% endblock %}
   </head>
   <body class="{% block body_class %}{% endblock %}">
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="/" aria-label="한국 경마 데이터 보드 홈">
-          <span class="brand-mark">HR</span>
-          <span>
-            <strong>한국 경마 데이터 보드</strong>
-            <small>KRA RACE CONTROL</small>
-          </span>
+        <a class="brand" href="/" aria-label="마필로그 홈">
+          <img class="brand-symbol brand-logo-color" src="{{ url_for('static', path='/images/brand/mapilog-symbol-color.svg') }}" alt="" aria-hidden="true">
+          <img class="brand-symbol brand-logo-white" src="{{ url_for('static', path='/images/brand/mapilog-symbol-white.svg') }}" alt="" aria-hidden="true">
+          <img class="brand-wordmark brand-logo-color" src="{{ url_for('static', path='/images/brand/mapilog-wordmark-color.svg') }}" alt="" aria-hidden="true">
+          <img class="brand-wordmark brand-logo-white" src="{{ url_for('static', path='/images/brand/mapilog-wordmark-white.svg') }}" alt="" aria-hidden="true">
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
           <a href="/" class="{% if active_nav == 'races' %}active{% endif %}">경주</a>

@@ -539,27 +539,125 @@
     window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
   }
 
-  document.querySelectorAll(".mobile-round-jump a[href^='#']").forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const id = decodeURIComponent((link.hash || "").slice(1));
+  function revealJumpChip(chip) {
+    if (!chip) {
+      return;
+    }
+    const nav = chip.closest(".mobile-round-jump");
+    if (!nav) {
+      return;
+    }
+    const navBox = nav.getBoundingClientRect();
+    const chipBox = chip.getBoundingClientRect();
+    if (chipBox.left >= navBox.left + 8 && chipBox.right <= navBox.right - 8) {
+      return;
+    }
+    const offset = chipBox.left - navBox.left - (navBox.width - chipBox.width) / 2;
+    nav.scrollTo({
+      left: Math.max(0, nav.scrollLeft + offset),
+      behavior: REDUCED_MOTION ? "auto" : "smooth",
+    });
+  }
+
+  function jumpChipId(link) {
+    return link.dataset.roundId || decodeURIComponent((link.hash || "").slice(1));
+  }
+
+  function setMobileRoundSelection(id, { reveal = false } = {}) {
+    document.querySelectorAll(".mobile-round-jump").forEach((nav) => {
+      let selected = null;
+      nav.querySelectorAll("a[data-round-id], a[href^='#']").forEach((link) => {
+        const on = jumpChipId(link) === id;
+        link.classList.toggle("active", on);
+        if (on) {
+          link.setAttribute("aria-current", "true");
+          selected = link;
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+      if (reveal) {
+        revealJumpChip(selected);
+      }
+    });
+  }
+
+  function initMobileRoundJump() {
+    const links = [...document.querySelectorAll(".mobile-round-jump a[href^='#']")];
+    if (!links.length) {
+      return;
+    }
+
+    let lockedUntil = 0;
+    let ticking = false;
+
+    links.forEach((link) => {
+      const id = jumpChipId(link);
       if (!id) {
         return;
       }
-      event.preventDefault();
-      if (history.replaceState) {
-        history.replaceState(null, "", `#${id}`);
-      } else {
-        location.hash = id;
-      }
-      scrollToMobileRound(id);
+      link.dataset.roundId = id;
+      // 네이티브 #id 점프가 카드를 고정 메뉴 위로 올린 뒤 JS가 다시 맞추는 깜빡임을 막는다.
+      link.setAttribute("href", "#_");
+      link.addEventListener(
+        "click",
+        (event) => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          lockedUntil = performance.now() + 800;
+          setMobileRoundSelection(id, { reveal: true });
+          scrollToMobileRound(id);
+        },
+        true
+      );
     });
-  });
+
+    const sections = [...document.querySelectorAll(".mobile-round[id]")];
+    if (!document.body.classList.contains("mobile-home") || !sections.length) {
+      return;
+    }
+
+    const syncFromScroll = () => {
+      ticking = false;
+      if (performance.now() < lockedUntil) {
+        return;
+      }
+      const clearance = mobileStickyClearance();
+      let current = sections[0];
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top - clearance <= 12) {
+          current = section;
+        }
+      });
+      if (current) {
+        setMobileRoundSelection(current.id, { reveal: true });
+      }
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) {
+          return;
+        }
+        ticking = true;
+        requestAnimationFrame(syncFromScroll);
+      },
+      { passive: true }
+    );
+  }
+
+  initMobileRoundJump();
 
   if (document.body.classList.contains("mobile-home")) {
+    if (history.scrollRestoration) {
+      history.scrollRestoration = "manual";
+    }
     syncMobileStickyClearance();
     window.addEventListener("resize", syncMobileStickyClearance);
     const initial = decodeURIComponent((location.hash || "").slice(1));
     if (initial.startsWith("round")) {
+      setMobileRoundSelection(initial, { reveal: true });
       requestAnimationFrame(() => scrollToMobileRound(initial));
     }
   }

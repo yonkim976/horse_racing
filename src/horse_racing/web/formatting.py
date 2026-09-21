@@ -85,6 +85,10 @@ def today_seoul() -> date:
     return datetime.now(tz=SEOUL).date()
 
 
+def now_seoul_ms() -> int:
+    return int(datetime.now(tz=SEOUL).timestamp() * 1000)
+
+
 def display_race_title(grade: str | None, race_name: str | None) -> str:
     name = (race_name or "").strip()
     label = (grade or "").strip()

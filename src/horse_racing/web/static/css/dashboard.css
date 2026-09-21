@@ -202,38 +202,44 @@ footer {
 
 .brand {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
-  gap: 13px;
+  gap: 8px;
 }
 
-.brand-mark {
-  display: grid;
-  width: 40px;
-  height: 40px;
-  color: #06251a;
-  background: linear-gradient(135deg, var(--lime) 0%, #34d399 100%);
-  border-radius: 12px;
-  font: 800 14px/1 var(--font-mono);
-  place-items: center;
-  box-shadow: var(--glow-accent);
+.brand:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
-.brand strong,
-.brand small {
+.brand-symbol,
+.brand-wordmark {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.brand-symbol {
+  width: 70px;
+  height: 38px;
+}
+
+.brand-wordmark {
+  width: 112px;
+  height: 38px;
+}
+
+.brand-logo-color {
+  display: none;
+}
+
+[data-theme="light"] .brand-logo-color {
   display: block;
 }
 
-.brand strong {
-  color: var(--ink-strong);
-  font-size: 16px;
-  letter-spacing: -0.03em;
-}
-
-.brand small {
-  margin-top: 2px;
-  color: var(--faint);
-  font: 600 9.5px/1.2 var(--font-mono);
-  letter-spacing: 0.18em;
+[data-theme="light"] .brand-logo-white {
+  display: none;
 }
 
 .site-nav {

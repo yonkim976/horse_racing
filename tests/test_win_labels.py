@@ -1,4 +1,8 @@
-from horse_racing.web.insights import WIN_LABELS, assign_win_labels
+from horse_racing.web.insights import (
+    WIN_LABELS,
+    assign_win_labels,
+    summarize_top3_field,
+)
 
 
 def labels_for(
@@ -15,8 +19,18 @@ def labels_for(
     return [assigned.get(index) for index in range(len(percents))]
 
 
-def test_win_labels_cover_only_the_seven_terms():
-    assert WIN_LABELS == ("강축", "축", "상대", "복병", "접전", "혼전", "후착혼전")
+def test_win_labels_cover_only_the_v1_terms():
+    assert WIN_LABELS == (
+        "강축",
+        "축마",
+        "공동축",
+        "축 후보",
+        "혼전권",
+        "상대마",
+        "후착후보",
+        "입상후보",
+        "후순위",
+    )
     assigned = assign_win_labels(
         [
             (1, 0.40, False),
@@ -30,47 +44,103 @@ def test_win_labels_cover_only_the_seven_terms():
     assert set(assigned.values()) <= set(WIN_LABELS)
 
 
-def test_clear_leader_is_strong_axis_with_include_and_challenger():
-    assert labels_for(40, 18, 12, 8, 7, 5) == ["강축", "축", "상대", "상대", "복병", "복병"]
-
-
-def test_close_top_two_or_three_are_dead_heat():
-    assert labels_for(28, 26, 8, 6, 4) == ["접전", "접전", "상대", "복병", "복병"]
-    assert labels_for(22, 21, 20, 7, 5) == ["접전", "접전", "접전", "복병", "복병"]
-
-
-def test_bunched_field_is_open_scramble():
-    assert labels_for(18, 16, 15, 14, 12, 8, 4) == [
-        "혼전",
-        "혼전",
-        "혼전",
-        "혼전",
-        "혼전",
-        "복병",
-        "복병",
-    ]
-
-
-def test_clear_win_with_bunched_place_is_place_scramble():
-    assert labels_for(35, 14, 13, 12, 6, 4) == [
+def test_strong_axis_has_two_opponents_and_two_place_candidates():
+    assert labels_for(80, 60, 50, 40, 30, 20, 10) == [
         "강축",
-        "후착혼전",
-        "후착혼전",
-        "후착혼전",
-        "복병",
-        "복병",
+        "상대마",
+        "상대마",
+        "후착후보",
+        "후착후보",
+        "후순위",
+        "후순위",
     ]
 
 
-def test_tied_displayed_percents_share_the_same_label():
-    assert labels_for(22, 17, 12, 11, 11, 11, 9) == [
-        "접전",
-        "접전",
-        "상대",
-        "상대",
-        "상대",
-        "상대",
-        "복병",
+def test_joint_axis_uses_two_axes_and_three_place_candidates():
+    assert labels_for(62, 60, 48, 42, 38, 20) == [
+        "공동축",
+        "공동축",
+        "후착후보",
+        "후착후보",
+        "후착후보",
+        "후순위",
     ]
+
+
+def test_mixed_field_has_four_mixed_runners_and_one_candidate():
+    assert labels_for(48, 41, 38, 36, 27, 20, 10) == [
+        "혼전권",
+        "혼전권",
+        "혼전권",
+        "혼전권",
+        "입상후보",
+        "후순위",
+        "후순위",
+    ]
+
+
+def test_mixed_field_expands_to_six_when_fifth_and_sixth_are_indistinguishable():
+    assert labels_for(48, 36, 35, 33, 29.4, 28.9, 23, 18) == [
+        "혼전권",
+        "혼전권",
+        "혼전권",
+        "혼전권",
+        "입상후보",
+        "입상후보",
+        "후순위",
+        "후순위",
+    ]
+
+    summary = summarize_top3_field(
+        [
+            (index, value / 100, False)
+            for index, value in enumerate((48, 36, 35, 33, 29.4, 28.9, 23, 18))
+        ]
+    )
+    assert summary.race_state == "혼전"
+    assert summary.candidate_count == 6
+    assert summary.prediction_count == 8
+    assert summary.ranks == {index: index + 1 for index in range(8)}
+
+
+def test_place_scramble_expands_to_six_even_with_an_axis():
+    assert labels_for(63.2, 33.2, 23.6, 23.5, 23.5, 21.9, 15.9, 14.9) == [
+        "축마",
+        "상대마",
+        "상대마",
+        "후착후보",
+        "후착후보",
+        "후착후보",
+        "후순위",
+        "후순위",
+    ]
+
+
+def test_axis_and_axis_candidate_thresholds():
+    assert labels_for(69, 55, 50, 40, 30, 20) == [
+        "축마",
+        "상대마",
+        "상대마",
+        "후착후보",
+        "후착후보",
+        "후순위",
+    ]
+    assert labels_for(58, 50, 45, 35, 25, 20) == [
+        "축 후보",
+        "상대마",
+        "상대마",
+        "후착후보",
+        "후착후보",
+        "후순위",
+    ]
+
+
+def test_missing_and_scratched_runners_are_not_labeled():
     assert labels_for(100, None, scratched=(False, True)) == ["강축", None]
     assert labels_for(None, None) == [None, None]
+
+    empty = summarize_top3_field([(1, None, False), (2, 0.8, True)])
+    assert empty.race_state is None
+    assert empty.candidate_count == 0
+    assert empty.prediction_count == 0
+    assert empty.ranks == {}

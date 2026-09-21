@@ -54,112 +54,145 @@ def format_win_pct(value: float | None) -> str | None:
     return None if percent is None else f"{percent}%"
 
 
-_CLOSE_PP = 5
-_AXIS_PP = 8
-_MIXED_PP = 8
-_CHALLENGER_PP = 8
-_INCLUDE_PP = 12
-WIN_LABELS = ("강축", "축", "상대", "복병", "접전", "혼전", "후착혼전")
+_STRONG_AXIS_PROBABILITY = 0.75
+_STRONG_AXIS_GAP = 0.15
+_JOINT_AXIS_MIN_PROBABILITY = 0.45
+_JOINT_AXIS_GAP = 0.05
+_AXIS_PROBABILITY = 0.60
+_AXIS_GAP = 0.10
+_AXIS_CANDIDATE_PROBABILITY = 0.55
+_AXIS_CANDIDATE_GAP = 0.05
+_MIXED_POOL_BOUNDARY_GAP = 0.03
+_PLACE_SCRAMBLE_GAP = 0.05
+_PROBABILITY_EPSILON = 1e-9
+WIN_LABELS = (
+    "강축",
+    "축마",
+    "공동축",
+    "축 후보",
+    "혼전권",
+    "상대마",
+    "후착후보",
+    "입상후보",
+    "후순위",
+)
+
+
+@dataclass(frozen=True, slots=True)
+class Top3FieldSummary:
+    """One race's UI roles derived from published Top-3 probabilities."""
+
+    labels: dict[int, str]
+    ranks: dict[int, int]
+    race_state: str | None
+    candidate_count: int
+    prediction_count: int
+
+
+def summarize_top3_field(
+    entries: Sequence[tuple[int, float | None, bool]],
+) -> Top3FieldSummary:
+    """Summarize runners from their ordered Top-3 inclusion probabilities.
+
+    The default candidate pool contains five runners. It expands to six only
+    when a mixed field has no meaningful fifth/sixth boundary, or when the
+    third- through sixth-ranked runners form a place-probability cluster.
+    """
+    ranked = sorted(
+        (
+            (entry_id, probability)
+            for entry_id, probability, scratched in entries
+            if not scratched
+            if probability is not None
+        ),
+        key=lambda item: (-float(item[1]), item[0]),
+    )
+    if not ranked:
+        return Top3FieldSummary(
+            labels={},
+            ranks={},
+            race_state=None,
+            candidate_count=0,
+            prediction_count=0,
+        )
+
+    probabilities = [float(item[1]) for item in ranked]
+    count = len(ranked)
+    top = probabilities[0]
+    second = probabilities[1] if count > 1 else None
+    top_gap = top if second is None else top - second
+
+    if (
+        top + _PROBABILITY_EPSILON >= _STRONG_AXIS_PROBABILITY
+        and top_gap + _PROBABILITY_EPSILON >= _STRONG_AXIS_GAP
+    ):
+        race_state = "강축"
+    elif (
+        second is not None
+        and second + _PROBABILITY_EPSILON >= _JOINT_AXIS_MIN_PROBABILITY
+        and top_gap <= _JOINT_AXIS_GAP + _PROBABILITY_EPSILON
+    ):
+        race_state = "공동축"
+    elif (
+        top + _PROBABILITY_EPSILON >= _AXIS_PROBABILITY
+        and top_gap + _PROBABILITY_EPSILON >= _AXIS_GAP
+    ):
+        race_state = "축마"
+    elif (
+        top + _PROBABILITY_EPSILON >= _AXIS_CANDIDATE_PROBABILITY
+        and top_gap + _PROBABILITY_EPSILON >= _AXIS_CANDIDATE_GAP
+    ):
+        race_state = "축 후보"
+    else:
+        race_state = "혼전"
+
+    candidate_count = min(5, count)
+    if count >= 6:
+        field_average = min(1.0, 3.0 / count)
+        mixed_boundary = (
+            race_state == "혼전"
+            and probabilities[4] - probabilities[5]
+            <= _MIXED_POOL_BOUNDARY_GAP + _PROBABILITY_EPSILON
+            and probabilities[5] + _PROBABILITY_EPSILON >= field_average * 0.70
+        )
+        place_scramble = (
+            probabilities[2] - probabilities[5]
+            <= _PLACE_SCRAMBLE_GAP + _PROBABILITY_EPSILON
+        )
+        if mixed_boundary or place_scramble:
+            candidate_count = 6
+
+    labels: dict[int, str] = {}
+    ranks: dict[int, int] = {}
+    for index, (entry_id, _) in enumerate(ranked):
+        ranks[entry_id] = index + 1
+        if index >= candidate_count:
+            label = "후순위"
+        elif race_state == "혼전":
+            label = "혼전권" if index < min(4, candidate_count) else "입상후보"
+        elif race_state == "공동축":
+            label = "공동축" if index < min(2, candidate_count) else "후착후보"
+        elif index == 0:
+            label = race_state
+        elif index < min(3, candidate_count):
+            label = "상대마"
+        else:
+            label = "후착후보"
+        labels[entry_id] = label
+    return Top3FieldSummary(
+        labels=labels,
+        ranks=ranks,
+        race_state=race_state,
+        candidate_count=candidate_count,
+        prediction_count=count,
+    )
 
 
 def assign_win_labels(
     entries: Sequence[tuple[int, float | None, bool]],
 ) -> dict[int, str]:
-    """Assign one of the seven contention terms from displayed win percents."""
-    ranked = sorted(
-        (
-            (entry_id, points)
-            for entry_id, probability, scratched in entries
-            if not scratched
-            for points in (displayed_win_points(probability),)
-            if points is not None
-        ),
-        key=lambda item: (-item[1], item[0]),
-    )
-    if not ranked:
-        return {}
-
-    points = [item[1] for item in ranked]
-    count = len(ranked)
-    top = points[0]
-    second = points[1] if count > 1 else None
-    top_gap = 0 if second is None else top - second
-
-    def cluster(start: int, anchor: int) -> list[int]:
-        return [
-            index
-            for index, value in enumerate(points)
-            if index >= start and anchor - value <= _CLOSE_PP
-        ]
-
-    def fill_rest(start: int, *, allow_challenger: bool) -> dict[int, str]:
-        labels: dict[int, str] = {}
-        challengers = 0
-        previous_value: int | None = None
-        previous_label: str | None = None
-        for index in range(start, count):
-            entry_id, value = ranked[index]
-            if previous_label is not None and value == previous_value:
-                labels[entry_id] = previous_label
-                continue
-            if allow_challenger and challengers < 2 and value >= _CHALLENGER_PP:
-                label = "상대"
-                challengers += 1
-            else:
-                label = "복병"
-            labels[entry_id] = label
-            previous_value = value
-            previous_label = label
-        return labels
-
-    if count == 1:
-        return {ranked[0][0]: "강축" if top >= _AXIS_PP else "축"}
-
-    leader_cluster = cluster(0, top)
-    place_cluster = cluster(1, second) if second is not None else []
-
-    if top_gap >= _AXIS_PP and len(place_cluster) >= 2:
-        labels = {ranked[0][0]: "강축"}
-        labels.update({ranked[index][0]: "후착혼전" for index in place_cluster})
-        labels.update(fill_rest(max(place_cluster) + 1, allow_challenger=False))
-        return labels
-
-    if len(leader_cluster) >= 4:
-        pack_end = leader_cluster[-1]
-        while pack_end + 1 < count and top - points[pack_end + 1] <= _MIXED_PP:
-            pack_end += 1
-        labels = {ranked[index][0]: "혼전" for index in range(pack_end + 1)}
-        labels.update(fill_rest(pack_end + 1, allow_challenger=False))
-        return labels
-
-    if 2 <= len(leader_cluster) <= 3:
-        last = leader_cluster[-1]
-        next_points = points[last + 1] if last + 1 < count else 0
-        bunched_field = [index for index, value in enumerate(points) if top - value <= _MIXED_PP]
-        if last + 1 < count and points[last] - next_points < _CLOSE_PP and len(bunched_field) >= 4:
-            labels = {ranked[index][0]: "혼전" for index in bunched_field}
-            labels.update(fill_rest(bunched_field[-1] + 1, allow_challenger=False))
-            return labels
-        labels = {ranked[index][0]: "접전" for index in leader_cluster}
-        labels.update(fill_rest(last + 1, allow_challenger=True))
-        return labels
-
-    if top_gap >= _AXIS_PP:
-        labels = {ranked[0][0]: "강축"}
-        if second is not None and (second >= _INCLUDE_PP or top_gap <= 15):
-            labels[ranked[1][0]] = "축"
-            labels.update(fill_rest(2, allow_challenger=True))
-        else:
-            labels.update(fill_rest(1, allow_challenger=True))
-        return labels
-
-    labels = {ranked[0][0]: "축"}
-    if second is not None and top_gap <= _CLOSE_PP:
-        labels[ranked[1][0]] = "축"
-        labels.update(fill_rest(2, allow_challenger=True))
-    else:
-        labels.update(fill_rest(1, allow_challenger=True))
-    return labels
+    """Backward-compatible label-only view of :func:`summarize_top3_field`."""
+    return summarize_top3_field(entries).labels
 
 
 _SKIP_TRIAL_JUDGEMENTS = {"출", "심", "주"}

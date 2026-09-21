@@ -14,7 +14,13 @@ from time import monotonic
 from typing import Annotated, TypeVar
 
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse, Response
+from fastapi.responses import (
+    FileResponse,
+    HTMLResponse,
+    PlainTextResponse,
+    RedirectResponse,
+    Response,
+)
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
@@ -41,8 +47,23 @@ from horse_racing.web.trial_page import load_running_trial_page
 
 WEB_ROOT = Path(__file__).parent
 T = TypeVar("T")
+_PUBLIC_SITE_ORIGIN = "https://mapilog.xyz"
+_SITEMAP_PATHS = (
+    "/",
+    "/analysis",
+    "/forecast",
+    "/predictions",
+    "/validation",
+    "/racecourses/seoul/distances",
+    "/racecourses/jeju/distances",
+    "/racecourses/busan/distances",
+    "/horses",
+    "/jockeys",
+    "/trainers",
+    "/owners",
+)
 _MOBILE_UA = re.compile(
-    r"Android.+Mobile|iPhone|iPod|iPad|webOS|BlackBerry|IEMobile|Opera Mini",
+    r"Android.+Mobile|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini",
     re.I,
 )
 
@@ -54,7 +75,25 @@ def _is_mobile_request(request: Request) -> bool:
 def _mobile_redirect(request: Request, mobile_path: str) -> RedirectResponse:
     query = request.url.query
     target = f"{mobile_path}?{query}" if query else mobile_path
-    return RedirectResponse(url=target, status_code=302)
+    return RedirectResponse(
+        url=target,
+        status_code=302,
+        headers={"Cache-Control": "private, no-store", "Vary": "User-Agent"},
+    )
+
+
+def _mobile_page_target(request: Request) -> str | None:
+    """Redirect phones only when an equivalent mobile page exists."""
+    if request.method != "GET" or not _is_mobile_request(request):
+        return None
+
+    path = request.url.path
+    if path in {"/", "/analysis"}:
+        target = "/m" if path == "/" else "/m/analysis"
+        return f"{target}?{request.url.query}" if request.url.query else target
+    if path.startswith("/races/") and path.removeprefix("/races/").isdecimal():
+        return f"/m/analysis?race_id={path.removeprefix('/races/')}"
+    return None
 
 
 def create_app(
@@ -101,6 +140,14 @@ def create_app(
 
     @app.middleware("http")
     async def public_safety(request: Request, call_next):  # type: ignore[no-untyped-def]
+        if request.url.hostname == "www.mapilog.xyz":
+            canonical_url = request.url.replace(scheme="https", netloc="mapilog.xyz")
+            return RedirectResponse(
+                url=str(canonical_url),
+                status_code=301,
+                headers={"Cache-Control": "public, max-age=3600"},
+            )
+
         if request.url.path != "/health":
             client = request.client.host if request.client else "unknown"
             now = monotonic()
@@ -115,6 +162,14 @@ def create_app(
                         headers={"Retry-After": "30"},
                     )
                 bucket.append(now)
+
+        mobile_target = _mobile_page_target(request)
+        if mobile_target is not None:
+            return RedirectResponse(
+                url=mobile_target,
+                status_code=302,
+                headers={"Cache-Control": "private, no-store", "Vary": "User-Agent"},
+            )
 
         cacheable = request.method == "GET" and (
             request.url.path in {"/", "/m", "/forecast", "/validation", "/analysis", "/m/analysis"}
@@ -199,6 +254,39 @@ def create_app(
         except Exception as exc:
             raise HTTPException(status_code=503, detail="database unavailable") from exc
         return {"status": "ready"}
+
+    @app.get("/robots.txt", response_class=PlainTextResponse, include_in_schema=False)
+    def robots_txt() -> PlainTextResponse:
+        return PlainTextResponse(
+            f"User-agent: *\nAllow: /\n\nSitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n",
+            headers={"Cache-Control": "public, max-age=3600"},
+        )
+
+    @app.get("/sitemap.xml", include_in_schema=False)
+    def sitemap_xml() -> Response:
+        urls = "\n".join(
+            f"  <url><loc>{_PUBLIC_SITE_ORIGIN}{path}</loc></url>"
+            for path in _SITEMAP_PATHS
+        )
+        body = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            f"{urls}\n"
+            "</urlset>\n"
+        )
+        return Response(
+            content=body,
+            media_type="application/xml",
+            headers={"Cache-Control": "public, max-age=3600"},
+        )
+
+    @app.get("/favicon.ico", include_in_schema=False)
+    def favicon_ico() -> FileResponse:
+        return FileResponse(
+            WEB_ROOT / "static/images/brand/mapilog-favicon.ico",
+            media_type="image/x-icon",
+            headers={"Cache-Control": "public, max-age=86400"},
+        )
 
     @app.get("/", response_class=HTMLResponse, response_model=None)
     def dashboard(

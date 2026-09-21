@@ -37,13 +37,14 @@ from horse_racing.web.formatting import (
     format_clock,
     format_finish_position,
     format_race_time,
+    now_seoul_ms,
     today_seoul,
 )
 from horse_racing.web.insights import (
-    assign_win_labels,
     format_trial_form_token,
     format_win_pct,
     latest_win_probabilities,
+    summarize_top3_field,
     win_probability_sort_key,
 )
 from horse_racing.web.race_video import race_video_url, running_trial_video_url
@@ -70,6 +71,8 @@ class AnalysisRace:
     field_size: int
     runner_names: list[str] = field(default_factory=list)
     status: str = "scheduled"
+    scheduled_at_ms: int | None = None
+    is_current: bool = False
 
 
 @dataclass(slots=True)
@@ -103,6 +106,8 @@ class PastStart:
     remark: str = ""
     source_label: str = "운영 DB 공식 경주기록"
     horse_number: int | None = None
+    race_name: str = ""
+    weather: str = ""
 
 
 @dataclass(slots=True)
@@ -128,6 +133,7 @@ class TrialStart:
     source_label: str = "운영 DB 공식 주행심사"
     horse_number: int | None = None
     form_token: str | None = None
+    weather: str = ""
 
 
 @dataclass(slots=True)
@@ -166,8 +172,22 @@ class AnalysisRunner:
     win_pct: str | None = None
     win_prob: float | None = None
     win_label: str | None = None
+    prediction_rank: int | None = None
+    is_candidate: bool = False
     form_kind: str = ""
     form_tokens: list[str] = field(default_factory=list)
+    recent_records: list[dict[str, Any]] = field(default_factory=list)
+    same_distance_history: list[PastStart] = field(default_factory=list)
+    result_label: str = "—"
+    result_time: str = "—"
+    finish_sort: int = 999
+
+
+@dataclass(slots=True)
+class PredictionRunnerGroup:
+    key: str
+    title: str
+    runners: list[AnalysisRunner]
 
 
 @dataclass(slots=True)
@@ -187,6 +207,10 @@ class RaceAnalysisPage:
     notes: list[str] = field(default_factory=list)
     pace_board: list[PaceBoardLane] = field(default_factory=list)
     pace_summaries: list[dict[str, Any]] = field(default_factory=list)
+    prediction_state: str | None = None
+    candidate_count: int = 0
+    prediction_count: int = 0
+    prediction_groups: list[PredictionRunnerGroup] = field(default_factory=list)
 
 
 @dataclass(slots=True)
@@ -246,6 +270,7 @@ def load_race_analysis_page(
         _race_conditions(meet=None, distance=distance, grade=grade),
         selected_date,
     )
+    _mark_upcoming_races(races, selected_date)
     if selected is not None and selected.date == selected_date.isoformat():
         selected = next((item for item in races if item.id == selected.id), selected)
         if meet is not None and selected.meet_code != meet:
@@ -310,10 +335,13 @@ def load_race_analysis_page(
                 RaceEntry.carried_weight_kg,
                 RaceEntry.rating,
                 RaceEntry.scratched,
+                RaceResult.finish_position,
+                RaceResult.finish_time_ms,
             )
             .join(Horse, Horse.id == RaceEntry.horse_id)
             .outerjoin(Jockey, Jockey.id == RaceEntry.jockey_id)
             .outerjoin(Trainer, Trainer.id == RaceEntry.trainer_id)
+            .outerjoin(RaceResult, RaceResult.race_entry_id == RaceEntry.id)
             .where(RaceEntry.race_id == selected.id)
             .order_by(RaceEntry.horse_number)
             .limit(MAX_RUNNERS)
@@ -375,6 +403,31 @@ def load_race_analysis_page(
             for item in history
         )
         horse_trials = trials.get(horse_id, [])
+        result_label, finish_sort, _ = format_finish_position(
+            entry["finish_position"], scratched=entry["scratched"]
+        )
+        recent_cutoff = cutoff - timedelta(days=365)
+        recent_history = [
+            item for item in history if date.fromisoformat(item.date) >= recent_cutoff
+        ]
+        recent_trials = [
+            item for item in horse_trials if date.fromisoformat(item.date) >= recent_cutoff
+        ]
+        recent_records = sorted(
+            [
+                *({"kind": "race", "record": item} for item in recent_history),
+                *({"kind": "trial", "record": item} for item in recent_trials),
+            ],
+            key=lambda row: (
+                (row["record"].date, row["record"].number)
+                if row["kind"] == "trial"
+                else (row["record"].date, row["record"].race_number)
+            ),
+            reverse=True,
+        )
+        same_distance_history = [
+            item for item in recent_history if item.distance == selected.distance
+        ]
         form_kind, form_tokens = _record_form(history, horse_trials)
         runner = AnalysisRunner(
             entry_id=entry["entry_id"],
@@ -424,6 +477,11 @@ def load_race_analysis_page(
             win_prob=win_probs.get(entry["entry_id"]),
             form_kind=form_kind,
             form_tokens=form_tokens,
+            recent_records=recent_records,
+            same_distance_history=same_distance_history,
+            result_label=result_label,
+            result_time=format_race_time(entry["finish_time_ms"]),
+            finish_sort=finish_sort,
         )
         page.runners.append(runner)
         for item in history:
@@ -480,14 +538,22 @@ def load_race_analysis_page(
         "truncated_field": selected.field_size > MAX_RUNNERS,
         **archive_coverage,
     }
-    win_labels = assign_win_labels(
+    top3_summary = summarize_top3_field(
         [
             (runner.entry_id, runner.win_prob, runner.state == "출전취소")
             for runner in page.runners
         ]
     )
     for runner in page.runners:
-        runner.win_label = win_labels.get(runner.entry_id)
+        runner.win_label = top3_summary.labels.get(runner.entry_id)
+        runner.prediction_rank = top3_summary.ranks.get(runner.entry_id)
+        runner.is_candidate = (
+            runner.prediction_rank is not None
+            and runner.prediction_rank <= top3_summary.candidate_count
+        )
+    page.prediction_state = top3_summary.race_state
+    page.candidate_count = top3_summary.candidate_count
+    page.prediction_count = top3_summary.prediction_count
     if any(runner.win_prob is not None for runner in page.runners):
         page.runners.sort(
             key=lambda runner: win_probability_sort_key(
@@ -497,6 +563,9 @@ def load_race_analysis_page(
                 has_field_predictions=True,
             )
         )
+    elif selected.status == "completed":
+        page.runners.sort(key=lambda runner: (runner.finish_sort, runner.number))
+    page.prediction_groups = _prediction_runner_groups(page.runners)
     page.pace_board, page.pace_summaries = _pace_board(page.runners)
     return page
 
@@ -545,6 +614,27 @@ def _race_query():
     ).join(Racecourse)
 
 
+def _mark_upcoming_races(races: list[AnalysisRace], race_date: date) -> None:
+    if race_date != today_seoul():
+        return
+    now_ms = now_seoul_ms()
+    by_meet: dict[int, list[AnalysisRace]] = defaultdict(list)
+    for item in races:
+        by_meet[item.meet_code].append(item)
+    for group in by_meet.values():
+        timed = [
+            item
+            for item in group
+            if item.status == "scheduled" and item.scheduled_at_ms is not None
+        ]
+        timed.sort(key=lambda item: (item.scheduled_at_ms or 0, item.number, item.id))
+        if not timed:
+            continue
+        started = [item for item in timed if item.scheduled_at_ms <= now_ms]
+        current = started[-1] if started else timed[0]
+        current.is_current = True
+
+
 def _races_on_date(session: Session, conditions: list, race_date: date) -> list[AnalysisRace]:
     rows = session.execute(
         _race_query()
@@ -575,6 +665,7 @@ def _race_view(row) -> AnalysisRace:
         name=row[8] or "일반",
         field_size=row[9],
         status=row[10],
+        scheduled_at_ms=row[5],
     )
 
 
@@ -613,6 +704,7 @@ def _load_histories(session, horse_ids, cutoff, limit, *, start, end):
             Race.race_number,
             Race.distance_m,
             Race.grade,
+            Race.race_name,
             Race.weather,
             Race.track_condition,
             Race.track_moisture_percent,
@@ -755,6 +847,8 @@ def _load_histories(session, horse_ids, cutoff, limit, *, start, end):
                 meet_code=row["meet_code"],
                 remark=row["rank_remark"] or "",
                 horse_number=row["horse_number"],
+                race_name=row["race_name"] or "",
+                weather=row["weather"] or "",
             )
         )
     return histories, totals
@@ -913,6 +1007,7 @@ def _load_trials(session, horse_ids, cutoff):
                 passing_order=result.passing_order_raw or "—",
                 horse_number=result.horse_number,
                 form_token=format_trial_form_token(result.finish_position, result.judgement),
+                weather=trial.weather or "",
             )
         )
     return output, totals
@@ -1186,6 +1281,8 @@ def _archive_start(row):
         remark=row["record_status"] if not normal else "",
         source_label=row["source_label"],
         horse_number=row.get("horse_number"),
+        race_name=row.get("race_name") or "",
+        weather=row.get("weather") or "",
     )
 
 
@@ -1226,6 +1323,7 @@ def _archive_trial(row):
         source_label=row["source_label"],
         horse_number=row.get("horse_number"),
         form_token=format_trial_form_token(row.get("finish_position"), row.get("judgement")),
+        weather=row.get("weather") or "",
     )
 
 
@@ -1377,22 +1475,52 @@ def _empty_training_summary():
 
 
 PACE_LANE_META = (
-    ("early", "초반", "출발 직후"),
-    ("middle", "중반", "코너"),
-    ("late", "종반", "결승 직전"),
+    ("early", "초반", "S1F 평균"),
+    ("middle", "중반", "코너 평균"),
+    ("late", "종반", "G1F 평균"),
 )
+
+_PREDICTION_GROUP_TITLES = {
+    "강축": "강축",
+    "축마": "축마",
+    "공동축": "공동축",
+    "축 후보": "축 후보",
+    "혼전권": "혼전",
+    "상대마": "상대",
+    "후착후보": "후착 후보",
+    "입상후보": "관심마",
+    "후순위": "후순위",
+    "예측없음": "예측 없음",
+}
+
+
+def _prediction_runner_groups(runners: list[AnalysisRunner]) -> list[PredictionRunnerGroup]:
+    groups: list[PredictionRunnerGroup] = []
+    for runner in runners:
+        key = runner.win_label or "예측없음"
+        if groups and groups[-1].key == key:
+            groups[-1].runners.append(runner)
+            continue
+        groups.append(
+            PredictionRunnerGroup(
+                key=key,
+                title=_PREDICTION_GROUP_TITLES[key],
+                runners=[runner],
+            )
+        )
+    return groups
 
 
 def _pace_band(normalized: float | None) -> str:
     if normalized is None:
-        return "기록 없음"
+        return "자료 부족"
     if normalized <= 0.25:
-        return "앞"
+        return "선행권"
     if normalized <= 0.5:
-        return "앞쪽"
+        return "선입권"
     if normalized <= 0.75:
-        return "뒤쪽"
-    return "뒤"
+        return "중위권"
+    return "추입권"
 
 
 def _pace_board(runners: list[AnalysisRunner]) -> tuple[list[PaceBoardLane], list[dict[str, Any]]]:
