@@ -6,7 +6,7 @@ from datetime import date
 
 _TITLE_RE = re.compile(
     r"(?P<year>\d{2,4})년\s*(?P<month>\d{1,2})월\s*(?P<day>\d{1,2})일"
-    r".*?제\s*(?P<round>\d+)차\s*주행심사성적\s*제\s*0*(?P<race>\d+)경주"
+    r".*?제\s*(?P<round>\d+)차\s*주행(?:심사|검사)성적\s*제\s*0*(?P<race>\d+)경주"
     r"(?:\s+(?P<distance>[\d,]+)M)?"
 )
 _TRACK_RE = re.compile(

@@ -11,9 +11,12 @@ EXPECTED_TABLES = {
     "entry_equipment",
     "horse_grade_changes",
     "horse_medical",
+    "horse_medical_diagnoses",
     "horse_profile_snapshots",
     "horse_rating_snapshots",
+    "horse_hill_training",
     "horse_start_training",
+    "horse_swim_training",
     "horse_training",
     "horse_weight_history",
     "historical_backfill_batches",
@@ -24,12 +27,14 @@ EXPECTED_TABLES = {
     "odds_snapshots",
     "owners",
     "model_predictions",
+    "medical_diagnosis_terms",
     "model_prediction_explanations",
     "prediction_outcomes",
     "prediction_model_components",
     "prediction_runs",
     "prediction_settlements",
     "race_entries",
+    "race_passing_summaries",
     "race_results",
     "race_scratches",
     "race_section_results",
@@ -54,9 +59,46 @@ def test_initial_migration_creates_expected_tables(tmp_path: Path) -> None:
     assert set(inspect(engine).get_table_names()) == EXPECTED_TABLES
     with engine.connect() as connection:
         revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-        assert revision == "20260919_0013"
+        assert revision == "20260925_0019"
         columns = {c["name"] for c in inspect(engine).get_columns("race_section_results")}
         assert {"time_basis", "source_kind"} <= columns
+        horse_columns = {c["name"] for c in inspect(engine).get_columns("horses")}
+        assert {
+            "is_active",
+            "active_status_observed_at_ms",
+            "active_status_source",
+        } <= horse_columns
+        horse_indexes = {i["name"] for i in inspect(engine).get_indexes("horses")}
+        assert "ix_horses_is_active" in horse_indexes
+        swim_columns = {
+            c["name"] for c in inspect(engine).get_columns("horse_swim_training")
+        }
+        assert {
+            "kra_horse_id_raw",
+            "swim_count",
+            "quality_status",
+            "source_document_id",
+        } <= swim_columns
+        hill_columns = {
+            c["name"] for c in inspect(engine).get_columns("horse_hill_training")
+        }
+        assert {
+            "farm_entry_reason",
+            "quality_status",
+            "source_row_hash",
+        } <= hill_columns
+        passing_columns = {
+            c["name"] for c in inspect(engine).get_columns("race_passing_summaries")
+        }
+        assert {
+            "race_id",
+            "corner_3_raw",
+            "corner_4_raw",
+            "corner_7_raw",
+            "corner_8_raw",
+            "tempo_level",
+            "source_row_hash",
+        } <= passing_columns
 
 
 def test_sqlite_pragmas_are_enabled(tmp_path: Path) -> None:
@@ -65,3 +107,43 @@ def test_sqlite_pragmas_are_enabled(tmp_path: Path) -> None:
         assert connection.execute(text("PRAGMA foreign_keys")).scalar_one() == 1
         assert connection.execute(text("PRAGMA journal_mode")).scalar_one() == "wal"
         assert connection.execute(text("PRAGMA busy_timeout")).scalar_one() == 5000
+
+
+def test_medical_term_migration_backfills_without_rewriting_diagnoses(
+    tmp_path: Path,
+) -> None:
+    database_url = f"sqlite:///{tmp_path / 'medical_backfill.sqlite3'}"
+    config = Config("alembic.ini")
+    config.attributes["database_url"] = database_url
+    command.upgrade(config, "20260924_0018")
+    engine = create_engine_for_url(database_url)
+    with engine.begin() as connection:
+        connection.execute(
+            text(
+                "INSERT INTO horses (id, kra_horse_id, name_ko) "
+                "VALUES (1, '0000001', '검증마')"
+            )
+        )
+        connection.execute(
+            text(
+                "INSERT INTO horse_medical "
+                "(id, horse_id, meet_code, clinic_date_local, hospital_name, "
+                "diagnosis_1, diagnosis_2, observed_at_ms) "
+                "VALUES (1, 1, 1, '2026-09-25', '검증병원', "
+                "'근육통', '-', 1000), "
+                "(2, 1, 1, '2026-09-24', '검증병원', "
+                "'근육통', '각막염', 1000)"
+            )
+        )
+
+    command.upgrade(config, "head")
+    with engine.connect() as connection:
+        assert connection.execute(
+            text("SELECT diagnosis_1, diagnosis_2 FROM horse_medical ORDER BY id")
+        ).all() == [("근육통", "-"), ("근육통", "각막염")]
+        assert connection.execute(
+            text("SELECT raw_text FROM medical_diagnosis_terms ORDER BY raw_text")
+        ).all() == [("각막염",), ("근육통",)]
+        assert connection.execute(
+            text("SELECT COUNT(*) FROM horse_medical_diagnoses")
+        ).scalar_one() == 3

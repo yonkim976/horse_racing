@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from horse_racing.collectors.kra_api import FetchedPage
+from horse_racing.collectors.special_training import FetchedXmlPage
 from horse_racing.collectors.kra_text import FetchedTextReport, KraTextFile
 
 
@@ -57,6 +58,34 @@ def store_kra_page(
     )
     target_dir.mkdir(parents=True, exist_ok=True)
     filename = f"page_{page_no:04d}_{fetched.retrieved_at_ms}_{digest[:12]}.json"
+    target_path = target_dir / filename
+    target_path.write_bytes(fetched.body)
+    return StoredRawDocument(path=target_path, sha256=digest)
+
+
+def store_kra_xml_page(
+    fetched: FetchedXmlPage,
+    *,
+    raw_data_dir: Path,
+    data_type: str,
+    partition_date: str,
+    partition_name: str,
+    run_id: int,
+    page_no: int,
+) -> StoredRawDocument:
+    digest = hashlib.sha256(fetched.body).hexdigest()
+    target_dir = (
+        raw_data_dir
+        / "kra"
+        / data_type
+        / partition_date[:4]
+        / partition_date[4:6]
+        / partition_date[6:8]
+        / partition_name
+        / f"run_{run_id}"
+    )
+    target_dir.mkdir(parents=True, exist_ok=True)
+    filename = f"page_{page_no:04d}_{fetched.retrieved_at_ms}_{digest[:12]}.xml"
     target_path = target_dir / filename
     target_path.write_bytes(fetched.body)
     return StoredRawDocument(path=target_path, sha256=digest)

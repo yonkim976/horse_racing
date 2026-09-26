@@ -16,10 +16,12 @@ from horse_racing.collectors.kra_api import (
 from horse_racing.db.models import (
     Horse,
     HorseMedical,
+    HorseMedicalDiagnosis,
     HorseProfileSnapshot,
     HorseRatingSnapshot,
     HorseTraining,
     HorseWeightHistory,
+    MedicalDiagnosisTerm,
 )
 from horse_racing.parsers.horse_history import (
     HorseDetailItem,
@@ -30,6 +32,8 @@ from horse_racing.parsers.horse_history import (
     parse_meet_code,
 )
 from horse_racing.services.horse_history import (
+    _write_medical,
+    ingest_horse_active_statuses,
     ingest_horse_profiles,
     ingest_medical,
     ingest_ratings,
@@ -289,6 +293,8 @@ def test_ingest_horse_history_tables(tmp_path: Path) -> None:
         assert session.scalar(select(func.count()).select_from(HorseWeightHistory)) == 1
         assert session.scalar(select(func.count()).select_from(HorseTraining)) == 1
         assert session.scalar(select(func.count()).select_from(HorseMedical)) == 1
+        assert session.scalar(select(func.count()).select_from(MedicalDiagnosisTerm)) == 1
+        assert session.scalar(select(func.count()).select_from(HorseMedicalDiagnosis)) == 1
         assert session.scalar(select(func.count()).select_from(HorseProfileSnapshot)) == 1
 
         weight = session.scalar(select(HorseWeightHistory))
@@ -302,3 +308,83 @@ def test_ingest_horse_history_tables(tmp_path: Path) -> None:
         assert horse.sire_name == "CARACARO"
         assert horse.dam_name == "ALGOWILD"
         assert horse.birth_date == date(2024, 3, 24)
+        assert horse.is_active is True
+        assert horse.active_status_observed_at_ms is not None
+        assert horse.active_status_source == "data.go.kr/B551015/API8_2:act_gubun=y"
+
+        with KraApiClient("test-key", transport=transport) as client:
+            inactive_summary = ingest_horse_profiles(
+                session,
+                client,
+                meet=1,
+                snapshot_date="20260825",
+                raw_data_dir=tmp_path / "raw",
+                include_inactive=True,
+            )
+        assert inactive_summary.records_written == 1
+        session.refresh(horse)
+        assert horse.is_active is True
+        assert horse.active_status_source == "data.go.kr/B551015/API8_2:act_gubun=y"
+
+
+def test_active_status_union_wins_over_inactive_at_another_meet(tmp_path: Path) -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.url.path.endswith(RACE_HORSE_INFO_ENDPOINT)
+        return httpx.Response(200, json=profile_payload())
+
+    session_factory = migrated_session(tmp_path)
+    with session_factory() as session:
+        with KraApiClient("test-key", transport=httpx.MockTransport(handler)) as client:
+            summary = ingest_horse_active_statuses(
+                session,
+                client,
+                meets=[1, 2],
+                snapshot_date="20260825",
+                raw_data_dir=tmp_path / "raw",
+            )
+
+        horse = session.scalar(select(Horse).where(Horse.kra_horse_id == "0058062"))
+        assert horse is not None
+        assert horse.is_active is True
+        assert horse.active_status_source == "data.go.kr/B551015/API8_2:act_gubun=y"
+        assert summary.records_fetched == 4
+        assert summary.records_written == 1
+
+
+def test_medical_terms_deduplicate_without_changing_source_text(tmp_path: Path) -> None:
+    session_factory = migrated_session(tmp_path)
+    items = [
+        HorseMedicalItem.model_validate(
+            {
+                "hrNo": horse_no,
+                "hrName": horse_name,
+                "meet": "서울",
+                "clinicDate": 20260925,
+                "hospiName": "검증병원",
+                "illName1": "양후지 근육통",
+                "illName2": second,
+            }
+        )
+        for horse_no, horse_name, second in (
+            ("0000001", "검증마일", "각막염"),
+            ("0000002", "검증마이", "-"),
+        )
+    ]
+    with session_factory() as session:
+        assert _write_medical(session, items, 12345) == 2
+        session.commit()
+        assert _write_medical(session, items, 12346) == 2
+        session.commit()
+
+        assert session.scalar(select(func.count()).select_from(HorseMedical)) == 2
+        assert session.scalar(select(func.count()).select_from(MedicalDiagnosisTerm)) == 2
+        assert session.scalar(select(func.count()).select_from(HorseMedicalDiagnosis)) == 3
+        assert set(session.scalars(select(MedicalDiagnosisTerm.raw_text))) == {
+            "양후지 근육통",
+            "각막염",
+        }
+        first = session.scalar(
+            select(HorseMedical).where(HorseMedical.diagnosis_2 == "각막염")
+        )
+        assert first is not None
+        assert first.diagnosis_1 == "양후지 근육통"

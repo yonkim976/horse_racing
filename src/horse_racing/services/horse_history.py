@@ -6,6 +6,8 @@ from pathlib import Path
 
 from pydantic import BaseModel
 from sqlalchemy import select
+from sqlalchemy.dialects.postgresql import insert as postgres_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.orm import Session
 
 from horse_racing.collectors.kra_api import (
@@ -24,11 +26,13 @@ from horse_racing.collectors.kra_api import (
 from horse_racing.db.models import (
     Horse,
     HorseMedical,
+    HorseMedicalDiagnosis,
     HorseProfileSnapshot,
     HorseRatingSnapshot,
     HorseTraining,
     HorseWeightHistory,
     IngestionRun,
+    MedicalDiagnosisTerm,
     Owner,
     SourceDocument,
     Trainer,
@@ -188,12 +192,155 @@ def ingest_horse_profiles(
             public_params=public_params,
         ),
         item_model=HorseDetailItem,
-        writer=lambda sess, _meet, items: _write_profiles(sess, items, observed_at_ms),
+        writer=lambda sess, _meet, items: _write_profiles(
+            sess,
+            items,
+            observed_at_ms,
+            is_active=True if not include_inactive else None,
+        ),
         race_date=snapshot_date,
         meet=meet,
         raw_data_dir=raw_data_dir,
         page_size=page_size,
     )
+
+
+def ingest_horse_active_statuses(
+    session: Session,
+    client: KraApiClient,
+    *,
+    meets: list[int],
+    snapshot_date: str,
+    raw_data_dir: Path,
+    page_size: int = 1000,
+) -> IngestionSummary:
+    """Refresh official active/inactive status, with active winning cross-meet conflicts."""
+    if not meets or any(meet not in {1, 2, 3} for meet in meets):
+        raise ValueError("meets는 1(서울), 2(제주), 3(부산경남) 중 하나 이상이어야 합니다.")
+
+    observed_at_ms = _now_ms()
+    run = IngestionRun(
+        source="data.go.kr/B551015/API8_2",
+        data_type="horse_active_statuses",
+        started_at_ms=observed_at_ms,
+        status="running",
+    )
+    session.add(run)
+    session.commit()
+    run_id = run.id
+
+    active_items: dict[str, HorseDetailItem] = {}
+    inactive_items: dict[str, HorseDetailItem] = {}
+    pages = 0
+    records_fetched = 0
+    try:
+        # A horse can be inactive at an old meet and active at its current meet.
+        # Collect both complete sets first, then let the active union take precedence.
+        for is_active in (False, True):
+            scope = "active" if is_active else "inactive"
+            target = active_items if is_active else inactive_items
+            act_gubun = "y" if is_active else "n"
+            for meet in meets:
+                for fetched in client.iter_pages(
+                    endpoint=RACE_HORSE_INFO_ENDPOINT,
+                    operation=RACE_HORSE_INFO_OPERATION,
+                    public_params={
+                        "meet": meet,
+                        "act_gubun": act_gubun,
+                        "_type": "json",
+                    },
+                    page_size=page_size,
+                    service_key_parameter="ServiceKey",
+                ):
+                    page_no = int(fetched.public_params["pageNo"])
+                    stored = store_kra_page(
+                        fetched,
+                        raw_data_dir=raw_data_dir,
+                        data_type=f"horse_active_statuses_{scope}",
+                        race_date=snapshot_date,
+                        meet=meet,
+                        run_id=run_id,
+                        page_no=page_no,
+                    )
+                    session.add(
+                        SourceDocument(
+                            ingestion_run_id=run_id,
+                            source_url=fetched.source_url,
+                            endpoint=fetched.endpoint,
+                            operation=fetched.operation,
+                            request_params_json=json.dumps(
+                                fetched.public_params,
+                                ensure_ascii=False,
+                                sort_keys=True,
+                                separators=(",", ":"),
+                            ),
+                            requested_at_ms=fetched.requested_at_ms,
+                            retrieved_at_ms=fetched.retrieved_at_ms,
+                            http_status_code=fetched.status_code,
+                            content_type=fetched.content_type,
+                            response_bytes=len(fetched.body),
+                            local_path=str(stored.path),
+                            sha256=stored.sha256,
+                        )
+                    )
+                    parsed = parse_items(fetched.payload, HorseDetailItem)
+                    target.update({item.horse_id: item for item in parsed})
+                    records_fetched += len(parsed)
+                    pages += 1
+                    run.records_fetched = records_fetched
+                    session.commit()
+
+        status_items = {**inactive_items, **active_items}
+        horse_ids = list(status_items)
+        existing: dict[str, Horse] = {}
+        for start in range(0, len(horse_ids), 5000):
+            batch = horse_ids[start : start + 5000]
+            existing.update(
+                {
+                    horse.kra_horse_id: horse
+                    for horse in session.scalars(
+                        select(Horse).where(Horse.kra_horse_id.in_(batch))
+                    )
+                }
+            )
+
+        for horse_id, item in status_items.items():
+            horse = existing.get(horse_id)
+            if horse is None:
+                horse = Horse(kra_horse_id=horse_id, name_ko=item.horse_name)
+                session.add(horse)
+                existing[horse_id] = horse
+            elif item.horse_name and item.horse_name != "(이름없음)":
+                horse.name_ko = item.horse_name
+
+            is_active = horse_id in active_items
+            horse.is_active = is_active
+            horse.active_status_observed_at_ms = observed_at_ms
+            horse.active_status_source = (
+                f"data.go.kr/B551015/API8_2:act_gubun={'y' if is_active else 'n'}"
+            )
+            if is_active and item.meet_code is not None:
+                horse.meet_code = item.meet_code
+
+        run.status = "completed"
+        run.completed_at_ms = _now_ms()
+        run.records_written = len(status_items)
+        session.commit()
+        return IngestionSummary(
+            run_id=run_id,
+            pages=pages,
+            records_fetched=records_fetched,
+            records_written=len(status_items),
+        )
+    except Exception as exc:
+        session.rollback()
+        failed_run = session.get(IngestionRun, run_id)
+        if failed_run is not None:
+            failed_run.status = "failed"
+            failed_run.completed_at_ms = _now_ms()
+            failed_run.error_message = str(exc)
+            session.commit()
+        raise
 
 
 def _write_ratings(
@@ -302,7 +449,36 @@ def _write_medical(
     items: list[HorseMedicalItem],
     observed_at_ms: int,
 ) -> int:
+    names = sorted(
+        {
+            text.strip()
+            for item in items
+            for text in (item.diagnosis_1, item.diagnosis_2)
+            if text and text.strip() not in ("", "-")
+        }
+    )
+    dialect_name = session.get_bind().dialect.name
+    for start in range(0, len(names), 500):
+        batch = names[start : start + 500]
+        values = [{"raw_text": name} for name in batch]
+        if dialect_name == "postgresql":
+            statement = postgres_insert(MedicalDiagnosisTerm).values(values)
+        elif dialect_name == "sqlite":
+            statement = sqlite_insert(MedicalDiagnosisTerm).values(values)
+        else:
+            raise NotImplementedError(f"Unsupported medical term dialect: {dialect_name}")
+        session.execute(statement.on_conflict_do_nothing(index_elements=["raw_text"]))
+    terms: dict[str, MedicalDiagnosisTerm] = {}
+    for start in range(0, len(names), 500):
+        for term in session.scalars(
+            select(MedicalDiagnosisTerm).where(
+                MedicalDiagnosisTerm.raw_text.in_(names[start : start + 500])
+            )
+        ):
+            terms[term.raw_text] = term
+
     written = 0
+    records: list[tuple[HorseMedical, HorseMedicalItem]] = []
     for item in items:
         horse = _upsert_horse(session, item.horse_id, item.horse_name)
         row = session.scalar(
@@ -328,7 +504,40 @@ def _write_medical(
             session.add(row)
         row.stable_part = item.stable_part
         row.observed_at_ms = observed_at_ms
+        records.append((row, item))
         written += 1
+
+    if not records:
+        return written
+    session.flush()
+    medical_ids = sorted({row.id for row, _ in records})
+    existing_links: dict[tuple[int, int], HorseMedicalDiagnosis] = {}
+    for start in range(0, len(medical_ids), 500):
+        for link in session.scalars(
+            select(HorseMedicalDiagnosis).where(
+                HorseMedicalDiagnosis.horse_medical_id.in_(
+                    medical_ids[start : start + 500]
+                )
+            )
+        ):
+            existing_links[(link.horse_medical_id, link.source_slot)] = link
+    for row, item in records:
+        for slot, raw_text in ((1, item.diagnosis_1), (2, item.diagnosis_2)):
+            if not raw_text or raw_text.strip() in ("", "-"):
+                continue
+            key = (row.id, slot)
+            term_id = terms[raw_text.strip()].id
+            link = existing_links.get(key)
+            if link is None:
+                link = HorseMedicalDiagnosis(
+                    horse_medical_id=row.id,
+                    source_slot=slot,
+                    term_id=term_id,
+                )
+                session.add(link)
+                existing_links[key] = link
+            elif link.term_id != term_id:
+                link.term_id = term_id
     return written
 
 
@@ -336,6 +545,8 @@ def _write_profiles(
     session: Session,
     items: list[HorseDetailItem],
     observed_at_ms: int,
+    *,
+    is_active: bool | None,
 ) -> int:
     written = 0
     for item in items:
@@ -362,6 +573,10 @@ def _write_profiles(
         if item.last_sale_amount_raw:
             horse.last_sale_amount_raw = item.last_sale_amount_raw
         horse.profile_observed_at_ms = observed_at_ms
+        if is_active is not None:
+            horse.is_active = is_active
+            horse.active_status_observed_at_ms = observed_at_ms
+            horse.active_status_source = "data.go.kr/B551015/API8_2:act_gubun=y"
 
         if item.trainer_id:
             _upsert_person(session, Trainer, "kra_trainer_id", item.trainer_id, item.trainer_name)

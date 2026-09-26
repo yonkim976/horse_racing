@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, time
+from decimal import Decimal
 
 from sqlalchemy import (
     BigInteger,
@@ -11,8 +12,11 @@ from sqlalchemy import (
     ForeignKey,
     Index,
     Integer,
+    Numeric,
+    SmallInteger,
     String,
     Text,
+    Time,
     UniqueConstraint,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -131,6 +135,9 @@ class Horse(Base):
     dam_name: Mapped[str | None] = mapped_column(String(100))
     last_sale_amount_raw: Mapped[str | None] = mapped_column(String(100))
     profile_observed_at_ms: Mapped[int | None] = mapped_column(BigInteger)
+    is_active: Mapped[bool | None] = mapped_column(Boolean)
+    active_status_observed_at_ms: Mapped[int | None] = mapped_column(BigInteger)
+    active_status_source: Mapped[str | None] = mapped_column(String(100))
 
     entries: Mapped[list[RaceEntry]] = relationship(back_populates="horse")
     rating_snapshots: Mapped[list[HorseRatingSnapshot]] = relationship(
@@ -154,6 +161,12 @@ class Horse(Base):
     start_training_records: Mapped[list[HorseStartTraining]] = relationship(
         back_populates="horse", cascade="all, delete-orphan"
     )
+    swim_training_records: Mapped[list[HorseSwimTraining]] = relationship(
+        back_populates="horse"
+    )
+    hill_training_records: Mapped[list[HorseHillTraining]] = relationship(
+        back_populates="horse"
+    )
     jockey_changes: Mapped[list[JockeyChange]] = relationship(
         back_populates="horse", cascade="all, delete-orphan"
     )
@@ -165,6 +178,17 @@ class Horse(Base):
     )
     running_trial_results: Mapped[list[RunningTrialResult]] = relationship(
         back_populates="horse"
+    )
+
+    __table_args__ = (
+        CheckConstraint(
+            "(is_active IS NULL AND active_status_observed_at_ms IS NULL "
+            "AND active_status_source IS NULL) OR "
+            "(is_active IS NOT NULL AND active_status_observed_at_ms > 0 "
+            "AND active_status_source IS NOT NULL)",
+            name="ck_horses_active_status_evidence",
+        ),
+        Index("ix_horses_is_active", "is_active"),
     )
 
 
@@ -520,6 +544,34 @@ class HorseMedical(Base):
     )
 
 
+class MedicalDiagnosisTerm(Base):
+    """Unique source diagnosis text, without clinical synonym merging."""
+
+    __tablename__ = "medical_diagnosis_terms"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    raw_text: Mapped[str] = mapped_column(String(200), nullable=False, unique=True)
+
+
+class HorseMedicalDiagnosis(Base):
+    """Preserve which original diagnosis slot referenced a catalog term."""
+
+    __tablename__ = "horse_medical_diagnoses"
+
+    horse_medical_id: Mapped[int] = mapped_column(
+        ForeignKey("horse_medical.id", ondelete="CASCADE"), primary_key=True
+    )
+    source_slot: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    term_id: Mapped[int] = mapped_column(
+        ForeignKey("medical_diagnosis_terms.id", ondelete="RESTRICT"), nullable=False
+    )
+
+    __table_args__ = (
+        CheckConstraint("source_slot IN (1, 2)", name="valid_source_slot"),
+        Index("ix_horse_medical_diagnoses_term_id", "term_id"),
+    )
+
+
 class JockeyChange(Base):
     __tablename__ = "jockey_changes"
 
@@ -677,6 +729,119 @@ class HorseStartTraining(Base):
     )
 
 
+class HorseSwimTraining(Base):
+    __tablename__ = "horse_swim_training"
+
+    id: Mapped[int] = mapped_column(
+        BigInteger().with_variant(Integer, "sqlite"),
+        primary_key=True,
+        autoincrement=True,
+    )
+    source_document_id: Mapped[int | None] = mapped_column(
+        ForeignKey("source_documents.id", ondelete="SET NULL")
+    )
+    horse_id: Mapped[int | None] = mapped_column(
+        ForeignKey("horses.id", ondelete="SET NULL")
+    )
+    kra_horse_id_raw: Mapped[str] = mapped_column(String(30), nullable=False)
+    horse_name_raw: Mapped[str] = mapped_column(String(100), nullable=False)
+    meet_code: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    training_date_local: Mapped[date] = mapped_column(Date, nullable=False)
+    swim_count: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    quality_status: Mapped[str] = mapped_column(String(20), nullable=False)
+    stable_part: Mapped[int | None] = mapped_column(SmallInteger)
+    stable_note: Mapped[str | None] = mapped_column(Text)
+    trainer_part: Mapped[int | None] = mapped_column(SmallInteger)
+    trainer_name: Mapped[str | None] = mapped_column(String(100))
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    horse: Mapped[Horse | None] = relationship(back_populates="swim_training_records")
+
+    __table_args__ = (
+        CheckConstraint("meet_code IN (1, 2, 3, 4)", name="valid_meet_code"),
+        CheckConstraint("swim_count >= 0", name="nonnegative_swim_count"),
+        CheckConstraint(
+            "quality_status IN ('valid', 'zero_record')",
+            name="valid_quality_status",
+        ),
+        UniqueConstraint(
+            "kra_horse_id_raw",
+            "meet_code",
+            "training_date_local",
+            name="uq_horse_swim_training_natural",
+        ),
+        Index(
+            "ix_horse_swim_training_horse_date",
+            "horse_id",
+            "training_date_local",
+        ),
+        Index(
+            "ix_horse_swim_training_raw_horse_date",
+            "kra_horse_id_raw",
+            "training_date_local",
+        ),
+        Index("ix_horse_swim_training_source_document", "source_document_id"),
+    )
+
+
+class HorseHillTraining(Base):
+    __tablename__ = "horse_hill_training"
+
+    id: Mapped[int] = mapped_column(
+        BigInteger().with_variant(Integer, "sqlite"),
+        primary_key=True,
+        autoincrement=True,
+    )
+    source_document_id: Mapped[int | None] = mapped_column(
+        ForeignKey("source_documents.id", ondelete="SET NULL")
+    )
+    horse_id: Mapped[int | None] = mapped_column(
+        ForeignKey("horses.id", ondelete="SET NULL")
+    )
+    kra_horse_id_raw: Mapped[str] = mapped_column(String(30), nullable=False)
+    horse_name_raw: Mapped[str] = mapped_column(String(100), nullable=False)
+    farm_name: Mapped[str] = mapped_column(String(50), nullable=False)
+    tag_id: Mapped[str | None] = mapped_column(String(30))
+    chip_id: Mapped[str | None] = mapped_column(String(30))
+    sex_raw: Mapped[str | None] = mapped_column(String(20))
+    birth_date: Mapped[date | None] = mapped_column(Date)
+    sire_name_raw: Mapped[str | None] = mapped_column(String(100))
+    dam_name_raw: Mapped[str | None] = mapped_column(String(100))
+    training_operator_name: Mapped[str | None] = mapped_column(String(100))
+    owner_name_raw: Mapped[str | None] = mapped_column(String(100))
+    farm_entry_date: Mapped[date | None] = mapped_column(Date)
+    farm_entry_reason: Mapped[str | None] = mapped_column(String(100))
+    training_date_local: Mapped[date] = mapped_column(Date, nullable=False)
+    training_time_local: Mapped[time | None] = mapped_column(Time)
+    f1_seconds: Mapped[Decimal | None] = mapped_column(Numeric(6, 1))
+    f2_seconds: Mapped[Decimal | None] = mapped_column(Numeric(6, 1))
+    f3_seconds: Mapped[Decimal | None] = mapped_column(Numeric(6, 1))
+    total_seconds: Mapped[Decimal | None] = mapped_column(Numeric(7, 1))
+    quality_status: Mapped[str] = mapped_column(String(20), nullable=False)
+    source_row_hash: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    horse: Mapped[Horse | None] = relationship(back_populates="hill_training_records")
+
+    __table_args__ = (
+        CheckConstraint(
+            "quality_status IN ('valid', 'zero_record', 'incomplete', 'invalid_record')",
+            name="valid_quality_status",
+        ),
+        Index(
+            "ix_horse_hill_training_horse_date",
+            "horse_id",
+            "training_date_local",
+        ),
+        Index(
+            "ix_horse_hill_training_raw_horse_date",
+            "kra_horse_id_raw",
+            "training_date_local",
+        ),
+        Index("ix_horse_hill_training_source_document", "source_document_id"),
+    )
+
+
 class RaceStewardReport(Base):
     __tablename__ = "race_steward_reports"
 
@@ -699,6 +864,61 @@ class RaceStewardReport(Base):
             name="uq_race_steward_reports_natural",
         ),
         Index("ix_race_steward_reports_date_meet", "race_date_local", "meet_code"),
+    )
+
+
+class RacePassingSummary(Base):
+    __tablename__ = "race_passing_summaries"
+
+    id: Mapped[int] = mapped_column(
+        BigInteger().with_variant(Integer, "sqlite"),
+        primary_key=True,
+        autoincrement=True,
+    )
+    race_id: Mapped[int] = mapped_column(
+        ForeignKey("races.id", ondelete="CASCADE"), nullable=False, unique=True
+    )
+    source_document_id: Mapped[int | None] = mapped_column(
+        ForeignKey("source_documents.id", ondelete="SET NULL")
+    )
+    corner_1_raw: Mapped[str | None] = mapped_column(Text)
+    corner_2_raw: Mapped[str | None] = mapped_column(Text)
+    corner_3_raw: Mapped[str | None] = mapped_column(Text)
+    corner_4_raw: Mapped[str | None] = mapped_column(Text)
+    corner_5_raw: Mapped[str | None] = mapped_column(Text)
+    corner_6_raw: Mapped[str | None] = mapped_column(Text)
+    corner_7_raw: Mapped[str | None] = mapped_column(Text)
+    corner_8_raw: Mapped[str | None] = mapped_column(Text)
+    corner_9_raw: Mapped[str | None] = mapped_column(Text)
+    pass_time_3f_raw: Mapped[str | None] = mapped_column(String(20))
+    pass_time_4f_raw: Mapped[str | None] = mapped_column(String(20))
+    pass_time_3f_ms: Mapped[int | None] = mapped_column(Integer)
+    pass_time_4f_ms: Mapped[int | None] = mapped_column(Integer)
+    tempo_raw: Mapped[str | None] = mapped_column(String(10))
+    tempo_level: Mapped[int | None] = mapped_column(SmallInteger)
+    quality_status: Mapped[str] = mapped_column(String(20), nullable=False)
+    source_row_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    __table_args__ = (
+        CheckConstraint(
+            "tempo_level IS NULL OR tempo_level BETWEEN 1 AND 5",
+            name="valid_tempo_level",
+        ),
+        CheckConstraint(
+            "quality_status IN ('valid', 'incomplete')",
+            name="valid_quality_status",
+        ),
+        CheckConstraint(
+            "pass_time_3f_ms IS NULL OR pass_time_3f_ms > 0",
+            name="positive_pass_time_3f",
+        ),
+        CheckConstraint(
+            "pass_time_4f_ms IS NULL OR pass_time_4f_ms > 0",
+            name="positive_pass_time_4f",
+        ),
+        Index("ix_race_passing_summaries_source_document", "source_document_id"),
+        Index("ix_race_passing_summaries_tempo", "tempo_level"),
     )
 
 

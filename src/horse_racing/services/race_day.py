@@ -655,8 +655,14 @@ def _write_race_plans(session: Session, meet: int, items: list[RacePlanItem]) ->
 def _write_ai_results(session: Session, meet: int, items: list[AiRaceResultItem]) -> int:
     racecourse = _upsert_racecourse(session, meet)
     observed_at_ms = _now_ms()
+    written = 0
     for item in items:
-        race = _upsert_race(session, racecourse, item.race_date, item.race_number, item.distance_m)
+        # API155 still returns rows on dates API154 did not publish. Those rows
+        # repeat an older card under the requested date, so do not create a race.
+        race = _find_race(session, racecourse, item.race_date, item.race_number)
+        if race is None:
+            continue
+        written += 1
         race.race_name = item.race_name or race.race_name
         # The result API also publishes pre-race rows with blank placings.
         if item.finish_position is not None:
@@ -693,7 +699,7 @@ def _write_ai_results(session: Session, meet: int, items: list[AiRaceResultItem]
                 item.place_odds,
                 observed_at_ms,
             )
-    return len(items)
+    return written
 
 
 def _write_detailed_results(
@@ -703,8 +709,12 @@ def _write_detailed_results(
 ) -> int:
     racecourse = _upsert_racecourse(session, meet)
     observed_at_ms = _now_ms()
+    written = 0
     for item in items:
-        race = _upsert_race(session, racecourse, item.race_date, item.race_number, item.distance_m)
+        race = _find_race(session, racecourse, item.race_date, item.race_number)
+        if race is None:
+            continue
+        written += 1
         race.race_day_count = item.race_day_count
         race.race_name = item.race_name or race.race_name
         race.grade = item.grade or race.grade
@@ -780,7 +790,7 @@ def _write_detailed_results(
                 item.place_odds,
                 observed_at_ms,
             )
-    return len(items)
+    return written
 
 
 def _write_final_dividends(
@@ -796,10 +806,7 @@ def _write_final_dividends(
             continue
         race = _find_race(session, racecourse, item.race_date, item.race_number)
         if race is None:
-            raise ValueError(
-                f"배당과 연결할 경주가 없습니다: meet={meet}, "
-                f"date={item.race_date}, race={item.race_number}"
-            )
+            continue
         # API can expose provisional prices for races without a placing yet.
         # This table represents settled dividends, so do not ingest them.
         if race.status != "completed":

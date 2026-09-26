@@ -40,6 +40,11 @@ from horse_racing.services.race_day import (
     result_data_exists,
     result_day_is_stored,
 )
+from horse_racing.services.race_passing import (
+    ingest_race_passing_summaries,
+    passing_summary_data_exists,
+    passing_summary_day_is_stored,
+)
 from horse_racing.services.race_sections import (
     ingest_race_sections,
     section_data_exists,
@@ -1372,6 +1377,138 @@ def backfill_sections(
     return 0
 
 
+def collect_race_passing(race_date: str, meet: int, page_size: int) -> int:
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print("HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.", file=sys.stderr)
+        return 2
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        summary = ingest_race_passing_summaries(
+            session,
+            client,
+            race_date=race_date,
+            meet=meet,
+            raw_data_dir=settings.raw_data_dir,
+            page_size=page_size,
+        )
+    print(
+        f"공식 통과대열 수집 완료: 경마장={MEET_METADATA[meet][1]}, 날짜={race_date}, "
+        f"run={summary.run_id}, pages={summary.pages}, "
+        f"fetched={summary.records_fetched}, written={summary.records_written}"
+    )
+    return 0
+
+
+def backfill_race_passing(
+    start_date: str,
+    end_date: str,
+    meets: list[int],
+    page_size: int,
+) -> int:
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print("HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.", file=sys.stderr)
+        return 2
+    start = datetime.strptime(start_date, "%Y%m%d").date()
+    end = datetime.strptime(end_date, "%Y%m%d").date()
+    if start > end:
+        raise ValueError("시작일은 종료일보다 늦을 수 없습니다.")
+    checked = collected = written = skipped = 0
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        current = start
+        while current <= end:
+            race_date = current.strftime("%Y%m%d")
+            for meet in meets:
+                checked += 1
+                if passing_summary_day_is_stored(session, race_date=current, meet=meet):
+                    skipped += 1
+                    continue
+                if not passing_summary_data_exists(client, race_date=race_date, meet=meet):
+                    continue
+                summary = ingest_race_passing_summaries(
+                    session,
+                    client,
+                    race_date=race_date,
+                    meet=meet,
+                    raw_data_dir=settings.raw_data_dir,
+                    page_size=page_size,
+                )
+                collected += 1
+                written += summary.records_written
+                print(
+                    f"공식 통과대열 수집: {race_date} {MEET_METADATA[meet][1]} / "
+                    f"fetched={summary.records_fetched}, written={summary.records_written}",
+                    flush=True,
+                )
+            current += timedelta(days=1)
+    print(
+        f"공식 통과대열 백필 완료: 기간={start_date}~{end_date}, 확인={checked}, "
+        f"신규수집={collected}, written={written}, 기존완료={skipped}",
+        flush=True,
+    )
+    return 0
+
+
+def backfill_race_passing_years(
+    start_year: int,
+    end_year: int,
+    meets: list[int],
+    page_size: int,
+) -> int:
+    if start_year > end_year:
+        raise ValueError("시작연도는 종료연도보다 늦을 수 없습니다.")
+    settings = get_settings()
+    if settings.data_go_kr_service_key is None:
+        print("HORSE_RACING_DATA_GO_KR_SERVICE_KEY가 설정되지 않았습니다.", file=sys.stderr)
+        return 2
+    fetched = written = 0
+    with (
+        KraApiClient(
+            settings.data_go_kr_service_key.get_secret_value(),
+            base_url=settings.kra_api_base_url,
+            timeout_seconds=settings.http_timeout_seconds,
+        ) as client,
+        SessionLocal() as session,
+    ):
+        for year in range(start_year, end_year + 1):
+            for meet in meets:
+                summary = ingest_race_passing_summaries(
+                    session,
+                    client,
+                    race_year=year,
+                    meet=meet,
+                    raw_data_dir=settings.raw_data_dir,
+                    page_size=page_size,
+                )
+                fetched += summary.records_fetched
+                written += summary.records_written
+                print(
+                    f"공식 통과대열 연도 백필: {year} {MEET_METADATA[meet][1]} / "
+                    f"fetched={summary.records_fetched}, written={summary.records_written}",
+                    flush=True,
+                )
+    print(
+        f"공식 통과대열 연도 백필 완료: {start_year}~{end_year}, "
+        f"fetched={fetched}, written={written}",
+        flush=True,
+    )
+    return 0
+
+
 def sync_daily(
     mode: str,
     *,
@@ -1406,6 +1543,7 @@ def sync_daily(
         print(f"  결과 수집 기간: {result_start}~{result_end}")
         print(f"  확정배당 포함: {'yes' if include_dividends else 'no'}")
         print("  구간기록 포함: yes")
+        print("  공식 통과대열·주로빠르기 포함: yes")
 
     if dry_run:
         print("dry-run: API 호출 없이 종료합니다.")
@@ -1429,6 +1567,9 @@ def sync_daily(
         sections_code = backfill_sections(result_start, result_end, meets, page_size)
         if sections_code != 0 and exit_code == 0:
             exit_code = sections_code
+        passing_code = backfill_race_passing(result_start, result_end, meets, page_size)
+        if passing_code != 0 and exit_code == 0:
+            exit_code = passing_code
     return exit_code
 
 
@@ -1495,6 +1636,10 @@ def sync_latest(
         (
             "구간기록",
             lambda: backfill_sections(recent_start, recent_end, meets, page_size),
+        ),
+        (
+            "공식 통과대열·주로빠르기",
+            lambda: backfill_race_passing(recent_start, recent_end, meets, page_size),
         ),
         (
             "기수변경",
@@ -4143,6 +4288,43 @@ def main() -> int:
         "--meets", nargs="+", type=int, choices=(1, 2, 3), default=[1, 2, 3]
     )
     backfill_sections_parser.add_argument("--page-size", type=int, default=1000)
+    passing_parser = subparsers.add_parser(
+        "collect-race-passing",
+        help="Collect official race-level passing groups and track tempo",
+    )
+    passing_parser.add_argument("--date", required=True, type=valid_race_date)
+    passing_parser.add_argument(
+        "--meet", required=True, type=int, choices=sorted(MEET_METADATA)
+    )
+    passing_parser.add_argument("--page-size", type=int, default=1000)
+    backfill_passing_parser = subparsers.add_parser(
+        "backfill-race-passing",
+        help="Collect official passing groups for stored race days missing them",
+    )
+    backfill_passing_parser.add_argument("--start", required=True, type=valid_race_date)
+    backfill_passing_parser.add_argument("--end", required=True, type=valid_race_date)
+    backfill_passing_parser.add_argument(
+        "--meets",
+        nargs="+",
+        type=int,
+        choices=sorted(MEET_METADATA),
+        default=sorted(MEET_METADATA),
+    )
+    backfill_passing_parser.add_argument("--page-size", type=int, default=1000)
+    backfill_passing_years_parser = subparsers.add_parser(
+        "backfill-race-passing-years",
+        help="Efficiently backfill official passing groups by year",
+    )
+    backfill_passing_years_parser.add_argument("--start-year", required=True, type=int)
+    backfill_passing_years_parser.add_argument("--end-year", required=True, type=int)
+    backfill_passing_years_parser.add_argument(
+        "--meets",
+        nargs="+",
+        type=int,
+        choices=sorted(MEET_METADATA),
+        default=sorted(MEET_METADATA),
+    )
+    backfill_passing_years_parser.add_argument("--page-size", type=int, default=1000)
     ratings_parser = subparsers.add_parser(
         "collect-ratings",
         help="Collect current horse rating snapshots",
@@ -5071,6 +5253,28 @@ def main() -> int:
             return backfill_sections(args.start, args.end, args.meets, args.page_size)
         except (KraApiError, ValueError) as exc:
             print(f"구간기록 백필 실패: {exc}", file=sys.stderr)
+            return 1
+    if args.command == "collect-race-passing":
+        try:
+            return collect_race_passing(args.date, args.meet, args.page_size)
+        except (KraApiError, ValueError) as exc:
+            print(f"공식 통과대열 수집 실패: {exc}", file=sys.stderr)
+            return 1
+    if args.command == "backfill-race-passing":
+        try:
+            return backfill_race_passing(
+                args.start, args.end, args.meets, args.page_size
+            )
+        except (KraApiError, ValueError) as exc:
+            print(f"공식 통과대열 백필 실패: {exc}", file=sys.stderr)
+            return 1
+    if args.command == "backfill-race-passing-years":
+        try:
+            return backfill_race_passing_years(
+                args.start_year, args.end_year, args.meets, args.page_size
+            )
+        except (KraApiError, ValueError) as exc:
+            print(f"공식 통과대열 연도 백필 실패: {exc}", file=sys.stderr)
             return 1
     if args.command == "collect-ratings":
         try:

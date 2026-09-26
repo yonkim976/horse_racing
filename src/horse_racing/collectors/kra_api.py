@@ -23,6 +23,8 @@ FINAL_DIVIDEND_ENDPOINT = "/API301/Dividend_rate_total"
 FINAL_DIVIDEND_OPERATION = "Dividend_rate_total"
 RACE_RESULT_WITH_SECTIONS_ENDPOINT = "/API4_3/raceResult_3"
 RACE_RESULT_WITH_SECTIONS_OPERATION = "raceResult_3"
+RACE_PASSING_SUMMARY_ENDPOINT = "/API303/corner_rank"
+RACE_PASSING_SUMMARY_OPERATION = "corner_rank"
 RACE_DETAIL_SECTION_RECORD_ENDPOINT = "/API6_1/raceDetailSectionRecord_1"
 RACE_DETAIL_SECTION_RECORD_OPERATION = "raceDetailSectionRecord_1"
 RACE_HORSE_RATING_ENDPOINT = "/API77/raceHorseRating"
@@ -149,6 +151,32 @@ class KraApiClient:
                 "_type": "json",
             },
             page_size=page_size,
+        )
+
+    def iter_race_passing_summary_pages(
+        self,
+        *,
+        meet: int,
+        page_size: int = 1000,
+        race_date: str | None = None,
+        race_year: int | None = None,
+    ) -> Iterator[FetchedPage]:
+        """Fetch official race-level passing groups and track-tempo values."""
+        if meet not in {1, 2, 3, 4}:
+            raise ValueError("meet는 1(서울), 2(제주), 3(부산경남), 4(영천) 중 하나여야 합니다.")
+        if (race_date is None) == (race_year is None):
+            raise ValueError("race_date 또는 race_year 중 하나만 지정해야 합니다.")
+        public_params: dict[str, str | int] = {"meet": meet, "_type": "json"}
+        if race_date is not None:
+            public_params["rc_date"] = race_date
+        else:
+            public_params["rc_year"] = str(race_year)
+        yield from self.iter_pages(
+            endpoint=RACE_PASSING_SUMMARY_ENDPOINT,
+            operation=RACE_PASSING_SUMMARY_OPERATION,
+            public_params=public_params,
+            page_size=page_size,
+            service_key_parameter="serviceKey",
         )
 
     def iter_pages(

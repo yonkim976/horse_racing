@@ -213,6 +213,37 @@ def test_race_day_parsing_helpers() -> None:
     assert not _is_date_echo_time(date(2026, 8, 22), "10:36:05")
 
 
+def test_unpublished_date_does_not_create_races_from_result_apis(tmp_path: Path) -> None:
+    empty = {
+        "response": {
+            "header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+            "body": {"items": "", "numOfRows": 1000, "pageNo": 1, "totalCount": 0},
+        }
+    }
+    responses = {
+        "/B551015/API154/racePlan": empty,
+        "/B551015/API26_2/entrySheet_2": empty,
+        "/B551015/API155/raceResult": ai_result_payload(),
+        "/B551015/API156/raceRsutDtl": detailed_result_payload(),
+        "/B551015/API301/Dividend_rate_total": final_dividend_payload(),
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=responses[request.url.path], request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        ingest_race_day(
+            session, client, race_date="20260822", meet=1, raw_data_dir=tmp_path / "raw"
+        )
+        assert session.scalar(select(func.count()).select_from(Race)) == 0
+        assert session.scalar(select(func.count()).select_from(RaceEntry)) == 0
+        assert session.scalar(select(func.count()).select_from(OddsSnapshot)) == 0
+
+
 def test_zero_finish_time_and_position_are_treated_as_missing() -> None:
     item = ai_result_payload()["response"]["body"]["items"]["item"][0]
     item["rk"] = "0"
