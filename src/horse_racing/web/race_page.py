@@ -77,7 +77,7 @@ class SectionCell:
 
 @dataclass(frozen=True, slots=True)
 class SectionEntryRow:
-    horse_id: int
+    horse_id: str
     horse_number: int
     horse_name: str
     finish_position: str
@@ -91,7 +91,7 @@ class SectionEntryRow:
 class RaceJockeyChangeRow:
     horse_number: int
     horse_name: str
-    horse_id: int | None
+    horse_id: str | None
     before_name: str
     after_name: str
     reason: str
@@ -101,7 +101,7 @@ class RaceJockeyChangeRow:
 class RaceScratchRow:
     horse_number: str
     horse_name: str
-    horse_id: int | None
+    horse_id: str | None
     reason: str
 
 
@@ -109,7 +109,7 @@ class RaceScratchRow:
 class RaceEquipmentRow:
     horse_number: str
     horse_name: str
-    horse_id: int | None
+    horse_id: str | None
     equipment: str
     bleeding: str
     illness: str
@@ -340,6 +340,7 @@ def _load_race_jockey_changes(
     rows = list(
         session.scalars(
             select(JockeyChange)
+            .options(joinedload(JockeyChange.horse))
             .where(
                 JockeyChange.meet_code == meet_code,
                 JockeyChange.race_date_local == race_date,
@@ -352,7 +353,7 @@ def _load_race_jockey_changes(
         RaceJockeyChangeRow(
             horse_number=row.horse_number,
             horse_name=_horse_name(session, row.horse_id),
-            horse_id=row.horse_id,
+            horse_id=row.horse.kra_horse_id if row.horse else None,
             before_name=row.jockey_before_name or "—",
             after_name=row.jockey_after_name or "—",
             reason=row.reason or "—",
@@ -371,6 +372,7 @@ def _load_race_scratches(
     rows = list(
         session.scalars(
             select(RaceScratch)
+            .options(joinedload(RaceScratch.horse))
             .where(
                 RaceScratch.meet_code == meet_code,
                 RaceScratch.race_date_local == race_date,
@@ -383,7 +385,7 @@ def _load_race_scratches(
         RaceScratchRow(
             horse_number=str(row.horse_number) if row.horse_number is not None else "—",
             horse_name=_horse_name(session, row.horse_id),
-            horse_id=row.horse_id,
+            horse_id=row.horse.kra_horse_id if row.horse else None,
             reason=row.reason or "—",
         )
         for row in rows
@@ -400,6 +402,7 @@ def _load_race_equipment(
     rows = list(
         session.scalars(
             select(EntryEquipment)
+            .options(joinedload(EntryEquipment.horse))
             .where(
                 EntryEquipment.meet_code == meet_code,
                 EntryEquipment.race_date_local == race_date,
@@ -412,7 +415,7 @@ def _load_race_equipment(
         RaceEquipmentRow(
             horse_number=str(row.horse_number) if row.horse_number is not None else "—",
             horse_name=_horse_name(session, row.horse_id),
-            horse_id=row.horse_id,
+            horse_id=row.horse.kra_horse_id if row.horse else None,
             equipment=row.equipment_raw or "—",
             bleeding=(
                 f"{row.bleeding_count}회"
@@ -536,7 +539,7 @@ def _section_columns(race: Race) -> list[SectionColumn]:
             code,
         ),
     )
-    if race.racecourse.kra_meet_code == 3:
+    if race.racecourse.kra_meet_code in (3, 4):
         from horse_racing.web.busan_diagram import timing_points
         busan_positions = timing_points(race.distance_m)
         ordered.sort(key=lambda code: busan_positions.get(code, float("inf")))
@@ -555,7 +558,7 @@ def _section_columns(race: Race) -> list[SectionColumn]:
             partner = {1000: "3C", 1600: "2C", 1700: "1C"}.get(race.distance_m)
             if partner is None or {left, right} != {"S1F", partner}:
                 return False
-        if race.racecourse.kra_meet_code == 3:
+        if race.racecourse.kra_meet_code in (3, 4):
             if (busan_positions.get(left) is None
                     or busan_positions.get(left) != busan_positions.get(right)):
                 return False
@@ -590,7 +593,7 @@ def _section_columns(race: Race) -> list[SectionColumn]:
         columns = _jeju_column_descriptions(columns, race.distance_m)
     elif race.racecourse.kra_meet_code == 1:
         columns = _seoul_column_descriptions(columns, race.distance_m)
-    elif race.racecourse.kra_meet_code == 3:
+    elif race.racecourse.kra_meet_code in (3, 4):
         columns = _busan_column_descriptions(columns, race.distance_m)
     return columns
 
@@ -763,7 +766,7 @@ def _section_rows(
             )
         rows.append(
             SectionEntryRow(
-                horse_id=entry.horse_id,
+                horse_id=entry.horse.kra_horse_id,
                 horse_number=entry.horse_number,
                 horse_name=entry.horse.name_ko,
                 finish_position=finish_label,

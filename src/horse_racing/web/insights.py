@@ -293,7 +293,7 @@ class ForecastRace:
 @dataclass(slots=True)
 class ForecastRunner:
     entry_id: int
-    horse_id: int
+    horse_id: str
     number: int
     gate: int | None
     horse: str
@@ -475,6 +475,7 @@ def load_forecast_page(
             RaceEntry.carried_weight_kg,
             RaceEntry.scratched,
             RaceEntry.running_style,
+            Horse.kra_horse_id,
         )
         .join(Horse, Horse.id == RaceEntry.horse_id)
         .outerjoin(Jockey, Jockey.id == RaceEntry.jockey_id)
@@ -591,7 +592,7 @@ def load_forecast_page(
         runners.append(
             ForecastRunner(
                 entry_id=entry[0],
-                horse_id=entry[1],
+                horse_id=entry[9],
                 number=entry[2],
                 gate=entry[3],
                 horse=entry[4],

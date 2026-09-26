@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-import asyncio
 import csv
+import json
+import os
+import random
 import re
-from collections import defaultdict, deque
 from collections.abc import Callable
 from dataclasses import asdict
 from datetime import date
 from io import StringIO
 from pathlib import Path
-from threading import Lock
 from time import monotonic
 from typing import Annotated, TypeVar
+from urllib.parse import quote, urlencode
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import (
@@ -25,6 +26,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+from starlette.middleware.gzip import GZipMiddleware
 
 from horse_racing.db.session import SessionLocal
 from horse_racing.web.dashboard import load_dashboard
@@ -35,6 +37,7 @@ from horse_racing.web.entities import (
     ENTITY_KINDS,
     load_entity_detail,
     load_entity_list,
+    load_entity_official_id,
 )
 from horse_racing.web.insights import (
     load_forecast_page,
@@ -43,6 +46,18 @@ from horse_racing.web.insights import (
 from horse_racing.web.predictions import load_prediction_ledger
 from horse_racing.web.race_analysis import load_race_analysis_page
 from horse_racing.web.race_page import load_race_page
+from horse_racing.web.request_policy import RequestPolicy, normalized_query_key
+from horse_racing.web.security import (
+    ActiveRequestGate,
+    AsyncLockRegistry,
+    BoundedRequestLimiter,
+    BoundedTTLCache,
+    SyncLockRegistry,
+    bounded_size,
+    parse_trusted_proxy_cidrs,
+    resolve_client_ip,
+    trusted_forwarded_scheme,
+)
 from horse_racing.web.trial_page import load_running_trial_page
 
 WEB_ROOT = Path(__file__).parent
@@ -66,34 +81,87 @@ _MOBILE_UA = re.compile(
     r"Android.+Mobile|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini",
     re.I,
 )
+_BLOCKED_ANTHROPIC_UA = re.compile(
+    r"ClaudeBot|Claude-SearchBot|Claude-User|Claude-Web|anthropic-ai",
+    re.I,
+)
+_CRAWLER_UA = re.compile(r"bot|crawler|spider|slurp|archiver", re.I)
+_RATE_LIMIT_WINDOW_SECONDS = 60.0
+_RATE_LIMIT_BURST_SECONDS = 10.0
+_HUMAN_REQUESTS_PER_WINDOW = 180
+_HUMAN_REQUESTS_PER_BURST = 60
+_CRAWLER_REQUESTS_PER_WINDOW = 30
+_CRAWLER_REQUESTS_PER_BURST = 10
+_TRUSTED_PROXY_CIDRS = parse_trusted_proxy_cidrs(os.getenv("TRUSTED_PROXY_CIDRS"))
+_MAX_RESPONSE_BYTES = 2 * 1024 * 1024
+_MAX_RESPONSE_CACHE_ENTRY_BYTES = 512 * 1024
+
+
+def _diagnostic_path(path: str) -> str:
+    """Keep logs low-cardinality and omit user supplied identifiers."""
+    if path in {"/", "/analysis", "/m/analysis", "/forecast", "/validation",
+                "/api/analysis/export.csv", "/predictions", "/api/predictions",
+                "/data-status", "/robots.txt", "/health", "/health/ready"}:
+        return path
+    match = re.fullmatch(r"/(races|running-trials)/[^/]+", path)
+    if match:
+        return f"/{match.group(1)}/{{id}}"
+    match = re.fullmatch(r"/(horses|jockeys|trainers|owners)(?:/[^/]+)?", path)
+    if match:
+        base = f"/{match.group(1)}"
+        return base if path == base else f"{base}/{{id}}"
+    match = re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path)
+    if match:
+        return "/racecourses/{meet}/distances"
+    if path.startswith("/static/"):
+        return "/static/{asset}"
+    return "/_other"
+
+
+def _response_bytes(response: Response) -> int | None:
+    body = getattr(response, "body", None)
+    if isinstance(body, (bytes, bytearray)):
+        return len(body)
+    length = response.headers.get("content-length")
+    return int(length) if length and length.isdecimal() else None
+
+
+def _client_rate_key(request: Request) -> str:
+    return resolve_client_ip(
+        request.client.host if request.client else None,
+        request.headers.get("x-forwarded-for"),
+        _TRUSTED_PROXY_CIDRS,
+    )
 
 
 def _is_mobile_request(request: Request) -> bool:
     return bool(_MOBILE_UA.search(request.headers.get("user-agent", "")))
 
 
-def _mobile_redirect(request: Request, mobile_path: str) -> RedirectResponse:
-    query = request.url.query
-    target = f"{mobile_path}?{query}" if query else mobile_path
-    return RedirectResponse(
-        url=target,
-        status_code=302,
-        headers={"Cache-Control": "private, no-store", "Vary": "User-Agent"},
+def _legacy_mobile_target(
+    request: Request,
+    path: str,
+    *,
+    exclude: frozenset[str] = frozenset(),
+    fragment: str = "",
+) -> str:
+    query = urlencode(
+        [
+            (key, value)
+            for key, value in request.query_params.multi_items()
+            if key not in exclude
+        ]
     )
+    target = f"{path}?{query}" if query else path
+    return f"{target}#{fragment}" if fragment else target
 
 
-def _mobile_page_target(request: Request) -> str | None:
-    """Redirect phones only when an equivalent mobile page exists."""
-    if request.method != "GET" or not _is_mobile_request(request):
-        return None
-
-    path = request.url.path
-    if path in {"/", "/analysis"}:
-        target = "/m" if path == "/" else "/m/analysis"
-        return f"{target}?{request.url.query}" if request.url.query else target
-    if path.startswith("/races/") and path.removeprefix("/races/").isdecimal():
-        return f"/m/analysis?race_id={path.removeprefix('/races/')}"
-    return None
+def _permanent_redirect(url: str) -> RedirectResponse:
+    return RedirectResponse(
+        url=url,
+        status_code=301,
+        headers={"Cache-Control": "public, max-age=3600"},
+    )
 
 
 def create_app(
@@ -106,141 +174,312 @@ def create_app(
     templates = Jinja2Templates(directory=WEB_ROOT / "templates")
     app.mount("/static", StaticFiles(directory=WEB_ROOT / "static"), name="static")
 
-    # Read-only public surface: conservative per-client burst protection and headers.
-    request_times: dict[str, deque[float]] = defaultdict(deque)
-    limiter_lock = Lock()
-    page_cache: dict[tuple[object, ...], tuple[float, object]] = {}
-    cache_key_locks: dict[tuple[object, ...], Lock] = defaultdict(Lock)
-    cache_lock = Lock()
-    response_cache: dict[str, tuple[float, int, dict[str, str], bytes]] = {}
-    response_locks: dict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+    # Read-only public surface: bounded per-client protection and short-lived caches.
+    request_limiter = BoundedRequestLimiter(max_clients=4096, idle_ttl=120.0)
+    page_cache: BoundedTTLCache[tuple[object, ...], object] = BoundedTTLCache(
+        max_entries=128,
+        max_bytes=8 * 1024 * 1024,
+        max_entry_bytes=1024 * 1024,
+        size_of=lambda value: bounded_size(value, limit=1024 * 1024),
+    )
+    cache_key_locks: SyncLockRegistry[tuple[object, ...]] = SyncLockRegistry()
+    response_cache: BoundedTTLCache[str, tuple[int, dict[str, str], bytes]] = BoundedTTLCache(
+        max_entries=128,
+        max_bytes=4 * 1024 * 1024,
+        max_entry_bytes=_MAX_RESPONSE_CACHE_ENTRY_BYTES,
+        size_of=lambda value: len(value[2]),
+    )
+    response_locks: AsyncLockRegistry[str] = AsyncLockRegistry()
+    request_policy = RequestPolicy()
+    active_request_gate = ActiveRequestGate(limit=16)
 
     def cached(key: tuple[object, ...], loader: Callable[[], T], ttl: float = 20.0) -> T:
         now = monotonic()
-        with cache_lock:
-            cached_value = page_cache.get(key)
-            if cached_value and cached_value[0] > now:
-                return cached_value[1]  # type: ignore[return-value]
-            key_lock = cache_key_locks[key]
-        with key_lock:
-            now = monotonic()
-            with cache_lock:
-                cached_value = page_cache.get(key)
-                if cached_value and cached_value[0] > now:
-                    return cached_value[1]  # type: ignore[return-value]
+        cached_value = page_cache.get(key, now=now)
+        if cached_value is not None:
+            return cached_value  # type: ignore[return-value]
+        with cache_key_locks.hold(key):
+            cached_value = page_cache.get(key, now=monotonic())
+            if cached_value is not None:
+                return cached_value  # type: ignore[return-value]
             value = loader()
-            with cache_lock:
-                page_cache[key] = (now + ttl, value)
-                if len(page_cache) > 256:
-                    expired = [item for item, (expires, _) in page_cache.items() if expires <= now]
-                    for item in expired:
-                        page_cache.pop(item, None)
-                        cache_key_locks.pop(item, None)
+            page_cache.set(key, value, ttl=ttl)
             return value
 
     @app.middleware("http")
     async def public_safety(request: Request, call_next):  # type: ignore[no-untyped-def]
+        started_at = monotonic()
+
+        def finish(response: Response) -> Response:
+            policy = getattr(response, "policy_diagnostics", None)
+            status = response.status_code
+            if policy is not None or status in {413, 429}:
+                policy = policy or {
+                    "category": "protection_policy",
+                    "reason": "response_limit" if status == 413 else "unclassified_rate_limit",
+                    "count": None,
+                    "limit": None,
+                }
+                event = {
+                    "event": "request_policy_denied",
+                    "severity": "WARNING",
+                    "status_code": status,
+                    "category": policy.get("category"),
+                    "reason": policy.get("reason"),
+                    "path": _diagnostic_path(request.scope.get("path", "")),
+                    "count": policy.get("count"),
+                    "limit": policy.get("limit"),
+                    "retry_after": response.headers.get("retry-after"),
+                    "duration_ms": round((monotonic() - started_at) * 1000, 2),
+                    "response_bytes": _response_bytes(response),
+                }
+                print(json.dumps(event, separators=(",", ":")), flush=True)
+            elif status < 400 and random.random() < 0.01:
+                event = {
+                    "event": "request_sample",
+                    "severity": "INFO",
+                    "status_code": status,
+                    "path": _diagnostic_path(request.scope.get("path", "")),
+                    "duration_ms": round((monotonic() - started_at) * 1000, 2),
+                    "response_bytes": _response_bytes(response),
+                }
+                print(json.dumps(event, separators=(",", ":")), flush=True)
+            return response
+
+        path = request.scope.get("path", "")
+        user_agent = request.headers.get("user-agent", "")
+        if path != "/robots.txt" and _BLOCKED_ANTHROPIC_UA.search(user_agent):
+            denied = Response(
+                status_code=403,
+                headers={
+                    "Cache-Control": "no-store",
+                    "X-Robots-Tag": "noindex, nofollow",
+                },
+            )
+            denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                "category": "user_agent_block",
+                "reason": "anthropic_crawler",
+                "count": None,
+                "limit": None,
+            }
+            return finish(denied)
+
+        peer = request.client.host if request.client else None
+        trusted_scheme = trusted_forwarded_scheme(
+            peer, request.headers.get("x-forwarded-proto"), _TRUSTED_PROXY_CIDRS
+        )
+        if trusted_scheme:
+            request.scope["scheme"] = trusted_scheme
+        elif request.headers.get("host", "").lower().split(":", 1)[0] in {
+            "mapilog.xyz", "www.mapilog.xyz"
+        }:
+            # The production host is HTTPS-only. This keeps url_for output
+            # correct behind TLS termination without trusting arbitrary XFP.
+            request.scope["scheme"] = "https"
+
+        # Import URL helpers only after applying a proxy scheme from a trusted peer.
+        path = request.url.path
+
+        if path != "/health":
+            client = _client_rate_key(request)
+            crawler_request = bool(_CRAWLER_UA.search(user_agent))
+            window_limit = (
+                _CRAWLER_REQUESTS_PER_WINDOW
+                if crawler_request
+                else _HUMAN_REQUESTS_PER_WINDOW
+            )
+            burst_limit = (
+                _CRAWLER_REQUESTS_PER_BURST
+                if crawler_request
+                else _HUMAN_REQUESTS_PER_BURST
+            )
+            now = monotonic()
+            allowed, rate_diagnostics = request_limiter.allow_with_diagnostics(
+                client,
+                now=now,
+                window_seconds=_RATE_LIMIT_WINDOW_SECONDS,
+                window_limit=window_limit,
+                burst_seconds=_RATE_LIMIT_BURST_SECONDS,
+                burst_limit=burst_limit,
+            )
+            if not allowed:
+                denied = PlainTextResponse(
+                    "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.",
+                    status_code=429,
+                    headers={"Retry-After": "60", "Cache-Control": "no-store"},
+                )
+                denied.policy_diagnostics = rate_diagnostics  # type: ignore[attr-defined]
+                return finish(denied)
+
+        if request.method in {"GET", "HEAD"}:
+            client = _client_rate_key(request)
+            policy_response = request_policy.check_request(
+                request, client_key=client, now=monotonic()
+            )
+            if policy_response is not None:
+                return finish(policy_response)
+
         if request.url.hostname == "www.mapilog.xyz":
             canonical_url = request.url.replace(scheme="https", netloc="mapilog.xyz")
-            return RedirectResponse(
+            return finish(RedirectResponse(
                 url=str(canonical_url),
                 status_code=301,
                 headers={"Cache-Control": "public, max-age=3600"},
-            )
-
-        if request.url.path != "/health":
-            client = request.client.host if request.client else "unknown"
-            now = monotonic()
-            with limiter_lock:
-                bucket = request_times[client]
-                while bucket and bucket[0] < now - 60:
-                    bucket.popleft()
-                if len(bucket) >= 2400:
-                    return PlainTextResponse(
-                        "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.",
-                        status_code=429,
-                        headers={"Retry-After": "30"},
-                    )
-                bucket.append(now)
-
-        mobile_target = _mobile_page_target(request)
-        if mobile_target is not None:
-            return RedirectResponse(
-                url=mobile_target,
-                status_code=302,
-                headers={"Cache-Control": "private, no-store", "Vary": "User-Agent"},
-            )
+            ))
 
         cacheable = request.method == "GET" and (
-            request.url.path in {"/", "/m", "/forecast", "/validation", "/analysis", "/m/analysis"}
-            or request.url.path.startswith("/races/")
+            path in {"/", "/m", "/forecast", "/validation", "/analysis", "/m/analysis"}
+            or path.startswith("/races/")
         )
         view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
         # Template responses contain absolute URLs generated from the request
         # origin. Keep caches isolated per origin so the apex, www, and
         # run.app hosts never receive HTML rendered for another host, while
         # mobile and desktop variants remain separate within the same host.
+        normalized_query = normalized_query_key(request)
         response_key = (
             f"{request.url.scheme}://{request.url.netloc}"
-            f"|{view_bit}:{request.url.path}?{request.url.query}"
+            f"|{view_bit}:{path}?{normalized_query}"
         )
+        request_cache_safe = (
+            not request.headers.get("authorization")
+            and not request.headers.get("cookie")
+        )
+        cacheable = cacheable and request_cache_safe
         if cacheable:
             cached_response = response_cache.get(response_key)
-            if cached_response and cached_response[0] > monotonic():
-                return Response(
-                    content=cached_response[3],
-                    status_code=cached_response[1],
-                    headers=cached_response[2],
-                )
+            if cached_response is not None:
+                return finish(Response(
+                    content=cached_response[2],
+                    status_code=cached_response[0],
+                    headers=cached_response[1],
+                ))
 
-        response_lock: asyncio.Lock | None = None
-        if cacheable:
-            response_lock = response_locks[response_key]
-            await response_lock.acquire()
-            cached_response = response_cache.get(response_key)
-            if cached_response and cached_response[0] > monotonic():
-                response_lock.release()
-                return Response(
-                    content=cached_response[3],
-                    status_code=cached_response[1],
-                    headers=cached_response[2],
-                )
-        try:
+        async def build_response():  # type: ignore[no-untyped-def]
             response = await call_next(request)
-        except Exception:
-            if response_lock and response_lock.locked():
-                response_lock.release()
-            raise
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "DENY"
-        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-        response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
-        if request.url.path in {"/forecast", "/validation", "/analysis", "/m/analysis"}:
-            response.headers["Cache-Control"] = "private, max-age=20"
-        response.headers["Content-Security-Policy"] = (
-            "default-src 'self'; script-src 'self' 'unsafe-inline'; "
-            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net "
-            "https://fonts.googleapis.com; "
-            "font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; "
-            "img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
-        )
-        if cacheable and response.status_code == 200:
-            body = b"".join([chunk async for chunk in response.body_iterator])
-            headers = dict(response.headers)
-            response_cache[response_key] = (monotonic() + 20, response.status_code, headers, body)
-            if len(response_cache) > 128:
-                expired = [
-                    key
-                    for key, (expires, _, _, _) in response_cache.items()
-                    if expires <= monotonic()
+            response.headers["X-Content-Type-Options"] = "nosniff"
+            response.headers["X-Frame-Options"] = "DENY"
+            response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+            response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+            if path in {"/", "/analysis"} or path.startswith("/races/"):
+                vary = [
+                    value.strip()
+                    for value in response.headers.get("Vary", "").split(",")
+                    if value.strip()
                 ]
-                for key in expired:
-                    response_cache.pop(key, None)
-                    response_locks.pop(key, None)
-            response = Response(content=body, status_code=response.status_code, headers=headers)
-        if response_lock and response_lock.locked():
-            response_lock.release()
-        return response
+                if not any(value.lower() == "user-agent" for value in vary):
+                    vary.append("User-Agent")
+                response.headers["Vary"] = ", ".join(vary)
+            if response.status_code == 200 and path in {
+                "/forecast", "/validation", "/analysis", "/m/analysis",
+            }:
+                response.headers["Cache-Control"] = "private, max-age=20"
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'self'; script-src 'self' 'unsafe-inline'; "
+                "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net "
+                "https://fonts.googleapis.com; "
+                "font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; "
+                "img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
+            )
+            content_length = response.headers.get("content-length")
+            if (
+                content_length
+                and content_length.isdecimal()
+                and int(content_length) > _MAX_RESPONSE_BYTES
+            ):
+                iterator = response.body_iterator
+                close = getattr(iterator, "aclose", None)
+                if close is not None:
+                    await close()
+                denied = PlainTextResponse(
+                    "응답이 허용된 크기를 초과했습니다.",
+                    status_code=413,
+                    headers={"Cache-Control": "no-store"},
+                    background=response.background,
+                )
+                denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                    "category": "response_size",
+                    "reason": "content_length_limit",
+                    "count": int(content_length),
+                    "limit": _MAX_RESPONSE_BYTES,
+                }
+                return denied
+            body_buffer = bytearray()
+            iterator = response.body_iterator
+            async for chunk in iterator:
+                if len(body_buffer) + len(chunk) > _MAX_RESPONSE_BYTES:
+                    close = getattr(iterator, "aclose", None)
+                    if close is not None:
+                        await close()
+                    denied = PlainTextResponse(
+                        "응답이 허용된 크기를 초과했습니다.",
+                        status_code=413,
+                        headers={"Cache-Control": "no-store"},
+                        background=response.background,
+                    )
+                    denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                        "category": "response_size",
+                        "reason": "stream_body_limit",
+                        "count": len(body_buffer) + len(chunk),
+                        "limit": _MAX_RESPONSE_BYTES,
+                    }
+                    return denied
+                body_buffer.extend(chunk)
+            body = bytes(body_buffer)
+            if (
+                cacheable
+                and response.status_code == 200
+                and len(body) <= _MAX_RESPONSE_CACHE_ENTRY_BYTES
+                and "set-cookie" not in response.headers
+            ):
+                headers = dict(response.headers)
+                cache_value = (response.status_code, headers, body)
+                response_cache.set(response_key, cache_value, ttl=20.0)
+                response = Response(content=body, status_code=response.status_code, headers=headers)
+            else:
+                raw_headers = [
+                    (name, value)
+                    for name, value in response.raw_headers
+                    if name.lower() != b"content-length"
+                ]
+                raw_headers.append((b"content-length", str(len(body)).encode("latin-1")))
+                buffered_response = Response(
+                    content=body,
+                    status_code=response.status_code,
+                    headers={},
+                    background=response.background,
+                )
+                buffered_response.raw_headers = raw_headers
+                response = buffered_response
+            return response
+
+        if not active_request_gate.try_enter():
+            denied = PlainTextResponse(
+                "서버가 바쁩니다. 잠시 후 다시 시도해 주세요.",
+                status_code=503,
+                headers={"Retry-After": "1", "Cache-Control": "no-store"},
+            )
+            denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                "category": "concurrency",
+                "reason": "active_request_limit",
+                "count": active_request_gate.active_count,
+                "limit": active_request_gate.limit,
+            }
+            return finish(denied)
+        try:
+            if cacheable:
+                async with response_locks.hold(response_key):
+                    cached_response = response_cache.get(response_key)
+                    if cached_response is not None:
+                        return finish(Response(
+                            content=cached_response[2],
+                            status_code=cached_response[0],
+                            headers=cached_response[1],
+                        ))
+                    return finish(await build_response())
+            return finish(await build_response())
+        finally:
+            active_request_gate.leave()
 
     @app.get("/health")
     def health() -> dict[str, str]:
@@ -258,7 +497,13 @@ def create_app(
     @app.get("/robots.txt", response_class=PlainTextResponse, include_in_schema=False)
     def robots_txt() -> PlainTextResponse:
         return PlainTextResponse(
-            f"User-agent: *\nAllow: /\n\nSitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n",
+            "User-agent: ClaudeBot\nDisallow: /\n\n"
+            "User-agent: Claude-SearchBot\nDisallow: /\n\n"
+            "User-agent: Claude-User\nDisallow: /\n\n"
+            "User-agent: Claude-Web\nDisallow: /\n\n"
+            "User-agent: anthropic-ai\nDisallow: /\n\n"
+            "User-agent: *\nAllow: /\n\n"
+            f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n",
             headers={"Cache-Control": "public, max-age=3600"},
         )
 
@@ -295,9 +540,8 @@ def create_app(
         meet: Annotated[str | None, Query()] = None,
         race_id: Annotated[int | None, Query()] = None,
         trial_id: Annotated[int | None, Query()] = None,
-    ) -> HTMLResponse | RedirectResponse:
-        if _is_mobile_request(request):
-            return _mobile_redirect(request, "/m")
+    ) -> HTMLResponse:
+        mobile_view = _is_mobile_request(request)
         selected_meet = int(meet) if meet and meet.isdigit() else None
         with session_factory() as session:
             data = load_dashboard(
@@ -306,39 +550,37 @@ def create_app(
                 selected_meet=selected_meet,
                 selected_race_id=race_id,
                 selected_trial_id=trial_id,
+                mobile_view=mobile_view,
             )
         return templates.TemplateResponse(
             request=request,
-            name="dashboard.html",
+            name="mobile/home.html" if mobile_view else "dashboard.html",
             context={"active_nav": "races", "dashboard": data},
         )
 
     @app.get("/m", response_class=HTMLResponse)
-    def mobile_dashboard(
-        request: Request,
-        race_date: Annotated[date | None, Query(alias="date")] = None,
-        meet: Annotated[str | None, Query()] = None,
-        race_id: Annotated[int | None, Query()] = None,
-        trial_id: Annotated[int | None, Query()] = None,
-    ) -> HTMLResponse:
-        selected_meet = int(meet) if meet and meet.isdigit() else None
-        with session_factory() as session:
-            data = load_dashboard(
-                session,
-                selected_date=race_date,
-                selected_meet=selected_meet,
-                selected_race_id=race_id,
-                selected_trial_id=trial_id,
-                home_path="/m",
-            )
-        return templates.TemplateResponse(
-            request=request,
-            name="mobile/home.html",
-            context={"active_nav": "races", "dashboard": data},
-        )
+    def legacy_mobile_dashboard(request: Request) -> RedirectResponse:
+        return _permanent_redirect(_legacy_mobile_target(request, "/"))
 
     @app.get("/races/{race_id}", response_class=HTMLResponse)
     def race_detail(request: Request, race_id: int) -> HTMLResponse:
+        if _is_mobile_request(request):
+            return _render_analysis(
+                request,
+                layout="mobile/base.html",
+                template_name="mobile/analysis.html",
+                race_date=None,
+                history_limit=12,
+                race_id=race_id,
+                start=None,
+                end=None,
+                meet=None,
+                distance=None,
+                grade="",
+                horse=[],
+                jockey_id=None,
+                q="",
+            )
         with session_factory() as session:
             page = load_race_page(session, race_id=race_id)
         if page is None:
@@ -588,9 +830,24 @@ def create_app(
         horse: Annotated[list[int] | None, Query()] = None,
         jockey_id: Annotated[int | None, Query(ge=1)] = None,
         q: Annotated[str, Query(max_length=50)] = "",
-    ) -> HTMLResponse | RedirectResponse:
+    ) -> HTMLResponse:
         if _is_mobile_request(request):
-            return _mobile_redirect(request, "/m/analysis")
+            return _render_analysis(
+                request,
+                layout="mobile/base.html",
+                template_name="mobile/analysis.html",
+                race_date=race_date,
+                history_limit=history_limit,
+                race_id=race_id,
+                start=start,
+                end=end,
+                meet=meet,
+                distance=distance,
+                grade=grade,
+                horse=horse or [],
+                jockey_id=jockey_id,
+                q=q,
+            )
         return _render_analysis(
             request,
             layout="base.html",
@@ -609,35 +866,19 @@ def create_app(
         )
 
     @app.get("/m/analysis", response_class=HTMLResponse)
-    def mobile_analysis_workspace(
-        request: Request,
-        race_date: Annotated[date | None, Query(alias="date")] = None,
-        history_limit: Annotated[int, Query(ge=1, le=60)] = 12,
-        race_id: Annotated[int | None, Query(ge=1)] = None,
-        start: Annotated[date | None, Query()] = None,
-        end: Annotated[date | None, Query()] = None,
-        meet: Annotated[int | None, Query(ge=1, le=4)] = None,
-        distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
-        grade: Annotated[str, Query(max_length=50)] = "",
-        horse: Annotated[list[int] | None, Query()] = None,
-        jockey_id: Annotated[int | None, Query(ge=1)] = None,
-        q: Annotated[str, Query(max_length=50)] = "",
-    ) -> HTMLResponse:
-        return _render_analysis(
-            request,
-            layout="mobile/base.html",
-            template_name="mobile/analysis.html",
-            race_date=race_date,
-            history_limit=history_limit,
-            race_id=race_id,
-            start=start,
-            end=end,
-            meet=meet,
-            distance=distance,
-            grade=grade,
-            horse=horse or [],
-            jockey_id=jockey_id,
-            q=q,
+    def legacy_mobile_analysis(request: Request) -> RedirectResponse:
+        race_id = request.query_params.get("race_id", "")
+        entry_id = request.query_params.get("entry", "")
+        fragment = f"entry-{entry_id}" if entry_id.isdecimal() else ""
+        if race_id.isdecimal():
+            return _permanent_redirect(f"/races/{race_id}{f'#{fragment}' if fragment else ''}")
+        return _permanent_redirect(
+            _legacy_mobile_target(
+                request,
+                "/analysis",
+                exclude=frozenset({"entry"}),
+                fragment=fragment,
+            )
         )
 
     @app.get("/api/analysis/export.csv")
@@ -731,6 +972,7 @@ def create_app(
         q: Annotated[str, Query(max_length=100)] = "",
         page: Annotated[int, Query(ge=1)] = 1,
         sort: Annotated[str, Query()] = "starts",
+        status: Annotated[str, Query()] = "all",
     ) -> HTMLResponse:
         if kind_slug not in ENTITY_KINDS:
             raise HTTPException(status_code=404, detail="Not found")
@@ -744,9 +986,10 @@ def create_app(
                     page=page,
                     page_size=DEFAULT_PAGE_SIZE,
                     sort=sort,
+                    status=status,
                 )
 
-        data = cached(("entity-list", kind_slug, q, page, sort), load, ttl=60.0)
+        data = cached(("entity-list", kind_slug, q, page, sort, status), load, ttl=60.0)
         if data is None:
             raise HTTPException(status_code=404, detail="Not found")
         return templates.TemplateResponse(
@@ -755,16 +998,30 @@ def create_app(
             context={"active_nav": kind_slug, "page_data": data},
         )
 
-    @app.get("/{kind_slug}/{entity_id}", response_class=HTMLResponse)
+    @app.get("/{kind_slug}/{entity_key}", response_class=HTMLResponse)
     def entity_detail(
         request: Request,
         kind_slug: str,
-        entity_id: int,
-    ) -> HTMLResponse:
+        entity_key: str,
+    ) -> Response:
         if kind_slug not in ENTITY_KINDS:
             raise HTTPException(status_code=404, detail="Not found")
         with session_factory() as session:
-            data = load_entity_detail(session, kind_slug=kind_slug, entity_id=entity_id)
+            data = load_entity_detail(
+                session,
+                kind_slug=kind_slug,
+                official_id=entity_key,
+            )
+            if data is None and entity_key.isdecimal():
+                official_id = load_entity_official_id(
+                    session,
+                    kind_slug=kind_slug,
+                    internal_id=int(entity_key),
+                )
+                if official_id is not None:
+                    return _permanent_redirect(
+                        f"/{kind_slug}/{quote(official_id, safe='')}"
+                    )
         if data is None:
             raise HTTPException(status_code=404, detail="Not found")
         return templates.TemplateResponse(
@@ -773,6 +1030,9 @@ def create_app(
             context={"active_nav": kind_slug, "detail": data},
         )
 
+    # Compress server-rendered HTML after application caching so large pages do
+    # not generate avoidable internet egress charges.
+    app.add_middleware(GZipMiddleware, minimum_size=1000)
     return app
 
 

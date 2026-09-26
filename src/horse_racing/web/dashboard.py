@@ -146,15 +146,15 @@ class TrialRow:
 
 @dataclass(frozen=True, slots=True)
 class EntryRow:
-    horse_id: int
+    horse_id: str
     horse_number: int
     horse_name: str
     horse_meta: str
-    jockey_id: int | None
+    jockey_id: str | None
     jockey_name: str
-    trainer_id: int | None
+    trainer_id: str | None
     trainer_name: str
-    owner_id: int | None
+    owner_id: str | None
     owner_name: str
     carried_weight: str
     body_weight: str
@@ -224,6 +224,7 @@ def load_dashboard(
     selected_race_id: int | None,
     selected_trial_id: int | None = None,
     home_path: str = "/",
+    mobile_view: bool = False,
 ) -> DashboardData:
     race_dates = list(
         session.scalars(
@@ -254,7 +255,7 @@ def load_dashboard(
         statuses_by_date.setdefault(race_date, set()).add(status)
     trial_date_set = set(trial_dates)
     if selected_date is None and available_dates:
-        if home_path == "/m":
+        if mobile_view:
             selected_date = _pick_live_date(available_dates, today_seoul())
         else:
             selected_date = available_dates[0]
@@ -315,7 +316,7 @@ def load_dashboard(
         form_by_horse.update(_recent_trial_form_by_horse(session, debut_ids, selected_date))
     win_probs = latest_win_probabilities(session, [race.id for race in races])
     race_rows = [_race_row(race, filter_query, form_by_horse, win_probs) for race in races]
-    if home_path == "/m":
+    if mobile_view:
         race_rows = _order_mobile_races(
             race_rows,
             now_ms=now_seoul_ms(),
@@ -329,7 +330,7 @@ def load_dashboard(
         )
     else:
         race_groups = _race_groups(race_rows, grouped=True)
-    if selected_race_id is None and home_path == "/m" and race_rows:
+    if selected_race_id is None and mobile_view and race_rows:
         chosen_race = next((race for race in races if race.id == race_rows[0].id), chosen_race)
     detail = _race_detail(session, chosen_race) if chosen_race is not None else None
     trial_rows = [_trial_row(trial) for trial in trials]
@@ -704,10 +705,7 @@ def _race_row(
         id=race.id,
         href=f"/?{query}",
         detail_href=f"/races/{race.id}",
-        analysis_href=(
-            f"/m/analysis?date={race.race_date_local.isoformat()}"
-            f"&meet={meet_code}&race_id={race.id}"
-        ),
+        analysis_href=f"/races/{race.id}",
         course_name=race.racecourse.name_ko,
         meet_code=meet_code,
         race_number=race.race_number,
@@ -795,15 +793,15 @@ def _entry_row(
         classes.append(f"placed-{sort_key}")
     selection_key = str(entry.horse_number)
     return EntryRow(
-        horse_id=entry.horse_id,
+        horse_id=entry.horse.kra_horse_id,
         horse_number=entry.horse_number,
         horse_name=entry.horse.name_ko,
         horse_meta=horse_meta or "정보 없음",
-        jockey_id=entry.jockey_id,
+        jockey_id=entry.jockey.kra_jockey_id if entry.jockey else None,
         jockey_name=entry.jockey.name_ko if entry.jockey else "—",
-        trainer_id=entry.trainer_id,
+        trainer_id=entry.trainer.kra_trainer_id if entry.trainer else None,
         trainer_name=entry.trainer.name_ko if entry.trainer else "—",
-        owner_id=entry.owner_id,
+        owner_id=entry.owner.kra_owner_id if entry.owner else None,
         owner_name=entry.owner.name_ko if entry.owner else "—",
         carried_weight=(
             f"{entry.carried_weight_kg:g}kg" if entry.carried_weight_kg is not None else "—"

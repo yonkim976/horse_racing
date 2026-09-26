@@ -14,4 +14,4 @@ COPY src ./src
 
 RUN uv sync --locked --no-dev --only-group web-prod --no-install-project
 
-CMD ["sh", "-c", "exec uvicorn horse_racing.web.app:app --host 0.0.0.0 --port ${PORT:-8080} --proxy-headers --forwarded-allow-ips='*'"]
+CMD ["sh", "-c", "exec uvicorn horse_racing.web.app:app --host 0.0.0.0 --port ${PORT:-8080} --no-proxy-headers"]

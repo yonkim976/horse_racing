@@ -102,6 +102,8 @@ class EntityListItem:
     weight_count: int
     training_count: int
     medical_count: int
+    status_label: str | None = None
+    status_key: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -125,6 +127,7 @@ class EntityListPage:
     total_pages: int
     page_items: list[int]
     history_coverage: HorseHistoryCoverage | None
+    status_filter: str = "all"
 
 
 @dataclass(frozen=True, slots=True)
@@ -135,13 +138,13 @@ class HistoryRow:
     distance: str
     horse_number: int
     horse_name: str
-    horse_id: int | None
+    horse_id: str | None
     jockey_name: str
-    jockey_id: int | None
+    jockey_id: str | None
     trainer_name: str
-    trainer_id: int | None
+    trainer_id: str | None
     owner_name: str
-    owner_id: int | None
+    owner_id: str | None
     finish_position: str
     finish_sort: int
     finish_time: str
@@ -298,6 +301,8 @@ class EntityDetail:
     start_training_count: int
     jockey_change_count: int
     scratch_count: int
+    status_label: str | None = None
+    status_key: str | None = None
 
 
 def load_entity_list(
@@ -308,6 +313,7 @@ def load_entity_list(
     page: int = 1,
     page_size: int = DEFAULT_PAGE_SIZE,
     sort: str = "starts",
+    status: str = "all",
 ) -> EntityListPage | None:
     kind = ENTITY_KINDS.get(kind_slug)
     if kind is None:
@@ -317,10 +323,23 @@ def load_entity_list(
     page_size = min(max(page_size, 1), MAX_PAGE_SIZE)
     cleaned_query = query.strip()
     sort_key = sort if sort in {"starts", "name"} else "starts"
+    status_filter = status if kind.slug == "horses" and status in {
+        "all",
+        "active",
+        "retired",
+        "unknown",
+    } else "all"
     model = kind.model
     official_id_column = getattr(model, kind.id_attr)
 
     filters = []
+    if kind.slug == "horses":
+        if status_filter == "active":
+            filters.append(Horse.is_active.is_(True))
+        elif status_filter == "retired":
+            filters.append(Horse.is_active.is_(False))
+        elif status_filter == "unknown":
+            filters.append(Horse.is_active.is_(None))
     if cleaned_query:
         pattern = f"%{cleaned_query}%"
         filters.append(
@@ -374,6 +393,12 @@ def load_entity_list(
             weight_count=history_stats.get(entity.id, ("—", 0, 0, 0))[1],
             training_count=history_stats.get(entity.id, ("—", 0, 0, 0))[2],
             medical_count=history_stats.get(entity.id, ("—", 0, 0, 0))[3],
+            status_label=_horse_status(entity.is_active)[0]
+            if isinstance(entity, Horse)
+            else None,
+            status_key=_horse_status(entity.is_active)[1]
+            if isinstance(entity, Horse)
+            else None,
         )
         for entity, entry_total in rows
     ]
@@ -388,17 +413,24 @@ def load_entity_list(
         total_pages=total_pages,
         page_items=page_window(page, total_pages),
         history_coverage=_load_history_coverage(session) if kind.slug == "horses" else None,
+        status_filter=status_filter,
     )
 
 
-def load_entity_detail(session: Session, *, kind_slug: str, entity_id: int) -> EntityDetail | None:
+def load_entity_detail(
+    session: Session, *, kind_slug: str, official_id: str
+) -> EntityDetail | None:
     kind = ENTITY_KINDS.get(kind_slug)
     if kind is None:
         return None
 
-    entity = session.get(kind.model, entity_id)
+    entity = session.scalar(
+        select(kind.model).where(getattr(kind.model, kind.id_attr) == official_id)
+    )
     if entity is None:
         return None
+
+    entity_id = entity.id
 
     fk_column = _entry_foreign_key(kind)
     entries = list(
@@ -462,8 +494,11 @@ def load_entity_detail(session: Session, *, kind_slug: str, entity_id: int) -> E
     jockey_change_count = scratch_count = 0
     profile: ProfileSnapshotRow | None = None
     meta_rows = _detail_meta(kind, entity)
+    status_label: str | None = None
+    status_key: str | None = None
     if kind.slug == "horses":
         assert isinstance(entity, Horse)
+        status_label, status_key = _horse_status(entity.is_active)
         ratings = _load_ratings(session, entity_id)
         weights = _load_weights(session, entity_id)
         training = _load_training(session, entity_id)
@@ -526,6 +561,20 @@ def load_entity_detail(session: Session, *, kind_slug: str, entity_id: int) -> E
         start_training_count=start_training_count,
         jockey_change_count=jockey_change_count,
         scratch_count=scratch_count,
+        status_label=status_label,
+        status_key=status_key,
+    )
+
+
+def load_entity_official_id(
+    session: Session, *, kind_slug: str, internal_id: int
+) -> str | None:
+    """Resolve a legacy database primary key to its public KRA identifier."""
+    kind = ENTITY_KINDS.get(kind_slug)
+    if kind is None:
+        return None
+    return session.scalar(
+        select(getattr(kind.model, kind.id_attr)).where(kind.model.id == internal_id)
     )
 
 
@@ -596,6 +645,7 @@ def _horse_detail_meta(
     as_of = today_seoul()
     rows = [
         ("마번", horse.kra_horse_id),
+        ("현역 상태", _horse_status(horse.is_active)[0]),
         ("영문 마명", horse.name_en or "—"),
         ("나이", format_age(horse.birth_date, as_of)),
         ("성별", horse.sex or "—"),
@@ -610,6 +660,8 @@ def _horse_detail_meta(
         ("모마", horse.dam_name or "—"),
         ("거래가", horse.last_sale_amount_raw or "—"),
     ]
+    if horse.active_status_observed_at_ms is not None:
+        rows.append(("상태 확인", _format_observed_ms(horse.active_status_observed_at_ms)))
     if profile is not None:
         rows.extend(
             [
@@ -633,6 +685,14 @@ def _horse_detail_meta(
     return rows
 
 
+def _horse_status(is_active: bool | None) -> tuple[str, str]:
+    if is_active is True:
+        return "현역", "active"
+    if is_active is False:
+        return "은퇴", "retired"
+    return "미확인", "unknown"
+
+
 def _history_row(entry: RaceEntry) -> HistoryRow:
     race = entry.race
     result = entry.result
@@ -647,13 +707,13 @@ def _history_row(entry: RaceEntry) -> HistoryRow:
         distance=f"{race.distance_m:,}m",
         horse_number=entry.horse_number,
         horse_name=entry.horse.name_ko,
-        horse_id=entry.horse_id,
+        horse_id=entry.horse.kra_horse_id,
         jockey_name=entry.jockey.name_ko if entry.jockey else "—",
-        jockey_id=entry.jockey_id,
+        jockey_id=entry.jockey.kra_jockey_id if entry.jockey else None,
         trainer_name=entry.trainer.name_ko if entry.trainer else "—",
-        trainer_id=entry.trainer_id,
+        trainer_id=entry.trainer.kra_trainer_id if entry.trainer else None,
         owner_name=entry.owner.name_ko if entry.owner else "—",
-        owner_id=entry.owner_id,
+        owner_id=entry.owner.kra_owner_id if entry.owner else None,
         finish_position=finish_label,
         finish_sort=finish_sort,
         finish_time=format_race_time(result.finish_time_ms if result else None),

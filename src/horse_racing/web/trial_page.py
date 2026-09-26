@@ -23,13 +23,13 @@ JUDGEMENT_LABELS = {
 
 @dataclass(frozen=True, slots=True)
 class TrialResultRow:
-    horse_id: int | None
+    horse_id: str | None
     horse_number: int
     horse_name: str
     horse_meta: str
-    jockey_id: int | None
+    jockey_id: str | None
     jockey_name: str
-    trainer_id: int | None
+    trainer_id: str | None
     trainer_name: str
     finish_position: str
     finish_sort: int
@@ -142,17 +142,17 @@ def _result_row(result: RunningTrialResult) -> TrialResultRow:
     if result.judgement not in {"합", None}:
         row_classes.append("non-finisher")
     return TrialResultRow(
-        horse_id=result.horse_id,
+        horse_id=result.horse.kra_horse_id if result.horse else None,
         horse_number=result.horse_number,
         horse_name=result.horse.name_ko if result.horse else result.horse_name_raw,
         horse_meta=horse_meta or "정보 없음",
-        jockey_id=result.jockey_id,
+        jockey_id=result.jockey.kra_jockey_id if result.jockey else None,
         jockey_name=(
             result.jockey.name_ko
             if result.jockey
             else result.jockey_name_raw or "—"
         ),
-        trainer_id=result.trainer_id,
+        trainer_id=result.trainer.kra_trainer_id if result.trainer else None,
         trainer_name=(
             result.trainer.name_ko
             if result.trainer
