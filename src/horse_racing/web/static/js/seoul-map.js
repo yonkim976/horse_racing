@@ -10,7 +10,17 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
     const line = route.querySelector('[data-route-line]');
     const length = line.getTotalLength();
     const arrows = route.querySelector('[data-route-arrows]');
-    for (let fraction = .13; fraction < .96; fraction += .24) {
+    const gate = route.querySelector('.seoul-gate circle');
+    const occupied = [...route.querySelectorAll('[data-seoul-marker]')]
+      .map((marker) => marker.getAttribute('transform').match(/-?[\d.]+/g).map(Number))
+      .concat([[Number(gate.getAttribute('cx')), Number(gate.getAttribute('cy'))]]);
+    const clear = (at) => {
+      const p = line.getPointAtLength(length * at);
+      return occupied.every(([x, y]) => Math.hypot(x - p.x, y - p.y) > 22);
+    };
+    for (let slot = .13; slot < .96; slot += .24) {
+      const fraction = [0, .04, -.04, .08, -.08].map((shift) => slot + shift).find(clear);
+      if (fraction === undefined) continue;
       const point = line.getPointAtLength(length * fraction);
       const next = line.getPointAtLength(length * fraction + 2);
       const angle = Math.atan2(next.y - point.y, next.x - point.x) * 180 / Math.PI;
@@ -56,6 +66,7 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
   const steps = [...root.querySelectorAll('[data-course-select]')];
   const note = root.querySelector('[data-seoul-map-note]');
   const current = root.dataset.distance;
+  const plan = root.dataset.racecourseMap !== 'seoul';
   function focus(action) {
     root.querySelectorAll('[data-seoul-interval]').forEach((path) => path.setAttribute('hidden', ''));
     root.querySelectorAll('[data-seoul-focus]').forEach((path) => {
@@ -66,7 +77,7 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
   }
   reset.addEventListener('click', () => {
     focus(null);
-    note.textContent = root.dataset.courseName === "부경" ? "지도 지점은 거리 기준 개략 위치이며, 코너 이름은 구역 안내입니다." : "지도 지점을 선택하면 기록을 확인합니다. 코너 점은 기록 대조 참고 위치입니다.";
+    note.textContent = plan ? "지도 지점은 거리 기준 개략 위치이며, 코너 이름은 구역 안내입니다." : "지도 지점을 선택하면 기록을 확인합니다. 코너 점은 기록 대조 참고 위치입니다.";
   });
   root.querySelectorAll('[data-course-closing]').forEach((button) => button.addEventListener('click', () => {
     focus(button.dataset.courseClosing);
@@ -89,7 +100,7 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
     const interval = route.querySelector(`[data-seoul-interval][data-start="${start}"][data-end="${end}"]`);
     if (interval) {
       interval.removeAttribute('hidden');
-      note.textContent = `${previous.join('/')} → ${codes.join('/')} · ${root.dataset.courseName === "부경" ? "" : "약 "}${end - start}m 구간입니다. ${root.dataset.courseName === "부경" ? "지도 위치는 공식 도면을 재구성한 개략 위치입니다." : "코너 위치는 기록 대조에 따른 개략 위치입니다."}`;
+      note.textContent = `${previous.join('/')} → ${codes.join('/')} · ${plan ? "" : "약 "}${end - start}m 구간입니다. ${plan ? "지도 위치는 공식 도면을 재구성한 개략 위치입니다." : "코너 위치는 기록 대조에 따른 개략 위치입니다."}`;
     } else {
       note.textContent = end !== undefined ? `${codes.join('/')} · 출발 후 약 ${end}m 참고 위치입니다. 직전 구간의 거리는 확정하지 않았습니다.` : '이 코너는 위치 확인이 더 필요해 지도 강조 없이 기록을 표시합니다.';
     }

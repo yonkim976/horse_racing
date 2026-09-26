@@ -24,6 +24,17 @@
         placeholder="이름 또는 {{ page_data.kind.id_label }}"
         aria-label="{{ page_data.kind.plural_label }} 검색">
     </label>
+    {% if page_data.kind.slug == 'horses' %}
+    <label>
+      <span>현역 상태</span>
+      <select name="status" aria-label="현역 상태">
+        <option value="all" {% if page_data.status_filter == 'all' %}selected{% endif %}>전체</option>
+        <option value="active" {% if page_data.status_filter == 'active' %}selected{% endif %}>현역</option>
+        <option value="retired" {% if page_data.status_filter == 'retired' %}selected{% endif %}>은퇴</option>
+        <option value="unknown" {% if page_data.status_filter == 'unknown' %}selected{% endif %}>미확인</option>
+      </select>
+    </label>
+    {% endif %}
     <label>
       <span>정렬</span>
       <select name="sort" aria-label="정렬">
@@ -58,6 +69,7 @@
         <thead>
           <tr>
             <th>이름</th>
+            {% if page_data.kind.slug == 'horses' %}<th>상태</th>{% endif %}
             <th>{{ page_data.kind.id_label }}</th>
             <th>정보</th>
             <th>출전</th>
@@ -72,12 +84,15 @@
         <tbody>
           {% for item in page_data.items %}
             <tr class="clickable-row" tabindex="0"
-              data-href="/{{ page_data.kind.slug }}/{{ item.id }}">
+              data-href="/{{ page_data.kind.slug }}/{{ item.official_id }}">
               <td>
-                <a class="entity-link" href="/{{ page_data.kind.slug }}/{{ item.id }}">
+                <a class="entity-link" href="/{{ page_data.kind.slug }}/{{ item.official_id }}">
                   <strong>{{ item.name_ko }}</strong>
                 </a>
               </td>
+              {% if page_data.kind.slug == 'horses' %}
+                <td><span class="horse-status-badge" data-status="{{ item.status_key }}">{{ item.status_label }}</span></td>
+              {% endif %}
               <td class="numeric">{{ item.official_id }}</td>
               <td>{{ item.subtitle }}</td>
               <td class="numeric">{{ item.entry_count }}회</td>
@@ -96,7 +111,7 @@
     {% if page_data.total_pages > 1 %}
       <nav class="pagination" aria-label="페이지 이동">
         {% if page_data.page > 1 %}
-          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&page={{ page_data.page - 1 }}">이전</a>
+          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}&page={{ page_data.page - 1 }}">이전</a>
         {% else %}
           <span class="disabled">이전</span>
         {% endif %}
@@ -107,12 +122,12 @@
             {% elif item == page_data.page %}
               <strong>{{ item }}</strong>
             {% else %}
-              <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&page={{ item }}">{{ item }}</a>
+              <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}&page={{ item }}">{{ item }}</a>
             {% endif %}
           {% endfor %}
         </span>
         {% if page_data.page < page_data.total_pages %}
-          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&page={{ page_data.page + 1 }}">다음</a>
+          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}&page={{ page_data.page + 1 }}">다음</a>
         {% else %}
           <span class="disabled">다음</span>
         {% endif %}

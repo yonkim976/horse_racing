@@ -12,6 +12,7 @@
   <label>예측 구분<select name="mode"><option value="">분리 요약</option><option value="live" {% if page.filters.mode == 'live' %}selected{% endif %}>사전 공개</option><option value="historical" {% if page.filters.mode == 'historical' %}selected{% endif %}>과거 재현</option></select></label>
   <button class="button-primary" type="submit">적용</button>
 </form>
+<p class="cell-note">기간을 지정하려면 시작일과 종료일을 함께 입력해 주세요. 한 번에 최대 366일까지 조회할 수 있습니다.</p>
 
 <section class="metric-grid">
   <article><span>우승 Top1 적중</span><strong>{{ page.summary.top1 }}</strong><small>실제 우승마의 예상순위 = 1</small></article><article><span>우승마 Top3 포함</span><strong>{{ page.summary.top3 }}</strong><small>실제 우승마 예상순위 ≤ 3</small></article><article><span>평균 순위 오차</span><strong>{{ page.summary.mae }}</strong><small>말별 |예상−실제|</small></article><article><span>Win Log Loss</span><strong>{{ page.summary.log_loss }}</strong><small>낮을수록 좋음 · 말별 {{ page.summary.entries }}건</small></article>

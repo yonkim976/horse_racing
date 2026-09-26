@@ -52,7 +52,7 @@
   const recordStore = root.querySelector("[data-record-store]");
   const ids = dossiers.map((article) => Number(article.dataset.dossier));
   const params = new URLSearchParams(location.search);
-  const hash = location.hash.match(/^#runner-(\d+)$/);
+  const hash = location.hash.match(/^#(?:entry|runner)-(\d+)$/);
   const requested = Number(params.get("entry") || (hash ? hash[1] : 0));
   let selected = ids.includes(requested) ? requested : ids[0];
   let expanded = null;

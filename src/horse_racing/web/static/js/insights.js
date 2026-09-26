@@ -1,6 +1,10 @@
 (() => {
   const COLORS = ["#34d399", "#fbbf24", "#7dd3fc", "#f87171", "#c4b5fd", "#fb7185", "#bef264", "#fdba74"];
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char]);
+  const finiteNumber = (value, fallback = 0) => {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : fallback;
+  };
 
   function initPace() {
     const root = document.querySelector("[data-pace-root]");
@@ -44,10 +48,10 @@
         const y = cy + Math.sin(angle) * (ry - lane * 8);
         const color = COLORS[runners.findIndex((item) => item.id === runner.id) % COLORS.length];
         const dim = selected && selected !== runner.id ? " is-dimmed" : "";
-        return `<g class="pace-marker${dim}" data-pace-id="${runner.id}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="15" fill="${color}"></circle><text y="1">${runner.number}</text></g>`;
+        return `<g class="pace-marker${dim}" data-pace-id="${escapeHtml(runner.id)}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="15" fill="${color}"></circle><text y="1">${escapeHtml(runner.number)}</text></g>`;
       }).join("");
       track.innerHTML = `<svg viewBox="0 0 ${width} ${height}" aria-hidden="true"><ellipse class="track-line" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"></ellipse><ellipse class="track-edge" cx="${cx}" cy="${cy}" rx="${rx + 32}" ry="${ry + 32}"></ellipse><ellipse class="track-edge" cx="${cx}" cy="${cy}" rx="${rx - 32}" ry="${ry - 32}"></ellipse><path class="track-edge" d="M105 175H655" stroke-dasharray="5 8"></path>${marks}</svg>`;
-      list.innerHTML = ranked.map((runner, index) => `<button type="button" data-pace-id="${runner.id}" class="${selected === runner.id ? "active" : ""}"><span><i class="pace-dot" style="display:inline-block;background:${COLORS[runners.findIndex((item) => item.id === runner.id) % COLORS.length]}"></i>${runner.number} ${escapeHtml(runner.name)}</span><small>추정 ${index + 1}위 · ${escapeHtml(runner.style)}</small></button>`).join("");
+      list.innerHTML = ranked.map((runner, index) => `<button type="button" data-pace-id="${escapeHtml(runner.id)}" class="${selected === runner.id ? "active" : ""}"><span><i class="pace-dot" style="display:inline-block;background:${COLORS[runners.findIndex((item) => item.id === runner.id) % COLORS.length]}"></i>${escapeHtml(runner.number)} ${escapeHtml(runner.name)}</span><small>추정 ${index + 1}위 · ${escapeHtml(runner.style)}</small></button>`).join("");
       root.querySelectorAll("[data-pace-id]").forEach((node) => node.addEventListener("click", () => { selected = selected === Number(node.dataset.paceId) ? null : Number(node.dataset.paceId); render(); syncRunnerRows(selected); }));
     };
     const syncRunnerRows = (id) => document.querySelectorAll("[data-entry-id]").forEach((row) => { const match = id === Number(row.dataset.entryId); row.classList.toggle("is-highlighted", match); row.classList.toggle("is-dimmed", Boolean(id) && !match); });
@@ -78,14 +82,14 @@
       const maxPoints = Math.max(...horses.map((horse) => horse.trend.length), 2);
       let body = "";
       for (let rank = 1; rank <= 12; rank += 2) { const y = pad + (rank - 1) / 11 * (height - pad * 2); body += `<line class="chart-grid" x1="${pad}" y1="${y}" x2="${width-pad}" y2="${y}"></line><text class="chart-label" x="8" y="${y+4}">${rank}위</text>`; }
-      horses.forEach((horse) => { const points = horse.trend.map((row, index) => ({ x: pad + index / (maxPoints - 1) * (width - pad * 2), y: pad + (Math.min(row.finish, 12) - 1) / 11 * (height - pad * 2), row })); const path = points.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" "); body += `<g class="chart-series" data-horse-id="${horse.horse_id}"><path class="chart-line" d="${path}" stroke="${colorFor(horse.horse_id)}"></path>${points.map((p) => `<circle class="chart-point" cx="${p.x}" cy="${p.y}" r="5" fill="${colorFor(horse.horse_id)}"><title>${escapeHtml(horse.name)} ${p.row.date} ${p.row.finish}위</title></circle>`).join("")}</g>`; });
+      horses.forEach((horse) => { const points = horse.trend.map((row, index) => ({ x: pad + index / (maxPoints - 1) * (width - pad * 2), y: pad + (Math.min(finiteNumber(row.finish, 12), 12) - 1) / 11 * (height - pad * 2), row })); const path = points.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" "); body += `<g class="chart-series" data-horse-id="${escapeHtml(horse.horse_id)}"><path class="chart-line" d="${path}" stroke="${colorFor(horse.horse_id)}"></path>${points.map((p) => `<circle class="chart-point" cx="${p.x}" cy="${p.y}" r="5" fill="${colorFor(horse.horse_id)}"><title>${escapeHtml(horse.name)} ${escapeHtml(p.row.date)} ${finiteNumber(p.row.finish, 0)}위</title></circle>`).join("")}</g>`; });
       formChart.innerHTML = `<svg viewBox="0 0 ${width} ${height}">${body}</svg>`;
     }
     const distanceChart = document.querySelector("[data-distance-chart]");
     if (distanceChart) {
       const groups = horses.flatMap((horse) => horse.distances.map((row) => ({...row, horse_id: horse.horse_id, name: horse.name}))).sort((a, b) => a.distance - b.distance || a.name.localeCompare(b.name));
       const width = 660, rowH = 24, height = Math.max(270, groups.length * rowH + 35);
-      const body = groups.map((row, index) => { const y = 20 + index * rowH; const bar = row.rate * 390; return `<g class="chart-series" data-horse-id="${row.horse_id}"><text class="chart-label" x="5" y="${y+12}">${escapeHtml(row.name)} ${row.distance}m</text><rect x="160" y="${y}" width="${bar}" height="15" rx="4" fill="${colorFor(row.horse_id)}"></rect><text class="chart-label" x="${165+bar}" y="${y+12}">${Math.round(row.rate*100)}% · n=${row.starts}</text></g>`; }).join("");
+      const body = groups.map((row, index) => { const y = 20 + index * rowH; const rate = Math.max(0, Math.min(finiteNumber(row.rate), 1)); const bar = rate * 390; return `<g class="chart-series" data-horse-id="${escapeHtml(row.horse_id)}"><text class="chart-label" x="5" y="${y+12}">${escapeHtml(row.name)} ${finiteNumber(row.distance)}m</text><rect x="160" y="${y}" width="${bar}" height="15" rx="4" fill="${colorFor(row.horse_id)}"></rect><text class="chart-label" x="${165+bar}" y="${y+12}">${Math.round(rate*100)}% · n=${finiteNumber(row.starts)}</text></g>`; }).join("");
       distanceChart.innerHTML = `<svg viewBox="0 0 ${width} ${height}" style="height:${height}px">${body}</svg>`;
     }
     const sectionChart = document.querySelector("[data-section-chart]");
@@ -94,9 +98,11 @@
       let body = `<text class="chart-label" x="${left}" y="18">빠름</text><text class="chart-label" x="${left + barWidth - 25}" y="18">느림</text>`;
       horses.forEach((horse, index) => {
         const y = 38 + index * 30;
-        const early = horse.early_position == null ? null : left + Math.min(horse.early_position / 12, 1) * barWidth;
-        const closing = horse.closing_time == null ? null : left + Math.max(0, Math.min((horse.closing_time - 14) / 6, 1)) * barWidth;
-        body += `<g class="chart-series" data-horse-id="${horse.horse_id}"><text class="chart-label" x="5" y="${y + 4}">${escapeHtml(horse.name)} · n=${horse.section_sample}</text><line class="chart-grid" x1="${left}" y1="${y}" x2="${left + barWidth}" y2="${y}"></line>${early == null ? "" : `<circle cx="${early}" cy="${y - 5}" r="6" fill="${colorFor(horse.horse_id)}"><title>초반 평균 ${horse.early_position}위</title></circle>`}${closing == null ? "" : `<rect x="${closing - 5}" y="${y + 4}" width="10" height="10" rx="2" fill="${colorFor(horse.horse_id)}"><title>G1F 평균 ${horse.closing_time}초</title></rect>`}</g>`;
+        const earlyPosition = horse.early_position == null ? null : finiteNumber(horse.early_position, null);
+        const closingTime = horse.closing_time == null ? null : finiteNumber(horse.closing_time, null);
+        const early = earlyPosition == null ? null : left + Math.min(Math.max(earlyPosition, 0) / 12, 1) * barWidth;
+        const closing = closingTime == null ? null : left + Math.max(0, Math.min((closingTime - 14) / 6, 1)) * barWidth;
+        body += `<g class="chart-series" data-horse-id="${escapeHtml(horse.horse_id)}"><text class="chart-label" x="5" y="${y + 4}">${escapeHtml(horse.name)} · n=${finiteNumber(horse.section_sample)}</text><line class="chart-grid" x1="${left}" y1="${y}" x2="${left + barWidth}" y2="${y}"></line>${early == null ? "" : `<circle cx="${early}" cy="${y - 5}" r="6" fill="${colorFor(horse.horse_id)}"><title>초반 평균 ${earlyPosition}위</title></circle>`}${closing == null ? "" : `<rect x="${closing - 5}" y="${y + 4}" width="10" height="10" rx="2" fill="${colorFor(horse.horse_id)}"><title>G1F 평균 ${closingTime}초</title></rect>`}</g>`;
       });
       sectionChart.innerHTML = `<svg viewBox="0 0 ${width} ${height}">${body}</svg>`;
     }

@@ -83,6 +83,31 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     event.currentTarget.textContent = zoom ? '전체 보기' : '확대 보기';
   });
   if (!isJeju) return;
+  const arrows = root.querySelector('[data-jeju-arrows]');
+  function drawArrows() {
+    const line = root.querySelector('[data-jeju-route]');
+    const length = line.getTotalLength();
+    const gate = root.querySelector('[data-jeju-start] circle');
+    const occupied = [...root.querySelectorAll('[data-course-point]:not([hidden])')]
+      .map(point => point.getAttribute('transform').match(/-?[\d.]+/g).map(Number))
+      .concat([[Number(gate.getAttribute('cx')), Number(gate.getAttribute('cy'))]]);
+    const clear = at => {
+      const p = line.getPointAtLength(length * at);
+      return occupied.every(([x, y]) => Math.hypot(x - p.x, y - p.y) > 26);
+    };
+    arrows.replaceChildren();
+    for (let slot = .13; slot < .96; slot += .24) {
+      const fraction = [0, .04, -.04, .08, -.08].map(shift => slot + shift).find(clear);
+      if (fraction === undefined) continue;
+      const point = line.getPointAtLength(length * fraction);
+      const next = line.getPointAtLength(length * fraction + 2);
+      const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      arrow.setAttribute('d', 'M -5 -4 L 1 0 L -5 4');
+      arrow.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${Math.atan2(next.y - point.y, next.x - point.x) * 180 / Math.PI})`);
+      arrows.appendChild(arrow);
+    }
+  }
+  drawArrows();
   previews.forEach(button => button.addEventListener('click', () => {
     const distance = button.dataset.jejuPreview;
     const own = distance === current;
@@ -108,6 +133,7 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     start.querySelector('path').setAttribute('d', `M ${x} ${y} l ${y > 0 ? 78 : 0} ${y > 0 ? 48 : -40}`);
     start.querySelector('text').setAttribute('x', x + (y > 0 ? 78 : 0));
     start.querySelector('text').setAttribute('y', y + (y > 0 ? 65 : -49));
+    start.querySelector('text').textContent = Number(distance) > 1600 ? `출발 · 결승선 ${Number(distance) - 1600}m 앞` : '출발';
     const label = Number(distance).toLocaleString('ko-KR') + 'm';
     root.querySelectorAll('[data-other-start]').forEach(marker => marker.toggleAttribute('hidden', marker.dataset.otherStart.replace(/[^0-9]/g, '') === distance));
     root.querySelector('[data-course-view-label]').textContent = (own ? '현재 경주 · ' : '경로 미리보기 · ') + label;
@@ -117,5 +143,6 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     root.querySelector('.course-map title').textContent = `제주 ${label} 주행 경로`;
     root.querySelectorAll('[data-course-point]').forEach(point => { point.toggleAttribute('hidden', !own); point.setAttribute('tabindex', own ? '0' : '-1'); });
     root.querySelector('[data-course-map-note]').textContent = own ? '지도 지점을 선택하면 직전 구간과 말별 기록을 확인합니다.' : `다른 거리의 경로 미리보기입니다. 아래 기록은 현재 ${Number(current).toLocaleString('ko-KR')}m 경주의 기록입니다.`;
+    drawArrows();
   }));
 });

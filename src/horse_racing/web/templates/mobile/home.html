@@ -76,7 +76,7 @@
           <div class="mobile-poster-row">
             {% for horse in race.posters %}
             {% if not race.prediction_state or race.prediction_count < race.runner_count or horse.is_candidate %}
-            <a class="mobile-poster{% if horse.scratched %} is-scratched{% endif %}" href="/m/analysis?race_id={{ race.id }}&entry={{ horse.entry_id }}">
+            <a class="mobile-poster{% if horse.scratched %} is-scratched{% endif %}" href="/races/{{ race.id }}#entry-{{ horse.entry_id }}">
               <span class="mobile-poster-cap silk-{{ horse.number }}" aria-hidden="true"></span>
               <span class="mobile-poster-num">{{ horse.number }}</span>
               <strong>{{ horse.name }}</strong>

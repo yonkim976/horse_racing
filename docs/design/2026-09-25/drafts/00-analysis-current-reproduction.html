@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>경주 분석 · 마필로그 Mapilog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&amp;display=swap">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#f2f5f2',
+            'surface-1': '#ffffff',
+            'surface-2': '#fbfdfb',
+            'surface-3': '#f0f5f1',
+            border: 'rgb(21 45 33 / 11%)',
+            'border-strong': 'rgb(21 45 33 / 22%)',
+            ink: '#17241d',
+            'ink-strong': '#060c09',
+            muted: '#5d7066',
+            faint: '#93a49a',
+            accent: '#059669',
+            'accent-strong': '#047857',
+            'accent-deep': '#065f46',
+            'accent-soft': 'rgb(5 150 105 / 9%)',
+            'accent-line': 'rgb(5 150 105 / 35%)',
+            lime: '#65a30d',
+            'row-hover': 'rgb(5 150 105 / 5%)',
+          },
+          fontFamily: {
+            sans: ['"Pretendard Variable"', 'Pretendard', '"Noto Sans KR"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            'soft': '0 6px 18px rgb(20 40 30 / 7%)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: var(--font-sans);
+      background-color: theme('colors.bg');
+      color: theme('colors.ink');
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(800px 420px at 12% -8%, rgb(5 150 105 / 6%), transparent 66%),
+                  radial-gradient(720px 400px at 88% -4%, rgb(132 204 22 / 5%), transparent 62%);
+      pointer-events: none;
+    }
+    .glass-header {
+      background: rgb(255 255 255 / 82%);
+      backdrop-filter: blur(14px) saturate(150%);
+    }
+    .stone {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 29px; height: 29px; border-radius: 50%; font-family: var(--font-mono); font-weight: 700; font-size: 12px;
+      box-shadow: inset 0 1px 2px rgb(255 255 255 / 15%), 0 2px 4px rgb(0 0 0 / 15%);
+    }
+    .silk-1 { background: #f6f3e8; color: #233c31; border: 1px solid #c5c9bb; }
+    .silk-2 { background: #263b33; color: #fff; }
+    .silk-3 { background: #b94c47; color: #fff; }
+    .silk-4 { background: #3b71ac; color: #fff; }
+    .silk-5 { background: #dfbd4f; color: #332d18; }
+    .silk-6 { background: #557d56; color: #fff; }
+    .silk-7 { background: #bd8561; color: #fff; }
+    .silk-8 { background: #9b739b; color: #fff; }
+    .silk-9 { background: #4d8991; color: #fff; }
+    .silk-10 { background: #aa687f; color: #fff; }
+    .silk-11 { background: #717e45; color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen" data-sd-id="1">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 glass-header border-b border-border" data-sd-id="2">
+      <div class="max-w-[1520px] w-[calc(100%-48px)] mx-auto flex items-center justify-between min-h-[68px]" data-sd-id="3">
+        <a href="/" class="flex items-center gap-2 flex-shrink-0" data-sd-id="4">
+          <img src="../../../../src/horse_racing/web/static/images/brand/mapilog-symbol-color.svg" alt="Mapilog Logo" class="w-[70px] h-[38px] object-contain" data-sd-id="5">
+          <img src="../../../../src/horse_racing/web/static/images/brand/mapilog-wordmark-color.svg" alt="Mapilog" class="w-[112px] h-[38px] object-contain" data-sd-id="6">
+        </a>
+        <nav class="flex-1 flex items-center justify-center gap-1" data-sd-id="7">
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="8">경주</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-[#06251a] bg-gradient-to-r from-lime to-[#4ade80] shadow-[0_0_22px_rgb(5_150_105_/_10%)] rounded-full" data-sd-id="9">경주 분석</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="10">예측 원장</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="11">말</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="12">기수</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="13">조교사</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="14">마주</a>
+          <a href="#" class="px-[15px] py-[8px] text-[13px] font-bold tracking-[-0.02em] text-muted hover:text-ink-strong hover:bg-surface-3 rounded-full transition-colors" data-sd-id="15">데이터</a>
+        </nav>
+        <div class="flex items-center gap-3" data-sd-id="16">
+          <div class="flex items-center gap-2 px-3 py-1.5 bg-surface-2 border border-border rounded-full text-xs font-semibold text-muted" data-sd-id="17">
+            <span class="w-[7px] h-[7px] bg-accent rounded-full shadow-[0_0_0_4px_rgb(5_150_105_/_9%)]" data-sd-id="18"></span>
+            로컬 데이터
+          </div>
+          <button class="w-[38px] h-[38px] grid place-items-center bg-surface-2 border border-border rounded-full text-muted hover:text-ink-strong hover:border-border-strong transition-all" data-sd-id="19">
+            <iconify-icon icon="lucide:sun" width="17" height="17"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-[1520px] w-[calc(100%-48px)] mx-auto py-10 pb-16" data-sd-id="20">
+      <!-- Workspace -->
+      <div class="text-ink" data-sd-id="21">
+        <!-- Intro -->
+        <header class="flex items-center justify-between gap-5 pb-4" data-sd-id="22">
+          <div data-sd-id="23">
+            <p class="text-[10px] font-mono font-semibold text-accent tracking-[0.2em] mb-2" data-sd-id="24">RACE STUDY</p>
+            <h1 class="text-[30px] font-[800] leading-snug tracking-[-0.05em] mb-1.5" data-sd-id="25">경주 분석</h1>
+            <p class="text-[13px] text-muted m-0" data-sd-id="26">출전마의 기록을 읽고, 비교하고, 전개를 그려보세요.</p>
+          </div>
+          <span class="text-[13px] text-muted border-l-2 border-accent-line py-2 px-4 m-0" data-sd-id="27">출전표에서 시작하는 데이터 분석</span>
+        </header>
+
+        <!-- Browser -->
+        <section class="grid grid-cols-[minmax(0,1fr)_auto] border border-border rounded-[14px] bg-surface-1 overflow-hidden mb-5" data-sd-id="28">
+          <div class="flex items-center gap-2.5 px-4 py-3 border-b border-border col-span-full md:col-span-1" data-sd-id="29">
+            <label class="text-xs text-muted" data-sd-id="30">경주일</label>
+            <input type="date" value="2026-09-20" class="w-[155px] bg-surface-2 border border-border-strong rounded-[7px] px-2.5 py-2 text-[13px] text-ink" data-sd-id="31">
+            <button class="inline-flex justify-center items-center bg-surface-2 border border-border-strong rounded-[7px] px-3 py-2 text-xs font-semibold text-ink min-h-[34px] hover:bg-accent-soft hover:border-accent" data-sd-id="32">조회</button>
+            <a href="#" class="text-xs text-accent-strong p-1.5" data-sd-id="33">오늘</a>
+          </div>
+          <nav class="flex items-center gap-[22px] px-4 border-b border-border col-span-full md:col-span-1" data-sd-id="34">
+            <a href="#" class="py-[14px] pb-[12px] text-[13px] font-semibold text-accent-strong border-b-2 border-accent" data-sd-id="35">서울</a>
+            <a href="#" class="py-[14px] pb-[12px] text-[13px] font-semibold text-muted border-b-2 border-transparent" data-sd-id="36">제주</a>
+            <a href="#" class="py-[14px] pb-[12px] text-[13px] font-semibold text-muted border-b-2 border-transparent" data-sd-id="37">부산경남</a>
+            <a href="#" class="py-[14px] pb-[12px] text-[13px] font-semibold text-muted border-b-2 border-transparent" data-sd-id="38">영천</a>
+          </nav>
+          <nav class="col-span-full flex gap-2 px-4 py-3 overflow-x-auto" data-sd-id="39">
+            <a href="#" class="flex-none grid gap-1 p-2 px-3 rounded-lg border border-accent-line bg-accent-soft shadow-[inset_0_2px_theme('colors.accent')]" data-sd-id="40">
+              <strong class="font-mono text-[16px] font-bold text-accent-strong">1R</strong>
+              <span class="font-mono text-[11px] font-medium text-muted" data-sd-id="41">10:35</span>
+              <small class="text-[10px] text-muted">1200m</small>
+            </a>
+            <a href="#" class="flex-none grid gap-1 p-2 px-3 rounded-lg border border-border bg-surface-2" data-sd-id="42">
+              <strong class="font-mono text-[16px] font-bold">2R</strong>
+              <span class="font-mono text-[11px] font-medium text-muted" data-sd-id="43">11:00</span>
+              <small class="text-[10px] text-muted">1300m</small>
+            </a>
+            <!-- Repeat for 3R to 11R visually implied -->
+          </nav>
+        </section>
+
+        <!-- Race Title -->
+        <section class="flex items-center justify-between gap-4 py-4 px-1" data-sd-id="44">
+          <div data-sd-id="45">
+            <p class="text-xs text-muted m-0" data-sd-id="46">2026-09-20 · 10:35 · 서울</p>
+            <h2 class="text-[27px] font-medium tracking-[-0.04em] mt-[7px] mb-2" data-sd-id="47">
+              서울 <b class="font-[750]">1경주</b>
+              <span class="inline-block font-mono text-[13px] font-semibold text-accent-strong ml-3.5 px-2.5 py-1.5 bg-accent-soft rounded-md align-middle" data-sd-id="48">1200m</span>
+            </h2>
+            <p class="text-xs text-muted m-0" data-sd-id="49">혼4등급 · 일반 · 출전 11두</p>
+          </div>
+          <div class="flex gap-4.5 text-xs text-muted" data-sd-id="50">
+            <a href="#" class="hover:text-accent-strong" data-sd-id="51">기본 경주 상세 ↗</a>
+          </div>
+        </section>
+
+        <!-- Section Nav -->
+        <nav class="sticky top-[69px] z-15 flex items-center gap-[25px] bg-bg border-b border-border-strong mb-4.5 min-h-[45px]" data-sd-id="52">
+          <a href="#" class="py-3 text-[13px] font-[650] whitespace-nowrap hover:text-accent-strong" data-sd-id="53">미래 예측</a>
+          <a href="#" class="py-3 text-[13px] font-[650] whitespace-nowrap hover:text-accent-strong" data-sd-id="54">출전마 비교</a>
+          <a href="#" class="py-3 text-[13px] font-[650] whitespace-nowrap hover:text-accent-strong" data-sd-id="55">말별 기록·영상</a>
+          <a href="#" class="py-3 text-[13px] font-[650] whitespace-nowrap hover:text-accent-strong" data-sd-id="56">전개 그리기</a>
+          <a href="#" class="py-3 text-[13px] font-[650] whitespace-nowrap hover:text-accent-strong" data-sd-id="57">메모</a>
+          <span class="ml-auto text-[11px] text-muted" data-sd-id="58">2026-09-20 이전 기록 기준</span>
+        </nav>
+
+        <!-- Field Overview Panel -->
+        <section class="border border-border rounded-[14px] bg-surface-1 overflow-hidden mb-5" data-sd-id="59">
+          <div class="flex items-center justify-between gap-4 p-5 border-b border-border" data-sd-id="60">
+            <div data-sd-id="61">
+              <h2 class="text-[17px] font-[720] tracking-[-0.03em] m-0 inline-flex items-center" data-sd-id="62">
+                현재 출전마 <span class="text-[13px] font-mono font-semibold text-accent-strong ml-[7px]" data-sd-id="63">11</span>
+              </h2>
+              <p class="text-xs text-muted mt-1.5 mb-0 leading-[1.6]" data-sd-id="64">말 이름으로 기록을 열고, 체크한 말은 나란히 비교하세요.</p>
+            </div>
+            <div class="flex items-center gap-2" data-sd-id="65">
+              <label data-sd-id="66">
+                <input type="search" placeholder="말 · 기수 검색" class="w-[160px] bg-surface-2 border border-border-strong rounded-[7px] px-2.5 py-2 text-[13px]" data-sd-id="67">
+              </label>
+              <button class="bg-surface-2 border border-border-strong rounded-[7px] px-3 py-2 text-xs font-semibold text-ink min-h-[34px] hover:bg-accent-soft hover:border-accent" data-sd-id="68">선택 해제</button>
+            </div>
+          </div>
+          <div class="overflow-x-auto" data-sd-id="69">
+            <table class="w-full text-xs text-left min-w-[1020px]" data-sd-id="70">
+              <thead class="bg-surface-2 text-muted border-b border-border" data-sd-id="71">
+                <tr data-sd-id="72">
+                  <th class="py-[11px] px-3 font-[550] pl-5 pr-1.5 w-[42px]" data-sd-id="73">비교</th>
+                  <th class="py-[11px] px-3 font-[550] pl-[5px] pr-2 w-[48px]" data-sd-id="74"><button class="font-inherit" data-sd-id="75">마번 ↕</button></th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="76">출전마 · 각질</th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="77">기수 · 중량</th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="78">최근 착순 <small class="block text-[10px] font-normal mt-[3px]">최신 → 과거</small></th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="79">동일거리 <small class="block text-[10px] font-normal mt-[3px]">1200m</small></th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="80">최근 주행심사</th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="81">최근 28일 조교</th>
+                  <th class="py-[11px] px-3 font-[550]" data-sd-id="82"><button class="font-inherit" data-sd-id="83">레이팅 ↕</button></th>
+                </tr>
+              </thead>
+              <tbody data-sd-id="84">
+                <!-- Row 1 -->
+                <tr class="border-b border-border hover:bg-row-hover" data-sd-id="85">
+                  <td class="py-3 pl-5 pr-1.5" data-sd-id="86"><input type="checkbox" class="w-[15px] h-[15px] accent-accent cursor-pointer" data-sd-id="87"></td>
+                  <td class="py-3 pl-[5px] pr-2" data-sd-id="88"><span class="stone silk-1" data-sd-id="89">1</span></td>
+                  <td class="py-3 px-3" data-sd-id="90">
+                    <button class="text-[14px] font-[650] hover:text-accent-strong hover:underline underline-offset-4" data-sd-id="91">서리풀선샤인</button>
+                    <small class="block text-[10px] text-muted mt-[3px]"><span class="inline-block text-[10px] text-accent-strong bg-accent-soft rounded px-1.5 py-0.5 whitespace-nowrap" data-sd-id="92">선행</span></small>
+                  </td>
+                  <td class="py-3 px-3" data-sd-id="93">빅투아르<small class="block text-[10px] text-muted mt-[3px]">54.0 · 게이트 1</small></td>
+                  <td class="py-3 px-3" data-sd-id="94">
+                    <span class="inline-flex gap-1" data-sd-id="95">
+                      <span class="inline-flex w-[22px] h-[24px] justify-center items-center bg-accent-soft text-accent-strong rounded font-mono text-[11px] font-medium" data-sd-id="96">1</span>
+                      <span class="inline-flex w-[22px] h-[24px] justify-center items-center bg-surface-3 text-muted rounded font-mono text-[11px] font-medium" data-sd-id="97">4</span>
+                      <span class="inline-flex w-[22px] h-[24px] justify-center items-center bg-surface-3 text-muted rounded font-mono text-[11px] font-medium" data-sd-id="98">5</span>
+                    </span>
+                  </td>
+                  <td class="py-3 px-3" data-sd-id="99">3전<small class="block text-[10px] text-muted mt-[3px]">수집된 과거 5전</small></td>
+                  <td class="py-3 px-3" data-sd-id="100">
+                    <button class="font-[650] hover:text-accent-strong hover:underline underline-offset-4" data-sd-id="101">1:03.4</button>
+                    <small class="block text-[10px] text-muted mt-[3px]">2026-08-10 · 1000m</small>
+                  </td>
+                  <td class="py-3 px-3" data-sd-id="102">6회<small class="block text-[10px] text-muted mt-[3px]">120분 · 출발 1회</small></td>
+                  <td class="py-3 px-3 font-mono text-[11px] font-medium" data-sd-id="103">35</td>
+                </tr>
+                <!-- Repeat 10 more rows with appropriate mock data -->
+                <tr class="border-b border-border hover:bg-row-hover" data-sd-id="104">
+                  <td class="py-3 pl-5 pr-1.5" data-sd-id="105"><input type="checkbox" class="w-[15px] h-[15px] accent-accent cursor-pointer" data-sd-id="106"></td>
+                  <td class="py-3 pl-[5px] pr-2" data-sd-id="107"><span class="stone silk-2" data-sd-id="108">2</span></td>
+                  <td class="py-3 px-3" data-sd-id="109">
+                    <button class="text-[14px] font-[650] hover:text-accent-strong hover:underline underline-offset-4" data-sd-id="110">나르샤고트</button>
+                    <small class="block text-[10px] text-muted mt-[3px]"><span class="inline-block text-[10px] text-accent-strong bg-accent-soft rounded px-1.5 py-0.5 whitespace-nowrap" data-sd-id="111">선입</span></small>
+                  </td>
+                  <td class="py-3 px-3" data-sd-id="112">마이아<small class="block text-[10px] text-muted mt-[3px]">52.5 · 게이트 2</small></td>
+                  <td class="py-3 px-3" data-sd-id="113">
+                    <span class="inline-flex gap-1" data-sd-id="114">
+                       <span class="inline-flex w-[22px] h-[24px] justify-center items-center bg-accent-soft text-accent-strong rounded font-mono text-[11px] font-medium" data-sd-id="115">2</span>
+                    </span>
+                  </td>
+                  <td class="py-3 px-3" data-sd-id="116">1전<small class="block text-[10px] text-muted mt-[3px]">수집된 과거 8전</small></td>
+                  <td class="py-3 px-3" data-sd-id="117">—<small class="block text-[10px] text-muted mt-[3px]">연결된 자료 없음</small></td>
+                  <td class="py-3 px-3" data-sd-id="118">8회<small class="block text-[10px] text-muted mt-[3px]">145분 · 출발 2회</small></td>
+                  <td class="py-3 px-3 font-mono text-[11px] font-medium" data-sd-id="119">29</td>
+                </tr>
+                <tr class="border-b border-border opacity-50 bg-surface-3" data-sd-id="120">
+                  <td class="py-3 pl-5 pr-1.5" data-sd-id="121"><input type="checkbox" disabled="" class="w-[15px] h-[15px] accent-accent" data-sd-id="122"></td>
+                  <td class="py-3 pl-[5px] pr-2" data-sd-id="123"><span class="stone silk-3" data-sd-id="124">3</span></td>
+                  <td class="py-3 px-3" data-sd-id="125">
+                    <span class="text-[14px] font-[650]" data-sd-id="126">울트라크라운</span>
+                    <small class="block text-[10px] text-muted mt-[3px]"><span class="inline-block text-[10px] text-accent-strong bg-accent-soft rounded px-1.5 py-0.5 whitespace-nowrap" data-sd-id="127">추입</span> · 출전취소</small>
+                  </td>
+                  <td class="py-3 px-3" data-sd-id="128">정정희<small class="block text-[10px] text-muted mt-[3px]">55.0 · 게이트 3</small></td>
+                  <td colspan="5" class="py-3 px-3 text-center text-xs text-muted" data-sd-id="129">출전 취소</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-[11px] text-muted leading-[1.8] m-0 p-[13px_20px] border-t border-border" data-sd-id="130">
+            각질은 수집된 과거 초반 통과순위에 따른 추정입니다. 기록이 없는 항목은 ‘—’로 표시합니다.
+          </p>
+        </section>
+      </div>
+    </main>
+    <!-- Footer omitted for brevity, but could go here -->
+  </div>
+
+</body></html>

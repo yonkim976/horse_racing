@@ -78,6 +78,25 @@ def span(points, start, end):
     return "M " + " L ".join(f"{x:.2f} {y:.2f}" for x, y in coords)
 
 
+# Leave the inner 1C-2C turn along its end tangent (-41, -17) so the transfer
+# has no corner; both cross the open rail end at x > 595.
+INNER_EXIT = " C 613.4 174.8 606 178 590 178"
+OUTER_EXIT = " C 613.4 174.8 606 151 590 151"
+
+
+def gate_label_dx(x, y, markers):
+    """Sideways shift for a start label whose leader would cross a timing marker.
+
+    Leaders run 58 units down from home-straight gates (y >= 370), else 24 up.
+    """
+    low, high = (y, y + 80) if y >= 370 else (y - 40, y)
+    hits = [m for m in markers
+            if low - 4 <= m["y"] <= high + 4 and abs(m["x"] - x) < 32]
+    if not hits:
+        return 0
+    return -52 if hits[0]["x"] >= x else 52
+
+
 def metric_route(distance, x, y):
     outer_left = "M 213 151 C 127 151 74 211 74 285 C 74 360 130 418 213 418"
     inner_left = (
@@ -102,7 +121,7 @@ def metric_route(distance, x, y):
         inner = distance != 2000
         pieces = [
             (distance - (1550 if inner else 1650), f"M {x} {y} H 590"),
-            (350, inner_right + (" Q 620 178 590 178" if inner else " Q 617 168 590 151")),
+            (350, inner_right + (INNER_EXIT if inner else OUTER_EXIT)),
             (450, f"M 590 {178 if inner else 151} H 213"),
             (350 if inner else 450, inner_left if inner else outer_left),
         ]

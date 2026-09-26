@@ -109,3 +109,4 @@ def test_racecourse_map_supports_seoul_and_jeju() -> None:
     assert build_racecourse_map(meet_code=1, distance_m=1200) is not None
     assert build_racecourse_map(meet_code=3, distance_m=1200) is not None
     assert build_racecourse_map(meet_code=2, distance_m=1200) is not None
+    assert build_racecourse_map(meet_code=4, distance_m=1200) is not None

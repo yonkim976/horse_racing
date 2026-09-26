@@ -1,16 +1,12 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="naver-site-verification" content="a71202c329d9767a2c3589e8637e278720be227f">
     <meta name="description" content="{% block meta_description %}한국 경마 일정과 결과, 출전마 기록과 예측 확률을 확인하는 마필로그 Mapilog{% endblock %}">
+    <meta name="robots" content="{{ 'noindex,follow' if request.url.query else 'index,follow' }}">
     <link rel="canonical" href="https://mapilog.xyz{{ request.url.path }}">
-    {% if request.url.path == "/" %}
-    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://mapilog.xyz/m">
-    {% elif request.url.path == "/analysis" %}
-    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://mapilog.xyz/m/analysis">
-    {% endif %}
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ko_KR">
     <meta property="og:site_name" content="마필로그 Mapilog">
@@ -19,7 +15,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ self.title()|striptags }}">
     <meta name="twitter:description" content="{{ self.meta_description()|striptags }}">
-    <meta name="theme-color" content="#0a0f0d">
+    <meta name="theme-color" content="#f2f5f2">
     <title>{% block title %}마필로그 | Mapilog 경마 분석 및 예측{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', path='/images/brand/mapilog-favicon-final.svg') }}" type="image/svg+xml">
     <link rel="icon" href="{{ url_for('static', path='/images/brand/mapilog-favicon.png') }}" type="image/png" sizes="224x224">
@@ -39,7 +35,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=15">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=15" defer></script>
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=16" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
     {% block extra_head %}{% endblock %}
   </head>
@@ -70,7 +66,7 @@
             <span class="live-dot" aria-hidden="true"></span>
             로컬 데이터
           </div>
-          <button type="button" class="theme-toggle" data-theme-toggle aria-label="라이트 모드로 전환">
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="다크 모드로 전환">
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>

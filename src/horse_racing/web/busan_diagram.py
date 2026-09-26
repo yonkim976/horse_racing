@@ -6,7 +6,7 @@ The 1800/1900 common gate uses different left turns (99m difference).
 Gate offsets absorb rounding in the published plan; do not rewrite race times.
 """
 
-from horse_racing.web.seoul_metric import at, calibrate, span
+from horse_racing.web.seoul_metric import at, calibrate, gate_label_dx, span
 
 DISTANCES = (1000, 1200, 1300, 1400, 1500, 1600, 1800, 1900, 2000, 2200)
 PLAN_URL = "https://race.kra.co.kr/images/sub/busan_racemap02.jpg"
@@ -39,10 +39,10 @@ STARTS = {
     2000: (250, 372),
     2200: (395, 390),
 }
-# Predominantly straight diagonal transfers, with short end transitions.
+# Single-curve transfers, tangent to both lanes at their ends.
 # Reuse the same geometry for the painted lane and highlighted race line.
-TOP_MERGE = "C 447 192 445.5 191 443 190 L 398 172 C 395.5 171 393 170 385 170"
-BOTTOM_MERGE = "C 194 361.111 199.4 363.9 202 365 L 242 385 C 248 388 251 390 255 390"
+TOP_MERGE = "C 425 192 410 170 385 170"
+BOTTOM_MERGE = "C 215.2 367 235 390 255 390"
 LEFT = "M 225 170 C 151 170 108 220 108 280 C 108 342 155 390 225 390"
 INNER_LEFT = "M 225 192 C 166 192 130 230 130 280 C 130 322 154 350 190 360 " + BOTTOM_MERGE
 RIGHT = "M 450 372 C 515 372 555 333 555 280 C 555 230 516 192 450 192"
@@ -143,6 +143,7 @@ def build_busan_diagram(distance):
                 distance=d,
                 start_x=x,
                 start_y=y,
+                gate_dx=gate_label_dx(x, y, markers),
                 path=span(points, 0, d),
                 label=label,
                 description="공식 평면도 기반 개략 경로입니다. "
@@ -175,6 +176,9 @@ def build_busan_diagram(distance):
             "C 515 372 555 333 555 280 C 555 230 516 192 450 192"
         ),
         connectors="M 450 192 " + TOP_MERGE + " M 190 360 " + BOTTOM_MERGE,
+        # The field is unstroked (the inner-lane border already outlines it on
+        # the left); only the open 1C-2C infield gets its own edge.
+        field_edge="M 450 181 H 565 C 638 181 683 226 683 280 C 683 336 638 379 565 379 H 450",
         training=(
             "M 225 222 H 450 C 491 222 520 246 520 280 "
             "C 520 317 491 341 450 341 H 225 C 182 341 155 317 155 280 "
@@ -183,7 +187,7 @@ def build_busan_diagram(distance):
         rails=[],
         corners=[
             dict(label="3코너 구역", x=265, y=143),
-            dict(label="2코너 구역", x=570, y=143),
+            dict(label="2코너 구역", x=738, y=215),
             dict(label="1코너 구역", x=576, y=431),
             dict(label="4코너 구역", x=222, y=431),
         ],

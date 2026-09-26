@@ -13,6 +13,11 @@
     } catch (error) {
       /* 저장 불가 환경 무시 */
     }
+    syncThemeControls(theme);
+    window.dispatchEvent(new CustomEvent("hr:themechange", { detail: { theme } }));
+  }
+
+  function syncThemeControls(theme) {
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
       meta.setAttribute("content", theme === "dark" ? "#0a0f0d" : "#f2f5f2");
@@ -23,8 +28,9 @@
         theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"
       );
     });
-    window.dispatchEvent(new CustomEvent("hr:themechange", { detail: { theme } }));
   }
+
+  syncThemeControls(document.documentElement.dataset.theme);
 
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
     button.addEventListener("click", () => {

@@ -5,12 +5,18 @@ from math import cos, hypot, pi, sin
 
 from horse_racing.web.busan_diagram import build_busan_diagram
 from horse_racing.web.seoul_diagram import build_seoul_diagram
+from horse_racing.web.yeongcheon_diagram import FINISH_Y as YEONGCHEON_FINISH_Y
+from horse_racing.web.yeongcheon_diagram import GOAL_X as YEONGCHEON_GOAL_X
+from horse_racing.web.yeongcheon_diagram import build_yeongcheon_diagram
 
 JEJU_STRAIGHT_M = 493.7
 JEJU_CURVE_RADIUS_M = 97.5
 JEJU_TRACK_WIDTH_M = 20.0
 JEJU_GOAL_FROM_LEFT_TANGENT_M = 147.8
 JEJU_LAP_M = 2 * JEJU_STRAIGHT_M + 2 * pi * JEJU_CURVE_RADIUS_M
+# Both straights run on past the tangents in the plan (2C side, 4C side); the
+# plan gives no length, ~100m is scaled from the drawing.
+JEJU_CHUTE_M = 100.0
 
 JEJU_DIAGRAM_STARTS = (800, 900, 1000, 1110, 1200, 1300, 1400, 1610)
 JEJU_BACKSTRETCH_STARTS = frozenset((800, 900, 1000, 1110, 1200))
@@ -76,6 +82,8 @@ def build_racecourse_map(*, meet_code: int, distance_m: int) -> RacecourseMapVie
         return build_jeju_racecourse_map(distance_m)
     if meet_code == 3:
         return build_busan_racecourse_map(distance_m)
+    if meet_code == 4:
+        return build_yeongcheon_racecourse_map(distance_m)
     return None
 
 
@@ -109,7 +117,8 @@ def build_jeju_racecourse_map(distance_m: int) -> RacecourseMapView:
             f"{JEJU_STRAIGHT_M:.3f} {inner_radius:.3f} H 0 "
             f"A {inner_radius:.3f} {inner_radius:.3f} 0 0 1 0 {-inner_radius:.3f} Z"
         ),
-        chute_path=f"M -72.000 {-radius:.3f} H 0",
+        chute_path=(f"M {-JEJU_CHUTE_M:.3f} {-radius:.3f} H 0 "
+                    f"M {JEJU_STRAIGHT_M:.3f} {radius:.3f} H {JEJU_STRAIGHT_M + JEJU_CHUTE_M:.3f}"),
         route_path=route_path,
         goal_x=JEJU_GOAL_FROM_LEFT_TANGENT_M,
         top_y=-radius,
@@ -342,5 +351,33 @@ def build_busan_racecourse_map(distance_m: int) -> RacecourseMapView:
         geometry_note=("공식 평면도 기준 내주로 1,460m · 외주로 2,008m · 폭 25m. "
                        "주로 현황 페이지의 1,470m·2,000m 표기와 차이가 있어 "
                        "평면도를 기준으로 재구성한 개략 경로입니다"),
+        diagram=diagram,
+    )
+
+
+def build_yeongcheon_racecourse_map(distance_m: int) -> RacecourseMapView:
+    diagram = build_yeongcheon_diagram(distance_m)
+    selected = diagram["selected"]
+    return RacecourseMapView(
+        meet_code=4,
+        course_name="영천",
+        distance_m=distance_m,
+        supported_distance=selected is not None,
+        view_box="0 0 790 520",
+        loop_path=diagram["bands"]["loop"],
+        inner_path=diagram["field"],
+        chute_path="",
+        route_path=selected["path"] if selected else "",
+        goal_x=YEONGCHEON_GOAL_X,
+        top_y=160,
+        bottom_y=YEONGCHEON_FINISH_Y,
+        start_markers=[],
+        furlong_markers=[],
+        selected_start=MapPoint(selected["start_x"], selected["start_y"])
+        if selected
+        else MapPoint(YEONGCHEON_GOAL_X, YEONGCHEON_FINISH_Y),
+        geometry_note=("공식 경주로 구조 기준 외주로 1,700m(폭 25m) · 내주로 1,514m(폭 20m). "
+                       "평면도 치수(결승직선 350m+50m, 뒤쪽 직선 360m, 3·4코너 530m, "
+                       "1·2코너 외 413m / 내 337m)로 구간을 나누어 재구성한 개략 경로입니다"),
         diagram=diagram,
     )

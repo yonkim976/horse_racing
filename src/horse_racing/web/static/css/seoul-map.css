@@ -44,3 +44,15 @@
 .busan-lane-border { fill:none; stroke:var(--seoul-rail); stroke-width:24; stroke-linecap:round; stroke-linejoin:round; }
 .busan-lane { fill:none; stroke:var(--seoul-surface); stroke-width:21; stroke-linecap:round; stroke-linejoin:round; }
 .busan-training { fill:none; stroke:var(--seoul-rail); stroke-width:1; opacity:.5; }
+.busan-field { stroke:none; }
+.busan-field-edge { stroke-width:1.5; }
+
+/* Yeongcheon lanes are stroked bands (loop 46, chute 25 display units);
+   all borders are painted before any lane so chute joints stay open. */
+.plan-band-border { fill:none; stroke:var(--border-strong); stroke-linejoin:round; }
+.plan-band { fill:none; stroke:var(--seoul-surface); stroke-linejoin:round; }
+.plan-band-border.plan-loop { stroke-width:49; }
+.plan-band.plan-loop { stroke-width:46; }
+.plan-band-border.plan-chute { stroke-width:28; }
+.plan-band.plan-chute { stroke-width:25; }
+.plan-rail { fill:none; stroke:var(--seoul-rail); stroke-width:3; stroke-linecap:round; }

@@ -2,7 +2,7 @@
 {% block body_class %}mobile-analysis{% endblock %}
 {% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block extra_head %}
-<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=9" defer></script>
+<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=10" defer></script>
 {% endblock %}
 
 {% macro kr_date(value) -%}
@@ -118,21 +118,21 @@
 {% block content %}
 <div class="ma-page" data-analysis-page>
   <nav class="ma-chrome" aria-label="분석할 경주 선택">
-    <a class="ma-back" href="/m{% if page.selected_date %}?date={{ page.selected_date }}{% if page.selected_race %}&amp;meet={{ page.selected_race.meet_code }}{% endif %}{% endif %}">경주 목록</a>
+    <a class="ma-back" href="/{% if page.selected_date %}?date={{ page.selected_date }}{% if page.selected_race %}&amp;meet={{ page.selected_race.meet_code }}{% endif %}{% endif %}">경주 목록</a>
     {% if page.races %}
     {% set ns = namespace(meets=[]) %}
     <div class="mobile-meet-bar" aria-label="경마장">
       {% for race in page.races %}
         {% if race.meet_code not in ns.meets %}
           {% set ns.meets = ns.meets + [race.meet_code] %}
-          <a href="/m/analysis?date={{ page.selected_date }}&amp;meet={{ race.meet_code }}" class="{% if page.selected_race and page.selected_race.meet_code == race.meet_code %}active{% endif %}" {% if page.selected_race and page.selected_race.meet_code == race.meet_code %}aria-current="page"{% endif %}>{{ race.meet }}</a>
+          <a href="/analysis?date={{ page.selected_date }}&amp;meet={{ race.meet_code }}" class="{% if page.selected_race and page.selected_race.meet_code == race.meet_code %}active{% endif %}" {% if page.selected_race and page.selected_race.meet_code == race.meet_code %}aria-current="page"{% endif %}>{{ race.meet }}</a>
         {% endif %}
       {% endfor %}
     </div>
     <div class="ma-rounds" aria-label="경주 선택">
       {% for race in page.races %}
         {% if not page.selected_race or race.meet_code == page.selected_race.meet_code %}
-        <a href="/m/analysis?date={{ race.date }}&amp;meet={{ race.meet_code }}&amp;race_id={{ race.id }}" class="{% if page.selected_race and race.id == page.selected_race.id %}active{% endif %}{% if race.is_current %} is-next{% endif %}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>
+        <a href="/races/{{ race.id }}" class="{% if page.selected_race and race.id == page.selected_race.id %}active{% endif %}{% if race.is_current %} is-next{% endif %}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>
           <strong>{{ race.number }}R</strong>
           <span>{% if race.status == 'completed' %}<span class="ma-finished-label">종료 · </span>{% elif race.is_current %}<span class="ma-next-label">예정 · </span>{% endif %}{{ race.start_time }}</span>
         </a>
@@ -278,7 +278,7 @@
   <div class="mobile-empty">
     <strong>선택한 날짜의 출전표가 없습니다.</strong>
     <p>경주 목록에서 다른 날짜를 골라 주세요.</p>
-    <p><a class="ma-back" href="/m">경주 목록으로</a></p>
+    <p><a class="ma-back" href="/">경주 목록으로</a></p>
   </div>
   {% endif %}
 </div>

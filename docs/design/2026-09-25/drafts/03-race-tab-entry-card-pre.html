@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경주 · 출마표 (경주 전)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
+<script>
+tailwind.config = { theme: { extend: {
+  colors: {
+    bg: '#f2f5f2', s1: '#ffffff', s2: '#fbfdfb', s3: '#f0f5f1',
+    line: 'rgb(21 45 33 / 11%)', linestrong: 'rgb(21 45 33 / 22%)',
+    ink: '#17241d', inkstrong: '#060c09', muted: '#5d7066', faint: '#93a49a',
+    accent: '#059669', accentstrong: '#047857', accentdeep: '#065f46', accentsoft: 'rgb(5 150 105 / 9%)',
+    lime: '#65a30d', gold: '#b45309', silver: '#64748b', bronze: '#9a5b2d', warn: '#dc2626', info: '#1570c7',
+  },
+  fontFamily: { sans: ['"Pretendard Variable"', 'Pretendard', '"Noto Sans KR"', 'sans-serif'], mono: ['"JetBrains Mono"', 'monospace'] },
+  boxShadow: { soft: '0 6px 18px rgb(20 40 30 / 7%)', raised: '0 16px 40px rgb(20 40 30 / 10%)' },
+} } };
+</script>
+<style>
+  body { margin: 0; font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", sans-serif; background: #f2f5f2; color: #17241d; font-size: 14px; }
+  .app-bg { background: radial-gradient(800px 420px at 12% -8%, rgb(5 150 105 / 6%), transparent 66%), radial-gradient(720px 400px at 88% -4%, rgb(132 204 22 / 5%), transparent 62%), #f2f5f2; }
+  .mono { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  .glass { background: rgb(255 255 255 / 82%); backdrop-filter: blur(14px) saturate(150%); }
+  .pill-active { background: linear-gradient(135deg, #059669, #65a30d); color: #fff; box-shadow: 0 6px 16px rgb(5 150 105 / 22%); }
+  .btn-primary { background: linear-gradient(135deg, #059669, #65a30d); color: #fff; box-shadow: 0 8px 20px rgb(5 150 105 / 24%); }
+  .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #059669; font-weight: 600; }
+  .silk { display: inline-grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto; border-radius: 9px; font: 700 12px/1 "JetBrains Mono", monospace; box-shadow: 0 2px 6px rgb(0 0 0 / 14%); }
+  .silk.sm { width: 22px; height: 22px; border-radius: 7px; font-size: 11px; }
+  .silk-1 { background: #f4f4f4; color: #222; border: 1px solid #c5c5c5; }
+  .silk-2 { background: #f4c430; color: #1a1a1a; border: 1px solid #d5a600; }
+  .silk-3 { background: #c0392b; color: #fff; }
+  .silk-4 { background: #1a1a1a; color: #fff; border: 1px solid #4b5563; }
+  .silk-5 { background: #1f5fbf; color: #fff; }
+  .silk-6 { background: #1f7a3a; color: #fff; }
+  .silk-7 { background: #7c2d26; color: #fff; }
+  .silk-8 { background: #ef7eb2; color: #30101f; }
+  .silk-9 { background: #6d28d9; color: #fff; }
+  .silk-10 { background: #38bdf8; color: #0b3b4d; }
+  .silk-11 { color: #17212b; background: repeating-linear-gradient(90deg, #38bdf8 0 6px, #f4f4f4 6px 10px); border: 1px solid #8fcde8; }
+  .silk-12 { color: #1a1a1a; background: repeating-linear-gradient(90deg, #38bdf8 0 6px, #f4c430 6px 10px); border: 1px solid #caac36; }
+  .silk-13 { color: #fff; background: repeating-linear-gradient(90deg, #38bdf8 0 6px, #c0392b 6px 10px); text-shadow: 0 1px 2px rgb(0 0 0 / 65%); }
+  .silk-14 { color: #fff; background: repeating-linear-gradient(90deg, #38bdf8 0 6px, #1a1a1a 6px 10px); text-shadow: 0 1px 2px rgb(0 0 0 / 65%); }
+  .silk-15 { background: #be123c; color: #fff; }
+  .silk-16 { background: #0f766e; color: #fff; }
+  .grid-table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; }
+  .grid-table thead th { position: sticky; top: 0; background: #f0f5f1; color: #5d7066; font-size: 11.5px; font-weight: 700; text-align: left; padding: 10px 10px; border-bottom: 1px solid rgb(21 45 33 / 16%); white-space: nowrap; }
+  .grid-table thead th.num { text-align: right; }
+  .grid-table tbody td { padding: 0 10px; height: 46px; border-bottom: 1px solid rgb(21 45 33 / 8%); white-space: nowrap; }
+  .grid-table tbody tr:hover td { background: rgb(5 150 105 / 5%); }
+  .grid-table tbody tr.is-selected td { background: rgb(5 150 105 / 8%); }
+  .grid-table td.num { text-align: right; font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  .grid-table tr.p1 td:first-child { box-shadow: inset 3px 0 0 #b45309; }
+  .grid-table tr.p2 td:first-child { box-shadow: inset 3px 0 0 #64748b; }
+  .grid-table tr.p3 td:first-child { box-shadow: inset 3px 0 0 #9a5b2d; }
+  .grid-table tr.p1 td { background: rgb(217 164 34 / 7%); }
+  .grid-table tr.p2 td { background: rgb(100 116 139 / 6%); }
+  .grid-table tr.p3 td { background: rgb(154 91 45 / 6%); }
+  .form-chip { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 7px; font: 600 11.5px/1 "JetBrains Mono", monospace; background: #f0f5f1; color: #5d7066; }
+  .form-chip.f1 { background: rgb(217 164 34 / 20%); color: #8a4a06; }
+  .form-chip.f2 { background: rgb(100 116 139 / 16%); color: #3f4c5e; }
+  .form-chip.f3 { background: rgb(154 91 45 / 15%); color: #7a4420; }
+  .heat-0 { background: rgb(5 150 105 / 26%); color: #065f46; font-weight: 700; }
+  .heat-1 { background: rgb(5 150 105 / 14%); color: #047857; font-weight: 600; }
+  .heat-2 { background: rgb(5 150 105 / 6%); }
+  .heat-slow { color: #93a49a; }
+  .heat-cell { display: inline-block; min-width: 50px; padding: 4px 7px; border-radius: 7px; text-align: right; }
+  .mark { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; font-size: 14px; font-weight: 800; border: 1px dashed rgb(21 45 33 / 18%); color: #c2cdc6; }
+  .mark.on { border: 0; color: #fff; }
+  .mark.m1 { background: #168a42; } .mark.m2 { background: #756900; } .mark.m3 { background: #9a6500; } .mark.m4 { background: #58635f; }
+  .tag { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+  .rail-item { transition: background .18s ease, transform .18s ease; }
+  .rail-item:hover { background: rgb(5 150 105 / 5%); }
+  .fade-up { animation: fadeUp .32s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+
+<body>
+<div class="app-bg min-h-screen">
+
+<header class="glass sticky top-0 z-30 border-b border-line">
+  <div class="mx-auto flex h-[64px] w-[calc(100%-48px)] max-w-[1520px] items-center gap-6">
+    <a href="#home" id="brand-43" class="flex items-center gap-2.5 shrink-0" aria-label="마필로그 홈">
+      <img src="../../../../src/horse_racing/web/static/images/brand/mapilog-symbol-color.svg" alt="" class="h-[26px] w-auto">
+      <img src="../../../../src/horse_racing/web/static/images/brand/mapilog-wordmark-color.svg" alt="Mapilog" class="h-[20px] w-auto">
+    </a>
+    <nav class="flex items-center gap-1"><a href="#nav-0" id="nav-38" class="px-4 py-2 rounded-full text-[13.5px] font-bold tracking-[-0.02em] pill-active">경주</a><a href="#nav-1" id="nav-39" class="px-4 py-2 rounded-full text-[13.5px] font-bold tracking-[-0.02em] text-muted hover:text-inkstrong hover:bg-s3">경주 분석</a><a href="#nav-2" id="nav-40" class="px-4 py-2 rounded-full text-[13.5px] font-bold tracking-[-0.02em] text-muted hover:text-inkstrong hover:bg-s3">내 분석<span class="ml-1 align-top text-[10px] text-accent">NEW</span></a><a href="#nav-3" id="nav-41" class="px-4 py-2 rounded-full text-[13.5px] font-bold tracking-[-0.02em] text-muted hover:text-inkstrong hover:bg-s3">예측 원장</a><a href="#nav-4" id="nav-42" class="px-4 py-2 rounded-full text-[13.5px] font-bold tracking-[-0.02em] text-muted hover:text-inkstrong hover:bg-s3">데이터</a></nav>
+    <div class="ml-auto flex items-center gap-2.5">
+      <label class="flex h-[38px] w-[300px] items-center gap-2 rounded-full border border-line bg-s2 px-4 text-muted">
+        <iconify-icon icon="lucide:search" width="16"></iconify-icon>
+        <input class="w-full bg-transparent text-[13px] outline-none placeholder:text-faint" placeholder="말 · 기수 · 조교사 · 마주 검색">
+        <span class="mono rounded-md border border-line px-1.5 text-[10.5px] text-faint">/</span>
+      </label>
+      <button class="grid h-[38px] w-[38px] place-items-center rounded-full border border-line bg-s2 text-muted" aria-label="다크 모드로 전환">
+        <iconify-icon icon="lucide:moon" width="17"></iconify-icon>
+      </button>
+    </div>
+  </div>
+</header>
+<main class="mx-auto w-[calc(100%-48px)] max-w-[1520px] pb-12">
+
+<section class="flex items-end justify-between gap-6 pt-7 pb-5">
+  <div>
+    <p class="eyebrow">RACE CALENDAR</p>
+    <h1 class="mt-1.5 text-[30px] font-extrabold tracking-[-0.03em] text-inkstrong">경주 일정과 결과</h1>
+    <p class="mt-1.5 flex items-center gap-2 text-[13px] text-muted">
+      <span>공식 경주 <b class="mono text-ink">17</b></span><span class="h-1 w-1 rounded-full bg-linestrong"></span>
+      <span>출전 <b class="mono text-ink">185</b>두</span><span class="h-1 w-1 rounded-full bg-linestrong"></span>
+      <span>주행심사 없음</span><span class="tag bg-[rgb(21_112_199_/_10%)] text-info"><span class="h-1.5 w-1.5 rounded-full bg-info"></span>진행 중 · 15:08 기준</span>
+    </p>
+  </div>
+  <div class="flex items-center gap-3">
+    <div class="flex items-center gap-1 rounded-[14px] border border-line bg-s1 p-1 shadow-soft">
+      <button class="grid h-9 w-9 place-items-center rounded-[10px] text-muted hover:bg-s3" aria-label="이전 경주일"><iconify-icon icon="lucide:chevron-left" width="18"></iconify-icon></button>
+      <button class="flex items-center gap-2 rounded-[10px] px-3 py-1.5 hover:bg-s3">
+        <iconify-icon icon="lucide:calendar-days" width="17" class="text-accent"></iconify-icon>
+        <span class="mono text-[14px] font-bold text-inkstrong">2026.09.20</span><span class="text-[12px] font-semibold text-muted">일</span>
+      </button>
+      <button class="grid h-9 w-9 place-items-center rounded-[10px] text-faint" aria-label="다음 경주일" disabled><iconify-icon icon="lucide:chevron-right" width="18"></iconify-icon></button>
+    </div>
+    <div class="flex items-center gap-0.5 rounded-[14px] border border-line bg-s3 p-1"><button class="flex items-center gap-1.5 rounded-[10px] px-3.5 py-1.5 text-[13px] font-bold bg-s1 text-inkstrong shadow-[0_1px_4px_rgb(20_40_30_/_10%)]">전체<span class="mono text-[11px] text-accent">17</span></button><button class="flex items-center gap-1.5 rounded-[10px] px-3.5 py-1.5 text-[13px] font-bold text-muted hover:text-ink">서울<span class="mono text-[11px] text-faint">11</span></button><button class="flex items-center gap-1.5 rounded-[10px] px-3.5 py-1.5 text-[13px] font-bold text-muted hover:text-ink opacity-45">제주<span class="mono text-[11px] text-faint">0</span></button><button class="flex items-center gap-1.5 rounded-[10px] px-3.5 py-1.5 text-[13px] font-bold text-muted hover:text-ink opacity-45">부산경남<span class="mono text-[11px] text-faint">0</span></button><button class="flex items-center gap-1.5 rounded-[10px] px-3.5 py-1.5 text-[13px] font-bold text-muted hover:text-ink">영천<span class="mono text-[11px] text-faint">6</span></button></div>
+  </div>
+</section>
+<div class="flex items-start gap-5">
+
+<aside class="w-[300px] shrink-0">
+  <div class="sticky top-[84px] overflow-hidden rounded-[18px] border border-line bg-s1 shadow-soft">
+    <div class="flex items-center justify-between border-b border-line px-4 py-3.5">
+      <div><p class="eyebrow">DAILY CARD</p><h2 class="mt-0.5 text-[16px] font-extrabold tracking-[-0.02em]">오늘의 경주</h2></div>
+      <button class="flex items-center gap-1 rounded-full border border-line px-2.5 py-1 text-[12px] font-semibold text-muted"><iconify-icon icon="lucide:list-filter" width="13"></iconify-icon>예정만</button>
+    </div>
+    <div class="max-h-[1080px] overflow-y-auto p-2">
+      <p class="px-3 pb-1 pt-2 text-[11.5px] font-bold text-accentstrong">서울 · 11경주</p>
+      <a href="#race-서울-1" id="race-44" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">1R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">10:35</span><span class="mono text-[11.5px] text-muted">1,200m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 더로드</span><span class="mono text-[11px] text-faint">1:12.8</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-2" id="race-45" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">2R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">11:00</span><span class="mono text-[11.5px] text-muted">1,400m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 이클립스골든</span><span class="mono text-[11px] text-faint">1:28.3</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-3" id="race-46" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">3R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">11:25</span><span class="mono text-[11.5px] text-muted">1,300m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 빅토리시크릿</span><span class="mono text-[11px] text-faint">1:23.3</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-4" id="race-47" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">4R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">12:05</span><span class="mono text-[11.5px] text-muted">1,700m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 파워풀아크틱</span><span class="mono text-[11px] text-faint">1:52.8</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-5" id="race-48" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">5R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">13:10</span><span class="mono text-[11.5px] text-muted">1,800m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 나로마스타</span><span class="mono text-[11px] text-faint">1:59.6</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-6" id="race-49" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">6R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">14:00</span><span class="mono text-[11.5px] text-muted">1,200m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 태평에스지</span><span class="mono text-[11px] text-faint">1:14.4</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-7" id="race-50" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">7R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">14:50</span><span class="mono text-[11.5px] text-muted">1,300m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 케렌시아</span><span class="mono text-[11px] text-faint">1:21.4</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-8" id="race-51" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 bg-accentsoft shadow-[inset_3px_0_0_#059669]">
+        <span class="mono w-[34px] text-[15px] font-bold text-accentstrong">8R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">15:40</span><span class="mono text-[11.5px] text-muted">1,400m</span><span class="ml-auto"><span class="mono rounded-full bg-[rgb(21_112_199_/_10%)] px-2 py-0.5 text-[10.5px] font-bold text-info">32분 후</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">도지사배(G3)</span><span class="mono text-[11px] text-faint">16두</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-9" id="race-52" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">9R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">16:55</span><span class="mono text-[11.5px] text-muted">1,800m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-info">예정</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">국3등급</span><span class="mono text-[11px] text-faint">11두</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-10" id="race-53" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">10R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">17:25</span><span class="mono text-[11.5px] text-muted">2,000m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-info">예정</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">2등급</span><span class="mono text-[11px] text-faint">9두</span></span>
+        </span>
+      </a>
+      <a href="#race-서울-11" id="race-54" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">11R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">17:55</span><span class="mono text-[11.5px] text-muted">1,200m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-info">예정</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">혼4등급</span><span class="mono text-[11px] text-faint">11두</span></span>
+        </span>
+      </a>
+      <p class="mt-2 border-t border-line px-3 pb-1 pt-3 text-[11.5px] font-bold text-accentstrong">영천 · 6경주</p>
+      <a href="#race-영천-1" id="race-55" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">1R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">12:45</span><span class="mono text-[11.5px] text-muted">1,400m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 윈드미르</span><span class="mono text-[11px] text-faint">1:25.4</span></span>
+        </span>
+      </a>
+      <a href="#race-영천-2" id="race-56" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">2R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">13:35</span><span class="mono text-[11.5px] text-muted">1,600m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 오아시스환희</span><span class="mono text-[11px] text-faint">1:39.2</span></span>
+        </span>
+      </a>
+      <a href="#race-영천-3" id="race-57" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">3R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">14:25</span><span class="mono text-[11.5px] text-muted">1,200m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-faint">종료</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="truncate text-[12px] text-muted">🏆 대로의빛</span><span class="mono text-[11px] text-faint">1:12.7</span></span>
+        </span>
+      </a>
+      <a href="#race-영천-4" id="race-58" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">4R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">15:15</span><span class="mono text-[11.5px] text-muted">1,400m</span><span class="ml-auto"><span class="mono rounded-full bg-[rgb(21_112_199_/_10%)] px-2 py-0.5 text-[10.5px] font-bold text-info">7분 후</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">국3등급</span><span class="mono text-[11px] text-faint">11두</span></span>
+        </span>
+      </a>
+      <a href="#race-영천-5" id="race-59" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">5R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">16:05</span><span class="mono text-[11.5px] text-muted">1,200m</span><span class="ml-auto"><span class="mono rounded-full bg-[rgb(21_112_199_/_10%)] px-2 py-0.5 text-[10.5px] font-bold text-info">57분 후</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">혼3등급</span><span class="mono text-[11px] text-faint">11두</span></span>
+        </span>
+      </a>
+      <a href="#race-영천-6" id="race-60" class="rail-item flex items-center gap-3 rounded-[12px] px-3 py-2.5 ">
+        <span class="mono w-[34px] text-[15px] font-bold text-inkstrong">6R</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2"><span class="mono text-[12.5px] font-semibold text-ink">16:30</span><span class="mono text-[11.5px] text-muted">1,200m</span><span class="ml-auto"><span class="text-[11px] font-semibold text-info">예정</span></span></span>
+          <span class="mt-0.5 flex items-center justify-between gap-2"><span class="text-[12px] text-muted">2등급</span><span class="mono text-[11px] text-faint">11두</span></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</aside>
+<section class="min-w-0 flex-1">
+<div class="fade-up rounded-[18px] border border-line bg-s1 p-5 shadow-soft">
+  <div class="flex items-start gap-5">
+    <div class="grid h-[76px] w-[76px] shrink-0 place-items-center rounded-[16px] bg-[linear-gradient(135deg,#06392a_0%,#0b5a3c_60%,#0e6a47_100%)] text-white shadow-[0_10px_24px_rgb(6_57_42_/_25%)]">
+      <span class="text-center leading-none"><span class="block text-[11px] font-semibold text-[#a7f3d0]">서울</span><span class="mono mt-1 block text-[28px] font-bold">8R</span></span>
+    </div>
+    <div class="min-w-0 flex-1">
+      <p class="mono flex items-center gap-2 text-[12px] font-semibold text-muted">2026.09.20 · 15:40 출발 <span class="tag bg-[rgb(21_112_199_/_10%)] text-info"><span class="h-1.5 w-1.5 animate-pulse rounded-full bg-info"></span>발주까지 32분</span></p>
+      <h2 class="mt-1.5 text-[24px] font-extrabold tracking-[-0.03em] text-inkstrong">제주특별자치도지사배 <span class="ml-1 rounded-[8px] bg-[rgb(217_164_34_/_14%)] px-2 py-0.5 align-middle text-[13px] font-bold text-gold">G3</span></h2>
+      <div class="mt-2.5 flex flex-wrap items-center gap-1.5 text-[12px] font-semibold text-muted">
+        <span class="tag bg-s3"><iconify-icon icon="lucide:ruler" width="12"></iconify-icon><span class="mono">1,400m</span></span>
+        <span class="tag bg-s3">국OPEN · 암말</span>
+        <span class="tag bg-s3">16두 출전</span>
+        <span class="tag bg-s3"><iconify-icon icon="lucide:sun" width="12"></iconify-icon>맑음 · 건조 · 함수율 <span class="mono">2%</span></span>
+      </div>
+    </div>
+    <div class="flex shrink-0 flex-col items-end gap-2">
+      <div class="flex items-center gap-1.5">
+        <a href="#prev-race" id="act-1" class="grid h-9 w-9 place-items-center rounded-full border border-line text-muted hover:bg-s3" aria-label="이전 경주"><iconify-icon icon="lucide:chevron-left" width="17"></iconify-icon></a>
+        <a href="#next-race" id="act-2" class="grid h-9 w-9 place-items-center rounded-full border border-line text-muted hover:bg-s3" aria-label="다음 경주"><iconify-icon icon="lucide:chevron-right" width="17"></iconify-icon></a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="#video" id="act-3" class="flex items-center gap-1.5 rounded-full border border-line bg-s2 px-3.5 py-2 text-[13px] font-bold text-ink hover:border-linestrong"><iconify-icon icon="lucide:play-circle" width="16"></iconify-icon>지난 경주 영상</a>
+        <a href="#analysis" id="act-4" class="btn-primary flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold"><iconify-icon icon="lucide:table-2" width="16"></iconify-icon>분석 시트로 열기</a>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 flex items-center justify-between">
+    <div class="flex items-center gap-0.5 rounded-[12px] border border-line bg-s3 p-1"><button class="rounded-[10px] px-4 py-2 text-[13px] font-bold bg-s1 text-inkstrong shadow-[0_1px_4px_rgb(20_40_30_/_10%)]">출마표</button><button class="rounded-[10px] px-4 py-2 text-[13px] font-bold text-faint cursor-not-allowed">결과<span class="ml-1 text-[10.5px] font-medium">경주 후</span></button><button class="rounded-[10px] px-4 py-2 text-[13px] font-bold text-faint cursor-not-allowed">구간기록<span class="ml-1 text-[10.5px] font-medium">경주 후</span></button><button class="rounded-[10px] px-4 py-2 text-[13px] font-bold text-muted hover:text-ink">장구 · 진료</button><button class="rounded-[10px] px-4 py-2 text-[13px] font-bold text-faint cursor-not-allowed">배당 · 심판<span class="ml-1 text-[10.5px] font-medium">경주 후</span></button></div>
+    <div class="flex items-center gap-2 text-[12.5px] font-semibold text-muted">
+      <button class="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 hover:bg-s3"><iconify-icon icon="lucide:columns-3" width="14"></iconify-icon>열 편집</button>
+      <button class="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 hover:bg-s3"><iconify-icon icon="lucide:file-spreadsheet" width="14"></iconify-icon>엑셀로 내보내기</button>
+      <button class="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 hover:bg-s3"><iconify-icon icon="lucide:printer" width="14"></iconify-icon>인쇄용</button>
+    </div>
+  </div>
+</div>
+<div class="mt-4 grid grid-cols-4 gap-3">
+
+  <div class="fade-up rounded-[18px] border border-line bg-s1 p-4 shadow-soft ">
+    <div class="flex items-center justify-between"><p class="eyebrow">MARKET · 단승</p></div>
+    <h3 class="mt-1 text-[14.5px] font-extrabold tracking-[-0.02em] text-inkstrong">인기 순위</h3>
+    <div class="mt-3"><div class="flex items-center gap-2 py-1"><span class="silk silk-6 sm">6</span><span class="flex-1 truncate text-[13px] font-semibold">글라디우스</span><span class="mono text-[12.5px] font-bold text-accentstrong">2.5배</span></div><div class="flex items-center gap-2 py-1"><span class="silk silk-10 sm">10</span><span class="flex-1 truncate text-[13px] font-semibold">보령라이트퀸</span><span class="mono text-[12.5px] font-bold text-ink">4.9배</span></div><div class="flex items-center gap-2 py-1"><span class="silk silk-12 sm">12</span><span class="flex-1 truncate text-[13px] font-semibold">클리어리위너</span><span class="mono text-[12.5px] font-bold text-ink">6.4배</span></div><div class="flex items-center gap-2 py-1"><span class="silk silk-8 sm">8</span><span class="flex-1 truncate text-[13px] font-semibold">판타스틱밸류</span><span class="mono text-[12.5px] font-bold text-ink">6.5배</span></div><p class="mt-2 text-[11.5px] text-faint">15:08 기준 · 1분마다 갱신</p></div>
+  </div>
+
+  <div class="fade-up rounded-[18px] border border-line bg-s1 p-4 shadow-soft ">
+    <div class="flex items-center justify-between"><p class="eyebrow">RATING</p></div>
+    <h3 class="mt-1 text-[14.5px] font-extrabold tracking-[-0.02em] text-inkstrong">레이팅 상위</h3>
+    <div class="mt-3"><div class="flex items-center gap-2 py-1"><span class="silk silk-5 sm">5</span><span class="flex-1 truncate text-[13px] font-semibold">즐거운여정</span><span class="mono text-[12.5px] font-bold text-ink">109</span></div><div class="flex items-center gap-2 py-1"><span class="silk silk-4 sm">4</span><span class="flex-1 truncate text-[13px] font-semibold">라온포레스트</span><span class="mono text-[12.5px] font-bold text-ink">108</span></div><div class="flex items-center gap-2 py-1"><span class="silk silk-6 sm">6</span><span class="flex-1 truncate text-[13px] font-semibold">글라디우스</span><span class="mono text-[12.5px] font-bold text-ink">106</span></div><div class="flex items-center gap-2 py-1"><span class="silk silk-10 sm">10</span><span class="flex-1 truncate text-[13px] font-semibold">보령라이트퀸</span><span class="mono text-[12.5px] font-bold text-ink">95</span></div></div>
+  </div>
+
+  <div class="fade-up rounded-[18px] border border-line bg-s1 p-4 shadow-soft ">
+    <div class="flex items-center justify-between"><p class="eyebrow">CONDITION</p></div>
+    <h3 class="mt-1 text-[14.5px] font-extrabold tracking-[-0.02em] text-inkstrong">컨디션 체크</h3>
+    <div class="mt-3">
+      <div class="space-y-2 text-[12.5px]">
+        <div class="flex items-center gap-2"><span class="w-[62px] shrink-0 font-semibold text-muted">체중 ±10kg</span><span class="flex flex-wrap gap-1"><span class="silk silk-4 sm">4</span><span class="silk silk-6 sm">6</span><span class="silk silk-3 sm">3</span><span class="silk silk-11 sm">11</span><span class="silk silk-13 sm">13</span><span class="silk silk-10 sm">10</span><span class="silk silk-5 sm">5</span><span class="silk silk-16 sm">16</span></span></div>
+        <div class="flex items-center gap-2"><span class="w-[62px] shrink-0 font-semibold text-muted">눈가리개</span><span class="flex gap-1"><span class="silk silk-6 sm">6</span><span class="silk silk-9 sm">9</span></span><span class="text-faint">BF 착용</span></div>
+        <div class="flex items-center gap-2"><span class="w-[62px] shrink-0 font-semibold text-muted">진료 주의</span><span class="flex gap-1"><span class="silk silk-8 sm">8</span><span class="silk silk-5 sm">5</span></span><span class="text-faint">파행 · 호흡기</span></div>
+        <p class="rounded-[10px] bg-[rgb(217_164_34_/_10%)] px-2.5 py-1.5 text-[12px] text-[#8a4a06]"><b>4 라온포레스트</b> +27kg 급증, 직전 대비 확인 필요</p>
+      </div></div>
+  </div>
+
+  <div class="fade-up rounded-[18px] border border-line bg-s1 p-4 shadow-soft ">
+    <div class="flex items-center justify-between"><p class="eyebrow">MY PICKS</p></div>
+    <h3 class="mt-1 text-[14.5px] font-extrabold tracking-[-0.02em] text-inkstrong">내 표시</h3>
+    <div class="mt-3"><div class="flex items-center gap-2 py-1"><span class="mark on m1 !h-[22px] !w-[22px] !text-[12px]">◎</span><span class="silk silk-8 sm">8</span><span class="flex-1 truncate text-[13px] font-semibold">판타스틱밸류</span></div><div class="flex items-center gap-2 py-1"><span class="mark on m2 !h-[22px] !w-[22px] !text-[12px]">○</span><span class="silk silk-4 sm">4</span><span class="flex-1 truncate text-[13px] font-semibold">라온포레스트</span></div><div class="flex items-center gap-2 py-1"><span class="mark on m3 !h-[22px] !w-[22px] !text-[12px]">▲</span><span class="silk silk-12 sm">12</span><span class="flex-1 truncate text-[13px] font-semibold">클리어리위너</span></div><div class="flex items-center gap-2 py-1"><span class="mark on m4 !h-[22px] !w-[22px] !text-[12px]">△</span><span class="silk silk-10 sm">10</span><span class="flex-1 truncate text-[13px] font-semibold">보령라이트퀸</span></div><a href="#my-analysis" id="my-5" class="mt-2 flex items-center justify-center gap-1 rounded-[10px] bg-accentsoft py-1.5 text-[12.5px] font-bold text-accentstrong">내 분석에 저장됨 · 비교하기 <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon></a></div>
+  </div>
+</div>
+<div class="fade-up mt-4 overflow-hidden rounded-[18px] border border-line bg-s1 shadow-soft">
+  <div class="flex items-center justify-between border-b border-line px-4 py-3">
+    <div class="flex items-center gap-3">
+      <h3 class="text-[15px] font-extrabold tracking-[-0.02em]">출마표</h3>
+      <span class="mono text-[12px] text-faint">16두 · 마번순</span>
+      <div class="flex items-center gap-0.5 rounded-[10px] bg-s3 p-0.5 text-[12px] font-bold">
+        <button class="rounded-[8px] bg-s1 px-2.5 py-1 text-inkstrong shadow-[0_1px_3px_rgb(20_40_30_/_10%)]">기본</button>
+        <button class="rounded-[8px] px-2.5 py-1 text-muted">컨디션</button>
+        <button class="rounded-[8px] px-2.5 py-1 text-muted">관계자</button>
+        <button class="rounded-[8px] px-2.5 py-1 text-muted">+ 내 보기</button>
+      </div>
+    </div>
+    <p class="flex items-center gap-3 text-[11.5px] text-muted">
+      <span class="flex items-center gap-1"><span class="form-chip f1 !h-4 !min-w-4 !text-[9px]">1</span>최근 성적 입상</span>
+      <span class="flex items-center gap-1"><span class="text-warn">+</span>/<span class="text-info">−</span> 직전 대비 마체중</span>
+      <span class="flex items-center gap-1"><span class="mark !h-4 !w-4 !text-[10px]">+</span>눌러서 ◎○▲△ 표시</span>
+    </p>
+  </div>
+  <table class="grid-table">
+    <thead><tr>
+      <th class="!pl-4">표시</th><th>마번 · 마명</th><th>최근 5전</th><th class="num">레이팅</th><th class="num">부담</th>
+      <th class="num">마체중 · 증감</th><th>기수</th><th>조교사</th><th>장구</th><th>진료</th><th class="num">단승</th><th class="!pr-4">메모</th>
+    </tr></thead>
+    <tbody>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-1 ">1</span><span><a href="#horse-1" id="h-6" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">선라이즈</a><span class="text-[11.5px] text-faint">3세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">5</span><span class="form-chip f3">3</span><span class="form-chip ">7</span><span class="form-chip opacity-40">·</span><span class="form-chip opacity-40">·</span></span></td>
+          <td class="num font-semibold">60</td>
+          <td class="num">53.5</td>
+          <td class="num"><span class="text-ink">465</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info  ">-7</span></span></td>
+          <td><a href="#jockey-1" id="j-7" class="font-semibold text-ink hover:text-accentstrong">채상현</a></td>
+          <td class="text-muted">하무선</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">재갈</span><span class="text-faint">·</span><span class="text-[12px] text-muted">가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">52.1</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-2 ">2</span><span><a href="#horse-2" id="h-8" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">클럽큐</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">9</span><span class="form-chip ">8</span><span class="form-chip ">6</span><span class="form-chip ">5</span><span class="form-chip ">7</span></span></td>
+          <td class="num font-semibold">65</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">440</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info  ">-4</span></span></td>
+          <td><a href="#jockey-2" id="j-9" class="font-semibold text-ink hover:text-accentstrong">김아현</a></td>
+          <td class="text-muted">최영주</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">35.7</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-3 ">3</span><span><a href="#horse-3" id="h-10" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">오늘도스마일</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">11</span><span class="form-chip ">12</span><span class="form-chip ">9</span><span class="form-chip ">10</span><span class="form-chip ">8</span></span></td>
+          <td class="num font-semibold">87</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">495</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn font-bold bg-[rgb(220_38_38_/_9%)]">+12</span></span></td>
+          <td><a href="#jockey-3" id="j-11" class="font-semibold text-ink hover:text-accentstrong">이용호</a></td>
+          <td class="text-muted">문병기</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 1건</span></td>
+          <td class="num font-bold text-ink">73.2</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark on m2">○</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-4 ">4</span><span><a href="#horse-4" id="h-12" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">라온포레스트</a><span class="text-[11.5px] text-faint">6세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">8</span><span class="form-chip f3">3</span><span class="form-chip f1">1</span><span class="form-chip f3">3</span><span class="form-chip ">4</span></span></td>
+          <td class="num font-semibold">108</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">509</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn font-bold bg-[rgb(220_38_38_/_9%)]">+27</span></span></td>
+          <td><a href="#jockey-4" id="j-13" class="font-semibold text-ink hover:text-accentstrong">최범현</a></td>
+          <td class="text-muted">이강서</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 1건</span></td>
+          <td class="num font-bold text-ink">16.2</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-5 ">5</span><span><a href="#horse-5" id="h-14" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">즐거운여정</a><span class="text-[11.5px] text-faint">6세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip f1">1</span><span class="form-chip ">5</span><span class="form-chip f2">2</span><span class="form-chip ">6</span><span class="form-chip f3">3</span></span></td>
+          <td class="num font-semibold">109</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">484</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info font-bold bg-[rgb(21_112_199_/_9%)]">-12</span></span></td>
+          <td><a href="#jockey-5" id="j-15" class="font-semibold text-ink hover:text-accentstrong">진겸</a></td>
+          <td class="text-muted">이상영</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">재갈</span><span class="text-faint">·</span><span class="text-[12px] text-muted">가면</span></span></td>
+          <td><span class="tag !h-[20px] bg-[rgb(220_38_38_/_9%)] !px-2 text-[11px] text-warn">호흡기 9.10</span></td>
+          <td class="num font-bold text-ink">20.5</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-6 ">6</span><span><a href="#horse-6" id="h-16" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">글라디우스</a><span class="text-[11.5px] text-faint">5세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip f1">1</span><span class="form-chip f2">2</span><span class="form-chip f1">1</span><span class="form-chip f3">3</span><span class="form-chip f2">2</span></span></td>
+          <td class="num font-semibold">106</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">491</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn font-bold bg-[rgb(220_38_38_/_9%)]">+17</span></span></td>
+          <td><a href="#jockey-6" id="j-17" class="font-semibold text-ink hover:text-accentstrong">임기원</a></td>
+          <td class="text-muted">강성오</td>
+          <td><span class="flex items-center gap-1.5"><span class="tag !h-[20px] bg-[rgb(217_164_34_/_16%)] !px-1.5 text-[11px] text-gold">BF</span><span class="text-faint">·</span><span class="text-[12px] text-muted">눈가면</span><span class="text-faint">·</span><span class="text-[12px] text-muted">재갈</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-accentstrong">2.5</td>
+          <td class="!pr-4"><span class="flex max-w-[150px] items-center gap-1 truncate text-[12px] text-accentstrong"><iconify-icon icon="lucide:sticky-note" width="13"></iconify-icon>+17kg 체중 증가 확인 필요</span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-7 ">7</span><span><a href="#horse-7" id="h-18" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">에이스하이</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">10</span><span class="form-chip ">7</span><span class="form-chip ">9</span><span class="form-chip ">8</span><span class="form-chip ">11</span></span></td>
+          <td class="num font-semibold">86</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">502</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn  ">+2</span></span></td>
+          <td><a href="#jockey-7" id="j-19" class="font-semibold text-ink hover:text-accentstrong">이현종</a></td>
+          <td class="text-muted">하무선</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">가면</span><span class="text-faint">·</span><span class="text-[12px] text-muted">재갈</span><span class="text-faint">·</span><span class="text-[12px] text-muted">쿠션편자</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">31.8</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="is-selected">
+          <td class="!pl-4"><span class="mark on m1">◎</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-8 ">8</span><span><a href="#horse-8" id="h-20" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">판타스틱밸류</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip f3">3</span><span class="form-chip f2">2</span><span class="form-chip ">5</span><span class="form-chip f1">1</span><span class="form-chip ">4</span></span></td>
+          <td class="num font-semibold">83</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">462</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info  ">-6</span></span></td>
+          <td><a href="#jockey-8" id="j-21" class="font-semibold text-ink hover:text-accentstrong">서승운</a></td>
+          <td class="text-muted">손병철</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span><span class="text-faint">·</span><span class="text-[12px] text-muted">재갈</span></span></td>
+          <td><span class="tag !h-[20px] bg-[rgb(220_38_38_/_9%)] !px-2 text-[11px] text-warn">파행 9.06</span></td>
+          <td class="num font-bold text-ink">6.5</td>
+          <td class="!pr-4"><span class="flex max-w-[150px] items-center gap-1 truncate text-[12px] text-accentstrong"><iconify-icon icon="lucide:sticky-note" width="13"></iconify-icon>3C부터 선행 가능, 1,400m 입상 2회</span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-9 ">9</span><span><a href="#horse-9" id="h-22" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">플라잉데이</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">7</span><span class="form-chip f3">3</span><span class="form-chip ">8</span><span class="form-chip f2">2</span><span class="form-chip ">6</span></span></td>
+          <td class="num font-semibold">80</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">476</span> <span class="text-[11.5px]"><span class="text-faint">0</span></span></td>
+          <td><a href="#jockey-9" id="j-23" class="font-semibold text-ink hover:text-accentstrong">김용근</a></td>
+          <td class="text-muted">이준철</td>
+          <td><span class="flex items-center gap-1.5"><span class="tag !h-[20px] bg-[rgb(217_164_34_/_16%)] !px-1.5 text-[11px] text-gold">BF</span><span class="text-faint">·</span><span class="text-[12px] text-muted">가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">68.9</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark on m4">△</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-10 ">10</span><span><a href="#horse-10" id="h-24" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">보령라이트퀸</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip f2">2</span><span class="form-chip f1">1</span><span class="form-chip f3">3</span><span class="form-chip ">4</span><span class="form-chip f2">2</span></span></td>
+          <td class="num font-semibold">95</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">504</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn font-bold bg-[rgb(220_38_38_/_9%)]">+10</span></span></td>
+          <td><a href="#jockey-10" id="j-25" class="font-semibold text-ink hover:text-accentstrong">정도윤</a></td>
+          <td class="text-muted">임금만</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span><span class="text-faint">·</span><span class="text-[12px] text-muted">재갈</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-accentstrong">4.9</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-11 ">11</span><span><a href="#horse-11" id="h-26" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">캐치레이스</a><span class="text-[11.5px] text-faint">3세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">6</span><span class="form-chip ">9</span><span class="form-chip ">4</span><span class="form-chip opacity-40">·</span><span class="form-chip opacity-40">·</span></span></td>
+          <td class="num font-semibold">65</td>
+          <td class="num">53.5</td>
+          <td class="num"><span class="text-ink">514</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn font-bold bg-[rgb(220_38_38_/_9%)]">+12</span></span></td>
+          <td><a href="#jockey-11" id="j-27" class="font-semibold text-ink hover:text-accentstrong">이동하</a></td>
+          <td class="text-muted">서인석</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">재갈</span><span class="text-faint">·</span><span class="text-[12px] text-muted">눈가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">29.3</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark on m3">▲</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-12 ">12</span><span><a href="#horse-12" id="h-28" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">클리어리위너</a><span class="text-[11.5px] text-faint">3세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip f2">2</span><span class="form-chip ">4</span><span class="form-chip f3">3</span><span class="form-chip opacity-40">·</span><span class="form-chip opacity-40">·</span></span></td>
+          <td class="num font-semibold">65</td>
+          <td class="num">53.5</td>
+          <td class="num"><span class="text-ink">471</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info  ">-4</span></span></td>
+          <td><a href="#jockey-12" id="j-29" class="font-semibold text-ink hover:text-accentstrong">다실바</a></td>
+          <td class="text-muted">구영준</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">가면</span><span class="text-faint">·</span><span class="text-[12px] text-muted">재갈</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">6.4</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-13 ">13</span><span><a href="#horse-13" id="h-30" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">라온사일런스</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip f3">3</span><span class="form-chip ">5</span><span class="form-chip f2">2</span><span class="form-chip ">7</span><span class="form-chip ">4</span></span></td>
+          <td class="num font-semibold">78</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">488</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn font-bold bg-[rgb(220_38_38_/_9%)]">+12</span></span></td>
+          <td><a href="#jockey-13" id="j-31" class="font-semibold text-ink hover:text-accentstrong">장추열</a></td>
+          <td class="text-muted">이강서</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">20.2</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-14 ">14</span><span><a href="#horse-14" id="h-32" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">뱅뱅뱅</a><span class="text-[11.5px] text-faint">5세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">4</span><span class="form-chip ">8</span><span class="form-chip ">10</span><span class="form-chip ">6</span><span class="form-chip ">9</span></span></td>
+          <td class="num font-semibold">88</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">477</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info  ">-7</span></span></td>
+          <td><a href="#jockey-14" id="j-33" class="font-semibold text-ink hover:text-accentstrong">조인권</a></td>
+          <td class="text-muted">임성실</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">재갈</span><span class="text-faint">·</span><span class="text-[12px] text-muted">눈가면</span><span class="text-faint">·</span><span class="text-[12px] text-muted">쿠션편자</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">48.2</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-15 ">15</span><span><a href="#horse-15" id="h-34" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">타이거로어</a><span class="text-[11.5px] text-faint">3세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">4</span><span class="form-chip ">6</span><span class="form-chip ">5</span><span class="form-chip opacity-40">·</span><span class="form-chip opacity-40">·</span></span></td>
+          <td class="num font-semibold">55</td>
+          <td class="num">53.5</td>
+          <td class="num"><span class="text-ink">493</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-warn  ">+5</span></span></td>
+          <td><a href="#jockey-15" id="j-35" class="font-semibold text-ink hover:text-accentstrong">루이스</a></td>
+          <td class="text-muted">정호익</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">눈가면</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">127.2</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr>
+        <tr class="">
+          <td class="!pl-4"><span class="mark">+</span></td>
+          <td><div class="flex items-center gap-2.5"><span class="silk silk-16 ">16</span><span><a href="#horse-16" id="h-36" class="block text-[13.5px] font-bold text-inkstrong hover:text-accentstrong">여수슈퍼스타</a><span class="text-[11.5px] text-faint">4세 · 한국 · 암</span></span></div></td>
+          <td><span class="flex items-center gap-1"><span class="form-chip ">6</span><span class="form-chip ">7</span><span class="form-chip ">4</span><span class="form-chip ">9</span><span class="form-chip ">5</span></span></td>
+          <td class="num font-semibold">71</td>
+          <td class="num">55</td>
+          <td class="num"><span class="text-ink">465</span> <span class="text-[11.5px]"><span class="rounded-[6px] px-1.5 py-0.5 text-info font-bold bg-[rgb(21_112_199_/_9%)]">-12</span></span></td>
+          <td><a href="#jockey-16" id="j-37" class="font-semibold text-ink hover:text-accentstrong">최은경</a></td>
+          <td class="text-muted">이상영</td>
+          <td><span class="flex items-center gap-1.5"><span class="text-[12px] text-muted">재갈</span><span class="text-faint">·</span><span class="text-[12px] text-muted">쿠션편자</span><span class="text-faint">·</span><span class="text-[12px] text-muted">혀끈</span></span></td>
+          <td><span class="text-[12px] text-faint">30일 2건</span></td>
+          <td class="num font-bold text-ink">84.3</td>
+          <td class="!pr-4"><span class="text-faint"><iconify-icon icon="lucide:pencil-line" width="14"></iconify-icon></span></td>
+        </tr></tbody>
+  </table>
+</div></section>
+</div>
+</main>
+<footer class="mx-auto flex w-[calc(100%-48px)] max-w-[1520px] justify-between border-t border-line py-6 text-[12px] text-faint">
+  <span class="mono tracking-[.12em]">MAPILOG · HORSE RACING DATA</span><span>한국마사회 공공데이터 기반</span>
+</footer>
+</div>
+</body>
+</html>

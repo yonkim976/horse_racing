@@ -95,7 +95,7 @@
   }
 
   function buildLegend() {
-    legend.innerHTML = "";
+    legend.replaceChildren();
     const sorted = [...data.series].sort(
       (a, b) => a.finishSort - b.finishSort || a.horseNumber - b.horseNumber
     );
@@ -105,11 +105,17 @@
       button.type = "button";
       button.className = "chart-legend-item";
       button.dataset.horse = String(item.horseNumber);
-      button.innerHTML = `
-        <span class="chart-swatch" data-swatch style="background:${colorFor(item.horseNumber)}"></span>
-        <span class="chart-legend-label">${item.horseNumber}. ${item.horseName}</span>
-        <span class="chart-legend-finish">${item.finishSort < 90 ? `${item.finishSort}위` : "—"}</span>
-      `;
+      const swatch = document.createElement("span");
+      swatch.className = "chart-swatch";
+      swatch.dataset.swatch = "";
+      swatch.style.background = colorFor(item.horseNumber);
+      const label = document.createElement("span");
+      label.className = "chart-legend-label";
+      label.textContent = `${item.horseNumber}. ${item.horseName}`;
+      const finish = document.createElement("span");
+      finish.className = "chart-legend-finish";
+      finish.textContent = item.finishSort < 90 ? `${item.finishSort}위` : "—";
+      button.append(swatch, label, finish);
       button.addEventListener("click", () => {
         if (state.pinned.has(item.horseNumber)) {
           state.pinned.delete(item.horseNumber);
@@ -203,7 +209,7 @@
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     svg.setAttribute("width", String(width));
     svg.setAttribute("height", String(height));
-    svg.innerHTML = "";
+    svg.replaceChildren();
 
     const ns = "http://www.w3.org/2000/svg";
     const add = (name, attrs = {}, parent = svg) => {
@@ -410,10 +416,11 @@
       cumulativeTime ? `누적 ${cumulativeTime}` : "",
     ].filter(Boolean).join(" · ");
     tooltip.hidden = false;
-    tooltip.innerHTML = `
-      <strong>${item.horseNumber}. ${item.horseName}</strong>
-      <span>${label} · ${position ?? "—"}위${timing ? ` · ${timing}` : ""}</span>
-    `;
+    const title = document.createElement("strong");
+    title.textContent = `${item.horseNumber}. ${item.horseName}`;
+    const details = document.createElement("span");
+    details.textContent = `${label} · ${position ?? "—"}위${timing ? ` · ${timing}` : ""}`;
+    tooltip.replaceChildren(title, details);
     positionTooltip(event);
   }
 

@@ -4,7 +4,7 @@ The open rail ends matter: at 2C runners can enter the outer backstretch,
 and at 4C the inside route merges smoothly into the shared finish straight.
 """
 
-from horse_racing.web.seoul_metric import metric_route
+from horse_racing.web.seoul_metric import INNER_EXIT, OUTER_EXIT, gate_label_dx, metric_route
 
 PLAN_URL = "https://race.kra.co.kr/images/sub/seoul_racemap02.jpg"
 GUIDE_URL = "https://race.kra.co.kr/chulmainfo/RacingcourseStructure.do?Act=02&Sub=11&meet=1"
@@ -12,8 +12,8 @@ GUIDE_URL = "https://race.kra.co.kr/chulmainfo/RacingcourseStructure.do?Act=02&S
 SURFACE = (
     "M 234 30 L 250 53 L 131 124 C 71 160 49 234 62 300 "
     "C 70 205 129 139 211 139 H 715 V 162 H 680 "
-    "C 727 198 747 260 750 322 L 758 345 Q 764 360 742 365 "
-    "Q 724 369 708 380 C 673 415 636 434 593 434 H 54 V 408 H 122 "
+    "C 727 198 747 260 750 322 L 756 358 L 729 362 L 727 352 "
+    "C 705 392 655 434 593 434 H 54 V 408 H 122 "
     "C 45 356 19 292 34 227 C 46 152 88 112 136 84 Z"
 )
 FIELD = (
@@ -38,16 +38,18 @@ def build_seoul_diagram(distance: int) -> dict:
     variants = []
 
     def add(d, start, path, label, description):
+        metric = metric_route(d, *start)
         variants.append(
             dict(
                 distance=d,
                 start_x=start[0],
                 start_y=start[1],
+                gate_dx=gate_label_dx(*start, metric["markers"]),
                 path=path,
                 label=label,
                 description=description,
                 selected=d == distance,
-                metric=metric_route(d, *start),
+                metric=metric,
             )
         )
 
@@ -77,14 +79,14 @@ def build_seoul_diagram(distance: int) -> dict:
         add(
             d,
             (x, 392),
-            f"M {x} 392 " + INNER_RIGHT + " Q 620 178 590 178 " + INNER_LEFT,
+            f"M {x} 392 " + INNER_RIGHT + INNER_EXIT + " " + INNER_LEFT,
             "내주로 출발 · 내주로 진행",
             "관람대 앞에서 출발해 내주로를 돌고 결승 직선으로 합류합니다.",
         )
     add(
         2000,
         (296, 392),
-        "M 296 392 " + INNER_RIGHT + " Q 617 168 590 151 " + OUTER_LEFT,
+        "M 296 392 " + INNER_RIGHT + OUTER_EXIT + " " + OUTER_LEFT,
         "내주로 출발 → 2코너 외주로",
         "1,900m와 같은 출발부를 사용하며 2코너에서 외주로로 나갑니다.",
     )
@@ -100,6 +102,13 @@ def build_seoul_diagram(distance: int) -> dict:
         surface=SURFACE,
         field=FIELD,
         rails=RAILS,
+        # 2C sits right of the 1,400m chute so backstretch gate labels stay clear.
+        corners=[
+            dict(label="3코너 구역", x=202, y=123),
+            dict(label="2코너 구역", x=757, y=128),
+            dict(label="1코너 구역", x=624, y=459),
+            dict(label="4코너 구역", x=202, y=459),
+        ],
         variants=variants,
         selected=selected,
         plan_url=PLAN_URL,

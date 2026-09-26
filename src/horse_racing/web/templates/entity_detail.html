@@ -8,7 +8,10 @@
 <section class="page-intro compact-intro">
   <div>
     <p class="eyebrow">{{ detail.kind.label | upper }} PROFILE</p>
-    <h1>{{ detail.name_ko }}</h1>
+    <div class="entity-title-line">
+      <h1>{{ detail.name_ko }}</h1>
+      {% if detail.status_label %}<span class="horse-status-badge" data-status="{{ detail.status_key }}">{{ detail.status_label }}</span>{% endif %}
+    </div>
     <p>{{ detail.kind.id_label }} {{ detail.official_id }}</p>
     {% if detail.kind.slug == 'horses' %}
       <p class="history-jump">
