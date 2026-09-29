@@ -63,6 +63,7 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
 
 document.querySelectorAll('[data-seoul-map]').forEach((root) => {
   const reset = root.querySelector('[data-course-reset]');
+  if (!reset) return;
   const steps = [...root.querySelectorAll('[data-course-select]')];
   const note = root.querySelector('[data-seoul-map-note]');
   const current = root.dataset.distance;

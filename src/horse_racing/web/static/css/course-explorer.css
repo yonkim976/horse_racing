@@ -77,6 +77,14 @@
 .course-distance-picker small { font-size:10px; margin-left:2px; }
 .course-distance-picker span { display:block; font:400 9px var(--font-sans); margin-top:4px; }
 .course-distance-picker button[aria-pressed="true"] { border-color:var(--course-accent); color:var(--course-accent); background:color-mix(in srgb,var(--course-accent) 8%,var(--surface-1)); }
+.course-distance-picker a { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:48px; padding:10px 5px; border:1px solid var(--border); border-radius:8px; background:var(--surface-1); color:var(--muted); font:500 13px var(--font-mono); text-decoration:none; }
+.course-distance-picker a[aria-current="page"] { border-color:var(--course-accent); color:var(--course-accent); background:color-mix(in srgb,var(--course-accent) 8%,var(--surface-1)); }
+.course-distance-picker a:hover { color:var(--ink-strong); border-color:var(--course-accent); }
+.course-distance-picker a small { font-size:10px; margin-left:2px; }
+.course-distance-picker a span { display:block; font:400 9px var(--font-sans); margin-top:4px; }
+.course-heading-links { display:flex; align-items:center; flex-wrap:wrap; justify-content:flex-end; gap:14px; }
+.course-distance-all-link { padding:10px 0 0; margin:0; text-align:right; }
+.course-distance-all-link a { color:var(--course-accent); font-size:12px; font-weight:600; }
 .course-record-layout { display:grid; grid-template-columns:1fr 320px; border-top:1px solid var(--border); }
 .course-record-nav { padding:24px 28px; }
 .course-record-nav .course-record-link { display:inline-block; margin-top:22px; }
@@ -121,6 +129,7 @@
 .course-explorer button:focus-visible { outline:2px solid var(--course-blue); outline-offset:3px; }
 @media(min-width:851px) { .course-record-layout .course-inspector { border-left:1px solid var(--border); } }
 @media(max-width:600px) { .course-view-tools { font-size:10px; } .course-view-tools button { padding:8px; font-size:11px; } }
+@media(max-width:600px) { .course-heading-links { justify-content:flex-start; gap:10px; } .course-distance-all-link { text-align:left; } }
 
 /* The map palette and circular focus treatment are shared across courses. */
 .course-explorer { --course-early:#398bcb; --course-middle:#dc9139; --course-last:#a57ac7; }

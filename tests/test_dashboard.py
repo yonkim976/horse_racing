@@ -204,6 +204,104 @@ def test_yeongcheon_schedule_and_detail(tmp_path: Path) -> None:
     assert "YEONGCHEON · COURSE EXPLORER" in response.text
 
 
+@pytest.mark.parametrize(
+    ("course", "meet_code", "name", "distance", "alternate_distance", "default_distance"),
+    [
+        ("seoul", 1, "서울", 1400, 1600, 1400),
+        ("jeju", 2, "제주", 1200, 1300, 1200),
+        ("busan", 3, "부경", 1600, 1800, 1600),
+        ("yeongcheon", 4, "영천", 1400, 1800, 1400),
+    ],
+)
+def test_course_map_page_loads_one_selected_route_for_each_meet(
+    tmp_path: Path, course: str, meet_code: int, name: str, distance: int,
+    alternate_distance: int, default_distance: int,
+) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        response = client.get(f"/racecourses/{course}/course?distance={distance}")
+        default_response = client.get(f"/racecourses/{course}/course")
+
+    assert response.status_code == 200
+    assert len(response.content) < 2 * 1024 * 1024
+    assert f"{name} 경주로" in response.text
+    assert f"distance={distance}" in response.text
+    assert "출발점과 주행 경로를 확인합니다" in response.text
+    assert "선택 거리" in response.text
+    assert "현재 경주" not in response.text
+    assert "전체 거리 보기 ↗" not in response.text
+    assert "지점을 선택하면 구간 기록을 확인할 수 있습니다." not in response.text
+    assert "구간 순서도" not in response.text
+    assert "최종 착순 상위" not in response.text
+    assert f'href="/racecourses/{course}/course?distance={alternate_distance}"' in response.text
+    assert response.text.index('class="course-distance-picker"') < response.text.index(
+        'class="seoul-viewport"'
+    )
+    assert default_response.status_code == 200
+    assert f'data-distance="{default_distance}"' in default_response.text
+    if meet_code == 2:
+        assert response.text.count("data-jeju-route/>") == 1
+    else:
+        assert response.text.count('data-seoul-route="') == 1
+    assert f"data-distance=\"{distance}\"" in response.text
+
+
+def test_course_map_page_rejects_unknown_course_and_distance(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        unknown_course = client.get("/racecourses/not-a-meet/course")
+        unknown_distance = client.get("/racecourses/seoul/course?distance=1111")
+
+    assert unknown_course.status_code == 404
+    assert unknown_distance.status_code == 404
+
+
+@pytest.mark.parametrize(
+    ("course", "meet_code", "name", "distance"),
+    [
+        ("seoul", 1, "서울", 1400),
+        ("jeju", 2, "제주", 1200),
+        ("busan", 3, "부경", 1600),
+        ("yeongcheon", 4, "영천", 1400),
+    ],
+)
+def test_race_detail_embeds_only_its_distance_route(
+    tmp_path: Path, course: str, meet_code: int, name: str, distance: int,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        racecourse = session.query(Racecourse).filter_by(kra_meet_code=meet_code).one_or_none()
+        if racecourse is None:
+            racecourse = Racecourse(
+                kra_meet_code=meet_code, code=course.upper(), name_ko=name,
+            )
+        race = Race(
+            racecourse=racecourse,
+            race_date_local=date(2026, 9, 13),
+            race_number=2,
+            distance_m=distance,
+            grade="혼OPEN",
+            race_name="지도 전송량 확인",
+            status="scheduled",
+        )
+        session.add(race)
+        session.commit()
+        race_id = race.id
+
+    with TestClient(create_app(factory)) as client:
+        response = client.get(f"/races/{race_id}")
+
+    assert response.status_code == 200
+    assert len(response.content) < 2 * 1024 * 1024
+    assert response.text.count('data-seoul-route="') == (0 if meet_code == 2 else 1)
+    assert response.text.count("data-jeju-route/>") == (1 if meet_code == 2 else 0)
+    assert f"href=\"/racecourses/{course}/course?distance={distance}\"" in response.text
+    assert "현재 경주" in response.text
+    assert "다른 거리의 경주로도 보기 ↗" in response.text
+
+
 def seeded_session(tmp_path: Path) -> sessionmaker[Session]:
     database_url = f"sqlite:///{tmp_path / 'dashboard.sqlite3'}"
     config = Config("alembic.ini")

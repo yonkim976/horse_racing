@@ -11,6 +11,7 @@ from datetime import date
 from io import StringIO
 from pathlib import Path
 from time import monotonic
+from types import SimpleNamespace
 from typing import Annotated, TypeVar
 from urllib.parse import quote, urlencode
 
@@ -46,6 +47,7 @@ from horse_racing.web.insights import (
 from horse_racing.web.predictions import load_prediction_ledger
 from horse_racing.web.race_analysis import load_race_analysis_page
 from horse_racing.web.race_page import load_race_page
+from horse_racing.web.racecourse import build_racecourse_map
 from horse_racing.web.request_policy import RequestPolicy, normalized_query_key
 from horse_racing.web.security import (
     ActiveRequestGate,
@@ -625,6 +627,47 @@ def create_app(
         return templates.TemplateResponse(
             request=request, name="distance_page.html",
             context={"active_nav": "distances", "data": data},
+        )
+
+    @app.get("/racecourses/{course}/course", response_class=HTMLResponse)
+    def course_map(
+        request: Request,
+        course: str,
+        distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
+    ) -> HTMLResponse:
+        meet_codes = {"seoul": 1, "jeju": 2, "busan": 3, "yeongcheon": 4}
+        meet_code = meet_codes.get(course)
+        if meet_code is None:
+            raise HTTPException(status_code=404, detail="지원하지 않는 경마장입니다.")
+
+        default_distances = {1: 1400, 2: 1200, 3: 1600, 4: 1400}
+        track = build_racecourse_map(
+            meet_code=meet_code,
+            distance_m=distance if distance is not None else default_distances[meet_code],
+        )
+        options = track.diagram["variants"] if track and track.diagram else []
+        supported_distances = {variant["distance"] for variant in options}
+        if distance is not None and distance not in supported_distances:
+            raise HTTPException(status_code=404, detail="지원하지 않는 경주 거리입니다.")
+        if track is None or not track.supported_distance:
+            raise HTTPException(status_code=404, detail="지원하지 않는 경주 거리입니다.")
+
+        page = SimpleNamespace(
+            course_name=track.course_name,
+            meet_code=meet_code,
+            distance_m=track.distance_m,
+            distance=f"{track.distance_m:,}m",
+            racecourse_map=track,
+            map_checkpoints=[],
+        )
+        return templates.TemplateResponse(
+            request=request,
+            name="course_map_page.html",
+            context={
+                "active_nav": "distances",
+                "page": page,
+                "is_course_explorer": True,
+            },
         )
 
     @app.get("/data-status", response_class=HTMLResponse)

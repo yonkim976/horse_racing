@@ -65,6 +65,7 @@
 
 {% if page.racecourse_map %}
 {% set track = page.racecourse_map %}
+{% set is_course_explorer = false %}
 {% set map_key = "seoul" if track.meet_code == 1 else "jeju" %}
 {% if track.meet_code == 2 %}
 {% include "_jeju_course_explorer.html" %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.course_name }} 경주로 전체 거리 · 마필로그 Mapilog{% endblock %}
+{% block meta_description %}{{ page.course_name }} 경주로를 거리별로 확인합니다.{% endblock %}
+
+{% block content %}
+<section class="page-intro compact-intro">
+  <nav class="crumb-nav" aria-label="페이지 이동">
+    <a class="back-link" href="/">← 경주 목록</a>
+    <span class="chip-link">{{ page.course_name }} 경주로</span>
+  </nav>
+</section>
+{% set track = page.racecourse_map %}
+{% if page.meet_code == 2 %}
+  {% include "_jeju_course_explorer.html" %}
+{% else %}
+  {% include "_seoul_course_explorer.html" %}
+{% endif %}
+{% endblock %}

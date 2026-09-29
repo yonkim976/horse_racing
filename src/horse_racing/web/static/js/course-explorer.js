@@ -42,7 +42,7 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
       highlight(Number(button.dataset.start), Number(button.dataset.span));
     });
   });
-  reset.addEventListener('click', () => {
+  reset?.addEventListener('click', () => {
     clear();
     note.textContent = '지도는 주로 배치, 순서도는 기록 측정 순서를 보여줍니다.';
   });
@@ -83,6 +83,24 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     event.currentTarget.textContent = zoom ? '전체 보기' : '확대 보기';
   });
   if (!isJeju) return;
+  const official = root.querySelector('[data-jeju-official]');
+  const officialImage = official?.querySelector('img');
+  const officialFallback = official?.querySelector('[data-jeju-official-fallback]');
+  const officialCaption = official?.querySelector('[data-jeju-official-caption]');
+  function showOfficialFallback() {
+    officialImage.hidden = true;
+    officialCaption.hidden = true;
+    officialFallback.hidden = false;
+    root.querySelector('[data-course-viewport]').classList.remove('with-source');
+  }
+  officialImage?.addEventListener('error', showOfficialFallback);
+  root.querySelector('[data-jeju-source]')?.addEventListener('click', event => {
+    const show = official.hidden;
+    official.hidden = !show;
+    root.querySelector('[data-course-viewport]').classList.toggle('with-source', show);
+    event.currentTarget.setAttribute('aria-pressed', String(show));
+    if (show && officialImage.complete && !officialImage.naturalWidth) showOfficialFallback();
+  });
   const arrows = root.querySelector('[data-jeju-arrows]');
   function drawArrows() {
     const line = root.querySelector('[data-jeju-route]');
@@ -113,6 +131,10 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     const own = distance === current;
     previews.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
     root.querySelector('[data-jeju-route]').setAttribute('d', button.dataset.route);
+    root.querySelector('[data-jeju-halo]').setAttribute('d', button.dataset.route);
+    const focus = root.querySelector('[data-course-focus]');
+    focus.setAttribute('d', button.dataset.route);
+    focus.setAttribute('pathLength', distance);
     const early = ['1110', '1610'].includes(distance) ? 210 : 200;
     root.querySelector('[data-course-early-label]').textContent = early;
     root.querySelectorAll('[data-jeju-band]').forEach(path => {
@@ -129,16 +151,20 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     start.setAttribute('aria-label', `출발 ${Number(distance).toLocaleString('ko-KR')}m`);
     start.querySelector('circle').setAttribute('cx', x);
     start.querySelector('circle').setAttribute('cy', y);
-    start.querySelector('circle').setAttribute('r', distance === '1610' ? 4 : 8);
+    start.querySelector('circle').setAttribute('r', distance === '1610' ? 4 : 7);
     start.querySelector('path').setAttribute('d', `M ${x} ${y} l ${y > 0 ? 78 : 0} ${y > 0 ? 48 : -40}`);
     start.querySelector('text').setAttribute('x', x + (y > 0 ? 78 : 0));
     start.querySelector('text').setAttribute('y', y + (y > 0 ? 65 : -49));
-    start.querySelector('text').textContent = Number(distance) > 1600 ? `출발 · 결승선 ${Number(distance) - 1600}m 앞` : '출발';
+    start.querySelector('text').textContent = `${Number(distance).toLocaleString('ko-KR')}m 출발`;
     const label = Number(distance).toLocaleString('ko-KR') + 'm';
     root.querySelectorAll('[data-other-start]').forEach(marker => marker.toggleAttribute('hidden', marker.dataset.otherStart.replace(/[^0-9]/g, '') === distance));
     root.querySelector('[data-course-view-label]').textContent = (own ? '현재 경주 · ' : '경로 미리보기 · ') + label;
     root.querySelector('[data-jeju-distance]').textContent = label;
-    root.querySelector('[data-jeju-direction]').textContent = '시계 방향' + (Number(distance) > 1600 ? ' · 결승선 첫 통과 후 한 바퀴' : '');
+    root.querySelector('[data-jeju-direction]').textContent = '시계 방향 ↻' + (Number(distance) > 1600 ? ' · 결승선 첫 통과 후 한 바퀴' : '');
+    root.querySelector('[data-jeju-route-title]').textContent = `${own ? '현재 경주' : '경로 미리보기'} · ${label}`;
+    root.querySelector('[data-jeju-route-description]').textContent = own
+      ? '제주 시계 방향 경로입니다. 아래 기록은 현재 경주의 기록입니다.'
+      : `다른 거리 출발점과 경로의 미리보기입니다. 아래 기록은 현재 ${Number(current).toLocaleString('ko-KR')}m 경주에 해당합니다.`;
     root.querySelector('.course-map').setAttribute('aria-label', `제주 ${label} 주행 경로`);
     root.querySelector('.course-map title').textContent = `제주 ${label} 주행 경로`;
     root.querySelectorAll('[data-course-point]').forEach(point => { point.toggleAttribute('hidden', !own); point.setAttribute('tabindex', own ? '0' : '-1'); });
