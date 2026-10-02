@@ -1,0 +1,17 @@
+<script>
+  (function () {
+    var phone = /Android.+Mobile|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i;
+    if (phone.test(navigator.userAgent)) return;
+    var query = window.matchMedia("(max-width: 1100px)");
+    function sync() {
+      var wantMobile = query.matches;
+      var isMobile = document.documentElement.dataset.layout === "mobile";
+      if (wantMobile === isMobile) return;
+      document.cookie = "hr-layout=" + (wantMobile ? "mobile" : "desktop")
+        + "; Path=/; Max-Age=31536000; SameSite=Lax";
+      location.reload();
+    }
+    sync();
+    query.addEventListener("change", sync);
+  })();
+</script>

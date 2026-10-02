@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-layout="mobile">
   <head>
     <meta charset="utf-8">
+    {% include "_layout_switch.html" %}
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="naver-site-verification" content="a71202c329d9767a2c3589e8637e278720be227f">
     <meta name="description" content="{% block meta_description %}한국 경마 일정과 결과, 출전마 기록과 예측 확률을 확인하는 마필로그 Mapilog{% endblock %}">
@@ -24,6 +25,9 @@
           if (theme === "light" || theme === "dark") {
             document.documentElement.dataset.theme = theme;
           }
+          if (localStorage.getItem("hr-easy") === "1") {
+            document.documentElement.dataset.easy = "1";
+          }
         } catch (error) { /* private mode 등에서 무시 */ }
       })();
     </script>
@@ -35,8 +39,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=18">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/mobile.css') }}?v=75">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=16" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/mobile.css') }}?v=81">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=20" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
     {% block extra_head %}{% endblock %}
   </head>
@@ -48,6 +52,7 @@
         <span class="mobile-beta-badge">BETA</span>
       </a>
       <div class="mobile-topbar-actions">
+        {% block topbar_actions %}{% endblock %}
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="다크 모드로 전환">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>

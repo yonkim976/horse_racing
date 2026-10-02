@@ -30,6 +30,7 @@ from horse_racing.web.formatting import (
     format_rating,
     group_dates_by_month,
     now_seoul_ms,
+    stakes_grade,
     today_seoul,
 )
 from horse_racing.web.insights import (
@@ -41,6 +42,9 @@ from horse_racing.web.insights import (
     win_probability_sort_key,
 )
 from horse_racing.web.race_scope import active_race_clause
+
+RACE_START_FOCUS_GRACE_MS = 5 * 60 * 1000
+_RESULT_GRACE_MS = 10 * 60 * 1000
 
 
 @dataclass(frozen=True, slots=True)
@@ -90,6 +94,8 @@ class RaceRow:
     prediction_state: str | None = None
     candidate_count: int = 0
     prediction_count: int = 0
+    stakes_grade: str | None = None
+    awaiting_result: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -521,17 +527,22 @@ def _sort_races_by_start(rows: list[RaceRow]) -> list[RaceRow]:
 
 
 def _current_race_index(rows: list[RaceRow], now_ms: int) -> int | None:
+    """Focus the next scheduled time window, keeping the last race after the card."""
     timed = [
         (index, row.scheduled_at_ms)
         for index, row in enumerate(rows)
-        if row.status == "scheduled" and row.scheduled_at_ms
+        if row.scheduled_at_ms is not None
     ]
     if not timed:
         return None
-    started = [index for index, scheduled_at in timed if scheduled_at <= now_ms]
-    if started:
-        return started[-1]
-    return timed[0][0]
+    in_focus_window = [
+        index
+        for index, scheduled_at in timed
+        if scheduled_at + RACE_START_FOCUS_GRACE_MS > now_ms
+    ]
+    if in_focus_window:
+        return in_focus_window[0]
+    return timed[-1][0]
 
 
 def _order_mobile_races(
@@ -548,7 +559,19 @@ def _order_mobile_races(
     index = _current_race_index(ordered, now_ms) if live else None
     rotated = ordered[index:] + ordered[:index] if index is not None and index > 0 else ordered
     current_id = ordered[index].id if index is not None else None
-    return [replace(row, is_current=row.id == current_id) for row in rotated]
+    return [
+        replace(
+            row,
+            is_current=row.id == current_id,
+            awaiting_result=(
+                row.status == "scheduled"
+                and row.id != current_id
+                and row.scheduled_at_ms is not None
+                and row.scheduled_at_ms + _RESULT_GRACE_MS < now_ms
+            ),
+        )
+        for row in rotated
+    ]
 
 
 def _recent_form_by_horse(
@@ -724,6 +747,7 @@ def _race_row(
         prediction_state=top3_summary.race_state,
         candidate_count=top3_summary.candidate_count,
         prediction_count=top3_summary.prediction_count,
+        stakes_grade=stakes_grade(race.race_name),
     )
 
 

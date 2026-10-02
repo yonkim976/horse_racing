@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-layout="desktop">
   <head>
     <meta charset="utf-8">
+    {% include "_layout_switch.html" %}
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="naver-site-verification" content="a71202c329d9767a2c3589e8637e278720be227f">
     <meta name="description" content="{% block meta_description %}한국 경마 일정과 결과, 출전마 기록과 예측 확률을 확인하는 마필로그 Mapilog{% endblock %}">
@@ -35,7 +36,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=19">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=16" defer></script>
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=20" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
     {% block extra_head %}{% endblock %}
   </head>

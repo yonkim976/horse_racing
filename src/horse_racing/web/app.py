@@ -143,6 +143,11 @@ def _client_rate_key(request: Request) -> str:
 
 
 def _is_mobile_request(request: Request) -> bool:
+    layout = request.cookies.get("hr-layout")
+    if layout == "mobile":
+        return True
+    if layout == "desktop":
+        return False
     return bool(_MOBILE_UA.search(request.headers.get("user-agent", "")))
 
 

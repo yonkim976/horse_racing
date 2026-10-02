@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import re
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
 SEOUL = ZoneInfo("Asia/Seoul")
 
 GENERIC_RACE_NAMES = {"", "일반", "일반경주"}
+_STAKES_GRADE = re.compile(r"\((?:G|Grade)\s*([123])\)", re.I)
 
 SPECIAL_FINISH_LABELS = {
     91: "출전취소",
@@ -97,6 +99,12 @@ def display_race_title(grade: str | None, race_name: str | None) -> str:
     if label:
         return label
     return "일반경주"
+
+
+def stakes_grade(race_name: str | None) -> str | None:
+    """Extract a group grade such as G1 from the race name, when present."""
+    match = _STAKES_GRADE.search(race_name or "")
+    return f"G{match.group(1)}" if match else None
 
 
 def format_finish_position(

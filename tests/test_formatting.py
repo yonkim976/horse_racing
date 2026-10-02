@@ -11,7 +11,16 @@ from horse_racing.web.formatting import (
     format_rating,
     group_dates_by_month,
     page_window,
+    stakes_grade,
 )
+
+
+def test_stakes_grade_reads_both_official_spellings() -> None:
+    assert stakes_grade("코리아컵(G1)") == "G1"
+    assert stakes_grade("제13회 제주특별자치도지사배(Grade3)") == "G3"
+    assert stakes_grade("제26회 농림축산식품부장관배(Grade2)") == "G2"
+    assert stakes_grade("일반") is None
+    assert stakes_grade(None) is None
 
 
 def test_age_years_matches_completed_birthdays() -> None:

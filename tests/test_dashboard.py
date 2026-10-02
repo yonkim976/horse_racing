@@ -1117,6 +1117,20 @@ def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
     assert "전체 경마장" in response.text
 
 
+def test_layout_cookie_overrides_user_agent(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        mobile = client.get("/", headers={"cookie": "hr-layout=mobile"})
+        desktop = client.get("/", headers={**PHONE_HEADERS, "cookie": "hr-layout=desktop"})
+
+    assert 'data-layout="mobile"' in mobile.text
+    assert 'class="mobile-app mobile-home"' in mobile.text
+    assert 'data-layout="desktop"' in desktop.text
+    assert "mobile-app" not in desktop.text
+    assert "hr-layout" in mobile.text
+
+
 def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> None:
     app = create_app(seeded_session(tmp_path))
 
@@ -1138,7 +1152,9 @@ def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> 
         'content="a71202c329d9767a2c3589e8637e278720be227f">'
     ) in page.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in page.text
-    assert "mobile.css?v=75" in page.text
+    assert "mobile.css?v=81" in page.text
+    assert 'data-easy-toggle' in page.text
+    assert "큰글씨 모드" in page.text
     assert "mapilog-favicon-final.svg" in page.text
     assert "mapilog-favicon.png" in page.text
     assert "<title>마필로그 | Mapilog 경마 분석 및 예측</title>" in page.text
@@ -1304,7 +1320,7 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert '<link rel="canonical" href="https://mapilog.xyz/analysis">' in desktop.text
     assert '<meta name="robots" content="noindex,follow">' in desktop.text
     assert 'rel="alternate"' not in desktop.text
-    assert "mobile-analysis.js?v=10" in page.text
+    assert "mobile-analysis.js?v=11" in page.text
     assert "경주 목록" in page.text
     assert 'aria-label="실제 착순별 출전마"' in page.text
     assert "과거 전개 성향" in page.text
@@ -1525,7 +1541,7 @@ def test_mobile_all_meets_lists_races_in_start_time_order(tmp_path: Path) -> Non
 
     app = create_app(factory)
     with TestClient(app) as client:
-        page = client.get("/?date=2026-08-21", headers=PHONE_HEADERS)
+        page = client.get("/?date=2026-08-21&meet=", headers=PHONE_HEADERS)
         seoul_only = client.get("/?date=2026-08-21&meet=1", headers=PHONE_HEADERS)
 
     text = page.text
@@ -1575,7 +1591,7 @@ def test_mobile_puts_current_race_first_on_today(tmp_path: Path, monkeypatch) ->
         session.commit()
 
     monkeypatch.setattr("horse_racing.web.dashboard.today_seoul", lambda: date(2026, 8, 21))
-    monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: _seoul_ms(13, 40))
+    monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: _seoul_ms(10, 36))
     app = create_app(factory)
     with TestClient(app) as client:
         page = client.get("/?date=2026-08-21", headers=PHONE_HEADERS)
@@ -1593,6 +1609,103 @@ def test_mobile_puts_current_race_first_on_today(tmp_path: Path, monkeypatch) ->
     assert "8월 21일" in default_home.text
     assert "바람의별" in default_home.text
     assert 'class="mobile-round is-current"' in default_home.text
+
+
+def test_default_race_focus_advances_five_minutes_after_start_regardless_of_status(
+    tmp_path: Path, monkeypatch
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        seoul = Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울")
+        first = Race(
+            racecourse=seoul,
+            race_date_local=date(2026, 8, 22),
+            race_number=1,
+            distance_m=1200,
+            grade="국6등급",
+            race_name="일반",
+            scheduled_at_ms=_seoul_ms(10, 35, day=22),
+            status="completed",
+        )
+        second = Race(
+            racecourse=seoul,
+            race_date_local=date(2026, 8, 22),
+            race_number=2,
+            distance_m=1400,
+            grade="국6등급",
+            race_name="일반",
+            scheduled_at_ms=_seoul_ms(11, 25, day=22),
+            status="scheduled",
+        )
+        session.add_all([seoul, first, second])
+        session.flush()
+        first_id = first.id
+        second_id = second.id
+        session.commit()
+
+    monkeypatch.setattr("horse_racing.web.dashboard.today_seoul", lambda: date(2026, 8, 22))
+    now_ms = _seoul_ms(10, 39, day=22) + 59_000
+    monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: now_ms)
+    with TestClient(create_app(factory)) as client:
+        before_cutoff = client.get("/?date=2026-08-22&meet=1", headers=PHONE_HEADERS)
+    now_ms = _seoul_ms(10, 40, day=22)
+    with TestClient(create_app(factory)) as client:
+        after_cutoff = client.get("/?date=2026-08-22&meet=1", headers=PHONE_HEADERS)
+
+    current_before = before_cutoff.text.split('class="mobile-round is-current"', 1)[1]
+    current_after = after_cutoff.text.split('class="mobile-round is-current"', 1)[1]
+    assert f'id="round-{first_id}"' in current_before.split(">", 1)[0]
+    assert f'id="round-{second_id}"' in current_after.split(">", 1)[0]
+
+
+def test_mobile_home_flags_stakes_and_overdue_results(tmp_path: Path, monkeypatch) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        seoul = Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울")
+        session.add_all(
+            [
+                Race(
+                    racecourse=seoul,
+                    race_date_local=date(2026, 8, 21),
+                    race_number=1,
+                    distance_m=1800,
+                    grade="혼OPEN",
+                    race_name="코리아컵(G1)",
+                    scheduled_at_ms=_seoul_ms(10, 35),
+                    status="scheduled",
+                ),
+                Race(
+                    racecourse=seoul,
+                    race_date_local=date(2026, 8, 21),
+                    race_number=2,
+                    distance_m=1200,
+                    grade="국6등급",
+                    race_name="일반",
+                    scheduled_at_ms=_seoul_ms(11, 30),
+                    status="scheduled",
+                ),
+            ]
+        )
+        session.commit()
+
+    monkeypatch.setattr("horse_racing.web.dashboard.today_seoul", lambda: date(2026, 8, 21))
+    monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: _seoul_ms(13, 40))
+    app = create_app(factory)
+    with TestClient(app) as client:
+        page = client.get("/?date=2026-08-21&meet=1", headers=PHONE_HEADERS)
+
+    def round_block(marker: str) -> str:
+        return page.text.split(marker, 1)[1].split('<section class="mobile-round', 1)[0]
+
+    stakes = round_block('class="mobile-round is-stakes"')
+    assert 'class="mobile-stakes-tag">G1 대상경주<' in stakes
+    assert 'class="mobile-awaiting-tag">결과 대기<' in stakes
+    current = round_block('class="mobile-round is-current"')
+    assert "mobile-awaiting-tag" not in current
+    assert 'class="mobile-live-tag">예정<' in current
+    assert "예측 보는 법" in page.text
+    assert "data-mobile-chrome" in page.text
+    assert "data-chrome-filters" in page.text
 
 
 def test_mobile_analysis_marks_upcoming_race(tmp_path: Path, monkeypatch) -> None:
@@ -1828,7 +1941,7 @@ def test_mobile_shows_trial_form_for_debut_horses(tmp_path: Path) -> None:
         analysis = client.get("/races/1", headers=PHONE_HEADERS)
         desktop = client.get("/analysis?race_id=1")
 
-    assert "심 1합" in home.text
+    assert "심사 1합" in home.text
     assert "송당퍼스트" in home.text
     assert "심사 1합" in analysis.text
     assert "첫 출전마는 주행심사 착순입니다" not in analysis.text

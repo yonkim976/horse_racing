@@ -21,23 +21,9 @@
     });
   }
 
-  function syncStickyCardTop() {
-    const topbar = document.querySelector(".mobile-topbar");
-    const chrome = root.querySelector(".ma-chrome");
-    const top = (topbar?.getBoundingClientRect().height || 0)
-      + (chrome?.getBoundingClientRect().height || 0);
-    root.style.setProperty("--ma-sticky-card-top", `${Math.round(top)}px`);
-  }
-
   revealActiveRoundChip();
-  syncStickyCardTop();
   requestAnimationFrame(revealActiveRoundChip);
-  requestAnimationFrame(syncStickyCardTop);
-  window.addEventListener("pageshow", () => {
-    revealActiveRoundChip();
-    syncStickyCardTop();
-  });
-  window.addEventListener("resize", syncStickyCardTop);
+  window.addEventListener("pageshow", revealActiveRoundChip);
 
   const form = root.querySelector("[data-auto-submit]");
   if (form) {
