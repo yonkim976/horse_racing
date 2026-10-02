@@ -11,6 +11,10 @@
 </section>
 
 <nav class="distance-options" aria-label="경마장 선택"><a href="/racecourses/seoul/distances" {% if data.meet_code == 1 %}aria-current="page"{% endif %}>서울</a><a href="/racecourses/jeju/distances" {% if data.meet_code == 2 %}aria-current="page"{% endif %}>제주</a><a href="/racecourses/busan/distances" {% if data.meet_code == 3 %}aria-current="page"{% endif %}>부경</a></nav>
+<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">
+  <a href="{{ data.base_url }}" aria-current="page">거리별 분석</a>
+  <a href="/racecourses/{{ data.course }}/course">지도 보기</a>
+</nav>
 <section class="panel distance-controls" aria-label="경주 검색 조건">
   <form class="filters" method="get" action="{{ data.base_url }}">
     <input type="hidden" name="distance" value="{{ data.distance }}">

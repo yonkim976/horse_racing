@@ -34,6 +34,7 @@ from horse_racing.db.models import (
     RunningTrial,
     RunningTrialResult,
     Trainer,
+    TrainerAffiliationSnapshot,
 )
 from horse_racing.web.app import create_app
 from horse_racing.web.request_policy import RequestPolicy
@@ -64,6 +65,8 @@ def test_search_engine_files_are_public_and_use_canonical_urls(tmp_path: Path) -
 
     robots = client.get("/robots.txt", headers=phone, follow_redirects=False)
     sitemap = client.get("/sitemap.xml", headers=phone, follow_redirects=False)
+    home = client.get("/")
+    sample = client.get("/race-sample")
 
     assert robots.status_code == 200
     assert robots.headers["content-type"].startswith("text/plain")
@@ -73,12 +76,21 @@ def test_search_engine_files_are_public_and_use_canonical_urls(tmp_path: Path) -
     assert "User-agent: *\nAllow: /" in robots.text
     assert "Sitemap: https://mapilog.xyz/sitemap.xml" in robots.text
     assert sitemap.status_code == 200
+    assert home.status_code == 200
+    assert 'href="/forecast"' not in home.text
+    assert 'href="/validation"' not in home.text
+    assert 'href="/predictions"' not in home.text
+    assert 'href="/data-status"' not in home.text
+    assert 'href="/race-sample"' not in home.text
+    assert sample.status_code == 404
     assert sitemap.headers["content-type"].startswith("application/xml")
     root = ElementTree.fromstring(sitemap.content)
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     urls = [item.text for item in root.findall("s:url/s:loc", namespace)]
     assert "https://mapilog.xyz/" in urls
-    assert "https://mapilog.xyz/forecast" in urls
+    assert "https://mapilog.xyz/forecast" not in urls
+    assert "https://mapilog.xyz/validation" not in urls
+    assert "https://mapilog.xyz/predictions" not in urls
     assert "https://mapilog.xyz/racecourses/jeju/distances" in urls
     assert all(url is not None and url.startswith("https://mapilog.xyz/") for url in urls)
     assert not any("/m/" in url for url in urls if url is not None)
@@ -134,9 +146,9 @@ def test_www_redirects_to_apex_without_leaking_cached_asset_urls(tmp_path: Path)
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in apex_response.text
     assert '<meta name="robots" content="index,follow">' in apex_response.text
     assert 'rel="alternate"' not in apex_response.text
-    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=15"' in apex_response.text
+    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=19"' in apex_response.text
     assert (
-        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=15"'
+        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=19"'
     ) in run_response.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in run_response.text
     assert 'aria-label="마필로그 홈"' in apex_response.text
@@ -201,7 +213,10 @@ def test_yeongcheon_schedule_and_detail(tmp_path: Path) -> None:
     assert "영천" in response.text
     assert "서울은 3C" not in response.text
     assert 'data-racecourse-map="yeongcheon"' in response.text
-    assert "YEONGCHEON · COURSE EXPLORER" in response.text
+    assert "COURSE EXPLORER" not in response.text
+    assert "공식 도면 비교" not in response.text
+    assert "확대 보기" not in response.text
+    assert 'class="course-method"' not in response.text
 
 
 @pytest.mark.parametrize(
@@ -226,9 +241,33 @@ def test_course_map_page_loads_one_selected_route_for_each_meet(
     assert response.status_code == 200
     assert len(response.content) < 2 * 1024 * 1024
     assert f"{name} 경주로" in response.text
+    assert f"<h1>{name} 경주로 지도</h1>" in response.text
     assert f"distance={distance}" in response.text
-    assert "출발점과 주행 경로를 확인합니다" in response.text
-    assert "선택 거리" in response.text
+    assert "COURSE EXPLORER" not in response.text
+    assert "공식 도면 비교" not in response.text
+    assert "확대 보기" not in response.text
+    assert "경마장을 선택하고 거리별 출발점과 주행 경로를 확인하세요." in response.text
+    assert '<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">' in response.text
+    assert f'href="/racecourses/{course}/course" aria-current="page">지도 보기</a>' in response.text
+    assert '<nav class="distance-options course-map-meets" aria-label="지도 볼 경마장 선택">' in response.text
+    for meet in ("seoul", "jeju", "busan", "yeongcheon"):
+        assert f'href="/racecourses/{meet}/course"' in response.text
+    if meet_code == 4:
+        assert f'href="/racecourses/{course}/distances"' not in response.text
+    else:
+        assert f'href="/racecourses/{course}/distances">거리별 분석</a>' in response.text
+    if meet_code == 1:
+        assert f"서울 경주로 <span>{distance:,}m</span>" in response.text
+        assert 'data-seoul-view-label' not in response.text
+        assert 'aria-label="지도 구간 색상 안내"' in response.text
+        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index("<svg viewBox")
+        assert "4C는 G3F 이후 70m, 결승 전 530m" in response.text
+        assert 'class="course-method"' not in response.text
+        assert "선택한 거리의 출발점과 주행 경로를 확인합니다" not in response.text
+        assert "2023년 이전의 예외 경로는 반영하지 않습니다" not in response.text
+    else:
+        assert 'class="course-method"' in response.text
+        assert "선택 거리" in response.text
     assert "현재 경주" not in response.text
     assert "전체 거리 보기 ↗" not in response.text
     assert "지점을 선택하면 구간 기록을 확인할 수 있습니다." not in response.text
@@ -295,11 +334,32 @@ def test_race_detail_embeds_only_its_distance_route(
 
     assert response.status_code == 200
     assert len(response.content) < 2 * 1024 * 1024
+    assert f'<div class="race-hero" data-racecourse="{name}">' in response.text
     assert response.text.count('data-seoul-route="') == (0 if meet_code == 2 else 1)
     assert response.text.count("data-jeju-route/>") == (1 if meet_code == 2 else 0)
+    map_script = "course-explorer.js?v=15" if meet_code == 2 else "seoul-map.js?v=15"
+    assert map_script in response.text
     assert f"href=\"/racecourses/{course}/course?distance={distance}\"" in response.text
+    assert "COURSE EXPLORER" not in response.text
+    assert "공식 도면 비교" not in response.text
+    assert "확대 보기" not in response.text
+    assert 'data-course-view-label>현재 경주 ·' not in response.text
+    assert 'data-seoul-view-label>현재 경주 ·' not in response.text
+    assert 'class="course-detail-kicker">현재 경주 ·' not in response.text
+    assert 'class="course-record-layout"' not in response.text
+    assert 'class="course-record-nav"' not in response.text
+    assert 'class="course-inspector"' not in response.text
+    assert 'class="course-method"' not in response.text
+    assert 'class="course-detail-kicker">구간 순서도</p>' not in response.text
     assert "현재 경주" in response.text
-    assert "다른 거리의 경주로도 보기 ↗" in response.text
+    assert "전체 거리 보기 ↗" in response.text
+    if meet_code != 2:
+        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index("<svg viewBox")
+        assert "다른 거리의 경주로도 보기 ↗" not in response.text
+        assert "지도 지점은 거리 기준 개략 위치" not in response.text
+        assert "현재 출발점과 표준 주로를 표시합니다" not in response.text
+    if meet_code == 1:
+        assert "4C는 G3F 이후 70m, 결승 전 530m" in response.text
 
 
 def seeded_session(tmp_path: Path) -> sessionmaker[Session]:
@@ -617,6 +677,7 @@ def test_dashboard_renders_schedule_and_result(tmp_path: Path) -> None:
     ) in response.text
     assert 'name="twitter:card" content="summary"' in response.text
     assert "경주 일정과 결과" in response.text
+    assert 'aria-label="선택일 요약"' not in response.text
     assert "제주 1R" in response.text
     assert "바람의별" in response.text
     assert response.text.index("제주 1R") < response.text.index("출전마 및 결과")
@@ -658,14 +719,9 @@ def test_race_detail_page_shows_results_and_sections(tmp_path: Path) -> None:
     assert "제주 1R" in response.text
     assert 'data-racecourse-map="jeju"' in response.text
     assert 'data-course-explorer data-distance="900"' in response.text
-    assert 'data-course-focus' in response.text
-    assert 'data-course-select="0"' in response.text
-    assert 'data-course-detail="0" hidden' in response.text
+    assert 'class="course-record-layout"' not in response.text
+    assert 'class="course-method"' not in response.text
     assert "제주 경주로 · 900m 주행 경로" in response.text
-    assert "직선 493.7m" in response.text
-    assert "곡선 R 97.5m" in response.text
-    assert "2×493.7m + 2π×97.5m" in response.text
-    assert "고저차는 표시하지 않습니다" in response.text
     assert "출전마 및 결과" in response.text
     assert "구간기록 · 전개" in response.text
     assert "이전 경주" in response.text
@@ -721,21 +777,16 @@ def test_running_trial_appears_in_calendar_and_has_race_like_detail_page(
     assert missing.status_code == 404
 
 
-def test_data_status_page_integrates_refresh_coverage(tmp_path: Path) -> None:
+def test_data_status_page_is_unavailable(tmp_path: Path) -> None:
     app = create_app(seeded_session(tmp_path))
 
     with TestClient(app) as client:
         response = client.get("/data-status")
 
-    assert response.status_code == 200
-    assert "데이터 최신화 현황" in response.text
-    assert "sync-latest" in response.text
-    assert "공식 경주" in response.text
-    assert "주행심사 결과" in response.text
-    assert "2026-08-13" in response.text
+    assert response.status_code == 404
 
 
-def test_prediction_ledger_page_and_api_separate_prospective_metrics(
+def test_prediction_ledger_page_removed_api_preserved(
     tmp_path: Path,
 ) -> None:
     app = create_app(seeded_session(tmp_path))
@@ -744,11 +795,7 @@ def test_prediction_ledger_page_and_api_separate_prospective_metrics(
         page = client.get("/predictions")
         api = client.get("/api/predictions")
 
-    assert page.status_code == 200
-    assert "공개 예측 검증 원장" in page.text
-    assert "사전 공개" in page.text
-    assert "정산 완료" in page.text
-    assert "cccccccccccc" in page.text
+    assert page.status_code == 404
     assert api.status_code == 200
     payload = api.json()
     assert payload["prospective"]["publications"] == 1
@@ -757,26 +804,15 @@ def test_prediction_ledger_page_and_api_separate_prospective_metrics(
     assert payload["runs"][0]["mode"] == "live"
 
 
-def test_forecast_page_uses_only_published_probabilities(tmp_path: Path) -> None:
-    factory = seeded_session(tmp_path)
-    with factory() as session:
-        race = session.get(Race, 1)
-        assert race is not None
-        race.status = "scheduled"
-        session.commit()
-    app = create_app(factory)
+def test_forecast_and_validation_pages_are_unavailable(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
 
     with TestClient(app) as client:
-        response = client.get("/forecast?date=2026-08-21&race_id=1")
+        forecast = client.get("/forecast?date=2026-08-21&race_id=1")
+        validation = client.get("/validation")
 
-    assert response.status_code == 200
-    assert "미래 경주 예측" in response.text
-    assert "probability_ensemble" in response.text
-    assert "100.0%" in response.text
-    assert "SCENARIO, NOT OBSERVATION" in response.text
-    assert "공식 GPS가 아닌" in response.text
-    assert response.headers["x-content-type-options"] == "nosniff"
-    assert "frame-ancestors 'none'" in response.headers["content-security-policy"]
+    assert forecast.status_code == 404
+    assert validation.status_code == 404
 
 
 def test_jeju_distance_page_uses_portable_year_extraction(tmp_path: Path) -> None:
@@ -787,20 +823,8 @@ def test_jeju_distance_page_uses_portable_year_extraction(tmp_path: Path) -> Non
 
     assert response.status_code == 200
     assert "제주" in response.text
-
-
-def test_validation_page_reports_sample_and_keeps_mode_visible(tmp_path: Path) -> None:
-    app = create_app(seeded_session(tmp_path))
-
-    with TestClient(app) as client:
-        response = client.get("/validation")
-
-    assert response.status_code == 200
-    assert "예측 검증" in response.text
-    assert "1경주 · 1두" in response.text
-    assert "사전 공개" in response.text
-    assert "확률 지표는 불변 원장" in response.text
-    assert "1위" in response.text
+    assert '<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">' in response.text
+    assert 'href="/racecourses/jeju/course">지도 보기</a>' in response.text
 
 
 def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
@@ -1074,7 +1098,13 @@ def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) ->
     assert ".silk-8 { background: #ef7eb2" in css.text
     assert ".silk-11 {" in css.text
     assert "repeating-linear-gradient" in css.text
-    assert "dashboard.css?v=15" in page.text
+    assert '.race-hero[data-racecourse="서울"]' in css.text
+    assert '.race-hero[data-racecourse="제주"]' in css.text
+    assert '.race-hero[data-racecourse="부경"]' in css.text
+    assert '.race-hero[data-racecourse="영천"]' in css.text
+    assert "background: linear-gradient(125deg," in css.text
+    assert "#2d234b 0%, #47366f 58%, #55417c 100%);" in css.text
+    assert "dashboard.css?v=19" in page.text
 
 
 def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
@@ -1192,16 +1222,14 @@ def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
             response = client.get(path, headers=headers, follow_redirects=False)
             assert response.status_code == 200, path
             assert 'class="mobile-app ' in response.text
+            assert "dashboard.css?v=18" in response.text
             assert {part.strip().lower() for part in response.headers["vary"].split(",")} == {
                 "user-agent", "accept-encoding"
             }
 
         for path in (
-            "/forecast?date=2026-08-21",
             "/running-trials/1",
-            "/validation",
             "/racecourses/jeju/distances",
-            "/predictions",
             "/horses",
             "/horses/003001",
             "/docs",
@@ -1223,7 +1251,9 @@ def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
         assert client.get("/health/ready", headers=headers).status_code == 200
         assert client.get("/openapi.json", headers=headers).status_code == 200
         assert client.get("/api/predictions", headers=headers).status_code == 200
-        assert client.get("/forecast", follow_redirects=False).status_code == 200
+        assert client.get("/forecast", follow_redirects=False).status_code == 404
+        assert client.get("/validation", follow_redirects=False).status_code == 404
+        assert client.get("/predictions", follow_redirects=False).status_code == 404
 
 
 def test_tablets_keep_desktop_pages_while_android_phones_use_mobile(tmp_path: Path) -> None:
@@ -1811,12 +1841,51 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     with factory() as session:
         active = next(horse for horse in session.query(Horse).all() if horse.name_ko == "바람의별")
         retired = next(horse for horse in session.query(Horse).all() if horse.name_ko == "가가나")
+        excluded = next(horse for horse in session.query(Horse).all() if horse.name_ko == "제외마")
         active.is_active = True
+        active.meet_code = 2
         active.active_status_observed_at_ms = 1_795_190_400_000
         active.active_status_source = "test"
         retired.is_active = False
+        excluded.is_active = False
+        retired.meet_code = 1
         retired.active_status_observed_at_ms = 1_795_190_400_000
         retired.active_status_source = "test"
+        excluded.meet_code = 3
+        session.add(
+            HorseProfileSnapshot(
+                horse=excluded,
+                meet_code=3,
+                trainer_kra_id="070101",
+                trainer_name="김조교",
+                observed_at_ms=1_795_190_400_000,
+            )
+        )
+        current_jeju_trainer = session.query(Trainer).filter_by(kra_trainer_id="070101").one()
+        current_seoul_trainer = Trainer(kra_trainer_id="070102", name_ko="서울조교사")
+        current_bukyeong_trainer = Trainer(kra_trainer_id="070103", name_ko="부경조교사")
+        unconfirmed_trainer = Trainer(kra_trainer_id="070199", name_ko="미확인조교사")
+        session.add_all([current_seoul_trainer, current_bukyeong_trainer, unconfirmed_trainer])
+        session.flush()
+        roster_date = date(2026, 9, 29)
+        source = "https://race.kra.co.kr/trainer/profileTrainerList.do"
+        for trainer, meet_code, stable_part in (
+            (current_jeju_trainer, 2, 1),
+            (current_seoul_trainer, 1, 1),
+            (current_bukyeong_trainer, 3, 1),
+        ):
+            session.add(
+                TrainerAffiliationSnapshot(
+                    trainer_id=trainer.id,
+                    observed_on=roster_date,
+                    meet_code=meet_code,
+                    stable_part=stable_part,
+                    official_name_ko=trainer.name_ko,
+                    observed_at_ms=1_795_190_400_000,
+                    source_url=source,
+                    source_sha256="a" * 64,
+                )
+            )
         session.commit()
     app = create_app(factory)
 
@@ -1826,6 +1895,15 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
         horse_by_name = client.get("/horses?sort=name")
         active_horses = client.get("/horses?status=active")
         retired_horses = client.get("/horses?status=retired")
+        seoul_horses = client.get("/horses?meet=1")
+        jeju_horses = client.get("/horses?meet=2")
+        bukyeong_horses = client.get("/horses?meet=3")
+        filtered_search = client.get("/horses?meet=2&q=바람")
+        trainers = client.get("/trainers")
+        seoul_trainers = client.get("/trainers?meet=1")
+        jeju_trainers = client.get("/trainers?meet=2")
+        bukyeong_trainers = client.get("/trainers?meet=3")
+        filtered_trainer_search = client.get("/trainers?meet=2&q=070101")
         horse_detail = client.get("/horses/003001")
         legacy_horse_detail = client.get("/horses/1", follow_redirects=False)
         jockey_detail = client.get("/jockeys/080101")
@@ -1841,7 +1919,7 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert horses.status_code == 200
     assert "바람의별" in horses.text
     assert "003001" in horses.text
-    assert "적재 레이팅" in horses.text
+    assert 'class="coverage-line"' not in horses.text
     assert "출전 많은 순" in horses.text
     assert 'href="/horses/003001"' in horses.text
     assert 'href="/horses/1"' not in horses.text
@@ -1853,6 +1931,28 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert 'data-status="retired">은퇴<' in retired_horses.text
     assert "가가나" in retired_horses.text
     assert "바람의별" not in retired_horses.text
+    assert 'href="/horses?meet=1' in horse_list.text
+    assert "가가나" in seoul_horses.text
+    assert "바람의별" not in seoul_horses.text
+    assert 'href="/horses?meet=2' in jeju_horses.text
+    assert "바람의별" in jeju_horses.text
+    assert "가가나" not in jeju_horses.text
+    assert "제외마" in bukyeong_horses.text
+    assert "바람의별" not in bukyeong_horses.text
+    assert "바람의별" in filtered_search.text
+    assert 'name="meet" value="2"' in filtered_search.text
+    assert trainers.status_code == 200
+    assert "2026-09-29 기준 현역 조교사" in trainers.text
+    assert "미확인조교사" not in trainers.text
+    assert 'href="/trainers?meet=1' in trainers.text
+    assert "서울조교사" in seoul_trainers.text
+    assert "김조교" not in seoul_trainers.text
+    assert "김조교" in jeju_trainers.text
+    assert "서울조교사" not in jeju_trainers.text
+    assert "부경조교사" in bukyeong_trainers.text
+    assert "서울조교사" not in bukyeong_trainers.text
+    assert "김조교" in filtered_trainer_search.text
+    assert 'name="meet" value="2"' in filtered_trainer_search.text
     assert "체중" in horses.text
     assert "훈련" in horses.text
 
@@ -1883,8 +1983,10 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert "기본 정보" in horse_detail.text
     assert "12전 3/2/1" in horse_detail.text
     assert "TEST SIRE" in horse_detail.text
-    assert "최신 레이팅" not in horse_detail.text or "현재 레이팅" in horse_detail.text
-    assert "현재 레이팅" in horse_detail.text
+    assert "최신 레이팅" not in horse_detail.text
+    assert "현재 레이팅" not in horse_detail.text
+    assert "마지막 경주 레이팅" in horse_detail.text
+    assert "경주 당시 레이팅" in horse_detail.text
     assert "주행심사" in horse_detail.text
     assert "합격" in horse_detail.text
     assert "1:07.1" in horse_detail.text
@@ -1897,6 +1999,22 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert trainer_detail.status_code == 200
     assert legacy_trainer_detail.status_code == 301
     assert legacy_trainer_detail.headers["location"] == "/trainers/070101"
+    managed_section = trainer_detail.text.split('id="trainer-managed-horses"', 1)[1].split(
+        '<section class="board-layout', 1
+    )[0]
+    assert "위탁관리 말" in managed_section
+    assert "1두" in managed_section
+    assert 'href="/horses/003001"' in managed_section
+    assert "바람의별" in managed_section
+    assert "<th>순번</th>" in managed_section
+    assert ">1</td>" in managed_section
+    assert "<th>마번</th>" not in managed_section
+    assert "<th>프로필 확인</th>" not in managed_section
+    assert "<th>나이</th>" in managed_section
+    assert "<th>마지막 경주 레이팅</th>" in managed_section
+    assert "4세" in managed_section
+    assert ">45</td>" in managed_section
+    assert "제외마" not in managed_section
 
     assert owners.status_code == 200
     assert "이마주" in owners.text

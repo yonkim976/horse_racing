@@ -1,8 +1,9 @@
 """Piecewise metre calibration of the display drawing, from KRA's dimension plan.
 
 Each straight/curve is calibrated separately; SVG pixels are never treated as metres.
-Curve shapes remain schematic. Only independently cross-checked corner distances
-are shown; these are reference positions, not surveyed timing-line coordinates.
+Curve shapes remain schematic. 1C/2C/3C references are distance-specific and shown
+only where checked against result records. 4C uses KRA's 530m-to-finish definition.
+All rendered points are references, not surveyed timing-line coordinates.
 """
 
 import math
@@ -21,6 +22,9 @@ CORNER_REFERENCE_METRES = {
     2000: {"1C": 400, "2C": 600, "3C": 1200},
     2300: {"2C": 900, "3C": 1500},
 }
+
+# KRA Seoul scorecard glossary: 4C is the timing point 530m before the finish.
+SEOUL_4C_REMAINING_METRES = 530
 
 
 def sample(path):
@@ -141,6 +145,7 @@ def metric_route(distance, x, y):
     for code, metre, action in [
         ("S1F", 200, "early"),
         ("G3F", distance - 600, "600"),
+        ("4C", distance - SEOUL_4C_REMAINING_METRES, "4C"),
         ("G1F", distance - 200, "200"),
     ]:
         px, py = at(points, metre)
@@ -161,7 +166,8 @@ def metric_route(distance, x, y):
         px, py = at(points, metre)
         markers.append(dict(code=code, elapsed=metre, remaining=distance - metre,
                             x=round(px, 2), y=round(py, 2), action=code, aliases=[code]))
-    checkpoints = sorted({0, 200, *corners.values(), distance - 600, distance - 200, distance})
+    checkpoints = sorted({0, 200, *corners.values(), distance - 600,
+                          distance - SEOUL_4C_REMAINING_METRES, distance - 200, distance})
     return dict(
         total=sum(p[0] for p in pieces),
         markers=markers,
@@ -173,6 +179,7 @@ def metric_route(distance, x, y):
         # Full paths allow highlighting the actual selected record interval,
         # including when an intermediate record is missing. JS supplies endpoints.
         reference_points={"S1F": 200, **corners, "G3F": distance - 600,
+                          "4C": distance - SEOUL_4C_REMAINING_METRES,
                           "G1F": distance - 200, "FIN": distance},
         intervals=[dict(start=a, end=b, path=span(points, a, b))
                    for a in checkpoints

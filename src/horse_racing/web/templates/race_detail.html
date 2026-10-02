@@ -22,7 +22,7 @@
 </section>
 
 <section class="panel race-detail-hero">
-  <div class="race-hero">
+  <div class="race-hero" data-racecourse="{{ page.course_name }}">
     <div class="race-badge">
       <span>{{ page.course_name }}</span>
       <strong>{{ page.race_number }}R</strong>
@@ -135,6 +135,8 @@
                 <small>{{ page.section_columns[loop.index0 - 1].label if loop.index0 else 'START' }} → {{ column.label }}</small>
               </th>
             {% endfor %}
+            <th class="section-head" rowspan="2">막판 600m<small>G3F → FIN</small></th>
+            <th class="section-head" rowspan="2">막판 200m<small>G1F → FIN</small></th>
           </tr>
           <tr class="section-subhead">
             <th></th>
@@ -170,6 +172,8 @@
                 </td>
                 <td class="numeric result-time section-cumulative-time section-group-{{ loop.index0 % 2 }}">{{ cell.cumulative_time }}</td>
               {% endfor %}
+              <td class="numeric result-time">{{ row.closing_600 }}</td>
+              <td class="numeric result-time">{{ row.closing_200 }}</td>
             </tr>
           {% endfor %}
         </tbody>
@@ -178,10 +182,23 @@
     <p class="section-note">
       구간=직전 표시 지점부터 현재 지점까지, 누적=출발부터 현재 지점까지의 기록입니다.
       FIN 구간은 마지막 표시 지점부터 결승까지, FIN 누적은 전체 경주기록입니다.
-      원본의 코너 누적값과 골전 구간값은 같은 기준으로 변환해 표시합니다.
+      통과 지점은 원자료의 누적시간을 우선 사용하며, 구간은 인접 누적시간의 차이입니다.
+      막판 600m·200m는 별도의 주파기록으로 표시하며, 원자료에 없을 때만 전체기록에서 지점 누적시간을 빼서 구합니다.
       여러 출전마의 누적시간과 제공된 통과순위가 일치하는 지점은 3C/G3F처럼 묶어 표시합니다. 기록이 다르거나 비교 자료가 부족하면 별도로 표시합니다.
       통과순위의 * 표시는 원자료에 순위가 없어 해당 지점 누적시간으로 보완한 값입니다.
     </p>
+    {% if page.official_segment_columns %}
+    <div class="panel-heading"><h3>성적표 원자료 구간시간</h3></div>
+    <p class="section-note">부산경남 성적표가 별도로 제공한 구간 주파시간입니다. 위 통과 지점의 누적시간이나 인접 지점 차이와 구분하며, 구간에 따라 측정 거리가 다를 수 있습니다.</p>
+    <div class="table-scroll">
+      <table class="entry-table section-table">
+        <thead><tr><th>착순</th><th>마번 / 마명</th>{% for code in page.official_segment_columns %}<th class="section-head">{{ code }}</th>{% endfor %}</tr></thead>
+        <tbody>{% for row, values in page.official_segment_rows %}
+          <tr><td>{{ row.finish_position }}</td><td><div class="horse-cell">{{ silk(row.horse_number) }}<a class="entity-link" href="/horses/{{ row.horse_id }}">{{ row.horse_name }}</a></div></td>{% for value in values %}<td class="numeric result-time">{{ value }}</td>{% endfor %}</tr>
+        {% endfor %}</tbody>
+      </table>
+    </div>
+    {% endif %}
     {% endif %}
   {% else %}
     <div class="empty-state compact">

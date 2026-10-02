@@ -187,7 +187,9 @@ def _upsert_items(session: Session, *, meet: int, items: list[EntrySheetItem]) -
         entry.jockey = jockey
         entry.trainer = trainer
         entry.owner = owner
-        entry.scratched = False
+        # A weekly card is not evidence that an officially cancelled runner
+        # has been reinstated. New entries default to False; preserve existing
+        # cancellation state when refreshing the card.
         records_written += 1
     return records_written
 

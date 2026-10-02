@@ -118,9 +118,7 @@ def test_ingest_special_training_is_idempotent_and_links_horse(tmp_path: Path) -
         horse = Horse(kra_horse_id="0050001", name_ko="테스트마")
         session.add(horse)
         session.commit()
-        with KraXmlApiClient(
-            "test-key", transport=httpx.MockTransport(handler)
-        ) as client:
+        with KraXmlApiClient("test-key", transport=httpx.MockTransport(handler)) as client:
             swim_summary = ingest_swim_training(
                 session,
                 client,
@@ -149,3 +147,52 @@ def test_ingest_special_training_is_idempotent_and_links_horse(tmp_path: Path) -
         assert swim.quality_status == "valid"
         statuses = set(session.scalars(select(HorseHillTraining.quality_status)))
         assert statuses == {"valid", "zero_record"}
+
+        swim_id = swim.id
+        hill_ids = set(session.scalars(select(HorseHillTraining.id)))
+        # Replay complete responses, not just duplicate items within one page.
+        for _ in range(2):
+            with KraXmlApiClient("test-key", transport=httpx.MockTransport(handler)) as client:
+                ingest_swim_training(
+                    session,
+                    client,
+                    start_year=2026,
+                    end_year=2026,
+                    raw_data_dir=tmp_path / "raw",
+                )
+                ingest_hill_training(
+                    session,
+                    client,
+                    start_date="20260101",
+                    end_date="20260923",
+                    raw_data_dir=tmp_path / "raw",
+                )
+            assert set(session.scalars(select(HorseSwimTraining.id))) == {swim_id}
+            assert set(session.scalars(select(HorseHillTraining.id))) == hill_ids
+        # Retrieval documents grow as observation history; business rows do not.
+        assert session.scalar(select(func.count()).select_from(SourceDocument)) == 9
+
+        def revised(request: httpx.Request) -> httpx.Response:
+            if request.url.path.endswith("/API216/SwimTr"):
+                return httpx.Response(200, content=_xml(SWIM_ITEM.replace("<cnt>2", "<cnt>3"), 1))
+            return httpx.Response(200, content=_xml("", 0))
+
+        with KraXmlApiClient("test-key", transport=httpx.MockTransport(revised)) as client:
+            ingest_swim_training(
+                session,
+                client,
+                start_year=2026,
+                end_year=2026,
+                raw_data_dir=tmp_path / "raw",
+            )
+            ingest_hill_training(
+                session,
+                client,
+                start_date="20260101",
+                end_date="20260923",
+                raw_data_dir=tmp_path / "raw",
+            )
+        session.expire_all()
+        revised_swim = session.scalar(select(HorseSwimTraining))
+        assert revised_swim.id == swim_id and revised_swim.swim_count == 3
+        assert set(session.scalars(select(HorseHillTraining.id))) == hill_ids

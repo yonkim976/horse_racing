@@ -218,6 +218,181 @@ class Trainer(Base):
     running_trial_results: Mapped[list[RunningTrialResult]] = relationship(
         back_populates="trainer"
     )
+    affiliation_snapshots: Mapped[list[TrainerAffiliationSnapshot]] = relationship(
+        back_populates="trainer"
+    )
+    historical_regions: Mapped[list[TrainerHistoricalRegion]] = relationship(
+        back_populates="trainer"
+    )
+
+
+class TrainerAffiliationSnapshot(Base):
+    """A dated observation of a trainer's officially listed stable part."""
+
+    __tablename__ = "trainer_affiliation_snapshots"
+
+    trainer_id: Mapped[int] = mapped_column(
+        ForeignKey("trainers.id", ondelete="RESTRICT"), primary_key=True
+    )
+    observed_on: Mapped[date] = mapped_column(Date, primary_key=True)
+    meet_code: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    stable_part: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    official_name_ko: Mapped[str] = mapped_column(String(100), nullable=False)
+    stats_as_of: Mapped[date | None] = mapped_column(Date)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    source_url: Mapped[str] = mapped_column(Text, nullable=False)
+    source_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+
+    trainer: Mapped[Trainer] = relationship(back_populates="affiliation_snapshots")
+
+    __table_args__ = (
+        CheckConstraint("meet_code IN (1, 2, 3)", name="valid_meet_code"),
+        CheckConstraint("stable_part BETWEEN 1 AND 99", name="valid_stable_part"),
+        CheckConstraint("length(source_sha256) = 64", name="source_sha256_length"),
+        Index("ix_trainer_affiliation_snapshots_observed_meet", "observed_on", "meet_code"),
+    )
+
+
+class TrainerHistoricalRegion(Base):
+    """Official API region for a trainer whose Korean tenure has ended."""
+
+    __tablename__ = "trainer_historical_regions"
+
+    trainer_id: Mapped[int] = mapped_column(
+        ForeignKey("trainers.id", ondelete="RESTRICT"), primary_key=True
+    )
+    region_code: Mapped[str] = mapped_column(String(16), primary_key=True)
+    observed_on: Mapped[date] = mapped_column(Date, primary_key=True)
+    source_end_date: Mapped[date] = mapped_column(Date, nullable=False)
+    retired_list_confirmed: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    source_url: Mapped[str] = mapped_column(Text, nullable=False)
+    source_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+
+    trainer: Mapped[Trainer] = relationship(back_populates="historical_regions")
+
+    __table_args__ = (
+        CheckConstraint("region_code IN ('SEOUL', 'JEJU', 'YEONGNAM')", name="valid_region_code"),
+        CheckConstraint("length(source_sha256) = 64", name="source_sha256_length"),
+        Index("ix_trainer_historical_regions_region_date", "region_code", "observed_on"),
+    )
+
+
+class TrainerPerson(Base):
+    """A reviewed human identity, independent of KRA registration numbers."""
+
+    __tablename__ = "trainer_people"
+
+    person_key: Mapped[str] = mapped_column(Text, primary_key=True)
+    canonical_name_en: Mapped[str] = mapped_column(Text, nullable=False)
+    birth_date: Mapped[date | None] = mapped_column(Date)
+    identity_basis: Mapped[str] = mapped_column(Text, nullable=False)
+    decision_source: Mapped[str] = mapped_column(Text, nullable=False)
+    decided_on: Mapped[date] = mapped_column(Date, nullable=False)
+
+    links: Mapped[list[TrainerPersonLink]] = relationship(back_populates="person")
+
+    __table_args__ = (
+        CheckConstraint(
+            "identity_basis IN ('birth_date_and_name', 'english_name_and_visit', 'mixed')",
+            name="valid_identity_basis",
+        ),
+    )
+
+
+class TrainerPersonLink(Base):
+    """An official or text-import trainer reference belonging to a person."""
+
+    __tablename__ = "trainer_person_links"
+
+    trainer_ref: Mapped[str] = mapped_column(Text, primary_key=True)
+    person_key: Mapped[str] = mapped_column(
+        ForeignKey("trainer_people.person_key", ondelete="RESTRICT"), nullable=False
+    )
+    ref_kind: Mapped[str] = mapped_column(Text, nullable=False)
+    name_at_source: Mapped[str] = mapped_column(Text, nullable=False)
+    link_basis: Mapped[str] = mapped_column(Text, nullable=False)
+    source_reference: Mapped[str] = mapped_column(Text, nullable=False)
+    evidence_note: Mapped[str | None] = mapped_column(Text)
+
+    person: Mapped[TrainerPerson] = relationship(back_populates="links")
+
+    __table_args__ = (
+        CheckConstraint("ref_kind IN ('official_tr_no', 'text_ingest_id')", name="valid_ref_kind"),
+        CheckConstraint(
+            "link_basis IN ('birth_date_match', 'english_name_and_visit', "
+            "'archived_race_candidate')",
+            name="valid_link_basis",
+        ),
+        Index("ix_trainer_person_links_person_key", "person_key"),
+    )
+
+
+class TrainerStatusObservation(Base):
+    """Dated official-registration status; not a claim about overseas retirement."""
+
+    __tablename__ = "trainer_status_observations"
+
+    official_tr_no: Mapped[str] = mapped_column(Text, primary_key=True)
+    observed_on: Mapped[date] = mapped_column(Date, primary_key=True)
+    canonical_name_ko: Mapped[str] = mapped_column(Text, nullable=False)
+    region_code: Mapped[str] = mapped_column(Text, nullable=False)
+    status_code: Mapped[str] = mapped_column(Text, nullable=False)
+    status_label_ko: Mapped[str] = mapped_column(Text, nullable=False)
+    source_end_date: Mapped[date | None] = mapped_column(Date)
+    classification_basis: Mapped[str] = mapped_column(Text, nullable=False)
+    source_url: Mapped[str] = mapped_column(Text, nullable=False)
+    source_api_sha256: Mapped[str] = mapped_column(Text, nullable=False)
+    retired_list_sha256: Mapped[str | None] = mapped_column(Text)
+
+    __table_args__ = (
+        CheckConstraint("region_code IN ('SEOUL', 'JEJU', 'YEONGNAM')", name="valid_region"),
+        CheckConstraint(
+            "status_code IN ('active', 'retired_confirmed', 'domestic_registration_ended')",
+            name="valid_status",
+        ),
+        CheckConstraint("length(source_api_sha256) = 64", name="valid_api_hash"),
+        CheckConstraint(
+            "retired_list_sha256 IS NULL OR length(retired_list_sha256) = 64",
+            name="valid_retired_hash",
+        ),
+        CheckConstraint(
+            "(status_code = 'active' AND source_end_date IS NULL AND status_label_ko = '현역') "
+            "OR (status_code = 'retired_confirmed' AND source_end_date IS NOT NULL "
+            "AND status_label_ko = '은퇴 확정') "
+            "OR (status_code = 'domestic_registration_ended' "
+            "AND source_end_date IS NOT NULL "
+            "AND status_label_ko = '국내 등록 종료(은퇴 미확인)')",
+            name="status_end_date_label_consistent",
+        ),
+        Index("ix_trainer_status_observations_status_date", "status_code", "observed_on"),
+    )
+
+
+class TrainerIdentityResolution(Base):
+    """Keep a Text-import name while resolving its current official registration."""
+
+    __tablename__ = "trainer_identity_resolutions"
+
+    temporary_trainer_ref: Mapped[str] = mapped_column(
+        ForeignKey("trainers.kra_trainer_id", ondelete="RESTRICT"), primary_key=True
+    )
+    official_tr_no: Mapped[str] = mapped_column(Text, nullable=False)
+    source_name_ko: Mapped[str] = mapped_column(Text, nullable=False)
+    canonical_name_ko: Mapped[str] = mapped_column(Text, nullable=False)
+    resolution_status: Mapped[str] = mapped_column(Text, nullable=False)
+    matched_race_rows: Mapped[int] = mapped_column(Integer, nullable=False)
+    source_reference: Mapped[str] = mapped_column(Text, nullable=False)
+    reviewed_on: Mapped[date] = mapped_column(Date, nullable=False)
+
+    __table_args__ = (
+        CheckConstraint(
+            "resolution_status IN ('confirmed', 'official_id_candidate')",
+            name="valid_resolution_status",
+        ),
+        CheckConstraint("matched_race_rows > 0", name="positive_matched_race_rows"),
+        Index("ix_trainer_identity_resolutions_official_no", "official_tr_no"),
+    )
 
 
 class Owner(Base):
@@ -302,6 +477,8 @@ class RaceEntry(Base):
     body_weight_change_kg: Mapped[int | None] = mapped_column(Integer)
     rating: Mapped[float | None] = mapped_column(Float)
     equipment: Mapped[str | None] = mapped_column(Text)
+    equipment_card_raw: Mapped[str | None] = mapped_column(Text)
+    equipment_card_observed_at_ms: Mapped[int | None] = mapped_column(BigInteger)
     running_style: Mapped[str | None] = mapped_column(String(30))
     scratched: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
@@ -312,6 +489,9 @@ class RaceEntry(Base):
     owner: Mapped[Owner | None] = relationship(back_populates="entries")
     result: Mapped[RaceResult | None] = relationship(
         back_populates="race_entry", cascade="all, delete-orphan", uselist=False
+    )
+    equipment_changes: Mapped[list[EntryEquipmentChange]] = relationship(
+        back_populates="race_entry", cascade="all, delete-orphan"
     )
     section_results: Mapped[list[RaceSectionResult]] = relationship(
         back_populates="race_entry", cascade="all, delete-orphan"
@@ -669,6 +849,29 @@ class EntryEquipment(Base):
     )
 
 
+class EntryEquipmentChange(Base):
+    """API78's official + (new) and - (removed) marks for one race entry."""
+
+    __tablename__ = "entry_equipment_changes"
+
+    race_entry_id: Mapped[int] = mapped_column(
+        ForeignKey("race_entries.id", ondelete="CASCADE"), primary_key=True
+    )
+    position: Mapped[int] = mapped_column(Integer, primary_key=True)
+    equipment_name_raw: Mapped[str] = mapped_column(Text, nullable=False)
+    change_type: Mapped[str] = mapped_column(String(10), nullable=False)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    race_entry: Mapped[RaceEntry] = relationship(back_populates="equipment_changes")
+
+    __table_args__ = (
+        CheckConstraint("position > 0", name="positive_position"),
+        CheckConstraint(
+            "change_type IN ('added', 'removed')", name="valid_change_type"
+        ),
+    )
+
+
 class HorseGradeChange(Base):
     __tablename__ = "horse_grade_changes"
 
@@ -711,6 +914,18 @@ class HorseStartTraining(Base):
     stable_number: Mapped[str | None] = mapped_column(Text)
     rider_name: Mapped[str | None] = mapped_column(String(100))
     remark: Mapped[str | None] = mapped_column(String(200))
+    # Storage ordinal only: neither a verified event ID nor chronological order.
+    occurrence_no: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=1, server_default="1"
+    )
+    source_kind: Mapped[str] = mapped_column(
+        String(30), nullable=False, default="legacy_api22", server_default="legacy_api22"
+    )
+    source_document_id: Mapped[int | None] = mapped_column(
+        ForeignKey("source_documents.id", ondelete="RESTRICT")
+    )
+    source_row_no: Mapped[int | None] = mapped_column(Integer)
+    location_raw: Mapped[str | None] = mapped_column(Text)
     observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
 
     horse: Mapped[Horse] = relationship(back_populates="start_training_records")
@@ -720,11 +935,11 @@ class HorseStartTraining(Base):
             "horse_id",
             "meet_code",
             "training_date_local",
-            "stable_part",
-            "stable_number",
-            "rider_name",
-            name="uq_horse_start_training_natural",
+            "occurrence_no",
+            name="uq_horse_start_training_occurrence",
         ),
+        CheckConstraint("occurrence_no > 0", name="start_training_positive_occurrence"),
+        Index("ix_horse_start_training_source", "source_document_id"),
         Index("ix_horse_start_training_horse_date", "horse_id", "training_date_local"),
     )
 
@@ -920,6 +1135,77 @@ class RacePassingSummary(Base):
         Index("ix_race_passing_summaries_source_document", "source_document_id"),
         Index("ix_race_passing_summaries_tempo", "tempo_level"),
     )
+
+
+class RacePointSourceBatch(Base):
+    """Immutable score-sheet file that supplied canonical section/passing rows."""
+
+    __tablename__ = "race_point_source_batches"
+
+    id: Mapped[int] = mapped_column(
+        BigInteger().with_variant(Integer, "sqlite"), primary_key=True, autoincrement=True
+    )
+    source_file: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
+    source_sha256: Mapped[str] = mapped_column(Text, nullable=False)
+    meet_code: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    race_year: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    section_row_count: Mapped[int] = mapped_column(Integer, nullable=False)
+    passing_group_row_count: Mapped[int] = mapped_column(Integer, nullable=False)
+    loaded_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("meet_code", "race_year", name="uq_race_point_source_batches_meet_year"),
+        CheckConstraint("length(source_sha256) = 64", name="source_sha256_length"),
+        CheckConstraint("meet_code BETWEEN 1 AND 4", name="meet_code_range"),
+        CheckConstraint("race_year BETWEEN 2000 AND 2100", name="race_year_range"),
+        CheckConstraint("section_row_count >= 0", name="section_rows_nonnegative"),
+        CheckConstraint("passing_group_row_count >= 0", name="passing_rows_nonnegative"),
+    )
+
+
+class RaceSectionTime(Base):
+    """One authoritative time kind per runner and official passage point."""
+
+    __tablename__ = "race_section_times"
+
+    race_entry_id: Mapped[int] = mapped_column(
+        ForeignKey("race_entries.id", ondelete="CASCADE"), primary_key=True
+    )
+    point_code: Mapped[str] = mapped_column(Text, primary_key=True)
+    time_kind: Mapped[str] = mapped_column(Text, primary_key=True)
+    elapsed_time_ms: Mapped[int | None] = mapped_column(Integer)
+    position_raw: Mapped[int | None] = mapped_column(Integer)
+    source_name: Mapped[str] = mapped_column(Text, nullable=False)
+    source_field: Mapped[str | None] = mapped_column(Text)
+    source_batch_id: Mapped[int] = mapped_column(
+        ForeignKey("race_point_source_batches.id"), nullable=False
+    )
+
+    __table_args__ = (
+        CheckConstraint("time_kind IN ('cumulative','closing','segment')", name="valid_time_kind"),
+        CheckConstraint(
+            "elapsed_time_ms IS NULL OR elapsed_time_ms > 0", name="positive_elapsed_time"
+        ),
+        Index("race_section_times_point_kind_idx", "point_code", "time_kind", "race_entry_id"),
+        Index("race_section_times_batch_idx", "source_batch_id"),
+    )
+
+
+class RacePassingGroup(Base):
+    """Official whole-field passing notation at one passage point."""
+
+    __tablename__ = "race_passing_groups"
+
+    race_id: Mapped[int] = mapped_column(
+        ForeignKey("races.id", ondelete="CASCADE"), primary_key=True
+    )
+    point_code: Mapped[str] = mapped_column(Text, primary_key=True)
+    notation_raw: Mapped[str] = mapped_column(Text, nullable=False)
+    source_batch_id: Mapped[int] = mapped_column(
+        ForeignKey("race_point_source_batches.id"), nullable=False
+    )
+
+    __table_args__ = (Index("race_passing_groups_batch_idx", "source_batch_id"),)
 
 
 class RunningTrial(Base):

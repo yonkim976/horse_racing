@@ -10,6 +10,7 @@ from horse_racing.collectors.kra_api import KraApiError, response_body
 
 _KOREAN_DATE = re.compile(r"^(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일")
 _FIRST_INTEGER = re.compile(r"(\d+)")
+_EQUIPMENT_MARK = re.compile(r"^(.+?)\s*([+-])\s*$")
 
 
 class GateEntrySheetItem(BaseModel):
@@ -21,6 +22,7 @@ class GateEntrySheetItem(BaseModel):
     race_number: int = Field(alias="raceNo")
     gate_number: int = Field(alias="gtno")
     horse_name: str = Field(alias="hrnm")
+    equipment_card_raw: str | None = Field(default=None, alias="equipCrs")
 
     @field_validator("race_date", mode="before")
     @classmethod
@@ -59,6 +61,19 @@ class GateEntrySheetPage(BaseModel):
     page_no: int
     num_of_rows: int
     total_count: int
+
+
+def parse_equipment_changes(raw: str) -> list[tuple[int, str, str]]:
+    """Return only official API78 +/- marks, preserving the card's token order."""
+    result: list[tuple[int, str, str]] = []
+    for position, token in enumerate(raw.split(","), start=1):
+        match = _EQUIPMENT_MARK.fullmatch(token.strip())
+        if match is None:
+            continue
+        name = match.group(1).strip()
+        if name:
+            result.append((position, name, "added" if match.group(2) == "+" else "removed"))
+    return result
 
 
 def parse_gate_entry_sheet_page(payload: dict[str, Any]) -> GateEntrySheetPage:

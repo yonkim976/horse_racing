@@ -13,6 +13,7 @@ from horse_racing.db.models import (
     IngestionRun,
     Race,
     Racecourse,
+    RacePassingGroup,
     RacePassingSummary,
     SourceDocument,
 )
@@ -21,6 +22,13 @@ from horse_racing.parsers.race_passing import RacePassingSummaryItem
 from horse_racing.services.entry_sheet import IngestionSummary, _upsert_racecourse
 from horse_racing.services.race_day import _find_race
 from horse_racing.services.raw_store import store_kra_page
+
+CORNER_POINTS = {
+    1: {1: "1C", 2: "2C", 3: "3C", 4: "4C", 7: "S1F", 8: "G1F"},
+    2: {1: "1C", 2: "2C", 3: "3C", 4: "4C", 7: "S1F", 8: "G1F"},
+    3: {1: "G8F", 2: "G6F", 3: "G4F", 5: "G3F", 7: "S1F", 8: "G2F", 9: "G1F"},
+    4: {1: "G8F", 2: "G6F", 3: "G4F", 5: "G3F", 7: "S1F", 8: "G2F", 9: "G1F"},
+}
 
 
 def passing_summary_data_exists(
@@ -183,6 +191,11 @@ def _upsert_items(
         race = _find_race(session, racecourse, item.race_date, item.race_number)
         if race is None:
             continue
+        score_sheet_points = set(
+            session.scalars(
+                select(RacePassingGroup.point_code).where(RacePassingGroup.race_id == race.id)
+            ).all()
+        )
         row = session.scalar(
             select(RacePassingSummary).where(RacePassingSummary.race_id == race.id)
         )
@@ -191,7 +204,8 @@ def _upsert_items(
             session.add(row)
         row.source_document_id = source_document_id
         for index, value in enumerate(item.corner_values, 1):
-            setattr(row, f"corner_{index}_raw", value)
+            point = CORNER_POINTS.get(meet, {}).get(index)
+            setattr(row, f"corner_{index}_raw", None if point in score_sheet_points else value)
         row.pass_time_3f_raw = item.pass_time_3f_raw
         row.pass_time_4f_raw = item.pass_time_4f_raw
         row.pass_time_3f_ms = item.pass_time_3f_ms

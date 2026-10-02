@@ -560,7 +560,7 @@ def collect_ratings(snapshot_date: str | None, page_size: int) -> int:
             page_size=page_size,
         )
     print(
-        f"레이팅 수집 완료: snapshot={snapshot_date}, "
+        f"API77 원문 보관 완료 (운영 레이팅 저장 제외): snapshot={snapshot_date}, "
         f"run={summary.run_id}, pages={summary.pages}, "
         f"fetched={summary.records_fetched}, written={summary.records_written}"
     )
@@ -1613,7 +1613,8 @@ def sync_latest(
     print(f"  경주 보강: {recent_start}~{supplemental_end}")
     print(f"  말 상태: {history_start}~{history_end}")
     print(f"  주행심사: {trial_start}~{trial_end}")
-    print("  기준정보: 레이팅·현역 말 프로필·등급변동")
+    print("  기준정보: 현역 말 프로필·등급변동")
+    print("  운영 레이팅: 출전표·경주 결과 기준 (API77 자동 수집 제외)")
     print(f"  경마장: {', '.join(MEET_METADATA[m][1] for m in meets)}")
     if 4 in meets:
         print("  영천 주행심사: 원천 형식 검증 전으로 수집 보류")
@@ -1677,7 +1678,6 @@ def sync_latest(
             "주행심사",
             lambda: collect_running_trials(trial_start, trial_end, [m for m in meets if m != 4]),
         ),
-        ("레이팅", lambda: collect_ratings(format_yyyymmdd(today), page_size)),
         (
             "현역 말 프로필",
             lambda: collect_horse_profiles(meets, page_size, False, format_yyyymmdd(today)),
@@ -4327,7 +4327,7 @@ def main() -> int:
     backfill_passing_years_parser.add_argument("--page-size", type=int, default=1000)
     ratings_parser = subparsers.add_parser(
         "collect-ratings",
-        help="Collect current horse rating snapshots",
+        help="Archive API77 raw responses only; operational ratings use entry cards/results",
     )
     ratings_parser.add_argument(
         "--date",

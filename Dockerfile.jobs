@@ -1,0 +1,14 @@
+FROM ghcr.io/astral-sh/uv:python3.12-trixie-slim@sha256:5ae92e4d35b8d586d50ddf4aba6ecdd9f744237284d31c86bf45077e4e17e4bd
+
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/app/src \
+    UV_LINK_MODE=copy PATH="/app/.venv/bin:$PATH" TZ=Asia/Seoul
+
+# Reuse the locked lightweight runtime, not model-training dependencies.
+COPY pyproject.toml uv.lock .python-version README.md ./
+RUN uv sync --locked --no-dev --only-group web-prod --no-install-project \
+    && groupadd --gid 10001 collector \
+    && useradd --uid 10001 --gid 10001 --no-create-home collector
+COPY src ./src
+USER 10001:10001
+CMD ["python", "-m", "horse_racing.jobs.weekly_entry_cards"]

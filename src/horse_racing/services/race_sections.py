@@ -22,6 +22,7 @@ from horse_racing.db.models import (
     RaceEntry,
     RaceResult,
     RaceSectionResult,
+    RaceSectionTime,
     SourceDocument,
 )
 from horse_racing.parsers.race_day import parse_items
@@ -95,21 +96,37 @@ def section_day_is_stored(
     if not expected_entry_count:
         return True
 
-    covered_entry_count = session.scalar(
-        select(func.count(func.distinct(RaceSectionResult.race_entry_id)))
-        .select_from(RaceSectionResult)
-        .join(RaceSectionResult.race_entry)
+    expected_ids = session.scalars(
+        select(RaceEntry.id)
         .join(RaceEntry.race)
         .join(Race.racecourse)
         .join(RaceEntry.result)
         .where(
             Race.race_date_local == race_date,
             Racecourse.kra_meet_code == meet,
-            RaceSectionResult.section_code == "S1F",
+            Race.status == "completed",
             expected_filter,
         )
+    ).all()
+    if not expected_ids:
+        return True
+    canonical_ids = set(
+        session.scalars(
+            select(RaceSectionTime.race_entry_id).where(
+                RaceSectionTime.race_entry_id.in_(expected_ids),
+                RaceSectionTime.point_code == "S1F",
+            )
+        ).all()
     )
-    return int(covered_entry_count or 0) >= int(expected_entry_count or 0)
+    legacy_ids = set(
+        session.scalars(
+            select(RaceSectionResult.race_entry_id).where(
+                RaceSectionResult.race_entry_id.in_(expected_ids),
+                RaceSectionResult.section_code == "S1F",
+            )
+        ).all()
+    )
+    return len(canonical_ids | legacy_ids) >= int(expected_entry_count or 0)
 
 
 def ingest_race_sections(
@@ -159,6 +176,13 @@ def _write_section_results(
             continue
         entry = _find_entry(session, race, item)
         if entry is None:
+            continue
+        if session.scalar(
+            select(RaceSectionTime.race_entry_id)
+            .where(RaceSectionTime.race_entry_id == entry.id)
+            .limit(1)
+        ) is not None:
+            # The immutable score-sheet batch owns this runner's section data.
             continue
         for section in parse_section_values(item, meet):
             _upsert_section_result(session, entry, section)

@@ -11,6 +11,8 @@
     <p>
       {% if page_data.kind.slug == 'horses' %}
         이름 또는 마번으로 검색하세요. 기본은 출전이 많은 순입니다.
+      {% elif page_data.kind.slug == 'trainers' %}
+        최신 공식 현역 명단에 확인된 조교사만 표시합니다. 이름 또는 조교사번호로 검색하세요.
       {% else %}
         이름 또는 {{ page_data.kind.id_label }}로 검색하세요. 기본은 출전이 많은 순입니다.
       {% endif %}
@@ -18,6 +20,9 @@
   </div>
 
   <form class="filters search-filters" method="get" action="/{{ page_data.kind.slug }}">
+    {% if page_data.kind.slug in ['horses', 'trainers'] and page_data.meet_filter %}
+    <input type="hidden" name="meet" value="{{ page_data.meet_filter }}">
+    {% endif %}
     <label class="search-field">
       <span>검색</span>
       <input type="search" name="q" value="{{ page_data.query }}"
@@ -46,6 +51,26 @@
   </form>
 </section>
 
+{% if page_data.kind.slug in ['horses', 'trainers'] %}
+<nav class="entity-region-filter" aria-label="경마장별 {{ page_data.kind.plural_label }} 목록">
+  <div class="entity-region-tabs">
+    <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+      {% if not page_data.meet_filter %}aria-current="page"{% endif %}>전체</a>
+    <a href="/{{ page_data.kind.slug }}?meet=1&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+      {% if page_data.meet_filter == 1 %}aria-current="page"{% endif %}>서울</a>
+    <a href="/{{ page_data.kind.slug }}?meet=2&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+      {% if page_data.meet_filter == 2 %}aria-current="page"{% endif %}>제주</a>
+    <a href="/{{ page_data.kind.slug }}?meet=3&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+      {% if page_data.meet_filter == 3 %}aria-current="page"{% endif %}>부경</a>
+  </div>
+  {% if page_data.kind.slug == 'trainers' %}
+  <p class="entity-region-note">{{ page_data.affiliation_observed_on.isoformat() if page_data.affiliation_observed_on else '공식 명단 미확인' }} 기준 현역 조교사입니다. 퇴역·초청·해외 조교사는 데이터 정리 후 추가됩니다.</p>
+  {% else %}
+  <p class="entity-region-note">말 정보에 등록된 경마장 기준입니다. 영천·미분류 말은 전체 목록에서 확인할 수 있습니다.</p>
+  {% endif %}
+</nav>
+{% endif %}
+
 <section class="panel">
   <div class="panel-heading">
     <div>
@@ -54,15 +79,6 @@
     </div>
     <span>{{ page_data.total_count }}건 · {{ page_data.page }}/{{ page_data.total_pages }}페이지</span>
   </div>
-  {% if page_data.history_coverage %}
-    <p class="coverage-line">
-      적재{% if page_data.history_coverage.approximate %} 추정{% endif %} 레이팅 {{ "{:,}".format(page_data.history_coverage.rating_snapshots) }}
-      · 체중 {{ "{:,}".format(page_data.history_coverage.weight_rows) }}
-      · 훈련 {{ "{:,}".format(page_data.history_coverage.training_rows) }}
-      · 진료 {{ "{:,}".format(page_data.history_coverage.medical_rows) }}
-    </p>
-  {% endif %}
-
   {% if page_data.items %}
     <div class="table-scroll">
       <table data-sortable>
@@ -74,7 +90,7 @@
             <th>정보</th>
             <th>출전</th>
             {% if page_data.kind.slug == 'horses' %}
-              <th>레이팅</th>
+              <th>마지막 경주 레이팅</th>
               <th>체중</th>
               <th>훈련</th>
               <th>진료</th>
@@ -97,7 +113,7 @@
               <td>{{ item.subtitle }}</td>
               <td class="numeric">{{ item.entry_count }}회</td>
               {% if page_data.kind.slug == 'horses' %}
-                <td class="numeric">{{ item.latest_rating }}</td>
+                <td class="numeric">{{ item.last_race_rating }}</td>
                 <td class="numeric">{{ item.weight_count }}</td>
                 <td class="numeric">{{ item.training_count }}</td>
                 <td class="numeric">{{ item.medical_count }}</td>
@@ -111,7 +127,7 @@
     {% if page_data.total_pages > 1 %}
       <nav class="pagination" aria-label="페이지 이동">
         {% if page_data.page > 1 %}
-          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}&page={{ page_data.page - 1 }}">이전</a>
+          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&page={{ page_data.page - 1 }}">이전</a>
         {% else %}
           <span class="disabled">이전</span>
         {% endif %}
@@ -122,12 +138,12 @@
             {% elif item == page_data.page %}
               <strong>{{ item }}</strong>
             {% else %}
-              <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}&page={{ item }}">{{ item }}</a>
+              <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&page={{ item }}">{{ item }}</a>
             {% endif %}
           {% endfor %}
         </span>
         {% if page_data.page < page_data.total_pages %}
-          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}&page={{ page_data.page + 1 }}">다음</a>
+          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&page={{ page_data.page + 1 }}">다음</a>
         {% else %}
           <span class="disabled">다음</span>
         {% endif %}

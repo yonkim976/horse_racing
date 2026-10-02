@@ -56,11 +56,20 @@ SOURCE_QUERIES = (
         "FROM odds_snapshots x JOIN races r ON r.id=x.race_id",
     ),
     (
-        "구간기록",
+        "구간기록(성적표 원천)",
+        "경주",
+        "SELECT COUNT(*) row_count, MAX(r.race_date_local) latest_date "
+        "FROM race_section_times x JOIN race_entries e ON e.id=x.race_entry_id "
+        "JOIN races r ON r.id=e.race_id",
+    ),
+    (
+        "구간기록(원천 미커버)",
         "경주",
         "SELECT COUNT(*) row_count, MAX(r.race_date_local) latest_date "
         "FROM race_section_results x JOIN race_entries e ON e.id=x.race_entry_id "
-        "JOIN races r ON r.id=e.race_id",
+        "JOIN races r ON r.id=e.race_id WHERE NOT EXISTS "
+        "(SELECT 1 FROM race_section_times s WHERE s.race_entry_id=x.race_entry_id "
+        "AND s.point_code=x.section_code)",
     ),
     (
         "주행심사",

@@ -255,10 +255,7 @@ def load_dashboard(
         statuses_by_date.setdefault(race_date, set()).add(status)
     trial_date_set = set(trial_dates)
     if selected_date is None and available_dates:
-        if mobile_view:
-            selected_date = _pick_live_date(available_dates, today_seoul())
-        else:
-            selected_date = available_dates[0]
+        selected_date = _pick_live_date(available_dates, today_seoul())
     older_date, newer_date = adjacent_dates(available_dates, selected_date)
 
     course_rows = session.execute(
@@ -316,13 +313,14 @@ def load_dashboard(
         form_by_horse.update(_recent_trial_form_by_horse(session, debut_ids, selected_date))
     win_probs = latest_win_probabilities(session, [race.id for race in races])
     race_rows = [_race_row(race, filter_query, form_by_horse, win_probs) for race in races]
+    default_race_order = _order_mobile_races(
+        race_rows,
+        now_ms=now_seoul_ms(),
+        selected_date=selected_date,
+        today=today_seoul(),
+    )
     if mobile_view:
-        race_rows = _order_mobile_races(
-            race_rows,
-            now_ms=now_seoul_ms(),
-            selected_date=selected_date,
-            today=today_seoul(),
-        )
+        race_rows = default_race_order
         race_groups = (
             [RaceGroup(course_name="", races=race_rows, kind="schedule")]
             if race_rows
@@ -330,8 +328,11 @@ def load_dashboard(
         )
     else:
         race_groups = _race_groups(race_rows, grouped=True)
-    if selected_race_id is None and mobile_view and race_rows:
-        chosen_race = next((race for race in races if race.id == race_rows[0].id), chosen_race)
+    if selected_race_id is None and default_race_order:
+        chosen_race = next(
+            (race for race in races if race.id == default_race_order[0].id),
+            chosen_race,
+        )
     detail = _race_detail(session, chosen_race) if chosen_race is not None else None
     trial_rows = [_trial_row(trial) for trial in trials]
     entry_count = sum(len(race.entries) for race in races)

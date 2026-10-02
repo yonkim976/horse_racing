@@ -50,6 +50,54 @@
   </article>
 </section>
 
+{% if detail.kind.slug == 'trainers' %}
+<section id="trainer-managed-horses" class="panel">
+  <div class="panel-heading">
+    <div>
+      <p class="panel-kicker">CURRENT HORSES</p>
+      <h2>위탁관리 말</h2>
+    </div>
+    <span>{{ detail.managed_horses | length }}두</span>
+  </div>
+  <p class="panel-note">최신 말 프로필에 연결된 조교사 번호 기준입니다.</p>
+  {% if detail.managed_horses %}
+    <div class="table-scroll">
+      <table class="entry-table">
+        <thead>
+          <tr>
+            <th>순번</th>
+            <th>말</th>
+            <th>경마장</th>
+            <th>등급</th>
+            <th>나이</th>
+            <th>마지막 경주 레이팅</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for horse in detail.managed_horses %}
+            <tr>
+              <td class="numeric">{{ loop.index }}</td>
+              <td>
+                <a class="entity-link" href="/horses/{{ horse.official_id }}"><strong>{{ horse.name_ko }}</strong></a>
+              </td>
+            <td>{{ horse.meet_label }}</td>
+            <td>{{ horse.grade }}</td>
+              <td class="numeric">{{ horse.age }}</td>
+              <td class="numeric">{{ horse.rating }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <strong>연결된 현역 말이 없습니다.</strong>
+      <p>최신 말 프로필에서 이 조교사 번호로 확인된 현역 말이 없습니다.</p>
+    </div>
+  {% endif %}
+</section>
+{% endif %}
+
 <section class="board-layout entity-detail-layout">
   <article id="horse-profile" class="panel">
     <div class="panel-heading">
@@ -232,23 +280,19 @@
       <table class="entry-table">
         <thead>
           <tr>
-            <th>관측</th>
+            <th>경주일</th>
             <th>경마장</th>
-            <th>R1</th>
-            <th>R2</th>
-            <th>R3</th>
-            <th>R4</th>
+            <th>경주</th>
+            <th>경주 당시 레이팅</th>
           </tr>
         </thead>
         <tbody>
           {% for row in detail.ratings %}
             <tr>
-              <td class="numeric">{{ row.observed_label }}</td>
+              <td class="numeric">{{ row.race_date.strftime('%Y.%m.%d') }}</td>
               <td>{{ row.meet_label }}</td>
-              <td class="numeric">{{ row.rating_1 }}</td>
-              <td class="numeric">{{ row.rating_2 }}</td>
-              <td class="numeric">{{ row.rating_3 }}</td>
-              <td class="numeric"><strong>{{ row.rating_4 }}</strong></td>
+              <td>{{ row.race_label }}</td>
+              <td class="numeric"><strong>{{ row.rating }}</strong></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -428,7 +472,7 @@
               <td>{{ row.meet_label }}</td>
               <td>{{ row.rider_name }}</td>
               <td>{{ row.stable }}</td>
-              <td>{{ row.remark }}</td>
+              <td>{{ row.remark }}{% if row.location != '—' %} · {{ row.location }}{% endif %}</td>
             </tr>
           {% endfor %}
         </tbody>

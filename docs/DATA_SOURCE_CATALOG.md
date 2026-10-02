@@ -2,6 +2,8 @@
 
 최종 확인: 2026-08-28 (Asia/Seoul)
 
+2026-09-30 현재 실제 사용 endpoint와 제공 데이터·개수는 [KRA API 사용 목록](KRA_API_USAGE_INVENTORY_2026-09-30.md)을 우선 참고한다. 이 문서의 `VERIFIED` 항목은 현재 운영 사용 개수에 포함되지 않을 수 있다.
+
 이 문서는 다른 에이전트가 별도의 대화 맥락 없이 한국마사회(KRA) 원천을 확인하고 데이터를
 다운로드할 수 있도록 만든 인수인계 문서다. 프로젝트의 소스 전략은 다음과 같다.
 
@@ -118,7 +120,7 @@ uv run horse-racing backfill-gates \
 | `act_gubun` | 의미 | CLI | 2026-08-25 확인 totalCount (대략) |
 |---|---|---|---|
 | `y` (기본) | 현역 | `collect-horse-profiles` | 서울 1,777 / 제주 999 / 부산경남 1,279 |
-| `n` | 비현역 | `collect-horse-profiles --include-inactive` | 서울 ~28,310 / 제주 ~20,946 / 부산경남 ~12,230 |
+| `n` | 비현역을 포함한 넓은 목록. 2026-09-23 보관 응답에서는 현역 `y`의 서울·부산경남 말 3,061개가 전부 `n`에도 포함됨 | `collect-horse-profiles --include-inactive` | 서울 ~28,310 / 제주 ~20,946 / 부산경남 ~12,230 |
 | (생략) | 현역과 동일하게 동작 | — | `y`와 같은 건수 |
 
 ```bash
@@ -133,6 +135,8 @@ uv run horse-racing collect-horse-profiles --meets 1 2 3 --include-inactive
 기본 수집은 현역만 적재하므로, 비현역을 구분·유지하려면 이후 `is_active` 컬럼을 두고
 현역 목록을 주기적으로 갱신하는 설계가 필요하다. 통산·올해 성적은 수집 시점 스냅샷이므로
 과거 경주 feature로 그대로 JOIN하지 않는다.
+`act_gubun=n` 응답에 있다는 사실만으로 비현역이라고 판정하지 않는다. 같은 시점의
+`y` 목록과 대조하고 요청 매개변수·관측 시각을 보존한다.
 
 ## 5. 훈련·건강 원천
 
@@ -145,7 +149,7 @@ uv run horse-racing collect-horse-profiles --meets 1 2 3 --include-inactive
 | A | `VERIFIED` | [언덕주로 훈련정보](https://www.data.go.kr/data/15086327/openapi.do) / 15086327 | API224 참고문서; 언덕주로 조교 기록 | **PENDING** 활용신청·endpoint 재확인 |
 | A | `LIVE` | [마필진료 정보](https://www.data.go.kr/data/15057799/openapi.do) / 15057799 | `/API16_1/raceHorseClinic_1`; `meet`, `clinic_date`; 진료일·병원·진단 | `collect-medical` / `backfill-medical` → `horse_medical` |
 | A | `LIVE` | [출전마 장구사용 및 폐출혈 정보](https://www.data.go.kr/data/15058040/openapi.do) / 15058040 | `/API24_1/horseMedicalAndEquipment_1`; `meet`, `rc_date` | `collect-equipment` / `backfill-equipment` → `entry_equipment` |
-| B | `VERIFIED` | [마필 질병 정보](https://www.data.go.kr/data/15036577/openapi.do) / 15036577 | `/API33/horseDiseaseInfo`; 한·영 질병명과 설명 | 진료 코드/용어 사전 |
+| B | `VERIFIED` | [마필 질병 정보](https://www.data.go.kr/data/15036577/openapi.do) / 15036577 | `/API33/horseDiseaseInfo`; 한·영 질병명과 설명 필드. 2026-09-30 전체 3,523행 수집 시 `illDesc`는 전부 `-`여서 현재 설명 출처로 쓸 수 없음 | 진료 표제 사전; 설명은 KRA 질병용어 웹/프로필 상세 별도 검증 필요 |
 | A | `VERIFIED` | [조교사 월별 조교시간](https://www.data.go.kr/data/15089715/openapi.do) / 15089715 | 경마장·월별 조교사 훈련시간 | 조교사 훈련량 snapshot |
 | A | `VERIFIED` | [조교사 월별 조교비율](https://www.data.go.kr/data/15089716/openapi.do) / 15089716 | 경마장·월별 조교 비율 | 조교 패턴 feature |
 | A | `VERIFIED` | [조교사 월별 조교강도](https://www.data.go.kr/data/15089717/openapi.do) / 15089717 | `/trmmtrainstr/gettrmmtrainstr`; `meet`, `tr_month` | 월별 강도·순위 feature |

@@ -33,7 +33,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=15">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=19">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
     <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=16" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
@@ -50,22 +50,14 @@
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
           <a href="/" class="{% if active_nav == 'races' %}active{% endif %}">경주</a>
-          <a href="/forecast" class="{% if active_nav == 'forecast' %}active{% endif %}">미래 예측</a>
-          <a href="/validation" class="{% if active_nav == 'validation' %}active{% endif %}">예측 검증</a>
           <a href="/analysis" class="{% if active_nav == 'analysis' %}active{% endif %}">경주 분석</a>
           <a href="/racecourses/jeju/distances" class="{% if active_nav == 'distances' %}active{% endif %}">거리별 분석</a>
-          <a href="/predictions" class="{% if active_nav == 'predictions' %}active{% endif %}">예측 원장</a>
           <a href="/horses" class="{% if active_nav == 'horses' %}active{% endif %}">말</a>
           <a href="/jockeys" class="{% if active_nav == 'jockeys' %}active{% endif %}">기수</a>
           <a href="/trainers" class="{% if active_nav == 'trainers' %}active{% endif %}">조교사</a>
           <a href="/owners" class="{% if active_nav == 'owners' %}active{% endif %}">마주</a>
-          <a href="/data-status" class="{% if active_nav == 'data-status' %}active{% endif %}">데이터</a>
         </nav>
         <div class="header-actions">
-          <div class="data-state">
-            <span class="live-dot" aria-hidden="true"></span>
-            로컬 데이터
-          </div>
           <button type="button" class="theme-toggle" data-theme-toggle aria-label="다크 모드로 전환">
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>

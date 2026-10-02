@@ -23,6 +23,7 @@ from horse_racing.db.models import (
     RaceEntry,
     RaceResult,
     RaceSectionResult,
+    RaceSectionTime,
     SourceDocument,
     Trainer,
 )
@@ -466,6 +467,12 @@ class _EntityResolver:
 
 
 def _write_sections(session: Session, entry: RaceEntry, item: Dacom11Entry) -> None:
+    if entry.id is not None and session.scalar(
+        select(RaceSectionTime.race_entry_id)
+        .where(RaceSectionTime.race_entry_id == entry.id)
+        .limit(1)
+    ) is not None:
+        return
     passing = (item.passing_order_raw or "").split("-")
     positions = {}
     if len(passing) == 6:

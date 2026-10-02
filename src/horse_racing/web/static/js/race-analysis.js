@@ -208,7 +208,7 @@
       rows.map((t) => '<tr><td>' + shown(t.date) + '</td><td>' + shown(t.duration_minutes) + '분</td><td>' + shown(t.canter_count) + '</td><td>' + shown(t.gallop_count) + '</td><td>' + shown(t.rider_type) + '</td></tr>').join("") + '</tbody></table></div>' :
       '<div class="ra-empty"><strong>최근 28일에 수집된 조교 기록이 없습니다.</strong><span>미수집 상태와 실제 조교 미실시는 구분할 수 없습니다.</span></div>';
     const start = starts.length ? '<div class="ra-panel-heading"><h2>출발조교</h2></div><div class="ra-table-scroll"><table><thead><tr><th>일자</th><th>기승자</th><th>비고</th></tr></thead><tbody>' +
-      starts.map((t) => '<tr><td>' + shown(t.date) + '</td><td>' + shown(t.rider) + '</td><td>' + shown(t.remark) + '</td></tr>').join("") + '</tbody></table></div>' : '';
+      starts.map((t) => '<tr><td>' + shown(t.date) + '</td><td>' + shown(t.rider) + '</td><td>' + shown(t.remark) + (t.location ? ' · ' + shown(t.location) : '') + '</td></tr>').join("") + '</tbody></table></div>' : '';
     return main + start;
   }
   const rate = (value) => typeof value === "number" && Number.isFinite(value) ? value.toFixed(1) + "%" : "—";

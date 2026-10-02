@@ -92,6 +92,37 @@ WHERE r.status = 'completed'
 """
 
 _SECTIONS_QUERY = """
+WITH scored_sections AS (
+    SELECT s.race_entry_id, s.point_code, s.time_kind,
+           s.elapsed_time_ms, s.position_raw, s.source_name,
+           MAX(CASE WHEN s.time_kind = 'cumulative' THEN s.position_raw END)
+             OVER (PARTITION BY s.race_entry_id, s.point_code) AS cumulative_position,
+           ROW_NUMBER() OVER (
+             PARTITION BY s.race_entry_id, s.point_code
+             ORDER BY CASE WHEN s.elapsed_time_ms IS NULL THEN 1 ELSE 0 END,
+               CASE WHEN s.point_code IN ('G3F', 'G1F') THEN
+                 CASE s.time_kind WHEN 'closing' THEN 0 WHEN 'cumulative' THEN 1 ELSE 2 END
+               ELSE
+                 CASE s.time_kind WHEN 'cumulative' THEN 0 WHEN 'closing' THEN 1 ELSE 2 END
+               END
+           ) AS selection_rank
+    FROM race_section_times AS s
+), effective_sections AS (
+    SELECT s.race_entry_id, s.point_code AS section_code,
+           s.elapsed_time_ms,
+           COALESCE(s.cumulative_position, s.position_raw) AS position,
+           s.time_kind AS time_basis, s.source_name AS source_kind
+    FROM scored_sections AS s WHERE s.selection_rank = 1
+    UNION ALL
+    SELECT old.race_entry_id, old.section_code, old.elapsed_time_ms,
+           old.position, old.time_basis, old.source_kind
+    FROM race_section_results AS old
+    WHERE NOT EXISTS (
+        SELECT 1 FROM race_section_times AS newer
+        WHERE newer.race_entry_id = old.race_entry_id
+          AND newer.point_code = old.section_code
+    )
+)
 SELECT
     e.horse_id AS horse_id,
     e.id AS race_entry_id,
@@ -106,7 +137,7 @@ SELECT
     s.source_kind AS source_kind,
     res.finish_position AS finish_position,
     res.finish_time_ms AS finish_time_ms
-FROM race_section_results AS s
+FROM effective_sections AS s
 JOIN race_entries AS e ON e.id = s.race_entry_id
 JOIN races AS r ON r.id = e.race_id
 JOIN racecourses AS rc ON rc.id = r.racecourse_id

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import time
 from collections.abc import Iterable, Sequence
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,72 @@ from horse_racing.db.models import (
 from horse_racing.parsers.special_training import HillTrainingItem, SwimTrainingItem
 from horse_racing.services.entry_sheet import IngestionSummary
 from horse_racing.services.raw_store import store_kra_xml_page
+
+
+def ingest_swim_training_date(
+    session: Session,
+    client: KraXmlApiClient,
+    *,
+    training_date: str,
+    raw_data_dir: Path,
+    page_size: int = 20_000,
+) -> IngestionSummary:
+    """Daily API216 query; validate the complete date before business writes.
+
+    Replaces neither an empty day nor an incomplete response with deletions.
+    Annual backfill remains a separate command.
+    """
+    day = datetime.strptime(training_date, "%Y%m%d").date()
+    if day.strftime("%Y%m%d") != training_date:
+        raise ValueError("수영조교 날짜는 YYYYMMDD여야 합니다.")
+    run = _start_run(session, "data.go.kr/B551015/API216", "horse_swim_training")
+    try:
+        pages = list(
+            client.iter_pages(
+                endpoint=SWIM_TRAINING_ENDPOINT,
+                operation=SWIM_TRAINING_OPERATION,
+                public_params={"tr_date": training_date},
+                page_size=page_size,
+                service_key_parameter="ServiceKey",
+            )
+        )
+        items = [SwimTrainingItem.model_validate(raw) for p in pages for raw in p.items]
+        if (
+            not pages
+            or {p.total_count for p in pages} != {len(items)}
+            or [int(p.public_params["pageNo"]) for p in pages] != list(range(1, len(pages) + 1))
+            or any(item.training_date != day for item in items)
+        ):
+            raise ValueError("수영조교 날짜 또는 전체 페이지 범위가 불일치합니다.")
+        unique = _dedupe_swim_items(items)
+        documents = {}
+        for page in pages:
+            document_id = _store_source_document(
+                session,
+                page,
+                raw_data_dir=raw_data_dir,
+                data_type="horse_swim_training",
+                partition_date=training_date,
+                partition_name="daily",
+                run_id=run.id,
+                page_no=int(page.public_params["pageNo"]),
+            )
+            for raw in page.items:
+                item = SwimTrainingItem.model_validate(raw)
+                documents[(item.horse_id, item.meet_code, item.training_date)] = (
+                    document_id,
+                    page.retrieved_at_ms,
+                )
+        written = 0
+        for item in unique:
+            doc, stamp = documents[(item.horse_id, item.meet_code, item.training_date)]
+            written += _upsert_swim_items(
+                session, [item], source_document_id=doc, observed_at_ms=stamp
+            )
+        return _complete_run(session, run, len(pages), len(items), written)
+    except Exception as exc:
+        _fail_run(session, run.id, exc)
+        raise
 
 
 def ingest_swim_training(
@@ -318,9 +385,7 @@ def _horse_id_map(session: Session, horse_numbers: Iterable[str]) -> dict[str, i
             {
                 horse_number: horse_id
                 for horse_number, horse_id in session.execute(
-                    select(Horse.kra_horse_id, Horse.id).where(
-                        Horse.kra_horse_id.in_(batch)
-                    )
+                    select(Horse.kra_horse_id, Horse.id).where(Horse.kra_horse_id.in_(batch))
                 )
             }
         )

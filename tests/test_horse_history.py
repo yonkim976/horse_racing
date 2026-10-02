@@ -1,4 +1,5 @@
-from datetime import date
+import json
+from datetime import date, timedelta
 from pathlib import Path
 
 import httpx
@@ -22,6 +23,7 @@ from horse_racing.db.models import (
     HorseTraining,
     HorseWeightHistory,
     MedicalDiagnosisTerm,
+    SourceDocument,
 )
 from horse_racing.parsers.horse_history import (
     HorseDetailItem,
@@ -33,6 +35,8 @@ from horse_racing.parsers.horse_history import (
 )
 from horse_racing.services.horse_history import (
     _write_medical,
+    _write_ratings,
+    _write_training,
     ingest_horse_active_statuses,
     ingest_horse_profiles,
     ingest_medical,
@@ -283,13 +287,14 @@ def test_ingest_horse_history_tables(tmp_path: Path) -> None:
                 raw_data_dir=tmp_path / "raw",
             )
 
-        assert rating_summary.records_written == 1
+        assert rating_summary.records_fetched == 1
+        assert rating_summary.records_written == 0
         assert weight_summary.records_written == 1
         assert training_summary.records_written == 1
         assert medical_summary.records_written == 1
         assert profile_summary.records_written == 1
-        assert session.scalar(select(func.count()).select_from(Horse)) == 5
-        assert session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) == 1
+        assert session.scalar(select(func.count()).select_from(Horse)) == 4
+        assert session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) == 0
         assert session.scalar(select(func.count()).select_from(HorseWeightHistory)) == 1
         assert session.scalar(select(func.count()).select_from(HorseTraining)) == 1
         assert session.scalar(select(func.count()).select_from(HorseMedical)) == 1
@@ -325,6 +330,146 @@ def test_ingest_horse_history_tables(tmp_path: Path) -> None:
         session.refresh(horse)
         assert horse.is_active is True
         assert horse.active_status_source == "data.go.kr/B551015/API8_2:act_gubun=y"
+
+
+def test_api77_archive_preserves_existing_snapshots_and_both_region_raw_rows(tmp_path: Path):
+    first = rating_payload()["response"]["body"]["items"]["item"][0]
+    second = {**first, "meet": "영남", "rating1": 109, "rating4": None}
+    payload = api_payload([first, second])
+    factory = migrated_session(tmp_path)
+    with factory() as session:
+        horse = Horse(kra_horse_id=first["hrNo"], name_ko="원래 이름")
+        snapshot = HorseRatingSnapshot(
+            horse=horse, meet_code=1, rating_1=81, rating_4=102, observed_at_ms=1
+        )
+        session.add(snapshot)
+        session.commit()
+        with KraApiClient(
+            "test-key",
+            transport=httpx.MockTransport(lambda request: httpx.Response(200, json=payload)),
+        ) as client:
+            summary = ingest_ratings(
+                session, client, snapshot_date="20261001", raw_data_dir=tmp_path / "raw"
+            )
+        assert summary.records_fetched == 2
+        assert summary.records_written == 0
+        session.refresh(snapshot)
+        assert (snapshot.meet_code, snapshot.rating_1, snapshot.rating_4) == (1, 81, 102)
+        assert horse.name_ko == "원래 이름"
+        assert session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) == 1
+        document = session.scalar(select(SourceDocument))
+        assert document is not None
+        raw = json.loads(Path(document.local_path).read_text())
+        assert raw["response"]["body"]["items"]["item"] == [first, second]
+
+
+def test_batched_history_keeps_identity_duplicates_and_snapshots(tmp_path: Path) -> None:
+    factory = migrated_session(tmp_path)
+    rating = HorseRatingItem.model_validate(
+        rating_payload()["response"]["body"]["items"]["item"][0]
+    )
+    training = HorseTrainingItem.model_validate(
+        training_payload()["response"]["body"]["items"]["item"][0]
+    )
+    with factory() as session:
+        session.add(Horse(kra_horse_id=rating.horse_id, name_ko="기존이름", sex="수", meet_code=1))
+        session.commit()
+        assert _write_ratings(session, [rating, rating], 12345) == 2
+        session.commit()
+        assert _write_ratings(session, [rating.model_copy(update={"rating_1": 90.0})], 12345) == 1
+        assert _write_ratings(session, [rating], 12346) == 1
+        assert _write_training(session, [training, training], 12345) == 2
+        session.commit()
+        assert (
+            _write_training(
+                session, [training.model_copy(update={"duration_seconds": 1200})], 12346
+            )
+            == 1
+        )
+        assert _write_ratings(session, [], 12347) == 0
+        assert _write_training(session, [], 12347) == 0
+        session.commit()
+        assert session.scalar(select(func.count()).select_from(Horse)) == 2
+        assert session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) == 2
+        assert session.scalar(select(func.count()).select_from(HorseTraining)) == 1
+        horse = session.scalar(select(Horse).where(Horse.kra_horse_id == rating.horse_id))
+        assert horse.name_ko == rating.horse_name
+        assert horse.sex == "수" and horse.meet_code == 1
+        snapshot = session.scalar(
+            select(HorseRatingSnapshot).where(HorseRatingSnapshot.observed_at_ms == 12345)
+        )
+        assert snapshot.rating_1 == 90.0
+        row = session.scalar(select(HorseTraining))
+        assert row.duration_seconds == 1200 and row.observed_at_ms == 12346
+
+
+def test_training_overlapping_week_replay_keeps_ids_and_multiple_sessions(tmp_path: Path):
+    """Seven-day daily windows must not append the same session repeatedly."""
+    template = training_payload()["response"]["body"]["items"]["item"][0]
+    factory = migrated_session(tmp_path)
+    seen_ids = {}
+    start = date(2026, 9, 26)
+    with factory() as session:
+        for offset in range(3):
+            end = start + timedelta(days=6 + offset)
+            for ago in range(6, -1, -1):
+                day = end - timedelta(days=ago)
+                label = day.strftime("%Y%m%d")
+                items = [
+                    HorseTrainingItem.model_validate(
+                        {**template, "trDate": label, "stTime": begin, "spTime": finish}
+                    )
+                    for begin, finish in (
+                        (label + "063600", label + "065300"),
+                        (label + "070000", label + "071000"),
+                        (None, None),
+                    )
+                ]
+                _write_training(session, items + items, 100 + offset)
+                session.commit()
+                rows = session.scalars(
+                    select(HorseTraining).where(HorseTraining.training_date_local == day)
+                ).all()
+                assert len(rows) == 3
+                ids = {row.id for row in rows}
+                if day in seen_ids:
+                    assert ids == seen_ids[day]
+                seen_ids[day] = ids
+        assert session.scalar(select(func.count()).select_from(HorseTraining)) == 9 * 3
+        # An empty response means no new observation, not removal of old rows.
+        assert _write_training(session, [], 999) == 0
+        session.commit()
+        assert session.scalar(select(func.count()).select_from(HorseTraining)) == 9 * 3
+
+
+def test_training_pg_lock_is_ordered_before_existing_row_lookup():
+    from unittest.mock import Mock, patch
+
+    template = training_payload()["response"]["body"]["items"]["item"][0]
+    items = [
+        HorseTrainingItem.model_validate({**template, "meet": meet, "trDate": day})
+        for meet, day in ((3, "20260927"), (1, "20260926"), (3, "20260927"))
+    ]
+    session = Mock()
+    session.get_bind.return_value.dialect.name = "postgresql"
+
+    def lookup(_session, _items):
+        assert [call.args[1]["scope"] for call in session.execute.call_args_list] == [
+            120260926,
+            320260927,
+        ]
+        raise RuntimeError("lookup reached after locks")
+
+    import pytest
+
+    with patch("horse_racing.services.horse_history._history_horses", side_effect=lookup):
+        with pytest.raises(RuntimeError, match="lookup reached"):
+            _write_training(session, items, 123)
+    assert all(
+        str(call.args[0]) == "SELECT pg_advisory_xact_lock(:namespace, :scope)"
+        and call.args[1]["namespace"] == 181001
+        for call in session.execute.call_args_list
+    )
 
 
 def test_active_status_union_wins_over_inactive_at_another_meet(tmp_path: Path) -> None:
@@ -383,8 +528,6 @@ def test_medical_terms_deduplicate_without_changing_source_text(tmp_path: Path) 
             "양후지 근육통",
             "각막염",
         }
-        first = session.scalar(
-            select(HorseMedical).where(HorseMedical.diagnosis_2 == "각막염")
-        )
+        first = session.scalar(select(HorseMedical).where(HorseMedical.diagnosis_2 == "각막염"))
         assert first is not None
         assert first.diagnosis_1 == "양후지 근육통"

@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 
-from sqlalchemy import Select, func, or_, select, text
+from sqlalchemy import Select, func, or_, select
 from sqlalchemy.orm import Session, joinedload
 
 from horse_racing.db.models import (
@@ -12,7 +12,6 @@ from horse_racing.db.models import (
     HorseGradeChange,
     HorseMedical,
     HorseProfileSnapshot,
-    HorseRatingSnapshot,
     HorseStartTraining,
     HorseTraining,
     HorseWeightHistory,
@@ -26,6 +25,7 @@ from horse_racing.db.models import (
     RunningTrial,
     RunningTrialResult,
     Trainer,
+    TrainerAffiliationSnapshot,
 )
 from horse_racing.web.formatting import (
     format_age,
@@ -98,21 +98,12 @@ class EntityListItem:
     name_ko: str
     subtitle: str
     entry_count: int
-    latest_rating: str
+    last_race_rating: str
     weight_count: int
     training_count: int
     medical_count: int
     status_label: str | None = None
     status_key: str | None = None
-
-
-@dataclass(frozen=True, slots=True)
-class HorseHistoryCoverage:
-    rating_snapshots: int
-    weight_rows: int
-    training_rows: int
-    medical_rows: int
-    approximate: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -126,8 +117,9 @@ class EntityListPage:
     total_count: int
     total_pages: int
     page_items: list[int]
-    history_coverage: HorseHistoryCoverage | None
     status_filter: str = "all"
+    meet_filter: int | None = None
+    affiliation_observed_on: date | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -153,13 +145,21 @@ class HistoryRow:
 
 
 @dataclass(frozen=True, slots=True)
-class RatingRow:
-    observed_label: str
+class TrainerManagedHorse:
+    official_id: str
+    name_ko: str
     meet_label: str
-    rating_1: str
-    rating_2: str
-    rating_3: str
-    rating_4: str
+    grade: str
+    age: str
+    rating: str
+
+
+@dataclass(frozen=True, slots=True)
+class RatingRow:
+    race_date: date
+    meet_label: str
+    race_label: str
+    rating: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -234,6 +234,7 @@ class StartTrainingRow:
     rider_name: str
     stable: str
     remark: str
+    location: str = "—"
 
 
 @dataclass(frozen=True, slots=True)
@@ -280,6 +281,7 @@ class EntityDetail:
     place_count: int
     win_rate: str
     history: list[HistoryRow]
+    managed_horses: list[TrainerManagedHorse]
     ratings: list[RatingRow]
     weights: list[WeightRow]
     training: list[TrainingRow]
@@ -314,6 +316,7 @@ def load_entity_list(
     page_size: int = DEFAULT_PAGE_SIZE,
     sort: str = "starts",
     status: str = "all",
+    meet: int | None = None,
 ) -> EntityListPage | None:
     kind = ENTITY_KINDS.get(kind_slug)
     if kind is None:
@@ -323,23 +326,49 @@ def load_entity_list(
     page_size = min(max(page_size, 1), MAX_PAGE_SIZE)
     cleaned_query = query.strip()
     sort_key = sort if sort in {"starts", "name"} else "starts"
-    status_filter = status if kind.slug == "horses" and status in {
-        "all",
-        "active",
-        "retired",
-        "unknown",
-    } else "all"
+    status_filter = (
+        status
+        if kind.slug == "horses"
+        and status
+        in {
+            "all",
+            "active",
+            "retired",
+            "unknown",
+        }
+        else "all"
+    )
+    meet_filter = meet if kind.slug in {"horses", "trainers"} and meet in {1, 2, 3} else None
     model = kind.model
     official_id_column = getattr(model, kind.id_attr)
+    affiliation_observed_on = (
+        session.scalar(select(func.max(TrainerAffiliationSnapshot.observed_on)))
+        if kind.slug == "trainers"
+        else None
+    )
+    active_trainer_roster = (
+        select(
+            TrainerAffiliationSnapshot.trainer_id.label("trainer_id"),
+            TrainerAffiliationSnapshot.meet_code.label("meet_code"),
+        )
+        .where(TrainerAffiliationSnapshot.observed_on == affiliation_observed_on)
+        .subquery()
+        if kind.slug == "trainers"
+        else None
+    )
 
     filters = []
     if kind.slug == "horses":
+        if meet_filter is not None:
+            filters.append(Horse.meet_code == meet_filter)
         if status_filter == "active":
             filters.append(Horse.is_active.is_(True))
         elif status_filter == "retired":
             filters.append(Horse.is_active.is_(False))
         elif status_filter == "unknown":
             filters.append(Horse.is_active.is_(None))
+    elif kind.slug == "trainers" and meet_filter is not None:
+        filters.append(active_trainer_roster.c.meet_code == meet_filter)
     if cleaned_query:
         pattern = f"%{cleaned_query}%"
         filters.append(
@@ -350,6 +379,11 @@ def load_entity_list(
         )
 
     count_statement: Select[tuple[int]] = select(func.count()).select_from(model)
+    if active_trainer_roster is not None:
+        count_statement = count_statement.join(
+            active_trainer_roster,
+            active_trainer_roster.c.trainer_id == Trainer.id,
+        )
     if filters:
         count_statement = count_statement.where(*filters)
     total_count = int(session.scalar(count_statement) or 0)
@@ -371,6 +405,11 @@ def load_entity_list(
         entry_counts,
         entry_counts.c.entity_id == model.id,
     )
+    if active_trainer_roster is not None:
+        statement = statement.join(
+            active_trainer_roster,
+            active_trainer_roster.c.trainer_id == Trainer.id,
+        )
     if sort_key == "name":
         statement = statement.order_by(model.name_ko, model.id)
     else:
@@ -389,16 +428,12 @@ def load_entity_list(
             name_ko=entity.name_ko,
             subtitle=_list_subtitle(kind, entity),
             entry_count=int(entry_total or 0),
-            latest_rating=history_stats.get(entity.id, ("—", 0, 0, 0))[0],
+            last_race_rating=history_stats.get(entity.id, ("—", 0, 0, 0))[0],
             weight_count=history_stats.get(entity.id, ("—", 0, 0, 0))[1],
             training_count=history_stats.get(entity.id, ("—", 0, 0, 0))[2],
             medical_count=history_stats.get(entity.id, ("—", 0, 0, 0))[3],
-            status_label=_horse_status(entity.is_active)[0]
-            if isinstance(entity, Horse)
-            else None,
-            status_key=_horse_status(entity.is_active)[1]
-            if isinstance(entity, Horse)
-            else None,
+            status_label=_horse_status(entity.is_active)[0] if isinstance(entity, Horse) else None,
+            status_key=_horse_status(entity.is_active)[1] if isinstance(entity, Horse) else None,
         )
         for entity, entry_total in rows
     ]
@@ -412,8 +447,9 @@ def load_entity_list(
         total_count=total_count,
         total_pages=total_pages,
         page_items=page_window(page, total_pages),
-        history_coverage=_load_history_coverage(session) if kind.slug == "horses" else None,
         status_filter=status_filter,
+        meet_filter=meet_filter,
+        affiliation_observed_on=affiliation_observed_on,
     )
 
 
@@ -479,6 +515,11 @@ def load_entity_detail(
     )
 
     history = [_history_row(entry) for entry in entries]
+    managed_horses = (
+        _load_trainer_managed_horses(session, entity.kra_trainer_id)
+        if isinstance(entity, Trainer)
+        else []
+    )
     ratings: list[RatingRow] = []
     weights: list[WeightRow] = []
     training: list[TrainingRow] = []
@@ -509,7 +550,14 @@ def load_entity_detail(
         start_training = _load_start_training(session, entity_id)
         jockey_changes = _load_horse_jockey_changes(session, entity_id)
         scratches = _load_horse_scratches(session, entity_id)
-        rating_count = _count_for_horse(session, HorseRatingSnapshot, entity_id)
+        rating_count = int(
+            session.scalar(
+                _completed_starts_statement()
+                .where(RaceEntry.horse_id == entity_id)
+                .with_only_columns(func.count(RaceEntry.id))
+            )
+            or 0
+        )
         weight_count = _count_for_horse(session, HorseWeightHistory, entity_id)
         training_count = _count_for_horse(session, HorseTraining, entity_id)
         medical_count = _count_for_horse(session, HorseMedical, entity_id)
@@ -527,6 +575,7 @@ def load_entity_detail(
             training_count,
             medical_count,
             running_trial_count,
+            ratings[0] if ratings else None,
         )
 
     return EntityDetail(
@@ -540,6 +589,7 @@ def load_entity_detail(
         place_count=place_count,
         win_rate=_win_rate(win_count, entry_count),
         history=history,
+        managed_horses=managed_horses,
         ratings=ratings,
         weights=weights,
         training=training,
@@ -566,9 +616,7 @@ def load_entity_detail(
     )
 
 
-def load_entity_official_id(
-    session: Session, *, kind_slug: str, internal_id: int
-) -> str | None:
+def load_entity_official_id(session: Session, *, kind_slug: str, internal_id: int) -> str | None:
     """Resolve a legacy database primary key to its public KRA identifier."""
     kind = ENTITY_KINDS.get(kind_slug)
     if kind is None:
@@ -592,6 +640,48 @@ def _entry_foreign_key(kind: EntityKind):
         "owners": RaceEntry.owner_id,
     }
     return mapping[kind.slug]
+
+
+def _load_trainer_managed_horses(
+    session: Session, trainer_kra_id: str
+) -> list[TrainerManagedHorse]:
+    latest_profile = (
+        select(
+            HorseProfileSnapshot.horse_id.label("horse_id"),
+            func.max(HorseProfileSnapshot.observed_at_ms).label("observed_at_ms"),
+        )
+        .group_by(HorseProfileSnapshot.horse_id)
+        .subquery()
+    )
+    rows = session.execute(
+        select(Horse, HorseProfileSnapshot)
+        .join(
+            HorseProfileSnapshot,
+            HorseProfileSnapshot.horse_id == Horse.id,
+        )
+        .join(
+            latest_profile,
+            (latest_profile.c.horse_id == HorseProfileSnapshot.horse_id)
+            & (HorseProfileSnapshot.observed_at_ms == latest_profile.c.observed_at_ms),
+        )
+        .where(
+            HorseProfileSnapshot.trainer_kra_id == trainer_kra_id,
+            Horse.is_active.is_(True),
+        )
+        .order_by(Horse.name_ko, Horse.kra_horse_id)
+    ).all()
+    last_race_ratings = _load_last_race_rating_values(session, [horse.id for horse, _ in rows])
+    return [
+        TrainerManagedHorse(
+            official_id=horse.kra_horse_id,
+            name_ko=horse.name_ko,
+            meet_label=_meet_label(profile.meet_code),
+            grade=profile.grade or "—",
+            age=format_age(horse.birth_date, today_seoul()),
+            rating=last_race_ratings.get(horse.id, "—"),
+        )
+        for horse, profile in rows
+    ]
 
 
 def _list_subtitle(kind: EntityKind, entity: Horse | Jockey | Trainer | Owner) -> str:
@@ -641,6 +731,7 @@ def _horse_detail_meta(
     training_count: int,
     medical_count: int,
     running_trial_count: int,
+    last_race: RatingRow | None,
 ) -> list[tuple[str, str]]:
     as_of = today_seoul()
     rows = [
@@ -659,14 +750,21 @@ def _horse_detail_meta(
         ("부마", horse.sire_name or "—"),
         ("모마", horse.dam_name or "—"),
         ("거래가", horse.last_sale_amount_raw or "—"),
+        ("마지막 경주 레이팅", last_race.rating if last_race else "—"),
     ]
+    if last_race is not None:
+        rows.append(
+            (
+                "레이팅 기준 경주",
+                f"{last_race.race_date:%Y.%m.%d} {last_race.meet_label} {last_race.race_label}",
+            )
+        )
     if horse.active_status_observed_at_ms is not None:
         rows.append(("상태 확인", _format_observed_ms(horse.active_status_observed_at_ms)))
     if profile is not None:
         rows.extend(
             [
                 ("프로필 관측", profile.observed_label),
-                ("현재 레이팅", profile.rating),
                 ("통산 성적", profile.career_record),
                 ("올해 성적", profile.year_record),
                 ("통산 상금", profile.prize_money),
@@ -725,23 +823,50 @@ def _history_row(entry: RaceEntry) -> HistoryRow:
 def _load_ratings(session: Session, horse_id: int) -> list[RatingRow]:
     rows = list(
         session.scalars(
-            select(HorseRatingSnapshot)
-            .where(HorseRatingSnapshot.horse_id == horse_id)
-            .order_by(HorseRatingSnapshot.observed_at_ms.desc())
+            _completed_starts_statement()
+            .where(RaceEntry.horse_id == horse_id)
+            .options(joinedload(RaceEntry.race).joinedload(Race.racecourse))
+            .order_by(Race.race_date_local.desc(), Race.race_number.desc(), RaceEntry.id.desc())
             .limit(MAX_HORSE_AUX_ROWS)
         )
     )
     return [
         RatingRow(
-            observed_label=_format_observed_ms(row.observed_at_ms),
-            meet_label=_meet_label(row.meet_code),
-            rating_1=format_rating(row.rating_1),
-            rating_2=format_rating(row.rating_2),
-            rating_3=format_rating(row.rating_3),
-            rating_4=format_rating(row.rating_4),
+            race_date=row.race.race_date_local,
+            meet_label=row.race.racecourse.name_ko,
+            race_label=f"{row.race.race_number}R",
+            rating=format_rating(row.rating),
         )
         for row in rows
     ]
+
+
+def _completed_starts_statement() -> Select[tuple[RaceEntry]]:
+    """Actual past starts only; never substitute a card or API77 snapshot.
+
+    Include a stopped/disqualified runner, but exclude cancellations and result
+    placeholders. Keep a missing rating on the last start instead of falling
+    back to an older non-null value.
+    """
+    return (
+        select(RaceEntry)
+        .join(RaceEntry.race)
+        .join(RaceEntry.result)
+        .where(
+            Race.status == "completed",
+            Race.race_date_local <= today_seoul(),
+            RaceEntry.scratched.is_(False),
+            or_(
+                RaceResult.finish_position > 0,
+                RaceResult.finish_time_ms > 0,
+                RaceResult.disqualified.is_(True),
+            ),
+            or_(
+                RaceResult.finish_position.is_(None),
+                RaceResult.finish_position.not_in([91, 92, 94, 95, 99]),
+            ),
+        )
+    )
 
 
 def _load_weights(session: Session, horse_id: int) -> list[WeightRow]:
@@ -837,9 +962,7 @@ def _load_running_trials(session: Session, horse_id: int) -> list[RunningTrialRo
             distance=f"{trial.distance_m:,}m",
             judgement=_trial_judgement_label(result.judgement),
             judgement_class=_trial_judgement_class(result.judgement),
-            position=(
-                f"{result.finish_position}위" if result.finish_position is not None else "—"
-            ),
+            position=(f"{result.finish_position}위" if result.finish_position is not None else "—"),
             finish_time=format_race_time(result.finish_time_ms),
             body_weight=_format_kg(result.body_weight_kg),
             sections=_format_trial_sections(result),
@@ -914,14 +1037,13 @@ def _load_start_training(session: Session, horse_id: int) -> list[StartTrainingR
             rider_name=row.rider_name or "—",
             stable=_format_stable(row.stable_part, row.stable_number),
             remark=row.remark or "—",
+            location=row.location_raw or "—",
         )
         for row in rows
     ]
 
 
-def _load_horse_jockey_changes(
-    session: Session, horse_id: int
-) -> list[HorseJockeyChangeRow]:
+def _load_horse_jockey_changes(session: Session, horse_id: int) -> list[HorseJockeyChangeRow]:
     rows = list(
         session.scalars(
             select(JockeyChange)
@@ -1025,9 +1147,7 @@ def _load_latest_profile(session: Session, horse_id: int) -> ProfileSnapshotRow 
             row.third_count_year,
         ),
         prize_money=(
-            f"{row.prize_money_total_krw:,}원"
-            if row.prize_money_total_krw is not None
-            else "—"
+            f"{row.prize_money_total_krw:,}원" if row.prize_money_total_krw is not None else "—"
         ),
         trainer_name=row.trainer_name or "—",
         owner_name=row.owner_name or "—",
@@ -1043,10 +1163,7 @@ def _format_place_record(
 ) -> str:
     if starts is None and wins is None and seconds is None and thirds is None:
         return "—"
-    return (
-        f"{starts or 0}전 "
-        f"{wins or 0}/{seconds or 0}/{thirds or 0}"
-    )
+    return f"{starts or 0}전 {wins or 0}/{seconds or 0}/{thirds or 0}"
 
 
 def _meet_label(meet_code: int | None) -> str:
@@ -1130,11 +1247,7 @@ def _format_trial_sections(result: RunningTrialResult) -> str:
         ("G3F", result.g3f_ms),
         ("G1F", result.g1f_ms),
     )
-    parts = [
-        f"{label} {milliseconds / 1000:.1f}"
-        for label, milliseconds in values
-        if milliseconds
-    ]
+    parts = [f"{label} {milliseconds / 1000:.1f}" for label, milliseconds in values if milliseconds]
     return " · ".join(parts) if parts else "—"
 
 
@@ -1147,43 +1260,6 @@ def _count_for_horse(session: Session, model: type, horse_id: int) -> int:
     return int(
         session.scalar(select(func.count()).select_from(model).where(model.horse_id == horse_id))
         or 0
-    )
-
-
-def _load_history_coverage(session: Session) -> HorseHistoryCoverage:
-    if session.get_bind().dialect.name == "postgresql":
-        rows = session.execute(
-            text(
-                """
-                SELECT relname, n_live_tup::bigint
-                FROM pg_stat_user_tables
-                WHERE schemaname = 'public'
-                  AND relname IN (
-                    'horse_rating_snapshots',
-                    'horse_weight_history',
-                    'horse_training',
-                    'horse_medical'
-                  )
-                """
-            )
-        ).all()
-        estimates = {name: int(count) for name, count in rows}
-        if len(estimates) == 4:
-            return HorseHistoryCoverage(
-                rating_snapshots=estimates["horse_rating_snapshots"],
-                weight_rows=estimates["horse_weight_history"],
-                training_rows=estimates["horse_training"],
-                medical_rows=estimates["horse_medical"],
-                approximate=True,
-            )
-
-    return HorseHistoryCoverage(
-        rating_snapshots=int(
-            session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) or 0
-        ),
-        weight_rows=int(session.scalar(select(func.count()).select_from(HorseWeightHistory)) or 0),
-        training_rows=int(session.scalar(select(func.count()).select_from(HorseTraining)) or 0),
-        medical_rows=int(session.scalar(select(func.count()).select_from(HorseMedical)) or 0),
     )
 
 
@@ -1216,24 +1292,7 @@ def _load_horse_list_history(
         ).all()
     )
 
-    latest_rating_subq = (
-        select(
-            HorseRatingSnapshot.horse_id.label("horse_id"),
-            func.max(HorseRatingSnapshot.observed_at_ms).label("max_observed"),
-        )
-        .where(HorseRatingSnapshot.horse_id.in_(horse_ids))
-        .group_by(HorseRatingSnapshot.horse_id)
-        .subquery()
-    )
-    rating_rows = session.execute(
-        select(HorseRatingSnapshot.horse_id, HorseRatingSnapshot.rating_4)
-        .join(
-            latest_rating_subq,
-            (HorseRatingSnapshot.horse_id == latest_rating_subq.c.horse_id)
-            & (HorseRatingSnapshot.observed_at_ms == latest_rating_subq.c.max_observed),
-        )
-    ).all()
-    ratings = {horse_id: format_rating(rating_4) for horse_id, rating_4 in rating_rows}
+    ratings = _load_last_race_rating_values(session, horse_ids)
 
     return {
         horse_id: (
@@ -1244,3 +1303,31 @@ def _load_horse_list_history(
         )
         for horse_id in horse_ids
     }
+
+
+def _load_last_race_rating_values(session: Session, horse_ids: list[int]) -> dict[int, str]:
+    if not horse_ids:
+        return {}
+    last_start = (
+        _completed_starts_statement()
+        .where(RaceEntry.horse_id.in_(horse_ids))
+        .with_only_columns(
+            RaceEntry.horse_id.label("horse_id"),
+            RaceEntry.rating.label("rating"),
+            func.row_number()
+            .over(
+                partition_by=RaceEntry.horse_id,
+                order_by=(
+                    Race.race_date_local.desc(),
+                    Race.race_number.desc(),
+                    RaceEntry.id.desc(),
+                ),
+            )
+            .label("position"),
+        )
+        .subquery()
+    )
+    rating_rows = session.execute(
+        select(last_start.c.horse_id, last_start.c.rating).where(last_start.c.position == 1)
+    ).all()
+    return {horse_id: format_rating(rating) for horse_id, rating in rating_rows}

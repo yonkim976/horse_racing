@@ -5,11 +5,22 @@
 
 {% block content %}
 <section class="page-intro compact-intro">
-  <nav class="crumb-nav" aria-label="페이지 이동">
-    <a class="back-link" href="/">← 경주 목록</a>
-    <span class="chip-link">{{ page.course_name }} 경주로</span>
-  </nav>
+  <div>
+    <p class="eyebrow">{{ page.course_name|upper }} · COURSE MAP</p>
+    <h1>{{ page.course_name }} 경주로 지도</h1>
+    <p>경마장을 선택하고 거리별 출발점과 주행 경로를 확인하세요.</p>
+  </div>
 </section>
+{% set course = 'seoul' if page.meet_code == 1 else 'jeju' if page.meet_code == 2 else 'busan' if page.meet_code == 3 else 'yeongcheon' %}
+<nav class="distance-options course-map-meets" aria-label="지도 볼 경마장 선택">
+  {% for slug, label, meet_code in [('seoul', '서울', 1), ('jeju', '제주', 2), ('busan', '부경', 3), ('yeongcheon', '영천', 4)] %}
+    <a href="/racecourses/{{ slug }}/course" {% if page.meet_code == meet_code %}aria-current="page"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>
+<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">
+  {% if page.meet_code != 4 %}<a href="/racecourses/{{ course }}/distances">거리별 분석</a>{% endif %}
+  <a href="/racecourses/{{ course }}/course" aria-current="page">지도 보기</a>
+</nav>
 {% set track = page.racecourse_map %}
 {% if page.meet_code == 2 %}
   {% include "_jeju_course_explorer.html" %}

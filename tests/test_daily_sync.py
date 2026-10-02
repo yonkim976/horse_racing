@@ -42,14 +42,25 @@ def test_refresh_defaults_include_yeongcheon(monkeypatch, command) -> None:
 def test_yeongcheon_sections_use_verified_cumulative_fields() -> None:
     from horse_racing.parsers.race_section import RaceResultSectionItem, parse_section_values
 
-    item = RaceResultSectionItem.model_validate({
-        "rcDate": 20260913, "rcNo": 1, "rcDist": 1800,
-        "chulNo": 7, "hrNo": "0053366", "hrName": "모멘텀", "meet": "영천",
-        "buS1fAccTime": 14.1, "buS1fOrd": 4,
-        "buG3fAccTime": 75.8, "buG3fOrd": 3,
-        "buG1fAccTime": 101, "buG1fOrd": 2,
-        "buG8fAccTime": 0, "buG8fOrd": 0,
-    })
+    item = RaceResultSectionItem.model_validate(
+        {
+            "rcDate": 20260913,
+            "rcNo": 1,
+            "rcDist": 1800,
+            "chulNo": 7,
+            "hrNo": "0053366",
+            "hrName": "모멘텀",
+            "meet": "영천",
+            "buS1fAccTime": 14.1,
+            "buS1fOrd": 4,
+            "buG3fAccTime": 75.8,
+            "buG3fOrd": 3,
+            "buG1fAccTime": 101,
+            "buG1fOrd": 2,
+            "buG8fAccTime": 0,
+            "buG8fOrd": 0,
+        }
+    )
     values = {s.section_code: s for s in parse_section_values(item, 4)}
     assert values["G3F"].elapsed_time_ms == 75800
     assert values["G1F"].elapsed_time_ms == 101000
@@ -116,4 +127,57 @@ def test_sync_latest_dry_run_prints_every_refresh_window(
     assert "결과·구간: 20260820~20260827" in captured
     assert "말 상태: 20260813~20260827" in captured
     assert "주행심사: 20260813~20260827" in captured
-    assert "레이팅·현역 말 프로필·등급변동" in captured
+    assert "기준정보: 현역 말 프로필·등급변동" in captured
+    assert "운영 레이팅: 출전표·경주 결과 기준 (API77 자동 수집 제외)" in captured
+
+
+def test_sync_latest_does_not_collect_api77(monkeypatch) -> None:
+    from horse_racing import cli
+
+    called = []
+    for name in (
+        "collect_schedule",
+        "backfill_results",
+        "backfill_sections",
+        "backfill_race_passing",
+        "backfill_jockey_changes",
+        "backfill_scratches",
+        "backfill_equipment",
+        "backfill_steward_reports",
+        "backfill_weights",
+        "backfill_training",
+        "backfill_medical",
+        "backfill_start_training",
+        "collect_running_trials",
+        "collect_horse_profiles",
+        "collect_grade_changes",
+        "repair_entry_links",
+    ):
+
+        def stub(*args, _name=name, **kwargs):
+            called.append(_name)
+            return 0
+
+        monkeypatch.setattr(cli, name, stub)
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("API77 must not update operational rating snapshots")
+
+    monkeypatch.setattr(cli, "collect_ratings", forbidden)
+    monkeypatch.setattr(cli, "SessionLocal", forbidden)
+    assert (
+        cli.sync_latest(
+            as_of="20261001",
+            meets=[1, 2, 3],
+            schedule_days=7,
+            recent_lookback_days=7,
+            history_lookback_days=14,
+            trial_lookback_days=14,
+            page_size=1000,
+            include_dividends=False,
+            dry_run=False,
+        )
+        == 0
+    )
+    assert "collect_schedule" in called
+    assert "backfill_results" in called

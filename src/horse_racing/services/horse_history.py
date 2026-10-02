@@ -5,7 +5,7 @@ import time
 from pathlib import Path
 
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.dialects.postgresql import insert as postgres_insert
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.orm import Session
@@ -58,7 +58,12 @@ def ingest_ratings(
     raw_data_dir: Path,
     page_size: int = 1000,
 ) -> IngestionSummary:
-    observed_at_ms = _now_ms()
+    """Archive API77 raw responses without updating operational rating snapshots.
+
+    Operational ratings come from race_entries (entry cards/results). Retaining
+    the original responses keeps the legacy source auditable without repeating
+    its horse-only, cross-meet snapshot overwrite.
+    """
     return _ingest_dataset(
         session,
         client,
@@ -70,7 +75,7 @@ def ingest_ratings(
             public_params={"_type": "json"},
         ),
         item_model=HorseRatingItem,
-        writer=lambda sess, _meet, items: _write_ratings(sess, items, observed_at_ms),
+        writer=lambda _session, _meet, _items: 0,
         race_date=snapshot_date,
         meet=0,
         raw_data_dir=raw_data_dir,
@@ -298,9 +303,7 @@ def ingest_horse_active_statuses(
             existing.update(
                 {
                     horse.kra_horse_id: horse
-                    for horse in session.scalars(
-                        select(Horse).where(Horse.kra_horse_id.in_(batch))
-                    )
+                    for horse in session.scalars(select(Horse).where(Horse.kra_horse_id.in_(batch)))
                 }
             )
 
@@ -348,18 +351,25 @@ def _write_ratings(
     items: list[HorseRatingItem],
     observed_at_ms: int,
 ) -> int:
-    written = 0
-    for item in items:
-        horse = _upsert_horse(session, item.horse_id, item.horse_name)
-        row = session.scalar(
+    horses = _history_horses(session, items)
+    horse_ids = [horse.id for horse in horses.values()]
+    existing: dict[int, HorseRatingSnapshot] = {}
+    for start in range(0, len(horse_ids), 500):
+        for row in session.scalars(
             select(HorseRatingSnapshot).where(
-                HorseRatingSnapshot.horse_id == horse.id,
+                HorseRatingSnapshot.horse_id.in_(horse_ids[start : start + 500]),
                 HorseRatingSnapshot.observed_at_ms == observed_at_ms,
             )
-        )
+        ):
+            existing[row.horse_id] = row
+    written = 0
+    for item in items:
+        horse = horses[item.horse_id]
+        row = existing.get(horse.id)
         if row is None:
             row = HorseRatingSnapshot(horse_id=horse.id, observed_at_ms=observed_at_ms)
             session.add(row)
+            existing[horse.id] = row
         row.meet_code = item.meet_code
         row.rating_1 = item.rating_1
         row.rating_2 = item.rating_2
@@ -408,18 +418,41 @@ def _write_training(
     items: list[HorseTrainingItem],
     observed_at_ms: int,
 ) -> int:
+    # A nullable start/end time does not participate in PostgreSQL UNIQUE the
+    # way a non-null key does. Serialize overlapping collectors before reading
+    # existing rows, including records whose times have not been published.
+    # Lock only the DB write phase (source pages were fetched beforehand).
+    if session.get_bind().dialect.name == "postgresql":
+        for meet, day in sorted({(item.meet_code, item.training_date) for item in items}):
+            session.execute(
+                text("SELECT pg_advisory_xact_lock(:namespace, :scope)"),
+                {"namespace": 181001, "scope": meet * 100_000_000 + int(day.strftime("%Y%m%d"))},
+            )
+    horses = _history_horses(session, items)
+    horse_ids = [horse.id for horse in horses.values()]
+    dates = {item.training_date for item in items}
+    existing: dict[tuple, HorseTraining] = {}
+    for start in range(0, len(horse_ids), 500):
+        for row in session.scalars(
+            select(HorseTraining).where(
+                HorseTraining.horse_id.in_(horse_ids[start : start + 500]),
+                HorseTraining.training_date_local.in_(dates),
+            )
+        ):
+            existing[
+                (
+                    row.horse_id,
+                    row.meet_code,
+                    row.training_date_local,
+                    row.started_at_raw,
+                    row.ended_at_raw,
+                )
+            ] = row
     written = 0
     for item in items:
-        horse = _upsert_horse(session, item.horse_id, item.horse_name)
-        row = session.scalar(
-            select(HorseTraining).where(
-                HorseTraining.horse_id == horse.id,
-                HorseTraining.meet_code == item.meet_code,
-                HorseTraining.training_date_local == item.training_date,
-                HorseTraining.started_at_raw == item.started_at_raw,
-                HorseTraining.ended_at_raw == item.ended_at_raw,
-            )
-        )
+        horse = horses[item.horse_id]
+        key = (horse.id, item.meet_code, item.training_date, item.started_at_raw, item.ended_at_raw)
+        row = existing.get(key)
         if row is None:
             row = HorseTraining(
                 horse_id=horse.id,
@@ -430,6 +463,7 @@ def _write_training(
                 observed_at_ms=observed_at_ms,
             )
             session.add(row)
+            existing[key] = row
         row.stable_part = item.stable_part
         row.stable_number = item.stable_number
         row.trainer_name = item.trainer_name
@@ -515,9 +549,7 @@ def _write_medical(
     for start in range(0, len(medical_ids), 500):
         for link in session.scalars(
             select(HorseMedicalDiagnosis).where(
-                HorseMedicalDiagnosis.horse_medical_id.in_(
-                    medical_ids[start : start + 500]
-                )
+                HorseMedicalDiagnosis.horse_medical_id.in_(medical_ids[start : start + 500])
             )
         ):
             existing_links[(link.horse_medical_id, link.source_slot)] = link
@@ -630,6 +662,30 @@ def _upsert_person(
     session.flush()
 
 
+def _history_horses(
+    session: Session,
+    items: list[HorseRatingItem] | list[HorseTrainingItem],
+) -> dict[str, Horse]:
+    """Resolve a history batch without a network round trip for every runner."""
+    horse_ids = sorted({item.horse_id for item in items})
+    horses: dict[str, Horse] = {}
+    for start in range(0, len(horse_ids), 500):
+        for horse in session.scalars(
+            select(Horse).where(Horse.kra_horse_id.in_(horse_ids[start : start + 500]))
+        ):
+            horses[horse.kra_horse_id] = horse
+    for item in items:
+        horse = horses.get(item.horse_id)
+        if horse is None:
+            horse = Horse(kra_horse_id=item.horse_id, name_ko=item.horse_name)
+            session.add(horse)
+            horses[item.horse_id] = horse
+        elif item.horse_name and item.horse_name != "(이름없음)":
+            horse.name_ko = item.horse_name
+    session.flush()
+    return horses
+
+
 def _upsert_horse(session: Session, kra_horse_id: str, name_ko: str) -> Horse:
     horse = session.scalar(select(Horse).where(Horse.kra_horse_id == kra_horse_id))
     if horse is None:
@@ -654,6 +710,7 @@ def _ingest_dataset[ItemT: BaseModel](
     meet: int,
     raw_data_dir: Path,
     page_size: int,
+    writer_with_sources=None,
 ) -> IngestionSummary:
     run = IngestionRun(
         source=definition.source,
@@ -666,6 +723,7 @@ def _ingest_dataset[ItemT: BaseModel](
     run_id = run.id
 
     parsed_items: list[ItemT] = []
+    item_sources: list[tuple[int, int]] = []
     pages = 0
     try:
         for fetched in client.iter_pages(
@@ -685,33 +743,39 @@ def _ingest_dataset[ItemT: BaseModel](
                 run_id=run_id,
                 page_no=page_no,
             )
-            session.add(
-                SourceDocument(
-                    ingestion_run_id=run_id,
-                    source_url=fetched.source_url,
-                    endpoint=fetched.endpoint,
-                    operation=fetched.operation,
-                    request_params_json=json.dumps(
-                        fetched.public_params,
-                        ensure_ascii=False,
-                        sort_keys=True,
-                        separators=(",", ":"),
-                    ),
-                    requested_at_ms=fetched.requested_at_ms,
-                    retrieved_at_ms=fetched.retrieved_at_ms,
-                    http_status_code=fetched.status_code,
-                    content_type=fetched.content_type,
-                    response_bytes=len(fetched.body),
-                    local_path=str(stored.path),
-                    sha256=stored.sha256,
-                )
+            document = SourceDocument(
+                ingestion_run_id=run_id,
+                source_url=fetched.source_url,
+                endpoint=fetched.endpoint,
+                operation=fetched.operation,
+                request_params_json=json.dumps(
+                    fetched.public_params,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ),
+                requested_at_ms=fetched.requested_at_ms,
+                retrieved_at_ms=fetched.retrieved_at_ms,
+                http_status_code=fetched.status_code,
+                content_type=fetched.content_type,
+                response_bytes=len(fetched.body),
+                local_path=str(stored.path),
+                sha256=stored.sha256,
             )
-            parsed_items.extend(parse_items(fetched.payload, item_model))
+            session.add(document)
+            session.flush()
+            page_items = parse_items(fetched.payload, item_model)
+            item_sources.extend((document.id, n) for n in range(1, len(page_items) + 1))
+            parsed_items.extend(page_items)
             pages += 1
             run.records_fetched = len(parsed_items)
             session.commit()
 
-        records_written = writer(session, meet, parsed_items)
+        records_written = (
+            writer_with_sources(session, meet, parsed_items, item_sources)
+            if writer_with_sources is not None
+            else writer(session, meet, parsed_items)
+        )
         run.status = "completed"
         run.completed_at_ms = _now_ms()
         run.records_written = records_written

@@ -9,10 +9,11 @@ from datetime import date
 from pathlib import Path
 
 from sqlalchemy import func, select
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session, joinedload, selectinload
 
 from horse_racing.collectors.kra_api import KraApiClient
 from horse_racing.db.models import (
+    EntryEquipmentChange,
     IngestionRun,
     Race,
     Racecourse,
@@ -21,6 +22,7 @@ from horse_racing.db.models import (
 )
 from horse_racing.parsers.gate_entry_sheet import (
     GateEntrySheetItem,
+    parse_equipment_changes,
     parse_gate_entry_sheet_page,
 )
 from horse_racing.services.raw_store import store_kra_page
@@ -55,6 +57,7 @@ def ingest_gate_numbers(
     run_id = run.id
 
     parsed_items: list[GateEntrySheetItem] = []
+    latest_observed_at_ms = 0
     pages = 0
     try:
         for fetched in client.iter_gate_entry_sheet_pages(
@@ -95,11 +98,17 @@ def ingest_gate_numbers(
             )
             parsed = parse_gate_entry_sheet_page(fetched.payload)
             parsed_items.extend(parsed.items)
+            latest_observed_at_ms = max(latest_observed_at_ms, fetched.retrieved_at_ms)
             pages += 1
             run.records_fetched = len(parsed_items)
             session.commit()
 
-        records_written = _write_gate_numbers(session, meet=meet, items=parsed_items)
+        records_written = _write_gate_numbers(
+            session,
+            meet=meet,
+            items=parsed_items,
+            observed_at_ms=latest_observed_at_ms,
+        )
         run.status = "completed"
         run.completed_at_ms = _now_ms()
         run.records_written = records_written
@@ -143,6 +152,7 @@ def _write_gate_numbers(
     *,
     meet: int,
     items: list[GateEntrySheetItem],
+    observed_at_ms: int,
 ) -> int:
     if not items:
         return 0
@@ -151,32 +161,37 @@ def _write_gate_numbers(
     if racecourse is None:
         raise ValueError(f"출발번호를 연결할 경마장이 없습니다: meet={meet}")
 
-    entries_by_race: dict[int, list[RaceEntry]] = {}
-    written = 0
-    for item in items:
-        race = session.scalar(
+    dates = {item.race_date for item in items}
+    races = list(
+        session.scalars(
             select(Race).where(
                 Race.racecourse_id == racecourse.id,
-                Race.race_date_local == item.race_date,
-                Race.race_number == item.race_number,
+                Race.race_date_local.in_(dates),
             )
         )
+    )
+    races_by_key = {(race.race_date_local, race.race_number): race for race in races}
+    entries_by_race: dict[int, list[RaceEntry]] = {}
+    if races:
+        for entry in session.scalars(
+            select(RaceEntry)
+            .options(
+                joinedload(RaceEntry.horse),
+                selectinload(RaceEntry.equipment_changes),
+            )
+            .where(RaceEntry.race_id.in_([race.id for race in races]))
+        ):
+            entries_by_race.setdefault(entry.race_id, []).append(entry)
+    written = 0
+    for item in items:
+        race = races_by_key.get((item.race_date, item.race_number))
         if race is None:
             raise ValueError(
                 "출발번호와 연결할 경주가 없습니다: "
                 f"meet={meet}, date={item.race_date}, race={item.race_number}"
             )
 
-        entries = entries_by_race.get(race.id)
-        if entries is None:
-            entries = list(
-                session.scalars(
-                    select(RaceEntry)
-                    .options(joinedload(RaceEntry.horse))
-                    .where(RaceEntry.race_id == race.id)
-                )
-            )
-            entries_by_race[race.id] = entries
+        entries = entries_by_race.get(race.id, [])
 
         by_number = {entry.horse_number: entry for entry in entries}
         entry = by_number.get(item.gate_number)
@@ -213,6 +228,37 @@ def _write_gate_numbers(
             )
 
         entry.gate_number = item.gate_number
+        if item.equipment_card_raw is not None and (
+            entry.equipment_card_observed_at_ms is None
+            or observed_at_ms >= entry.equipment_card_observed_at_ms
+        ):
+            entry.equipment_card_raw = item.equipment_card_raw
+            entry.equipment_card_observed_at_ms = observed_at_ms
+            marks = {
+                position: (name, change_type)
+                for position, name, change_type in parse_equipment_changes(
+                    item.equipment_card_raw
+                )
+            }
+            existing = {mark.position: mark for mark in entry.equipment_changes}
+            for position, mark in existing.items():
+                if position not in marks:
+                    entry.equipment_changes.remove(mark)
+            for position, (name, change_type) in marks.items():
+                mark = existing.get(position)
+                if mark is None:
+                    entry.equipment_changes.append(
+                        EntryEquipmentChange(
+                            position=position,
+                            equipment_name_raw=name,
+                            change_type=change_type,
+                            observed_at_ms=observed_at_ms,
+                        )
+                    )
+                else:
+                    mark.equipment_name_raw = name
+                    mark.change_type = change_type
+                    mark.observed_at_ms = observed_at_ms
         written += 1
 
     session.flush()
@@ -221,10 +267,14 @@ def _write_gate_numbers(
 
 def _name_key(value: str) -> str:
     normalized = unicodedata.normalize("NFKC", value).strip()
+    # Historical API78 cards prefix some otherwise identical horse names with
+    # a decorative star (for example ★은빛나래 in the 2017-01-07 Seoul card).
+    normalized = normalized.removeprefix("★").strip()
     # KRA sources use different home-region labels for the same runner
     # (for example ``[부]`` versus ``[영남]``).  Gate and entry number are
     # already matched above, so compare the stable base horse name here.
     normalized = re.sub(r"^\[[^\]]+\]\s*", "", normalized)
+    normalized = normalized.removeprefix("★").strip()
     return "".join(normalized.split()).casefold()
 
 

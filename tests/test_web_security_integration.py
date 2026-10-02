@@ -27,6 +27,67 @@ def middleware_client(
     return TestClient(app, client=(peer, 50000))
 
 
+def test_origin_guard_rejects_direct_requests_before_route_loader(monkeypatch, capsys) -> None:
+    token = "a" * 32
+    monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", token)
+    calls = []
+
+    async def render():
+        calls.append(True)
+        return PlainTextResponse("ok")
+
+    with middleware_client(render) as client:
+        assert client.get("/").status_code == 403
+        assert client.get("/", headers={"X-Mapilog-Origin-Token": "wrong"}).status_code == 403
+        assert client.get("/", headers={"X-Mapilog-Origin-Token": token}).status_code == 403
+        accepted = client.get("/", headers={
+            "X-Mapilog-Origin-Token": token,
+            "CF-Connecting-IP": "203.0.113.5",
+        })
+        assert client.get("/").status_code == 403
+
+    assert accepted.status_code == 200
+    assert accepted.text == "ok"
+    assert calls == [True]
+    output = capsys.readouterr().out
+    assert token not in output
+    assert '"category":"origin_guard"' in output
+
+
+def test_origin_guard_uses_verified_cloudflare_client_ip(monkeypatch) -> None:
+    token = "a" * 32
+    monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", token)
+
+    async def render(request: Request):
+        module = importlib.import_module("horse_racing.web.app")
+        return PlainTextResponse(module._client_rate_key(request))
+
+    with middleware_client(render, peer="10.1.2.3") as client:
+        first = client.get("/robots.txt", headers={
+            "X-Mapilog-Origin-Token": token,
+            "CF-Connecting-IP": "203.0.113.5",
+            "X-Forwarded-For": "198.51.100.99",
+        })
+        second = client.get("/robots.txt", headers={
+            "X-Mapilog-Origin-Token": token,
+            "CF-Connecting-IP": "2001:db8::5",
+        })
+        invalid = client.get("/robots.txt", headers={
+            "X-Mapilog-Origin-Token": token,
+            "CF-Connecting-IP": "not-an-ip",
+        })
+
+    assert first.text == "203.0.113.5"
+    assert second.text == "2001:db8::5"
+    assert invalid.status_code == 403
+
+
+def test_origin_guard_rejects_short_configured_token(monkeypatch) -> None:
+    monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", "too-short")
+    with pytest.raises(ValueError, match="at least 32 characters"):
+        create_app()
+
+
 def test_home_cache_preserves_selected_race_and_trial() -> None:
     calls = []
 

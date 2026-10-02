@@ -1,6 +1,6 @@
 """Refresh one KRA race day in the explicitly selected production database.
 
-The entry-sheet importer resets scratch flags, so scratches must be applied last.
+The entry-sheet importer preserves scratch flags; apply fresh scratches last.
 This script deliberately omits dividends and prediction publication.
 """
 

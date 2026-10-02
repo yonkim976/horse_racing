@@ -81,3 +81,33 @@ def test_ingest_entry_sheet_preserves_raw_and_upserts_database(tmp_path: Path) -
         assert "ServiceKey" not in document.request_params_json
         assert document.endpoint == "/API26_2/entrySheet_2"
         assert Path(document.local_path).read_bytes()
+
+
+def test_refresh_entry_sheet_preserves_existing_cancellation(tmp_path: Path) -> None:
+    payload = load_fixture()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=payload, request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        options = {
+            "race_date": "20260822",
+            "meet": 1,
+            "raw_data_dir": tmp_path / "raw",
+        }
+        ingest_entry_sheet(session, client, **options)
+        entries = list(session.scalars(select(RaceEntry).order_by(RaceEntry.id)))
+        assert all(entry.scratched is False for entry in entries)
+        entries[0].scratched = True
+        session.commit()
+
+        ingest_entry_sheet(session, client, **options)
+        session.expire_all()
+        refreshed = list(session.scalars(select(RaceEntry).order_by(RaceEntry.id)))
+        assert len(refreshed) == 2
+        assert refreshed[0].scratched is True
+        assert refreshed[1].scratched is False

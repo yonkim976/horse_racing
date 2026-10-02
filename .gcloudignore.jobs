@@ -1,0 +1,13 @@
+# Allowlist: never upload secrets, operational DBs, models or research folders.
+*
+!Dockerfile.jobs
+!Dockerfile.jobs.dockerignore
+!cloudbuild.jobs.yaml
+!pyproject.toml
+!uv.lock
+!.python-version
+!README.md
+!src/
+!src/**
+**/__pycache__/**
+**/*.pyc

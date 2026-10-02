@@ -1,0 +1,9 @@
+# Build/push only. Never deploy or reopen the web service.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: [build, -f, Dockerfile.jobs, -t, '${_IMAGE}', .]
+images: ['${_IMAGE}']
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_MEDIUM
+timeout: 600s

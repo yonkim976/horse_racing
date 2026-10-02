@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from pathlib import Path
 
 from sqlalchemy import select
@@ -186,6 +187,14 @@ def ingest_start_training(
         ),
         item_model=StartTrainingItem,
         writer=lambda sess, _meet, items: _write_start_training(sess, items, observed_at_ms),
+        writer_with_sources=lambda sess, _meet, items, sources: _write_start_training(
+            sess,
+            items,
+            observed_at_ms,
+            item_sources=sources,
+            expected_meet=meet,
+            expected_date=training_date,
+        ),
         race_date=training_date,
         meet=meet,
         raw_data_dir=raw_data_dir,
@@ -384,34 +393,81 @@ def _write_start_training(
     session: Session,
     items: list[StartTrainingItem],
     observed_at_ms: int,
+    *,
+    item_sources: list[tuple[int, int]] | None = None,
+    expected_meet: int | None = None,
+    expected_date: str | None = None,
 ) -> int:
+    """Preserve multiplicity across all pages; repeat collection is idempotent.
+
+    API22 has no event ID/time. occurrence_no is an anonymous storage slot.
+    A verified website date is authoritative and is never overwritten by API22.
+    Empty responses leave existing records intact.
+    """
+    if item_sources is not None and len(item_sources) != len(items):
+        raise ValueError("출발조교 원문 위치 수가 입력 행 수와 다릅니다.")
+    if any(
+        (expected_meet is not None and item.meet_code != expected_meet)
+        or (expected_date is not None and item.training_date.strftime("%Y%m%d") != expected_date)
+        for item in items
+    ):
+        raise ValueError("출발조교 응답 지역·날짜가 요청 범위와 다릅니다.")
+    groups = defaultdict(list)
+    for index, item in enumerate(items):
+        groups[(item.meet_code, item.training_date)].append((index, item))
     written = 0
-    for item in items:
-        horse = _upsert_horse(session, item.horse_id, item.horse_name)
-        row = session.scalar(
+    for (meet, day), incoming in groups.items():
+        if session.bind.dialect.name == "postgresql":
+            from sqlalchemy import text
+
+            session.execute(
+                text("SELECT pg_advisory_xact_lock(:key)"),
+                {"key": meet * 100_000_000 + int(day.strftime("%Y%m%d"))},
+            )
+        existing = session.scalars(
             select(HorseStartTraining).where(
-                HorseStartTraining.horse_id == horse.id,
-                HorseStartTraining.meet_code == item.meet_code,
-                HorseStartTraining.training_date_local == item.training_date,
-                HorseStartTraining.stable_part == item.stable_part,
-                HorseStartTraining.stable_number == item.stable_number,
-                HorseStartTraining.rider_name == item.rider_name,
+                HorseStartTraining.meet_code == meet,
+                HorseStartTraining.training_date_local == day,
             )
-        )
-        if row is None:
-            row = HorseStartTraining(
-                horse_id=horse.id,
-                meet_code=item.meet_code,
-                training_date_local=item.training_date,
-                stable_part=item.stable_part,
-                stable_number=item.stable_number,
-                rider_name=item.rider_name,
-                observed_at_ms=observed_at_ms,
+        ).all()
+        if any(row.source_kind == "kra_website" for row in existing):
+            continue
+        # An older concurrent collector must not roll back a newer snapshot.
+        if existing and max(row.observed_at_ms for row in existing) > observed_at_ms:
+            continue
+        slots = {(row.horse_id, row.occurrence_no): row for row in existing}
+        ordinals = defaultdict(int)
+        retained = set()
+        for index, item in incoming:
+            horse = _upsert_horse(session, item.horse_id, item.horse_name)
+            ordinals[horse.id] += 1
+            slot = (horse.id, ordinals[horse.id])
+            row = slots.get(slot)
+            if row is None:
+                row = HorseStartTraining(
+                    horse_id=horse.id,
+                    meet_code=meet,
+                    training_date_local=day,
+                    occurrence_no=slot[1],
+                    observed_at_ms=observed_at_ms,
+                )
+                session.add(row)
+            row.stable_part = item.stable_part
+            row.stable_number = item.stable_number
+            row.rider_name = item.rider_name
+            row.remark = item.remark
+            row.source_kind = "api22"
+            row.source_document_id, row.source_row_no = (
+                item_sources[index] if item_sources is not None else (None, None)
             )
-            session.add(row)
-        row.remark = item.remark
-        row.observed_at_ms = observed_at_ms
-        written += 1
+            row.location_raw = None
+            row.observed_at_ms = observed_at_ms
+            retained.add(slot)
+            written += 1
+        # Replace only a nonempty, fully fetched date snapshot. Raw versions remain archived.
+        for slot, row in slots.items():
+            if slot not in retained:
+                session.delete(row)
     return written
 
 

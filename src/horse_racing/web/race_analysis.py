@@ -25,11 +25,11 @@ from horse_racing.db.models import (
     Racecourse,
     RaceEntry,
     RaceResult,
-    RaceSectionResult,
     RunningTrial,
     RunningTrialResult,
     Trainer,
 )
+from horse_racing.services.section_read import load_section_observations
 from horse_racing.web.analysis_archive import load_verified_archive
 from horse_racing.web.formatting import (
     MAX_NORMAL_FINISH,
@@ -750,20 +750,11 @@ def _load_histories(session, horse_ids, cutoff, limit, *, start, end):
         .mappings()
         .all()
     )
-    section_rows = (
-        session.execute(
-            select(RaceSectionResult).where(
-                RaceSectionResult.race_entry_id.in_([row["entry_id"] for row in rows]),
-            )
-        )
-        .scalars()
-        .all()
-        if rows
-        else []
-    )
+    section_map = load_section_observations(session, [row["entry_id"] for row in rows])
     sections = defaultdict(dict)
-    for section in section_rows:
-        sections[section.race_entry_id][section.section_code] = section
+    for entry_id, section_rows in section_map.items():
+        for section in section_rows:
+            sections[entry_id][section.section_code] = section
     # Field sizes in source plans may be absent; count historical entries in one batch.
     missing_sizes = list({row["race_id"] for row in rows if not row["field_size"]})
     sizes = (
@@ -1398,7 +1389,9 @@ def _load_training(session, horse_ids, cutoff):
                     end_time=record.ended_at_raw,
                 )
             else:
-                item.update(rider=record.rider_name, remark=record.remark)
+                item.update(rider=record.rider_name, remark=record.remark,
+                    location=record.location_raw, source_kind=record.source_kind,
+                    occurrence_no=record.occurrence_no)
             destination[record.horse_id].append(item)
     for horse_id in horse_ids:
         rows = training[horse_id]

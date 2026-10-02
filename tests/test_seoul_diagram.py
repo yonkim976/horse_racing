@@ -109,7 +109,7 @@ def test_metric_calibration_keeps_distance_and_marked_spans_on_track(distance):
     assert sample(metric["closing200"])[-1] == (555, 418)
 
 
-def test_corner_reference_markers_merge_and_leave_unverified_positions_unmapped():
+def test_corner_reference_markers_merge_and_keep_unverified_positions_unmapped():
     for distance, corner in [(1000, "3C"), (1600, "2C"), (1700, "1C")]:
         metric = build_seoul_diagram(distance)["selected"]["metric"]
         shared = [m for m in metric["markers"] if corner in m["aliases"]]
@@ -118,8 +118,29 @@ def test_corner_reference_markers_merge_and_leave_unverified_positions_unmapped(
         assert shared[0]["elapsed"] == 200
     for distance in (1700, 1800, 1900):
         points = build_seoul_diagram(distance)["selected"]["metric"]["reference_points"]
-        assert "3C" not in points and "4C" not in points
+        assert "3C" not in points
+        assert "4C" in points
     assert "1C" not in build_seoul_diagram(2300)["selected"]["metric"]["reference_points"]
+
+
+@pytest.mark.parametrize("distance", [1000, 1200, 1300, 1400, 1600, 1700, 1800, 1900, 2000, 2300])
+def test_four_corner_uses_kra_530m_before_finish_reference(distance):
+    metric = build_seoul_diagram(distance)["selected"]["metric"]
+    marker = next(m for m in metric["markers"] if m["code"] == "4C")
+
+    assert marker["elapsed"] == distance - 530
+    assert marker["remaining"] == 530
+    assert metric["reference_points"]["4C"] == distance - 530
+
+
+def test_1200m_map_has_four_corner_but_no_unverified_first_or_second_corner():
+    metric = build_seoul_diagram(1200)["selected"]["metric"]
+    codes = {code for marker in metric["markers"] for code in marker["aliases"]}
+
+    assert "4C" in codes
+    assert "1C" not in codes
+    assert "2C" not in codes
+    assert metric["reference_points"]["4C"] == 670
 
 
 def test_corner_interval_highlight_ends_at_reference_points():

@@ -96,29 +96,6 @@
 ]
 </script>
 
-<section class="summary-grid" aria-label="선택일 요약">
-  <article class="summary-card primary">
-    <span>공식 경주</span>
-    <strong data-countup>{{ dashboard.race_count }}</strong>
-    <small>RACES</small>
-  </article>
-  <article class="summary-card trial-summary-card">
-    <span>주행심사</span>
-    <strong data-countup>{{ dashboard.trial_count }}</strong>
-    <small>TRIALS</small>
-  </article>
-  <article class="summary-card">
-    <span>공식 출전마</span>
-    <strong data-countup>{{ dashboard.entry_count }}</strong>
-    <small>RACE RUNNERS</small>
-  </article>
-  <article class="summary-card">
-    <span>심사 참가마</span>
-    <strong data-countup>{{ dashboard.trial_entry_count }}</strong>
-    <small>TRIAL RUNNERS</small>
-  </article>
-</section>
-
 <section class="board-layout race-board">
   <article class="panel schedule-panel">
     <div class="panel-heading">
@@ -205,7 +182,7 @@
 
   {% if dashboard.selected_race %}
     <article class="panel detail-panel">
-      <div class="race-hero">
+      <div class="race-hero" data-racecourse="{{ dashboard.selected_race.course_name }}">
         <div class="race-badge">
           <span>{{ dashboard.selected_race.course_name }}</span>
           <strong>{{ dashboard.selected_race.race_number }}R</strong>

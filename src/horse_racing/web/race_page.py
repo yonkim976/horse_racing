@@ -18,6 +18,10 @@ from horse_racing.db.models import (
     RaceStewardReport,
 )
 from horse_racing.parsers.race_section import MEET_SECTION_SPECS
+from horse_racing.services.section_read import (
+    load_official_segment_times,
+    load_section_observations,
+)
 from horse_racing.web.dashboard import EntryRow, _entry_row, _status
 from horse_racing.web.formatting import (
     display_race_title,
@@ -50,6 +54,7 @@ SECTION_LABELS: dict[str, str] = {
 }
 
 FINISH_LABEL = "FIN"
+OFFICIAL_SEGMENT_ORDER = ("S-1F", "10-8F", "8-6F", "6-4F", "4-2F", "2F-G")
 
 
 @dataclass(frozen=True, slots=True)
@@ -158,6 +163,8 @@ class RacePageData:
     entries: list[EntryRow]
     section_columns: list[SectionColumn]
     section_rows: list[SectionEntryRow]
+    official_segment_columns: list[str]
+    official_segment_rows: list[tuple[SectionEntryRow, list[str]]]
     has_sections: bool
     chart_data: dict[str, object]
     map_checkpoints: list[dict]
@@ -172,6 +179,12 @@ class RacePageData:
     video_url: str | None = None
 
 
+def _effective_sections(entry: RaceEntry):
+    if hasattr(entry, "_effective_sections"):
+        return entry._effective_sections
+    return entry.section_results
+
+
 def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
     race = session.scalar(
         select(Race)
@@ -183,11 +196,15 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
             selectinload(Race.entries).joinedload(RaceEntry.trainer),
             selectinload(Race.entries).joinedload(RaceEntry.owner),
             selectinload(Race.entries).joinedload(RaceEntry.result),
-            selectinload(Race.entries).selectinload(RaceEntry.section_results),
         )
     )
     if race is None or is_retired_halla_race(race):
         return None
+
+    section_map = load_section_observations(session, [entry.id for entry in race.entries])
+    official_segments = load_official_segment_times(session, [entry.id for entry in race.entries])
+    for entry in race.entries:
+        entry._effective_sections = section_map.get(entry.id, [])
 
     odds = {
         (snapshot.bet_type, snapshot.selection_key): snapshot.odds
@@ -207,6 +224,23 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
         section_columns,
         meet_code=race.racecourse.kra_meet_code,
     )
+    segment_codes = [
+        code for code in OFFICIAL_SEGMENT_ORDER
+        if any(code in values for values in official_segments.values())
+    ]
+    entry_ids_by_number = {entry.horse_number: entry.id for entry in race.entries}
+    official_segment_rows = [
+        (
+            row,
+            [
+                format_race_time(
+                    official_segments.get(entry_ids_by_number[row.horse_number], {}).get(code)
+                )
+                for code in segment_codes
+            ],
+        )
+        for row in section_rows
+    ]
     chart_data = build_section_chart_data(section_columns, section_rows)
     condition_parts = [part for part in (race.weather, race.track_condition) if part]
     if race.track_moisture_percent is not None:
@@ -243,6 +277,8 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
         entries=entries,
         section_columns=section_columns,
         section_rows=section_rows,
+        official_segment_columns=segment_codes,
+        official_segment_rows=official_segment_rows,
         has_sections=bool(section_columns),
         chart_data=chart_data,
         map_checkpoints=_map_checkpoints(race.distance_m, section_columns)
@@ -514,7 +550,7 @@ def _section_columns(race: Race) -> list[SectionColumn]:
     present_codes = {
         section.section_code
         for entry in race.entries
-        for section in entry.section_results
+        for section in _effective_sections(entry)
     }
     if not present_codes:
         return []
@@ -548,7 +584,7 @@ def _section_columns(race: Race) -> list[SectionColumn]:
     observations = [
         (
             _entry_cumulative_times(entry, meet_code=race.racecourse.kra_meet_code),
-            {section.section_code: section.position for section in entry.section_results},
+            {section.section_code: section.position for section in _effective_sections(entry)},
         )
         for entry in race.entries
     ]
@@ -720,7 +756,7 @@ def _section_rows(
     )
     rows: list[SectionEntryRow] = []
     for entry in entries:
-        by_code = {section.section_code: section for section in entry.section_results}
+        by_code = {section.section_code: section for section in _effective_sections(entry)}
         raw_finish = entry.result.finish_position if entry.result is not None else None
         finish_label, finish_sort, _special = format_finish_position(
             raw_finish, scratched=entry.scratched
@@ -839,17 +875,25 @@ def _column_time(cumulative: dict[str, int], column: SectionColumn) -> int | Non
 
 
 def _entry_cumulative_times(entry: RaceEntry, *, meet_code: int) -> dict[str, int]:
-    raw_times = {
-        section.section_code: section.elapsed_time_ms
-        for section in entry.section_results
-        if section.elapsed_time_ms is not None
-    }
+    sections = _effective_sections(entry)
+    raw_times = {}
+    time_bases = {}
+    for section in sections:
+        if section.time_basis == "segment":
+            continue
+        cumulative_ms = getattr(section, "cumulative_time_ms", None)
+        value = cumulative_ms if cumulative_ms is not None else section.elapsed_time_ms
+        if value is not None:
+            raw_times[section.section_code] = value
+            time_bases[section.section_code] = (
+                "cumulative" if cumulative_ms is not None else section.time_basis
+            )
     finish_time_ms = entry.result.finish_time_ms if entry.result is not None else None
     cumulative = derive_section_cumulative_times(
         raw_times,
         finish_time_ms=finish_time_ms,
         meet_code=meet_code,
-        time_bases={s.section_code: s.time_basis for s in entry.section_results},
+        time_bases=time_bases,
     )
     if finish_time_ms is not None:
         cumulative[FINISH_LABEL] = finish_time_ms
@@ -888,9 +932,11 @@ def derive_section_cumulative_times(
 
 
 def _closing_time(entry: RaceEntry, code: str, meet_code: int) -> str:
-    section = next((s for s in entry.section_results if s.section_code == code), None)
+    section = next((s for s in _effective_sections(entry) if s.section_code == code), None)
     if section is None or section.elapsed_time_ms is None:
         return "—"
+    if getattr(section, "closing_time_ms", None) is not None:
+        return format_race_time(section.closing_time_ms)
     if section.time_basis == "closing" or (section.time_basis is None and meet_code == 2):
         return format_race_time(section.elapsed_time_ms)
     cumulative = _entry_cumulative_times(entry, meet_code=meet_code)

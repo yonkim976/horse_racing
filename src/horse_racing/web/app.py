@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+import hmac
+import ipaddress
 import json
 import os
 import random
@@ -31,7 +33,6 @@ from starlette.middleware.gzip import GZipMiddleware
 
 from horse_racing.db.session import SessionLocal
 from horse_racing.web.dashboard import load_dashboard
-from horse_racing.web.data_status import load_data_status
 from horse_racing.web.distance_page import GRADE_LABELS, SEOUL_GRADE_LABELS, load_distance_page
 from horse_racing.web.entities import (
     DEFAULT_PAGE_SIZE,
@@ -40,10 +41,7 @@ from horse_racing.web.entities import (
     load_entity_list,
     load_entity_official_id,
 )
-from horse_racing.web.insights import (
-    load_forecast_page,
-    load_validation_page,
-)
+from horse_racing.web.insights import load_forecast_page
 from horse_racing.web.predictions import load_prediction_ledger
 from horse_racing.web.race_analysis import load_race_analysis_page
 from horse_racing.web.race_page import load_race_page
@@ -68,12 +66,13 @@ _PUBLIC_SITE_ORIGIN = "https://mapilog.xyz"
 _SITEMAP_PATHS = (
     "/",
     "/analysis",
-    "/forecast",
-    "/predictions",
-    "/validation",
     "/racecourses/seoul/distances",
     "/racecourses/jeju/distances",
     "/racecourses/busan/distances",
+    "/racecourses/seoul/course",
+    "/racecourses/jeju/course",
+    "/racecourses/busan/course",
+    "/racecourses/yeongcheon/course",
     "/horses",
     "/jockeys",
     "/trainers",
@@ -97,6 +96,7 @@ _CRAWLER_REQUESTS_PER_BURST = 10
 _TRUSTED_PROXY_CIDRS = parse_trusted_proxy_cidrs(os.getenv("TRUSTED_PROXY_CIDRS"))
 _MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 _MAX_RESPONSE_CACHE_ENTRY_BYTES = 512 * 1024
+_ORIGIN_TOKEN_HEADER = "x-mapilog-origin-token"
 
 
 def _diagnostic_path(path: str) -> str:
@@ -115,6 +115,9 @@ def _diagnostic_path(path: str) -> str:
     match = re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path)
     if match:
         return "/racecourses/{meet}/distances"
+    match = re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/course", path)
+    if match:
+        return "/racecourses/{meet}/course"
     if path.startswith("/static/"):
         return "/static/{asset}"
     return "/_other"
@@ -129,6 +132,9 @@ def _response_bytes(response: Response) -> int | None:
 
 
 def _client_rate_key(request: Request) -> str:
+    verified_client_ip = getattr(request.state, "verified_client_ip", None)
+    if verified_client_ip is not None:
+        return verified_client_ip
     return resolve_client_ip(
         request.client.host if request.client else None,
         request.headers.get("x-forwarded-for"),
@@ -194,6 +200,9 @@ def create_app(
     response_locks: AsyncLockRegistry[str] = AsyncLockRegistry()
     request_policy = RequestPolicy()
     active_request_gate = ActiveRequestGate(limit=16)
+    origin_token = os.getenv("MAPILOG_ORIGIN_TOKEN", "")
+    if origin_token and len(origin_token) < 32:
+        raise ValueError("MAPILOG_ORIGIN_TOKEN must be at least 32 characters")
 
     def cached(key: tuple[object, ...], loader: Callable[[], T], ttl: float = 20.0) -> T:
         now = monotonic()
@@ -249,6 +258,25 @@ def create_app(
             return response
 
         path = request.scope.get("path", "")
+        token_matches = not origin_token or hmac.compare_digest(
+            request.headers.get(_ORIGIN_TOKEN_HEADER, "").encode("utf-8"),
+            origin_token.encode("utf-8"),
+        )
+        cloudflare_ip = request.headers.get("cf-connecting-ip", "")
+        if origin_token and token_matches:
+            try:
+                request.state.verified_client_ip = str(ipaddress.ip_address(cloudflare_ip))
+            except ValueError:
+                token_matches = False
+        if not token_matches:
+            denied = Response(status_code=403, headers={"Cache-Control": "no-store"})
+            denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                "category": "origin_guard",
+                "reason": "missing_or_invalid_token",
+                "count": None,
+                "limit": None,
+            }
+            return finish(denied)
         user_agent = request.headers.get("user-agent", "")
         if path != "/robots.txt" and _BLOCKED_ANTHROPIC_UA.search(user_agent):
             denied = Response(
@@ -330,7 +358,7 @@ def create_app(
             ))
 
         cacheable = request.method == "GET" and (
-            path in {"/", "/m", "/forecast", "/validation", "/analysis", "/m/analysis"}
+            path in {"/", "/m", "/analysis", "/m/analysis"}
             or path.startswith("/races/")
         )
         view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
@@ -372,9 +400,7 @@ def create_app(
                 if not any(value.lower() == "user-agent" for value in vary):
                     vary.append("User-Agent")
                 response.headers["Vary"] = ", ".join(vary)
-            if response.status_code == 200 and path in {
-                "/forecast", "/validation", "/analysis", "/m/analysis",
-            }:
+            if response.status_code == 200 and path in {"/analysis", "/m/analysis"}:
                 response.headers["Cache-Control"] = "private, max-age=20"
             response.headers["Content-Security-Policy"] = (
                 "default-src 'self'; script-src 'self' 'unsafe-inline'; "
@@ -670,87 +696,6 @@ def create_app(
             },
         )
 
-    @app.get("/data-status", response_class=HTMLResponse)
-    def data_status(request: Request) -> HTMLResponse:
-        with session_factory() as session:
-            page = load_data_status(session)
-        return templates.TemplateResponse(
-            request=request,
-            name="data_status.html",
-            context={"active_nav": "data-status", "page": page},
-        )
-
-    @app.get("/predictions", response_class=HTMLResponse)
-    def predictions(request: Request) -> HTMLResponse:
-        with session_factory() as session:
-            page = load_prediction_ledger(session)
-        return templates.TemplateResponse(
-            request=request,
-            name="predictions.html",
-            context={"active_nav": "predictions", "page": page},
-        )
-
-    @app.get("/forecast", response_class=HTMLResponse)
-    def forecast(
-        request: Request,
-        race_date: Annotated[date | None, Query(alias="date")] = None,
-        meet: Annotated[int | None, Query(ge=1, le=4)] = None,
-        distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
-        grade: Annotated[str, Query(max_length=50)] = "",
-        race_id: Annotated[int | None, Query(ge=1)] = None,
-    ) -> HTMLResponse:
-        def load():
-            with session_factory() as session:
-                return load_forecast_page(
-                    session,
-                    selected_date=race_date,
-                    meet=meet,
-                    distance=distance,
-                    grade=grade,
-                    race_id=race_id,
-                )
-
-        page = cached(("forecast", race_date, meet, distance, grade, race_id), load)
-        return templates.TemplateResponse(
-            request=request,
-            name="forecast.html",
-            context={"active_nav": "forecast", "page": page},
-        )
-
-    @app.get("/validation", response_class=HTMLResponse)
-    def validation(
-        request: Request,
-        start: Annotated[date | None, Query()] = None,
-        end: Annotated[date | None, Query()] = None,
-        meet: Annotated[int | None, Query(ge=1, le=4)] = None,
-        distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
-        grade: Annotated[str, Query(max_length=50)] = "",
-        model: Annotated[str, Query(max_length=100)] = "",
-        mode: Annotated[str, Query(pattern="^(|live|historical)$")] = "",
-    ) -> HTMLResponse:
-        if start and end and start > end:
-            raise HTTPException(status_code=422, detail="시작일은 종료일보다 늦을 수 없습니다.")
-
-        def load():
-            with session_factory() as session:
-                return load_validation_page(
-                    session,
-                    start=start,
-                    end=end,
-                    meet=meet,
-                    distance=distance,
-                    grade=grade,
-                    model=model,
-                    mode=mode,
-                )
-
-        page = cached(("validation", start, end, meet, distance, grade, model, mode), load)
-        return templates.TemplateResponse(
-            request=request,
-            name="validation.html",
-            context={"active_nav": "validation", "page": page},
-        )
-
     def _analysis_data(
         *,
         race_id: int | None,
@@ -1016,6 +961,7 @@ def create_app(
         page: Annotated[int, Query(ge=1)] = 1,
         sort: Annotated[str, Query()] = "starts",
         status: Annotated[str, Query()] = "all",
+        meet: Annotated[int | None, Query(ge=1, le=3)] = None,
     ) -> HTMLResponse:
         if kind_slug not in ENTITY_KINDS:
             raise HTTPException(status_code=404, detail="Not found")
@@ -1030,9 +976,10 @@ def create_app(
                     page_size=DEFAULT_PAGE_SIZE,
                     sort=sort,
                     status=status,
+                    meet=meet,
                 )
 
-        data = cached(("entity-list", kind_slug, q, page, sort, status), load, ttl=60.0)
+        data = cached(("entity-list", kind_slug, q, page, sort, status, meet), load, ttl=60.0)
         if data is None:
             raise HTTPException(status_code=404, detail="Not found")
         return templates.TemplateResponse(

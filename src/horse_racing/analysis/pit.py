@@ -26,6 +26,8 @@ PIT_ALLOWED_SOURCES: dict[str, str] = {
     # "이전 경주의 결과"로만 join해야 한다 (경주일 < 예측 대상 경주일).
     "race_results": "race_date_local",
     "race_section_results": "race_date_local",
+    "race_section_times": "race_date_local",
+    "race_passing_groups": "race_date_local",
 }
 
 # 수집 시점 스냅샷이라 과거 시점으로 JOIN하면 미래 정보가 새는 원천.

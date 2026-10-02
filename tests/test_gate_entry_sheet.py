@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from horse_racing.collectors.kra_api import KraApiClient
 from horse_racing.db.engine import create_engine_for_url
 from horse_racing.db.models import (
+    EntryEquipmentChange,
     Horse,
     IngestionRun,
     Race,
@@ -20,7 +21,10 @@ from horse_racing.db.models import (
     RaceEntry,
     SourceDocument,
 )
-from horse_racing.parsers.gate_entry_sheet import parse_gate_entry_sheet_page
+from horse_racing.parsers.gate_entry_sheet import (
+    parse_equipment_changes,
+    parse_gate_entry_sheet_page,
+)
 from horse_racing.services.gate_entry_sheet import ingest_gate_numbers
 
 
@@ -31,12 +35,14 @@ def gate_payload(*, second_gate: int = 2) -> dict[str, object]:
             "raceNo": "제1경주",
             "gtno": "1",
             "hrnm": "테스트원",
+            "equipCrs": "망사눈+,계란형큰-",
         },
         {
             "raceDt": "2026년08월29일(토)",
             "raceNo": "제1경주",
             "gtno": str(second_gate),
             "hrnm": "테스트투",
+            "equipCrs": "망사",
         },
     ]
     return {
@@ -93,6 +99,12 @@ def test_parse_gate_entry_sheet_page() -> None:
     assert page.items[0].race_number == 1
     assert page.items[0].gate_number == 1
     assert page.items[0].horse_name == "테스트원"
+    assert page.items[0].equipment_card_raw == "망사눈+,계란형큰-"
+    assert parse_equipment_changes("망사눈+,Triabit +,계란형큰-,망사") == [
+        (1, "망사눈", "added"),
+        (2, "Triabit", "added"),
+        (3, "계란형큰", "removed"),
+    ]
 
 
 def test_ingest_gate_numbers_preserves_raw_and_updates_entries(tmp_path: Path) -> None:
@@ -122,6 +134,19 @@ def test_ingest_gate_numbers_preserves_raw_and_updates_entries(tmp_path: Path) -
         assert summary.records_written == 2
         entries = list(session.scalars(select(RaceEntry).order_by(RaceEntry.horse_number)))
         assert [entry.gate_number for entry in entries] == [1, 2]
+        assert [entry.equipment_card_raw for entry in entries] == [
+            "망사눈+,계란형큰-",
+            "망사",
+        ]
+        marks = list(
+            session.scalars(
+                select(EntryEquipmentChange).order_by(EntryEquipmentChange.position)
+            )
+        )
+        assert [(m.position, m.equipment_name_raw, m.change_type) for m in marks] == [
+            (1, "망사눈", "added"),
+            (2, "계란형큰", "removed"),
+        ]
 
         run = session.scalar(select(IngestionRun))
         assert run is not None
@@ -164,6 +189,54 @@ def test_ingest_gate_numbers_ignores_home_region_label_difference(
         )
 
         assert summary.records_written == 2
+
+
+def test_ingest_gate_numbers_ignores_historical_star_prefix(tmp_path: Path) -> None:
+    payload = gate_payload()
+    payload["response"]["body"]["items"]["item"][0]["hrnm"] = "★테스트원"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=payload, request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        seed_entries(session)
+        summary = ingest_gate_numbers(
+            session,
+            client,
+            race_date="20260829",
+            meet=1,
+            raw_data_dir=tmp_path / "raw",
+        )
+        assert summary.records_written == 2
+
+
+def test_newer_card_replaces_old_equipment_marks(tmp_path: Path) -> None:
+    payload = gate_payload()
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=payload, request=request)
+
+    session_factory = migrated_session(tmp_path)
+    with (
+        KraApiClient("secret-test-key", transport=httpx.MockTransport(handler)) as client,
+        session_factory() as session,
+    ):
+        seed_entries(session)
+        ingest_gate_numbers(
+            session, client, race_date="20260829", meet=1, raw_data_dir=tmp_path / "raw"
+        )
+        payload["response"]["body"]["items"]["item"][0]["equipCrs"] = "망사눈"
+        ingest_gate_numbers(
+            session, client, race_date="20260829", meet=1, raw_data_dir=tmp_path / "raw"
+        )
+        assert session.scalar(select(EntryEquipmentChange)) is None
+        first = session.scalar(select(RaceEntry).where(RaceEntry.horse_number == 1))
+        assert first is not None
+        assert first.equipment_card_raw == "망사눈"
 
 
 def test_ingest_gate_numbers_rejects_number_name_mismatch(tmp_path: Path) -> None:

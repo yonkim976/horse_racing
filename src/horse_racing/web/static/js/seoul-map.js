@@ -14,9 +14,10 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
     const occupied = [...route.querySelectorAll('[data-seoul-marker]')]
       .map((marker) => marker.getAttribute('transform').match(/-?[\d.]+/g).map(Number))
       .concat([[Number(gate.getAttribute('cx')), Number(gate.getAttribute('cy'))]]);
+    const arrowMarkerClearance = root.dataset.racecourseMap === 'seoul' ? 56 : 22;
     const clear = (at) => {
       const p = line.getPointAtLength(length * at);
-      return occupied.every(([x, y]) => Math.hypot(x - p.x, y - p.y) > 22);
+      return occupied.every(([x, y]) => Math.hypot(x - p.x, y - p.y) > arrowMarkerClearance);
     };
     for (let slot = .13; slot < .96; slot += .24) {
       const fraction = [0, .04, -.04, .08, -.08].map((shift) => slot + shift).find(clear);
@@ -41,20 +42,21 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
       else route.setAttribute('hidden', '');
     });
     const label = Number(distance).toLocaleString('ko-KR') + 'm';
-    root.querySelector('[data-seoul-view-label]').textContent = (distance === current ? '현재 경주 · ' : '경로 미리보기 · ') + label;
+    const viewLabel = root.querySelector('[data-seoul-view-label]');
+    if (viewLabel) viewLabel.textContent = (distance === current ? '' : '경로 미리보기 · ') + label;
     root.querySelector('[data-seoul-center-distance]').textContent = label;
     root.querySelector('[data-seoul-route-title]').textContent = button.dataset.routeTitle;
     root.querySelector('[data-seoul-route-description]').textContent = button.dataset.routeDescription;
     svg.setAttribute('aria-label', `${root.dataset.courseName || "서울"} ${label} 표준 경로 구조도`);
     svg.querySelector('title').textContent = `${root.dataset.courseName || "서울"} ${label} 표준 경로 구조도`;
   }));
-  sourceButton.addEventListener('click', () => {
+  sourceButton?.addEventListener('click', () => {
     const show = source.hidden;
     source.hidden = !show;
     viewport.classList.toggle('with-source', show);
     sourceButton.setAttribute('aria-pressed', String(show));
   });
-  root.querySelector('[data-seoul-zoom]').addEventListener('click', (event) => {
+  root.querySelector('[data-seoul-zoom]')?.addEventListener('click', (event) => {
     const zoom = viewport.classList.toggle('zoomed');
     event.currentTarget.setAttribute('aria-pressed', String(zoom));
     event.currentTarget.textContent = zoom ? '전체 보기' : '확대 보기';

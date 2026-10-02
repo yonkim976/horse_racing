@@ -28,8 +28,8 @@ from horse_racing.db.models import (
     Racecourse,
     RaceEntry,
     RaceResult,
-    RaceSectionResult,
 )
+from horse_racing.services.section_read import load_section_observations
 from horse_racing.web.formatting import MAX_NORMAL_FINISH
 
 KST = ZoneInfo("Asia/Seoul")
@@ -493,14 +493,10 @@ def load_forecast_page(
                 Race.distance_m,
                 RaceResult.finish_position,
                 RaceResult.finish_time_ms,
-                RaceSectionResult.section_code,
-                RaceSectionResult.elapsed_time_ms,
-                RaceSectionResult.position,
-                RaceSectionResult.time_basis,
+                RaceEntry.id,
             )
             .join(Race, Race.id == RaceEntry.race_id)
             .join(RaceResult, RaceResult.race_entry_id == RaceEntry.id)
-            .outerjoin(RaceSectionResult, RaceSectionResult.race_entry_id == RaceEntry.id)
             .where(
                 RaceEntry.horse_id.in_(horse_ids),
                 Race.race_date_local < date.fromisoformat(selected.date),
@@ -512,12 +508,18 @@ def load_forecast_page(
         ).all()
     history: dict[int, dict[int, dict[str, Any]]] = defaultdict(dict)
     for row in history_rows:
-        race_history = history[row[0]].setdefault(
+        history[row[0]].setdefault(
             row[1],
             {"date": row[2], "distance": row[3], "finish": row[4], "time": row[5], "sections": {}},
         )
-        if row[6]:
-            race_history["sections"][row[6]] = (row[7], row[8], row[9])
+    history_section_map = load_section_observations(session, [row[6] for row in history_rows])
+    for row in history_rows:
+        for section in history_section_map.get(row[6], []):
+            history[row[0]][row[1]]["sections"][section.section_code] = (
+                section.elapsed_time_ms,
+                section.position,
+                section.time_basis,
+            )
 
     run_row = session.execute(
         select(PredictionRun)
@@ -999,23 +1001,20 @@ def load_analysis_page(
     by_horse: dict[int, list[Any]] = defaultdict(list)
     for row in detail_rows:
         by_horse[row[0]].append(row)
-    section_rows = session.execute(
-        select(
-            RaceEntry.horse_id,
-            RaceSectionResult.section_code,
-            RaceSectionResult.elapsed_time_ms,
-            RaceSectionResult.position,
-            RaceSectionResult.time_basis,
-        )
-        .join(RaceEntry, RaceEntry.id == RaceSectionResult.race_entry_id)
-        .where(
-            RaceEntry.id.in_([row[12] for row in detail_rows]),
-            RaceSectionResult.section_code.in_(["S1F", "1C", "2C", "3C", "G1F"]),
-        )
-    ).all()
+    detail_section_map = load_section_observations(session, [row[12] for row in detail_rows])
     sections_by_horse: dict[int, list[Any]] = defaultdict(list)
-    for row in section_rows:
-        sections_by_horse[row[0]].append(row)
+    for row in detail_rows:
+        for section in detail_section_map.get(row[12], []):
+            if section.section_code in {"S1F", "1C", "2C", "3C", "G1F"}:
+                sections_by_horse[row[0]].append(
+                    (
+                        row[0],
+                        section.section_code,
+                        section.elapsed_time_ms,
+                        section.position,
+                        section.time_basis,
+                    )
+                )
     horses: list[AnalysisHorse] = []
     for horse_id in selected_ids:
         records = by_horse[horse_id]

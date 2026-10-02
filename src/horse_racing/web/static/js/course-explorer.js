@@ -158,10 +158,11 @@ document.querySelectorAll('[data-course-explorer]').forEach((root) => {
     start.querySelector('text').textContent = `${Number(distance).toLocaleString('ko-KR')}m 출발`;
     const label = Number(distance).toLocaleString('ko-KR') + 'm';
     root.querySelectorAll('[data-other-start]').forEach(marker => marker.toggleAttribute('hidden', marker.dataset.otherStart.replace(/[^0-9]/g, '') === distance));
-    root.querySelector('[data-course-view-label]').textContent = (own ? '현재 경주 · ' : '경로 미리보기 · ') + label;
+    const viewLabel = root.querySelector('[data-course-view-label]');
+    if (viewLabel) viewLabel.textContent = (own ? '' : '경로 미리보기 · ') + label;
     root.querySelector('[data-jeju-distance]').textContent = label;
     root.querySelector('[data-jeju-direction]').textContent = '시계 방향 ↻' + (Number(distance) > 1600 ? ' · 결승선 첫 통과 후 한 바퀴' : '');
-    root.querySelector('[data-jeju-route-title]').textContent = `${own ? '현재 경주' : '경로 미리보기'} · ${label}`;
+    root.querySelector('[data-jeju-route-title]').textContent = `${own ? '' : '경로 미리보기 · '}${label}`;
     root.querySelector('[data-jeju-route-description]').textContent = own
       ? '제주 시계 방향 경로입니다. 아래 기록은 현재 경주의 기록입니다.'
       : `다른 거리 출발점과 경로의 미리보기입니다. 아래 기록은 현재 ${Number(current).toLocaleString('ko-KR')}m 경주에 해당합니다.`;

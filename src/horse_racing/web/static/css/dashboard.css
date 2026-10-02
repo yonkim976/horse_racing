@@ -1383,7 +1383,61 @@ th[aria-sort] {
   position: relative;
   overflow: hidden;
   color: #eafff5;
+  --race-hero-glow: rgb(190 242 100 / 12%);
+  --race-badge-start: var(--lime);
+  --race-badge-end: #4ade80;
+  --race-badge-ink: #06251a;
+  --race-time-color: rgb(190 242 100 / 70%);
+  --race-action-start: var(--lime);
+  --race-action-end: #4ade80;
   background: var(--hero-bg);
+}
+
+.race-hero[data-racecourse="서울"] {
+  --race-hero-glow: rgb(125 211 252 / 18%);
+  --race-badge-start: #7dd3fc;
+  --race-badge-end: #38bdf8;
+  --race-badge-ink: #082f49;
+  --race-time-color: #bae6fd;
+  --race-action-start: #7dd3fc;
+  --race-action-end: #38bdf8;
+  background: linear-gradient(125deg, #102c49 0%, #164e77 58%, #1d6590 100%);
+}
+
+.race-hero[data-racecourse="제주"] {
+  --race-hero-glow: rgb(251 113 133 / 18%);
+  --race-badge-start: #ff9078;
+  --race-badge-end: #ef5947;
+  --race-badge-ink: #3b120e;
+  --race-time-color: #fecaca;
+  --race-action-start: #ff9078;
+  --race-action-end: #ef5947;
+  background: linear-gradient(125deg, #492027 0%, #702933 58%, #873540 100%);
+}
+
+.race-hero[data-racecourse="부경"],
+.race-hero[data-racecourse="부산경남"],
+.race-hero[data-racecourse="영남"],
+.race-hero[data-racecourse="부경"] {
+  --race-hero-glow: rgb(110 231 183 / 16%);
+  --race-badge-start: #6ee7b7;
+  --race-badge-end: #34d399;
+  --race-badge-ink: #064e3b;
+  --race-time-color: #a7f3d0;
+  --race-action-start: #6ee7b7;
+  --race-action-end: #34d399;
+  background: linear-gradient(125deg, #0b382d 0%, #0c5b42 58%, #0f6a4c 100%);
+}
+
+.race-hero[data-racecourse="영천"] {
+  --race-hero-glow: rgb(196 181 253 / 18%);
+  --race-badge-start: #7a60b7;
+  --race-badge-end: #61479d;
+  --race-badge-ink: #ffffff;
+  --race-time-color: #ddd6fe;
+  --race-action-start: #7a60b7;
+  --race-action-end: #61479d;
+  background: linear-gradient(125deg, #2d234b 0%, #47366f 58%, #55417c 100%);
 }
 
 .race-hero::after {
@@ -1393,7 +1447,7 @@ th[aria-sort] {
   width: 260px;
   height: 260px;
   content: "";
-  background: radial-gradient(closest-side, rgb(190 242 100 / 12%), transparent);
+  background: radial-gradient(closest-side, var(--race-hero-glow), transparent);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -1406,8 +1460,8 @@ th[aria-sort] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #06251a;
-  background: linear-gradient(160deg, var(--lime) 0%, #4ade80 100%);
+  color: var(--race-badge-ink);
+  background: linear-gradient(160deg, var(--race-badge-start) 0%, var(--race-badge-end) 100%);
 }
 
 .race-badge span {
@@ -1732,7 +1786,7 @@ th[aria-sort] {
 
 .race-title-row p {
   margin: 0 0 5px;
-  color: rgb(190 242 100 / 70%);
+  color: var(--race-time-color);
   font: 600 11px var(--font-mono);
   letter-spacing: 0.04em;
 }
@@ -1769,8 +1823,8 @@ th[aria-sort] {
   align-items: center;
   min-height: 34px;
   padding: 0 14px;
-  color: #06251a;
-  background: linear-gradient(120deg, var(--lime), #4ade80);
+  color: var(--race-badge-ink);
+  background: linear-gradient(120deg, var(--race-action-start), var(--race-action-end));
   border-radius: 999px;
   font-size: 12px;
   font-weight: 800;
@@ -2623,11 +2677,33 @@ th[aria-sort] {
 .panel > .distance-note { padding: 0 24px; }
 .distance-controls > .distance-note { padding: 0; margin-bottom: 0; }
 .distance-subtitle { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; max-width: 240px; white-space: normal; }
+.distance-view-tabs { display: flex; align-items: center; gap: 4px; width: max-content; max-width: 100%; margin: 14px 0 24px; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-2); }
+.distance-view-tabs a { min-width: 110px; padding: 9px 16px; border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 700; text-align: center; text-decoration: none; transition: color .15s, background .15s; }
+.distance-view-tabs a:hover { color: var(--ink); background: var(--surface); }
+.distance-view-tabs a[aria-current="page"] { color: var(--accent-ink, var(--ink)); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.course-map-meets { margin-top: 0; }
+
+/* Horse directory regional filters */
+.entity-region-filter { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: -16px 0 24px; }
+.entity-region-tabs { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-2); }
+.entity-region-tabs a { min-width: 64px; padding: 8px 14px; border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 700; text-align: center; text-decoration: none; transition: color .15s, background .15s; }
+.entity-region-tabs a:hover { color: var(--ink); background: var(--surface); }
+.entity-region-tabs a[aria-current="page"] { color: var(--accent-ink, var(--ink)); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.entity-region-note { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+@media (max-width: 640px) {
+  .entity-region-filter { align-items: flex-start; flex-direction: column; gap: 8px; margin: -10px 0 18px; }
+  .entity-region-tabs { width: 100%; }
+  .entity-region-tabs a { flex: 1; min-width: 0; padding: 9px 8px; }
+}
+
 @media (max-width: 640px) {
   .distance-controls { padding: 16px; }
   .distance-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .distance-options a { padding: 12px 8px; }
   .distance-options strong { font-size: 17px; }
+  .course-map-meets { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .distance-view-tabs { width: 100%; margin: 12px 0 18px; }
+  .distance-view-tabs a { flex: 1; min-width: 0; padding: 9px 8px; }
 }
 
 .race-video-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 15px; border:1px solid rgb(255 255 255 / 35%); border-radius:12px; background:#d5f5a5; color:#173b29; font-size:13px; font-weight:750; text-decoration:none; white-space:nowrap; transition:background .15s, box-shadow .15s; }
