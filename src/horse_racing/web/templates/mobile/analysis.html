@@ -2,7 +2,7 @@
 {% block body_class %}mobile-analysis{% endblock %}
 {% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block extra_head %}
-<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=10" defer></script>
+<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=11" defer></script>
 {% endblock %}
 
 {% macro kr_date(value) -%}
@@ -35,7 +35,7 @@
   <div class="ma-record-section-row ma-record-section-ranks" aria-label="구간별 통과순위">
     {% for code, cell in record.section_details.items() %}
       {% if code not in ["400M", "FINAL400"] and cell.get("position") is not none %}
-      <span><small>{{ code }}</small><strong>{{ cell.get("position") }}</strong></span>
+      <span><small>{{ code }}</small><strong>{{ cell.get("position") }}위</strong></span>
       {% endif %}
     {% endfor %}
     {% if not ns.count %}<span class="ma-record-section-empty">통과순위 자료 없음</span>{% endif %}
@@ -92,7 +92,7 @@
       <span>{{ runner.jockey }} · {{ runner.weight }}</span>
       <span class="ma-form">
         {% if runner.form_kind == "trial" %}심사 {{ runner.form_tokens|join("-") }}
-        {% elif runner.form_tokens %}{{ runner.form_tokens|join("-") }}
+        {% elif runner.form_tokens %}최근 {{ runner.form_tokens|join("-") }}
         {% else %}최근 착순 없음{% endif %}
       </span>
       {% if runner.state == '경주 완료' and runner.win_pct %}<span class="ma-result-prediction">예측 {{ runner.win_pct }}{% if runner.win_label %} · {{ role_name(runner.win_label) }}{% endif %}</span>{% endif %}
@@ -107,7 +107,7 @@
     </span>
     {% else %}
     <span class="ma-win-block" data-role="{{ role_name(runner.win_label) }}">
-      <span class="ma-win-pct">{{ runner.win_pct or '00%' }}</span>
+      <span class="ma-win-pct" title="3위 안 입상 확률">{{ runner.win_pct or '00%' }}</span>
       <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
     </span>
     {% endif %}
@@ -117,18 +117,22 @@
 
 {% block content %}
 <div class="ma-page" data-analysis-page>
-  <nav class="ma-chrome" aria-label="분석할 경주 선택">
-    <a class="ma-back" href="/{% if page.selected_date %}?date={{ page.selected_date }}{% if page.selected_race %}&amp;meet={{ page.selected_race.meet_code }}{% endif %}{% endif %}">경주 목록</a>
-    {% if page.races %}
-    {% set ns = namespace(meets=[]) %}
-    <div class="mobile-meet-bar" aria-label="경마장">
-      {% for race in page.races %}
-        {% if race.meet_code not in ns.meets %}
-          {% set ns.meets = ns.meets + [race.meet_code] %}
-          <a href="/analysis?date={{ page.selected_date }}&amp;meet={{ race.meet_code }}" class="{% if page.selected_race and page.selected_race.meet_code == race.meet_code %}active{% endif %}" {% if page.selected_race and page.selected_race.meet_code == race.meet_code %}aria-current="page"{% endif %}>{{ race.meet }}</a>
-        {% endif %}
-      {% endfor %}
+  <nav class="ma-chrome" aria-label="분석할 경주 선택" data-mobile-chrome>
+    <div class="ma-chrome-row" data-chrome-filters>
+      <a class="ma-back" href="/{% if page.selected_date %}?date={{ page.selected_date }}{% if page.selected_race %}&amp;meet={{ page.selected_race.meet_code }}{% endif %}{% endif %}" aria-label="경주 목록">목록</a>
+      {% if page.races %}
+      {% set ns = namespace(meets=[]) %}
+      <div class="mobile-meet-bar" aria-label="경마장">
+        {% for race in page.races %}
+          {% if race.meet_code not in ns.meets %}
+            {% set ns.meets = ns.meets + [race.meet_code] %}
+            <a href="/analysis?date={{ page.selected_date }}&amp;meet={{ race.meet_code }}" class="{% if page.selected_race and page.selected_race.meet_code == race.meet_code %}active{% endif %}" {% if page.selected_race and page.selected_race.meet_code == race.meet_code %}aria-current="page"{% endif %}>{{ race.meet }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
     </div>
+    {% if page.races %}
     <div class="ma-rounds" aria-label="경주 선택">
       {% for race in page.races %}
         {% if not page.selected_race or race.meet_code == page.selected_race.meet_code %}
@@ -177,6 +181,7 @@
         {% endfor %}
       </div>
     </section>
+    {% include "mobile/_prediction_guide.html" %}
     {% endif %}
   </header>
 

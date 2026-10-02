@@ -137,6 +137,13 @@ def _client_rate_key(request: Request) -> str:
 
 
 def _is_mobile_request(request: Request) -> bool:
+    # 데스크톱 브라우저를 좁히면 User-Agent는 PC 그대로라 축소된 PC 화면이 나온다.
+    # 그 경우 화면 너비를 본 스크립트가 hr-layout 쿠키로 모바일 화면을 고른다.
+    layout = request.cookies.get("hr-layout")
+    if layout == "mobile":
+        return True
+    if layout == "desktop":
+        return False
     return bool(_MOBILE_UA.search(request.headers.get("user-agent", "")))
 
 

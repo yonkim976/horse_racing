@@ -1,5 +1,11 @@
 {% extends "mobile/base.html" %}
 {% block body_class %}mobile-home{% endblock %}
+{% block topbar_actions %}
+<button type="button" class="mobile-easy-toggle" data-easy-toggle aria-pressed="false" aria-label="큰글씨 모드로 보기">
+  <span class="mobile-easy-off">큰글씨 모드</span>
+  <span class="mobile-easy-on">일반모드</span>
+</button>
+{% endblock %}
 {% block title %}마필로그 | Mapilog 경마 분석 및 예측{% endblock %}
 {% block meta_description %}한국 경마 일정과 결과를 확인하고 출전마 기록과 예측 확률을 분석하는 마필로그 Mapilog{% endblock %}
 

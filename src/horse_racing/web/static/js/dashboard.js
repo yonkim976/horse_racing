@@ -40,6 +40,38 @@
   });
 
   /* ------------------------------------------------------------------
+     숫자만 보기 (홈 카드에서 마번·확률만 크게, localStorage 유지)
+     ------------------------------------------------------------------ */
+  const EASY_KEY = "hr-easy";
+
+  function applyEasy(on) {
+    if (on) document.documentElement.dataset.easy = "1";
+    else delete document.documentElement.dataset.easy;
+    try {
+      localStorage.setItem(EASY_KEY, on ? "1" : "0");
+    } catch (error) {
+      /* 저장 불가 환경 무시 */
+    }
+    syncEasyControls();
+  }
+
+  function syncEasyControls() {
+    const on = document.documentElement.dataset.easy === "1";
+    document.querySelectorAll("[data-easy-toggle]").forEach((button) => {
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+      button.setAttribute("aria-label", on ? "일반모드로 보기" : "큰글씨 모드로 보기");
+    });
+  }
+
+  syncEasyControls();
+
+  document.querySelectorAll("[data-easy-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      applyEasy(document.documentElement.dataset.easy !== "1");
+    });
+  });
+
+  /* ------------------------------------------------------------------
      필터 select 변경 시 자동 제출
      ------------------------------------------------------------------ */
   const filterForm = document.querySelector("[data-filter-form]");
@@ -512,27 +544,108 @@
     });
   });
 
-  function mobileStickyClearance() {
+  /* ------------------------------------------------------------------
+     모바일 고정 영역: 아래로 스크롤하면 로고 줄·필터 줄·하단 탭을 접고
+     라운드 칩만 남긴다. 위로 스크롤하거나 맨 위 근처면 다시 펼친다.
+     ------------------------------------------------------------------ */
+  const mobileChrome = (() => {
+    const body = document.body;
+    const root = document.documentElement;
+    const chrome = document.querySelector("[data-mobile-chrome]");
     const topbar = document.querySelector(".mobile-topbar");
-    const chrome = document.querySelector(".mobile-day-chrome");
-    let bottom = 0;
-    if (topbar) {
-      bottom = Math.max(bottom, topbar.getBoundingClientRect().bottom);
+    if (!body.classList.contains("mobile-app") || !chrome || !topbar) {
+      return null;
     }
-    if (chrome) {
-      const box = chrome.getBoundingClientRect();
-      if (box.bottom > 0) {
-        bottom = Math.max(bottom, box.bottom);
-      }
-    }
-    return bottom + 12;
-  }
+    const filters = chrome.querySelector("[data-chrome-filters]");
+    const THRESHOLD = 8;
+    let condensed = false;
+    let anchorY = window.scrollY;
+    let lockedUntil = 0;
+    let ticking = false;
+    let metrics = { topShift: 0, filterShift: 0, full: 0 };
 
-  function syncMobileStickyClearance() {
-    document.documentElement.style.setProperty(
-      "--mobile-sticky-clearance",
-      `${Math.round(mobileStickyClearance())}px`
+    function bottom(state = condensed) {
+      return state ? metrics.full - metrics.topShift - metrics.filterShift : metrics.full;
+    }
+
+    function publish() {
+      root.style.setProperty("--mobile-chrome-bottom", `${Math.round(bottom())}px`);
+      root.style.setProperty("--mobile-sticky-clearance", `${Math.round(bottom() + 12)}px`);
+    }
+
+    function measure() {
+      const topPadding = parseFloat(getComputedStyle(topbar).paddingTop) || 0;
+      const gap = parseFloat(getComputedStyle(chrome).rowGap) || 0;
+      metrics = {
+        topShift: topbar.offsetHeight - topPadding,
+        filterShift: filters ? filters.offsetHeight + gap : 0,
+        full: topbar.offsetHeight + chrome.offsetHeight,
+      };
+      root.style.setProperty("--mobile-topbar-shift", `${metrics.topShift}px`);
+      root.style.setProperty("--mobile-chrome-filter-shift", `${metrics.filterShift}px`);
+      publish();
+    }
+
+    function setCondensed(next) {
+      if (next === condensed) {
+        return;
+      }
+      condensed = next;
+      body.classList.toggle("chrome-condensed", next);
+      publish();
+    }
+
+    function sync() {
+      ticking = false;
+      const y = window.scrollY;
+      if (performance.now() < lockedUntil) {
+        anchorY = y;
+        return;
+      }
+      if (y <= metrics.full) {
+        setCondensed(false);
+        anchorY = y;
+        return;
+      }
+      const delta = y - anchorY;
+      if (Math.abs(delta) < THRESHOLD) {
+        return;
+      }
+      setCondensed(delta > 0);
+      anchorY = y;
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("pageshow", measure);
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(sync);
+        }
+      },
+      { passive: true }
     );
+
+    return {
+      bottom,
+      setCondensed,
+      lock(ms) {
+        lockedUntil = performance.now() + ms;
+      },
+      isCondensed: () => condensed,
+      full: () => metrics.full,
+    };
+  })();
+
+  function mobileStickyClearance() {
+    if (mobileChrome) {
+      return mobileChrome.bottom() + 12;
+    }
+    const topbar = document.querySelector(".mobile-topbar");
+    return (topbar ? topbar.getBoundingClientRect().bottom : 0) + 12;
   }
 
   function scrollToMobileRound(id) {
@@ -540,8 +653,13 @@
     if (!target) {
       return;
     }
-    syncMobileStickyClearance();
-    const top = window.scrollY + target.getBoundingClientRect().top - mobileStickyClearance();
+    const absolute = window.scrollY + target.getBoundingClientRect().top;
+    if (mobileChrome) {
+      mobileChrome.lock(800);
+      const condensedTop = absolute - mobileChrome.bottom(true) - 12;
+      mobileChrome.setCondensed(condensedTop > mobileChrome.full());
+    }
+    const top = absolute - mobileStickyClearance();
     window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
   }
 
@@ -659,8 +777,6 @@
     if (history.scrollRestoration) {
       history.scrollRestoration = "manual";
     }
-    syncMobileStickyClearance();
-    window.addEventListener("resize", syncMobileStickyClearance);
     const initial = decodeURIComponent((location.hash || "").slice(1));
     if (initial.startsWith("round")) {
       setMobileRoundSelection(initial, { reveal: true });
