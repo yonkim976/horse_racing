@@ -1,0 +1,252 @@
+"""Report observed moisture/position associations with support and uncertainty."""
+# ruff: noqa: E501
+
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path
+
+os.environ.setdefault("MPLCONFIGDIR", "/private/tmp/horse-racing-moisture-position-matplotlib")
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import pandas as pd
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "outputs"
+MEETS = {1: "서울", 3: "부산"}
+BANDS = ["건조", "양호", "다습", "포화", "불량"]
+ROLES = {
+    "solo": "단독선행",
+    "leading_pack": "선두군",
+    "stalking": "선입권",
+    "middle": "중위권",
+    "rear": "후미권",
+}
+DISTANCES = [1200, 1300, 1400, 1600, 1700, 1800]
+
+
+def fmt(row):
+    c = row["change"]
+    if not c["estimable"]:
+        return "추정 불가"
+    lo, hi = c["ci95_pp"]
+    return f"{c['effect_pp']:+.2f} [{lo:+.2f}, {hi:+.2f}]" + (
+        " †" if not row.get("supported", True) else ""
+    )
+
+
+def main():
+    saved = json.loads((OUT / "summary.json").read_text())
+    frame = pd.read_parquet(OUT / "position_runners.parquet")
+    early = frame[frame.point.eq("S1F")]
+    raw = pd.read_csv(OUT / "raw_position_cells.csv")
+    rows = saved["modes"]["primary"]["rows"]
+    plt.rcParams.update(
+        {"font.family": "AppleGothic", "axes.unicode_minus": False, "font.size": 11}
+    )
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5.9), sharey=True)
+    colors = ["#2463a6", "#da6b31", "#5c8e58", "#9166a5", "#718096"]
+    for ax, (meet, name) in zip(axes, MEETS.items(), strict=True):
+        for (role, label), color in zip(ROLES.items(), colors, strict=True):
+            cells = [
+                raw[
+                    (raw.meet == meet)
+                    & (raw.point == "S1F")
+                    & (raw.distance_m == 1200)
+                    & (raw.role == role)
+                    & (raw.band == band)
+                ].iloc[0]
+                for band in BANDS
+            ]
+            ax.plot(
+                range(5),
+                [c.top3_rate * 100 for c in cells],
+                marker="o",
+                color=color,
+                label=label,
+                linestyle="--" if role == "solo" else "-",
+                linewidth=1.6,
+            )
+            if role == "solo":
+                for index, cell in enumerate(cells):
+                    ax.annotate(
+                        f"n={int(cell.runners)}",
+                        (index, cell.top3_rate * 100),
+                        xytext=(0, 9),
+                        textcoords="offset points",
+                        ha="center",
+                        color=color,
+                        fontsize=9,
+                    )
+        ax.set_title(name, loc="left")
+        ax.set_xticks(
+            range(5), ["건조\n1–5%", "양호\n6–9%", "다습\n10–14%", "포화\n15–19%", "불량\n20% 이상"]
+        )
+        ax.set_ylim(0, 90)
+        ax.spines[["top", "right"]].set_visible(False)
+        ax.grid(axis="y", alpha=0.15)
+    axes[0].set_ylabel("최종 3위 내 입상률 (%)")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles, labels, loc="lower center", ncol=5, frameon=False, bbox_to_anchor=(0.5, 0.095)
+    )
+    fig.suptitle("1200m 실제 초반 위치별 입상률 — 능력 보정 전", x=0.07, ha="left", fontsize=16)
+    fig.text(
+        0.07,
+        0.015,
+        "S1F(출발 후 200m) 통과조 기준 · 2018~2026년 관찰자료\n점선: 1마신 이상 분리된 단독선행 · n: 단독선행 표본 · 사전 예측확률 또는 함수율의 인과효과가 아님",
+        fontsize=9,
+        color="#475569",
+    )
+    fig.tight_layout(rect=(0, 0.16, 1, 0.93))
+    fig.savefig(OUT / "position_top3_1200m.png", dpi=180, facecolor="white")
+    plt.close(fig)
+    lines = [
+        "# 함수율 × 거리 × 실제 주행위치 — 관찰 연구 결과",
+        "",
+        "작성일: 2026-10-02 · 서울·부산 · 주로빠르기 제외 · 운영 미적용",
+        "",
+        "## 결론",
+        "",
+        "**실제로 초반 단독선행한 말의 승률·입상률은 높지만, 함수율이 높아질수록 그 유리함이 더 커진다는 패턴은 확인되지 않았다. 특정 거리×함수율×위치를 확정적인 유리 조건으로 고를 근거도 아직 부족하다.**",
+        "",
+        "1200m 부산 포화의 단독선행 승률은 63.6%(14/22)로 건조 44.4%(59/133)보다 높았지만, 같은 조건의 Top3율은 68.2%(15/22)로 건조 71.4%(95/133)보다 낮았다. 불량 단독선행은 9경주뿐이고 승률 33.3%(3/9)였다. 한 지표·한 작은 셀의 큰 비율을 함수율의 단조 효과로 바꿀 수 없다.",
+        "",
+        "과거 능력·레이팅·중량·나이·마번, 경주 고정효과, 위치별 연도·월 성향을 보정한 지정 거리 S1F Top3의 함수율 상호작용 검정 108개에서 BH q<0.05를 통과한 조건은 0개다. 이는 효과가 없다는 증명이 아니라 현재 표본·설계로 특정 추가 우위를 확정하지 못했다는 뜻이다. 단독선행의 포화·불량 셀은 모든 지정 거리에서 100출전 미만이었다.",
+        "",
+        "## 정의·표본",
+        "",
+        "[결과 확인 전 고정한 계획](PLAN.md)에 따라 숫자 함수율로 5구간을 만들고 앞선 연구와 동일한 82경주 품질 제외를 적용했다. 공식 순위 코드 93·94·95를 제외한 모든 출전마가 정상 완주하고 1~N위가 완결된 6두 이상 경주만 사용했다. 따라서 동착·낙마·중지 등이 있는 경주를 포괄한 결과가 아니다.",
+        "",
+        "초반은 S1F(출발 후 200m)다. [마사회 공식 통과조 설명](https://race.kra.co.kr/raceScore/scoretableLayerExplanation.do?meet=1)에 따라 1마신 미만 마군은 괄호로 묶이고, 마군 사이 쉼표는 1~2마신 미만 간격이다. 괄호 내부 번호는 상대 내외측 순서이므로 앞뒤 순위로 사용하지 않았다.",
+        "",
+        "단독선행은 첫 마군 1두로 다음 마군과 1마신 이상 분리된 경우다. 단순 통과순위 1위 또는 ^ 하나와 동일하지 않다. 첫 마군 2두 이상은 '선두군'이며 실제 경합 압박을 뜻하지 않는다. 그 밖의 말은 마군 평균 등수의 상대 앞뒤 위치에 따라 선입권(앞 1/3), 중위권(중간 1/3), 후미권(뒤 1/3)으로 나눴다. 마군이 경계를 걸치면 그 중간 위치로 분류했다.",
+        "",
+        f"정상 순위·함수율 조건을 통과한 {saved['eligible_population_races']:,}경주·{saved['eligible_population_runners']:,}출전에서 주 분석 S1F는 서울 8,181경주·88,271출전·793일, 부산 5,746경주·62,834출전·787일이다. 이 수는 기대시간 적격 말 4두 이상을 요구했던 이전 시간 보정 연구와 다르다. 경주 순위 불완결/동착 197경주, 비정상 완주 431경주를 먼저 제외했다. 통과조는 지원하지 않는 문법 2지점·출전마 집합 불일치 1지점을 보류했다.",
+        "",
+        "연구 코어 DB는 하나의 읽기 전용 트랜잭션으로 출전 원장과 선택된 통과조를 스냅샷했다. API를 기본으로 하되 DB의 공식 지점 매핑·성적표 보완 선택을 따랐다. 원문 차이와 선택 원천도 각 행에 보존했다. 2010년 이후 과거 출전 이력으로 직전 5회 성적을 계산했으며 반드시 대상 날짜보다 이전 자료만 사용했다.",
+        "",
+        "## 초반 위치별 입상률",
+        "",
+        "아래는 모든 거리를 합친 능력 보정 전 Top3율이다. 거리·능력 구성이 다르므로 함수율 효과 추정치가 아니다. 단독선행이 가능한 빠른 말의 선별도 섞여 있다.",
+        "",
+        "| 위치 | 서울 건조 | 서울 포화 | 서울 불량 | 부산 건조 | 부산 포화 | 부산 불량 |",
+        "|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for role, label in ROLES.items():
+        rates = [
+            early[(early.meet == meet) & (early.band == band) & (early.role == role)].top3.mean()
+            * 100
+            for meet in MEETS
+            for band in ["건조", "포화", "불량"]
+        ]
+        lines.append(f"| {label} | " + " | ".join(f"{rate:.1f}%" for rate in rates) + " |")
+    lines += [
+        "",
+        "단독선행 표본은 서울 건조 682·포화 242·불량 96경주, 부산 건조 556·포화 77·불량 39경주다. 함수율이 높은 조건의 단독선행 표본은 전체 경주 수에 비해 훨씬 적다. 원시 비율에서 선두군→선입권→중위권→후미권 순으로 입상률이 낮은 것은 관찰된 자리의 연관성이고, 그 자리로 보내면 동일 말의 성적이 그만큼 좋아진다는 인과적 비교가 아니다.",
+        "",
+        "![1200m 위치별 원시 입상률](outputs/position_top3_1200m.png)",
+        "",
+        "## 거리별 단독선행 원시 승률",
+        "",
+        "괄호는 단독선행 경주 수다. 포화·불량의 모든 거리 셀은 최소 지원 기준(100출전·30경주·20일)을 충족하지 못한다. 아래 비율은 사례 확인용이다.",
+        "",
+        "| 경기장·거리 | 건조 승률(n) | 포화 승률(n) | 불량 승률(n) |",
+        "|---|---:|---:|---:|",
+    ]
+    for meet in MEETS:
+        for distance in DISTANCES:
+            cells = raw[
+                (raw.meet == meet)
+                & (raw.point == "S1F")
+                & (raw.distance_m == distance)
+                & (raw.role == "solo")
+            ]
+            if cells.empty:
+                continue
+            values = []
+            for band in ["건조", "포화", "불량"]:
+                cell = cells[cells.band.eq(band)]
+                values.append(
+                    "없음"
+                    if cell.empty
+                    else f"{cell.iloc[0].win_rate * 100:.1f}% ({int(cell.iloc[0].runners)})"
+                )
+            lines.append(f"| {MEETS[meet]}·{distance}m | " + " | ".join(values) + " |")
+    lines += [
+        "",
+        "서울 1200m 단독선행은 건조 승률 46.3%, 포화 40.3%, 불량 35.5%였고 Top3율은 각각 74.3%, 75.8%, 61.3%였다. 반대로 서울 1300m 불량 승률 50%는 20경주, 서울 1400m 불량 승률 50%는 14경주다. 거리마다 방향이 달라 단순히 '함수율이 높으면 단독선행 가산' 규칙으로 묶기 어렵다.",
+        "",
+        "## 능력 보정 후: 함수율이 추가로 바꾸는 위치 우위",
+        "",
+        "Top3 여부를 경주 고정효과 선형확률 회귀로 분석했다. 경주당 총 가중치는 1이며 과거 5회 완주 상대순위·Top3율·S1F 상대순위, 과거 출전수·간격, 레이팅·나이·중량·마번 상대위치를 통제했다. 위치×연도·위치×월을 추가하고 전체 거리 모델은 위치×거리도 통제했다. 현재 실제 주행위치는 관찰 설명 변수이며 사전 예측 입력으로 평가한 것이 아니다.",
+        "",
+        "다음 수치는 '후미권 대비 해당 위치의 Top3 우위가 건조보다 추가로 얼마나 변했는가'다. 단위는 %p, 괄호는 경주일 군집 t 근사 95% 구간이다. 양수는 해당 위치의 상대 우위가 더 커진 방향이다. 단순 함수율별 Top3율 차이와 다르다. †는 해당 위치/후미 또는 건조 기준 셀의 지원 부족이다.",
+        "",
+        "| 경기장·위치 | 포화의 건조 대비 추가 변화 | 불량의 건조 대비 추가 변화 |",
+        "|---|---:|---:|",
+    ]
+    for meet in MEETS:
+        for role, label in list(ROLES.items())[:-1]:
+            cells = [
+                next(
+                    r
+                    for r in rows
+                    if r["meet"] == meet
+                    and r["point"] == "S1F"
+                    and r["distance_m"] is None
+                    and r["role"] == role
+                    and r["band"] == band
+                )
+                for band in ["포화", "불량"]
+            ]
+            lines.append(f"| {MEETS[meet]}·{label} | " + " | ".join(fmt(r) for r in cells) + " |")
+    lines += [
+        "",
+        "전체 거리를 모은 단독선행의 함수율 5%p당 추가 기울기도 서울 −0.41%p(95% −2.98~+2.15), 부산 −2.16%p(−5.37~+1.04)로 0을 포함했다. 전체 선두군·선입·중위의 선형 기울기도 모두 0을 포함한다. 5구간별 원시 비율과 함께 보아도 '높을수록 일관되게 앞선 유리'라는 근거는 없다.",
+        "",
+        "## 거리별 추가 우위와 다중비교",
+        "",
+        "지정 거리 S1F Top3 중 충분한 셀 지원과 추정가능성을 갖춘 건조 대비 변화 108개를 하나의 BH 검정군으로 보정했다. q<0.05 조건은 0개, 최소 q는 약 0.245였다. 낮은 지원 셀은 큰 수치가 나와도 확정 후보에서 제외했다.",
+        "",
+        "예를 들어 서울 1200m 포화의 중위권은 후미권 대비 우위가 건조보다 +5.32%p(95% +0.95~+9.68) 커지는 방향이었지만 q≈0.461로 다중비교 후 근거가 부족했다. 부산 1400m 포화의 중위권은 −11.85%p(−19.95~−3.76), q≈0.245로 역시 확정하지 못했다. 서로 다른 거리에서 반대 방향의 탐색값이 나왔다.",
+        "",
+        "[모든 거리·함수율·위치 원시 셀](outputs/raw_position_cells.csv), [모든 회귀 대비와 지원](outputs/primary_results.json)에 양호·다습을 포함한 전체 결과를 보존했다. 결과가 좋게 나온 조건만 고르지 않았다.",
+        "",
+        "## 보조 지점·민감도",
+        "",
+        "서울 3C와 부산 G4F는 공간좌표가 다른 보조 지점으로 따로 분석했다. 전체 거리 단독선행의 포화 추가 변화는 서울 3C −0.56%p(−8.18~+7.05), 부산 G4F +7.30%p(−2.14~+16.73)였다. 초반 이후에 단독선행한 말은 진행 중 능력·기수 선택·소모가 이미 반영되어 더 강한 사후 선택 편향이 있다. 보조 지점의 일부 명목상 차이는 다중비교로 확인된 규칙이 아니다.",
+        "",
+        "품질 제외를 풀거나, 최근 2024~2026년만 보거나, 최종 단승배당 역수 정규화를 능력 대용값으로 추가해도 각 민감도 검정군에서 q<0.05의 S1F 조건은 없었다. 배당은 사후 관측 자료이므로 사전 이용 가능성을 검증한 변수가 아니다. 일부 위치의 평균적 우위는 배당 통제 후 줄어 능력 선별이 섞여 있다는 점도 확인됐다.",
+        "",
+        "2마신 이상 분리된 엄격 단독선행은 초반에 서울 건조 33·포화 8·불량 6경주, 부산 건조 13·포화 3·불량 1경주뿐이었다. 해당 기준에서는 단독선행 여부의 표본이 더 부족해 판단 보류다. 엄격 민감도는 1~2마신 미만 단독선행 경주를 통째로 제외한 조건부 비교이며 같은 전체 표본 비교가 아니다.",
+        "",
+        "## 해석과 사전 활용의 다음 단계",
+        "",
+        "이번 연구에서 확인한 것은 실제 초반 위치와 최종 성적의 연관성이다. 이미 단독선행에 성공한 말은 빠른 초반능력·컨디션·전개 선택이 선별된 집단이며, '단독선행을 예상한 말'과 다르다. 높은 함수율에서 전체 주행시간이 빨라졌다는 앞선 연구 결과도 모든 말에 공통인 시간 변화와 상대 위치의 유불리를 구분해야 한다.",
+        "",
+        "사전에 활용하려면 과거 S1F 시간·통과위치·마번·참가마 구성만으로 단독선행 가능성과 선두 경쟁을 추정한 뒤, 그 예상 전개와 함수율·거리를 결합해 날짜순 외부 평가해야 한다. 이번 실제 통과조를 같은 경주의 예측 입력에 사용하면 결과 누출이다. 현 단계에서는 함수율만으로 선행/추입 점수를 자동 가감하지 않는다.",
+        "",
+        "정상 완주 경주로 제한한 선택 편향, 선형확률모형의 근사, 미측정 능력·기수·전개·진로·모래 정비, 같은 말 반복 출전 의존성은 남는다. 경주일 군집 구간과 과거 능력 통제가 이를 전부 없애지는 않는다. 따라서 추가 우위 미확인을 '영향 없음'의 확정으로 읽지 않는다.",
+        "",
+        "## 재현·검증",
+        "",
+        "```bash",
+        "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python thoroughbred/research/20261002_moisture_position/analyze.py",
+        "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python thoroughbred/research/20261002_moisture_position/verify.py",
+        "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python thoroughbred/research/20261002_moisture_position/render_report.py",
+        ".venv/bin/ruff check thoroughbred/research/20261002_moisture_position/*.py",
+        "```",
+        "",
+        "입력·계획·분석코드 SHA256을 계산 전후 대조했다. 분석은 summary.json이 있으면 덮어쓰지 않는다. 새 분석은 새 버전 폴더에서 스냅샷을 복제해 실행한다. 파서 공식 예문·거부 사례, 출전마 완결성, 경주별 우승 1두·Top3 3두, 키 유일성, 과거 이력 날짜·30개 독립 Top3 이력 재계산, 가중 경주 내 회귀 대비 재현·경주 상수 추가 불변성, BH 재계산을 검사했다.",
+        "",
+        "[검증 결과](outputs/verification.json), [전체 요약](outputs/summary.json), [스냅샷 원장](outputs/snapshot_manifest.json)을 저장했다. 공식 DB·운영 모형·기존 연구는 수정하지 않았다.",
+    ]
+    (HERE / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

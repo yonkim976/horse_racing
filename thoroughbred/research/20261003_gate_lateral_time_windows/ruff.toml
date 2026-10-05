@@ -1,0 +1,7 @@
+extend = "../../../pyproject.toml"
+
+[lint.per-file-ignores]
+# The statistic closure is called synchronously inside its own loop iteration.
+"analyze.py" = ["B023"]
+# Preserve readable Korean report prose and literal Markdown links.
+"render_report.py" = ["E501"]

@@ -1,0 +1,116 @@
+{
+  "time_differences": {
+    "measurements": 50,
+    "runners": 42,
+    "races": 12,
+    "meets": [
+      1
+    ]
+  },
+  "archived_api_records_traced": 7573,
+  "archived_api_value_checks": 7585,
+  "archived_api_checks_all_pass": true,
+  "archived_api_source_hashes": {
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_1.json.gz": "1f59511124ccc51595d230c43367c562714b824eb8906235fbaf5f2305847fbc",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_3.json.gz": "e65a72423e2ed660ab54af06432c6e5c716097dcc0276e87be53f6df9ccdd00f",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_1.json.gz": "ae153667845171337aa1c37ee6a15da322abca9e6e4c4eaa3af76f65052fefdd",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_3.json.gz": "adb2cca8f24efa6932a36e32add5045b23254523ecd40729348ab79f455736ce",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_1.json.gz": "246826262ba50ec0605c84377b7c5381ab2d1634d9fb138974cffd0d83924e61",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_3.json.gz": "4809c714011f7b10508a002c34ee0c9620f652cd8ca9d5e393b1a6ff738bf39a",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_1.json.gz": "dfe0e1544ca4c8594e8ac3af58ab46a61f6ca8d191821ecea3f79c6a6e3ab1cc",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_3.json.gz": "f3964eadda846a624061e97684e9b3b5e02bae3a4c8bab02fba7bd726bd11eab",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_1.json.gz": "6e7a49fef5c922b759cff1249614f900b2f0f757a7836b76c35e52cc4bb048ec",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_3.json.gz": "deda87da51aa2e08ededde1209efa491bcf5c776c8e2d90fa313581af919b4a1",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_1.json.gz": "6b1e4ad1d5f5bbaed8dde60c16c54fb3f7f1ff149bc7b8261f1c042623b58e13",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_3.json.gz": "34d3b9e1515c660e4484ae90967602dc90623486114a133acc060602f1ab7c14",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_1.json.gz": "57d3d689be03d2b6b02db533746d3c236a125fd532b3ffe41a06cc4352a0e4eb",
+    "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_3.json.gz": "a97d361760bd9f0f22ca0dc98204efb20e6ed90485bed643e82269ee72d85a4e"
+  },
+  "api_band_percent_conflicts": {
+    "races": 70,
+    "days": 19,
+    "by_meet": {
+      "1": 24,
+      "3": 46
+    }
+  },
+  "legacy_bad_band": [
+    {
+      "meet": 1,
+      "runners": 4059,
+      "all_days": 52,
+      "days_with_numeric_percent": 12,
+      "missing_percent_runners": 3327
+    },
+    {
+      "meet": 3,
+      "runners": 3014,
+      "all_days": 46,
+      "days_with_numeric_percent": 7,
+      "missing_percent_runners": 2535
+    }
+  ],
+  "api_bad_band": [
+    {
+      "meet": 1,
+      "runners": 4059,
+      "all_days": 52,
+      "numeric_values": [
+        20,
+        23
+      ]
+    },
+    {
+      "meet": 3,
+      "runners": 3014,
+      "all_days": 46,
+      "numeric_values": [
+        16,
+        20
+      ]
+    }
+  ],
+  "new_only_runners": 191,
+  "new_only_races": 17,
+  "new_only_legacy_band_missing": 190,
+  "new_only_legacy_band_present": 1,
+  "legacy_only_race_verdict": [
+    {
+      "meet": "3",
+      "date": "20251226",
+      "race_no": "6",
+      "in_plan_api": "1",
+      "source_result_rows": "12",
+      "positive_finish_rows": "0",
+      "execution_status": "planned_no_execution_evidence",
+      "execution_verdict": "no_valid_completed_race",
+      "adjudication_status": "race_invalid",
+      "nonexecution_scope": "race",
+      "reason_text": "11번마 출발대 미진입 상태에서 출발하여 경주불성립",
+      "supporting_reason": null,
+      "evidence_files": "kra_scoretable_nonfinish_reasons.csv;race_execution_flags.csv",
+      "evidence_urls": "https://race.kra.co.kr/raceScore/scoretablePeriodSearch.do",
+      "evidence_kind": "kra_scoretable_live_ui"
+    }
+  ],
+  "limits": "API value agreement validates extraction, not physical truth or publication time. RPT differences remain unadjudicated.",
+  "rpt_trace": {
+    "compared": 50,
+    "rpt_matches_old": 50,
+    "rpt_matches_new": 0,
+    "source_hashes": {
+      "data/raw/kra_text/dacom11/meet=1/year=2018/month=01/day=13/20180113dacom11.rpt": "89364947dd559e7eca5d511687e213fbdc96aa1937678eda1b3cacac97af2f04",
+      "data/raw/kra_text/dacom11/meet=1/year=2018/month=01/day=20/20180120dacom11.rpt": "5a85fbc5eff3f34568b76e446d7f00d846a00d7e894b4eb11d600ca1b2b33906",
+      "data/raw/kra_text/dacom11/meet=1/year=2018/month=01/day=21/20180121dacom11.rpt": "dfd712bbd096127eabec664a4695d197e1eece4b8cf69e8ab433cd6cfcba9eeb",
+      "data/raw/kra_text/dacom11/meet=1/year=2020/month=06/day=20/20200620dacom11.rpt": "61d1c3189a2bd5f286b9d0d83ae533521f072d56fa83d5f78a54536353392c06",
+      "data/raw/kra_text/dacom11/meet=1/year=2020/month=07/day=19/20200719dacom11.rpt": "b280c6c5684c101df5dccf12134254d72fa9c1e5e7da1b4ce6823aa826022d64",
+      "data/raw/kra_text/dacom11/meet=1/year=2020/month=08/day=30/20200830dacom11.rpt": "bc9cc8e8bbf1d1e1ff5bee8408e81da1a644e311bbf74068b37b4a15748b0d81",
+      "data/raw/kra_text/dacom11/meet=1/year=2022/month=08/day=27/20220827dacom11.rpt": "c8a75eb7a1226131334815fba7acc4b07c4991a0eb1bf95badf8b69ca27fba26",
+      "data/raw/kra_text/dacom11/meet=1/year=2023/month=02/day=05/20230205dacom11.rpt": "a36441641c29bc06fa5e4722838f2c86b95fc825bfab372b57c9c7474b83cbf2",
+      "data/raw/kra_text/dacom11/meet=1/year=2023/month=03/day=04/20230304dacom11.rpt": "382b4715a2ccc02cc75fd37f3ce8b874e78e481eedb44fe1d491d51ce7bf6e5e",
+      "data/raw/kra_text/dacom11/meet=1/year=2023/month=03/day=12/20230312dacom11.rpt": "d296b8a87199b01b26dc315e143a46ab299acad674604c7215f37d5471125826",
+      "data/raw/kra_text/dacom11/meet=1/year=2023/month=03/day=19/20230319dacom11.rpt": "416a7a6ff26e0bbe7ac8685faff5ea42c93bb33537cd2d2567504b61b2a8ae53"
+    },
+    "note": "RPT lacks official horse IDs; match race/program number, retain name."
+  }
+}

@@ -1,0 +1,1689 @@
+{
+  "scope": {
+    "start": "2018-01-01",
+    "end": "2026-09-20",
+    "meets": [
+      1,
+      3
+    ],
+    "legacy_study_runners": 158337,
+    "new_confirmed_runners": 161114,
+    "new_eligible_finishers": 158528,
+    "excluded_from_comparison": "Jeju (2), Yeongcheon (4), pre-2018"
+  },
+  "legacy_join_integrity": {
+    "horse_id": 0,
+    "horse_number": 0,
+    "distance_m": 0,
+    "date": 0,
+    "race_no": 0,
+    "meet": 0
+  },
+  "races": {
+    "keys": {
+      "both": 14636,
+      "left_only": 1,
+      "right_only": 0
+    },
+    "fields": {
+      "distance_m": {
+        "both_present": 14636,
+        "equal": 14636,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "grade": {
+        "both_present": 14636,
+        "equal": 14636,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "grade_normalized": {
+        "both_present": 14636,
+        "equal": 14636,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "band": {
+        "both_present": 14620,
+        "equal": 14620,
+        "different": 0,
+        "old_missing_new_present": 16,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "moisture": {
+        "both_present": 14074,
+        "equal": 13932,
+        "different": 142,
+        "old_missing_new_present": 562,
+        "old_present_new_missing": 0,
+        "both_missing": 0,
+        "max_absolute_difference": 8.0
+      }
+    }
+  },
+  "runners_raw": {
+    "keys": {
+      "both": 158337,
+      "right_only": 191,
+      "left_only": 0
+    },
+    "fields": {
+      "horse_number": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "rank": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "distance_m": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "grade": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "grade_normalized": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "weight": {
+        "both_present": 158337,
+        "equal": 158334,
+        "different": 3,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0,
+        "max_absolute_difference": 1.0
+      },
+      "gate": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "band": {
+        "both_present": 158337,
+        "equal": 158337,
+        "different": 0,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0
+      },
+      "moisture": {
+        "both_present": 152475,
+        "equal": 150809,
+        "different": 1666,
+        "old_missing_new_present": 5862,
+        "old_present_new_missing": 0,
+        "both_missing": 0,
+        "max_absolute_difference": 8.0
+      },
+      "start_200": {
+        "both_present": 158336,
+        "equal": 158317,
+        "different": 19,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 1,
+        "both_missing": 0,
+        "max_absolute_difference": 60000.0
+      },
+      "last_200": {
+        "both_present": 158337,
+        "equal": 158329,
+        "different": 8,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0,
+        "max_absolute_difference": 26000.0
+      },
+      "last_600": {
+        "both_present": 158335,
+        "equal": 158315,
+        "different": 20,
+        "old_missing_new_present": 2,
+        "old_present_new_missing": 0,
+        "both_missing": 0,
+        "max_absolute_difference": 600.0
+      },
+      "finish": {
+        "both_present": 158337,
+        "equal": 158333,
+        "different": 4,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 0,
+        "max_absolute_difference": 100.0
+      }
+    }
+  },
+  "runners_clean": {
+    "keys": {
+      "both": 158337,
+      "right_only": 191,
+      "left_only": 0
+    },
+    "fields": {
+      "start_200": {
+        "both_present": 158334,
+        "equal": 158316,
+        "different": 18,
+        "old_missing_new_present": 1,
+        "old_present_new_missing": 0,
+        "both_missing": 2,
+        "max_absolute_difference": 500.0
+      },
+      "last_200": {
+        "both_present": 158330,
+        "equal": 158322,
+        "different": 8,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 7,
+        "max_absolute_difference": 26000.0
+      },
+      "last_600": {
+        "both_present": 158334,
+        "equal": 158314,
+        "different": 20,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 3,
+        "max_absolute_difference": 600.0
+      },
+      "finish": {
+        "both_present": 158332,
+        "equal": 158328,
+        "different": 4,
+        "old_missing_new_present": 0,
+        "old_present_new_missing": 0,
+        "both_missing": 5,
+        "max_absolute_difference": 100.0
+      }
+    }
+  },
+  "history_coverage": {
+    "legacy": [
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "start_200",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "start_200",
+        "valid_times": 11976,
+        "history_eligible": 8806
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "start_200",
+        "valid_times": 7285,
+        "history_eligible": 4250
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "start_200",
+        "valid_times": 10135,
+        "history_eligible": 7189
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "start_200",
+        "valid_times": 10678,
+        "history_eligible": 7855
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "start_200",
+        "valid_times": 11035,
+        "history_eligible": 7893
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "start_200",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "start_200",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "start_200",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "start_200",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "start_200",
+        "valid_times": 8638,
+        "history_eligible": 6605
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "start_200",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "start_200",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "start_200",
+        "valid_times": 7392,
+        "history_eligible": 5342
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "start_200",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "start_200",
+        "valid_times": 7771,
+        "history_eligible": 5565
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "start_200",
+        "valid_times": 7892,
+        "history_eligible": 5836
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "start_200",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      },
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "last_200",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "last_200",
+        "valid_times": 11975,
+        "history_eligible": 8805
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "last_200",
+        "valid_times": 7285,
+        "history_eligible": 4250
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "last_200",
+        "valid_times": 10135,
+        "history_eligible": 7189
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "last_200",
+        "valid_times": 10678,
+        "history_eligible": 7855
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "last_200",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "last_200",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "last_200",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "last_200",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "last_200",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "last_200",
+        "valid_times": 8638,
+        "history_eligible": 6605
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "last_200",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "last_200",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "last_200",
+        "valid_times": 7392,
+        "history_eligible": 5342
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "last_200",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "last_200",
+        "valid_times": 7770,
+        "history_eligible": 5564
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "last_200",
+        "valid_times": 7889,
+        "history_eligible": 5834
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "last_200",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      },
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "last_600",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "last_600",
+        "valid_times": 11976,
+        "history_eligible": 8806
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "last_600",
+        "valid_times": 7285,
+        "history_eligible": 4250
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "last_600",
+        "valid_times": 10134,
+        "history_eligible": 7188
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "last_600",
+        "valid_times": 10678,
+        "history_eligible": 7855
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "last_600",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "last_600",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "last_600",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "last_600",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "last_600",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "last_600",
+        "valid_times": 8638,
+        "history_eligible": 6605
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "last_600",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "last_600",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "last_600",
+        "valid_times": 7392,
+        "history_eligible": 5342
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "last_600",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "last_600",
+        "valid_times": 7771,
+        "history_eligible": 5565
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "last_600",
+        "valid_times": 7892,
+        "history_eligible": 5836
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "last_600",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      },
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "finish",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "finish",
+        "valid_times": 11976,
+        "history_eligible": 8806
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "finish",
+        "valid_times": 7284,
+        "history_eligible": 4250
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "finish",
+        "valid_times": 10133,
+        "history_eligible": 7187
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "finish",
+        "valid_times": 10678,
+        "history_eligible": 7855
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "finish",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "finish",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "finish",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "finish",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "finish",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "finish",
+        "valid_times": 8639,
+        "history_eligible": 6606
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "finish",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "finish",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "finish",
+        "valid_times": 7391,
+        "history_eligible": 5341
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "finish",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "finish",
+        "valid_times": 7771,
+        "history_eligible": 5565
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "finish",
+        "valid_times": 7892,
+        "history_eligible": 5836
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "finish",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      }
+    ],
+    "api": [
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "start_200",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "start_200",
+        "valid_times": 11976,
+        "history_eligible": 8806
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "start_200",
+        "valid_times": 7300,
+        "history_eligible": 4261
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "start_200",
+        "valid_times": 10311,
+        "history_eligible": 7329
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "start_200",
+        "valid_times": 10678,
+        "history_eligible": 7856
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "start_200",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "start_200",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "start_200",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "start_200",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "start_200",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "start_200",
+        "valid_times": 8638,
+        "history_eligible": 6605
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "start_200",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "start_200",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "start_200",
+        "valid_times": 7392,
+        "history_eligible": 5342
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "start_200",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "start_200",
+        "valid_times": 7771,
+        "history_eligible": 5565
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "start_200",
+        "valid_times": 7892,
+        "history_eligible": 5836
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "start_200",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      },
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "last_200",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "last_200",
+        "valid_times": 11975,
+        "history_eligible": 8805
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "last_200",
+        "valid_times": 7300,
+        "history_eligible": 4261
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "last_200",
+        "valid_times": 10311,
+        "history_eligible": 7329
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "last_200",
+        "valid_times": 10678,
+        "history_eligible": 7856
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "last_200",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "last_200",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "last_200",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "last_200",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "last_200",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "last_200",
+        "valid_times": 8638,
+        "history_eligible": 6605
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "last_200",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "last_200",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "last_200",
+        "valid_times": 7392,
+        "history_eligible": 5342
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "last_200",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "last_200",
+        "valid_times": 7770,
+        "history_eligible": 5564
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "last_200",
+        "valid_times": 7889,
+        "history_eligible": 5834
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "last_200",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      },
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "last_600",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "last_600",
+        "valid_times": 11976,
+        "history_eligible": 8806
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "last_600",
+        "valid_times": 7300,
+        "history_eligible": 4261
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "last_600",
+        "valid_times": 10310,
+        "history_eligible": 7328
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "last_600",
+        "valid_times": 10678,
+        "history_eligible": 7856
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "last_600",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "last_600",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "last_600",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "last_600",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "last_600",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "last_600",
+        "valid_times": 8638,
+        "history_eligible": 6605
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "last_600",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "last_600",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "last_600",
+        "valid_times": 7392,
+        "history_eligible": 5342
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "last_600",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "last_600",
+        "valid_times": 7771,
+        "history_eligible": 5565
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "last_600",
+        "valid_times": 7892,
+        "history_eligible": 5836
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "last_600",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      },
+      {
+        "meet": 1,
+        "year": "2018",
+        "part": "finish",
+        "valid_times": 11704,
+        "history_eligible": 6812
+      },
+      {
+        "meet": 1,
+        "year": "2019",
+        "part": "finish",
+        "valid_times": 11976,
+        "history_eligible": 8806
+      },
+      {
+        "meet": 1,
+        "year": "2020",
+        "part": "finish",
+        "valid_times": 7299,
+        "history_eligible": 4261
+      },
+      {
+        "meet": 1,
+        "year": "2021",
+        "part": "finish",
+        "valid_times": 10309,
+        "history_eligible": 7327
+      },
+      {
+        "meet": 1,
+        "year": "2022",
+        "part": "finish",
+        "valid_times": 10678,
+        "history_eligible": 7856
+      },
+      {
+        "meet": 1,
+        "year": "2023",
+        "part": "finish",
+        "valid_times": 11036,
+        "history_eligible": 7894
+      },
+      {
+        "meet": 1,
+        "year": "2024",
+        "part": "finish",
+        "valid_times": 10769,
+        "history_eligible": 7667
+      },
+      {
+        "meet": 1,
+        "year": "2025",
+        "part": "finish",
+        "valid_times": 10810,
+        "history_eligible": 7879
+      },
+      {
+        "meet": 1,
+        "year": "2026",
+        "part": "finish",
+        "valid_times": 7881,
+        "history_eligible": 5741
+      },
+      {
+        "meet": 3,
+        "year": "2018",
+        "part": "finish",
+        "valid_times": 8300,
+        "history_eligible": 4848
+      },
+      {
+        "meet": 3,
+        "year": "2019",
+        "part": "finish",
+        "valid_times": 8639,
+        "history_eligible": 6606
+      },
+      {
+        "meet": 3,
+        "year": "2020",
+        "part": "finish",
+        "valid_times": 5386,
+        "history_eligible": 3390
+      },
+      {
+        "meet": 3,
+        "year": "2021",
+        "part": "finish",
+        "valid_times": 7064,
+        "history_eligible": 4965
+      },
+      {
+        "meet": 3,
+        "year": "2022",
+        "part": "finish",
+        "valid_times": 7391,
+        "history_eligible": 5341
+      },
+      {
+        "meet": 3,
+        "year": "2023",
+        "part": "finish",
+        "valid_times": 7829,
+        "history_eligible": 5580
+      },
+      {
+        "meet": 3,
+        "year": "2024",
+        "part": "finish",
+        "valid_times": 7771,
+        "history_eligible": 5565
+      },
+      {
+        "meet": 3,
+        "year": "2025",
+        "part": "finish",
+        "valid_times": 7892,
+        "history_eligible": 5836
+      },
+      {
+        "meet": 3,
+        "year": "2026",
+        "part": "finish",
+        "valid_times": 5789,
+        "history_eligible": 4254
+      }
+    ]
+  },
+  "moisture_coverage": [
+    {
+      "source": "legacy",
+      "meet": 1,
+      "band": "건조",
+      "races": 3059,
+      "days": 296,
+      "moisture_missing": 0,
+      "moisture_values": [
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 1,
+      "band": "다습",
+      "races": 2205,
+      "days": 248,
+      "moisture_missing": 0,
+      "moisture_values": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 1,
+      "band": "불량",
+      "races": 380,
+      "days": 52,
+      "moisture_missing": 308,
+      "moisture_values": [
+        20.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 1,
+      "band": "양호",
+      "races": 1880,
+      "days": 207,
+      "moisture_missing": 0,
+      "moisture_values": [
+        6.0,
+        7.0,
+        8.0,
+        9.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 1,
+      "band": "포화",
+      "races": 1043,
+      "days": 134,
+      "moisture_missing": 0,
+      "moisture_values": [
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 1,
+      "band": null,
+      "races": 16,
+      "days": 2,
+      "moisture_missing": 16,
+      "moisture_values": []
+    },
+    {
+      "source": "legacy",
+      "meet": 3,
+      "band": "(0%)",
+      "races": 1,
+      "days": 1,
+      "moisture_missing": 1,
+      "moisture_values": []
+    },
+    {
+      "source": "legacy",
+      "meet": 3,
+      "band": "건조",
+      "races": 3450,
+      "days": 463,
+      "moisture_missing": 0,
+      "moisture_values": [
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 3,
+      "band": "다습",
+      "races": 736,
+      "days": 138,
+      "moisture_missing": 0,
+      "moisture_values": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 3,
+      "band": "불량",
+      "races": 285,
+      "days": 46,
+      "moisture_missing": 238,
+      "moisture_values": [
+        20.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 3,
+      "band": "양호",
+      "races": 1116,
+      "days": 186,
+      "moisture_missing": 0,
+      "moisture_values": [
+        6.0,
+        7.0,
+        8.0,
+        9.0
+      ]
+    },
+    {
+      "source": "legacy",
+      "meet": 3,
+      "band": "포화",
+      "races": 466,
+      "days": 91,
+      "moisture_missing": 0,
+      "moisture_values": [
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 1,
+      "band": "건조",
+      "races": 3059,
+      "days": 296,
+      "moisture_missing": 0,
+      "moisture_values": [
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 1,
+      "band": "다습",
+      "races": 2205,
+      "days": 248,
+      "moisture_missing": 0,
+      "moisture_values": [
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        20.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 1,
+      "band": "불량",
+      "races": 380,
+      "days": 52,
+      "moisture_missing": 0,
+      "moisture_values": [
+        20.0,
+        23.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 1,
+      "band": "양호",
+      "races": 1896,
+      "days": 208,
+      "moisture_missing": 0,
+      "moisture_values": [
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 1,
+      "band": "포화",
+      "races": 1043,
+      "days": 134,
+      "moisture_missing": 0,
+      "moisture_values": [
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0,
+        20.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 3,
+      "band": "건조",
+      "races": 3450,
+      "days": 463,
+      "moisture_missing": 0,
+      "moisture_values": [
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 3,
+      "band": "다습",
+      "races": 736,
+      "days": 138,
+      "moisture_missing": 0,
+      "moisture_values": [
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 3,
+      "band": "불량",
+      "races": 285,
+      "days": 46,
+      "moisture_missing": 0,
+      "moisture_values": [
+        16.0,
+        20.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 3,
+      "band": "양호",
+      "races": 1116,
+      "days": 186,
+      "moisture_missing": 0,
+      "moisture_values": [
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        11.0
+      ]
+    },
+    {
+      "source": "api",
+      "meet": 3,
+      "band": "포화",
+      "races": 466,
+      "days": 91,
+      "moisture_missing": 0,
+      "moisture_values": [
+        14.0,
+        15.0,
+        16.0,
+        17.0,
+        18.0,
+        19.0
+      ]
+    }
+  ],
+  "core_environment_columns": [
+    [
+      "confirmed_races",
+      "actual_track_condition_raw"
+    ],
+    [
+      "confirmed_races_2017plus",
+      "actual_track_condition_raw"
+    ],
+    [
+      "confirmed_runners",
+      "track_condition_raw"
+    ],
+    [
+      "confirmed_runners_2017plus",
+      "track_condition_raw"
+    ],
+    [
+      "confirmed_runners_entity_linked",
+      "track_condition_raw"
+    ],
+    [
+      "confirmed_runners_entity_reviewed",
+      "track_condition_raw"
+    ],
+    [
+      "confirmed_runners_entity_reviewed_before_role_review",
+      "track_condition_raw"
+    ],
+    [
+      "race_events",
+      "actual_track_condition_raw"
+    ],
+    [
+      "runner_results",
+      "track_condition_raw"
+    ],
+    [
+      "trial_participants",
+      "api_track"
+    ],
+    [
+      "trial_participants_entity_linked",
+      "api_track"
+    ],
+    [
+      "trial_participants_entity_reviewed",
+      "api_track"
+    ],
+    [
+      "trial_participants_entity_reviewed_before_role_review",
+      "api_track"
+    ],
+    [
+      "trial_participants_resolved",
+      "api_track"
+    ],
+    [
+      "trial_participants_venue_reviewed",
+      "api_track"
+    ],
+    [
+      "trial_trainer_review_evidence",
+      "api_track"
+    ],
+    [
+      "unidentified_trial_participants",
+      "api_track"
+    ],
+    [
+      "unresolved_trial_participants",
+      "api_track"
+    ],
+    [
+      "unverified_result_only_keys",
+      "actual_track_condition_raw"
+    ]
+  ],
+  "source_files_before": {
+    "data/horse_racing.sqlite3": {
+      "bytes": 3077263360,
+      "sha256": "73bcbd083c08121a25a1894543148fc5db7feab804cbead265a51c231d7d3ca6"
+    },
+    "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3": {
+      "bytes": 1393250304,
+      "sha256": "82a95378ae0a5c71114e9f1b5038efdd2e1d683e2977310e9224b3b17b9f0e6c"
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb": {
+      "bytes": 1761882112,
+      "sha256": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6"
+    },
+    "research/track_common_residual_20260928/FINAL_REPORT_KO.md": {
+      "bytes": 33769,
+      "sha256": "db4a2d3fe981128891a278a0b96d3a5c8e6df6974d28d6504461d3d06dd43cfa"
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/manifest.json": {
+      "bytes": 105323,
+      "sha256": "aa8648e439b75bdacbd7328c2d5e6ccf0aaf6105bce70f69fc7ec1f5547df7de"
+    }
+  },
+  "source_files_after": {
+    "data/horse_racing.sqlite3": {
+      "bytes": 3077263360,
+      "sha256": "73bcbd083c08121a25a1894543148fc5db7feab804cbead265a51c231d7d3ca6"
+    },
+    "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3": {
+      "bytes": 1393250304,
+      "sha256": "82a95378ae0a5c71114e9f1b5038efdd2e1d683e2977310e9224b3b17b9f0e6c"
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb": {
+      "bytes": 1761882112,
+      "sha256": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6"
+    },
+    "research/track_common_residual_20260928/FINAL_REPORT_KO.md": {
+      "bytes": 33769,
+      "sha256": "db4a2d3fe981128891a278a0b96d3a5c8e6df6974d28d6504461d3d06dd43cfa"
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/manifest.json": {
+      "bytes": 105323,
+      "sha256": "aa8648e439b75bdacbd7328c2d5e6ccf0aaf6105bce70f69fc7ec1f5547df7de"
+    }
+  },
+  "source_files_unchanged": true,
+  "gate_note": "API horse program number is only a comparison proxy; verify actual gate before modeling.",
+  "method": "Exact final study SQL/filter and time conversion; same physical filters; official horse ID keys, milliseconds.",
+  "versions": {
+    "python": "3.12.13",
+    "duckdb": "1.5.5",
+    "pandas": "3.0.5"
+  },
+  "completed_at_utc": "2026-10-01T21:26:56.144271+00:00"
+}
