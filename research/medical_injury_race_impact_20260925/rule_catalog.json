@@ -1,0 +1,23 @@
+{
+  "ruleset_version": "medical-term-candidates-v1.0.0",
+  "principle": "Exact source text is retained; any phrase rule generates an unreviewed candidate, not a diagnosis, severity, performance effect, or eligibility decision.",
+  "rules": {
+    "R_COMPOUND_HOLD": "Comma-like separator in original: preserve whole term; mixed kind/system, race-impact unknown; never split.",
+    "R_BLEEDING_HOLD": "Any 출혈 string: preserve unknown and route for source reconciliation; not an official pulmonary-bleeding event.",
+    "R_SOURCE_PREFIX_PASSTHROUGH": "For matching only, inspect text after exact '동물  ' prefix; preserve raw text, term_id and frequency independently.",
+    "R_PREVENTION": "Explicit 예방접종/백신접종: prevention and no_injury_signal; not health or no-performance-effect evidence.",
+    "R_ADMIN": "Small exact allowlist of administrative phrases only; no_injury_signal is not a health judgment.",
+    "R_EYE_CONDITION": "Explicit eye-site words with injury or disease phrase; context-dependent pending exam.",
+    "R_LAMENESS": "파행 is a symptom with direct concern; cause and severity remain unknown.",
+    "R_STRUCTURAL_INJURY": "Explicit bone/tendon/ligament/structural terms; direct concern, severity/recovery unknown.",
+    "R_SOFT_TISSUE_INJURY": "Explicit wound/trauma terms; context-dependent, site only when phrase supports it.",
+    "R_SYMPTOM_CONTEXT": "Explicit symptom vocabulary; cause, duration and severity unknown.",
+    "R_RESPIRATORY_DISEASE": "Explicit respiratory illness term; context-dependent and current status unknown.",
+    "R_SKIN_DISEASE": "Explicit skin disease phrase; context-dependent and current status unknown.",
+    "R_PROCEDURE": "Treatment/test vocabulary alone; indication and race impact unknown.",
+    "R_DISEASE_GENERAL": "Limited disease-like vocabulary; term and site remain candidates requiring review.",
+    "R_NO_MATCH": "No conservative rule matched: retain unknown and unreviewed."
+  },
+  "validation_cases_file": "rule_validation_cases.csv",
+  "rule_source": "build_candidates.py"
+}

@@ -1,0 +1,131 @@
+{
+  "ruleset_version": "medical-term-candidates-v1.0.0",
+  "generated_at_utc": "2026-09-25T14:48:55.971993+00:00",
+  "source_db_path_argument": "data/horse_racing.sqlite3",
+  "source_db_bytes": 2837508096,
+  "source_db_sha256": "1fb25999de5928083201015be793157b2ad73bf33c694e9f362768b55b926bcb",
+  "term_catalog_rows": 5397,
+  "medical_diagnosis_link_rows": 676047,
+  "horse_medical_rows": 697695,
+  "term_catalog_sha256_id_raw_text_ordered": "393beb9bb3c6734da9c48f65806dac1a69c6bec0cac64e7740805901ad4a7dfc",
+  "term_links_sha256_ordered": "4100955191f76b3540bec62c735e9be28bb73d22b6b0d7be53908116f397cc0c",
+  "classification_counts": {
+    "term_kind": {
+      "symptom": 68,
+      "unknown": 456,
+      "injury": 712,
+      "treatment_or_test": 76,
+      "disease": 344,
+      "administrative": 4,
+      "prevention": 6,
+      "mixed": 3731
+    },
+    "anatomic_system": {
+      "musculoskeletal": 603,
+      "unknown": 763,
+      "eye": 18,
+      "skin": 265,
+      "systemic": 11,
+      "respiratory": 6,
+      "mixed": 3731
+    },
+    "race_impact_prior": {
+      "context_dependent": 871,
+      "unknown": 4263,
+      "no_injury_signal": 10,
+      "direct_concern": 253
+    },
+    "review_status": {
+      "rule_candidate": 4945,
+      "unreviewed": 452
+    }
+  },
+  "validation_case_count": 16,
+  "validation_status": "passed",
+  "entry_equipment": {
+    "rows_total": 499671,
+    "count_rows": 45402,
+    "date_rows": 789,
+    "illness_note_rows": 35909
+  },
+  "entry_equipment_bleeding_count_distribution_entry_rows": [
+    {
+      "bleeding_count": 0,
+      "entry_rows": 44613
+    },
+    {
+      "bleeding_count": 1,
+      "entry_rows": 734
+    },
+    {
+      "bleeding_count": 2,
+      "entry_rows": 43
+    },
+    {
+      "bleeding_count": 3,
+      "entry_rows": 9
+    },
+    {
+      "bleeding_count": 4,
+      "entry_rows": 3
+    }
+  ],
+  "medical_term_raw_text_with_bleeding": [
+    {
+      "term_id": 13,
+      "raw_text": "운동기인성폐출혈",
+      "frequency": 131
+    },
+    {
+      "term_id": 247,
+      "raw_text": "비출혈",
+      "frequency": 47
+    },
+    {
+      "term_id": 3633,
+      "raw_text": "동물  비출혈",
+      "frequency": 14
+    },
+    {
+      "term_id": 3886,
+      "raw_text": "동물  운동기인성폐출혈",
+      "frequency": 7
+    },
+    {
+      "term_id": 1437,
+      "raw_text": "각막염,운동기인성폐출혈",
+      "frequency": 1
+    },
+    {
+      "term_id": 2421,
+      "raw_text": "비출혈,외상기타",
+      "frequency": 1
+    },
+    {
+      "term_id": 2570,
+      "raw_text": "비출혈,좌안면부좌상",
+      "frequency": 1
+    },
+    {
+      "term_id": 3284,
+      "raw_text": "마체검사,운동기인성폐출혈",
+      "frequency": 1
+    },
+    {
+      "term_id": 4171,
+      "raw_text": "운동기인성폐출혈,후두개포착",
+      "frequency": 1
+    },
+    {
+      "term_id": 4296,
+      "raw_text": "후두염,비출혈",
+      "frequency": 1
+    },
+    {
+      "term_id": 4669,
+      "raw_text": "동물  진정(보정),비출혈",
+      "frequency": 1
+    }
+  ],
+  "read_only_source_query": true
+}

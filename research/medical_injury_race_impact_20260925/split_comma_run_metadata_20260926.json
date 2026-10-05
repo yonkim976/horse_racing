@@ -1,0 +1,25 @@
+{
+  "source_file": "candidate_terms.csv",
+  "comma_audit_file": "comma_entry_review_20260926.csv",
+  "comma_terms_total": 3731,
+  "split_source_terms": 3712,
+  "split_component_rows": 7424,
+  "held_source_terms": 19,
+  "all_comma_term_frequency_sum": 70262,
+  "component_frequency_policy": "Source phrase frequency is repeated as provenance only and must not be summed per component; component-level allocation is unavailable.",
+  "split_policy": "Split at the comma only for 3,704 different two-text terms, 6 identical repeated-text pairs, and 2 manually inspected top-level pairs whose second diagnosis contains a numeric anatomical enumeration.",
+  "hold_policy": "Preserve 7 likely single diagnoses with an internal numeric anatomical comma and 12 terms with an unresolved isolated token '일' as whole raw source terms.",
+  "source_text_modified": false,
+  "disposition_counts": {
+    "two_distinct_textual_items": 3704,
+    "single_medical_phrase_internal_anatomic_enumeration": 7,
+    "two_medical_phrases_plus_unresolved_token": 12,
+    "two_source_entries_same_text": 6,
+    "two_medical_phrases_with_internal_anatomic_enumeration": 2
+  },
+  "split_parent_frequency_by_disposition": {
+    "two_distinct_textual_items": 70225,
+    "two_source_entries_same_text": 9,
+    "two_medical_phrases_with_internal_anatomic_enumeration": 2
+  }
+}
