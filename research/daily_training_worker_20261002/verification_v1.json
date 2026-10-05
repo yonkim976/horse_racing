@@ -1,0 +1,60 @@
+{
+  "verified_on_kst": "2026-10-02",
+  "state": "local_code_prepared_not_deployed",
+  "planned_schedule": {"timezone": "Asia/Seoul", "daily_time": "14:30", "inclusive_days": 7},
+  "worker": "src/horse_racing/jobs/daily_training.py",
+  "default_mode": "plan_only_no_io",
+  "production_worker_executed": false,
+  "production_business_rows_written_in_this_task": 0,
+  "scheduler_created_or_updated": false,
+  "discord_messages_sent": 0,
+  "tests": {"passed": 49, "ruff": "passed"},
+  "audit_window": {"start": "2026-09-26", "end": "2026-10-02"},
+  "local_and_supabase_matching_counts": {
+    "horse_training": 5168,
+    "horse_start_training": 408,
+    "horse_swim_training": 108,
+    "horse_hill_training": 127
+  },
+  "duplicate_business_key_groups_in_window": {
+    "local": {"horse_training": 0, "horse_start_training": 0, "horse_swim_training": 0, "horse_hill_training": 0},
+    "supabase": {"horse_training": 0, "horse_start_training": 0, "horse_swim_training": 0, "horse_hill_training": 0}
+  },
+  "latest_training_date_in_audited_db_window": "2026-09-30",
+  "live_read_only_source_checks": {
+    "jeju_starting_website": {"2026-09-30": 113, "2026-10-02": 0},
+    "api216_tr_date": {"2026-09-30": 108, "2026-10-01": 91}
+  },
+  "postgres_read_only_lock_test": {"parallel_transaction_blocked": true, "released_after_rollback": true},
+  "sources": {
+    "daily_training": "API18_1, meet 1/2/3, tr_date",
+    "starting_training": "API22_1 meet 1/3; canonical KRA website meet 2",
+    "swimming": "API216 tr_date (not annual requery)",
+    "hill": "hilldriving area 1/2 with start_date/end_date"
+  },
+  "storage_contract": [
+    "Repeated collection reuses business keys; observations and raw versions are separate history.",
+    "Jeju starting occurrences remain separate; ordinal slots are not official event IDs or timestamps.",
+    "Empty responses preserve old rows and are labelled observed_empty, not proof of no training.",
+    "Validated nonempty Jeju snapshots may retire stale current slots; archived prior source files remain.",
+    "Hill full-row hashes preserve distinct observations; an altered source value is not assumed to be the same event.",
+    "A session advisory lock protects this worker; per-date transaction locks protect standard/start writers.",
+    "Models and prediction inputs are not changed by this worker."
+  ],
+  "discord_proposal": {
+    "reference_read_only": "Fintor jobs/listed_corp_overview_daily/notify.py and pipeline.py",
+    "secret": "dedicated horse-racing Discord webhook in Secret Manager; do not reuse Fintor automatically",
+    "delivery": "send after DB commits; wait=true and allowed_mentions.parse=[]",
+    "summary": ["조회기간", "지역별 수집상태", "신규·변경·유지 건수", "실제 최신 자료일", "빈 응답·미연결·실패", "소요시간", "실행 ID·로그 링크"],
+    "failure_isolation": "Discord failure must not retry successful ingestion; separately retry notification",
+    "crash_fallback": "Cloud Monitoring needed for timeout/process crash before webhook dispatch"
+  },
+  "remaining_before_activation": [
+    "Review incremental Cloud costs before creating billable resources.",
+    "Validate this new worker with one supervised production/cloud execution and durable raw-file verification.",
+    "Create and activate the daily Scheduler only after validation; current code is not a registered cron.",
+    "Prepare dedicated Discord channel/webhook, inject secret and test delivery separately.",
+    "Add monitoring for missed runs/older-than-seven-day gaps; do not silently expand the user-approved window.",
+    "Cloud worker updates Supabase only; local SQLite mirroring is not included."
+  ]
+}

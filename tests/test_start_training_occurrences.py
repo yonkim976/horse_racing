@@ -115,6 +115,75 @@ def test_existing_legacy_rows_survive_migration(tmp_path: Path):
         ).all() == [(1, "이동준", 1, "legacy_api22"), (2, "문성호", 2, "legacy_api22")]
 
 
+def test_scoped_website_repair_and_replay(tmp_path: Path, monkeypatch):
+    import scripts.repair_start_training_occurrences as repair
+
+    sessions = migrated_session(tmp_path)
+    with sessions() as session:
+        item = StartTrainingItem.model_validate(
+            start_training_payload()["response"]["body"]["items"]["item"][0]
+        )
+        _write_start_training(session, [item], 1)
+        session.commit()
+        engine = session.get_bind()
+    monkeypatch.setattr(repair, "target_engine", lambda target: engine)
+    repair.backup(tmp_path, "local")
+    html = tmp_path / "source.html"
+    html.write_bytes(b"preserved-source")
+    records = [
+        {
+            "horse_id_raw": "3104784",
+            "training_date": "2026-08-23",
+            "stable_part": 1,
+            "stable_number": "21",
+            "rider_name": "김길홍",
+            "remark": "양호",
+            "location_raw": location,
+            "occurrence_no": n,
+            "source_row_no": n,
+        }
+        for n, location in enumerate(["800M 출발지점", "400M 출발지점"], 1)
+    ]
+    bundle = {
+        "scope": ["3104784"],
+        "research_db_sha256": repair.sha(repair.RESEARCH),
+        "artifacts": [
+            {
+                "training_date": "2026-08-23",
+                "requested_at": "2026-10-01T00:00:00+00:00",
+                "source_url": "https://race.kra.co.kr/startingData/getStartingTrainListAll.do",
+                "local_path": str(html),
+                "sha256": repair.sha(html),
+                "records": records,
+            }
+        ],
+    }
+    repair.write_json(tmp_path / "bundle.json", bundle)
+    repair.write_json(
+        tmp_path / "prepare.json", {"bundle_sha256": repair.sha(tmp_path / "bundle.json")}
+    )
+    repair.apply(tmp_path, "local")
+    repair.apply(tmp_path, "local", replay=True)
+    with sessions() as session:
+        rows = session.scalars(
+            select(HorseStartTraining).order_by(HorseStartTraining.occurrence_no)
+        ).all()
+        assert len(rows) == 2
+        assert [r.location_raw for r in rows] == ["800M 출발지점", "400M 출발지점"]
+        assert all(r.source_document_id and r.source_kind == "kra_website" for r in rows)
+        from datetime import date
+
+        from horse_racing.web.entities import _load_start_training
+        from horse_racing.web.race_analysis import _load_training
+
+        detail = _load_start_training(session, rows[0].horse_id)
+        assert {r.location for r in detail} == {"800M 출발지점", "400M 출발지점"}
+        _, starts, _ = _load_training(session, [rows[0].horse_id], date(2026, 8, 24))
+        assert len(starts[rows[0].horse_id]) == 2
+        assert {r["location"] for r in starts[rows[0].horse_id]} == {
+            "800M 출발지점",
+            "400M 출발지점",
+        }
 
 
 def test_failed_second_page_never_replaces_current_snapshot(tmp_path: Path):
