@@ -1,0 +1,1249 @@
+{
+  "approved_scope": "User-selected manual maintenance tools and retired/annual/legacy DB build tools only; remove low-utility files in these groups after dependency review.",
+  "candidate_count": 137,
+  "deleted_script_candidates": [
+    {
+      "path": "scripts/adjudicate_section_points.py",
+      "category": "retired_shared_section_pipeline",
+      "reason": "사용자가 종료한 공유 구간 DB 재구축·판정 경로. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/analyze_carried_weight.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/analyze_gate_bias.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/analyze_outer_front_advantage.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/analyze_pace_competition.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/analyze_running_style.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_busan_freshness.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/busan_complete_db_20260916"
+      ]
+    },
+    {
+      "path": "scripts/audit_canonical_sections.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_jeju_section_lineage.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_jeju_section_lineage.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_context_features_v1_20260916",
+        "data/research/jeju_native_experience_calibration_v9_20260916",
+        "data/research/jeju_native_running_trial_links_20260915",
+        "data/research/jeju_native_section_lineage_v10_20260916"
+      ]
+    },
+    {
+      "path": "scripts/audit_seoul_freshness.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/seoul_backfill_20260915_v1",
+        "data/research/seoul_running_trials_20260915_v1"
+      ]
+    },
+    {
+      "path": "scripts/audit_seoul_result_status_codes.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_seoul_backfill.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/seoul_backfill_20260915_v1"
+      ]
+    },
+    {
+      "path": "scripts/build_busan_2017_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2018_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2019_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2020_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2021_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2022_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2023_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2024_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2025_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_2026_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_busan_complete_db.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_busan_complete_db.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/busan_complete_db_20260916",
+        "data/research/busan_history_20260915",
+        "data/research/busan_temp_id_linkage_20260915",
+        "data/research/busan_trial_linkage_20260915"
+      ]
+    },
+    {
+      "path": "scripts/build_busan_trial_linkage.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_busan_trial_linkage.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/busan_history_20260915",
+        "data/research/busan_trial_linkage_20260915"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_2017_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2018_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2019_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2020_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2021_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2022_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2023_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2024_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2025_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_2026_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_basic_info_sheet.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_jeju_entry_history_sheet.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_entry_history_sheet.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_native_analysis_db.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_confirmed_race_time_ids_20260914",
+        "data/research/jeju_native_200m_readiness_20260915",
+        "data/research/jeju_native_analysis_db_20260915",
+        "data/research/jeju_native_running_trial_links_20260915",
+        "data/research/jeju_race_time_official_ids_20260914"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_native_extended_db.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_analysis_db_20260915",
+        "data/research/jeju_native_extended_db_20260915",
+        "data/research/jeju_other_sources_verification_20260915"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_native_text_phase2_db.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_extended_db_20260915"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_running_trial_links.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_jeju_trial_inspection_exclusions.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_confirmed_race_time_ids_20260914",
+        "data/research/jeju_native_running_trial_links_20260915"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_steward_2024_events.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_steward_2024_backfill_20260917",
+        "data/research/jeju_steward_2024_events_20260917",
+        "data/research/jeju_steward_events_v1_20260917",
+        "data/research/jeju_tempo_pace_features_20260917"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_steward_event_pilot.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_steward_events_v1_20260917",
+        "data/research/jeju_tempo_pace_features_20260917"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_steward_pace_v2.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_steward_2024_events_20260917",
+        "data/research/jeju_steward_events_v1_20260917",
+        "data/research/jeju_steward_pace_v2_20260918",
+        "data/research/jeju_tempo_pace_features_20260917"
+      ]
+    },
+    {
+      "path": "scripts/build_running_trials_2017_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2018_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2019_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2020_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2021_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2022_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2023_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2024_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2025_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_running_trials_2026_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_section_point_db.py",
+      "category": "retired_shared_section_pipeline",
+      "reason": "사용자가 종료한 공유 구간 DB 재구축·판정 경로. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2017_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2018_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2019_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2020_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2021_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2022_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2023_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2024_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2025_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_2026_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_seoul_running_trials.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/seoul_backfill_20260915_v1",
+        "data/research/seoul_running_trials_20260915_v1"
+      ]
+    },
+    {
+      "path": "scripts/build_yeongcheon_2026_score_db.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_busan_medical_api.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_busan_history.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/busan_history_20260915"
+      ]
+    },
+    {
+      "path": "scripts/collect_busan_trial_api.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_busan_trial_linkage.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/busan_trial_linkage_20260915"
+      ]
+    },
+    {
+      "path": "scripts/collect_jeju_steward_2024.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_steward_2024_backfill_20260917",
+        "data/research/jeju_tempo_pace_features_20260917"
+      ]
+    },
+    {
+      "path": "scripts/collect_jeju_tempo_research.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_tempo_api303_20260917"
+      ]
+    },
+    {
+      "path": "scripts/confirm_jeju_trial_breed_profiles.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/verify_jeju_trial_inspection_exclusions.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_running_trial_links_20260915"
+      ]
+    },
+    {
+      "path": "scripts/link_busan_temporary_ids.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/busan_history_20260915",
+        "data/research/busan_temp_id_linkage_20260915"
+      ]
+    },
+    {
+      "path": "scripts/link_seoul_text_ids.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/seoul_backfill_20260915_v1",
+        "data/research/seoul_text_id_linkage_20260915_v1"
+      ]
+    },
+    {
+      "path": "scripts/load_busan_api4_3_sections.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/load_busan_point_passing.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/busan_"
+      ]
+    },
+    {
+      "path": "scripts/load_jeju_point_passing.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_"
+      ]
+    },
+    {
+      "path": "scripts/load_seoul_point_passing.py",
+      "category": "legacy_annual_score_pipeline",
+      "reason": "2026-09-25 연도별 스냅샷 생성·통과 자료 적재. 새 종별 코어 연구의 기본 경로가 아님. 보관 분리 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/seoul_"
+      ]
+    },
+    {
+      "path": "scripts/materialize_jeju_confirmed_race_ids.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_owner_conflict_followup_20260914_v4",
+        "data/research/jeju_race_time_official_ids_20260914"
+      ]
+    },
+    {
+      "path": "scripts/reconcile_jeju_race_time_ids.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/validate_jeju_running_trial_links.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_confirmed_race_time_ids_20260914",
+        "data/research/jeju_native_running_trial_links_20260915"
+      ]
+    },
+    {
+      "path": "scripts/verify_busan_complete_db.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_busan_complete_db.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_busan_freshness_audit.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/busan_complete_db_20260916"
+      ]
+    },
+    {
+      "path": "scripts/verify_busan_history.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/busan_history_20260915"
+      ]
+    },
+    {
+      "path": "scripts/verify_busan_trial_linkage.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_confirmed_race_ids.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_native_analysis_db.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_jeju_native_analysis_db.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_analysis_db_20260915"
+      ]
+    },
+    {
+      "path": "scripts/verify_jeju_native_extended_db.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_jeju_native_extended_db.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_analysis_db_20260915",
+        "data/research/jeju_native_extended_db_20260915",
+        "data/research/jeju_other_sources_verification_20260915"
+      ]
+    },
+    {
+      "path": "scripts/verify_jeju_native_text_phase2_db.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_jeju_native_text_phase2_db.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_extended_db_20260915"
+      ]
+    },
+    {
+      "path": "scripts/verify_jeju_other_sources.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_confirmed_race_time_ids_20260914",
+        "data/research/jeju_other_sources_verification_20260915",
+        "data/research/jeju_race_time_official_ids_20260914"
+      ]
+    },
+    {
+      "path": "scripts/verify_jeju_race_time_ids.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_section_lineage.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_trial_inspection_exclusions.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_200m_readiness_20260915"
+      ]
+    },
+    {
+      "path": "scripts/verify_seoul_backfill.py",
+      "category": "legacy_history_db_construction",
+      "reason": "기존 이력·중간 DB 구축/검증 경로. 삭제된 입력 또는 옛 단계와 연결되어 별도 보관 후보.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/seoul_backfill_20260915_v1"
+      ]
+    }
+  ],
+  "manual_scripts_to_keep": [
+    {
+      "path": "scripts/analysis_finish_time_quality.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_api78_equipment_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_artifacts.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_historical_text_archive.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_kra_disease_glossary.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_pre2015_race_result_availability.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_pre_race_field_dnf_e1.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_api78_equipment_changes.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_api78_equipment_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_dividends_verified.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/prepare_dividend_archive_audit.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_operational_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_context_features.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/audit_jeju_section_lineage.py",
+        "scripts/freeze_jeju_transition_protocol.py",
+        "scripts/build_jeju_transition_features.py",
+        "data/research/jeju_native_transition_holdout_v13_20260916/reproduce/build_jeju_transition_features.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_context_features_v1_20260916"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_h3_features.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_live_update_bundles.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/run_live_prediction_cycle.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_native_top3_dataset.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_transition_features.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "data/research/jeju_native_transition_holdout_v13_20260916/reproduce/build_jeju_transition_features.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_historical_text_verified_empty.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_historical_training_monthly.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/audit_historical_training_monthly.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_jeju_native_health_weight.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_jeju_native_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_jeju_pregame.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_pregame_observations_v1"
+      ]
+    },
+    {
+      "path": "scripts/fetch_jeju_live_audit_inputs.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/generate_supabase_schema.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/install-launchd.sh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/load_test_web.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/materialize_jeju_native_training.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/prepare_dividend_archive_audit.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/render_jeju_live_detailed_report.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/replay_jeju_pregame.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_pregame_observations_v1"
+      ]
+    },
+    {
+      "path": "scripts/run-daily-sync.sh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/set_mapilog_database_secret.zsh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_horse_active_status.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_special_training.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_trainer_affiliations.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_trainer_historical_regions.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/apply_20260929_trainer_status_identity.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/uninstall-launchd.sh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_dividend_backfill.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/prepare_dividend_archive_audit.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_native_top3_dataset.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_jeju_native_top3_dataset.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_pregame.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    }
+  ],
+  "coupled_retired_tests": [
+    "tests/test_adjudicate_section_points.py",
+    "tests/test_section_point_db_builder.py"
+  ],
+  "retained_due_to_other_tool_dependency": [
+    {
+      "path": "scripts/build_seoul_backfill.py",
+      "callers": [
+        "scripts/resume_seoul_backfill.py"
+      ]
+    },
+    {
+      "path": "scripts/build_unified_thoroughbred_dataset.py",
+      "callers": [
+        "scripts/finalize_unified_thoroughbred_dataset.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_seoul_backfill_results.py",
+      "callers": [
+        "scripts/build_seoul_backfill.py"
+      ]
+    },
+    {
+      "path": "scripts/verify_unified_thoroughbred_dataset.py",
+      "callers": [
+        "scripts/finalize_unified_thoroughbred_dataset.py"
+      ]
+    },
+    {
+      "path": "scripts/build_busan_history.py",
+      "callers": [
+        "tests/test_busan_history_build.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_busan_history_results.py",
+      "callers": [
+        "scripts/build_busan_history.py"
+      ]
+    }
+  ]
+}

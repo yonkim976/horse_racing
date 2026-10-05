@@ -1,0 +1,151 @@
+스크립트 정리 완료 — 2026-10-04
+
+삭제: 루트 스크립트 92개(수동 도구 29개, 과거 DB 도구 63개), 종료된 공유 구간 경로 전용 테스트 파일 2개, 해당 bytecode 6개.
+보존: 선택 그룹의 수동 도구 39개와 다른 보존 도구/테스트의 의존 모듈 6개. 루트 스크립트는 총 109개 남았다.
+DB 6개 파일 메타데이터, 현재 두 종 모델/등록부/검증 파일 및 별도 모델 보관본 해시 유지.
+검증: 삭제 전 1130개·삭제 후 1126개 테스트 수집 성공, 운영/발행 관련 72개 테스트 통과.
+이번 확보 용량은 스크립트와 캐시 약 1.38MB다.
+과거 데이터·문서·연구 결과와 현재 종별 코드·스케줄 설정은 추가 삭제하지 않았다.
+
+삭제한 스크립트
+scripts/adjudicate_section_points.py
+scripts/analyze_carried_weight.py
+scripts/analyze_gate_bias.py
+scripts/analyze_outer_front_advantage.py
+scripts/analyze_pace_competition.py
+scripts/analyze_running_style.py
+scripts/audit_busan_freshness.py
+scripts/audit_canonical_sections.py
+scripts/audit_jeju_section_lineage.py
+scripts/audit_seoul_freshness.py
+scripts/audit_seoul_result_status_codes.py
+scripts/build_busan_2017_score_db.py
+scripts/build_busan_2018_score_db.py
+scripts/build_busan_2019_score_db.py
+scripts/build_busan_2020_score_db.py
+scripts/build_busan_2021_score_db.py
+scripts/build_busan_2022_score_db.py
+scripts/build_busan_2023_score_db.py
+scripts/build_busan_2024_score_db.py
+scripts/build_busan_2025_score_db.py
+scripts/build_busan_2026_score_db.py
+scripts/build_busan_complete_db.py
+scripts/build_busan_trial_linkage.py
+scripts/build_jeju_2017_score_db.py
+scripts/build_jeju_2018_score_db.py
+scripts/build_jeju_2019_score_db.py
+scripts/build_jeju_2020_score_db.py
+scripts/build_jeju_2021_score_db.py
+scripts/build_jeju_2022_score_db.py
+scripts/build_jeju_2023_score_db.py
+scripts/build_jeju_2024_score_db.py
+scripts/build_jeju_2025_score_db.py
+scripts/build_jeju_2026_score_db.py
+scripts/build_jeju_basic_info_sheet.py
+scripts/build_jeju_entry_history_sheet.py
+scripts/build_jeju_native_analysis_db.py
+scripts/build_jeju_native_extended_db.py
+scripts/build_jeju_native_text_phase2_db.py
+scripts/build_jeju_running_trial_links.py
+scripts/build_jeju_steward_2024_events.py
+scripts/build_jeju_steward_event_pilot.py
+scripts/build_jeju_steward_pace_v2.py
+scripts/build_running_trials_2017_score_db.py
+scripts/build_running_trials_2018_score_db.py
+scripts/build_running_trials_2019_score_db.py
+scripts/build_running_trials_2020_score_db.py
+scripts/build_running_trials_2021_score_db.py
+scripts/build_running_trials_2022_score_db.py
+scripts/build_running_trials_2023_score_db.py
+scripts/build_running_trials_2024_score_db.py
+scripts/build_running_trials_2025_score_db.py
+scripts/build_running_trials_2026_score_db.py
+scripts/build_section_point_db.py
+scripts/build_seoul_2017_score_db.py
+scripts/build_seoul_2018_score_db.py
+scripts/build_seoul_2019_score_db.py
+scripts/build_seoul_2020_score_db.py
+scripts/build_seoul_2021_score_db.py
+scripts/build_seoul_2022_score_db.py
+scripts/build_seoul_2023_score_db.py
+scripts/build_seoul_2024_score_db.py
+scripts/build_seoul_2025_score_db.py
+scripts/build_seoul_2026_score_db.py
+scripts/build_seoul_running_trials.py
+scripts/build_yeongcheon_2026_score_db.py
+scripts/collect_busan_medical_api.py
+scripts/collect_busan_trial_api.py
+scripts/collect_jeju_steward_2024.py
+scripts/collect_jeju_tempo_research.py
+scripts/confirm_jeju_trial_breed_profiles.py
+scripts/link_busan_temporary_ids.py
+scripts/link_seoul_text_ids.py
+scripts/load_busan_api4_3_sections.py
+scripts/load_busan_point_passing.py
+scripts/load_jeju_point_passing.py
+scripts/load_seoul_point_passing.py
+scripts/materialize_jeju_confirmed_race_ids.py
+scripts/reconcile_jeju_race_time_ids.py
+scripts/validate_jeju_running_trial_links.py
+scripts/verify_busan_complete_db.py
+scripts/verify_busan_freshness_audit.py
+scripts/verify_busan_history.py
+scripts/verify_busan_trial_linkage.py
+scripts/verify_jeju_confirmed_race_ids.py
+scripts/verify_jeju_native_analysis_db.py
+scripts/verify_jeju_native_extended_db.py
+scripts/verify_jeju_native_text_phase2_db.py
+scripts/verify_jeju_other_sources.py
+scripts/verify_jeju_race_time_ids.py
+scripts/verify_jeju_section_lineage.py
+scripts/verify_jeju_trial_inspection_exclusions.py
+scripts/verify_seoul_backfill.py
+
+유지한 수동 도구
+scripts/analysis_finish_time_quality.py
+scripts/audit_api78_equipment_history.py
+scripts/audit_artifacts.py
+scripts/audit_historical_text_archive.py
+scripts/audit_kra_disease_glossary.py
+scripts/audit_pre2015_race_result_availability.py
+scripts/audit_pre_race_field_dnf_e1.py
+scripts/backfill_api78_equipment_changes.py
+scripts/backfill_api78_equipment_history.py
+scripts/backfill_dividends_verified.py
+scripts/backfill_operational_history.py
+scripts/build_jeju_context_features.py
+scripts/build_jeju_h3_features.py
+scripts/build_jeju_live_update_bundles.py
+scripts/build_jeju_native_top3_dataset.py
+scripts/build_jeju_transition_features.py
+scripts/collect_historical_text_verified_empty.py
+scripts/collect_historical_training_monthly.py
+scripts/collect_jeju_native_health_weight.py
+scripts/collect_jeju_native_history.py
+scripts/collect_jeju_pregame.py
+scripts/fetch_jeju_live_audit_inputs.py
+scripts/generate_supabase_schema.py
+scripts/install-launchd.sh
+scripts/load_test_web.py
+scripts/materialize_jeju_native_training.py
+scripts/prepare_dividend_archive_audit.py
+scripts/render_jeju_live_detailed_report.py
+scripts/replay_jeju_pregame.py
+scripts/run-daily-sync.sh
+scripts/set_mapilog_database_secret.zsh
+scripts/sync_horse_active_status.py
+scripts/sync_special_training.py
+scripts/sync_trainer_affiliations.py
+scripts/sync_trainer_historical_regions.py
+scripts/uninstall-launchd.sh
+scripts/verify_dividend_backfill.py
+scripts/verify_jeju_native_top3_dataset.py
+scripts/verify_jeju_pregame.py
+
+유지한 과거 의존 모듈
+scripts/build_seoul_backfill.py ← scripts/resume_seoul_backfill.py
+scripts/build_unified_thoroughbred_dataset.py ← scripts/finalize_unified_thoroughbred_dataset.py
+scripts/collect_seoul_backfill_results.py ← scripts/build_seoul_backfill.py
+scripts/verify_unified_thoroughbred_dataset.py ← scripts/finalize_unified_thoroughbred_dataset.py
+scripts/build_busan_history.py ← tests/test_busan_history_build.py
+scripts/collect_busan_history_results.py ← scripts/build_busan_history.py

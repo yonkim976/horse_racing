@@ -1,0 +1,41 @@
+{
+  "pytest_collection_after": {
+    "exit_code": 0,
+    "command": [
+      "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "output_log": "pytest_collection_after.txt",
+    "summary": "ave_exact_metric_total[1000]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1200]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1300]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1400]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1600]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1800]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1900]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[2000]\ntests/test_yeongcheon_diagram.py::test_all_route_pieces_join_without_jumps\ntests/test_yeongcheon_diagram.py::test_shared_closing_checkpoints_do_not_move_between_distances\ntests/test_yeongcheon_diagram.py::test_long_races_start_inside_and_finish_outside\ntests/test_yeongcheon_diagram.py::test_racecourse_map_supports_yeongcheon\ntests/test_yeongcheon_diagram.py::test_yeongcheon_sections_use_distance_positions\n\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /Users/kimyongjin/Desktop/horse_racing/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1126 tests collected in 2.64s\n"
+  },
+  "current_operations_tests": {
+    "exit_code": 0,
+    "command": [
+      "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_local_race_day.py",
+      "tests/test_local_post_race.py",
+      "tests/test_daily_training_job.py",
+      "tests/test_weekly_entry_cards.py",
+      "tests/test_prediction_publisher_skill.py",
+      "tests/test_dividend_backfill_verified.py",
+      "tests/test_trainer_affiliations.py",
+      "tests/test_jeju_native_top3_artifact.py",
+      "tests/test_busan_history_build.py",
+      "tests/test_seoul_backfill_status.py"
+    ],
+    "output_log": "current_operations_tests.txt",
+    "summary": "........................................................................ [100%]\n72 passed in 9.02s\n"
+  }
+}

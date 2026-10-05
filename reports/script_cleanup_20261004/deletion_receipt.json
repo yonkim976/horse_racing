@@ -1,0 +1,2946 @@
+{
+  "started_at": "2026-10-04T12:25:09.826270+09:00",
+  "status": "completed",
+  "authorization": "User explicitly requested deleting low-utility files within selected manual tools and retired/annual/legacy DB-build groups.",
+  "scope": "Exact 92 root scripts; two tests only for retired shared section scripts; associated bytecode and exact-target symlinks. No DB/model/source response/result report deletion.",
+  "criteria": "Retired shared DB workflow, superseded annual snapshots and legacy intermediate stages, fixed-date info sheets and old experimental/identity ledgers with absent inputs. Functional collection/deployment/audit tools and model/research dependencies retained.",
+  "selected_group_counts": {
+    "retired_shared_section_pipeline": 2,
+    "manual_maintenance_or_research_review": 29,
+    "legacy_annual_score_pipeline": 45,
+    "legacy_history_db_construction": 16
+  },
+  "preserved_manual_tools": [
+    {
+      "path": "scripts/analysis_finish_time_quality.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_api78_equipment_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_artifacts.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_historical_text_archive.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_kra_disease_glossary.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_pre2015_race_result_availability.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/audit_pre_race_field_dnf_e1.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_api78_equipment_changes.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_api78_equipment_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_dividends_verified.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/prepare_dividend_archive_audit.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/backfill_operational_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_context_features.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/audit_jeju_section_lineage.py",
+        "scripts/freeze_jeju_transition_protocol.py",
+        "scripts/build_jeju_transition_features.py",
+        "data/research/jeju_native_transition_holdout_v13_20260916/reproduce/build_jeju_transition_features.py"
+      ],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_context_features_v1_20260916"
+      ]
+    },
+    {
+      "path": "scripts/build_jeju_h3_features.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_live_update_bundles.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/run_live_prediction_cycle.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_native_top3_dataset.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/build_jeju_transition_features.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "data/research/jeju_native_transition_holdout_v13_20260916/reproduce/build_jeju_transition_features.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_historical_text_verified_empty.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_historical_training_monthly.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/audit_historical_training_monthly.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_jeju_native_health_weight.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_jeju_native_history.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/collect_jeju_pregame.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_pregame_observations_v1"
+      ]
+    },
+    {
+      "path": "scripts/fetch_jeju_live_audit_inputs.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/generate_supabase_schema.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/install-launchd.sh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/load_test_web.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/materialize_jeju_native_training.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/prepare_dividend_archive_audit.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/render_jeju_live_detailed_report.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/replay_jeju_pregame.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": [
+        "data/research/jeju_native_pregame_observations_v1"
+      ]
+    },
+    {
+      "path": "scripts/run-daily-sync.sh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/set_mapilog_database_secret.zsh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_horse_active_status.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_special_training.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_trainer_affiliations.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/sync_trainer_historical_regions.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/apply_20260929_trainer_status_identity.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/uninstall-launchd.sh",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_dividend_backfill.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/prepare_dividend_archive_audit.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_native_top3_dataset.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [
+        "scripts/build_jeju_native_top3_dataset.py"
+      ],
+      "missing_literal_research_directories": []
+    },
+    {
+      "path": "scripts/verify_jeju_pregame.py",
+      "category": "manual_maintenance_or_research_review",
+      "reason": "수동 수집·감사·보조 연구 도구. 자동 폐기 판정 없이 호출자/재구축 필요를 확인할 대상.",
+      "current_dependency_evidence": [],
+      "static_code_callers": [],
+      "missing_literal_research_directories": []
+    }
+  ],
+  "preserved_legacy_dependencies": [
+    {
+      "path": "scripts/build_seoul_backfill.py",
+      "callers": [
+        "scripts/resume_seoul_backfill.py"
+      ]
+    },
+    {
+      "path": "scripts/build_unified_thoroughbred_dataset.py",
+      "callers": [
+        "scripts/finalize_unified_thoroughbred_dataset.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_seoul_backfill_results.py",
+      "callers": [
+        "scripts/build_seoul_backfill.py"
+      ]
+    },
+    {
+      "path": "scripts/verify_unified_thoroughbred_dataset.py",
+      "callers": [
+        "scripts/finalize_unified_thoroughbred_dataset.py"
+      ]
+    },
+    {
+      "path": "scripts/build_busan_history.py",
+      "callers": [
+        "tests/test_busan_history_build.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_busan_history_results.py",
+      "callers": [
+        "scripts/build_busan_history.py"
+      ]
+    }
+  ],
+  "planned_files": {
+    "scripts/adjudicate_section_points.py": {
+      "kind": "retired_script",
+      "bytes": 19219,
+      "inode": 92593403,
+      "mtime_ns": 1790331621940862052,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "2dc6b3d13894d8837b25cda5454b0c46fa5599be61ebd8ffdcd3889e2305042d"
+    },
+    "scripts/analyze_carried_weight.py": {
+      "kind": "retired_script",
+      "bytes": 30988,
+      "inode": 88723254,
+      "mtime_ns": 1788028097539185006,
+      "mode": 33188,
+      "allocated_bytes": 32768,
+      "sha256": "a451a1fc327bb6f7ad9a69ccc0f7339ec1c245b3a965395f480d3eb8760c6f73"
+    },
+    "scripts/analyze_gate_bias.py": {
+      "kind": "retired_script",
+      "bytes": 14446,
+      "inode": 88591914,
+      "mtime_ns": 1787866281778368689,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "e597122babca395ded8243a651d16ba662690990ef83e768d2a28cb66d3efc05"
+    },
+    "scripts/analyze_outer_front_advantage.py": {
+      "kind": "retired_script",
+      "bytes": 14068,
+      "inode": 89051628,
+      "mtime_ns": 1788381295995452777,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "4e3c4fe58c4cd42a469ce4f15abcfbcc5eb0a235f70219e7c432156580a1969c"
+    },
+    "scripts/analyze_pace_competition.py": {
+      "kind": "retired_script",
+      "bytes": 12810,
+      "inode": 88683371,
+      "mtime_ns": 1787989686166961441,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "a737ceb726257696665cfd41398b6885154edbd9247d7f0956c403f35d954dbe"
+    },
+    "scripts/analyze_running_style.py": {
+      "kind": "retired_script",
+      "bytes": 17230,
+      "inode": 88593374,
+      "mtime_ns": 1787867039045031936,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "2d94505d64a1459f54ebc8dbb0cea80c72cd6e6ad3c3c332588d8b2e56ba2233"
+    },
+    "scripts/audit_busan_freshness.py": {
+      "kind": "retired_script",
+      "bytes": 7664,
+      "inode": 91104088,
+      "mtime_ns": 1789646347347332271,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "cac852ce4a86f36d57a3f417df36016e87cf0ed76b145498724d03a14dfc5c61"
+    },
+    "scripts/audit_canonical_sections.py": {
+      "kind": "retired_script",
+      "bytes": 9399,
+      "inode": 89745551,
+      "mtime_ns": 1789064747624680081,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "068257d796e0d90c736f57203f4c4bba8e92b0196829e147e7764a82adf1ce82"
+    },
+    "scripts/audit_jeju_section_lineage.py": {
+      "kind": "retired_script",
+      "bytes": 13726,
+      "inode": 91002854,
+      "mtime_ns": 1789541416248960555,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "46942e4c7609c644ec5b9dd4aa370d96b241d22c0b442f74cabc7b8e0ecac880"
+    },
+    "scripts/audit_seoul_freshness.py": {
+      "kind": "retired_script",
+      "bytes": 7421,
+      "inode": 91127386,
+      "mtime_ns": 1789658456748861931,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e72fa2f3b3d2f45aeb29d98d57a98850f03d2db23f079e22be8b6645e84f4940"
+    },
+    "scripts/audit_seoul_result_status_codes.py": {
+      "kind": "retired_script",
+      "bytes": 2352,
+      "inode": 90821625,
+      "mtime_ns": 1789404214162389525,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "329294b53e435573bea3007e3539704463cb8c4a6ee3cf80a15353f8f3fdde49"
+    },
+    "scripts/build_busan_2017_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93096870,
+      "mtime_ns": 1790354360225703076,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "6a8d8c514e4c1b5c3017ee1e5600bb9e677bb1b9f2c836ff1c0b516db8332458"
+    },
+    "scripts/build_busan_2018_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93096866,
+      "mtime_ns": 1790354360224816365,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "b6146c411c0bce3bc10c2807a65e922715d94edfac6a2a8599eed35cda07f5d3"
+    },
+    "scripts/build_busan_2019_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93089717,
+      "mtime_ns": 1790349510705707203,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "0abc29330e715ea7620cc91595e118811778bd7aeaaa3bbcb58ea46dcaff406b"
+    },
+    "scripts/build_busan_2020_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93072788,
+      "mtime_ns": 1790346641314629951,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "35da84e4a126bd205412ddb76420cb9dd6dd65134ced74a0162a4834cba4b61a"
+    },
+    "scripts/build_busan_2021_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93071661,
+      "mtime_ns": 1790346290025522190,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "d06bdba57baa759f14319408ecf1dadc653b54b55f9a9c91c54dc687df5aae0d"
+    },
+    "scripts/build_busan_2022_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93068151,
+      "mtime_ns": 1790345162312032992,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "caf5b58e5cffe1193f27103a901ab9999cf7786feee818a9c8f3d75f966a343b"
+    },
+    "scripts/build_busan_2023_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 92778495,
+      "mtime_ns": 1790341083391379357,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "94683fdcf74cfb0410ea2e40401c196ef59ee85ad480c8c6534c90326adca3ef"
+    },
+    "scripts/build_busan_2024_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 92706017,
+      "mtime_ns": 1790340765834869241,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "69335a7054d5f4d6ce2d11029b9881fc9bbea5b8af7b5d5cdfcf55a006adbc29"
+    },
+    "scripts/build_busan_2025_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6702,
+      "inode": 92703353,
+      "mtime_ns": 1790340288208277450,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "23c9a8d773d9a4571bbbd748c72d414650143ecc3580bf1eb5c39987d0375e28"
+    },
+    "scripts/build_busan_2026_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6702,
+      "inode": 92677316,
+      "mtime_ns": 1790338958701873758,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "5b68d0295b7cdffb0c167c977237037f4aa64052f8092119d732820911af339f"
+    },
+    "scripts/build_busan_complete_db.py": {
+      "kind": "retired_script",
+      "bytes": 27267,
+      "inode": 91030385,
+      "mtime_ns": 1789560162690166621,
+      "mode": 33188,
+      "allocated_bytes": 28672,
+      "sha256": "b5433e3e33bd68e434b1d9ced8c6a929f4d719409a7e23a4d0c4d310a729efa2"
+    },
+    "scripts/build_busan_trial_linkage.py": {
+      "kind": "retired_script",
+      "bytes": 34836,
+      "inode": 90831620,
+      "mtime_ns": 1789461035061923601,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "85acf094ed2578c3cbe9fd15e152942aca8a9a300b93a4a15bb2bfc59f1cb2e4"
+    },
+    "scripts/build_jeju_2017_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 7644,
+      "inode": 93096871,
+      "mtime_ns": 1790354379716682714,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "9ce566093413eb52260d90d3e2eea4710070f99b26e6cb32d212ae1a6b3a7191"
+    },
+    "scripts/build_jeju_2018_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 7644,
+      "inode": 93096867,
+      "mtime_ns": 1790354379719413722,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "8ccbd566e6da60a56c4736af20141a4fedfce612554f70fda053c2e3e451d3e3"
+    },
+    "scripts/build_jeju_2019_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93089718,
+      "mtime_ns": 1790349510706528911,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "1725a57ba37b189e89ce4fbfe153bb58d2e3a25300bd21c1bd19eecfdc74326c"
+    },
+    "scripts/build_jeju_2020_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93072789,
+      "mtime_ns": 1790346641314906785,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "4aaa28921b9e55c688e8911e577fa01a5e2e1d7420fa32276fab315d04c453c4"
+    },
+    "scripts/build_jeju_2021_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93071662,
+      "mtime_ns": 1790346290025835189,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "d260b899dc0d717ad38fb88e239494f222d33f00b7a4cb6bb95dc83ed39e5751"
+    },
+    "scripts/build_jeju_2022_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93068152,
+      "mtime_ns": 1790345162312260532,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "1c4855fcdf3fe9c3b95e4e656522048d6dfa0fd514959818cd5a96ac6f248458"
+    },
+    "scripts/build_jeju_2023_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92778496,
+      "mtime_ns": 1790341083391634690,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "df17fd8e81b1647b9dae83770af48bfad2a68363cfb3343ca11f88bed53ca7c6"
+    },
+    "scripts/build_jeju_2024_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92705941,
+      "mtime_ns": 1790340730959634949,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "84ab0ea5f816fe40d217b8ba52b475cfc2e0d2422451afb1e390a303648304b3"
+    },
+    "scripts/build_jeju_2025_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92703354,
+      "mtime_ns": 1790340288208105782,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "087d1f022d28357ca92b5b2829f77a4eb5d61e447a54670fcd603ca561fab964"
+    },
+    "scripts/build_jeju_2026_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92692971,
+      "mtime_ns": 1790339215618216455,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e648d6ec023df1447752d7c3d11ce6730d461e47f0f534c29d8ff3d475523f14"
+    },
+    "scripts/build_jeju_basic_info_sheet.py": {
+      "kind": "retired_script",
+      "bytes": 10532,
+      "inode": 90789141,
+      "mtime_ns": 1789406883573966267,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "b9f6af8a031073843e8b3f314d512014cb062392fe01b23b60bd2ce6fc189020"
+    },
+    "scripts/build_jeju_entry_history_sheet.py": {
+      "kind": "retired_script",
+      "bytes": 16387,
+      "inode": 90827944,
+      "mtime_ns": 1789407302063554813,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "f0e6be345a8186a47f707ff2df00ba710458077cab1e829ba9fad1abab39632a"
+    },
+    "scripts/build_jeju_native_analysis_db.py": {
+      "kind": "retired_script",
+      "bytes": 34128,
+      "inode": 90874292,
+      "mtime_ns": 1789465533796279341,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "ddc3371946086e7c599a2d0620d6b3a6064c8a27bbaf09cdec0e43999b5c4eda"
+    },
+    "scripts/build_jeju_native_extended_db.py": {
+      "kind": "retired_script",
+      "bytes": 34324,
+      "inode": 90881274,
+      "mtime_ns": 1789467946352602226,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "abfb2336e4cb87dc89dd92103adb5570c660439694951de946ec67358f46a09d"
+    },
+    "scripts/build_jeju_native_text_phase2_db.py": {
+      "kind": "retired_script",
+      "bytes": 18261,
+      "inode": 90881849,
+      "mtime_ns": 1789469035494129785,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "95217032406213ffa3b9cab24cd5e45c8e6c9267a19c09efb64df01c3169aea1"
+    },
+    "scripts/build_jeju_running_trial_links.py": {
+      "kind": "retired_script",
+      "bytes": 13761,
+      "inode": 90831197,
+      "mtime_ns": 1789413933818602746,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "940bf8deb693cd5ef56cd90ddbafa11db20761dbb2b50b194b2ad65c8955e9e6"
+    },
+    "scripts/build_jeju_steward_2024_events.py": {
+      "kind": "retired_script",
+      "bytes": 4796,
+      "inode": 91118576,
+      "mtime_ns": 1789654760042377426,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "10dd1e959b283f14f69d64365b5c0d2e44ee39dd50d433ade5e0f0e29488eda1"
+    },
+    "scripts/build_jeju_steward_event_pilot.py": {
+      "kind": "retired_script",
+      "bytes": 4269,
+      "inode": 91109851,
+      "mtime_ns": 1789652819559298838,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "81c0aa2e3a7418ae080d86ed63859573b7bb12a95548cef024b39ebaa1d743e9"
+    },
+    "scripts/build_jeju_steward_pace_v2.py": {
+      "kind": "retired_script",
+      "bytes": 9296,
+      "inode": 91157782,
+      "mtime_ns": 1789668548348114117,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "944819f0a1277d0440fccc08e1cd550aa48a346570fbe08494b719e711626c26"
+    },
+    "scripts/build_running_trials_2017_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 14135,
+      "inode": 93096872,
+      "mtime_ns": 1790354379872025879,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "83250c86928977677e63a65f6f0df54de065ac7b4e9ea0cbdf1deeb803228f15"
+    },
+    "scripts/build_running_trials_2018_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 14135,
+      "inode": 93096868,
+      "mtime_ns": 1790354379724544195,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "5c886972e366871d463c1ae8b659773b7d345dcf27c3ad6d52a4a8226807c3e9"
+    },
+    "scripts/build_running_trials_2019_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93089719,
+      "mtime_ns": 1790349510707011744,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "0a2d5805b5522585bcb7645963618444ea04123ce1588fed16548445b06f7d22"
+    },
+    "scripts/build_running_trials_2020_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93072790,
+      "mtime_ns": 1790346641315333412,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "1ee1fd67f12ea59d43e7784500963150e107ff3b2419320b2a41e1beabb04997"
+    },
+    "scripts/build_running_trials_2021_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93071663,
+      "mtime_ns": 1790346290026230395,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "512ae4851ad02b88c17f9e9a82d9169047ddb6a8e300c71092521ef4c809051e"
+    },
+    "scripts/build_running_trials_2022_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93068284,
+      "mtime_ns": 1790345379351769429,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "15b9457f6e9bcad8b711764e5a273d454fd862ed6364b8443dd1062976d52314"
+    },
+    "scripts/build_running_trials_2023_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 12607,
+      "inode": 92778497,
+      "mtime_ns": 1790341123101245411,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "645c5713db37f6ac13dfbe44d63a7650a0e50c39a4a4a08482e3e1e8cdcd0e60"
+    },
+    "scripts/build_running_trials_2024_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 12701,
+      "inode": 92705942,
+      "mtime_ns": 1790340873059119043,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "38c27b37d584ed00b62df9de02231731f55080da292ff09a274f849e6e3e515e"
+    },
+    "scripts/build_running_trials_2025_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 10958,
+      "inode": 92703355,
+      "mtime_ns": 1790340288212115775,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "a47891eb4750ad5026f25300d9eb2d96d2cec118bcc22a49b1fd0e9744a2497d"
+    },
+    "scripts/build_running_trials_2026_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 10958,
+      "inode": 92694405,
+      "mtime_ns": 1790339997999857620,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "e14df7071481d01ae36816d2335d827b347a448228e97359bbd184cbd20e85e3"
+    },
+    "scripts/build_section_point_db.py": {
+      "kind": "retired_script",
+      "bytes": 36655,
+      "inode": 92535687,
+      "mtime_ns": 1790328906512355766,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "f20fff8183cf8ccaada64ca2dc8dfc034db334f72bd2aa0c165ab9e1337faa8b"
+    },
+    "scripts/build_seoul_2017_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93096869,
+      "mtime_ns": 1790354360225520409,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "571ecd56458005b9f97804614f05912d45472d1c8920892ccfebbcd4811fb110"
+    },
+    "scripts/build_seoul_2018_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93096865,
+      "mtime_ns": 1790354360224350905,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "58720316e29bcbe0b6f5952dffe99d06fd2a94d37df4d347c368133003461f22"
+    },
+    "scripts/build_seoul_2019_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93089716,
+      "mtime_ns": 1790349510705390453,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "5ce9d3ea0a8210d7889a4c8ed4bcc265258b9da602c58fb07dfaf06137f7e903"
+    },
+    "scripts/build_seoul_2020_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93072787,
+      "mtime_ns": 1790346641314120991,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "9b26d41443b60b09efc4b10be355711052ec9f0a714963099a094749b3b8ccb3"
+    },
+    "scripts/build_seoul_2021_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93071660,
+      "mtime_ns": 1790346290024948777,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "8b62b4d89c512358bc88e854b0d9dd06de95f1b7cb30ea8b3bc64997f131e95f"
+    },
+    "scripts/build_seoul_2022_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93068150,
+      "mtime_ns": 1790345162311561202,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "54b4c4ab5bf44642b1daa8b9109a1f98f02308e0866ecb79bbd9e513441af4f7"
+    },
+    "scripts/build_seoul_2023_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 92778494,
+      "mtime_ns": 1790341083391078481,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "cb35ed26d64a41862f16d429ac4ca9b45b30d80f6aae5ec697d2fb42347a4040"
+    },
+    "scripts/build_seoul_2024_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 92705998,
+      "mtime_ns": 1790340754643535131,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "2baf9308efb35284d45059fe9ed3dda93307ca57c6d4c033d0bd0c1ce64b1138"
+    },
+    "scripts/build_seoul_2025_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6457,
+      "inode": 92703352,
+      "mtime_ns": 1790340288112453776,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "196a72e1b3afb3bc13195120f6d5cdb0d3fa8a2efd6bf543996da03562df7d00"
+    },
+    "scripts/build_seoul_2026_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6457,
+      "inode": 92660270,
+      "mtime_ns": 1790338010023713604,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "f192abe64b27f9462209331ee2de3bf3557555caf66469ce458130649e604269"
+    },
+    "scripts/build_seoul_running_trials.py": {
+      "kind": "retired_script",
+      "bytes": 32822,
+      "inode": 90831550,
+      "mtime_ns": 1789412530522529374,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "9af00e20abdfb1d4567858e696a850ab87547a9c451f0ca40c6c88de05ce1b1e"
+    },
+    "scripts/build_yeongcheon_2026_score_db.py": {
+      "kind": "retired_script",
+      "bytes": 6776,
+      "inode": 92694364,
+      "mtime_ns": 1790339978214273744,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "27126c41bdb62d94083f40e43c33d4d003fed5867bd29c00f2477012773a3d6e"
+    },
+    "scripts/collect_busan_medical_api.py": {
+      "kind": "retired_script",
+      "bytes": 3964,
+      "inode": 90812337,
+      "mtime_ns": 1789399667187032073,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "a11c2d0f1fd6398c7f95dc2879f06312c15e921c0865f606de1fb4461801f867"
+    },
+    "scripts/collect_busan_trial_api.py": {
+      "kind": "retired_script",
+      "bytes": 7129,
+      "inode": 90832090,
+      "mtime_ns": 1789412793169380796,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "95c53680e5ea8c449afec6bec089074b71d1d36e29c99062f6d497ec24402014"
+    },
+    "scripts/collect_jeju_steward_2024.py": {
+      "kind": "retired_script",
+      "bytes": 2007,
+      "inode": 91115549,
+      "mtime_ns": 1789654432386443333,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "840b864dad4743aa51a90bae5b86d77980f065fbecef4c5dfede06f4da5fdf6d"
+    },
+    "scripts/collect_jeju_tempo_research.py": {
+      "kind": "retired_script",
+      "bytes": 2245,
+      "inode": 91102153,
+      "mtime_ns": 1789645664852538184,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "3e663376de501afe8985092c24fb0b435cd7fbc37a1499e737664c91122e2b58"
+    },
+    "scripts/confirm_jeju_trial_breed_profiles.py": {
+      "kind": "retired_script",
+      "bytes": 7241,
+      "inode": 90831353,
+      "mtime_ns": 1789411705379943660,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "578f81952e39bf2d5edc1449268033b69642826d4cd8e22fab5d6042f5ad48b8"
+    },
+    "scripts/link_busan_temporary_ids.py": {
+      "kind": "retired_script",
+      "bytes": 19493,
+      "inode": 90823564,
+      "mtime_ns": 1789404683695171004,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "ee2fa42f47e5bbc6cc7284998b6dfdc14e2f883ac516a50a8bca6aea6623fe44"
+    },
+    "scripts/link_seoul_text_ids.py": {
+      "kind": "retired_script",
+      "bytes": 17378,
+      "inode": 90830168,
+      "mtime_ns": 1789410304176620490,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "221fcf48727bbb7a56fe05744fc895e49147a7324129fcf294966a4060929fb3"
+    },
+    "scripts/load_busan_api4_3_sections.py": {
+      "kind": "retired_script",
+      "bytes": 5049,
+      "inode": 92999847,
+      "mtime_ns": 1790354369151282211,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "dadfa4f3f18db2d9ce7f62f210ca3dbfaa92f1c84ed78c4752f2f06fa02d116d"
+    },
+    "scripts/load_busan_point_passing.py": {
+      "kind": "retired_script",
+      "bytes": 9639,
+      "inode": 93121904,
+      "mtime_ns": 1790363492564109291,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "a88bdd787b13637b3b2354aab51d4d9fb8dc1e2d35e75b228c400b8ac8b65c38"
+    },
+    "scripts/load_jeju_point_passing.py": {
+      "kind": "retired_script",
+      "bytes": 7832,
+      "inode": 93122108,
+      "mtime_ns": 1790363689634311311,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "7765624dfcee3ab5a1464f5a71be399e943d6f2205be7616cef1a036c3ca342b"
+    },
+    "scripts/load_seoul_point_passing.py": {
+      "kind": "retired_script",
+      "bytes": 11542,
+      "inode": 93103244,
+      "mtime_ns": 1790358046872685964,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "63ae47e647538b32ea1877b5b2e8a579dc0f99d2ddf032141cb1503ceac20f3e"
+    },
+    "scripts/materialize_jeju_confirmed_race_ids.py": {
+      "kind": "retired_script",
+      "bytes": 7374,
+      "inode": 90805469,
+      "mtime_ns": 1789388115827495895,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "4bb430e614cb88c0dc5482a38bbbfdc8c22e255671946c2b26e2d1d0805e77fe"
+    },
+    "scripts/reconcile_jeju_race_time_ids.py": {
+      "kind": "retired_script",
+      "bytes": 16335,
+      "inode": 90794511,
+      "mtime_ns": 1789381272364909737,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "4a35eae34310fac660155878327eba636b3ac1963ef04f5683e0ee8743205719"
+    },
+    "scripts/validate_jeju_running_trial_links.py": {
+      "kind": "retired_script",
+      "bytes": 6325,
+      "inode": 90831457,
+      "mtime_ns": 1789411861477169620,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "4c605d0be325348e43ebbed6b9245c26559ae5c6ef52fefd1221ee8aa6827412"
+    },
+    "scripts/verify_busan_complete_db.py": {
+      "kind": "retired_script",
+      "bytes": 11679,
+      "inode": 91030415,
+      "mtime_ns": 1789560359209562063,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "6d2287b302602801abff7e530caaff425add9dcde446f130431af155aea585ed"
+    },
+    "scripts/verify_busan_freshness_audit.py": {
+      "kind": "retired_script",
+      "bytes": 13315,
+      "inode": 91105989,
+      "mtime_ns": 1789647027598818819,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "8e94c71e17b95c378124238bc4cc489b233c88caac93443a7f6431a75a119f58"
+    },
+    "scripts/verify_busan_history.py": {
+      "kind": "retired_script",
+      "bytes": 33283,
+      "inode": 90812309,
+      "mtime_ns": 1789400740466011877,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "e8c0af6088bd741d9dfcefac470eaeea0fb7166f11b9243c563597bdfbc72011"
+    },
+    "scripts/verify_busan_trial_linkage.py": {
+      "kind": "retired_script",
+      "bytes": 15115,
+      "inode": 90832831,
+      "mtime_ns": 1789461159127824057,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "7d2b2e7883a60c530e5550589fec2a56cb4cd63fd9fc256dd6afcb2c28366fd3"
+    },
+    "scripts/verify_jeju_confirmed_race_ids.py": {
+      "kind": "retired_script",
+      "bytes": 3604,
+      "inode": 90805495,
+      "mtime_ns": 1789388150705838708,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "b04190dc9511d34cd0509fdd75072cd51512c75962297426f266498aa0f75bea"
+    },
+    "scripts/verify_jeju_native_analysis_db.py": {
+      "kind": "retired_script",
+      "bytes": 6335,
+      "inode": 90874687,
+      "mtime_ns": 1789459565090334473,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "dc74dd65caab0928744d1ae9af77872092d38bcb9a02c8979b8048d2c80b151d"
+    },
+    "scripts/verify_jeju_native_extended_db.py": {
+      "kind": "retired_script",
+      "bytes": 8640,
+      "inode": 90881567,
+      "mtime_ns": 1789467776079605881,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "01ef79b0c2fc36245cbc9069ee3d0b12bdadd77d15b229c7b601c8016e7da133"
+    },
+    "scripts/verify_jeju_native_text_phase2_db.py": {
+      "kind": "retired_script",
+      "bytes": 5969,
+      "inode": 90881943,
+      "mtime_ns": 1789469035430322736,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "a54d1579b2c56ad28e61c39451f699e2c1c484a98c1aacc42142f762e3317492"
+    },
+    "scripts/verify_jeju_other_sources.py": {
+      "kind": "retired_script",
+      "bytes": 34420,
+      "inode": 90811101,
+      "mtime_ns": 1789399148701340678,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "b52a3c444d1012c0d8bf27767c96def867101970e90b0ba0dd5c72a23a433fd5"
+    },
+    "scripts/verify_jeju_race_time_ids.py": {
+      "kind": "retired_script",
+      "bytes": 5179,
+      "inode": 90794671,
+      "mtime_ns": 1789381684346667050,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "6e1922e715107fca6a12a22bc030be52e613d090d9cfbc9002c60099cc039c44"
+    },
+    "scripts/verify_jeju_section_lineage.py": {
+      "kind": "retired_script",
+      "bytes": 8468,
+      "inode": 91003143,
+      "mtime_ns": 1789541750173723581,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "3a186e9141798869ce47f0518100377d70d6589c5f6e9ed0b604d5fa55cf64e7"
+    },
+    "scripts/verify_jeju_trial_inspection_exclusions.py": {
+      "kind": "retired_script",
+      "bytes": 4415,
+      "inode": 90835317,
+      "mtime_ns": 1789414552664246731,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "73494df4acaae22fdc4ce74b75500b6f293d59ad442590fec11a780d55a0a439"
+    },
+    "scripts/verify_seoul_backfill.py": {
+      "kind": "retired_script",
+      "bytes": 24860,
+      "inode": 90817071,
+      "mtime_ns": 1789404729166896574,
+      "mode": 33188,
+      "allocated_bytes": 28672,
+      "sha256": "a01b9746a6dea587bb0a456097a18193f524b613b7732270552a124a039d6bb6"
+    },
+    "tests/test_adjudicate_section_points.py": {
+      "kind": "retired_script_test",
+      "bytes": 2112,
+      "inode": 92593424,
+      "mtime_ns": 1790331685571798495,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "542b1742bf0d5c41bfe9742cb5225a1d1ab7f433cdb0b55d60ad15961d5ecb2c"
+    },
+    "tests/test_section_point_db_builder.py": {
+      "kind": "retired_script_test",
+      "bytes": 4958,
+      "inode": 92547097,
+      "mtime_ns": 1790328960907045013,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e233fdd90eace2fa5b2cdb294cfb46d5ab2c85a40df8e40757b15eec4882678c"
+    },
+    "scripts/__pycache__/adjudicate_section_points.cpython-312.pyc": {
+      "kind": "removed_source_bytecode",
+      "bytes": 24630,
+      "inode": 92593759,
+      "mtime_ns": 1790331802690731968,
+      "mode": 33188,
+      "allocated_bytes": 28672,
+      "sha256": "32bdc47053df9a4455fc5f51bb4907e043c827b64b4fea68db57126c9903d031"
+    },
+    "scripts/__pycache__/build_jeju_steward_pace_v2.cpython-312.pyc": {
+      "kind": "removed_source_bytecode",
+      "bytes": 15261,
+      "inode": 92118624,
+      "mtime_ns": 1790014810282182206,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "ef3de6467f9eb7a51722ec6c4964c8c2a1ce261f00afe23d16d420dd72240072"
+    },
+    "scripts/__pycache__/build_section_point_db.cpython-312.pyc": {
+      "kind": "removed_source_bytecode",
+      "bytes": 41996,
+      "inode": 92568982,
+      "mtime_ns": 1790328923654310127,
+      "mode": 33188,
+      "allocated_bytes": 45056,
+      "sha256": "c9c7ecdec3d7c0e7c7df8e3f47f0e3f2db1096a026be55834336a57a2bdcfdcf"
+    },
+    "scripts/__pycache__/load_busan_api4_3_sections.cpython-312.pyc": {
+      "kind": "removed_source_bytecode",
+      "bytes": 6265,
+      "inode": 93097279,
+      "mtime_ns": 1790354464275832044,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e1efbccdd730cc90462c50bef799b81d8deae00280c363199a091b211d6cd4db"
+    },
+    "tests/__pycache__/test_adjudicate_section_points.cpython-312-pytest-8.4.2.pyc": {
+      "kind": "removed_source_bytecode",
+      "bytes": 8358,
+      "inode": 92593615,
+      "mtime_ns": 1790331697912415112,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "f7752996e5093b2bbb547b0952d8986e83085d2d840794ca874569c740ef203a"
+    },
+    "tests/__pycache__/test_section_point_db_builder.cpython-312-pytest-8.4.2.pyc": {
+      "kind": "removed_source_bytecode",
+      "bytes": 12788,
+      "inode": 92569125,
+      "mtime_ns": 1790328964753176192,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "3a53cf1af2a7b2225f7384591734853449f5b61a4d67305d4890e5e56a0ba658"
+    }
+  },
+  "planned_symlinks": {},
+  "deleted_files": [
+    {
+      "path": "scripts/adjudicate_section_points.py",
+      "kind": "retired_script",
+      "bytes": 19219,
+      "inode": 92593403,
+      "mtime_ns": 1790331621940862052,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "2dc6b3d13894d8837b25cda5454b0c46fa5599be61ebd8ffdcd3889e2305042d"
+    },
+    {
+      "path": "scripts/analyze_carried_weight.py",
+      "kind": "retired_script",
+      "bytes": 30988,
+      "inode": 88723254,
+      "mtime_ns": 1788028097539185006,
+      "mode": 33188,
+      "allocated_bytes": 32768,
+      "sha256": "a451a1fc327bb6f7ad9a69ccc0f7339ec1c245b3a965395f480d3eb8760c6f73"
+    },
+    {
+      "path": "scripts/analyze_gate_bias.py",
+      "kind": "retired_script",
+      "bytes": 14446,
+      "inode": 88591914,
+      "mtime_ns": 1787866281778368689,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "e597122babca395ded8243a651d16ba662690990ef83e768d2a28cb66d3efc05"
+    },
+    {
+      "path": "scripts/analyze_outer_front_advantage.py",
+      "kind": "retired_script",
+      "bytes": 14068,
+      "inode": 89051628,
+      "mtime_ns": 1788381295995452777,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "4e3c4fe58c4cd42a469ce4f15abcfbcc5eb0a235f70219e7c432156580a1969c"
+    },
+    {
+      "path": "scripts/analyze_pace_competition.py",
+      "kind": "retired_script",
+      "bytes": 12810,
+      "inode": 88683371,
+      "mtime_ns": 1787989686166961441,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "a737ceb726257696665cfd41398b6885154edbd9247d7f0956c403f35d954dbe"
+    },
+    {
+      "path": "scripts/analyze_running_style.py",
+      "kind": "retired_script",
+      "bytes": 17230,
+      "inode": 88593374,
+      "mtime_ns": 1787867039045031936,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "2d94505d64a1459f54ebc8dbb0cea80c72cd6e6ad3c3c332588d8b2e56ba2233"
+    },
+    {
+      "path": "scripts/audit_busan_freshness.py",
+      "kind": "retired_script",
+      "bytes": 7664,
+      "inode": 91104088,
+      "mtime_ns": 1789646347347332271,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "cac852ce4a86f36d57a3f417df36016e87cf0ed76b145498724d03a14dfc5c61"
+    },
+    {
+      "path": "scripts/audit_canonical_sections.py",
+      "kind": "retired_script",
+      "bytes": 9399,
+      "inode": 89745551,
+      "mtime_ns": 1789064747624680081,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "068257d796e0d90c736f57203f4c4bba8e92b0196829e147e7764a82adf1ce82"
+    },
+    {
+      "path": "scripts/audit_jeju_section_lineage.py",
+      "kind": "retired_script",
+      "bytes": 13726,
+      "inode": 91002854,
+      "mtime_ns": 1789541416248960555,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "46942e4c7609c644ec5b9dd4aa370d96b241d22c0b442f74cabc7b8e0ecac880"
+    },
+    {
+      "path": "scripts/audit_seoul_freshness.py",
+      "kind": "retired_script",
+      "bytes": 7421,
+      "inode": 91127386,
+      "mtime_ns": 1789658456748861931,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e72fa2f3b3d2f45aeb29d98d57a98850f03d2db23f079e22be8b6645e84f4940"
+    },
+    {
+      "path": "scripts/audit_seoul_result_status_codes.py",
+      "kind": "retired_script",
+      "bytes": 2352,
+      "inode": 90821625,
+      "mtime_ns": 1789404214162389525,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "329294b53e435573bea3007e3539704463cb8c4a6ee3cf80a15353f8f3fdde49"
+    },
+    {
+      "path": "scripts/build_busan_2017_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93096870,
+      "mtime_ns": 1790354360225703076,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "6a8d8c514e4c1b5c3017ee1e5600bb9e677bb1b9f2c836ff1c0b516db8332458"
+    },
+    {
+      "path": "scripts/build_busan_2018_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93096866,
+      "mtime_ns": 1790354360224816365,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "b6146c411c0bce3bc10c2807a65e922715d94edfac6a2a8599eed35cda07f5d3"
+    },
+    {
+      "path": "scripts/build_busan_2019_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93089717,
+      "mtime_ns": 1790349510705707203,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "0abc29330e715ea7620cc91595e118811778bd7aeaaa3bbcb58ea46dcaff406b"
+    },
+    {
+      "path": "scripts/build_busan_2020_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93072788,
+      "mtime_ns": 1790346641314629951,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "35da84e4a126bd205412ddb76420cb9dd6dd65134ced74a0162a4834cba4b61a"
+    },
+    {
+      "path": "scripts/build_busan_2021_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93071661,
+      "mtime_ns": 1790346290025522190,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "d06bdba57baa759f14319408ecf1dadc653b54b55f9a9c91c54dc687df5aae0d"
+    },
+    {
+      "path": "scripts/build_busan_2022_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 93068151,
+      "mtime_ns": 1790345162312032992,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "caf5b58e5cffe1193f27103a901ab9999cf7786feee818a9c8f3d75f966a343b"
+    },
+    {
+      "path": "scripts/build_busan_2023_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 92778495,
+      "mtime_ns": 1790341083391379357,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "94683fdcf74cfb0410ea2e40401c196ef59ee85ad480c8c6534c90326adca3ef"
+    },
+    {
+      "path": "scripts/build_busan_2024_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6976,
+      "inode": 92706017,
+      "mtime_ns": 1790340765834869241,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "69335a7054d5f4d6ce2d11029b9881fc9bbea5b8af7b5d5cdfcf55a006adbc29"
+    },
+    {
+      "path": "scripts/build_busan_2025_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6702,
+      "inode": 92703353,
+      "mtime_ns": 1790340288208277450,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "23c9a8d773d9a4571bbbd748c72d414650143ecc3580bf1eb5c39987d0375e28"
+    },
+    {
+      "path": "scripts/build_busan_2026_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6702,
+      "inode": 92677316,
+      "mtime_ns": 1790338958701873758,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "5b68d0295b7cdffb0c167c977237037f4aa64052f8092119d732820911af339f"
+    },
+    {
+      "path": "scripts/build_busan_complete_db.py",
+      "kind": "retired_script",
+      "bytes": 27267,
+      "inode": 91030385,
+      "mtime_ns": 1789560162690166621,
+      "mode": 33188,
+      "allocated_bytes": 28672,
+      "sha256": "b5433e3e33bd68e434b1d9ced8c6a929f4d719409a7e23a4d0c4d310a729efa2"
+    },
+    {
+      "path": "scripts/build_busan_trial_linkage.py",
+      "kind": "retired_script",
+      "bytes": 34836,
+      "inode": 90831620,
+      "mtime_ns": 1789461035061923601,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "85acf094ed2578c3cbe9fd15e152942aca8a9a300b93a4a15bb2bfc59f1cb2e4"
+    },
+    {
+      "path": "scripts/build_jeju_2017_score_db.py",
+      "kind": "retired_script",
+      "bytes": 7644,
+      "inode": 93096871,
+      "mtime_ns": 1790354379716682714,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "9ce566093413eb52260d90d3e2eea4710070f99b26e6cb32d212ae1a6b3a7191"
+    },
+    {
+      "path": "scripts/build_jeju_2018_score_db.py",
+      "kind": "retired_script",
+      "bytes": 7644,
+      "inode": 93096867,
+      "mtime_ns": 1790354379719413722,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "8ccbd566e6da60a56c4736af20141a4fedfce612554f70fda053c2e3e451d3e3"
+    },
+    {
+      "path": "scripts/build_jeju_2019_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93089718,
+      "mtime_ns": 1790349510706528911,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "1725a57ba37b189e89ce4fbfe153bb58d2e3a25300bd21c1bd19eecfdc74326c"
+    },
+    {
+      "path": "scripts/build_jeju_2020_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93072789,
+      "mtime_ns": 1790346641314906785,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "4aaa28921b9e55c688e8911e577fa01a5e2e1d7420fa32276fab315d04c453c4"
+    },
+    {
+      "path": "scripts/build_jeju_2021_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93071662,
+      "mtime_ns": 1790346290025835189,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "d260b899dc0d717ad38fb88e239494f222d33f00b7a4cb6bb95dc83ed39e5751"
+    },
+    {
+      "path": "scripts/build_jeju_2022_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 93068152,
+      "mtime_ns": 1790345162312260532,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "1c4855fcdf3fe9c3b95e4e656522048d6dfa0fd514959818cd5a96ac6f248458"
+    },
+    {
+      "path": "scripts/build_jeju_2023_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92778496,
+      "mtime_ns": 1790341083391634690,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "df17fd8e81b1647b9dae83770af48bfad2a68363cfb3343ca11f88bed53ca7c6"
+    },
+    {
+      "path": "scripts/build_jeju_2024_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92705941,
+      "mtime_ns": 1790340730959634949,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "84ab0ea5f816fe40d217b8ba52b475cfc2e0d2422451afb1e390a303648304b3"
+    },
+    {
+      "path": "scripts/build_jeju_2025_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92703354,
+      "mtime_ns": 1790340288208105782,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "087d1f022d28357ca92b5b2829f77a4eb5d61e447a54670fcd603ca561fab964"
+    },
+    {
+      "path": "scripts/build_jeju_2026_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6977,
+      "inode": 92692971,
+      "mtime_ns": 1790339215618216455,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e648d6ec023df1447752d7c3d11ce6730d461e47f0f534c29d8ff3d475523f14"
+    },
+    {
+      "path": "scripts/build_jeju_basic_info_sheet.py",
+      "kind": "retired_script",
+      "bytes": 10532,
+      "inode": 90789141,
+      "mtime_ns": 1789406883573966267,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "b9f6af8a031073843e8b3f314d512014cb062392fe01b23b60bd2ce6fc189020"
+    },
+    {
+      "path": "scripts/build_jeju_entry_history_sheet.py",
+      "kind": "retired_script",
+      "bytes": 16387,
+      "inode": 90827944,
+      "mtime_ns": 1789407302063554813,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "f0e6be345a8186a47f707ff2df00ba710458077cab1e829ba9fad1abab39632a"
+    },
+    {
+      "path": "scripts/build_jeju_native_analysis_db.py",
+      "kind": "retired_script",
+      "bytes": 34128,
+      "inode": 90874292,
+      "mtime_ns": 1789465533796279341,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "ddc3371946086e7c599a2d0620d6b3a6064c8a27bbaf09cdec0e43999b5c4eda"
+    },
+    {
+      "path": "scripts/build_jeju_native_extended_db.py",
+      "kind": "retired_script",
+      "bytes": 34324,
+      "inode": 90881274,
+      "mtime_ns": 1789467946352602226,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "abfb2336e4cb87dc89dd92103adb5570c660439694951de946ec67358f46a09d"
+    },
+    {
+      "path": "scripts/build_jeju_native_text_phase2_db.py",
+      "kind": "retired_script",
+      "bytes": 18261,
+      "inode": 90881849,
+      "mtime_ns": 1789469035494129785,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "95217032406213ffa3b9cab24cd5e45c8e6c9267a19c09efb64df01c3169aea1"
+    },
+    {
+      "path": "scripts/build_jeju_running_trial_links.py",
+      "kind": "retired_script",
+      "bytes": 13761,
+      "inode": 90831197,
+      "mtime_ns": 1789413933818602746,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "940bf8deb693cd5ef56cd90ddbafa11db20761dbb2b50b194b2ad65c8955e9e6"
+    },
+    {
+      "path": "scripts/build_jeju_steward_2024_events.py",
+      "kind": "retired_script",
+      "bytes": 4796,
+      "inode": 91118576,
+      "mtime_ns": 1789654760042377426,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "10dd1e959b283f14f69d64365b5c0d2e44ee39dd50d433ade5e0f0e29488eda1"
+    },
+    {
+      "path": "scripts/build_jeju_steward_event_pilot.py",
+      "kind": "retired_script",
+      "bytes": 4269,
+      "inode": 91109851,
+      "mtime_ns": 1789652819559298838,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "81c0aa2e3a7418ae080d86ed63859573b7bb12a95548cef024b39ebaa1d743e9"
+    },
+    {
+      "path": "scripts/build_jeju_steward_pace_v2.py",
+      "kind": "retired_script",
+      "bytes": 9296,
+      "inode": 91157782,
+      "mtime_ns": 1789668548348114117,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "944819f0a1277d0440fccc08e1cd550aa48a346570fbe08494b719e711626c26"
+    },
+    {
+      "path": "scripts/build_running_trials_2017_score_db.py",
+      "kind": "retired_script",
+      "bytes": 14135,
+      "inode": 93096872,
+      "mtime_ns": 1790354379872025879,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "83250c86928977677e63a65f6f0df54de065ac7b4e9ea0cbdf1deeb803228f15"
+    },
+    {
+      "path": "scripts/build_running_trials_2018_score_db.py",
+      "kind": "retired_script",
+      "bytes": 14135,
+      "inode": 93096868,
+      "mtime_ns": 1790354379724544195,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "5c886972e366871d463c1ae8b659773b7d345dcf27c3ad6d52a4a8226807c3e9"
+    },
+    {
+      "path": "scripts/build_running_trials_2019_score_db.py",
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93089719,
+      "mtime_ns": 1790349510707011744,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "0a2d5805b5522585bcb7645963618444ea04123ce1588fed16548445b06f7d22"
+    },
+    {
+      "path": "scripts/build_running_trials_2020_score_db.py",
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93072790,
+      "mtime_ns": 1790346641315333412,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "1ee1fd67f12ea59d43e7784500963150e107ff3b2419320b2a41e1beabb04997"
+    },
+    {
+      "path": "scripts/build_running_trials_2021_score_db.py",
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93071663,
+      "mtime_ns": 1790346290026230395,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "512ae4851ad02b88c17f9e9a82d9169047ddb6a8e300c71092521ef4c809051e"
+    },
+    {
+      "path": "scripts/build_running_trials_2022_score_db.py",
+      "kind": "retired_script",
+      "bytes": 13986,
+      "inode": 93068284,
+      "mtime_ns": 1790345379351769429,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "15b9457f6e9bcad8b711764e5a273d454fd862ed6364b8443dd1062976d52314"
+    },
+    {
+      "path": "scripts/build_running_trials_2023_score_db.py",
+      "kind": "retired_script",
+      "bytes": 12607,
+      "inode": 92778497,
+      "mtime_ns": 1790341123101245411,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "645c5713db37f6ac13dfbe44d63a7650a0e50c39a4a4a08482e3e1e8cdcd0e60"
+    },
+    {
+      "path": "scripts/build_running_trials_2024_score_db.py",
+      "kind": "retired_script",
+      "bytes": 12701,
+      "inode": 92705942,
+      "mtime_ns": 1790340873059119043,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "38c27b37d584ed00b62df9de02231731f55080da292ff09a274f849e6e3e515e"
+    },
+    {
+      "path": "scripts/build_running_trials_2025_score_db.py",
+      "kind": "retired_script",
+      "bytes": 10958,
+      "inode": 92703355,
+      "mtime_ns": 1790340288212115775,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "a47891eb4750ad5026f25300d9eb2d96d2cec118bcc22a49b1fd0e9744a2497d"
+    },
+    {
+      "path": "scripts/build_running_trials_2026_score_db.py",
+      "kind": "retired_script",
+      "bytes": 10958,
+      "inode": 92694405,
+      "mtime_ns": 1790339997999857620,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "e14df7071481d01ae36816d2335d827b347a448228e97359bbd184cbd20e85e3"
+    },
+    {
+      "path": "scripts/build_section_point_db.py",
+      "kind": "retired_script",
+      "bytes": 36655,
+      "inode": 92535687,
+      "mtime_ns": 1790328906512355766,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "f20fff8183cf8ccaada64ca2dc8dfc034db334f72bd2aa0c165ab9e1337faa8b"
+    },
+    {
+      "path": "scripts/build_seoul_2017_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93096869,
+      "mtime_ns": 1790354360225520409,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "571ecd56458005b9f97804614f05912d45472d1c8920892ccfebbcd4811fb110"
+    },
+    {
+      "path": "scripts/build_seoul_2018_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93096865,
+      "mtime_ns": 1790354360224350905,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "58720316e29bcbe0b6f5952dffe99d06fd2a94d37df4d347c368133003461f22"
+    },
+    {
+      "path": "scripts/build_seoul_2019_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93089716,
+      "mtime_ns": 1790349510705390453,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "5ce9d3ea0a8210d7889a4c8ed4bcc265258b9da602c58fb07dfaf06137f7e903"
+    },
+    {
+      "path": "scripts/build_seoul_2020_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93072787,
+      "mtime_ns": 1790346641314120991,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "9b26d41443b60b09efc4b10be355711052ec9f0a714963099a094749b3b8ccb3"
+    },
+    {
+      "path": "scripts/build_seoul_2021_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93071660,
+      "mtime_ns": 1790346290024948777,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "8b62b4d89c512358bc88e854b0d9dd06de95f1b7cb30ea8b3bc64997f131e95f"
+    },
+    {
+      "path": "scripts/build_seoul_2022_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 93068150,
+      "mtime_ns": 1790345162311561202,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "54b4c4ab5bf44642b1daa8b9109a1f98f02308e0866ecb79bbd9e513441af4f7"
+    },
+    {
+      "path": "scripts/build_seoul_2023_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 92778494,
+      "mtime_ns": 1790341083391078481,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "cb35ed26d64a41862f16d429ac4ca9b45b30d80f6aae5ec697d2fb42347a4040"
+    },
+    {
+      "path": "scripts/build_seoul_2024_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6687,
+      "inode": 92705998,
+      "mtime_ns": 1790340754643535131,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "2baf9308efb35284d45059fe9ed3dda93307ca57c6d4c033d0bd0c1ce64b1138"
+    },
+    {
+      "path": "scripts/build_seoul_2025_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6457,
+      "inode": 92703352,
+      "mtime_ns": 1790340288112453776,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "196a72e1b3afb3bc13195120f6d5cdb0d3fa8a2efd6bf543996da03562df7d00"
+    },
+    {
+      "path": "scripts/build_seoul_2026_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6457,
+      "inode": 92660270,
+      "mtime_ns": 1790338010023713604,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "f192abe64b27f9462209331ee2de3bf3557555caf66469ce458130649e604269"
+    },
+    {
+      "path": "scripts/build_seoul_running_trials.py",
+      "kind": "retired_script",
+      "bytes": 32822,
+      "inode": 90831550,
+      "mtime_ns": 1789412530522529374,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "9af00e20abdfb1d4567858e696a850ab87547a9c451f0ca40c6c88de05ce1b1e"
+    },
+    {
+      "path": "scripts/build_yeongcheon_2026_score_db.py",
+      "kind": "retired_script",
+      "bytes": 6776,
+      "inode": 92694364,
+      "mtime_ns": 1790339978214273744,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "27126c41bdb62d94083f40e43c33d4d003fed5867bd29c00f2477012773a3d6e"
+    },
+    {
+      "path": "scripts/collect_busan_medical_api.py",
+      "kind": "retired_script",
+      "bytes": 3964,
+      "inode": 90812337,
+      "mtime_ns": 1789399667187032073,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "a11c2d0f1fd6398c7f95dc2879f06312c15e921c0865f606de1fb4461801f867"
+    },
+    {
+      "path": "scripts/collect_busan_trial_api.py",
+      "kind": "retired_script",
+      "bytes": 7129,
+      "inode": 90832090,
+      "mtime_ns": 1789412793169380796,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "95c53680e5ea8c449afec6bec089074b71d1d36e29c99062f6d497ec24402014"
+    },
+    {
+      "path": "scripts/collect_jeju_steward_2024.py",
+      "kind": "retired_script",
+      "bytes": 2007,
+      "inode": 91115549,
+      "mtime_ns": 1789654432386443333,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "840b864dad4743aa51a90bae5b86d77980f065fbecef4c5dfede06f4da5fdf6d"
+    },
+    {
+      "path": "scripts/collect_jeju_tempo_research.py",
+      "kind": "retired_script",
+      "bytes": 2245,
+      "inode": 91102153,
+      "mtime_ns": 1789645664852538184,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "3e663376de501afe8985092c24fb0b435cd7fbc37a1499e737664c91122e2b58"
+    },
+    {
+      "path": "scripts/confirm_jeju_trial_breed_profiles.py",
+      "kind": "retired_script",
+      "bytes": 7241,
+      "inode": 90831353,
+      "mtime_ns": 1789411705379943660,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "578f81952e39bf2d5edc1449268033b69642826d4cd8e22fab5d6042f5ad48b8"
+    },
+    {
+      "path": "scripts/link_busan_temporary_ids.py",
+      "kind": "retired_script",
+      "bytes": 19493,
+      "inode": 90823564,
+      "mtime_ns": 1789404683695171004,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "ee2fa42f47e5bbc6cc7284998b6dfdc14e2f883ac516a50a8bca6aea6623fe44"
+    },
+    {
+      "path": "scripts/link_seoul_text_ids.py",
+      "kind": "retired_script",
+      "bytes": 17378,
+      "inode": 90830168,
+      "mtime_ns": 1789410304176620490,
+      "mode": 33188,
+      "allocated_bytes": 20480,
+      "sha256": "221fcf48727bbb7a56fe05744fc895e49147a7324129fcf294966a4060929fb3"
+    },
+    {
+      "path": "scripts/load_busan_api4_3_sections.py",
+      "kind": "retired_script",
+      "bytes": 5049,
+      "inode": 92999847,
+      "mtime_ns": 1790354369151282211,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "dadfa4f3f18db2d9ce7f62f210ca3dbfaa92f1c84ed78c4752f2f06fa02d116d"
+    },
+    {
+      "path": "scripts/load_busan_point_passing.py",
+      "kind": "retired_script",
+      "bytes": 9639,
+      "inode": 93121904,
+      "mtime_ns": 1790363492564109291,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "a88bdd787b13637b3b2354aab51d4d9fb8dc1e2d35e75b228c400b8ac8b65c38"
+    },
+    {
+      "path": "scripts/load_jeju_point_passing.py",
+      "kind": "retired_script",
+      "bytes": 7832,
+      "inode": 93122108,
+      "mtime_ns": 1790363689634311311,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "7765624dfcee3ab5a1464f5a71be399e943d6f2205be7616cef1a036c3ca342b"
+    },
+    {
+      "path": "scripts/load_seoul_point_passing.py",
+      "kind": "retired_script",
+      "bytes": 11542,
+      "inode": 93103244,
+      "mtime_ns": 1790358046872685964,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "63ae47e647538b32ea1877b5b2e8a579dc0f99d2ddf032141cb1503ceac20f3e"
+    },
+    {
+      "path": "scripts/materialize_jeju_confirmed_race_ids.py",
+      "kind": "retired_script",
+      "bytes": 7374,
+      "inode": 90805469,
+      "mtime_ns": 1789388115827495895,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "4bb430e614cb88c0dc5482a38bbbfdc8c22e255671946c2b26e2d1d0805e77fe"
+    },
+    {
+      "path": "scripts/reconcile_jeju_race_time_ids.py",
+      "kind": "retired_script",
+      "bytes": 16335,
+      "inode": 90794511,
+      "mtime_ns": 1789381272364909737,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "4a35eae34310fac660155878327eba636b3ac1963ef04f5683e0ee8743205719"
+    },
+    {
+      "path": "scripts/validate_jeju_running_trial_links.py",
+      "kind": "retired_script",
+      "bytes": 6325,
+      "inode": 90831457,
+      "mtime_ns": 1789411861477169620,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "4c605d0be325348e43ebbed6b9245c26559ae5c6ef52fefd1221ee8aa6827412"
+    },
+    {
+      "path": "scripts/verify_busan_complete_db.py",
+      "kind": "retired_script",
+      "bytes": 11679,
+      "inode": 91030415,
+      "mtime_ns": 1789560359209562063,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "6d2287b302602801abff7e530caaff425add9dcde446f130431af155aea585ed"
+    },
+    {
+      "path": "scripts/verify_busan_freshness_audit.py",
+      "kind": "retired_script",
+      "bytes": 13315,
+      "inode": 91105989,
+      "mtime_ns": 1789647027598818819,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "8e94c71e17b95c378124238bc4cc489b233c88caac93443a7f6431a75a119f58"
+    },
+    {
+      "path": "scripts/verify_busan_history.py",
+      "kind": "retired_script",
+      "bytes": 33283,
+      "inode": 90812309,
+      "mtime_ns": 1789400740466011877,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "e8c0af6088bd741d9dfcefac470eaeea0fb7166f11b9243c563597bdfbc72011"
+    },
+    {
+      "path": "scripts/verify_busan_trial_linkage.py",
+      "kind": "retired_script",
+      "bytes": 15115,
+      "inode": 90832831,
+      "mtime_ns": 1789461159127824057,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "7d2b2e7883a60c530e5550589fec2a56cb4cd63fd9fc256dd6afcb2c28366fd3"
+    },
+    {
+      "path": "scripts/verify_jeju_confirmed_race_ids.py",
+      "kind": "retired_script",
+      "bytes": 3604,
+      "inode": 90805495,
+      "mtime_ns": 1789388150705838708,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "b04190dc9511d34cd0509fdd75072cd51512c75962297426f266498aa0f75bea"
+    },
+    {
+      "path": "scripts/verify_jeju_native_analysis_db.py",
+      "kind": "retired_script",
+      "bytes": 6335,
+      "inode": 90874687,
+      "mtime_ns": 1789459565090334473,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "dc74dd65caab0928744d1ae9af77872092d38bcb9a02c8979b8048d2c80b151d"
+    },
+    {
+      "path": "scripts/verify_jeju_native_extended_db.py",
+      "kind": "retired_script",
+      "bytes": 8640,
+      "inode": 90881567,
+      "mtime_ns": 1789467776079605881,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "01ef79b0c2fc36245cbc9069ee3d0b12bdadd77d15b229c7b601c8016e7da133"
+    },
+    {
+      "path": "scripts/verify_jeju_native_text_phase2_db.py",
+      "kind": "retired_script",
+      "bytes": 5969,
+      "inode": 90881943,
+      "mtime_ns": 1789469035430322736,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "a54d1579b2c56ad28e61c39451f699e2c1c484a98c1aacc42142f762e3317492"
+    },
+    {
+      "path": "scripts/verify_jeju_other_sources.py",
+      "kind": "retired_script",
+      "bytes": 34420,
+      "inode": 90811101,
+      "mtime_ns": 1789399148701340678,
+      "mode": 33188,
+      "allocated_bytes": 36864,
+      "sha256": "b52a3c444d1012c0d8bf27767c96def867101970e90b0ba0dd5c72a23a433fd5"
+    },
+    {
+      "path": "scripts/verify_jeju_race_time_ids.py",
+      "kind": "retired_script",
+      "bytes": 5179,
+      "inode": 90794671,
+      "mtime_ns": 1789381684346667050,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "6e1922e715107fca6a12a22bc030be52e613d090d9cfbc9002c60099cc039c44"
+    },
+    {
+      "path": "scripts/verify_jeju_section_lineage.py",
+      "kind": "retired_script",
+      "bytes": 8468,
+      "inode": 91003143,
+      "mtime_ns": 1789541750173723581,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "3a186e9141798869ce47f0518100377d70d6589c5f6e9ed0b604d5fa55cf64e7"
+    },
+    {
+      "path": "scripts/verify_jeju_trial_inspection_exclusions.py",
+      "kind": "retired_script",
+      "bytes": 4415,
+      "inode": 90835317,
+      "mtime_ns": 1789414552664246731,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "73494df4acaae22fdc4ce74b75500b6f293d59ad442590fec11a780d55a0a439"
+    },
+    {
+      "path": "scripts/verify_seoul_backfill.py",
+      "kind": "retired_script",
+      "bytes": 24860,
+      "inode": 90817071,
+      "mtime_ns": 1789404729166896574,
+      "mode": 33188,
+      "allocated_bytes": 28672,
+      "sha256": "a01b9746a6dea587bb0a456097a18193f524b613b7732270552a124a039d6bb6"
+    },
+    {
+      "path": "tests/test_adjudicate_section_points.py",
+      "kind": "retired_script_test",
+      "bytes": 2112,
+      "inode": 92593424,
+      "mtime_ns": 1790331685571798495,
+      "mode": 33188,
+      "allocated_bytes": 4096,
+      "sha256": "542b1742bf0d5c41bfe9742cb5225a1d1ab7f433cdb0b55d60ad15961d5ecb2c"
+    },
+    {
+      "path": "tests/test_section_point_db_builder.py",
+      "kind": "retired_script_test",
+      "bytes": 4958,
+      "inode": 92547097,
+      "mtime_ns": 1790328960907045013,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e233fdd90eace2fa5b2cdb294cfb46d5ab2c85a40df8e40757b15eec4882678c"
+    },
+    {
+      "path": "scripts/__pycache__/adjudicate_section_points.cpython-312.pyc",
+      "kind": "removed_source_bytecode",
+      "bytes": 24630,
+      "inode": 92593759,
+      "mtime_ns": 1790331802690731968,
+      "mode": 33188,
+      "allocated_bytes": 28672,
+      "sha256": "32bdc47053df9a4455fc5f51bb4907e043c827b64b4fea68db57126c9903d031"
+    },
+    {
+      "path": "scripts/__pycache__/build_jeju_steward_pace_v2.cpython-312.pyc",
+      "kind": "removed_source_bytecode",
+      "bytes": 15261,
+      "inode": 92118624,
+      "mtime_ns": 1790014810282182206,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "ef3de6467f9eb7a51722ec6c4964c8c2a1ce261f00afe23d16d420dd72240072"
+    },
+    {
+      "path": "scripts/__pycache__/build_section_point_db.cpython-312.pyc",
+      "kind": "removed_source_bytecode",
+      "bytes": 41996,
+      "inode": 92568982,
+      "mtime_ns": 1790328923654310127,
+      "mode": 33188,
+      "allocated_bytes": 45056,
+      "sha256": "c9c7ecdec3d7c0e7c7df8e3f47f0e3f2db1096a026be55834336a57a2bdcfdcf"
+    },
+    {
+      "path": "scripts/__pycache__/load_busan_api4_3_sections.cpython-312.pyc",
+      "kind": "removed_source_bytecode",
+      "bytes": 6265,
+      "inode": 93097279,
+      "mtime_ns": 1790354464275832044,
+      "mode": 33188,
+      "allocated_bytes": 8192,
+      "sha256": "e1efbccdd730cc90462c50bef799b81d8deae00280c363199a091b211d6cd4db"
+    },
+    {
+      "path": "tests/__pycache__/test_adjudicate_section_points.cpython-312-pytest-8.4.2.pyc",
+      "kind": "removed_source_bytecode",
+      "bytes": 8358,
+      "inode": 92593615,
+      "mtime_ns": 1790331697912415112,
+      "mode": 33188,
+      "allocated_bytes": 12288,
+      "sha256": "f7752996e5093b2bbb547b0952d8986e83085d2d840794ca874569c740ef203a"
+    },
+    {
+      "path": "tests/__pycache__/test_section_point_db_builder.cpython-312-pytest-8.4.2.pyc",
+      "kind": "removed_source_bytecode",
+      "bytes": 12788,
+      "inode": 92569125,
+      "mtime_ns": 1790328964753176192,
+      "mode": 33188,
+      "allocated_bytes": 16384,
+      "sha256": "3a53cf1af2a7b2225f7384591734853449f5b61a4d67305d4890e5e56a0ba658"
+    }
+  ],
+  "deleted_symlinks": [],
+  "protected_db_signatures_before": {
+    "data/horse_racing.sqlite3": {
+      "bytes": 3077263360,
+      "inode": 87568535,
+      "mtime_ns": 1790954386700207901,
+      "mode": 33188,
+      "allocated_bytes": 3077586944
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "inode": 93724961,
+      "mtime_ns": 1790957930815247537,
+      "mode": 33152,
+      "allocated_bytes": 1793851392
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb": {
+      "bytes": 2742300672,
+      "inode": 94326869,
+      "mtime_ns": 1790922801758258602,
+      "mode": 33188,
+      "allocated_bytes": 2742300672
+    },
+    "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb": {
+      "bytes": 552611840,
+      "inode": 93555094,
+      "mtime_ns": 1790707496646005201,
+      "mode": 33188,
+      "allocated_bytes": 552611840
+    },
+    "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb": {
+      "bytes": 1323053056,
+      "inode": 91154130,
+      "mtime_ns": 1789665943191187414,
+      "mode": 33188,
+      "allocated_bytes": 1323053056
+    },
+    "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3": {
+      "bytes": 1535651840,
+      "inode": 90882110,
+      "mtime_ns": 1789468792285848257,
+      "mode": 33188,
+      "allocated_bytes": 1535754240
+    }
+  },
+  "model_verification_before": {
+    "thoroughbred": {
+      "active_profile": "thoroughbred-main-20260919-v1",
+      "champion_id": "thoroughbred-abc-current-a-b-c-20260919",
+      "combination_algorithm_version": "top3_set_joint_v1",
+      "components": {
+        "A": {
+          "artifact": "A_model",
+          "candidate": "current_A",
+          "metadata": "A_metadata",
+          "model_version": "v5_2026H2_rolling_all"
+        },
+        "B": {
+          "artifact": "BC_model",
+          "candidate": "current_B",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength"
+        },
+        "C": {
+          "artifact": "BC_model",
+          "candidate": "current_C",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength+v2_2026_H3_relative",
+          "order_artifact": "WIN_ORDER_model",
+          "order_metadata": "WIN_ORDER_metadata"
+        }
+      },
+      "domain": "thoroughbred",
+      "ok": true,
+      "probability_contract": "thoroughbred_abc_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "A_model",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt",
+          "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+        },
+        {
+          "name": "A_metadata",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/metadata.json",
+          "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+        },
+        {
+          "name": "BC_model",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt",
+          "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+        },
+        {
+          "name": "BC_metadata",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/metadata.json",
+          "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+        },
+        {
+          "name": "WIN_ORDER_model",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt",
+          "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+        },
+        {
+          "name": "WIN_ORDER_metadata",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/metadata.json",
+          "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+        },
+        {
+          "name": "reference_inference",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/infer.py",
+          "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+        },
+        {
+          "name": "frozen_selection",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+          "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+          "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+        },
+        {
+          "name": "latest_challenger_review",
+          "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+          "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+        }
+      ]
+    },
+    "jeju": {
+      "active_profile": "jeju-hy-r-form-20260919-v1",
+      "champion_id": "HY_R_FORM",
+      "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+      "components": {
+        "A_B_C": {
+          "artifact": "HY_R_FORM_model",
+          "candidate": "HY_R_FORM",
+          "model_version": "frozen_2026_HY_R_FORM",
+          "order_score": "order_score",
+          "set_score": "rank_score"
+        }
+      },
+      "domain": "jeju",
+      "ok": true,
+      "probability_contract": "jeju_hy_r_form_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "HY_R_FORM_model",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+          "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+        },
+        {
+          "name": "reference_inference",
+          "path": "scripts/predict_jeju_live_hy_r_form.py",
+          "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+          "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+        },
+        {
+          "name": "latest_challenger_decision",
+          "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+          "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+        },
+        {
+          "name": "latest_challenger_verification",
+          "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+          "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+        }
+      ]
+    }
+  },
+  "retained_root_script_hashes_before": {
+    "scripts/render_confirmed_starter_e9b_evaluation_addendum.py": "5bc641e8f1abc0ba0774ee441b829aecde08f41fbc8331c542a883e7c38d3d5f",
+    "scripts/generate_supabase_schema.py": "5d6b2dbcba26038d4f37413afbbc561ab9c0cfb8803d7a4324fcdb93dcb7bc31",
+    "scripts/audit_pre_race_field_dnf_e1.py": "532cb40b92eb184d17f057e90fb389fa26ff0edbaed043646d87ee5d3072308d",
+    "scripts/audit_artifacts.py": "33634d8e9bedbcad2a1797d67682fbeee6833eaadcada756dd5401c9bef62ffb",
+    "scripts/replay_jeju_pregame.py": "b7a2d13da5637dc9c1298d1186277b1215426b1c618194aa35fe72968aa6bae0",
+    "scripts/run_confirmed_starter_e9a_remediation.py": "80c77141b472675a398beaecc593efd6277d18fb31089842d239fd9151c56cb2",
+    "scripts/correct_seoul_zero_time_ranks.py": "3e6d36a3f0741401fb16f0a77322450ea1310c631f27066dee1ce215d32257f8",
+    "scripts/check_current_card_changes.py": "ed605692e99dd5a1ebaeb4732dc3a23e5d13e8ef45569c7cceca2f48afa1f47a",
+    "scripts/run-live-race-day.sh": "37ebfa13eb8614e3804ce4310fefca679e26eef58babfcce2d755306b5b1f25c",
+    "scripts/research_betting_2025_2026.py": "e9be56ef7c55ab484ee582e95b410bdebbe7b73e3addd5bc3e4bd9198ef76d3e",
+    "scripts/remove_legacy_point_duplicates.py": "457bda4488e2a86547a6fdc1672ea3cbb3a3a0f51236a2fc1b17262d27e32634",
+    "scripts/run_race_value_v1.py": "1775f0efd497d79434d392998ca7403bf487aec31978403705e6970a8e46f97d",
+    "scripts/analysis_finish_time_quality.py": "3e411d4171ff5efe1f64739f0530c1fc71001c0d09de3b8e2b85da044a913e2e",
+    "scripts/audit_historical_training_monthly.py": "0f2a5bd11d97746c46534d7f878c21a8d5412c5e2659fceb35e1d3fee11262ab",
+    "scripts/run_confirmed_starter_e8b_source_control.py": "bf0f631648b86e271f6928af8d3a44dbc54de0b6d9c5772cdafe732bc3aa9552",
+    "scripts/backfill_dividends_verified.py": "3eecf0221a4ea866cc3f32c497b510dff3d1e462ad3b2a7a41bbf6b7cf3fd2e3",
+    "scripts/run_confirmed_starter_e8a_v2_h1h2.py": "3f90ba1000a8da8a2f8e2e8d213aa2bb148618b6470e22c154a81a849db3c8f9",
+    "scripts/migrate_sqlite_to_postgres.py": "6a16c233a5b87422e9c0e4367d6df4077edd4dfa40dafa502d86a703ee06caf5",
+    "scripts/build_unified_thoroughbred_dataset.py": "07ee13f7d7a8eaeb3fd7b749155a1cdfc4caee7a6d2793685af811b894f4ae09",
+    "scripts/run_confirmed_starter_e4.py": "f11da3f711184c6d9c9e39d4f1b489fcdbcc075b4ba05e306714b39b321d4175",
+    "scripts/audit_historical_training_overlap.py": "5f26969549117664194d7f4cc550e321653b8b8a0161379b7fb0b16fde455452",
+    "scripts/run_confirmed_starter_e5a_r3r4_spike.py": "fe8142f16ff6c554009a14ecfd81130db61f506c5a5ea7057adb0755248b94af",
+    "scripts/verify_dividend_backfill.py": "b8b5d3e3972d11500e042f4634e84ee671936908c26c67564395580b5c1b54dc",
+    "scripts/resume_seoul_backfill.py": "0c9b370fc6117d411e1c910a6528f0eac26a06efeadff5b8b964ee76a20a5e5e",
+    "scripts/repair_seoul_sections.py": "a91d5e453c90d95dd5014b17678bdc6d041a8ba229ba1ba8fcd82b930449a0e9",
+    "scripts/repair_seoul_20201122_r3_runner.py": "962394a2868cb8f7ba30de99284f3e0ceebe1de765f8b09496f07a9616698c08",
+    "scripts/audit_pre2015_race_result_availability.py": "cf80a89b72a1e5d40d8a9fa5898de901b41cd3a901d3174687434a17a56ef738",
+    "scripts/sync_horse_active_status.py": "0c2a21fe5e93947ce95973e43150e8b5f39c95ef4282dcfa9cc1e6d9a9b93a26",
+    "scripts/build_jeju_h3_features.py": "85a39e189273af87bc9a47685e9d1fe2bcfea5c184e2b2230d2eff5572442773",
+    "scripts/repair_start_training_occurrences.py": "3fb81bc6aa8d7fabd8ff74e43b9541ecd6674dfc988dc1458553f127730f6281",
+    "scripts/backfill_api78_equipment_history.py": "2f99d84598addd3a26ee0d337f9b0605246c0985b56e94ca7de876af6bc535f9",
+    "scripts/verify_unified_thoroughbred_dataset.py": "474d8e37a09013663efc1042e59aed480e1bb05132415f17215043e8328cd3a2",
+    "scripts/run_confirmed_starter_e8b.py": "29ee8fd533de8a58a8b682efba11bccfa409e1729d0f3d473f05111c4b314a78",
+    "scripts/collect_historical_training_monthly.py": "5843c34a4a5693616665cee350f86a35f823c3207cf7b9d45e81c84f1f1c7bb0",
+    "scripts/repair_race_start_times.py": "4da686eb3a778af66cdddf19a1b1593b6c60267f2cc36bc99031f4b863fb25c6",
+    "scripts/verify_jeju_pregame.py": "dcbb465a8676f50da2ffdbddf8b0610a422f1323ae56657fe072eedb2c24c48b",
+    "scripts/manage-local-post-race.py": "fcdaf90acf8049b31ee2cbefeb472873484c24814aa99468ab3ed49afc9f2c5e",
+    "scripts/render_jeju_live_detailed_report.py": "91c214ed571b82166632dfeb4b79bfda266c5f1f9c5f94956183c788dc45dc4d",
+    "scripts/materialize_jeju_native_training.py": "7207b25b0820f080f7b7a7b48fdc83e479156132e58278f2a224f234b0bf5ba4",
+    "scripts/build_confirmed_starter_conditional_e2.py": "ee7aef23f8793183e0d45e34da823f3d4651769e22f4779bdd41bb1a579a192f",
+    "scripts/build_current_prediction_bundles.py": "7daa79df07cd17926285df990920617da39372662d07ef67c2a80b393985798b",
+    "scripts/backfill_operational_history.py": "4cf5ed9702f1e04a144a71f02bd4b808d945c6fa321b03664a5ce74f44f64695",
+    "scripts/finalize_unified_thoroughbred_dataset.py": "669b03174bec29f99516064b7cf405e715e61d980c34190a41ab3027c8e680c1",
+    "scripts/confirmed_starter_e9b_compare.py": "6aa50b0acbff64b124e5021ab1ae4a5611888b59cee788193a4a0e8d48f09b5c",
+    "scripts/collect_busan_history_results.py": "51beecf25b9dbcc8f595cebc0dee2049c77a4e0176e9d13eb7f1c33f0019cad8",
+    "scripts/seal_confirmed_starter_e9a.py": "bb3a46b29f59b7ccd2aae9bf4a3b05950c3709dfe675ef9c64a255cc02ec5cb2",
+    "scripts/run_confirmed_starter_e5b.py": "3a4142f850d6355dac5369290660007915f2714b3ce2e0a0c021599b7d7a147a",
+    "scripts/uninstall-launchd.sh": "f4f159a93703644821b70c0109c56ed3cd13b43140bb9385f6cedae03b7c3046",
+    "scripts/prepare_dividend_archive_audit.py": "70e4638da4d3d4a66a640db2c1676b70cd3207ad2d0a3cb5b6096d6a2ec63caf",
+    "scripts/run_confirmed_starter_e7b.py": "9f68f918304cedee608e1ce0eb2a2b97f582a56e9e82bd602cdcbd4a3c323be7",
+    "scripts/apply_20260929_trainer_status_identity.py": "509f104657e85a97b6eeacaf8ece0757830c86c12a0b8611923f5004a0667d15",
+    "scripts/freeze_jeju_transition_protocol.py": "82162a98354df7ba48ab38e2d69cb018adc67c93de16dff2a9cc10eaf9bc07a3",
+    "scripts/run_confirmed_starter_e8a.py": "90f718842d6222736daa5d1496b102a2e7e4f5cc6901c1579eeda581ddefdd97",
+    "scripts/apply_20260929_trainer_person_blue_general.py": "df74a5ec1c9906b80e333175c1d9e1b5ab6c335e2e91748df62902f2d6105aa5",
+    "scripts/collect_seoul_backfill_results.py": "99d65526c2c0be92ea1be0f4a2cb1fef1bfc0b426f13630b635f9d068abb4f18",
+    "scripts/sync_special_training.py": "12cdcf6870ebe1720abfa6d360ff5b26d1779adc9f94966fa145561208e41202",
+    "scripts/build_jeju_transition_features.py": "348e8a02cdfef8d47c03398f55396050dced3faa19587218bd15f5eab0eba0e7",
+    "scripts/backfill_api78_equipment_changes.py": "7966fac5ef55e107f734a61b47f76b108b8f4cb4344431d03da54b6529fabd34",
+    "scripts/run_confirmed_starter_e9a.py": "712d0d7f71493ab51cd76d2c036983b55f799475636be5f8378e2889fdc58487",
+    "scripts/collect_historical_text_verified_empty.py": "43b97f784cc8cd13ece6bd1ebda59f745da8780306dbd11f45d36c56bb7695f7",
+    "scripts/run_confirmed_starter_e6b.py": "1b0611adf078f0bb3d09679aefdb202d712bf1af286ff2d5f7c2e20d9cb1dfbd",
+    "scripts/render_jeju_race3_weight_update.py": "b7a02bdd93d930f44617d3f9a016739a073e954354eea80abfa40e65d344b4c2",
+    "scripts/run-daily-sync.sh": "ae8a7b8623cb3e0126d789e4383928eacd94c9b632ae4e10235ef59265a5e17d",
+    "scripts/inspect_confirmed_starter_e9a.py": "ab028b6814d144f48dbcee518c187f0500de060702f27a9bd1865951c077d437",
+    "scripts/collect_jeju_native_history.py": "95a2e55a1c2b2d88f05537fd143e95e3a9e2218621ff9df61fbf9cbc216f454d",
+    "scripts/audit_confirmed_starter_e6a_v2.py": "3fee85646870f42662d0dc8af5c850c96ddaf9b7d8078e4398b756982bf73ea4",
+    "scripts/sync_live_race_day.py": "1f81dedfebf6491c43d02135cb4b8edf6144d4e53df55bd19877cf491c09451e",
+    "scripts/build_jeju_native_top3_dataset.py": "0d043593879f542cf6c485ef6217cc070f044d96190eaecd0cfa9d51c88e7516",
+    "scripts/freeze_jeju_trial_protocol.py": "d1bb943791ed9ff26305e4017cdc3e7622a6f5846c1213ea073a053d4a0db4d9",
+    "scripts/install-launchd.sh": "315e319a8661726b33d9e10e8ee36b47b0b67fdfc51dd686d533724fb950f354",
+    "scripts/audit_historical_text_archive.py": "7fc794e3c05670e535a34b6446b16e9a7cdf7841ff9c3167d1f543d0a9e419aa",
+    "scripts/collect_jeju_pregame.py": "6128010d7dee672c9d6c77c878ae4e30d3811b36d9f7ec14fe911dc2356547a5",
+    "scripts/audit_kra_disease_glossary.py": "15c9358a164e79671df254c542db20041c7e9d9f9e657af9a6b1393a4edd918d",
+    "scripts/build_seoul_backfill.py": "8fa840c28baca4c8a0e29cb024c103b7b5d6013df9105491eb3d174fbb86cbf1",
+    "scripts/run_confirmed_starter_e3.py": "ff2bae688cc95d6dfcf99d60b28aee124fe202fb492c11f244e11e575cb5e03b",
+    "scripts/build_confirmed_starter_e9b_blind_package.py": "2429539bd74e1decbd790ec96da1c11251208e59be753f5ea456a30f0ece8025",
+    "scripts/predict_jeju_live_hy_r_form.py": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0",
+    "scripts/build_busan_history.py": "03a55379bd4d85d8cb68b697e1294388f9f64868af94ccd881ae9518ad9bceb9",
+    "scripts/fit_probability_calibration.py": "7624b163f01a475c263d53b2b4455f260598c4f82041efa7dd9aecec31815026",
+    "scripts/build_jeju_live_update_bundles.py": "adb93c020e4e2ee3e05b7acaf489f9a4b76694106ac7bafafa566c89e14fcfe9",
+    "scripts/compare_canonical_section_runs.py": "b138f270a5d5b89fd6cf0b80b793373b6b320db5634660470c3d8324d9a4fd78",
+    "scripts/run_race_portfolio_v1.py": "2ddd0495ab268926b8e597ad35e233585865f6ded146799753f7b4e420987fcb",
+    "scripts/run_confirmed_starter_e9b_frozen_evaluation.py": "2b79f7ad7f7004efd605fdf77ec08b7fd64f32ca38fbdc1450138cb56d30cb41",
+    "scripts/build_jeju_context_features.py": "9dddce3a2b6a8cca62076dc92dfc24d0a06c3f62b0f73b0b478e8bfe4fc2e989",
+    "scripts/repair_jeju_sections.py": "48a9cab8aab18f96a2b70c28efe296f20f169babbabc06e955b6903ea9576804",
+    "scripts/verify_jeju_native_top3_dataset.py": "2f9ee197b7d81e2f656aac1438233413e0da47725acdce33c06152fed4ab3b69",
+    "scripts/archive_and_purge_halla.py": "cd039d3f6fef316aded95bc8e48a2450e0e64bd64b909fd90285207134d54ace",
+    "scripts/sync_trainer_affiliations.py": "f485a84c0bb59d50ae925efcdd591d31c13e4f2bf71d7672ca5614cefd0e5df9",
+    "scripts/import_score_point_sources.py": "7b0caa88d883cc7513d60fef2d600cce5b55e51da21b9fd032e64f68c87047a5",
+    "scripts/run_confirmed_starter_e9a_h1h2.py": "90a72adc36f663dd99c4dac596823db0bac5e64b2f87aa560c901b8fccaaebc5",
+    "scripts/run_jeju_joint_top3.py": "d6c4fd7b841d3dc21a9da2f9b95a3885726c86ee41cdd9817a13f3be0ea4f757",
+    "scripts/manage-local-race-day.py": "d45f3cc387a4734269c2614a55e9da6fc70b6b6cddcfa031c0c9f7a6195ea571",
+    "scripts/research_odds_rank_roi_2025_2026.sql": "7f08472c88460355c7505454f5b2384724f0788234d7359a1d5d3686505acd34",
+    "scripts/run_confirmed_starter_e8a_v2.py": "53a24cb4b1fb873a954a4e867b035b519e1a19005ba849f9ac5f3b176eb79fbf",
+    "scripts/backtest_trifecta_boxes.py": "49364a05caa9ca192befe8d29d2b9e00f4f6cdce2e50e1dcd344ed2a75698a14",
+    "scripts/set_mapilog_database_secret.zsh": "0dce1e205f4c591baa28a46891f2a1ef92cdeac2212925885ac6e08c1110c5fd",
+    "scripts/run_live_prediction_cycle.py": "466cfae24051a1472c032c49805a9636ee3c89b91781b1fab64498b214fa1bd1",
+    "scripts/audit_api78_equipment_history.py": "e79d727133b7587a32ef8f605d6219b550c7ee27550b14041a18c83ac7fee3ab",
+    "scripts/run_confirmed_starter_e5a_spike.py": "11bef27f9108575056141d8e0bdc2fe50a384804cf887a8ea67a6bb2fb2e6905",
+    "scripts/load_test_web.py": "799dfff1a49b0aa51e8d5e3890a26e2ff543b276b59158a0c755404830ffad47",
+    "scripts/backup_legacy_point_tables.py": "2fc5685db1760b0abdd0eaad8f332b0d4556700d2013aaa58e44e6aa41fed5b1",
+    "scripts/fetch_jeju_live_audit_inputs.py": "2aad5e27cc839890a4ff455743904ca75dba7d47f22385c26012b213cda50692",
+    "scripts/correct_seoul_special_98.py": "1863719d69cc0e82eb7273d79a600a5ae49ce6f563a0a8b7c638182d22c675a7",
+    "scripts/audit_confirmed_starter_e6a.py": "1f0ade28acc8845a5f26acf3d2760b0d2874797a12b15c7e7d4f9782fa891b63",
+    "scripts/collect_jeju_native_health_weight.py": "ceb2e8bf9096cbbbe58b04037f3e94eb5b971cb6b9053b3adb37d7f5637c92ab",
+    "scripts/sync_trainer_historical_regions.py": "5ee3cc941ca16efb5e6532dab2695ae87621d7c864e3d75ccad829fb8a9ba33c",
+    "scripts/finalize_seoul_backfill.py": "dcd4d88e3f2a8f1a858e3ba21dd1c0595caf5747fd7020c839701c18f32db145",
+    "scripts/run_jeju_top3_experiment.py": "3ee18b08030b715396fd5a675c041d981460d069a7ae23ca370e8d8661a384a3",
+    "scripts/audit_confirmed_starter_e7a.py": "62da768793bde34f53176f864d188e287d0db5241cb4000c1e83756c57a51053"
+  },
+  "source_open_handle_check": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "all_targets_absent": true,
+  "protected_db_signatures_after": {
+    "data/horse_racing.sqlite3": {
+      "bytes": 3077263360,
+      "inode": 87568535,
+      "mtime_ns": 1790954386700207901,
+      "mode": 33188,
+      "allocated_bytes": 3077586944
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "inode": 93724961,
+      "mtime_ns": 1790957930815247537,
+      "mode": 33152,
+      "allocated_bytes": 1793851392
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb": {
+      "bytes": 2742300672,
+      "inode": 94326869,
+      "mtime_ns": 1790922801758258602,
+      "mode": 33188,
+      "allocated_bytes": 2742300672
+    },
+    "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb": {
+      "bytes": 552611840,
+      "inode": 93555094,
+      "mtime_ns": 1790707496646005201,
+      "mode": 33188,
+      "allocated_bytes": 552611840
+    },
+    "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb": {
+      "bytes": 1323053056,
+      "inode": 91154130,
+      "mtime_ns": 1789665943191187414,
+      "mode": 33188,
+      "allocated_bytes": 1323053056
+    },
+    "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3": {
+      "bytes": 1535651840,
+      "inode": 90882110,
+      "mtime_ns": 1789468792285848257,
+      "mode": 33188,
+      "allocated_bytes": 1535754240
+    }
+  },
+  "protected_db_files_unchanged": true,
+  "retained_root_script_hashes_after": {
+    "scripts/render_confirmed_starter_e9b_evaluation_addendum.py": "5bc641e8f1abc0ba0774ee441b829aecde08f41fbc8331c542a883e7c38d3d5f",
+    "scripts/generate_supabase_schema.py": "5d6b2dbcba26038d4f37413afbbc561ab9c0cfb8803d7a4324fcdb93dcb7bc31",
+    "scripts/audit_pre_race_field_dnf_e1.py": "532cb40b92eb184d17f057e90fb389fa26ff0edbaed043646d87ee5d3072308d",
+    "scripts/audit_artifacts.py": "33634d8e9bedbcad2a1797d67682fbeee6833eaadcada756dd5401c9bef62ffb",
+    "scripts/replay_jeju_pregame.py": "b7a2d13da5637dc9c1298d1186277b1215426b1c618194aa35fe72968aa6bae0",
+    "scripts/run_confirmed_starter_e9a_remediation.py": "80c77141b472675a398beaecc593efd6277d18fb31089842d239fd9151c56cb2",
+    "scripts/correct_seoul_zero_time_ranks.py": "3e6d36a3f0741401fb16f0a77322450ea1310c631f27066dee1ce215d32257f8",
+    "scripts/check_current_card_changes.py": "ed605692e99dd5a1ebaeb4732dc3a23e5d13e8ef45569c7cceca2f48afa1f47a",
+    "scripts/run-live-race-day.sh": "37ebfa13eb8614e3804ce4310fefca679e26eef58babfcce2d755306b5b1f25c",
+    "scripts/research_betting_2025_2026.py": "e9be56ef7c55ab484ee582e95b410bdebbe7b73e3addd5bc3e4bd9198ef76d3e",
+    "scripts/remove_legacy_point_duplicates.py": "457bda4488e2a86547a6fdc1672ea3cbb3a3a0f51236a2fc1b17262d27e32634",
+    "scripts/run_race_value_v1.py": "1775f0efd497d79434d392998ca7403bf487aec31978403705e6970a8e46f97d",
+    "scripts/analysis_finish_time_quality.py": "3e411d4171ff5efe1f64739f0530c1fc71001c0d09de3b8e2b85da044a913e2e",
+    "scripts/audit_historical_training_monthly.py": "0f2a5bd11d97746c46534d7f878c21a8d5412c5e2659fceb35e1d3fee11262ab",
+    "scripts/run_confirmed_starter_e8b_source_control.py": "bf0f631648b86e271f6928af8d3a44dbc54de0b6d9c5772cdafe732bc3aa9552",
+    "scripts/backfill_dividends_verified.py": "3eecf0221a4ea866cc3f32c497b510dff3d1e462ad3b2a7a41bbf6b7cf3fd2e3",
+    "scripts/run_confirmed_starter_e8a_v2_h1h2.py": "3f90ba1000a8da8a2f8e2e8d213aa2bb148618b6470e22c154a81a849db3c8f9",
+    "scripts/migrate_sqlite_to_postgres.py": "6a16c233a5b87422e9c0e4367d6df4077edd4dfa40dafa502d86a703ee06caf5",
+    "scripts/build_unified_thoroughbred_dataset.py": "07ee13f7d7a8eaeb3fd7b749155a1cdfc4caee7a6d2793685af811b894f4ae09",
+    "scripts/run_confirmed_starter_e4.py": "f11da3f711184c6d9c9e39d4f1b489fcdbcc075b4ba05e306714b39b321d4175",
+    "scripts/audit_historical_training_overlap.py": "5f26969549117664194d7f4cc550e321653b8b8a0161379b7fb0b16fde455452",
+    "scripts/run_confirmed_starter_e5a_r3r4_spike.py": "fe8142f16ff6c554009a14ecfd81130db61f506c5a5ea7057adb0755248b94af",
+    "scripts/verify_dividend_backfill.py": "b8b5d3e3972d11500e042f4634e84ee671936908c26c67564395580b5c1b54dc",
+    "scripts/resume_seoul_backfill.py": "0c9b370fc6117d411e1c910a6528f0eac26a06efeadff5b8b964ee76a20a5e5e",
+    "scripts/repair_seoul_sections.py": "a91d5e453c90d95dd5014b17678bdc6d041a8ba229ba1ba8fcd82b930449a0e9",
+    "scripts/repair_seoul_20201122_r3_runner.py": "962394a2868cb8f7ba30de99284f3e0ceebe1de765f8b09496f07a9616698c08",
+    "scripts/audit_pre2015_race_result_availability.py": "cf80a89b72a1e5d40d8a9fa5898de901b41cd3a901d3174687434a17a56ef738",
+    "scripts/sync_horse_active_status.py": "0c2a21fe5e93947ce95973e43150e8b5f39c95ef4282dcfa9cc1e6d9a9b93a26",
+    "scripts/build_jeju_h3_features.py": "85a39e189273af87bc9a47685e9d1fe2bcfea5c184e2b2230d2eff5572442773",
+    "scripts/repair_start_training_occurrences.py": "3fb81bc6aa8d7fabd8ff74e43b9541ecd6674dfc988dc1458553f127730f6281",
+    "scripts/backfill_api78_equipment_history.py": "2f99d84598addd3a26ee0d337f9b0605246c0985b56e94ca7de876af6bc535f9",
+    "scripts/verify_unified_thoroughbred_dataset.py": "474d8e37a09013663efc1042e59aed480e1bb05132415f17215043e8328cd3a2",
+    "scripts/run_confirmed_starter_e8b.py": "29ee8fd533de8a58a8b682efba11bccfa409e1729d0f3d473f05111c4b314a78",
+    "scripts/collect_historical_training_monthly.py": "5843c34a4a5693616665cee350f86a35f823c3207cf7b9d45e81c84f1f1c7bb0",
+    "scripts/repair_race_start_times.py": "4da686eb3a778af66cdddf19a1b1593b6c60267f2cc36bc99031f4b863fb25c6",
+    "scripts/verify_jeju_pregame.py": "dcbb465a8676f50da2ffdbddf8b0610a422f1323ae56657fe072eedb2c24c48b",
+    "scripts/manage-local-post-race.py": "fcdaf90acf8049b31ee2cbefeb472873484c24814aa99468ab3ed49afc9f2c5e",
+    "scripts/render_jeju_live_detailed_report.py": "91c214ed571b82166632dfeb4b79bfda266c5f1f9c5f94956183c788dc45dc4d",
+    "scripts/materialize_jeju_native_training.py": "7207b25b0820f080f7b7a7b48fdc83e479156132e58278f2a224f234b0bf5ba4",
+    "scripts/build_confirmed_starter_conditional_e2.py": "ee7aef23f8793183e0d45e34da823f3d4651769e22f4779bdd41bb1a579a192f",
+    "scripts/build_current_prediction_bundles.py": "7daa79df07cd17926285df990920617da39372662d07ef67c2a80b393985798b",
+    "scripts/backfill_operational_history.py": "4cf5ed9702f1e04a144a71f02bd4b808d945c6fa321b03664a5ce74f44f64695",
+    "scripts/finalize_unified_thoroughbred_dataset.py": "669b03174bec29f99516064b7cf405e715e61d980c34190a41ab3027c8e680c1",
+    "scripts/confirmed_starter_e9b_compare.py": "6aa50b0acbff64b124e5021ab1ae4a5611888b59cee788193a4a0e8d48f09b5c",
+    "scripts/collect_busan_history_results.py": "51beecf25b9dbcc8f595cebc0dee2049c77a4e0176e9d13eb7f1c33f0019cad8",
+    "scripts/seal_confirmed_starter_e9a.py": "bb3a46b29f59b7ccd2aae9bf4a3b05950c3709dfe675ef9c64a255cc02ec5cb2",
+    "scripts/run_confirmed_starter_e5b.py": "3a4142f850d6355dac5369290660007915f2714b3ce2e0a0c021599b7d7a147a",
+    "scripts/uninstall-launchd.sh": "f4f159a93703644821b70c0109c56ed3cd13b43140bb9385f6cedae03b7c3046",
+    "scripts/prepare_dividend_archive_audit.py": "70e4638da4d3d4a66a640db2c1676b70cd3207ad2d0a3cb5b6096d6a2ec63caf",
+    "scripts/run_confirmed_starter_e7b.py": "9f68f918304cedee608e1ce0eb2a2b97f582a56e9e82bd602cdcbd4a3c323be7",
+    "scripts/apply_20260929_trainer_status_identity.py": "509f104657e85a97b6eeacaf8ece0757830c86c12a0b8611923f5004a0667d15",
+    "scripts/freeze_jeju_transition_protocol.py": "82162a98354df7ba48ab38e2d69cb018adc67c93de16dff2a9cc10eaf9bc07a3",
+    "scripts/run_confirmed_starter_e8a.py": "90f718842d6222736daa5d1496b102a2e7e4f5cc6901c1579eeda581ddefdd97",
+    "scripts/apply_20260929_trainer_person_blue_general.py": "df74a5ec1c9906b80e333175c1d9e1b5ab6c335e2e91748df62902f2d6105aa5",
+    "scripts/collect_seoul_backfill_results.py": "99d65526c2c0be92ea1be0f4a2cb1fef1bfc0b426f13630b635f9d068abb4f18",
+    "scripts/sync_special_training.py": "12cdcf6870ebe1720abfa6d360ff5b26d1779adc9f94966fa145561208e41202",
+    "scripts/build_jeju_transition_features.py": "348e8a02cdfef8d47c03398f55396050dced3faa19587218bd15f5eab0eba0e7",
+    "scripts/backfill_api78_equipment_changes.py": "7966fac5ef55e107f734a61b47f76b108b8f4cb4344431d03da54b6529fabd34",
+    "scripts/run_confirmed_starter_e9a.py": "712d0d7f71493ab51cd76d2c036983b55f799475636be5f8378e2889fdc58487",
+    "scripts/collect_historical_text_verified_empty.py": "43b97f784cc8cd13ece6bd1ebda59f745da8780306dbd11f45d36c56bb7695f7",
+    "scripts/run_confirmed_starter_e6b.py": "1b0611adf078f0bb3d09679aefdb202d712bf1af286ff2d5f7c2e20d9cb1dfbd",
+    "scripts/render_jeju_race3_weight_update.py": "b7a02bdd93d930f44617d3f9a016739a073e954354eea80abfa40e65d344b4c2",
+    "scripts/run-daily-sync.sh": "ae8a7b8623cb3e0126d789e4383928eacd94c9b632ae4e10235ef59265a5e17d",
+    "scripts/inspect_confirmed_starter_e9a.py": "ab028b6814d144f48dbcee518c187f0500de060702f27a9bd1865951c077d437",
+    "scripts/collect_jeju_native_history.py": "95a2e55a1c2b2d88f05537fd143e95e3a9e2218621ff9df61fbf9cbc216f454d",
+    "scripts/audit_confirmed_starter_e6a_v2.py": "3fee85646870f42662d0dc8af5c850c96ddaf9b7d8078e4398b756982bf73ea4",
+    "scripts/sync_live_race_day.py": "1f81dedfebf6491c43d02135cb4b8edf6144d4e53df55bd19877cf491c09451e",
+    "scripts/build_jeju_native_top3_dataset.py": "0d043593879f542cf6c485ef6217cc070f044d96190eaecd0cfa9d51c88e7516",
+    "scripts/freeze_jeju_trial_protocol.py": "d1bb943791ed9ff26305e4017cdc3e7622a6f5846c1213ea073a053d4a0db4d9",
+    "scripts/install-launchd.sh": "315e319a8661726b33d9e10e8ee36b47b0b67fdfc51dd686d533724fb950f354",
+    "scripts/audit_historical_text_archive.py": "7fc794e3c05670e535a34b6446b16e9a7cdf7841ff9c3167d1f543d0a9e419aa",
+    "scripts/collect_jeju_pregame.py": "6128010d7dee672c9d6c77c878ae4e30d3811b36d9f7ec14fe911dc2356547a5",
+    "scripts/audit_kra_disease_glossary.py": "15c9358a164e79671df254c542db20041c7e9d9f9e657af9a6b1393a4edd918d",
+    "scripts/build_seoul_backfill.py": "8fa840c28baca4c8a0e29cb024c103b7b5d6013df9105491eb3d174fbb86cbf1",
+    "scripts/run_confirmed_starter_e3.py": "ff2bae688cc95d6dfcf99d60b28aee124fe202fb492c11f244e11e575cb5e03b",
+    "scripts/build_confirmed_starter_e9b_blind_package.py": "2429539bd74e1decbd790ec96da1c11251208e59be753f5ea456a30f0ece8025",
+    "scripts/predict_jeju_live_hy_r_form.py": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0",
+    "scripts/build_busan_history.py": "03a55379bd4d85d8cb68b697e1294388f9f64868af94ccd881ae9518ad9bceb9",
+    "scripts/fit_probability_calibration.py": "7624b163f01a475c263d53b2b4455f260598c4f82041efa7dd9aecec31815026",
+    "scripts/build_jeju_live_update_bundles.py": "adb93c020e4e2ee3e05b7acaf489f9a4b76694106ac7bafafa566c89e14fcfe9",
+    "scripts/compare_canonical_section_runs.py": "b138f270a5d5b89fd6cf0b80b793373b6b320db5634660470c3d8324d9a4fd78",
+    "scripts/run_race_portfolio_v1.py": "2ddd0495ab268926b8e597ad35e233585865f6ded146799753f7b4e420987fcb",
+    "scripts/run_confirmed_starter_e9b_frozen_evaluation.py": "2b79f7ad7f7004efd605fdf77ec08b7fd64f32ca38fbdc1450138cb56d30cb41",
+    "scripts/build_jeju_context_features.py": "9dddce3a2b6a8cca62076dc92dfc24d0a06c3f62b0f73b0b478e8bfe4fc2e989",
+    "scripts/repair_jeju_sections.py": "48a9cab8aab18f96a2b70c28efe296f20f169babbabc06e955b6903ea9576804",
+    "scripts/verify_jeju_native_top3_dataset.py": "2f9ee197b7d81e2f656aac1438233413e0da47725acdce33c06152fed4ab3b69",
+    "scripts/archive_and_purge_halla.py": "cd039d3f6fef316aded95bc8e48a2450e0e64bd64b909fd90285207134d54ace",
+    "scripts/sync_trainer_affiliations.py": "f485a84c0bb59d50ae925efcdd591d31c13e4f2bf71d7672ca5614cefd0e5df9",
+    "scripts/import_score_point_sources.py": "7b0caa88d883cc7513d60fef2d600cce5b55e51da21b9fd032e64f68c87047a5",
+    "scripts/run_confirmed_starter_e9a_h1h2.py": "90a72adc36f663dd99c4dac596823db0bac5e64b2f87aa560c901b8fccaaebc5",
+    "scripts/run_jeju_joint_top3.py": "d6c4fd7b841d3dc21a9da2f9b95a3885726c86ee41cdd9817a13f3be0ea4f757",
+    "scripts/manage-local-race-day.py": "d45f3cc387a4734269c2614a55e9da6fc70b6b6cddcfa031c0c9f7a6195ea571",
+    "scripts/research_odds_rank_roi_2025_2026.sql": "7f08472c88460355c7505454f5b2384724f0788234d7359a1d5d3686505acd34",
+    "scripts/run_confirmed_starter_e8a_v2.py": "53a24cb4b1fb873a954a4e867b035b519e1a19005ba849f9ac5f3b176eb79fbf",
+    "scripts/backtest_trifecta_boxes.py": "49364a05caa9ca192befe8d29d2b9e00f4f6cdce2e50e1dcd344ed2a75698a14",
+    "scripts/set_mapilog_database_secret.zsh": "0dce1e205f4c591baa28a46891f2a1ef92cdeac2212925885ac6e08c1110c5fd",
+    "scripts/run_live_prediction_cycle.py": "466cfae24051a1472c032c49805a9636ee3c89b91781b1fab64498b214fa1bd1",
+    "scripts/audit_api78_equipment_history.py": "e79d727133b7587a32ef8f605d6219b550c7ee27550b14041a18c83ac7fee3ab",
+    "scripts/run_confirmed_starter_e5a_spike.py": "11bef27f9108575056141d8e0bdc2fe50a384804cf887a8ea67a6bb2fb2e6905",
+    "scripts/load_test_web.py": "799dfff1a49b0aa51e8d5e3890a26e2ff543b276b59158a0c755404830ffad47",
+    "scripts/backup_legacy_point_tables.py": "2fc5685db1760b0abdd0eaad8f332b0d4556700d2013aaa58e44e6aa41fed5b1",
+    "scripts/fetch_jeju_live_audit_inputs.py": "2aad5e27cc839890a4ff455743904ca75dba7d47f22385c26012b213cda50692",
+    "scripts/correct_seoul_special_98.py": "1863719d69cc0e82eb7273d79a600a5ae49ce6f563a0a8b7c638182d22c675a7",
+    "scripts/audit_confirmed_starter_e6a.py": "1f0ade28acc8845a5f26acf3d2760b0d2874797a12b15c7e7d4f9782fa891b63",
+    "scripts/collect_jeju_native_health_weight.py": "ceb2e8bf9096cbbbe58b04037f3e94eb5b971cb6b9053b3adb37d7f5637c92ab",
+    "scripts/sync_trainer_historical_regions.py": "5ee3cc941ca16efb5e6532dab2695ae87621d7c864e3d75ccad829fb8a9ba33c",
+    "scripts/finalize_seoul_backfill.py": "dcd4d88e3f2a8f1a858e3ba21dd1c0595caf5747fd7020c839701c18f32db145",
+    "scripts/run_jeju_top3_experiment.py": "3ee18b08030b715396fd5a675c041d981460d069a7ae23ca370e8d8661a384a3",
+    "scripts/audit_confirmed_starter_e7a.py": "62da768793bde34f53176f864d188e287d0db5241cb4000c1e83756c57a51053"
+  },
+  "model_verification_after": {
+    "thoroughbred": {
+      "active_profile": "thoroughbred-main-20260919-v1",
+      "champion_id": "thoroughbred-abc-current-a-b-c-20260919",
+      "combination_algorithm_version": "top3_set_joint_v1",
+      "components": {
+        "A": {
+          "artifact": "A_model",
+          "candidate": "current_A",
+          "metadata": "A_metadata",
+          "model_version": "v5_2026H2_rolling_all"
+        },
+        "B": {
+          "artifact": "BC_model",
+          "candidate": "current_B",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength"
+        },
+        "C": {
+          "artifact": "BC_model",
+          "candidate": "current_C",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength+v2_2026_H3_relative",
+          "order_artifact": "WIN_ORDER_model",
+          "order_metadata": "WIN_ORDER_metadata"
+        }
+      },
+      "domain": "thoroughbred",
+      "ok": true,
+      "probability_contract": "thoroughbred_abc_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "A_model",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt",
+          "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+        },
+        {
+          "name": "A_metadata",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/metadata.json",
+          "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+        },
+        {
+          "name": "BC_model",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt",
+          "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+        },
+        {
+          "name": "BC_metadata",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/metadata.json",
+          "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+        },
+        {
+          "name": "WIN_ORDER_model",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt",
+          "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+        },
+        {
+          "name": "WIN_ORDER_metadata",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/metadata.json",
+          "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+        },
+        {
+          "name": "reference_inference",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/infer.py",
+          "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+        },
+        {
+          "name": "frozen_selection",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+          "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+          "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+        },
+        {
+          "name": "latest_challenger_review",
+          "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+          "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+        }
+      ]
+    },
+    "jeju": {
+      "active_profile": "jeju-hy-r-form-20260919-v1",
+      "champion_id": "HY_R_FORM",
+      "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+      "components": {
+        "A_B_C": {
+          "artifact": "HY_R_FORM_model",
+          "candidate": "HY_R_FORM",
+          "model_version": "frozen_2026_HY_R_FORM",
+          "order_score": "order_score",
+          "set_score": "rank_score"
+        }
+      },
+      "domain": "jeju",
+      "ok": true,
+      "probability_contract": "jeju_hy_r_form_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "HY_R_FORM_model",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+          "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+        },
+        {
+          "name": "reference_inference",
+          "path": "scripts/predict_jeju_live_hy_r_form.py",
+          "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+          "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+        },
+        {
+          "name": "latest_challenger_decision",
+          "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+          "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+        },
+        {
+          "name": "latest_challenger_verification",
+          "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+          "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+        }
+      ]
+    }
+  },
+  "deleted_source_bytes": 1077502,
+  "deleted_allocated_bytes": 1384448,
+  "deletion_counts": {
+    "retired_script": 92,
+    "retired_script_test": 2,
+    "removed_source_bytecode": 6
+  },
+  "archived_model_files_verified": 17,
+  "validation_results": {
+    "pytest_collection_after": {
+      "exit_code": 0,
+      "command": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "output_log": "pytest_collection_after.txt",
+      "summary": "ave_exact_metric_total[1000]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1200]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1300]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1400]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1600]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1800]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[1900]\ntests/test_yeongcheon_diagram.py::test_yeongcheon_routes_end_at_finish_and_have_exact_metric_total[2000]\ntests/test_yeongcheon_diagram.py::test_all_route_pieces_join_without_jumps\ntests/test_yeongcheon_diagram.py::test_shared_closing_checkpoints_do_not_move_between_distances\ntests/test_yeongcheon_diagram.py::test_long_races_start_inside_and_finish_outside\ntests/test_yeongcheon_diagram.py::test_racecourse_map_supports_yeongcheon\ntests/test_yeongcheon_diagram.py::test_yeongcheon_sections_use_distance_positions\n\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /Users/kimyongjin/Desktop/horse_racing/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1126 tests collected in 2.64s\n"
+    },
+    "current_operations_tests": {
+      "exit_code": 0,
+      "command": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_local_race_day.py",
+        "tests/test_local_post_race.py",
+        "tests/test_daily_training_job.py",
+        "tests/test_weekly_entry_cards.py",
+        "tests/test_prediction_publisher_skill.py",
+        "tests/test_dividend_backfill_verified.py",
+        "tests/test_trainer_affiliations.py",
+        "tests/test_jeju_native_top3_artifact.py",
+        "tests/test_busan_history_build.py",
+        "tests/test_seoul_backfill_status.py"
+      ],
+      "output_log": "current_operations_tests.txt",
+      "summary": "........................................................................ [100%]\n72 passed in 9.02s\n"
+    }
+  },
+  "updated_documentation": [
+    {
+      "path": "docs/README.md",
+      "sha256": "f79bf4842b07dc41814c2e966319783c6a4cecb5d0c15f4d2401df9d7316b282"
+    },
+    {
+      "path": "thoroughbred/README.md",
+      "sha256": "0a61b64c21c751d8a7b59811783621ba14a4dddb9d2e135e317caded3fe773f2"
+    },
+    {
+      "path": "jeju/README.md",
+      "sha256": "5132faaf51ecdf4cf770e13e1219b1541f5fbf5b4e4eac4d5e49ef64b4691310"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/RETIRED_INTERMEDIATES_2026-09-28.md",
+      "sha256": "9a6e6bce66258c13178a0ce05733bbcb8b137ad1584690fe8c1af048e5ec641d"
+    }
+  ],
+  "finished_at": "2026-10-04T12:27:42.028631+09:00",
+  "remaining_root_scripts": 109
+}
