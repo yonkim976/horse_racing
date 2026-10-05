@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.horse-racing.live-race-day</string>
+  <key>ProgramArguments</key><array>
+    <string>/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python</string>
+    <string>-m</string><string>horse_racing.jobs.local_race_day</string>
+    <string>--apply</string><string>--scheduled</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/kimyongjin/Desktop/horse_racing</string>
+  <key>StartInterval</key><integer>120</integer>
+  <key>RunAtLoad</key><true/>
+  <key>EnvironmentVariables</key><dict>
+    <key>PATH</key><string>/Users/kimyongjin/google-cloud-sdk/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>PYTHONUNBUFFERED</key><string>1</string>
+  </dict>
+  <key>StandardOutPath</key><string>/Users/kimyongjin/Library/Logs/horse-racing/local-live-race-day.log</string>
+  <key>StandardErrorPath</key><string>/Users/kimyongjin/Library/Logs/horse-racing/local-live-race-day.err.log</string>
+</dict></plist>

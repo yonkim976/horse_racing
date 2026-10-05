@@ -34,7 +34,15 @@ def main():
         if existing.get("Label") != LABEL:
             raise SystemExit("다른 예약 파일이 있어 덮어쓰지 않았습니다.")
     destination.parent.mkdir(parents=True, exist_ok=True)
-    (TASK_ROOT / "data/logs").mkdir(parents=True, exist_ok=True)
+    log_dir = Path.home() / "Library/Logs/horse-racing"
+    for key in ("StandardOutPath", "StandardErrorPath"):
+        if Path(config[key]).parent != log_dir:
+            raise SystemExit("자동 실행 로그는 Library/Logs/horse-racing 아래에 있어야 합니다.")
+    log_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+    for key in ("StandardOutPath", "StandardErrorPath"):
+        log_path = Path(config[key])
+        log_path.touch(mode=0o600, exist_ok=True)
+        os.chmod(log_path, 0o600)
     # The reviewed plist contains no keys, passwords, or webhook URL.
     shutil.copyfile(source, destination)
     os.chmod(destination, 0o600)
@@ -43,6 +51,7 @@ def main():
     subprocess.run(["launchctl", "bootstrap", domain, str(destination)], check=True)
     print(f"설치 완료: {LABEL}, 120초 간격. 실제 실행/성공은 로그로 확인하세요.")
     print("노트북 로그인·인터넷·잠자기 해제 상태가 필요합니다.")
+    print(f"자동 실행 로그: {log_dir}. 바탕화면 프로젝트 접근 권한은 별도로 필요합니다.")
 
 
 if __name__ == "__main__":
