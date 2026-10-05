@@ -1,0 +1,102 @@
+{
+  "frozen_at_utc": "2026-09-18T14:48:32.656163+00:00",
+  "reference_evaluation_started": false,
+  "by_target": {
+    "A": {
+      "selected": "current_A",
+      "baseline": {
+        "log_loss": 0.5037704535182546,
+        "brier": 0.16645618065252527,
+        "hit": 0.6261626162616262
+      },
+      "evidence": {
+        "context_temperature": {
+          "qualifies": false,
+          "development": {
+            "log_loss": 0.5040666064773339,
+            "brier": 0.16656802949752778,
+            "hit": 0.6261626162616262
+          },
+          "venue_year": {
+            "SEOUL": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 0
+            },
+            "BUSAN": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 1
+            }
+          }
+        }
+      }
+    },
+    "B": {
+      "selected": "current_B",
+      "baseline": {
+        "log_loss": 4.28637654073061,
+        "brier": 0.9726124506693471,
+        "hit": 0.07723394701392007
+      },
+      "evidence": {
+        "fixed60": {
+          "qualifies": false,
+          "development": {
+            "log_loss": 4.326876938214708,
+            "brier": 0.9739683847615944,
+            "hit": 0.07513845232749589
+          },
+          "venue_year": {
+            "SEOUL": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 3
+            },
+            "BUSAN": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 0
+            }
+          }
+        },
+        "global_residual": {
+          "qualifies": false,
+          "development": {
+            "log_loss": 4.298814792735148,
+            "brier": 0.9730688359542135,
+            "hit": 0.07663523424637031
+          },
+          "venue_year": {
+            "SEOUL": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 3
+            },
+            "BUSAN": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 1
+            }
+          }
+        },
+        "boundary_residual": {
+          "qualifies": false,
+          "development": {
+            "log_loss": 4.319140355341007,
+            "brier": 0.973708154804486,
+            "hit": 0.07543780871127077
+          },
+          "venue_year": {
+            "SEOUL": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 3
+            },
+            "BUSAN": {
+              "loss_nonworse": 0,
+              "secondary_nonworse": 0
+            }
+          }
+        }
+      }
+    },
+    "C": {
+      "selected": "current_C",
+      "reason": "not an eligible target in this study"
+    }
+  }
+}
