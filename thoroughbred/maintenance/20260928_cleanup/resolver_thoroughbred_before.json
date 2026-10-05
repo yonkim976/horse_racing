@@ -1,0 +1,85 @@
+{
+  "active_profile": "thoroughbred-main-20260919-v1",
+  "champion_id": "thoroughbred-abc-current-a-b-c-20260919",
+  "combination_algorithm_version": "top3_set_joint_v1",
+  "components": {
+    "A": {
+      "artifact": "A_model",
+      "candidate": "current_A",
+      "metadata": "A_metadata",
+      "model_version": "v5_2026H2_rolling_all"
+    },
+    "B": {
+      "artifact": "BC_model",
+      "candidate": "current_B",
+      "metadata": "BC_metadata",
+      "model_version": "v4_2026_top3_growth_strength"
+    },
+    "C": {
+      "artifact": "BC_model",
+      "candidate": "current_C",
+      "metadata": "BC_metadata",
+      "model_version": "v4_2026_top3_growth_strength+v2_2026_H3_relative",
+      "order_artifact": "WIN_ORDER_model",
+      "order_metadata": "WIN_ORDER_metadata"
+    }
+  },
+  "domain": "thoroughbred",
+  "ok": true,
+  "probability_contract": "thoroughbred_abc_runner_v1",
+  "registry_path": "config/prediction_model_registry.json",
+  "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+  "verified_artifacts": [
+    {
+      "name": "A_model",
+      "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt",
+      "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+    },
+    {
+      "name": "A_metadata",
+      "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/metadata.json",
+      "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+    },
+    {
+      "name": "BC_model",
+      "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt",
+      "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+    },
+    {
+      "name": "BC_metadata",
+      "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/metadata.json",
+      "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+    },
+    {
+      "name": "WIN_ORDER_model",
+      "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt",
+      "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+    },
+    {
+      "name": "WIN_ORDER_metadata",
+      "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/metadata.json",
+      "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+    },
+    {
+      "name": "reference_inference",
+      "path": "data/research/thoroughbred_boundary_20260918_v6/infer.py",
+      "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+    },
+    {
+      "name": "frozen_selection",
+      "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+      "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+    },
+    {
+      "name": "baseline_verification",
+      "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+      "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+    },
+    {
+      "name": "latest_challenger_review",
+      "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+      "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+    }
+  ],
+  "profile_name": "thoroughbred-main-20260919-v1"
+}

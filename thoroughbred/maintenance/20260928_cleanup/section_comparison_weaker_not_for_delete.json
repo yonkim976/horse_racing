@@ -1,0 +1,285 @@
+{
+  "scope": "Read-only set comparison of source-value keys and listed support tables against the retained adjudicated DB.",
+  "current_db": {
+    "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+    "bytes": 1393250304
+  },
+  "method": {
+    "sqlite_read_only": true,
+    "query_only": true,
+    "set_semantics": "EXCEPT compares distinct projected rows; IDs and derived classification fields are intentionally excluded from the source-key comparison.",
+    "source_key_columns": [
+      "meet_code",
+      "race_date",
+      "race_number",
+      "horse_number",
+      "point_code",
+      "elapsed_time_ms",
+      "source_name",
+      "source_field"
+    ],
+    "other_tables": [
+      "finish_time",
+      "track_by_distance",
+      "s1f_field_mismatch"
+    ]
+  },
+  "results": [
+    {
+      "path": "data/research/section_point_db_20260925/section_points.sqlite3",
+      "bytes": 712994816,
+      "section_time_rows": 3204435,
+      "current_section_time_rows": 4190591,
+      "source_key_columns": [
+        "meet_code",
+        "race_date",
+        "race_number",
+        "horse_number",
+        "point_code",
+        "elapsed_time_ms",
+        "source_name",
+        "source_field"
+      ],
+      "old_distinct_source_keys_missing_from_current": 597443,
+      "missing_source_keys_with_null_horse_number": 597443,
+      "missing_source_groups": [
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_3fGTime",
+          "rows": 66605,
+          "null_horse_number_rows": 66605
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_2fGTime",
+          "rows": 65187,
+          "null_horse_number_rows": 65187
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buG2fAccTime",
+          "rows": 63244,
+          "null_horse_number_rows": 63244
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buG3fAccTime",
+          "rows": 62007,
+          "null_horse_number_rows": 62007
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buS1fAccTime",
+          "rows": 53211,
+          "null_horse_number_rows": 53211
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_4_2fTime",
+          "rows": 53043,
+          "null_horse_number_rows": 53043
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buG4fAccTime",
+          "rows": 50983,
+          "null_horse_number_rows": 50983
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buG1fAccTime",
+          "rows": 48550,
+          "null_horse_number_rows": 48550
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_1fGTime",
+          "rows": 45275,
+          "null_horse_number_rows": 45275
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_6_4fTime",
+          "rows": 43908,
+          "null_horse_number_rows": 43908
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buG6fAccTime",
+          "rows": 21343,
+          "null_horse_number_rows": 21343
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_8_6fTime",
+          "rows": 17939,
+          "null_horse_number_rows": 17939
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "buG8fAccTime",
+          "rows": 3079,
+          "null_horse_number_rows": 3079
+        },
+        {
+          "source_name": "busan_research",
+          "source_field": "bu_10_8fTime",
+          "rows": 3069,
+          "null_horse_number_rows": 3069
+        }
+      ],
+      "missing_source_samples": [
+        [
+          3,
+          "2005-01-07",
+          1,
+          null,
+          "2F-G",
+          24400,
+          "busan_research",
+          "bu_2fGTime"
+        ],
+        [
+          3,
+          "2005-01-07",
+          1,
+          null,
+          "2F-G",
+          25500,
+          "busan_research",
+          "bu_2fGTime"
+        ],
+        [
+          3,
+          "2005-01-07",
+          1,
+          null,
+          "2F-G",
+          25600,
+          "busan_research",
+          "bu_2fGTime"
+        ],
+        [
+          3,
+          "2005-01-07",
+          1,
+          null,
+          "2F-G",
+          25700,
+          "busan_research",
+          "bu_2fGTime"
+        ],
+        [
+          3,
+          "2005-01-07",
+          1,
+          null,
+          "2F-G",
+          26400,
+          "busan_research",
+          "bu_2fGTime"
+        ]
+      ],
+      "other_tables": {
+        "finish_time": {
+          "old_rows": 575708,
+          "current_rows": 575928,
+          "old_rows_missing_from_current": 0
+        },
+        "track_by_distance": {
+          "old_rows": 19,
+          "current_rows": 19,
+          "old_rows_missing_from_current": 0
+        },
+        "s1f_field_mismatch": {
+          "old_rows": null,
+          "current_rows": 18,
+          "old_rows_missing_from_current": null
+        }
+      }
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_ext.sqlite3",
+      "bytes": 1091465216,
+      "section_time_rows": 3887230,
+      "current_section_time_rows": 4190591,
+      "source_key_columns": [
+        "meet_code",
+        "race_date",
+        "race_number",
+        "horse_number",
+        "point_code",
+        "elapsed_time_ms",
+        "source_name",
+        "source_field"
+      ],
+      "old_distinct_source_keys_missing_from_current": 0,
+      "missing_source_keys_with_null_horse_number": 0,
+      "missing_source_groups": [],
+      "missing_source_samples": [],
+      "other_tables": {
+        "finish_time": {
+          "old_rows": 575708,
+          "current_rows": 575928,
+          "old_rows_missing_from_current": 0
+        },
+        "track_by_distance": {
+          "old_rows": 19,
+          "current_rows": 19,
+          "old_rows_missing_from_current": 0
+        },
+        "s1f_field_mismatch": {
+          "old_rows": 18,
+          "current_rows": 18,
+          "old_rows_missing_from_current": 0
+        }
+      }
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_repaired.sqlite3",
+      "bytes": 1091465216,
+      "section_time_rows": 3887230,
+      "current_section_time_rows": 4190591,
+      "source_key_columns": [
+        "meet_code",
+        "race_date",
+        "race_number",
+        "horse_number",
+        "point_code",
+        "elapsed_time_ms",
+        "source_name",
+        "source_field"
+      ],
+      "old_distinct_source_keys_missing_from_current": 0,
+      "missing_source_keys_with_null_horse_number": 0,
+      "missing_source_groups": [],
+      "missing_source_samples": [],
+      "other_tables": {
+        "finish_time": {
+          "old_rows": 575708,
+          "current_rows": 575928,
+          "old_rows_missing_from_current": 0
+        },
+        "track_by_distance": {
+          "old_rows": 19,
+          "current_rows": 19,
+          "old_rows_missing_from_current": 0
+        },
+        "s1f_field_mismatch": {
+          "old_rows": 18,
+          "current_rows": 18,
+          "old_rows_missing_from_current": 0
+        }
+      }
+    }
+  ],
+  "recommendation": {
+    "section_points.sqlite3": "preserve: distinct source-value keys are absent from the adjudicated DB",
+    "section_points_ext.sqlite3": "candidate for deletion after independent review: source keys and compared support tables are covered",
+    "section_points_repaired.sqlite3": "candidate for deletion after independent review: source keys and compared support tables are covered",
+    "limitations": [
+      "Coverage against the adjudicated DB does not by itself establish that the old DB can never be needed to rerun its historical build stage.",
+      "The verified DB is separately retained as the direct input to adjudicate_section_points.py and is outside this deletion proposal."
+    ]
+  }
+}

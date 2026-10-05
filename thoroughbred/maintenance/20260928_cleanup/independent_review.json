@@ -1,0 +1,73 @@
+{
+  "review_version": 1,
+  "reviewer": "independent_cleanup_review",
+  "passed": true,
+  "approved_paths": [
+    "data/research/section_point_db_20260925/section_points_ext.sqlite3",
+    "data/research/section_point_db_20260925/section_points_repaired.sqlite3"
+  ],
+  "scope": "Approve deletion of only the two hash-pinned obsolete section database snapshots listed above, plus the exact regenerable .DS_Store and __pycache__/*.pyc entries in deletion_plan.json. This review does not approve changes to any source, training, verified/adjudicated, registry, production, or Jeju-specific database files.",
+  "database_review": {
+    "comparison_report": "thoroughbred/maintenance/20260928_cleanup/section_comparison.json",
+    "comparison_method": "Read-only SQLite mode=ro with query_only=ON. Distinct source-value tuples were compared using EXCEPT on meet_code, race_date, race_number, distance_m, kra_horse_id, horse_number, point_code, elapsed_time_ms, source_name, and source_field. Persistent support tables were also compared.",
+    "section_points_ext.sqlite3": {
+      "bytes": 1091465216,
+      "sha256": "6753ea341e3d8367a43b06ccb1c179e5fc8ba0409a6a9d14b06962745a23bcda",
+      "section_time_rows": 3887230,
+      "distinct_source_value_tuples_missing_from_adjudicated": 0,
+      "finish_time_rows": 575708,
+      "finish_time_rows_missing": 0,
+      "track_by_distance_rows": 19,
+      "track_by_distance_rows_missing": 0,
+      "s1f_field_mismatch_rows": 18,
+      "s1f_field_mismatch_rows_missing": 0
+    },
+    "section_points_repaired.sqlite3": {
+      "bytes": 1091465216,
+      "sha256": "1ac9cd904bb906d45431c04940811620afd67a897a0de386f0adc14ff96beade",
+      "section_time_rows": 3887230,
+      "distinct_source_value_tuples_missing_from_adjudicated": 0,
+      "finish_time_rows": 575708,
+      "finish_time_rows_missing": 0,
+      "track_by_distance_rows": 19,
+      "track_by_distance_rows_missing": 0,
+      "s1f_field_mismatch_rows": 18,
+      "s1f_field_mismatch_rows_missing": 0
+    },
+    "preserve": {
+      "section_points.sqlite3": {
+        "reason": "The stronger source key comparison found 756700 distinct source-value tuples absent from the retained adjudicated DB; do not delete the base snapshot based on the earlier weaker-key report.",
+        "bytes": 712994816,
+        "sha256": "2099f94a07575b64c571fb992ee712e07a2e4e221f144e1058242c12bdb139d7"
+      },
+      "section_points_verified.sqlite3": {
+        "reason": "Retained, independently validated source database and direct input to the adjudication build.",
+        "bytes": 1363853312,
+        "sha256": "9a39970bfeb08e6b91e9f389beafa69684b2114148fb82bdb5bbce796e4d1053"
+      },
+      "section_points_adjudicated.sqlite3": {
+        "reason": "Retained latest research database, used by current reports and analyses.",
+        "bytes": 1393250304,
+        "sha256": "82a95378ae0a5c71114e9f1b5038efdd2e1d683e2977310e9224b3b17b9f0e6c"
+      }
+    },
+    "database_integrity": "All five section databases passed SQLite PRAGMA quick_check during the review."
+  },
+  "dependencies_and_rebuild": {
+    "documented_rebuild": "build_section_point_db.py build-verified reads the operational database and retained Thoroughbred unified DuckDB to recreate section_points_verified.sqlite3; adjudicate_section_points.py reads verified plus retained raw KRA evidence and current KRA pages to create section_points_adjudicated.sqlite3. Neither documented command depends on the two approved deletion candidates.",
+    "legacy_commands": "build_section_point_db.py extend and repair still use the hard-coded section_points_ext.sqlite3 path. The handoff explicitly marks the old base/ext/repair pipeline as intermediate and says not to use it. Update the handoff with a dated retirement note and retain the deletion plan/receipt for provenance; do not describe the deleted snapshots as still preserved.",
+    "shared_data_boundary": "The approved paths are exact files within the shared section-point research directory. Keep the source DBs, section_points.sqlite3 base snapshot, section_points_verified.sqlite3, section_points_adjudicated.sqlite3, data/horse_racing.sqlite3, thoroughbred_unified.duckdb, Jeju data, and all registry artifacts. No wildcard deletion of the shared directory is approved."
+  },
+  "integrity_and_runtime_checks": {
+    "candidate_hashes": "The candidate hashes and lengths match section_databases_before.json and deletion_plan.json.",
+    "open_handles": "lsof returned exit status 1 with empty stdout/stderr for the five section database paths at review time. cleanup.py must repeat its lsof gate immediately before unlinking.",
+    "production_registry": "The Thoroughbred and Jeju profiles remain registry-selected and separately hash-verified; the deletion whitelist excludes config/prediction_model_registry.json and every registered artifact.",
+    "cli_review": "Reviewed the registry-backed Thoroughbred CLI for complete-card, model-cutoff, venue, historical-label, fresh-output-path, and output-root safeguards. The registry is hash-checked before model loading and before output publication. The recorded replay verification covers 294 runners and 540 B/C rows with exact probability and raw-score equality; six CLI tests are recorded passing. The CLI does not write to the database, publish, or promote models.",
+    "execution": "This review records approval only; it does not execute file deletion."
+  },
+  "limitations": [
+    "EXCEPT compares distinct projected tuples. Local database row IDs and derived time_kind, classification, representation, and view definitions are intentionally not compared; those old labels are not retained by raw-value coverage and the snapshots are explicitly forbidden for use.",
+    "Deleting ext/repaired retires those exact historical intermediate database bytes. Their old extend/repair workflow is not a supported rebuild path; the documented verified/adjudicated rebuild remains available from the retained sources.",
+    "The weaker-key comparison is retained as section_comparison_weaker_not_for_delete.json for audit history and must not be used to justify deletion."
+  ]
+}

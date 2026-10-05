@@ -1,0 +1,87 @@
+{
+  "checked_at_utc": "2026-10-02T17:08:26.860299+00:00",
+  "action": "inspection only; no files deleted",
+  "scope": "Thoroughbred DB backups; prediction models, inference code, model inputs, prediction fixtures and experiment outputs excluded",
+  "current_db": {
+    "path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "bytes": 2742300672,
+    "sha256": "c46286df4773a7ffcea4c7bc431e2cd2a8fc03a4c38fdaa4403bd8f39c2a1668",
+    "stable": true,
+    "seconds": 2.39,
+    "manifest_sha256": "6f9c194529709b3db4862ffba0aa34dcda4f58af54d5d322333d6af3ccff7e52"
+  },
+  "current_db_objects": [
+    [
+      "BASE TABLE",
+      127
+    ],
+    [
+      "VIEW",
+      81
+    ]
+  ],
+  "backups": [
+    {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_medical/thoroughbred_core.duckdb",
+      "bytes": 1761882112,
+      "sha256": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6",
+      "stable": true,
+      "seconds": 1.64,
+      "manifest_sha256": "aa8648e439b75bdacbd7328c2d5e6ccf0aaf6105bce70f69fc7ec1f5547df7de",
+      "classification": "conditional_candidate",
+      "reason": "Direct input to completed medical preservation verification; retain if rerunning that exact comparison is required",
+      "manifest_registered_db_hash_matches": true
+    },
+    {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_passing_groups/thoroughbred_core.duckdb",
+      "bytes": 2399416320,
+      "sha256": "c30202a65a1a82c2927efc8e0ef150c03a0c9950e953ee445beb1b3a7f8c2de6",
+      "stable": true,
+      "seconds": 2.15,
+      "manifest_sha256": "3fc7cd7dbbe13b908424e33d11955f2089834333870da2778e53099312758ee4",
+      "classification": "conditional_candidate",
+      "reason": "Direct input to completed passing-groups preservation verification; retain if rerunning that exact comparison is required",
+      "manifest_registered_db_hash_matches": true
+    },
+    {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_starting_exam/thoroughbred_core.duckdb",
+      "bytes": 1762406400,
+      "sha256": "5c9fa0e4d53a776a643d045440717727c5a9299b158f43ea93109eb53e770ec7",
+      "stable": true,
+      "seconds": 1.61,
+      "manifest_sha256": "3bacfdde0c1e8354fb6def74bda545771f351f7605f3e13cce4a8b984bcdbe0a",
+      "classification": "recommended_candidate",
+      "reason": "Pre-starting-exam recovery snapshot; backup creation and historical cleanup references, no direct runtime or validation read input found",
+      "manifest_registered_db_hash_matches": true
+    },
+    {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+      "bytes": 2396532736,
+      "sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "stable": true,
+      "seconds": 2.12,
+      "manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+      "classification": "retain",
+      "reason": "Pinned direct baseline of comprehensive DB validation and passing-group unmapped recheck",
+      "manifest_registered_db_hash_matches": true
+    },
+    {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_current_verified_061544/thoroughbred_core.duckdb",
+      "bytes": 1761882112,
+      "sha256": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6",
+      "stable": true,
+      "seconds": 1.43,
+      "manifest_sha256": "aa8648e439b75bdacbd7328c2d5e6ccf0aaf6105bce70f69fc7ec1f5547df7de",
+      "classification": "recommended_candidate",
+      "reason": "Exact DB and manifest duplicate of 20261002_before_medical; no direct read input references found",
+      "manifest_registered_db_hash_matches": true
+    }
+  ],
+  "all_backup_logical_bytes": 10082119680,
+  "recommended_candidate_logical_bytes": 3524288512,
+  "recommended_plus_conditional_logical_bytes": 7685586944,
+  "prediction_model_registry_status": "Thoroughbred CLI status ok; registered model/inference artifact hashes verified",
+  "read_only_checks": "All six DBs opened read-only; all backup base-table names exist in current DB and counts agree except appended source_manifests. This is a count comparison, not a new exhaustive row-content comparison. Existing completed full preservation reports form a chain to the exact current DB hash.",
+  "live_use_check": "No open DB processes or WAL/journal files observed at inspection time",
+  "physical_space_note": "APFS clone backups share storage blocks; logical bytes are not guaranteed disk space recovery"
+}
