@@ -34,3 +34,36 @@ tmp/
 data/experiments/models/**
 
 .superdesign/tmp/
+
+# Shared research datasets and generated repair bundles stay local.
+/research/**/*.csv
+/research/**/*.jsonl
+/research/**/*.jsonl.gz
+/research/**/*.parquet
+/research/start_training_repair_20261001/bundle.json
+
+# Runtime state and personal editor settings are local to each checkout.
+/data/state/
+/.cursor/settings.json
+
+# Preserve research code and audit summaries, not raw responses or row backups.
+/research/**/*.log
+/research/**/*.npz
+/research/**/raw/**
+/research/start_training_repair_20261001/local_before.json
+/research/start_training_repair_20261001/supabase_before.json
+/jeju/maintenance/**/*.jsonl
+/jeju/maintenance/**/*.before_deletion
+/jeju/maintenance/**/deleted_database_rows.json
+/jeju/research/**/*.log
+/jeju/research/**/*.rpt
+/jeju/research/**/cutoff_exceeding/**
+/jeju/research/**/api_retry/**/*.json
+/jeju/research/**/api4_retry/**/*.json
+/jeju/research/**/api4_recheck/**/*.json
+/jeju/research/**/root_before_load.json
+/thoroughbred/maintenance/**/*.jsonl
+/thoroughbred/research/**/*.log
+/thoroughbred/research/**/root_replay_stdout.json
+/reports/**/*.log
+/reports/2026_pool_comparison/race_strategy_evaluation.csv
