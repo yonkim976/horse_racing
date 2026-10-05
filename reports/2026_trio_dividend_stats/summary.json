@@ -1,0 +1,209 @@
+{
+  "period": [
+    "2026-01-01",
+    "2026-10-02"
+  ],
+  "venues": [
+    "제주",
+    "부산"
+  ],
+  "rule": "One observation per completed race; TLA winning combination only; average multiple winning dividends for dead heats; each venue sorted and floor(n*p) removed from each tail. Cancelled races excluded.",
+  "cancelled": [
+    {
+      "id": 561,
+      "race_date_local": "2026-03-20",
+      "race_number": 1,
+      "meet": 2
+    },
+    {
+      "id": 562,
+      "race_date_local": "2026-03-20",
+      "race_number": 2,
+      "meet": 2
+    },
+    {
+      "id": 563,
+      "race_date_local": "2026-03-20",
+      "race_number": 3,
+      "meet": 2
+    },
+    {
+      "id": 564,
+      "race_date_local": "2026-03-20",
+      "race_number": 4,
+      "meet": 2
+    },
+    {
+      "id": 565,
+      "race_date_local": "2026-03-20",
+      "race_number": 5,
+      "meet": 2
+    },
+    {
+      "id": 566,
+      "race_date_local": "2026-03-20",
+      "race_number": 6,
+      "meet": 2
+    },
+    {
+      "id": 567,
+      "race_date_local": "2026-03-20",
+      "race_number": 7,
+      "meet": 2
+    },
+    {
+      "id": 568,
+      "race_date_local": "2026-03-20",
+      "race_number": 8,
+      "meet": 2
+    },
+    {
+      "id": 588,
+      "race_date_local": "2026-03-21",
+      "race_number": 1,
+      "meet": 2
+    },
+    {
+      "id": 589,
+      "race_date_local": "2026-03-21",
+      "race_number": 2,
+      "meet": 2
+    },
+    {
+      "id": 590,
+      "race_date_local": "2026-03-21",
+      "race_number": 3,
+      "meet": 2
+    },
+    {
+      "id": 591,
+      "race_date_local": "2026-03-21",
+      "race_number": 4,
+      "meet": 2
+    },
+    {
+      "id": 592,
+      "race_date_local": "2026-03-21",
+      "race_number": 5,
+      "meet": 2
+    },
+    {
+      "id": 593,
+      "race_date_local": "2026-03-21",
+      "race_number": 6,
+      "meet": 2
+    },
+    {
+      "id": 688,
+      "race_date_local": "2026-04-04",
+      "race_number": 1,
+      "meet": 2
+    },
+    {
+      "id": 689,
+      "race_date_local": "2026-04-04",
+      "race_number": 2,
+      "meet": 2
+    },
+    {
+      "id": 690,
+      "race_date_local": "2026-04-04",
+      "race_number": 3,
+      "meet": 2
+    },
+    {
+      "id": 691,
+      "race_date_local": "2026-04-04",
+      "race_number": 4,
+      "meet": 2
+    },
+    {
+      "id": 692,
+      "race_date_local": "2026-04-04",
+      "race_number": 5,
+      "meet": 2
+    },
+    {
+      "id": 693,
+      "race_date_local": "2026-04-04",
+      "race_number": 6,
+      "meet": 2
+    }
+  ],
+  "summary": {
+    "2": {
+      "races": 539,
+      "raw_mean": 68.65269016697589,
+      "median": 30.4,
+      "trim": {
+        "0.01": {
+          "removed_each_tail": 5,
+          "retained_n": 529,
+          "mean": 62.37183364839319,
+          "min": 3.1,
+          "max": 597.0
+        },
+        "0.05": {
+          "removed_each_tail": 26,
+          "retained_n": 487,
+          "mean": 51.02340862422998,
+          "min": 5.0,
+          "max": 272.6
+        },
+        "0.1": {
+          "removed_each_tail": 53,
+          "retained_n": 433,
+          "mean": 43.6715935334873,
+          "min": 6.9,
+          "max": 174.1
+        }
+      },
+      "iqr": {
+        "upper": 161.6,
+        "retained_n": 477,
+        "mean": 37.025995807127885
+      }
+    },
+    "3": {
+      "races": 545,
+      "raw_mean": 109.0248623853211,
+      "median": 34.0,
+      "trim": {
+        "0.01": {
+          "removed_each_tail": 5,
+          "retained_n": 535,
+          "mean": 86.0066355140187,
+          "min": 3.1,
+          "max": 1305.3
+        },
+        "0.05": {
+          "removed_each_tail": 27,
+          "retained_n": 491,
+          "mean": 62.61211812627292,
+          "min": 5.3,
+          "max": 407.7
+        },
+        "0.1": {
+          "removed_each_tail": 54,
+          "retained_n": 437,
+          "mean": 51.76933638443936,
+          "min": 7.0,
+          "max": 229.6
+        }
+      },
+      "iqr": {
+        "upper": 197.2,
+        "retained_n": 483,
+        "mean": 43.79606625258799
+      }
+    },
+    "combined": {
+      "races": 1084,
+      "raw_mean": 88.9505073800738,
+      "median": 31.5,
+      "venue_trim5_retained_n": 978,
+      "venue_trim5_mean": 56.84146216768916,
+      "venue_trim5_median": 31.5
+    }
+  }
+}
