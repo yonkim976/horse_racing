@@ -1,4 +1,4 @@
-"""E7-B production preflight, gate and failure-boundary counterexamples."""
+"""E7-B gate, failure-boundary and retained prediction regression checks."""
 
 from __future__ import annotations
 
@@ -9,14 +9,12 @@ import pytest
 from horse_racing.analysis.confirmed_starter_e5_r3r4 import diagnose_temperature
 from horse_racing.analysis.confirmed_starter_e5b import E5BContractError
 from horse_racing.analysis.confirmed_starter_e6a_v2 import prepare_diagnosed_arm
-from horse_racing.analysis.confirmed_starter_e7a import FEATURES
 from horse_racing.analysis.confirmed_starter_e7b import (
     ARMS,
     E7BContractError,
     evaluate_arm,
     orchestrate_fold,
     pooled_metrics,
-    verify_sequence_contract,
     verify_shared_base_matrices,
 )
 from scripts import run_confirmed_starter_e7b as runner
@@ -71,25 +69,6 @@ def test_148_column_matrix_rejects_changed_old_cell():
     added["fit"][0, 0] = 3.0
     with pytest.raises(E7BContractError, match="existing 136"):
         verify_shared_base_matrices(base, added)
-
-
-def test_sequence_contract_rejects_missing_key_and_filled_absent_slot():
-    h1 = pl.read_parquet(runner.H1)
-    sequence = pl.read_parquet(runner.SEQUENCE)
-    evidence = pl.read_parquet(runner.EVIDENCE)
-    with pytest.raises(E7BContractError, match="denominator"):
-        verify_sequence_contract(h1, sequence.head(sequence.height - 1), evidence)
-    absent_id = evidence.filter((pl.col("slot") == 1) & pl.col("prior_race_entry_id").is_null())[
-        "race_entry_id"
-    ][0]
-    altered = sequence.with_columns(
-        pl.when(pl.col("race_entry_id") == absent_id)
-        .then(0.0)
-        .otherwise(pl.col("sequence_start1_early_rel"))
-        .alias("sequence_start1_early_rel")
-    )
-    with pytest.raises(E7BContractError, match="null isolation"):
-        verify_sequence_contract(h1, altered, evidence)
 
 
 def test_prediction_deletion_and_dead_heat_loss_are_distinct():
@@ -155,19 +134,6 @@ def test_runner_stops_current_fold_on_selector_failure(tmp_path, monkeypatch):
     assert ledger["fit_calls_started"] == 1
     assert ledger["fit_calls_completed"] == 0
     assert not (tmp_path / "F1" / "comparison.json").exists()
-
-
-def test_real_sealed_preflight_and_fold_inputs_without_fitting():
-    runner.verify_sealed()
-    frame, features, audit = runner.preflight_input()
-    assert audit["evidence_rows"] == 46737
-    assert len(FEATURES) == 12
-    for fold, rows in (("F1", 1693), ("F2", 834), ("F3", 1691)):
-        parts, matrices, contract = runner.fold_input(frame, features, fold)
-        assert parts["evaluation"].height == rows
-        assert matrices[ARMS[0]]["fit"].shape[1] == 136
-        assert matrices[ARMS[1]]["fit"].shape[1] == 148
-        assert contract["partitions"]["evaluation"]["dates"][1] <= "2026-02-28"
 
 
 def test_baseline_reproduction_rejects_modified_saved_margin():

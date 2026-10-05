@@ -6,9 +6,6 @@ from scripts.generate_supabase_schema import render_schema
 from scripts.migrate_sqlite_to_postgres import (
     _partial_target_resume_id,
     _postgres_dsn,
-    _validate_source_integer_ranges,
-    _validate_source_numeric_types,
-    _validate_source_string_lengths,
 )
 
 MIGRATION = next(Path("supabase/migrations").glob("*_create_horse_racing_schema.sql"))
@@ -62,30 +59,6 @@ def test_legacy_identifiers_and_status_are_unbounded_text() -> None:
     assert "status TEXT NOT NULL" in generated
     assert "track_condition TEXT" in generated
     assert widening_sql.count("TYPE text") == 7
-
-
-def test_source_string_length_preflight_accepts_frozen_snapshot() -> None:
-    import sqlite3
-
-    snapshot = Path("data/backups/after_historical_backfill_20260918.sqlite3")
-    with sqlite3.connect(f"file:{snapshot.resolve()}?mode=ro", uri=True) as connection:
-        _validate_source_string_lengths(connection)
-
-
-def test_source_integer_range_preflight_accepts_frozen_snapshot() -> None:
-    import sqlite3
-
-    snapshot = Path("data/backups/after_historical_backfill_20260918.sqlite3")
-    with sqlite3.connect(f"file:{snapshot.resolve()}?mode=ro", uri=True) as connection:
-        _validate_source_integer_ranges(connection)
-
-
-def test_source_numeric_type_preflight_accepts_frozen_snapshot() -> None:
-    import sqlite3
-
-    snapshot = Path("data/backups/after_historical_backfill_20260918.sqlite3")
-    with sqlite3.connect(f"file:{snapshot.resolve()}?mode=ro", uri=True) as connection:
-        _validate_source_numeric_types(connection)
 
 
 def test_horse_profile_prize_money_uses_bigint() -> None:

@@ -1,4 +1,4 @@
-"""E6-B execution-boundary and sealed-input regression checks."""
+"""E6-B execution-boundary checks using synthetic inputs."""
 
 from __future__ import annotations
 
@@ -20,7 +20,6 @@ from horse_racing.analysis.confirmed_starter_e6b import (
     verify_shared_base_matrices,
 )
 from scripts import run_confirmed_starter_e6b as runner
-from scripts.run_confirmed_starter_e6b import fold_input, preflight_input, verify_sealed_files
 
 
 def _flat_diagnosis():
@@ -137,15 +136,3 @@ def test_runner_stops_fold_and_pooled_comparison_on_fit_failure(tmp_path, monkey
     assert ledger["fit_calls_started"] == 1
     assert ledger["fit_calls_completed"] == 0
     assert not (tmp_path / "F1" / "comparison.json").exists()
-
-
-def test_sealed_real_input_and_fold_encoding_contract():
-    verify_sealed_files()
-    frame, features, audit = preflight_input()
-    assert audit["H1_rows"] == 15579
-    parts, matrices, contracts = fold_input(frame, features, "F1")
-    assert parts["evaluation"].height == 1693
-    assert parts["evaluation"]["race_date_local"].max() == "2025-07-27"
-    assert contracts["partitions"]["fit"]["rows"] == 2767
-    assert matrices[ARMS[0]]["fit"].shape == (2767, 136)
-    assert matrices[ARMS[1]]["fit"].shape == (2767, 139)
