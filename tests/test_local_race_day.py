@@ -1,4 +1,6 @@
+import json
 from datetime import date, datetime, timedelta
+from pathlib import Path
 from types import SimpleNamespace
 
 import httpx
@@ -153,7 +155,7 @@ def result(n=1, rank=1, *, detailed=False, **values):
 def apply(session, kind, items):
     races = load_races(session, DAY)
     index = entry_index(races)
-    validate_items(items, kind=kind, day=DAY, meet=2, entries=index)
+    items = validate_items(items, kind=kind, day=DAY, meet=2, entries=index)
     apply_items(session, kind=kind, items=items, entries=index, observed_ms=123456789)
     session.commit()
     return races
@@ -235,6 +237,120 @@ def test_details_correct_results_but_ai_cannot_regress_them(session):
     assert races[0].weather == "맑음"
     assert races[0].track_moisture_percent == 3
     assert session.scalar(select(func.count()).select_from(RaceResult)) == 1
+
+
+def yeongcheon_card(session):
+    race = load_races(session, DAY)[0]
+    race.racecourse.kra_meet_code = 4
+    race.racecourse.code = "YEONGCHEON"
+    race.racecourse.name_ko = "영천"
+    session.commit()
+    return load_races(session, DAY)
+
+
+@pytest.mark.parametrize("venue_name", ["-", "", "  "])
+def test_missing_detail_venue_returns_validated_copy(session, venue_name):
+    races = yeongcheon_card(session)
+    source = result(detailed=True, schdRccrsNm=venue_name)
+    validated = validate_items(
+        [source], kind="details", day=DAY, meet=4, entries=entry_index(races)
+    )
+    assert validated[0] is not source
+    assert source.meet_name == venue_name
+    assert validated[0].meet_name == "영천"
+    apply_items(
+        session, kind="details", items=validated, entries=entry_index(races), observed_ms=10
+    )
+    assert races[0].entries[0].result.finish_position == 1
+
+
+@pytest.mark.parametrize("venue_name", ["서울", "부경", "영남", "미확인"])
+def test_nonempty_wrong_or_unknown_detail_venue_never_falls_back(session, venue_name):
+    races = yeongcheon_card(session)
+    with pytest.raises(LiveSourceMismatch):
+        validate_items(
+            [result(detailed=True, schdRccrsNm=venue_name)],
+            kind="details",
+            day=DAY,
+            meet=4,
+            entries=entry_index(races),
+        )
+    assert session.scalar(select(func.count()).select_from(RaceResult)) == 0
+
+
+@pytest.mark.parametrize(
+    "values",
+    [
+        {"schdRaceDt": "20261001"},
+        {"schdRaceNo": 99},
+        {"pthrHrno": "3999999"},
+        {"pthrGtno": 2},
+        {"cndRaceDs": 1200},
+    ],
+)
+def test_missing_detail_venue_still_requires_exact_card_match(session, values):
+    races = yeongcheon_card(session)
+    good = result(detailed=True, schdRccrsNm="-")
+    bad = result(detailed=True, schdRccrsNm="-", **values)
+    with pytest.raises(LiveSourceMismatch):
+        validate_items([good, bad], kind="details", day=DAY, meet=4, entries=entry_index(races))
+    assert good.meet_name == "-"  # A later failure cannot mutate earlier source rows.
+    assert session.scalar(select(func.count()).select_from(RaceResult)) == 0
+
+
+def test_missing_venue_does_not_relax_ai_results_or_duplicate_checks(session):
+    races = yeongcheon_card(session)
+    index = entry_index(races)
+    with pytest.raises(LiveSourceMismatch):
+        validate_items([result(rccrsNm="-")], kind="results", day=DAY, meet=4, entries=index)
+    detail = result(detailed=True, schdRccrsNm="-")
+    with pytest.raises(LiveSourceMismatch):
+        validate_items([detail, detail], kind="details", day=DAY, meet=4, entries=index)
+
+
+def test_live_missing_venue_corrects_rank_and_archives_original_once(session, tmp_path):
+    races = yeongcheon_card(session)
+    session.add(RaceResult(race_entry=races[0].entries[0], finish_position=6, finish_time_ms=70500))
+    session.commit()
+    details = [
+        result(n, rank=5, detailed=True, schdRccrsNm="-").model_dump(by_alias=True, mode="json")
+        for n in (1, 2)
+    ]
+
+    def handler(request):
+        return httpx.Response(
+            200,
+            json=api_payload(details if "/API156/" in request.url.path else []),
+        )
+
+    state = {}
+    with KraApiClient("secret", transport=httpx.MockTransport(handler)) as client:
+        summaries = [
+            job.collect(
+                session,
+                client,
+                races=load_races(session, DAY),
+                day=DAY,
+                state=state,
+                state_path=tmp_path / "state.json",
+                raw_dir=tmp_path / "raw",
+                scheduled=False,
+            )
+            for _ in range(2)
+        ]
+    assert all(not summary["errors"] for summary in summaries)
+    assert len(summaries[0]["changes"]["results"]) == 2
+    assert not any(summaries[1]["changes"].values())
+    race = load_races(session, DAY)[0]
+    assert race.status == "completed"
+    assert [entry.result.finish_position for entry in race.entries] == [5, 5]
+    assert session.scalar(select(func.count()).select_from(RaceResult)) == 2
+    assert session.scalar(select(func.count()).select_from(SourceDocument)) == 5
+    document = session.scalar(
+        select(SourceDocument).where(SourceDocument.endpoint == "/API156/raceRsutDtl")
+    )
+    archived = json.loads(Path(document.local_path).read_text(encoding="utf-8"))
+    assert all(row["schdRccrsNm"] == "-" for row in archived["response"]["body"]["items"]["item"])
 
 
 @pytest.mark.parametrize(

@@ -18,7 +18,11 @@ from horse_racing.db.models import (
     RaceScratch,
 )
 from horse_racing.parsers.horse_history import parse_meet_code
-from horse_racing.parsers.race_day import parse_body_weight, parse_track_status
+from horse_racing.parsers.race_day import (
+    DetailedRaceResultItem,
+    parse_body_weight,
+    parse_track_status,
+)
 from horse_racing.services.race_day import _is_date_echo_time, _local_datetime_ms
 
 
@@ -50,12 +54,28 @@ def entry_index(races: list[Race]) -> dict:
     }
 
 
-def validate_items(items: list, *, kind: str, day: date, meet: int, entries: dict) -> None:
+def validate_items(items: list, *, kind: str, day: date, meet: int, entries: dict) -> list:
+    """Return storage-ready items after validating the whole batch.
+
+    API156 may omit the venue name (notably Yeongcheon). Only a missing name
+    can use the requested venue, and only with an exact existing-card match.
+    Copy normalized items so the fetched payload and parsed source stay intact.
+    Callers must apply these returned items, not the original source items.
+    """
     seen = set()
+    validated = []
     for item in items:
         region = getattr(item, "meet_code", None)
         if region is None:
             region = parse_meet_code(item.meet_name)
+        missing_detail_venue = (
+            kind == "details"
+            and isinstance(item, DetailedRaceResultItem)
+            and str(item.meet_name or "").strip() in {"", "-"}
+            and meet in {1, 2, 3, 4}
+        )
+        if missing_detail_venue:
+            region = meet
         key = (meet, item.race_number, item.horse_id)
         entry = entries.get(key)
         if (
@@ -75,6 +95,13 @@ def validate_items(items: list, *, kind: str, day: date, meet: int, entries: dic
         if kind == "weights" and item.body_weight_kg not in (None, 0):
             if not 100 <= item.body_weight_kg <= 800:
                 raise LiveSourceMismatch("invalid_weight")
+        if missing_detail_venue:
+            venue_name = entry.race.racecourse.name_ko
+            if parse_meet_code(venue_name) != meet:
+                raise LiveSourceMismatch("date_venue_runner_mismatch")
+            item = item.model_copy(update={"meet_name": venue_name})
+        validated.append(item)
+    return validated
 
 
 def _non_null(row, **values) -> None:

@@ -274,7 +274,7 @@ def collect(session, client, *, races, day, state, state_path, raw_dir, schedule
                 )
                 items = [item for page in pages for item in parse_items(page.payload, model)]
                 require_complete_pages(pages, len(items))
-                validate_items(items, kind=kind, day=day, meet=meet, entries=index)
+                items = validate_items(items, kind=kind, day=day, meet=meet, entries=index)
                 digest = hashlib.sha256(b"".join(p.body for p in pages)).hexdigest()
                 stage_before = snapshot(races)
                 apply_items(
