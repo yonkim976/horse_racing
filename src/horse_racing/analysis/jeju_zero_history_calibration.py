@@ -12,7 +12,9 @@ def objective_gradient(params, scores, zero, labels, weights, penalty=.01):
     return float(loss),gradient
 
 class ZeroHistoryCalibrator:
-    def fit(self,scores,zero,labels,weights):
+    def fit(self,scores,zero,labels,weights,*,penalty=.01):
+        if not np.isfinite(penalty) or penalty < 0:raise ValueError('finite nonnegative penalty required')
+        self.penalty_=float(penalty)
         x,z,y,w=[np.asarray(v,dtype=float) for v in [scores,zero,labels,weights]]
         if not(len(x)>0 and x.shape==z.shape==y.shape==w.shape and x.ndim==1):raise ValueError('aligned nonempty vectors required')
         if not all(np.isfinite(v).all() for v in [x,z,y,w]):raise ValueError('finite inputs required')
@@ -24,9 +26,9 @@ class ZeroHistoryCalibrator:
         if self.fallback_:
             self.params_=initial;self.success_=True;self.message_='insufficient classes; global fallback';self.n_iter_=0
         else:
-            result=minimize(lambda p:objective_gradient(p,x,z,y,w),initial,jac=True,method='L-BFGS-B',bounds=[(-4,4),(-10,10),(-3,3)],options={'maxiter':150,'ftol':1e-12,'gtol':1e-8,'maxls':50})
+            result=minimize(lambda p:objective_gradient(p,x,z,y,w,penalty=self.penalty_),initial,jac=True,method='L-BFGS-B',bounds=[(-4,4),(-10,10),(-3,3)],options={'maxiter':150,'ftol':1e-12,'gtol':1e-8,'maxls':50})
             self.params_=result.x;self.success_=bool(result.success);self.message_=str(result.message);self.n_iter_=int(result.nit)
-        self.objective_=objective_gradient(self.params_,x,z,y,w)[0]
+        self.objective_=objective_gradient(self.params_,x,z,y,w,penalty=self.penalty_)[0]
         return self
 
     def predict(self,scores,zero):
