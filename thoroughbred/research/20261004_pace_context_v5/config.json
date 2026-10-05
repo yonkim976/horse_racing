@@ -1,0 +1,15 @@
+{
+  "experiment": "thoroughbred_pace_context_v5",
+  "source_db": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "venues": [1, 3], "training_start_year": 2017,
+  "evaluation_years": [2024, 2025, 2026], "history_lag_days": 2,
+  "distance_breaks": [1300, 1600], "distance_prior_observations": 3,
+  "jockey_prior_observations": 30, "competition_time_margin_seconds": 0.2,
+  "temperature_bounds": [0.02, 8.0], "seed": 20261003, "bootstrap_draws": 1000,
+  "training": {
+    "objective": "regression", "metric": "l2", "learning_rate": 0.04,
+    "num_leaves": 15, "min_data_in_leaf": 100, "lambda_l2": 5.0,
+    "num_threads": 4, "deterministic": true, "force_col_wise": true,
+    "verbosity": -1, "max_rounds": 200, "early_stopping_rounds": 25
+  }
+}

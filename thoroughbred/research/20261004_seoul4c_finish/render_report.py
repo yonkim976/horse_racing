@@ -1,0 +1,196 @@
+"""Render the standalone figure, full state tables and Korean research report."""
+# ruff: noqa: E501 -- Keep Korean report sentences together.
+
+import json
+
+import matplotlib
+import numpy as np
+import pandas as pd
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from analyze import HERE, OUT, bench
+
+
+def table(b):
+    lines = [
+        "| 등급 | 관측 행/경주/일 | 빠른20% 경계 | 평균 | 중앙값 | 느린20% 경계 | 빠른20% 평균 | 느린20% 평균 |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for grade in bench.GRADES:
+        r = b[b.grade.eq(grade)].iloc[0]
+        mark = " *" if r.status != "관측지원" else ""
+        lines.append(
+            f"| {grade}{mark} | {r.observed_n}/{r.observed_races}/{r.observed_days} | "
+            + " | ".join(
+                f"{r[k]:.2f}"
+                for k in ["p20", "mean", "median", "p80", "fast20_mean", "slow20_mean"]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
+
+
+def main():
+    s = json.loads((OUT / "summary.json").read_text())
+    v = json.loads((OUT / "verification.json").read_text())
+    b = pd.read_csv(OUT / "estimated_benchmarks.csv")
+    pos = pd.read_csv(OUT / "position_profiles.csv").set_index("position4c")
+    validation = pd.read_csv(OUT / "temporal_validation.csv")
+    cv = s["benchmark_cell_validation"]
+    mae_base = np.average(validation.closing_mae_basic, weights=validation.test_n)
+    mae_at4c = np.average(validation.closing_mae_at4c, weights=validation.test_n)
+    dry = b[b.band.eq("건조") & b.part.eq("closing4c")].set_index("grade").loc[bench.GRADES]
+    plt.rcParams.update({"font.family": "AppleGothic", "axes.unicode_minus": False})
+    fig, ax = plt.subplots(figsize=(10, 7))
+    y = np.arange(len(dry))
+    ax.hlines(
+        y, dry.p20, dry.p80, linewidth=9, alpha=0.22, color="#245f92", label="가운데60% 기록 범위"
+    )
+    ax.scatter(dry["mean"], y, s=50, color="#245f92", label="전체 평균", zorder=3)
+    ax.scatter(dry.fast20_mean, y, marker="<", color="#227b54", label="빠른20% 평균")
+    ax.scatter(dry.slow20_mean, y, marker=">", color="#af4d4d", label="느린20% 평균")
+    ax.set_yticks(y, bench.GRADES)
+    ax.invert_yaxis()
+    ax.grid(axis="x", alpha=0.15)
+    ax.set_xlabel("4C 계측점 이후 결승까지(초) · 왼쪽일수록 빠름")
+    ax.set_title("서울1200m · 등급별 4C 이후 마무리", fontsize=18, pad=20)
+    ax.legend(loc="lower right", ncol=2, frameon=False, fontsize=10)
+    fig.text(
+        0.5,
+        0.02,
+        "2024년 이후 참조분포 · 건조 기준 연구용 추정 · 공식4C 설명: 결승선 전530m",
+        ha="center",
+        fontsize=10,
+    )
+    fig.tight_layout(rect=[0, 0.04, 1, 1])
+    fig.savefig(OUT / "seoul4c_grade_benchmarks.png", dpi=160, facecolor="white")
+    plt.close(fig)
+
+    all_tables = [
+        "# 서울1200m 4C 이후 등급·함수율 기준표\n",
+        "단위 초. *는 관측지원 기준200행·20경주·20일을 만족하지 못하는 조합이다. 각 표는 연구용 상태 정렬 추정이며 원관측 평균은 CSV에 별도로 보관했다. 빠른20% 경계 이하이면 그 기준분포에서 빠른 쪽이다. 동일기록 때문에 꼬리 표본수가 정확히20%는 아닐 수 있다.\n",
+    ]
+    for part, label in [
+        ("closing4c", "4C→결승"),
+        ("c4tog1", "4C→G1F"),
+        ("late", "G1F→결승·마지막200m"),
+    ]:
+        for band in bench.BANDS:
+            all_tables += [
+                f"## {label} · {band}\n",
+                table(b[b.part.eq(part) & b.band.eq(band)]),
+                "",
+            ]
+    (HERE / "ALL_BENCHMARKS.md").write_text("\n".join(all_tables))
+    example = pd.read_csv(OUT / "latest_race_examples.csv")
+    example_lines = [
+        "| 말 | 4C→G1F→결승 순위 | 4C 이후 | 4C→G1F | 마지막200m | 4C 당시 선두 대비 회복 |",
+        "|---|---|---:|---:|---:|---:|",
+    ]
+    for horse in ["0060340", "0060719", "0053501"]:
+        r = example[example.row_key.str.endswith(":" + horse)].iloc[0]
+        example_lines.append(
+            f"| {r.horse_name} | {r.p4}→{r.p1}→{r['rank']} | {r.closing4c:.1f} | {r.c4tog1:.1f} | {r.late:.1f} | {r.recovered_seconds:+.1f}초 |"
+        )
+    position_lines = [
+        "| 4C 상대 순위군 | 표본 | 4C 이후 평균 | 마지막200m 평균 | 평균 순위 상승 | 3착 이내 비율 |",
+        "|---|---:|---:|---:|---:|---:|",
+    ]
+    for label in ["앞", "중간", "뒤"]:
+        r = pos.loc[label]
+        position_lines.append(
+            f"| {label} | {int(r.n):,} | {r.closing4c_mean:.2f} | {r.late200_mean:.2f} | {r.mean_gain:+.2f} | {r.top3_rate:.1%} |"
+        )
+    report = f"""# 서울1200m 4C 이후 마무리와 추입 평가
+
+2026-10-04. **4C 이후 시간은 서울의 마무리를 읽는 데 유용하다. 시간만으로 추입 능력·승리 가능성을 확정하기보다, 4C 당시 선두 시간차와 4C→G1F→결승 순위를 함께 보는 기준을 권한다.** 이번 결과는 실전1200m에 한정한다.
+
+## 지점과 계산
+
+[마사회 공식 설명](https://race.kra.co.kr/raceScore/scoretableLayerExplanation.do?meet=1)은 서울4C를 결승선 전530m 지점으로 안내한다. 원자료4C는 출발 이후 누적시간이다.
+
+- `4C 이후 = 전체시간 − 4C 누적시간`
+- `4C→G1F = G1F 누적시간 − 4C 누적시간`
+- `마지막200m = 전체시간 − G1F 누적시간`
+- `4C 이후 = 4C→G1F + 마지막200m`
+- `순위 상승 = 4C 통과순위 − 결승 착순`. 양수는 상승이다. 두 단계의 변화도 따로 보관했다.
+- `선두 대비 회복초 = 4C 당시 선두 말의 이후시간 − 해당 말의 이후시간`. 비교 대상은 결승 우승마가 아니라 **같은 4C 선두 말**이다.
+
+530m는 공식 계측점 설명이다. 실제 주행거리·레일 위치·외측 이동거리는 측정하지 않았다. G3F→4C 시각차의 역사 평균6.189초를 공식 일반설명의70m와 바로 결합해 가속도를 계산하지 않는다. [출처와 계측 제한](SOURCES.md)을 보존했다. 모든 추입이4C부터 시작했다는 뜻도 아니다.
+
+## 자료와 품질
+
+2018-01-06~{s["end"]} 정상 서울1200m **{s["n_all"]:,}행**. 최근 기준은{s["reference_start"]}~{s["end"]} **{s["n_recent"]:,}행·{s["races_recent"]:,}경주·{s["days_recent"]:,}일**이다. 주로빠르기를 제외했고 원천 등급과 함수율 상태만 사용했다. 기존 모집단의 정상 경주·물리적 구간 검사를 유지했다. 원API {v["raw_verified_rows"]:,}행과 DB 계측값이 일치한다.
+
+정상 기록의 빠르고 느린 꼬리는 기준분포에 유지한다. 추가로 등급별 양끝1%를 제외한 민감도 분석을 했으며, 4C 이후 평균의 이동은 약0.003~0.054초였다. 극단치가 등급별 평균 차이를 만들었다고 보기는 어렵다. 정확한 평균·중앙값·절사 평균은 [꼬리 민감도](outputs/tail_sensitivity.csv)에 있다. 이 절사는 진단용이며 공식 기준표 모집단을 바꾸지 않았다.
+
+## 등급별 감을 잡는 기준
+
+아래는 **건조 상태로 정렬한 연구용 추정**이다. 평균과 중앙값을 분리했고, 빠른20%·느린20%의 경계와 각각의 평균을 구분했다. 상위착순3두와 하위착순3두의 기록은 [관측 착순 집단표](outputs/observed_cohorts.csv)에 별도 보관했다.
+
+{table(b[b.band.eq("건조") & b.part.eq("closing4c")])}
+
+단위 초. *는 해당 건조 조합의 관측지원 기준200행·20경주·20일 미달이다. 국OPEN·혼OPEN은 일반1~6등급과 같은 승급 서열로 해석하지 않는다. 예를 들어 국5 건조에서4C 이후31.95초 이하이면 이 참조분포의 빠른20%에 해당한다. 31.95초가 모든 경주에서 좋은 추입을 보장하는 절대 문턱은 아니다.
+
+![서울1200m 4C 이후 기준](outputs/seoul4c_grade_benchmarks.png)
+
+[전체 등급×5상태×3구간 표](ALL_BENCHMARKS.md)와 [150행 CSV](outputs/estimated_benchmarks.csv)에 관측 평균·지원 상태·평균·P10/P20/중앙/P80/P90·시간 꼬리 평균·표본수를 정리했다. 각 독립 구간의 평균 합은4C 이후 평균과 일치하지만 서로 다른 구간의 P20 등을 합해서 전체 P20으로 사용하지 않는다.
+
+## 위치와 실제 추입을 같이 보기
+
+4C 순위의 `(순위−1)/(출전두수−1)`가1/3이하이면 앞,2/3이하이면 중간,나머지는 뒤다. 예를 들어10두면1~4위 앞,5~7위 중간,8~10위 뒤다. **앞뒤 순위군이며 내측·중간·외측 경로가 아니다.**
+
+{chr(10).join(position_lines)}
+
+뒤 그룹의 마지막200m는 앞 그룹보다 평균 약0.26초 빠르지만, 실제3착 이내 비율은 약9.9%이고 앞 그룹은49.4%다. 앞뒤에는 올라갈 수 있는 순위의 여유·4C까지 만든 시간차·능력·등급·경주 전개가 함께 섞인다. 이 원시 집계로 뒤가 유리하다거나 추입형이 강하다고 결론 내리지 않는다. 등급별 집계도 [별도 표](outputs/grade_position_profiles.csv)에 있다.
+
+실제 예시:2026-09-20 서울11경주, 혼4·건조. 아래는 동일 경주 비교다.
+
+{chr(10).join(example_lines)}
+
+4C 이후30.1초인 말은30.7초인 우승마보다 빨랐지만4C 당시 뒤처진 시간차 때문에6착이었다. 우승마는4C와G1F에서4위였고 마지막200m에1위로 올라왔다. 그래서 **전체 착순,4C 이후 기록,추월이 일어난 단계**는 서로 다른 정보를 준다. 기록만으로 진로·방해·외측 손실 원인을 확정할 수는 없다.
+
+## 초반 여유와 기대 이상의 마무리
+
+Ridge alpha10으로 등급·함수율·연월·성별·연령·부담중량·레이팅·직전 성적과 이력 변수를 조정했다. 레이팅0이하는 결측 처리하고 경주별 총 가중치를 맞췄다. 기존 연구가 고른 등급별 상태 상호작용0을 고정했으며 새 최적 계수를 탐색한 연구는 아니다.
+
+각 평가 연도는 이전 연도만 학습했다. 기본4C 이후 기대시간에 **실제4C 누적시간·같은 경주4C 선두 누적시간·상대 순위**를 추가한 조건부 모델도 비교했다. 새 모델의 오차는{mae_base:.3f}초→{mae_at4c:.3f}초로 약{(1 - mae_at4c / mae_base) * 100:.1f}% 줄었다. 효과는 작아서0.1초 차이만으로 확정 평가하기 어렵다. [연도별 검증](outputs/temporal_validation.csv) 참조. 이 값은 개인 마무리시간 예측 오차이지 등급별 기준표 평균 오차가 아니다.
+
+개별4C 누적시간의 기본 기대값 대비 잔차를 이전 학습자료의 등급별P25/P75로 나눴다. ‘4C까지느림’은 **개별 말의 누적시간 분류**이며 경주 전체가 느렸다는 뜻은 아니다. 조건부 마무리 잔차는 학습자료P20/P80으로 빠름·보통·느림을 구분했다. [전개×마무리9조합](outputs/pace_closing_profiles.csv)에 건수·기록·순위 변화가 있다.
+
+- 4C까지느림·기대보다빠름289행: 평균4C 이후31.25초, 순위+3.24,3착 이내27.3%.
+- 4C까지보통·기대보다빠름598행:31.46초,순위+2.47,3착 이내59.0%.
+- 4C까지빠름·기대보다빠름504행:31.69초,순위+1.20,3착 이내77.8%.
+- 4C까지빠름·기대보다느림700행:34.66초,순위−4.08,3착 이내5.6%.
+
+뒤에서 여유를 가진 말은 마무리가 빨라도 출발점의 손실을 회복하지 못할 수 있고, 앞에서 빠르게 달린 뒤 좋은 마무리를 유지한 말은 절대 막판 기록이 조금 느려도 의미가 있다. 다만 마무리 분류와 착순은 같은 경주의 종료 후 관측량이므로 위 비율은 다음 경주의 승률이 아니다. 조건부 잔차도 초반 속도의 인과효과나 확정된 ‘체력 능력’으로 해석하지 않는다.
+
+## 함수율 정렬과 기준표 검증
+
+새 구간 자체의 상태 효과로 최근 등급별 기록분포를 위치 이동시켰다. 건조 대비4C 이후 연구 추정은 양호+0.050초,다습+0.050초,포화−0.189초,불량−0.489초다. 서울 공통효과 설정이므로 등급에 같은 이동량을 적용한다. 실제 원기록·관측 평균은 보존했다. 이는 기존 전체시간 서울80% 보정률을 복사한 값도, 새 운영용 구간 보정 채택도 아니다.
+
+최근47/50 등급×상태 조합이 관측됐다. 국4·국OPEN·혼OPEN 불량은 최근 관측이 없고 뒤 두 조합은 전체 학습기간에도 없다. 작은 조합은 소표본/미관측 추정으로 표시했다. 평균만 이동하고 분포의 폭은 같다고 가정하므로 상태별 분산 차이와 등급별 상태 상호작용은 반영하지 못한다. 이 연구에서는 새 신뢰구간이나 전체 조합을 가린 외삽 검증을 수행하지 않았다.
+
+별도로 직전3년 참조분포로 다음 연도의20행 이상 등급×상태 셀을 검사했다. {cv["eligible_cells"]}개 셀의 평균 절대오차는{cv["equal_cell_mean_absolute_error"]:.3f}초, 빠른20% 문턱 이하 관측 비율{cv["fast20_share"]:.1%}, 느린20% 문턱 이상{cv["slow20_share"]:.1%}였다. [기준표 시간순 검증](outputs/temporal_benchmark_validation.csv). 이 검증은 미관측 조합의 오차까지 보증하지 않는다. 소수점 둘째 자리는 표 비교 편의를 위한 표시다.
+
+## 권장 기록 평가 구성
+
+1. 전체시간 점수와 별도로 **같은 등급·상태의4C 이후 빠르기**를 표시한다.
+2. 4C→G1F와 마지막200m를 나눠 긴 마무리인지 마지막에 집중된 추입인지 읽는다. 시간 기준과 통과 순위를 함께 보여준다.
+3. 4C 당시 선두와의 시간차, 해당 선두 대비 회복초,4C→G1F→결승 순위를 같이 표시한다.
+4. 초반 여유의 영향은 이전 자료로 추정한4C 조건부 기대시간 대비 잔차로 보조한다. 현재의 작은 검증 개선을 종합능력 점수로 확정하지 않는다.
+
+4C 이후와 기존 마지막600m의 상관은**{s["correlation_4c_last600"]:.3f}**, 마지막200m와는{s["correlation_4c_late200"]:.3f}다. 마지막600m 점수에4C 점수를 독립 능력처럼 더하면 같은 마무리를 중복 평가할 수 있다. 서울400m를 새로 생성하지 않았다. 다른 거리의 기준은 해당 거리를 따로 분석해야 한다.
+
+## 재현과 검증
+
+`.venv/bin/python analyze.py` → `verify.py` → `render_report.py`. 루트에서 각 파일의 전체 경로를 사용한다. `PYTHONDONTWRITEBYTECODE=1`, 그림은 `MPLCONFIGDIR=/tmp/horse_seoul4c_mpl`을 지정한다. 마지막에 `record_inventory.py`로 용량을 갱신한다.
+
+원API {v["raw_verified_rows"]:,}행 확인, 독립DB 대조 불일치0건, 시간·순위 산술{v["arithmetic_checks"]:,}항목, 기준표 통계{v["benchmark_stat_checks"]:,}항목,3개 연도 시간순 분리, 원천 해시 불변을 확인했다. [검증 결과](outputs/verification.json), [원천 및 요약](outputs/summary.json), [전체 산출물 용량](outputs/artifact_inventory.json). 중앙 결론은 [09 서울4C](../conclusions/09_SEOUL4C_FINISH.md)에 모았다.
+"""
+    (HERE / "README.md").write_text(report)
+
+
+if __name__ == "__main__":
+    main()
