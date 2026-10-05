@@ -1,0 +1,47 @@
+{
+  "completed_at_utc": "2026-10-02T17:04:13.559980+00:00",
+  "user_scope": "Delete Git temporary garbage and unused Jeju source/backup DBs; retain active text archive; local operating backup DBs if present",
+  "deleted_git_temp_files": 235,
+  "deleted_jeju_backup_db_files": 7,
+  "deleted_jeju_annual_source_db_files": 10,
+  "deleted_jeju_source_links": 10,
+  "deleted_logical_bytes": 21055028016,
+  "retained_final_jeju_db": {
+    "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+    "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e"
+  },
+  "retained_final_jeju_db_unchanged": true,
+  "retained_operational_db": "data/horse_racing.sqlite3",
+  "local_operational_backup_db_files_found": 0,
+  "retained_active_archive": {
+    "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+    "reason": "User requested retention after confirming HY_R_FORM live prediction and web history dependencies"
+  },
+  "retained_shared_section_databases": [
+    {
+      "path": "data/research/section_point_db_20260925/section_points.sqlite3",
+      "reason": "Shared Thoroughbred evidence; prior full replacement audit could not establish equivalence"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_verified.sqlite3",
+      "reason": "Shared pre-adjudication evidence and direct adjudication script input"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+      "reason": "Shared current adjudicated dataset"
+    }
+  ],
+  "other_retained": "API/JSON/TXT source artifacts, verification documents, models and frozen prediction fixtures; Thoroughbred backup DBs were outside this Jeju-first cleanup",
+  "verification": {
+    "git_connectivity_after_deletion": "passed",
+    "git_garbage_final_count": 0,
+    "jeju_sqlite_quick_check": "ok",
+    "operational_sqlite_quick_check": "ok",
+    "jeju_horse_analysis_rows": 4718,
+    "jeju_race_analysis_rows": 92513,
+    "jeju_trial_analysis_rows": 15736,
+    "jeju_postrace_quality_rows": 92513,
+    "jeju_section_internal_conflict_review_rows": 90
+  },
+  "disk_free_bytes_at_completion": 28252831744
+}

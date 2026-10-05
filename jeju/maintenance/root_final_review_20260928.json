@@ -1,0 +1,42 @@
+{
+  "reviewer": "root",
+  "implementation_agents": "gpt-6-luna xhigh",
+  "deleted_files": 632,
+  "deleted_bytes": 114267306,
+  "all_deleted_paths_absent": true,
+  "obsolete_model_files": 87,
+  "model_sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+  "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+  "champion_is_canonical_regular_file": true,
+  "replay_verification": "jeju/predictions/final_cleanup_review_20260928/replay_verification.json",
+  "replay_max_abs_difference": 0.0,
+  "replay_races": 7,
+  "replay_runners": 67,
+  "focused_tests_passed": 16,
+  "repository_tests_collected_without_error": 978,
+  "full_repository_tests_executed": false,
+  "receipts": [
+    {
+      "path": "jeju/maintenance/cleanup_20260928/execution_receipt.json",
+      "sha256": "e18f7ddb4b8c06f444380ec26ff232210deece1c9d240840930ff227cfde82b0"
+    },
+    {
+      "path": "jeju/maintenance/cleanup_20260928/phase2_execution_receipt.json",
+      "sha256": "6be35b3a7ab5c224383e5a400bc8393374c599712ca9f876736a5f48ebfb8011"
+    },
+    {
+      "path": "jeju/maintenance/legacy_review_20260928/deletion_receipt.json",
+      "sha256": "931f0e5206d1b0fff4a1d3782a9e37efc2f23d825c52ba2b908441e41393b2c3"
+    },
+    {
+      "path": "jeju/maintenance/legacy_review_20260928/deletion_receipt_v2.json",
+      "sha256": "390f41a8a76c2a9e464c5ef184ab905962f10274cad6dc1a2b0531ecc3481dd5"
+    }
+  ],
+  "limitations": [
+    "Replay uses a fixed historical feature card, not arbitrary live cards.",
+    "Common runtime/environment and raw/source databases remain shared with parent repository.",
+    "13 intentionally disposed historical Jeju run artifact references remain in unchanged shared ledger and legacy audit reports them missing.",
+    "Selected baseline evidence and source provenance remain; this is not deletion of all Jeju-related data."
+  ]
+}

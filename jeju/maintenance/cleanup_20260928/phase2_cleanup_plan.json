@@ -1,0 +1,760 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-28T13:48:36.555621+00:00",
+  "status": "PREPARED_FOR_ROOT_REVIEW_NOT_APPROVED",
+  "scope": "Exact phase-2 candidates for data-first Jeju cleanup. No phase-2 files were changed.",
+  "groups": {
+    "jeju_racefit_dataset_payloads": [
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_full/start_minus_30m/dataset.parquet",
+        "sha256": "b16d0d0a80098f6f8a5dbc00ff43a3054d0bb463bab3b6509a4713e58c35dbce",
+        "size_bytes": 5189302,
+        "reason": "Jeju-only engineered training cache; no active HY_R_FORM inference import/path reference. Raw and source DB/history remain protected; keep manifest.json separately as lineage."
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_history/day_before_18/dataset.parquet",
+        "sha256": "a371a5864bd9623b0110e9add3f0afe1be1b43c85bff28b1dfa7f880f80e0c6f",
+        "size_bytes": 23305922,
+        "reason": "Jeju-only engineered training cache; no active HY_R_FORM inference import/path reference. Raw and source DB/history remain protected; keep manifest.json separately as lineage."
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_recent/start_minus_30m/dataset.parquet",
+        "sha256": "abdea3cc2089aa3287a00c6b3ec48e7581ac108a64eab1ddf07f7aee1da58573",
+        "size_bytes": 5189302,
+        "reason": "Jeju-only engineered training cache; no active HY_R_FORM inference import/path reference. Raw and source DB/history remain protected; keep manifest.json separately as lineage."
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v6_history/day_before_18/dataset.parquet",
+        "sha256": "7343f5b15f1a6e3701d326e8f89ba640f06ed27176c03763fcc947af9324e6ff",
+        "size_bytes": 23302496,
+        "reason": "Jeju-only engineered training cache; no active HY_R_FORM inference import/path reference. Raw and source DB/history remain protected; keep manifest.json separately as lineage."
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v6_recent/start_minus_30m/dataset.parquet",
+        "sha256": "d57632d6b3de4339d845c82ddc2dedb2e06bba2c39f18be83eff6a49643bdc67",
+        "size_bytes": 5187996,
+        "reason": "Jeju-only engineered training cache; no active HY_R_FORM inference import/path reference. Raw and source DB/history remain protected; keep manifest.json separately as lineage."
+      }
+    ],
+    "obsolete_jeju_experiment_outputs": [
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/boundaries.json",
+        "sha256": "605fc8843e88e34ff0ac2be6868eb5d5e478d2adc159e9c644a3c04a684eecdf",
+        "size_bytes": 1664,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/delivery_manifest.json",
+        "sha256": "a9a4fc31c6764984c038c052a1b8d0684487c5496c615b3ab2429ac928571556",
+        "size_bytes": 1778,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/fit_ledger.json",
+        "sha256": "2e4406a48d42ad64c36927b8088eceebcc6c1afd9dc20c51bb21808d6e11f37e",
+        "size_bytes": 1110,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/manifest.json",
+        "sha256": "b21a3a4a33d4b96b864208d96076d5e40979116973f5e725f01b4a16d5de09bf",
+        "size_bytes": 1762,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/primary_comparisons.json",
+        "sha256": "fecfa22d3ea797b5f0a56bfc3dce6e7fac4b7ad140fd1108b781e086fc70aba9",
+        "size_bytes": 1719,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/quarters.json",
+        "sha256": "ae4b9ed0a27bac0df9a751094f86d935ef0ed4d729245171b0a7735e15d789ce",
+        "size_bytes": 6077,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/seed_summary.json",
+        "sha256": "29b1695a3fd6a5c76436165965701cf30a3b303c713a2c66af49580b8650f7b5",
+        "size_bytes": 2210,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/changed_races.json",
+        "sha256": "c213d5b185202a5cf5f97306b40d6d1a4b3e3db9217599ba1ad5c2fae3b01a3c",
+        "size_bytes": 10910,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/comparisons.json",
+        "sha256": "7d3dc1b1b6398af238df603e2cee70f3cf29b6a9358d0416197e5ddb4da4932d",
+        "size_bytes": 2019,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/delivery_manifest.json",
+        "sha256": "e8df5cd43ba2df6a75d413d20f19f5b661fc7fe3996198acb7f5c7a430ce6136",
+        "size_bytes": 8608,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/frozen_oof_probabilities.parquet",
+        "sha256": "e48ab2f62263eb8d596edf93a251d2123251b9eb90b4594b013f70f5e09e7506",
+        "size_bytes": 238305,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/frozen_probabilities.parquet",
+        "sha256": "45c8a6e8fd82ae572ae5ef0415cc174742f33dd1adf04fb4f553311b15e70143",
+        "size_bytes": 639159,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/horse_experience.json",
+        "sha256": "6c6a61b1a7b47b246eeaf8b241d3d536da26bd52cbdb515dbc20071eceb948b5",
+        "size_bytes": 6135,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/inner_ledger.json",
+        "sha256": "83fe8d16ad1867d2292c6e039596cd6e601eadd2af600973d6eadcf009a88380",
+        "size_bytes": 13814,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/lost_pick_cases_2026.json",
+        "sha256": "54773c706e829853895e3ce46086e4c8ac3cfaa68a7be3e96e0701aa2f980842",
+        "size_bytes": 1364,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/quarters.json",
+        "sha256": "84e9822aa6a4b95633d3d571180385abfb106165694c9d070a54b892b4e02b60",
+        "size_bytes": 4687,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/recovery_boundaries.json",
+        "sha256": "1a55ae360c2afd03ff7002e5e3bd83531a253eaa4bbe2901d9125a87eaadb5f7",
+        "size_bytes": 6842,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/recovery_fit_ledger.json",
+        "sha256": "9d3098c5f9587bca96f0736c8a0aaa53d5e86da98133f3bcf0243248c6078335",
+        "size_bytes": 1736,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/recovery_lock.json",
+        "sha256": "d4eb8096e05ceecab34349e1f6568f52e9657d01281508fd1ffea1ad9becc217",
+        "size_bytes": 1307,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/selections.json",
+        "sha256": "d7401d6dff458e8192f86d9c3d63e5827c99fa5e7fbfd773849b14236e66af36",
+        "size_bytes": 2669,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/test_result.json",
+        "sha256": "33011366d9eaa0aeabc23cea29db4070ca9a625afaa1eb24cbc6c537824c550e",
+        "size_bytes": 230,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/boundaries.json",
+        "sha256": "7548fb92f9fad8f6643a162cf4cd38e897bca1911a467fe9a354b7307bc8f5a1",
+        "size_bytes": 1664,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/changed_races.json",
+        "sha256": "006e16a113107bad8ff16301c0518218aaa22452ef11ed8cade6848299aad285",
+        "size_bytes": 219592,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/comparisons.json",
+        "sha256": "b11692c7d89d4ca9bf1ce89b950838726bfa904dea9c58cf6041fc317a3894e3",
+        "size_bytes": 1418,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/delivery_manifest.json",
+        "sha256": "d07e304ddab4f3f9ce01c628553385df2a4eb2c8b35794909506b493efcf0506",
+        "size_bytes": 3433,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/feature_changes.json",
+        "sha256": "a8e24051fb2dd1f0878833f77b15a2c89cfa35ea49af89ee3565a0f41ebf15d0",
+        "size_bytes": 1469,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/features.parquet",
+        "sha256": "6f02b085d0dc3084b2731c6432cf41aeab741158c9cf45a7f3b2444abd060201",
+        "size_bytes": 6114134,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/fit_ledger.json",
+        "sha256": "e7e8f1dc8449f4eaa5d2a7bf758bda6e84a82c3464aba2429f38a98c348c9c89",
+        "size_bytes": 412,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/horse_experience.json",
+        "sha256": "5ba0f3e9b6197b4276fe533ff54f7fe93a54a00c8a03581571ff79f45112dad8",
+        "size_bytes": 3079,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/quarters.json",
+        "sha256": "77bc9e71a35b79cca5f399cb66e0c23872f1baeaedecb73aa756d390e5c508f4",
+        "size_bytes": 3227,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/seed_summary.json",
+        "sha256": "7b486576d452a9072fdb3131e6875dfcba5200e8df20ef922880281571e110e9",
+        "size_bytes": 1502,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/subgroups.json",
+        "sha256": "63163263ffe7838c886b0c902b20663a93aab2e70db2cd38188b905af6e48aa1",
+        "size_bytes": 2429,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/test_result.json",
+        "sha256": "8bfc967f6ba9c869583a73a7a155e0c088fcb653dfc3d12f19ad1bf2596859cf",
+        "size_bytes": 186,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/boundaries.json",
+        "sha256": "6b142c416f7d0067a83c227037e25553203fd0bebc59f235ae87b0b436c637ca",
+        "size_bytes": 2218,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/changed_cases.json",
+        "sha256": "287663e586a9999a909161c8fa0571e716a302ac7f11cb0145270f18b1a5a4ce",
+        "size_bytes": 41759,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/comparisons.json",
+        "sha256": "d8e6e6739da6d3a207df16e0cc396f1840482d347f5c2c0e4821a0c4b5377c4a",
+        "size_bytes": 1549,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/delivery_manifest.json",
+        "sha256": "d889e1d9500bac08f2d730283fff2211aa1692a6b8d071949a74e4c5a3b2f006",
+        "size_bytes": 7222,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/environment.json",
+        "sha256": "3c70c700980a1bd28393dae65631d80c24b7441acbff7ef0ba3e7ba3123972e4",
+        "size_bytes": 162,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/fit_ledger.json",
+        "sha256": "d61064911d8df674efe82dc25fabe467e3dffa5ed3e3b43dd720da177cd81acd",
+        "size_bytes": 928,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/jeju_trial_gate_20260928.log",
+        "sha256": "2ece09c493b34d5654387c4adc4f40db3eed7f9c679176703346afdeed80fa41",
+        "size_bytes": 6479,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/jeju_trial_gate_diagnostic_20260928.log",
+        "sha256": "99fec0799cbd5164bd13c18c2b19ccc51663e35e4b0959162a83906f9a2b3c61",
+        "size_bytes": 1333,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/jeju_trial_gate_verify_20260928.log",
+        "sha256": "9c4bf5b6f374def278fb1c60ea9fcc9ad0e8162d03d0cb9f404a32c89d8b46b0",
+        "size_bytes": 434,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/seed_gate_diagnostic.json",
+        "sha256": "3915ef230d2a04acdeb773c7e7f7e01cb076b876e0bbb5fdf1d47e6b2c0cb68c",
+        "size_bytes": 1831,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/test_result.json",
+        "sha256": "f95d0fe8b7de7745b923c44e8c1ad7b862b27891dd23b4b12be3162424d5c754",
+        "size_bytes": 248,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/boundaries.json",
+        "sha256": "7548fb92f9fad8f6643a162cf4cd38e897bca1911a467fe9a354b7307bc8f5a1",
+        "size_bytes": 1664,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/changed_races.json",
+        "sha256": "627e12136f8784a2adcb9734a0d3ed512ee6b75fba1b8aeb0aab64cb39c0b994",
+        "size_bytes": 334684,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/comparisons.json",
+        "sha256": "b524c3bf5cb1f01d656bf40cfd469dcc409dc1265e640b3f74859d7352c415c6",
+        "size_bytes": 1411,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/coverage.json",
+        "sha256": "71eec660cdf4d0448889c6f83a077197ea793995db9144c6512f815a1f1f46ff",
+        "size_bytes": 2477,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/delivery_manifest.json",
+        "sha256": "644179c0de421428432cf5096f652597055f4e35620ccf0a71d637f35def8eca",
+        "size_bytes": 4057,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/features.parquet",
+        "sha256": "90c96ef44b6f03e777d4d5713e98419764b78a344edb355c3390d8e4edc786f1",
+        "size_bytes": 626539,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/fit_ledger.json",
+        "sha256": "c17e5654bf5c3c2c35bc533928e22cf6cf0d5a500eef9e70c3bb4256c881f331",
+        "size_bytes": 410,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/horse_experience.json",
+        "sha256": "d322c66636c8b50cffabe38c8a015e96d4c95a55fcd30887965a276e7a45ad4f",
+        "size_bytes": 3101,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/lineage.parquet",
+        "sha256": "e0fd1bf6bc77febde5ad23385d656e0265cc8aaccd99a87bdc3e96bdf1f28801",
+        "size_bytes": 404392,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/quarters.json",
+        "sha256": "53b2be04934eaba5f460a9ecca94bea78c446c34d97c68e69a998bc5be6257ac",
+        "size_bytes": 3250,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/seed_summary.json",
+        "sha256": "75991040cd55fa8dc2031446d1c4a9beedba3531ee0d5ac5bea929fd40d768db",
+        "size_bytes": 1514,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/source_trials.parquet",
+        "sha256": "43d7bee599d201285ce11cca439bd347eba431ea9cfe57f51af46d90457d73ef",
+        "size_bytes": 101497,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/subgroup_uncertainty_exploratory.json",
+        "sha256": "ec94753dc5afe3b4271d41960cbf9d3267ab3abe0fac21653f7dbd31beeedd2a",
+        "size_bytes": 941,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/subgroups.json",
+        "sha256": "988a22597d11a872729d6251d775a6564cd35e61781a351067fa2caa869e6579",
+        "size_bytes": 2445,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/test_result.json",
+        "sha256": "01de61d0c64aa6540e7dce110db02c99a23c13f0d761d8f55b001b43ead65eef",
+        "size_bytes": 222,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/trial_contexts.parquet",
+        "sha256": "b8dda63bc46e8a1bfc832a0dc5f9f979e43ba9586b9e6564b92157ba86eb904f",
+        "size_bytes": 832484,
+        "reason": "Derived output from a rejected/nonpromoted Jeju experiment; the small decision/protocol/summary/verification records and code-review scope are excluded."
+      }
+    ]
+  },
+  "summary": {
+    "jeju_racefit_dataset_payloads": {
+      "file_count": 5,
+      "size_bytes": 62175018
+    },
+    "obsolete_jeju_experiment_outputs": {
+      "file_count": 60,
+      "size_bytes": 9691901
+    },
+    "all_phase2_candidates": {
+      "file_count": 65,
+      "size_bytes": 71866919
+    }
+  },
+  "phase1_dependency": "Jeju-only racefit run models and selected experiment prediction outputs were removed under cleanup_plan.json; current champion and its gate records remain verified.",
+  "dataset_cache_assessment": {
+    "five_payloads_are_jeju_only": true,
+    "active_hy_r_form_inference_references": [],
+    "manifest_files_retained": [
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_full/start_minus_30m/manifest.json",
+        "sha256": "41e8d0cee1ec55cb2d00f1b08b2902b162061bb085733808aa2441dbaf5d3026",
+        "size_bytes": 17689
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_history/day_before_18/manifest.json",
+        "sha256": "548c2550aaccf70fcd2fb25b182d61903d9ecb671aa4abe7e83d7067bec7b18f",
+        "size_bytes": 13140
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_recent/start_minus_30m/manifest.json",
+        "sha256": "6dd4e2eed041ed36b05d2f9424979411fa4327116b56a6a3c1efb9a3cbe18288",
+        "size_bytes": 17684
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v6_history/day_before_18/manifest.json",
+        "sha256": "a9b5553a252db91974b359d2c40f7988c3459f77ffdc20ceb7c5e246101a8c30",
+        "size_bytes": 13148
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v6_recent/start_minus_30m/manifest.json",
+        "sha256": "0a4e629379f6dfa44f64ae2ece1d0244164449a1c29dc2a91f912b6a7eae8f5c",
+        "size_bytes": 17692
+      }
+    ],
+    "shared_model_runs_rows_reference_four_jeju_dataset_versions": true,
+    "audit_effect": "Removing dataset payloads leaves data/experiments/model_runs.jsonl untouched; audit_artifacts.py checks dataset manifests (retained) and old artifact_path files (already disposed in phase 1).",
+    "rebuildability_limit": "This audit confirms no live champion dependency and that manifests identify the cached feature tables; it does not run a fresh dataset builder or prove that each table can be byte-for-byte rebuilt from raw sources."
+  },
+  "preserve": {
+    "runtime_inputs_and_control_files": [
+      {
+        "path": "config/prediction_model_registry.json",
+        "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+        "size_bytes": 7291
+      },
+      {
+        "path": "jeju/models/current/HY_R_FORM.pkl",
+        "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+        "size_bytes": 638955
+      },
+      {
+        "path": "scripts/predict_jeju_live_hy_r_form.py",
+        "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0",
+        "size_bytes": 27278
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+        "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53",
+        "size_bytes": 935
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+        "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d",
+        "size_bytes": 540
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+        "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518",
+        "size_bytes": 307
+      },
+      {
+        "path": "data/research/jeju_native_top3_dataset_v1_20260915_r2/labels.parquet",
+        "sha256": "8887ee5a7a62abef9c0f54db622a190dbeb34c900735246f473351c6aa8691d7",
+        "size_bytes": 756610
+      },
+      {
+        "path": "data/research/jeju_native_top3_dataset_v1_20260915_r2/history_results.parquet",
+        "sha256": "8b23bd99e76142ab0bc34fff011b99996816e70190a9a6c848f0581469aad5cd",
+        "size_bytes": 4044081
+      },
+      {
+        "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+        "sha256": "0f2871c2a8f931bb968d8bf7086c27f0644c0ef7332b41b7a1bd85ff637c638f",
+        "size_bytes": 1535651840
+      },
+      {
+        "path": "data/research/jeju_native_transition_features_v1_20260916/context_history.parquet",
+        "sha256": "ac3ece2b83717692ee35cc3492e11bd0afe800bd687d273a0d3d01f461e01b6a",
+        "size_bytes": 3019685
+      },
+      {
+        "path": "data/research/jeju_model_input_audit_20260928/bundle_input_inventory.json",
+        "sha256": "7a9ba8a30b69cdb0362caf3ab3057c759a0fae9793047e97c1d58e8293b9eb77",
+        "size_bytes": 35309
+      },
+      {
+        "path": "data/experiments/model_runs.jsonl",
+        "sha256": "7ff2f6a11f0b11da1a92c98be25935123f2712b9d6fb628ddf994cec8db1330f",
+        "size_bytes": 692497
+      }
+    ],
+    "experiment_explanatory_gate_files": [
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+        "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d",
+        "size_bytes": 540
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/prediction_lock.json",
+        "sha256": "96c873f19cb918b4a28eb1247450aebe9326f4d723c6db1517510ccffeaf193c",
+        "size_bytes": 860
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/protocol.json",
+        "sha256": "fd260bcaca7307c395da21c7d1dff91d47aeab9901c484bb84543b60a9aaa930",
+        "size_bytes": 8150
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/summary.json",
+        "sha256": "a0d2ad2ccd8d22dfb21d5d5ef178b051d0ef1b45da486735a518b6cee3b9b122",
+        "size_bytes": 1506
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+        "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518",
+        "size_bytes": 307
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/decision.json",
+        "sha256": "bfa6ef75d77f7857de40f19bf051c93ede360bda22075ddc339fee712063eb22",
+        "size_bytes": 102
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/prediction_lock.json",
+        "sha256": "b0023ffb45ac9d1bbe3f4d1ceb93f68542a0f8501c4b7282f4993ed3f9beef19",
+        "size_bytes": 5759
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/protocol.json",
+        "sha256": "38ce803784410b3ef843e32ecb521d8cb10d778c7508abd1d16644b709e983c4",
+        "size_bytes": 2400
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/summary.json",
+        "sha256": "54d144f7d345442d03628eaa4ab23e2cc0147fb3999962b0b1217703f2ff2afd",
+        "size_bytes": 3024
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/verification.json",
+        "sha256": "6847b369d76b16ba7e7115ff5c08d0af3aae34331e09a34182a180bf69a3257f",
+        "size_bytes": 382
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/decision.json",
+        "sha256": "da6d628988311e1930da2f7a4a32d3a8bdf9fd2359aa7e04fa5ac1246632fee7",
+        "size_bytes": 128
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/prediction_lock.json",
+        "sha256": "1c2b2c62c3f7722313f77f4a77e4f9f92ce951fe2a699cb3a34cdaa0936a5b02",
+        "size_bytes": 667
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/protocol.json",
+        "sha256": "0838b8fecff0fdee05f3b841b6cd88275bc7f281a8671a72efdb3ae51005dd57",
+        "size_bytes": 5993
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/summary.json",
+        "sha256": "8636d25ed88de2bdd965b4dfd2d2e825c075aa3935248bacabefe65285d5181a",
+        "size_bytes": 1319
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/verification.json",
+        "sha256": "3547091a48dc8bfbbd2bd79d7f58018a0df358deb88f3985075dd9792a019e53",
+        "size_bytes": 360
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/decision.json",
+        "sha256": "3b1b854eb6e1abd0634cd5568428302a2256faa8ca10d5c6caef2b68e294b828",
+        "size_bytes": 250
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/gates.json",
+        "sha256": "22a749a98e71a4f7f9c728b112a39cb91f3b356deaea587cd158aabfbe5860a1",
+        "size_bytes": 1020
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/protocol.json",
+        "sha256": "88e8a0fc666f11a9d2a58a8490120d88cbec753eac21ca2cad19dbd9f344eec2",
+        "size_bytes": 11011
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/selection_lock.json",
+        "sha256": "816df6b736f5509c3516fdc115e1db77e079578ce09fc845e16089d39668bbf2",
+        "size_bytes": 1046
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/summary.json",
+        "sha256": "40b05ad53af74253838e41390cea6b96076303534438d76e7fcd130d87c66ead",
+        "size_bytes": 6119
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/verification.json",
+        "sha256": "508991298f81bd5dfa6e1b9ed25b8d776f756a418b891cb68e0de7bc4c8f2e1b",
+        "size_bytes": 433
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/decision.json",
+        "sha256": "da6d628988311e1930da2f7a4a32d3a8bdf9fd2359aa7e04fa5ac1246632fee7",
+        "size_bytes": 128
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/prediction_lock.json",
+        "sha256": "5edcde1c0203bb0542985651a98f9279fa90b75a32592d451d119b52c45ffded",
+        "size_bytes": 959
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/protocol.json",
+        "sha256": "6707b2466ef719af91a55ae2c602e2fc76682288f5635ab22a28bde75b0ee00a",
+        "size_bytes": 6638
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/source_audit.json",
+        "sha256": "2015c694ba3704f0088c95880ab9a97b6d4357a7b49887bcc115aa111686e259",
+        "size_bytes": 277
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/summary.json",
+        "sha256": "e955848c45458090248179b6519b0e9a7a4e01d949f35292e3ec45034418dfd9",
+        "size_bytes": 1328
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/verification.json",
+        "sha256": "203afb1154d05edb19738d4e8b3369363a5b3a7c65460c71df0033c99d1b8fd3",
+        "size_bytes": 386
+      }
+    ],
+    "racefit_dataset_manifests": [
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_full/start_minus_30m/manifest.json",
+        "sha256": "41e8d0cee1ec55cb2d00f1b08b2902b162061bb085733808aa2441dbaf5d3026",
+        "size_bytes": 17689
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_history/day_before_18/manifest.json",
+        "sha256": "548c2550aaccf70fcd2fb25b182d61903d9ecb671aa4abe7e83d7067bec7b18f",
+        "size_bytes": 13140
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v5_recent/start_minus_30m/manifest.json",
+        "sha256": "6dd4e2eed041ed36b05d2f9424979411fa4327116b56a6a3c1efb9a3cbe18288",
+        "size_bytes": 17684
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v6_history/day_before_18/manifest.json",
+        "sha256": "a9b5553a252db91974b359d2c40f7988c3459f77ffdc20ceb7c5e246101a8c30",
+        "size_bytes": 13148
+      },
+      {
+        "path": "data/datasets/jeju_native_racefit_v6_recent/start_minus_30m/manifest.json",
+        "sha256": "0a4e629379f6dfa44f64ae2ece1d0244164449a1c29dc2a91f912b6a7eae8f5c",
+        "size_bytes": 17692
+      }
+    ],
+    "saved_pregame_fixture_files": [
+      {
+        "path": "tests/fixtures/jeju_pregame/README.md",
+        "sha256": "e07ca7a1d9ee1f9dd611517aead98d265a3a921d26d08d6e6263b0a25572826c",
+        "size_bytes": 998
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/card.html",
+        "sha256": "b16c7df0e9e1371c3f65f013504f5316ac9a810b20b82988e3b1cfeb92dd4c58",
+        "size_bytes": 8244
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/card_rated.html",
+        "sha256": "f689bd041851c4306fd419383b24bc398b9612ee99b6b17a89ae6d4b6d1e172d",
+        "size_bytes": 8879
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/changes.html",
+        "sha256": "d51b0ec40bbc7e2160702ab63819b0bf37a9909d855f76c7ec106a14a8f87f53",
+        "size_bytes": 2444
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/schedule.html",
+        "sha256": "5111d4cf01e88372eeceeccebb37372b9b03ac882ddb02e44da3d24380039341",
+        "size_bytes": 22234
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/track.html",
+        "sha256": "1960e4678e7db611705ded47dfc553bf2710fd8380608bc096c4d33aa86a22da",
+        "size_bytes": 176
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/weight.html",
+        "sha256": "657d453831ca96995471d36b00dcb1eae3b434b1dc001507bbaff50217af84df",
+        "size_bytes": 3546
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/weight_index.html",
+        "sha256": "2f6e90d6c64920ad76b9a3e9ae23b5b7b2e69f9d2e7ba2e9f2be244ef25e8b4e",
+        "size_bytes": 1255
+      }
+    ],
+    "original_raw_source_and_operational_database_roots": [
+      "data/raw/",
+      "data/logs/",
+      "data/archives/",
+      "data/horse_racing.sqlite3",
+      "data/horse_racing_pre_medical_terms_20260925.sqlite3",
+      "data/backups/",
+      "data/research/jeju_native_text_phase2_db_20260915/",
+      "data/research/jeju_2017_score_20260925/ through data/research/jeju_2026_score_20260925/"
+    ],
+    "all_live_saved_predictions_root": "data/predictions/",
+    "final_model_reproduction_inputs": [
+      "data/research/jeju_native_top3_dataset_v1_20260915_r2/labels.parquet",
+      "data/research/jeju_native_top3_dataset_v1_20260915_r2/history_results.parquet",
+      "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+      "data/research/jeju_native_transition_features_v1_20260916/context_history.parquet"
+    ],
+    "five_user_protected_docs": [
+      "docs/JEJU_HUMAN_ANALYSIS_FRAMEWORK_2026-09-28.md",
+      "docs/JEJU_FINAL_MODEL_INPUT_AUDIT_AND_REBUILD_PLAN_2026-09-28.md",
+      "docs/JEJU_NATIVE_VARIABLE_CATALOG_2026-09-16.md",
+      "docs/JEJU_NATIVE_CONTEXT_VARIABLES_2026-09-16.md",
+      "docs/JEJU_NATIVE_EVALUATION_REGISTER.md"
+    ]
+  },
+  "noncandidate_sources": {
+    "experiment_code_snapshots": "All `reproduce/` files are outside this manifest and deferred to the dependency-aware source/docs audit.",
+    "current_champion_evaluation": "The transition-holdout directory is outside phase 2, including its champion/gates and three retained frozen baseline prediction parquet files.",
+    "research_feature_and_source_datasets": "The top3/transition/H3 feature directories remain preserved because their source-history lineage is valuable for the data-first restart; direct inference only reads the four paths named above.",
+    "docs_and_generated_markdown": "Root-level docs and data/experiments/reports are outside this phase; the delegated legacy review preserves concise conclusions and updates references."
+  },
+  "known_side_effects": [
+    "The phase-1 removal of 13 old Jeju run model artifacts leaves historic artifact_path entries in the shared data/experiments/model_runs.jsonl. The shared ledger is intentionally unchanged; scripts/audit_artifacts.py will continue reporting those old artifacts missing.",
+    "Five removed parquet payloads are not separately checked by scripts/audit_artifacts.py, but deleting them prevents rerunning those old Jeju racefit studies without rebuilding their feature caches."
+  ],
+  "execution_constraints": [
+    "Wait for explicit root approval of this exact manifest before phase-2 deletion.",
+    "Before execution, verify each listed path hash and byte size, no symlink traversal, registry/champion/input/gate hashes, and confirm the 3 held-out baseline tables still exist unchanged.",
+    "Delete only exact listed files; preserve manifests, source history, operational databases, data/predictions, and every file outside this allowlist."
+  ]
+}

@@ -1,0 +1,1124 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-28T13:36:10.250507+00:00",
+  "status": "AUDIT_ONLY_PENDING_ROOT_APPROVAL",
+  "scope": "Phase 1 exact allowlist for Jeju-only obsolete model weights and cached experiment outputs. No files were moved or deleted.",
+  "registry_gate": {
+    "path": "config/prediction_model_registry.json",
+    "expected_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "observed_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+  },
+  "champion": {
+    "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+    "expected_sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+    "observed_sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+  },
+  "groups": {
+    "legacy-jeju-racefit-models": [
+      {
+        "path": "data/experiments/models/20047697-0b2e-4dac-9a4d-762271f5e1f9/model.pkl",
+        "sha256": "7ed07c901f373f13acb488bb0feab39d5fc967ebaaf25d72c815009e5480b082",
+        "size_bytes": 4732,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/20e1772c-17fe-4d7f-9a0a-cb2418b0fa13/model.pkl",
+        "sha256": "8ae8b3076d24aab56373645a71b0cd2b743fbea72e9fdb087a7fe42c71806297",
+        "size_bytes": 757711,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/29861472-0b42-4863-9bb1-8f9a4123146e/model.pkl",
+        "sha256": "a0ccb5f5b2a3531eec0970c51615d248fd020278f42aca13ee4b0eae05d89619",
+        "size_bytes": 4732,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/2d6ebf9a-812a-49aa-ac33-b3bf8efd225a/model.pkl",
+        "sha256": "0339d543f8debaa2400dbf7561025702d766fc9970e6210dfdb61db54798edfe",
+        "size_bytes": 737704,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/37a13280-f0d5-45a2-bbd2-3d9fc23b31f4/model.pkl",
+        "sha256": "b03a796cd8dc913742732602e2f562fe092e0432adfedd9a09a7cf3de353cfdb",
+        "size_bytes": 1551870,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/4946746a-86aa-4a95-8b25-ec2e3eb20963/model.pkl",
+        "sha256": "eadc8e202005eb32dd3a2b024bb4aa4590c02917719497488bcef5932fb6017e",
+        "size_bytes": 4732,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/511666a2-cc64-4146-97fa-2e99834952be/model.pkl",
+        "sha256": "1df8317da41389eb353dc4027785c244abc0d3fae28457a2768f6861374c0fe7",
+        "size_bytes": 1482717,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/81f002fc-b17e-4c98-8e67-cfdf5205f621/model.pkl",
+        "sha256": "b874885f2417f795b0d04d76f20d67f4daae2c360b9b788ef7ff73dccb0c8a94",
+        "size_bytes": 1109710,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/91169b74-0363-42a1-9c17-b2cd47164f38/model.pkl",
+        "sha256": "ea8e7af7e82c434881ae4b47be862cb97ba01d4fe1b950034b1c29e83c58b4b8",
+        "size_bytes": 242964,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/97e00395-c11f-4b13-a518-35cc8e43d4c4/model.pkl",
+        "sha256": "fba36661a7a4aabbb7b63e4f93c77079520b3567f36d622a0a7f269b80436936",
+        "size_bytes": 871023,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/ccfea29d-5e4f-4099-9a1b-43b977348389/model.pkl",
+        "sha256": "48857f786e70decea0080432b939c12e52fd74bb268f20872605f7dc78bc1ac1",
+        "size_bytes": 1215450,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/e15ed472-a49a-4685-b8a5-9925edbcea5b/model.pkl",
+        "sha256": "ab8a0d758b4e82da6b67e87e4392eae82a091a16fac67cc69589f8d1820529ed",
+        "size_bytes": 1263225,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      },
+      {
+        "path": "data/experiments/models/e39d8096-52b9-43c2-9c2e-658044d0a0b0/model.pkl",
+        "sha256": "fddfdbef3c390091e5e0a5335eff650873cd474c14581c9abf829953fe1b4c62",
+        "size_bytes": 146225,
+        "category": "legacy-jeju-racefit-model",
+        "reason": "Jeju-only run id proven by data/experiments/model_runs.jsonl; not referenced by the production model registry."
+      }
+    ],
+    "legacy-jeju-research-models": [
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/bundles/2024__NO_GROWTH.pkl",
+        "sha256": "60ba6d1c3c5400207a3a72b27cf405d6b9fd6f55f2c04d773088d86cbb09732a",
+        "size_bytes": 452099,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/bundles/2024__PACE.pkl",
+        "sha256": "9600934b087bcada14f8f91db71d02bc03021d6ea16d605b14ea041056f05e26",
+        "size_bytes": 481445,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/bundles/2025__NO_GROWTH.pkl",
+        "sha256": "88d575208764a543caa61707299f0eade4cb9380edb464d7929868c0e2fabef6",
+        "size_bytes": 261357,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/bundles/2025__PACE.pkl",
+        "sha256": "f3d1b584f9b913cb6119d386ee3eb7d9d65137239683b07b9b76729ae67d8592",
+        "size_bytes": 448505,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/bundles/2026__NO_GROWTH.pkl",
+        "sha256": "2e05df43268f3b5702446653525974634ab49ac3de698552f16748cfc0064904",
+        "size_bytes": 625893,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/bundles/2026__PACE.pkl",
+        "sha256": "2c74e5f5af5fa641c23d629c451aeaea8851be8e612322d9a597aeef443a3ca0",
+        "size_bytes": 850285,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_TRANSITION.pkl",
+        "sha256": "66c174a1c1b289fb893dc91039d1e62194f04aa9a8d306e487146b2caf8bfd1f",
+        "size_bytes": 699917,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_TRANSITION_CONTEXT.pkl",
+        "sha256": "d50b6a1b1db151d9c2d61751d922496d286e83b9ef1e0f1b4c8f7919447085e4",
+        "size_bytes": 508292,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__O_BASE.pkl",
+        "sha256": "e544ea7efc4850825a7e39321d0b5848717b759f23042970c2730014339ec521",
+        "size_bytes": 27809,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__R_FORM.pkl",
+        "sha256": "7dd8aa78bcd0678084d11730c0fab7d06e0d0e27a3f8bc3532fb38d8a024fe65",
+        "size_bytes": 610910,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__R_TRANSITION.pkl",
+        "sha256": "c5dd5c38f974d3f0771e75de113806ab462f43709c510c5aaa61f4ace9f6562e",
+        "size_bytes": 671850,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__R_TRANSITION_CONTEXT.pkl",
+        "sha256": "a24f1d8ee1867ca4d7ac6db7002baaccf2e932213973352db7f8434b85399a73",
+        "size_bytes": 480254,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2023Q1.pkl",
+        "sha256": "0ffdc180a863dc897637d961e550b1502f584c03d144e00654eb6103779202b8",
+        "size_bytes": 468049,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2023Q2.pkl",
+        "sha256": "bef3043d5d5632ac78192c456c6672a36d45ecfa6d598ac82e778b94e4978b35",
+        "size_bytes": 490868,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2023Q3.pkl",
+        "sha256": "f01174a5b5b640bd14f6b74ff45478e6ddd572c953c5cdcce7ba2e1fe296cf7a",
+        "size_bytes": 154910,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2023Q4.pkl",
+        "sha256": "b86f799ab2127607c8b7e97c1f54e862da595546538af7a0a1dab491a817e463",
+        "size_bytes": 395061,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2024Q1.pkl",
+        "sha256": "1ac0da0afb3f9333da8ca1839d8d2f44cf4c954fe39655be088914200f9b5f4e",
+        "size_bytes": 301491,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2024Q2.pkl",
+        "sha256": "54c870e3dd481a14a8c353737aafbfdeda0da96a3122e06554cd5cc2699e6142",
+        "size_bytes": 207826,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2024Q3.pkl",
+        "sha256": "4a2175c7db9849bd9e52a8bc464a81a9f94c7e1f22618ca7d53f4843932424d5",
+        "size_bytes": 395921,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2024Q4.pkl",
+        "sha256": "16fa591ba6f34706ae4886c76ecc2d7db145f5e8b05ef7fad2c901fa5cfe4c9d",
+        "size_bytes": 558542,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2025Q1.pkl",
+        "sha256": "ef42608eeedea3c4eb2e15245482fb05d45504f49429f6b8e94bde3b7e776761",
+        "size_bytes": 493911,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2025Q2.pkl",
+        "sha256": "30b6e74292a45091a6bf64769a491655cb09e3a4a7433604e04067c22ccfa585",
+        "size_bytes": 311167,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2025Q3.pkl",
+        "sha256": "c0f823717d07142c8c84fdc47b1636d5ec27825e160734ac6ec2044d0f5ea026",
+        "size_bytes": 79110,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/2025Q4.pkl",
+        "sha256": "ffa90048ff427c91e1f2fbef5d5f73e195b8fdaafd2874cd199ab98643221628",
+        "size_bytes": 291605,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/final_2024.pkl",
+        "sha256": "41390d3087ffd1b3ae9f94b5c53594015383e6b246748a52c89cee7cfb772c9c",
+        "size_bytes": 762,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/final_2025.pkl",
+        "sha256": "2e92aaa583117f5b77c3f8735898d6e72ee1806729b94745a3746fad7574643d",
+        "size_bytes": 762,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/final_2026.pkl",
+        "sha256": "0c7b4b0deaf8737804289c9bf9cd925c54a0ded4f18eb357620e93aadef726bd",
+        "size_bytes": 762,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_2_fixed_003.pkl",
+        "sha256": "4075974fb95fc43600d698a09afd3899d0e17b11b0ccc21d00ede65e5ca86503",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_2_fixed_010.pkl",
+        "sha256": "3b77861de6ba8053579e9e38eeba4d4909f3e908bc4382274366d41ef65743d1",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_2_share_010.pkl",
+        "sha256": "00604a55a0c3e43451bfec9f764f37846cf71467fec2244ecb6d96c265eb6fbb",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_2_unpenalized.pkl",
+        "sha256": "9a062d27065af85d7ecd55375fd47a66879cae5671f15611d264bd316a6efe42",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_3_fixed_003.pkl",
+        "sha256": "f75319532c4bd9c81a69eac6b61edda187c4a4dccb60bd32daf2d0e9bd77fb5f",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_3_fixed_010.pkl",
+        "sha256": "34dd0d6f35000e839fbb1b11ce0ab16ccebdcd42a6f1a2331215d9e5ebfdb3c6",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_3_share_010.pkl",
+        "sha256": "5f4593f00122cb9a95b5d94c43684793ed6ccb3456a8fcd33b67626fb8b82128",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_3_unpenalized.pkl",
+        "sha256": "dd457bb9e61849884cc7b77d01403eb9b81de250d40b403f5330638077e463d2",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_4_fixed_003.pkl",
+        "sha256": "72206a20d5f30b35db28a554f45de6d32a41993841beb63722990e9e7e41ed33",
+        "size_bytes": 415,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_4_fixed_010.pkl",
+        "sha256": "66c16dabd1a7820819122dc5d218679f1ebe412ae27a315b5e824068ffcafac7",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_4_share_010.pkl",
+        "sha256": "105ae916e25ec5af32f5189256b38a2485e602c1bf7b749d54b05b723d0f14eb",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2024_4_unpenalized.pkl",
+        "sha256": "28e8e74f65da80d27201d58a7ce3e61059d2a0f1733df38fd994f1cc2d69560a",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_2_fixed_003.pkl",
+        "sha256": "bb397a82f1548cb23e3eb8cb9713d214b4c9a33b3b9e3ade3f02ea9abb535e9e",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_2_fixed_010.pkl",
+        "sha256": "50c9a9784106a5236fccaa38ae631d46bf9d61986c61bc78978cacae9886ce44",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_2_share_010.pkl",
+        "sha256": "d1a9ca3f07018842839bd928ebd6c7a64f3204915574408cbdfa890402c055b5",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_2_unpenalized.pkl",
+        "sha256": "3f8634b3aa57d0b932556ca9a5a79aaaad90218461819fbe370e8f3faab750b4",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_3_fixed_003.pkl",
+        "sha256": "a4f7ef90fd5df7e14262152029d58bbb7f39c86bd2292de8dc55aa44a1964d7f",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_3_fixed_010.pkl",
+        "sha256": "b029673bd8810b6a39bdbf1245cbe8dae420f7d3601cc6de35af068ee2b5b59d",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_3_share_010.pkl",
+        "sha256": "3def64e9e61d1d3f677d4ebebbcb36d9c70c113ac9a0a14aacfbc8d3b23b4c38",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_3_unpenalized.pkl",
+        "sha256": "5942877ef8ab78bd44e26903fcced474902e849fb47dbdea1df173489799b4d2",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_4_fixed_003.pkl",
+        "sha256": "c2f7a5da4f7d4386735f975098446ddfaf5d37f1c103d0819ad0c256913bf4b5",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_4_fixed_010.pkl",
+        "sha256": "596f312060d65d8dec1ac5271f5a6e3c1548ded61e38ed0134ed6613dbd997f4",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_4_share_010.pkl",
+        "sha256": "e9ab35b1c24962c468c5a492ded3425e14306506e68a0a4b667658ceecf5d735",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2025_4_unpenalized.pkl",
+        "sha256": "926e462cd61a4532e24bb3cc9d4e372fcacd64f1a33f9915cce4201eaedb7136",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_2_fixed_003.pkl",
+        "sha256": "9dad31b6ca5ee6df9c7137a592fff96a01f6acf0b0b2f1bb92df65036e7777e4",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_2_fixed_010.pkl",
+        "sha256": "a1ae3e593f39c5f72f2d26e71c5581f226dc0b8436703d9550b58d13f20a789d",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_2_share_010.pkl",
+        "sha256": "a98ab5f31828dc21c66b54891627f0da10dc1b458a788a20396fc556f818af4a",
+        "size_bytes": 415,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_2_unpenalized.pkl",
+        "sha256": "0b953f78e2b8d053b7c681a8f3c56414ee087834c0ee5dfbb6f2f8a0dc59346b",
+        "size_bytes": 415,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_3_fixed_003.pkl",
+        "sha256": "3669c6b6a8b8583063bd29f1d363879b3ec9a67363c7b42af03441bc233d3a00",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_3_fixed_010.pkl",
+        "sha256": "65ae353ba7f5cb140a61a11f2496fff146eed2b1ba700ea58e3012af99df38db",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_3_share_010.pkl",
+        "sha256": "125f098c8f4b54bfed00588a25c9a495aaa846eb08468d99b96ce1d9e8e18339",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_3_unpenalized.pkl",
+        "sha256": "b7377d6697b3bed309bb24a1a92698fbb3fcae5588dcd0e8828f28fc655bdc76",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_4_fixed_003.pkl",
+        "sha256": "f8755c586433b495e078183f4ac4be0e10cf337fe19adc56cae7458dfa01a011",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_4_fixed_010.pkl",
+        "sha256": "6bd0d7a0c04e8704247416e05cea2cb3b70d6a138212498f9e8e91cd6ec05192",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_4_share_010.pkl",
+        "sha256": "6d4191de8f765ba3041df1fd184943ddae61cb26155e62c68be961ecd70e88a7",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/bundles/inner_2026_4_unpenalized.pkl",
+        "sha256": "883281ced261300d237cfd0a5b88885c03b0aa6f2e3caa7f5f80a36f82e0f5b8",
+        "size_bytes": 411,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/bundles/2024__ELO_OBSERVED.pkl",
+        "sha256": "f5b13a7da26ff4224803d7b20f220331cf38246f63b6b79d3b6328e47051f094",
+        "size_bytes": 458825,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/bundles/2025__ELO_OBSERVED.pkl",
+        "sha256": "f51d8911ebcbb20f9ab3015c9f728b922c21c016f3259a12f5a0634bbcee6f12",
+        "size_bytes": 306141,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/bundles/2026__ELO_OBSERVED.pkl",
+        "sha256": "ad180dac6a3c50b4349b4d2455322d82997d9437789b370492a5565536f60b54",
+        "size_bytes": 506161,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/bundles/2023__RECENCY.pkl",
+        "sha256": "4897f35c54693aedadc2b3e8982b54b106ed9f7d497711ab569a2d394d8de94b",
+        "size_bytes": 475493,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/bundles/2023__RELATIVE.pkl",
+        "sha256": "d2a4fedaa236de1f80efa8d08caf83f810874af82ba8a6139de24a0f8cc5fa3d",
+        "size_bytes": 144132,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/bundles/2024__RECENCY.pkl",
+        "sha256": "c3c723674dbc0dc407dba5fb611e7cc6e694d698ab3099bff2b1da628db50140",
+        "size_bytes": 288668,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/bundles/2025__RECENCY.pkl",
+        "sha256": "ba71bb9d08d6dfec796c01b87d10324349e302b3a2f33f557beda2dc6ccbaccb",
+        "size_bytes": 459988,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/bundles/2026__RECENCY.pkl",
+        "sha256": "71e34efdefc8fdb6dc8ce25bc2fdb5f33d4d108012a6fd0ec80acdddc6120d96",
+        "size_bytes": 583245,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/bundles/2024__TRIAL_RELATIVE.pkl",
+        "sha256": "65f49ebabeaa65e8566d7a3c1258b2549e38e525f85e6a306035ce48970ce74d",
+        "size_bytes": 108372,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/bundles/2025__TRIAL_RELATIVE.pkl",
+        "sha256": "4561eb65c246d33cef9437b32a623d71e2d627673bcff36aa7face31b2a3a772",
+        "size_bytes": 108334,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/bundles/2026__TRIAL_RELATIVE.pkl",
+        "sha256": "e2d93526a2db00b025286dca2042eecfb0d71cea4d8a618dd8c8b5de46e6a0bb",
+        "size_bytes": 489049,
+        "category": "legacy-jeju-research-model",
+        "reason": "Jeju-only experimental/calibration/challenger weight; not the registry champion and not imported by live inference."
+      }
+    ],
+    "legacy-jeju-experiment-outputs": [
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/frozen_scores.parquet",
+        "sha256": "fb73afe7c2f57d43248086394f5e50a49529c2d3f385f9005b3967780bf8af47",
+        "size_bytes": 1621895,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/horse_predictions.parquet",
+        "sha256": "a804373d59d706768c3bfae67e6aa07ada3c71aa7e2e6b09d8963d71840a7dd2",
+        "size_bytes": 505318,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/race_predictions.parquet",
+        "sha256": "2a5e5a5a0789ce8e814edd9fe9dd8fb576df1a808cab7971e2d96db623213fd0",
+        "size_bytes": 457677,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/seed_race_predictions.parquet",
+        "sha256": "18dc2278b3f915fb339c37fe46016316b189294494100b4241eb749c5b95e600",
+        "size_bytes": 21665,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/frozen_scores.parquet",
+        "sha256": "0f5f74df38960fd556b314753612bed2373380b4e01657c0ec8ba4f841d6b66e",
+        "size_bytes": 184456,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/horse_predictions.parquet",
+        "sha256": "3fe93854bab4f6772a944db3a57f91a6ee6ab67469948d2df42a06314ccd4e31",
+        "size_bytes": 321946,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/race_predictions.parquet",
+        "sha256": "8e1a019165dbd967eea6286d2305f46a61d4f7d7abd0c5a54b71314d01c00e81",
+        "size_bytes": 193658,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/horse_predictions.parquet",
+        "sha256": "3cf170e2628ecfbb5c35ae6d2565dd1af9e03820ba0cbcc7216bcfbaa2be6b30",
+        "size_bytes": 761608,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_nested_calibration_20260922/race_predictions.parquet",
+        "sha256": "0e67c3636ed609a291982a116815ad56108952418908193b6f1449222182befc",
+        "size_bytes": 135656,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/frozen_scores.parquet",
+        "sha256": "52d0222ea38181c152e5f602c0ba6ad9d0c8138da4fbfad8b5649f1eb282ffbe",
+        "size_bytes": 1135840,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/horse_predictions.parquet",
+        "sha256": "ce96b624c3492117c5c8b8a2eafc36c7d0c0ca0eaad38909cb61faa04c817f6f",
+        "size_bytes": 464386,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/race_predictions.parquet",
+        "sha256": "a6e00e671da00ca9f30e3a83feddc2096b0928923773ba8fc7382f539257cbbc",
+        "size_bytes": 327660,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_observed_elo_20260922/seed_predictions.parquet",
+        "sha256": "1fdbd9f125c446b72fc47a88fffde1bf2985781454c775751444bd6f376bf586",
+        "size_bytes": 10583,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/frozen_scores.parquet",
+        "sha256": "00c29b577eac8c64fb6f5373d8714577e1742d5ef2b46cdb8ec4b03c70aa3ca2",
+        "size_bytes": 1969875,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/policy_race_predictions.parquet",
+        "sha256": "9fedd3dadefb1654ead2802d71de9f63b8fb3341c824e3f01b87273687e1c750",
+        "size_bytes": 72536,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/prior_race_predictions.parquet",
+        "sha256": "4d360d44cd8bc4546db58d6e6adca36c3aecf37f761f43a6706efa76922a5d0d",
+        "size_bytes": 51126,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_gate_20260928/raw_race_predictions.parquet",
+        "sha256": "f93fff51589fa632ffedea6225641febc8db73733615c95a4901cd71c92a1916",
+        "size_bytes": 80414,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/frozen_scores.parquet",
+        "sha256": "089a94b6133e3e8806b6581ca33c13fbde464023de8c38f56ac330e13fd39322",
+        "size_bytes": 1110508,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/horse_predictions.parquet",
+        "sha256": "f651ae8766cf67d4d4f4e1499a433747e5031dbca328134de22f20a0c21113e8",
+        "size_bytes": 464391,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/race_predictions.parquet",
+        "sha256": "c61379447ef1a961fe32f9728e245421d9749d265a321f45e51682e74887eb98",
+        "size_bytes": 330192,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      },
+      {
+        "path": "data/research/jeju_trial_relative_20260922/seed_predictions.parquet",
+        "sha256": "56eede693f833515ca398fb7e0e474615710dbb3516120097f6d329ba2650a6e",
+        "size_bytes": 10643,
+        "category": "legacy-jeju-experiment-output",
+        "reason": "Saved prediction/score table from a completed Jeju challenger study; no live-inference dependency. Candidate is limited to these explicit files."
+      }
+    ],
+    "legacy-jeju-racefit-cached-outputs": [
+      {
+        "path": "data/experiments/models/20047697-0b2e-4dac-9a4d-762271f5e1f9/predictions_valid.parquet",
+        "sha256": "79784c56e59b84e691cda3ea5928395e28070c5d93bd6555bccd331d6a7f2753",
+        "size_bytes": 137292,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/20e1772c-17fe-4d7f-9a0a-cb2418b0fa13/predictions_valid.parquet",
+        "sha256": "86018a782a897f7fd25374f85a7dec63af3cbe3700a3407d937921ef7b0defa7",
+        "size_bytes": 229974,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/20e1772c-17fe-4d7f-9a0a-cb2418b0fa13/rank_comparison_valid.parquet",
+        "sha256": "b3b3bad406d7cb4f4837af05b1685ee9925f7dfe06f1a773af888e30fddeef9e",
+        "size_bytes": 265785,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/29861472-0b42-4863-9bb1-8f9a4123146e/predictions_valid.parquet",
+        "sha256": "ff643d6ccc217a0c787c45d248893261d8197b31b31abfba7710a756d3f65f38",
+        "size_bytes": 137286,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/2d6ebf9a-812a-49aa-ac33-b3bf8efd225a/predictions_valid.parquet",
+        "sha256": "3f460e2bbc3c0b6a172b963e0290b5add7aceea43b900f6488485017b7d3e2a4",
+        "size_bytes": 229580,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/2d6ebf9a-812a-49aa-ac33-b3bf8efd225a/rank_comparison_valid.parquet",
+        "sha256": "e4d3b5ed0dcf9431196f0a0da01004e35f166cfbaf3a74bec9f7cbb08b6295ee",
+        "size_bytes": 265387,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/37a13280-f0d5-45a2-bbd2-3d9fc23b31f4/predictions_valid.parquet",
+        "sha256": "59d12916496a8724aafb082a2c79e7d8d4195a5ad95b9a583eb6cee1b3a7b9bd",
+        "size_bytes": 230042,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/37a13280-f0d5-45a2-bbd2-3d9fc23b31f4/rank_comparison_valid.parquet",
+        "sha256": "fd2e9c66b7e8fc2ef1fb96aea15bca373be90aef1ca2cc7880e32e2cd175d5bf",
+        "size_bytes": 265859,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/4946746a-86aa-4a95-8b25-ec2e3eb20963/predictions_valid.parquet",
+        "sha256": "ff643d6ccc217a0c787c45d248893261d8197b31b31abfba7710a756d3f65f38",
+        "size_bytes": 137286,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/511666a2-cc64-4146-97fa-2e99834952be/predictions_valid.parquet",
+        "sha256": "ac011fa16c2824a78f937c77df3f6c468949fa29255ab134cfb47e93b6c43dda",
+        "size_bytes": 229866,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/511666a2-cc64-4146-97fa-2e99834952be/rank_comparison_valid.parquet",
+        "sha256": "722cf3811e8782a0085badcab00d6162374cd91ec786077abd4d925631073718",
+        "size_bytes": 265671,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/81f002fc-b17e-4c98-8e67-cfdf5205f621/predictions_valid.parquet",
+        "sha256": "32d0764526def718948d6312cec0530bec6b3ce3ad527311860dc88b47a4613f",
+        "size_bytes": 230169,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/81f002fc-b17e-4c98-8e67-cfdf5205f621/rank_comparison_valid.parquet",
+        "sha256": "0f9000ffc6a4286d7929c8a8642c793fc6c9d54006f6cdac1503d0d28f65014f",
+        "size_bytes": 265994,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/91169b74-0363-42a1-9c17-b2cd47164f38/predictions_valid.parquet",
+        "sha256": "4230443e534a811ca2e6229e6d637eb17774b651fc88e3aa8ec91950479c602f",
+        "size_bytes": 226575,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/91169b74-0363-42a1-9c17-b2cd47164f38/rank_comparison_valid.parquet",
+        "sha256": "d578b65d62754de351ce2910de3a561f6e8747ee52b45294e60642313ed1b29d",
+        "size_bytes": 262382,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/97e00395-c11f-4b13-a518-35cc8e43d4c4/predictions_valid.parquet",
+        "sha256": "5534d80d83321992e2907c289ac1b337a6807c3f0a4b266891d2473df8928db2",
+        "size_bytes": 230151,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/97e00395-c11f-4b13-a518-35cc8e43d4c4/rank_comparison_valid.parquet",
+        "sha256": "eba24d04942da1b7833d6e61c0081dea8e495dd8c288d7ed5acce7c73e28c109",
+        "size_bytes": 265956,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/ccfea29d-5e4f-4099-9a1b-43b977348389/predictions_valid.parquet",
+        "sha256": "1b8f4d370241c5000b1f939406dcddb066c67b05e3e23991db42a184becfb139",
+        "size_bytes": 230025,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/ccfea29d-5e4f-4099-9a1b-43b977348389/rank_comparison_valid.parquet",
+        "sha256": "eb98e1a5536e6102bb5764a9ca4e891dfe247819f2d186e90e44c1b5eca42884",
+        "size_bytes": 265836,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/e15ed472-a49a-4685-b8a5-9925edbcea5b/predictions_valid.parquet",
+        "sha256": "109d35f8522c1b5165e3dbc73f40fc8fdb6ab3536dfec3a9ea9b5d92dcdcbf6c",
+        "size_bytes": 230206,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/e15ed472-a49a-4685-b8a5-9925edbcea5b/rank_comparison_valid.parquet",
+        "sha256": "e374754aa695fd202f734e41011c903adb1358e33d4e4c4049cf258580d37f88",
+        "size_bytes": 266030,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/e39d8096-52b9-43c2-9c2e-658044d0a0b0/predictions_valid.parquet",
+        "sha256": "dbced6deca81e90aeb754f6df5766c053691a80190d57c52a4ef6687fca369ba",
+        "size_bytes": 216733,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      },
+      {
+        "path": "data/experiments/models/e39d8096-52b9-43c2-9c2e-658044d0a0b0/rank_comparison_valid.parquet",
+        "sha256": "3a30be374e86bee46e3a4242ff2005c6e28093071bd307bad4a3d9b32c6f9753",
+        "size_bytes": 252533,
+        "category": "legacy-jeju-racefit-output",
+        "reason": "Cached validation predictions/comparisons for a Jeju-only run; preserves source datasets and the shared run ledger."
+      }
+    ]
+  },
+  "summary": {
+    "legacy-jeju-racefit-models": {
+      "file_count": 13,
+      "size_bytes": 9392795
+    },
+    "legacy-jeju-research-models": {
+      "file_count": 74,
+      "size_bytes": 14212579
+    },
+    "legacy-jeju-experiment-outputs": {
+      "file_count": 21,
+      "size_bytes": 10232033
+    },
+    "legacy-jeju-racefit-cached-outputs": {
+      "file_count": 23,
+      "size_bytes": 5336618
+    },
+    "all_phase1_candidates": {
+      "file_count": 131,
+      "size_bytes": 39174025
+    }
+  },
+  "provenance": {
+    "jeju_racefit_run_count": 13,
+    "jeju_racefit_run_ids": [
+      "20047697-0b2e-4dac-9a4d-762271f5e1f9",
+      "20e1772c-17fe-4d7f-9a0a-cb2418b0fa13",
+      "29861472-0b42-4863-9bb1-8f9a4123146e",
+      "2d6ebf9a-812a-49aa-ac33-b3bf8efd225a",
+      "37a13280-f0d5-45a2-bbd2-3d9fc23b31f4",
+      "4946746a-86aa-4a95-8b25-ec2e3eb20963",
+      "511666a2-cc64-4146-97fa-2e99834952be",
+      "81f002fc-b17e-4c98-8e67-cfdf5205f621",
+      "91169b74-0363-42a1-9c17-b2cd47164f38",
+      "97e00395-c11f-4b13-a518-35cc8e43d4c4",
+      "ccfea29d-5e4f-4099-9a1b-43b977348389",
+      "e15ed472-a49a-4685-b8a5-9925edbcea5b",
+      "e39d8096-52b9-43c2-9c2e-658044d0a0b0"
+    ],
+    "run_id_source": "data/experiments/model_runs.jsonl rows whose dataset_version contains jeju_native_racefit; the mixed-domain ledger itself is preserved.",
+    "research_model_scope": [
+      "data/research/jeju_accuracy_candidates_20260919",
+      "data/research/jeju_nested_calibration_20260922",
+      "data/research/jeju_observed_elo_20260922",
+      "data/research/jeju_trial_gate_20260928",
+      "data/research/jeju_trial_relative_20260922",
+      "data/research/jeju_native_transition_holdout_v13_20260916"
+    ],
+    "research_output_filename_allowlist": [
+      "frozen_scores.parquet",
+      "horse_predictions.parquet",
+      "policy_race_predictions.parquet",
+      "prior_race_predictions.parquet",
+      "race_predictions.parquet",
+      "raw_race_predictions.parquet",
+      "seed_predictions.parquet",
+      "seed_race_predictions.parquet"
+    ]
+  },
+  "preserve_integrity_snapshot": {
+    "required_live_inputs_and_control_files": [
+      {
+        "path": "config/prediction_model_registry.json",
+        "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+        "size_bytes": 7291
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+        "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+        "size_bytes": 638955
+      },
+      {
+        "path": "scripts/predict_jeju_live_hy_r_form.py",
+        "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0",
+        "size_bytes": 27278
+      },
+      {
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+        "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53",
+        "size_bytes": 935
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+        "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d",
+        "size_bytes": 540
+      },
+      {
+        "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+        "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518",
+        "size_bytes": 307
+      },
+      {
+        "path": "data/research/jeju_native_top3_dataset_v1_20260915_r2/labels.parquet",
+        "sha256": "8887ee5a7a62abef9c0f54db622a190dbeb34c900735246f473351c6aa8691d7",
+        "size_bytes": 756610
+      },
+      {
+        "path": "data/research/jeju_native_top3_dataset_v1_20260915_r2/history_results.parquet",
+        "sha256": "8b23bd99e76142ab0bc34fff011b99996816e70190a9a6c848f0581469aad5cd",
+        "size_bytes": 4044081
+      },
+      {
+        "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+        "sha256": "0f2871c2a8f931bb968d8bf7086c27f0644c0ef7332b41b7a1bd85ff637c638f",
+        "size_bytes": 1535651840
+      },
+      {
+        "path": "data/research/jeju_native_transition_features_v1_20260916/context_history.parquet",
+        "sha256": "ac3ece2b83717692ee35cc3492e11bd0afe800bd687d273a0d3d01f461e01b6a",
+        "size_bytes": 3019685
+      },
+      {
+        "path": "data/research/jeju_model_input_audit_20260928/bundle_input_inventory.json",
+        "sha256": "7a9ba8a30b69cdb0362caf3ab3057c759a0fae9793047e97c1d58e8293b9eb77",
+        "size_bytes": 35309
+      },
+      {
+        "path": "data/experiments/model_runs.jsonl",
+        "sha256": "7ff2f6a11f0b11da1a92c98be25935123f2712b9d6fb628ddf994cec8db1330f",
+        "size_bytes": 692497
+      }
+    ],
+    "saved_pregame_fixture_files": [
+      {
+        "path": "tests/fixtures/jeju_pregame/README.md",
+        "sha256": "e07ca7a1d9ee1f9dd611517aead98d265a3a921d26d08d6e6263b0a25572826c",
+        "size_bytes": 998
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/card.html",
+        "sha256": "b16c7df0e9e1371c3f65f013504f5316ac9a810b20b82988e3b1cfeb92dd4c58",
+        "size_bytes": 8244
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/card_rated.html",
+        "sha256": "f689bd041851c4306fd419383b24bc398b9612ee99b6b17a89ae6d4b6d1e172d",
+        "size_bytes": 8879
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/changes.html",
+        "sha256": "d51b0ec40bbc7e2160702ab63819b0bf37a9909d855f76c7ec106a14a8f87f53",
+        "size_bytes": 2444
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/schedule.html",
+        "sha256": "5111d4cf01e88372eeceeccebb37372b9b03ac882ddb02e44da3d24380039341",
+        "size_bytes": 22234
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/track.html",
+        "sha256": "1960e4678e7db611705ded47dfc553bf2710fd8380608bc096c4d33aa86a22da",
+        "size_bytes": 176
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/weight.html",
+        "sha256": "657d453831ca96995471d36b00dcb1eae3b434b1dc001507bbaff50217af84df",
+        "size_bytes": 3546
+      },
+      {
+        "path": "tests/fixtures/jeju_pregame/weight_index.html",
+        "sha256": "2f6e90d6c64920ad76b9a3e9ae23b5b7b2e69f9d2e7ba2e9f2be244ef25e8b4e",
+        "size_bytes": 1255
+      }
+    ]
+  },
+  "explicit_exclusions": [
+    "The current HY_R_FORM champion bundle, prediction registry and all referenced verification/decision gate JSON files.",
+    "scripts/predict_jeju_live_hy_r_form.py and all source modules needed to build its frame or unpickle its estimator classes.",
+    "The current Jeju pregame test fixtures, all saved files under data/predictions, raw/source history, operational/shared SQLite databases, Jeju yearly score databases, core inference inputs, and Jeju restart data under data/datasets.",
+    "The five user-protected Jeju intent/reference documents and any source/docs/reproduce files; delegated for a separate dependency-aware review.",
+    "All shared or mixed-domain files outside the explicit path list; all symlinks (not followed or included)."
+  ],
+  "known_side_effects": [
+    "Deleting the 13 Jeju racefit model directories leaves historical artifact_path entries in data/experiments/model_runs.jsonl unresolved. scripts/audit_artifacts.py currently treats those references as missing artifacts. The shared ledger is preserved per root instruction; root must decide whether to record an external disposal receipt or update the audit contract in a later review."
+  ],
+  "execution_constraints": [
+    "Do not act on this manifest until root review/authorization.",
+    "Execution must re-stat and re-hash every path immediately before unlink; abort any changed hash/size, missing file, symlink, duplicate, or path outside repository root.",
+    "Do not use recursive directory deletion. Unlink only the exact entries listed in groups.",
+    "After approved cleanup, re-run the registry resolver and confirm model and registry hashes unchanged."
+  ]
+}

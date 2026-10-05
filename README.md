@@ -16,6 +16,10 @@
 - [Supabase 이전 실행 절차](docs/SUPABASE_MIGRATION.md)
 - [단계별 개발 로드맵](docs/ROADMAP.md)
 
+## 제주마 연구
+
+새 제주마 작업은 [제주 작업 공간](jeju/README.md)과 [작업 지침](jeju/AGENTS.md)에서 시작합니다. 공통 DB·수집·웹 인프라는 상위 프로젝트와 공유합니다.
+
 ## 기술 구성
 
 - Python 3.12, uv
