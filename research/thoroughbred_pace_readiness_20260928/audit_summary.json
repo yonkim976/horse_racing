@@ -1,0 +1,41 @@
+{
+  "scope": "read-only readiness audit, not trained feature coverage or accuracy measurement",
+  "source_as_of": "2026-09-28",
+  "database_open_mode": "read-only + query_only",
+  "old_dataset_sha256": "e4b63fdf579068fb972285a8dba677039ab3343a2afd14b0abbad106491c869e",
+  "read_sources_sha256": {
+    "docs/THOROUGHBRED_HUMAN_ANALYSIS_FRAMEWORK_2026-09-28.md": "9b7f7bf1a49f7e51ddca6a8a9031dc0cd37ade74b1537321d9a08557319b540d",
+    "docs/PASSING_SECTION_OPERATIONAL_MIGRATION_2026-09-28.md": "173f02560edc20b4ea5add4cdb24baa4bd02db084e90d31c90a8466e1f6fa862",
+    "research/track_common_residual_20260928/FINAL_REPORT_KO.md": "db4a2d3fe981128891a278a0b96d3a5c8e6df6974d28d6504461d3d06dd43cfa",
+    "data/research/thoroughbred_three_targets_20260918_v3/code/context_features.py": "0fb5f0cc5348cdf2bafced8bf1e9741f61a97ab198536c1aa58d963a40658065",
+    "data/research/thoroughbred_followup_20260918_v4/model/candidate_features.json": "0bd1b0e2c7901329827657e2dacf26e90381e8e3bf8ebdfecdd9ff68451d0ffb"
+  },
+  "prior_S1F_support": [
+    {
+      "venue": "BUSAN",
+      "old_dataset_rows": 44211,
+      "old_early_available": 2077,
+      "old_early_available_rate": 0.0469792585555631,
+      "new_prior_S1F_available": 41411,
+      "new_prior_S1F_available_rate": 0.936667345230825,
+      "newly_supported_old_missing_rows": 39334
+    },
+    {
+      "venue": "SEOUL",
+      "old_dataset_rows": 62554,
+      "old_early_available": 58639,
+      "old_early_available_rate": 0.9374140742398568,
+      "new_prior_S1F_available": 58799,
+      "new_prior_S1F_available_rate": 0.9399718643092368,
+      "newly_supported_old_missing_rows": 160
+    }
+  ],
+  "new_history_valid_rows": 178611,
+  "notes": [
+    "Old counts are nonmissing features in the frozen evaluation dataset, not counts of direct raw sections.",
+    "Potential new coverage requires a valid observed S1F on a strictly earlier date for the same horse; includes earlier starts at either venue.",
+    "Only new 2017+ history is counted; earlier legacy data are not reconstructed.",
+    "No newly generated input values, model fitting, prediction or probability change.",
+    "Availability by past race date does not independently verify original publication timestamps."
+  ]
+}

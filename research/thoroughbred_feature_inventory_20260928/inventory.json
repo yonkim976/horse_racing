@@ -1,0 +1,772 @@
+[
+  {
+    "number": 1,
+    "group": "범주형 출마·개체 정보",
+    "name": "venue_code",
+    "type": "범주",
+    "meaning": "경마장 구분"
+  },
+  {
+    "number": 2,
+    "group": "범주형 출마·개체 정보",
+    "name": "race_type",
+    "type": "범주",
+    "meaning": "공식 경주 유형"
+  },
+  {
+    "number": 3,
+    "group": "범주형 출마·개체 정보",
+    "name": "race_class",
+    "type": "범주",
+    "meaning": "경주 등급"
+  },
+  {
+    "number": 4,
+    "group": "범주형 출마·개체 정보",
+    "name": "burden_type",
+    "type": "범주",
+    "meaning": "부담중량 부여 방식"
+  },
+  {
+    "number": 5,
+    "group": "범주형 출마·개체 정보",
+    "name": "rating_condition_raw",
+    "type": "범주",
+    "meaning": "출전 가능 레이팅 조건 원문"
+  },
+  {
+    "number": 6,
+    "group": "범주형 출마·개체 정보",
+    "name": "origin_raw",
+    "type": "범주",
+    "meaning": "말의 산지"
+  },
+  {
+    "number": 7,
+    "group": "범주형 출마·개체 정보",
+    "name": "sex_raw",
+    "type": "범주",
+    "meaning": "말의 성별"
+  },
+  {
+    "number": 8,
+    "group": "범주형 출마·개체 정보",
+    "name": "hr_no",
+    "type": "범주",
+    "meaning": "말의 공식 식별번호. 능력 측정값 자체는 아님"
+  },
+  {
+    "number": 9,
+    "group": "범주형 출마·개체 정보",
+    "name": "jockey_no",
+    "type": "범주",
+    "meaning": "기수 식별번호. 세부 기승 스타일 자체는 아님"
+  },
+  {
+    "number": 10,
+    "group": "범주형 출마·개체 정보",
+    "name": "trainer_no",
+    "type": "범주",
+    "meaning": "조교사 식별번호. 조교 강도 자체는 아님"
+  },
+  {
+    "number": 11,
+    "group": "범주형 출마·개체 정보",
+    "name": "owner_no",
+    "type": "범주",
+    "meaning": "마주 식별번호. 승부 의도를 측정하지 않음"
+  },
+  {
+    "number": 12,
+    "group": "범주형 출마·개체 정보",
+    "name": "hist_previous_race_venue",
+    "type": "범주",
+    "meaning": "직전 확정 출전의 경마장"
+  },
+  {
+    "number": 13,
+    "group": "범주형 출마·개체 정보",
+    "name": "venue_distance_class",
+    "type": "범주",
+    "meaning": "경마장×거리×등급을 결합한 범주"
+  },
+  {
+    "number": 14,
+    "group": "현재 카드 수치 정보",
+    "name": "distance_m",
+    "type": "수치",
+    "meaning": "이번 경주 거리(m)"
+  },
+  {
+    "number": 15,
+    "group": "현재 카드 수치 정보",
+    "name": "field_size_full_card",
+    "type": "수치",
+    "meaning": "보존된 전체 출마표 행 수. 최종 실제 출전두수와 다를 수 있음"
+  },
+  {
+    "number": 16,
+    "group": "현재 카드 수치 정보",
+    "name": "chul_no",
+    "type": "수치",
+    "meaning": "등록된 출발번호/마번"
+  },
+  {
+    "number": 17,
+    "group": "현재 카드 수치 정보",
+    "name": "age_raw",
+    "type": "수치",
+    "meaning": "현재 말 나이"
+  },
+  {
+    "number": 18,
+    "group": "현재 카드 수치 정보",
+    "name": "rating_raw",
+    "type": "수치",
+    "meaning": "현재 공식 레이팅"
+  },
+  {
+    "number": 19,
+    "group": "현재 카드 수치 정보",
+    "name": "burden_weight_kg",
+    "type": "수치",
+    "meaning": "현재 부담중량(kg). 마체중이 아님"
+  },
+  {
+    "number": 20,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_starts_all",
+    "type": "수치",
+    "meaning": "과거 확정 출전행 수"
+  },
+  {
+    "number": 21,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_finished_all",
+    "type": "수치",
+    "meaning": "과거 착순 라벨이 있는 완주 수"
+  },
+  {
+    "number": 22,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_wins_all",
+    "type": "수치",
+    "meaning": "과거 우승 수"
+  },
+  {
+    "number": 23,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_top3_all",
+    "type": "수치",
+    "meaning": "과거 3위 이내 수"
+  },
+  {
+    "number": 24,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_starts_at_venue",
+    "type": "수치",
+    "meaning": "현재 경마장에서의 과거 확정 출전행 수"
+  },
+  {
+    "number": 25,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_finished_at_venue",
+    "type": "수치",
+    "meaning": "현재 경마장에서의 과거 완주 수"
+  },
+  {
+    "number": 26,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_wins_at_venue",
+    "type": "수치",
+    "meaning": "현재 경마장에서의 과거 우승 수"
+  },
+  {
+    "number": 27,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_prior_starts_other_venue",
+    "type": "수치",
+    "meaning": "다른 경마장에서의 과거 확정 출전행 수"
+  },
+  {
+    "number": 28,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_days_since_last_race",
+    "type": "수치",
+    "meaning": "직전 확정 출전일 이후 일수"
+  },
+  {
+    "number": 29,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_venue_changed_since_last_start",
+    "type": "수치",
+    "meaning": "직전 출전과 현재 경마장이 달라졌는지"
+  },
+  {
+    "number": 30,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_first_start_at_venue",
+    "type": "수치",
+    "meaning": "현재 경마장에 첫 출전인지"
+  },
+  {
+    "number": 31,
+    "group": "누적 전적·경마장 이력",
+    "name": "hist_away_from_first_observed_venue",
+    "type": "수치",
+    "meaning": "처음 관측된 경마장과 현재 경마장이 다른지"
+  },
+  {
+    "number": 32,
+    "group": "누적 전적·경마장 이력",
+    "name": "smoothed_historic_win_rate",
+    "type": "수치",
+    "meaning": "완화한 통산 승률: (우승+1)/(완주+10)"
+  },
+  {
+    "number": 33,
+    "group": "누적 전적·경마장 이력",
+    "name": "smoothed_historic_top3_rate",
+    "type": "수치",
+    "meaning": "완화한 통산 입상률: (입상+3)/(완주+10)"
+  },
+  {
+    "number": 34,
+    "group": "누적 전적·경마장 이력",
+    "name": "prior_starts_venue_distance_class",
+    "type": "수치",
+    "meaning": "같은 경마장×정확거리×등급의 과거 출전행 수"
+  },
+  {
+    "number": 35,
+    "group": "누적 전적·경마장 이력",
+    "name": "prior_wins_venue_distance_class",
+    "type": "수치",
+    "meaning": "같은 경마장×정확거리×등급의 과거 우승 수"
+  },
+  {
+    "number": 36,
+    "group": "누적 전적·경마장 이력",
+    "name": "smoothed_win_rate_venue_distance_class",
+    "type": "수치",
+    "meaning": "동일 조건 완화 승률: (우승+1)/(출전행+20)"
+  },
+  {
+    "number": 37,
+    "group": "계절",
+    "name": "race_month_sin",
+    "type": "수치",
+    "meaning": "경주 월을 원형으로 표현한 sine 값"
+  },
+  {
+    "number": 38,
+    "group": "계절",
+    "name": "race_month_cos",
+    "type": "수치",
+    "meaning": "경주 월을 원형으로 표현한 cosine 값. 위 값과 함께 12월·1월의 연속성 표현"
+  },
+  {
+    "number": 39,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_finish_pct_last",
+    "type": "수치",
+    "meaning": "직전 유효 상대 착순 점수. 1이 좋고 0이 나쁨"
+  },
+  {
+    "number": 40,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_finish_pct_avg3",
+    "type": "수치",
+    "meaning": "최근 유효 최대 3회 상대 착순 점수 평균"
+  },
+  {
+    "number": 41,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_finish_pct_avg5",
+    "type": "수치",
+    "meaning": "최근 유효 최대 5회 상대 착순 점수 평균"
+  },
+  {
+    "number": 42,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_wins3",
+    "type": "수치",
+    "meaning": "최근 유효 최대 3회 중 우승 횟수"
+  },
+  {
+    "number": 43,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_wins5",
+    "type": "수치",
+    "meaning": "최근 유효 최대 5회 중 우승 횟수"
+  },
+  {
+    "number": 44,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_top3_3",
+    "type": "수치",
+    "meaning": "최근 유효 최대 3회 중 입상 횟수"
+  },
+  {
+    "number": 45,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_top3_5",
+    "type": "수치",
+    "meaning": "최근 유효 최대 5회 중 입상 횟수"
+  },
+  {
+    "number": 46,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_prior_valid_finishes",
+    "type": "수치",
+    "meaning": "누적 유효 착순 이력 수"
+  },
+  {
+    "number": 47,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_last_burden_delta_kg",
+    "type": "수치",
+    "meaning": "현재 부담중량−직전 출전 부담중량(kg)"
+  },
+  {
+    "number": 48,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_last_distance_delta_m",
+    "type": "수치",
+    "meaning": "현재 거리−직전 출전 거리(m)"
+  },
+  {
+    "number": 49,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_dnf_count5",
+    "type": "수치",
+    "meaning": "최근 확정 최대 5회 출전 중 미완주(DNF) 횟수"
+  },
+  {
+    "number": 50,
+    "group": "최근 성적·조건 변화",
+    "name": "research_form_dnf_rate5",
+    "type": "수치",
+    "meaning": "최근 확정 최대 5회 출전 중 미완주 비율"
+  },
+  {
+    "number": 51,
+    "group": "상대 수준을 반영한 Elo 능력",
+    "name": "research_elo_global",
+    "type": "수치",
+    "meaning": "과거 상대와의 승패에서 누적한 전체 Elo. 신규 기본값 1500"
+  },
+  {
+    "number": 52,
+    "group": "상대 수준을 반영한 Elo 능력",
+    "name": "research_elo_global_starts",
+    "type": "수치",
+    "meaning": "전체 Elo를 갱신한 과거 경주 수"
+  },
+  {
+    "number": 53,
+    "group": "상대 수준을 반영한 Elo 능력",
+    "name": "research_elo_context",
+    "type": "수치",
+    "meaning": "현재 경마장×정확거리의 Elo. 신규 기본값 1500"
+  },
+  {
+    "number": 54,
+    "group": "상대 수준을 반영한 Elo 능력",
+    "name": "research_elo_context_starts",
+    "type": "수치",
+    "meaning": "해당 경마장×정확거리의 Elo 갱신 경주 수"
+  },
+  {
+    "number": 55,
+    "group": "상대 수준을 반영한 Elo 능력",
+    "name": "research_elo_uncertainty",
+    "type": "수치",
+    "meaning": "Elo 이력 부족 정도: 1/sqrt(전체 Elo 갱신 수+1). 예측 신뢰구간 자체는 아님"
+  },
+  {
+    "number": 56,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_last",
+    "type": "수치",
+    "meaning": "직전 유효 보정 속도지수"
+  },
+  {
+    "number": 57,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_avg3",
+    "type": "수치",
+    "meaning": "최근 유효 최대 3회 보정 속도지수 평균"
+  },
+  {
+    "number": 58,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_median5",
+    "type": "수치",
+    "meaning": "최근 유효 최대 5회 보정 속도지수 중앙값"
+  },
+  {
+    "number": 59,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_best5",
+    "type": "수치",
+    "meaning": "최근 유효 최대 5회 최고 보정 속도지수"
+  },
+  {
+    "number": 60,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_trend",
+    "type": "수치",
+    "meaning": "최근 2회 평균−그 이전 최대 3회 평균. 유효 4회 이상 필요"
+  },
+  {
+    "number": 61,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_count5",
+    "type": "수치",
+    "meaning": "최근 최대 5회 창의 유효 속도지수 개수"
+  },
+  {
+    "number": 62,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_censored_rate5",
+    "type": "수치",
+    "meaning": "최근 최대 5회 지수 중 뒤처진 완주 기록의 하한 제한이 적용된 비율. 실제 전력 질주 포기를 관측한 값은 아님"
+  },
+  {
+    "number": 63,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_exact_distance_avg5",
+    "type": "수치",
+    "meaning": "이번 정확거리에서 최근 유효 최대 5회 속도지수 평균"
+  },
+  {
+    "number": 64,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_exact_distance_count5",
+    "type": "수치",
+    "meaning": "이번 정확거리에서 확보된 최근 유효 속도지수 수(최대 5)"
+  },
+  {
+    "number": 65,
+    "group": "보정된 최종 기록",
+    "name": "research_speed_has_valid_history",
+    "type": "수치",
+    "meaning": "유효 속도지수 이력이 있는지"
+  },
+  {
+    "number": 66,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_elo_vs_field",
+    "type": "수치",
+    "meaning": "자기 전체 Elo−이번 상대마 평균 Elo"
+  },
+  {
+    "number": 67,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_context_elo_vs_field",
+    "type": "수치",
+    "meaning": "자기 경마장×거리 Elo−이번 상대마 평균"
+  },
+  {
+    "number": 68,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_rating_vs_field",
+    "type": "수치",
+    "meaning": "자기 레이팅−현재 레이팅이 있는 상대마 평균"
+  },
+  {
+    "number": 69,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_speed_vs_field",
+    "type": "수치",
+    "meaning": "자기 직전 속도지수−해당 지수가 있는 상대마 평균"
+  },
+  {
+    "number": 70,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_field_competitor_count",
+    "type": "수치",
+    "meaning": "전체 출마표에서 자기 외 상대마 수"
+  },
+  {
+    "number": 71,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_field_rating_available_count",
+    "type": "수치",
+    "meaning": "현재 레이팅이 있는 상대마 수"
+  },
+  {
+    "number": 72,
+    "group": "이번 편성 대비 상대 능력",
+    "name": "research_field_speed_available_count",
+    "type": "수치",
+    "meaning": "과거 유효 속도지수가 있는 상대마 수"
+  },
+  {
+    "number": 73,
+    "group": "게이트",
+    "name": "research_gate_position_pct",
+    "type": "수치",
+    "meaning": "출발번호/전체 출마표 두수. 이번 게이트 감사의 순위 기반 정의와 다름"
+  },
+  {
+    "number": 74,
+    "group": "게이트",
+    "name": "research_gate_band_code",
+    "type": "수치",
+    "meaning": "상대 출발번호 ≤1/3이면 내측0, ≤2/3이면 중간1, 그 밖은 외측2"
+  },
+  {
+    "number": 75,
+    "group": "게이트",
+    "name": "research_gate_top3_index_course_3y",
+    "type": "수치",
+    "meaning": "이전 1095일 경마장×게이트 구역의 관측/Elo 기대 입상 지수. 100이 중립"
+  },
+  {
+    "number": 76,
+    "group": "게이트",
+    "name": "research_gate_top3_index_distance_3y",
+    "type": "수치",
+    "meaning": "이전 1095일 경마장×정확거리×게이트 구역 입상 지수"
+  },
+  {
+    "number": 77,
+    "group": "게이트",
+    "name": "research_gate_top3_index_recent_1y",
+    "type": "수치",
+    "meaning": "이전 365일 같은 경마장×정확거리×게이트 구역 입상 지수"
+  },
+  {
+    "number": 78,
+    "group": "게이트",
+    "name": "research_gate_recent_minus_long",
+    "type": "수치",
+    "meaning": "최근 1년 지수−3년 정확거리 지수"
+  },
+  {
+    "number": 79,
+    "group": "게이트",
+    "name": "research_gate_distance_expected_slots",
+    "type": "수치",
+    "meaning": "이전 1095일 같은 경마장×거리×게이트 구역의 기대 입상 슬롯 합"
+  },
+  {
+    "number": 80,
+    "group": "게이트",
+    "name": "research_gate_distance_reliability",
+    "type": "수치",
+    "meaning": "게이트 거리 통계 신뢰도 대리값: 기대 슬롯/(기대 슬롯+30)"
+  },
+  {
+    "number": 81,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_distance_starts",
+    "type": "수치",
+    "meaning": "현재 정확거리의 과거 실제 출전 수. 경마장 합산"
+  },
+  {
+    "number": 82,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_distance_wins",
+    "type": "수치",
+    "meaning": "현재 정확거리의 과거 우승 수"
+  },
+  {
+    "number": 83,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_distance_top3",
+    "type": "수치",
+    "meaning": "현재 정확거리의 과거 입상 수"
+  },
+  {
+    "number": 84,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_distance_top3_rate_smoothed",
+    "type": "수치",
+    "meaning": "거리 입상률 완화값: (입상+2)/(출전+8)"
+  },
+  {
+    "number": 85,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_distance_finish_pct_avg5",
+    "type": "수치",
+    "meaning": "현재 정확거리 최근 유효 최대 5회 상대 착순 점수 평균. 높을수록 좋음"
+  },
+  {
+    "number": 86,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_jockey_changed",
+    "type": "수치",
+    "meaning": "현재 기수가 직전 출전 기수와 달라졌는지"
+  },
+  {
+    "number": 87,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_jockey_pair_starts",
+    "type": "수치",
+    "meaning": "현재 말×기수 조합의 과거 실제 출전 수"
+  },
+  {
+    "number": 88,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_jockey_pair_top3_rate_smoothed",
+    "type": "수치",
+    "meaning": "말×기수 조합 입상률 완화값: (입상+2)/(출전+8)"
+  },
+  {
+    "number": 89,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_burden_z5",
+    "type": "수치",
+    "meaning": "현재 부담중량이 최근 최대 5회 중량 평균에서 몇 표준편차 떨어졌는지"
+  },
+  {
+    "number": 90,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_burden_performance_slope5",
+    "type": "수치",
+    "meaning": "최근 유효 최대 5회 부담중량과 상대 착순 점수의 회귀 기울기. 기록 초/최적 중량/인과효과가 아님"
+  },
+  {
+    "number": 91,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_layoff_log1p",
+    "type": "수치",
+    "meaning": "log(1+직전 출전 이후 일수)"
+  },
+  {
+    "number": 92,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_short_return_21d",
+    "type": "수치",
+    "meaning": "출전 간격 21일 이하 여부"
+  },
+  {
+    "number": 93,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_long_layoff_90d",
+    "type": "수치",
+    "meaning": "출전 간격 90일 이상 여부"
+  },
+  {
+    "number": 94,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_speed_variability_proxy",
+    "type": "수치",
+    "meaning": "최근 5회 최고 속도지수−중앙값. 분산 자체는 아님"
+  },
+  {
+    "number": 95,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_speed_potential_gap",
+    "type": "수치",
+    "meaning": "최근 5회 최고 속도지수−직전 지수. 잠재력/반등을 확정하지 않음"
+  },
+  {
+    "number": 96,
+    "group": "거리·기수·부담중량·휴양·기록 편차",
+    "name": "research_condition_speed_last_vs_avg3",
+    "type": "수치",
+    "meaning": "직전 속도지수−최근 3회 평균"
+  },
+  {
+    "number": 97,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_early_pos_pct_avg5",
+    "type": "수치",
+    "meaning": "과거 검증 S1F 최근 최대 5회 상대순위 평균. 0이 앞, 1이 뒤"
+  },
+  {
+    "number": 98,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_early_pos_pct_std5",
+    "type": "수치",
+    "meaning": "위 초반 상대순위의 표준편차. 최소 2회 필요"
+  },
+  {
+    "number": 99,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_late_gain_pct_avg5",
+    "type": "수치",
+    "meaning": "과거 (S1F 순위−최종순위)/(전체 카드 두수−1) 평균. 양수면 순위 상승"
+  },
+  {
+    "number": 100,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_section_coverage5",
+    "type": "수치",
+    "meaning": "최근 창의 검증 S1F 관측 수(최대 5)"
+  },
+  {
+    "number": 101,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_field_available_count",
+    "type": "수치",
+    "meaning": "현재 카드에서 초반 성향을 계산할 수 있는 말 수. 자기 포함"
+  },
+  {
+    "number": 102,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_front_runner_count",
+    "type": "수치",
+    "meaning": "과거 초반 상대순위 평균 <0.35인 말 수. 자기 포함"
+  },
+  {
+    "number": 103,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_front_competition",
+    "type": "수치",
+    "meaning": "현재 카드의 Σmax(0, 0.5−과거 초반 상대순위 평균)"
+  },
+  {
+    "number": 104,
+    "group": "초반 위치·선행 경쟁",
+    "name": "research_pace_self_front_advantage",
+    "type": "수치",
+    "meaning": "상대마들의 과거 초반 상대순위 평균−자기 값. 양수면 자기의 앞선 경향"
+  },
+  {
+    "number": 105,
+    "group": "성장·최근 변화·과거 상대 수준",
+    "name": "research_v4_finish_pct_slope5",
+    "type": "수치",
+    "meaning": "최근 최대 5회 (착순−1)/(카드두수−1)의 추세. 앞의 form 점수와 반대로 작을수록 좋으므로 음의 기울기가 개선 방향"
+  },
+  {
+    "number": 106,
+    "group": "성장·최근 변화·과거 상대 수준",
+    "name": "research_v4_recent_vs_career_finish",
+    "type": "수치",
+    "meaning": "최근 3회 위 상대순위 평균−누적 과거 평균. 음수면 최근 개선 방향"
+  },
+  {
+    "number": 107,
+    "group": "성장·최근 변화·과거 상대 수준",
+    "name": "research_v4_opponent_elo_avg3",
+    "type": "수치",
+    "meaning": "최근 유효 최대 3회에 상대했던 말들의 사전 Elo 평균"
+  },
+  {
+    "number": 108,
+    "group": "성장·최근 변화·과거 상대 수준",
+    "name": "research_v4_opponent_elo_vs_current_field",
+    "type": "수치",
+    "meaning": "최근 상대 Elo 평균−이번 상대 Elo 평균. 양수면 과거 상대가 더 강한 편"
+  },
+  {
+    "number": 109,
+    "group": "성장·최근 변화·과거 상대 수준",
+    "name": "research_v4_age_center4",
+    "type": "수치",
+    "meaning": "현재 나이−4. 실제 능력 정점이 4세라는 검증 결과가 아님"
+  },
+  {
+    "number": 110,
+    "group": "성장·최근 변화·과거 상대 수준",
+    "name": "research_v4_age_experience",
+    "type": "수치",
+    "meaning": "(현재 나이−4)×log(1+과거 확정 출전행 수)"
+  }
+]
