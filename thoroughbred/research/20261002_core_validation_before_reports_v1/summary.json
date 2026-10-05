@@ -1,0 +1,77 @@
+{
+  "status": "PASS_WITH_DOCUMENTED_SOURCE_LIMITS",
+  "consolidated_at_utc": "2026-10-02T08:39:22.188228+00:00",
+  "validation_scope": "pre-steward research snapshot; steward reports and sanction-stage objects excluded",
+  "baseline_database": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+  "baseline_database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "baseline_manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+  "baseline_files_unchanged_after_all_audits": true,
+  "domain_checks": {
+    "races_trials_entities_sections": 99,
+    "equipment_training_starting_exam": 65,
+    "medical_passing_proof_and_direct_checks": 9
+  },
+  "domain_checks_passed": 173,
+  "domain_checks_failed": 0,
+  "global_inventory": {
+    "queryable_objects": 180,
+    "registered_row_counts_checked": 178,
+    "row_count_mismatches": 0,
+    "input_file_hashes_checked": 384,
+    "input_file_hash_mismatches": 0
+  },
+  "medical_previous_proof_guard_attestation": {
+    "report_sha256": "e9a3465985220b67fe6caa70c54f99ecf331afa519771347643580d1af76e825",
+    "verified_script_sha256": "0bf8ea127dd7ba785ee691bbf8d32768154f45d0b54a10b85a416756c43c5a36",
+    "passed_assertions_in_pinned_script": {
+      "unknown_explanation_publication_time": true,
+      "no_verified_API_historical_publication_time": true,
+      "no_name_only_Text_official_ID_link": true
+    },
+    "method": "prior exhaustive medical input parity proof plus staged preservation chain; not a fresh historical completeness claim"
+  },
+  "active_database": {
+    "sha256": "c46286df4773a7ffcea4c7bc431e2cd2a8fc03a4c38fdaa4403bd8f39c2a1668",
+    "unchanged": true,
+    "state": "208 objects with steward/sanction phase; physical exclusion scope awaits user clarification"
+  },
+  "model_freeze_complete": false,
+  "proof_files": [
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/root_manifest_verify.py",
+      "sha256": "0c34a65d4fa87acd46f124459bfcbb89f2c97c7c485cf6607284c3c9c72ff539"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/root_manifest_verification.json",
+      "sha256": "8fe7f6389f77349240768ea8ada2cbcf00ffe77be9a4099934ff4cc3b12d5fed"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/race_core/validate_core.py",
+      "sha256": "ab2ed57488198ee2b647b9b3d9281d6501afd63b6783be51f237c7a3ae012252"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/race_core/validation.json",
+      "sha256": "ffef775637563b13461e68ea6b93717e6faa1d11b6f06155fbd1f6c25555029e"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/training_equipment/validate_prior_research.py",
+      "sha256": "a701c5a36fb19e5de131371483aaf2b03eeef66acc6df5a311be3026403796e7"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/training_equipment/validation_report.json",
+      "sha256": "776e39db74337bd00d06e7dc26bffa4a09c05055f88af8a1ebbd78287dac9143"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/medical_passing/verify_medical_passing_snapshot.py",
+      "sha256": "fa4f4e3da176a62169f124cc60cc32c587628fb719023afec42bca09e9db47c4"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/medical_passing/verification.json",
+      "sha256": "1079627f573a9a8c16454e143168e00a40c4b8cc91d7d7c24edd5aee7f995407"
+    },
+    {
+      "path": "thoroughbred/research/20261002_core_validation_before_reports_v1/consolidate_verification.py",
+      "sha256": "60bb3e5fabfb5043003f706ac047dada14aa75a3351c9b5befc94e74a2476186"
+    }
+  ]
+}

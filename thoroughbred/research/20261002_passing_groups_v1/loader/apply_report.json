@@ -1,0 +1,223 @@
+{
+  "status": "applied",
+  "applied": true,
+  "source_name": "passing_groups_research_v1",
+  "baseline_core_sha256": "c30202a65a1a82c2927efc8e0ef150c03a0c9950e953ee445beb1b3a7f8c2de6",
+  "core_sha256_after": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "core_manifest_sha256_after": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+  "backup_pair": {
+    "backup_db_sha256": "c30202a65a1a82c2927efc8e0ef150c03a0c9950e953ee445beb1b3a7f8c2de6",
+    "backup_manifest_sha256": "3fc7cd7dbbe13b908424e33d11955f2089834333870da2778e53099312758ee4",
+    "backup_attestation_sha256": "3b6be12fde1cbf81d487b2a44e351eaf1bff07caa795240d8166bd99baa8d798",
+    "root_attestation_sha256": "3b6be12fde1cbf81d487b2a44e351eaf1bff07caa795240d8166bd99baa8d798"
+  },
+  "new_objects": {
+    "created_object_count": 27,
+    "objects": [
+      [
+        "TABLE",
+        "passing_api_observations"
+      ],
+      [
+        "TABLE",
+        "passing_api_page_ledger"
+      ],
+      [
+        "TABLE",
+        "passing_api_exclusions"
+      ],
+      [
+        "TABLE",
+        "passing_rpt_race_headers"
+      ],
+      [
+        "TABLE",
+        "passing_rpt_point_observations"
+      ],
+      [
+        "TABLE",
+        "passing_rpt_source_files"
+      ],
+      [
+        "TABLE",
+        "passing_rpt_point_mapping"
+      ],
+      [
+        "TABLE",
+        "passing_rpt_snapshot_comparison"
+      ],
+      [
+        "TABLE",
+        "passing_api_mapping_validation"
+      ],
+      [
+        "TABLE",
+        "passing_api_rpt_value_matches"
+      ],
+      [
+        "TABLE",
+        "passing_confirmed_race_keys"
+      ],
+      [
+        "TABLE",
+        "passing_core_execution_ledger"
+      ],
+      [
+        "TABLE",
+        "passing_api_error_evidence"
+      ],
+      [
+        "TABLE",
+        "passing_source_metadata"
+      ],
+      [
+        "TABLE",
+        "passing_source_output_hashes"
+      ],
+      [
+        "VIEW",
+        "passing_api_race_times"
+      ],
+      [
+        "VIEW",
+        "passing_api_point_observations"
+      ],
+      [
+        "VIEW",
+        "passing_api_unmapped_point_observations"
+      ],
+      [
+        "VIEW",
+        "passing_api_unmapped_race_holds"
+      ],
+      [
+        "VIEW",
+        "passing_rpt_mapped_point_observations"
+      ],
+      [
+        "VIEW",
+        "passing_rpt_unmapped_nonempty_point_observations"
+      ],
+      [
+        "VIEW",
+        "passing_mapped_point_observations"
+      ],
+      [
+        "VIEW",
+        "passing_point_comparison"
+      ],
+      [
+        "VIEW",
+        "race_passing_groups"
+      ],
+      [
+        "VIEW",
+        "passing_point_discrepancy_ledger"
+      ],
+      [
+        "VIEW",
+        "passing_race_coverage"
+      ],
+      [
+        "VIEW",
+        "passing_api_event_reconciliation"
+      ]
+    ],
+    "row_counts": {
+      "passing_api_observations": 29774,
+      "passing_api_page_ledger": 48,
+      "passing_api_exclusions": 0,
+      "passing_rpt_race_headers": 17371,
+      "passing_rpt_point_observations": 111467,
+      "passing_rpt_source_files": 1827,
+      "passing_rpt_point_mapping": 20,
+      "passing_rpt_snapshot_comparison": 126406,
+      "passing_api_mapping_validation": 315,
+      "passing_api_rpt_value_matches": 87334,
+      "passing_confirmed_race_keys": 29710,
+      "passing_core_execution_ledger": 29826,
+      "passing_api_error_evidence": 72,
+      "passing_source_metadata": 12,
+      "passing_source_output_hashes": 26,
+      "passing_api_race_times": 29774,
+      "passing_api_point_observations": 142641,
+      "passing_api_unmapped_point_observations": 414,
+      "passing_api_unmapped_race_holds": 259,
+      "passing_rpt_mapped_point_observations": 83390,
+      "passing_rpt_unmapped_nonempty_point_observations": 0,
+      "passing_mapped_point_observations": 225617,
+      "passing_point_comparison": 144001,
+      "race_passing_groups": 144001,
+      "passing_point_discrepancy_ledger": 50,
+      "passing_race_coverage": 29710,
+      "passing_api_event_reconciliation": 29774
+    },
+    "selected_source_counts": {
+      "api303": 142227,
+      "dacom11_rpt": 1774,
+      "api_primary_with_rpt_discrepancy": 50
+    },
+    "selection_status_counts": [
+      {
+        "source": "api303",
+        "status": "api_primary_exact_agreement_after_outer_space_trim",
+        "rows": 81566
+      },
+      {
+        "source": "api303",
+        "status": "api_primary_unique_literal",
+        "rows": 60611
+      },
+      {
+        "source": "api303",
+        "status": "api_primary_with_rpt_discrepancy",
+        "rows": 50
+      },
+      {
+        "source": "dacom11_rpt",
+        "status": "rpt_unique_literal_fill_api_absent",
+        "rows": 1108
+      },
+      {
+        "source": "dacom11_rpt",
+        "status": "rpt_unique_literal_fill_api_mapping_held_same_race",
+        "rows": 666
+      }
+    ],
+    "unknown_api_event_receipts": 0,
+    "historical_publication_time_claims": 0,
+    "independent_selected_point_except_all_mismatch": 0
+  },
+  "table_and_view_counts": {
+    "passing_api_observations": 29774,
+    "passing_api_page_ledger": 48,
+    "passing_api_exclusions": 0,
+    "passing_rpt_race_headers": 17371,
+    "passing_rpt_point_observations": 111467,
+    "passing_rpt_source_files": 1827,
+    "passing_rpt_point_mapping": 20,
+    "passing_rpt_snapshot_comparison": 126406,
+    "passing_api_mapping_validation": 315,
+    "passing_api_rpt_value_matches": 87334,
+    "passing_confirmed_race_keys": 29710,
+    "passing_core_execution_ledger": 29826,
+    "passing_api_error_evidence": 72,
+    "passing_source_metadata": 12,
+    "passing_source_output_hashes": 26,
+    "passing_api_race_times": 29774,
+    "passing_api_point_observations": 142641,
+    "passing_api_unmapped_point_observations": 414,
+    "passing_api_unmapped_race_holds": 259,
+    "passing_rpt_mapped_point_observations": 83390,
+    "passing_rpt_unmapped_nonempty_point_observations": 0,
+    "passing_mapped_point_observations": 225617,
+    "passing_point_comparison": 144001,
+    "race_passing_groups": 144001,
+    "passing_point_discrepancy_ledger": 50,
+    "passing_race_coverage": 29710,
+    "passing_api_event_reconciliation": 29774,
+    "source_manifests": 26
+  },
+  "source_manifests_rows_after": 26,
+  "applied_at_utc": "2026-10-02T05:01:54+00:00"
+}

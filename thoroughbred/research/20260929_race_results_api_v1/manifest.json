@@ -1,0 +1,801 @@
+{
+  "dataset": "KRA API4_3 race results normalized research dataset",
+  "version": 1,
+  "built_at_utc": "2026-09-29T18:43:22.965603+00:00",
+  "declared_date_scope": {
+    "from": "20100101",
+    "through": "20260929"
+  },
+  "join_key": [
+    "source_meet",
+    "rcDate/result_date",
+    "rcNo/result_race_no"
+  ],
+  "prior_key_sources": [
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_plan.csv",
+      "sha256": "bb4e2a6992b6edde3011db1f13fcd626d6a7bd2348385f7510942a91e401c40e"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_execution_flags.csv",
+      "sha256": "9f5f0be86db1d0bb584e79a66a67d6af1d80d58a2185f3adbcec49c770bbcd16"
+    }
+  ],
+  "source_api": "KRA data.go.kr B551015 API4_3/raceResult_3",
+  "inputs": [
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2010,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2010/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "774a4b73befdd119d6c36ff3d017646d709955e10c52731a9701603a629a2408",
+      "response_payload_sha256": "4634de0e17cde561b2df8fc24f619e8cbbf386105b58e1c784e67350e2534e60",
+      "total_count": 12134,
+      "included_rows": 12134,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2010,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2010/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "234076cb375ade4af06dd05566e7d65dfe0eee00d813fe644fa82bd6789f1a2c",
+      "response_payload_sha256": "8f6d7e4b32489924f32a7608a1f93ef0a1db80d4ebdb55ba26836a4c6d2e1d2c",
+      "total_count": 8235,
+      "included_rows": 8235,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2010,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2010/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "a6a792294808aa68ecd57c20010814c7a0528d5cfa22ee3617667dee6ee21b10",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2011,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2011/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "235909ec0bc239e8bc1cf830d64a2eb643940aaafe54958b6fc7f54f2d7f61b9",
+      "response_payload_sha256": "db2f60efa8a4bab7f1bce312e31554db6f996cf41485eac86dc3ab74b112917f",
+      "total_count": 12678,
+      "included_rows": 12678,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2011,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2011/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "c949b7542832b769afda029ace110f4c07734a04b729bf302092d45e7aa636fb",
+      "response_payload_sha256": "4e481fe9ce2e01ffc0171b983a547372e16b95bed6f40e3905e55414e622c04e",
+      "total_count": 8305,
+      "included_rows": 8305,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2011,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2011/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "9feb9f12111539dfbeed135e9da8bac6f6d0c5215a431921ae8497903fcdd737",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2012,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2012/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "25e38c15547956367942ee8ff23d6d0a97d12fb9b97321cd4c0e75382f2a1c56",
+      "response_payload_sha256": "2f06f080d4ab183ee304b60d9ae6915623c6d78ad2e2772f9845d18cfdbc8b09",
+      "total_count": 13074,
+      "included_rows": 13074,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2012,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2012/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5b321bca9adb34b2eab101f2eabd17f8c4c9dac780ff49f25e912610871a5328",
+      "response_payload_sha256": "b51c6b7a782d5be19b7d124d484da887a88cff6477f89b1e643e6558230336a2",
+      "total_count": 8641,
+      "included_rows": 8641,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2012,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2012/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "d965c6a62a51c1baf16cd1f44339abd4931044aac48cdf31f4d2b6594b28d1e7",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2013,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2013/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "d011139f6423f43e8d6e6dc79e06569bd9b943a82620b5e91eef2e49e4d75f35",
+      "response_payload_sha256": "354aea09a77a7762399e0bc904892ff7c41bee754c82d13b78d3d5651af6dd10",
+      "total_count": 12521,
+      "included_rows": 12521,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2013,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2013/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "f01c29c4dfd819fd4cffc585452235a1719bbe2cf81e95782e566e141181bd75",
+      "response_payload_sha256": "ef6cf9eea3718581bede81768cb6c6cd6c247994b7849d72ff8e9d8a1fc6f612",
+      "total_count": 8905,
+      "included_rows": 8905,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2013,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2013/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5e18c532c52e4d0621e97dc571146398e07d05a5f3a710f840653c2a6c717ad7",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2014,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2014/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "ad5a7eda2f93b28732fcaa78392cc544e16f4ad937c6ce441d77da2105f25aa6",
+      "response_payload_sha256": "e741753997436556ed20a6f09e9688941215a1e8622e75214f04fb34ac27a22d",
+      "total_count": 12945,
+      "included_rows": 12945,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2014,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2014/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "bd07ba6cc71b28bf821ef6e9985e3cfd42e7f341ffe349ff2feeda9c3da3e94d",
+      "response_payload_sha256": "edbbd89d98e444ef14f2a1ce920fb9ea7e53e8ef867f9aaacc910860d62154e7",
+      "total_count": 8801,
+      "included_rows": 8801,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2014,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2014/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "135c3ec6cab31cea78e2cd4ed83daf6fa84534ab671ba856656012f15d0dda45",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2015,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2015/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "f63c15d3356b15a132fc0e8710fdada70360b538d6ffc1b89ab095af49ac6c5c",
+      "response_payload_sha256": "722f48940630ecb44a6d33905671779379597fa99fdc85e6df6db411b9f07d4e",
+      "total_count": 12982,
+      "included_rows": 12982,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2015,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2015/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "95d95ac16e46979837405c8e3102ad048aeb1e4d6ccff44885692ed87d18a04c",
+      "response_payload_sha256": "7aa1e42de3c952f20f95b0373258c7268a3438b68620a1c4f9e014a4dbbe2c94",
+      "total_count": 8654,
+      "included_rows": 8654,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2015,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2015/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "fce143cb4e5aff36e47fc7462c3c36e5270a5b482093a2a0333e953365001289",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2016,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2016/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "95a742f214080c45ed620a1948ad292cc54fc6ddef799185fff932d29fc88190",
+      "response_payload_sha256": "d8c63d5c906d3054dade9fd831b2a0f0a5aed9be8ecb5cd4b3681b7a0784191c",
+      "total_count": 12391,
+      "included_rows": 12391,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2016,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2016/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5627f30d2d31a9581d3407831caac1a9a7ee5b28f905c48c32cecb48b8e7f42c",
+      "response_payload_sha256": "04f0f41971ba6e3d6480154b1304492af6c7ed64f2da5a0d33e4b31562f6ee6b",
+      "total_count": 8751,
+      "included_rows": 8751,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2016,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2016/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "eabc3062284c250f57068f79b5ddb96f86adf31f6e7be1242b4c47d0fce9098b",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2017,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2017/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5aae52060f7f6f80f79075ee2f169df013a7a322d0498bc0edb6c8c03c7e1e58",
+      "response_payload_sha256": "0293fea796a6b1a1cb35a15197be6d55910bed5ca052bd61359ae38fc120f7ae",
+      "total_count": 11972,
+      "included_rows": 11972,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2017,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2017/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "0c24cc7fff8089c87c50763853bcb0826cac0ec04323ac9c70886aef76741f3a",
+      "response_payload_sha256": "e4cd8951157ccda7bb3837ce2838d2064ad3248c7874da64a8c9a7537f784474",
+      "total_count": 8857,
+      "included_rows": 8857,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2017,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2017/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "d557b5b92c9cc69f46ea047d1257395f2266b53499b172c7b13fe387d6c96d40",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2018,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "1f59511124ccc51595d230c43367c562714b824eb8906235fbaf5f2305847fbc",
+      "response_payload_sha256": "add6ebe164f2fe8ada1018da31ad84a32521115a26e8cc3e0c51042b1b2455e9",
+      "total_count": 11908,
+      "included_rows": 11908,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2018,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "e65a72423e2ed660ab54af06432c6e5c716097dcc0276e87be53f6df9ccdd00f",
+      "response_payload_sha256": "e352eb02161cb0a772c0b4aad05fb377f841011b4bf2ca26a70ee24313203ddf",
+      "total_count": 8454,
+      "included_rows": 8454,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2018,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "80dc9278ed03c4f5436158d9ba54537c707550a8a5acd1709df863145b884913",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2019,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "ae153667845171337aa1c37ee6a15da322abca9e6e4c4eaa3af76f65052fefdd",
+      "response_payload_sha256": "47541c5ab482b39bfe78ecb418362ff15f9e9c8062a2f3a94998ceed60bff526",
+      "total_count": 12181,
+      "included_rows": 12181,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2019,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "adb2cca8f24efa6932a36e32add5045b23254523ecd40729348ab79f455736ce",
+      "response_payload_sha256": "a41997a9492e3794c3f5143902a8b148356930639be122b0c008ae888ce99dcc",
+      "total_count": 8903,
+      "included_rows": 8903,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2019,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "65acf95ed74f9bb48a346fcd07c4ba9fc31af06d2c378637512abb04e2b8b655",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2020,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "246826262ba50ec0605c84377b7c5381ab2d1634d9fb138974cffd0d83924e61",
+      "response_payload_sha256": "221873bbdd7fa01541cbab2e6ff0c7059b33e7d3efd5a7675d4eecf6d6a3157e",
+      "total_count": 7796,
+      "included_rows": 7796,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2020,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "4809c714011f7b10508a002c34ee0c9620f652cd8ca9d5e393b1a6ff738bf39a",
+      "response_payload_sha256": "d25c40d3266a8c72fd23d749095b355dc37e84e6e03d54317862a62daf1033da",
+      "total_count": 5547,
+      "included_rows": 5547,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2020,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "4710c584f4741b1fba86a75fc38a9c90d93f026058e31f31944e70dd73508830",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2021,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "dfe0e1544ca4c8594e8ac3af58ab46a61f6ca8d191821ecea3f79c6a6e3ab1cc",
+      "response_payload_sha256": "14a0a27999642407f9d473f7abbc084f1d170d0172ec2ac3f49b148bc835b4ad",
+      "total_count": 10482,
+      "included_rows": 10482,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2021,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "f3964eadda846a624061e97684e9b3b5e02bae3a4c8bab02fba7bd726bd11eab",
+      "response_payload_sha256": "19dd5fa586f6d1babc4e8b2bb27c883bbc9babbce53314c13cb894c01749ef69",
+      "total_count": 7151,
+      "included_rows": 7151,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2021,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "77059f59da788e56ce7ae0d734dbc4ccb96bcb1f5dcfb3eb56a1bb7c040717fb",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2022,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "6e7a49fef5c922b759cff1249614f900b2f0f757a7836b76c35e52cc4bb048ec",
+      "response_payload_sha256": "4ed9693a82fc6429c614b7f8042c1915fe9cef55a02d9b21adadc0f6e01fe486",
+      "total_count": 10863,
+      "included_rows": 10863,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2022,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "deda87da51aa2e08ededde1209efa491bcf5c776c8e2d90fa313581af919b4a1",
+      "response_payload_sha256": "180a16f4ccc5864476a144b9a25425c7f44ba9bbd67c2b990b219928f69b5e12",
+      "total_count": 7492,
+      "included_rows": 7492,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2022,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "90c838f5ed6a1a4d58d4c61a9e7c2bcd9022cca09c60770eca4994d608ac4d72",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2023,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "6b1e4ad1d5f5bbaed8dde60c16c54fb3f7f1ff149bc7b8261f1c042623b58e13",
+      "response_payload_sha256": "ac33251b5bc63d9dfd6e7f26cd77b6844368caee11291a82c8a8266ca5b334c9",
+      "total_count": 11342,
+      "included_rows": 11342,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2023,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "34d3b9e1515c660e4484ae90967602dc90623486114a133acc060602f1ab7c14",
+      "response_payload_sha256": "8d2c46ad5c8d485f445097e825adfd5783f8fdb7697bfbeacd8f8f60410d8edb",
+      "total_count": 7942,
+      "included_rows": 7942,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2023,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "db8126ed9f71d929bf1a2398dc45905958d56e58f7092b0e2a7a0cf94c72e97f",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2024,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "57d3d689be03d2b6b02db533746d3c236a125fd532b3ffe41a06cc4352a0e4eb",
+      "response_payload_sha256": "a22a7944746a7dc93162013fe9f3938fd49dd0b928638ec625de6e5ba787900a",
+      "total_count": 10997,
+      "included_rows": 10997,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2024,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "a97d361760bd9f0f22ca0dc98204efb20e6ed90485bed643e82269ee72d85a4e",
+      "response_payload_sha256": "81a2988c13d6a104075842548306c0ae5b351837e90723f90d8e8c7c2a35ada6",
+      "total_count": 7876,
+      "included_rows": 7876,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2024,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5732b9b43f19a6bab7cdc818e632b329e1433e7f96a254c1db41261f14f73759",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2025,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2025/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "9c83304b29faa1cb1cb90d1e44a027ad3046ac071b4120bf3f6ebb7ad38382fb",
+      "response_payload_sha256": "161558398c701795f3ed55f41f4268d5ed4e5b344bb21dc0c16fcc43b1a16671",
+      "total_count": 11020,
+      "included_rows": 11020,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2025,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2025/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5fc2fde4a6c91da4037ba7db6fbc874ea7ddf6c346d5d4ad9c09c89e311aa3dd",
+      "response_payload_sha256": "35e124cebda1582be31e23269ab6e3e5c20949e5fabebb5bf524e7a7649a7b91",
+      "total_count": 7985,
+      "included_rows": 7985,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2025,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2025/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "d7aca10124d0fb0ff74839bfc38d36a712f9993c1d77ac13fd1b7c25169bfa3a",
+      "response_payload_sha256": "94c679d78c445a24e7a28349d14c306e419fb4e215c90b9e82f819a925dcec03",
+      "total_count": 0,
+      "included_rows": 0,
+      "scope_excluded_rows": 0
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2026,
+      "request_meet": 1,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2026/meet_1.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "95fcf6b9ba8364f7edf2a6490e6fa864cfab21d1317c5d588b8faf76d97ba399",
+      "response_payload_sha256": "bb88106b9d2144025819513c18f2219159291278559ebe12b8e53ae60ba4f5fe",
+      "total_count": 8509,
+      "included_rows": 8064,
+      "scope_excluded_rows": 445
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2026,
+      "request_meet": 3,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2026/meet_3.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5c42bfd9a1d54e5eca0243d245f77791dfb54fe51738f86c5aa7d367e524550f",
+      "response_payload_sha256": "6287ede69aa0cedbdb9261e65428ac40ae25bbc42b1dda7a4ac902bb6ea643df",
+      "total_count": 5979,
+      "included_rows": 5843,
+      "scope_excluded_rows": 136
+    },
+    {
+      "source": "KRA data.go.kr API4_3/raceResult_3",
+      "request_year": 2026,
+      "request_meet": 4,
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2026/meet_4.json.gz",
+      "compression": "gzip",
+      "compressed_sha256": "5b47c3f1e220a27ece59df81b6b1b3624f9cecb05c465f875ebbe1d11a0183cf",
+      "response_payload_sha256": "3834a8164ee9a34548979419b532f86fb83832740e771470df29cd07d69e3488",
+      "total_count": 291,
+      "included_rows": 119,
+      "scope_excluded_rows": 172
+    }
+  ],
+  "outputs": {
+    "race_events.csv": {
+      "row_count": 29826,
+      "sha256": "740497c441e00efe713f591626fdb06e46211b13536fa35cf5cfee2f64bb8635"
+    },
+    "runner_results.csv": {
+      "row_count": 331811,
+      "sha256": "8636fdd8d8875e717405b99bfbfb0bcaff1b58406d9213c09f830719a558468c"
+    },
+    "unverified_result_only_keys.csv": {
+      "row_count": 0,
+      "sha256": "f5d00f0d0c82b09de531bda801f262eef84b47aad575bd77699c90ac8be38cc7"
+    },
+    "scope_exclusions.csv": {
+      "row_count": 753,
+      "sha256": "e53819966bd927763ba070506cbafafc9273522ffd3915672d7b149f305801cf"
+    }
+  },
+  "counts": {
+    "race_plan_rows": 29826,
+    "race_result_probe_rows": 331811,
+    "executed_plan_keys": 29710,
+    "positive_result_only_keys": 0,
+    "raw_api_rows_total": 332564,
+    "scope_excluded_rows": 753,
+    "excluded_anomalous_result_keys": 72,
+    "event_keys_from_prior_ledger": 29826,
+    "result_event_keys": 29826,
+    "planned_keys_without_result_rows": 0,
+    "unverified_result_only_keys_all": 0,
+    "unverified_result_only_keys_positive_finish": 0,
+    "runner_result_rows": 331811,
+    "status_counts": {
+      "executed_plan_and_result": 29710,
+      "planned_no_execution_evidence": 116
+    }
+  },
+  "validation": {
+    "all_source_total_counts_match_item_rows": true,
+    "all_in_scope_api_items_have_runner_result_rows": true,
+    "result_keys_match_prior_execution_flags": true,
+    "result_counts_and_positive_finish_counts_match_prior_flags": true,
+    "all_plan_keys_present_in_event_table": true,
+    "expected_calendar_counts_match": true,
+    "seoul_20200809_all_12_races_ord99_time0_not_counted_as_execution": true,
+    "raw_pointer_is_source_file_and_zero_based_item_index": true,
+    "raw_fields_are_retained_in_archived_response_payload": true
+  },
+  "event_attribute_audit": {
+    "meet": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "rcDate": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "rcDay": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "rcNo": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "rcDist": {
+      "consistent_events": 29762,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 64,
+      "events_with_blank_value": 0
+    },
+    "rcName": {
+      "consistent_events": 29762,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 64,
+      "events_with_blank_value": 0
+    },
+    "rank": {
+      "consistent_events": 29762,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 64,
+      "events_with_blank_value": 0
+    },
+    "prizeCond": {
+      "consistent_events": 29761,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 65,
+      "events_with_blank_value": 0
+    },
+    "track": {
+      "consistent_events": 29762,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 64,
+      "events_with_blank_value": 0
+    },
+    "weather": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "chaksun1": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "chaksun2": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "chaksun3": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "chaksun4": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "chaksun5": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    },
+    "buga1": {
+      "consistent_events": 29826,
+      "multi_value_events": 0,
+      "partially_missing_or_null_events": 0,
+      "all_missing_or_null_events": 0,
+      "events_with_blank_value": 0
+    }
+  }
+}

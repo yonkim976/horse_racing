@@ -1,0 +1,37 @@
+{
+  "status": "complete_read_only_exact_literal_comparison",
+  "comparison_normalization": "ASCII outer spaces stripped only in separate comparison fields; source raw values unchanged",
+  "placeholders_excluded_from_exact_mapping": [
+    "null",
+    "",
+    "-",
+    "X"
+  ],
+  "no_notation_parsing": true,
+  "official_nominal_map_remains_default_outside_seoul_2020_2021": true,
+  "seoul_2020_2021_policy": "Only unique same-race exact-value pairs are assignment evidence; repeated-value candidates remain ambiguous; no year-wide permutation inferred.",
+  "inputs": {
+    "thoroughbred/research/20261002_passing_groups_v1/api_source/api_observations.parquet": "facfeca265488a7907ae913d4b7605e3e64aa8b324cca3b8287f1f3dbe316df7",
+    "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_point_observations.parquet": "0677122595858c8e6eb7db48d31d325be7733659e553379f66796f2d364d4b5a",
+    "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_point_mapping.csv": "aaf5858840b00367e5d96a66495c976849fc74f05de929b7ac00fd445ab9e5d2"
+  },
+  "outputs": {
+    "api_rpt_value_matches.parquet": {
+      "sha256": "f1f0b822596aedea4974f31a4c6dd56f256873fb214c6c7ee8aaf96379512c9b",
+      "row_count": 87334
+    },
+    "api_mapping_validation_by_year.parquet": {
+      "sha256": "ea0e06d9c930df8ccfc9647a7cd4450d504756f439853750b74cbf168e88a7b7",
+      "row_count": 315
+    },
+    "api_mapping_validation_by_year.csv": {
+      "sha256": "1374e0c464fb6f7329773ba42043f19581e277c18831916bf40534cdc4b8e874",
+      "row_count": 315
+    }
+  },
+  "mapping_evidence_counts": {
+    "unique_exact_value_pair": 76641,
+    "ambiguous_repeated_value": 10693
+  },
+  "built_by_script_sha256": "381333d8eb92c5d72c6c808c93646c130654ee61bd0b0e2fe598f04c9637cf97"
+}

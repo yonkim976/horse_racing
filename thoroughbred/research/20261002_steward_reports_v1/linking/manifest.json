@@ -1,0 +1,303 @@
+{
+  "artifact": "KRA API215 steward report horse-paragraph research linking v1",
+  "manifest_status": "complete",
+  "status": "complete",
+  "built_at_utc": null,
+  "capture_time_semantics": "source_captured_at_utc is retrieval time only; publication/availability time not verified",
+  "source_observations_sha256": "89d78f93dadf00e75211a51633eef77ccab1567b2f14675005bcd986e404853e",
+  "source_files": [
+    {
+      "path": "thoroughbred/research/20261002_steward_reports_v1/source/api_observations.parquet",
+      "sha256": "89d78f93dadf00e75211a51633eef77ccab1567b2f14675005bcd986e404853e",
+      "bytes": 11624329
+    },
+    {
+      "path": "thoroughbred/research/20261002_steward_reports_v1/source/api_page_ledger.parquet",
+      "sha256": "a2c19eadefbb8019469838eb4fec005b313b9b7b7e484c2d69d8a513874b9f6b",
+      "bytes": 17015
+    },
+    {
+      "path": "thoroughbred/research/20261002_steward_reports_v1/source/api_exclusions.parquet",
+      "sha256": "f1b70189e52354dd47d7431893b0b2f92becbde97638f578883dee85f344ecce",
+      "bytes": 18671
+    },
+    {
+      "path": "thoroughbred/research/20261002_steward_reports_v1/source/source_manifest.json",
+      "sha256": "08613b4339d9cca87f3825caca61602d9682e42f9b338f0773c1765bfeaeda8a",
+      "bytes": 61985
+    },
+    {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+      "sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "bytes": 2396532736
+    }
+  ],
+  "builder_file": {
+    "path": "thoroughbred/research/20261002_steward_reports_v1/linking/build_linking_artifacts.py",
+    "sha256": "473522fb98a9429174f90a9f04e9e832679302a8ef5d3c3803139ea4f880dc47",
+    "bytes": 8226
+  },
+  "parser_file": {
+    "path": "thoroughbred/research/20261002_steward_reports_v1/linking/report_linker.py",
+    "sha256": "faf04b2c5d6973d2cc0e41f441df3e8c6aa39951e21475b9e3cb1a7dae2520c4",
+    "bytes": 33943
+  },
+  "readme_file": {
+    "path": "thoroughbred/research/20261002_steward_reports_v1/linking/README.md",
+    "sha256": "6dec30c4193d172cc79e17132f1e712ca42c4e81778d22e9a68623d9a402e8ea",
+    "bytes": 5817
+  },
+  "build_summary_file": {
+    "path": "build_summary.json",
+    "sha256": "a1de266e8265cf2ff5cffe34d4694ba1bea47e31c81f53350e9aebac48eeb53a",
+    "bytes": 1807
+  },
+  "summary": {
+    "scope": {
+      "start_inclusive": "2010-01-01",
+      "end_inclusive": "2026-09-29",
+      "actual_meet_codes": [
+        1,
+        3,
+        4
+      ],
+      "excluded_meet_code": 2
+    },
+    "api215_source_observations_in_scope": 14867,
+    "api215_source_observation_count_before_scope": 14867,
+    "source_occurrence_locator_unique": true,
+    "core_event_roster_row_count": 331811,
+    "core_event_key_count": 29826,
+    "core_roster_execution_status_counts": {
+      "executed_plan_and_result": 330465,
+      "planned_no_execution_evidence": 1346
+    },
+    "derived_rows": {
+      "event_paragraphs": 98467,
+      "event_sentences": 107007,
+      "horse_mentions": 175170,
+      "horse_links": 149008,
+      "marker_residuals": 228
+    },
+    "paragraph_context_status_counts": {
+      "parent_report_event_context": 67834,
+      "source_field_not_text": 26497,
+      "add_judgement_target_weekday_mismatch": 33,
+      "add_judgement_exact_leading_date_race_context": 1656,
+      "add_judgement_target_context_missing_or_not_leading": 2447
+    },
+    "mention_candidate_status_counts": {
+      "explicit_number_name_race_roster_exact": 164454,
+      "report_local_exact_name_from_unique_anchor": 3249,
+      "explicit_number_name_venue_prefix_exact": 1305,
+      "quoted_name_not_on_event_roster": 257,
+      "number_name_mismatch": 916,
+      "name_only_without_explicit_anchor": 163,
+      "report_local_anchor_conflict": 12,
+      "candidate_unresolved": 228,
+      "unresolved_target_event_context": 4580,
+      "program_no_not_on_event_roster": 6
+    },
+    "api215_text_field_state_counts": {
+      "judgement:text": 67834,
+      "addJudgement:dash_placeholder": 11630,
+      "jkChange:dash_placeholder": 12243,
+      "addJudgement:text": 4136,
+      "jkChange:literal_null": 2624
+    },
+    "capture_timestamp_is_historical_publication_time": false,
+    "all_links_non_attributive": true
+  },
+  "outputs": {
+    "event_paragraphs": {
+      "path": "report_event_paragraphs.parquet",
+      "sha256": "bcec4fb372d85a519a981ab2cad66f537e83a337dfe75eae950be1fb56be63a2",
+      "bytes": 10313040,
+      "rows": 98467,
+      "columns": [
+        "capture_id",
+        "dataset",
+        "source_row_sha256",
+        "source_path",
+        "page_sha256",
+        "source_location",
+        "source_captured_at_utc",
+        "source_captured_at_ms",
+        "requested_at_utc",
+        "requested_at_ms",
+        "page_no",
+        "row_no",
+        "historical_publication_time_verified",
+        "source_publication_at_kst",
+        "observation_locator",
+        "report_text_field",
+        "paragraph_index",
+        "paragraph_locator",
+        "paragraph_source_text_raw",
+        "span_start_codepoint",
+        "span_end_codepoint",
+        "paragraph_raw",
+        "paragraph_state",
+        "split_basis",
+        "parent_actual_meet_code",
+        "parent_event_date",
+        "parent_race_no",
+        "target_actual_meet_code",
+        "target_event_date",
+        "target_race_no",
+        "target_context_status",
+        "target_roster_row_count"
+      ]
+    },
+    "event_sentences": {
+      "path": "report_event_sentences.parquet",
+      "sha256": "19d55f2887607962501f93a21dd3cf685929871e3ff63405cbe9f88c7b7cadcc",
+      "bytes": 11859505,
+      "rows": 107007,
+      "columns": [
+        "capture_id",
+        "dataset",
+        "source_row_sha256",
+        "source_path",
+        "page_sha256",
+        "source_location",
+        "source_captured_at_utc",
+        "source_captured_at_ms",
+        "requested_at_utc",
+        "requested_at_ms",
+        "page_no",
+        "row_no",
+        "historical_publication_time_verified",
+        "source_publication_at_kst",
+        "observation_locator",
+        "paragraph_locator",
+        "sentence_locator",
+        "report_text_field",
+        "sentence_index",
+        "sentence_source_text_raw",
+        "span_start_codepoint",
+        "span_end_codepoint",
+        "sentence_raw",
+        "target_actual_meet_code",
+        "target_event_date",
+        "target_race_no",
+        "target_context_status"
+      ]
+    },
+    "horse_mentions": {
+      "path": "report_horse_mentions.parquet",
+      "sha256": "f0548c1f6a5adbf51f75d0103db5b67a354794530af81bd9bbaa13ea8e5aa551",
+      "bytes": 7524305,
+      "rows": 175170,
+      "columns": [
+        "capture_id",
+        "dataset",
+        "source_row_sha256",
+        "source_path",
+        "page_sha256",
+        "source_location",
+        "source_captured_at_utc",
+        "source_captured_at_ms",
+        "requested_at_utc",
+        "requested_at_ms",
+        "page_no",
+        "row_no",
+        "historical_publication_time_verified",
+        "source_publication_at_kst",
+        "observation_locator",
+        "paragraph_locator",
+        "mention_locator",
+        "report_text_field",
+        "mention_kind",
+        "mention_raw",
+        "raw_name",
+        "raw_program_no",
+        "raw_circled_marker",
+        "span_start_codepoint",
+        "span_end_codepoint",
+        "name_start_codepoint",
+        "name_end_codepoint",
+        "marker_start_codepoint",
+        "marker_end_codepoint",
+        "candidate_status",
+        "candidate_official_horse_id",
+        "candidate_roster_program_no_raw",
+        "target_actual_meet_code",
+        "target_event_date",
+        "target_race_no",
+        "target_context_status",
+        "anchor_mention_locators_json"
+      ]
+    },
+    "horse_links": {
+      "path": "report_horse_links.parquet",
+      "sha256": "c3c7225002608da99e47375487344bcd6d7555dd70b6937cf8a84dcbb8bd0fb5",
+      "bytes": 6373075,
+      "rows": 149008,
+      "columns": [
+        "capture_id",
+        "dataset",
+        "source_row_sha256",
+        "source_path",
+        "page_sha256",
+        "source_location",
+        "source_captured_at_utc",
+        "source_captured_at_ms",
+        "requested_at_utc",
+        "requested_at_ms",
+        "page_no",
+        "row_no",
+        "historical_publication_time_verified",
+        "source_publication_at_kst",
+        "observation_locator",
+        "paragraph_locator",
+        "official_horse_id",
+        "program_no_raw",
+        "match_rule",
+        "mention_semantics",
+        "status",
+        "target_actual_meet_code",
+        "target_event_date",
+        "target_race_no",
+        "target_context_status",
+        "event_execution_status",
+        "roster_source_file",
+        "roster_source_item_index",
+        "roster_horse_name_raw",
+        "linked_mention_locators_json",
+        "linked_sentence_locators_json"
+      ]
+    },
+    "marker_residuals": {
+      "path": "report_marker_residuals.parquet",
+      "sha256": "2e78fc7f17d6f9a04253fb4300c390117c0db17fd9155796793e27e954aa0d6e",
+      "bytes": 22952,
+      "rows": 228,
+      "columns": [
+        "capture_id",
+        "dataset",
+        "source_row_sha256",
+        "source_path",
+        "page_sha256",
+        "source_location",
+        "source_captured_at_utc",
+        "source_captured_at_ms",
+        "requested_at_utc",
+        "requested_at_ms",
+        "page_no",
+        "row_no",
+        "historical_publication_time_verified",
+        "source_publication_at_kst",
+        "observation_locator",
+        "paragraph_locator",
+        "mention_locator",
+        "report_text_field",
+        "marker_raw",
+        "marker_value",
+        "span_start_codepoint",
+        "span_end_codepoint",
+        "residual_status"
+      ]
+    }
+  }
+}

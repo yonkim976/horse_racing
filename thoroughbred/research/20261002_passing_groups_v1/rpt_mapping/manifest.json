@@ -1,0 +1,167 @@
+{
+  "package": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping",
+  "scope": {
+    "start_date": "2010-01-01",
+    "end_date": "2026-09-29",
+    "actual_meets": {
+      "1": "Seoul",
+      "3": "Busan-Gyeongnam",
+      "4": "Yeongcheon"
+    },
+    "Jeju_excluded": true
+  },
+  "source_read_contract": {
+    "rpt_source": "CP949 local Dacom11 RPT files listed in passing_rpt_file_evidence.json; bytes read only",
+    "path_meet_is_not_actual_meet": "actual meet is bridged only from the RPT header venue label; source path meet code is separately retained",
+    "capture_timestamp": "retrieved_at_ms from data/raw/kra_text/_manifests/dacom11/manifest.jsonl only when both local_path and sha256 match exactly; all others null; filesystem mtime is not used",
+    "notation_handling": "entire text after the label colon is preserved including padding; no notation grammar is parsed",
+    "comparison_only_normalization": "ASCII outer spaces are trimmed only in separate comparison fields; raw line, notation, and source bytes remain unchanged",
+    "snapshot": "section_passing_raw_2010plus_20260929_v1/section_passing_raw.duckdb opened read_only=True; file SHA-256 checked unchanged before/after",
+    "operating_database": "not opened or modified",
+    "network": "not used"
+  },
+  "precheck_inputs": {
+    "passing_rpt_file_evidence_sha256": "c650fe7a26cc410421e34dad6987e4085ca44a5e529377af1e06cd112a63c7ff",
+    "passing_inventory_sha256": "c73abfe09bc91f86e5d80bb6f88ad313e74d27bcf8d5061dada01599f0468e40",
+    "passing_inventory_expected_pinned_sha256": "c73abfe09bc91f86e5d80bb6f88ad313e74d27bcf8d5061dada01599f0468e40",
+    "precheck_summary_sha256": "804c73c4adf7d48ea5f437f034420985d54a044bf817a808f6fd6338698ee128",
+    "independent_root_rpt_parse_sha256": "25087828d433a4cc4b3c1e51904ae4ae0c7f33513c3cbcfa12f502a89f730807",
+    "dacom11_capture_manifest_path": "data/raw/kra_text/_manifests/dacom11/manifest.jsonl",
+    "dacom11_capture_manifest_sha256": "70ccd5eda57d470ba70bd1d2948dbc9e8551b66a2e1d336494fb1a105661c13a",
+    "dacom11_capture_manifest_row_count": 5973,
+    "dacom11_capture_manifest_downloaded_row_count": 2724
+  },
+  "builder_sha256": "457ad76e3b196e988e98f61223055663cb31811eda5297e8017cbc4c9a098aa0",
+  "counts": {
+    "source_file_count": 1827,
+    "race_header_count": 17371,
+    "point_line_count": 111467,
+    "nonempty_point_line_count": 83390,
+    "blank_or_placeholder_point_line_count": 28077,
+    "distinct_rpt_race_point_keys": 111467,
+    "snapshot_scope_row_count": 80180,
+    "snapshot_duplicate_race_point_keys": 0,
+    "snapshot_union_comparison_key_count": 126406,
+    "snapshot_comparison_status_counts": {
+      "rpt_blank_or_placeholder_snapshot_absent": 28077,
+      "rpt_nonempty_snapshot_absent": 18149,
+      "rpt_snapshot_equal_after_outer_space_trim": 65241,
+      "snapshot_only_no_rpt_print_label": 14939
+    },
+    "actual_venue_bridges": [
+      {
+        "source_path_meet_code": 1,
+        "actual_meet_code": 1,
+        "venue_raw": "서울",
+        "race_count": 10130
+      },
+      {
+        "source_path_meet_code": 3,
+        "actual_meet_code": 3,
+        "venue_raw": "부경",
+        "race_count": 9
+      },
+      {
+        "source_path_meet_code": 3,
+        "actual_meet_code": 3,
+        "venue_raw": "부산",
+        "race_count": 7226
+      },
+      {
+        "source_path_meet_code": 3,
+        "actual_meet_code": 4,
+        "venue_raw": "영천",
+        "race_count": 6
+      }
+    ],
+    "rpt_labels_by_actual_meet": {
+      "1": {
+        "C1": 10130,
+        "C2": 10130,
+        "C3": 10130,
+        "C4": 10130,
+        "G-1F": 10130,
+        "S-1F": 10130
+      },
+      "3": {
+        "G1F": 7235,
+        "G2F": 7235,
+        "G3F": 7235,
+        "G4F": 7235,
+        "G6F": 7235,
+        "G8F": 7235,
+        "S1F": 7235
+      },
+      "4": {
+        "G1F": 6,
+        "G2F": 6,
+        "G3F": 6,
+        "G4F": 6,
+        "G6F": 6,
+        "G8F": 6,
+        "S1F": 6
+      }
+    },
+    "source_capture_manifest_row_count": 5973,
+    "source_capture_manifest_downloaded_row_count": 2724,
+    "source_capture_matched_file_count": 1826,
+    "source_capture_unmatched_files": [
+      "data/raw/kra_text/dacom11/meet=1/year=2022/month=05/day=22/20220522dacom11.rpt"
+    ],
+    "snapshot_db_sha256": "fcdba7f41f45fa26a73347103d580f10dcf33dff07f69e17a171620e2a747062"
+  },
+  "root_independent_parse_parity": {
+    "independent_root_artifact": "thoroughbred/research/20261002_passing_groups_v1/root_expected_rpt_points.parquet",
+    "independent_root_artifact_sha256": "25087828d433a4cc4b3c1e51904ae4ae0c7f33513c3cbcfa12f502a89f730807",
+    "our_point_rows": 111467,
+    "root_point_rows": 111467,
+    "missing_from_our_extraction": 0,
+    "missing_from_root_parse": 0,
+    "field_mismatch_counts": {},
+    "all_source_coordinate_rows_match": true
+  },
+  "outputs": [
+    {
+      "path": "rpt_race_headers.parquet",
+      "sha256": "5eaaca2e92f5cc70b0ed80f187e5ed5928ea3ac2d1cefb3b8e9f1dec3b3340df",
+      "bytes": 1263512,
+      "row_count": 17371
+    },
+    {
+      "path": "rpt_point_observations.parquet",
+      "sha256": "0677122595858c8e6eb7db48d31d325be7733659e553379f66796f2d364d4b5a",
+      "bytes": 10928383,
+      "row_count": 111467
+    },
+    {
+      "path": "rpt_source_files.parquet",
+      "sha256": "8cdc4eaba4c049dd558a640fbed1a212bfe2ded7f907b39f0317548287bd36db",
+      "bytes": 251351,
+      "row_count": 1827
+    },
+    {
+      "path": "rpt_point_mapping.csv",
+      "sha256": "aaf5858840b00367e5d96a66495c976849fc74f05de929b7ac00fd445ab9e5d2",
+      "bytes": 4120,
+      "row_count": 20
+    },
+    {
+      "path": "root_independent_parse_parity.json",
+      "sha256": "24f25350942e389bc37d681ecfa06ab0c0c882bdc61bf9ab6ae8d5c9ec198c13",
+      "bytes": 425,
+      "row_count": null
+    },
+    {
+      "path": "rpt_snapshot_comparison.parquet",
+      "sha256": "6eeab952b919d35e97f892d9815e22fda0e6e57b7400cf9b821bec37da17b523",
+      "bytes": 8169228,
+      "row_count": 126406
+    },
+    {
+      "path": "README.md",
+      "sha256": "0fd2f80db73cc31788c128f8f545bb4009d4427edf55027c6c0edb72f2f0fded",
+      "bytes": 1603,
+      "row_count": null
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "status": "applied_and_independently_verified",
+  "completed_at_utc": "2026-10-01T22:31:20.822166+00:00",
+  "scope": {
+    "start_date": "2010-01-01",
+    "end_date": "2026-09-29",
+    "clinical_meets": [
+      1,
+      3
+    ],
+    "model_development_from": "2017-01-01"
+  },
+  "source_occurrence_counts": {
+    "current_annual": 243411,
+    "archived_daily_snapshot": 238591,
+    "rpt": 1619071,
+    "total": 2101073
+  },
+  "counts_are_verified_clinical_visit_counts": false,
+  "database_sha256": "c30202a65a1a82c2927efc8e0ef150c03a0c9950e953ee445beb1b3a7f8c2de6",
+  "previous_objects_preserved": 109,
+  "current_object_count": 153,
+  "new_tables": 25,
+  "new_views": 19,
+  "source_manifests_rows": 25,
+  "operational_database_accessed_or_modified": false,
+  "core_input_summary": {
+    "horse_link_counts": [
+      {
+        "source_kind": "api16",
+        "source_cohort": "current_annual",
+        "link_status": "exact_core_roster_match",
+        "n": 238344
+      },
+      {
+        "source_kind": "api16",
+        "source_cohort": "current_annual",
+        "link_status": "unmatched_official_id",
+        "n": 5067
+      },
+      {
+        "source_kind": "api16_archived",
+        "source_cohort": "archived_daily_snapshot",
+        "link_status": "exact_core_roster_match",
+        "n": 228615
+      },
+      {
+        "source_kind": "api16_archived",
+        "source_cohort": "archived_daily_snapshot",
+        "link_status": "unmatched_official_id",
+        "n": 9976
+      },
+      {
+        "source_kind": "dacom72",
+        "source_cohort": "rpt",
+        "link_status": "source_has_no_official_id",
+        "n": 1619071
+      }
+    ],
+    "current_api_phrase_states": [
+      {
+        "exact_phrase_review_status": "source_empty_or_placeholder",
+        "n": 266411,
+        "phrases": 1
+      },
+      {
+        "exact_phrase_review_status": "reviewed_exact_phrase_metadata_only",
+        "n": 220237,
+        "phrases": 708
+      },
+      {
+        "exact_phrase_review_status": "no_exact_review_phrase",
+        "n": 174,
+        "phrases": 18
+      }
+    ],
+    "text_phrase_states": [
+      {
+        "exact_phrase_review_status": "excluded_review_metadata",
+        "fingerprint_candidates": 131,
+        "raw_occurrences": 141,
+        "phrases": 5
+      },
+      {
+        "exact_phrase_review_status": "hold_requires_new_in_scope_event_evidence",
+        "fingerprint_candidates": 461,
+        "raw_occurrences": 482,
+        "phrases": 3
+      },
+      {
+        "exact_phrase_review_status": "reviewed_exact_phrase_metadata_only",
+        "fingerprint_candidates": 1478582,
+        "raw_occurrences": 1598981,
+        "phrases": 3590
+      },
+      {
+        "exact_phrase_review_status": "no_exact_review_phrase",
+        "fingerprint_candidates": 17654,
+        "raw_occurrences": 19467,
+        "phrases": 5566
+      }
+    ],
+    "explanation_distinct_source_slots": [
+      {
+        "source_kind": "api16",
+        "source_cohort": "current_annual",
+        "slots": 156390,
+        "capture_component_rows": 199731
+      },
+      {
+        "source_kind": "api16_archived",
+        "source_cohort": "archived_daily_snapshot",
+        "slots": 153532,
+        "capture_component_rows": 199757
+      },
+      {
+        "source_kind": "dacom72",
+        "source_cohort": "rpt",
+        "slots": 1106293,
+        "capture_component_rows": 2232704
+      }
+    ]
+  },
+  "gates": {
+    "root_input_verification.json": {
+      "passed": true,
+      "sha256": "b9adbbaa8e415b99952b7a807cb7d6c087037491441b9dde8ddc4e1a788c2bbe"
+    },
+    "root_dictionary_verification.json": {
+      "passed": true,
+      "sha256": "d910a36279a4f8abe20ecd4a8e31f30059adc2b72fc88170d4eba82a767f0fef"
+    },
+    "root_core_input_verification.json": {
+      "passed": true,
+      "sha256": "e9a3465985220b67fe6caa70c54f99ecf331afa519771347643580d1af76e825"
+    },
+    "root_preservation_verification.json": {
+      "passed": true,
+      "sha256": "73d7427cd51949afb3b73579d6d00632f338317c16b88ded5574c50cf59c92f0"
+    }
+  },
+  "report_pins": {
+    "loader/dry_run_report.json": "f8a7bff33d123ce4acd285126a50c868171050e1c6f43bbef548e2e31d0b800c",
+    "loader/apply_report.json": "6bc3d0396108c32dcaacae8f4e4ed9b2a8697327defe2d6b9e34e215475f98a9",
+    "root_backup_attestation.json": "8518ca990c8fff90a9aa8f985bcf28171d7fd88280b59bd046cfd98b9b59b5e1",
+    "README.md": "59762c2024fa6b2ba2f2455abd63e512ffd9b4381be7bc1696308b388a7cb11b"
+  },
+  "unverified": [
+    "historical_medical_completeness",
+    "historical_publication_times",
+    "text_horse_official_id_links",
+    "unmatched_api_horse_roster_ids",
+    "new_or_contextual_phrase_mappings"
+  ],
+  "remaining_major_ingestions": [
+    "race_level_passing_groups",
+    "stewards_reports_and_sanctions"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "status": "complete_nonmutating_inventory",
+  "source_observation_path": "thoroughbred/research/20261002_steward_reports_v1/source/api_observations.parquet",
+  "source_observation_sha256": "89d78f93dadf00e75211a51633eef77ccab1567b2f14675005bcd986e404853e",
+  "source_scope": "API215 included rows only; addJudgement values null/empty/'-' excluded from nonblank inventory",
+  "nonblank_item_occurrences": 3237,
+  "distinct_exact_field_values": 375,
+  "distinct_paragraphs_after_bullet_newline_split": 508,
+  "field_value_locator_class_counts": {
+    "multiple_dates_or_races_ambiguous": 104,
+    "one_explicit_full_date_one_race_number_candidate": 169,
+    "yearless_date_and_race_number_needs_context": 32,
+    "one_explicit_date_multiple_race_numbers": 29,
+    "race_number_without_explicit_full_date": 5,
+    "yearless_date_without_race_number": 8,
+    "no_explicit_date_race_locator": 10,
+    "explicit_full_date_without_race_number": 18
+  },
+  "field_occurrence_locator_class_counts": {
+    "multiple_dates_or_races_ambiguous": 862,
+    "one_explicit_full_date_one_race_number_candidate": 1517,
+    "yearless_date_and_race_number_needs_context": 283,
+    "one_explicit_date_multiple_race_numbers": 201,
+    "race_number_without_explicit_full_date": 48,
+    "yearless_date_without_race_number": 66,
+    "no_explicit_date_race_locator": 98,
+    "explicit_full_date_without_race_number": 162
+  },
+  "occurrence_rows_with_one_full_date_and_one_race_candidate": 169,
+  "unique_values_with_multiple_dates_or_race_numbers": 133,
+  "values_with_candidate_future_date_references": 100,
+  "future_date_reference_pairs": 111,
+  "values_with_calendar_weekday_mismatch": 7,
+  "calendar_weekday_mismatch_occurrences": 53,
+  "future_reference_class_counts": {
+    "future_effective_or_scheduled_date_possible": 97,
+    "future_date_with_weekday_conflict_candidate_typo": 2,
+    "future_reference_role_unresolved_needs_review": 1
+  },
+  "values_repeated_across_every_api_race_row_of_a_source_day": 375,
+  "future_date_interpretation": "A date later than the API row's rcDate is a forward reference, not itself a typo. Rows with a weekday/date conflict are listed independently as stronger calendar-error candidates; no date is corrected automatically.",
+  "official_ui_semantics": {
+    "source_path": "thoroughbred/research/20261002_steward_reports_v1/official_web/seoul_report_index.html",
+    "source_sha256": "96662a0abb9939dc99a12d48041afe7c0e68af4947efa0ef4169022b89e38531",
+    "captured_at_utc": "2026-10-02T05:33:52.071332+00:00",
+    "encoding": "EUC-KR",
+    "page_selected_date": "2026-09-20 (rcDate option in saved HTML)",
+    "page_has_additional_judgement_heading": true,
+    "page_additional_judgement_value": "- (the pre element immediately under that page-level heading)",
+    "api_same_date_rows": 11,
+    "api_same_date_rows_addjudgement_dash": 11,
+    "interpretation": "The official page presents `추가 심판사항` in a separate page/day section before the individual race detail tables. Its dash on 2026-09-20 agrees with all 11 API215 race rows for that meet/date. Repetition of addJudgement across multiple race rows, plus this page layout, supports preserving the value as day-wide supplemental text rather than assigning it to the containing race row. This does not validate older-archive completeness."
+  },
+  "database_accessed": false,
+  "source_files_modified": false
+}

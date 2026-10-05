@@ -1,0 +1,136 @@
+{
+  "status": "complete_independent_local_parquet_recheck",
+  "scope": {
+    "actual_meet_code": 1,
+    "venue": "Seoul",
+    "start_date": "2020-01-01",
+    "end_date": "2021-12-31",
+    "official_rpt_labels": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "G-1F",
+      "S-1F"
+    ]
+  },
+  "source_pins": {
+    "api_observations": {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/api_observations.parquet",
+      "sha256": "facfeca265488a7907ae913d4b7605e3e64aa8b324cca3b8287f1f3dbe316df7"
+    },
+    "rpt_point_observations": {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_point_observations.parquet",
+      "sha256": "0677122595858c8e6eb7db48d31d325be7733659e553379f66796f2d364d4b5a"
+    },
+    "baseline_db": {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+      "sha256_before": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "attested_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7"
+    }
+  },
+  "method": {
+    "source_parquet_scans": 2,
+    "materialization": "one in-memory DuckDB materialization per source, filtered to Seoul 2020-2021",
+    "normalization": "strip outer ASCII spaces only for equality; placeholders null/empty/-/X excluded",
+    "mapping_rule": "an API field/value maps only when that normalized value occurs in exactly one relevant API field and exactly one canonical official RPT location in the same race",
+    "notation_grammar_parsed": false,
+    "baseline_database_mode": "read_only=True",
+    "network_or_api_calls": false
+  },
+  "counts": {
+    "materialized_api_race_rows": 1516,
+    "materialized_api_race_keys": 1516,
+    "materialized_rpt_point_rows": 8970,
+    "rpt_race_keys": 1495,
+    "api_nonempty_mapped_fields": 5171,
+    "held_api_cells_independent": 414,
+    "held_api_cells_baseline_db": 414,
+    "held_api_cells_locally_reconciled": 414,
+    "held_races": 259,
+    "held_cells_by_year": {
+      "2020": 170,
+      "2021": 244
+    },
+    "held_races_by_year": {
+      "2020": 114,
+      "2021": 145
+    },
+    "candidate_class_counts": {
+      "no_rpt_candidate": 0,
+      "multiple_api_fields_only": 0,
+      "multiple_rpt_points_only": 104,
+      "multiple_api_fields_and_multiple_rpt_points": 310
+    },
+    "candidate_flags_nonexclusive": {
+      "cells_with_multiple_api_fields": 310,
+      "cells_with_multiple_rpt_points": 414,
+      "cells_with_no_rpt_candidate": 0,
+      "cells_with_balanced_multi_api_multi_rpt_candidates": 310
+    },
+    "ambiguous_race_value_groups": 259,
+    "balanced_multi_api_and_multi_rpt_value_groups": 155,
+    "ambiguous_groups_by_api_field_count": {
+      "1": 104,
+      "2": 155
+    },
+    "ambiguous_groups_by_rpt_point_count": {
+      "2": 259
+    },
+    "candidate_rpt_point_pair_cell_counts": {
+      "1C+2C": 2,
+      "1C+S1F": 206,
+      "2C+S1F": 12,
+      "3C+4C": 1,
+      "3C+S1F": 193
+    },
+    "candidate_rpt_point_pair_group_counts": {
+      "1C+2C": 1,
+      "1C+S1F": 129,
+      "2C+S1F": 7,
+      "3C+4C": 1,
+      "3C+S1F": 121
+    },
+    "candidate_rpt_point_keys_from_all_held_cells": 518,
+    "candidate_rpt_point_keys_selected_from_one_literal_rpt_value": 518,
+    "candidate_rpt_point_keys_missing_or_not_rpt_selected": 0,
+    "final_race_point_rows_independent": 6531,
+    "final_race_point_rows_baseline_db": 6531,
+    "final_selection_source_counts_independent": {
+      "dacom11_rpt": 1774,
+      "api303": 4757
+    },
+    "final_selection_status_counts_independent": {
+      "rpt_unique_literal_fill_api_mapping_held_same_race": 666,
+      "api_primary_exact_agreement_after_outer_space_trim": 4757,
+      "rpt_unique_literal_fill_api_absent": 1108
+    },
+    "baseline_selection_source_and_status_counts": {
+      "api303|api_primary_exact_agreement_after_outer_space_trim": 4757,
+      "dacom11_rpt|rpt_unique_literal_fill_api_absent": 1108,
+      "dacom11_rpt|rpt_unique_literal_fill_api_mapping_held_same_race": 666
+    },
+    "rpt_filled_point_rows_independent": 1774,
+    "rpt_filled_point_rows_all_have_one_rpt_literal_and_match_baseline": true,
+    "all_held_candidate_rpt_point_keys_filled_from_unique_rpt_literals": true,
+    "independent_vs_baseline_point_value_or_source_mismatches": 0,
+    "baseline_db_sha256_after": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7"
+  },
+  "parity": {
+    "all_414_held_cells_match_raw_api_source_locator_and_literal": true,
+    "all_direct_point_selections_match_baseline_source_and_normalized_value": true,
+    "baseline_db_hash_unchanged": true
+  },
+  "interpretation": {
+    "cell_level_mapping": "The 414 cells remain individually unmappable by value alone wherever multiple API fields and/or multiple RPT points carry the same literal.",
+    "final_point_values": "Every race×RPT point selected from Dacom11 has exactly one normalized RPT literal; the entire independent selected-point universe matches the read-only baseline DB."
+  },
+  "outputs": [
+    "README.md",
+    "unmapped_cells.csv",
+    "ambiguous_value_groups.csv",
+    "rpt_final_fill_points.csv",
+    "point_selection_reconciliation.csv",
+    "recheck_unmapped.py"
+  ]
+}

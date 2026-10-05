@@ -1,0 +1,215 @@
+{
+  "generated_at_utc": "2026-10-01T13:05:28+00:00",
+  "scope": "CSV-defined 2017+ core runners with matched operational entry and NULL API78 observation",
+  "input_csv": "thoroughbred/research/20261001_equipment_storage_audit_v1/matched_operational_api78_missing_2017plus.csv",
+  "input_rows": 104,
+  "distinct_target_date_meet_pairs": 96,
+  "current_operational_state": {
+    "matched_operational_entry": 104,
+    "api78_observation_timestamp_null": 104,
+    "api78_raw_card_null": 104,
+    "wide_equipment_nonblank_but_api78_unobserved": 0,
+    "official_horse_id_in_core": 104,
+    "official_horse_id_equals_operational_horse_profile_id": 104,
+    "core_source_file_present": 104
+  },
+  "raw_source_review": {
+    "latest_page_complete_saved_API78_batch_selected_per_date_meet": true,
+    "all_older_page_complete_batches_checked_for_presence_and_equipment_drift": true,
+    "page_completeness_is_independent_of_ingestion_run_status": true,
+    "latest_presence_counts": {
+      "absent_at_race_program_key": 104
+    },
+    "latest_ingestion_run_status_counts": {
+      "completed": 26,
+      "partial": 70
+    },
+    "latest_equipment_state_counts": {},
+    "older_observation_drift_counts": {
+      "all_complete_observations_same_presence_and_value": 1,
+      "single_or_no_complete_observation": 103
+    },
+    "date_meets_with_older_complete_observations": 1,
+    "additional_older_complete_batches": 1,
+    "latest_race_program_presence_counts": {
+      "exact_race_program_absent": 104
+    },
+    "latest_source_document_count": 96,
+    "all_validated_document_count": 97,
+    "complete_observation_batches_across_target_date_meets": 97,
+    "saved_batches_rejected_as_incomplete": 0,
+    "incomplete_batch_details": [],
+    "dates_meets_without_a_complete_saved_batch": 0,
+    "api78_horse_id_field_available": false
+  },
+  "missing_population_by_year_meet": [
+    {
+      "year": "2017",
+      "meet": 1,
+      "missing_rows": 26
+    },
+    {
+      "year": "2017",
+      "meet": 3,
+      "missing_rows": 34
+    },
+    {
+      "year": "2018",
+      "meet": 1,
+      "missing_rows": 10
+    },
+    {
+      "year": "2018",
+      "meet": 3,
+      "missing_rows": 16
+    },
+    {
+      "year": "2019",
+      "meet": 1,
+      "missing_rows": 1
+    },
+    {
+      "year": "2019",
+      "meet": 3,
+      "missing_rows": 14
+    },
+    {
+      "year": "2020",
+      "meet": 3,
+      "missing_rows": 3
+    }
+  ],
+  "missing_population_by_horse": [
+    {
+      "horse_id": "0034497",
+      "horse_name_core": "[서울]자이언트홀드",
+      "missing_rows": 29
+    },
+    {
+      "horse_id": "0034359",
+      "horse_name_core": "[서울]쇼트스톱",
+      "missing_rows": 23
+    },
+    {
+      "horse_id": "0032248",
+      "horse_name_core": "[부산경남]청춘열차",
+      "missing_rows": 18
+    },
+    {
+      "horse_id": "0031699",
+      "horse_name_core": "[부산경남]마이블레이드",
+      "missing_rows": 11
+    },
+    {
+      "horse_id": "0032569",
+      "horse_name_core": "[서울]환희의별",
+      "missing_rows": 10
+    },
+    {
+      "horse_id": "0030364",
+      "horse_name_core": "[부산경남]해란강자",
+      "missing_rows": 7
+    },
+    {
+      "horse_id": "0034856",
+      "horse_name_core": "[서울]슈퍼철인",
+      "missing_rows": 5
+    },
+    {
+      "horse_id": "0029670",
+      "horse_name_core": "[부산경남]금포엔젤",
+      "missing_rows": 1
+    }
+  ],
+  "missing_population_by_name_prefix_and_meet": [
+    {
+      "meet": 1,
+      "horse_name_prefix": "[부산경남]",
+      "missing_rows": 37
+    },
+    {
+      "meet": 3,
+      "horse_name_prefix": "[서울]",
+      "missing_rows": 67
+    }
+  ],
+  "core_2017plus_api78_observation_coverage_by_name_prefix_and_meet": [
+    {
+      "meet": 1,
+      "horse_name_prefix": "(untagged)",
+      "core_runners": 105315,
+      "api78_observed": 103855,
+      "api78_unobserved": 0,
+      "no_operational_entry": 1460,
+      "operational_horse_id_mismatch": 0
+    },
+    {
+      "meet": 1,
+      "horse_name_prefix": "[부산경남]",
+      "core_runners": 773,
+      "api78_observed": 726,
+      "api78_unobserved": 37,
+      "no_operational_entry": 10,
+      "operational_horse_id_mismatch": 0
+    },
+    {
+      "meet": 1,
+      "horse_name_prefix": "[영남]",
+      "core_runners": 24,
+      "api78_observed": 24,
+      "api78_unobserved": 0,
+      "no_operational_entry": 0,
+      "operational_horse_id_mismatch": 0
+    },
+    {
+      "meet": 3,
+      "horse_name_prefix": "(untagged)",
+      "core_runners": 75207,
+      "api78_observed": 74312,
+      "api78_unobserved": 0,
+      "no_operational_entry": 895,
+      "operational_horse_id_mismatch": 0
+    },
+    {
+      "meet": 3,
+      "horse_name_prefix": "[서울]",
+      "core_runners": 624,
+      "api78_observed": 551,
+      "api78_unobserved": 67,
+      "no_operational_entry": 6,
+      "operational_horse_id_mismatch": 0
+    },
+    {
+      "meet": 4,
+      "horse_name_prefix": "(untagged)",
+      "core_runners": 119,
+      "api78_observed": 119,
+      "api78_unobserved": 0,
+      "no_operational_entry": 0,
+      "operational_horse_id_mismatch": 0
+    }
+  ],
+  "core_population_scope": "2017-01-01..2026-09-29, meets 1/3/4; API78 state counted only for exact-key operational entries with the same horse ID.",
+  "cross_meet_name_prefix_rows": 104,
+  "name_prefix_interpretation": "Counts are labels in confirmed_runners.horse_name_raw; for meets 1 and 3 they are compared with the venue prefix. The local API78 cards contain no exact race/program row for these targets, so prefix association is descriptive and does not establish why the row was omitted.",
+  "read_only": {
+    "operational_sqlite_mode_ro": true,
+    "operational_sqlite_query_only": true,
+    "core_duckdb_read_only": true,
+    "network_used": false,
+    "database_rows_modified": false,
+    "source_url_selected_or_emitted": false,
+    "request_parameter_blob_selected_or_emitted": false,
+    "request_json_fields_extracted": [
+      "race_dt",
+      "rccrs_cd",
+      "pageNo"
+    ],
+    "raw_files_confined_to_data_raw_and_sha256_verified_before_json_parse": true
+  },
+  "files": {
+    "row_ledger_csv": "row_ledger.csv",
+    "validated_document_ledger_csv": "validated_documents.csv",
+    "target_date_meet_json": "target_date_meets.json"
+  }
+}

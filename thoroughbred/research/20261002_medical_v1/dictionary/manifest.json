@@ -1,0 +1,308 @@
+{
+  "dataset": "medical_dictionary_snapshot_v1",
+  "generated_at_kst": "2026-10-02T06:55:54+09:00",
+  "dataset_scope": {
+    "kind": "research_dictionary_and_review_provenance",
+    "medical_event_scope": "events are loaded separately for Seoul and Busan-Gyeongnam, 2010-01-01 through 2026-09-29",
+    "phrase_review_snapshot_scope": "prior all-meet unique-phrase audit; no usage counts are exported here",
+    "jeju_profile_source_meet": 2,
+    "meet_names": {
+      "1": "Seoul",
+      "2": "Jeju",
+      "3": "Busan-Gyeongnam"
+    }
+  },
+  "hash_contract": {
+    "raw_text_sha256": "SHA-256 of exact UTF-8 raw phrase bytes; no normalization",
+    "api33_tuple_sha256": "length-prefixed exact UTF-8 illName, illEngName, illDesc; null encoded distinctly",
+    "explanation_tuple_sha256": "length-prefixed exact UTF-8 title, English name, description; null encoded distinctly"
+  },
+  "schema_file": "schema.json",
+  "metrics": {
+    "api33": {
+      "source_row_count": 3523,
+      "exact_tuple_count": 3511,
+      "unique_korean_title_count": 3500,
+      "source_duplicate_excess_count": 12,
+      "all_ill_desc_are_dash": true,
+      "xml_json_page_row_parity": true,
+      "xml_page_count": 4,
+      "xml_page_checks": [
+        {
+          "page_no": 1,
+          "source_xml_path": "raw/api33_page_001.xml",
+          "source_xml_sha256": "4873c23bf315b2f10fb0780cdd43a8029a813c1984a7bf2be6cc5b862b8d2823",
+          "manifest_item_count": 1000,
+          "xml_item_count": 1000,
+          "json_page_item_count": 1000,
+          "xml_json_rows_equal_in_order": true
+        },
+        {
+          "page_no": 2,
+          "source_xml_path": "raw/api33_page_002.xml",
+          "source_xml_sha256": "c6249dd770347bc5a3b484ff7b61637d3e20009cd7e3718f02e5a238f9c465b2",
+          "manifest_item_count": 1000,
+          "xml_item_count": 1000,
+          "json_page_item_count": 1000,
+          "xml_json_rows_equal_in_order": true
+        },
+        {
+          "page_no": 3,
+          "source_xml_path": "raw/api33_page_003.xml",
+          "source_xml_sha256": "2cf6e132b4b65117295b6beffa92e6cfb935bda99811120e1d3a7fec4adda7a4",
+          "manifest_item_count": 1000,
+          "xml_item_count": 1000,
+          "json_page_item_count": 1000,
+          "xml_json_rows_equal_in_order": true
+        },
+        {
+          "page_no": 4,
+          "source_xml_path": "raw/api33_page_004.xml",
+          "source_xml_sha256": "ff9ff121e79af3f64289842fd871958f0071f519dea2c7d4cfd19be7a8624829",
+          "manifest_item_count": 523,
+          "xml_item_count": 523,
+          "json_page_item_count": 523,
+          "xml_json_rows_equal_in_order": true
+        }
+      ]
+    },
+    "phrases": {
+      "phrase_decision_count": 5397,
+      "confirmed_mapping_count": 5392,
+      "excluded_count": 5,
+      "excluded_raw_texts": [
+        "치료장제(기타)",
+        "치료장제(답  창)",
+        "치료장제(무  제)",
+        "치료장제(백선열)",
+        "치료장제(제구염)"
+      ],
+      "component_link_row_count": 9113,
+      "contextual_evidence_required_count": 364,
+      "prior_parser_prefix_rule_count": 356,
+      "automatic_event_link_enabled": false
+    },
+    "explanations": {
+      "explanation_observation_count": 145,
+      "unique_exact_explanation_tuple_count": 119,
+      "profile_capture_source_record_count": 94,
+      "profile_observations_as_recorded_count": 192,
+      "unique_profile_title_count": 68,
+      "unique_profile_title_with_description_count": 67,
+      "profile_capture_source_record_counts_by_meet": {
+        "1": 80,
+        "2": 1,
+        "3": 13
+      },
+      "profile_reported_observation_counts_by_meet": {
+        "1": 156,
+        "2": 8,
+        "3": 28
+      },
+      "web_glossary_row_count": 50,
+      "user_provided_detail_row_count": 1,
+      "historical_publication_time_column_present_but_unknown": true,
+      "source_time_and_event_date_are_separate_columns": true,
+      "source_input_hashes": {
+        "data/research/kra_disease_glossary_api33_20260930/profile_hover_review_20260930/profile_hover_observations.csv": {
+          "sha256": "b45919ce1300ab6c6c5d212f1fab54db3732220371a211cf1494aaf8c7fba8b2",
+          "bytes": 24649
+        },
+        "data/research/kra_disease_glossary_api33_20260930/final_review_20260930/phrase_recheck_20261001/kra_profile_observations.csv": {
+          "sha256": "3337e71ec128316c4d77249ba8d2294d11c3e5cb534a8ee3b8917b60ae759163",
+          "bytes": 2625
+        },
+        "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/profile_hover_observations.csv": {
+          "sha256": "5782a44b9b319393995527f7263272d08d4e7dcf40ca527b14b664ded5a7e64b",
+          "bytes": 4463
+        },
+        "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/profile_hover_observations_additional_20261001.csv": {
+          "sha256": "a00ee70f9af1f43febd842cfc8266de1c5d249ae40a8accb256721c9529804cd",
+          "bytes": 11451
+        },
+        "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/source_manifest.json": {
+          "sha256": "ef478208400c5248411d70f4b917c890adb301f34946ad0826f670314cbdaad5",
+          "bytes": 14739
+        },
+        "data/research/kra_disease_glossary_20260930/glossary.json": {
+          "sha256": "8d1e42622d0be69180fe9112a13b68b45bf2859d893d6dc9618658c9b3989dff",
+          "bytes": 146871
+        },
+        "data/research/kra_disease_glossary_api33_20260930/final_review_20260930/phrase_recheck_20261001/user_provided_kra_term_details.json": {
+          "sha256": "b5c51528886d9346df07158b222440f8a0320ef1ce5e33ac923d5b184911ff6f",
+          "bytes": 1048
+        }
+      }
+    }
+  },
+  "source_files": {
+    "data/research/kra_disease_glossary_api33_20260930/api33_glossary.json": {
+      "sha256": "256603bddaeae106b7a583a1778ef02dbece4a99aee9549d363c2a48ca56fefb",
+      "bytes": 462467
+    },
+    "data/research/kra_disease_glossary_api33_20260930/api33_glossary_deduplicated_exact.json": {
+      "sha256": "e94753e4847f3755783e64d41f502fe93b05620a8a95d1d0cfba17f51a6bad1a",
+      "bytes": 461694
+    },
+    "data/research/kra_disease_glossary_api33_20260930/manifest.json": {
+      "sha256": "ab0fe0d0b7f860658e8cb99a05fbc09acdbefb93a238b10015ab7fae706837b7",
+      "bytes": 3836
+    },
+    "data/research/kra_disease_glossary_api33_20260930/raw/api33_page_001.xml": {
+      "sha256": "4873c23bf315b2f10fb0780cdd43a8029a813c1984a7bf2be6cc5b862b8d2823",
+      "bytes": 120069
+    },
+    "data/research/kra_disease_glossary_api33_20260930/raw/api33_page_002.xml": {
+      "sha256": "c6249dd770347bc5a3b484ff7b61637d3e20009cd7e3718f02e5a238f9c465b2",
+      "bytes": 130965
+    },
+    "data/research/kra_disease_glossary_api33_20260930/raw/api33_page_003.xml": {
+      "sha256": "2cf6e132b4b65117295b6beffa92e6cfb935bda99811120e1d3a7fec4adda7a4",
+      "bytes": 135447
+    },
+    "data/research/kra_disease_glossary_api33_20260930/raw/api33_page_004.xml": {
+      "sha256": "ff9ff121e79af3f64289842fd871958f0071f519dea2c7d4cfd19be7a8624829",
+      "bytes": 66223
+    },
+    "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/full_term_review_20261001.csv": {
+      "sha256": "88fc41ea7cc2b81ee04e8a9511660639aa3553c55808818cb93bbe4e788326e9",
+      "bytes": 1801473
+    },
+    "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/source_manifest.json": {
+      "sha256": "ef478208400c5248411d70f4b917c890adb301f34946ad0826f670314cbdaad5",
+      "bytes": 14739
+    },
+    "data/research/kra_disease_glossary_api33_20260930/profile_hover_review_20260930/profile_hover_observations.csv": {
+      "sha256": "b45919ce1300ab6c6c5d212f1fab54db3732220371a211cf1494aaf8c7fba8b2",
+      "bytes": 24649
+    },
+    "data/research/kra_disease_glossary_api33_20260930/final_review_20260930/phrase_recheck_20261001/kra_profile_observations.csv": {
+      "sha256": "3337e71ec128316c4d77249ba8d2294d11c3e5cb534a8ee3b8917b60ae759163",
+      "bytes": 2625
+    },
+    "data/research/kra_disease_glossary_api33_20260930/final_review_20260930/phrase_recheck_20261001/user_provided_kra_term_details.json": {
+      "sha256": "b5c51528886d9346df07158b222440f8a0320ef1ce5e33ac923d5b184911ff6f",
+      "bytes": 1048
+    },
+    "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/profile_hover_observations.csv": {
+      "sha256": "5782a44b9b319393995527f7263272d08d4e7dcf40ca527b14b664ded5a7e64b",
+      "bytes": 4463
+    },
+    "data/research/kra_disease_glossary_api33_20260930/profile_hover_expansion_20261001/profile_hover_observations_additional_20261001.csv": {
+      "sha256": "a00ee70f9af1f43febd842cfc8266de1c5d249ae40a8accb256721c9529804cd",
+      "bytes": 11451
+    },
+    "data/research/kra_disease_glossary_20260930/glossary.json": {
+      "sha256": "8d1e42622d0be69180fe9112a13b68b45bf2859d893d6dc9618658c9b3989dff",
+      "bytes": 146871
+    },
+    "data/research/kra_disease_glossary_api33_20260930/manual_review_decisions_20260930.csv": {
+      "sha256": "d3c76fde07b97ecab24e0b4eabd1dd25b087ca6d77f1f5dce066d4330ef4862d",
+      "bytes": 32847
+    },
+    "data/research/kra_disease_glossary_api33_20260930/composite_review_20260930/composite_component_review.csv": {
+      "sha256": "63037c2b83d683ec54c8f0f34470080a7b0f3f4e307e451e8896223eade42488",
+      "bytes": 1375346
+    }
+  },
+  "output_files": {
+    "api33_source_rows.parquet": {
+      "sha256": "3e9e8e99f5a2f79e135f70f40f41d019df94c43556443a7d9d0fec7580c62a75",
+      "bytes": 252942,
+      "row_count": 3523
+    },
+    "api33_terms.parquet": {
+      "sha256": "8766e10b60fc240d2277affc115bd3bdf57f8ff5f5e2c59c2f1103510ad05945",
+      "bytes": 201047,
+      "row_count": 3511
+    },
+    "phrase_decisions.parquet": {
+      "sha256": "bc8eb16e757f7ee98587b16a7cb5e762ab5b1db04bf12c7fca249821d08810b4",
+      "bytes": 362145,
+      "row_count": 5397
+    },
+    "phrase_components.parquet": {
+      "sha256": "9d1e55d8ffb9dd2796b375385871a162a4533c66c305e0fbc4a332c79d6eb5bb",
+      "bytes": 289639,
+      "row_count": 9113
+    },
+    "explanation_observations.parquet": {
+      "sha256": "57b6c6c612a73b32bfef165ae2e12c8f4309505e025f641d7f76f3c4e3e9181a",
+      "bytes": 157534,
+      "row_count": 145
+    },
+    "explanation_terms.parquet": {
+      "sha256": "7bfce6799b4f328dd6cfc2a6f0fdd11e8585568ee10b02610ba361f342dc7857",
+      "bytes": 72477,
+      "row_count": 119
+    },
+    "schema.json": {
+      "sha256": "8b5fbf61dd72b7234384ab41c3b97548f3f9f65078cb1415f6a9a180a9521963",
+      "bytes": 9614,
+      "row_count": null
+    },
+    "README.md": {
+      "sha256": "134599fd27b6dce1ded46f4a569292d0fb5e3be42c68aa44e73d37e954aa68b9",
+      "bytes": 4437,
+      "row_count": null
+    },
+    "build_dictionary.py": {
+      "sha256": "4e10697fc66318fc16ec537624818c12aaf76c8aa0e44ef11f2788a5dc82e9fd",
+      "bytes": 47670,
+      "row_count": null
+    }
+  },
+  "safety": {
+    "operating_sqlite_or_supabase_accessed": false,
+    "core_duckdb_accessed_or_modified": false,
+    "network_used": false,
+    "term_id_copied": false,
+    "automatic_event_linking_enabled": false,
+    "legacy_dacom72_prefix_rule_reuse_enabled": false,
+    "api33_ill_desc_used_as_explanation": false
+  },
+  "xml_validation": {
+    "parser": "lxml.etree XMLParser(resolve_entities=False, no_network=True, load_dtd=False, huge_tree=False)",
+    "raw_xml_hashes_checked_against_manifest": true,
+    "page_item_counts_checked": true,
+    "every_xml_row_compared_to_json_row": true,
+    "page_checks": [
+      {
+        "page_no": 1,
+        "source_xml_path": "raw/api33_page_001.xml",
+        "source_xml_sha256": "4873c23bf315b2f10fb0780cdd43a8029a813c1984a7bf2be6cc5b862b8d2823",
+        "manifest_item_count": 1000,
+        "xml_item_count": 1000,
+        "json_page_item_count": 1000,
+        "xml_json_rows_equal_in_order": true
+      },
+      {
+        "page_no": 2,
+        "source_xml_path": "raw/api33_page_002.xml",
+        "source_xml_sha256": "c6249dd770347bc5a3b484ff7b61637d3e20009cd7e3718f02e5a238f9c465b2",
+        "manifest_item_count": 1000,
+        "xml_item_count": 1000,
+        "json_page_item_count": 1000,
+        "xml_json_rows_equal_in_order": true
+      },
+      {
+        "page_no": 3,
+        "source_xml_path": "raw/api33_page_003.xml",
+        "source_xml_sha256": "2cf6e132b4b65117295b6beffa92e6cfb935bda99811120e1d3a7fec4adda7a4",
+        "manifest_item_count": 1000,
+        "xml_item_count": 1000,
+        "json_page_item_count": 1000,
+        "xml_json_rows_equal_in_order": true
+      },
+      {
+        "page_no": 4,
+        "source_xml_path": "raw/api33_page_004.xml",
+        "source_xml_sha256": "ff9ff121e79af3f64289842fd871958f0071f519dea2c7d4cfd19be7a8624829",
+        "manifest_item_count": 523,
+        "xml_item_count": 523,
+        "json_page_item_count": 523,
+        "xml_json_rows_equal_in_order": true
+      }
+    ]
+  }
+}

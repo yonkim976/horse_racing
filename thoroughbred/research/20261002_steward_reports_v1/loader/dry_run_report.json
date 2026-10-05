@@ -1,0 +1,455 @@
+{
+  "status": "preflight_passed_dry_run_only",
+  "applied": false,
+  "operational_database_or_service_opened_or_modified": false,
+  "core_database_path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "baseline_core_database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "baseline_core_manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+  "core_sha256_after_dry_run": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "loader_sha256": "d198fde4902a0bf26ced3e4460180cb4e220b37ddc3802da3643c6de1a5677bb",
+  "schema_sha256": "dc3fe5ee4d2c43a624a8e093a12dd61c1f5a4f78a9bd7d5a75dd9bfc4e73023c",
+  "input_contract_sha256": "b811ae3f42d054c6caf030d9ed20573468e2e29a84d4cd9d1a5a1f3395798acc",
+  "input_file_pins": {
+    "thoroughbred/research/20261002_steward_reports_v1/collect_steward_api_sources.py": {
+      "sha256": "a9df6c5eb68b72a4c14165bccd72d4ff72491a957a949e8473a503c684385b7b",
+      "bytes": 38215,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/build_linking_artifacts.py": {
+      "sha256": "473522fb98a9429174f90a9f04e9e832679302a8ef5d3c3803139ea4f880dc47",
+      "bytes": 8226,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/build_summary.json": {
+      "sha256": "a1de266e8265cf2ff5cffe34d4694ba1bea47e31c81f53350e9aebac48eeb53a",
+      "bytes": 1807,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/manifest.json": {
+      "sha256": "4260cc5d85ee6d37b8d79ad506537d627d9c9bc9540b1c6fc7644e83f2a80765",
+      "bytes": 9748,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/report_event_paragraphs.parquet": {
+      "sha256": "bcec4fb372d85a519a981ab2cad66f537e83a337dfe75eae950be1fb56be63a2",
+      "bytes": 10313040,
+      "rows": 98467
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/report_event_sentences.parquet": {
+      "sha256": "19d55f2887607962501f93a21dd3cf685929871e3ff63405cbe9f88c7b7cadcc",
+      "bytes": 11859505,
+      "rows": 107007
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/report_horse_links.parquet": {
+      "sha256": "c3c7225002608da99e47375487344bcd6d7555dd70b6937cf8a84dcbb8bd0fb5",
+      "bytes": 6373075,
+      "rows": 149008
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/report_horse_mentions.parquet": {
+      "sha256": "f0548c1f6a5adbf51f75d0103db5b67a354794530af81bd9bbaa13ea8e5aa551",
+      "bytes": 7524305,
+      "rows": 175170
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/report_linker.py": {
+      "sha256": "faf04b2c5d6973d2cc0e41f441df3e8c6aa39951e21475b9e3cb1a7dae2520c4",
+      "bytes": 33943,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/linking/report_marker_residuals.parquet": {
+      "sha256": "2e78fc7f17d6f9a04253fb4300c390117c0db17fd9155796793e27e954aa0d6e",
+      "bytes": 22952,
+      "rows": 228
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/loader/load_steward_reports.py": {
+      "sha256": "d198fde4902a0bf26ced3e4460180cb4e220b37ddc3802da3643c6de1a5677bb",
+      "bytes": 49333,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/loader/schema.sql": {
+      "sha256": "dc3fe5ee4d2c43a624a8e093a12dd61c1f5a4f78a9bd7d5a75dd9bfc4e73023c",
+      "bytes": 24948,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_backup_attestation.json": {
+      "sha256": "15b03445d92c36692f585e50e35370788411d8e6d1854f6c33e4e66ecc3d0608",
+      "bytes": 1234,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_linking_verification.json": {
+      "sha256": "c0b20edc684ab42b39c82669e6bfec8c0ca1aa3641ad54f08e5e3c0fd6c8b456",
+      "bytes": 1125,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_linking_verify.py": {
+      "sha256": "7f4d85345de6c96077cb54a85de365d569e73fe078d727c63a590e745feda301",
+      "bytes": 5891,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_manual_expected_links.json": {
+      "sha256": "811b6a4e227c2b715b929f5126623bbfea0e67cdcdd85c5037d50500655f921e",
+      "bytes": 1410,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_negative_controls.json": {
+      "sha256": "9832e46615bfcc7cc0a71aad621816f1e6b13d0b6bcdc3799f8457f386b840c9",
+      "bytes": 1643,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_parser_control_verification.json": {
+      "sha256": "119bbc74e2885355a03f1b9752392803a6c63ce7f6655cd7e91f28ddbc159aa0",
+      "bytes": 2020,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_parser_controls.py": {
+      "sha256": "0408cf31e1e669c7260248d4cc7a08562bbc06d30d5e8daef08d91d530181aea",
+      "bytes": 4775,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_sanction_entry_expectations.parquet": {
+      "sha256": "1154c9c971816c3ee00c91cd342bef1c259fd9026bace8a41ad11842946d66f8",
+      "bytes": 751517,
+      "rows": 46562
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_sanction_entry_summary.json": {
+      "sha256": "2831724b60f5fd239829643c8e6b6469010c49cde2a5039b0311ba12f37124bc",
+      "bytes": 319,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_source_verification.json": {
+      "sha256": "cd7f45cc5267b55c999f00fb6d3eb3f526d38d4ee8543f01494fb3a633b70807",
+      "bytes": 9801,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/root_source_verify.py": {
+      "sha256": "1bb41f45a5d754f47a38d4436b591c4a109345c32907df3b1030ec004136a046",
+      "bytes": 6262,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/source/api_exclusions.parquet": {
+      "sha256": "f1b70189e52354dd47d7431893b0b2f92becbde97638f578883dee85f344ecce",
+      "bytes": 18671,
+      "rows": 10
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/source/api_observations.parquet": {
+      "sha256": "89d78f93dadf00e75211a51633eef77ccab1567b2f14675005bcd986e404853e",
+      "bytes": 11624329,
+      "rows": 61439
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/source/api_page_ledger.parquet": {
+      "sha256": "a2c19eadefbb8019469838eb4fec005b313b9b7b7e484c2d69d8a513874b9f6b",
+      "bytes": 17015,
+      "rows": 102
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/source/api_year_meet_coverage.json": {
+      "sha256": "f7d888b6e518e550c038c3c2cc42c4751ffa1890565b80a3a4f57cc97da7add8",
+      "bytes": 36176,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/source/raw_page_sha256_manifest.json": {
+      "sha256": "6ccd50143afa03b796570e96a18dcf460061ab2a5f1fdb2593e7b5b0ef3794c0",
+      "bytes": 39792,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/source/source_manifest.json": {
+      "sha256": "08613b4339d9cca87f3825caca61602d9682e42f9b338f0773c1765bfeaeda8a",
+      "bytes": 61985,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/addjudgement_occurrences.csv": {
+      "sha256": "c01fc025f7654362058febcadbb8647b6805c87bf0fa0b687fd0b6475dc4a749",
+      "bytes": 945555,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/future_date_reference_candidates.csv": {
+      "sha256": "32fd5800cfd728085e6ed481abc0efdbc13d5f32169af8d6e0b1912063d08b3b",
+      "bytes": 165541,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/inventory_add_judgement.py": {
+      "sha256": "2f7dc761cbb141a19430936f871959718d04a87f97c91818b20e1a47f9bfd42e",
+      "bytes": 24145,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/official_ui_semantics_check.json": {
+      "sha256": "a8d248cfdb339ddc57965a0cbb8b9e0a610867039c76151d0458e2c102e507ad",
+      "bytes": 1036,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/supplemental_audit_manifest.json": {
+      "sha256": "bec2dc295e77cd972fc922e42fe998ea65105de3eac03ed7b4c84350acf0f918",
+      "bytes": 1531,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/supplemental_audit_summary.json": {
+      "sha256": "8187ce0b76514bae1314b2a25a8ac34afea4e027013743ceec11d07806741da1",
+      "bytes": 3397,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/unique_addjudgement_paragraphs.jsonl": {
+      "sha256": "4d52e8fb8059b02d7d73c10b18d1e87d979b1b90807d88c454855a0a36209d6b",
+      "bytes": 530283,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/unique_addjudgement_values.csv": {
+      "sha256": "72891c7a70d318e8dc8578f0dd7ea7961322bcc6192d7b7eccd97eb3095f623f",
+      "bytes": 637178,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_steward_reports_v1/supplemental_audit/weekday_date_mismatch_candidates.csv": {
+      "sha256": "f95b5e9740e813e44120e1d7d73cd70de0ed6cf16e373e84f0624a65623be526",
+      "bytes": 9189,
+      "rows": null
+    }
+  },
+  "core_preflight": {
+    "core_object_count": 180,
+    "source_manifests_rows": 26,
+    "source_name_existing_rows": 0,
+    "object_collisions": []
+  },
+  "source_manifests": {
+    "source_manifest_status": "complete",
+    "source_rows": 61439,
+    "api_page_count": 102,
+    "partitions": 70,
+    "all_partitions_complete": true,
+    "linker_status": "complete",
+    "root_source_verification": true,
+    "root_parser_controls": true,
+    "root_linking_verification": true
+  },
+  "source_page_verification": {
+    "exact_raw_page_files_verified": 102
+  },
+  "input_validation": {
+    "source_observations": 61439,
+    "report_observations": 14867,
+    "sanction_observations_raw": 46572,
+    "sanction_observations_in_scope": 46562,
+    "post_cutoff_exclusions": 10,
+    "api_pages": 102,
+    "report_event_execution_verdict_counts": [
+      {
+        "verdict": "executed_or_unmarked",
+        "rows": 14853
+      },
+      {
+        "verdict": "no_valid_completed_race",
+        "rows": 14
+      }
+    ],
+    "report_event_keys_missing_from_adjudicated_core": 0,
+    "complete_year_meet_partitions": 70,
+    "incomplete_partitions": 0,
+    "duplicate_source_occurrence_locators": 0,
+    "source_rows_without_page_receipt": 0,
+    "paragraph_span_parity_failures": 0,
+    "report_text_field_state_parity_failures": 0,
+    "sentence_span_parity_failures": 0,
+    "horse_mention_span_parity_failures": 0,
+    "linked_mention_reference_failures": 0,
+    "linked_sentence_reference_failures": 0,
+    "report_horse_links_without_event_roster_proof": 0,
+    "invalid_report_horse_link_fields": 0,
+    "report_parent_target_key_mismatches": 0,
+    "sanction_target_class_values": [
+      "기수",
+      "말"
+    ],
+    "scope_group_counts": [
+      {
+        "dataset": "api180_1_sanction_history",
+        "status": "excluded",
+        "rows": 10
+      },
+      {
+        "dataset": "api180_1_sanction_history",
+        "status": "included",
+        "rows": 46562
+      },
+      {
+        "dataset": "api215_judge_report",
+        "status": "included",
+        "rows": 14867
+      }
+    ],
+    "independent_sanction_entry_expectation_rows": 46562
+  },
+  "loaded_schema_validation": {
+    "created_objects": [
+      [
+        "TABLE",
+        "steward_api_source_observations"
+      ],
+      [
+        "TABLE",
+        "steward_api_page_ledger"
+      ],
+      [
+        "TABLE",
+        "steward_api_scope_exclusions"
+      ],
+      [
+        "TABLE",
+        "steward_source_year_meet_coverage"
+      ],
+      [
+        "TABLE",
+        "steward_report_paragraphs"
+      ],
+      [
+        "TABLE",
+        "steward_report_paragraph_field_states"
+      ],
+      [
+        "TABLE",
+        "steward_report_sentences"
+      ],
+      [
+        "TABLE",
+        "steward_report_horse_mentions"
+      ],
+      [
+        "TABLE",
+        "steward_report_horse_links"
+      ],
+      [
+        "TABLE",
+        "steward_report_horse_link_candidates"
+      ],
+      [
+        "TABLE",
+        "steward_report_marker_residuals"
+      ],
+      [
+        "TABLE",
+        "steward_source_metadata"
+      ],
+      [
+        "TABLE",
+        "steward_source_output_hashes"
+      ],
+      [
+        "VIEW",
+        "steward_report_observations"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_observations"
+      ],
+      [
+        "TABLE",
+        "steward_sanction_target_link_audit"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_target_links"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_target_link_exceptions"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_event_entry_links"
+      ],
+      [
+        "VIEW",
+        "steward_horse_sanctions"
+      ],
+      [
+        "VIEW",
+        "steward_report_variant_summary"
+      ],
+      [
+        "VIEW",
+        "steward_report_latest_observation"
+      ],
+      [
+        "VIEW",
+        "steward_report_horse_paragraph_history"
+      ],
+      [
+        "VIEW",
+        "horse_steward_history"
+      ],
+      [
+        "VIEW",
+        "steward_report_event_coverage"
+      ],
+      [
+        "VIEW",
+        "steward_report_nonexecution_observations"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_event_receipts"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_event_coverage"
+      ]
+    ],
+    "row_counts": {
+      "steward_api_source_observations": 61439,
+      "steward_api_page_ledger": 102,
+      "steward_api_scope_exclusions": 10,
+      "steward_source_year_meet_coverage": 70,
+      "steward_report_paragraphs": 71970,
+      "steward_report_paragraph_field_states": 26497,
+      "steward_report_sentences": 107007,
+      "steward_report_horse_mentions": 175170,
+      "steward_report_horse_links": 149008,
+      "steward_report_horse_link_candidates": 6162,
+      "steward_report_marker_residuals": 228,
+      "steward_source_metadata": 15,
+      "steward_source_output_hashes": 38,
+      "steward_report_observations": 14867,
+      "steward_sanction_observations": 46572,
+      "steward_sanction_target_link_audit": 46562,
+      "steward_sanction_target_links": 46562,
+      "steward_sanction_target_link_exceptions": 0,
+      "steward_sanction_event_entry_links": 46562,
+      "steward_horse_sanctions": 31978,
+      "steward_report_variant_summary": 14867,
+      "steward_report_latest_observation": 14867,
+      "steward_report_horse_paragraph_history": 149008,
+      "horse_steward_history": 146612,
+      "steward_report_event_coverage": 29826,
+      "steward_report_nonexecution_observations": 14,
+      "steward_sanction_event_receipts": 21431,
+      "steward_sanction_event_coverage": 29826
+    },
+    "independent_sanction_entry_parity": {
+      "expected_occurrences": 46562,
+      "mismatches": 0,
+      "comparison": "full-outer occurrence locator, exact target ID/program/event, and independent roster match counts"
+    },
+    "verified_sanction_target_link_status_counts": [
+      {
+        "status": "verified_exact_id_entry_and_name",
+        "rows": 46363
+      },
+      {
+        "status": "verified_exact_id_entry_name_differs",
+        "rows": 199
+      }
+    ],
+    "nonexecution_reports_retained": 14,
+    "historical_publication_claims": 0
+  },
+  "independent_link_checks": {
+    "independent_manual_events_checked": 3,
+    "expected_horse_paragraph_links": 40,
+    "manual_link_mismatches": []
+  },
+  "interpretation_policy": {
+    "historical_publication_time_verified": false,
+    "source_publication_at_kst": null,
+    "report_mentions_are_blame_attributions": false,
+    "absence_of_report_or_sanction_is_clean_event_evidence": false,
+    "duplicate_natural_key_sanctions_collapsed": false,
+    "addJudgement_horse_links_use_validated_target_event_roster": true
+  },
+  "executed_at_utc": "2026-10-02T06:32:09+00:00"
+}

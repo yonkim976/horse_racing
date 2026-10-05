@@ -1,0 +1,439 @@
+{
+  "status": "preflight_passed_dry_run_only",
+  "applied": false,
+  "operational_database_opened_or_modified": false,
+  "core_database_path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "baseline_core_database_sha256": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6",
+  "baseline_core_manifest_sha256": "aa8648e439b75bdacbd7328c2d5e6ccf0aaf6105bce70f69fc7ec1f5547df7de",
+  "core_sha256_after_dry_run": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6",
+  "code_sha256": "947795fafe1969f2020abd64f29d8c1ecef00461588b7cad09e293d598ea60b2",
+  "schema_sha256": "5547b02d14e2b07c47e0f515c835f1a64919479a32e81a1b6fe8bc25108a43ef",
+  "input_contract_sha256": "81898fd44f16f6298c6fbef777db1ccf82c16130265295675ccde74f574028b9",
+  "input_file_pins": {
+    "thoroughbred/research/20261002_medical_v1/dictionary/README.md": {
+      "sha256": "134599fd27b6dce1ded46f4a569292d0fb5e3be42c68aa44e73d37e954aa68b9",
+      "bytes": 4437,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/api33_source_rows.parquet": {
+      "sha256": "3e9e8e99f5a2f79e135f70f40f41d019df94c43556443a7d9d0fec7580c62a75",
+      "bytes": 252942,
+      "rows": 3523
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/api33_terms.parquet": {
+      "sha256": "8766e10b60fc240d2277affc115bd3bdf57f8ff5f5e2c59c2f1103510ad05945",
+      "bytes": 201047,
+      "rows": 3511
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/build_dictionary.py": {
+      "sha256": "4e10697fc66318fc16ec537624818c12aaf76c8aa0e44ef11f2788a5dc82e9fd",
+      "bytes": 47670,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/explanation_observations.parquet": {
+      "sha256": "57b6c6c612a73b32bfef165ae2e12c8f4309505e025f641d7f76f3c4e3e9181a",
+      "bytes": 157534,
+      "rows": 145
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/explanation_terms.parquet": {
+      "sha256": "7bfce6799b4f328dd6cfc2a6f0fdd11e8585568ee10b02610ba361f342dc7857",
+      "bytes": 72477,
+      "rows": 119
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/manifest.json": {
+      "sha256": "08f85681b4125faea6be5912ad4b136c7199f25eb2ef3bad5ae856fb90b024ab",
+      "bytes": 12937,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/phrase_components.parquet": {
+      "sha256": "9d1e55d8ffb9dd2796b375385871a162a4533c66c305e0fbc4a332c79d6eb5bb",
+      "bytes": 289639,
+      "rows": 9113
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/phrase_decisions.parquet": {
+      "sha256": "bc8eb16e757f7ee98587b16a7cb5e762ab5b1db04bf12c7fca249821d08810b4",
+      "bytes": 362145,
+      "rows": 5397
+    },
+    "thoroughbred/research/20261002_medical_v1/dictionary/schema.json": {
+      "sha256": "8b5fbf61dd72b7234384ab41c3b97548f3f9f65078cb1415f6a9a180a9521963",
+      "bytes": 9614,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_archived_capture_manifest.json": {
+      "sha256": "ebcfa1dcc30e5fe6e094f4f22b612c0abf9477e9de6912fe0d5a108e6a67b72a",
+      "bytes": 721,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_archived_daily_observations.parquet": {
+      "sha256": "c0a2fb337f68714bc4ea039d6f276052c1af46777d7e896159ca46c77668caac",
+      "bytes": 13105861,
+      "rows": 238591
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_archived_exclusions.parquet": {
+      "sha256": "d63b4046b0470f2952975999185966ab1fc0d6cfc28aeb576ef79462e49925d9",
+      "bytes": 448934,
+      "rows": 8775
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_archived_page_ledger.parquet": {
+      "sha256": "175fccdbe4e69f505a8f3b00a4d809fb08cee16aac20bf441993572e28afea33",
+      "bytes": 164716,
+      "rows": 2524
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_capture_manifest.json": {
+      "sha256": "526ee654ba6d217ec7f0219ed6a4a021bd159e3804b2a0b75844cc77f2084c6c",
+      "bytes": 65415,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_exclusions.parquet": {
+      "sha256": "965e31da914aba12e1bf8f16ee23f654db41cb2dcd8817cdccc85646f7ddc76a",
+      "bytes": 16687,
+      "rows": 475
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_observations.parquet": {
+      "sha256": "8429a47b2c8073a93c4b81d29ae1b6aae02b75dd2f740ccf0188ee1ade691ba6",
+      "bytes": 14431127,
+      "rows": 243411
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_page_ledger.parquet": {
+      "sha256": "fc2e450e79b348e5e7f98640b652740dede877e66938736079711445295aec1f",
+      "bytes": 9615,
+      "rows": 42
+    },
+    "thoroughbred/research/20261002_medical_v1/source/api16_year_meet_coverage.parquet": {
+      "sha256": "5511f98ba3ae1e41d34912980cc451055fd9ee6e2df991f280e796deeda3127e",
+      "bytes": 6626,
+      "rows": 34
+    },
+    "thoroughbred/research/20261002_medical_v1/source/archived_daily_coverage.parquet": {
+      "sha256": "6503cd1c07bf6ee4b3e84c2565b3b837795c7132e9eea340be377f494f17eac4",
+      "bytes": 3721,
+      "rows": 34
+    },
+    "thoroughbred/research/20261002_medical_v1/source/coverage_manifest.json": {
+      "sha256": "ad3534a8e7c7343f70b94dda8b7eadc9db9ea501051de9cd96fcfd07d755ece5",
+      "bytes": 10054,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_capture_manifest.json": {
+      "sha256": "81c48777feb36009d906a296f87e6e02ae465dfada8e039a864c44dcf9919bec",
+      "bytes": 1716,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_exclusions.parquet": {
+      "sha256": "a561982fbf8d6ddb5fcfb79f68d641762115234995d489cb78e161fa7c972af0",
+      "bytes": 6935,
+      "rows": 32
+    },
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_file_ledger.parquet": {
+      "sha256": "e54a747793bf99b1c971c639191f67e1cd9615c5834e7efe48be053daed0e326",
+      "bytes": 214487,
+      "rows": 3377
+    },
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_layout_reconciliation.parquet": {
+      "sha256": "d2c635d0aac517847a3c31fa1733e219d1e5db1663800be3f5e3021c02445d7f",
+      "bytes": 4428118,
+      "rows": 272079
+    },
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_observations.parquet": {
+      "sha256": "186924ba30e6961635cfd1e47bc7e43450cb577028c91bd806fc0f79eef35619",
+      "bytes": 80116526,
+      "rows": 1619071
+    },
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_year_meet_coverage.parquet": {
+      "sha256": "21436f41f6307184fbafb4c7c6344629b011aba2219ab1cbd2cbaeaebd291ff8",
+      "bytes": 3959,
+      "rows": 34
+    },
+    "thoroughbred/research/20261002_medical_v1/source/existing_raw_inventory.parquet": {
+      "sha256": "d2fc92b3ac652741d57c8a653f8e368585424f01cb79330de1b5fc37f7e6af31",
+      "bytes": 203170,
+      "rows": 2524
+    },
+    "thoroughbred/research/20261002_medical_v1/source/medical_api_comparison_ledger.parquet": {
+      "sha256": "da415957d7d06dc4389de57428a2005f6691d2c5c250f64b503953930a6e9c03",
+      "bytes": 86549680,
+      "rows": 1825169
+    },
+    "thoroughbred/research/20261002_medical_v1/source/medical_fingerprint_candidates.parquet": {
+      "sha256": "99673e1e96c1ed939c33dfdbecbc0aac28d08f0a46bcbc38d86d6ff8c0921f56",
+      "bytes": 103811410,
+      "rows": 1904555
+    },
+    "thoroughbred/research/20261002_medical_v1/source/source_capture_manifest.json": {
+      "sha256": "19c4a5ec54d649cef6543a0571b591fb616610ae38ec8ffba4d6c42a3aa269b8",
+      "bytes": 7284,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/source_exclusions.parquet": {
+      "sha256": "01f277ed4ff235d467cd6a0c95ae57b49ed3b3962dd6e47dc95e3fe0e9c0221c",
+      "bytes": 445624,
+      "rows": 9282
+    },
+    "thoroughbred/research/20261002_medical_v1/source/source_output_hashes.csv": {
+      "sha256": "ac0e01b175a969ba3198e640294178045635b0b8fd8f765970550b398490266f",
+      "bytes": 3402,
+      "rows": null
+    },
+    "thoroughbred/research/20261002_medical_v1/source/source_year_meet_coverage.parquet": {
+      "sha256": "14a5b4a4cbbf053428181ee3a4eb2b32622dd95698a5fe4ad7689aa0825173a4",
+      "bytes": 4572,
+      "rows": 102
+    }
+  },
+  "core_preflight": {
+    "core_object_count": 109,
+    "source_manifests_rows": 24,
+    "target_object_collisions": [],
+    "horse_roster_duplicate_official_ids": 0
+  },
+  "source_manifests": {
+    "scope": {
+      "start_date": "2010-01-01",
+      "end_date": "2026-09-29",
+      "meets": {
+        "1": "서울",
+        "3": "영남 (부산경남/영천 혼합)"
+      }
+    },
+    "source_total": 2101073,
+    "cohort_rows": {
+      "current_annual": 243411,
+      "archived_daily_snapshot": 238591,
+      "rpt": 1619071
+    },
+    "source_manifest_artifacts": 21,
+    "dictionary_manifest_sha256": "08f85681b4125faea6be5912ad4b136c7199f25eb2ef3bad5ae856fb90b024ab"
+  },
+  "input_validation": {
+    "cohort_counts": {
+      "archived_daily_snapshot": 238591,
+      "current_annual": 243411,
+      "rpt": 1619071
+    },
+    "total_observation_rows": 2101073,
+    "source_row_hash_unique": true,
+    "raw_api_fields_untouched": true,
+    "rpt_whole_literal_preserved": true,
+    "fingerprint_occurrence_sum": 2101073,
+    "annual_coverage_rows": 34,
+    "annual_successful_empty_responses": 17,
+    "rpt_files": 3377,
+    "source_coverage_rows": 102,
+    "automatic_cross_source_links": 0
+  },
+  "raw_capture_hash_verification": {
+    "raw_source_files_hash_verified": 5943,
+    "ledger_file_counts": {
+      "input_api16_page_ledger": 42,
+      "input_api16_archived_page_ledger": 2524,
+      "input_dacom72_file_ledger": 3377
+    }
+  },
+  "input_table_mapping": {
+    "materialized_parquet_input_count": 23,
+    "input_path_to_table": {
+      "thoroughbred/research/20261002_medical_v1/source/api16_page_ledger.parquet": "medical_api16_page_ledger",
+      "thoroughbred/research/20261002_medical_v1/source/api16_year_meet_coverage.parquet": "medical_api16_year_meet_coverage",
+      "thoroughbred/research/20261002_medical_v1/source/api16_archived_page_ledger.parquet": "medical_api16_archived_page_ledger",
+      "thoroughbred/research/20261002_medical_v1/source/archived_daily_coverage.parquet": "medical_archived_daily_coverage",
+      "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_exclusions.parquet": "medical_api16_current_exclusions",
+      "thoroughbred/research/20261002_medical_v1/source/api16_archived_exclusions.parquet": "medical_api16_archived_exclusions",
+      "thoroughbred/research/20261002_medical_v1/source/existing_raw_inventory.parquet": "medical_existing_raw_inventory",
+      "thoroughbred/research/20261002_medical_v1/source/dacom72_file_ledger.parquet": "medical_dacom72_file_ledger",
+      "thoroughbred/research/20261002_medical_v1/source/dacom72_exclusions.parquet": "medical_dacom72_exclusions",
+      "thoroughbred/research/20261002_medical_v1/source/dacom72_layout_reconciliation.parquet": "medical_dacom72_layout_reconciliation",
+      "thoroughbred/research/20261002_medical_v1/source/dacom72_year_meet_coverage.parquet": "medical_dacom72_year_meet_coverage",
+      "thoroughbred/research/20261002_medical_v1/source/medical_api_comparison_ledger.parquet": "medical_api_comparison_ledger",
+      "thoroughbred/research/20261002_medical_v1/source/medical_fingerprint_candidates.parquet": "medical_fingerprint_candidates",
+      "thoroughbred/research/20261002_medical_v1/source/source_year_meet_coverage.parquet": "medical_source_year_meet_coverage",
+      "thoroughbred/research/20261002_medical_v1/dictionary/api33_source_rows.parquet": "medical_api33_source_rows",
+      "thoroughbred/research/20261002_medical_v1/dictionary/api33_terms.parquet": "medical_api33_terms",
+      "thoroughbred/research/20261002_medical_v1/dictionary/phrase_decisions.parquet": "medical_phrase_decisions",
+      "thoroughbred/research/20261002_medical_v1/dictionary/phrase_components.parquet": "medical_phrase_components",
+      "thoroughbred/research/20261002_medical_v1/dictionary/explanation_observations.parquet": "medical_explanation_observations",
+      "thoroughbred/research/20261002_medical_v1/dictionary/explanation_terms.parquet": "medical_explanation_terms",
+      "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_observations.parquet": "medical_observations",
+      "thoroughbred/research/20261002_medical_v1/source/api16_archived_daily_observations.parquet": "medical_observations",
+      "thoroughbred/research/20261002_medical_v1/source/dacom72_observations.parquet": "medical_observations"
+    },
+    "pinned_but_not_materialized_artifact_count": 1
+  },
+  "schema_validation": {
+    "created_objects": 44,
+    "new_object_names": [
+      "medical_observations",
+      "medical_api16_page_ledger",
+      "medical_api16_year_meet_coverage",
+      "medical_api16_archived_page_ledger",
+      "medical_archived_daily_coverage",
+      "medical_api16_current_exclusions",
+      "medical_api16_archived_exclusions",
+      "medical_existing_raw_inventory",
+      "medical_dacom72_file_ledger",
+      "medical_dacom72_exclusions",
+      "medical_dacom72_layout_reconciliation",
+      "medical_dacom72_year_meet_coverage",
+      "medical_api_comparison_ledger",
+      "medical_fingerprint_candidates",
+      "medical_source_year_meet_coverage",
+      "medical_source_metadata",
+      "medical_source_output_hashes",
+      "medical_api33_source_rows",
+      "medical_api33_terms",
+      "medical_phrase_decisions",
+      "medical_phrase_components",
+      "medical_explanation_observations",
+      "medical_explanation_terms",
+      "medical_dictionary_metadata",
+      "medical_dictionary_output_hashes",
+      "medical_raw_diagnosis_slots",
+      "medical_api16_illness_slots",
+      "medical_current_api_payload_capture_counts",
+      "medical_current_api_exact_slot_keys",
+      "medical_current_api_records",
+      "medical_entity_links",
+      "medical_link_exceptions",
+      "medical_api16_archived_candidates",
+      "medical_text_record_candidates",
+      "medical_diagnosis_term_links",
+      "medical_diagnosis_explanations",
+      "medical_observed_diagnosis_components",
+      "medical_observed_diagnosis_explanations",
+      "medical_api16_current_phrase_review",
+      "medical_text_phrase_review",
+      "medical_api16_current_api33_exact_title_lookup",
+      "medical_union_candidates",
+      "medical_api16_current_phrase_usage",
+      "medical_text_full_literal_phrase_usage"
+    ],
+    "row_counts": {
+      "medical_observations": 2101073,
+      "medical_api16_page_ledger": 42,
+      "medical_api16_year_meet_coverage": 34,
+      "medical_api16_archived_page_ledger": 2524,
+      "medical_archived_daily_coverage": 34,
+      "medical_api16_current_exclusions": 475,
+      "medical_api16_archived_exclusions": 8775,
+      "medical_existing_raw_inventory": 2524,
+      "medical_dacom72_file_ledger": 3377,
+      "medical_dacom72_exclusions": 32,
+      "medical_dacom72_layout_reconciliation": 272079,
+      "medical_dacom72_year_meet_coverage": 34,
+      "medical_api_comparison_ledger": 1825169,
+      "medical_fingerprint_candidates": 1904555,
+      "medical_source_year_meet_coverage": 102,
+      "medical_source_metadata": 5,
+      "medical_source_output_hashes": 21,
+      "medical_api33_source_rows": 3523,
+      "medical_api33_terms": 3511,
+      "medical_phrase_decisions": 5397,
+      "medical_phrase_components": 9113,
+      "medical_explanation_observations": 145,
+      "medical_explanation_terms": 119,
+      "medical_dictionary_metadata": 2,
+      "medical_dictionary_output_hashes": 9,
+      "medical_raw_diagnosis_slots": 2583075,
+      "medical_api16_illness_slots": 964004,
+      "medical_current_api_payload_capture_counts": 231806,
+      "medical_current_api_exact_slot_keys": 414514,
+      "medical_current_api_records": 243411,
+      "medical_entity_links": 2101073,
+      "medical_link_exceptions": 1634114,
+      "medical_api16_archived_candidates": 238591,
+      "medical_text_record_candidates": 1496828,
+      "medical_diagnosis_term_links": 9113,
+      "medical_diagnosis_explanations": 8748,
+      "medical_observed_diagnosis_components": 2718155,
+      "medical_observed_diagnosis_explanations": 2632192,
+      "medical_api16_current_phrase_review": 486822,
+      "medical_text_phrase_review": 1496828,
+      "medical_api16_current_api33_exact_title_lookup": 220411,
+      "medical_union_candidates": 1978830,
+      "medical_api16_current_phrase_usage": 1027,
+      "medical_text_full_literal_phrase_usage": 9164
+    },
+    "exact_horse_link_counts": [
+      {
+        "source_cohort": "archived_daily_snapshot",
+        "status": "exact_core_roster_match",
+        "rows": 228615
+      },
+      {
+        "source_cohort": "archived_daily_snapshot",
+        "status": "unmatched_official_id",
+        "rows": 9976
+      },
+      {
+        "source_cohort": "current_annual",
+        "status": "exact_core_roster_match",
+        "rows": 238344
+      },
+      {
+        "source_cohort": "current_annual",
+        "status": "unmatched_official_id",
+        "rows": 5067
+      },
+      {
+        "source_cohort": "rpt",
+        "status": "source_has_no_official_id",
+        "rows": 1619071
+      }
+    ],
+    "archived_rows_with_exact_current_raw_payload_string_match": 229273,
+    "union_candidate_rows_by_type": [
+      {
+        "type": "archived_api_additional_capture_evidence",
+        "rows": 229273
+      },
+      {
+        "type": "archived_api_candidate",
+        "rows": 9318
+      },
+      {
+        "type": "current_api_primary",
+        "rows": 243411
+      },
+      {
+        "type": "rpt_fingerprint_supplementary_candidate",
+        "rows": 1496828
+      }
+    ],
+    "current_api_phrase_review_rows_by_status": [
+      {
+        "status": "no_exact_review_phrase",
+        "rows": 174
+      },
+      {
+        "status": "reviewed_exact_phrase_metadata_only",
+        "rows": 220237
+      },
+      {
+        "status": "source_empty_or_placeholder",
+        "rows": 266411
+      }
+    ],
+    "term_component_metadata_rows_by_disposition": [
+      {
+        "disposition": "hold_requires_new_in_scope_event_evidence",
+        "component_rows": 365,
+        "phrases": 364
+      },
+      {
+        "disposition": "reviewed_exact_phrase_component_metadata_only",
+        "component_rows": 8748,
+        "phrases": 5028
+      }
+    ],
+    "observed_record_to_captured_description_rows": 2632192,
+    "baseline_object_count": 109,
+    "append_object_count": 44
+  },
+  "timing_and_availability": {
+    "source_capture_timestamps_preserved": true,
+    "historical_publication_time_verified": false,
+    "medical_history_completeness_verified": false,
+    "zero_API_response_means_no_event": false
+  },
+  "execution_utc": "2026-10-01T22:23:38+00:00"
+}

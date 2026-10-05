@@ -1,0 +1,61 @@
+{
+  "roster": [
+    {
+      "number": 1,
+      "horse_id": "0000101",
+      "horse_name": "가나다"
+    },
+    {
+      "number": 2,
+      "horse_id": "0000102",
+      "horse_name": "라마바"
+    }
+  ],
+  "cases": [
+    {
+      "label": "no_number_anchor",
+      "text": "● “가나다”의 출발이 늦었음.",
+      "expected_linked_numbers": []
+    },
+    {
+      "label": "number_name_mismatch",
+      "text": "● ②“가나다”의 출발이 늦었음.",
+      "expected_linked_numbers": []
+    },
+    {
+      "label": "non_runner_numbers",
+      "text": "● 출발 후 250m 지점, 3코너에서 기승정지 3일 및 2026년 10월 2일 처분.",
+      "expected_linked_numbers": []
+    },
+    {
+      "label": "disposition_quote",
+      "text": "● ①“가나다”에 대해 「주의」 및 「주행심사」 처분.",
+      "expected_linked_numbers": [
+        1
+      ]
+    },
+    {
+      "label": "multiple_related_horses",
+      "text": "● ①“가나다”가 바깥으로 나가 ②“라마바”와 접촉하였음.",
+      "expected_linked_numbers": [
+        1,
+        2
+      ]
+    },
+    {
+      "label": "report_local_reuse",
+      "text": "● ①“가나다”가 출발이 늦었음. ● 경주 후 “가나다”에 대해 마체검사 지정.",
+      "expected_linked_numbers": [
+        1,
+        1
+      ]
+    },
+    {
+      "label": "conflicting_later_anchor",
+      "text": "● ①“가나다”가 출발이 늦었음. ● ②“가나다”가 출발이 늦었음. ● “가나다”에 대해 마체검사 지정.",
+      "expected_linked_numbers": [
+        1
+      ]
+    }
+  ]
+}

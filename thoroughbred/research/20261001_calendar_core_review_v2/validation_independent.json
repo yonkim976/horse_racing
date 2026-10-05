@@ -1,0 +1,259 @@
+{
+  "verification": "independent_read_only_database_comparison",
+  "new_database": {
+    "path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "sha256": "f4624d4e7175b00b9213e19c162976bdc0c779e3341087d18b6d06916e908a76",
+    "manifest_path": "thoroughbred/data/core_api_2010_20260929_v1/manifest.json",
+    "manifest_path_matches": true,
+    "manifest_sha256_matches_database": true
+  },
+  "baseline_database": {
+    "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261001_before_calendar_closure_subtype_review/thoroughbred_core.duckdb",
+    "sha256": "7ee896c839943f66ee42999a379cc06d0f3d5d5ea23481de6f409fa4c06d1baf"
+  },
+  "builder_checks": {
+    "passed": 60,
+    "total": 60,
+    "all_true": true
+  },
+  "input_hashes": {
+    "build_manifest_records": 180,
+    "build_manifest_mismatches": [],
+    "approved_pins": 100,
+    "approved_pin_mismatches": []
+  },
+  "subtype_review": {
+    "rows": 29,
+    "status_counts": {
+      "reason_recorded_outcome_unclassified": 2,
+      "race_cancelled": 27
+    },
+    "race_invalid_rows": 0,
+    "unresolved_keys": [
+      {
+        "meet": "3",
+        "date": "20150329",
+        "race_no": "5"
+      },
+      {
+        "meet": "3",
+        "date": "20150329",
+        "race_no": "6"
+      }
+    ],
+    "unique_keys": true,
+    "expected_27_cancelled_2_unresolved": true
+  },
+  "nonexecution_spine": {
+    "baseline_rows": 116,
+    "new_prior_review_rows": 116,
+    "new_reviewed_rows": 116,
+    "prior_review_exact_bidirectional_difference_rows": [
+      0,
+      0
+    ],
+    "joined_natural_keys": 116,
+    "execution_verdict_differences": 0,
+    "source_result_row_differences": 0,
+    "positive_finish_row_differences": 0,
+    "reason_text_differences": 0,
+    "keys_and_verdicts_preserved": true
+  },
+  "race_execution_adjudicated_view": {
+    "new_rows": 29826,
+    "baseline_rows": 29826,
+    "natural_key_difference_rows": 0,
+    "changed_key_count": 29,
+    "changed_keys_exactly_29_subtype_review_keys": true,
+    "changed_columns_and_key_counts": {
+      "adjudication_status": 27,
+      "supporting_reason": 2,
+      "evidence_files": 29,
+      "evidence_urls": 29,
+      "evidence_kind": 29
+    },
+    "only_expected_overlay_fields_changed": true
+  },
+  "closures": {
+    "intervals": 75,
+    "calendar_documented_venue_day_rows": 450,
+    "unique_documented_venue_days": 450,
+    "expanded_interval_venue_days": 450,
+    "calendar_overlay_execution_conflicts": 0,
+    "interval_execution_conflicts": 0,
+    "expected_75_intervals_450_venue_days_no_execution_conflict": true
+  },
+  "calendar_preservation": {
+    "reviewed_daily_rows": 18348,
+    "prior_daily_rows": 18348,
+    "daily_key_difference_rows": 0,
+    "daily_common_non_overlay_field_difference_rows": 0,
+    "prior_calendar_exact_baseline_difference_rows": [
+      0,
+      0
+    ],
+    "reviewed_annual_rows": 51,
+    "prior_annual_rows": 51,
+    "annual_key_difference_rows": 0,
+    "annual_nonclosure_metric_difference_rows": 0,
+    "prior_annual_exact_baseline_difference_rows": [
+      0,
+      0
+    ],
+    "daily_event_counts_unchanged": true,
+    "annual_historical_metrics_unchanged_except_documented_closure_days": true
+  },
+  "unchanged_raw_and_role_venue_data": {
+    "object_count": 19,
+    "all_exactly_unchanged": true,
+    "objects": {
+      "race_events": {
+        "new_rows": 29826,
+        "baseline_rows": 29826,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "runner_results": {
+        "new_rows": 331811,
+        "baseline_rows": 331811,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_sessions": {
+        "new_rows": 6199,
+        "baseline_rows": 6199,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_participants": {
+        "new_rows": 61777,
+        "baseline_rows": 61777,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "race_trainer_owner_review": {
+        "new_rows": 60,
+        "baseline_rows": 60,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "race_trainer_owner_review_evidence": {
+        "new_rows": 60,
+        "baseline_rows": 60,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "role_link_exceptions_current": {
+        "new_rows": 186,
+        "baseline_rows": 186,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "role_link_exceptions_pending": {
+        "new_rows": 0,
+        "baseline_rows": 0,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_trainer_review": {
+        "new_rows": 224,
+        "baseline_rows": 224,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_trainer_review_evidence": {
+        "new_rows": 224,
+        "baseline_rows": 224,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_trainer_source_error_decisions": {
+        "new_rows": 22,
+        "baseline_rows": 22,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_trainer_errors_closed": {
+        "new_rows": 22,
+        "baseline_rows": 22,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_venue_review": {
+        "new_rows": 1,
+        "baseline_rows": 1,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_sessions_venue_reviewed": {
+        "new_rows": 6199,
+        "baseline_rows": 6199,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_participants_venue_reviewed": {
+        "new_rows": 61777,
+        "baseline_rows": 61777,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "confirmed_runners_entity_reviewed_before_role_review": {
+        "new_rows": 330465,
+        "baseline_rows": 330465,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_participants_entity_reviewed_before_role_review": {
+        "new_rows": 61777,
+        "baseline_rows": 61777,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "confirmed_runners_entity_reviewed": {
+        "new_rows": 330465,
+        "baseline_rows": 330465,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      },
+      "trial_participants_entity_reviewed": {
+        "new_rows": 61777,
+        "baseline_rows": 61777,
+        "new_minus_baseline_rows": 0,
+        "baseline_minus_new_rows": 0,
+        "unchanged_exactly": true
+      }
+    }
+  },
+  "checks": {
+    "database_manifest_hash_matches": true,
+    "builder_checks_60_of_60_true": true,
+    "manifest_input_hashes_match": true,
+    "approved_pinned_input_hashes_match": true,
+    "subtype_review_27_cancelled_2_unresolved": true,
+    "nonexecution_116_keys_and_verdicts_preserved": true,
+    "dependent_view_changes_exactly_29_review_keys": true,
+    "closure_75_intervals_450_days_no_execution_conflict": true,
+    "daily_calendar_counts_preserved": true,
+    "annual_summary_historical_metrics_preserved": true,
+    "raw_and_role_venue_objects_unchanged": true
+  },
+  "overall_pass": true
+}

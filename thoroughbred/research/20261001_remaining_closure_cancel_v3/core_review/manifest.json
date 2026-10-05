@@ -1,0 +1,631 @@
+{
+  "calendar_rows": 18348,
+  "closure_intervals": 77,
+  "documented_closure_days": 540,
+  "adjudication_status_counts": {
+    "race_cancelled": 51,
+    "official_day_cancelled": 35,
+    "official_closure_nonexecution": 17,
+    "race_invalid": 2,
+    "reported_day_cancelled": 11
+  },
+  "reviewed_subtype_rows": 29,
+  "subtype_rows_reclassified": 29,
+  "closure_coverage_status": "partial; 75 prior source intervals retained plus 2 intervals with official start and API-derived end; historical and amendment gaps retained",
+  "closure_coverage_gaps": [
+    {
+      "years": "2010–2015",
+      "gap": "No validated full annual planned closure schedule located; selected actual cancellation evidence retained separately."
+    },
+    {
+      "years": "2021",
+      "gap": "Q3 source reviewed; annual and other-quarter closure completeness not established."
+    },
+    {
+      "years": "2020",
+      "gap": "2020 Sep1 start confirmed by parliamentary report citing KRA; Oct15 end reconciled from Oct16 actual API races. No explicit official end notice found."
+    },
+    {
+      "years": "2016–2026",
+      "gap": "Source-backed annual/quarter tables do not prove exhaustive amended closure history."
+    }
+  ],
+  "closure_source_coverage_path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/reviewed_year_coverage.csv",
+  "checks": {
+    "original_116_keys_preserved": true,
+    "original_29_reviewed_once": true,
+    "execution_verdict_preserved": true,
+    "no_closure_execution_conflicts": true,
+    "daily_adjudication_totals_reconcile": true,
+    "approved_hashes_verified": true
+  },
+  "approved_inputs_sha256": "74246675ecc3c5c74307d2d9d4639f29bb4193baf8f0f44bacc90cb5a81a94af",
+  "pinned_files": [
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/annual_summary.csv",
+      "sha256": "4c47fd2033f0d0cbf428b0dbaf454823ce4ebe4120b1f012664e06c977dd99dc"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/closure_addendum.csv",
+      "sha256": "1e6537ad8607e8f9a06dec4d7bba7be46c247c12b34fea5ae498b497fca483de"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/daily_calendar.csv",
+      "sha256": "db0a5ebfbe01483e78403ac3ec59390055f7744368f30085c52b7acee80cebe0"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/kra_scoretable_nonfinish_reasons.csv",
+      "sha256": "10f4aca53c017b45d27d705f86254208491510ec88ec11587b0a84fd213b7662"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_execution_flags.csv",
+      "sha256": "9f5f0be86db1d0bb584e79a66a67d6af1d80d58a2185f3adbcec49c770bbcd16"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_nonexecution_adjudication.csv",
+      "sha256": "1051f96a3fd6b0471f2524db92dc451276e65cad09d3092f4a4b719c7b0123f2"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_1.json.gz",
+      "sha256": "246826262ba50ec0605c84377b7c5381ab2d1634d9fb138974cffd0d83924e61"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_3.json.gz",
+      "sha256": "4809c714011f7b10508a002c34ee0c9620f652cd8ca9d5e393b1a6ff738bf39a"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/race_plan/2015/meet_3.json",
+      "sha256": "5a50ea1e03f3c32be3e09840ba71ef60340eb98a70c90723ba9743283bf03027"
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/reported_race_cancellations.csv",
+      "sha256": "11c5ed73cf774a54563954d08984dcb5e6d157dcb8bdc916d8f0c1a69310abf8"
+    },
+    {
+      "path": "thoroughbred/research/20260929_closure_inventory_v1/closures.csv",
+      "sha256": "62a43896101cdb985d55f3ef4c18c26cc06441436f4f0c5323b4d8f8c8e7ebb5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/manifest.json",
+      "sha256": "94d5036054fcda26c205736ec5c37ef2e44fbb9fa3359e06fe62ec52a515c0d6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/reviewed_year_coverage.csv",
+      "sha256": "afc23abd0140151e88752e449c9611978891db78b4221e782c047919149a49d9"
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/root_annual_plan_date_verification.json",
+      "sha256": "69ce02eddadc6c9d968246b56a10aded12b9e3de1c71fb052a9bc043bf451a6f"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/README.md",
+      "sha256": "521f75e02d7048d52f790078c3f0f8123825b9a873290c137299e317a32bc5cf"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/actual_nonexecution_evidence.csv",
+      "sha256": "4efe0feb2df6c06aa40ff1ba749cf72fcf01a6afdd943a0817bd0b92ec7db14e"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/capture_manifest.csv",
+      "sha256": "f3975c1d3b6b344d30aad56b4e0f42ae36c173a2af38940afe3aad9a777bded4"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/closures_supplement.csv",
+      "sha256": "d199a699ef19af8b2083bde72f43b72996f9b575e838a7b31f301b60ce3e77da"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/gap_candidate_checks.csv",
+      "sha256": "8fa51d7d2eb648a7115b61f54b3a3b8ce0c2529bc407180b4f47b204deabe986"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_business_parts_text.txt",
+      "sha256": "2f17635f30728ffaf809e5bb540f62d5745fcbd15db941d595f1e111208aff00"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_masa_02_1.pdf",
+      "sha256": "73ca486dca646eccdb51ebf4800716c07c634390a9ae097d162137f305bff15b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_masa_02_2.pdf",
+      "sha256": "a1e94e7047db323604fd2fa882d5bd04db8c0c46cc1ae5c0a9ef7606cdedc93d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_masa_02_3.pdf",
+      "sha256": "0bc4cdc28f5403f4d137a1b67705a4d361af12e670d3cf1bff2b4188861718a6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_yearbook_record.html",
+      "sha256": "9cb6604d3f2cc1ef39bb58385244645c1a7ed69e02237e5ad9e5387bea5107c1"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_masa_01.pdf",
+      "sha256": "9c34c85295192a9dc0fe0208a9259d1e3e3df27bbe52cf1e1e485a9e1df6e8bb"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_nonexecution_pages.txt",
+      "sha256": "ccf66114793cfeb19b9eda7c77b72a2e7513be7559d46136cfd291feba61facb"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_search_hits.txt",
+      "sha256": "e68aabeb229e479ea5de349d3c1ab824460f342e119a6ba636aa764c74ecfc6a"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_yearbook_record.html",
+      "sha256": "4ec51598247b1735786c843cc70d1b482e82c5aabb2fe186f4e8a69cc61de388"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/capture_manifest.json",
+      "sha256": "aa5e50ba01e188fd3e5067b18f5ab9f886588c83c9c65af5ec0b14d2d1a699d3"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/pages/2013_masa_01_physical_p109.png",
+      "sha256": "7b61719dd08f71ccc10d7bbb4ae2929f41b280dc0f67f50fd13205c06d1e5421"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/pages/2013_masa_01_physical_p60.png",
+      "sha256": "c56bc259a1a52049cbe6371bc7a1e5cb342b428852731326517ea1b524e7d6a5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/term_counts.txt",
+      "sha256": "9ddbff90e8e6462a95cc330671e2133504f6e8eb234bfbc41cc6964a9bf296ba"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/yearbook_text_hits.txt",
+      "sha256": "d71e2ebcda0b9b57a40298a972f31d600eb0d68ca71a0987b5dee4c859240ff9"
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/source_status.csv",
+      "sha256": "192bc12decba140ead081ff8a7e1144c41cb5562894bb764a89aa4c261483450"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/decisions.csv",
+      "sha256": "f4648e9911023bca73bea331b9f45caaa5a59f2b7d5a3b392d4e0f73359275fc"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/manifest.json",
+      "sha256": "1957028ae2642257612d3d67b4872c4d365ccfa1396a9707b335b6fb1b91402b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/busan_20150329.rpt",
+      "sha256": "25bf7d01ddc6063aa6d1308720b9940b426e6fc13ed878077502ce7024c8f6e0"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/busan_20160228.rpt",
+      "sha256": "047afdd94e798030e9cf64f7c347055eccbd1145ddf0aa1a3aab0e9569d906ed"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/busan_20200710.rpt",
+      "sha256": "f50e82c4ce66206ed2facea7ff058c371ee68c499d35645fe6147c4f6728ff50"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20151108.rpt",
+      "sha256": "f173c0fafab4af6d39b5f95110d9bf61c3708450c4deb2efc2739f21367950bc"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20160228.rpt",
+      "sha256": "5ac9c82398ab596d06bcd00669286abbeab35e107822efb28cc95ad0216cc74d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20201220.rpt",
+      "sha256": "7b8e908cf9219e29165a5f9dcfdf077840604cf8c36c9780bd2e2f1e30b5961c"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20230115.rpt",
+      "sha256": "f8d20d4fad1ee81e01ec7a57ebf374416f94aded2f5677cb17bd950f2e3d70c6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20230506.rpt",
+      "sha256": "521c57d63595ffb3ac663384114d817b930ed486bca9525d3fd941d407dbaac4"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20240929.rpt",
+      "sha256": "87afdb08a477139070517af614b106ca225b353cf08577af26ceffec8ff9df64"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet1_20201220_all_races_excerpt.txt",
+      "sha256": "43ca0bd0b5aa1ed861df7316698f3711c8eb5f734ff9acfbaa7d7f84b3ba7e13"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet1_20230506_all_races_excerpt.txt",
+      "sha256": "b888a51a72c46c22274ea6aee63af7c3c7f52c2726ce27b2dca98e419fd64dca"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet1_20240929_all_races_excerpt.txt",
+      "sha256": "84a09558bc45f07a443b5f5165bb324763e28a5973582cb8db21676c0700b75f"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet3_20200710_all_races_excerpt.txt",
+      "sha256": "d5edfadbdd43b76717022dd378f0f7099bef18e8479d80ddd90834e119125625"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20150329.html",
+      "sha256": "ae07db3b295479988e9739aa991e94c497685d90673cc5939cde036d4233e7fd"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20150329.txt",
+      "sha256": "9bce80849dafc0ff0e3eaf8aa2972e904464ffe27496d44af3415c36c87024f6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20160228.html",
+      "sha256": "a3369278fad53e3d1e9c4053bf9898c4762332e60d8236c85f46134eba32be9c"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20160228.txt",
+      "sha256": "2aefc8d2a2404bdc967100c5d2f6705bd372a552b5920aa7db7f6b64c2117989"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20200710.html",
+      "sha256": "64625ecf86bc0a3f6393fcab93ef1998d0313784bd067553437eac0003d894a1"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20200710.txt",
+      "sha256": "b623ec79afcb03d49d86924f887f3a2115d282f72c9786bd4f653c859d18cb5b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/capture_manifest.json",
+      "sha256": "33b53f6f6dc208d8fb7a9f5db9a4f82cadc11d522cee2e790dd0fa10080f66e2"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20151108.html",
+      "sha256": "9b68f4702b1050c1d2e0f5831f0de2ed92f866dd52a092f77726c3bc44e573b6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20151108.txt",
+      "sha256": "61962503f9dafd1fd7c218a39d5b7e77f87dc388fb2414d39def5e082843ed98"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20160228.html",
+      "sha256": "489a0747c497e50fd7dd8be00183b6f119292fc4277d85024d57038b3da65d8d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20160228.txt",
+      "sha256": "7c1df21687b1fbd7ccafef8ff2133f3f49c2b2adec2fde45b449ff0fa9a4b3b4"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20201220.html",
+      "sha256": "8001a4720f40021dd5a2631b148b6df804c08ed9c168d6a7c6e2708b80434d28"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20201220.txt",
+      "sha256": "90b631e00c348979997050d4d5683aeb2eb372b5b503697bacfc17937214d663"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230115.html",
+      "sha256": "cc64716cacd8401ce4c9e6fbd1f02a63671afd677f998a3891802457c0cbe61b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230115.txt",
+      "sha256": "c9fb840b70afc535004b8f80b4dc69932ec3a08d86b686e8317509ea69790338"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230506.html",
+      "sha256": "6ef523ea0d1fb4b96a9f9390b268a4ecc4fb339441d1fb6f89bbd674726f7d15"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230506.txt",
+      "sha256": "2d9283a96842b3696e4b9dbc14e48a9a63ecfd2d57010fce19c80f453e273560"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20240929.html",
+      "sha256": "f9f152529353a674477d587718cb2b11101c702ac7ed1b4249c76e7a00d045b9"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20240929.txt",
+      "sha256": "79906466def0c08bd65848e5ca7a8c0eb9042b9b4650651778a8a71b5fbce533"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r5.html",
+      "sha256": "daef4aec6a63ea429a3b7405d9041616969546f483f59f56dd9baa660d135bd5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r5.txt",
+      "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r6.html",
+      "sha256": "daef4aec6a63ea429a3b7405d9041616969546f483f59f56dd9baa660d135bd5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r6.txt",
+      "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/capture_manifest.json",
+      "sha256": "b93706a6d38bbbfd3cc1d93d3542499621aeafd65a8f7804a452c5404e2b3a34"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook.pdf",
+      "sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook_detail.html",
+      "sha256": "a7af6baff9d96fc7538d33e7092bb58b9d64c4d2c556058aa58e4fd0b3d6a962"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook_page_063.png",
+      "sha256": "91adec7a1bfe8d4dfae22476894f9b677e7dcd01f7751a9f9378be3842911c26"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/page_063_transcription.txt",
+      "sha256": "836b71499bad44f2172105029c7a96ad3bc2bf3bb21ed3d0cb38f331a79a3528"
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/root_mobile_label_verification.json",
+      "sha256": "317f818f228cfce32609961f7bc21bd3b66bea2fa6312f847f5373a7bafd476a"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/closure_additions.csv",
+      "sha256": "2214dfea2aaa1d91442b3f230898e0bdfd7bf47491ce1ff5bb0376e0e102cf60"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_adjustment_preview.txt",
+      "sha256": "c6a40ffd484f898a6e06657dadbe3d8a719e473758c32ea997bd3cbd9ebabab5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_adjustment_records.csv",
+      "sha256": "f2b317f55465677b99757bff291c7404217a5d9d221c6eb6b7150cb0341629fd"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_closure_table_cells.csv",
+      "sha256": "16a9cd9f4eba81de52553ce1a824af825617e01111e7eee6435c837e8108a110"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_plan_preview.txt",
+      "sha256": "458231df2dcb4941f0c61ed4d1cd7a4d642fe1625188725b97d65d21dca11f40"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_plan_records.csv",
+      "sha256": "fafec4d0adea4da80bfab6986af9460cf85340d71321421ac6468c9de40e8f83"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_distancing_adjustment_kra_authored_mirror.hwp",
+      "sha256": "8e02e56a04418aa08c20942f4b27ff4c0079ab38146609c206ec5174301ee39d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_distancing_adjustment_post.html",
+      "sha256": "68ac9b2ae271724b21ad298d1a6d35c84d86036341557c63828990e35bc47ffa"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_kra_authored_mirror.hwp",
+      "sha256": "f384612379911d7df9fc4462c10d80507ad69d56d84b270acef89e6474a9fa26"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_post.html",
+      "sha256": "ade5693da30c0a5a23e6cfe40422e66ef69abdd5368f711805b45731fff0bb41"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2014_masa_yearbook.pdf",
+      "sha256": "7ff9772b92d3334311b6e3deb93f05d29d862eb8a9ad838469f9a00e867a0d52"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2014_masa_yearbook_detail.html",
+      "sha256": "e3eaf846fb6e239057fba2c695085239085412565c22c9821713121f329379ed"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2015_masa_yearbook.pdf",
+      "sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2015_masa_yearbook_detail.html",
+      "sha256": "a7af6baff9d96fc7538d33e7092bb58b9d64c4d2c556058aa58e4fd0b3d6a962"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2020_masa_yearbook.pdf",
+      "sha256": "2cfc103bef8b3359880be65b915c3a460f67b2895dbeee99c72e5ff0f6f22950"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2020_masa_yearbook_attachment.zip",
+      "sha256": "a42b6def2223a943ce6e81c05ef236a9117b921fc477912951a3aecf8ddd1688"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2020_masa_yearbook_detail.html",
+      "sha256": "94236646493a3d40d7df6fb01c880f65cd9895a8e236e2ce53783c932a9ee4a3"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2021_masa_yearbook.pdf",
+      "sha256": "4dd72635db34661ec8fa65bee56c43bae7578aefe1b85b845d0649c74fb2ad50"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2021_masa_yearbook_detail.html",
+      "sha256": "983ca278026fd6104c7edb2ae2ddb503514dd213bdeee371de76e487c635af66"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2016.pdf",
+      "sha256": "d307686da9536d23fee18a759f237a2d8f8c3775b3cbcc2383452e801eb3e9cd"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2017.pdf",
+      "sha256": "d95136731351160165c9de2afaaa52de9d799030fb5d5f4e7987220992a9b7af"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2020.pdf",
+      "sha256": "4c49a9a1fcede4efbc3f7ce8aed73cc1b44c732c4be79009c1efa1c8ce8e8190"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2022.pdf",
+      "sha256": "55361b10265272df39ea29a827acb156efb2513502f4ca97f50e7cbe5ca20253"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/yearbook_archive.html",
+      "sha256": "5b8369bb4e0e53b1952cee1da1c6453b34dc438cabc96ba53958bd0dbb6a0ce5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/tools/hwp5_text_extract.py",
+      "sha256": "dfe4d6e2af8d8d258ee30d0f7680e28418cd4b0a6b9a13eca70ea26dadaec8f7"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/reviewed_year_coverage.csv",
+      "sha256": "14943adbd972181ad6f4378b4aa93edc427159e1f9eb775840ad21af6b4421af"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/source_package_verification.json",
+      "sha256": "070a8808d711ae6e949750dd3ce0b06f2c772e7979bc280a6e7ba176c3f8469c"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/verify_db_preservation.py",
+      "sha256": "c2d2126c8bafadce07c794a680fcccf1e7033b4d4106da59facc8bc939e9b800"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/2021_gap_assessment.csv",
+      "sha256": "121da84a333291b8535be8453aa5e792652be2e1a56b6c688be6dadcf69f7dc1"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/README.md",
+      "sha256": "d8e43c32a35358d905cf7dcd7b067239b653699b819708e5ed35449ce95a896c"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/boundary_reconciliation.csv",
+      "sha256": "ee8b91a5fd1df16474dc63c71889f3e85f0771703e9aaf24c260f94fbe38ec0b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/calendar_boundary_evidence.csv",
+      "sha256": "3abb0cae233b089b5671ef14cd17fab0dc04bfa818dd50135b264bdf22b536d6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/closure_additions.csv",
+      "sha256": "1885513537073af34b549fc778f1d00e3eba116e210151d66c306c9fc8f1bd24"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/decision_provenance_ledger.csv",
+      "sha256": "755ad92dd6afe2dad5c6e02a5e82931ebe88a856614756428cf87df040ec67a1"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/manifest.json",
+      "sha256": "5efecb9c8ab9a3d1819a04e5c7d7b964818f26439e848af89fc4bbffa32574ea"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/kra_raceplan_2021_url_response.html",
+      "sha256": "d832d79866aff4d0bb8a7aef305f437f8264c2118b5ec3ff788c920e2b22046d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_2021_public_institutions_analysis.pdf",
+      "sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_physical_p056.png",
+      "sha256": "648a6f21ded4630e5c852f0cb1bd415842ad5d45946704a72c0293d8f7684485"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_physical_p056.txt",
+      "sha256": "0f3444d6804a4b8b8392216a6118193f2d649d527692d8ebfdb20225fdf72692"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/sources_inventory.csv",
+      "sha256": "bf67e5612a00066a203a997d6f45cc74b8a05f0a6a47695e8dc7b7bc053ff6b7"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/README.md",
+      "sha256": "1276c17fa79d32b86fee7a7eceaa215c259743ab0f07ea5bb0c2bbc87ebeb9b6"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/closure_candidates.csv",
+      "sha256": "d199a699ef19af8b2083bde72f43b72996f9b575e838a7b31f301b60ce3e77da"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/lead_confidence_provenance.csv",
+      "sha256": "1e32c85d339eb9d19f223e856a8f034c27e174599c6f648bcb9818779cfff678"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/manifest.json",
+      "sha256": "3b6bdf1bd48420fb9cedf726fe913f219169a6e629e051d7c9ce709cc8d6e81e"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/raw/kra_monthly_plan_board_web_reader_capture.txt",
+      "sha256": "a327163dffab82bb9b1bd13686dbcee21b7155cc6762dd3e3b5b4415b3c5868b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/raw/reported_sources_fetch_manifest.json",
+      "sha256": "77a5ed6809a46fcf4b321320e8bec5cfc0bd1e24fc78059c8a3716b48d99e89a"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/raw/search_observations.json",
+      "sha256": "84e2a080354ae91fd7c8c5c39b5666cf961f854144c819e76a41a9d0a87598cb"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/reported_interval_leads.csv",
+      "sha256": "09c7fc230d3739d813a62bd59e432a660a70c429004cbdf5cd1c2186c6e9ac1b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/source_status.csv",
+      "sha256": "94de542dac07d0f1bb8936ffb6d5f47a8cd8ecc1e8b1deb5d76bde5e5e98695d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_approved/closure_boundary_review.csv",
+      "sha256": "8165a13fa6acd1fc3633d7363a974acdfd57012df02ae2f8ec3f2792d8b85d12"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_approved/root_label_verification.json",
+      "sha256": "5c6dfc9cdde198a46bfed6f53c68a0053691685428f822cbcac054d0aedba8c9"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_approved/subtype_decisions.csv",
+      "sha256": "73a02baf0be9547b1b86a6d4d0f47587a6ed9df344a11d614ca91f17b8872363"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_busan_direct/capture_manifest.json",
+      "sha256": "92ef560b65a985ba74ddd9c4be3fb3372ee86aa7707caa5128f9e5ba688a0bea"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_busan_direct/daily_20150329.html",
+      "sha256": "a9b077b77ea457204da944256939b76ffb8b5154b03911c6a8734df762d4fd86"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_busan_direct/daily_20150329.txt",
+      "sha256": "c275d726e6eabd56835cc8df09ab4b2c06ec9a02f6e47bf60a3c7e4cddf02e4e"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/capture_manifest.json",
+      "sha256": "b884fe10c96b3b866bdba3c92f043565de1d2a13b2afdd7c7bc69d479a5a15e5"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/closure_boundary_evidence.csv",
+      "sha256": "1819cba3dc81675c32899e2f23eadb333c56bc0036028de47090b83990b72f0d"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_2021_public_institutions_analysis.pdf",
+      "sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_physical_p056.png",
+      "sha256": "648a6f21ded4630e5c852f0cb1bd415842ad5d45946704a72c0293d8f7684485"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_physical_p056.txt",
+      "sha256": "0f3444d6804a4b8b8392216a6118193f2d649d527692d8ebfdb20225fdf72692"
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/root_api_restart_boundary_verification.json",
+      "sha256": "5f386f0896825a9462066491cb97a92e3d879207fe4cf05b874b55367133146f"
+    }
+  ],
+  "outputs": {
+    "subtype_decisions.csv": {
+      "rows": 29,
+      "sha256": "73a02baf0be9547b1b86a6d4d0f47587a6ed9df344a11d614ca91f17b8872363"
+    },
+    "daily_calendar.csv": {
+      "rows": 18348,
+      "sha256": "73e69bf1ca6caf859eb23b1a8ad2af38c1c01ea84b10c1a09a5439c79710e979"
+    },
+    "annual_summary.csv": {
+      "rows": 51,
+      "sha256": "d25967a1e80cd38d4c20b634352894199ef966c656da954798ac2d003dae2de3"
+    },
+    "race_nonexecution_adjudication.csv": {
+      "rows": 116,
+      "sha256": "49c95186a7b12873001432133a7226da069b0cc7c3fc6766e2365c65bb91b768"
+    },
+    "official_closure_intervals.csv": {
+      "rows": 77,
+      "sha256": "8f3a84a36dae221dac8a85eb8d820e1f86ee286fbb9140f0b2e1e702f7293eef"
+    },
+    "closure_boundary_review.csv": {
+      "rows": 2,
+      "sha256": "8165a13fa6acd1fc3633d7363a974acdfd57012df02ae2f8ec3f2792d8b85d12"
+    },
+    "reported_closure_interval_leads.csv": {
+      "rows": 10,
+      "sha256": "9b24b08e67387eaa6140f76e903791e33a4ee4e85fdfe00736b0cf4d956e39cc"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "dataset": "starting_exam",
+  "endpoint": "API21_1",
+  "scope": {
+    "start": "2010-01-01",
+    "end": "2026-09-29",
+    "meets": ["1", "3"],
+    "jeju_meet_2": "excluded"
+  },
+  "input_paths": {
+    "parquet": "thoroughbred/research/20261002_starting_exam_v1/input/starting_exam.parquet",
+    "capture_manifest": "thoroughbred/research/20261002_starting_exam_v1/raw/capture_manifest.json",
+    "coverage_summary": "thoroughbred/research/20261002_starting_exam_v1/raw/coverage_summary.json"
+  },
+  "parquet_columns": [
+    ["dataset", "VARCHAR"],
+    ["observation_id", "VARCHAR"],
+    ["event_date", "DATE"],
+    ["meet", "VARCHAR"],
+    ["official_horse_id", "VARCHAR"],
+    ["raw_name", "VARCHAR"],
+    ["raw_path", "VARCHAR"],
+    ["raw_sha256", "VARCHAR"],
+    ["source_page_no", "INTEGER"],
+    ["source_row_no", "INTEGER"],
+    ["source_captured_at", "TIMESTAMP"],
+    ["capture_basis", "VARCHAR"],
+    ["endpoint", "VARCHAR"],
+    ["raw_payload_json", "VARCHAR"],
+    ["typed_fields_json", "VARCHAR"],
+    ["link_status", "VARCHAR"],
+    ["linked_core_horse_id", "VARCHAR"],
+    ["qa_flags_json", "VARCHAR"],
+    ["capture_id", "VARCHAR"]
+  ],
+  "coverage_contract": {
+    "partition_count": 34,
+    "partitions": "2010-2026 × meets 1 and 3; 2026 scope clipped at 2026-09-29",
+    "statuses": ["complete", "zero", "fail"],
+    "daily_coverage": "derived for every in-scope date×meet from validated complete/zero partition and observed Parquet row counts"
+  },
+  "preservation_rules": [
+    "Keep every source occurrence, including exact repeats and same-key conflicts.",
+    "Preserve the full source object in both raw_payload_json and typed_fields_json.",
+    "Link horse, trainer, and owner IDs by exact official identifier only; never link a jockey by name.",
+    "Keep blank, dash, 휴양마, unmatched IDs, and all pass/reason values as raw source values.",
+    "Do not promote passFlag, cancellation, exclusion, or first-pass status into a derived result.",
+    "Label all imported observations retrospective with pre-race eligibility unverified.",
+    "Preserve raw meet and location labels; do not infer a physical Yeongnam venue split."
+  ]
+}

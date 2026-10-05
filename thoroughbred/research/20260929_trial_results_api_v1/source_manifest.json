@@ -1,0 +1,387 @@
+{
+  "dataset": "KRA running-trial participant results",
+  "source_api_service": "API20_1/ridingTestResult_1",
+  "source_endpoint": "https://apis.data.go.kr/B551015/API20_1/ridingTestResult_1",
+  "source_root": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result",
+  "date_basis": "API trainDate; exposed as ISO trial_date and retained as api_trainDate",
+  "session_key": "source meet query + API trainDate + API trainNo",
+  "source_file_count": 34,
+  "participant_row_count": 61777,
+  "session_count": 6199,
+  "source_meet_date_count": 1633,
+  "unidentified_horse_id_row_count": 104,
+  "participant_rows_by_year": {
+    "2010": 2895,
+    "2011": 3373,
+    "2012": 2972,
+    "2013": 3543,
+    "2014": 3451,
+    "2015": 3457,
+    "2016": 3588,
+    "2017": 3823,
+    "2018": 3980,
+    "2019": 4175,
+    "2020": 5845,
+    "2021": 3468,
+    "2022": 3552,
+    "2023": 3517,
+    "2024": 3740,
+    "2025": 3796,
+    "2026": 2602
+  },
+  "api_participant_fields": [
+    "age",
+    "chulNo",
+    "daySerial",
+    "diffUnit",
+    "g1f",
+    "g2f",
+    "g3f_4c",
+    "g4f_3c",
+    "g6f_2c",
+    "g8f_1c",
+    "hrName",
+    "hrNo",
+    "jkName",
+    "jkNo",
+    "majong",
+    "meet",
+    "name",
+    "nopassReason",
+    "ord",
+    "passFlag",
+    "passtime_3f",
+    "passtime_4f",
+    "rcTime",
+    "rcTimeG1f",
+    "rcTimeG3f",
+    "rcTimeG400",
+    "rcTimeS1f",
+    "rcTime_1c",
+    "rcTime_2c",
+    "rcTime_3c",
+    "rcTime_400",
+    "rcTime_4c",
+    "reason",
+    "s1f",
+    "sex",
+    "trName",
+    "trNo",
+    "track",
+    "trainDate",
+    "trainDays",
+    "trainNo",
+    "weather",
+    "wgBudam",
+    "wgHr",
+    "wgJkAdd"
+  ],
+  "source_files": [
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2010/meet_1.json",
+      "source_file_sha256": "ff8a102a5da11f9d9bfbf8cabebf8300de2919425da6a04c3999211a03e45930",
+      "source_year_query": 2010,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1860
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2010/meet_3.json",
+      "source_file_sha256": "a6228d97d2bc2cd8c93f5e6fbd97c06a1590f431f85fbb55e7ccba687f8fce9f",
+      "source_year_query": 2010,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1035
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2011/meet_1.json",
+      "source_file_sha256": "72c3a30f231d6c2110b476552ab33250fa8f62bc79e3f6b2b0a1630c83a8694f",
+      "source_year_query": 2011,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2077
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2011/meet_3.json",
+      "source_file_sha256": "b9facac6191c1d5bd0c97c6c8cb36421de84281b62763f316cfe69977fb43147",
+      "source_year_query": 2011,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1296
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2012/meet_1.json",
+      "source_file_sha256": "573a01ca8d0d93473bc15db03d6d9e839eb32aab88a7d71bd83b3c0dd3728f5a",
+      "source_year_query": 2012,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1798
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2012/meet_3.json",
+      "source_file_sha256": "efac57b039a97daaed494328ba8cc11753a07f3eb78d3c49ce628133398cc3c2",
+      "source_year_query": 2012,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1174
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2013/meet_1.json",
+      "source_file_sha256": "e75e53fcab73eaa697d70358fee2322f92252569e2d35991d5e515ab915a4ee9",
+      "source_year_query": 2013,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2119
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2013/meet_3.json",
+      "source_file_sha256": "ff7d6f36c4d923296d349d1e292bc5c0e33839e2b096ef1b122c43ccd9a9068f",
+      "source_year_query": 2013,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1424
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2014/meet_1.json",
+      "source_file_sha256": "c439cc93e186d28cdedd4388bf50bfac0763caea7f4bacd6e169005c81a37590",
+      "source_year_query": 2014,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2042
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2014/meet_3.json",
+      "source_file_sha256": "b3189fef7a4fce1f7188b96bc5f7d298e62ef3c9cb93a6a905def16213a3df70",
+      "source_year_query": 2014,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1409
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2015/meet_1.json",
+      "source_file_sha256": "f267873f90d838bef572d7ae83373fea48f1e1a29b43b152c03047c6378239ea",
+      "source_year_query": 2015,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2049
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2015/meet_3.json",
+      "source_file_sha256": "619fcfd3fff45b12765e4036c3da87816af5d38290718fb0d6c948c71dcd065d",
+      "source_year_query": 2015,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1408
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2016/meet_1.json",
+      "source_file_sha256": "33abc106899848ed2d6748a5694ba88c9c582842f4423b4d9ea34575acda41b8",
+      "source_year_query": 2016,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2127
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2016/meet_3.json",
+      "source_file_sha256": "396afce00e009a0a7440662cd38c76be481fb9590878bbccab428461f448abd8",
+      "source_year_query": 2016,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1461
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2017/meet_1.json",
+      "source_file_sha256": "a5090a7ff7fabfdf7e37362198a715de39fd366469fc4ffb307edec99b79422c",
+      "source_year_query": 2017,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2250
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2017/meet_3.json",
+      "source_file_sha256": "f959ecbf1c5d18880fb4fba1562e4a787344677c65417f6ec7f6c17b33dda75d",
+      "source_year_query": 2017,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1573
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2018/meet_1.json",
+      "source_file_sha256": "d741b7cbde99026dbdeace1de0cf20651f041d742151ef83685e197c13bf10d2",
+      "source_year_query": 2018,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2448
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2018/meet_3.json",
+      "source_file_sha256": "e2b170950c91ebfce5616277a0b355d1accc0949b454480a4e91076938591725",
+      "source_year_query": 2018,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1532
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2019/meet_1.json",
+      "source_file_sha256": "d5331f7a99f29f731f60b7c3ccec11d4e1783ea7328ad9608805804d8086464c",
+      "source_year_query": 2019,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2580
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2019/meet_3.json",
+      "source_file_sha256": "a65769df36393435160c79bdd460b8356ff522617fac83da696da94d89396f7c",
+      "source_year_query": 2019,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1595
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2020/meet_1.json",
+      "source_file_sha256": "556d40927d1a7a4c098277ca12fac9ea35a57e5565272a32b9883614c2b0be6d",
+      "source_year_query": 2020,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 3641
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2020/meet_3.json",
+      "source_file_sha256": "25e5728e3856ff53d606fa1f51f7c780ccf6cb131703a5d81956e13d0be47f1d",
+      "source_year_query": 2020,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2204
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2021/meet_1.json",
+      "source_file_sha256": "3e816e50af4bda7359496df0ee3844d57153329f9b325e47eb40bb6f6545d7d5",
+      "source_year_query": 2021,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2044
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2021/meet_3.json",
+      "source_file_sha256": "40663a9c155b619175e872cced5d3531a4fb73826ef2b26665a8c9a5732526ba",
+      "source_year_query": 2021,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1424
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2022/meet_1.json",
+      "source_file_sha256": "941c6f0e85b77b5e97b7f9b1657bad220b55c8f928c4b1dff05c1b289815a7f3",
+      "source_year_query": 2022,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2124
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2022/meet_3.json",
+      "source_file_sha256": "0aa05b07037547b6e1533a154e2402280b191700b30276af61ad8406a57a6762",
+      "source_year_query": 2022,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1428
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2023/meet_1.json",
+      "source_file_sha256": "56057c68e8cf65258f90c623d3b1e8dc26d69c8c0328686563de866c71218d77",
+      "source_year_query": 2023,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2077
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2023/meet_3.json",
+      "source_file_sha256": "c7ae275672edaf0df8a2016993684be6a610880e0c1730f69fd33f3efc39575d",
+      "source_year_query": 2023,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1440
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2024/meet_1.json",
+      "source_file_sha256": "513c7afce592bf86cf5ccc394a60679ceab4db7bd4436ea131edef6a87f832b3",
+      "source_year_query": 2024,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2168
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2024/meet_3.json",
+      "source_file_sha256": "c35af897d5512737fe964cc9e991555f38609b5eb9b7ca9faee9b4ba32f1766e",
+      "source_year_query": 2024,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1572
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2025/meet_1.json",
+      "source_file_sha256": "3723d0ea54bcc9d0cb14874a8a56bf74180652d4e696983b5adef1539a170d19",
+      "source_year_query": 2025,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 2215
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2025/meet_3.json",
+      "source_file_sha256": "6f6197fc4ef6583ae84e1b64029bda02986fa440e6ccb073301c4b4abbd51e98",
+      "source_year_query": 2025,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1581
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2026/meet_1.json",
+      "source_file_sha256": "a79153a8425db6e3c44eb04dd21377a3d3bf64d2979d1730bd1cfab67825edad",
+      "source_year_query": 2026,
+      "source_meet_query": 1,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1573
+    },
+    {
+      "source_file": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2026/meet_3.json",
+      "source_file_sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+      "source_year_query": 2026,
+      "source_meet_query": 3,
+      "source_result_code": "00",
+      "source_result_msg": "NORMAL SERVICE.",
+      "source_item_count": 1029
+    }
+  ]
+}

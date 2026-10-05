@@ -1,0 +1,370 @@
+{
+  "checked_at_utc": "2026-10-01T10:27:22.558535+00:00",
+  "baseline_database": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261001_before_remaining_closure_cancel_review_v3/thoroughbred_core.duckdb",
+  "database": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "checks": {
+    "all_other_tables_and_views_unchanged": true,
+    "calendar_days_prior_copy_exact": true,
+    "annual_summary_prior_copy_exact": true,
+    "race_nonexecution_adjudication_prior_copy_exact": true,
+    "calendar_other_columns_unchanged": true,
+    "116_keys_verdicts_unchanged": true,
+    "adjudicated_view_only_two_busan_keys_changed": true,
+    "adjudication_nonreview_columns_unchanged": true,
+    "other_114_adjudications_exact": true,
+    "old_closure_intervals_preserved": true,
+    "annual_other_columns_unchanged": true,
+    "review_29_cancelled_zero_unknown": true,
+    "closures_77_intervals_540_venue_days_no_conflicts": true,
+    "new_closure_days_exact_90_zero_execution": true,
+    "two_api_delimited_boundaries_explicit": true,
+    "secondary_leads_not_promoted": true,
+    "no_pre2016_closure_added": true,
+    "builder_all_checks_pass": true,
+    "all_review_evidence_hashes_match": true,
+    "db_hash_matches_manifest": true
+  },
+  "all_passed": true,
+  "unchanged_objects": {
+    "annual_summary_prior_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "calendar_days_prior_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "entity_name_observations": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "entity_profile_coverage": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "entity_profile_coverage_gaps": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "entity_reference_roster": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "entity_reference_summary": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "horse_profile_page_manifest": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "horse_profile_snapshot_membership": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "non_person_placeholder_observations": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "official_annual_stats_crosscheck": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "official_cancelled_days": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "person_profile_page_manifest": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "person_reference_profile_snapshots": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "prior_unresolved_race_day_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_events": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_execution_flags": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_nonexecution_adjudication_prior_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_plan": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_plan_full_api": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_role_gap_audit": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_trainer_owner_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "race_trainer_owner_review_evidence": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "runner_results": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "runner_section_coverage_api": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "section_measurements_api": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "section_missing_finisher_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "section_parse_issues_api": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_horse_identity_links": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_horse_identity_pending": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_horse_identity_user_confirmations": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_horse_id_source_exceptions": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_jockey_gap_audit": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_jockey_official_profile_supplement": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_jockey_official_web_conflict_18": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_jockey_official_web_missing_24": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_jockey_official_web_rpt_5079": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_participants": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_rpt_name_review_18": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_sessions": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_trainer_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_trainer_review_evidence": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_trainer_source_error_decisions": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_venue_review": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "unidentified_trial_participants": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "unresolved_entity_references": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "unverified_result_only_keys": {
+      "kind": "BASE TABLE",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_races": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_races_2017plus": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_runners": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_runners_2017plus": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_runners_entity_linked": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_runners_entity_reviewed": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "confirmed_runners_entity_reviewed_before_role_review": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "jockey_reference_ids_with_review": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "role_link_exceptions_current": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "role_link_exceptions_pending": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_participants_entity_linked": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_participants_entity_reviewed": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_participants_entity_reviewed_before_role_review": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_participants_resolved": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_participants_venue_reviewed": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_sessions_venue_reviewed": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "trial_trainer_errors_closed": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "unresolved_race_days": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    },
+    "unresolved_trial_participants": {
+      "kind": "VIEW",
+      "new_only_rows": 0,
+      "old_only_rows": 0
+    }
+  },
+  "status_counts": {
+    "official_closure_nonexecution": 17,
+    "race_cancelled": 51,
+    "race_invalid": 2,
+    "official_day_cancelled": 35,
+    "reported_day_cancelled": 11
+  },
+  "closure_intervals": 77,
+  "closure_venue_days": 540,
+  "builder_check_count": 60
+}

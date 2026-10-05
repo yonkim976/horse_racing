@@ -1,0 +1,643 @@
+{
+  "checked_at_utc": "2026-10-01T17:26:37.052480+00:00",
+  "baseline": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_training_three/thoroughbred_core.duckdb",
+  "checks": {
+    "all_original_objects_content_preserved": true,
+    "all_original_schemas_preserved": true,
+    "old_source_manifest_rows_preserved_one_added": true,
+    "raw_payload_source_date_meet_id_name_hash_all_checked": true,
+    "stored_payload_exactly_matches_all_three_parquets": true,
+    "complete_date_meet_inventory_counts_match_all_raw_rows": true,
+    "all_registered_source_hash_page_row_counts_verified": true,
+    "retrospective_availability_and_unknown_venue_flags_exact": true,
+    "observation_ids_unique_without_discarding_source_rows": true,
+    "all_observations_and_date_coverage_trace_to_registered_sources": true,
+    "old_manifest_metadata_inputs_and_loads_preserved": true,
+    "old_object_counts_preserved": true,
+    "database_hash_matches_manifest": true
+  },
+  "all_passed": true,
+  "raw_reports": {
+    "daily_training": {
+      "counts": {
+        "rows": 5173033,
+        "negative_duration": 8,
+        "zero_duration": 11,
+        "end_before_start": 9,
+        "duration_differs_from_clocks": 337
+      },
+      "link_status_counts": {
+        "exact_core_roster_match": 5139741,
+        "unmatched_official_id": 33292
+      },
+      "qa_flag_counts": {
+        "duration_negative": 8,
+        "end_before_start": 9,
+        "duration_zero": 11,
+        "duration_differs_from_raw_time_delta": 337,
+        "nonidentical_natural_key_variant": 16
+      },
+      "verified_raw_files": 425
+    },
+    "start_training": {
+      "counts": {
+        "rows": 431517
+      },
+      "link_status_counts": {
+        "exact_core_roster_match": 426332,
+        "unmatched_official_id": 5185
+      },
+      "qa_flag_counts": {
+        "unmatched_official_horse_id": 5185,
+        "meet3_physical_venue_unadjudicated": 215265
+      },
+      "verified_raw_files": 414
+    },
+    "swim_training": {
+      "counts": {
+        "rows": 459604,
+        "zero_count": 3,
+        "negative_count": 0
+      },
+      "link_status_counts": {
+        "exact_core_roster_match": 456662,
+        "unmatched_official_id": 2942
+      },
+      "qa_flag_counts": {
+        "swim_cnt_unit_unresolved": 459604,
+        "unmatched_official_horse_id": 2942,
+        "swim_cnt_raw_zero_preserved": 3,
+        "swim_cnt_raw_large_value_preserved": 33,
+        "meet3_physical_venue_unadjudicated": 171485,
+        "exact_payload_repeat_preserved": 24,
+        "same_natural_key_multiplicity_preserved": 24
+      },
+      "verified_raw_files": 33
+    }
+  },
+  "payload_parity": {
+    "daily_training": {
+      "added": 0,
+      "lost": 0
+    },
+    "start_training": {
+      "added": 0,
+      "lost": 0
+    },
+    "swim_training": {
+      "added": 0,
+      "lost": 0
+    }
+  },
+  "coverage_rows": 36696,
+  "source_file_entries": 4884,
+  "preserved_objects": {
+    "annual_summary": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "annual_summary_prior_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "calendar_days": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "calendar_days_prior_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "closure_boundary_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "closure_gap_review_candidates": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "closure_plan_amendment_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "closure_review_questions": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "entity_name_observations": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "entity_profile_coverage": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "entity_profile_coverage_gaps": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "entity_reference_roster": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "entity_reference_summary": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_capture_batches": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_capture_pages": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_card_observations": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_card_tokens": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_core_runner_ledger": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_identity_conflicts": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_source_documents": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_score_supplement": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_score_supplement_tokens": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "horse_profile_page_manifest": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "horse_profile_snapshot_membership": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "non_person_placeholder_observations": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "official_annual_stats_crosscheck": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "official_cancelled_days": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "official_closure_intervals": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "person_profile_page_manifest": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "person_reference_profile_snapshots": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "prior_unresolved_race_day_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_events": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_execution_flags": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_nonexecution_adjudication": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_nonexecution_adjudication_prior_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_nonexecution_subtype_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_plan": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_plan_full_api": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_role_gap_audit": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_trainer_owner_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_trainer_owner_review_evidence": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "reported_closure_interval_leads": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "runner_results": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "runner_section_coverage_api": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "section_measurements_api": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "section_missing_finisher_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "section_parse_issues_api": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_horse_identity_links": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_horse_identity_pending": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_horse_identity_user_confirmations": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_horse_id_source_exceptions": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_jockey_gap_audit": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_jockey_official_profile_supplement": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_jockey_official_web_conflict_18": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_jockey_official_web_missing_24": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_jockey_official_web_rpt_5079": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_participants": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_rpt_name_review_18": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_sessions": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_trainer_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_trainer_review_evidence": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_trainer_source_error_decisions": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_venue_review": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "unidentified_trial_participants": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "unresolved_entity_references": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "unverified_result_only_keys": {
+      "kind": "BASE TABLE",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_races": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_races_2017plus": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_runners": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_runners_2017plus": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_runners_entity_linked": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_runners_entity_reviewed": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "confirmed_runners_entity_reviewed_before_role_review": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_active_declared": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_api78_latest_card_observations": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_core_coverage": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_declared_union_fallback": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "equipment_score_supplement_active_declared": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "jockey_reference_ids_with_review": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "race_execution_adjudicated": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "role_link_exceptions_current": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "role_link_exceptions_pending": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_participants_entity_linked": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_participants_entity_reviewed": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_participants_entity_reviewed_before_role_review": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_participants_resolved": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_participants_venue_reviewed": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_sessions_venue_reviewed": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "trial_trainer_errors_closed": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "unresolved_race_days": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    },
+    "unresolved_trial_participants": {
+      "kind": "VIEW",
+      "added": 0,
+      "lost": 0,
+      "schema_equal": true
+    }
+  },
+  "verification_script_sha256": "920c1a8c13dcc62867e6b35c1c84c1e5cd085b49d8cff9b5576601b7f43ab44a"
+}

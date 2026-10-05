@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "checks": {
+    "all_source_participant_rows_retained_and_raw_payloads_match": true,
+    "source_file_sha256_provenance_matches": true,
+    "normalized_date_and_trial_session_keys_match_api_fields": true,
+    "unidentified_horse_rows_retained_in_main_and_review_extracts": true,
+    "no_grade_or_inferred_physical_venue_column": true,
+    "meet_3_2026_09_17_keeps_raw_label_yeongnam": true,
+    "source_session_participant_counts_reconcile": true,
+    "expected_source_counts_match": true
+  },
+  "counts": {
+    "source_file_count": 34,
+    "participant_row_count": 61777,
+    "session_count": 6199,
+    "source_meet_date_count": 1633,
+    "unidentified_horse_id_row_count": 104
+  },
+  "participant_rows_by_source_meet_query": {
+    "1": 37192,
+    "3": 24585
+  },
+  "missing_horse_id_rows_by_source_meet_query": {
+    "1": 72,
+    "3": 32
+  },
+  "source_api_meet_label_rows": {
+    "서울": 37192,
+    "영남": 24585
+  },
+  "source_files_by_year": {
+    "2010": 2,
+    "2011": 2,
+    "2012": 2,
+    "2013": 2,
+    "2014": 2,
+    "2015": 2,
+    "2016": 2,
+    "2017": 2,
+    "2018": 2,
+    "2019": 2,
+    "2020": 2,
+    "2021": 2,
+    "2022": 2,
+    "2023": 2,
+    "2024": 2,
+    "2025": 2,
+    "2026": 2
+  },
+  "trial_date_min": "20100108",
+  "trial_date_max": "20260917",
+  "api_field_count": 45,
+  "api_grade_fields_found": [],
+  "source_meet_3_2026_09_17": {
+    "session_count": 4,
+    "participant_rows": 48,
+    "api_meet_label": "영남",
+    "physical_venue": null,
+    "interpretation": "Venue is unresolved; no Yeongcheon or other physical venue was assigned."
+  },
+  "output_file_sha256": {
+    "participants.csv": "0b1bdb887747159d4036acd3a922162275c4059b3a5683809cc93542c6175908",
+    "sessions.csv": "97e9d7bd746640b1e6eb1edd252d0ff2d2408db0f1a6fb5b8b42b795186b84d0",
+    "unidentified_participants.csv": "a83bd2e19e3c6339164ece6639413ee7305f28e847ebf01d06f5f380ed651d7e",
+    "source_manifest.json": "2f7eb7ef40c91b72d00bc896901f99eda7da6b172405550ae096bb0cd8fc13ce"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "review_date": "2026-10-01",
+  "review_type": "independent_read_only_integration_validation",
+  "scope": [
+    "race trainer/owner review (60 target keys)",
+    "trial trainer review (224 target keys)",
+    "final core database integration and baseline preservation"
+  ],
+  "baseline": {
+    "database": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261001_before_trainer_owner_review/thoroughbred_core.duckdb",
+    "database_sha256": "5fef8038538d9a6c19f62b022c67b570d192b969baadacefb4413414c6e35bdc",
+    "manifest_sha256": "70a94493cfc01c1bc0cc3ea4e1943168aa7b49fb83f84119c01053d202cfa635"
+  },
+  "final_database": {
+    "database": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "database_sha256": "fd4e1135b1286b8b70b39441bd326e634772e143a551c6bf1a1584cac49a1bf5",
+    "manifest_sha256": "c4accf6db718113cc28b73147abe4ddd34356028477717539b8429bbc9bb9896",
+    "manifest_database_sha_matches_file": true,
+    "build_checks_total": 54,
+    "build_checks_passed": 54
+  },
+  "race_role_review": {
+    "target_rows": 60,
+    "unique_natural_keys": 60,
+    "official_event_captures_sha256_verified": "60/60",
+    "same_event_horse_program_rows_reparsed": "60/60",
+    "trainer_supplements": 37,
+    "owner_supplements": 37,
+    "source_placeholder_rows_left_unlinked": 23,
+    "direct_person_ids_in_known_roster": true,
+    "profile_meet_parameter_equals_event_meet_required": false,
+    "note": "Profile meet is retained as supplied by goHorse/goTrainer/goOwner links; it may differ from the race event meet. One reviewed example is event meet 3 with profile meet 1."
+  },
+  "trial_trainer_review": {
+    "target_rows": 224,
+    "ledger_sha256": "8af724039337443b3cee5375f9951a6f39a1d9b0d9400feaa1da79a1df9f3927",
+    "capture_manifest_sha256": "3d8b24d9feecb119837daf50da1be164d7d8eae03dc97bfcca7db13bb5995079",
+    "normalized_csv_sha256": "d31dbcea6535068caca697ae8c0ad2e27dddc330f9c1fe514ed68dccb74e0aba",
+    "normalized_csv_rows_and_unique_keys": "224/224",
+    "normalized_keys_equal_source_ledger": true,
+    "review_and_evidence_table_keys_match_ledger": "224/224",
+    "source_api_item_pointers_hashes_and_trainer_fields_verified": "224/224",
+    "official_score_page_captures": 221,
+    "capture_sha256_files_verified": "221/221",
+    "capture_byte_sizes_verified_where_manifest_has_size": "220/220",
+    "supplemental_trainer_ids": 61,
+    "supplements_reparsed_from_exact_event_program_horse_row_and_goPage3": "61/61",
+    "supplemental_ids_in_existing_trainer_roster": "61/61",
+    "supplemental_id_strings_preserve_leading_zero": "61/61",
+    "source_0AAAAA_promoted_to_person_id": false,
+    "source_dash_recovered_as_official_0AAAAA_placeholder": 1,
+    "unresolved_no_exact_official_person_id": 22,
+    "partition": {
+      "exact_official_person_id_supplement": 61,
+      "confirmed_non_person_placeholder": 141,
+      "unresolved_no_exact_official_person_id": 22,
+      "total": 224
+    },
+    "normalizer_projection_values_match_ledger": true
+  },
+  "database_gates": {
+    "preexisting_api_and_core_base_table_content_changed": false,
+    "horse_jockey_identity_fields_changed": false,
+    "row_multiplication_or_natural_key_duplication": false,
+    "preexisting_nonnull_role_id_overridden": false,
+    "role_id_columns_are_varchar": true,
+    "current_exception_rows": 186,
+    "current_exception_partition": {
+      "race_confirmed_non_person_placeholder": 23,
+      "trial_confirmed_non_person_placeholder": 141,
+      "trial_unresolved_no_exact_official_person_id": 22,
+      "total": 186
+    },
+    "final_counts": {
+      "confirmed_runners": 330465,
+      "trial_participants": 61777,
+      "race_trainer_linked": 330442,
+      "race_owner_linked": 330465,
+      "trial_trainer_linked": 61614
+    },
+    "horse_jockey_coverage_unchanged": true
+  },
+  "unresolved_limitations": [
+    "The 22 trial trainer rows without a source program row on the exact event page remain unresolved; no trainer ID was inferred.",
+    "KRA 0AAAAA/휴양마 entries remain non-person placeholders even if the page exposes a profile-style link.",
+    "The review establishes row-level linkage evidence from the captured official score pages. It does not adjudicate trainer identity where the exact event row is absent."
+  ],
+  "independent_validation_status": "PASS"
+}

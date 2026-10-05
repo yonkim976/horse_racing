@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "scope": {
+    "start": "2010-01-01",
+    "end": "2026-09-29",
+    "meets": ["1", "3"],
+    "jeju_meet_2": "excluded"
+  },
+  "datasets": {
+    "daily_training": {"endpoint": "API18_1", "parquet": "daily_training.parquet", "inventory": "daily_training_inventory.json"},
+    "start_training": {"endpoint": "API22_1", "parquet": "start_training.parquet", "inventory": "start_training_inventory.json"},
+    "swim_training": {"endpoint": "API216", "parquet": "swim_training.parquet", "inventory": "swim_training_inventory.json"}
+  },
+  "parquet_columns": [
+    {"name": "dataset", "type": "VARCHAR"},
+    {"name": "observation_id", "type": "VARCHAR"},
+    {"name": "event_date", "type": "DATE"},
+    {"name": "meet", "type": "VARCHAR"},
+    {"name": "official_horse_id", "type": "VARCHAR"},
+    {"name": "raw_name", "type": "VARCHAR"},
+    {"name": "raw_path", "type": "VARCHAR"},
+    {"name": "raw_sha256", "type": "VARCHAR"},
+    {"name": "source_page_no", "type": "INTEGER"},
+    {"name": "source_row_no", "type": "INTEGER"},
+    {"name": "source_captured_at", "type": "TIMESTAMP", "timezone": "UTC naive; raw basis remains in capture_basis and inventory"},
+    {"name": "capture_basis", "type": "VARCHAR"},
+    {"name": "endpoint", "type": "VARCHAR"},
+    {"name": "raw_payload_json", "type": "VARCHAR"},
+    {"name": "typed_fields_json", "type": "VARCHAR"},
+    {"name": "link_status", "type": "VARCHAR"},
+    {"name": "linked_core_horse_id", "type": "VARCHAR"},
+    {"name": "qa_flags_json", "type": "VARCHAR"},
+    {"name": "capture_id", "type": "VARCHAR"}
+  ],
+  "inventory_required_fields": ["schema_version", "dataset", "endpoint", "scope_start", "scope_end", "row_count", "parquet_path", "parquet_sha256", "source_files", "date_coverage"],
+  "source_file_required_fields": ["raw_path", "raw_sha256", "source_page_no", "row_count", "capture_id", "capture_basis", "endpoint", "is_selected"],
+  "source_file_metadata": "Retain selected and older capture request/retrieval fields where available in source_metadata_json. No URLs, credentials, or secrets.",
+  "date_coverage_required_fields": ["event_date", "meet", "coverage_status", "selected_capture_id", "selection_rule", "coverage_basis", "expected_rows", "observed_rows"],
+  "coverage_status_values": ["complete_rows", "complete_zero_rows", "missing_capture", "incomplete_capture"],
+  "capture_selection": "Latest hash-verified complete capture per event-date and meet, regardless of year/month/day partition.",
+  "identity_rule": "Exact official horse ID string matching to core entity_reference_roster where entity_type=horse; no name-based linkage; retain unmatched IDs.",
+  "preservation_rules": [
+    "Keep every nonidentical same-natural-key observation.",
+    "Keep identical repeats as separate source observations and flag them in QA metadata.",
+    "Preserve API22 occurrence order as anonymous storage order; it is not an event ID or event time.",
+    "Keep zero, negative, null, blank, and raw delta values unchanged.",
+    "All imported rows are retrospective observations with pre-race eligibility unverified.",
+    "Do not infer a historical daily 14:00 publication time from current behavior.",
+    "Preserve raw meet/venue labels; physical venue remains unadjudicated where unresolved."
+  ],
+  "core_objects": {
+    "tables": ["training_raw_observations", "training_capture_coverage", "training_source_files"],
+    "views": ["daily_training_raw", "start_training_raw", "swim_training_raw", "training_observation_qa", "training_date_coverage", "training_source_entities"]
+  }
+}

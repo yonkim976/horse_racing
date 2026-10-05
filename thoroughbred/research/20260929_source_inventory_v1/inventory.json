@@ -1,0 +1,3842 @@
+{
+  "inventory_version": "2026-09-29-source-inventory-v1",
+  "generated_at_utc": "2026-09-29T07:54:07+00:00",
+  "scope": {
+    "included_meets": {
+      "1": "SEOUL",
+      "3": "BUSAN_GYEONGNAM",
+      "4": "YEONGCHEON"
+    },
+    "excluded_meets": {
+      "2": "JEJU"
+    },
+    "target_event_date_cutoff": "2026-09-20",
+    "model_start_date": "2017-01-01",
+    "history_policy": "Preserve each source from its observed first record through the target cutoff; pre-2017 race rows are history only. Preserve event date separately from published/observed/ingested timestamps."
+  },
+  "sources": {
+    "operational_sqlite": {
+      "path": "data/horse_racing.sqlite3",
+      "bytes": 3077263360,
+      "modified_local": "2026-09-28T01:09:23",
+      "open_mode": "read_only"
+    },
+    "historical_unified_duckdb": {
+      "path": "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb",
+      "bytes": 1323053056,
+      "modified_local": "2026-09-18T02:25:43",
+      "open_mode": "read_only"
+    },
+    "section_points_adjudicated_sqlite": {
+      "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+      "bytes": 1393250304,
+      "modified_local": "2026-09-25T19:20:26",
+      "open_mode": "read_only"
+    },
+    "research_dataset_v1_duckdb": {
+      "path": "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb",
+      "bytes": 532164608,
+      "modified_local": "2026-09-29T00:47:24",
+      "open_mode": "read_only"
+    },
+    "section_passing_raw_duckdb": {
+      "path": "thoroughbred/data/section_passing_raw_2010plus_20260929_v1/section_passing_raw.duckdb",
+      "bytes": 83111936,
+      "modified_local": "2026-09-29T03:18:28",
+      "open_mode": "read_only"
+    }
+  },
+  "table_inventory": [
+    {
+      "source": "operational_sqlite",
+      "domain": "race_schedule",
+      "table": "races",
+      "columns": [
+        "id",
+        "racecourse_id",
+        "race_date_local",
+        "race_number",
+        "distance_m",
+        "grade",
+        "race_name",
+        "scheduled_at_ms",
+        "weather",
+        "track_condition",
+        "track_moisture_percent",
+        "status",
+        "race_day_count",
+        "field_size",
+        "burden_type",
+        "age_condition",
+        "sex_condition",
+        "rating_condition",
+        "newcomer_condition",
+        "actual_start_at_ms",
+        "start_time_change_reason",
+        "weather_planned",
+        "track_condition_planned",
+        "track_moisture_percent_planned"
+      ],
+      "key_candidate": "(racecourse_id, race_date_local, race_number)",
+      "major_date_field": "race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 43950,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 43950,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 1114,
+        "2001": 1118,
+        "2002": 1094,
+        "2003": 1106,
+        "2004": 1110,
+        "2005": 1566,
+        "2006": 1688,
+        "2007": 1712,
+        "2008": 1870,
+        "2009": 1842,
+        "2010": 1794,
+        "2011": 1816,
+        "2012": 1886,
+        "2013": 1904,
+        "2014": 1939,
+        "2015": 1926,
+        "2016": 1917,
+        "2017": 1899,
+        "2018": 1906,
+        "2019": 1893,
+        "2020": 1103,
+        "2021": 1453,
+        "2022": 1679,
+        "2023": 1775,
+        "2024": 1774,
+        "2025": 1759,
+        "2026": 1307
+      },
+      "annual_sum_check": {
+        "sum": 43950,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 28399,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 15539,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 12,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "status rows include non-completed/cancelled records; a missing race date is not proof of a closure."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "race_entries",
+      "table": "race_entries",
+      "columns": [
+        "id",
+        "race_id",
+        "horse_id",
+        "jockey_id",
+        "trainer_id",
+        "owner_id",
+        "horse_number",
+        "gate_number",
+        "carried_weight_kg",
+        "body_weight_kg",
+        "body_weight_change_kg",
+        "rating",
+        "running_style",
+        "scratched",
+        "equipment"
+      ],
+      "key_candidate": "(race_id, horse_number); cross-source (meet, date, race_no, horse_number)",
+      "major_date_field": "races.race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 485108,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 485108,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 12519,
+        "2001": 12261,
+        "2002": 12009,
+        "2003": 12045,
+        "2004": 11734,
+        "2005": 16442,
+        "2006": 18878,
+        "2007": 19673,
+        "2008": 20855,
+        "2009": 21137,
+        "2010": 20284,
+        "2011": 20983,
+        "2012": 21715,
+        "2013": 21426,
+        "2014": 21556,
+        "2015": 21190,
+        "2016": 20699,
+        "2017": 20516,
+        "2018": 20004,
+        "2019": 20615,
+        "2020": 12686,
+        "2021": 17375,
+        "2022": 18070,
+        "2023": 18865,
+        "2024": 18540,
+        "2025": 19005,
+        "2026": 14026
+      },
+      "annual_sum_check": {
+        "sum": 485108,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 315529,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 169460,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "horse_id is required, while jockey/trainer/owner IDs may be NULL; keep original names and IDs."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "race_results",
+      "table": "race_results",
+      "columns": [
+        "id",
+        "race_entry_id",
+        "finish_position",
+        "finish_time_ms",
+        "margin_text",
+        "prize_money_krw",
+        "disqualified",
+        "bonus_prize_money_krw",
+        "rank_remark"
+      ],
+      "key_candidate": "race_entry_id",
+      "major_date_field": "races.race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 485108,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 485108,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 12519,
+        "2001": 12261,
+        "2002": 12009,
+        "2003": 12045,
+        "2004": 11734,
+        "2005": 16442,
+        "2006": 18878,
+        "2007": 19673,
+        "2008": 20855,
+        "2009": 21137,
+        "2010": 20284,
+        "2011": 20983,
+        "2012": 21715,
+        "2013": 21426,
+        "2014": 21556,
+        "2015": 21190,
+        "2016": 20699,
+        "2017": 20516,
+        "2018": 20004,
+        "2019": 20615,
+        "2020": 12686,
+        "2021": 17375,
+        "2022": 18070,
+        "2023": 18865,
+        "2024": 18540,
+        "2025": 19005,
+        "2026": 14026
+      },
+      "annual_sum_check": {
+        "sum": 485108,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 315529,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 169460,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "one result row may contain a non-finish/special status; finish time alone is not a complete entry roster."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "trial_schedule",
+      "table": "running_trials",
+      "columns": [
+        "id",
+        "source_document_id",
+        "meet_code",
+        "trial_date_local",
+        "trial_round",
+        "trial_race_number",
+        "distance_m",
+        "weather",
+        "track_condition",
+        "track_moisture_percent",
+        "observed_at_ms"
+      ],
+      "key_candidate": "(meet_code, trial_date_local, trial_race_number)",
+      "major_date_field": "trial_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 7825,
+      "earliest_event_date": "2003-07-03",
+      "latest_event_date": "2026-09-17",
+      "rows_on_or_before_target_cutoff": 7825,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 81,
+        "2004": 200,
+        "2005": 251,
+        "2006": 270,
+        "2007": 272,
+        "2008": 270,
+        "2009": 300,
+        "2010": 304,
+        "2011": 349,
+        "2012": 308,
+        "2013": 356,
+        "2014": 338,
+        "2015": 360,
+        "2016": 374,
+        "2017": 394,
+        "2018": 398,
+        "2019": 405,
+        "2020": 541,
+        "2021": 354,
+        "2022": 368,
+        "2023": 351,
+        "2024": 367,
+        "2025": 365,
+        "2026": 249
+      },
+      "annual_sum_check": {
+        "sum": 7825,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 4426,
+          "first": "2003-07-03",
+          "last": "2026-09-17"
+        },
+        {
+          "meet": 3,
+          "rows": 3399,
+          "first": "2004-11-07",
+          "last": "2026-09-17"
+        }
+      ],
+      "risk": "No meet=4 schedule was found. running_trials has no grade field."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "trial_entries_results",
+      "table": "running_trial_results",
+      "columns": [
+        "id",
+        "running_trial_id",
+        "horse_id",
+        "jockey_id",
+        "trainer_id",
+        "horse_number",
+        "horse_name_raw",
+        "finish_position",
+        "finish_rank_raw",
+        "origin_country",
+        "sex",
+        "age",
+        "carried_weight_base_kg",
+        "carried_weight_extra_kg",
+        "carried_weight_raw",
+        "jockey_name_raw",
+        "trainer_name_raw",
+        "body_weight_kg",
+        "finish_time_ms",
+        "margin_text",
+        "judgement",
+        "failure_reason",
+        "inspection_reason",
+        "g3f_ms",
+        "s1f_ms",
+        "corner_3_ms",
+        "corner_4_ms",
+        "g1f_ms",
+        "section_400_ms",
+        "final_400_ms",
+        "passing_order_raw",
+        "observed_at_ms"
+      ],
+      "key_candidate": "(running_trial_id, horse_number)",
+      "major_date_field": "running_trials.trial_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 76245,
+      "earliest_event_date": "2003-07-03",
+      "latest_event_date": "2026-09-17",
+      "rows_on_or_before_target_cutoff": 76245,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 792,
+        "2004": 1799,
+        "2005": 2225,
+        "2006": 2445,
+        "2007": 2450,
+        "2008": 2378,
+        "2009": 2685,
+        "2010": 2882,
+        "2011": 3364,
+        "2012": 2958,
+        "2013": 3490,
+        "2014": 3423,
+        "2015": 3444,
+        "2016": 3579,
+        "2017": 3822,
+        "2018": 3969,
+        "2019": 4146,
+        "2020": 5803,
+        "2021": 3434,
+        "2022": 3506,
+        "2023": 3515,
+        "2024": 3738,
+        "2025": 3796,
+        "2026": 2602
+      },
+      "annual_sum_check": {
+        "sum": 76245,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 46466,
+          "first": "2003-07-03",
+          "last": "2026-09-17"
+        },
+        {
+          "meet": 3,
+          "rows": 29779,
+          "first": "2004-11-07",
+          "last": "2026-09-17"
+        }
+      ],
+      "risk": "Horse/jockey/trainer IDs are incompletely linked; participant name/number and judgement text are source evidence."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "horse_entity_master",
+      "table": "horses",
+      "columns": [
+        "id",
+        "kra_horse_id",
+        "name_ko",
+        "name_en",
+        "sex",
+        "birth_date",
+        "origin_country",
+        "grade",
+        "meet_code",
+        "sire_kra_id",
+        "sire_name",
+        "dam_kra_id",
+        "dam_name",
+        "last_sale_amount_raw",
+        "profile_observed_at_ms",
+        "is_active",
+        "active_status_observed_at_ms",
+        "active_status_source"
+      ],
+      "key_candidate": "kra_horse_id",
+      "major_date_field": "no event date; birth_date/profile_observed_at_ms are attributes/snapshots",
+      "date_role": "event_date",
+      "rows_in_source_scope": 61637,
+      "earliest_event_date": null,
+      "latest_event_date": null,
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 61637,
+      "annual_rows_through_cutoff": {},
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 61637,
+          "first": null,
+          "last": null
+        }
+      ],
+      "risk": "Global master includes entities outside the target meet scope; scope through verified event links."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "jockey_entity_master",
+      "table": "jockeys",
+      "columns": [
+        "id",
+        "kra_jockey_id",
+        "name_ko",
+        "name_en"
+      ],
+      "key_candidate": "kra_jockey_id",
+      "major_date_field": "no effective-date history in the master table",
+      "date_role": "event_date",
+      "rows_in_source_scope": 610,
+      "earliest_event_date": null,
+      "latest_event_date": null,
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 610,
+      "annual_rows_through_cutoff": {},
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 610,
+          "first": null,
+          "last": null
+        }
+      ],
+      "risk": "Names can change or repeat; preserve source ID/name and dated snapshots where present."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "trainer_entity_master",
+      "table": "trainers",
+      "columns": [
+        "id",
+        "kra_trainer_id",
+        "name_ko",
+        "name_en"
+      ],
+      "key_candidate": "kra_trainer_id",
+      "major_date_field": "no effective-date history in the master table",
+      "date_role": "event_date",
+      "rows_in_source_scope": 653,
+      "earliest_event_date": null,
+      "latest_event_date": null,
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 653,
+      "annual_rows_through_cutoff": {},
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 653,
+          "first": null,
+          "last": null
+        }
+      ],
+      "risk": "Current master identity is not the same as historical affiliation."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "owner_entity_master",
+      "table": "owners",
+      "columns": [
+        "id",
+        "kra_owner_id",
+        "name_ko",
+        "name_en"
+      ],
+      "key_candidate": "kra_owner_id",
+      "major_date_field": "no effective-date history in the master table",
+      "date_role": "event_date",
+      "rows_in_source_scope": 2558,
+      "earliest_event_date": null,
+      "latest_event_date": null,
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 2558,
+      "annual_rows_through_cutoff": {},
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 2558,
+          "first": null,
+          "last": null
+        }
+      ],
+      "risk": "No independent owner_change table was found; entry-time owner ID/name and profile snapshots are the available evidence."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "horse_profile_snapshots",
+      "table": "horse_profile_snapshots",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "grade",
+        "rating",
+        "race_count_total",
+        "race_count_year",
+        "win_count_total",
+        "win_count_year",
+        "second_count_total",
+        "second_count_year",
+        "third_count_total",
+        "third_count_year",
+        "prize_money_total_krw",
+        "last_sale_amount_raw",
+        "trainer_kra_id",
+        "trainer_name",
+        "owner_kra_id",
+        "owner_name",
+        "observed_at_ms"
+      ],
+      "key_candidate": "(horse_id, observed_at_ms)",
+      "major_date_field": "observed_at_ms converted to KST observation date; profile observation, not validity interval",
+      "date_role": "observation_date_kst",
+      "rows_in_source_scope": 75622,
+      "earliest_event_date": "2026-08-25",
+      "latest_event_date": "2026-09-23",
+      "rows_on_or_before_target_cutoff": 72561,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 3061,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2026": 72561
+      },
+      "annual_sum_check": {
+        "sum": 72561,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 48080,
+          "first": "2026-08-25",
+          "last": "2026-09-23"
+        },
+        {
+          "meet": 3,
+          "rows": 27542,
+          "first": "2026-08-25",
+          "last": "2026-09-23"
+        }
+      ],
+      "risk": "Observation date must not be mistaken for attribute effective date; same-day time still needs race-level as-of validation."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "jockey_affiliation_and_history",
+      "table": "jockey_changes",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "race_date_local",
+        "race_number",
+        "horse_number",
+        "jockey_before_id",
+        "jockey_before_name",
+        "jockey_after_id",
+        "jockey_after_name",
+        "carried_weight_before_kg",
+        "carried_weight_after_kg",
+        "reason",
+        "observed_at_ms"
+      ],
+      "key_candidate": "(meet_code, race_date_local, race_number, horse_number, jockey_before_id, jockey_after_id)",
+      "major_date_field": "race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 761,
+      "earliest_event_date": "2025-01-03",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 761,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2025": 440,
+        "2026": 321
+      },
+      "annual_sum_check": {
+        "sum": 761,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 402,
+          "first": "2025-01-25",
+          "last": "2026-09-19"
+        },
+        {
+          "meet": 3,
+          "rows": 354,
+          "first": "2025-01-03",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 5,
+          "first": "2026-09-20",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "A recorded change is tied to a race entry; observed_at_ms is a separate timestamp."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "trainer_affiliation_snapshots",
+      "table": "trainer_affiliation_snapshots",
+      "columns": [
+        "trainer_id",
+        "observed_on",
+        "meet_code",
+        "stable_part",
+        "official_name_ko",
+        "stats_as_of",
+        "observed_at_ms",
+        "source_url",
+        "source_sha256"
+      ],
+      "key_candidate": "(trainer_id, observed_on)",
+      "major_date_field": "observed_on; stats_as_of is a different date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 140,
+      "earliest_event_date": "2026-09-28",
+      "latest_event_date": "2026-09-29",
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 140,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2026": 0
+      },
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 84,
+          "first": "2026-09-28",
+          "last": "2026-09-29"
+        },
+        {
+          "meet": 3,
+          "rows": 56,
+          "first": "2026-09-28",
+          "last": "2026-09-29"
+        }
+      ],
+      "risk": "Official observed affiliation snapshots currently exist; observed_on is not necessarily effective_from."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "trainer_historical_regions",
+      "table": "trainer_historical_regions",
+      "columns": [
+        "trainer_id",
+        "region_code",
+        "observed_on",
+        "source_end_date",
+        "retired_list_confirmed",
+        "observed_at_ms",
+        "source_url",
+        "source_sha256"
+      ],
+      "key_candidate": "(trainer_id, region_code, observed_on)",
+      "major_date_field": "observed_on/source_end_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 114,
+      "earliest_event_date": "2026-09-29",
+      "latest_event_date": "2026-09-29",
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 114,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2026": 0
+      },
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 91,
+          "first": "2026-09-29",
+          "last": "2026-09-29"
+        },
+        {
+          "meet": 3,
+          "rows": 23,
+          "first": "2026-09-29",
+          "last": "2026-09-29"
+        }
+      ],
+      "risk": "Regional history is not detailed trainer-to-stable assignment history."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "trainer_person_links",
+      "table": "trainer_person_links",
+      "columns": [
+        "trainer_ref",
+        "person_key",
+        "ref_kind",
+        "name_at_source",
+        "link_basis",
+        "source_reference",
+        "evidence_note"
+      ],
+      "key_candidate": "trainer_ref",
+      "major_date_field": "no date column on link table; trainer_people.decided_on belongs to the person decision",
+      "date_role": "event_date",
+      "rows_in_source_scope": 11,
+      "earliest_event_date": null,
+      "latest_event_date": null,
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 11,
+      "annual_rows_through_cutoff": {},
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 11,
+          "first": null,
+          "last": null
+        }
+      ],
+      "risk": "Keep the stated link basis and evidence; do not treat person decision date as relationship effective date."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "sectional_results",
+      "table": "race_section_results",
+      "columns": [
+        "id",
+        "race_entry_id",
+        "section_code",
+        "distance_from_start_m",
+        "elapsed_time_ms",
+        "position",
+        "gap_to_leader_lengths",
+        "group_notation_raw",
+        "time_basis",
+        "source_kind"
+      ],
+      "key_candidate": "(race_entry_id, section_code)",
+      "major_date_field": "races.race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1159687,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2016-12-31",
+      "rows_on_or_before_target_cutoff": 1159687,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 45659,
+        "2001": 45736,
+        "2002": 58763,
+        "2003": 67116,
+        "2004": 65544,
+        "2005": 65242,
+        "2006": 68035,
+        "2007": 71939,
+        "2008": 71343,
+        "2009": 69820,
+        "2010": 68091,
+        "2011": 69988,
+        "2012": 71421,
+        "2013": 69138,
+        "2014": 68486,
+        "2015": 93413,
+        "2016": 89953
+      },
+      "annual_sum_check": {
+        "sum": 1159687,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1108417,
+          "first": "2000-01-08",
+          "last": "2016-12-25"
+        },
+        {
+          "meet": 3,
+          "rows": 51270,
+          "first": "2015-01-02",
+          "last": "2016-12-31"
+        }
+      ],
+      "risk": "This table is a different source/representation from race_section_times."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "sectional_times",
+      "table": "race_section_times",
+      "columns": [
+        "race_entry_id",
+        "point_code",
+        "time_kind",
+        "elapsed_time_ms",
+        "position_raw",
+        "source_name",
+        "source_field",
+        "source_batch_id"
+      ],
+      "key_candidate": "(race_entry_id, point_code, time_kind)",
+      "major_date_field": "races.race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1536143,
+      "earliest_event_date": "2017-01-06",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 1536143,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2017": 177589,
+        "2018": 172504,
+        "2019": 180136,
+        "2020": 108435,
+        "2021": 147635,
+        "2022": 155284,
+        "2023": 163069,
+        "2024": 162486,
+        "2025": 155078,
+        "2026": 113927
+      },
+      "annual_sum_check": {
+        "sum": 1536143,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 654208,
+          "first": "2017-01-07",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 881322,
+          "first": "2017-01-06",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 613,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Cumulative/closing/segment meanings vary by venue, year and source field."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "passing_groups",
+      "table": "race_passing_groups",
+      "columns": [
+        "race_id",
+        "point_code",
+        "notation_raw",
+        "source_batch_id"
+      ],
+      "key_candidate": "(race_id, point_code)",
+      "major_date_field": "races.race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 80180,
+      "earliest_event_date": "2017-01-06",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 80180,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2017": 9135,
+        "2018": 9212,
+        "2019": 9250,
+        "2020": 5237,
+        "2021": 6916,
+        "2022": 8082,
+        "2023": 8529,
+        "2024": 8666,
+        "2025": 8700,
+        "2026": 6453
+      },
+      "annual_sum_check": {
+        "sum": 80180,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 43156,
+          "first": "2017-01-07",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 36962,
+          "first": "2017-01-06",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 62,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Race-level group notation; do not expand as horse-level passing order."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "passing_summaries",
+      "table": "race_passing_summaries",
+      "columns": [
+        "id",
+        "race_id",
+        "source_document_id",
+        "corner_1_raw",
+        "corner_2_raw",
+        "corner_3_raw",
+        "corner_4_raw",
+        "corner_5_raw",
+        "corner_6_raw",
+        "corner_7_raw",
+        "corner_8_raw",
+        "corner_9_raw",
+        "pass_time_3f_raw",
+        "pass_time_4f_raw",
+        "pass_time_3f_ms",
+        "pass_time_4f_ms",
+        "tempo_raw",
+        "tempo_level",
+        "quality_status",
+        "source_row_hash",
+        "observed_at_ms"
+      ],
+      "key_candidate": "race_id (unique)",
+      "major_date_field": "races.race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 14649,
+      "earliest_event_date": "2018-01-05",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 14649,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2018": 1906,
+        "2019": 1893,
+        "2020": 1103,
+        "2021": 1453,
+        "2022": 1679,
+        "2023": 1775,
+        "2024": 1774,
+        "2025": 1759,
+        "2026": 1307
+      },
+      "annual_sum_check": {
+        "sum": 14649,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 8583,
+          "first": "2018-01-06",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 6054,
+          "first": "2018-01-05",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 12,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Race-level corner/time summary; source observation time is separately stored."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "steward_reports",
+      "table": "race_steward_reports",
+      "columns": [
+        "id",
+        "meet_code",
+        "race_date_local",
+        "race_number",
+        "weather",
+        "members",
+        "judgement",
+        "additional_judgement",
+        "jockey_change_note",
+        "observed_at_ms"
+      ],
+      "key_candidate": "(meet_code, race_date_local, race_number)",
+      "major_date_field": "race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 3066,
+      "earliest_event_date": "2025-01-03",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 3066,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2025": 1759,
+        "2026": 1307
+      },
+      "annual_sum_check": {
+        "sum": 3066,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1801,
+          "first": "2025-01-04",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 1253,
+          "first": "2025-01-03",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 12,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Local coverage begins in 2025 for Seoul/Busan; older official report coverage is unverified."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "medical_events",
+      "table": "horse_medical",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "clinic_date_local",
+        "stable_part",
+        "hospital_name",
+        "diagnosis_1",
+        "diagnosis_2",
+        "observed_at_ms"
+      ],
+      "key_candidate": "source event ID; candidate natural key includes horse, meet, clinic date, facility and diagnoses",
+      "major_date_field": "clinic_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 685271,
+      "earliest_event_date": "2003-09-18",
+      "latest_event_date": "2026-09-22",
+      "rows_on_or_before_target_cutoff": 684720,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 551,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 2545,
+        "2004": 9162,
+        "2005": 11632,
+        "2006": 16484,
+        "2007": 18498,
+        "2008": 22123,
+        "2009": 23395,
+        "2010": 23355,
+        "2011": 24540,
+        "2012": 26174,
+        "2013": 26617,
+        "2014": 29497,
+        "2015": 29817,
+        "2016": 27846,
+        "2017": 27143,
+        "2018": 26500,
+        "2019": 28611,
+        "2020": 17456,
+        "2021": 21903,
+        "2022": 21686,
+        "2023": 29940,
+        "2024": 45586,
+        "2025": 83246,
+        "2026": 90964
+      },
+      "annual_sum_check": {
+        "sum": 684720,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 415961,
+          "first": "2003-09-18",
+          "last": "2026-09-22"
+        },
+        {
+          "meet": 3,
+          "rows": 269310,
+          "first": "2005-05-04",
+          "last": "2026-09-22"
+        }
+      ],
+      "risk": "The operational table combines historical rows; API vs Text provenance and publication time need source-level separation."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "daily_training",
+      "table": "horse_training",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "training_date_local",
+        "stable_part",
+        "stable_number",
+        "trainer_name",
+        "rider_type",
+        "rider_id",
+        "started_at_raw",
+        "ended_at_raw",
+        "duration_seconds",
+        "canter_count",
+        "gallop_count",
+        "entry_plan",
+        "observed_at_ms"
+      ],
+      "key_candidate": "source event ID; candidate (horse_id, meet, date, started_at_raw, ended_at_raw)",
+      "major_date_field": "training_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 7313456,
+      "earliest_event_date": "1998-09-25",
+      "latest_event_date": "2026-09-21",
+      "rows_on_or_before_target_cutoff": 7312421,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 1035,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "1998": 36542,
+        "1999": 141129,
+        "2000": 138217,
+        "2001": 151281,
+        "2002": 145946,
+        "2003": 147335,
+        "2004": 162421,
+        "2005": 210547,
+        "2006": 238196,
+        "2007": 246908,
+        "2008": 257917,
+        "2009": 268337,
+        "2010": 255322,
+        "2011": 265446,
+        "2012": 270951,
+        "2013": 260435,
+        "2014": 275040,
+        "2015": 286165,
+        "2016": 300733,
+        "2017": 335328,
+        "2018": 329909,
+        "2019": 347404,
+        "2020": 332229,
+        "2021": 328415,
+        "2022": 309396,
+        "2023": 326202,
+        "2024": 335620,
+        "2025": 350539,
+        "2026": 258511
+      },
+      "annual_sum_check": {
+        "sum": 7312421,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 4363563,
+          "first": "1998-09-25",
+          "last": "2026-09-21"
+        },
+        {
+          "meet": 3,
+          "rows": 2949893,
+          "first": "2004-06-30",
+          "last": "2026-09-21"
+        }
+      ],
+      "risk": "Event date and public/observed availability can differ in historical backfill."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "start_training",
+      "table": "horse_start_training",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "training_date_local",
+        "stable_part",
+        "stable_number",
+        "rider_name",
+        "remark",
+        "observed_at_ms"
+      ],
+      "key_candidate": "source event ID; candidate includes horse_id, meet, date, stable, rider",
+      "major_date_field": "training_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 441206,
+      "earliest_event_date": "2009-05-21",
+      "latest_event_date": "2026-09-19",
+      "rows_on_or_before_target_cutoff": 441206,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2009": 9648,
+        "2010": 15873,
+        "2011": 19049,
+        "2012": 21863,
+        "2013": 26426,
+        "2014": 23498,
+        "2015": 23377,
+        "2016": 24619,
+        "2017": 26613,
+        "2018": 27306,
+        "2019": 27746,
+        "2020": 24040,
+        "2021": 25802,
+        "2022": 29755,
+        "2023": 30925,
+        "2024": 30726,
+        "2025": 31504,
+        "2026": 22436
+      },
+      "annual_sum_check": {
+        "sum": 441206,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 218726,
+          "first": "2009-05-21",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 3,
+          "rows": 222480,
+          "first": "2009-05-21",
+          "last": "2026-09-19"
+        }
+      ],
+      "risk": "Do not interpret missing pre-source years as zero start-training activity."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "swim_training",
+      "table": "horse_swim_training",
+      "columns": [
+        "id",
+        "source_document_id",
+        "horse_id",
+        "kra_horse_id_raw",
+        "horse_name_raw",
+        "meet_code",
+        "training_date_local",
+        "swim_count",
+        "stable_part",
+        "stable_note",
+        "trainer_part",
+        "trainer_name",
+        "observed_at_ms",
+        "quality_status"
+      ],
+      "key_candidate": "(kra_horse_id_raw, meet_code, training_date_local)",
+      "major_date_field": "training_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 591270,
+      "earliest_event_date": "2000-06-01",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 591270,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 4790,
+        "2001": 7523,
+        "2002": 5293,
+        "2003": 7131,
+        "2004": 8237,
+        "2005": 14330,
+        "2006": 17837,
+        "2007": 17194,
+        "2008": 23367,
+        "2009": 26062,
+        "2010": 23678,
+        "2011": 27791,
+        "2012": 27436,
+        "2013": 28751,
+        "2014": 24836,
+        "2015": 27252,
+        "2016": 23409,
+        "2017": 33833,
+        "2018": 31647,
+        "2019": 28028,
+        "2020": 29905,
+        "2021": 34621,
+        "2022": 28554,
+        "2023": 23908,
+        "2024": 24584,
+        "2025": 21778,
+        "2026": 19495
+      },
+      "annual_sum_check": {
+        "sum": 591270,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 371579,
+          "first": "2000-06-01",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 219691,
+          "first": "2005-02-26",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "No Yeongcheon source found; horse_id may be NULL, so preserve raw official horse ID/name."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "hill_training",
+      "table": "horse_hill_training",
+      "columns": [
+        "id",
+        "source_document_id",
+        "horse_id",
+        "kra_horse_id_raw",
+        "horse_name_raw",
+        "farm_name",
+        "tag_id",
+        "chip_id",
+        "sex_raw",
+        "birth_date",
+        "sire_name_raw",
+        "dam_name_raw",
+        "training_operator_name",
+        "owner_name_raw",
+        "farm_entry_date",
+        "farm_entry_reason",
+        "training_date_local",
+        "training_time_local",
+        "f1_seconds",
+        "f2_seconds",
+        "f3_seconds",
+        "total_seconds",
+        "quality_status",
+        "source_row_hash",
+        "observed_at_ms"
+      ],
+      "key_candidate": "source_row_hash",
+      "major_date_field": "training_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 3576,
+      "earliest_event_date": "2025-08-28",
+      "latest_event_date": "2026-09-22",
+      "rows_on_or_before_target_cutoff": 3491,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 85,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2025": 82,
+        "2026": 3409
+      },
+      "annual_sum_check": {
+        "sum": 3491,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 3576,
+          "first": "2025-08-28",
+          "last": "2026-09-22"
+        }
+      ],
+      "risk": "No meet field; in the observed table 3,212/3,576 rows have no linked horse_id."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "weight_events",
+      "table": "horse_weight_history",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "race_date_local",
+        "race_number",
+        "horse_number",
+        "body_weight_kg",
+        "body_weight_change_kg",
+        "observed_at_ms"
+      ],
+      "key_candidate": "horse/race date/race number/horse number",
+      "major_date_field": "race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 438512,
+      "earliest_event_date": "2003-09-06",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 438512,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 3936,
+        "2004": 11648,
+        "2005": 16214,
+        "2006": 18567,
+        "2007": 19374,
+        "2008": 20597,
+        "2009": 20801,
+        "2010": 20127,
+        "2011": 20725,
+        "2012": 21194,
+        "2013": 21163,
+        "2014": 21360,
+        "2015": 21399,
+        "2016": 20854,
+        "2017": 20615,
+        "2018": 20104,
+        "2019": 20734,
+        "2020": 12801,
+        "2021": 17471,
+        "2022": 18186,
+        "2023": 18984,
+        "2024": 18627,
+        "2025": 19005,
+        "2026": 14026
+      },
+      "annual_sum_check": {
+        "sum": 438512,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 269985,
+          "first": "2003-09-06",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 168408,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Past public availability time is not established by event date alone."
+    },
+    {
+      "source": "operational_sqlite",
+      "domain": "equipment_events",
+      "table": "entry_equipment",
+      "columns": [
+        "id",
+        "horse_id",
+        "meet_code",
+        "race_date_local",
+        "race_number",
+        "horse_number",
+        "equipment_raw",
+        "bleeding_count",
+        "bleeding_date_raw",
+        "illness_note",
+        "observed_at_ms"
+      ],
+      "key_candidate": "(meet_code, race_date_local, race_number, horse_number)",
+      "major_date_field": "race_date_local",
+      "date_role": "event_date",
+      "rows_in_source_scope": 441817,
+      "earliest_event_date": "2003-09-20",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 441817,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 3667,
+        "2004": 11724,
+        "2005": 16441,
+        "2006": 18863,
+        "2007": 19653,
+        "2008": 20823,
+        "2009": 21044,
+        "2010": 20320,
+        "2011": 20912,
+        "2012": 21643,
+        "2013": 21346,
+        "2014": 21663,
+        "2015": 21375,
+        "2016": 20703,
+        "2017": 20597,
+        "2018": 20188,
+        "2019": 20912,
+        "2020": 13283,
+        "2021": 17562,
+        "2022": 18230,
+        "2023": 19126,
+        "2024": 18711,
+        "2025": 19005,
+        "2026": 14026
+      },
+      "annual_sum_check": {
+        "sum": 441817,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 271563,
+          "first": "2003-09-20",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 170135,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Keep raw note and observed_at_ms; historical publication time is unverified."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "race_schedule_and_result",
+      "table": "race",
+      "columns": [
+        "race_id",
+        "venue_code",
+        "canonical_meet",
+        "region_code",
+        "race_date",
+        "race_no",
+        "race_type",
+        "race_class",
+        "distance_m",
+        "burden_type",
+        "track_raw",
+        "weather_raw",
+        "track_moisture_percent",
+        "rating_condition_raw",
+        "label_scope",
+        "official_result_state",
+        "rating_system",
+        "surface_regime",
+        "mile_1600_era",
+        "source_dataset",
+        "source_path"
+      ],
+      "key_candidate": "(venue_code, race_date, race_no)",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 44089,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-13",
+      "rows_on_or_before_target_cutoff": 44089,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 1114,
+        "2001": 1140,
+        "2002": 1094,
+        "2003": 1106,
+        "2004": 1110,
+        "2005": 1566,
+        "2006": 1688,
+        "2007": 1712,
+        "2008": 1870,
+        "2009": 1843,
+        "2010": 1801,
+        "2011": 1816,
+        "2012": 1886,
+        "2013": 1904,
+        "2014": 1956,
+        "2015": 1931,
+        "2016": 1921,
+        "2017": 1899,
+        "2018": 1906,
+        "2019": 1904,
+        "2020": 1143,
+        "2021": 1453,
+        "2022": 1679,
+        "2023": 1786,
+        "2024": 1775,
+        "2025": 1759,
+        "2026": 1327
+      },
+      "annual_sum_check": {
+        "sum": 44089,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 28506,
+          "first": "2000-01-08",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": 3,
+          "rows": 15577,
+          "first": "2005-01-07",
+          "last": "2026-09-11"
+        },
+        {
+          "meet": 4,
+          "rows": 6,
+          "first": "2026-09-13",
+          "last": "2026-09-13"
+        }
+      ],
+      "risk": "Historical source snapshot ends before the operational refresh; compare, do not choose priority from counts."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "race_entries_and_results",
+      "table": "entry_result",
+      "columns": [
+        "race_id",
+        "venue_code",
+        "canonical_meet",
+        "race_date",
+        "race_no",
+        "chul_no",
+        "hr_no",
+        "horse_name_raw",
+        "horse_name_normalized",
+        "origin_raw",
+        "sex_raw",
+        "age_raw",
+        "rating_raw",
+        "jockey_no",
+        "trainer_no",
+        "owner_no",
+        "owner_no_raw_json",
+        "jockey_name",
+        "trainer_name",
+        "owner_name",
+        "burden_weight_kg",
+        "horse_weight_raw",
+        "horse_weight_kg",
+        "horse_weight_delta_kg",
+        "finish_raw",
+        "finish_order",
+        "result_status",
+        "race_time_s",
+        "win_odds",
+        "place_odds",
+        "diff_raw",
+        "is_dead_heat",
+        "source_prior_races",
+        "source_prior_wins",
+        "source_training_28d",
+        "source_training_seconds_28d",
+        "source_start_training_28d",
+        "source_confirmed_medical_28d",
+        "source_availability_status",
+        "training_28d_status",
+        "start_training_28d_status",
+        "medical_28d_status",
+        "current_weight_availability",
+        "label_scope",
+        "official_result_state",
+        "is_model_target",
+        "is_rank_label",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "(venue_code, race_date, race_no, chul_no); hr_no cross-check",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 489851,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-13",
+      "rows_on_or_before_target_cutoff": 489851,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 12519,
+        "2001": 12552,
+        "2002": 12009,
+        "2003": 12045,
+        "2004": 11734,
+        "2005": 16442,
+        "2006": 18878,
+        "2007": 19673,
+        "2008": 20855,
+        "2009": 21145,
+        "2010": 20369,
+        "2011": 20983,
+        "2012": 21715,
+        "2013": 21426,
+        "2014": 21746,
+        "2015": 21636,
+        "2016": 21142,
+        "2017": 20829,
+        "2018": 20362,
+        "2019": 21084,
+        "2020": 13343,
+        "2021": 17633,
+        "2022": 18355,
+        "2023": 19284,
+        "2024": 18873,
+        "2025": 19005,
+        "2026": 14214
+      },
+      "annual_sum_check": {
+        "sum": 489851,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 318733,
+          "first": "2000-01-08",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": 3,
+          "rows": 171064,
+          "first": "2005-01-07",
+          "last": "2026-09-11"
+        },
+        {
+          "meet": 4,
+          "rows": 54,
+          "first": "2026-09-13",
+          "last": "2026-09-13"
+        }
+      ],
+      "risk": "Contains raw and normalized names plus source result status; preserve non-finish rows."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "trial_entries",
+      "table": "trial_entry",
+      "columns": [
+        "trial_event_id",
+        "venue_code",
+        "canonical_meet",
+        "region_code",
+        "source_meet",
+        "venue_resolution_status",
+        "trial_date",
+        "trial_no",
+        "participant_no",
+        "trial_round",
+        "trial_kind",
+        "distance_m",
+        "weather_raw",
+        "track_raw",
+        "track_moisture_percent",
+        "hr_no",
+        "horse_name_raw",
+        "horse_name_normalized",
+        "origin_raw",
+        "sex_raw",
+        "age_raw",
+        "jockey_no",
+        "jockey_name_raw",
+        "trainer_no",
+        "trainer_name_raw",
+        "finish_raw",
+        "finish_position",
+        "result_state",
+        "judgement_raw",
+        "failure_reason_raw",
+        "inspection_reason_raw",
+        "body_weight_kg",
+        "finish_time_ms",
+        "section_json",
+        "horse_link_status",
+        "person_link_status",
+        "availability_status",
+        "source_dataset",
+        "source_path"
+      ],
+      "key_candidate": "(source_meet, trial_date, trial_no, participant_no)",
+      "major_date_field": "trial_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 76413,
+      "earliest_event_date": "2003-07-03",
+      "latest_event_date": "2026-09-17",
+      "rows_on_or_before_target_cutoff": 76413,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 792,
+        "2004": 1802,
+        "2005": 2225,
+        "2006": 2446,
+        "2007": 2457,
+        "2008": 2382,
+        "2009": 2693,
+        "2010": 2895,
+        "2011": 3373,
+        "2012": 2972,
+        "2013": 3495,
+        "2014": 3451,
+        "2015": 3457,
+        "2016": 3588,
+        "2017": 3823,
+        "2018": 3980,
+        "2019": 4175,
+        "2020": 5803,
+        "2021": 3437,
+        "2022": 3512,
+        "2023": 3517,
+        "2024": 3740,
+        "2025": 3796,
+        "2026": 2602
+      },
+      "annual_sum_check": {
+        "sum": 76413,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 46603,
+          "first": "2003-07-03",
+          "last": "2026-09-17"
+        },
+        {
+          "meet": 3,
+          "rows": 29762,
+          "first": "2004-11-07",
+          "last": "2026-09-10"
+        },
+        {
+          "meet": "unassigned",
+          "rows": 48,
+          "first": "2026-09-17",
+          "last": "2026-09-17"
+        }
+      ],
+      "risk": "48 post-split records have unresolved venue; retain with unresolved venue rather than assigning Busan or Yeongcheon."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "sectional_records",
+      "table": "section",
+      "columns": [
+        "race_id",
+        "venue_code",
+        "canonical_meet",
+        "race_date",
+        "race_no",
+        "hr_no",
+        "source_field",
+        "section_code",
+        "value_ms",
+        "unit",
+        "time_basis",
+        "canonical_closing_ms",
+        "position_raw",
+        "semantic_status",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "source path/row plus (venue, date, race, hr_no, section code)",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 4242283,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-13",
+      "rows_on_or_before_target_cutoff": 4242283,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 45659,
+        "2001": 45736,
+        "2002": 58763,
+        "2003": 67116,
+        "2004": 65544,
+        "2005": 135652,
+        "2006": 166570,
+        "2007": 174299,
+        "2008": 190803,
+        "2009": 199330,
+        "2010": 191616,
+        "2011": 194563,
+        "2012": 201036,
+        "2013": 202713,
+        "2014": 200501,
+        "2015": 198004,
+        "2016": 195622,
+        "2017": 196934,
+        "2018": 190803,
+        "2019": 199447,
+        "2020": 122053,
+        "2021": 162769,
+        "2022": 170326,
+        "2023": 178558,
+        "2024": 177091,
+        "2025": 179886,
+        "2026": 130889
+      },
+      "annual_sum_check": {
+        "sum": 4242283,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1676045,
+          "first": "2000-01-08",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": 3,
+          "rows": 2565960,
+          "first": "2005-01-07",
+          "last": "2026-09-11"
+        },
+        {
+          "meet": 4,
+          "rows": 278,
+          "first": "2026-09-13",
+          "last": "2026-09-13"
+        }
+      ],
+      "risk": "Multiple source fields and time bases must remain distinct."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "daily_and_start_training",
+      "table": "training_event",
+      "columns": [
+        "training_event_id",
+        "training_venue_code",
+        "source_meet",
+        "source_type",
+        "event_date",
+        "hr_no",
+        "horse_name",
+        "duration_seconds",
+        "start_time_raw",
+        "end_time_raw",
+        "intensity_1",
+        "intensity_2",
+        "trainer_name_raw",
+        "part_raw",
+        "rider_no_raw",
+        "remark_raw",
+        "availability_status",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "training_event_id; raw source row retained",
+      "major_date_field": "event_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 7749406,
+      "earliest_event_date": "1998-09-25",
+      "latest_event_date": "2026-09-16",
+      "rows_on_or_before_target_cutoff": 7749406,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "1998": 36650,
+        "1999": 141308,
+        "2000": 138559,
+        "2001": 151575,
+        "2002": 146001,
+        "2003": 147335,
+        "2004": 162421,
+        "2005": 210571,
+        "2006": 238203,
+        "2007": 246908,
+        "2008": 257942,
+        "2009": 277985,
+        "2010": 271195,
+        "2011": 284495,
+        "2012": 292814,
+        "2013": 286861,
+        "2014": 298538,
+        "2015": 309546,
+        "2016": 325353,
+        "2017": 361941,
+        "2018": 357216,
+        "2019": 375150,
+        "2020": 356270,
+        "2021": 354217,
+        "2022": 339151,
+        "2023": 357127,
+        "2024": 366346,
+        "2025": 382050,
+        "2026": 275678
+      },
+      "annual_sum_check": {
+        "sum": 7749406,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 4579571,
+          "first": "1998-09-25",
+          "last": "2026-09-16"
+        },
+        {
+          "meet": 3,
+          "rows": 3169835,
+          "first": "2004-06-30",
+          "last": "2026-09-16"
+        }
+      ],
+      "risk": "source_type separates event categories; event_date does not prove it was publicly observable by that date."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "medical_events",
+      "table": "medical_event",
+      "columns": [
+        "medical_event_id",
+        "source_venue_code",
+        "source_meet",
+        "source_type",
+        "event_date",
+        "hr_no",
+        "horse_name",
+        "stable_no_raw",
+        "facility_raw",
+        "diagnosis_1_raw",
+        "diagnosis_2_raw",
+        "has_content",
+        "link_status",
+        "candidate_hr_nos_json",
+        "availability_status",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "medical_event_id; raw source row retained",
+      "major_date_field": "event_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 2181002,
+      "earliest_event_date": "2003-09-18",
+      "latest_event_date": "2026-09-16",
+      "rows_on_or_before_target_cutoff": 2181002,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2003": 10153,
+        "2004": 33064,
+        "2005": 43069,
+        "2006": 56153,
+        "2007": 61277,
+        "2008": 74316,
+        "2009": 80508,
+        "2010": 81505,
+        "2011": 84771,
+        "2012": 93562,
+        "2013": 99412,
+        "2014": 109633,
+        "2015": 115217,
+        "2016": 102679,
+        "2017": 89441,
+        "2018": 87946,
+        "2019": 100503,
+        "2020": 74070,
+        "2021": 82545,
+        "2022": 78064,
+        "2023": 98689,
+        "2024": 136606,
+        "2025": 207289,
+        "2026": 180530
+      },
+      "annual_sum_check": {
+        "sum": 2181002,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1445162,
+          "first": "2003-09-18",
+          "last": "2026-09-16"
+        },
+        {
+          "meet": 3,
+          "rows": 735840,
+          "first": "2005-05-04",
+          "last": "2026-09-16"
+        }
+      ],
+      "risk": "API and Text sources differ in identity/publication coverage; unresolved name matches remain unresolved."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "horse_entity_observation",
+      "table": "horse_dimension",
+      "columns": [
+        "hr_no",
+        "canonical_name",
+        "raw_name_variants",
+        "first_race_date",
+        "last_race_date",
+        "first_observed_venue",
+        "race_entry_rows",
+        "observed_venue_count"
+      ],
+      "key_candidate": "hr_no",
+      "major_date_field": "no point-in-time entity profile date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 30024,
+      "earliest_event_date": null,
+      "latest_event_date": null,
+      "rows_on_or_before_target_cutoff": 0,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 30024,
+      "annual_rows_through_cutoff": {},
+      "annual_sum_check": {
+        "sum": 0,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": "unassigned",
+          "rows": 30024,
+          "first": null,
+          "last": null
+        }
+      ],
+      "risk": "Dimension is derived from the available race history; not a complete timeless registry."
+    },
+    {
+      "source": "historical_unified_duckdb",
+      "domain": "unresolved_identity",
+      "table": "unresolved_identity_ledger",
+      "columns": [
+        "issue_domain",
+        "venue_code",
+        "event_date",
+        "event_key",
+        "participant_no",
+        "source_value",
+        "candidate_value",
+        "status",
+        "evidence",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "(issue_domain, event_key, source row)",
+      "major_date_field": "event_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1405260,
+      "earliest_event_date": "2000-03-12",
+      "latest_event_date": "2026-09-17",
+      "rows_on_or_before_target_cutoff": 1405260,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 1,
+        "2001": 1,
+        "2003": 7610,
+        "2004": 24210,
+        "2005": 31430,
+        "2006": 39682,
+        "2007": 42683,
+        "2008": 51706,
+        "2009": 56837,
+        "2010": 57570,
+        "2011": 59629,
+        "2012": 66528,
+        "2013": 72343,
+        "2014": 79900,
+        "2015": 85049,
+        "2016": 74423,
+        "2017": 62012,
+        "2018": 61404,
+        "2019": 70006,
+        "2020": 54570,
+        "2021": 55761,
+        "2022": 52456,
+        "2023": 62602,
+        "2024": 81793,
+        "2025": 87647,
+        "2026": 67407
+      },
+      "annual_sum_check": {
+        "sum": 1405260,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 981135,
+          "first": "2000-03-12",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": 3,
+          "rows": 424077,
+          "first": "2004-11-28",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": "unassigned",
+          "rows": 48,
+          "first": "2026-09-17",
+          "last": "2026-09-17"
+        }
+      ],
+      "risk": "Unresolved/null venue records must remain available to later adjudication."
+    },
+    {
+      "source": "section_points_adjudicated_sqlite",
+      "domain": "finish_and_result_rows",
+      "table": "finish_time",
+      "columns": [
+        "race_entry_id",
+        "meet_code",
+        "race_date",
+        "race_number",
+        "distance_m",
+        "kra_horse_id",
+        "horse_number",
+        "finish_position",
+        "finish_time_ms",
+        "scratched",
+        "rank_remark",
+        "result_state"
+      ],
+      "key_candidate": "(meet_code, race_date, race_number, kra_horse_id); horse_number cross-check",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 484238,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 484238,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 12402,
+        "2001": 12261,
+        "2002": 12009,
+        "2003": 12045,
+        "2004": 11734,
+        "2005": 16360,
+        "2006": 18680,
+        "2007": 19505,
+        "2008": 20722,
+        "2009": 21020,
+        "2010": 20277,
+        "2011": 20908,
+        "2012": 21562,
+        "2013": 21426,
+        "2014": 21556,
+        "2015": 21190,
+        "2016": 20699,
+        "2017": 20516,
+        "2018": 20004,
+        "2019": 20615,
+        "2020": 12686,
+        "2021": 17375,
+        "2022": 18070,
+        "2023": 18865,
+        "2024": 18540,
+        "2025": 19005,
+        "2026": 14206
+      },
+      "annual_sum_check": {
+        "sum": 484238,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 314744,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 169375,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Only completed-result coverage in this table; it is not a complete starter roster."
+    },
+    {
+      "source": "section_points_adjudicated_sqlite",
+      "domain": "sectional_time_rows",
+      "table": "section_time",
+      "columns": [
+        "id",
+        "meet_code",
+        "race_date",
+        "race_number",
+        "distance_m",
+        "kra_horse_id",
+        "horse_number",
+        "race_entry_id",
+        "point_code",
+        "point_kind",
+        "time_kind",
+        "meters_from_start",
+        "meters_before_finish",
+        "elapsed_time_ms",
+        "position",
+        "source_name",
+        "source_field",
+        "source_basis",
+        "classification",
+        "geometry_note",
+        "segment_length_m",
+        "representation"
+      ],
+      "key_candidate": "source row ID; natural candidate (meet, date, race, horse ID, point, time_kind)",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 3730179,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 3730179,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 45659,
+        "2001": 45736,
+        "2002": 58763,
+        "2003": 67116,
+        "2004": 65544,
+        "2005": 99146,
+        "2006": 120838,
+        "2007": 127979,
+        "2008": 150880,
+        "2009": 157271,
+        "2010": 152730,
+        "2011": 156280,
+        "2012": 161355,
+        "2013": 162767,
+        "2014": 161057,
+        "2015": 183187,
+        "2016": 180344,
+        "2017": 183343,
+        "2018": 177494,
+        "2019": 185529,
+        "2020": 111997,
+        "2021": 151495,
+        "2022": 159459,
+        "2023": 167757,
+        "2024": 167374,
+        "2025": 190425,
+        "2026": 138654
+      },
+      "annual_sum_check": {
+        "sum": 3730179,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1676730,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 2052836,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 613,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Cumulative, closing and segment times must not be merged without semantic evidence."
+    },
+    {
+      "source": "section_points_adjudicated_sqlite",
+      "domain": "point_positions",
+      "table": "point_position",
+      "columns": [
+        "race_entry_id",
+        "point_code",
+        "position_raw",
+        "position",
+        "quality_status",
+        "source_name"
+      ],
+      "key_candidate": "(race_entry_id, point_code)",
+      "major_date_field": "via finish_time.race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1640302,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 1640302,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 45659,
+        "2001": 45736,
+        "2002": 58763,
+        "2003": 67116,
+        "2004": 65543,
+        "2005": 65242,
+        "2006": 68035,
+        "2007": 71939,
+        "2008": 71343,
+        "2009": 69820,
+        "2010": 68091,
+        "2011": 69988,
+        "2012": 71421,
+        "2013": 69138,
+        "2014": 68486,
+        "2015": 55270,
+        "2016": 52036,
+        "2017": 52284,
+        "2018": 52274,
+        "2019": 53900,
+        "2020": 31538,
+        "2021": 45176,
+        "2022": 47236,
+        "2023": 48392,
+        "2024": 48177,
+        "2025": 102478,
+        "2026": 75221
+      },
+      "annual_sum_check": {
+        "sum": 1640302,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1566374,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 73315,
+          "first": "2025-01-03",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 613,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Position/call data is not the same concept as race-level passing group notation."
+    },
+    {
+      "source": "section_points_adjudicated_sqlite",
+      "domain": "canonical_points",
+      "table": "common_point",
+      "columns": [
+        "meet_code",
+        "race_date",
+        "race_number",
+        "distance_m",
+        "kra_horse_id",
+        "horse_number",
+        "race_entry_id",
+        "point_code",
+        "time_kind",
+        "meters_from_start",
+        "meters_before_finish",
+        "elapsed_time_ms",
+        "position",
+        "position_raw",
+        "position_quality_status",
+        "position_source",
+        "source_position",
+        "source_name",
+        "source_field",
+        "classification"
+      ],
+      "key_candidate": "(meet_code, date, race, horse ID, point code, time kind)",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1680645,
+      "earliest_event_date": "2000-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 1680645,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2000": 12281,
+        "2001": 12101,
+        "2002": 26847,
+        "2003": 35634,
+        "2004": 34734,
+        "2005": 48247,
+        "2006": 55210,
+        "2007": 57679,
+        "2008": 75369,
+        "2009": 79118,
+        "2010": 75882,
+        "2011": 78213,
+        "2012": 80700,
+        "2013": 80831,
+        "2014": 81030,
+        "2015": 80552,
+        "2016": 79313,
+        "2017": 79010,
+        "2018": 76612,
+        "2019": 79121,
+        "2020": 48829,
+        "2021": 66252,
+        "2022": 68994,
+        "2023": 72253,
+        "2024": 71162,
+        "2025": 71905,
+        "2026": 52766
+      },
+      "annual_sum_check": {
+        "sum": 1680645,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 877306,
+          "first": "2000-01-08",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 802982,
+          "first": "2005-01-07",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 357,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Adjudicated view only; retain source rows and quality/exclusion statuses alongside."
+    },
+    {
+      "source": "research_dataset_v1_duckdb",
+      "domain": "race_schedule_and_result",
+      "table": "race",
+      "columns": [
+        "race_id",
+        "venue_code",
+        "canonical_meet",
+        "region_code",
+        "race_date",
+        "race_no",
+        "race_type",
+        "race_class",
+        "distance_m",
+        "burden_type",
+        "track_raw",
+        "weather_raw",
+        "track_moisture_percent",
+        "rating_condition_raw",
+        "label_scope",
+        "official_result_state",
+        "rating_system",
+        "surface_regime",
+        "mile_1600_era",
+        "source_dataset",
+        "source_path"
+      ],
+      "key_candidate": "(venue_code, race_date, race_no)",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 29882,
+      "earliest_event_date": "2010-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 29882,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 1801,
+        "2011": 1816,
+        "2012": 1886,
+        "2013": 1904,
+        "2014": 1956,
+        "2015": 1931,
+        "2016": 1921,
+        "2017": 1899,
+        "2018": 1906,
+        "2019": 1904,
+        "2020": 1143,
+        "2021": 1453,
+        "2022": 1679,
+        "2023": 1786,
+        "2024": 1775,
+        "2025": 1759,
+        "2026": 1363
+      },
+      "annual_sum_check": {
+        "sum": 29882,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 17446,
+          "first": "2010-01-09",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 12424,
+          "first": "2010-01-08",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 12,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "2010+ research snapshot assembled from historical unified plus operational refresh; not an adjudicated final core."
+    },
+    {
+      "source": "research_dataset_v1_duckdb",
+      "domain": "race_entries_and_results",
+      "table": "entry_result",
+      "columns": [
+        "race_id",
+        "venue_code",
+        "canonical_meet",
+        "race_date",
+        "race_no",
+        "chul_no",
+        "hr_no",
+        "horse_name_raw",
+        "horse_name_normalized",
+        "origin_raw",
+        "sex_raw",
+        "age_raw",
+        "rating_raw",
+        "jockey_no",
+        "trainer_no",
+        "owner_no",
+        "owner_no_raw_json",
+        "jockey_name",
+        "trainer_name",
+        "owner_name",
+        "burden_weight_kg",
+        "horse_weight_raw",
+        "horse_weight_kg",
+        "horse_weight_delta_kg",
+        "finish_raw",
+        "finish_order",
+        "result_status",
+        "race_time_s",
+        "win_odds",
+        "place_odds",
+        "diff_raw",
+        "is_dead_heat",
+        "source_prior_races",
+        "source_prior_wins",
+        "source_training_28d",
+        "source_training_seconds_28d",
+        "source_start_training_28d",
+        "source_confirmed_medical_28d",
+        "source_availability_status",
+        "training_28d_status",
+        "start_training_28d_status",
+        "medical_28d_status",
+        "current_weight_availability",
+        "label_scope",
+        "official_result_state",
+        "is_model_target",
+        "is_rank_label",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "(venue_code, race_date, race_no, chul_no); hr_no cross-check",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 332392,
+      "earliest_event_date": "2010-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 332392,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 20369,
+        "2011": 20983,
+        "2012": 21715,
+        "2013": 21426,
+        "2014": 21746,
+        "2015": 21636,
+        "2016": 21142,
+        "2017": 20829,
+        "2018": 20362,
+        "2019": 21084,
+        "2020": 13343,
+        "2021": 17633,
+        "2022": 18355,
+        "2023": 19284,
+        "2024": 18873,
+        "2025": 19005,
+        "2026": 14607
+      },
+      "annual_sum_check": {
+        "sum": 332392,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 195795,
+          "first": "2010-01-09",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 136478,
+          "first": "2010-01-08",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Some runner rows do not join to section DB finish_time; preserve all result states."
+    },
+    {
+      "source": "research_dataset_v1_duckdb",
+      "domain": "trial_entries",
+      "table": "trial_entry",
+      "columns": [
+        "trial_event_id",
+        "venue_code",
+        "canonical_meet",
+        "region_code",
+        "source_meet",
+        "venue_resolution_status",
+        "trial_date",
+        "trial_no",
+        "participant_no",
+        "trial_round",
+        "trial_kind",
+        "distance_m",
+        "weather_raw",
+        "track_raw",
+        "track_moisture_percent",
+        "hr_no",
+        "horse_name_raw",
+        "horse_name_normalized",
+        "origin_raw",
+        "sex_raw",
+        "age_raw",
+        "jockey_no",
+        "jockey_name_raw",
+        "trainer_no",
+        "trainer_name_raw",
+        "finish_raw",
+        "finish_position",
+        "result_state",
+        "judgement_raw",
+        "failure_reason_raw",
+        "inspection_reason_raw",
+        "body_weight_kg",
+        "finish_time_ms",
+        "section_json",
+        "horse_link_status",
+        "person_link_status",
+        "availability_status",
+        "source_dataset",
+        "source_path"
+      ],
+      "key_candidate": "(trial event, participant number, source meet)",
+      "major_date_field": "trial_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 61616,
+      "earliest_event_date": "2010-01-08",
+      "latest_event_date": "2026-09-17",
+      "rows_on_or_before_target_cutoff": 61616,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 2895,
+        "2011": 3373,
+        "2012": 2972,
+        "2013": 3495,
+        "2014": 3451,
+        "2015": 3457,
+        "2016": 3588,
+        "2017": 3823,
+        "2018": 3980,
+        "2019": 4175,
+        "2020": 5803,
+        "2021": 3437,
+        "2022": 3512,
+        "2023": 3517,
+        "2024": 3740,
+        "2025": 3796,
+        "2026": 2602
+      },
+      "annual_sum_check": {
+        "sum": 61616,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 37031,
+          "first": "2010-01-08",
+          "last": "2026-09-17"
+        },
+        {
+          "meet": 3,
+          "rows": 24537,
+          "first": "2010-01-09",
+          "last": "2026-09-10"
+        },
+        {
+          "meet": "unassigned",
+          "rows": 48,
+          "first": "2026-09-17",
+          "last": "2026-09-17"
+        }
+      ],
+      "risk": "Legacy-derived only in v1; not reconciled as separate schedule and result source tables."
+    },
+    {
+      "source": "research_dataset_v1_duckdb",
+      "domain": "daily_and_start_training",
+      "table": "training_event",
+      "columns": [
+        "training_event_id",
+        "training_venue_code",
+        "source_meet",
+        "source_type",
+        "event_date",
+        "hr_no",
+        "horse_name",
+        "duration_seconds",
+        "start_time_raw",
+        "end_time_raw",
+        "intensity_1",
+        "intensity_2",
+        "trainer_name_raw",
+        "part_raw",
+        "rider_no_raw",
+        "remark_raw",
+        "availability_status",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "training_event_id",
+      "major_date_field": "event_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 5593948,
+      "earliest_event_date": "2010-01-02",
+      "latest_event_date": "2026-09-16",
+      "rows_on_or_before_target_cutoff": 5593948,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 271195,
+        "2011": 284495,
+        "2012": 292814,
+        "2013": 286861,
+        "2014": 298538,
+        "2015": 309546,
+        "2016": 325353,
+        "2017": 361941,
+        "2018": 357216,
+        "2019": 375150,
+        "2020": 356270,
+        "2021": 354217,
+        "2022": 339151,
+        "2023": 357127,
+        "2024": 366346,
+        "2025": 382050,
+        "2026": 275678
+      },
+      "annual_sum_check": {
+        "sum": 5593948,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 2973858,
+          "first": "2010-01-02",
+          "last": "2026-09-16"
+        },
+        {
+          "meet": 3,
+          "rows": 2620090,
+          "first": "2010-01-04",
+          "last": "2026-09-16"
+        }
+      ],
+      "risk": "Latest v1 training snapshot is earlier than the operational table; test observed-time eligibility."
+    },
+    {
+      "source": "research_dataset_v1_duckdb",
+      "domain": "medical_events",
+      "table": "medical_event",
+      "columns": [
+        "medical_event_id",
+        "source_venue_code",
+        "source_meet",
+        "source_type",
+        "event_date",
+        "hr_no",
+        "horse_name",
+        "stable_no_raw",
+        "facility_raw",
+        "diagnosis_1_raw",
+        "diagnosis_2_raw",
+        "has_content",
+        "link_status",
+        "candidate_hr_nos_json",
+        "availability_status",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "medical_event_id",
+      "major_date_field": "event_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1822462,
+      "earliest_event_date": "2010-01-01",
+      "latest_event_date": "2026-09-16",
+      "rows_on_or_before_target_cutoff": 1822462,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 81505,
+        "2011": 84771,
+        "2012": 93562,
+        "2013": 99412,
+        "2014": 109633,
+        "2015": 115217,
+        "2016": 102679,
+        "2017": 89441,
+        "2018": 87946,
+        "2019": 100503,
+        "2020": 74070,
+        "2021": 82545,
+        "2022": 78064,
+        "2023": 98689,
+        "2024": 136606,
+        "2025": 207289,
+        "2026": 180530
+      },
+      "annual_sum_check": {
+        "sum": 1822462,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1149946,
+          "first": "2010-01-03",
+          "last": "2026-09-16"
+        },
+        {
+          "meet": 3,
+          "rows": 672516,
+          "first": "2010-01-01",
+          "last": "2026-09-16"
+        }
+      ],
+      "risk": "Source type and identity-resolution status are essential."
+    },
+    {
+      "source": "research_dataset_v1_duckdb",
+      "domain": "unresolved_identity",
+      "table": "unresolved_identity_ledger",
+      "columns": [
+        "issue_domain",
+        "venue_code",
+        "event_date",
+        "event_key",
+        "participant_no",
+        "source_value",
+        "candidate_value",
+        "status",
+        "evidence",
+        "source_dataset",
+        "source_path",
+        "source_row"
+      ],
+      "key_candidate": "issue domain/event key/source row",
+      "major_date_field": "event_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1151100,
+      "earliest_event_date": "2010-01-01",
+      "latest_event_date": "2026-09-17",
+      "rows_on_or_before_target_cutoff": 1151100,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 57570,
+        "2011": 59629,
+        "2012": 66528,
+        "2013": 72343,
+        "2014": 79900,
+        "2015": 85049,
+        "2016": 74423,
+        "2017": 62012,
+        "2018": 61404,
+        "2019": 70006,
+        "2020": 54570,
+        "2021": 55761,
+        "2022": 52456,
+        "2023": 62602,
+        "2024": 81793,
+        "2025": 87647,
+        "2026": 67407
+      },
+      "annual_sum_check": {
+        "sum": 1151100,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 765864,
+          "first": "2010-01-03",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": 3,
+          "rows": 385188,
+          "first": "2010-01-01",
+          "last": "2026-09-13"
+        },
+        {
+          "meet": "unassigned",
+          "rows": 48,
+          "first": "2026-09-17",
+          "last": "2026-09-17"
+        }
+      ],
+      "risk": "Do not resolve or drop identities based on name alone."
+    },
+    {
+      "source": "section_passing_raw_duckdb",
+      "domain": "section_finish_raw",
+      "table": "spdb_finish_time",
+      "columns": [
+        "race_entry_id",
+        "meet_code",
+        "race_date",
+        "race_number",
+        "distance_m",
+        "kra_horse_id",
+        "horse_number",
+        "finish_position",
+        "finish_time_ms",
+        "scratched",
+        "rank_remark",
+        "result_state"
+      ],
+      "key_candidate": "source table original key columns",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 327500,
+      "earliest_event_date": "2010-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 327500,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 20277,
+        "2011": 20908,
+        "2012": 21562,
+        "2013": 21426,
+        "2014": 21556,
+        "2015": 21190,
+        "2016": 20699,
+        "2017": 20516,
+        "2018": 20004,
+        "2019": 20615,
+        "2020": 12686,
+        "2021": 17375,
+        "2022": 18070,
+        "2023": 18865,
+        "2024": 18540,
+        "2025": 19005,
+        "2026": 14206
+      },
+      "annual_sum_check": {
+        "sum": 327500,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 192585,
+          "first": "2010-01-09",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 134796,
+          "first": "2010-01-08",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 119,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Raw adjudicated-source rows; preserved source columns."
+    },
+    {
+      "source": "section_passing_raw_duckdb",
+      "domain": "section_time_raw",
+      "table": "spdb_section_time",
+      "columns": [
+        "id",
+        "meet_code",
+        "race_date",
+        "race_number",
+        "distance_m",
+        "kra_horse_id",
+        "horse_number",
+        "race_entry_id",
+        "point_code",
+        "point_kind",
+        "time_kind",
+        "meters_from_start",
+        "meters_before_finish",
+        "elapsed_time_ms",
+        "position",
+        "source_name",
+        "source_field",
+        "source_basis",
+        "classification",
+        "geometry_note",
+        "segment_length_m",
+        "representation"
+      ],
+      "key_candidate": "source table id and natural event key",
+      "major_date_field": "race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 2791247,
+      "earliest_event_date": "2010-01-08",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 2791247,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 152730,
+        "2011": 156280,
+        "2012": 161355,
+        "2013": 162767,
+        "2014": 161057,
+        "2015": 183187,
+        "2016": 180344,
+        "2017": 183343,
+        "2018": 177494,
+        "2019": 185529,
+        "2020": 111997,
+        "2021": 151495,
+        "2022": 159459,
+        "2023": 167757,
+        "2024": 167374,
+        "2025": 190425,
+        "2026": 138654
+      },
+      "annual_sum_check": {
+        "sum": 2791247,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 1047533,
+          "first": "2010-01-09",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 1743101,
+          "first": "2010-01-08",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 613,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Raw section values; time semantics remain source-specific."
+    },
+    {
+      "source": "section_passing_raw_duckdb",
+      "domain": "passing_groups",
+      "table": "op_race_passing_groups",
+      "columns": [
+        "race_id",
+        "point_code",
+        "notation_raw",
+        "source_batch_id"
+      ],
+      "key_candidate": "(race_id, point_code)",
+      "major_date_field": "op_race_context.race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 80180,
+      "earliest_event_date": "2017-01-06",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 80180,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2017": 9135,
+        "2018": 9212,
+        "2019": 9250,
+        "2020": 5237,
+        "2021": 6916,
+        "2022": 8082,
+        "2023": 8529,
+        "2024": 8666,
+        "2025": 8700,
+        "2026": 6453
+      },
+      "annual_sum_check": {
+        "sum": 80180,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 43156,
+          "first": "2017-01-07",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 36962,
+          "first": "2017-01-06",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 62,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Race-level group notation, not horse-level passing order."
+    },
+    {
+      "source": "section_passing_raw_duckdb",
+      "domain": "passing_summaries",
+      "table": "op_race_passing_summaries",
+      "columns": [
+        "id",
+        "race_id",
+        "source_document_id",
+        "corner_1_raw",
+        "corner_2_raw",
+        "corner_3_raw",
+        "corner_4_raw",
+        "corner_5_raw",
+        "corner_6_raw",
+        "corner_7_raw",
+        "corner_8_raw",
+        "corner_9_raw",
+        "pass_time_3f_raw",
+        "pass_time_4f_raw",
+        "pass_time_3f_ms",
+        "pass_time_4f_ms",
+        "tempo_raw",
+        "tempo_level",
+        "quality_status",
+        "source_row_hash",
+        "observed_at_ms"
+      ],
+      "key_candidate": "source summary ID/race_id",
+      "major_date_field": "op_race_context.race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 14649,
+      "earliest_event_date": "2018-01-05",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 14649,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2018": 1906,
+        "2019": 1893,
+        "2020": 1103,
+        "2021": 1453,
+        "2022": 1679,
+        "2023": 1775,
+        "2024": 1774,
+        "2025": 1759,
+        "2026": 1307
+      },
+      "annual_sum_check": {
+        "sum": 14649,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 8583,
+          "first": "2018-01-06",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 6054,
+          "first": "2018-01-05",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 12,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Race-level summaries; observed_at_ms is separate from race date."
+    },
+    {
+      "source": "section_passing_raw_duckdb",
+      "domain": "section_results_raw",
+      "table": "op_race_section_results",
+      "columns": [
+        "id",
+        "race_entry_id",
+        "section_code",
+        "distance_from_start_m",
+        "elapsed_time_ms",
+        "position",
+        "gap_to_leader_lengths",
+        "group_notation_raw",
+        "time_basis",
+        "source_kind"
+      ],
+      "key_candidate": "(race_entry_id, section_code)",
+      "major_date_field": "op_entry_context.race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 530490,
+      "earliest_event_date": "2010-01-09",
+      "latest_event_date": "2016-12-31",
+      "rows_on_or_before_target_cutoff": 530490,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2010": 68091,
+        "2011": 69988,
+        "2012": 71421,
+        "2013": 69138,
+        "2014": 68486,
+        "2015": 93413,
+        "2016": 89953
+      },
+      "annual_sum_check": {
+        "sum": 530490,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 479220,
+          "first": "2010-01-09",
+          "last": "2016-12-25"
+        },
+        {
+          "meet": 3,
+          "rows": 51270,
+          "first": "2015-01-02",
+          "last": "2016-12-31"
+        }
+      ],
+      "risk": "Distinct from normalized point/time records."
+    },
+    {
+      "source": "section_passing_raw_duckdb",
+      "domain": "section_times_raw",
+      "table": "op_race_section_times",
+      "columns": [
+        "race_entry_id",
+        "point_code",
+        "time_kind",
+        "elapsed_time_ms",
+        "position_raw",
+        "source_name",
+        "source_field",
+        "source_batch_id"
+      ],
+      "key_candidate": "(race_entry_id, point_code, time_kind)",
+      "major_date_field": "op_entry_context.race_date",
+      "date_role": "event_date",
+      "rows_in_source_scope": 1536143,
+      "earliest_event_date": "2017-01-06",
+      "latest_event_date": "2026-09-20",
+      "rows_on_or_before_target_cutoff": 1536143,
+      "target_cutoff": "2026-09-20",
+      "rows_after_target_cutoff": 0,
+      "rows_without_event_date": 0,
+      "annual_rows_through_cutoff": {
+        "2017": 177589,
+        "2018": 172504,
+        "2019": 180136,
+        "2020": 108435,
+        "2021": 147635,
+        "2022": 155284,
+        "2023": 163069,
+        "2024": 162486,
+        "2025": 155078,
+        "2026": 113927
+      },
+      "annual_sum_check": {
+        "sum": 1536143,
+        "equals_cutoff_rows": true
+      },
+      "coverage_by_meet": [
+        {
+          "meet": 1,
+          "rows": 654208,
+          "first": "2017-01-07",
+          "last": "2026-09-20"
+        },
+        {
+          "meet": 3,
+          "rows": 881322,
+          "first": "2017-01-06",
+          "last": "2026-09-18"
+        },
+        {
+          "meet": 4,
+          "rows": 613,
+          "first": "2026-09-13",
+          "last": "2026-09-20"
+        }
+      ],
+      "risk": "Retain source field/batch; bridge identity match is separately validated."
+    }
+  ],
+  "calendar_and_cancellation_evidence": {
+    "race_status_counts_by_meet": [
+      {
+        "meet": 1,
+        "status": "completed",
+        "rows": 28319
+      },
+      {
+        "meet": 1,
+        "status": "void",
+        "rows": 80
+      },
+      {
+        "meet": 3,
+        "status": "completed",
+        "rows": 15528
+      },
+      {
+        "meet": 3,
+        "status": "special_only_unresolved",
+        "rows": 11
+      },
+      {
+        "meet": 4,
+        "status": "completed",
+        "rows": 12
+      }
+    ],
+    "table_names_matching_holiday_calendar_closure_cancel": [],
+    "separate_official_closure_evidence": {
+      "status": "verified_partial_official_plan_list",
+      "csv_path": "thoroughbred/research/20260929_closure_inventory_v1/closures.csv",
+      "validation_path": "thoroughbred/research/20260929_closure_inventory_v1/validation.json",
+      "source_rows": 50,
+      "rows_by_meet": {
+        "1": 25,
+        "3": 25
+      },
+      "rows_by_year": {
+        "2018": 8,
+        "2019": 8,
+        "2020": 2,
+        "2021": 2,
+        "2022": 8,
+        "2023": 6,
+        "2024": 6,
+        "2025": 6,
+        "2026": 4
+      },
+      "race_rows_inside_closures": 0,
+      "conflicts": [],
+      "cutoff": "2026-09-20",
+      "is_complete_historical_calendar": false,
+      "evidence": "official annual/revised racing plans; 50 Seoul/Busan-Gyeongnam interval rows"
+    },
+    "interpretation": "A local partial official closure-plan list is linked above; it is not a complete historical calendar. An explicit cancelled/void race row/status may be retained as evidence. No meeting row/entries alone does not prove a scheduled closure or holiday."
+  },
+  "identity_linkage_risks": {
+    "scope_cutoff": "2026-09-20",
+    "race_entry_linkage_by_meet": [
+      {
+        "meet": 1,
+        "rows": 315529,
+        "horse_id_null": 0,
+        "jockey_id_null": 0,
+        "trainer_id_null": 1,
+        "owner_id_null": 2
+      },
+      {
+        "meet": 3,
+        "rows": 169460,
+        "horse_id_null": 0,
+        "jockey_id_null": 0,
+        "trainer_id_null": 3,
+        "owner_id_null": 3
+      },
+      {
+        "meet": 4,
+        "rows": 119,
+        "horse_id_null": 0,
+        "jockey_id_null": 0,
+        "trainer_id_null": 0,
+        "owner_id_null": 0
+      }
+    ],
+    "trial_entry_linkage_by_meet": [
+      {
+        "meet": 1,
+        "rows": 46466,
+        "horse_id_null": 9,
+        "jockey_id_null": 22603,
+        "trainer_id_null": 8254
+      },
+      {
+        "meet": 3,
+        "rows": 29779,
+        "horse_id_null": 4,
+        "jockey_id_null": 2513,
+        "trainer_id_null": 191
+      }
+    ],
+    "hill_training": {
+      "rows": 3576,
+      "horse_id_null": 3212,
+      "venue_key_available": false
+    },
+    "entity_master_date_note": "Master rows without event/observation date are counted as reference inventories; zero rows on/before cutoff means date is not applicable, not that the entity data is unusable."
+  },
+  "raw_file_tree_inventory": {
+    "status": "file_metadata_only_no_content_or_hash_read",
+    "path": "data/raw",
+    "total_regular_files": 79383,
+    "total_bytes": 5594808312,
+    "families": {
+      ".DS_Store": {
+        "files": 1,
+        "bytes": 8196
+      },
+      ".gitkeep": {
+        "files": 1,
+        "bytes": 1
+      },
+      "jeju_native_health_weight": {
+        "files": 632,
+        "bytes": 24323971
+      },
+      "jeju_native_results": {
+        "files": 26,
+        "bytes": 38782960
+      },
+      "jeju_native_training": {
+        "files": 4,
+        "bytes": 21331565
+      },
+      "jeju_section_audit": {
+        "files": 12,
+        "bytes": 1169318
+      },
+      "kra": {
+        "files": 20813,
+        "bytes": 1607819961
+      },
+      "kra_api_monthly": {
+        "files": 2289,
+        "bytes": 2325959274
+      },
+      "kra_retired_trainer_regions": {
+        "files": 6,
+        "bytes": 239174
+      },
+      "kra_text": {
+        "files": 55577,
+        "bytes": 1574433751
+      },
+      "kra_trainer_affiliations": {
+        "files": 6,
+        "bytes": 221752
+      },
+      "seoul_section_audit": {
+        "files": 16,
+        "bytes": 518389
+      }
+    },
+    "scope_note": "File counts/sizes do not establish source dates, completeness, or whether each file is Thoroughbred/meet 1, 3 or 4; filename/content provenance remains unverified."
+  },
+  "validation": {
+    "all_date_tables_annual_sums_checked": true,
+    "source_database_hashes": "not computed; broad file hashing intentionally avoided",
+    "read_only": true
+  }
+}

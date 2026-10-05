@@ -1,0 +1,1937 @@
+{
+  "validation_title": "Pre-steward-report core data QA",
+  "validation_status": "PASS",
+  "validated_at_utc": "2026-10-02T08:17:53.925899+00:00",
+  "scope": {
+    "date_range": "2010-01-01 through 2026-09-29",
+    "venues": {
+      "1": "Seoul",
+      "3": "Busan-Gyeongnam / Yeongnam trial query",
+      "4": "Yeongcheon"
+    },
+    "excluded_venue": "Jeju (2)",
+    "model_period_start": "2017-01-01",
+    "excluded_content": [
+      "steward reports",
+      "penalty/sanction objects"
+    ]
+  },
+  "source": {
+    "database": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+    "sibling_manifest": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/manifest.json",
+    "manifest_built_at_utc": "2026-10-01T10:57:49.224656+00:00",
+    "database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+    "manifest_database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+    "manifest_source_input_count": 384,
+    "manifest_status": "staged_core_not_frozen; closure coverage partial; 81 sourced intervals / 552 venue-days including 4 user-supplied KRA-authored annual-plan intervals and 2 official-start/API-end intervals; secondary historical leads and amendment gaps retained; 22 trial trainer source errors closed without IDs; 0 noncompletion subtypes qualified",
+    "opened_read_only": true
+  },
+  "resource_settings": {
+    "duckdb_memory_limit": "2GB",
+    "duckdb_threads": 2
+  },
+  "object_inventory": {
+    "database_object_count": 180,
+    "manifest_row_count_entries": 178,
+    "not_row_counted_helper_views": [
+      "confirmed_runners_entity_reviewed_before_role_review",
+      "trial_participants_entity_reviewed_before_role_review"
+    ]
+  },
+  "counts": {
+    "calendar_days": {
+      "observed": 18348,
+      "expected": 18348,
+      "manifest": 18348
+    },
+    "race_plan": {
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    "race_plan_full_api": {
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    "race_execution_flags": {
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    "race_nonexecution_adjudication": {
+      "observed": 116,
+      "expected": 116,
+      "manifest": 116
+    },
+    "race_nonexecution_subtype_review": {
+      "observed": 29,
+      "expected": 29,
+      "manifest": 29
+    },
+    "race_events": {
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    "runner_results": {
+      "observed": 331811,
+      "expected": 331811,
+      "manifest": 331811
+    },
+    "confirmed_races": {
+      "observed": 29710,
+      "expected": 29710,
+      "manifest": 29710
+    },
+    "confirmed_runners": {
+      "observed": 330465,
+      "expected": 330465,
+      "manifest": 330465
+    },
+    "confirmed_races_2017plus": {
+      "observed": 16547,
+      "expected": 16547,
+      "manifest": 16547
+    },
+    "confirmed_runners_2017plus": {
+      "observed": 182062,
+      "expected": 182062,
+      "manifest": 182062
+    },
+    "race_execution_adjudicated": {
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    "trial_sessions": {
+      "observed": 6199,
+      "expected": 6199,
+      "manifest": 6199
+    },
+    "trial_participants": {
+      "observed": 61777,
+      "expected": 61777,
+      "manifest": 61777
+    },
+    "trial_participants_resolved": {
+      "observed": 61777,
+      "expected": 61777,
+      "manifest": 61777
+    },
+    "unresolved_trial_participants": {
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    "official_closure_intervals": {
+      "observed": 81,
+      "expected": 81,
+      "manifest": 81
+    },
+    "role_link_exceptions_current": {
+      "observed": 186,
+      "expected": 186,
+      "manifest": 186
+    },
+    "role_link_exceptions_pending": {
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    "entity_reference_roster": {
+      "observed": 25814,
+      "expected": 25814,
+      "manifest": 25814
+    },
+    "section_measurements_api": {
+      "observed": 4380065,
+      "expected": 4380065,
+      "manifest": 4380065
+    },
+    "runner_section_coverage_api": {
+      "observed": 330465,
+      "expected": 330465,
+      "manifest": 330465
+    },
+    "section_parse_issues_api": {
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    "section_missing_finisher_review": {
+      "observed": 2,
+      "expected": 2,
+      "manifest": 2
+    },
+    "unverified_result_only_keys": {
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    "trial_trainer_errors_closed": {
+      "observed": 22,
+      "expected": 22,
+      "manifest": 22
+    }
+  },
+  "date_format_inventory": [
+    {
+      "field": "race_plan.date",
+      "format": "YYYYMMDD",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "20100108",
+      "maximum": "20260920"
+    },
+    {
+      "field": "race_plan_full_api.race_date_key",
+      "format": "YYYYMMDD",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "20100108",
+      "maximum": "20260920"
+    },
+    {
+      "field": "race_events.result_date_key",
+      "format": "YYYYMMDD",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "20100108",
+      "maximum": "20260920"
+    },
+    {
+      "field": "race_events.scheduled_date",
+      "format": "YYYYMMDD",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "20100108",
+      "maximum": "20260920"
+    },
+    {
+      "field": "runner_results.result_date",
+      "format": "YYYYMMDD",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "20100108",
+      "maximum": "20260920"
+    },
+    {
+      "field": "section_coverage.race_date",
+      "format": "YYYYMMDD",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "20100108",
+      "maximum": "20260920"
+    },
+    {
+      "field": "calendar_days.date",
+      "format": "ISO-8601 date",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "2010-01-01",
+      "maximum": "2026-09-29"
+    },
+    {
+      "field": "trial_sessions.trial_date",
+      "format": "ISO-8601 date",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "2010-01-08",
+      "maximum": "2026-09-17"
+    },
+    {
+      "field": "trial_participants.trial_date",
+      "format": "ISO-8601 date",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "2010-01-08",
+      "maximum": "2026-09-17"
+    },
+    {
+      "field": "official_closure_intervals.start_end_date",
+      "format": "ISO-8601 date",
+      "invalid_count": 0,
+      "out_of_scope_count": 0,
+      "minimum": "2016-01-01",
+      "maximum": "2026-09-27"
+    }
+  ],
+  "duplicate_key_counts": {
+    "calendar_venue_date": 0,
+    "race_plan_natural_key": 0,
+    "race_plan_full_api_natural_key": 0,
+    "race_flags_natural_key": 0,
+    "race_adjudication_natural_key": 0,
+    "race_event_natural_key": 0,
+    "runner_result_natural_key": 0,
+    "trial_session_id": 0,
+    "trial_session_date_meet_number": 0,
+    "trial_participant_id": 0,
+    "trial_participant_source_item": 0,
+    "entity_type_official_id": 0,
+    "section_runner_coverage_key": 0,
+    "section_measurement_source_field_pointer": 0
+  },
+  "official_id_zero_prefix_examples": [
+    [
+      "horse",
+      "0014396"
+    ],
+    [
+      "horse",
+      "0014470"
+    ],
+    [
+      "horse",
+      "0014539"
+    ],
+    [
+      "jockey",
+      "080014"
+    ],
+    [
+      "jockey",
+      "080100"
+    ],
+    [
+      "jockey",
+      "080103"
+    ],
+    [
+      "owner",
+      "001201"
+    ],
+    [
+      "owner",
+      "010009"
+    ],
+    [
+      "owner",
+      "010011"
+    ],
+    [
+      "trainer",
+      "070017"
+    ],
+    [
+      "trainer",
+      "070018"
+    ],
+    [
+      "trainer",
+      "070020"
+    ]
+  ],
+  "result_runner_status_partition": [
+    [
+      "executed_plan_and_result",
+      330465,
+      324784
+    ],
+    [
+      "planned_no_execution_evidence",
+      1346,
+      0
+    ]
+  ],
+  "nonexecution_classification": [
+    [
+      "no_valid_completed_race",
+      "official_closure_nonexecution",
+      17
+    ],
+    [
+      "no_valid_completed_race",
+      "official_day_cancelled",
+      35
+    ],
+    [
+      "no_valid_completed_race",
+      "race_cancelled",
+      51
+    ],
+    [
+      "no_valid_completed_race",
+      "race_invalid",
+      2
+    ],
+    [
+      "no_valid_completed_race",
+      "reported_day_cancelled",
+      11
+    ]
+  ],
+  "nonfinish_rank_distribution": [
+    [
+      "executed_plan_and_result",
+      "0",
+      2,
+      0
+    ],
+    [
+      "executed_plan_and_result",
+      "94",
+      1568,
+      0
+    ],
+    [
+      "executed_plan_and_result",
+      "95",
+      2030,
+      0
+    ],
+    [
+      "planned_no_execution_evidence",
+      "0",
+      97,
+      0
+    ],
+    [
+      "planned_no_execution_evidence",
+      "94",
+      1,
+      0
+    ],
+    [
+      "planned_no_execution_evidence",
+      "95",
+      3,
+      0
+    ],
+    [
+      "planned_no_execution_evidence",
+      "98",
+      12,
+      0
+    ],
+    [
+      "planned_no_execution_evidence",
+      "99",
+      1233,
+      0
+    ]
+  ],
+  "role_exception_classification": [
+    [
+      "race",
+      "confirmed_non_person_placeholder",
+      "placeholder_0AAAAA_web_row_checked",
+      23
+    ],
+    [
+      "trial",
+      "confirmed_non_person_placeholder",
+      "confirmed_same_nonperson_placeholder",
+      140
+    ],
+    [
+      "trial",
+      "confirmed_non_person_placeholder",
+      "official_row_nonperson_sentinel_for_missing_source_id",
+      1
+    ],
+    [
+      "trial",
+      "source_error_unknown_cause",
+      "closed_user_accepted_source_error",
+      22
+    ]
+  ],
+  "section_value_summary": {
+    "measure_kind_contract_errors": [
+      0,
+      0,
+      0
+    ],
+    "coverage_flags_and_measurement_sums": [
+      0,
+      0,
+      2617940,
+      1762125,
+      330465
+    ],
+    "rows_by_has_section_data": [
+      [
+        false,
+        4870
+      ],
+      [
+        true,
+        325595
+      ]
+    ],
+    "known_finisher_gaps": [
+      [
+        "1",
+        "20100704",
+        "6",
+        "10",
+        "0020813",
+        "용왕성",
+        "특이경주",
+        "실격 미처분",
+        "user_provided_2026-09-30",
+        false,
+        "unverified"
+      ],
+      [
+        "1",
+        "20121006",
+        "9",
+        "9",
+        "0027368",
+        "동촌",
+        "출주정지",
+        "2개월(2012.10.07~2012.12.06); 양 앞다리 질병(양전 제염)",
+        "user_provided_2026-09-30",
+        false,
+        "unverified"
+      ]
+    ]
+  },
+  "known_exceptions": [
+    {
+      "category": "planned races without valid completed-race evidence",
+      "count": 116,
+      "classification": "all adjudicated no_valid_completed_race; 29 previously unclassified cases are now race_cancelled"
+    },
+    {
+      "category": "runner rows attached to planned nonexecution races",
+      "count": 1346,
+      "classification": "retained under planned_no_execution_evidence; zero positive finish rows"
+    },
+    {
+      "category": "trainer non-person placeholders",
+      "count": 164,
+      "classification": "23 race rows and 141 trial rows; not person IDs"
+    },
+    {
+      "category": "closed trial trainer source errors",
+      "count": 22,
+      "classification": "unknown cause, user-accepted closed status, trainer ID remains null; not reopened"
+    },
+    {
+      "category": "trial API horse IDs absent",
+      "count": 104,
+      "classification": "99 crosschecked operational RPT links and 5 user-confirmed links; pending 0"
+    },
+    {
+      "category": "trial API jockey IDs absent",
+      "count": 5121,
+      "classification": "5079 RPT-verified, 18 official score-table conflict reviews, 24 scheduled-only; zero-time assignments are not actual rides"
+    },
+    {
+      "category": "confirmed runner trainer and owner IDs absent in original API fields",
+      "count": 38,
+      "classification": "original blanks preserved; official-ID supplements are linked in reviewed columns"
+    },
+    {
+      "category": "known owner name absent with official ID retained",
+      "count": 1,
+      "example": "2026-08-09 Seoul R5 runner 11, Queen's Flying, owner ID 010424"
+    },
+    {
+      "category": "runner section coverage without measurements",
+      "count": 4870,
+      "classification": "coverage rows retained; two user-provided post-race records are linked; whether either explains its missing API section values remains unverified; no values are imputed"
+    },
+    {
+      "category": "nonfinish rank and status codes",
+      "count": 4946,
+      "classification": "ranks 0/94/95/98/99 remain non-positive-finish; 3600 rows occur in otherwise executed races and 1346 rows belong to planned nonexecution races"
+    }
+  ],
+  "unverified_scope_limits": [
+    "The source manifest labels this a staged core, not a frozen final database.",
+    "The 81 sourced closure intervals / 552 venue-days are a partial historical closure list; unsourced no-race days are not classified as closures.",
+    "The capture/publication as-of time and complete historical source coverage remain unverified.",
+    "Section measurements are post-race outcomes and are not validated as pre-race model inputs."
+  ],
+  "checks": [
+    {
+      "name": "database_sha256_matches_manifest",
+      "status": "PASS",
+      "observed": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "expected": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "detail": "Snapshot bytes match the sibling source manifest."
+    },
+    {
+      "name": "manifest_scope",
+      "status": "PASS",
+      "observed": "2010-01-01 through 2026-09-29; Seoul, Busan-Gyeongnam, Yeongcheon; no Jeju",
+      "expected": "2010-01-01 through 2026-09-29; Seoul, Busan-Gyeongnam, Yeongcheon; no Jeju",
+      "detail": ""
+    },
+    {
+      "name": "manifest_object_inventory",
+      "status": "PASS",
+      "observed": {
+        "database_object_count": 180,
+        "manifest_count_map_entries": 178,
+        "manifest_names_missing_from_database": [],
+        "database_objects_not_row_counted_in_manifest": [
+          "confirmed_runners_entity_reviewed_before_role_review",
+          "trial_participants_entity_reviewed_before_role_review"
+        ]
+      },
+      "expected": {
+        "database_object_count": 180,
+        "manifest_count_map_entries": 178,
+        "database_objects_not_row_counted_in_manifest": [
+          "confirmed_runners_entity_reviewed_before_role_review",
+          "trial_participants_entity_reviewed_before_role_review"
+        ]
+      },
+      "detail": "The two additional objects are named pre-role-review helper views."
+    },
+    {
+      "name": "row_count:calendar_days",
+      "status": "PASS",
+      "observed": 18348,
+      "expected": 18348,
+      "manifest": 18348
+    },
+    {
+      "name": "row_count:race_plan",
+      "status": "PASS",
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    {
+      "name": "row_count:race_plan_full_api",
+      "status": "PASS",
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    {
+      "name": "row_count:race_execution_flags",
+      "status": "PASS",
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    {
+      "name": "row_count:race_nonexecution_adjudication",
+      "status": "PASS",
+      "observed": 116,
+      "expected": 116,
+      "manifest": 116
+    },
+    {
+      "name": "row_count:race_nonexecution_subtype_review",
+      "status": "PASS",
+      "observed": 29,
+      "expected": 29,
+      "manifest": 29
+    },
+    {
+      "name": "row_count:race_events",
+      "status": "PASS",
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    {
+      "name": "row_count:runner_results",
+      "status": "PASS",
+      "observed": 331811,
+      "expected": 331811,
+      "manifest": 331811
+    },
+    {
+      "name": "row_count:confirmed_races",
+      "status": "PASS",
+      "observed": 29710,
+      "expected": 29710,
+      "manifest": 29710
+    },
+    {
+      "name": "row_count:confirmed_runners",
+      "status": "PASS",
+      "observed": 330465,
+      "expected": 330465,
+      "manifest": 330465
+    },
+    {
+      "name": "row_count:confirmed_races_2017plus",
+      "status": "PASS",
+      "observed": 16547,
+      "expected": 16547,
+      "manifest": 16547
+    },
+    {
+      "name": "row_count:confirmed_runners_2017plus",
+      "status": "PASS",
+      "observed": 182062,
+      "expected": 182062,
+      "manifest": 182062
+    },
+    {
+      "name": "row_count:race_execution_adjudicated",
+      "status": "PASS",
+      "observed": 29826,
+      "expected": 29826,
+      "manifest": 29826
+    },
+    {
+      "name": "row_count:trial_sessions",
+      "status": "PASS",
+      "observed": 6199,
+      "expected": 6199,
+      "manifest": 6199
+    },
+    {
+      "name": "row_count:trial_participants",
+      "status": "PASS",
+      "observed": 61777,
+      "expected": 61777,
+      "manifest": 61777
+    },
+    {
+      "name": "row_count:trial_participants_resolved",
+      "status": "PASS",
+      "observed": 61777,
+      "expected": 61777,
+      "manifest": 61777
+    },
+    {
+      "name": "row_count:unresolved_trial_participants",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    {
+      "name": "row_count:official_closure_intervals",
+      "status": "PASS",
+      "observed": 81,
+      "expected": 81,
+      "manifest": 81
+    },
+    {
+      "name": "row_count:role_link_exceptions_current",
+      "status": "PASS",
+      "observed": 186,
+      "expected": 186,
+      "manifest": 186
+    },
+    {
+      "name": "row_count:role_link_exceptions_pending",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    {
+      "name": "row_count:entity_reference_roster",
+      "status": "PASS",
+      "observed": 25814,
+      "expected": 25814,
+      "manifest": 25814
+    },
+    {
+      "name": "row_count:section_measurements_api",
+      "status": "PASS",
+      "observed": 4380065,
+      "expected": 4380065,
+      "manifest": 4380065
+    },
+    {
+      "name": "row_count:runner_section_coverage_api",
+      "status": "PASS",
+      "observed": 330465,
+      "expected": 330465,
+      "manifest": 330465
+    },
+    {
+      "name": "row_count:section_parse_issues_api",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    {
+      "name": "row_count:section_missing_finisher_review",
+      "status": "PASS",
+      "observed": 2,
+      "expected": 2,
+      "manifest": 2
+    },
+    {
+      "name": "row_count:unverified_result_only_keys",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "manifest": 0
+    },
+    {
+      "name": "row_count:trial_trainer_errors_closed",
+      "status": "PASS",
+      "observed": 22,
+      "expected": 22,
+      "manifest": 22
+    },
+    {
+      "name": "duplicate_key:calendar_venue_date",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:race_plan_natural_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:race_plan_full_api_natural_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:race_flags_natural_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:race_adjudication_natural_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:race_event_natural_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:runner_result_natural_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:trial_session_id",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:trial_session_date_meet_number",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:trial_participant_id",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:trial_participant_source_item",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:entity_type_official_id",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:section_runner_coverage_key",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_key:section_measurement_source_field_pointer",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "date_format_and_scope:race_plan.date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "20100108",
+        "maximum": "20260920"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "YYYYMMDD"
+      }
+    },
+    {
+      "name": "date_format_and_scope:race_plan_full_api.race_date_key",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "20100108",
+        "maximum": "20260920"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "YYYYMMDD"
+      }
+    },
+    {
+      "name": "date_format_and_scope:race_events.result_date_key",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "20100108",
+        "maximum": "20260920"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "YYYYMMDD"
+      }
+    },
+    {
+      "name": "date_format_and_scope:race_events.scheduled_date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "20100108",
+        "maximum": "20260920"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "YYYYMMDD"
+      }
+    },
+    {
+      "name": "date_format_and_scope:runner_results.result_date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "20100108",
+        "maximum": "20260920"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "YYYYMMDD"
+      }
+    },
+    {
+      "name": "date_format_and_scope:section_coverage.race_date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "20100108",
+        "maximum": "20260920"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "YYYYMMDD"
+      }
+    },
+    {
+      "name": "date_format_and_scope:calendar_days.date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "2010-01-01",
+        "maximum": "2026-09-29"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "ISO-8601 date"
+      }
+    },
+    {
+      "name": "date_format_and_scope:trial_sessions.trial_date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "2010-01-08",
+        "maximum": "2026-09-17"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "ISO-8601 date"
+      }
+    },
+    {
+      "name": "date_format_and_scope:trial_participants.trial_date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "2010-01-08",
+        "maximum": "2026-09-17"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "ISO-8601 date"
+      }
+    },
+    {
+      "name": "date_format_and_scope:official_closure_intervals.start_end_date",
+      "status": "PASS",
+      "observed": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "minimum": "2016-01-01",
+        "maximum": "2026-09-27"
+      },
+      "expected": {
+        "invalid_count": 0,
+        "out_of_scope_count": 0,
+        "format": "ISO-8601 date"
+      }
+    },
+    {
+      "name": "scope:race_plan_meets",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "Seoul=1, Busan/Yeongnam query=3, Yeongcheon=4; Jeju=2 excluded."
+    },
+    {
+      "name": "scope:race_event_meets",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "Seoul=1, Busan/Yeongnam query=3, Yeongcheon=4; Jeju=2 excluded."
+    },
+    {
+      "name": "scope:runner_result_meets",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "Seoul=1, Busan/Yeongnam query=3, Yeongcheon=4; Jeju=2 excluded."
+    },
+    {
+      "name": "scope:calendar_meets",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "Seoul=1, Busan/Yeongnam query=3, Yeongcheon=4; Jeju=2 excluded."
+    },
+    {
+      "name": "scope:section_meets",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "Seoul=1, Busan/Yeongnam query=3, Yeongcheon=4; Jeju=2 excluded."
+    },
+    {
+      "name": "scope:trial_source_meets",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "Seoul=1, Busan/Yeongnam query=3, Yeongcheon=4; Jeju=2 excluded."
+    },
+    {
+      "name": "foreign_key:full_plan_exactly_matches_plan",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "foreign_key:events_have_exact_plan_key_and_date",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "foreign_key:runner_rows_have_event_parent",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "foreign_key:event_result_item_counts_match_runner_rows",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "foreign_key:execution_flags_have_plan_parent",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "foreign_key:trial_participants_have_exact_session_parent",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "foreign_key:section_measurements_have_coverage_parent",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "result_runner_partition",
+      "status": "PASS",
+      "observed": [
+        [
+          "executed_plan_and_result",
+          330465,
+          324784
+        ],
+        [
+          "planned_no_execution_evidence",
+          1346,
+          0
+        ]
+      ],
+      "expected": [
+        [
+          "executed_plan_and_result",
+          330465,
+          324784
+        ],
+        [
+          "planned_no_execution_evidence",
+          1346,
+          0
+        ]
+      ],
+      "detail": "All result rows partition into confirmed-race runners and planned nonexecution rows."
+    },
+    {
+      "name": "all_planned_nonexecution_keys_classified",
+      "status": "PASS",
+      "observed": [
+        [
+          "no_valid_completed_race",
+          "official_closure_nonexecution",
+          17
+        ],
+        [
+          "no_valid_completed_race",
+          "official_day_cancelled",
+          35
+        ],
+        [
+          "no_valid_completed_race",
+          "race_cancelled",
+          51
+        ],
+        [
+          "no_valid_completed_race",
+          "race_invalid",
+          2
+        ],
+        [
+          "no_valid_completed_race",
+          "reported_day_cancelled",
+          11
+        ]
+      ],
+      "expected": [
+        [
+          "no_valid_completed_race",
+          "official_closure_nonexecution",
+          17
+        ],
+        [
+          "no_valid_completed_race",
+          "official_day_cancelled",
+          35
+        ],
+        [
+          "no_valid_completed_race",
+          "race_cancelled",
+          51
+        ],
+        [
+          "no_valid_completed_race",
+          "race_invalid",
+          2
+        ],
+        [
+          "no_valid_completed_race",
+          "reported_day_cancelled",
+          11
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "29_previously_unclassified_rows_closed_as_cancelled",
+      "status": "PASS",
+      "observed": [
+        [
+          "reason_recorded_outcome_unclassified",
+          "race_cancelled",
+          29
+        ]
+      ],
+      "expected": [
+        [
+          "reason_recorded_outcome_unclassified",
+          "race_cancelled",
+          29
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "unresolved_race_days",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "documented_closure_venue_days",
+      "status": "PASS",
+      "observed": 552,
+      "expected": 552,
+      "detail": ""
+    },
+    {
+      "name": "executed_races_on_documented_closure_dates",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "calendar_full_date_venue_rectangle",
+      "status": "PASS",
+      "observed": [
+        18348,
+        6116,
+        3,
+        "2010-01-01",
+        "2026-09-29"
+      ],
+      "expected": [
+        18348,
+        6116,
+        3,
+        "2010-01-01",
+        "2026-09-29"
+      ],
+      "detail": ""
+    },
+    {
+      "name": "reviewed_2026_09_17_yeongnam_trial_scope",
+      "status": "PASS",
+      "observed": [
+        4,
+        48,
+        4
+      ],
+      "expected": [
+        4,
+        48,
+        4
+      ],
+      "detail": ""
+    },
+    {
+      "name": "missing_trial_horse_ids_resolved_by_documented_methods",
+      "status": "PASS",
+      "observed": [
+        [
+          "crosschecked_operational_rpt",
+          99
+        ],
+        [
+          "user_confirmed_rpt_profile",
+          5
+        ]
+      ],
+      "expected": [
+        [
+          "crosschecked_operational_rpt",
+          99
+        ],
+        [
+          "user_confirmed_rpt_profile",
+          5
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "no_unresolved_trial_horse_ids",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "resolved_trial_horse_ids_match_official_id_roster",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "official_runner_id_widths_without_numeric_conversion",
+      "status": "PASS",
+      "observed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "detail": "Identifiers remain strings; widths are validated without casting or padding IDs."
+    },
+    {
+      "name": "date_and_official_id_columns_are_varchar",
+      "status": "PASS",
+      "observed": [
+        [
+          "race_plan",
+          "date",
+          "VARCHAR"
+        ],
+        [
+          "race_events",
+          "result_date_key",
+          "VARCHAR"
+        ],
+        [
+          "race_events",
+          "scheduled_date",
+          "VARCHAR"
+        ],
+        [
+          "runner_results",
+          "result_date",
+          "VARCHAR"
+        ],
+        [
+          "calendar_days",
+          "date",
+          "VARCHAR"
+        ],
+        [
+          "trial_sessions",
+          "trial_date",
+          "VARCHAR"
+        ],
+        [
+          "trial_participants",
+          "trial_date",
+          "VARCHAR"
+        ],
+        [
+          "runner_section_coverage_api",
+          "race_date",
+          "VARCHAR"
+        ],
+        [
+          "runner_results",
+          "horse_id_raw",
+          "VARCHAR"
+        ],
+        [
+          "runner_results",
+          "jockey_id_raw",
+          "VARCHAR"
+        ],
+        [
+          "runner_results",
+          "trainer_id_raw",
+          "VARCHAR"
+        ],
+        [
+          "runner_results",
+          "owner_id_raw",
+          "VARCHAR"
+        ],
+        [
+          "entity_reference_roster",
+          "entity_id_official_string",
+          "VARCHAR"
+        ]
+      ],
+      "expected": "VARCHAR for every listed date and ID field"
+    },
+    {
+      "name": "official_id_reference_roster_counts_and_zero_prefixes",
+      "status": "PASS",
+      "observed": [
+        [
+          "horse",
+          23814,
+          23632
+        ],
+        [
+          "jockey",
+          337,
+          337
+        ],
+        [
+          "owner",
+          1438,
+          311
+        ],
+        [
+          "trainer",
+          225,
+          225
+        ]
+      ],
+      "expected": [
+        [
+          "horse",
+          23814,
+          23632
+        ],
+        [
+          "jockey",
+          337,
+          337
+        ],
+        [
+          "owner",
+          1438,
+          311
+        ],
+        [
+          "trainer",
+          225,
+          225
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "confirmed_runner_entity_ids_match_official_roster",
+      "status": "PASS",
+      "observed": [
+        [
+          "horse",
+          0
+        ],
+        [
+          "jockey",
+          0
+        ],
+        [
+          "owner",
+          0
+        ],
+        [
+          "trainer",
+          0
+        ]
+      ],
+      "expected": [
+        [
+          "horse",
+          0
+        ],
+        [
+          "jockey",
+          0
+        ],
+        [
+          "owner",
+          0
+        ],
+        [
+          "trainer",
+          0
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "reviewed_trial_entity_ids_match_official_roster",
+      "status": "PASS",
+      "observed": [
+        [
+          "jockey",
+          0
+        ],
+        [
+          "trainer",
+          0
+        ]
+      ],
+      "expected": [
+        [
+          "jockey",
+          0
+        ],
+        [
+          "trainer",
+          0
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "section_measurement_kind_value_contract",
+      "status": "PASS",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "detail": ""
+    },
+    {
+      "name": "section_coverage_flags_and_counts",
+      "status": "PASS",
+      "observed": [
+        0,
+        0,
+        2617940,
+        1762125,
+        330465
+      ],
+      "expected": [
+        0,
+        0,
+        2617940,
+        1762125,
+        330465
+      ],
+      "detail": ""
+    },
+    {
+      "name": "section_runner_coverage_exactly_matches_confirmed_runners",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "section_observed_and_missing_counts",
+      "status": "PASS",
+      "observed": [
+        [
+          false,
+          4870
+        ],
+        [
+          true,
+          325595
+        ]
+      ],
+      "expected": [
+        [
+          false,
+          4870
+        ],
+        [
+          true,
+          325595
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "two_documented_finisher_section_gaps_remain_unimputed",
+      "status": "PASS",
+      "observed": [
+        [
+          "1",
+          "20100704",
+          "6",
+          "10",
+          "0020813",
+          "용왕성",
+          "특이경주",
+          "실격 미처분",
+          "user_provided_2026-09-30",
+          false,
+          "unverified"
+        ],
+        [
+          "1",
+          "20121006",
+          "9",
+          "9",
+          "0027368",
+          "동촌",
+          "출주정지",
+          "2개월(2012.10.07~2012.12.06); 양 앞다리 질병(양전 제염)",
+          "user_provided_2026-09-30",
+          false,
+          "unverified"
+        ]
+      ],
+      "expected": [
+        [
+          "1",
+          "20100704",
+          "6",
+          "10",
+          "0020813",
+          "용왕성",
+          "특이경주",
+          "실격 미처분",
+          "user_provided_2026-09-30",
+          false,
+          "unverified"
+        ],
+        [
+          "1",
+          "20121006",
+          "9",
+          "9",
+          "0027368",
+          "동촌",
+          "출주정지",
+          "2개월(2012.10.07~2012.12.06); 양 앞다리 질병(양전 제염)",
+          "user_provided_2026-09-30",
+          false,
+          "unverified"
+        ]
+      ],
+      "detail": "The user-provided post-race records are retained. Their causal link to the missing API section values remains unverified; no measurement is imputed."
+    },
+    {
+      "name": "documented_role_exception_categories",
+      "status": "PASS",
+      "observed": [
+        [
+          "race",
+          "confirmed_non_person_placeholder",
+          "placeholder_0AAAAA_web_row_checked",
+          23
+        ],
+        [
+          "trial",
+          "confirmed_non_person_placeholder",
+          "confirmed_same_nonperson_placeholder",
+          140
+        ],
+        [
+          "trial",
+          "confirmed_non_person_placeholder",
+          "official_row_nonperson_sentinel_for_missing_source_id",
+          1
+        ],
+        [
+          "trial",
+          "source_error_unknown_cause",
+          "closed_user_accepted_source_error",
+          22
+        ]
+      ],
+      "expected": [
+        [
+          "race",
+          "confirmed_non_person_placeholder",
+          "placeholder_0AAAAA_web_row_checked",
+          23
+        ],
+        [
+          "trial",
+          "confirmed_non_person_placeholder",
+          "confirmed_same_nonperson_placeholder",
+          140
+        ],
+        [
+          "trial",
+          "confirmed_non_person_placeholder",
+          "official_row_nonperson_sentinel_for_missing_source_id",
+          1
+        ],
+        [
+          "trial",
+          "source_error_unknown_cause",
+          "closed_user_accepted_source_error",
+          22
+        ]
+      ],
+      "detail": "The 22 accepted source errors stay ID-null and are reported as closed exceptions, not reopened."
+    },
+    {
+      "name": "22_closed_trial_trainer_source_errors_remain_unassigned",
+      "status": "PASS",
+      "observed": [
+        22,
+        22,
+        19,
+        3
+      ],
+      "expected": [
+        22,
+        22,
+        19,
+        3
+      ],
+      "detail": ""
+    },
+    {
+      "name": "known_raw_identifier_gaps",
+      "status": "PASS",
+      "observed": [
+        38,
+        38,
+        104,
+        5121,
+        84
+      ],
+      "expected": [
+        38,
+        38,
+        104,
+        5121,
+        84
+      ],
+      "detail": ""
+    },
+    {
+      "name": "official_trial_jockey_supplement_partition",
+      "status": "PASS",
+      "observed": [
+        5079,
+        18,
+        24,
+        4420,
+        659
+      ],
+      "expected": [
+        5079,
+        18,
+        24,
+        4420,
+        659
+      ],
+      "detail": ""
+    },
+    {
+      "name": "completed_trial_rows_missing_reviewed_jockey_id",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "zero_time_trial_not_counted_as_completed_ride",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": "A listed or scheduled jockey on a zero-time row is not promoted to an actual ride."
+    },
+    {
+      "name": "single_known_owner_name_absence_preserves_official_id",
+      "status": "PASS",
+      "observed": [
+        [
+          "1",
+          "20260809",
+          "5",
+          "11",
+          "퀸즈플라잉",
+          "010424"
+        ]
+      ],
+      "expected": [
+        [
+          "1",
+          "20260809",
+          "5",
+          "11",
+          "퀸즈플라잉",
+          "010424"
+        ]
+      ],
+      "detail": "Owner identity remains the official ID; no name is inferred."
+    },
+    {
+      "name": "runner_result_outcome_fields_and_nonfinish_markers",
+      "status": "PASS",
+      "observed": [
+        0,
+        0,
+        1332,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        1332,
+        0
+      ],
+      "detail": "Raw rank 0/99 are retained and never treated as positive finishes; 2 such rows are in otherwise executed races."
+    },
+    {
+      "name": "nonfinish_rank_codes_partition",
+      "status": "PASS",
+      "observed": [
+        [
+          "executed_plan_and_result",
+          "0",
+          2,
+          0
+        ],
+        [
+          "executed_plan_and_result",
+          "94",
+          1568,
+          0
+        ],
+        [
+          "executed_plan_and_result",
+          "95",
+          2030,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "0",
+          97,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "94",
+          1,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "95",
+          3,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "98",
+          12,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "99",
+          1233,
+          0
+        ]
+      ],
+      "expected": [
+        [
+          "executed_plan_and_result",
+          "0",
+          2,
+          0
+        ],
+        [
+          "executed_plan_and_result",
+          "94",
+          1568,
+          0
+        ],
+        [
+          "executed_plan_and_result",
+          "95",
+          2030,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "0",
+          97,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "94",
+          1,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "95",
+          3,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "98",
+          12,
+          0
+        ],
+        [
+          "planned_no_execution_evidence",
+          "99",
+          1233,
+          0
+        ]
+      ],
+      "detail": ""
+    },
+    {
+      "name": "unverified_result_only_key_ledger_empty",
+      "status": "PASS",
+      "observed": 0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "database_sha256_unchanged_after_read_only_audit",
+      "status": "PASS",
+      "observed": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "expected": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "detail": ""
+    }
+  ],
+  "failed_checks": []
+}

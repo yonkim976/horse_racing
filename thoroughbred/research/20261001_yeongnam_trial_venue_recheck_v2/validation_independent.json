@@ -1,0 +1,222 @@
+{
+  "validation_date": "2026-10-01",
+  "status": "passed",
+  "scope": {
+    "source_meet_query": "3",
+    "trial_date": "2026-09-17",
+    "trial_nos": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "expected_sessions": 4,
+    "expected_participant_rows": 48,
+    "scope_note": "Validation applies only to this date and cohort; no all-year inference."
+  },
+  "input_ledger": {
+    "row_count": 1,
+    "csv_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+    "physical_venue": "부산경남",
+    "venue_review_status": "confirmed_official_plan_and_user_clarification",
+    "reviewed_distance_m": 1000,
+    "distance_review_status": "official_2026_plan_standard",
+    "decision_basis": "official_2026_annual_plan_and_user_clarification; event-level API/RPT venue and distance remain absent; scoped to meet=3 2026-09-17",
+    "official_plan_url": "https://race.kra.co.kr/down/raceplan2026_20260516.pdf",
+    "official_plan_printed_pages": "65,66",
+    "official_plan_pdf_pages_1based": "69,70",
+    "scope_matches_manifest": true
+  },
+  "evidence_hashes": {
+    "pinned_files_all_match": true,
+    "pinned_files": [
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/venue_review.csv",
+        "expected_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+        "actual_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+        "matches": true
+      },
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/raceplan2026_20260516.pdf",
+        "expected_sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+        "actual_sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+        "matches": true
+      },
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/official_plan_capture.json",
+        "expected_sha256": "2b2998508bf86579c615909c751e54c4c43319e561434158c3f905da8f7b4984",
+        "actual_sha256": "2b2998508bf86579c615909c751e54c4c43319e561434158c3f905da8f7b4984",
+        "matches": true
+      },
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/official_plan_page_65.png",
+        "expected_sha256": "85dfbb439dd50c8817dbbcd238892c16a5e0a8b20f396370e042db49987c207f",
+        "actual_sha256": "85dfbb439dd50c8817dbbcd238892c16a5e0a8b20f396370e042db49987c207f",
+        "matches": true
+      },
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/user_clarification.json",
+        "expected_sha256": "bc79c36ae78660b210f17a1ef0484f08aa87d9f3739d832bd06f93429426f50e",
+        "actual_sha256": "bc79c36ae78660b210f17a1ef0484f08aa87d9f3739d832bd06f93429426f50e",
+        "matches": true
+      },
+      {
+        "path": "thoroughbred/research/20260930_trial_venue_review_v1/venue_review.csv",
+        "expected_sha256": "8635d5aa0be39f63c68d71d865734d9de5650dc9f54ceb6a1e2fbf0fe3fe2769",
+        "actual_sha256": "8635d5aa0be39f63c68d71d865734d9de5650dc9f54ceb6a1e2fbf0fe3fe2769",
+        "matches": true
+      },
+      {
+        "path": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2026/meet_3.json",
+        "expected_sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+        "actual_sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+        "matches": true
+      },
+      {
+        "path": "data/raw/kra_text/dacom23/meet=3/year=2026/month=09/day=17/20260917dacom23.rpt",
+        "expected_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+        "actual_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+        "matches": true
+      }
+    ],
+    "api_snapshot_sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+    "api_matches_manifest_pin": true,
+    "rpt_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+    "rpt_matches_manifest_pin": true,
+    "official_plan_pdf_sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+    "official_plan_page_captures": [
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/official_plan_page_65.png",
+        "exists": true,
+        "sha256": "85dfbb439dd50c8817dbbcd238892c16a5e0a8b20f396370e042db49987c207f"
+      },
+      {
+        "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/official_plan_page_66.png",
+        "exists": true,
+        "sha256": "bd75a9821cfee7ee86bc9a4d2501424c47c054445d1f46f36648a3496d401517"
+      }
+    ]
+  },
+  "build_artifact": {
+    "built_at_utc": "2026-10-01T07:57:36.360351+00:00",
+    "database_path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "database_sha256": "146f709dba3eb4d6add21af774f62dca561d0d04022dc40728b99255edaefda6",
+    "database_sha256_matches_manifest": true,
+    "build_in_progress_marker_absent": true,
+    "manifest_checks_count": 55,
+    "manifest_checks_passed": 55,
+    "manifest_check_failures": []
+  },
+  "db_read_only_validation": {
+    "opened_read_only": true,
+    "target_sessions_view": {
+      "rows": 4,
+      "distinct_sessions": 4,
+      "busan_gyeongnam_rows": 4,
+      "distance_1000_rows": 4,
+      "official_plan_url_rows": 4
+    },
+    "target_participants_view": {
+      "rows": 48,
+      "distinct_sessions": 4,
+      "busan_gyeongnam_rows": 48,
+      "distance_1000_rows": 48,
+      "official_plan_url_rows": 48
+    },
+    "participant_rows_by_trial_no": [
+      {
+        "trial_no": "1",
+        "participant_rows": 12,
+        "distinct_sessions": 1,
+        "busan_gyeongnam_rows": 12,
+        "distance_1000_rows": 12
+      },
+      {
+        "trial_no": "2",
+        "participant_rows": 12,
+        "distinct_sessions": 1,
+        "busan_gyeongnam_rows": 12,
+        "distance_1000_rows": 12
+      },
+      {
+        "trial_no": "3",
+        "participant_rows": 12,
+        "distinct_sessions": 1,
+        "busan_gyeongnam_rows": 12,
+        "distance_1000_rows": 12
+      },
+      {
+        "trial_no": "4",
+        "participant_rows": 12,
+        "distinct_sessions": 1,
+        "busan_gyeongnam_rows": 12,
+        "distance_1000_rows": 12
+      }
+    ],
+    "global_base_and_view_row_counts": {
+      "trial_sessions": 6199,
+      "trial_sessions_venue_reviewed": 6199,
+      "trial_participants": 61777,
+      "trial_participants_venue_reviewed": 61777
+    },
+    "role_and_source_data_compared_to_pre_venue_backup": [
+      {
+        "object": "trial_sessions",
+        "baseline_rows": 6199,
+        "current_rows": 6199,
+        "symmetric_difference_rows": 0,
+        "unchanged": true
+      },
+      {
+        "object": "trial_participants",
+        "baseline_rows": 61777,
+        "current_rows": 61777,
+        "symmetric_difference_rows": 0,
+        "unchanged": true
+      },
+      {
+        "object": "runner_results",
+        "baseline_rows": 331811,
+        "current_rows": 331811,
+        "symmetric_difference_rows": 0,
+        "unchanged": true
+      },
+      {
+        "object": "race_events",
+        "baseline_rows": 29826,
+        "current_rows": 29826,
+        "symmetric_difference_rows": 0,
+        "unchanged": true
+      },
+      {
+        "object": "confirmed_runners_entity_linked",
+        "baseline_rows": 330465,
+        "current_rows": 330465,
+        "symmetric_difference_rows": 0,
+        "unchanged": true
+      },
+      {
+        "object": "trial_participants_entity_linked",
+        "baseline_rows": 61777,
+        "current_rows": 61777,
+        "symmetric_difference_rows": 0,
+        "unchanged": true
+      }
+    ],
+    "all_compared_data_unchanged": true,
+    "raw_api_role_ids_present_in_target_rows": true
+  },
+  "source_attribution_review": {
+    "sessions_view_has_venue_evidence_url_and_venue_decision_basis": true,
+    "participants_view_has_venue_evidence_url_and_venue_review_status": true,
+    "participants_view_has_full_venue_decision_basis_column": false,
+    "note": "The participant view carries the official annual-plan URL and confirmed review status. The fuller basis text is on trial_sessions_venue_reviewed and in the source ledger."
+  },
+  "mutations_performed": {
+    "database": false,
+    "source_api_or_rpt": false,
+    "role_ids": false,
+    "readme_or_source_capture": false,
+    "only_validation_artifact_written": true
+  }
+}

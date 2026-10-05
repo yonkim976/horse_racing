@@ -1,0 +1,419 @@
+{
+  "status": "PASS",
+  "database": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+  "manifest": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/manifest.json",
+  "database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+  "read_only": true,
+  "duckdb_threads": 2,
+  "duckdb_memory_limit": "2GB",
+  "scope": {
+    "dates": [
+      "2010-01-01",
+      "2026-09-29"
+    ],
+    "actual_meets": [
+      1,
+      3,
+      4
+    ],
+    "medical_meets": [
+      1,
+      3
+    ],
+    "jeju_excluded": true
+  },
+  "proof_pins": {
+    "medical_source_input": {
+      "path": "thoroughbred/research/20261002_medical_v1/root_input_verification.json",
+      "sha256": "b9adbbaa8e415b99952b7a807cb7d6c087037491441b9dde8ddc4e1a788c2bbe",
+      "all_passed": true
+    },
+    "medical_core_input": {
+      "path": "thoroughbred/research/20261002_medical_v1/root_core_input_verification.json",
+      "sha256": "e9a3465985220b67fe6caa70c54f99ecf331afa519771347643580d1af76e825",
+      "all_passed": true
+    },
+    "medical_dictionary": {
+      "path": "thoroughbred/research/20261002_medical_v1/root_dictionary_verification.json",
+      "sha256": "d910a36279a4f8abe20ecd4a8e31f30059adc2b72fc88170d4eba82a767f0fef",
+      "all_passed": true
+    },
+    "medical_stage_preservation": {
+      "path": "thoroughbred/research/20261002_medical_v1/root_preservation_verification.json",
+      "sha256": "73d7427cd51949afb3b73579d6d00632f338317c16b88ded5574c50cf59c92f0",
+      "all_passed": true
+    },
+    "medical_apply_report": {
+      "path": "thoroughbred/research/20261002_medical_v1/loader/apply_report.json",
+      "sha256": "6bc3d0396108c32dcaacae8f4e4ed9b2a8697327defe2d6b9e34e215475f98a9"
+    },
+    "passing_new_data": {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_new_data_verification.json",
+      "sha256": "51b5dc88be7863c450210cf083b8eda70f96fbac8a935c35bb999aff02615ef3",
+      "all_passed": true
+    },
+    "passing_snapshot_preservation": {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_preservation_verification.json",
+      "sha256": "6d23dc9763b791d928551ea6d2dd66ce5d3d34a0f491b8f88b64c42e1fc91863",
+      "all_passed": true
+    },
+    "passing_apply_report": {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/loader/apply_report.json",
+      "sha256": "edde60eb844c73a702e5fb8aef19f7a7c76b1b7bbdddf324efe4896955b01a5e"
+    }
+  },
+  "checks": {
+    "exact_attested_read_only_snapshot": {
+      "passed": true,
+      "details": {
+        "database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+        "manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+        "attestation_verified_equal": true
+      }
+    },
+    "medical_to_passing_source_and_preservation_proof_chain": {
+      "passed": true,
+      "details": {
+        "medical_raw_rows_and_unique_observation_ids": [
+          2101073,
+          2101073
+        ],
+        "medical_input_tables_bidirectional_mismatches": {
+          "medical_observations": [
+            0,
+            0
+          ],
+          "medical_api16_page_ledger": [
+            0,
+            0
+          ],
+          "medical_api16_year_meet_coverage": [
+            0,
+            0
+          ],
+          "medical_api16_archived_page_ledger": [
+            0,
+            0
+          ],
+          "medical_archived_daily_coverage": [
+            0,
+            0
+          ],
+          "medical_api16_current_exclusions": [
+            0,
+            0
+          ],
+          "medical_api16_archived_exclusions": [
+            0,
+            0
+          ],
+          "medical_existing_raw_inventory": [
+            0,
+            0
+          ],
+          "medical_dacom72_file_ledger": [
+            0,
+            0
+          ],
+          "medical_dacom72_exclusions": [
+            0,
+            0
+          ],
+          "medical_dacom72_layout_reconciliation": [
+            0,
+            0
+          ],
+          "medical_dacom72_year_meet_coverage": [
+            0,
+            0
+          ],
+          "medical_api_comparison_ledger": [
+            0,
+            0
+          ],
+          "medical_fingerprint_candidates": [
+            0,
+            0
+          ],
+          "medical_source_year_meet_coverage": [
+            0,
+            0
+          ],
+          "medical_api33_source_rows": [
+            0,
+            0
+          ],
+          "medical_api33_terms": [
+            0,
+            0
+          ],
+          "medical_phrase_decisions": [
+            0,
+            0
+          ],
+          "medical_phrase_components": [
+            0,
+            0
+          ],
+          "medical_explanation_observations": [
+            0,
+            0
+          ],
+          "medical_explanation_terms": [
+            0,
+            0
+          ]
+        },
+        "medical_prefix_rules_held": 356,
+        "medical_stage_sha256": "c30202a65a1a82c2927efc8e0ef150c03a0c9950e953ee445beb1b3a7f8c2de6",
+        "passing_baseline_sha256": "c30202a65a1a82c2927efc8e0ef150c03a0c9950e953ee445beb1b3a7f8c2de6",
+        "final_snapshot_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+        "passing_source_input_multiset_mismatch": {
+          "passing_api_observations": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 29774,
+            "source_sha256": "facfeca265488a7907ae913d4b7605e3e64aa8b324cca3b8287f1f3dbe316df7"
+          },
+          "passing_api_page_ledger": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 48,
+            "source_sha256": "113a9fb48a80d663e9ceaf3889087d2b31dade2940f0b6c9ebe5fed046a49ba6"
+          },
+          "passing_api_exclusions": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 0,
+            "source_sha256": "8ce3e82818d6ba85298ff80f1ae3d1e2a576a7f23354d023e8eb1516f6a43c3e"
+          },
+          "passing_rpt_race_headers": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 17371,
+            "source_sha256": "5eaaca2e92f5cc70b0ed80f187e5ed5928ea3ac2d1cefb3b8e9f1dec3b3340df"
+          },
+          "passing_rpt_point_observations": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 111467,
+            "source_sha256": "0677122595858c8e6eb7db48d31d325be7733659e553379f66796f2d364d4b5a"
+          },
+          "passing_rpt_source_files": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 1827,
+            "source_sha256": "8cdc4eaba4c049dd558a640fbed1a212bfe2ded7f907b39f0317548287bd36db"
+          },
+          "passing_rpt_snapshot_comparison": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 126406,
+            "source_sha256": "6eeab952b919d35e97f892d9815e22fda0e6e57b7400cf9b821bec37da17b523"
+          },
+          "passing_rpt_point_mapping": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 20,
+            "source_sha256": "aaf5858840b00367e5d96a66495c976849fc74f05de929b7ac00fd445ab9e5d2"
+          },
+          "passing_api_mapping_validation": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 315,
+            "source_sha256": "ea0e06d9c930df8ccfc9647a7cd4450d504756f439853750b74cbf168e88a7b7"
+          },
+          "passing_api_rpt_value_matches": {
+            "bidirectional_mismatch": [
+              0,
+              0
+            ],
+            "rows": 87334,
+            "source_sha256": "f1f0b822596aedea4974f31a4c6dd56f256873fb214c6c7ee8aaf96379512c9b"
+          }
+        },
+        "passing_selection_mismatch": [
+          0,
+          0
+        ],
+        "passing_preserved_objects": [
+          153,
+          180
+        ]
+      }
+    },
+    "pre_report_object_inventory": {
+      "passed": true,
+      "details": {
+        "database_objects": {
+          "VIEW": 67,
+          "BASE TABLE": 113
+        },
+        "manifest_registered_objects": 178,
+        "source_manifests_rows": 26,
+        "steward_report_objects": []
+      }
+    },
+    "medical_snapshot_row_count_and_scope": {
+      "passed": true,
+      "details": {
+        "rows": 2101073,
+        "scope_violations": 0,
+        "cohort_rows": [
+          [
+            "api16",
+            "current_annual",
+            243411
+          ],
+          [
+            "api16_archived",
+            "archived_daily_snapshot",
+            238591
+          ],
+          [
+            "dacom72",
+            "rpt",
+            1619071
+          ]
+        ]
+      }
+    },
+    "passing_api_and_confirmed_race_keys": {
+      "passed": true,
+      "details": {
+        "API_observations": 29774,
+        "unique_API_source_locators": 29774,
+        "duplicate_API_event_keys": 0,
+        "API_scope_violations": 0,
+        "confirmed_race_keys": 29710,
+        "confirmed_scope_violations": 0,
+        "duplicate_confirmed_race_keys": 0,
+        "adjudicated_executed_and_nonexecution_counts": {
+          "confirmed_executed_race": 29710,
+          "core_execution_ledger_nonconfirmed_match": 64
+        }
+      }
+    },
+    "passing_point_grain_raw_value_scope_and_coverage": {
+      "passed": true,
+      "details": {
+        "selected_points": 144001,
+        "selected_sources": [
+          [
+            "api303",
+            142227
+          ],
+          [
+            "dacom11_rpt",
+            1774
+          ]
+        ],
+        "duplicate_meet_date_race_point_keys": 0,
+        "selected_points_without_value_or_source": 0,
+        "selected_points_out_of_scope": 0,
+        "historical_publication_claims": 0,
+        "group_grammar_interpretations": 0,
+        "selected_raw_literals_missing_from_same_row_source_value_array": 0,
+        "confirmed_races_missing_a_selected_point": 0,
+        "selected_races_without_confirmed_core_key": 0,
+        "note": "The TEMP table is connection-local and memory-only; the backup database was opened read_only."
+      }
+    },
+    "passing_expected_selection_and_known_discrepancies": {
+      "passed": true,
+      "details": {
+        "selected_points_db_only": 0,
+        "selected_points_expected_only": 0,
+        "API_RPT_literal_discrepancies": 50,
+        "races_with_discrepancies": 39,
+        "discrepancies_retained_API_primary": 50,
+        "unmapped_API_literal_observations_preserved": 414,
+        "expected_point_multiset_file_sha256": "d15fbcbc69a2adca8f597f3ef5bbedf59def7994f9b3361603f1265e89cad743"
+      }
+    },
+    "medical_publication_time_and_linking_guards_from_independent_proof": {
+      "passed": true,
+      "details": {
+        "medical_time_claim_audit_summary": null,
+        "source_exact_roster_link_counts": [
+          {
+            "source_kind": "api16",
+            "source_cohort": "current_annual",
+            "link_status": "exact_core_roster_match",
+            "n": 238344
+          },
+          {
+            "source_kind": "api16",
+            "source_cohort": "current_annual",
+            "link_status": "unmatched_official_id",
+            "n": 5067
+          },
+          {
+            "source_kind": "api16_archived",
+            "source_cohort": "archived_daily_snapshot",
+            "link_status": "exact_core_roster_match",
+            "n": 228615
+          },
+          {
+            "source_kind": "api16_archived",
+            "source_cohort": "archived_daily_snapshot",
+            "link_status": "unmatched_official_id",
+            "n": 9976
+          },
+          {
+            "source_kind": "dacom72",
+            "source_cohort": "rpt",
+            "link_status": "source_has_no_official_id",
+            "n": 1619071
+          }
+        ],
+        "unlinked_name_only_Text_policy": "All 1,619,071 Text rows have source_has_no_official_id; no name-only horse links.",
+        "prior_parser_dependent_phrases_blocked": 356,
+        "medical_input_proof_sha256": "e9a3465985220b67fe6caa70c54f99ecf331afa519771347643580d1af76e825"
+      }
+    },
+    "backup_file_unchanged_by_read_only_validation": {
+      "passed": true,
+      "details": {
+        "size_bytes_before_after": [
+          2396532736,
+          2396532736
+        ],
+        "mtime_ns_before_after": [
+          1790917171608928428,
+          1790917171608928428
+        ]
+      }
+    }
+  },
+  "issues": [],
+  "known_exceptions_and_limits": [
+    "Repeated medical source observations are intentionally preserved; occurrence totals are not distinct-visit counts.",
+    "Text source rows carry horse names but no official horse IDs, so they remain unlinked by name alone.",
+    "API horse IDs absent from the core roster remain source IDs with unmatched status; they are not silently discarded.",
+    "The prior parser-dependent 356 phrases remain held; exact reviewed phrase metadata does not become an event diagnosis.",
+    "Passing conflict count is 50 points across 39 races; both source literals remain and API is primary as authorized.",
+    "There are 414 API point literals with no justified canonical point mapping; they remain in the raw/unmapped ledger.",
+    "Passing group notation is unparsed text, not horse-level passage order. Capture times do not establish historical publication times.",
+    "The snapshot predates steward-report objects; this verification does not inspect the active post-report database or any operating service."
+  ]
+}

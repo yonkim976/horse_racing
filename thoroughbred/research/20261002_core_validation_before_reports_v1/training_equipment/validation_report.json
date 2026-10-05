@@ -1,0 +1,1629 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-02T08:19:11.702890+00:00",
+  "scope": {
+    "event_dates": [
+      "2010-01-01",
+      "2026-09-29"
+    ],
+    "model_window_start": "2017-01-01",
+    "training_and_starting_exam_source_meets": [
+      "1",
+      "3"
+    ],
+    "equipment_api78_meets": [
+      "1",
+      "3",
+      "4"
+    ],
+    "jeju_meet_2_excluded": true
+  },
+  "database": {
+    "path": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+    "read_only": true,
+    "memory_limit": "2GB",
+    "threads": 2,
+    "sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+    "manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+    "manifest_status": "staged_core_not_frozen; closure coverage partial; 81 sourced intervals / 552 venue-days including 4 user-supplied KRA-authored annual-plan intervals and 2 official-start/API-end intervals; secondary historical leads and amendment gaps retained; 22 trial trainer source errors closed without IDs; 0 noncompletion subtypes qualified",
+    "backup_pair_verified_equal": true,
+    "sha256_after_readonly_audit": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7"
+  },
+  "checks": [
+    {
+      "name": "backup_database_hash_matches_manifest",
+      "status": "pass",
+      "expected": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "actual": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7"
+    },
+    {
+      "name": "backup_database_hash_matches_pair_attestation",
+      "status": "pass",
+      "expected": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "actual": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7"
+    },
+    {
+      "name": "backup_manifest_hash_matches_pair_attestation",
+      "status": "pass",
+      "expected": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+      "actual": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697"
+    },
+    {
+      "name": "backup_pair_attested_equal",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "research_source_manifest_rows_present",
+      "status": "pass",
+      "expected": [
+        "equipment_api78_full_v1",
+        "starting_exam_api21_1_v1",
+        "training_three_api18_api22_api216_v1"
+      ],
+      "actual": [
+        "equipment_api78_full_v1",
+        "starting_exam_api21_1_v1",
+        "training_three_api18_api22_api216_v1"
+      ]
+    },
+    {
+      "name": "manifest_object_inventory_matches_backup",
+      "status": "pass",
+      "expected": {
+        "declared_object_count": 178,
+        "allowed_unregistered_intermediate_views": [
+          "confirmed_runners_entity_reviewed_before_role_review",
+          "trial_participants_entity_reviewed_before_role_review"
+        ]
+      },
+      "actual": {
+        "object_count": 180,
+        "missing": [],
+        "unexpected": [
+          "confirmed_runners_entity_reviewed_before_role_review",
+          "trial_participants_entity_reviewed_before_role_review"
+        ]
+      }
+    },
+    {
+      "name": "official_entity_roster_key_unique",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_batches_scope_and_count",
+      "status": "pass",
+      "expected": {
+        "1": 1562,
+        "3": 1553,
+        "4": 2
+      },
+      "actual": {
+        "1": 1562,
+        "3": 1553,
+        "4": 2
+      }
+    },
+    {
+      "name": "equipment_batch_date_bounds",
+      "status": "pass",
+      "expected": [
+        "20100108",
+        "20260920"
+      ],
+      "actual": [
+        "20100108",
+        "20260920"
+      ],
+      "detail": "Capture dates can postdate the requested last event date when no later in-scope card exists; event rows are separately bounded."
+    },
+    {
+      "name": "equipment_batch_meet_and_event_scope",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_selected_batches_complete",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_observation_count",
+      "status": "pass",
+      "expected": 331450,
+      "actual": 331450
+    },
+    {
+      "name": "equipment_observation_scope",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_observation_primary_key_unique",
+      "status": "pass",
+      "expected": 331450,
+      "actual": 331450
+    },
+    {
+      "name": "equipment_source_locator_unique",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_observations_trace_to_page_manifest",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_raw_field_state_consistent",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_is_retrospective_and_wear_unknown",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_plus_minus_marks_preserve_raw_semantics",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0,
+      "detail": "A trailing + means new; a trailing - means removed; all other tokens are unmarked."
+    },
+    {
+      "name": "equipment_tokens_reconstruct_exactly_from_raw_field",
+      "status": "pass",
+      "expected": 326385,
+      "actual": {
+        "expected_token_rows": 326385,
+        "missing_token_rows": 0,
+        "raw_token_mismatches": 0,
+        "name_mismatches": 0,
+        "mark_mismatches": 0
+      }
+    },
+    {
+      "name": "equipment_removed_tokens_excluded_from_active_declared_view",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_active_declared_view_retains_all_nonremoved_tokens",
+      "status": "pass",
+      "expected": 312714,
+      "actual": 312714
+    },
+    {
+      "name": "equipment_core_runner_ledger_five_key_unique",
+      "status": "pass",
+      "expected": [
+        330465,
+        330465
+      ],
+      "actual": [
+        330465,
+        330465
+      ]
+    },
+    {
+      "name": "equipment_core_coverage_has_each_confirmed_runner_once",
+      "status": "pass",
+      "expected": [
+        330465,
+        330465
+      ],
+      "actual": [
+        330465,
+        330465
+      ]
+    },
+    {
+      "name": "equipment_runner_ledger_exact_confirmed_runner_keyset",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_link_requires_one_core_key_and_name_match",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_api78_priority_and_score_fallback_separation",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_declared_union_fallback_preserves_api_priority_and_excludes_removed",
+      "status": "pass",
+      "expected": {
+        "rows": 311790,
+        "removed_rows": 0
+      },
+      "actual": {
+        "rows": 311790,
+        "removed_rows": 0
+      }
+    },
+    {
+      "name": "equipment_links_resolve_by_exact_runner_key_and_normalized_name",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "equipment_linked_observations_map_one_to_one_to_core_runner",
+      "status": "pass",
+      "expected": [
+        330106,
+        330106
+      ],
+      "actual": [
+        330106,
+        330106
+      ]
+    },
+    {
+      "name": "training_observation_counts",
+      "status": "pass",
+      "expected": {
+        "daily_training": 5173033,
+        "start_training": 431517,
+        "swim_training": 459604
+      },
+      "actual": {
+        "daily_training": 5173033,
+        "start_training": 431517,
+        "swim_training": 459604
+      }
+    },
+    {
+      "name": "training_meet_and_date_scope",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_observation_id_primary_key_unique",
+      "status": "pass",
+      "expected": 6064154,
+      "actual": 6064154
+    },
+    {
+      "name": "training_same_source_locator_unique",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_source_locator_and_raw_fields_present",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_observations_trace_to_selected_source_files",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_full_date_meet_coverage_matches_contract",
+      "status": "pass",
+      "expected": {
+        "daily_training": [
+          12232,
+          10211,
+          2021,
+          0
+        ],
+        "start_training": [
+          12232,
+          5688,
+          6544,
+          0
+        ],
+        "swim_training": [
+          12232,
+          5691,
+          6541,
+          0
+        ]
+      },
+      "actual": {
+        "daily_training": [
+          12232,
+          10211,
+          2021,
+          0
+        ],
+        "start_training": [
+          12232,
+          5688,
+          6544,
+          0
+        ],
+        "swim_training": [
+          12232,
+          5691,
+          6541,
+          0
+        ]
+      }
+    },
+    {
+      "name": "training_coverage_rows_match_observation_counts",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_coverage_scope",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_horse_links_are_exact_official_id_only",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_retro_availability_and_unadjudicated_venue_flags",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "training_views_preserve_base_rows",
+      "status": "pass",
+      "expected": {
+        "daily_training_raw": 5173033,
+        "start_training_raw": 431517,
+        "swim_training_raw": 459604,
+        "training_observation_qa": 6064154,
+        "training_date_coverage": 36696
+      },
+      "actual": {
+        "daily_training_raw": 5173033,
+        "start_training_raw": 431517,
+        "swim_training_raw": 459604,
+        "training_observation_qa": 6064154,
+        "training_date_coverage": 36696
+      }
+    },
+    {
+      "name": "training_source_payload_json_valid",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "daily_training_known_nonidentical_natural_key_variants",
+      "status": "pass",
+      "expected": {
+        "repeated_groups": 8,
+        "affected_rows": 16,
+        "excess_rows": 8,
+        "nonidentical_groups": 8,
+        "nonidentical_rows": 16
+      },
+      "actual": {
+        "repeated_groups": 8,
+        "affected_rows": 16,
+        "excess_rows": 8,
+        "nonidentical_groups": 8,
+        "nonidentical_rows": 16
+      }
+    },
+    {
+      "name": "daily_training_existing_raw_value_qa_flags",
+      "status": "pass",
+      "expected": {
+        "duration_negative": 8,
+        "duration_zero": 11,
+        "end_before_start": 9,
+        "duration_differs_from_raw_time_delta": 337,
+        "nonidentical_natural_key_variant": 16
+      },
+      "actual": {
+        "duration_differs_from_raw_time_delta": 337,
+        "duration_negative": 8,
+        "duration_zero": 11,
+        "end_before_start": 9,
+        "nonidentical_natural_key_variant": 16
+      }
+    },
+    {
+      "name": "training_exact_payload_repeats_match_existing_qa",
+      "status": "pass",
+      "expected": {
+        "swim_training": [
+          8,
+          24,
+          16
+        ]
+      },
+      "actual": {
+        "swim_training": [
+          8,
+          24,
+          16
+        ]
+      },
+      "detail": "Repeated source payload rows are preserved as QA observations and are not interpreted as real training-session counts."
+    },
+    {
+      "name": "api22_occurrence_order_not_promoted_to_event_or_chronology",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "swim_raw_counts_preserved_and_unit_unresolved",
+      "status": "pass",
+      "expected": {
+        "zero_rows": 3,
+        "twenty_plus_rows": 33,
+        "resolved_unit_rows": 0
+      },
+      "actual": {
+        "zero_rows": 3,
+        "twenty_plus_rows": 33,
+        "resolved_unit_rows": 0
+      }
+    },
+    {
+      "name": "starting_exam_observation_count",
+      "status": "pass",
+      "expected": 52325,
+      "actual": 52325
+    },
+    {
+      "name": "starting_exam_meet_and_date_scope",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_observation_primary_key_unique",
+      "status": "pass",
+      "expected": 52325,
+      "actual": 52325
+    },
+    {
+      "name": "starting_exam_source_locator_unique",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_observations_trace_to_selected_source_files",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_daily_coverage",
+      "status": "pass",
+      "expected": 12232,
+      "actual": 12232
+    },
+    {
+      "name": "starting_exam_all_34_year_meet_partitions_complete",
+      "status": "pass",
+      "expected": 34,
+      "actual": 34
+    },
+    {
+      "name": "starting_exam_exact_repeat_keys_preserved",
+      "status": "pass",
+      "expected": {
+        "repeated_key_groups": 8,
+        "repeated_key_rows": 16,
+        "repeated_excess_rows": 8,
+        "exact_repeat_groups": 8,
+        "nonidentical_groups": 0
+      },
+      "actual": {
+        "repeated_key_groups": 8,
+        "repeated_key_rows": 16,
+        "repeated_excess_rows": 8,
+        "exact_repeat_groups": 8,
+        "nonidentical_groups": 0
+      }
+    },
+    {
+      "name": "starting_exam_missing_natural_key_components_retained",
+      "status": "pass",
+      "expected": 128,
+      "actual": 128,
+      "detail": "Rows missing a source key component are retained and not force-linked."
+    },
+    {
+      "name": "starting_exam_horse_link_exact_id_and_unmatched_ledger",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_role_link_view_cardinality",
+      "status": "pass",
+      "expected": 156975,
+      "actual": 156975
+    },
+    {
+      "name": "starting_exam_person_role_links_use_exact_source_ids",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_rider_names_not_linked_as_jockey_ids",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_retro_availability_and_venue_flags",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "starting_exam_view_cardinalities",
+      "status": "pass",
+      "expected": {
+        "starting_exam_results": 52325,
+        "starting_exam_qa": 52325,
+        "starting_exam_sessions": 3538,
+        "starting_exam_date_coverage": 12232,
+        "starting_exam_entity_links": 156975
+      },
+      "actual": {
+        "starting_exam_results": 52325,
+        "starting_exam_qa": 52325,
+        "starting_exam_sessions": 3538,
+        "starting_exam_date_coverage": 12232,
+        "starting_exam_entity_links": 156975
+      }
+    },
+    {
+      "name": "starting_exam_source_payload_json_valid",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "database_hash_unchanged_after_readonly_audit",
+      "status": "pass",
+      "expected": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+      "actual": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7"
+    }
+  ],
+  "known_limitations": [
+    {
+      "id": "training_and_starting_exam_meet3_is_integrated_region",
+      "status": "documented_source_limit",
+      "detail": "API18_1/API22_1/API216 and API21_1 provide meet 1 and raw meet 3 only. Meet 3 remains the source's Yeongnam region label and cannot be split into Busan meet 3 and Yeongcheon meet 4; no meet 4 rows are present in these datasets.",
+      "evidence": "The source contracts and READMEs define meets 1/3 and prohibit physical-venue inference; API78 separately has meets 1/3/4."
+    },
+    {
+      "id": "all_three_sources_are_retrospective",
+      "status": "documented_model_eligibility_limit",
+      "detail": "The source captures do not establish historical pre-race availability. Every row retains a retrospective/unverified status. The 2017+ row counts are reported separately; passing this QA does not approve feature use."
+    },
+    {
+      "id": "training_payload_repeats_are_not_session_counts",
+      "status": "documented_aggregation_limit",
+      "detail": "Identical repeated source payloads, especially the 24-row/8-group swim repeat set, remain observations and must not be interpreted as additional real workouts without a separate aggregation rule. API22 occurrence order is anonymous storage order, not an event ID or chronology."
+    },
+    {
+      "id": "entity_reference_roster_is_exact_id_reference_only",
+      "status": "documented_identity_limit",
+      "detail": "Horse, trainer and owner links use exact source official IDs. Names are not join keys; current profile trainer/owner values are not backfilled into historical rows. Unmatched and missing source IDs remain separate exceptions."
+    },
+    {
+      "id": "two_manifest_unregistered_intermediate_views",
+      "status": "confirmed_intentional_intermediate_views",
+      "detail": "The backup contains confirmed_runners_entity_reviewed_before_role_review and trial_participants_entity_reviewed_before_role_review outside the manifest object-count map. The coordinator confirmed these two helper views are intentional unregistered intermediates; all other declared object names match."
+    }
+  ],
+  "summaries": {
+    "database_object_counts": [
+      {
+        "table_type": "BASE TABLE",
+        "object_count": 113
+      },
+      {
+        "table_type": "VIEW",
+        "object_count": 67
+      }
+    ],
+    "roster_relationship_rule_counts": [
+      {
+        "relationship_rule": "event IDs are event-level only; current profile trainer/owner values are not backfilled",
+        "row_count": 25814
+      }
+    ],
+    "equipment_batches_by_meet": [
+      {
+        "meet": "1",
+        "row_count": 1562,
+        "first_date": "20100109",
+        "last_date": "20260920"
+      },
+      {
+        "meet": "3",
+        "row_count": 1553,
+        "first_date": "20100108",
+        "last_date": "20260918"
+      },
+      {
+        "meet": "4",
+        "row_count": 2,
+        "first_date": "20260913",
+        "last_date": "20260920"
+      }
+    ],
+    "equipment_field_states": [
+      {
+        "equipment_value_state": "blank",
+        "equipment_field_state": "observed_empty",
+        "row_count": 150171
+      },
+      {
+        "equipment_value_state": "nonblank",
+        "equipment_field_state": "observed_value",
+        "row_count": 181279
+      }
+    ],
+    "equipment_time_and_wear_status": [
+      {
+        "availability_status": "retrospective_api78_observation_not_verified_pre_race",
+        "physical_wear_status": "unknown",
+        "observed_time_basis": "response_file_saved_time_upper_bound_reconstructed",
+        "row_count": 12308
+      },
+      {
+        "availability_status": "retrospective_api78_observation_not_verified_pre_race",
+        "physical_wear_status": "unknown",
+        "observed_time_basis": "source_documents.retrieved_at_ms",
+        "row_count": 172103
+      },
+      {
+        "availability_status": "retrospective_api78_observation_not_verified_pre_race",
+        "physical_wear_status": "unknown",
+        "observed_time_basis": "timestamp_recorded_after_http_response",
+        "row_count": 147039
+      }
+    ],
+    "equipment_token_marks": [
+      {
+        "mark_status": "new",
+        "row_count": 27266
+      },
+      {
+        "mark_status": "removed",
+        "row_count": 13671
+      },
+      {
+        "mark_status": "unmarked",
+        "row_count": 285448
+      }
+    ],
+    "equipment_token_reconstruction": {
+      "expected_token_rows": 326385,
+      "missing_token_rows": 0,
+      "raw_token_mismatches": 0,
+      "name_mismatches": 0,
+      "mark_mismatches": 0
+    },
+    "equipment_core_coverage": [
+      {
+        "selected_source": "API78",
+        "coverage_status": "api78_observed_empty",
+        "source_coverage_state": "observed_blank",
+        "row_count": 149495
+      },
+      {
+        "selected_source": "API78",
+        "coverage_status": "api78_observed_value",
+        "source_coverage_state": "observed_nonblank",
+        "row_count": 180611
+      },
+      {
+        "selected_source": "KRA_official_score_html",
+        "coverage_status": "api78_unobserved_official_score_fallback",
+        "source_coverage_state": "runner_absent_from_complete_api78_card",
+        "row_count": 104
+      },
+      {
+        "selected_source": null,
+        "coverage_status": "api78_runner_absent_from_complete_card",
+        "source_coverage_state": "runner_absent_from_complete_api78_card",
+        "row_count": 255
+      }
+    ],
+    "equipment_link_status": [
+      {
+        "link_status": "linked_core_key_name_only",
+        "row_count": 3152
+      },
+      {
+        "link_status": "linked_op_id_corroborated",
+        "row_count": 326954
+      },
+      {
+        "link_status": "unresolved",
+        "row_count": 1344
+      }
+    ],
+    "training_dataset_counts": [
+      {
+        "dataset": "daily_training",
+        "row_count": 5173033,
+        "first_event_date": "2010-01-02",
+        "last_event_date": "2026-09-28",
+        "pre_2017_rows": 1914096,
+        "model_window_rows": 3258937,
+        "capture_time_null_rows": 0,
+        "prerace_verified_rows": 0
+      },
+      {
+        "dataset": "start_training",
+        "row_count": 431517,
+        "first_event_date": "2010-01-05",
+        "last_event_date": "2026-09-19",
+        "pre_2017_rows": 154706,
+        "model_window_rows": 276811,
+        "capture_time_null_rows": 0,
+        "prerace_verified_rows": 0
+      },
+      {
+        "dataset": "swim_training",
+        "row_count": 459604,
+        "first_event_date": "2010-03-03",
+        "last_event_date": "2026-09-23",
+        "pre_2017_rows": 183165,
+        "model_window_rows": 276439,
+        "capture_time_null_rows": 0,
+        "prerace_verified_rows": 0
+      }
+    ],
+    "training_date_coverage": [
+      {
+        "dataset": "daily_training",
+        "coverage_rows": 12232,
+        "complete_rows_cells": 10211,
+        "complete_zero_cells": 2021,
+        "missing_or_incomplete_cells": 0
+      },
+      {
+        "dataset": "start_training",
+        "coverage_rows": 12232,
+        "complete_rows_cells": 5688,
+        "complete_zero_cells": 6544,
+        "missing_or_incomplete_cells": 0
+      },
+      {
+        "dataset": "swim_training",
+        "coverage_rows": 12232,
+        "complete_rows_cells": 5691,
+        "complete_zero_cells": 6541,
+        "missing_or_incomplete_cells": 0
+      }
+    ],
+    "training_link_status": [
+      {
+        "dataset": "daily_training",
+        "link_status": "exact_core_roster_match",
+        "row_count": 5139741
+      },
+      {
+        "dataset": "daily_training",
+        "link_status": "unmatched_official_id",
+        "row_count": 33292
+      },
+      {
+        "dataset": "start_training",
+        "link_status": "exact_core_roster_match",
+        "row_count": 426332
+      },
+      {
+        "dataset": "start_training",
+        "link_status": "unmatched_official_id",
+        "row_count": 5185
+      },
+      {
+        "dataset": "swim_training",
+        "link_status": "exact_core_roster_match",
+        "row_count": 456662
+      },
+      {
+        "dataset": "swim_training",
+        "link_status": "unmatched_official_id",
+        "row_count": 2942
+      }
+    ],
+    "unmatched_id_examples": {
+      "training": [
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0022072",
+          "raw_name": "기회포착",
+          "event_date": "2010-01-02",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_1/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 13645
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0024020",
+          "raw_name": "승승구구",
+          "event_date": "2010-01-02",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_1/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 13828
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0015929",
+          "raw_name": "천하명장",
+          "event_date": "2010-01-03",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_1/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 13494
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0022072",
+          "raw_name": "기회포착",
+          "event_date": "2010-01-03",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_1/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 13166
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0024020",
+          "raw_name": "승승구구",
+          "event_date": "2010-01-03",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_1/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 13378
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0018972",
+          "raw_name": "개선장군",
+          "event_date": "2010-01-04",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_3/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 10691
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0019316",
+          "raw_name": "블랙메인",
+          "event_date": "2010-01-04",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_3/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 10859
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0019821",
+          "raw_name": "베이라이트",
+          "event_date": "2010-01-04",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_3/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 10835
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0022059",
+          "raw_name": "하이랜드",
+          "event_date": "2010-01-04",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_3/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 11103
+        },
+        {
+          "dataset": "daily_training",
+          "official_horse_id": "0022072",
+          "raw_name": "기회포착",
+          "event_date": "2010-01-04",
+          "raw_path": "data/raw/kra_api_monthly/horse_training/meet_1/201001/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 12739
+        }
+      ],
+      "starting_exam_horse": [
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-05-14",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 1147
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-05-20",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 1131
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-08-05",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 454
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-09-03",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 532
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-10-17",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 240
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-10-21",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 220
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-11-18",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 170
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-11-19",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 166
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-11-26",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 131
+        },
+        {
+          "link_status": "missing_official_id",
+          "official_horse_id": null,
+          "raw_name": null,
+          "event_date": "2015-12-09",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2015/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 77
+        }
+      ],
+      "starting_exam_person_roles": [
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2013-07-13",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2013/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 463
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2013-08-28",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2013/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 299
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2013-09-14",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2013/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 224
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2013-12-26",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2013/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 7
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2014-04-02",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2014/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 956
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2014-06-11",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_1/year_2014/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 1172
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2014-06-21",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2014/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 707
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2014-08-09",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2014/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 537
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2014-08-16",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2014/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 509
+        },
+        {
+          "entity_role": "owner",
+          "link_status": "missing_official_id",
+          "source_official_id": null,
+          "source_name": null,
+          "event_date": "2014-08-16",
+          "raw_path": "thoroughbred/research/20261002_starting_exam_v1/raw/captures/20261001T205529.933758Z-831c6db2/meet_3/year_2014/page_0001.json",
+          "source_page_no": 1,
+          "source_row_no": 504
+        }
+      ]
+    },
+    "training_view_counts": {
+      "daily_training_raw": 5173033,
+      "start_training_raw": 431517,
+      "swim_training_raw": 459604,
+      "training_observation_qa": 6064154,
+      "training_date_coverage": 36696
+    },
+    "training_source_json_validity": [
+      {
+        "dataset": "daily_training",
+        "invalid_json_rows": 0
+      },
+      {
+        "dataset": "start_training",
+        "invalid_json_rows": 0
+      },
+      {
+        "dataset": "swim_training",
+        "invalid_json_rows": 0
+      }
+    ],
+    "daily_training_natural_key_repeats": {
+      "repeated_groups": 8,
+      "affected_rows": 16,
+      "excess_rows": 8,
+      "nonidentical_groups": 8,
+      "nonidentical_rows": 16
+    },
+    "daily_training_qa_flag_counts": [
+      {
+        "flag": "duration_differs_from_raw_time_delta",
+        "row_count": 337
+      },
+      {
+        "flag": "duration_negative",
+        "row_count": 8
+      },
+      {
+        "flag": "duration_zero",
+        "row_count": 11
+      },
+      {
+        "flag": "end_before_start",
+        "row_count": 9
+      },
+      {
+        "flag": "nonidentical_natural_key_variant",
+        "row_count": 16
+      }
+    ],
+    "training_exact_payload_repeats": [
+      {
+        "dataset": "swim_training",
+        "duplicate_groups": 8,
+        "affected_rows": 24,
+        "duplicate_excess_rows": 16
+      }
+    ],
+    "starting_exam_by_meet": [
+      {
+        "meet": "1",
+        "row_count": 29516,
+        "first_event_date": "2010-01-06",
+        "last_event_date": "2026-09-18",
+        "pre_2017_rows": 10342,
+        "model_window_rows": 19174,
+        "capture_time_null_rows": 0,
+        "prerace_verified_rows": 0
+      },
+      {
+        "meet": "3",
+        "row_count": 22809,
+        "first_event_date": "2010-01-06",
+        "last_event_date": "2026-09-19",
+        "pre_2017_rows": 9240,
+        "model_window_rows": 13569,
+        "capture_time_null_rows": 0,
+        "prerace_verified_rows": 0
+      }
+    ],
+    "starting_exam_date_coverage": {
+      "day_meet_cells": 12232,
+      "complete_rows_cells": 3538,
+      "complete_zero_cells": 8694,
+      "incomplete_cells": 0,
+      "out_of_scope_cells": 0
+    },
+    "starting_exam_partitions": [
+      {
+        "coverage_status": "complete",
+        "row_count": 34
+      }
+    ],
+    "starting_exam_natural_key_repeats": {
+      "repeated_key_groups": 8,
+      "repeated_key_rows": 16,
+      "repeated_excess_rows": 8,
+      "exact_repeat_groups": 8,
+      "nonidentical_groups": 0
+    },
+    "starting_exam_raw_judgment_counts": [
+      {
+        "raw_pass_flag": "-",
+        "row_count": 180
+      },
+      {
+        "raw_pass_flag": "경주취소",
+        "row_count": 1
+      },
+      {
+        "raw_pass_flag": "불합격",
+        "row_count": 9882
+      },
+      {
+        "raw_pass_flag": "심사취소",
+        "row_count": 6
+      },
+      {
+        "raw_pass_flag": "출전제외",
+        "row_count": 1
+      },
+      {
+        "raw_pass_flag": "출전취소",
+        "row_count": 1381
+      },
+      {
+        "raw_pass_flag": "출주취소",
+        "row_count": 731
+      },
+      {
+        "raw_pass_flag": "합격",
+        "row_count": 40142
+      },
+      {
+        "raw_pass_flag": "합격유보",
+        "row_count": 1
+      }
+    ],
+    "starting_exam_horse_link_status": [
+      {
+        "link_status": "exact_core_roster_match",
+        "row_count": 51553
+      },
+      {
+        "link_status": "missing_official_id",
+        "row_count": 42
+      },
+      {
+        "link_status": "unmatched_official_id",
+        "row_count": 730
+      }
+    ],
+    "equipment_unmatched_runner_examples": [
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "1",
+        "api_horse_name_raw": "코리안댄서",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "2",
+        "api_horse_name_raw": "스윙맘보",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "3",
+        "api_horse_name_raw": "소진스키",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "4",
+        "api_horse_name_raw": "문프린세스",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "5",
+        "api_horse_name_raw": "나팔수선",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "6",
+        "api_horse_name_raw": "★다링비전",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20100821",
+        "race_no": "4",
+        "horse_no": "7",
+        "api_horse_name_raw": "★레인그린",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20100821_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20110123",
+        "race_no": "10",
+        "horse_no": "1",
+        "api_horse_name_raw": "시인의노래",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20110123_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20110123",
+        "race_no": "10",
+        "horse_no": "10",
+        "api_horse_name_raw": "천운",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20110123_p1.json"
+      },
+      {
+        "conflict_class": "not_in_confirmed_core",
+        "link_reason": "no_core_runner_at_exact_meet_date_race_program",
+        "meet": "1",
+        "event_date": "20110123",
+        "race_no": "10",
+        "horse_no": "11",
+        "api_horse_name_raw": "세세만세",
+        "core_key_candidate_count": 0,
+        "core_key_name_match_count": 0,
+        "source_document_ref": "historical_raw:thoroughbred/research/20261002_equipment_full_v1/historical_raw/api78_1_20110123_p1.json"
+      }
+    ],
+    "equipment_core_api78_absence_examples": [
+      {
+        "core_meet": "1",
+        "core_event_date": "20140816",
+        "core_race_no": "3",
+        "core_horse_no": "2",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20140920",
+        "core_race_no": "6",
+        "core_horse_no": "7",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20141025",
+        "core_race_no": "5",
+        "core_horse_no": "4",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20141130",
+        "core_race_no": "2",
+        "core_horse_no": "11",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20141228",
+        "core_race_no": "4",
+        "core_horse_no": "2",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20150117",
+        "core_race_no": "6",
+        "core_horse_no": "11",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20150214",
+        "core_race_no": "10",
+        "core_horse_no": "14",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20150502",
+        "core_race_no": "5",
+        "core_horse_no": "4",
+        "core_horse_id": "0030579",
+        "core_horse_name_raw": "[부산경남]무공훈장",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20150516",
+        "core_race_no": "8",
+        "core_horse_no": "7",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      },
+      {
+        "core_meet": "1",
+        "core_event_date": "20150530",
+        "core_race_no": "5",
+        "core_horse_no": "14",
+        "core_horse_id": "0034497",
+        "core_horse_name_raw": "자이언트홀드",
+        "equipment_observation_state": "runner_absent_from_complete_api78_card",
+        "api78_link_reason_candidate": null
+      }
+    ],
+    "starting_exam_role_link_status": [
+      {
+        "entity_role": "horse",
+        "link_status": "exact_core_roster_match",
+        "row_count": 51553
+      },
+      {
+        "entity_role": "horse",
+        "link_status": "missing_official_id",
+        "row_count": 42
+      },
+      {
+        "entity_role": "horse",
+        "link_status": "unmatched_official_id",
+        "row_count": 730
+      },
+      {
+        "entity_role": "owner",
+        "link_status": "exact_core_roster_match",
+        "row_count": 52236
+      },
+      {
+        "entity_role": "owner",
+        "link_status": "missing_official_id",
+        "row_count": 65
+      },
+      {
+        "entity_role": "owner",
+        "link_status": "unmatched_official_id",
+        "row_count": 24
+      },
+      {
+        "entity_role": "trainer",
+        "link_status": "exact_core_roster_match",
+        "row_count": 52270
+      },
+      {
+        "entity_role": "trainer",
+        "link_status": "missing_official_id",
+        "row_count": 49
+      },
+      {
+        "entity_role": "trainer",
+        "link_status": "placeholder_source_value",
+        "row_count": 6
+      }
+    ],
+    "starting_exam_view_counts": {
+      "starting_exam_results": 52325,
+      "starting_exam_qa": 52325,
+      "starting_exam_sessions": 3538,
+      "starting_exam_date_coverage": 12232,
+      "starting_exam_entity_links": 156975
+    },
+    "full_archive_vs_model_window": {
+      "training": {
+        "daily_training": {
+          "pre_2017": 1914096,
+          "2017_plus": 3258937
+        },
+        "start_training": {
+          "pre_2017": 154706,
+          "2017_plus": 276811
+        },
+        "swim_training": {
+          "pre_2017": 183165,
+          "2017_plus": 276439
+        }
+      },
+      "starting_exam": {
+        "1": {
+          "pre_2017": 10342,
+          "2017_plus": 19174
+        },
+        "3": {
+          "pre_2017": 9240,
+          "2017_plus": 13569
+        }
+      },
+      "equipment_api78": [
+        {
+          "meet": "1",
+          "pre_2017_rows": 88637,
+          "model_window_rows": 106588
+        },
+        {
+          "meet": "3",
+          "pre_2017_rows": 60125,
+          "model_window_rows": 75981
+        },
+        {
+          "meet": "4",
+          "pre_2017_rows": 0,
+          "model_window_rows": 119
+        }
+      ]
+    }
+  },
+  "failed_check_count": 0,
+  "passed_check_count": 65,
+  "status": "passed_with_documented_limitations"
+}

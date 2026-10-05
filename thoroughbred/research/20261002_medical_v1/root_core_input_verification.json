@@ -1,0 +1,212 @@
+{
+  "all_passed": true,
+  "input_table_parity": {
+    "medical_observations": {
+      "added": 0,
+      "lost": 0,
+      "columns": 30
+    },
+    "medical_api16_page_ledger": {
+      "added": 0,
+      "lost": 0,
+      "columns": 20
+    },
+    "medical_api16_year_meet_coverage": {
+      "added": 0,
+      "lost": 0,
+      "columns": 17
+    },
+    "medical_api16_archived_page_ledger": {
+      "added": 0,
+      "lost": 0,
+      "columns": 18
+    },
+    "medical_archived_daily_coverage": {
+      "added": 0,
+      "lost": 0,
+      "columns": 9
+    },
+    "medical_api16_current_exclusions": {
+      "added": 0,
+      "lost": 0,
+      "columns": 12
+    },
+    "medical_api16_archived_exclusions": {
+      "added": 0,
+      "lost": 0,
+      "columns": 13
+    },
+    "medical_existing_raw_inventory": {
+      "added": 0,
+      "lost": 0,
+      "columns": 24
+    },
+    "medical_dacom72_file_ledger": {
+      "added": 0,
+      "lost": 0,
+      "columns": 20
+    },
+    "medical_dacom72_exclusions": {
+      "added": 0,
+      "lost": 0,
+      "columns": 11
+    },
+    "medical_dacom72_layout_reconciliation": {
+      "added": 0,
+      "lost": 0,
+      "columns": 14
+    },
+    "medical_dacom72_year_meet_coverage": {
+      "added": 0,
+      "lost": 0,
+      "columns": 9
+    },
+    "medical_api_comparison_ledger": {
+      "added": 0,
+      "lost": 0,
+      "columns": 27
+    },
+    "medical_fingerprint_candidates": {
+      "added": 0,
+      "lost": 0,
+      "columns": 18
+    },
+    "medical_source_year_meet_coverage": {
+      "added": 0,
+      "lost": 0,
+      "columns": 15
+    },
+    "medical_api33_source_rows": {
+      "added": 0,
+      "lost": 0,
+      "columns": 14
+    },
+    "medical_api33_terms": {
+      "added": 0,
+      "lost": 0,
+      "columns": 8
+    },
+    "medical_phrase_decisions": {
+      "added": 0,
+      "lost": 0,
+      "columns": 16
+    },
+    "medical_phrase_components": {
+      "added": 0,
+      "lost": 0,
+      "columns": 14
+    },
+    "medical_explanation_observations": {
+      "added": 0,
+      "lost": 0,
+      "columns": 30
+    },
+    "medical_explanation_terms": {
+      "added": 0,
+      "lost": 0,
+      "columns": 11
+    }
+  },
+  "metadata_checks": {
+    "medical_source_metadata": 5,
+    "medical_dictionary_metadata": 2
+  },
+  "summary": {
+    "horse_link_counts": [
+      {
+        "source_kind": "api16",
+        "source_cohort": "current_annual",
+        "link_status": "exact_core_roster_match",
+        "n": 238344
+      },
+      {
+        "source_kind": "api16",
+        "source_cohort": "current_annual",
+        "link_status": "unmatched_official_id",
+        "n": 5067
+      },
+      {
+        "source_kind": "api16_archived",
+        "source_cohort": "archived_daily_snapshot",
+        "link_status": "exact_core_roster_match",
+        "n": 228615
+      },
+      {
+        "source_kind": "api16_archived",
+        "source_cohort": "archived_daily_snapshot",
+        "link_status": "unmatched_official_id",
+        "n": 9976
+      },
+      {
+        "source_kind": "dacom72",
+        "source_cohort": "rpt",
+        "link_status": "source_has_no_official_id",
+        "n": 1619071
+      }
+    ],
+    "current_api_phrase_states": [
+      {
+        "exact_phrase_review_status": "source_empty_or_placeholder",
+        "n": 266411,
+        "phrases": 1
+      },
+      {
+        "exact_phrase_review_status": "reviewed_exact_phrase_metadata_only",
+        "n": 220237,
+        "phrases": 708
+      },
+      {
+        "exact_phrase_review_status": "no_exact_review_phrase",
+        "n": 174,
+        "phrases": 18
+      }
+    ],
+    "text_phrase_states": [
+      {
+        "exact_phrase_review_status": "excluded_review_metadata",
+        "fingerprint_candidates": 131,
+        "raw_occurrences": 141,
+        "phrases": 5
+      },
+      {
+        "exact_phrase_review_status": "hold_requires_new_in_scope_event_evidence",
+        "fingerprint_candidates": 461,
+        "raw_occurrences": 482,
+        "phrases": 3
+      },
+      {
+        "exact_phrase_review_status": "reviewed_exact_phrase_metadata_only",
+        "fingerprint_candidates": 1478582,
+        "raw_occurrences": 1598981,
+        "phrases": 3590
+      },
+      {
+        "exact_phrase_review_status": "no_exact_review_phrase",
+        "fingerprint_candidates": 17654,
+        "raw_occurrences": 19467,
+        "phrases": 5566
+      }
+    ],
+    "explanation_distinct_source_slots": [
+      {
+        "source_kind": "api16",
+        "source_cohort": "current_annual",
+        "slots": 156390,
+        "capture_component_rows": 199731
+      },
+      {
+        "source_kind": "api16_archived",
+        "source_cohort": "archived_daily_snapshot",
+        "slots": 153532,
+        "capture_component_rows": 199757
+      },
+      {
+        "source_kind": "dacom72",
+        "source_cohort": "rpt",
+        "slots": 1106293,
+        "capture_component_rows": 2232704
+      }
+    ]
+  },
+  "verification_script_sha256": "0bf8ea127dd7ba785ee691bbf8d32768154f45d0b54a10b85a416756c43c5a36"
+}

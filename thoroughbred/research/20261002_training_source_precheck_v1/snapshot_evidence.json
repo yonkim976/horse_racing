@@ -1,0 +1,2016 @@
+{
+  "core_linkage": {
+    "comparison": "Operational horse_id foreign keys refer to the operational horses table. The independent comparisons here use exact official IDs against date/meet-scoped confirmed runners and the core entity_reference_roster (type=horse). Roster presence alone is not a training-event, venue, or full-population link.",
+    "distinct_official_horse_ids_in_confirmed_runners": 22322,
+    "distinct_official_horse_ids_in_entity_reference_roster_type_horse": 23814,
+    "runner_ids_also_in_horse_roster": 22322
+  },
+  "core_running_trials": {
+    "note": "Separate event type from daily training and starting training; source_meet=3 may remain Yeongnam without a venue split.",
+    "participants_by_source_meet": [
+      {
+        "participants": 37192,
+        "source_meet_query": "1"
+      },
+      {
+        "participants": 24585,
+        "source_meet_query": "3"
+      }
+    ],
+    "sessions_by_source_meet": [
+      {
+        "first_date": "2010-01-08",
+        "last_date": "2026-09-17",
+        "sessions": 3483,
+        "source_meet_query": "1"
+      },
+      {
+        "first_date": "2010-01-09",
+        "last_date": "2026-09-17",
+        "sessions": 2716,
+        "source_meet_query": "3"
+      }
+    ]
+  },
+  "core_training_like_tables": [
+    "race_trainer_owner_review",
+    "race_trainer_owner_review_evidence",
+    "trial_trainer_errors_closed",
+    "trial_trainer_review",
+    "trial_trainer_review_evidence",
+    "trial_trainer_source_error_decisions"
+  ],
+  "datasets": {
+    "daily_training": {
+      "field_null_counts": {
+        "1": {
+          "canter_count": 0,
+          "duration_seconds": 0,
+          "ended_at_raw": 0,
+          "entry_plan": 2415005,
+          "gallop_count": 0,
+          "rider_id": 231728,
+          "rider_type": 2641643,
+          "rows": 2763920,
+          "stable_number": 2415005,
+          "stable_part": 744010,
+          "started_at_raw": 0,
+          "trainer_name": 744025
+        },
+        "3": {
+          "canter_count": 0,
+          "duration_seconds": 0,
+          "ended_at_raw": 0,
+          "entry_plan": 2143590,
+          "gallop_count": 0,
+          "rider_id": 220474,
+          "rider_type": 2359473,
+          "rows": 2409098,
+          "stable_number": 2143590,
+          "stable_part": 1669997,
+          "started_at_raw": 0,
+          "trainer_name": 1669997
+        }
+      },
+      "meet_summary": [
+        {
+          "distinct_ids_matching_core_horse_roster": 13869,
+          "distinct_ids_matching_core_runner_ids": 13227,
+          "distinct_ids_not_in_core_horse_roster": 453,
+          "distinct_ids_not_in_core_runner_ids": 1095,
+          "distinct_source_horses": 14322,
+          "first_event_date": "2010-01-02",
+          "last_event_date": "2026-09-28",
+          "linked_rows_missing_horse_fk": 0,
+          "meet_code": 1,
+          "meet_label": "서울",
+          "rows": 2763920,
+          "rows_with_horse_id_zero": 0,
+          "unmatched_id_examples": [
+            "0015579",
+            "0015929",
+            "0016544",
+            "0017897",
+            "0019475",
+            "0019517",
+            "0019786",
+            "0019993",
+            "0020572",
+            "0020609"
+          ]
+        },
+        {
+          "distinct_ids_matching_core_horse_roster": 9738,
+          "distinct_ids_matching_core_runner_ids": 9137,
+          "distinct_ids_not_in_core_horse_roster": 609,
+          "distinct_ids_not_in_core_runner_ids": 1210,
+          "distinct_source_horses": 10347,
+          "first_event_date": "2010-01-04",
+          "last_event_date": "2026-09-28",
+          "linked_rows_missing_horse_fk": 0,
+          "meet_code": 3,
+          "meet_label": "영남 API 권역; 부산경남·영천 장소 미분리",
+          "rows": 2409098,
+          "rows_with_horse_id_zero": 0,
+          "unmatched_id_examples": [
+            "0017132",
+            "0017559",
+            "0017602",
+            "0018972",
+            "0019316",
+            "0019483",
+            "0019551",
+            "0019574",
+            "0019752",
+            "0019821"
+          ]
+        }
+      ],
+      "nonpositive_duration_source_archive_check": {
+        "archive_page_sha256": {
+          "data/raw/kra_api_monthly/horse_training/meet_1/201003/page_0001.json": "7cfd149bac5a700106546954026dd30d61bc37a9d2168d917c612e611ba6558b",
+          "data/raw/kra_api_monthly/horse_training/meet_1/201005/page_0001.json": "f517f007d04d91b26a5d4878dc500bd80667867ba433e82443e9bfea6acfd225",
+          "data/raw/kra_api_monthly/horse_training/meet_1/201012/page_0001.json": "2312203211543f2f68b498f2fed45d4db65d00178c604e33c75f1f2c05c2f7c9",
+          "data/raw/kra_api_monthly/horse_training/meet_1/201402/page_0001.json": "e66dc74c1516e1917bcc72eacbd533ddd3582df017bd31bf3731624194c9d457",
+          "data/raw/kra_api_monthly/horse_training/meet_1/202008/page_0001.json": "f8412224c7df3612320fb194f997ed9360624d5bb3c9479a06dc9ba1af8f5c4f",
+          "data/raw/kra_api_monthly/horse_training/meet_1/202011/page_0001.json": "9e3d9ee97bf4dc8b6b023ad5d4ba458c488673f4d8d638009ebb33d59c17abec",
+          "data/raw/kra_api_monthly/horse_training/meet_1/202108/page_0001.json": "79a5eb8abdef572cfc275c1ffe18de29ba5f95ab3b957fab2511e2bea843f227",
+          "data/raw/kra_api_monthly/horse_training/meet_1/202109/page_0001.json": "385ee1e8b9252223b811d70ad13b43e2ff5d093086d67a170cafa48149a7fc6c",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201007/page_0001.json": "148e3f940da7b51ff22e878bcca599aa1d53daac49d4757ee847365a1f070388",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201010/page_0001.json": "d0ab9b10db43060ada871f580bb71e7b5d9e2153866fefd8ffcfc11e9b347396",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201102/page_0001.json": "999dad9f8fa48a8d3d667586bb020d8706b476f1bec8d10153063db9fbfe3050",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201303/page_0001.json": "d319cb0fd10121a49f68295654d71180bc1f8500a994524c0145c9778bccfbe9",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201306/page_0001.json": "772bd4760f8cac00aa0d5fa63d507c9b2254c364c7a34e0342b9761c1a09b3b0",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201309/page_0001.json": "1dcbe56eff7d93dbaf03f97fc823150c220ed1edbfdd2c49918a06e9c59817e1",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201406/page_0001.json": "7ea187967c4bea1a2e55fe6dfe1421def0eb4b1e985241040117c9adc4a1e804",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201410/page_0001.json": "18e59ab0870cf355d839d0ad5907bfaf2b7476762e1b94f027b0f4852499e4eb",
+          "data/raw/kra_api_monthly/horse_training/meet_3/201710/page_0001.json": "eea5732dd16b671eb7b547b27b13ba53bd3c82c78db47f07be01d54af172ab1d",
+          "data/raw/kra_api_monthly/horse_training/meet_3/202004/page_0001.json": "eadca91a13e271aab3a229da96cfec5407ba4bc331fa1b7ea3c3426c3449d047",
+          "data/raw/kra_api_monthly/horse_training/meet_3/202111/page_0001.json": "97689dfd526a370d100beb0c02c7342d50f493de96ae9b0106dac854120e3b50"
+        },
+        "flagged_nonpositive_duration_rows": 19,
+        "manifest_path": "data/raw/kra_api_monthly/horse_training/manifest.jsonl",
+        "manifest_sha256": "3ad52bd056726507c05575c1b4ee792225e26e985b29c7b5680e34e28ad2dd96",
+        "rows": [
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20100306000000",
+            "horse_id_official": "0023527",
+            "horse_name": "수마쿰라우드",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/201003/page_0001.json",
+              "page_sha256": "7cfd149bac5a700106546954026dd30d61bc37a9d2168d917c612e611ba6558b",
+              "source_item_row_index_within_page": 10141,
+              "source_record_fields": {
+                "hrName": "수마쿰라우드",
+                "hrNo": "0023527",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20100306000000,
+                "stTime": 20100306000000,
+                "trDate": 20100306,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20100306000000",
+            "training_date_local": "2010-03-06"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20100513063900",
+            "horse_id_official": "0023389",
+            "horse_name": "요동정벌",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/201005/page_0001.json",
+              "page_sha256": "f517f007d04d91b26a5d4878dc500bd80667867ba433e82443e9bfea6acfd225",
+              "source_item_row_index_within_page": 6834,
+              "source_record_fields": {
+                "hrName": "요동정벌",
+                "hrNo": "0023389",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20100513063900,
+                "stTime": 20100513063900,
+                "trDate": 20100513,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20100513063900",
+            "training_date_local": "2010-05-13"
+          },
+          {
+            "duration_seconds": -15660,
+            "ended_at_raw": "20100726005400",
+            "horse_id_official": "0025599",
+            "horse_name": "무한불패",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201007/page_0001.json",
+              "page_sha256": "148e3f940da7b51ff22e878bcca599aa1d53daac49d4757ee847365a1f070388",
+              "source_item_row_index_within_page": 1603,
+              "source_record_fields": {
+                "hrName": "무한불패",
+                "hrNo": "0025599",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20100726005400,
+                "stTime": 20100726051500,
+                "trDate": 20100726,
+                "trTerm": -15660
+              }
+            },
+            "started_at_raw": "20100726051500",
+            "training_date_local": "2010-07-26"
+          },
+          {
+            "duration_seconds": -2340,
+            "ended_at_raw": "20101021044800",
+            "horse_id_official": "0022694",
+            "horse_name": "크레셴도",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201010/page_0001.json",
+              "page_sha256": "d0ab9b10db43060ada871f580bb71e7b5d9e2153866fefd8ffcfc11e9b347396",
+              "source_item_row_index_within_page": 3912,
+              "source_record_fields": {
+                "hrName": "크레셴도",
+                "hrNo": "0022694",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20101021044800,
+                "stTime": 20101021052700,
+                "trDate": 20101021,
+                "trTerm": -2340
+              }
+            },
+            "started_at_raw": "20101021052700",
+            "training_date_local": "2010-10-21"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20101205000000",
+            "horse_id_official": "0022994",
+            "horse_name": "러브옵션",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/201012/page_0001.json",
+              "page_sha256": "2312203211543f2f68b498f2fed45d4db65d00178c604e33c75f1f2c05c2f7c9",
+              "source_item_row_index_within_page": 7607,
+              "source_record_fields": {
+                "hrName": "러브옵션",
+                "hrNo": "0022994",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20101205000000,
+                "stTime": 20101205000000,
+                "trDate": 20101205,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20101205000000",
+            "training_date_local": "2010-12-05"
+          },
+          {
+            "duration_seconds": -10320,
+            "ended_at_raw": "20110214032000",
+            "horse_id_official": "0022864",
+            "horse_name": "남쪽의함성",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201102/page_0001.json",
+              "page_sha256": "999dad9f8fa48a8d3d667586bb020d8706b476f1bec8d10153063db9fbfe3050",
+              "source_item_row_index_within_page": 4649,
+              "source_record_fields": {
+                "hrName": "남쪽의함성",
+                "hrNo": "0022864",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20110214032000,
+                "stTime": 20110214061200,
+                "trDate": 20110214,
+                "trTerm": -10320
+              }
+            },
+            "started_at_raw": "20110214061200",
+            "training_date_local": "2011-02-14"
+          },
+          {
+            "duration_seconds": -9600,
+            "ended_at_raw": "20130320062300",
+            "horse_id_official": "0024452",
+            "horse_name": "탐라에이스",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201303/page_0001.json",
+              "page_sha256": "d319cb0fd10121a49f68295654d71180bc1f8500a994524c0145c9778bccfbe9",
+              "source_item_row_index_within_page": 4304,
+              "source_record_fields": {
+                "hrName": "탐라에이스",
+                "hrNo": "0024452",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20130320062300,
+                "stTime": 20130320090300,
+                "trDate": 20130320,
+                "trTerm": -9600
+              }
+            },
+            "started_at_raw": "20130320090300",
+            "training_date_local": "2013-03-20"
+          },
+          {
+            "duration_seconds": -2400,
+            "ended_at_raw": "20130624055400",
+            "horse_id_official": "0032796",
+            "horse_name": "사조영",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201306/page_0001.json",
+              "page_sha256": "772bd4760f8cac00aa0d5fa63d507c9b2254c364c7a34e0342b9761c1a09b3b0",
+              "source_item_row_index_within_page": 2123,
+              "source_record_fields": {
+                "hrName": "사조영",
+                "hrNo": "0032796",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20130624055400,
+                "stTime": 20130624063400,
+                "trDate": 20130624,
+                "trTerm": -2400
+              }
+            },
+            "started_at_raw": "20130624063400",
+            "training_date_local": "2013-06-24"
+          },
+          {
+            "duration_seconds": -2340,
+            "ended_at_raw": "20130922055900",
+            "horse_id_official": "0030280",
+            "horse_name": "첼로소나타",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201309/page_0001.json",
+              "page_sha256": "1dcbe56eff7d93dbaf03f97fc823150c220ed1edbfdd2c49918a06e9c59817e1",
+              "source_item_row_index_within_page": 3929,
+              "source_record_fields": {
+                "hrName": "첼로소나타",
+                "hrNo": "0030280",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20130922055900,
+                "stTime": 20130922063800,
+                "trDate": 20130922,
+                "trTerm": -2340
+              }
+            },
+            "started_at_raw": "20130922063800",
+            "training_date_local": "2013-09-22"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20140228000000",
+            "horse_id_official": "0026591",
+            "horse_name": "봉암사",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/201402/page_0001.json",
+              "page_sha256": "e66dc74c1516e1917bcc72eacbd533ddd3582df017bd31bf3731624194c9d457",
+              "source_item_row_index_within_page": 186,
+              "source_record_fields": {
+                "hrName": "봉암사",
+                "hrNo": "0026591",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20140228000000,
+                "stTime": 20140228000000,
+                "trDate": 20140228,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20140228000000",
+            "training_date_local": "2014-02-28"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20140625000000",
+            "horse_id_official": "0030011",
+            "horse_name": "피코이지스",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201406/page_0001.json",
+              "page_sha256": "7ea187967c4bea1a2e55fe6dfe1421def0eb4b1e985241040117c9adc4a1e804",
+              "source_item_row_index_within_page": 2622,
+              "source_record_fields": {
+                "hrName": "피코이지스",
+                "hrNo": "0030011",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20140625000000,
+                "stTime": 20140625000000,
+                "trDate": 20140625,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20140625000000",
+            "training_date_local": "2014-06-25"
+          },
+          {
+            "duration_seconds": -9480,
+            "ended_at_raw": "20141030065500",
+            "horse_id_official": "0032948",
+            "horse_name": "희망하나",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201410/page_0001.json",
+              "page_sha256": "18e59ab0870cf355d839d0ad5907bfaf2b7476762e1b94f027b0f4852499e4eb",
+              "source_item_row_index_within_page": 950,
+              "source_record_fields": {
+                "hrName": "희망하나",
+                "hrNo": "0032948",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20141030065500,
+                "stTime": 20141030093300,
+                "trDate": 20141030,
+                "trTerm": -9480
+              }
+            },
+            "started_at_raw": "20141030093300",
+            "training_date_local": "2014-10-30"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20171011000000",
+            "horse_id_official": "0035187",
+            "horse_name": "특급감동",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/201710/page_0001.json",
+              "page_sha256": "eea5732dd16b671eb7b547b27b13ba53bd3c82c78db47f07be01d54af172ab1d",
+              "source_item_row_index_within_page": 10148,
+              "source_record_fields": {
+                "hrName": "특급감동",
+                "hrNo": "0035187",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20171011000000,
+                "stTime": 20171011000000,
+                "trDate": 20171011,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20171011000000",
+            "training_date_local": "2017-10-11"
+          },
+          {
+            "duration_seconds": -2940,
+            "ended_at_raw": "20200416083900",
+            "horse_id_official": "0039655",
+            "horse_name": "천년의질주",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/202004/page_0001.json",
+              "page_sha256": "eadca91a13e271aab3a229da96cfec5407ba4bc331fa1b7ea3c3426c3449d047",
+              "source_item_row_index_within_page": 6161,
+              "source_record_fields": {
+                "hrName": "천년의질주",
+                "hrNo": "0039655",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20200416083900,
+                "stTime": 20200416092800,
+                "trDate": 20200416,
+                "trTerm": -2940
+              }
+            },
+            "started_at_raw": "20200416092800",
+            "training_date_local": "2020-04-16"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20200810000000",
+            "horse_id_official": "0042742",
+            "horse_name": "국향",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/202008/page_0001.json",
+              "page_sha256": "f8412224c7df3612320fb194f997ed9360624d5bb3c9479a06dc9ba1af8f5c4f",
+              "source_item_row_index_within_page": 12186,
+              "source_record_fields": {
+                "hrName": "국향",
+                "hrNo": "0042742",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20200810000000,
+                "stTime": 20200810000000,
+                "trDate": 20200810,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20200810000000",
+            "training_date_local": "2020-08-10"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20201122000000",
+            "horse_id_official": "0042608",
+            "horse_name": "배다리킹덤",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/202011/page_0001.json",
+              "page_sha256": "9e3d9ee97bf4dc8b6b023ad5d4ba458c488673f4d8d638009ebb33d59c17abec",
+              "source_item_row_index_within_page": 4765,
+              "source_record_fields": {
+                "hrName": "배다리킹덤",
+                "hrNo": "0042608",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20201122000000,
+                "stTime": 20201122000000,
+                "trDate": 20201122,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20201122000000",
+            "training_date_local": "2020-11-22"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20210813000000",
+            "horse_id_official": "0044782",
+            "horse_name": "함평여왕",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/202108/page_0001.json",
+              "page_sha256": "79a5eb8abdef572cfc275c1ffe18de29ba5f95ab3b957fab2511e2bea843f227",
+              "source_item_row_index_within_page": 8667,
+              "source_record_fields": {
+                "hrName": "함평여왕",
+                "hrNo": "0044782",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20210813000000,
+                "stTime": 20210813000000,
+                "trDate": 20210813,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20210813000000",
+            "training_date_local": "2021-08-13"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20210916000000",
+            "horse_id_official": "0044092",
+            "horse_name": "빅스고",
+            "meet_code": 1,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_1/202109/page_0001.json",
+              "page_sha256": "385ee1e8b9252223b811d70ad13b43e2ff5d093086d67a170cafa48149a7fc6c",
+              "source_item_row_index_within_page": 6050,
+              "source_record_fields": {
+                "hrName": "빅스고",
+                "hrNo": "0044092",
+                "meet": "서울",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20210916000000,
+                "stTime": 20210916000000,
+                "trDate": 20210916,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20210916000000",
+            "training_date_local": "2021-09-16"
+          },
+          {
+            "duration_seconds": 0,
+            "ended_at_raw": "20211118071453",
+            "horse_id_official": "0041117",
+            "horse_name": "아티스갈",
+            "meet_code": 3,
+            "source_archive_exact_match": true,
+            "source_archive_match": {
+              "manifest_hash_verified": true,
+              "page_path": "data/raw/kra_api_monthly/horse_training/meet_3/202111/page_0001.json",
+              "page_sha256": "97689dfd526a370d100beb0c02c7342d50f493de96ae9b0106dac854120e3b50",
+              "source_item_row_index_within_page": 5449,
+              "source_record_fields": {
+                "hrName": "아티스갈",
+                "hrNo": "0041117",
+                "meet": "영남",
+                "run1Cnt": 0,
+                "run2Cnt": 0,
+                "spTime": 20211118071453,
+                "stTime": 20211118072133,
+                "trDate": 20211118,
+                "trTerm": 0
+              }
+            },
+            "started_at_raw": "20211118072133",
+            "training_date_local": "2021-11-18"
+          }
+        ],
+        "rows_exactly_matched_to_archived_source": 19,
+        "rows_without_archived_source_match": 0,
+        "source": "local API18_1 monthly raw pages; no network calls"
+      },
+      "quality_checks": {
+        "canter_gallop_counts_by_meet": [
+          {
+            "meet_code": 1,
+            "negative_canter_rows": 0,
+            "negative_gallop_rows": 0,
+            "null_canter_rows": 0,
+            "null_gallop_rows": 0,
+            "rows": 2763920,
+            "zero_canter_rows": 940189,
+            "zero_gallop_rows": 2471358
+          },
+          {
+            "meet_code": 3,
+            "negative_canter_rows": 0,
+            "negative_gallop_rows": 0,
+            "null_canter_rows": 0,
+            "null_gallop_rows": 0,
+            "rows": 2409098,
+            "zero_canter_rows": 1875303,
+            "zero_gallop_rows": 2340497
+          }
+        ],
+        "clock_duration": {
+          "by_meet": {
+            "1": {
+              "canter_zero_rows": 940189,
+              "duration_mismatch_rows": 326,
+              "end_before_start_rows": 0,
+              "gallop_zero_rows": 2471358,
+              "negative_duration_rows": 0,
+              "rows": 2763920,
+              "zero_duration_rows": 8
+            },
+            "3": {
+              "canter_zero_rows": 1875303,
+              "duration_mismatch_rows": 0,
+              "end_before_start_rows": 9,
+              "gallop_zero_rows": 2340497,
+              "negative_duration_rows": 8,
+              "rows": 2409098,
+              "zero_duration_rows": 3
+            }
+          },
+          "duration_delta_counts": {
+            "-1": 5,
+            "-10": 25,
+            "-11": 11,
+            "-12": 20,
+            "-13": 12,
+            "-14": 22,
+            "-15": 10,
+            "-16": 18,
+            "-17": 9,
+            "-18": 12,
+            "-19": 11,
+            "-2": 18,
+            "-20": 9,
+            "-21": 10,
+            "-22": 14,
+            "-23": 10,
+            "-24": 7,
+            "-3": 16,
+            "-4": 16,
+            "-5": 13,
+            "-6": 15,
+            "-7": 13,
+            "-8": 15,
+            "-9": 15
+          },
+          "duration_matches_elapsed_exactly": 5172683,
+          "duration_mismatch_examples": [
+            {
+              "duration_minus_elapsed": -12,
+              "duration_seconds": 1339,
+              "elapsed_seconds_from_raw_clocks": 1351,
+              "ended_at_raw": "20100326055158",
+              "meet_code": 1,
+              "started_at_raw": "20100326052927",
+              "training_date_local": "2010-03-26"
+            },
+            {
+              "duration_minus_elapsed": -24,
+              "duration_seconds": 1475,
+              "elapsed_seconds_from_raw_clocks": 1499,
+              "ended_at_raw": "20100326064321",
+              "meet_code": 1,
+              "started_at_raw": "20100326061822",
+              "training_date_local": "2010-03-26"
+            },
+            {
+              "duration_minus_elapsed": -8,
+              "duration_seconds": 1391,
+              "elapsed_seconds_from_raw_clocks": 1399,
+              "ended_at_raw": "20160804055326",
+              "meet_code": 1,
+              "started_at_raw": "20160804053007",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -11,
+              "duration_seconds": 1397,
+              "elapsed_seconds_from_raw_clocks": 1408,
+              "ended_at_raw": "20160804063840",
+              "meet_code": 1,
+              "started_at_raw": "20160804061512",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -21,
+              "duration_seconds": 811,
+              "elapsed_seconds_from_raw_clocks": 832,
+              "ended_at_raw": "20160804070334",
+              "meet_code": 1,
+              "started_at_raw": "20160804064942",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -19,
+              "duration_seconds": 1468,
+              "elapsed_seconds_from_raw_clocks": 1487,
+              "ended_at_raw": "20160804071440",
+              "meet_code": 1,
+              "started_at_raw": "20160804064953",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -16,
+              "duration_seconds": 1404,
+              "elapsed_seconds_from_raw_clocks": 1420,
+              "ended_at_raw": "20160804075240",
+              "meet_code": 1,
+              "started_at_raw": "20160804072900",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -16,
+              "duration_seconds": 1284,
+              "elapsed_seconds_from_raw_clocks": 1300,
+              "ended_at_raw": "20160804055006",
+              "meet_code": 1,
+              "started_at_raw": "20160804052826",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -4,
+              "duration_seconds": 605,
+              "elapsed_seconds_from_raw_clocks": 609,
+              "ended_at_raw": "20160804064028",
+              "meet_code": 1,
+              "started_at_raw": "20160804063019",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -14,
+              "duration_seconds": 1581,
+              "elapsed_seconds_from_raw_clocks": 1595,
+              "ended_at_raw": "20160804061758",
+              "meet_code": 1,
+              "started_at_raw": "20160804055123",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -8,
+              "duration_seconds": 791,
+              "elapsed_seconds_from_raw_clocks": 799,
+              "ended_at_raw": "20160804061059",
+              "meet_code": 1,
+              "started_at_raw": "20160804055740",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -6,
+              "duration_seconds": 429,
+              "elapsed_seconds_from_raw_clocks": 435,
+              "ended_at_raw": "20160804060411",
+              "meet_code": 1,
+              "started_at_raw": "20160804055656",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -11,
+              "duration_seconds": 1696,
+              "elapsed_seconds_from_raw_clocks": 1707,
+              "ended_at_raw": "20160804071047",
+              "meet_code": 1,
+              "started_at_raw": "20160804064220",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -10,
+              "duration_seconds": 1574,
+              "elapsed_seconds_from_raw_clocks": 1584,
+              "ended_at_raw": "20160804062737",
+              "meet_code": 1,
+              "started_at_raw": "20160804060113",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -22,
+              "duration_seconds": 1174,
+              "elapsed_seconds_from_raw_clocks": 1196,
+              "ended_at_raw": "20160804060943",
+              "meet_code": 1,
+              "started_at_raw": "20160804054947",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -7,
+              "duration_seconds": 611,
+              "elapsed_seconds_from_raw_clocks": 618,
+              "ended_at_raw": "20160804060411",
+              "meet_code": 1,
+              "started_at_raw": "20160804055353",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -14,
+              "duration_seconds": 800,
+              "elapsed_seconds_from_raw_clocks": 814,
+              "ended_at_raw": "20160804065030",
+              "meet_code": 1,
+              "started_at_raw": "20160804063656",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -4,
+              "duration_seconds": 1146,
+              "elapsed_seconds_from_raw_clocks": 1150,
+              "ended_at_raw": "20160804065150",
+              "meet_code": 1,
+              "started_at_raw": "20160804063240",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -9,
+              "duration_seconds": 974,
+              "elapsed_seconds_from_raw_clocks": 983,
+              "ended_at_raw": "20160804064911",
+              "meet_code": 1,
+              "started_at_raw": "20160804063248",
+              "training_date_local": "2016-08-04"
+            },
+            {
+              "duration_minus_elapsed": -3,
+              "duration_seconds": 665,
+              "elapsed_seconds_from_raw_clocks": 668,
+              "ended_at_raw": "20160804074134",
+              "meet_code": 1,
+              "started_at_raw": "20160804073026",
+              "training_date_local": "2016-08-04"
+            }
+          ],
+          "duration_mismatch_rows": 326,
+          "duration_mismatch_within_30_seconds": 326,
+          "duration_mismatch_within_5_seconds": 68,
+          "maximum_absolute_duration_mismatch_seconds": 24,
+          "nonpositive_duration_examples": [
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20100306000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20100306000000",
+              "training_date_local": "2010-03-06"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20100513063900",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20100513063900",
+              "training_date_local": "2010-05-13"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -15660,
+              "ended_at_raw": "20100726005400",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20100726051500",
+              "training_date_local": "2010-07-26"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -2340,
+              "ended_at_raw": "20101021044800",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20101021052700",
+              "training_date_local": "2010-10-21"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20101205000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20101205000000",
+              "training_date_local": "2010-12-05"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -10320,
+              "ended_at_raw": "20110214032000",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20110214061200",
+              "training_date_local": "2011-02-14"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -9600,
+              "ended_at_raw": "20130320062300",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20130320090300",
+              "training_date_local": "2013-03-20"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -2400,
+              "ended_at_raw": "20130624055400",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20130624063400",
+              "training_date_local": "2013-06-24"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -2340,
+              "ended_at_raw": "20130922055900",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20130922063800",
+              "training_date_local": "2013-09-22"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20140228000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20140228000000",
+              "training_date_local": "2014-02-28"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20140625000000",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20140625000000",
+              "training_date_local": "2014-06-25"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -9480,
+              "ended_at_raw": "20141030065500",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20141030093300",
+              "training_date_local": "2014-10-30"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20171011000000",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20171011000000",
+              "training_date_local": "2017-10-11"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": -2940,
+              "ended_at_raw": "20200416083900",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20200416092800",
+              "training_date_local": "2020-04-16"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20200810000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20200810000000",
+              "training_date_local": "2020-08-10"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20201122000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20201122000000",
+              "training_date_local": "2020-11-22"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20210813000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20210813000000",
+              "training_date_local": "2021-08-13"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20210916000000",
+              "gallop_count": 0,
+              "meet_code": 1,
+              "started_at_raw": "20210916000000",
+              "training_date_local": "2021-09-16"
+            },
+            {
+              "canter_count": 0,
+              "duration_seconds": 0,
+              "ended_at_raw": "20211118071453",
+              "gallop_count": 0,
+              "meet_code": 3,
+              "started_at_raw": "20211118072133",
+              "training_date_local": "2021-11-18"
+            }
+          ],
+          "raw_clock_parse_rule": "4 digits HHMM, 6 digits HHMMSS, or 14 digits YYYYMMDDHHMMSS; valid date and 00-23:00-59:00-59.",
+          "rows_checked": 5173018,
+          "rows_with_both_raw_times_and_duration": 5173018,
+          "rows_with_embedded_end_date_different_from_training_date": 0,
+          "rows_with_embedded_start_date_different_from_training_date": 0,
+          "rows_with_end_before_start": 9,
+          "rows_with_negative_duration": 8,
+          "rows_with_parseable_both_times_and_duration": 5173018,
+          "rows_with_unparseable_nonnull_end": 0,
+          "rows_with_unparseable_nonnull_start": 0,
+          "rows_with_zero_duration": 11
+        },
+        "natural_key_collision_evidence": "Normalized table uniqueness is on horse_id/meet/date/start/end. The historical API overlap artifacts show distinct source payloads sharing that key, so operational row counts can be lower than source rows; see pinned 2015-2024 and 2025 overlap reports."
+      },
+      "stored_rows_in_scope": 5173018,
+      "table": "horse_training"
+    },
+    "hill_training": {
+      "farms": [
+        {
+          "dangling_horse_fk_rows": 0,
+          "distinct_source_horses": 131,
+          "farm_name": "장수",
+          "first_event_date": "2025-08-28",
+          "last_event_date": "2026-09-29",
+          "linked_horses": 40,
+          "null_horse_id_rows": 2854,
+          "raw_horse_id_zero_rows": 0,
+          "rows": 3224,
+          "zero_horse_id_rows": 0
+        },
+        {
+          "dangling_horse_fk_rows": 0,
+          "distinct_source_horses": 60,
+          "farm_name": "제주",
+          "first_event_date": "2026-01-28",
+          "last_event_date": "2026-09-29",
+          "linked_horses": 7,
+          "null_horse_id_rows": 457,
+          "raw_horse_id_zero_rows": 0,
+          "rows": 502,
+          "zero_horse_id_rows": 0
+        }
+      ],
+      "quality_counts": {
+        "incomplete_rows": 0,
+        "invalid_rows": 8,
+        "rows": 3726,
+        "rows_without_source_document": 0,
+        "rows_without_time": 0,
+        "rows_without_total_time": 0,
+        "valid_rows": 3687,
+        "zero_rows": 31
+      },
+      "raw_horse_id_zero_rows": 0,
+      "raw_horse_ids_matching_core_horse_roster": 41,
+      "raw_horse_ids_matching_core_runner_ids": 38,
+      "raw_horse_ids_not_in_core_horse_roster": 150,
+      "raw_horse_ids_not_in_core_runner_ids": 153,
+      "stored_rows_in_scope": 3726,
+      "table": "horse_hill_training",
+      "unmatched_id_examples": [
+        "0051686",
+        "0053393",
+        "0055063",
+        "0055122",
+        "0055192",
+        "0055242",
+        "0055358",
+        "0055393",
+        "0055397",
+        "0055398"
+      ],
+      "venue_or_meet_code": "No meet_code; grouped by named training farm only."
+    },
+    "start_training": {
+      "field_null_counts": {
+        "1": {
+          "location_raw": 216290,
+          "remark": 0,
+          "rider_name": 0,
+          "rows": 216290,
+          "source_document_id": 216290,
+          "source_row_no": 216290,
+          "stable_number": 188829,
+          "stable_part": 55
+        },
+        "3": {
+          "location_raw": 215270,
+          "remark": 0,
+          "rider_name": 0,
+          "rows": 215270,
+          "source_document_id": 215270,
+          "source_row_no": 215270,
+          "stable_number": 189808,
+          "stable_part": 214
+        }
+      },
+      "identical_payload_multiplicity": [],
+      "meet_summary": [
+        {
+          "distinct_ids_matching_core_horse_roster": 13382,
+          "distinct_ids_matching_core_runner_ids": 12498,
+          "distinct_ids_not_in_core_horse_roster": 466,
+          "distinct_ids_not_in_core_runner_ids": 1350,
+          "distinct_source_horses": 13848,
+          "first_event_date": "2010-01-06",
+          "last_event_date": "2026-09-18",
+          "linked_rows_missing_horse_fk": 0,
+          "meet_code": 1,
+          "meet_label": "서울",
+          "rows": 216290,
+          "rows_with_horse_id_zero": 0,
+          "unmatched_id_examples": [
+            "0019786",
+            "0021178",
+            "0021302",
+            "0022041",
+            "0022198",
+            "0022208",
+            "0022255",
+            "0022270",
+            "0022307",
+            "0022320"
+          ]
+        },
+        {
+          "distinct_ids_matching_core_horse_roster": 9574,
+          "distinct_ids_matching_core_runner_ids": 8976,
+          "distinct_ids_not_in_core_horse_roster": 465,
+          "distinct_ids_not_in_core_runner_ids": 1063,
+          "distinct_source_horses": 10039,
+          "first_event_date": "2010-01-05",
+          "last_event_date": "2026-09-19",
+          "linked_rows_missing_horse_fk": 0,
+          "meet_code": 3,
+          "meet_label": "영남 API 권역; 부산경남·영천 장소 미분리",
+          "rows": 215270,
+          "rows_with_horse_id_zero": 0,
+          "unmatched_id_examples": [
+            "0019483",
+            "0019574",
+            "0019821",
+            "0021451",
+            "0021935",
+            "0022055",
+            "0022207",
+            "0022346",
+            "0022386",
+            "0022514"
+          ]
+        }
+      ],
+      "multi_occurrence_horse_days": [
+        {
+          "extra_rows_above_one": 39,
+          "horse_days": 39,
+          "max_rows_per_horse_day": 2,
+          "meet_code": 1,
+          "source_kind": "legacy_api22",
+          "stored_rows_in_multi_occurrence_days": 78
+        },
+        {
+          "extra_rows_above_one": 5,
+          "horse_days": 5,
+          "max_rows_per_horse_day": 2,
+          "meet_code": 3,
+          "source_kind": "legacy_api22",
+          "stored_rows_in_multi_occurrence_days": 10
+        }
+      ],
+      "occurrence_slot_counts": [
+        {
+          "meet_code": 1,
+          "occurrence_no": 1,
+          "rows": 216251
+        },
+        {
+          "meet_code": 1,
+          "occurrence_no": 2,
+          "rows": 39
+        },
+        {
+          "meet_code": 3,
+          "occurrence_no": 1,
+          "rows": 215265
+        },
+        {
+          "meet_code": 3,
+          "occurrence_no": 2,
+          "rows": 5
+        }
+      ],
+      "source_kind_counts": [
+        {
+          "meet_code": 1,
+          "rows": 216290,
+          "rows_with_location": 0,
+          "rows_with_source_document": 0,
+          "rows_with_source_row_no": 0,
+          "source_kind": "legacy_api22"
+        },
+        {
+          "meet_code": 3,
+          "rows": 215270,
+          "rows_with_location": 0,
+          "rows_with_source_document": 0,
+          "rows_with_source_row_no": 0,
+          "source_kind": "legacy_api22"
+        }
+      ],
+      "stored_rows_in_scope": 431560,
+      "table": "horse_start_training"
+    },
+    "swim_training": {
+      "field_null_counts": {
+        "1": {
+          "horse_id": 0,
+          "rows": 288115,
+          "source_document_id": 0,
+          "stable_note": 280967,
+          "stable_part": 0,
+          "trainer_name": 0,
+          "trainer_part": 0
+        },
+        "3": {
+          "horse_id": 0,
+          "rows": 171473,
+          "source_document_id": 0,
+          "stable_note": 171288,
+          "stable_part": 0,
+          "trainer_name": 0,
+          "trainer_part": 0
+        }
+      },
+      "large_count_examples": [
+        {
+          "horse_name_raw": "파워질주",
+          "kra_horse_id_raw": "0052878",
+          "meet_code": 1,
+          "source_document_id": 95319,
+          "swim_count": 36,
+          "training_date_local": "2026-07-11"
+        },
+        {
+          "horse_name_raw": "마루장군",
+          "kra_horse_id_raw": "0051059",
+          "meet_code": 1,
+          "source_document_id": 89759,
+          "swim_count": 36,
+          "training_date_local": "2025-08-17"
+        },
+        {
+          "horse_name_raw": "오섬스텝",
+          "kra_horse_id_raw": "0051858",
+          "meet_code": 1,
+          "source_document_id": 89759,
+          "swim_count": 33,
+          "training_date_local": "2025-07-16"
+        },
+        {
+          "horse_name_raw": "삼한영웅",
+          "kra_horse_id_raw": "0027733",
+          "meet_code": 3,
+          "source_document_id": 89736,
+          "swim_count": 33,
+          "training_date_local": "2013-06-21"
+        },
+        {
+          "horse_name_raw": "비카러브",
+          "kra_horse_id_raw": "0021889",
+          "meet_code": 1,
+          "source_document_id": 89729,
+          "swim_count": 33,
+          "training_date_local": "2010-06-23"
+        },
+        {
+          "horse_name_raw": "대마지풍",
+          "kra_horse_id_raw": "0039463",
+          "meet_code": 1,
+          "source_document_id": 89751,
+          "swim_count": 32,
+          "training_date_local": "2021-05-07"
+        },
+        {
+          "horse_name_raw": "최대걸작품",
+          "kra_horse_id_raw": "0023717",
+          "meet_code": 3,
+          "source_document_id": 89735,
+          "swim_count": 32,
+          "training_date_local": "2013-04-11"
+        },
+        {
+          "horse_name_raw": "시티우스",
+          "kra_horse_id_raw": "0027986",
+          "meet_code": 1,
+          "source_document_id": 89735,
+          "swim_count": 31,
+          "training_date_local": "2013-07-20"
+        },
+        {
+          "horse_name_raw": "영광의러너",
+          "kra_horse_id_raw": "0040626",
+          "meet_code": 3,
+          "source_document_id": 89750,
+          "swim_count": 30,
+          "training_date_local": "2020-03-22"
+        },
+        {
+          "horse_name_raw": "럭스비전",
+          "kra_horse_id_raw": "0022581",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 27,
+          "training_date_local": "2011-11-20"
+        },
+        {
+          "horse_name_raw": "럭스비전",
+          "kra_horse_id_raw": "0022581",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 27,
+          "training_date_local": "2011-11-19"
+        },
+        {
+          "horse_name_raw": "원더풀잭팟",
+          "kra_horse_id_raw": "0036947",
+          "meet_code": 1,
+          "source_document_id": 89749,
+          "swim_count": 23,
+          "training_date_local": "2020-04-05"
+        },
+        {
+          "horse_name_raw": "오코날루프티",
+          "kra_horse_id_raw": "0031059",
+          "meet_code": 3,
+          "source_document_id": 89736,
+          "swim_count": 23,
+          "training_date_local": "2013-08-11"
+        },
+        {
+          "horse_name_raw": "지봉만세",
+          "kra_horse_id_raw": "0032105",
+          "meet_code": 3,
+          "source_document_id": 89742,
+          "swim_count": 22,
+          "training_date_local": "2016-08-03"
+        },
+        {
+          "horse_name_raw": "절대군주",
+          "kra_horse_id_raw": "0030921",
+          "meet_code": 3,
+          "source_document_id": 89736,
+          "swim_count": 21,
+          "training_date_local": "2013-08-28"
+        },
+        {
+          "horse_name_raw": "윈드워커",
+          "kra_horse_id_raw": "0028135",
+          "meet_code": 1,
+          "source_document_id": 89735,
+          "swim_count": 21,
+          "training_date_local": "2013-05-18"
+        },
+        {
+          "horse_name_raw": "럭스비전",
+          "kra_horse_id_raw": "0022581",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 21,
+          "training_date_local": "2011-11-26"
+        },
+        {
+          "horse_name_raw": "퍼펙트리처블",
+          "kra_horse_id_raw": "0024483",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 21,
+          "training_date_local": "2011-11-26"
+        },
+        {
+          "horse_name_raw": "퍼펙트리처블",
+          "kra_horse_id_raw": "0024483",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 21,
+          "training_date_local": "2011-11-23"
+        },
+        {
+          "horse_name_raw": "퍼펙트리처블",
+          "kra_horse_id_raw": "0024483",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 21,
+          "training_date_local": "2011-11-20"
+        },
+        {
+          "horse_name_raw": "퍼펙트리처블",
+          "kra_horse_id_raw": "0024483",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 21,
+          "training_date_local": "2011-11-19"
+        },
+        {
+          "horse_name_raw": "특별한승리",
+          "kra_horse_id_raw": "0022576",
+          "meet_code": 1,
+          "source_document_id": 89729,
+          "swim_count": 21,
+          "training_date_local": "2010-06-24"
+        },
+        {
+          "horse_name_raw": "백전완승",
+          "kra_horse_id_raw": "0026724",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-06-22"
+        },
+        {
+          "horse_name_raw": "백전완승",
+          "kra_horse_id_raw": "0026724",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-06-17"
+        },
+        {
+          "horse_name_raw": "엘리트클래스",
+          "kra_horse_id_raw": "0025119",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-05-13"
+        },
+        {
+          "horse_name_raw": "엘리트클래스",
+          "kra_horse_id_raw": "0025119",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-05-10"
+        },
+        {
+          "horse_name_raw": "엘리트클래스",
+          "kra_horse_id_raw": "0025119",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-05-09"
+        },
+        {
+          "horse_name_raw": "퍼스트레이디",
+          "kra_horse_id_raw": "0026873",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-05-04"
+        },
+        {
+          "horse_name_raw": "퍼스트레이디",
+          "kra_horse_id_raw": "0026873",
+          "meet_code": 1,
+          "source_document_id": 89733,
+          "swim_count": 20,
+          "training_date_local": "2012-05-02"
+        },
+        {
+          "horse_name_raw": "챌린지컨셉트",
+          "kra_horse_id_raw": "0024488",
+          "meet_code": 1,
+          "source_document_id": 89731,
+          "swim_count": 20,
+          "training_date_local": "2011-11-26"
+        }
+      ],
+      "meet_summary": [
+        {
+          "distinct_ids_matching_core_horse_roster": 7827,
+          "distinct_ids_matching_core_runner_ids": 7573,
+          "distinct_ids_not_in_core_horse_roster": 132,
+          "distinct_ids_not_in_core_runner_ids": 386,
+          "distinct_source_horses": 7959,
+          "first_event_date": "2010-05-06",
+          "last_event_date": "2026-09-23",
+          "linked_rows_missing_horse_fk": 0,
+          "meet_code": 1,
+          "meet_label": "서울",
+          "rows": 288115,
+          "rows_with_horse_id_zero": 0,
+          "unmatched_id_examples": [
+            "0016544",
+            "0020807",
+            "0022208",
+            "0022270",
+            "0022483",
+            "0022497",
+            "0022886",
+            "0023081",
+            "0023082",
+            "0023213"
+          ]
+        },
+        {
+          "distinct_ids_matching_core_horse_roster": 5676,
+          "distinct_ids_matching_core_runner_ids": 5504,
+          "distinct_ids_not_in_core_horse_roster": 103,
+          "distinct_ids_not_in_core_runner_ids": 275,
+          "distinct_source_horses": 5779,
+          "first_event_date": "2010-03-03",
+          "last_event_date": "2026-09-20",
+          "linked_rows_missing_horse_fk": 0,
+          "meet_code": 3,
+          "meet_label": "영남 API 권역; 부산경남·영천 장소 미분리",
+          "rows": 171473,
+          "rows_with_horse_id_zero": 0,
+          "unmatched_id_examples": [
+            "0017559",
+            "0021935",
+            "0022556",
+            "0022715",
+            "0022840",
+            "0022858",
+            "0022901",
+            "0022960",
+            "0023289",
+            "0023312"
+          ]
+        }
+      ],
+      "quality_counts": [
+        {
+          "count_20_or_more_rows": 27,
+          "maximum_count": 36,
+          "meet_code": 1,
+          "negative_count_rows": 0,
+          "quality_status": "valid",
+          "rows": 288112,
+          "zero_count_rows": 0
+        },
+        {
+          "count_20_or_more_rows": 0,
+          "maximum_count": 0,
+          "meet_code": 1,
+          "negative_count_rows": 0,
+          "quality_status": "zero_record",
+          "rows": 3,
+          "zero_count_rows": 3
+        },
+        {
+          "count_20_or_more_rows": 6,
+          "maximum_count": 33,
+          "meet_code": 3,
+          "negative_count_rows": 0,
+          "quality_status": "valid",
+          "rows": 171473,
+          "zero_count_rows": 0
+        }
+      ],
+      "stored_rows_in_scope": 459588,
+      "table": "horse_swim_training"
+    }
+  },
+  "operational_all_date_freshness": {
+    "daily_training": {
+      "first_event_date": "1998-09-25",
+      "last_event_date": "2026-09-30",
+      "latest_ingestion_run": {
+        "completed_at_ms": 1790838074471,
+        "id": 19468,
+        "records_fetched": 0,
+        "records_written": 0,
+        "source": "data.go.kr/B551015/API18_1",
+        "started_at_ms": 1790838071730,
+        "status": "completed"
+      },
+      "rows_all_dates": 8214054,
+      "source_documents_in_latest_run": 1,
+      "table": "horse_training"
+    },
+    "hill_training": {
+      "first_event_date": "2025-08-28",
+      "last_event_date": "2026-09-30",
+      "latest_ingestion_run": {
+        "completed_at_ms": 1790837234483,
+        "id": 19455,
+        "records_fetched": 684,
+        "records_written": 342,
+        "source": "data.go.kr/B551015/hilldriving",
+        "started_at_ms": 1790837233316,
+        "status": "completed"
+      },
+      "rows_all_dates": 3770,
+      "source_documents_in_latest_run": 2,
+      "table": "horse_hill_training"
+    },
+    "start_training": {
+      "first_event_date": "2007-10-17",
+      "last_event_date": "2026-09-30",
+      "latest_ingestion_run": {
+        "completed_at_ms": 1790838122004,
+        "id": 19526,
+        "records_fetched": 0,
+        "records_written": 0,
+        "source": "data.go.kr/B551015/API22_1",
+        "started_at_ms": 1790838121931,
+        "status": "completed"
+      },
+      "rows_all_dates": 628005,
+      "source_documents_in_latest_run": 1,
+      "table": "horse_start_training"
+    },
+    "swim_training": {
+      "first_event_date": "2000-06-01",
+      "last_event_date": "2026-09-30",
+      "latest_ingestion_run": {
+        "completed_at_ms": 1790867000850,
+        "id": 19604,
+        "records_fetched": 19685,
+        "records_written": 19685,
+        "source": "data.go.kr/B551015/API216",
+        "started_at_ms": 1790866994546,
+        "status": "completed"
+      },
+      "rows_all_dates": 591460,
+      "source_documents_in_latest_run": 1,
+      "table": "horse_swim_training"
+    }
+  },
+  "operational_recent_ingestion_runs": [
+    {
+      "completed_at_ms": 1790867000850,
+      "data_type": "horse_swim_training",
+      "id": 19604,
+      "records_fetched": 19685,
+      "records_written": 19685,
+      "source": "data.go.kr/B551015/API216",
+      "started_at_ms": 1790866994546,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838122004,
+      "data_type": "horse_start_training",
+      "id": 19526,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838121931,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838121726,
+      "data_type": "horse_start_training",
+      "id": 19525,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838121658,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838121454,
+      "data_type": "horse_start_training",
+      "id": 19524,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838121374,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838121150,
+      "data_type": "horse_start_training",
+      "id": 19523,
+      "records_fetched": 154,
+      "records_written": 154,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838120932,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838120729,
+      "data_type": "horse_start_training",
+      "id": 19522,
+      "records_fetched": 113,
+      "records_written": 113,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838120522,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838120315,
+      "data_type": "horse_start_training",
+      "id": 19521,
+      "records_fetched": 100,
+      "records_written": 100,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838120100,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838119895,
+      "data_type": "horse_start_training",
+      "id": 19520,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838119800,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838119596,
+      "data_type": "horse_start_training",
+      "id": 19519,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838119523,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838119317,
+      "data_type": "horse_start_training",
+      "id": 19518,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838119241,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838119036,
+      "data_type": "horse_start_training",
+      "id": 19517,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838118962,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838118761,
+      "data_type": "horse_start_training",
+      "id": 19516,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838118659,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838118455,
+      "data_type": "horse_start_training",
+      "id": 19515,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838118383,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838118178,
+      "data_type": "horse_start_training",
+      "id": 19514,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838118096,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838117890,
+      "data_type": "horse_start_training",
+      "id": 19513,
+      "records_fetched": 41,
+      "records_written": 41,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838117752,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838117546,
+      "data_type": "horse_start_training",
+      "id": 19512,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838117465,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838117264,
+      "data_type": "horse_start_training",
+      "id": 19511,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838117195,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838116994,
+      "data_type": "horse_start_training",
+      "id": 19510,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838116891,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838116685,
+      "data_type": "horse_start_training",
+      "id": 19509,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838116512,
+      "status": "completed"
+    },
+    {
+      "completed_at_ms": 1790838116307,
+      "data_type": "horse_start_training",
+      "id": 19508,
+      "records_fetched": 0,
+      "records_written": 0,
+      "source": "data.go.kr/B551015/API22_1",
+      "started_at_ms": 1790838116233,
+      "status": "completed"
+    }
+  ],
+  "scope": {
+    "event_date_from_inclusive": "2010-01-01",
+    "event_date_through_inclusive": "2026-09-29",
+    "excluded_meet_code": {
+      "2": "제주"
+    },
+    "included_meet_codes": {
+      "1": "서울",
+      "3": "영남 API 권역",
+      "4": "영천"
+    },
+    "venue_limit": "API meet=3 may mean Yeongnam and does not prove Busan-Gyeongnam vs Yeongcheon."
+  },
+  "snapshot": {
+    "core_duckdb_access": "read_only=True; read-only transaction",
+    "core_duckdb_path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "opened_at_kst": "2026-10-02T00:53:17+09:00",
+    "sqlite_access": "mode=ro; PRAGMA query_only=ON; one BEGIN transaction; no SQLite writes",
+    "sqlite_journal_mode": "wal",
+    "sqlite_main_file_bytes": 3077263360,
+    "sqlite_path": "data/horse_racing.sqlite3",
+    "sqlite_schema_version": 197
+  },
+  "source_document_lineage_by_type": [
+    {
+      "data_type": "horse_hill_training",
+      "first_retrieved_at_ms": 1790170193987,
+      "ingestion_runs": 2,
+      "last_retrieved_at_ms": 1790837234453,
+      "source": "data.go.kr/B551015/hilldriving",
+      "source_documents": 4
+    },
+    {
+      "data_type": "horse_start_training",
+      "first_retrieved_at_ms": 1787629780994,
+      "ingestion_runs": 2455,
+      "last_retrieved_at_ms": 1790838122001,
+      "source": "data.go.kr/B551015/API22_1",
+      "source_documents": 2455
+    },
+    {
+      "data_type": "horse_swim_training",
+      "first_retrieved_at_ms": 1790170043802,
+      "ingestion_runs": 3,
+      "last_retrieved_at_ms": 1790866998639,
+      "source": "data.go.kr/B551015/API216",
+      "source_documents": 47
+    },
+    {
+      "data_type": "horse_training",
+      "first_retrieved_at_ms": 1787596917817,
+      "ingestion_runs": 2479,
+      "last_retrieved_at_ms": 1790838074467,
+      "source": "data.go.kr/B551015/API18_1",
+      "source_documents": 2471
+    }
+  ],
+  "source_evidence_sha256": {
+    "data/logs/historical_horse_training_2015_2024_quality_20260914.json": "0efebad3c08fa3415e301f85686bee5e7d9a693d2983225d8f01ca71d88b8419",
+    "data/logs/historical_horse_training_2025_db_overlap_20260914.json": "4fe22af46b2763a7ac30e522067460464799618956898da78bb298f3e13b08c2",
+    "data/logs/historical_horse_training_monthly_audit_20260914.json": "118f09c14ee97255481e02dd213d9c59e724717a46e7032814d798dd0606014e",
+    "data/logs/historical_start_training_monthly_audit_20260914.json": "84fb3f6dd6b4d9f322ee933bf7d2c67e389e4a350be682dbd798bbb3b4d7dec4",
+    "data/raw/kra_api_monthly/horse_training/manifest.jsonl": "3ad52bd056726507c05575c1b4ee792225e26e985b29c7b5680e34e28ad2dd96",
+    "research/start_training_repair_20261001/cross_database_verification.json": "c3632a98a772bcd15c2bc3b20f30d63e81b5d759437bea4c96ef940208bce5e7",
+    "research/start_training_repair_20261001/historical_audit.json": "2db5d47e8850095d49e95208c3d793bafe947c244c12d022eb2e18ecbe6c5b03",
+    "research/swim_training_refresh_20261002/report.json": "dc186759f5db97585c97580e2b69f58d43fff0a059e2a74da2121c0a7e66b298",
+    "scripts/audit_historical_training_monthly.py": "0f2a5bd11d97746c46534d7f878c21a8d5412c5e2659fceb35e1d3fee11262ab",
+    "scripts/audit_historical_training_overlap.py": "5f26969549117664194d7f4cc550e321653b8b8a0161379b7fb0b16fde455452",
+    "scripts/repair_start_training_occurrences.py": "3fb81bc6aa8d7fabd8ff74e43b9541ecd6674dfc988dc1458553f127730f6281",
+    "src/horse_racing/db/models.py": "0c6c3fd922cc90bd23476537898702cab8aae03ce23d5b673692d7fb3d97e9d5",
+    "src/horse_racing/parsers/horse_history.py": "1828ee98f942e64c4ee11abd5b6d502e014cc28e99a1fa55b839a4f05f3f7155",
+    "src/horse_racing/parsers/race_supplemental.py": "4e5c30eb289112bb4c0f7097efbf154cf0e0b33bab17be8a1d9923c0471a3765",
+    "src/horse_racing/services/horse_history.py": "c197c3ee1c71a89f4be59f3cabaa27849710bf874c6c6544f42496e5b75b6741",
+    "src/horse_racing/services/race_supplemental.py": "40606a013f7568b5e5334654b4a4b0eec8231dce2845df09239e46bd801ad830",
+    "src/horse_racing/services/special_training.py": "69899488451e5a8a267300901e57473f8eabea4d12336c211b446a0c38f86778",
+    "thoroughbred/data/core_api_2010_20260929_v1/manifest.json": "0a01aca1d632cd3fd2266806f7a8001e7a4a39036fcfe31211b30f6c1bbf28b9",
+    "thoroughbred/research/20260929_source_inventory_v1/inventory.json": "042c528f0bf8a0087a1114a11622b3980b41338f2e74a0abbb74c53bd0eff1da",
+    "thoroughbred/research/20260930_next_ingestion_plan_v1/README.md": "b725852d3977ec5911236a8c9bc940208dda8b13171fc4b3a00cd284b7a56911",
+    "thoroughbred/research/20261002_training_source_precheck_v1/operating_chat_latest_reference.json": "be705b781b53e512f19be1e8fd6f4484b20860192ec73355fa4d2ff262dfdaec",
+    "thoroughbred/research/20261002_training_source_precheck_v1/snapshot.py": "43bfe8b5851f2cd357e4ff996a6b820bbf8d02fa60de070ed75e631a27ef3282"
+  }
+}

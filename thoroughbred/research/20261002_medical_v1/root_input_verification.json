@@ -1,0 +1,36 @@
+{
+  "all_passed": true,
+  "raw_rows_checked": 2101073,
+  "source_counts": {
+    "api16": 243411,
+    "api16_archived": 238591,
+    "dacom72": 1619071
+  },
+  "cohort_counts": {
+    "current_annual": 243411,
+    "archived_daily_snapshot": 238591,
+    "rpt": 1619071
+  },
+  "text_files_checked": 3377,
+  "text_rows_checked": 1619071,
+  "unique_observation_ids": 2101073,
+  "empty_text_horse_names": [
+    {
+      "path": "data/raw/kra_text/dacom72/meet=1/year=2011/month=07/day=14/20110714dacom72.rpt",
+      "line": 71,
+      "event_date": "2011-07-10"
+    },
+    {
+      "path": "data/raw/kra_text/dacom72/meet=1/year=2011/month=08/day=04/20110804dacom72.rpt",
+      "line": 150,
+      "event_date": "2011-07-31"
+    }
+  ],
+  "verification_script_sha256": "b137046f37d54a827ab656b7eb4080ed92c8899275bbd7981066b6a2a9f6d891",
+  "api_source_files_checked": 1654,
+  "input_sha256": {
+    "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_observations.parquet": "8429a47b2c8073a93c4b81d29ae1b6aae02b75dd2f740ccf0188ee1ade691ba6",
+    "thoroughbred/research/20261002_medical_v1/source/api16_archived_daily_observations.parquet": "c0a2fb337f68714bc4ea039d6f276052c1af46777d7e896159ca46c77668caac",
+    "thoroughbred/research/20261002_medical_v1/source/dacom72_observations.parquet": "186924ba30e6961635cfd1e47bc7e43450cb577028c91bd806fc0f79eef35619"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "status": "dry_run_replay_passed",
+  "applied": false,
+  "idempotent_replay": true,
+  "core_database": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "core_database_sha256_before": "828942c5b59f4632998c12f142c4e18e4ee2e6316a0e5a56f826f37a68c726a6",
+  "baseline_database_sha256": "5c9fa0e4d53a776a643d045440717727c5a9299b158f43ea93109eb53e770ec7",
+  "existing_core_objects": 101,
+  "existing_source_manifest_rows": 24,
+  "input_sha256": {
+    "thoroughbred/research/20261002_starting_exam_v1/input/starting_exam.parquet": "f8d1689fbc84de5fc53b8960177bccc129143800debfc2eddfe1d24ff6ad3d53",
+    "thoroughbred/research/20261002_starting_exam_v1/raw/capture_manifest.json": "08cbb5cbfd093a84d1daff42872d657f830d33c14ff5fc98aeab6e4bb72c17b7",
+    "thoroughbred/research/20261002_starting_exam_v1/raw/coverage_summary.json": "f2d1e721c094c44793510691099b80cf08dda2d85f204324b9850f5badf11ac8",
+    "thoroughbred/research/20261002_starting_exam_v1/loader/load_starting_exam.py": "22d1171afc351011a01846d9418ca8dbc3da3f61f0bbe025dcd455e27abcc485",
+    "thoroughbred/research/20261002_starting_exam_v1/loader/schema.sql": "a583cdc9845b366922803a48149c3eab018b25384127bd2bb21baa7e233f1f8e",
+    "thoroughbred/research/20261002_starting_exam_v1/loader/input_contract.json": "f71f98fa7e82c59560350dd30441388cd9c4c5b8254ef0e7e26d6ea64178f23a"
+  },
+  "loader_and_schema_sha256": {
+    "loader": "22d1171afc351011a01846d9418ca8dbc3da3f61f0bbe025dcd455e27abcc485",
+    "schema": "a583cdc9845b366922803a48149c3eab018b25384127bd2bb21baa7e233f1f8e",
+    "contract": "f71f98fa7e82c59560350dd30441388cd9c4c5b8254ef0e7e26d6ea64178f23a"
+  },
+  "dataset_counts": {
+    "dataset_observation_rows": 52325,
+    "unique_observation_ids": 52325,
+    "source_file_inventory_rows": 34,
+    "partition_coverage_rows": 34,
+    "daily_coverage_rows": 12232,
+    "complete_partitions": 34,
+    "zero_partitions": 0,
+    "exact_horse_link_rows": 51553,
+    "unmatched_horse_id_rows": 730,
+    "missing_horse_id_rows": 42,
+    "rows_with_natural_key_repeat_flag": 16,
+    "rows_with_missing_natural_key_component_flag": 128,
+    "object_row_counts": {
+      "starting_exam_observations": 52325,
+      "starting_exam_source_files": 34,
+      "starting_exam_partition_coverage": 34,
+      "starting_exam_results": 52325,
+      "starting_exam_sessions": 3538,
+      "starting_exam_qa": 52325,
+      "starting_exam_date_coverage": 12232,
+      "starting_exam_entity_links": 156975
+    }
+  },
+  "proposed_objects": [
+    {
+      "name": "starting_exam_observations",
+      "type": "BASE TABLE",
+      "rows": 52325
+    },
+    {
+      "name": "starting_exam_source_files",
+      "type": "BASE TABLE",
+      "rows": 34
+    },
+    {
+      "name": "starting_exam_partition_coverage",
+      "type": "BASE TABLE",
+      "rows": 34
+    },
+    {
+      "name": "starting_exam_results",
+      "type": "VIEW",
+      "rows": 52325
+    },
+    {
+      "name": "starting_exam_sessions",
+      "type": "VIEW",
+      "rows": 3538
+    },
+    {
+      "name": "starting_exam_qa",
+      "type": "VIEW",
+      "rows": 52325
+    },
+    {
+      "name": "starting_exam_date_coverage",
+      "type": "VIEW",
+      "rows": 12232
+    },
+    {
+      "name": "starting_exam_entity_links",
+      "type": "VIEW",
+      "rows": 156975
+    }
+  ],
+  "proposed_source_manifest": "starting_exam_api21_1_v1",
+  "expected_core_after_apply": {
+    "objects": 109,
+    "source_manifest_rows": 24
+  },
+  "backup_directory": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_starting_exam",
+  "status_rules": {
+    "availability_status": "retrospective_starting_exam_not_verified_pre_race",
+    "historical_prerace_eligibility_verified": false,
+    "pass_flag_adjudication_performed": false,
+    "rider_name_linked_to_jockey_id": false,
+    "physical_venue_adjudicated": false,
+    "session_group_is_race": false
+  },
+  "replay_verification": {
+    "core_only_row_hashes": 0,
+    "input_only_row_hashes": 0,
+    "method": "SHA-256 of every typed table column; bidirectional EXCEPT ALL"
+  }
+}

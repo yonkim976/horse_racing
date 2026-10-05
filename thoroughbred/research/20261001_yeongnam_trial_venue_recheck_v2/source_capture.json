@@ -1,0 +1,74 @@
+{
+  "review_date": "2026-10-01",
+  "capture_method": "Official KRA pages and PDF opened via web retrieval; local shell HTTP fetch failed because DNS resolution for race.kra.co.kr was unavailable.",
+  "raw_html_saved": false,
+  "original_pdfs_saved": true,
+  "pdf_fetch_attempt": {
+    "url": "https://race.kra.co.kr/down/raceplan2026_20260516.pdf",
+    "command_result": "curl exit 6: Could not resolve host: race.kra.co.kr",
+    "attempted_output_path": "raceplan2026_20260516.pdf"
+  },
+  "sources": [
+    {
+      "title": "2026년 경마시행계획",
+      "url": "https://race.kra.co.kr/down/raceplan2026_20260516.pdf",
+      "type": "official_pdf",
+      "publication_marker": "20260516 in URL",
+      "relevant_pages": {
+        "printed_page_65_pdf_page_69": "주행심사: 서울 및 부경 경마장, 양쪽 매주 목요일 10:30, 1000m 지점부터 결승선까지",
+        "printed_page_66_pdf_page_70": "기수 기승, 경주로 입장, 출발대 진입 후 1000m 주행"
+      },
+      "retrieval_note": "Root later saved the official PDF and visually verified printed pages 65 and 66; see official_plan_capture.json."
+    },
+    {
+      "title": "경마시행 주요변경사항_영남경마",
+      "url": "https://race.kra.co.kr/raceoper/RaceoperView.do?Act=13&Sub=2&meet=3",
+      "type": "official_html_page",
+      "retrieved_date": "2026-10-01",
+      "relevant_lines": "Web extraction lines 107-108: 2026 Yeongcheon circuit racing runs from 2nd week of September through 1st week of December. Line 282: Bugeong racetrack trial date changes from Saturday to Thursday.",
+      "retrieval_note": "Official page opened through web tool; raw HTML not locally saved."
+    },
+    {
+      "title": "경주마조교심사 제도_영남경마",
+      "url": "https://race.kra.co.kr/startingData/trainEvaluationSystem.do?Act=07&Sub=10&meet=3",
+      "type": "official_html_page",
+      "retrieved_date": "2026-10-01",
+      "relevant_lines": "Web extraction lines 97-110: basis is Racing Rules Article 35; Yeongnam page states weekly Thursday from 10:30 at the 1,000m course start and a 1,000m qualifying record.",
+      "retrieval_note": "Official page opened through web tool; raw HTML not locally saved. It does not independently name the physical venue."
+    },
+    {
+      "title": "경주마 조교심사 시행기준집 (2026.05)",
+      "url": "https://race.kra.co.kr/down/trngImplementGuide_20260626130700.pdf",
+      "type": "official_pdf",
+      "relevant_pages": {
+        "printed_page_12_pdf_page_13": "The schedule table groups Seoul, Jeju, and Bugeong; all list Thursday and the starting point. The rules allow schedule changes according to circumstances."
+      },
+      "retrieval_note": "Viewed in web tool. No local binary copy or binary hash available."
+    },
+    {
+      "title": "API20_1 archived response meet_3.json",
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2026/meet_3.json",
+      "type": "local_official_api_snapshot",
+      "sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+      "target_row_summary": "2026-09-17: 48 rows; trainNo 1-4 with 12 rows each; all meet=영남 and trainDays=목요일; response has no distance or physical-venue field."
+    },
+    {
+      "title": "2026-09-17 RPT trial result",
+      "path": "data/raw/kra_text/dacom23/meet=3/year=2026/month=09/day=17/20260917dacom23.rpt",
+      "type": "local_official_result_snapshot",
+      "sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+      "target_row_summary": "CP949-decoded text lists 2026-09-17 (Thursday), the 36th trial, races 1-4. The document body does not state physical venue or distance."
+    }
+  ],
+  "evidence_conclusion": "The 2026 plan plus the official 2026 change specifying Bugeong's Thursday trial schedule support a rule-based assignment of Bugeong (Busan-Gyeongnam), 1000m to the 2026-09-17 Yeongnam sessions. The dated API/RPT themselves do not directly print venue or distance.",
+  "locally_saved_pdfs": [
+    "raceplan2026_20260516.pdf"
+  ],
+  "root_capture": {
+    "url": "https://race.kra.co.kr/down/raceplan2026_20260516.pdf",
+    "retrieved_at_utc": "2026-10-01T07:55:20.136744+00:00",
+    "source_file": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/raceplan2026_20260516.pdf",
+    "sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+    "bytes": 6355608
+  }
+}

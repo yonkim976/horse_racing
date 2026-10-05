@@ -1,0 +1,3655 @@
+{
+  "all_passed": true,
+  "checked_at_utc": "2026-10-02T08:08:28.216030+00:00",
+  "read_only": true,
+  "baseline_database": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb",
+  "database_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+  "database_and_manifest_unchanged": true,
+  "checked_objects": 180,
+  "registered_counts_checked": 178,
+  "all_object_counts": {
+    "annual_summary": 51,
+    "annual_summary_prior_review": 51,
+    "calendar_days": 18348,
+    "calendar_days_prior_review": 18348,
+    "closure_boundary_review": 2,
+    "closure_gap_review_candidates": 26,
+    "closure_plan_amendment_review": 3,
+    "closure_review_questions": 19,
+    "confirmed_races": 29710,
+    "confirmed_races_2017plus": 16547,
+    "confirmed_runners": 330465,
+    "confirmed_runners_2017plus": 182062,
+    "confirmed_runners_entity_linked": 330465,
+    "confirmed_runners_entity_reviewed": 330465,
+    "confirmed_runners_entity_reviewed_before_role_review": 330465,
+    "daily_training_raw": 5173033,
+    "entity_name_observations": 26807,
+    "entity_profile_coverage": 4,
+    "entity_profile_coverage_gaps": 857,
+    "entity_reference_roster": 25814,
+    "entity_reference_summary": 4,
+    "equipment_api78_active_declared": 312714,
+    "equipment_api78_capture_batches": 3117,
+    "equipment_api78_capture_pages": 3117,
+    "equipment_api78_card_observations": 331450,
+    "equipment_api78_card_tokens": 326385,
+    "equipment_api78_core_runner_ledger": 330465,
+    "equipment_api78_identity_conflicts": 1344,
+    "equipment_api78_latest_card_observations": 331450,
+    "equipment_api78_source_documents": 3270,
+    "equipment_core_coverage": 330465,
+    "equipment_declared_union_fallback": 311790,
+    "equipment_score_supplement": 104,
+    "equipment_score_supplement_active_declared": 166,
+    "equipment_score_supplement_tokens": 170,
+    "horse_profile_page_manifest": 46,
+    "horse_profile_snapshot_membership": 43717,
+    "jockey_reference_ids_with_review": 338,
+    "medical_api16_archived_candidates": 238591,
+    "medical_api16_archived_exclusions": 8775,
+    "medical_api16_archived_page_ledger": 2524,
+    "medical_api16_current_api33_exact_title_lookup": 220411,
+    "medical_api16_current_exclusions": 475,
+    "medical_api16_current_phrase_review": 486822,
+    "medical_api16_current_phrase_usage": 1027,
+    "medical_api16_illness_slots": 964004,
+    "medical_api16_page_ledger": 42,
+    "medical_api16_year_meet_coverage": 34,
+    "medical_api33_source_rows": 3523,
+    "medical_api33_terms": 3511,
+    "medical_api_comparison_ledger": 1825169,
+    "medical_archived_daily_coverage": 34,
+    "medical_current_api_exact_slot_keys": 414514,
+    "medical_current_api_payload_capture_counts": 231806,
+    "medical_current_api_records": 243411,
+    "medical_dacom72_exclusions": 32,
+    "medical_dacom72_file_ledger": 3377,
+    "medical_dacom72_layout_reconciliation": 272079,
+    "medical_dacom72_year_meet_coverage": 34,
+    "medical_diagnosis_explanations": 8748,
+    "medical_diagnosis_term_links": 9113,
+    "medical_dictionary_metadata": 2,
+    "medical_dictionary_output_hashes": 9,
+    "medical_entity_links": 2101073,
+    "medical_existing_raw_inventory": 2524,
+    "medical_explanation_observations": 145,
+    "medical_explanation_terms": 119,
+    "medical_fingerprint_candidates": 1904555,
+    "medical_link_exceptions": 1634114,
+    "medical_observations": 2101073,
+    "medical_observed_diagnosis_components": 2718155,
+    "medical_observed_diagnosis_explanations": 2632192,
+    "medical_phrase_components": 9113,
+    "medical_phrase_decisions": 5397,
+    "medical_raw_diagnosis_slots": 2583075,
+    "medical_source_metadata": 5,
+    "medical_source_output_hashes": 21,
+    "medical_source_year_meet_coverage": 102,
+    "medical_text_full_literal_phrase_usage": 9164,
+    "medical_text_phrase_review": 1496828,
+    "medical_text_record_candidates": 1496828,
+    "medical_union_candidates": 1978830,
+    "non_person_placeholder_observations": 163,
+    "official_annual_stats_crosscheck": 10,
+    "official_cancelled_days": 4,
+    "official_closure_intervals": 81,
+    "passing_api_error_evidence": 72,
+    "passing_api_event_reconciliation": 29774,
+    "passing_api_exclusions": 0,
+    "passing_api_mapping_validation": 315,
+    "passing_api_observations": 29774,
+    "passing_api_page_ledger": 48,
+    "passing_api_point_observations": 142641,
+    "passing_api_race_times": 29774,
+    "passing_api_rpt_value_matches": 87334,
+    "passing_api_unmapped_point_observations": 414,
+    "passing_api_unmapped_race_holds": 259,
+    "passing_confirmed_race_keys": 29710,
+    "passing_core_execution_ledger": 29826,
+    "passing_mapped_point_observations": 225617,
+    "passing_point_comparison": 144001,
+    "passing_point_discrepancy_ledger": 50,
+    "passing_race_coverage": 29710,
+    "passing_rpt_mapped_point_observations": 83390,
+    "passing_rpt_point_mapping": 20,
+    "passing_rpt_point_observations": 111467,
+    "passing_rpt_race_headers": 17371,
+    "passing_rpt_snapshot_comparison": 126406,
+    "passing_rpt_source_files": 1827,
+    "passing_rpt_unmapped_nonempty_point_observations": 0,
+    "passing_source_metadata": 12,
+    "passing_source_output_hashes": 26,
+    "person_profile_page_manifest": 7,
+    "person_reference_profile_snapshots": 1919,
+    "prior_unresolved_race_day_review": 2,
+    "race_events": 29826,
+    "race_execution_adjudicated": 29826,
+    "race_execution_flags": 29826,
+    "race_nonexecution_adjudication": 116,
+    "race_nonexecution_adjudication_prior_review": 116,
+    "race_nonexecution_subtype_review": 29,
+    "race_passing_groups": 144001,
+    "race_plan": 29826,
+    "race_plan_full_api": 29826,
+    "race_role_gap_audit": 38,
+    "race_trainer_owner_review": 60,
+    "race_trainer_owner_review_evidence": 60,
+    "reported_closure_interval_leads": 10,
+    "role_link_exceptions_current": 186,
+    "role_link_exceptions_pending": 0,
+    "runner_results": 331811,
+    "runner_section_coverage_api": 330465,
+    "section_measurements_api": 4380065,
+    "section_missing_finisher_review": 2,
+    "section_parse_issues_api": 0,
+    "source_manifests": 26,
+    "start_training_raw": 431517,
+    "starting_exam_date_coverage": 12232,
+    "starting_exam_entity_links": 156975,
+    "starting_exam_observations": 52325,
+    "starting_exam_partition_coverage": 34,
+    "starting_exam_qa": 52325,
+    "starting_exam_results": 52325,
+    "starting_exam_sessions": 3538,
+    "starting_exam_source_files": 34,
+    "swim_training_raw": 459604,
+    "training_capture_coverage": 36696,
+    "training_date_coverage": 36696,
+    "training_observation_qa": 6064154,
+    "training_raw_observations": 6064154,
+    "training_source_entities": 62297,
+    "training_source_files": 4884,
+    "trial_horse_id_source_exceptions": 104,
+    "trial_horse_identity_links": 104,
+    "trial_horse_identity_pending": 0,
+    "trial_horse_identity_user_confirmations": 5,
+    "trial_jockey_gap_audit": 5121,
+    "trial_jockey_official_profile_supplement": 1,
+    "trial_jockey_official_web_conflict_18": 18,
+    "trial_jockey_official_web_missing_24": 24,
+    "trial_jockey_official_web_rpt_5079": 5079,
+    "trial_participants": 61777,
+    "trial_participants_entity_linked": 61777,
+    "trial_participants_entity_reviewed": 61777,
+    "trial_participants_entity_reviewed_before_role_review": 61777,
+    "trial_participants_resolved": 61777,
+    "trial_participants_venue_reviewed": 61777,
+    "trial_rpt_name_review_18": 18,
+    "trial_sessions": 6199,
+    "trial_sessions_venue_reviewed": 6199,
+    "trial_trainer_errors_closed": 22,
+    "trial_trainer_review": 224,
+    "trial_trainer_review_evidence": 224,
+    "trial_trainer_source_error_decisions": 22,
+    "trial_venue_review": 1,
+    "unidentified_trial_participants": 104,
+    "unresolved_entity_references": 5548,
+    "unresolved_race_days": 0,
+    "unresolved_trial_participants": 0,
+    "unverified_result_only_keys": 0
+  },
+  "registered_count_mismatches": {},
+  "input_files_checked": 384,
+  "input_hash_checks": [
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/daily_calendar.csv",
+      "exists": true,
+      "expected_sha256": "9f2ed04283812b51177e25e99e79462bb4684f1c68efcd55c9c9d6b8a351fa8d",
+      "table": "calendar_days",
+      "loaded_to_database": null,
+      "actual_sha256": "9f2ed04283812b51177e25e99e79462bb4684f1c68efcd55c9c9d6b8a351fa8d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/annual_summary.csv",
+      "exists": true,
+      "expected_sha256": "fcf9c27203841cf946d98863af2637ece104fd29ca0a03535876bcecc3dda607",
+      "table": "annual_summary",
+      "loaded_to_database": null,
+      "actual_sha256": "fcf9c27203841cf946d98863af2637ece104fd29ca0a03535876bcecc3dda607",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/daily_calendar.csv",
+      "exists": true,
+      "expected_sha256": "db0a5ebfbe01483e78403ac3ec59390055f7744368f30085c52b7acee80cebe0",
+      "table": "calendar_days_prior_review",
+      "loaded_to_database": null,
+      "actual_sha256": "db0a5ebfbe01483e78403ac3ec59390055f7744368f30085c52b7acee80cebe0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/annual_summary.csv",
+      "exists": true,
+      "expected_sha256": "4c47fd2033f0d0cbf428b0dbaf454823ce4ebe4120b1f012664e06c977dd99dc",
+      "table": "annual_summary_prior_review",
+      "loaded_to_database": null,
+      "actual_sha256": "4c47fd2033f0d0cbf428b0dbaf454823ce4ebe4120b1f012664e06c977dd99dc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_plan.csv",
+      "exists": true,
+      "expected_sha256": "bb4e2a6992b6edde3011db1f13fcd626d6a7bd2348385f7510942a91e401c40e",
+      "table": "race_plan",
+      "loaded_to_database": null,
+      "actual_sha256": "bb4e2a6992b6edde3011db1f13fcd626d6a7bd2348385f7510942a91e401c40e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_core_api_db_v1/race_plan_full_api.csv",
+      "exists": true,
+      "expected_sha256": "5f01b06826606c8a98edb70ceca07142cadda9fd47fc5f870dd260ba8e6103f7",
+      "table": "race_plan_full_api",
+      "loaded_to_database": null,
+      "actual_sha256": "5f01b06826606c8a98edb70ceca07142cadda9fd47fc5f870dd260ba8e6103f7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_execution_flags.csv",
+      "exists": true,
+      "expected_sha256": "9f5f0be86db1d0bb584e79a66a67d6af1d80d58a2185f3adbcec49c770bbcd16",
+      "table": "race_execution_flags",
+      "loaded_to_database": null,
+      "actual_sha256": "9f5f0be86db1d0bb584e79a66a67d6af1d80d58a2185f3adbcec49c770bbcd16",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/race_nonexecution_adjudication.csv",
+      "exists": true,
+      "expected_sha256": "49c95186a7b12873001432133a7226da069b0cc7c3fc6766e2365c65bb91b768",
+      "table": "race_nonexecution_adjudication",
+      "loaded_to_database": null,
+      "actual_sha256": "49c95186a7b12873001432133a7226da069b0cc7c3fc6766e2365c65bb91b768",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_nonexecution_adjudication.csv",
+      "exists": true,
+      "expected_sha256": "1051f96a3fd6b0471f2524db92dc451276e65cad09d3092f4a4b719c7b0123f2",
+      "table": "race_nonexecution_adjudication_prior_review",
+      "loaded_to_database": null,
+      "actual_sha256": "1051f96a3fd6b0471f2524db92dc451276e65cad09d3092f4a4b719c7b0123f2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/subtype_decisions.csv",
+      "exists": true,
+      "expected_sha256": "73a02baf0be9547b1b86a6d4d0f47587a6ed9df344a11d614ca91f17b8872363",
+      "table": "race_nonexecution_subtype_review",
+      "loaded_to_database": null,
+      "actual_sha256": "73a02baf0be9547b1b86a6d4d0f47587a6ed9df344a11d614ca91f17b8872363",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_boundary_review.csv",
+      "exists": true,
+      "expected_sha256": "8165a13fa6acd1fc3633d7363a974acdfd57012df02ae2f8ec3f2792d8b85d12",
+      "table": "closure_boundary_review",
+      "loaded_to_database": null,
+      "actual_sha256": "8165a13fa6acd1fc3633d7363a974acdfd57012df02ae2f8ec3f2792d8b85d12",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/reported_closure_interval_leads.csv",
+      "exists": true,
+      "expected_sha256": "9b24b08e67387eaa6140f76e903791e33a4ee4e85fdfe00736b0cf4d956e39cc",
+      "table": "reported_closure_interval_leads",
+      "loaded_to_database": null,
+      "actual_sha256": "9b24b08e67387eaa6140f76e903791e33a4ee4e85fdfe00736b0cf4d956e39cc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_gap_review_candidates.csv",
+      "exists": true,
+      "expected_sha256": "e89377d63272629bce124251d8adbb1fe1a0a2e2b6dbf3cb9b9b9c13331d1e9d",
+      "table": "closure_gap_review_candidates",
+      "loaded_to_database": null,
+      "actual_sha256": "e89377d63272629bce124251d8adbb1fe1a0a2e2b6dbf3cb9b9b9c13331d1e9d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_plan_amendment_review.csv",
+      "exists": true,
+      "expected_sha256": "5ccc0a6a9988847d2a7d68e8efe629979316e5fc198d5dafe1c42a1ce4078916",
+      "table": "closure_plan_amendment_review",
+      "loaded_to_database": null,
+      "actual_sha256": "5ccc0a6a9988847d2a7d68e8efe629979316e5fc198d5dafe1c42a1ce4078916",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_review_questions.csv",
+      "exists": true,
+      "expected_sha256": "255db55975f6a657630cc4d2cae65418a65ac2f7f1eac545fd2357064e9b28e0",
+      "table": "closure_review_questions",
+      "loaded_to_database": null,
+      "actual_sha256": "255db55975f6a657630cc4d2cae65418a65ac2f7f1eac545fd2357064e9b28e0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_section_api_v1/missing_finisher_section_review.csv",
+      "exists": true,
+      "expected_sha256": "1528aa3ee19452ae2d2d33fca916c9722860cbd6b37a865c7a64796f52008eaa",
+      "table": "section_missing_finisher_review",
+      "loaded_to_database": null,
+      "actual_sha256": "1528aa3ee19452ae2d2d33fca916c9722860cbd6b37a865c7a64796f52008eaa",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_race_results_api_v1/race_events.csv",
+      "exists": true,
+      "expected_sha256": "740497c441e00efe713f591626fdb06e46211b13536fa35cf5cfee2f64bb8635",
+      "table": "race_events",
+      "loaded_to_database": null,
+      "actual_sha256": "740497c441e00efe713f591626fdb06e46211b13536fa35cf5cfee2f64bb8635",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_race_results_api_v1/runner_results.csv",
+      "exists": true,
+      "expected_sha256": "8636fdd8d8875e717405b99bfbfb0bcaff1b58406d9213c09f830719a558468c",
+      "table": "runner_results",
+      "loaded_to_database": null,
+      "actual_sha256": "8636fdd8d8875e717405b99bfbfb0bcaff1b58406d9213c09f830719a558468c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_trial_results_api_v1/sessions.csv",
+      "exists": true,
+      "expected_sha256": "97e9d7bd746640b1e6eb1edd252d0ff2d2408db0f1a6fb5b8b42b795186b84d0",
+      "table": "trial_sessions",
+      "loaded_to_database": null,
+      "actual_sha256": "97e9d7bd746640b1e6eb1edd252d0ff2d2408db0f1a6fb5b8b42b795186b84d0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_trial_results_api_v1/participants.csv",
+      "exists": true,
+      "expected_sha256": "0b1bdb887747159d4036acd3a922162275c4059b3a5683809cc93542c6175908",
+      "table": "trial_participants",
+      "loaded_to_database": null,
+      "actual_sha256": "0b1bdb887747159d4036acd3a922162275c4059b3a5683809cc93542c6175908",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_trial_results_api_v1/unidentified_participants.csv",
+      "exists": true,
+      "expected_sha256": "a83bd2e19e3c6339164ece6639413ee7305f28e847ebf01d06f5f380ed651d7e",
+      "table": "unidentified_trial_participants",
+      "loaded_to_database": null,
+      "actual_sha256": "a83bd2e19e3c6339164ece6639413ee7305f28e847ebf01d06f5f380ed651d7e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_horse_identity_v1/identity_links.csv",
+      "exists": true,
+      "expected_sha256": "58c6e9ed9d170aebb1bb0a7f5cf6acbecb18f17b4931ebf951f9aee7e7cf1ced",
+      "table": "trial_horse_identity_links",
+      "loaded_to_database": null,
+      "actual_sha256": "58c6e9ed9d170aebb1bb0a7f5cf6acbecb18f17b4931ebf951f9aee7e7cf1ced",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_horse_identity_v1/pending_review.csv",
+      "exists": true,
+      "expected_sha256": "72e3dc9c13ee5257e096ab91a44d014be05bb1401581f7cd0aabf0d422198427",
+      "table": "trial_horse_identity_pending",
+      "loaded_to_database": null,
+      "actual_sha256": "72e3dc9c13ee5257e096ab91a44d014be05bb1401581f7cd0aabf0d422198427",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_horse_identity_v1/user_confirmations.csv",
+      "exists": true,
+      "expected_sha256": "7aa708c20f6dc97187ce43221a3ed7653c74c24a1d132260652fc76cad38b7a7",
+      "table": "trial_horse_identity_user_confirmations",
+      "loaded_to_database": null,
+      "actual_sha256": "7aa708c20f6dc97187ce43221a3ed7653c74c24a1d132260652fc76cad38b7a7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/venue_review.csv",
+      "exists": true,
+      "expected_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+      "table": "trial_venue_review",
+      "loaded_to_database": null,
+      "actual_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_trial_22_profile_absence_review_v1/source_error_decisions.csv",
+      "exists": true,
+      "expected_sha256": "87e1b9e6ffba26e31ba9ff6ee879281408fb703d9e220a0cf636756f93b2b732",
+      "table": "trial_trainer_source_error_decisions",
+      "loaded_to_database": null,
+      "actual_sha256": "87e1b9e6ffba26e31ba9ff6ee879281408fb703d9e220a0cf636756f93b2b732",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_race_results_api_v1/unverified_result_only_keys.csv",
+      "exists": true,
+      "expected_sha256": "f5d00f0d0c82b09de531bda801f262eef84b47aad575bd77699c90ac8be38cc7",
+      "table": "unverified_result_only_keys",
+      "loaded_to_database": null,
+      "actual_sha256": "f5d00f0d0c82b09de531bda801f262eef84b47aad575bd77699c90ac8be38cc7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/official_nonexecution_addendum.csv",
+      "exists": true,
+      "expected_sha256": "fd4afac525045141e6244e407ff631db2b9ca8a2a0e14e1fc10116345ad55463",
+      "table": "official_cancelled_days",
+      "loaded_to_database": null,
+      "actual_sha256": "fd4afac525045141e6244e407ff631db2b9ca8a2a0e14e1fc10116345ad55463",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/unresolved_race_day_review.csv",
+      "exists": true,
+      "expected_sha256": "c8c274686017cd500d71a03afc84d00bb38a4b8f7448202a8a9efe50e56e7549",
+      "table": "prior_unresolved_race_day_review",
+      "loaded_to_database": null,
+      "actual_sha256": "c8c274686017cd500d71a03afc84d00bb38a4b8f7448202a8a9efe50e56e7549",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/official_annual_stats_crosscheck.csv",
+      "exists": true,
+      "expected_sha256": "7ac5530c4e4f5076637f5fa5cbd187fad33f8eca48f485732579aa94ad40db3d",
+      "table": "official_annual_stats_crosscheck",
+      "loaded_to_database": null,
+      "actual_sha256": "7ac5530c4e4f5076637f5fa5cbd187fad33f8eca48f485732579aa94ad40db3d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/data/section_api_2010_20260929_v1/section_measurements.parquet",
+      "exists": true,
+      "expected_sha256": "552b445408ce9e1443f503ae9efa9e0b918191b64b34654d0661af2ead4f76a9",
+      "table": "section_measurements_api",
+      "loaded_to_database": null,
+      "actual_sha256": "552b445408ce9e1443f503ae9efa9e0b918191b64b34654d0661af2ead4f76a9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/data/section_api_2010_20260929_v1/runner_section_coverage.parquet",
+      "exists": true,
+      "expected_sha256": "79d476225483354abf55bbebb30d5706eb4fc5ee1774b9e62aa67cc65d296296",
+      "table": "runner_section_coverage_api",
+      "loaded_to_database": null,
+      "actual_sha256": "79d476225483354abf55bbebb30d5706eb4fc5ee1774b9e62aa67cc65d296296",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/data/section_api_2010_20260929_v1/section_parse_issues.parquet",
+      "exists": true,
+      "expected_sha256": "83616bb58e7043a254c0827f467116de8c4ceb29a17140b7c72c3083677016c3",
+      "table": "section_parse_issues_api",
+      "loaded_to_database": null,
+      "actual_sha256": "83616bb58e7043a254c0827f467116de8c4ceb29a17140b7c72c3083677016c3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/entity_reference_roster.csv",
+      "exists": true,
+      "expected_sha256": "376f2b27498edeef887f0634e60a10795c736b4b1505fe3428eae79484c9412b",
+      "table": "entity_reference_roster",
+      "loaded_to_database": null,
+      "actual_sha256": "376f2b27498edeef887f0634e60a10795c736b4b1505fe3428eae79484c9412b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/entity_name_observations.csv",
+      "exists": true,
+      "expected_sha256": "57fbc723b35d95acaa2722072b68817aa3c8c59d7239fd80d7a7b245748a865c",
+      "table": "entity_name_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "57fbc723b35d95acaa2722072b68817aa3c8c59d7239fd80d7a7b245748a865c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/unresolved_entity_references.csv",
+      "exists": true,
+      "expected_sha256": "06d79aaf63ea9cd742482bce584de60a7be5db9511daf78ab75693172c6832f9",
+      "table": "unresolved_entity_references",
+      "loaded_to_database": null,
+      "actual_sha256": "06d79aaf63ea9cd742482bce584de60a7be5db9511daf78ab75693172c6832f9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/entity_reference_summary.csv",
+      "exists": true,
+      "expected_sha256": "5610f8726b694aa5a1d873b1fe7b821a971b203ad9644c625e44e21cf65ef15e",
+      "table": "entity_reference_summary",
+      "loaded_to_database": null,
+      "actual_sha256": "5610f8726b694aa5a1d873b1fe7b821a971b203ad9644c625e44e21cf65ef15e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/entity_profile_coverage.csv",
+      "exists": true,
+      "expected_sha256": "600a727fe224920682116e138fdea7e04bbc4ccb4f3fe0de06c32d5c535ac589",
+      "table": "entity_profile_coverage",
+      "loaded_to_database": null,
+      "actual_sha256": "600a727fe224920682116e138fdea7e04bbc4ccb4f3fe0de06c32d5c535ac589",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/entity_profile_coverage_gaps.csv",
+      "exists": true,
+      "expected_sha256": "8a1d013ac2095513c3ccb9f377cf5e7a1cbd1c4f63f5562debcdbac6f483727d",
+      "table": "entity_profile_coverage_gaps",
+      "loaded_to_database": null,
+      "actual_sha256": "8a1d013ac2095513c3ccb9f377cf5e7a1cbd1c4f63f5562debcdbac6f483727d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/horse_profile_snapshot_membership.csv",
+      "exists": true,
+      "expected_sha256": "03565b96b1817bb52b3bb9ed07834ff71a36ec41f9b6a2b58aced7501764a39e",
+      "table": "horse_profile_snapshot_membership",
+      "loaded_to_database": null,
+      "actual_sha256": "03565b96b1817bb52b3bb9ed07834ff71a36ec41f9b6a2b58aced7501764a39e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/person_reference_profile_snapshots.csv",
+      "exists": true,
+      "expected_sha256": "32e92ed0ba6927b3e9c423d458d3190722b1cbe34a4ccb996fe4bafd622b3c23",
+      "table": "person_reference_profile_snapshots",
+      "loaded_to_database": null,
+      "actual_sha256": "32e92ed0ba6927b3e9c423d458d3190722b1cbe34a4ccb996fe4bafd622b3c23",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/trial_horse_id_source_exceptions.csv",
+      "exists": true,
+      "expected_sha256": "f62cd042a61266b4982b465f5fdfb8cb05cd9376eb082bf88937a6760134ba35",
+      "table": "trial_horse_id_source_exceptions",
+      "loaded_to_database": null,
+      "actual_sha256": "f62cd042a61266b4982b465f5fdfb8cb05cd9376eb082bf88937a6760134ba35",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/non_person_placeholder_observations.csv",
+      "exists": true,
+      "expected_sha256": "2323eed4d340a2842647819001ce59ec01fb14c41b2d9cd78fa2d9cd8c44d1ae",
+      "table": "non_person_placeholder_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "2323eed4d340a2842647819001ce59ec01fb14c41b2d9cd78fa2d9cd8c44d1ae",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/horse_profile_page_manifest.csv",
+      "exists": true,
+      "expected_sha256": "27935e704d548e521999f93c613f6fa6fefdcacd5231ae50bfb20f35f4722fa3",
+      "table": "horse_profile_page_manifest",
+      "loaded_to_database": null,
+      "actual_sha256": "27935e704d548e521999f93c613f6fa6fefdcacd5231ae50bfb20f35f4722fa3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/person_profile_page_manifest.csv",
+      "exists": true,
+      "expected_sha256": "e2c384c9e29b5f72a71f2b9305cb3a66d1467405ec906e024014aa48ecc3faa0",
+      "table": "person_profile_page_manifest",
+      "loaded_to_database": null,
+      "actual_sha256": "e2c384c9e29b5f72a71f2b9305cb3a66d1467405ec906e024014aa48ecc3faa0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_missing_entity_source_audit_v1/race_role_gap_audit.jsonl",
+      "exists": true,
+      "expected_sha256": "ee105169735ceb850d665ecf7e1c1f32ed67a2b869b4b01e56ca7e97febef7fb",
+      "table": "race_role_gap_audit",
+      "loaded_to_database": null,
+      "actual_sha256": "ee105169735ceb850d665ecf7e1c1f32ed67a2b869b4b01e56ca7e97febef7fb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/trial_jockey_missing_audit.jsonl",
+      "exists": true,
+      "expected_sha256": "2295a8d5fe84bc3fb46ec208e81556b7e420f0cd2929d08c4fc4ac3d22169b65",
+      "table": "trial_jockey_gap_audit",
+      "loaded_to_database": null,
+      "actual_sha256": "2295a8d5fe84bc3fb46ec208e81556b7e420f0cd2929d08c4fc4ac3d22169b65",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_web_missing_24.jsonl",
+      "exists": true,
+      "expected_sha256": "6220beb062cc2b66df2d5e5739695f4fb3ba1ee9f255ba4ec99411c897d5210e",
+      "table": "trial_jockey_official_web_missing_24",
+      "loaded_to_database": null,
+      "actual_sha256": "6220beb062cc2b66df2d5e5739695f4fb3ba1ee9f255ba4ec99411c897d5210e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_web_name_conflicts_18.jsonl",
+      "exists": true,
+      "expected_sha256": "1fa24e68d099139b24ad83387cf81fd61fb3eacd2aba699eef852fe03bbcb4b2",
+      "table": "trial_jockey_official_web_conflict_18",
+      "loaded_to_database": null,
+      "actual_sha256": "1fa24e68d099139b24ad83387cf81fd61fb3eacd2aba699eef852fe03bbcb4b2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/rpt_name_discrepancy_review.jsonl",
+      "exists": true,
+      "expected_sha256": "d1d2292a8a2183a3f0a195af42fa4bb14507b5aadc6721344860af73cd704e45",
+      "table": "trial_rpt_name_review_18",
+      "loaded_to_database": null,
+      "actual_sha256": "d1d2292a8a2183a3f0a195af42fa4bb14507b5aadc6721344860af73cd704e45",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_web_jockey_ids_5079.jsonl",
+      "exists": true,
+      "expected_sha256": "09aed2fcf713122c668526dcacd6f294989b9d82e2bd092e93bad4f4e19c3c2f",
+      "table": "trial_jockey_official_web_rpt_5079",
+      "loaded_to_database": null,
+      "actual_sha256": "09aed2fcf713122c668526dcacd6f294989b9d82e2bd092e93bad4f4e19c3c2f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_jockey_profile_supplement.jsonl",
+      "exists": true,
+      "expected_sha256": "a281ab254fca401dcf9302d0f79602d8619f66a54106f548c4a0813fcc480cce",
+      "table": "trial_jockey_official_profile_supplement",
+      "loaded_to_database": null,
+      "actual_sha256": "a281ab254fca401dcf9302d0f79602d8619f66a54106f548c4a0813fcc480cce",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/official_closure_intervals.csv",
+      "exists": true,
+      "expected_sha256": "c718436bbbbcebab53645e3b299e2e9757707263d68328250ccd50c1a2d592c8",
+      "table": "official_closure_intervals",
+      "loaded_to_database": null,
+      "actual_sha256": "c718436bbbbcebab53645e3b299e2e9757707263d68328250ccd50c1a2d592c8",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_role_review_v1/race_role_review.csv",
+      "exists": true,
+      "expected_sha256": "299453f6cc42c0230d024de3fe85643101eb36b99aab530df52b60b0b4b3ff39",
+      "table": "race_trainer_owner_review",
+      "loaded_to_database": null,
+      "actual_sha256": "299453f6cc42c0230d024de3fe85643101eb36b99aab530df52b60b0b4b3ff39",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_race_role_review_v1/race_role_review_results.jsonl",
+      "exists": true,
+      "expected_sha256": "59b0fdb18e3ca5444550387d732f7e4bb9fa2418c159f3729305aef12efd8ac8",
+      "table": "race_trainer_owner_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "59b0fdb18e3ca5444550387d732f7e4bb9fa2418c159f3729305aef12efd8ac8",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_role_review_v1/trial_trainer_review.csv",
+      "exists": true,
+      "expected_sha256": "d31dbcea6535068caca697ae8c0ad2e27dddc330f9c1fe514ed68dccb74e0aba",
+      "table": "trial_trainer_review",
+      "loaded_to_database": null,
+      "actual_sha256": "d31dbcea6535068caca697ae8c0ad2e27dddc330f9c1fe514ed68dccb74e0aba",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_trial_trainer_review_v1/trial_trainer_gap_review.jsonl",
+      "exists": true,
+      "expected_sha256": "8af724039337443b3cee5375f9951a6f39a1d9b0d9400feaa1da79a1df9f3927",
+      "table": "trial_trainer_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8af724039337443b3cee5375f9951a6f39a1d9b0d9400feaa1da79a1df9f3927",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/manifest.json",
+      "exists": true,
+      "expected_sha256": "4348e69dc039eab58570213dccdb0b2e0f836a3690830c3a8f8b114c75fbfb7d",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "4348e69dc039eab58570213dccdb0b2e0f836a3690830c3a8f8b114c75fbfb7d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/daily_calendar_summary.json",
+      "exists": true,
+      "expected_sha256": "c3ce4a647e65fb1f2dd9053f0ae0165063855bd8c1f9a7b319dae7af3e82e9cf",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "c3ce4a647e65fb1f2dd9053f0ae0165063855bd8c1f9a7b319dae7af3e82e9cf",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_race_results_api_v1/manifest.json",
+      "exists": true,
+      "expected_sha256": "35981eee0ea61e1dadbcb51f38fe5f9180e0d0d479497dfa36cca86350562409",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "35981eee0ea61e1dadbcb51f38fe5f9180e0d0d479497dfa36cca86350562409",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_trial_results_api_v1/source_manifest.json",
+      "exists": true,
+      "expected_sha256": "2f7eb7ef40c91b72d00bc896901f99eda7da6b172405550ae096bb0cd8fc13ce",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "2f7eb7ef40c91b72d00bc896901f99eda7da6b172405550ae096bb0cd8fc13ce",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_trial_results_api_v1/validation.json",
+      "exists": true,
+      "expected_sha256": "e5d7f9c9cb740f380273c0b2c8e10091ed36c26bf41d34eae157d65c4daeb26d",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "e5d7f9c9cb740f380273c0b2c8e10091ed36c26bf41d34eae157d65c4daeb26d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_horse_identity_v1/validation.json",
+      "exists": true,
+      "expected_sha256": "e513321caf0a5ed22bcdab2511b8939bf4a0484ee97a35baee4972bcdd71562e",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "e513321caf0a5ed22bcdab2511b8939bf4a0484ee97a35baee4972bcdd71562e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/data/section_api_2010_20260929_v1/manifest.json",
+      "exists": true,
+      "expected_sha256": "54a3067a35148f0b5422a09b02341af44414e51b68793ad7570f59de0ca24307",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "54a3067a35148f0b5422a09b02341af44414e51b68793ad7570f59de0ca24307",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_entity_reference_audit_v1/exports/manifest.json",
+      "exists": true,
+      "expected_sha256": "db58f2585b845463f41dbe9cc37449a443e757a6b50b16e58b425b1ded1474db",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "db58f2585b845463f41dbe9cc37449a443e757a6b50b16e58b425b1ded1474db",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/manifest.json",
+      "exists": true,
+      "expected_sha256": "914a19cb2911e1ec19537268054c96e796de5a0fa0f46d0307e0abe229e0bcbb",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "914a19cb2911e1ec19537268054c96e796de5a0fa0f46d0307e0abe229e0bcbb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_web_missing_24_manifest.json",
+      "exists": true,
+      "expected_sha256": "df61f42ec2cb64792d5fbc6fc39e1770feace3d5c27842b2e13bf159858c7c91",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "df61f42ec2cb64792d5fbc6fc39e1770feace3d5c27842b2e13bf159858c7c91",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_web_name_conflicts_18_manifest.json",
+      "exists": true,
+      "expected_sha256": "a28c23ab4e19c3c9d4bbd84ab87dcde13b2e1763d2f7eb46900a4dda485823c3",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "a28c23ab4e19c3c9d4bbd84ab87dcde13b2e1763d2f7eb46900a4dda485823c3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/rpt_name_discrepancy_review_manifest.json",
+      "exists": true,
+      "expected_sha256": "39a757a8cb9a01d01371fbed2e88ddc72ef61227e15ba0278928772d972d38e3",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "39a757a8cb9a01d01371fbed2e88ddc72ef61227e15ba0278928772d972d38e3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_web_jockey_ids_5079_manifest.json",
+      "exists": true,
+      "expected_sha256": "25b0effd2d3f2b71fe8083a64dafd79992fdb899658d353914dcc6e3effd138c",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "25b0effd2d3f2b71fe8083a64dafd79992fdb899658d353914dcc6e3effd138c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_jockey_gap_audit_v1/official_jockey_profile_supplement_manifest.json",
+      "exists": true,
+      "expected_sha256": "7274ca2679d99c2b66bf22a91d6cf9faac626aa8bbc7d79b87838887489fe2c2",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "7274ca2679d99c2b66bf22a91d6cf9faac626aa8bbc7d79b87838887489fe2c2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_role_review_v1/manifest.json",
+      "exists": true,
+      "expected_sha256": "ee97e2e2a7828624c63a2c406739cf45c1afc8809f7369e26510a8b93104a65a",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "ee97e2e2a7828624c63a2c406739cf45c1afc8809f7369e26510a8b93104a65a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/manifest.json",
+      "exists": true,
+      "expected_sha256": "f93a230517d5aad3e694f991acc9ef78c67c191c3edc395682863a709bcf24e9",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "f93a230517d5aad3e694f991acc9ef78c67c191c3edc395682863a709bcf24e9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_trial_22_profile_absence_review_v1/resolution_manifest.json",
+      "exists": true,
+      "expected_sha256": "1cf225c16fd8462af000a09b8fc0b3ae0839e15689d2680554864e3d49deefd0",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "1cf225c16fd8462af000a09b8fc0b3ae0839e15689d2680554864e3d49deefd0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/manifest.json",
+      "exists": true,
+      "expected_sha256": "ad40114366b9da94681d0fd675de1755aac360f5805a35a08b2e73b059a5a7a3",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "ad40114366b9da94681d0fd675de1755aac360f5805a35a08b2e73b059a5a7a3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/manifest.json",
+      "exists": true,
+      "expected_sha256": "94d5036054fcda26c205736ec5c37ef2e44fbb9fa3359e06fe62ec52a515c0d6",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "94d5036054fcda26c205736ec5c37ef2e44fbb9fa3359e06fe62ec52a515c0d6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/manifest.json",
+      "exists": true,
+      "expected_sha256": "1fecf2124cc09745b3e3cbd42412fb66ae391811b7cabd81bd9f93c7b9918580",
+      "table": "source_manifests",
+      "loaded_to_database": null,
+      "actual_sha256": "1fecf2124cc09745b3e3cbd42412fb66ae391811b7cabd81bd9f93c7b9918580",
+      "matches": true
+    },
+    {
+      "path": "data/raw/kra_text/dacom23/meet=3/year=2026/month=09/day=17/20260917dacom23.rpt",
+      "exists": true,
+      "expected_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/approved_inputs.json",
+      "exists": true,
+      "expected_sha256": "7657d254fea1abbb2a5206c8520cd641ecfe326ff7c810815407a03f7b9102d1",
+      "table": "calendar_review_approved_inputs",
+      "loaded_to_database": null,
+      "actual_sha256": "7657d254fea1abbb2a5206c8520cd641ecfe326ff7c810815407a03f7b9102d1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/annual_summary.csv",
+      "exists": true,
+      "expected_sha256": "4c47fd2033f0d0cbf428b0dbaf454823ce4ebe4120b1f012664e06c977dd99dc",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4c47fd2033f0d0cbf428b0dbaf454823ce4ebe4120b1f012664e06c977dd99dc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/closure_addendum.csv",
+      "exists": true,
+      "expected_sha256": "1e6537ad8607e8f9a06dec4d7bba7be46c247c12b34fea5ae498b497fca483de",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1e6537ad8607e8f9a06dec4d7bba7be46c247c12b34fea5ae498b497fca483de",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/daily_calendar.csv",
+      "exists": true,
+      "expected_sha256": "db0a5ebfbe01483e78403ac3ec59390055f7744368f30085c52b7acee80cebe0",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "db0a5ebfbe01483e78403ac3ec59390055f7744368f30085c52b7acee80cebe0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/kra_scoretable_nonfinish_reasons.csv",
+      "exists": true,
+      "expected_sha256": "10f4aca53c017b45d27d705f86254208491510ec88ec11587b0a84fd213b7662",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "10f4aca53c017b45d27d705f86254208491510ec88ec11587b0a84fd213b7662",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_execution_flags.csv",
+      "exists": true,
+      "expected_sha256": "9f5f0be86db1d0bb584e79a66a67d6af1d80d58a2185f3adbcec49c770bbcd16",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9f5f0be86db1d0bb584e79a66a67d6af1d80d58a2185f3adbcec49c770bbcd16",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/race_nonexecution_adjudication.csv",
+      "exists": true,
+      "expected_sha256": "1051f96a3fd6b0471f2524db92dc451276e65cad09d3092f4a4b719c7b0123f2",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1051f96a3fd6b0471f2524db92dc451276e65cad09d3092f4a4b719c7b0123f2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_1.json.gz",
+      "exists": true,
+      "expected_sha256": "246826262ba50ec0605c84377b7c5381ab2d1634d9fb138974cffd0d83924e61",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "246826262ba50ec0605c84377b7c5381ab2d1634d9fb138974cffd0d83924e61",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_3.json.gz",
+      "exists": true,
+      "expected_sha256": "4809c714011f7b10508a002c34ee0c9620f652cd8ca9d5e393b1a6ff738bf39a",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4809c714011f7b10508a002c34ee0c9620f652cd8ca9d5e393b1a6ff738bf39a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/race_plan/2015/meet_3.json",
+      "exists": true,
+      "expected_sha256": "5a50ea1e03f3c32be3e09840ba71ef60340eb98a70c90723ba9743283bf03027",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5a50ea1e03f3c32be3e09840ba71ef60340eb98a70c90723ba9743283bf03027",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/reported_race_cancellations.csv",
+      "exists": true,
+      "expected_sha256": "11c5ed73cf774a54563954d08984dcb5e6d157dcb8bdc916d8f0c1a69310abf8",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "11c5ed73cf774a54563954d08984dcb5e6d157dcb8bdc916d8f0c1a69310abf8",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_closure_inventory_v1/closures.csv",
+      "exists": true,
+      "expected_sha256": "62a43896101cdb985d55f3ef4c18c26cc06441436f4f0c5323b4d8f8c8e7ebb5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "62a43896101cdb985d55f3ef4c18c26cc06441436f4f0c5323b4d8f8c8e7ebb5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/manifest.json",
+      "exists": true,
+      "expected_sha256": "94d5036054fcda26c205736ec5c37ef2e44fbb9fa3359e06fe62ec52a515c0d6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "94d5036054fcda26c205736ec5c37ef2e44fbb9fa3359e06fe62ec52a515c0d6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/reviewed_year_coverage.csv",
+      "exists": true,
+      "expected_sha256": "afc23abd0140151e88752e449c9611978891db78b4221e782c047919149a49d9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "afc23abd0140151e88752e449c9611978891db78b4221e782c047919149a49d9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_calendar_core_review_v2/root_annual_plan_date_verification.json",
+      "exists": true,
+      "expected_sha256": "69ce02eddadc6c9d968246b56a10aded12b9e3de1c71fb052a9bc043bf451a6f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "69ce02eddadc6c9d968246b56a10aded12b9e3de1c71fb052a9bc043bf451a6f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/README.md",
+      "exists": true,
+      "expected_sha256": "521f75e02d7048d52f790078c3f0f8123825b9a873290c137299e317a32bc5cf",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "521f75e02d7048d52f790078c3f0f8123825b9a873290c137299e317a32bc5cf",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/actual_nonexecution_evidence.csv",
+      "exists": true,
+      "expected_sha256": "4efe0feb2df6c06aa40ff1ba749cf72fcf01a6afdd943a0817bd0b92ec7db14e",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4efe0feb2df6c06aa40ff1ba749cf72fcf01a6afdd943a0817bd0b92ec7db14e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/capture_manifest.csv",
+      "exists": true,
+      "expected_sha256": "f3975c1d3b6b344d30aad56b4e0f42ae36c173a2af38940afe3aad9a777bded4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f3975c1d3b6b344d30aad56b4e0f42ae36c173a2af38940afe3aad9a777bded4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/closures_supplement.csv",
+      "exists": true,
+      "expected_sha256": "d199a699ef19af8b2083bde72f43b72996f9b575e838a7b31f301b60ce3e77da",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d199a699ef19af8b2083bde72f43b72996f9b575e838a7b31f301b60ce3e77da",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/gap_candidate_checks.csv",
+      "exists": true,
+      "expected_sha256": "8fa51d7d2eb648a7115b61f54b3a3b8ce0c2529bc407180b4f47b204deabe986",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8fa51d7d2eb648a7115b61f54b3a3b8ce0c2529bc407180b4f47b204deabe986",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_business_parts_text.txt",
+      "exists": true,
+      "expected_sha256": "2f17635f30728ffaf809e5bb540f62d5745fcbd15db941d595f1e111208aff00",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2f17635f30728ffaf809e5bb540f62d5745fcbd15db941d595f1e111208aff00",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_masa_02_1.pdf",
+      "exists": true,
+      "expected_sha256": "73ca486dca646eccdb51ebf4800716c07c634390a9ae097d162137f305bff15b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "73ca486dca646eccdb51ebf4800716c07c634390a9ae097d162137f305bff15b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_masa_02_2.pdf",
+      "exists": true,
+      "expected_sha256": "a1e94e7047db323604fd2fa882d5bd04db8c0c46cc1ae5c0a9ef7606cdedc93d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a1e94e7047db323604fd2fa882d5bd04db8c0c46cc1ae5c0a9ef7606cdedc93d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_masa_02_3.pdf",
+      "exists": true,
+      "expected_sha256": "0bc4cdc28f5403f4d137a1b67705a4d361af12e670d3cf1bff2b4188861718a6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "0bc4cdc28f5403f4d137a1b67705a4d361af12e670d3cf1bff2b4188861718a6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2012_yearbook_record.html",
+      "exists": true,
+      "expected_sha256": "9cb6604d3f2cc1ef39bb58385244645c1a7ed69e02237e5ad9e5387bea5107c1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9cb6604d3f2cc1ef39bb58385244645c1a7ed69e02237e5ad9e5387bea5107c1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_masa_01.pdf",
+      "exists": true,
+      "expected_sha256": "9c34c85295192a9dc0fe0208a9259d1e3e3df27bbe52cf1e1e485a9e1df6e8bb",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9c34c85295192a9dc0fe0208a9259d1e3e3df27bbe52cf1e1e485a9e1df6e8bb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_nonexecution_pages.txt",
+      "exists": true,
+      "expected_sha256": "ccf66114793cfeb19b9eda7c77b72a2e7513be7559d46136cfd291feba61facb",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ccf66114793cfeb19b9eda7c77b72a2e7513be7559d46136cfd291feba61facb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_search_hits.txt",
+      "exists": true,
+      "expected_sha256": "e68aabeb229e479ea5de349d3c1ab824460f342e119a6ba636aa764c74ecfc6a",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e68aabeb229e479ea5de349d3c1ab824460f342e119a6ba636aa764c74ecfc6a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/2013_yearbook_record.html",
+      "exists": true,
+      "expected_sha256": "4ec51598247b1735786c843cc70d1b482e82c5aabb2fe186f4e8a69cc61de388",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4ec51598247b1735786c843cc70d1b482e82c5aabb2fe186f4e8a69cc61de388",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "aa5e50ba01e188fd3e5067b18f5ab9f886588c83c9c65af5ec0b14d2d1a699d3",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "aa5e50ba01e188fd3e5067b18f5ab9f886588c83c9c65af5ec0b14d2d1a699d3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/pages/2013_masa_01_physical_p109.png",
+      "exists": true,
+      "expected_sha256": "7b61719dd08f71ccc10d7bbb4ae2929f41b280dc0f67f50fd13205c06d1e5421",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7b61719dd08f71ccc10d7bbb4ae2929f41b280dc0f67f50fd13205c06d1e5421",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/pages/2013_masa_01_physical_p60.png",
+      "exists": true,
+      "expected_sha256": "c56bc259a1a52049cbe6371bc7a1e5cb342b428852731326517ea1b524e7d6a5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c56bc259a1a52049cbe6371bc7a1e5cb342b428852731326517ea1b524e7d6a5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/term_counts.txt",
+      "exists": true,
+      "expected_sha256": "9ddbff90e8e6462a95cc330671e2133504f6e8eb234bfbc41cc6964a9bf296ba",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9ddbff90e8e6462a95cc330671e2133504f6e8eb234bfbc41cc6964a9bf296ba",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/raw/yearbook_text_hits.txt",
+      "exists": true,
+      "expected_sha256": "d71e2ebcda0b9b57a40298a972f31d600eb0d68ca71a0987b5dee4c859240ff9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d71e2ebcda0b9b57a40298a972f31d600eb0d68ca71a0987b5dee4c859240ff9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_early_closure_sources_v2/source_status.csv",
+      "exists": true,
+      "expected_sha256": "192bc12decba140ead081ff8a7e1144c41cb5562894bb764a89aa4c261483450",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "192bc12decba140ead081ff8a7e1144c41cb5562894bb764a89aa4c261483450",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/decisions.csv",
+      "exists": true,
+      "expected_sha256": "f4648e9911023bca73bea331b9f45caaa5a59f2b7d5a3b392d4e0f73359275fc",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f4648e9911023bca73bea331b9f45caaa5a59f2b7d5a3b392d4e0f73359275fc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/manifest.json",
+      "exists": true,
+      "expected_sha256": "1957028ae2642257612d3d67b4872c4d365ccfa1396a9707b335b6fb1b91402b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1957028ae2642257612d3d67b4872c4d365ccfa1396a9707b335b6fb1b91402b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/busan_20150329.rpt",
+      "exists": true,
+      "expected_sha256": "25bf7d01ddc6063aa6d1308720b9940b426e6fc13ed878077502ce7024c8f6e0",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "25bf7d01ddc6063aa6d1308720b9940b426e6fc13ed878077502ce7024c8f6e0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/busan_20160228.rpt",
+      "exists": true,
+      "expected_sha256": "047afdd94e798030e9cf64f7c347055eccbd1145ddf0aa1a3aab0e9569d906ed",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "047afdd94e798030e9cf64f7c347055eccbd1145ddf0aa1a3aab0e9569d906ed",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/busan_20200710.rpt",
+      "exists": true,
+      "expected_sha256": "f50e82c4ce66206ed2facea7ff058c371ee68c499d35645fe6147c4f6728ff50",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f50e82c4ce66206ed2facea7ff058c371ee68c499d35645fe6147c4f6728ff50",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20151108.rpt",
+      "exists": true,
+      "expected_sha256": "f173c0fafab4af6d39b5f95110d9bf61c3708450c4deb2efc2739f21367950bc",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f173c0fafab4af6d39b5f95110d9bf61c3708450c4deb2efc2739f21367950bc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20160228.rpt",
+      "exists": true,
+      "expected_sha256": "5ac9c82398ab596d06bcd00669286abbeab35e107822efb28cc95ad0216cc74d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5ac9c82398ab596d06bcd00669286abbeab35e107822efb28cc95ad0216cc74d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20201220.rpt",
+      "exists": true,
+      "expected_sha256": "7b8e908cf9219e29165a5f9dcfdf077840604cf8c36c9780bd2e2f1e30b5961c",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7b8e908cf9219e29165a5f9dcfdf077840604cf8c36c9780bd2e2f1e30b5961c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20230115.rpt",
+      "exists": true,
+      "expected_sha256": "f8d20d4fad1ee81e01ec7a57ebf374416f94aded2f5677cb17bd950f2e3d70c6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f8d20d4fad1ee81e01ec7a57ebf374416f94aded2f5677cb17bd950f2e3d70c6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20230506.rpt",
+      "exists": true,
+      "expected_sha256": "521c57d63595ffb3ac663384114d817b930ed486bca9525d3fd941d407dbaac4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "521c57d63595ffb3ac663384114d817b930ed486bca9525d3fd941d407dbaac4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_dacom11/seoul_20240929.rpt",
+      "exists": true,
+      "expected_sha256": "87afdb08a477139070517af614b106ca225b353cf08577af26ceffec8ff9df64",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "87afdb08a477139070517af614b106ca225b353cf08577af26ceffec8ff9df64",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet1_20201220_all_races_excerpt.txt",
+      "exists": true,
+      "expected_sha256": "43ca0bd0b5aa1ed861df7316698f3711c8eb5f734ff9acfbaa7d7f84b3ba7e13",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "43ca0bd0b5aa1ed861df7316698f3711c8eb5f734ff9acfbaa7d7f84b3ba7e13",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet1_20230506_all_races_excerpt.txt",
+      "exists": true,
+      "expected_sha256": "b888a51a72c46c22274ea6aee63af7c3c7f52c2726ce27b2dca98e419fd64dca",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b888a51a72c46c22274ea6aee63af7c3c7f52c2726ce27b2dca98e419fd64dca",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet1_20240929_all_races_excerpt.txt",
+      "exists": true,
+      "expected_sha256": "84a09558bc45f07a443b5f5165bb324763e28a5973582cb8db21676c0700b75f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "84a09558bc45f07a443b5f5165bb324763e28a5973582cb8db21676c0700b75f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/kra_mobile_cancelled/meet3_20200710_all_races_excerpt.txt",
+      "exists": true,
+      "expected_sha256": "d5edfadbdd43b76717022dd378f0f7099bef18e8479d80ddd90834e119125625",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d5edfadbdd43b76717022dd378f0f7099bef18e8479d80ddd90834e119125625",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20150329.html",
+      "exists": true,
+      "expected_sha256": "ae07db3b295479988e9739aa991e94c497685d90673cc5939cde036d4233e7fd",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ae07db3b295479988e9739aa991e94c497685d90673cc5939cde036d4233e7fd",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20150329.txt",
+      "exists": true,
+      "expected_sha256": "9bce80849dafc0ff0e3eaf8aa2972e904464ffe27496d44af3415c36c87024f6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9bce80849dafc0ff0e3eaf8aa2972e904464ffe27496d44af3415c36c87024f6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20160228.html",
+      "exists": true,
+      "expected_sha256": "a3369278fad53e3d1e9c4053bf9898c4762332e60d8236c85f46134eba32be9c",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a3369278fad53e3d1e9c4053bf9898c4762332e60d8236c85f46134eba32be9c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20160228.txt",
+      "exists": true,
+      "expected_sha256": "2aefc8d2a2404bdc967100c5d2f6705bd372a552b5920aa7db7f6b64c2117989",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2aefc8d2a2404bdc967100c5d2f6705bd372a552b5920aa7db7f6b64c2117989",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20200710.html",
+      "exists": true,
+      "expected_sha256": "64625ecf86bc0a3f6393fcab93ef1998d0313784bd067553437eac0003d894a1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "64625ecf86bc0a3f6393fcab93ef1998d0313784bd067553437eac0003d894a1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/bukyeong_20200710.txt",
+      "exists": true,
+      "expected_sha256": "b623ec79afcb03d49d86924f887f3a2115d282f72c9786bd4f653c859d18cb5b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b623ec79afcb03d49d86924f887f3a2115d282f72c9786bd4f653c859d18cb5b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "33b53f6f6dc208d8fb7a9f5db9a4f82cadc11d522cee2e790dd0fa10080f66e2",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "33b53f6f6dc208d8fb7a9f5db9a4f82cadc11d522cee2e790dd0fa10080f66e2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20151108.html",
+      "exists": true,
+      "expected_sha256": "9b68f4702b1050c1d2e0f5831f0de2ed92f866dd52a092f77726c3bc44e573b6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9b68f4702b1050c1d2e0f5831f0de2ed92f866dd52a092f77726c3bc44e573b6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20151108.txt",
+      "exists": true,
+      "expected_sha256": "61962503f9dafd1fd7c218a39d5b7e77f87dc388fb2414d39def5e082843ed98",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "61962503f9dafd1fd7c218a39d5b7e77f87dc388fb2414d39def5e082843ed98",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20160228.html",
+      "exists": true,
+      "expected_sha256": "489a0747c497e50fd7dd8be00183b6f119292fc4277d85024d57038b3da65d8d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "489a0747c497e50fd7dd8be00183b6f119292fc4277d85024d57038b3da65d8d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20160228.txt",
+      "exists": true,
+      "expected_sha256": "7c1df21687b1fbd7ccafef8ff2133f3f49c2b2adec2fde45b449ff0fa9a4b3b4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7c1df21687b1fbd7ccafef8ff2133f3f49c2b2adec2fde45b449ff0fa9a4b3b4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20201220.html",
+      "exists": true,
+      "expected_sha256": "8001a4720f40021dd5a2631b148b6df804c08ed9c168d6a7c6e2708b80434d28",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8001a4720f40021dd5a2631b148b6df804c08ed9c168d6a7c6e2708b80434d28",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20201220.txt",
+      "exists": true,
+      "expected_sha256": "90b631e00c348979997050d4d5683aeb2eb372b5b503697bacfc17937214d663",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "90b631e00c348979997050d4d5683aeb2eb372b5b503697bacfc17937214d663",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230115.html",
+      "exists": true,
+      "expected_sha256": "cc64716cacd8401ce4c9e6fbd1f02a63671afd677f998a3891802457c0cbe61b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "cc64716cacd8401ce4c9e6fbd1f02a63671afd677f998a3891802457c0cbe61b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230115.txt",
+      "exists": true,
+      "expected_sha256": "c9fb840b70afc535004b8f80b4dc69932ec3a08d86b686e8317509ea69790338",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c9fb840b70afc535004b8f80b4dc69932ec3a08d86b686e8317509ea69790338",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230506.html",
+      "exists": true,
+      "expected_sha256": "6ef523ea0d1fb4b96a9f9390b268a4ecc4fb339441d1fb6f89bbd674726f7d15",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "6ef523ea0d1fb4b96a9f9390b268a4ecc4fb339441d1fb6f89bbd674726f7d15",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20230506.txt",
+      "exists": true,
+      "expected_sha256": "2d9283a96842b3696e4b9dbc14e48a9a63ecfd2d57010fce19c80f453e273560",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2d9283a96842b3696e4b9dbc14e48a9a63ecfd2d57010fce19c80f453e273560",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20240929.html",
+      "exists": true,
+      "expected_sha256": "f9f152529353a674477d587718cb2b11101c702ac7ed1b4249c76e7a00d045b9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f9f152529353a674477d587718cb2b11101c702ac7ed1b4249c76e7a00d045b9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_mobile/seoul_20240929.txt",
+      "exists": true,
+      "expected_sha256": "79906466def0c08bd65848e5ca7a8c0eb9042b9b4650651778a8a71b5fbce533",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "79906466def0c08bd65848e5ca7a8c0eb9042b9b4650651778a8a71b5fbce533",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r5.html",
+      "exists": true,
+      "expected_sha256": "daef4aec6a63ea429a3b7405d9041616969546f483f59f56dd9baa660d135bd5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "daef4aec6a63ea429a3b7405d9041616969546f483f59f56dd9baa660d135bd5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r5.txt",
+      "exists": true,
+      "expected_sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r6.html",
+      "exists": true,
+      "expected_sha256": "daef4aec6a63ea429a3b7405d9041616969546f483f59f56dd9baa660d135bd5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "daef4aec6a63ea429a3b7405d9041616969546f483f59f56dd9baa660d135bd5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/busan_20150329_r6.txt",
+      "exists": true,
+      "expected_sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_pc/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "b93706a6d38bbbfd3cc1d93d3542499621aeafd65a8f7804a452c5404e2b3a34",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b93706a6d38bbbfd3cc1d93d3542499621aeafd65a8f7804a452c5404e2b3a34",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook.pdf",
+      "exists": true,
+      "expected_sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook_detail.html",
+      "exists": true,
+      "expected_sha256": "a7af6baff9d96fc7538d33e7092bb58b9d64c4d2c556058aa58e4fd0b3d6a962",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a7af6baff9d96fc7538d33e7092bb58b9d64c4d2c556058aa58e4fd0b3d6a962",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook_page_063.png",
+      "exists": true,
+      "expected_sha256": "91adec7a1bfe8d4dfae22476894f9b677e7dcd01f7751a9f9378be3842911c26",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "91adec7a1bfe8d4dfae22476894f9b677e7dcd01f7751a9f9378be3842911c26",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/page_063_transcription.txt",
+      "exists": true,
+      "expected_sha256": "836b71499bad44f2172105029c7a96ad3bc2bf3bb21ed3d0cb38f331a79a3528",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "836b71499bad44f2172105029c7a96ad3bc2bf3bb21ed3d0cb38f331a79a3528",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_nonexecution_subtype_review_v2/root_mobile_label_verification.json",
+      "exists": true,
+      "expected_sha256": "317f818f228cfce32609961f7bc21bd3b66bea2fa6312f847f5373a7bafd476a",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "317f818f228cfce32609961f7bc21bd3b66bea2fa6312f847f5373a7bafd476a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/closure_additions.csv",
+      "exists": true,
+      "expected_sha256": "2214dfea2aaa1d91442b3f230898e0bdfd7bf47491ce1ff5bb0376e0e102cf60",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2214dfea2aaa1d91442b3f230898e0bdfd7bf47491ce1ff5bb0376e0e102cf60",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_adjustment_preview.txt",
+      "exists": true,
+      "expected_sha256": "c6a40ffd484f898a6e06657dadbe3d8a719e473758c32ea997bd3cbd9ebabab5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c6a40ffd484f898a6e06657dadbe3d8a719e473758c32ea997bd3cbd9ebabab5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_adjustment_records.csv",
+      "exists": true,
+      "expected_sha256": "f2b317f55465677b99757bff291c7404217a5d9d221c6eb6b7150cb0341629fd",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f2b317f55465677b99757bff291c7404217a5d9d221c6eb6b7150cb0341629fd",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_closure_table_cells.csv",
+      "exists": true,
+      "expected_sha256": "16a9cd9f4eba81de52553ce1a824af825617e01111e7eee6435c837e8108a110",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "16a9cd9f4eba81de52553ce1a824af825617e01111e7eee6435c837e8108a110",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_plan_preview.txt",
+      "exists": true,
+      "expected_sha256": "458231df2dcb4941f0c61ed4d1cd7a4d642fe1625188725b97d65d21dca11f40",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "458231df2dcb4941f0c61ed4d1cd7a4d642fe1625188725b97d65d21dca11f40",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/extracted/2021_q3_plan_records.csv",
+      "exists": true,
+      "expected_sha256": "fafec4d0adea4da80bfab6986af9460cf85340d71321421ac6468c9de40e8f83",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "fafec4d0adea4da80bfab6986af9460cf85340d71321421ac6468c9de40e8f83",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_distancing_adjustment_kra_authored_mirror.hwp",
+      "exists": true,
+      "expected_sha256": "8e02e56a04418aa08c20942f4b27ff4c0079ab38146609c206ec5174301ee39d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8e02e56a04418aa08c20942f4b27ff4c0079ab38146609c206ec5174301ee39d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_distancing_adjustment_post.html",
+      "exists": true,
+      "expected_sha256": "68ac9b2ae271724b21ad298d1a6d35c84d86036341557c63828990e35bc47ffa",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "68ac9b2ae271724b21ad298d1a6d35c84d86036341557c63828990e35bc47ffa",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_kra_authored_mirror.hwp",
+      "exists": true,
+      "expected_sha256": "f384612379911d7df9fc4462c10d80507ad69d56d84b270acef89e6474a9fa26",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f384612379911d7df9fc4462c10d80507ad69d56d84b270acef89e6474a9fa26",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/broa/2021_q3_plan_post.html",
+      "exists": true,
+      "expected_sha256": "ade5693da30c0a5a23e6cfe40422e66ef69abdd5368f711805b45731fff0bb41",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ade5693da30c0a5a23e6cfe40422e66ef69abdd5368f711805b45731fff0bb41",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2014_masa_yearbook.pdf",
+      "exists": true,
+      "expected_sha256": "7ff9772b92d3334311b6e3deb93f05d29d862eb8a9ad838469f9a00e867a0d52",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7ff9772b92d3334311b6e3deb93f05d29d862eb8a9ad838469f9a00e867a0d52",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2014_masa_yearbook_detail.html",
+      "exists": true,
+      "expected_sha256": "e3eaf846fb6e239057fba2c695085239085412565c22c9821713121f329379ed",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e3eaf846fb6e239057fba2c695085239085412565c22c9821713121f329379ed",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2015_masa_yearbook.pdf",
+      "exists": true,
+      "expected_sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2015_masa_yearbook_detail.html",
+      "exists": true,
+      "expected_sha256": "a7af6baff9d96fc7538d33e7092bb58b9d64c4d2c556058aa58e4fd0b3d6a962",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a7af6baff9d96fc7538d33e7092bb58b9d64c4d2c556058aa58e4fd0b3d6a962",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2020_masa_yearbook.pdf",
+      "exists": true,
+      "expected_sha256": "2cfc103bef8b3359880be65b915c3a460f67b2895dbeee99c72e5ff0f6f22950",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2cfc103bef8b3359880be65b915c3a460f67b2895dbeee99c72e5ff0f6f22950",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2020_masa_yearbook_attachment.zip",
+      "exists": true,
+      "expected_sha256": "a42b6def2223a943ce6e81c05ef236a9117b921fc477912951a3aecf8ddd1688",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a42b6def2223a943ce6e81c05ef236a9117b921fc477912951a3aecf8ddd1688",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2020_masa_yearbook_detail.html",
+      "exists": true,
+      "expected_sha256": "94236646493a3d40d7df6fb01c880f65cd9895a8e236e2ce53783c932a9ee4a3",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "94236646493a3d40d7df6fb01c880f65cd9895a8e236e2ce53783c932a9ee4a3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2021_masa_yearbook.pdf",
+      "exists": true,
+      "expected_sha256": "4dd72635db34661ec8fa65bee56c43bae7578aefe1b85b845d0649c74fb2ad50",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4dd72635db34661ec8fa65bee56c43bae7578aefe1b85b845d0649c74fb2ad50",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2021_masa_yearbook_detail.html",
+      "exists": true,
+      "expected_sha256": "983ca278026fd6104c7edb2ae2ddb503514dd213bdeee371de76e487c635af66",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "983ca278026fd6104c7edb2ae2ddb503514dd213bdeee371de76e487c635af66",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2016.pdf",
+      "exists": true,
+      "expected_sha256": "d307686da9536d23fee18a759f237a2d8f8c3775b3cbcc2383452e801eb3e9cd",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d307686da9536d23fee18a759f237a2d8f8c3775b3cbcc2383452e801eb3e9cd",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2017.pdf",
+      "exists": true,
+      "expected_sha256": "d95136731351160165c9de2afaaa52de9d799030fb5d5f4e7987220992a9b7af",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d95136731351160165c9de2afaaa52de9d799030fb5d5f4e7987220992a9b7af",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2020.pdf",
+      "exists": true,
+      "expected_sha256": "4c49a9a1fcede4efbc3f7ce8aed73cc1b44c732c4be79009c1efa1c8ce8e8190",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4c49a9a1fcede4efbc3f7ce8aed73cc1b44c732c4be79009c1efa1c8ce8e8190",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/raceplan_2022.pdf",
+      "exists": true,
+      "expected_sha256": "55361b10265272df39ea29a827acb156efb2513502f4ca97f50e7cbe5ca20253",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "55361b10265272df39ea29a827acb156efb2513502f4ca97f50e7cbe5ca20253",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/yearbook_archive.html",
+      "exists": true,
+      "expected_sha256": "5b8369bb4e0e53b1952cee1da1c6453b34dc438cabc96ba53958bd0dbb6a0ce5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5b8369bb4e0e53b1952cee1da1c6453b34dc438cabc96ba53958bd0dbb6a0ce5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_official_closure_completion_v2/tools/hwp5_text_extract.py",
+      "exists": true,
+      "expected_sha256": "dfe4d6e2af8d8d258ee30d0f7680e28418cd4b0a6b9a13eca70ea26dadaec8f7",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "dfe4d6e2af8d8d258ee30d0f7680e28418cd4b0a6b9a13eca70ea26dadaec8f7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/reviewed_year_coverage.csv",
+      "exists": true,
+      "expected_sha256": "14943adbd972181ad6f4378b4aa93edc427159e1f9eb775840ad21af6b4421af",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "14943adbd972181ad6f4378b4aa93edc427159e1f9eb775840ad21af6b4421af",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/source_package_verification.json",
+      "exists": true,
+      "expected_sha256": "070a8808d711ae6e949750dd3ce0b06f2c772e7979bc280a6e7ba176c3f8469c",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "070a8808d711ae6e949750dd3ce0b06f2c772e7979bc280a6e7ba176c3f8469c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/core_review/verify_db_preservation.py",
+      "exists": true,
+      "expected_sha256": "c2d2126c8bafadce07c794a680fcccf1e7033b4d4106da59facc8bc939e9b800",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c2d2126c8bafadce07c794a680fcccf1e7033b4d4106da59facc8bc939e9b800",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/2021_gap_assessment.csv",
+      "exists": true,
+      "expected_sha256": "121da84a333291b8535be8453aa5e792652be2e1a56b6c688be6dadcf69f7dc1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "121da84a333291b8535be8453aa5e792652be2e1a56b6c688be6dadcf69f7dc1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/README.md",
+      "exists": true,
+      "expected_sha256": "d8e43c32a35358d905cf7dcd7b067239b653699b819708e5ed35449ce95a896c",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d8e43c32a35358d905cf7dcd7b067239b653699b819708e5ed35449ce95a896c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/boundary_reconciliation.csv",
+      "exists": true,
+      "expected_sha256": "ee8b91a5fd1df16474dc63c71889f3e85f0771703e9aaf24c260f94fbe38ec0b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ee8b91a5fd1df16474dc63c71889f3e85f0771703e9aaf24c260f94fbe38ec0b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/calendar_boundary_evidence.csv",
+      "exists": true,
+      "expected_sha256": "3abb0cae233b089b5671ef14cd17fab0dc04bfa818dd50135b264bdf22b536d6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "3abb0cae233b089b5671ef14cd17fab0dc04bfa818dd50135b264bdf22b536d6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/closure_additions.csv",
+      "exists": true,
+      "expected_sha256": "1885513537073af34b549fc778f1d00e3eba116e210151d66c306c9fc8f1bd24",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1885513537073af34b549fc778f1d00e3eba116e210151d66c306c9fc8f1bd24",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/decision_provenance_ledger.csv",
+      "exists": true,
+      "expected_sha256": "755ad92dd6afe2dad5c6e02a5e82931ebe88a856614756428cf87df040ec67a1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "755ad92dd6afe2dad5c6e02a5e82931ebe88a856614756428cf87df040ec67a1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/manifest.json",
+      "exists": true,
+      "expected_sha256": "5efecb9c8ab9a3d1819a04e5c7d7b964818f26439e848af89fc4bbffa32574ea",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5efecb9c8ab9a3d1819a04e5c7d7b964818f26439e848af89fc4bbffa32574ea",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/kra_raceplan_2021_url_response.html",
+      "exists": true,
+      "expected_sha256": "d832d79866aff4d0bb8a7aef305f437f8264c2118b5ec3ff788c920e2b22046d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d832d79866aff4d0bb8a7aef305f437f8264c2118b5ec3ff788c920e2b22046d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_2021_public_institutions_analysis.pdf",
+      "exists": true,
+      "expected_sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_physical_p056.png",
+      "exists": true,
+      "expected_sha256": "648a6f21ded4630e5c852f0cb1bd415842ad5d45946704a72c0293d8f7684485",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "648a6f21ded4630e5c852f0cb1bd415842ad5d45946704a72c0293d8f7684485",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_physical_p056.txt",
+      "exists": true,
+      "expected_sha256": "0f3444d6804a4b8b8392216a6118193f2d649d527692d8ebfdb20225fdf72692",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "0f3444d6804a4b8b8392216a6118193f2d649d527692d8ebfdb20225fdf72692",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/sources_inventory.csv",
+      "exists": true,
+      "expected_sha256": "bf67e5612a00066a203a997d6f45cc74b8a05f0a6a47695e8dc7b7bc053ff6b7",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "bf67e5612a00066a203a997d6f45cc74b8a05f0a6a47695e8dc7b7bc053ff6b7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/README.md",
+      "exists": true,
+      "expected_sha256": "1276c17fa79d32b86fee7a7eceaa215c259743ab0f07ea5bb0c2bbc87ebeb9b6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1276c17fa79d32b86fee7a7eceaa215c259743ab0f07ea5bb0c2bbc87ebeb9b6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/closure_candidates.csv",
+      "exists": true,
+      "expected_sha256": "d199a699ef19af8b2083bde72f43b72996f9b575e838a7b31f301b60ce3e77da",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d199a699ef19af8b2083bde72f43b72996f9b575e838a7b31f301b60ce3e77da",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/lead_confidence_provenance.csv",
+      "exists": true,
+      "expected_sha256": "1e32c85d339eb9d19f223e856a8f034c27e174599c6f648bcb9818779cfff678",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1e32c85d339eb9d19f223e856a8f034c27e174599c6f648bcb9818779cfff678",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/manifest.json",
+      "exists": true,
+      "expected_sha256": "3b6bdf1bd48420fb9cedf726fe913f219169a6e629e051d7c9ce709cc8d6e81e",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "3b6bdf1bd48420fb9cedf726fe913f219169a6e629e051d7c9ce709cc8d6e81e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/raw/kra_monthly_plan_board_web_reader_capture.txt",
+      "exists": true,
+      "expected_sha256": "a327163dffab82bb9b1bd13686dbcee21b7155cc6762dd3e3b5b4415b3c5868b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a327163dffab82bb9b1bd13686dbcee21b7155cc6762dd3e3b5b4415b3c5868b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/raw/reported_sources_fetch_manifest.json",
+      "exists": true,
+      "expected_sha256": "77a5ed6809a46fcf4b321320e8bec5cfc0bd1e24fc78059c8a3716b48d99e89a",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "77a5ed6809a46fcf4b321320e8bec5cfc0bd1e24fc78059c8a3716b48d99e89a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/raw/search_observations.json",
+      "exists": true,
+      "expected_sha256": "84e2a080354ae91fd7c8c5c39b5666cf961f854144c819e76a41a9d0a87598cb",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "84e2a080354ae91fd7c8c5c39b5666cf961f854144c819e76a41a9d0a87598cb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/reported_interval_leads.csv",
+      "exists": true,
+      "expected_sha256": "09c7fc230d3739d813a62bd59e432a660a70c429004cbdf5cd1c2186c6e9ac1b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "09c7fc230d3739d813a62bd59e432a660a70c429004cbdf5cd1c2186c6e9ac1b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/early_2010_2015/source_status.csv",
+      "exists": true,
+      "expected_sha256": "94de542dac07d0f1bb8936ffb6d5f47a8cd8ecc1e8b1deb5d76bde5e5e98695d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "94de542dac07d0f1bb8936ffb6d5f47a8cd8ecc1e8b1deb5d76bde5e5e98695d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_approved/closure_boundary_review.csv",
+      "exists": true,
+      "expected_sha256": "8165a13fa6acd1fc3633d7363a974acdfd57012df02ae2f8ec3f2792d8b85d12",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8165a13fa6acd1fc3633d7363a974acdfd57012df02ae2f8ec3f2792d8b85d12",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_approved/root_label_verification.json",
+      "exists": true,
+      "expected_sha256": "5c6dfc9cdde198a46bfed6f53c68a0053691685428f822cbcac054d0aedba8c9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5c6dfc9cdde198a46bfed6f53c68a0053691685428f822cbcac054d0aedba8c9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_approved/subtype_decisions.csv",
+      "exists": true,
+      "expected_sha256": "73a02baf0be9547b1b86a6d4d0f47587a6ed9df344a11d614ca91f17b8872363",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "73a02baf0be9547b1b86a6d4d0f47587a6ed9df344a11d614ca91f17b8872363",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_busan_direct/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "92ef560b65a985ba74ddd9c4be3fb3372ee86aa7707caa5128f9e5ba688a0bea",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "92ef560b65a985ba74ddd9c4be3fb3372ee86aa7707caa5128f9e5ba688a0bea",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_busan_direct/daily_20150329.html",
+      "exists": true,
+      "expected_sha256": "a9b077b77ea457204da944256939b76ffb8b5154b03911c6a8734df762d4fd86",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a9b077b77ea457204da944256939b76ffb8b5154b03911c6a8734df762d4fd86",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_busan_direct/daily_20150329.txt",
+      "exists": true,
+      "expected_sha256": "c275d726e6eabd56835cc8df09ab4b2c06ec9a02f6e47bf60a3c7e4cddf02e4e",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c275d726e6eabd56835cc8df09ab4b2c06ec9a02f6e47bf60a3c7e4cddf02e4e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "b884fe10c96b3b866bdba3c92f043565de1d2a13b2afdd7c7bc69d479a5a15e5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b884fe10c96b3b866bdba3c92f043565de1d2a13b2afdd7c7bc69d479a5a15e5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/closure_boundary_evidence.csv",
+      "exists": true,
+      "expected_sha256": "1819cba3dc81675c32899e2f23eadb333c56bc0036028de47090b83990b72f0d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1819cba3dc81675c32899e2f23eadb333c56bc0036028de47090b83990b72f0d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_2021_public_institutions_analysis.pdf",
+      "exists": true,
+      "expected_sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_physical_p056.png",
+      "exists": true,
+      "expected_sha256": "648a6f21ded4630e5c852f0cb1bd415842ad5d45946704a72c0293d8f7684485",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "648a6f21ded4630e5c852f0cb1bd415842ad5d45946704a72c0293d8f7684485",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_physical_p056.txt",
+      "exists": true,
+      "expected_sha256": "0f3444d6804a4b8b8392216a6118193f2d649d527692d8ebfdb20225fdf72692",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "0f3444d6804a4b8b8392216a6118193f2d649d527692d8ebfdb20225fdf72692",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/root_api_restart_boundary_verification.json",
+      "exists": true,
+      "expected_sha256": "5f386f0896825a9462066491cb97a92e3d879207fe4cf05b874b55367133146f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5f386f0896825a9462066491cb97a92e3d879207fe4cf05b874b55367133146f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/reviewed_year_coverage.csv",
+      "exists": true,
+      "expected_sha256": "c32dca1d08dcda82bb72476baf922770955a7f0056cf22c53c65707c7f879f78",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c32dca1d08dcda82bb72476baf922770955a7f0056cf22c53c65707c7f879f78",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/source_package_verification.json",
+      "exists": true,
+      "expected_sha256": "31ff3794e938c530ed5599cc7bca6aa81c75976f2285eebb0fab7a7d45619f84",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "31ff3794e938c530ed5599cc7bca6aa81c75976f2285eebb0fab7a7d45619f84",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/verify_db_preservation.py",
+      "exists": true,
+      "expected_sha256": "31a4c99963bd87f4c1a8c432a49a4203466ed16b99d2f9135e5e23eea6688906",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "31a4c99963bd87f4c1a8c432a49a4203466ed16b99d2f9135e5e23eea6688906",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/README.md",
+      "exists": true,
+      "expected_sha256": "10c5898e63029cee5131fb0b5e2cb0b5824d72dbfedbb5a45f3fb893d30e7f83",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "10c5898e63029cee5131fb0b5e2cb0b5824d72dbfedbb5a45f3fb893d30e7f83",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/interval_candidates.csv",
+      "exists": true,
+      "expected_sha256": "72deeef61157fe7842bef3304d1efbc345654fea50f4a68a2301b11152f36884",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "72deeef61157fe7842bef3304d1efbc345654fea50f4a68a2301b11152f36884",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/manifest.json",
+      "exists": true,
+      "expected_sha256": "3b1aa763e956ecb465c01b6fc64eb9786d0a382b4c69cf096699cb24c4d90ca4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "3b1aa763e956ecb465c01b6fc64eb9786d0a382b4c69cf096699cb24c4d90ca4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/plan_amendments.csv",
+      "exists": true,
+      "expected_sha256": "61f695b6cd8fdc92426edff96724ac2440c54aae23fda058ad6d1e11d85148ad",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "61f695b6cd8fdc92426edff96724ac2440c54aae23fda058ad6d1e11d85148ad",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/source_observations.json",
+      "exists": true,
+      "expected_sha256": "ea7bdbd01ffb26da6ad0a2860f0d93148ea830c6c0ef050f0b58a70bb1805067",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ea7bdbd01ffb26da6ad0a2860f0d93148ea830c6c0ef050f0b58a70bb1805067",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/sports_khan_2010_seoul_plan.html",
+      "exists": true,
+      "expected_sha256": "ef3d40be251664e70612d28ff1122c1a284ce94585df8ab8dfecbf1059f9e20d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ef3d40be251664e70612d28ff1122c1a284ce94585df8ab8dfecbf1059f9e20d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/sports_seoul_2013_aug_plan.html",
+      "exists": true,
+      "expected_sha256": "14aff7754647a950867506007af02971bb56299a6180f6bc3ba37cd29f6a1f11",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "14aff7754647a950867506007af02971bb56299a6180f6bc3ba37cd29f6a1f11",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/sroa/horse_plan_page5.html",
+      "exists": true,
+      "expected_sha256": "f0d803758010baa390368f77ae7c3b58b51ea177ecc0a22d71931be211c892b0",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f0d803758010baa390368f77ae7c3b58b51ea177ecc0a22d71931be211c892b0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/ujnews_2012_bus_reply.html",
+      "exists": true,
+      "expected_sha256": "a80241063665861cea82963d41c8883269fe8372167e379c44722c009118def7",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a80241063665861cea82963d41c8883269fe8372167e379c44722c009118def7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/ujnews_2013_busan_annual_plan.html",
+      "exists": true,
+      "expected_sha256": "37a09f2b8650ae0658127a9cd7b556f5538af22f0fcc35d40ae57bae96366f43",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "37a09f2b8650ae0658127a9cd7b556f5538af22f0fcc35d40ae57bae96366f43",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/ujnews_2013_busan_aug_closure.html",
+      "exists": true,
+      "expected_sha256": "650a8e92ec50743fe24f448f259df5cbb21148923310e7f2dd1d7c85104c5c01",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "650a8e92ec50743fe24f448f259df5cbb21148923310e7f2dd1d7c85104c5c01",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/raw/ujnews_2013_busan_sept_plan.html",
+      "exists": true,
+      "expected_sha256": "b0736c776ef39ce0ce3cfd378d3de208619c2b5b10c438fd1e9728ca146f952e",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b0736c776ef39ce0ce3cfd378d3de208619c2b5b10c438fd1e9728ca146f952e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/source_status.csv",
+      "exists": true,
+      "expected_sha256": "cc4b809221d96551ae36479a9231c37f95073ec759cb4daf52c28f95f285f40b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "cc4b809221d96551ae36479a9231c37f95073ec759cb4daf52c28f95f285f40b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/early_2010_2013/user_review_items.csv",
+      "exists": true,
+      "expected_sha256": "5f36c6d1497f05877555dc2b3060fa1886617cffb0ebd936ddac3e8312c11b86",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5f36c6d1497f05877555dc2b3060fa1886617cffb0ebd936ddac3e8312c11b86",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/prepare_review.py",
+      "exists": true,
+      "expected_sha256": "c67817c3e1f346454972851c0d3a485ebc52c5f0cd935728f822b6e1109b37fb",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c67817c3e1f346454972851c0d3a485ebc52c5f0cd935728f822b6e1109b37fb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_01.hits.json",
+      "exists": true,
+      "expected_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_01.pdf",
+      "exists": true,
+      "expected_sha256": "0728833a62de6f7554544fbace0572684f72660486f449a395b37edf9f482fe4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "0728833a62de6f7554544fbace0572684f72660486f449a395b37edf9f482fe4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_01.txt",
+      "exists": true,
+      "expected_sha256": "72f7e080b6ea950105187b41052ccc0e477c4f6742ff1efc87051f6632775b90",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "72f7e080b6ea950105187b41052ccc0e477c4f6742ff1efc87051f6632775b90",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_03.hits.json",
+      "exists": true,
+      "expected_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_03.pdf",
+      "exists": true,
+      "expected_sha256": "7e7dc9ec03268d17a183e26c286d39b65b29d2aa5dc47ef33cfeff7fbadaf63d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7e7dc9ec03268d17a183e26c286d39b65b29d2aa5dc47ef33cfeff7fbadaf63d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_03.txt",
+      "exists": true,
+      "expected_sha256": "79624dfbef43c6e7a12cd5c2c3fadf73bd850692c92660148747532fd9202da1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "79624dfbef43c6e7a12cd5c2c3fadf73bd850692c92660148747532fd9202da1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_04.hits.json",
+      "exists": true,
+      "expected_sha256": "cfc90274b188a2021d631f44578a42f132b85563498e9fe29eccd0085b0571ba",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "cfc90274b188a2021d631f44578a42f132b85563498e9fe29eccd0085b0571ba",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_04.pdf",
+      "exists": true,
+      "expected_sha256": "22f05755364be9c35ea72fcfa8e53bb3416015a77e9cd88b21ef2629be9df77f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "22f05755364be9c35ea72fcfa8e53bb3416015a77e9cd88b21ef2629be9df77f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/2012_masa_04.txt",
+      "exists": true,
+      "expected_sha256": "0c431d9306fdc4221db63abc641f7dede684744d7764c3a04a19976bdc473956",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "0c431d9306fdc4221db63abc641f7dede684744d7764c3a04a19976bdc473956",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/README.md",
+      "exists": true,
+      "expected_sha256": "a2684ed3e26a2d095cc23238ea136e59a035e7dfcdfe39fa3fada18b575382d1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a2684ed3e26a2d095cc23238ea136e59a035e7dfcdfe39fa3fada18b575382d1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "f283660d56ff9d59e0c9d94f4ae7f6b0d740dbe92df7c8e8c0921b6eb00bb628",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f283660d56ff9d59e0c9d94f4ae7f6b0d740dbe92df7c8e8c0921b6eb00bb628",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/yearbook-021.png",
+      "exists": true,
+      "expected_sha256": "626fc0e7e7d9b20ab9776f578ea255f740a7d54f16415c8c8f5a9199e331483d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "626fc0e7e7d9b20ab9776f578ea255f740a7d54f16415c8c8f5a9199e331483d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_2012_yearbook/yearbook-070.png",
+      "exists": true,
+      "expected_sha256": "1164474addc76afde43fe2f79f303f9a82f9320fbd01f75da838258ef4f35823",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1164474addc76afde43fe2f79f303f9a82f9320fbd01f75da838258ef4f35823",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_approved/closure_gap_review_candidates.csv",
+      "exists": true,
+      "expected_sha256": "e89377d63272629bce124251d8adbb1fe1a0a2e2b6dbf3cb9b9b9c13331d1e9d",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e89377d63272629bce124251d8adbb1fe1a0a2e2b6dbf3cb9b9b9c13331d1e9d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_approved/closure_plan_amendment_review.csv",
+      "exists": true,
+      "expected_sha256": "5ccc0a6a9988847d2a7d68e8efe629979316e5fc198d5dafe1c42a1ce4078916",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5ccc0a6a9988847d2a7d68e8efe629979316e5fc198d5dafe1c42a1ce4078916",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/root_approved/closure_review_questions.csv",
+      "exists": true,
+      "expected_sha256": "255db55975f6a657630cc4d2cae65418a65ac2f7f1eac545fd2357064e9b28e0",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "255db55975f6a657630cc4d2cae65418a65ac2f7f1eac545fd2357064e9b28e0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf",
+      "exists": true,
+      "expected_sha256": "5f614c787c10c65b8ab232011641f621db231c1cea2bd1fc70eea981458a37f9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5f614c787c10c65b8ab232011641f621db231c1cea2bd1fc70eea981458a37f9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.txt",
+      "exists": true,
+      "expected_sha256": "68f3e1cf0a3c35d35674dc24b567676d432c344f8d3e7d3b1f0b4ecf3975a103",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "68f3e1cf0a3c35d35674dc24b567676d432c344f8d3e7d3b1f0b4ecf3975a103",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "7a98ec70dd42edb4d6f48f208a223d5ed4cf9d5f87a245538432b5b1f2dbfb3f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7a98ec70dd42edb4d6f48f208a223d5ed4cf9d5f87a245538432b5b1f2dbfb3f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/hits.json",
+      "exists": true,
+      "expected_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-01.png",
+      "exists": true,
+      "expected_sha256": "4758e4f15308f364cd4e8c5cda82971491ccf1805d8604a3271c268a66d284c4",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "4758e4f15308f364cd4e8c5cda82971491ccf1805d8604a3271c268a66d284c4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-02.png",
+      "exists": true,
+      "expected_sha256": "9bb31fc46a0b78bfac1f0edb61c9f7b6be1d92a02b6f323e788354157c3d32fc",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9bb31fc46a0b78bfac1f0edb61c9f7b6be1d92a02b6f323e788354157c3d32fc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-03.png",
+      "exists": true,
+      "expected_sha256": "7ce294c95c08c9d60c7d9a7098446f381d671e0718b4cf74ade70897e2e94f60",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7ce294c95c08c9d60c7d9a7098446f381d671e0718b4cf74ade70897e2e94f60",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-04.png",
+      "exists": true,
+      "expected_sha256": "84a1a963e9e149d503634f7fe724958577bc1086a9f36fb6e4805fbcb61ca326",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "84a1a963e9e149d503634f7fe724958577bc1086a9f36fb6e4805fbcb61ca326",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-05.png",
+      "exists": true,
+      "expected_sha256": "ac4295f2c657684f16151b56d66c24ec7dca45d28436ace9881e06f613fb69bc",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ac4295f2c657684f16151b56d66c24ec7dca45d28436ace9881e06f613fb69bc",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-10.png",
+      "exists": true,
+      "expected_sha256": "5e5b86d49d4c78be8ee71ae693b3860490ca9aca891fdbfe98280f6128120fdf",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5e5b86d49d4c78be8ee71ae693b3860490ca9aca891fdbfe98280f6128120fdf",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-11.png",
+      "exists": true,
+      "expected_sha256": "721646503e65ebb50b130b5486739f98785c7e52de235c913e74d1964d697231",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "721646503e65ebb50b130b5486739f98785c7e52de235c913e74d1964d697231",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-12.png",
+      "exists": true,
+      "expected_sha256": "13a1e4733fb82b06232a461d9f2dbebc1829d814ffd21a758621e5cc3bacfa23",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "13a1e4733fb82b06232a461d9f2dbebc1829d814ffd21a758621e5cc3bacfa23",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/pages/annual-13.png",
+      "exists": true,
+      "expected_sha256": "d51d23d5e35aa57b5046e676e5095f053ac5b867e5d9b6307762975d93e1cfc1",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d51d23d5e35aa57b5046e676e5095f053ac5b867e5d9b6307762975d93e1cfc1",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/q1_plan_screenshot_1.png",
+      "exists": true,
+      "expected_sha256": "9292da983787d1ff3a576e15851cdfe6a4774e9c675a55c146c18a5b61389d48",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9292da983787d1ff3a576e15851cdfe6a4774e9c675a55c146c18a5b61389d48",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/q1_plan_screenshot_2.png",
+      "exists": true,
+      "expected_sha256": "fea76f2b0ba8af3a2a9e0941bdc29c6671bb73d45f3f21c0498eb6b033268dd5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "fea76f2b0ba8af3a2a9e0941bdc29c6671bb73d45f3f21c0498eb6b033268dd5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/2021_february_schedule_reconciliation.csv",
+      "exists": true,
+      "expected_sha256": "42b9d84a8023c792006ab7e8c310f13b5559304958fccd7411bf2e2e4a433b1a",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "42b9d84a8023c792006ab7e8c310f13b5559304958fccd7411bf2e2e4a433b1a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/2021_long_gap_records.csv",
+      "exists": true,
+      "expected_sha256": "cc76ea8a3df439cd6dcb7cfa5f38b103f23f15bc41d1bd5a53eec3e079886fba",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "cc76ea8a3df439cd6dcb7cfa5f38b103f23f15bc41d1bd5a53eec3e079886fba",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/2021_segment_calendar_audit.csv",
+      "exists": true,
+      "expected_sha256": "05de480e9ea6319f507f8bbb0181af2eb4b5f106e640dc2ff35be5ff0a22ae3a",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "05de480e9ea6319f507f8bbb0181af2eb4b5f106e640dc2ff35be5ff0a22ae3a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/README.md",
+      "exists": true,
+      "expected_sha256": "08546275bbc045bc7069846b4196e6e90d35b8dae75bf38ac479c30cb3522818",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "08546275bbc045bc7069846b4196e6e90d35b8dae75bf38ac479c30cb3522818",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/candidate_calendar_validation.csv",
+      "exists": true,
+      "expected_sha256": "381b12f1649acfe57367791941912236a61b886ba99a357d47779bf24fc4a3ee",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "381b12f1649acfe57367791941912236a61b886ba99a357d47779bf24fc4a3ee",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/evidence_provenance.csv",
+      "exists": true,
+      "expected_sha256": "32bdafc865f95f9aa090e0a7e95abee9a83ff2490d21a31ce8ab26c36c703f62",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "32bdafc865f95f9aa090e0a7e95abee9a83ff2490d21a31ce8ab26c36c703f62",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/feb_2021_calendar_window.csv",
+      "exists": true,
+      "expected_sha256": "d74e7f39b08c412401bd69741bc425b7ffaf52391250ec2f278672d612aa74f3",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "d74e7f39b08c412401bd69741bc425b7ffaf52391250ec2f278672d612aa74f3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/interval_candidates.csv",
+      "exists": true,
+      "expected_sha256": "8bdf2409b8c59b9094538ba12d7654fbafb81b881f434ae41515eb595852f55b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8bdf2409b8c59b9094538ba12d7654fbafb81b881f434ae41515eb595852f55b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/manifest.json",
+      "exists": true,
+      "expected_sha256": "a5e325a65cf07b018e32b1f9b4a8bf155ef72e5cee70cd37dd6c627021bc93b3",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a5e325a65cf07b018e32b1f9b4a8bf155ef72e5cee70cd37dd6c627021bc93b3",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/raw/2021_racing_detailed_plan_user.pdf",
+      "exists": true,
+      "expected_sha256": "5f614c787c10c65b8ab232011641f621db231c1cea2bd1fc70eea981458a37f9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "5f614c787c10c65b8ab232011641f621db231c1cea2bd1fc70eea981458a37f9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/raw/broa_q1_search_index_transcript.txt",
+      "exists": true,
+      "expected_sha256": "a324db3385a01dad46d74b1b6fddda2c139e634cae30ced652e33e30d52b4be6",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a324db3385a01dad46d74b1b6fddda2c139e634cae30ced652e33e30d52b4be6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/raw/krj_2021-02-19_page_fetch_response_http200_read_failure.html",
+      "exists": true,
+      "expected_sha256": "ae72478eb672882ab8254b3bace7254cfe3557df02721ce0005f69c6eac830cb",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ae72478eb672882ab8254b3bace7254cfe3557df02721ce0005f69c6eac830cb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/raw/krj_2021-02-19_search_index_excerpt.txt",
+      "exists": true,
+      "expected_sha256": "e6928717b34895f22cb5e252daabd471e058d5d0bbf4eed79994ba7265197a44",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e6928717b34895f22cb5e252daabd471e058d5d0bbf4eed79994ba7265197a44",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/search_log.csv",
+      "exists": true,
+      "expected_sha256": "8ffee4f9dc3824af4fa8a85be2d8ec24638c3b5f2f7a4b8239f464dfc0a93258",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8ffee4f9dc3824af4fa8a85be2d8ec24638c3b5f2f7a4b8239f464dfc0a93258",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/sources_inventory.csv",
+      "exists": true,
+      "expected_sha256": "227782dd09c89df78a35e6117a948dfd763db4b3e7dd4ca429ba9620deae7fbe",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "227782dd09c89df78a35e6117a948dfd763db4b3e7dd4ca429ba9620deae7fbe",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/user_review_items.csv",
+      "exists": true,
+      "expected_sha256": "a594333b814c1c2b12a1b3677720b7aafe70c6f74b89034ccf3f27aa250acd50",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "a594333b814c1c2b12a1b3677720b7aafe70c6f74b89034ccf3f27aa250acd50",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/README.md",
+      "exists": true,
+      "expected_sha256": "7bd749d96bc15b4754f11b49e6cb815786e67f170339616f58879f8b8e030150",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7bd749d96bc15b4754f11b49e6cb815786e67f170339616f58879f8b8e030150",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/conflict_exclusions.csv",
+      "exists": true,
+      "expected_sha256": "e14b020dc37e73243ffa3ab15149c54bfd5bf841b275064ed8b664eae7da3f48",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e14b020dc37e73243ffa3ab15149c54bfd5bf841b275064ed8b664eae7da3f48",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/interval_candidates.csv",
+      "exists": true,
+      "expected_sha256": "e93859fd3797ed44c386a118eb1cbc9db580932c266d253a85bc4bb2ad5f459f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "e93859fd3797ed44c386a118eb1cbc9db580932c266d253a85bc4bb2ad5f459f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/manifest.json",
+      "exists": true,
+      "expected_sha256": "7545dcd2b1f2c141020d18b3ece11725ede7a916d00e032db3b951d911224aab",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7545dcd2b1f2c141020d18b3ece11725ede7a916d00e032db3b951d911224aab",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/plan_amendments.csv",
+      "exists": true,
+      "expected_sha256": "1e31127829733427663a4a3cec1795f355b8a88bcd8d785903aea6f31b3c5906",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "1e31127829733427663a4a3cec1795f355b8a88bcd8d785903aea6f31b3c5906",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2014_annual_krj.html",
+      "exists": true,
+      "expected_sha256": "9fe86cd7ad858f2e7c8614ea041f942d2e1dabaeab933681f8df5ead4a47151f",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9fe86cd7ad858f2e7c8614ea041f942d2e1dabaeab933681f8df5ead4a47151f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2014_apr_sewol.html",
+      "exists": true,
+      "expected_sha256": "7ea1840bd846b913e3b420ad6b4fb8e09adcfe792b8df293db6c4820a4a66608",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "7ea1840bd846b913e3b420ad6b4fb8e09adcfe792b8df293db6c4820a4a66608",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2014_dec_ilyo.html",
+      "exists": true,
+      "expected_sha256": "ed61ead6fea8c708279898d350ed7cb5a06a0db3fcfa803e63925a4e7a07ac95",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "ed61ead6fea8c708279898d350ed7cb5a06a0db3fcfa803e63925a4e7a07ac95",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2014_december_report_capture.json",
+      "exists": true,
+      "expected_sha256": "2a8ca4d342d3e923e7d431b79c0df2891d7639ce1217414470c3eefc6b8a213b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2a8ca4d342d3e923e7d431b79c0df2891d7639ce1217414470c3eefc6b8a213b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2014_jul_busan.html",
+      "exists": true,
+      "expected_sha256": "167991bee935f50a3d91abccb75bdd5975a4aefcf7189bfcf863c2df3da80341",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "167991bee935f50a3d91abccb75bdd5975a4aefcf7189bfcf863c2df3da80341",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2014_sep_busan.html",
+      "exists": true,
+      "expected_sha256": "9e539c0de4f31f1e03205e95994738ff793f23fa47b620af642528a7256a667c",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9e539c0de4f31f1e03205e95994738ff793f23fa47b620af642528a7256a667c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2015_dec_ilyo.html",
+      "exists": true,
+      "expected_sha256": "0b45410bdc59fadb709bc056ea9a3239dd94d9fac029b70c48efb1059fc2fd0e",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "0b45410bdc59fadb709bc056ea9a3239dd94d9fac029b70c48efb1059fc2fd0e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2015_jul_ilyo.html",
+      "exists": true,
+      "expected_sha256": "279ee270b906a89f1261300de0894b27a9bcdfdceea3b9e46bd7091598d6309b",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "279ee270b906a89f1261300de0894b27a9bcdfdceea3b9e46bd7091598d6309b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2015_jul_khan.html",
+      "exists": true,
+      "expected_sha256": "c5bf86d99f9bc70841ff3521df46e25eb246715f971beccd3468fa1e7bff3be0",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "c5bf86d99f9bc70841ff3521df46e25eb246715f971beccd3468fa1e7bff3be0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2015_sep_ajunews.html",
+      "exists": true,
+      "expected_sha256": "3ea3bf673bbc7e5815a7cbafda3576691e4944db54696dadf1aa5eb604449d32",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "3ea3bf673bbc7e5815a7cbafda3576691e4944db54696dadf1aa5eb604449d32",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/2015_sep_newsis.html",
+      "exists": true,
+      "expected_sha256": "36f29ed29a5e74a7fc20702c0b37f289d9cb786a34b50ca48b772db1a6fadd94",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "36f29ed29a5e74a7fc20702c0b37f289d9cb786a34b50ca48b772db1a6fadd94",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/annual_report_fetch.json",
+      "exists": true,
+      "expected_sha256": "f494d2227692aeb84de6f04ee68678e837cd6dc91ad28053a4f65aa5f3223147",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f494d2227692aeb84de6f04ee68678e837cd6dc91ad28053a4f65aa5f3223147",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/bounded_article_capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "eea52b71d1c99cee8e1cdd7a7b3d6ea6b8c4fee05fb3f07cf9b94fba4fe20e38",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "eea52b71d1c99cee8e1cdd7a7b3d6ea6b8c4fee05fb3f07cf9b94fba4fe20e38",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/raw/standard_network_probe.json",
+      "exists": true,
+      "expected_sha256": "38ad7663a35e9d0b1f47da0485bd6e8cfe1e8a4c4f19221ed648538a8a8150e9",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "38ad7663a35e9d0b1f47da0485bd6e8cfe1e8a4c4f19221ed648538a8a8150e9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/source_ledger.csv",
+      "exists": true,
+      "expected_sha256": "f691147fe4f56af23f77e0c274d5af6b1587616d34485b8b2c5791265860dd88",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "f691147fe4f56af23f77e0c274d5af6b1587616d34485b8b2c5791265860dd88",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/years_2014_2015/user_review_items.csv",
+      "exists": true,
+      "expected_sha256": "da0c2d1522bd22fe360697a6f9f6f4df2788ffbcd818d5b3e41a2af6efa41ca5",
+      "table": "calendar_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "da0c2d1522bd22fe360697a6f9f6f4df2788ffbcd818d5b3e41a2af6efa41ca5",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/venue_review.csv",
+      "exists": true,
+      "expected_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "628089f5121ba4b37d6642456d45899bd18d4351ba5d7ca306299498e4a8d9ac",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/raceplan2026_20260516.pdf",
+      "exists": true,
+      "expected_sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/official_plan_capture.json",
+      "exists": true,
+      "expected_sha256": "2b2998508bf86579c615909c751e54c4c43319e561434158c3f905da8f7b4984",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "2b2998508bf86579c615909c751e54c4c43319e561434158c3f905da8f7b4984",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/official_plan_page_65.png",
+      "exists": true,
+      "expected_sha256": "85dfbb439dd50c8817dbbcd238892c16a5e0a8b20f396370e042db49987c207f",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "85dfbb439dd50c8817dbbcd238892c16a5e0a8b20f396370e042db49987c207f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/user_clarification.json",
+      "exists": true,
+      "expected_sha256": "bc79c36ae78660b210f17a1ef0484f08aa87d9f3739d832bd06f93429426f50e",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "bc79c36ae78660b210f17a1ef0484f08aa87d9f3739d832bd06f93429426f50e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260930_trial_venue_review_v1/venue_review.csv",
+      "exists": true,
+      "expected_sha256": "8635d5aa0be39f63c68d71d865734d9de5650dc9f54ceb6a1e2fbf0fe3fe2769",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "8635d5aa0be39f63c68d71d865734d9de5650dc9f54ceb6a1e2fbf0fe3fe2769",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/raw/trial_result/2026/meet_3.json",
+      "exists": true,
+      "expected_sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "181ecdaabd9a9c71e67029b74c612f88535ec2f224f68889f4d6deb7bfca60b1",
+      "matches": true
+    },
+    {
+      "path": "data/raw/kra_text/dacom23/meet=3/year=2026/month=09/day=17/20260917dacom23.rpt",
+      "exists": true,
+      "expected_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+      "table": "trial_venue_review_evidence",
+      "loaded_to_database": null,
+      "actual_sha256": "b0f57f4b7833bae2ad2c04c8b6d026addcc78082af9b0c6eb8af1800189d936e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_equipment_unobserved_review_v1/score_supplement_candidates.csv",
+      "exists": true,
+      "expected_sha256": "4a085df33dff84715fac4d1d4824692eae92e2a0d460b7442306f245bcfefb7f",
+      "table": "equipment_score_supplement",
+      "loaded_to_database": null,
+      "actual_sha256": "4a085df33dff84715fac4d1d4824692eae92e2a0d460b7442306f245bcfefb7f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261001_equipment_unobserved_review_v1/score_supplement_tokens.csv",
+      "exists": true,
+      "expected_sha256": "2b446f4cd5730bc5d52d614da913bc4ba224f5f629fd04dd7d0cccfb7600390c",
+      "table": "equipment_score_supplement_tokens",
+      "loaded_to_database": null,
+      "actual_sha256": "2b446f4cd5730bc5d52d614da913bc4ba224f5f629fd04dd7d0cccfb7600390c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_equipment_full_v1/inventory/api78_runner_records.csv",
+      "exists": true,
+      "expected_sha256": "20e997641ae80eca480cd8634aadd2f5c39d5542309ab8c30bce031363dfcede",
+      "table": "equipment_api78_card_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "20e997641ae80eca480cd8634aadd2f5c39d5542309ab8c30bce031363dfcede",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_equipment_full_v1/inventory/api78_selected_batches.csv",
+      "exists": true,
+      "expected_sha256": "fb975be9d55fb46fa37334a31f559aa841f242713075ef4c18f11e69ba826d2f",
+      "table": "equipment_api78_capture_batches",
+      "loaded_to_database": null,
+      "actual_sha256": "fb975be9d55fb46fa37334a31f559aa841f242713075ef4c18f11e69ba826d2f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_equipment_full_v1/inventory/api78_selected_pages.csv",
+      "exists": true,
+      "expected_sha256": "8e4a1f0eebd409f1d7d0662c64f4bda96637ee8eefa88a9c4cf669696dcdcb08",
+      "table": "equipment_api78_capture_pages",
+      "loaded_to_database": null,
+      "actual_sha256": "8e4a1f0eebd409f1d7d0662c64f4bda96637ee8eefa88a9c4cf669696dcdcb08",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_equipment_full_v1/inventory/api78_source_document_inventory.csv",
+      "exists": true,
+      "expected_sha256": "baf38100020b7fb5cddf21e0b0a776bc3ce2e11da5da88f2cb0d0b162b67a3d2",
+      "table": "equipment_api78_source_documents",
+      "loaded_to_database": null,
+      "actual_sha256": "baf38100020b7fb5cddf21e0b0a776bc3ce2e11da5da88f2cb0d0b162b67a3d2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_equipment_full_v1/inventory/api78_core_runner_ledger.csv",
+      "exists": true,
+      "expected_sha256": "10f8f92107beaa03ec08e5d1651d3bd1a627f5d9670979f1a3bf1bb60febd797",
+      "table": "equipment_api78_core_runner_ledger",
+      "loaded_to_database": null,
+      "actual_sha256": "10f8f92107beaa03ec08e5d1651d3bd1a627f5d9670979f1a3bf1bb60febd797",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input/daily_training.parquet",
+      "exists": true,
+      "expected_sha256": "96a075f060e092be4c82b1f2120912075e34cca746d63d621721ea89db01bd57",
+      "table": "training_raw_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "96a075f060e092be4c82b1f2120912075e34cca746d63d621721ea89db01bd57",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input/daily_training_inventory.json",
+      "exists": true,
+      "expected_sha256": "04632d8523806e1163094123fa0c99b6e9ba269fdadcb903c9e12c1adcf65750",
+      "table": "training_source_files/training_capture_coverage",
+      "loaded_to_database": null,
+      "actual_sha256": "04632d8523806e1163094123fa0c99b6e9ba269fdadcb903c9e12c1adcf65750",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input/start_training.parquet",
+      "exists": true,
+      "expected_sha256": "b7c390c675413ec9adb8fc210eab1ce678b5fb8b2bfe38b5e6fb47c583988ce2",
+      "table": "training_raw_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "b7c390c675413ec9adb8fc210eab1ce678b5fb8b2bfe38b5e6fb47c583988ce2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input/start_training_inventory.json",
+      "exists": true,
+      "expected_sha256": "6d439af13a2b3456e0e8299f6b3e5fb25827a553e56cb0ea5728c72b4b0bfb54",
+      "table": "training_source_files/training_capture_coverage",
+      "loaded_to_database": null,
+      "actual_sha256": "6d439af13a2b3456e0e8299f6b3e5fb25827a553e56cb0ea5728c72b4b0bfb54",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input/swim_training.parquet",
+      "exists": true,
+      "expected_sha256": "c76430f8abc2bd8ff2c514b5fa56ad42d7bb26157f3884ac9a3e7268fed5a658",
+      "table": "training_raw_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "c76430f8abc2bd8ff2c514b5fa56ad42d7bb26157f3884ac9a3e7268fed5a658",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input/swim_training_inventory.json",
+      "exists": true,
+      "expected_sha256": "6f74eeb0190354c615452a3a2ec76d143322987931e65f802c1067db5e70ad75",
+      "table": "training_source_files/training_capture_coverage",
+      "loaded_to_database": null,
+      "actual_sha256": "6f74eeb0190354c615452a3a2ec76d143322987931e65f802c1067db5e70ad75",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/load_training_three.py",
+      "exists": true,
+      "expected_sha256": "ed673cafbd4e06882270d21dac2b0c07a33c2999b4051efd860ad92f97b3de26",
+      "table": "training_loader_code",
+      "loaded_to_database": null,
+      "actual_sha256": "ed673cafbd4e06882270d21dac2b0c07a33c2999b4051efd860ad92f97b3de26",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/schema.sql",
+      "exists": true,
+      "expected_sha256": "49a696166e999ce39cd2a5f3d3a60fc3762a64775c8a0184b8d59519a29a2d06",
+      "table": "training_loader_schema",
+      "loaded_to_database": null,
+      "actual_sha256": "49a696166e999ce39cd2a5f3d3a60fc3762a64775c8a0184b8d59519a29a2d06",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_training_three_v1/loader/input_contract.json",
+      "exists": true,
+      "expected_sha256": "2b6f83a1fd70c033d55fee94ed834a171be2d5400ef419d51b5092656e9a44d4",
+      "table": "training_loader_contract",
+      "loaded_to_database": null,
+      "actual_sha256": "2b6f83a1fd70c033d55fee94ed834a171be2d5400ef419d51b5092656e9a44d4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_starting_exam_v1/input/starting_exam.parquet",
+      "exists": true,
+      "expected_sha256": "f8d1689fbc84de5fc53b8960177bccc129143800debfc2eddfe1d24ff6ad3d53",
+      "table": "starting_exam_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "f8d1689fbc84de5fc53b8960177bccc129143800debfc2eddfe1d24ff6ad3d53",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_starting_exam_v1/raw/capture_manifest.json",
+      "exists": true,
+      "expected_sha256": "08cbb5cbfd093a84d1daff42872d657f830d33c14ff5fc98aeab6e4bb72c17b7",
+      "table": "starting_exam_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "08cbb5cbfd093a84d1daff42872d657f830d33c14ff5fc98aeab6e4bb72c17b7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_starting_exam_v1/raw/coverage_summary.json",
+      "exists": true,
+      "expected_sha256": "f2d1e721c094c44793510691099b80cf08dda2d85f204324b9850f5badf11ac8",
+      "table": "starting_exam_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "f2d1e721c094c44793510691099b80cf08dda2d85f204324b9850f5badf11ac8",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_starting_exam_v1/loader/load_starting_exam.py",
+      "exists": true,
+      "expected_sha256": "22d1171afc351011a01846d9418ca8dbc3da3f61f0bbe025dcd455e27abcc485",
+      "table": "starting_exam_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "22d1171afc351011a01846d9418ca8dbc3da3f61f0bbe025dcd455e27abcc485",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_starting_exam_v1/loader/schema.sql",
+      "exists": true,
+      "expected_sha256": "a583cdc9845b366922803a48149c3eab018b25384127bd2bb21baa7e233f1f8e",
+      "table": "starting_exam_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "a583cdc9845b366922803a48149c3eab018b25384127bd2bb21baa7e233f1f8e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_starting_exam_v1/loader/input_contract.json",
+      "exists": true,
+      "expected_sha256": "f71f98fa7e82c59560350dd30441388cd9c4c5b8254ef0e7e26d6ea64178f23a",
+      "table": "starting_exam_observations",
+      "loaded_to_database": null,
+      "actual_sha256": "f71f98fa7e82c59560350dd30441388cd9c4c5b8254ef0e7e26d6ea64178f23a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/dictionary/api33_source_rows.parquet",
+      "exists": true,
+      "expected_sha256": "3e9e8e99f5a2f79e135f70f40f41d019df94c43556443a7d9d0fec7580c62a75",
+      "table": "medical_api33_source_rows",
+      "loaded_to_database": true,
+      "actual_sha256": "3e9e8e99f5a2f79e135f70f40f41d019df94c43556443a7d9d0fec7580c62a75",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/dictionary/api33_terms.parquet",
+      "exists": true,
+      "expected_sha256": "8766e10b60fc240d2277affc115bd3bdf57f8ff5f5e2c59c2f1103510ad05945",
+      "table": "medical_api33_terms",
+      "loaded_to_database": true,
+      "actual_sha256": "8766e10b60fc240d2277affc115bd3bdf57f8ff5f5e2c59c2f1103510ad05945",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/dictionary/explanation_observations.parquet",
+      "exists": true,
+      "expected_sha256": "57b6c6c612a73b32bfef165ae2e12c8f4309505e025f641d7f76f3c4e3e9181a",
+      "table": "medical_explanation_observations",
+      "loaded_to_database": true,
+      "actual_sha256": "57b6c6c612a73b32bfef165ae2e12c8f4309505e025f641d7f76f3c4e3e9181a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/dictionary/explanation_terms.parquet",
+      "exists": true,
+      "expected_sha256": "7bfce6799b4f328dd6cfc2a6f0fdd11e8585568ee10b02610ba361f342dc7857",
+      "table": "medical_explanation_terms",
+      "loaded_to_database": true,
+      "actual_sha256": "7bfce6799b4f328dd6cfc2a6f0fdd11e8585568ee10b02610ba361f342dc7857",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/dictionary/phrase_components.parquet",
+      "exists": true,
+      "expected_sha256": "9d1e55d8ffb9dd2796b375385871a162a4533c66c305e0fbc4a332c79d6eb5bb",
+      "table": "medical_phrase_components",
+      "loaded_to_database": true,
+      "actual_sha256": "9d1e55d8ffb9dd2796b375385871a162a4533c66c305e0fbc4a332c79d6eb5bb",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/dictionary/phrase_decisions.parquet",
+      "exists": true,
+      "expected_sha256": "bc8eb16e757f7ee98587b16a7cb5e762ab5b1db04bf12c7fca249821d08810b4",
+      "table": "medical_phrase_decisions",
+      "loaded_to_database": true,
+      "actual_sha256": "bc8eb16e757f7ee98587b16a7cb5e762ab5b1db04bf12c7fca249821d08810b4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_archived_daily_observations.parquet",
+      "exists": true,
+      "expected_sha256": "c0a2fb337f68714bc4ea039d6f276052c1af46777d7e896159ca46c77668caac",
+      "table": "medical_observations",
+      "loaded_to_database": true,
+      "actual_sha256": "c0a2fb337f68714bc4ea039d6f276052c1af46777d7e896159ca46c77668caac",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_archived_exclusions.parquet",
+      "exists": true,
+      "expected_sha256": "d63b4046b0470f2952975999185966ab1fc0d6cfc28aeb576ef79462e49925d9",
+      "table": "medical_api16_archived_exclusions",
+      "loaded_to_database": true,
+      "actual_sha256": "d63b4046b0470f2952975999185966ab1fc0d6cfc28aeb576ef79462e49925d9",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_archived_page_ledger.parquet",
+      "exists": true,
+      "expected_sha256": "175fccdbe4e69f505a8f3b00a4d809fb08cee16aac20bf441993572e28afea33",
+      "table": "medical_api16_archived_page_ledger",
+      "loaded_to_database": true,
+      "actual_sha256": "175fccdbe4e69f505a8f3b00a4d809fb08cee16aac20bf441993572e28afea33",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_exclusions.parquet",
+      "exists": true,
+      "expected_sha256": "965e31da914aba12e1bf8f16ee23f654db41cb2dcd8817cdccc85646f7ddc76a",
+      "table": "medical_api16_current_exclusions",
+      "loaded_to_database": true,
+      "actual_sha256": "965e31da914aba12e1bf8f16ee23f654db41cb2dcd8817cdccc85646f7ddc76a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_current_annual_observations.parquet",
+      "exists": true,
+      "expected_sha256": "8429a47b2c8073a93c4b81d29ae1b6aae02b75dd2f740ccf0188ee1ade691ba6",
+      "table": "medical_observations",
+      "loaded_to_database": true,
+      "actual_sha256": "8429a47b2c8073a93c4b81d29ae1b6aae02b75dd2f740ccf0188ee1ade691ba6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_page_ledger.parquet",
+      "exists": true,
+      "expected_sha256": "fc2e450e79b348e5e7f98640b652740dede877e66938736079711445295aec1f",
+      "table": "medical_api16_page_ledger",
+      "loaded_to_database": true,
+      "actual_sha256": "fc2e450e79b348e5e7f98640b652740dede877e66938736079711445295aec1f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/api16_year_meet_coverage.parquet",
+      "exists": true,
+      "expected_sha256": "5511f98ba3ae1e41d34912980cc451055fd9ee6e2df991f280e796deeda3127e",
+      "table": "medical_api16_year_meet_coverage",
+      "loaded_to_database": true,
+      "actual_sha256": "5511f98ba3ae1e41d34912980cc451055fd9ee6e2df991f280e796deeda3127e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/archived_daily_coverage.parquet",
+      "exists": true,
+      "expected_sha256": "6503cd1c07bf6ee4b3e84c2565b3b837795c7132e9eea340be377f494f17eac4",
+      "table": "medical_archived_daily_coverage",
+      "loaded_to_database": true,
+      "actual_sha256": "6503cd1c07bf6ee4b3e84c2565b3b837795c7132e9eea340be377f494f17eac4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/dacom72_exclusions.parquet",
+      "exists": true,
+      "expected_sha256": "a561982fbf8d6ddb5fcfb79f68d641762115234995d489cb78e161fa7c972af0",
+      "table": "medical_dacom72_exclusions",
+      "loaded_to_database": true,
+      "actual_sha256": "a561982fbf8d6ddb5fcfb79f68d641762115234995d489cb78e161fa7c972af0",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/dacom72_file_ledger.parquet",
+      "exists": true,
+      "expected_sha256": "e54a747793bf99b1c971c639191f67e1cd9615c5834e7efe48be053daed0e326",
+      "table": "medical_dacom72_file_ledger",
+      "loaded_to_database": true,
+      "actual_sha256": "e54a747793bf99b1c971c639191f67e1cd9615c5834e7efe48be053daed0e326",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/dacom72_layout_reconciliation.parquet",
+      "exists": true,
+      "expected_sha256": "d2c635d0aac517847a3c31fa1733e219d1e5db1663800be3f5e3021c02445d7f",
+      "table": "medical_dacom72_layout_reconciliation",
+      "loaded_to_database": true,
+      "actual_sha256": "d2c635d0aac517847a3c31fa1733e219d1e5db1663800be3f5e3021c02445d7f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/dacom72_observations.parquet",
+      "exists": true,
+      "expected_sha256": "186924ba30e6961635cfd1e47bc7e43450cb577028c91bd806fc0f79eef35619",
+      "table": "medical_observations",
+      "loaded_to_database": true,
+      "actual_sha256": "186924ba30e6961635cfd1e47bc7e43450cb577028c91bd806fc0f79eef35619",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/dacom72_year_meet_coverage.parquet",
+      "exists": true,
+      "expected_sha256": "21436f41f6307184fbafb4c7c6344629b011aba2219ab1cbd2cbaeaebd291ff8",
+      "table": "medical_dacom72_year_meet_coverage",
+      "loaded_to_database": true,
+      "actual_sha256": "21436f41f6307184fbafb4c7c6344629b011aba2219ab1cbd2cbaeaebd291ff8",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/existing_raw_inventory.parquet",
+      "exists": true,
+      "expected_sha256": "d2fc92b3ac652741d57c8a653f8e368585424f01cb79330de1b5fc37f7e6af31",
+      "table": "medical_existing_raw_inventory",
+      "loaded_to_database": true,
+      "actual_sha256": "d2fc92b3ac652741d57c8a653f8e368585424f01cb79330de1b5fc37f7e6af31",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/medical_api_comparison_ledger.parquet",
+      "exists": true,
+      "expected_sha256": "da415957d7d06dc4389de57428a2005f6691d2c5c250f64b503953930a6e9c03",
+      "table": "medical_api_comparison_ledger",
+      "loaded_to_database": true,
+      "actual_sha256": "da415957d7d06dc4389de57428a2005f6691d2c5c250f64b503953930a6e9c03",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/medical_fingerprint_candidates.parquet",
+      "exists": true,
+      "expected_sha256": "99673e1e96c1ed939c33dfdbecbc0aac28d08f0a46bcbc38d86d6ff8c0921f56",
+      "table": "medical_fingerprint_candidates",
+      "loaded_to_database": true,
+      "actual_sha256": "99673e1e96c1ed939c33dfdbecbc0aac28d08f0a46bcbc38d86d6ff8c0921f56",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/source_exclusions.parquet",
+      "exists": true,
+      "expected_sha256": "01f277ed4ff235d467cd6a0c95ae57b49ed3b3962dd6e47dc95e3fe0e9c0221c",
+      "table": null,
+      "loaded_to_database": false,
+      "actual_sha256": "01f277ed4ff235d467cd6a0c95ae57b49ed3b3962dd6e47dc95e3fe0e9c0221c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_medical_v1/source/source_year_meet_coverage.parquet",
+      "exists": true,
+      "expected_sha256": "14a5b4a4cbbf053428181ee3a4eb2b32622dd95698a5fe4ad7689aa0825173a4",
+      "table": "medical_source_year_meet_coverage",
+      "loaded_to_database": true,
+      "actual_sha256": "14a5b4a4cbbf053428181ee3a4eb2b32622dd95698a5fe4ad7689aa0825173a4",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/planless_positive_result_review.csv",
+      "exists": true,
+      "expected_sha256": "5b3f1e93bee2af8edf6e83aba70be9cc6e54e360dcfe9704aa19b1f1098cd39c",
+      "table": "passing_api_error_evidence",
+      "loaded_to_database": true,
+      "actual_sha256": "5b3f1e93bee2af8edf6e83aba70be9cc6e54e360dcfe9704aa19b1f1098cd39c",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20260929_calendar_api_v1/result_only_nonfinish_anomaly_review.csv",
+      "exists": true,
+      "expected_sha256": "d752dc84e70063f7544e8708a5f6f1d02454d2b8e7b1398b8c0cc62d9e555048",
+      "table": "passing_api_error_evidence",
+      "loaded_to_database": true,
+      "actual_sha256": "d752dc84e70063f7544e8708a5f6f1d02454d2b8e7b1398b8c0cc62d9e555048",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_mapping_independent/api_mapping_validation_by_year.parquet",
+      "exists": true,
+      "expected_sha256": "ea0e06d9c930df8ccfc9647a7cd4450d504756f439853750b74cbf168e88a7b7",
+      "table": "passing_api_mapping_validation",
+      "loaded_to_database": true,
+      "actual_sha256": "ea0e06d9c930df8ccfc9647a7cd4450d504756f439853750b74cbf168e88a7b7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_mapping_independent/api_match_artifact_manifest.json",
+      "exists": true,
+      "expected_sha256": "b03cad8f55810177577b30aa320b65741b721d20ad593d768b6900df03d4c258",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "b03cad8f55810177577b30aa320b65741b721d20ad593d768b6900df03d4c258",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_mapping_independent/api_rpt_value_matches.parquet",
+      "exists": true,
+      "expected_sha256": "f1f0b822596aedea4974f31a4c6dd56f256873fb214c6c7ee8aaf96379512c9b",
+      "table": "passing_api_rpt_value_matches",
+      "loaded_to_database": true,
+      "actual_sha256": "f1f0b822596aedea4974f31a4c6dd56f256873fb214c6c7ee8aaf96379512c9b",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_mapping_independent/independent_mapping_check.json",
+      "exists": true,
+      "expected_sha256": "7f2bb77f186749262882ae85bccf07c11095a9e48489ee890889345ddc462205",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "7f2bb77f186749262882ae85bccf07c11095a9e48489ee890889345ddc462205",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/api_exclusions.parquet",
+      "exists": true,
+      "expected_sha256": "8ce3e82818d6ba85298ff80f1ae3d1e2a576a7f23354d023e8eb1516f6a43c3e",
+      "table": "passing_api_exclusions",
+      "loaded_to_database": true,
+      "actual_sha256": "8ce3e82818d6ba85298ff80f1ae3d1e2a576a7f23354d023e8eb1516f6a43c3e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/api_observations.parquet",
+      "exists": true,
+      "expected_sha256": "facfeca265488a7907ae913d4b7605e3e64aa8b324cca3b8287f1f3dbe316df7",
+      "table": "passing_api_observations",
+      "loaded_to_database": true,
+      "actual_sha256": "facfeca265488a7907ae913d4b7605e3e64aa8b324cca3b8287f1f3dbe316df7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/api_page_ledger.parquet",
+      "exists": true,
+      "expected_sha256": "113a9fb48a80d663e9ceaf3889087d2b31dade2940f0b6c9ebe5fed046a49ba6",
+      "table": "passing_api_page_ledger",
+      "loaded_to_database": true,
+      "actual_sha256": "113a9fb48a80d663e9ceaf3889087d2b31dade2940f0b6c9ebe5fed046a49ba6",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/api_year_meet_coverage.json",
+      "exists": true,
+      "expected_sha256": "c1812a49db122c59331c2d1dec3e8954bb0a9fdeb530114a13c2dc36d4a66bc7",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "c1812a49db122c59331c2d1dec3e8954bb0a9fdeb530114a13c2dc36d4a66bc7",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/raw_page_sha256_manifest.json",
+      "exists": true,
+      "expected_sha256": "43745d62eece089e013d78e1bc6f01d923bbc387eda668d69b42cb77868b5a6d",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "43745d62eece089e013d78e1bc6f01d923bbc387eda668d69b42cb77868b5a6d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/api_source/source_manifest.json",
+      "exists": true,
+      "expected_sha256": "0dd711652a47932f1a6c0e8b832b282bffdeb5a3b4fbd9b852e8c2f2e0f4843d",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "0dd711652a47932f1a6c0e8b832b282bffdeb5a3b4fbd9b852e8c2f2e0f4843d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_api_verification.json",
+      "exists": true,
+      "expected_sha256": "08d1ea5ddcc37efef9790f4545bdd5899b1094bceecda56b46554479502b125d",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "08d1ea5ddcc37efef9790f4545bdd5899b1094bceecda56b46554479502b125d",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_backup_attestation.json",
+      "exists": true,
+      "expected_sha256": "3b6be12fde1cbf81d487b2a44e351eaf1bff07caa795240d8166bd99baa8d798",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "3b6be12fde1cbf81d487b2a44e351eaf1bff07caa795240d8166bd99baa8d798",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_expected_confirmed_races.json",
+      "exists": true,
+      "expected_sha256": "0dfcffec7dad1a310bdf85e38ad4aa4b1df97a0276cdf222f9f3d9f26392b012",
+      "table": "passing_confirmed_race_keys",
+      "loaded_to_database": true,
+      "actual_sha256": "0dfcffec7dad1a310bdf85e38ad4aa4b1df97a0276cdf222f9f3d9f26392b012",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_expected_noncore_keys.json",
+      "exists": true,
+      "expected_sha256": "b579b5b714dbdc18b391bc97ef593563bc5da4ddb8f8c01b4e561737b423525f",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "b579b5b714dbdc18b391bc97ef593563bc5da4ddb8f8c01b4e561737b423525f",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_expected_selected_points.parquet",
+      "exists": true,
+      "expected_sha256": "d15fbcbc69a2adca8f597f3ef5bbedf59def7994f9b3361603f1265e89cad743",
+      "table": null,
+      "loaded_to_database": false,
+      "actual_sha256": "d15fbcbc69a2adca8f597f3ef5bbedf59def7994f9b3361603f1265e89cad743",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_pair_evidence_verification.json",
+      "exists": true,
+      "expected_sha256": "df54b8863b35c4fe44e129cb0902fbeee62a13eab9528c5a44155dbc06af4844",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "df54b8863b35c4fe44e129cb0902fbeee62a13eab9528c5a44155dbc06af4844",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/root_rpt_verification.json",
+      "exists": true,
+      "expected_sha256": "615cf3e7435afee351bd61b9d2ce587d8473401e79cd09c25b6a1de203a21433",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "615cf3e7435afee351bd61b9d2ce587d8473401e79cd09c25b6a1de203a21433",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/manifest.json",
+      "exists": true,
+      "expected_sha256": "37662872e3c1947e1f900baddbc235893b7004fd0138dab8a10c8d0ec861d11e",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "37662872e3c1947e1f900baddbc235893b7004fd0138dab8a10c8d0ec861d11e",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/root_independent_parse_parity.json",
+      "exists": true,
+      "expected_sha256": "24f25350942e389bc37d681ecfa06ab0c0c882bdc61bf9ab6ae8d5c9ec198c13",
+      "table": "passing_source_metadata",
+      "loaded_to_database": true,
+      "actual_sha256": "24f25350942e389bc37d681ecfa06ab0c0c882bdc61bf9ab6ae8d5c9ec198c13",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_point_mapping.csv",
+      "exists": true,
+      "expected_sha256": "aaf5858840b00367e5d96a66495c976849fc74f05de929b7ac00fd445ab9e5d2",
+      "table": "passing_rpt_point_mapping",
+      "loaded_to_database": true,
+      "actual_sha256": "aaf5858840b00367e5d96a66495c976849fc74f05de929b7ac00fd445ab9e5d2",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_point_observations.parquet",
+      "exists": true,
+      "expected_sha256": "0677122595858c8e6eb7db48d31d325be7733659e553379f66796f2d364d4b5a",
+      "table": "passing_rpt_point_observations",
+      "loaded_to_database": true,
+      "actual_sha256": "0677122595858c8e6eb7db48d31d325be7733659e553379f66796f2d364d4b5a",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_race_headers.parquet",
+      "exists": true,
+      "expected_sha256": "5eaaca2e92f5cc70b0ed80f187e5ed5928ea3ac2d1cefb3b8e9f1dec3b3340df",
+      "table": "passing_rpt_race_headers",
+      "loaded_to_database": true,
+      "actual_sha256": "5eaaca2e92f5cc70b0ed80f187e5ed5928ea3ac2d1cefb3b8e9f1dec3b3340df",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_snapshot_comparison.parquet",
+      "exists": true,
+      "expected_sha256": "6eeab952b919d35e97f892d9815e22fda0e6e57b7400cf9b821bec37da17b523",
+      "table": "passing_rpt_snapshot_comparison",
+      "loaded_to_database": true,
+      "actual_sha256": "6eeab952b919d35e97f892d9815e22fda0e6e57b7400cf9b821bec37da17b523",
+      "matches": true
+    },
+    {
+      "path": "thoroughbred/research/20261002_passing_groups_v1/rpt_mapping/rpt_source_files.parquet",
+      "exists": true,
+      "expected_sha256": "8cdc4eaba4c049dd558a640fbed1a212bfe2ded7f907b39f0317548287bd36db",
+      "table": "passing_rpt_source_files",
+      "loaded_to_database": true,
+      "actual_sha256": "8cdc4eaba4c049dd558a640fbed1a212bfe2ded7f907b39f0317548287bd36db",
+      "matches": true
+    }
+  ],
+  "input_hash_issues": [],
+  "steward_report_objects_present": false
+}

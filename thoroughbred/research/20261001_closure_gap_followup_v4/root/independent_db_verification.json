@@ -1,0 +1,306 @@
+{
+  "verification": "independent_read_only_db_verification",
+  "generated_local_date": "2026-10-01",
+  "read_only": true,
+  "builder_or_database_writes_performed": false,
+  "database_files": {
+    "current_database": {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+      "bytes": 151793664,
+      "sha256": "c3cd5caf16991293e852405f49988f201a2f2c595bd5abd6e727fcd13e39267e"
+    },
+    "before_v4_backup": {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261001_before_closure_gap_followup_v4/thoroughbred_core.duckdb",
+      "bytes": 150220800,
+      "sha256": "2f332068740599e9ff1c93a45b8b4abd62ebae6994c560140fe6f32d6aad3e7b"
+    },
+    "approved_inputs_json": {
+      "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/approved_inputs.json",
+      "bytes": 49865,
+      "sha256": "7657d254fea1abbb2a5206c8520cd641ecfe326ff7c810815407a03f7b9102d1",
+      "manifest_expected_sha256": "7657d254fea1abbb2a5206c8520cd641ecfe326ff7c810815407a03f7b9102d1"
+    }
+  },
+  "approved_inputs": {
+    "path": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/approved_inputs.json",
+    "sha256": "7657d254fea1abbb2a5206c8520cd641ecfe326ff7c810815407a03f7b9102d1",
+    "expected_sha256": "7657d254fea1abbb2a5206c8520cd641ecfe326ff7c810815407a03f7b9102d1",
+    "pinned_file_count": 225,
+    "matched_count": 225,
+    "mismatched_or_missing": []
+  },
+  "core_review_output_hashes": {
+    "count": 10,
+    "matched_count": 10,
+    "mismatched_or_missing": []
+  },
+  "builder_input_hashes": {
+    "count": 312,
+    "matched_count": 312,
+    "mismatched_or_missing": []
+  },
+  "counts": {
+    "current_interval_rows": 81,
+    "prior_interval_rows": 77,
+    "new_interval_rows": 4,
+    "venue_days_by_interval_expansion_sum": 552,
+    "distinct_expanded_meet_dates": 552,
+    "calendar_days_with_closure_source": 552,
+    "distinct_calendar_closure_meet_dates": 552,
+    "all_closure_days_with_execution": 0,
+    "new_calendar_closure_days": 12,
+    "race_nonexecution_adjudication_rows": 116,
+    "race_nonexecution_subtype_rows": 29,
+    "unchanged_objects_compared": 71
+  },
+  "new_intervals": [
+    {
+      "meet_code": "1",
+      "venue": "SEOUL",
+      "start_date": "2021-01-01",
+      "end_date": "2021-01-03",
+      "reason": "new_year",
+      "evidence_kind": "kra_authored_plan_user_supplied",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf",
+      "source_page": "physical PDF p.13; printed p.9"
+    },
+    {
+      "meet_code": "1",
+      "venue": "SEOUL",
+      "start_date": "2021-02-12",
+      "end_date": "2021-02-14",
+      "reason": "lunar_new_year",
+      "evidence_kind": "kra_authored_plan_user_supplied",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf",
+      "source_page": "physical PDF p.13; printed p.9"
+    },
+    {
+      "meet_code": "3",
+      "venue": "BUSAN_GYEONGNAM",
+      "start_date": "2021-01-01",
+      "end_date": "2021-01-03",
+      "reason": "new_year",
+      "evidence_kind": "kra_authored_plan_user_supplied",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf",
+      "source_page": "physical PDF p.13; printed p.9"
+    },
+    {
+      "meet_code": "3",
+      "venue": "BUSAN_GYEONGNAM",
+      "start_date": "2021-02-12",
+      "end_date": "2021-02-14",
+      "reason": "lunar_new_year",
+      "evidence_kind": "kra_authored_plan_user_supplied",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf",
+      "source_page": "physical PDF p.13; printed p.9"
+    }
+  ],
+  "new_calendar_days": [
+    {
+      "meet": "1",
+      "date": "2021-01-01",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "1",
+      "date": "2021-01-02",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "1",
+      "date": "2021-01-03",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "1",
+      "date": "2021-02-12",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "lunar_new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "1",
+      "date": "2021-02-13",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "lunar_new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "1",
+      "date": "2021-02-14",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "lunar_new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "3",
+      "date": "2021-01-01",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "3",
+      "date": "2021-01-02",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "3",
+      "date": "2021-01-03",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "3",
+      "date": "2021-02-12",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "lunar_new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "3",
+      "date": "2021-02-13",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "lunar_new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    },
+    {
+      "meet": "3",
+      "date": "2021-02-14",
+      "scheduled_race_count": "0",
+      "executed_race_count": "0",
+      "reason": "lunar_new_year",
+      "source_url": "user-file:thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+    }
+  ],
+  "selected_ledger_families": {
+    "race": {
+      "objects_checked": [
+        "race_events",
+        "runner_results",
+        "race_plan",
+        "race_plan_full_api",
+        "race_execution_flags",
+        "race_nonexecution_adjudication",
+        "race_nonexecution_subtype_review"
+      ],
+      "all_exact": true
+    },
+    "trial_exam": {
+      "objects_checked": [
+        "trial_sessions",
+        "trial_participants",
+        "trial_horse_identity_links",
+        "trial_horse_identity_pending",
+        "trial_jockey_gap_audit",
+        "trial_trainer_review",
+        "trial_venue_review"
+      ],
+      "all_exact": true
+    },
+    "personnel": {
+      "objects_checked": [
+        "race_trainer_owner_review",
+        "race_trainer_owner_review_evidence",
+        "trial_trainer_review_evidence",
+        "trial_rpt_name_review_18",
+        "jockey_reference_ids_with_review",
+        "person_reference_profile_snapshots"
+      ],
+      "all_exact": true
+    },
+    "section": {
+      "objects_checked": [
+        "section_measurements_api",
+        "section_missing_finisher_review",
+        "section_parse_issues_api"
+      ],
+      "all_exact": true
+    }
+  },
+  "object_name_changes": {
+    "added": [
+      "closure_gap_review_candidates",
+      "closure_plan_amendment_review",
+      "closure_review_questions"
+    ],
+    "removed": [],
+    "interpretation": "No pre-v4 table/view was removed. The only three additions are the v4 review tables, and each table was independently compared to its core_review CSV by column order and row multiset."
+  },
+  "comparison_errors": [],
+  "unchanged_object_differences": {},
+  "checks": {
+    "approved_inputs_hash_matches_core_review_manifest": true,
+    "current_database_hash_matches_builder_manifest": true,
+    "backup_hash_matches_backup_manifest": true,
+    "builder_60_checks_all_pass": true,
+    "all_approved_input_hashes_match": true,
+    "core_review_output_hashes_match_manifest": true,
+    "builder_input_hashes_match_manifest": true,
+    "all_unmodified_objects_exact": true,
+    "calendar_days_nonclosure_columns_exact": true,
+    "annual_summary_nonclosure_columns_exact": true,
+    "81_intervals_and_552_distinct_venue_days": true,
+    "all_77_prior_intervals_preserved": true,
+    "four_new_interval_rows_exact": true,
+    "four_new_interval_dates_and_meets_exact": true,
+    "new_intervals_use_approved_user_plan_source": true,
+    "12_new_calendar_dates_exact": true,
+    "12_new_dates_have_zero_scheduled_and_executed_races": true,
+    "zero_execution_conflicts_across_all_closure_days": true,
+    "busan_2021_02_20_execution_preserved": true,
+    "116_race_nonexecution_adjudications_preserved": true,
+    "29_subtype_decisions_preserved": true,
+    "race_exam_personnel_section_ledgers_preserved": true,
+    "no_prior_table_or_view_removed": true,
+    "only_expected_review_tables_added": true,
+    "three_added_review_tables_match_source_csvs": true
+  },
+  "all_passed": true,
+  "added_review_tables": {
+    "closure_gap_review_candidates": {
+      "source_csv": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_gap_review_candidates.csv",
+      "source_csv_sha256": "e89377d63272629bce124251d8adbb1fe1a0a2e2b6dbf3cb9b9b9c13331d1e9d",
+      "database_row_count": 26,
+      "source_row_count": 26,
+      "column_order_matches": true,
+      "row_multiset_matches_exactly": true
+    },
+    "closure_plan_amendment_review": {
+      "source_csv": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_plan_amendment_review.csv",
+      "source_csv_sha256": "5ccc0a6a9988847d2a7d68e8efe629979316e5fc198d5dafe1c42a1ce4078916",
+      "database_row_count": 3,
+      "source_row_count": 3,
+      "column_order_matches": true,
+      "row_multiset_matches_exactly": true
+    },
+    "closure_review_questions": {
+      "source_csv": "thoroughbred/research/20261001_closure_gap_followup_v4/core_review/closure_review_questions.csv",
+      "source_csv_sha256": "255db55975f6a657630cc4d2cae65418a65ac2f7f1eac545fd2357064e9b28e0",
+      "database_row_count": 19,
+      "source_row_count": 19,
+      "column_order_matches": true,
+      "row_multiset_matches_exactly": true
+    }
+  }
+}

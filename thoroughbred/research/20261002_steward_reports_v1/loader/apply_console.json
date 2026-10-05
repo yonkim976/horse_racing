@@ -1,0 +1,210 @@
+{
+  "status": "applied",
+  "applied": true,
+  "source_name": "steward_reports_research_v1",
+  "baseline_core_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+  "core_sha256_after": "c46286df4773a7ffcea4c7bc431e2cd2a8fc03a4c38fdaa4403bd8f39c2a1668",
+  "core_manifest_sha256_after": "6f9c194529709b3db4862ffba0aa34dcda4f58af54d5d322333d6af3ccff7e52",
+  "backup_pair": {
+    "backup_db_sha256": "616aa6111242cfbcee4b87bc2e77251644e5c3780fc8c978319f69e7b1c4c8f7",
+    "backup_manifest_sha256": "6aa4d2870fbd087afa81973d5fc8f3966cfc00fd7896c656cb4fedaef2ef1697",
+    "backup_attestation_sha256": "15b03445d92c36692f585e50e35370788411d8e6d1854f6c33e4e66ecc3d0608",
+    "root_attestation_sha256": "15b03445d92c36692f585e50e35370788411d8e6d1854f6c33e4e66ecc3d0608"
+  },
+  "new_objects": {
+    "created_objects": [
+      [
+        "TABLE",
+        "steward_api_source_observations"
+      ],
+      [
+        "TABLE",
+        "steward_api_page_ledger"
+      ],
+      [
+        "TABLE",
+        "steward_api_scope_exclusions"
+      ],
+      [
+        "TABLE",
+        "steward_source_year_meet_coverage"
+      ],
+      [
+        "TABLE",
+        "steward_report_paragraphs"
+      ],
+      [
+        "TABLE",
+        "steward_report_paragraph_field_states"
+      ],
+      [
+        "TABLE",
+        "steward_report_sentences"
+      ],
+      [
+        "TABLE",
+        "steward_report_horse_mentions"
+      ],
+      [
+        "TABLE",
+        "steward_report_horse_links"
+      ],
+      [
+        "TABLE",
+        "steward_report_horse_link_candidates"
+      ],
+      [
+        "TABLE",
+        "steward_report_marker_residuals"
+      ],
+      [
+        "TABLE",
+        "steward_source_metadata"
+      ],
+      [
+        "TABLE",
+        "steward_source_output_hashes"
+      ],
+      [
+        "VIEW",
+        "steward_report_observations"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_observations"
+      ],
+      [
+        "TABLE",
+        "steward_sanction_target_link_audit"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_target_links"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_target_link_exceptions"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_event_entry_links"
+      ],
+      [
+        "VIEW",
+        "steward_horse_sanctions"
+      ],
+      [
+        "VIEW",
+        "steward_report_variant_summary"
+      ],
+      [
+        "VIEW",
+        "steward_report_latest_observation"
+      ],
+      [
+        "VIEW",
+        "steward_report_horse_paragraph_history"
+      ],
+      [
+        "VIEW",
+        "horse_steward_history"
+      ],
+      [
+        "VIEW",
+        "steward_report_event_coverage"
+      ],
+      [
+        "VIEW",
+        "steward_report_nonexecution_observations"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_event_receipts"
+      ],
+      [
+        "VIEW",
+        "steward_sanction_event_coverage"
+      ]
+    ],
+    "row_counts": {
+      "steward_api_source_observations": 61439,
+      "steward_api_page_ledger": 102,
+      "steward_api_scope_exclusions": 10,
+      "steward_source_year_meet_coverage": 70,
+      "steward_report_paragraphs": 71970,
+      "steward_report_paragraph_field_states": 26497,
+      "steward_report_sentences": 107007,
+      "steward_report_horse_mentions": 175170,
+      "steward_report_horse_links": 149008,
+      "steward_report_horse_link_candidates": 6162,
+      "steward_report_marker_residuals": 228,
+      "steward_source_metadata": 15,
+      "steward_source_output_hashes": 38,
+      "steward_report_observations": 14867,
+      "steward_sanction_observations": 46572,
+      "steward_sanction_target_link_audit": 46562,
+      "steward_sanction_target_links": 46562,
+      "steward_sanction_target_link_exceptions": 0,
+      "steward_sanction_event_entry_links": 46562,
+      "steward_horse_sanctions": 31978,
+      "steward_report_variant_summary": 14867,
+      "steward_report_latest_observation": 14867,
+      "steward_report_horse_paragraph_history": 149008,
+      "horse_steward_history": 146612,
+      "steward_report_event_coverage": 29826,
+      "steward_report_nonexecution_observations": 14,
+      "steward_sanction_event_receipts": 21431,
+      "steward_sanction_event_coverage": 29826
+    },
+    "independent_sanction_entry_parity": {
+      "expected_occurrences": 46562,
+      "mismatches": 0,
+      "comparison": "full-outer occurrence locator, exact target ID/program/event, and independent roster match counts"
+    },
+    "verified_sanction_target_link_status_counts": [
+      {
+        "status": "verified_exact_id_entry_and_name",
+        "rows": 46363
+      },
+      {
+        "status": "verified_exact_id_entry_name_differs",
+        "rows": 199
+      }
+    ],
+    "nonexecution_reports_retained": 14,
+    "historical_publication_claims": 0
+  },
+  "table_and_view_counts": {
+    "steward_api_source_observations": 61439,
+    "steward_api_page_ledger": 102,
+    "steward_api_scope_exclusions": 10,
+    "steward_source_year_meet_coverage": 70,
+    "steward_report_paragraphs": 71970,
+    "steward_report_paragraph_field_states": 26497,
+    "steward_report_sentences": 107007,
+    "steward_report_horse_mentions": 175170,
+    "steward_report_horse_links": 149008,
+    "steward_report_horse_link_candidates": 6162,
+    "steward_report_marker_residuals": 228,
+    "steward_source_metadata": 15,
+    "steward_source_output_hashes": 38,
+    "steward_report_observations": 14867,
+    "steward_sanction_observations": 46572,
+    "steward_sanction_target_link_audit": 46562,
+    "steward_sanction_target_links": 46562,
+    "steward_sanction_target_link_exceptions": 0,
+    "steward_sanction_event_entry_links": 46562,
+    "steward_horse_sanctions": 31978,
+    "steward_report_variant_summary": 14867,
+    "steward_report_latest_observation": 14867,
+    "steward_report_horse_paragraph_history": 149008,
+    "horse_steward_history": 146612,
+    "steward_report_event_coverage": 29826,
+    "steward_report_nonexecution_observations": 14,
+    "steward_sanction_event_receipts": 21431,
+    "steward_sanction_event_coverage": 29826,
+    "source_manifests": 27
+  },
+  "source_manifests_rows_after": 27,
+  "applied_at_utc": "2026-10-02T06:33:24+00:00"
+}

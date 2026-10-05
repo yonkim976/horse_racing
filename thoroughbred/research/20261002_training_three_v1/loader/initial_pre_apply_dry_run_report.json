@@ -1,0 +1,128 @@
+{
+  "status": "dry_run_passed",
+  "applied": false,
+  "idempotent_replay": false,
+  "core_database": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "core_database_sha256_before": "087914d31ac0f7025c6f399e5a5aef7ebd221c7bc5dfe08078caf1207847eae1",
+  "baseline_database_sha256": "087914d31ac0f7025c6f399e5a5aef7ebd221c7bc5dfe08078caf1207847eae1",
+  "existing_source_manifest_rows": 22,
+  "existing_core_objects": 92,
+  "input_hashes": {
+    "thoroughbred/research/20261002_training_three_v1/loader/input/daily_training.parquet": "96a075f060e092be4c82b1f2120912075e34cca746d63d621721ea89db01bd57",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/daily_training_inventory.json": "04632d8523806e1163094123fa0c99b6e9ba269fdadcb903c9e12c1adcf65750",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/start_training.parquet": "b7c390c675413ec9adb8fc210eab1ce678b5fb8b2bfe38b5e6fb47c583988ce2",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/start_training_inventory.json": "6d439af13a2b3456e0e8299f6b3e5fb25827a553e56cb0ea5728c72b4b0bfb54",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/swim_training.parquet": "c76430f8abc2bd8ff2c514b5fa56ad42d7bb26157f3884ac9a3e7268fed5a658",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/swim_training_inventory.json": "6f74eeb0190354c615452a3a2ec76d143322987931e65f802c1067db5e70ad75",
+    "thoroughbred/research/20261002_training_three_v1/loader/load_training_three.py": "386ece2e78552c3ef44d9ed8734c86eaf00c9d6d4609ca4691ad547a9973ae1a",
+    "thoroughbred/research/20261002_training_three_v1/loader/schema.sql": "49a696166e999ce39cd2a5f3d3a60fc3762a64775c8a0184b8d59519a29a2d06",
+    "thoroughbred/research/20261002_training_three_v1/loader/input_contract.json": "2b6f83a1fd70c033d55fee94ed834a171be2d5400ef419d51b5092656e9a44d4"
+  },
+  "dataset_counts": {
+    "dataset_observation_rows": {
+      "daily_training": 5173033,
+      "start_training": 431517,
+      "swim_training": 459604
+    },
+    "total_observation_rows": 6064154,
+    "unique_observation_ids": 6064154,
+    "source_file_inventory_rows": {
+      "daily_training": 2876,
+      "start_training": 1973,
+      "swim_training": 35
+    },
+    "date_coverage": {
+      "daily_training": {
+        "complete_rows": 10211,
+        "complete_zero_rows": 2021,
+        "missing_or_incomplete": 0
+      },
+      "start_training": {
+        "complete_rows": 5688,
+        "complete_zero_rows": 6544,
+        "missing_or_incomplete": 0
+      },
+      "swim_training": {
+        "complete_rows": 5691,
+        "complete_zero_rows": 6541,
+        "missing_or_incomplete": 0
+      }
+    },
+    "date_coverage_rows": 36696,
+    "exact_roster_link_rows": 6022735,
+    "unmatched_official_id_rows": 41419,
+    "missing_official_id_rows": 0,
+    "invalid_json_rows": 0,
+    "dataset_view_rows": {
+      "daily_training_raw": 5173033,
+      "start_training_raw": 431517,
+      "swim_training_raw": 459604,
+      "training_observation_qa": 6064154,
+      "training_date_coverage": 36696,
+      "training_source_entities": 62297
+    }
+  },
+  "proposed_objects": [
+    {
+      "name": "training_raw_observations",
+      "type": "BASE TABLE",
+      "rows": 6064154
+    },
+    {
+      "name": "training_capture_coverage",
+      "type": "BASE TABLE",
+      "rows": 36696
+    },
+    {
+      "name": "training_source_files",
+      "type": "BASE TABLE",
+      "rows": 4884
+    },
+    {
+      "name": "daily_training_raw",
+      "type": "VIEW",
+      "rows": 5173033
+    },
+    {
+      "name": "start_training_raw",
+      "type": "VIEW",
+      "rows": 431517
+    },
+    {
+      "name": "swim_training_raw",
+      "type": "VIEW",
+      "rows": 459604
+    },
+    {
+      "name": "training_observation_qa",
+      "type": "VIEW",
+      "rows": 6064154
+    },
+    {
+      "name": "training_date_coverage",
+      "type": "VIEW",
+      "rows": 36696
+    },
+    {
+      "name": "training_source_entities",
+      "type": "VIEW",
+      "rows": 62297
+    }
+  ],
+  "proposed_source_manifest": "training_three_api18_api22_api216_v1",
+  "replay_verification": null,
+  "expected_core_after_apply": {
+    "objects": 101,
+    "source_manifest_rows": 23
+  },
+  "backup_directory": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_training_three",
+  "status_rules": {
+    "availability_status": "retrospective_training_observation_not_verified_pre_race",
+    "historical_prerace_eligibility_verified": false,
+    "historical_14_00_publication_time_inferred": false,
+    "physical_venue_status": "raw_venue_not_adjudicated",
+    "api22_occurrence_is_event_id": false,
+    "api22_occurrence_is_chronological": false,
+    "api216_count_unit": "unresolved"
+  }
+}

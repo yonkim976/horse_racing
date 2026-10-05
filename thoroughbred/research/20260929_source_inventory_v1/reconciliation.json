@@ -1,0 +1,1262 @@
+{
+  "basis": "natural race key (venue,date,race_no); entry key adds horse_number",
+  "periods": {
+    "pre_2010": {
+      "date_range": {
+        "start": "source_start",
+        "end": "2009-12-31"
+      },
+      "races": {
+        "historical_unified_duckdb": {
+          "unique_keys": 14243,
+          "left_count": 14243,
+          "right_count": 14220,
+          "matched": 14220,
+          "left_only": 23,
+          "right_only": 0,
+          "left_only_sample": [
+            [
+              "SEOUL",
+              "2001-01-07",
+              1
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              3
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              4
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              5
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              6
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              7
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              8
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              9
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              10
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              11
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              1
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              2
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              3
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              4
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              5
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              6
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              7
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              8
+            ],
+            [
+              "SEOUL",
+              "2001-01-14",
+              9
+            ]
+          ],
+          "right_only_sample": []
+        },
+        "research_dataset_v1_duckdb": {
+          "unique_keys": 0,
+          "left_count": 0,
+          "right_count": 14220,
+          "matched": 0,
+          "left_only": 0,
+          "right_only": 14220,
+          "left_only_sample": [],
+          "right_only_sample": [
+            [
+              "BUSAN",
+              "2005-01-07",
+              1
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              3
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              4
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              5
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              6
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              7
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              8
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              9
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              10
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              1
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              2
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              3
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              4
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              5
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              6
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              7
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              8
+            ],
+            [
+              "BUSAN",
+              "2005-01-14",
+              9
+            ],
+            [
+              "BUSAN",
+              "2005-01-21",
+              1
+            ]
+          ]
+        }
+      },
+      "entries": {
+        "historical_unified_duckdb": {
+          "unique_keys": 157852,
+          "left_count": 157852,
+          "right_count": 157553,
+          "matched": 157553,
+          "left_only": 299,
+          "right_only": 0,
+          "left_only_sample": [
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              1
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              2
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              3
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              4
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              5
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              6
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              7
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              8
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              9
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              10
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              11
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              12
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              13
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              1,
+              14
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2,
+              1
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2,
+              2
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2,
+              3
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2,
+              4
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2,
+              5
+            ],
+            [
+              "SEOUL",
+              "2001-01-07",
+              2,
+              6
+            ]
+          ],
+          "right_only_sample": [],
+          "shared_entry_horse_id_conflicts": 0,
+          "horse_id_conflict_sample": []
+        },
+        "research_dataset_v1_duckdb": {
+          "unique_keys": 0,
+          "left_count": 0,
+          "right_count": 157553,
+          "matched": 0,
+          "left_only": 0,
+          "right_only": 157553,
+          "left_only_sample": [],
+          "right_only_sample": [
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              1
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              2
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              3
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              4
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              5
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              6
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              7
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              1,
+              8
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              1
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              2
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              3
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              4
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              5
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              6
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              7
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              2,
+              8
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              3,
+              1
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              3,
+              2
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              3,
+              3
+            ],
+            [
+              "BUSAN",
+              "2005-01-07",
+              3,
+              4
+            ]
+          ],
+          "shared_entry_horse_id_conflicts": 0,
+          "horse_id_conflict_sample": []
+        }
+      },
+      "note": "Counts and differences are descriptive only. This report assigns no source priority or correctness ranking."
+    },
+    "2010_plus": {
+      "date_range": {
+        "start": "2010-01-01",
+        "end": "2026-09-20"
+      },
+      "races": {
+        "historical_unified_duckdb": {
+          "unique_keys": 29846,
+          "left_count": 29846,
+          "right_count": 29730,
+          "matched": 29694,
+          "left_only": 152,
+          "right_only": 36,
+          "left_only_sample": [
+            [
+              "BUSAN",
+              "2010-03-12",
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              2
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              4
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              5
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              6
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              1
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              2
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              3
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              4
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              5
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              6
+            ],
+            [
+              "BUSAN",
+              "2015-03-29",
+              5
+            ],
+            [
+              "BUSAN",
+              "2015-03-29",
+              6
+            ],
+            [
+              "BUSAN",
+              "2016-02-28",
+              4
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              1
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              2
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              3
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              4
+            ]
+          ],
+          "right_only_sample": [
+            [
+              "BUSAN",
+              "2026-09-18",
+              1
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              3
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              4
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              5
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              6
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              7
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              8
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              9
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              1
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              2
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              3
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              4
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              5
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              6
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              7
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              8
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              9
+            ],
+            [
+              "SEOUL",
+              "2026-09-19",
+              10
+            ],
+            [
+              "SEOUL",
+              "2026-09-20",
+              1
+            ]
+          ]
+        },
+        "research_dataset_v1_duckdb": {
+          "unique_keys": 29882,
+          "left_count": 29882,
+          "right_count": 29730,
+          "matched": 29730,
+          "left_only": 152,
+          "right_only": 0,
+          "left_only_sample": [
+            [
+              "BUSAN",
+              "2010-03-12",
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              2
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              4
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              5
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              6
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              1
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              2
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              3
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              4
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              5
+            ],
+            [
+              "BUSAN",
+              "2014-04-20",
+              6
+            ],
+            [
+              "BUSAN",
+              "2015-03-29",
+              5
+            ],
+            [
+              "BUSAN",
+              "2015-03-29",
+              6
+            ],
+            [
+              "BUSAN",
+              "2016-02-28",
+              4
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              1
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              2
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              3
+            ],
+            [
+              "BUSAN",
+              "2019-11-29",
+              4
+            ]
+          ],
+          "right_only_sample": []
+        }
+      },
+      "entries": {
+        "historical_unified_duckdb": {
+          "unique_keys": 331999,
+          "left_count": 331999,
+          "right_count": 327555,
+          "matched": 327162,
+          "left_only": 4837,
+          "right_only": 393,
+          "left_only_sample": [
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              1
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              2
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              4
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              5
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              6
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              7
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              8
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              9
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              10
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              11
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              1
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              2
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              4
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              5
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              6
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              7
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              8
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              9
+            ]
+          ],
+          "right_only_sample": [
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              1
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              2
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              3
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              4
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              5
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              6
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              7
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              8
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              9
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              10
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              1,
+              11
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              1
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              2
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              3
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              4
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              5
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              6
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              7
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              8
+            ],
+            [
+              "BUSAN",
+              "2026-09-18",
+              2,
+              9
+            ]
+          ],
+          "shared_entry_horse_id_conflicts": 0,
+          "horse_id_conflict_sample": []
+        },
+        "research_dataset_v1_duckdb": {
+          "unique_keys": 332392,
+          "left_count": 332392,
+          "right_count": 327555,
+          "matched": 327555,
+          "left_only": 4837,
+          "right_only": 0,
+          "left_only_sample": [
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              1
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              2
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              4
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              5
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              6
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              7
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              8
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              9
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              10
+            ],
+            [
+              "BUSAN",
+              "2010-03-12",
+              3,
+              11
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              1
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              2
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              3
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              4
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              5
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              6
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              7
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              8
+            ],
+            [
+              "BUSAN",
+              "2010-03-14",
+              1,
+              9
+            ]
+          ],
+          "right_only_sample": [],
+          "shared_entry_horse_id_conflicts": 0,
+          "horse_id_conflict_sample": []
+        }
+      },
+      "note": "Counts and differences are descriptive only. This report assigns no source priority or correctness ranking."
+    }
+  },
+  "sources": {
+    "operational_sqlite": {
+      "path": "data/horse_racing.sqlite3",
+      "bytes": 3077263360,
+      "modified_local": "2026-09-28T01:09:23",
+      "open_mode": "read_only"
+    },
+    "historical_unified_duckdb": {
+      "path": "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb",
+      "bytes": 1323053056,
+      "modified_local": "2026-09-18T02:25:43",
+      "open_mode": "read_only"
+    },
+    "section_points_adjudicated_sqlite": {
+      "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+      "bytes": 1393250304,
+      "modified_local": "2026-09-25T19:20:26",
+      "open_mode": "read_only"
+    },
+    "research_dataset_v1_duckdb": {
+      "path": "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb",
+      "bytes": 532164608,
+      "modified_local": "2026-09-29T00:47:24",
+      "open_mode": "read_only"
+    },
+    "section_passing_raw_duckdb": {
+      "path": "thoroughbred/data/section_passing_raw_2010plus_20260929_v1/section_passing_raw.duckdb",
+      "bytes": 83111936,
+      "modified_local": "2026-09-29T03:18:28",
+      "open_mode": "read_only"
+    }
+  },
+  "target_cutoff": "2026-09-20",
+  "validation": {
+    "sets_use_unique_natural_keys": true,
+    "source_priority_assigned": false
+  }
+}

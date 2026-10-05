@@ -1,0 +1,162 @@
+{
+  "status": "dry_run_replay_passed",
+  "applied": false,
+  "idempotent_replay": true,
+  "core_database": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "core_database_sha256_before": "d4be443d8ee3a43b11d30add89a84a197d93dc57510e7266fa45969a913cd77e",
+  "inventory_snapshot_at_kst": "2026-10-02T00:57:00.802+09:00",
+  "source_hashes": {
+    "frozen_export_manifest.csv": "04792c4c41f3fc6d91d2278418031c9eae9bf778953abb2de2f5c16f2b4f26af",
+    "api78_batch_inventory.csv": "cd6786d40351dcf5a5de4ad1408d4c89b8d3758eaec4c077853f7315e8f0bed7",
+    "api78_capture_queue_status.csv": "c273bd84b2f66c65a58b146f3bcfddabbb588310fc433fad4383d3fe5bd597a1",
+    "api78_core_runner_ledger.csv": "10f8f92107beaa03ec08e5d1651d3bd1a627f5d9670979f1a3bf1bb60febd797",
+    "api78_coverage_by_meet_year.csv": "68a9ba6e5ef0246d0278112e251bd884fff46d2d4351a2ad1314b22a1e8d1153",
+    "api78_explicit_change_marks.csv": "13e9666a96e6447164fb0f9e44365746a7e422ab0e0dad2ca9883c9bbb856a37",
+    "api78_missing_core_date_meets.csv": "2f601aa9f324d85cae821f70217ddc0cef534bee3c1474f7e5958e011681296a",
+    "api78_runner_records.csv": "20e997641ae80eca480cd8634aadd2f5c39d5542309ab8c30bce031363dfcede",
+    "api78_selected_batches.csv": "fb975be9d55fb46fa37334a31f559aa841f242713075ef4c18f11e69ba826d2f",
+    "api78_selected_pages.csv": "8e4a1f0eebd409f1d7d0662c64f4bda96637ee8eefa88a9c4cf669696dcdcb08",
+    "api78_source_document_inventory.csv": "baf38100020b7fb5cddf21e0b0a776bc3ce2e11da5da88f2cb0d0b162b67a3d2",
+    "api78_unresolved_runner_identity_ledger.csv": "654a5869df45b54d2c4a8269e558e7a5d7055dd8ad4efb13f93f04707db37c17",
+    "thoroughbred/research/20261002_equipment_full_v1/inventory/historical_capture_manifest_frozen_20261002T005700802537KST.json": "89844f0204d88f64e912207af9d46b2f889d3878f1cba5791b195a1453361c80",
+    "thoroughbred/research/20261002_equipment_full_v1/inventory/historical_targets_frozen_20261002T005700802537KST.json": "a353f780fa6923b80f27f57b77902db548c08f3ed7d606cb407f868123c48ca3",
+    "thoroughbred/research/20261002_equipment_full_v1/loader/load_equipment_api78_full.py": "b771886e56d09acc6dbfe9f6d9f645b04fb275f3f661a8477f934fd18be1bfa6",
+    "thoroughbred/research/20261002_equipment_full_v1/loader/schema.sql": "40bcbb7cb46e322772cc5cd184245b754caafed0151922c5835d8d7a378683d0"
+  },
+  "identity_coverage": {
+    "core_confirmed_runner_rows": 330465,
+    "core_unique_five_key_rows": 330465,
+    "source_manifest_rows_before_append": 22,
+    "linked_observation_rows": 330106,
+    "unique_linked_core_five_keys": 330106,
+    "unresolved_observation_rows": 1344,
+    "complete_core_date_meets": 3109,
+    "missing_core_date_meets": 0,
+    "existing_api78_objects": [
+      "equipment_api78_active_declared",
+      "equipment_api78_capture_batches",
+      "equipment_api78_capture_pages",
+      "equipment_api78_card_observations",
+      "equipment_api78_card_tokens",
+      "equipment_api78_core_runner_ledger",
+      "equipment_api78_identity_conflicts",
+      "equipment_api78_latest_card_observations",
+      "equipment_api78_source_documents",
+      "equipment_core_coverage",
+      "equipment_declared_union_fallback"
+    ],
+    "source_manifest_rows": 22
+  },
+  "existing_table_verification": {
+    "equipment_api78_source_documents": {
+      "rows": 3270,
+      "canonical_rows_sha256": "9ff262de9fc22a290e0145b70d6dca0cba17fc6dc54a9bcb23bd84e1ce812141"
+    },
+    "equipment_api78_capture_batches": {
+      "rows": 3117,
+      "canonical_rows_sha256": "07c4bd850cf2f2444a2d683dc3b944f475915af136738583360c002027957c0a"
+    },
+    "equipment_api78_capture_pages": {
+      "rows": 3117,
+      "canonical_rows_sha256": "9992b580c3aee02a2316e85d0a857e78b53129120bd6664b77147fb86afab3b4"
+    },
+    "equipment_api78_card_observations": {
+      "rows": 331450,
+      "canonical_rows_sha256": "0838661dbc48b205b52141b90d4a972bbec1bbe2072925d0692ccd1532b2d311"
+    },
+    "equipment_api78_core_runner_ledger": {
+      "rows": 330465,
+      "canonical_rows_sha256": "3cad3f20eca42bd1d0b35a029a274a867c10fcae99af8415437a9e2125668c84"
+    },
+    "equipment_api78_card_tokens": {
+      "rows": 326385,
+      "canonical_rows_sha256": "86f6e73bea0abbcfcca3ba28997afa665ff802ed0cd3200e903a0c4a776e5341"
+    },
+    "equipment_api78_identity_conflicts": {
+      "rows": 1344,
+      "canonical_rows_sha256": "37a89fc49fe1fb63610e5cf9dc5d371667c04ba592dbc9252b1190989220bddb"
+    }
+  },
+  "row_counts": {
+    "documents": 3270,
+    "batches": 3117,
+    "pages": 3117,
+    "observations": 331450,
+    "ledger": 330465,
+    "tokens": 326385,
+    "conflicts": 1344
+  },
+  "token_counts_by_mark_status": {
+    "unmarked": 285448,
+    "new": 27266,
+    "removed": 13671
+  },
+  "coverage_view_rows": 330465,
+  "proposed_objects": [
+    {
+      "name": "equipment_api78_source_documents",
+      "type": "BASE TABLE",
+      "rows": 3270
+    },
+    {
+      "name": "equipment_api78_capture_batches",
+      "type": "BASE TABLE",
+      "rows": 3117
+    },
+    {
+      "name": "equipment_api78_capture_pages",
+      "type": "BASE TABLE",
+      "rows": 3117
+    },
+    {
+      "name": "equipment_api78_card_observations",
+      "type": "BASE TABLE",
+      "rows": 331450
+    },
+    {
+      "name": "equipment_api78_core_runner_ledger",
+      "type": "BASE TABLE",
+      "rows": 330465
+    },
+    {
+      "name": "equipment_api78_card_tokens",
+      "type": "BASE TABLE",
+      "rows": 326385
+    },
+    {
+      "name": "equipment_api78_identity_conflicts",
+      "type": "BASE TABLE",
+      "rows": 1344
+    },
+    {
+      "name": "equipment_api78_latest_card_observations",
+      "type": "VIEW",
+      "rows": 331450
+    },
+    {
+      "name": "equipment_api78_active_declared",
+      "type": "VIEW",
+      "rows": 312714
+    },
+    {
+      "name": "equipment_core_coverage",
+      "type": "VIEW",
+      "rows": 330465
+    },
+    {
+      "name": "equipment_declared_union_fallback",
+      "type": "VIEW",
+      "rows": 311790
+    }
+  ],
+  "core_manifest_plan": {
+    "append_source_manifest": "equipment_api78_full_v1",
+    "backup_directory": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261002_before_equipment_api78_full",
+    "core_manifest_update": "append-only inputs/load; preserve existing fields"
+  },
+  "safety_notes": [
+    "Dry-run does not write the core database or core manifest.",
+    "API78 availability is retrospective; pre-race eligibility is unverified.",
+    "Declared tokens do not establish physical wear."
+  ]
+}

@@ -1,0 +1,479 @@
+{
+  "api33_source_rows.parquet": [
+    {
+      "name": "source_row_id",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "page_no",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "page_row_no",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "ill_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "ill_eng_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "ill_desc",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_url",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "fetched_at_kst",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_json_path",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_json_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_xml_path",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_xml_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_record_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_record_json",
+      "arrow_type": "string",
+      "nullable": true
+    }
+  ],
+  "api33_terms.parquet": [
+    {
+      "name": "api33_tuple_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "ill_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "ill_eng_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "ill_desc",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "first_source_row_id",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "source_row_ids_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_duplicate_count",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "deduplication_rule",
+      "arrow_type": "string",
+      "nullable": true
+    }
+  ],
+  "phrase_decisions.parquet": [
+    {
+      "name": "raw_text_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "raw_text",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "review_decision",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "review_status",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "original_match_status",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "mapped_kra_titles_raw",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "reviewed_target_count",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "description_status_in_review",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_sources_by_title_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "evidence_note",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contextual_evidence_required",
+      "arrow_type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "mapping_rule_scope",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "prefix_rule_reusable",
+      "arrow_type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "event_link_policy",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_review_file",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_review_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    }
+  ],
+  "phrase_components.parquet": [
+    {
+      "name": "raw_text_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "raw_text",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "reviewed_target_ordinal",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "target_ill_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "target_order_semantics",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "review_decision",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "review_status",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contextual_evidence_required",
+      "arrow_type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "mapping_rule_scope",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "prefix_rule_reusable",
+      "arrow_type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "event_link_policy",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "evidence_note",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_review_file",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_review_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    }
+  ],
+  "explanation_observations.parquet": [
+    {
+      "name": "explanation_observation_id",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_kind",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_title",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_english_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_text",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_present",
+      "arrow_type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "exact_explanation_tuple_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_text_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "raw_capture_text",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_url",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_file",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_file_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_row_ordinal",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "source_subrow_ordinal",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "source_row_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_record_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "collected_at_kst",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_publication_at_kst",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_meet",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "source_meet_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "horse_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "horse_id",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "event_date_local",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "event_dates_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "hospital_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_observation_count",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "capture_status",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "parser_status",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "api33_title_exact_match",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "api33_english_exact_match",
+      "arrow_type": "string",
+      "nullable": true
+    }
+  ],
+  "explanation_terms.parquet": [
+    {
+      "name": "exact_explanation_tuple_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_title",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_english_name",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_text",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_present",
+      "arrow_type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "source_observation_count",
+      "arrow_type": "int32",
+      "nullable": true
+    },
+    {
+      "name": "source_kinds_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_meets_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_observation_ids_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_files_json",
+      "arrow_type": "string",
+      "nullable": true
+    },
+    {
+      "name": "description_text_sha256",
+      "arrow_type": "string",
+      "nullable": true
+    }
+  ]
+}

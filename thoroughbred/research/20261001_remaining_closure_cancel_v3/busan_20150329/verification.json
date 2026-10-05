@@ -1,0 +1,38 @@
+{
+  "review": "Independent row-level verification of Busan-Gyeongnam 2015-03-29 races 5 and 6",
+  "verified_at_utc": "2026-10-01T10:28:53.706792+00:00",
+  "source": {
+    "path": "../root_busan_direct/daily_20150329.html",
+    "url": "https://race.kra.co.kr/raceScore/ScoretableDailyList.do?meet=3&realRcDate=20150329",
+    "method": "GET",
+    "status": 200,
+    "final_url": "https://race.kra.co.kr/raceScore/ScoretableDailyList.do?meet=3&realRcDate=20150329",
+    "content_type": "text/html; charset=EUC-KR",
+    "bytes": 34944,
+    "sha256": "a9b077b77ea457204da944256939b76ffb8b5154b03911c6a8734df762d4fd86",
+    "encoding": "EUC-KR"
+  },
+  "verification_method": "Decoded the archived response as EUC-KR; parsed table rows; required one exact date/race card per key and checked the row contains both the official status label and reason.",
+  "results": [
+    {
+      "meet": 3,
+      "date": "20150329",
+      "race_no": 5,
+      "official_label": "취소",
+      "reviewed_status": "race_cancelled",
+      "cause_text": "경주 진행 장애 (고객들이 4경주 1번마 경주성적 불만으로 출장로 점거)",
+      "normalized_row_text": "5 상세열기 2015/03/29(일) 5경주 경주 진행 장애 (고객들이 4경주 1번마 경주성적 불만으로 출장로 점거) 취소"
+    },
+    {
+      "meet": 3,
+      "date": "20150329",
+      "race_no": 6,
+      "official_label": "취소",
+      "reviewed_status": "race_cancelled",
+      "cause_text": "경주 진행 장애 (고객들이 4경주 1번마 경주성적 불만으로 출장로 점거)",
+      "normalized_row_text": "6 상세열기 2015/03/29(일) 6경주 경주 진행 장애 (고객들이 4경주 1번마 경주성적 불만으로 출장로 점거) 취소"
+    }
+  ],
+  "conclusion": "Both exact rows explicitly show 취소 and the same 출장로 점거 reason. This supports race_cancelled for races 5 and 6; neither row says 경주불성립.",
+  "network": "No network request was made for this verification."
+}

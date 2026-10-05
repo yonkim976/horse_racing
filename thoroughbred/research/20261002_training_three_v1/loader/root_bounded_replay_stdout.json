@@ -1,0 +1,69 @@
+{
+  "status": "read_only_bounded_replay_passed",
+  "applied": false,
+  "checked_at_utc": "2026-10-01T17:28:42.544388+00:00",
+  "comparison": "SHA-256 of full typed row, EXCEPT ALL both directions; metadata exact comparison",
+  "source_manifest_exact_match": true,
+  "row_digest_deltas": [
+    0,
+    0
+  ],
+  "metrics": {
+    "dataset_observation_rows": {
+      "daily_training": 5173033,
+      "start_training": 431517,
+      "swim_training": 459604
+    },
+    "total_observation_rows": 6064154,
+    "unique_observation_ids": 6064154,
+    "source_file_inventory_rows": {
+      "daily_training": 2876,
+      "start_training": 1973,
+      "swim_training": 35
+    },
+    "date_coverage": {
+      "daily_training": {
+        "complete_rows": 10211,
+        "complete_zero_rows": 2021,
+        "missing_or_incomplete": 0
+      },
+      "start_training": {
+        "complete_rows": 5688,
+        "complete_zero_rows": 6544,
+        "missing_or_incomplete": 0
+      },
+      "swim_training": {
+        "complete_rows": 5691,
+        "complete_zero_rows": 6541,
+        "missing_or_incomplete": 0
+      }
+    },
+    "date_coverage_rows": 36696,
+    "exact_roster_link_rows": 6022735,
+    "unmatched_official_id_rows": 41419,
+    "missing_official_id_rows": 0,
+    "invalid_json_rows": 0,
+    "dataset_view_rows": {
+      "daily_training_raw": 5173033,
+      "start_training_raw": 431517,
+      "swim_training_raw": 459604,
+      "training_observation_qa": 6064154,
+      "training_date_coverage": 36696,
+      "training_source_entities": 62297
+    }
+  },
+  "database_sha256_before": "5c9fa0e4d53a776a643d045440717727c5a9299b158f43ea93109eb53e770ec7",
+  "database_sha256_after": "5c9fa0e4d53a776a643d045440717727c5a9299b158f43ea93109eb53e770ec7",
+  "source_pins": {
+    "thoroughbred/research/20261002_training_three_v1/loader/input/daily_training.parquet": "96a075f060e092be4c82b1f2120912075e34cca746d63d621721ea89db01bd57",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/daily_training_inventory.json": "04632d8523806e1163094123fa0c99b6e9ba269fdadcb903c9e12c1adcf65750",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/start_training.parquet": "b7c390c675413ec9adb8fc210eab1ce678b5fb8b2bfe38b5e6fb47c583988ce2",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/start_training_inventory.json": "6d439af13a2b3456e0e8299f6b3e5fb25827a553e56cb0ea5728c72b4b0bfb54",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/swim_training.parquet": "c76430f8abc2bd8ff2c514b5fa56ad42d7bb26157f3884ac9a3e7268fed5a658",
+    "thoroughbred/research/20261002_training_three_v1/loader/input/swim_training_inventory.json": "6f74eeb0190354c615452a3a2ec76d143322987931e65f802c1067db5e70ad75",
+    "thoroughbred/research/20261002_training_three_v1/loader/load_training_three.py": "ed673cafbd4e06882270d21dac2b0c07a33c2999b4051efd860ad92f97b3de26",
+    "thoroughbred/research/20261002_training_three_v1/loader/schema.sql": "49a696166e999ce39cd2a5f3d3a60fc3762a64775c8a0184b8d59519a29a2d06",
+    "thoroughbred/research/20261002_training_three_v1/loader/input_contract.json": "2b6f83a1fd70c033d55fee94ed834a171be2d5400ef419d51b5092656e9a44d4"
+  },
+  "verification_script_sha256": "c4c12440afce5e43b8599741814d9aff649752777c4bb5dd2583bdb345d0e1a1"
+}

@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "newly_fetched_official_web_races": 5,
+  "all_259_races_fetched_online": false,
+  "comparison_scope": "official HTML examples versus preserved source RPT and API literals; full 414-slot local audit is separate",
+  "examples": [
+    {
+      "event_date": "2020-01-04",
+      "race_no": 1,
+      "official_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?meet=1&realRcDate=20200104&realRcNo=1",
+      "official_html_sha256": "cce2d2bd1fb63c7116df9de75228d40ee5aefb18ed88e8d52b55ab76e05563b6",
+      "web_points_display_whitespace_normalized": {
+        "S1F": "12,(2,6,7),(3,4),(1,9,10),(5,11),8",
+        "1C": "",
+        "2C": "",
+        "3C": "12,(2,6,7),(3,4),(1,9,10),(5,11),8",
+        "4C": "(^12,6),(2,4,7)-3-(1,9,10,11),(5,8)",
+        "G1F": "12-(2,4),(6,7),3-1-(8,10,9)-11,5"
+      },
+      "rpt_points_display_whitespace_normalized": {
+        "S1F": "12,(2,6,7),(3,4),(1,9,10),(5,11),8",
+        "3C": "12,(2,6,7),(3,4),(1,9,10),(5,11),8",
+        "4C": "(^12,6),(2,4,7)-3-(1,9,10,11),(5,8)",
+        "G1F": "12-(2,4),(6,7),3-1-(8,10,9)-11,5"
+      },
+      "web_RPT_nonempty_point_comparison": "identical",
+      "api_fields_literal": {
+        "corner_3": "12,(2,6,7),(3,4),(1,9,10),(5,11),8",
+        "corner_4": "(^12,6),(2,4,7)-3-(1,9,10,11),(5,8)",
+        "corner_7": "12,(2,6,7),(3,4),(1,9,10),(5,11),8",
+        "corner_8": "12-(2,4),(6,7),3-1-(8,10,9)-11,5"
+      },
+      "rpt_source_paths": [
+        "data/raw/kra_text/dacom11/meet=1/year=2020/month=01/day=04/20200104dacom11.rpt"
+      ],
+      "api_source_page": "raw/year=2020/meet=1/page_0001_1790914922200_1f583d3b7666.json",
+      "API_page_sha256_verified": "1f583d3b7666ca75248ef17b226d3f83c673ec9e18d22656b569767570cb220d",
+      "API_original_response_item_verified": true
+    },
+    {
+      "event_date": "2020-01-04",
+      "race_no": 8,
+      "official_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?meet=1&realRcDate=20200104&realRcNo=8",
+      "official_html_sha256": "5d2819c1d4a1c41bce63ad6fc77db13901c474ca9e6d29fe5b806794110f1bfb",
+      "web_points_display_whitespace_normalized": {
+        "S1F": "(1,3),(2,4,8,9,10),(6,11),(5,7)-12",
+        "1C": "",
+        "2C": "",
+        "3C": "(1,3),(2,4,8,9,10),(6,11),(5,7)-12",
+        "4C": "(^1,3)-(2,9),(4,8),6-10-(7,11),5,12",
+        "G1F": "3,(1,2,9)-6,8,4-(5,10),7,(12,11)"
+      },
+      "rpt_points_display_whitespace_normalized": {
+        "S1F": "(1,3),(2,4,8,9,10),(6,11),(5,7)-12",
+        "3C": "(1,3),(2,4,8,9,10),(6,11),(5,7)-12",
+        "4C": "(^1,3)-(2,9),(4,8),6-10-(7,11),5,12",
+        "G1F": "3,(1,2,9)-6,8,4-(5,10),7,(12,11)"
+      },
+      "web_RPT_nonempty_point_comparison": "identical",
+      "api_fields_literal": {
+        "corner_2": "(1,3),(2,4,8,9,10),(6,11),(5,7)-12",
+        "corner_3": "3,(1,2,9)-6,8,4-(5,10),7,(12,11)",
+        "corner_7": "(^1,3)-(2,9),(4,8),6-10-(7,11),5,12"
+      },
+      "rpt_source_paths": [
+        "data/raw/kra_text/dacom11/meet=1/year=2020/month=01/day=04/20200104dacom11.rpt"
+      ],
+      "api_source_page": "raw/year=2020/meet=1/page_0001_1790914922200_1f583d3b7666.json",
+      "API_page_sha256_verified": "1f583d3b7666ca75248ef17b226d3f83c673ec9e18d22656b569767570cb220d",
+      "API_original_response_item_verified": true
+    },
+    {
+      "event_date": "2021-01-08",
+      "race_no": 1,
+      "official_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?meet=1&realRcDate=20210108&realRcNo=1",
+      "official_html_sha256": "58f4526a816877d30dc9b7bdbd5a15a8acf55ad7cb0fa6b59faf11f023be415c",
+      "web_points_display_whitespace_normalized": {
+        "S1F": "(^2,3),(4,6,8,12),(5,11),(7,9,10),1",
+        "1C": "",
+        "2C": "",
+        "3C": "(^2,3),(4,6,8,12),(5,11),(7,9,10),1",
+        "4C": "(2,3,6)-(4,5,8)-(7,9,11,12),(1,10)",
+        "G1F": "(2,^3)-(6,8)-5,4,12,(1,9),(7,10)-11"
+      },
+      "rpt_points_display_whitespace_normalized": {
+        "S1F": "(^2,3),(4,6,8,12),(5,11),(7,9,10),1",
+        "3C": "(^2,3),(4,6,8,12),(5,11),(7,9,10),1",
+        "4C": "(2,3,6)-(4,5,8)-(7,9,11,12),(1,10)",
+        "G1F": "(2,^3)-(6,8)-5,4,12,(1,9),(7,10)-11"
+      },
+      "web_RPT_nonempty_point_comparison": "identical",
+      "api_fields_literal": {
+        "corner_3": "(^2,3),(4,6,8,12),(5,11),(7,9,10),1",
+        "corner_4": "(2,3,6)-(4,5,8)-(7,9,11,12),(1,10)",
+        "corner_7": "(^2,3),(4,6,8,12),(5,11),(7,9,10),1",
+        "corner_8": "(2,^3)-(6,8)-5,4,12,(1,9),(7,10)-11"
+      },
+      "rpt_source_paths": [
+        "data/raw/kra_text/dacom11/meet=1/year=2021/month=01/day=08/20210108dacom11.rpt"
+      ],
+      "api_source_page": "raw/year=2021/meet=1/page_0001_1790914924202_6505d4c4cd08.json",
+      "API_page_sha256_verified": "6505d4c4cd08d93a61262eabb8ac012bc2473c8cd350b90cf10796d32d6e2232",
+      "API_original_response_item_verified": true
+    },
+    {
+      "event_date": "2020-07-11",
+      "race_no": 12,
+      "official_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?meet=1&realRcDate=20200711&realRcNo=12",
+      "official_html_sha256": "af94a75a1a5bdb1e750d81d36da304df44b52b316a9ce1ec8956ad76a9804fde",
+      "web_points_display_whitespace_normalized": {
+        "S1F": "(^1,2,5,7),(3,6),(4,8)",
+        "1C": "1,(2,7),(3,5),(4,6),8",
+        "2C": "1,(2,7),(3,5),(4,6),8",
+        "3C": "(1,^2),(3,7),(4,5),6,8",
+        "4C": "(^2,3,7),1,(4,6),8≡5",
+        "G1F": "2-(1,4),(3,6,8),7≡5"
+      },
+      "rpt_points_display_whitespace_normalized": {
+        "S1F": "(^1,2,5,7),(3,6),(4,8)",
+        "1C": "1,(2,7),(3,5),(4,6),8",
+        "2C": "1,(2,7),(3,5),(4,6),8",
+        "3C": "(1,^2),(3,7),(4,5),6,8",
+        "4C": "(^2,3,7),1,(4,6),8≡5",
+        "G1F": "2-(1,4),(3,6,8),7≡5"
+      },
+      "web_RPT_nonempty_point_comparison": "identical",
+      "api_fields_literal": {
+        "corner_1": "(^1,2,5,7),(3,6),(4,8)",
+        "corner_2": "2-(1,4),(3,6,8),7≡5",
+        "corner_3": "1,(2,7),(3,5),(4,6),8",
+        "corner_4": "1,(2,7),(3,5),(4,6),8"
+      },
+      "rpt_source_paths": [
+        "data/raw/kra_text/dacom11/meet=1/year=2020/month=07/day=11/20200711dacom11.rpt"
+      ],
+      "api_source_page": "raw/year=2020/meet=1/page_0001_1790914922200_1f583d3b7666.json",
+      "API_page_sha256_verified": "1f583d3b7666ca75248ef17b226d3f83c673ec9e18d22656b569767570cb220d",
+      "API_original_response_item_verified": true
+    },
+    {
+      "event_date": "2021-10-09",
+      "race_no": 4,
+      "official_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?meet=1&realRcDate=20211009&realRcNo=4",
+      "official_html_sha256": "f2f7be9165aea8386a616785aa3df6acde0350b9b41ab67fafa1123e360e4e2f",
+      "web_points_display_whitespace_normalized": {
+        "S1F": "(1,4),(2,6,7,9),(10,11),(3,5,8,12)",
+        "1C": "",
+        "2C": "",
+        "3C": "(^1,4),(2,6,7),(3,9,11),10,(5,12),8",
+        "4C": "(^1,4),(2,6,7),(3,9,11),10,(5,12),8",
+        "G1F": "(1,4),(2,6),3-(10,7,9),8,(5,11)-12"
+      },
+      "rpt_points_display_whitespace_normalized": {
+        "S1F": "(1,4),(2,6,7,9),(10,11),(3,5,8,12)",
+        "3C": "(^1,4),(2,6,7),(3,9,11),10,(5,12),8",
+        "4C": "(^1,4),(2,6,7),(3,9,11),10,(5,12),8",
+        "G1F": "(1,4),(2,6),3-(10,7,9),8,(5,11)-12"
+      },
+      "web_RPT_nonempty_point_comparison": "identical",
+      "api_fields_literal": {
+        "corner_1": "(1,4),(2,6),3-(10,7,9),8,(5,11)-12",
+        "corner_4": "(^1,4),(2,6,7),(3,9,11),10,(5,12),8",
+        "corner_8": "(1,4),(2,6,7,9),(10,11),(3,5,8,12)"
+      },
+      "rpt_source_paths": [
+        "data/raw/kra_text/dacom11/meet=1/year=2021/month=10/day=09/20211009dacom11.rpt"
+      ],
+      "api_source_page": "raw/year=2021/meet=1/page_0001_1790914924202_6505d4c4cd08.json",
+      "API_page_sha256_verified": "6505d4c4cd08d93a61262eabb8ac012bc2473c8cd350b90cf10796d32d6e2232",
+      "API_original_response_item_verified": true
+    }
+  ]
+}
