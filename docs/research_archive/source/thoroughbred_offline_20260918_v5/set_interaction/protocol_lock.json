@@ -1,0 +1,19 @@
+{
+  "frozen_before_metrics": true,
+  "candidate": "set_interaction_v5",
+  "target": "B",
+  "features": [
+    "elo_pair_rank_dispersion",
+    "speed_pair_rank_dispersion",
+    "seoul_front_runner_pair_count",
+    "base_boundary_margin_sd"
+  ],
+  "l2": 4.0,
+  "coefficient_bounds": [-1.0, 1.0],
+  "fit_window": "prior_year_Q3_TUNE",
+  "calibration_window": "prior_year_Q4_CAL",
+  "selection_years": [2021, 2022, 2023, 2024],
+  "reference_years": [2025, 2026],
+  "comparator": "v4/top3_growth_strength/full_card",
+  "pace_availability": {"SEOUL": "verified", "BUSAN": "unavailable_feature_forced_zero"}
+}

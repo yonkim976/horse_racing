@@ -1,0 +1,235 @@
+{
+  "computed_at_utc": "2026-09-18T13:30:59.910106+00:00",
+  "rule_frozen_before_results": true,
+  "decision_uses_development_only": true,
+  "by_target": {
+    "A": {
+      "selected": "rolling_all",
+      "baseline": "current_A",
+      "evidence": {
+        "rolling_3y": {
+          "qualifies": false,
+          "development_log_loss": 0.5102992150258486,
+          "development_hit_rate": 0.609060906090609,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 2
+            }
+          }
+        },
+        "rolling_5y": {
+          "qualifies": false,
+          "development_log_loss": 0.5070327388154782,
+          "development_hit_rate": 0.617011701170117,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 3
+            }
+          }
+        },
+        "rolling_all": {
+          "qualifies": true,
+          "development_log_loss": 0.5037704535182546,
+          "development_hit_rate": 0.6261626162616262,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 3
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 4
+            }
+          }
+        },
+        "rolling_decay2y": {
+          "qualifies": false,
+          "development_log_loss": 0.510309041151157,
+          "development_hit_rate": 0.6032103210321033,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 0
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 0
+            }
+          }
+        }
+      }
+    },
+    "B": {
+      "selected": "current_B",
+      "baseline": "current_B",
+      "evidence": {
+        "rolling_3y": {
+          "qualifies": false,
+          "development_log_loss": 4.345995910727099,
+          "development_hit_rate": 0.06825325550067356,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 0
+            }
+          }
+        },
+        "rolling_5y": {
+          "qualifies": false,
+          "development_log_loss": 4.315235137284169,
+          "development_hit_rate": 0.07409070498428379,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 0
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            }
+          }
+        },
+        "rolling_all": {
+          "qualifies": false,
+          "development_log_loss": 4.28251680350889,
+          "development_hit_rate": 0.07888040712468193,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 4
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 2
+            }
+          }
+        },
+        "rolling_decay2y": {
+          "qualifies": false,
+          "development_log_loss": 4.347237205193316,
+          "development_hit_rate": 0.07184553210597217,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 3
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 0
+            }
+          }
+        },
+        "set_interaction_v5": {
+          "qualifies": false,
+          "development_log_loss": 4.285510659430575,
+          "development_hit_rate": 0.07663523424637031,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 3
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 0
+            }
+          }
+        }
+      }
+    },
+    "C": {
+      "selected": "current_C",
+      "baseline": "current_C",
+      "evidence": {
+        "conditional_order_8coef": {
+          "qualifies": false,
+          "development_log_loss": 6.0616306165583005,
+          "development_hit_rate": 0.01706331387516839,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 0
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 2
+            }
+          }
+        },
+        "rolling_3y": {
+          "qualifies": false,
+          "development_log_loss": 6.07901475703136,
+          "development_hit_rate": 0.01646460110761862,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            }
+          }
+        },
+        "rolling_5y": {
+          "qualifies": false,
+          "development_log_loss": 6.04823927430737,
+          "development_hit_rate": 0.018859452177817693,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 3
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 2
+            }
+          }
+        },
+        "rolling_all": {
+          "qualifies": false,
+          "development_log_loss": 6.01552044791477,
+          "development_hit_rate": 0.019009130369705134,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 3
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 2
+            }
+          }
+        },
+        "rolling_decay2y": {
+          "qualifies": false,
+          "development_log_loss": 6.080251536037111,
+          "development_hit_rate": 0.017662026642718157,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 2
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 0,
+              "hit_nonworse_years": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

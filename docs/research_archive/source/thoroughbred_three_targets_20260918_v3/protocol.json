@@ -1,0 +1,88 @@
+{
+  "version": "thoroughbred_three_targets_20260918_v3",
+  "frozen_before_results": true,
+  "seed": 20260918,
+  "status_labels": {
+    "development": [2021, 2022, 2023, 2024],
+    "already_exposed_reference": [2025, 2026],
+    "reference_last_date": "2026-09-13"
+  },
+  "split_contract": {
+    "fit": "2006-01-01 through June 30 of evaluation_year-1",
+    "tune": "July 1 through September 30 of evaluation_year-1",
+    "cal": "October 1 through December 31 of evaluation_year-1",
+    "eval": "calendar evaluation year; 2026 truncated at 2026-09-13",
+    "selection_years": [2021, 2022, 2023, 2024],
+    "selection_forbidden_years": [2025, 2026]
+  },
+  "population": {
+    "primary": "full_card: every supplied historical card row",
+    "secondary": "final_starters: retrospectively restrict to finished, disqualified, or did_not_finish then recompute the complete joint distribution",
+    "small_field_note": "Target A always means top three. It is not converted to top two in fields of seven or fewer.",
+    "cancellation_note": "Full-card and final-starter metrics answer different information-time questions; final-starter probabilities are newly normalized on that subset."
+  },
+  "targets": {
+    "A": "A_slot_inclusion_probability: per-horse probability of occupying one of exactly three podium slots; probabilities sum to 3 per race. On non-boundary-tie races this equals the ordinary official top3 event probability.",
+    "B": "normalized distribution over every unordered three-horse set",
+    "C": "normalized distribution over every ordered first/second/third triple"
+  },
+  "ties": {
+    "compatible_sets": "At a tied boundary, all three-horse sets consistent with official ranks are correct; the target distribution is uniform over compatible sets.",
+    "compatible_orders": "All permutations within an official tie group and all boundary-compatible choices are correct; the target distribution is uniform over compatible ordered triples.",
+    "A_boundary_target": "Marginal inclusion under the uniform compatible-set target; a tied third-place boundary may therefore have fractional labels. The binary official rank<=3 event label is retained separately and is not mislabeled as the three-slot probability.",
+    "log_loss": "negative log of total predicted probability assigned to all compatible answers",
+    "brier": "squared error against the uniform compatible-answer distribution; A boundary-tie Brier is also reported separately"
+  },
+  "training": {
+    "max_boost_round": 120,
+    "tune_iteration_candidates": [60, 120],
+    "num_threads": 4,
+    "top3_objective": "LightGBM cross_entropy with fractional A boundary labels and race-balanced row weights",
+    "rank_objective": "LightGBM lambdarank relevance 3/2/1/0 with equal relevance for official ties",
+    "position_objective": "three LightGBM cross_entropy models for compatible position-1/2/3 fractional labels",
+    "calibration": "Separate scalar joint-distribution temperatures for A, B, and C per candidate and venue: A minimizes race-mean binary CE on non-boundary races, B minimizes compatible-set NLL, C minimizes compatible-order NLL. Each target-specific temperature defines its own fully coherent joint distribution; probabilities calibrated or selected for different targets are never combined into one synthetic distribution. GLOBAL is the fallback below 100 venue races.",
+    "temperature_bounds": [0.25, 4.0]
+  },
+  "candidate_limit": 12,
+  "candidates": [
+    {"name": "uniform", "family": "uniform_joint", "features": "none", "selection_eligible": false},
+    {"name": "win72_pl", "family": "plackett_luce", "features": "existing_v2_H3_72", "selection_eligible": true},
+    {"name": "top3_B0", "family": "top3_set_energy", "features": ["base72"], "selection_eligible": true},
+    {"name": "top3_gate", "family": "top3_set_energy", "features": ["base72", "gate"], "selection_eligible": true},
+    {"name": "top3_condition", "family": "top3_set_energy", "features": ["base72", "condition"], "selection_eligible": true},
+    {"name": "top3_pace", "family": "top3_set_energy", "features": ["base72", "pace"], "selection_eligible": true},
+    {"name": "top3_allcore", "family": "top3_set_energy", "features": ["base72", "gate", "condition", "pace"], "selection_eligible": true},
+    {"name": "rank_B0", "family": "rank_plackett_luce", "features": ["base72"], "selection_eligible": true},
+    {"name": "rank_allcore", "family": "rank_plackett_luce", "features": ["base72", "gate", "condition", "pace"], "selection_eligible": true},
+    {"name": "position_B0", "family": "position_order_energy", "features": ["base72"], "selection_eligible": true},
+    {"name": "position_allcore", "family": "position_order_energy", "features": ["base72", "gate", "condition", "pace"], "selection_eligible": true},
+    {"name": "top3_retrospective_allinfo", "family": "top3_set_energy", "features": ["base72", "gate", "condition", "pace", "historical_event_unverified", "late_info_unverified"], "selection_eligible": false, "availability_profile": "retrospective_only"}
+  ],
+  "joint_probability_contract": {
+    "top3_set_energy": "softmax over scores of every unordered triple; never an unnormalized product of independent A probabilities; order within a set uses the frozen win72 PL conditional distribution",
+    "rank_plackett_luce": "one coherent PL distribution over all distinct ordered triples; B and A are exact marginals",
+    "position_order_energy": "softmax over all distinct ordered triples using position-specific logits; B and A are exact marginals",
+    "probability_checks": ["A sum=3", "B sum=1", "C sum=1"]
+  },
+  "selection": {
+    "per_target": true,
+    "primary_metric": "full-card loss: A uses the mean of per-race mean binary CE on non-boundary races; B/C use compatible-answer race NLL",
+    "secondary_metric": "Brier score",
+    "rule": "Against win72_pl, improve target log loss in at least 3 of 4 development years in both SEOUL and BUSAN; compare qualifying candidates with win72_pl itself and choose minimum pooled 2021-2024 log loss then Brier. Thus a qualifying candidate with a large loss in the fourth year cannot displace a better pooled baseline. If none qualify, retain win72_pl.",
+    "reference_reselection_forbidden": true
+  },
+  "diagnostics": {
+    "A_probability_thresholds": [0.5, 0.6, 0.7, 0.8, 0.9],
+    "A_threshold_primary_scope": "one highest A probability horse per race; all-entry threshold counts are supplemental and labeled separately",
+    "B_C_top_k": [1, 3, 5, 10],
+    "fixed_calibration_bins": [0.0, 0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0],
+    "confidence": "95% Wilson binomial interval and 1000-repetition race-date cluster bootstrap",
+    "warning": "Coverage, sample size, mean predicted probability, and actual hit rate are all reported; a high forecast probability is not itself evidence of a high realized hit rate."
+  },
+  "outputs": {
+    "row_predictions": "predictions/{year}_{candidate}_{cohort}_A.parquet: entry keys, A_slot_inclusion_probability, official_top3_event_label, target_slot_inclusion, boundary_tie",
+    "combination_predictions": "predictions/{year}_{candidate}_{cohort}_joint_top10.parquet: target A/B/C, rank, predicted key/probability, actual compatible keys, exact hit, horse overlap, correct-position count, and exact total-mass checks",
+    "metrics": "target/cohort/year/venue log loss, Brier, top-1 hit, calibration and high-probability diagnostics",
+    "models": "portable LightGBM model.txt plus metadata.json and train-only category vocabulary"
+  }
+}

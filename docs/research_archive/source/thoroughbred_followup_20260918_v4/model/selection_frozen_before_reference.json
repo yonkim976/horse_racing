@@ -1,0 +1,84 @@
+{
+  "frozen_at_utc": "2026-09-18T12:15:16.749751+00:00",
+  "uses_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "reference_metrics_present_at_freeze": false,
+  "by_target": {
+    "A": {
+      "selected": "top3_allcore",
+      "qualifies": false,
+      "pooled": {
+        "candidate": {
+          "log_loss": 0.504155332605857,
+          "top1_hit_rate": 0.6251125112511251
+        },
+        "baseline": {
+          "log_loss": 0.5048990599455696,
+          "top1_hit_rate": 0.6158115811581159
+        }
+      },
+      "venue_gates": {
+        "SEOUL": {
+          "logloss_nonworse_years": 4,
+          "hit_nonworse_years": 3
+        },
+        "BUSAN": {
+          "logloss_nonworse_years": 4,
+          "hit_nonworse_years": 2
+        }
+      }
+    },
+    "B": {
+      "selected": "top3_growth_strength",
+      "qualifies": true,
+      "pooled": {
+        "candidate": {
+          "log_loss": 4.286376540730609,
+          "top1_hit_rate": 0.07723394701392002
+        },
+        "baseline": {
+          "log_loss": 4.293703554168031,
+          "top1_hit_rate": 0.07513845232749583
+        }
+      },
+      "venue_gates": {
+        "SEOUL": {
+          "logloss_nonworse_years": 4,
+          "hit_nonworse_years": 3
+        },
+        "BUSAN": {
+          "logloss_nonworse_years": 4,
+          "hit_nonworse_years": 3
+        }
+      }
+    },
+    "C": {
+      "selected": "top3_growth_strength",
+      "qualifies": true,
+      "pooled": {
+        "candidate": {
+          "log_loss": 6.019370677357776,
+          "top1_hit_rate": 0.018859452177817627
+        },
+        "baseline": {
+          "log_loss": 6.026692593430348,
+          "top1_hit_rate": 0.017961383026492993
+        }
+      },
+      "venue_gates": {
+        "SEOUL": {
+          "logloss_nonworse_years": 4,
+          "hit_nonworse_years": 4
+        },
+        "BUSAN": {
+          "logloss_nonworse_years": 4,
+          "hit_nonworse_years": 3
+        }
+      }
+    }
+  }
+}

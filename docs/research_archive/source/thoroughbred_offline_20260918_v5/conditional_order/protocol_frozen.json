@@ -1,0 +1,26 @@
+{
+  "frozen_before_metrics": true,
+  "candidate_count": 1,
+  "candidate": "conditional_order_8coef",
+  "evaluation_years": [2021, 2022, 2023, 2024, 2025, 2026],
+  "selection_years": [2021, 2022, 2023, 2024],
+  "reference_only_years": [2025, 2026],
+  "venues": ["SEOUL", "BUSAN"],
+  "split": {"tune": "previous-year Q3", "calibration": "previous-year Q4", "evaluation": "named calendar year through frozen v3 reference cutoff"},
+  "frozen_inputs": {"first": "v2 H3_relative win score and saved venue temperature", "top3": "v4 top3_growth_strength direct top3 score", "features": ["research_speed_vs_field", "research_elo_vs_field"]},
+  "conditional_model": {
+    "second_features": ["win_score_race_z", "top3_score_race_z", "squared_speed_race_z_gap_to_selected_first", "squared_elo_race_z_gap_to_selected_first"],
+    "third_features": ["win_score_race_z", "top3_score_race_z", "squared_speed_race_z_gap_to_selected_pair_mean", "squared_elo_race_z_gap_to_selected_pair_mean"],
+    "coefficient_count": 8,
+    "l2": 0.1,
+    "bounds": [-4.0, 4.0],
+    "optimizer": "L-BFGS-B",
+    "optimizer_maxiter": 400
+  },
+  "calibration": {"target": "C", "temperature_bounds": [0.25, 4.0], "minimum_venue_races": 100, "fallback": "GLOBAL"},
+  "truth": "sum probability over all official-rank-compatible ordered triples; compatible outcomes receive uniform mass for Brier",
+  "selection_rule": "C only; pooled 2021-2024 hit >= baseline and log_loss <= baseline with one strict; each venue loss nonworse in >=3/4 years and hit nonworse in >=3/4 years; maximize hit then minimize log_loss",
+  "controls": ["v4_top3_growth_strength", "v2_win72_pl"],
+  "pre_result_amendment": "Before fitting or metrics, linear candidate-minus-selected terms were replaced by squared gaps because selected terms cancel from conditional-softmax odds.",
+  "no_posthoc_adjustment": true
+}

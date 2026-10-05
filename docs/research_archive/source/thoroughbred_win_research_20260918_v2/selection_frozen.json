@@ -1,0 +1,122 @@
+{
+  "selected_candidate": "H3_relative",
+  "frozen_at_utc": "2026-09-18T06:40:41.285245+00:00",
+  "development_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "reference_results_used": false,
+  "selection_gate": {
+    "evaluation_data": "development2021-24 only; neither reference2025 nor2026 for selection",
+    "criteria": "candidate must beat B0 mean race NLL and Brier in BOTH SEOUL and BUSAN, improve NLL in >=3 of4 years pervenue, and date-cluster paired bootstrap upper98.3333%two-sided CI belowzero for overall NLL; minimum pooleddevelopmentNLL among eligible elseB0",
+    "bootstrap_repetitions": 2000,
+    "familywise_ci_level": 0.9833333333333333
+  },
+  "comparisons": [
+    {
+      "candidate": "H1_form",
+      "eligible": true,
+      "development_log_loss": 2.044572610974312,
+      "log_loss_delta": -0.04201819050006979,
+      "paired_date_bootstrap_interval": [
+        -0.05459458267543124,
+        -0.030222265074778404
+      ],
+      "venue_results": {
+        "SEOUL": {
+          "log_loss_delta": -0.042049935338209395,
+          "brier_delta": -0.008739776574557922,
+          "years_improved": 4,
+          "annual_log_loss_deltas": {
+            "2021": -0.06121755283172674,
+            "2022": -0.05322110817664569,
+            "2023": -0.021999978733102086,
+            "2024": -0.03584889725650988
+          }
+        },
+        "BUSAN": {
+          "log_loss_delta": -0.041972247695861165,
+          "brier_delta": -0.007492166097683837,
+          "years_improved": 4,
+          "annual_log_loss_deltas": {
+            "2021": -0.03296302634421247,
+            "2022": -0.04809305904527357,
+            "2023": -0.05988385211966483,
+            "2024": -0.025510338131556412
+          }
+        }
+      }
+    },
+    {
+      "candidate": "H2_ability",
+      "eligible": true,
+      "development_log_loss": 2.0195943946817265,
+      "log_loss_delta": -0.06699640679265553,
+      "paired_date_bootstrap_interval": [
+        -0.08152343466595541,
+        -0.0528460497503884
+      ],
+      "venue_results": {
+        "SEOUL": {
+          "log_loss_delta": -0.06934116035197442,
+          "brier_delta": -0.016579372394434168,
+          "years_improved": 4,
+          "annual_log_loss_deltas": {
+            "2021": -0.0754820452661426,
+            "2022": -0.08709512308009887,
+            "2023": -0.042677955452166384,
+            "2024": -0.07431593141077464
+          }
+        },
+        "BUSAN": {
+          "log_loss_delta": -0.0636029557623006,
+          "brier_delta": -0.01355593816197015,
+          "years_improved": 4,
+          "annual_log_loss_deltas": {
+            "2021": -0.038323964552310796,
+            "2022": -0.06647722402328997,
+            "2023": -0.09719052658795901,
+            "2024": -0.047790667613917585
+          }
+        }
+      }
+    },
+    {
+      "candidate": "H3_relative",
+      "eligible": true,
+      "development_log_loss": 2.0065804184428324,
+      "log_loss_delta": -0.08001038303154968,
+      "paired_date_bootstrap_interval": [
+        -0.09630124104533494,
+        -0.06288925236345795
+      ],
+      "venue_results": {
+        "SEOUL": {
+          "log_loss_delta": -0.08522043237283837,
+          "brier_delta": -0.019887328658148237,
+          "years_improved": 4,
+          "annual_log_loss_deltas": {
+            "2021": -0.07877990436782495,
+            "2022": -0.12851888952511697,
+            "2023": -0.048143663184475445,
+            "2024": -0.08702020460742084
+          }
+        },
+        "BUSAN": {
+          "log_loss_delta": -0.0724701248090473,
+          "brier_delta": -0.01608582040525951,
+          "years_improved": 4,
+          "annual_log_loss_deltas": {
+            "2021": -0.0690018069572919,
+            "2022": -0.07444949013940237,
+            "2023": -0.10244074115312068,
+            "2024": -0.043418971666031564
+          }
+        }
+      }
+    }
+  ],
+  "deployment_status": "shadow_research_only"
+}

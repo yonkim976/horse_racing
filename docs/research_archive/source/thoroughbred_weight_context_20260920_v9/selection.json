@@ -1,0 +1,327 @@
+{
+  "frozen_at_utc": "2026-09-19T18:29:11.546372+00:00",
+  "reference_evaluation_started": false,
+  "by_target": {
+    "A": {
+      "selected": "current_A",
+      "baseline": "current_A",
+      "evidence": {
+        "combined_context": {
+          "qualifies": false,
+          "development_log_loss": 0.5034295867958966,
+          "development_hit_rate": 0.624962496249625,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 0
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 3
+            }
+          }
+        },
+        "personal_distance": {
+          "qualifies": false,
+          "development_log_loss": 0.5037188160294994,
+          "development_hit_rate": 0.6261626162616262,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 1
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 3
+            }
+          }
+        },
+        "timing_context": {
+          "qualifies": false,
+          "development_log_loss": 0.5032915185650753,
+          "development_hit_rate": 0.626012601260126,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 1
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 3
+            }
+          }
+        }
+      }
+    },
+    "B": {
+      "selected": "current_B",
+      "baseline": "current_B",
+      "evidence": {
+        "combined_context": {
+          "qualifies": false,
+          "development_log_loss": 4.282452471130886,
+          "development_hit_rate": 0.07543780871127077,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 3
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 0
+            }
+          }
+        },
+        "personal_distance": {
+          "qualifies": false,
+          "development_log_loss": 4.284492551022274,
+          "development_hit_rate": 0.07633587786259542,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 2
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 1
+            }
+          }
+        },
+        "timing_context": {
+          "qualifies": false,
+          "development_log_loss": 4.281014613084625,
+          "development_hit_rate": 0.0784313725490196,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 4
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 0
+            }
+          }
+        }
+      }
+    },
+    "C": {
+      "selected": "current_C",
+      "baseline": "current_C",
+      "evidence": {
+        "combined_context": {
+          "qualifies": false,
+          "development_log_loss": 6.015443669202315,
+          "development_hit_rate": 0.017662026642718157,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 2
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 1
+            }
+          }
+        },
+        "personal_distance": {
+          "qualifies": false,
+          "development_log_loss": 6.01748665247686,
+          "development_hit_rate": 0.01856009579404281,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 2
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 3,
+              "hit_nonworse_years": 3
+            }
+          }
+        },
+        "timing_context": {
+          "qualifies": false,
+          "development_log_loss": 6.014004951001307,
+          "development_hit_rate": 0.01870977398593025,
+          "year_venue": {
+            "SEOUL": {
+              "loss_nonworse_years": 2,
+              "hit_nonworse_years": 2
+            },
+            "BUSAN": {
+              "loss_nonworse_years": 4,
+              "hit_nonworse_years": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "by_venue": {
+    "SEOUL": {
+      "A": {
+        "selected": "current_A",
+        "baseline": "current_A",
+        "evidence": {
+          "personal_distance": {
+            "qualifies": false,
+            "development_hit_rate": 0.6340598073998986,
+            "development_log_loss": 0.5020691749727707,
+            "hit_nonworse_years": 1,
+            "loss_nonworse_years": 2
+          },
+          "timing_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.6315255955397872,
+            "development_log_loss": 0.501789759859986,
+            "hit_nonworse_years": 1,
+            "loss_nonworse_years": 3
+          },
+          "combined_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.6307653319817537,
+            "development_log_loss": 0.501986163970602,
+            "hit_nonworse_years": 0,
+            "loss_nonworse_years": 2
+          }
+        }
+      },
+      "B": {
+        "selected": "combined_context",
+        "baseline": "current_B",
+        "evidence": {
+          "personal_distance": {
+            "qualifies": false,
+            "development_hit_rate": 0.07289293849658314,
+            "development_log_loss": 4.24448078873215,
+            "hit_nonworse_years": 2,
+            "loss_nonworse_years": 2
+          },
+          "timing_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.07795494811440142,
+            "development_log_loss": 4.240444713889836,
+            "hit_nonworse_years": 4,
+            "loss_nonworse_years": 2
+          },
+          "combined_context": {
+            "qualifies": true,
+            "development_hit_rate": 0.07289293849658314,
+            "development_log_loss": 4.24238898541459,
+            "hit_nonworse_years": 3,
+            "loss_nonworse_years": 3
+          }
+        }
+      },
+      "C": {
+        "selected": "current_C",
+        "baseline": "current_C",
+        "evidence": {
+          "personal_distance": {
+            "qualifies": false,
+            "development_hit_rate": 0.018476335105036698,
+            "development_log_loss": 5.976123220439873,
+            "hit_nonworse_years": 2,
+            "loss_nonworse_years": 2
+          },
+          "timing_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.020248038471273096,
+            "development_log_loss": 5.972079473406234,
+            "hit_nonworse_years": 2,
+            "loss_nonworse_years": 2
+          },
+          "combined_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.018476335105036698,
+            "development_log_loss": 5.974025973831436,
+            "hit_nonworse_years": 2,
+            "loss_nonworse_years": 3
+          }
+        }
+      }
+    },
+    "BUSAN": {
+      "A": {
+        "selected": "timing_context",
+        "baseline": "current_A",
+        "evidence": {
+          "personal_distance": {
+            "qualifies": false,
+            "development_hit_rate": 0.6147058823529412,
+            "development_log_loss": 0.5061120085331212,
+            "hit_nonworse_years": 3,
+            "loss_nonworse_years": 2
+          },
+          "timing_context": {
+            "qualifies": true,
+            "development_hit_rate": 0.618014705882353,
+            "development_log_loss": 0.5054701729217967,
+            "hit_nonworse_years": 3,
+            "loss_nonworse_years": 4
+          },
+          "combined_context": {
+            "qualifies": true,
+            "development_hit_rate": 0.6165441176470589,
+            "development_log_loss": 0.5055236112328865,
+            "hit_nonworse_years": 3,
+            "loss_nonworse_years": 4
+          }
+        }
+      },
+      "B": {
+        "selected": "current_B",
+        "baseline": "current_B",
+        "evidence": {
+          "personal_distance": {
+            "qualifies": false,
+            "development_hit_rate": 0.08131868131868132,
+            "development_log_loss": 4.342399683919081,
+            "hit_nonworse_years": 1,
+            "loss_nonworse_years": 3
+          },
+          "timing_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.07912087912087912,
+            "development_log_loss": 4.3397295111500505,
+            "hit_nonworse_years": 0,
+            "loss_nonworse_years": 4
+          },
+          "combined_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.07912087912087912,
+            "development_log_loss": 4.340434460898317,
+            "hit_nonworse_years": 0,
+            "loss_nonworse_years": 4
+          }
+        }
+      },
+      "C": {
+        "selected": "personal_distance",
+        "baseline": "current_C",
+        "evidence": {
+          "personal_distance": {
+            "qualifies": true,
+            "development_hit_rate": 0.01868131868131868,
+            "development_log_loss": 6.077349993128192,
+            "hit_nonworse_years": 3,
+            "loss_nonworse_years": 3
+          },
+          "timing_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.016483516483516484,
+            "development_log_loss": 6.0746817136306595,
+            "hit_nonworse_years": 1,
+            "loss_nonworse_years": 4
+          },
+          "combined_context": {
+            "qualifies": false,
+            "development_hit_rate": 0.016483516483516484,
+            "development_log_loss": 6.0753855426126995,
+            "hit_nonworse_years": 1,
+            "loss_nonworse_years": 4
+          }
+        }
+      }
+    }
+  }
+}

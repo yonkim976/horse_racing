@@ -1,0 +1,60 @@
+{
+  "frozen_at_utc": "2026-09-17T18:08:42.127150+00:00",
+  "route_by_venue": {
+    "SEOUL": "partial_shared",
+    "BUSAN": "partial_shared",
+    "YEONGCHEON": "integrated"
+  },
+  "selection_uses": "2023-2024 full-card validation only",
+  "test_evaluation_started": false,
+  "hyperparameters": {
+    "version": "thoroughbred_model_20260918_v1",
+    "seed": 20260918,
+    "num_boost_round": 300,
+    "train": [
+      "2006-01-01",
+      "2022-12-31"
+    ],
+    "validation": [
+      "2023-01-01",
+      "2024-12-31"
+    ],
+    "test": [
+      "2025-01-01",
+      "2026-09-13"
+    ],
+    "selection": "minimum full-card validation race log loss, separately SEOUL/BUSAN, Brier as secondary evidence; no test-dependent tuning",
+    "strategies": [
+      "uniform",
+      "history",
+      "integrated",
+      "venue_specific",
+      "partial_shared"
+    ],
+    "calibration": "fit auxiliary pooled model through 2021, per-venue temperature from 2022 only, apply to pooled model trained through 2022; no validation/test labels used for calibration",
+    "expanding_evaluation_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "expanding_calibration": "auxiliary pooled model through evaluation_year-2; temperatures on evaluation_year-1; main models through evaluation_year-1",
+    "dead_heat": "divide unit target mass equally among official first-place horses; top1/top3 any official winner; race Brier sum of squared errors to fractional target",
+    "cohorts": [
+      "all_available_result_card_entries",
+      "final_starters_retrospective_membership"
+    ],
+    "notes": [
+      "Full historical declared-card completeness cannot be proven from results-derived entries. Full-card here denotes all supplied entries.",
+      "DQ and DNF retained with zero mass. Cancellation publication time unknown; final-starter evaluation is conditional and retrospective.",
+      "No odds, no ROI, no production promotion."
+    ]
+  },
+  "calibration_temperatures": {
+    "GLOBAL": 1.196515517130954,
+    "SEOUL": 1.1539559845531069,
+    "BUSAN": 1.2567211859559229
+  }
+}

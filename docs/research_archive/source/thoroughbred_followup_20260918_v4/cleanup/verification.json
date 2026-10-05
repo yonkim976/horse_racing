@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checks": [
+    {
+      "name": "original_manifest_unchanged:data/research/thoroughbred_model_20260918_v1/manifest.json",
+      "passed": true,
+      "detail": "bc4aa432bcf808c84a548ad6a01bd36be5efba141b3ff54cbb5401ae6f423c74"
+    },
+    {
+      "name": "original_manifest_unchanged:data/research/thoroughbred_win_research_20260918_v2/manifest.json",
+      "passed": true,
+      "detail": "5a71baead1fffdbc8f4b9f5dccd811547eafe7f0cb386120c8cdcd71461afcd9"
+    },
+    {
+      "name": "original_manifest_unchanged:data/research/thoroughbred_three_targets_20260918_v3/manifest.json",
+      "passed": true,
+      "detail": "b72e2b53a77a5a80a1a8c3dbbce9f7ceaf6760784af1e87331420f34e66d66cb"
+    },
+    {
+      "name": "archive_sha256",
+      "passed": true,
+      "detail": "25cbe683aa941f4c921509c0032b4122dc253b7d5eca1797f51fd0505746339d"
+    },
+    {
+      "name": "archive_stream_original_sha256",
+      "passed": true,
+      "detail": "37c89e88396187bed69a3c39e838c390cb166d7330ef48466ff741f7fe20b9a2"
+    },
+    {
+      "name": "archive_roundtrip_sha256",
+      "passed": true,
+      "detail": "37c89e88396187bed69a3c39e838c390cb166d7330ef48466ff741f7fe20b9a2"
+    },
+    {
+      "name": "archive_original_bytes",
+      "passed": true,
+      "detail": 139748563
+    },
+    {
+      "name": "archive_csv_data_rows",
+      "passed": true,
+      "detail": 410168
+    },
+    {
+      "name": "prepared_v2_retained_sha256",
+      "passed": true,
+      "detail": "9825ae72e64830e3a3a12d13bf6778357010a97e48884108647d8c35d7d1653a"
+    },
+    {
+      "name": "pruned_csv_absent",
+      "passed": true,
+      "detail": "data/research/thoroughbred_win_research_20260918_v2/features_v2_rows.csv"
+    },
+    {
+      "name": "cache_absent:data/research/thoroughbred_model_20260918_v1/code/__pycache__",
+      "passed": true,
+      "detail": "data/research/thoroughbred_model_20260918_v1/code/__pycache__"
+    },
+    {
+      "name": "cache_absent:data/research/thoroughbred_win_research_20260918_v2/code/__pycache__",
+      "passed": true,
+      "detail": "data/research/thoroughbred_win_research_20260918_v2/code/__pycache__"
+    }
+  ],
+  "space_accounting": {
+    "removed_logical_bytes": 140219210,
+    "new_archive_logical_bytes": 47928499,
+    "net_logical_bytes_reclaimed": 92290711,
+    "removed_allocated_bytes": 140283904,
+    "new_archive_allocated_bytes": 48889856,
+    "net_allocated_bytes_reclaimed": 91394048
+  }
+}

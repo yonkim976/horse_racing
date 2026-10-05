@@ -1,0 +1,159 @@
+{
+  "verified_at_utc": "2026-09-17T15:29:41.765044+00:00",
+  "as_of_kst": "2026-09-18",
+  "verdict": "suitable_after_incremental_refresh_and_schema_harmonization",
+  "databases": {
+    "history": {
+      "path": "data/research/seoul_backfill_20260915_v1/history.sqlite3",
+      "bytes": 3169357824,
+      "sha256": "bdbe501365fc59bdbe515a22daad373c8192788a31c382787d43f45b6278ef72",
+      "quick_check": "ok",
+      "foreign_key_violations": 0
+    },
+    "trials": {
+      "path": "data/research/seoul_running_trials_20260915_v1/trials.sqlite3",
+      "bytes": 92291072,
+      "sha256": "ff284eebad4d3423dcdc51623ccf2f9874459037343be248c07a74dd845a82c1",
+      "quick_check": "ok",
+      "foreign_key_violations": 0
+    }
+  },
+  "history_counts": {
+    "races": 28506,
+    "entries": 318733,
+    "results": 318733,
+    "sections": 1676045,
+    "race_range": [
+      "2000-01-08",
+      "2026-09-13"
+    ],
+    "daily_training": 4360360,
+    "start_training": 218330,
+    "weights": 269617,
+    "medical_text": 1349468,
+    "equipment": 271536
+  },
+  "race_freshness": {
+    "latest_confirmed_date": "2026-09-13",
+    "fresh_2026_rows_through_as_of": 8280,
+    "database_2026_rows": 8280,
+    "api_only_keys": 0,
+    "database_only_keys": 0,
+    "core_field_mismatches": 0,
+    "future_cards": {
+      "2026-09-19": {
+        "races": 10,
+        "rows": 109
+      },
+      "2026-09-20": {
+        "races": 11,
+        "rows": 120
+      }
+    },
+    "future_rows_all_ord_and_time_zero": true
+  },
+  "missing_current_events": {
+    "trial_2026-09-17": {
+      "trials": 5,
+      "rows": 60,
+      "horses": 60
+    },
+    "daily_training_2026-09-16": {
+      "rows": 755,
+      "horses": 755
+    },
+    "start_training_2026-09-16": {
+      "rows": 126,
+      "horses": 126
+    },
+    "medical_api_after_snapshot": {
+      "2026-09-14": 178,
+      "2026-09-15": 87,
+      "2026-09-16": 59,
+      "rows": 324,
+      "horses": 225
+    }
+  },
+  "trial_comparison": {
+    "fresh_2026_rows": 1573,
+    "database_2026_rows": 1513,
+    "fresh_only_rows": 60,
+    "database_only_rows": 0,
+    "shared_official_id_matches": 1509,
+    "source_conflicts": [
+      {
+        "trial_date": "2026-06-04",
+        "trial_no": 2,
+        "chul_no": 1,
+        "text_name": "커널이클립티컬",
+        "api_name": "캡틴리엄",
+        "api_hr_no": "0061460"
+      },
+      {
+        "trial_date": "2026-06-11",
+        "trial_no": 1,
+        "chul_no": 7,
+        "text_name": "원평대세",
+        "api_name": "원평크라운",
+        "api_hr_no": "0061529"
+      },
+      {
+        "trial_date": "2026-06-18",
+        "trial_no": 3,
+        "chul_no": 1,
+        "text_name": "아모스챔프",
+        "api_name": "클러치마일",
+        "api_hr_no": "0055209"
+      },
+      {
+        "trial_date": "2026-07-02",
+        "trial_no": 2,
+        "chul_no": 2,
+        "text_name": "아모스월드",
+        "api_name": "클러치더비",
+        "api_hr_no": "0055466"
+      }
+    ]
+  },
+  "weight_linkage": {
+    "september_positive_api_keys": 433,
+    "database_confirmed_keys": 423,
+    "visiting_horse_rows_to_link": 10,
+    "all_unmatched_rows": 1624,
+    "exact_race_chul_candidates": 1624,
+    "normalized_name_matches": 1555,
+    "name_conflicts_keep_unresolved": 69,
+    "future_rows": 229,
+    "future_positive_weights": 0
+  },
+  "seoul_busan_overlap": {
+    "horses": {
+      "seoul": 19763,
+      "busan": 11351,
+      "shared": 1090,
+      "normalized_name_matches": 1090
+    },
+    "jockeys": {
+      "seoul": 419,
+      "busan": 221,
+      "shared": 181
+    },
+    "trainers": {
+      "seoul": 238,
+      "busan": 132,
+      "shared": 122
+    },
+    "owners": {
+      "seoul": 1460,
+      "busan": 867,
+      "shared": 538
+    },
+    "cross_venue_transition_entries": 3070
+  },
+  "medical_text_linkage": {
+    "confirmed": 368626,
+    "ambiguous": 941071,
+    "unmatched": 39771
+  },
+  "existing_databases_modified": false
+}

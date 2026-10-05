@@ -1,0 +1,64 @@
+{
+  "version": "thoroughbred_win_research_20260918_v2",
+  "frozen_at_utc": "2026-09-18T05:12:30.274160+00:00",
+  "seed": 20260918,
+  "base_version": "/Users/kimyongjin/Desktop/horse_racing/data/research/thoroughbred_model_20260918_v1",
+  "development_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "historical_reference_years": [
+    2025,
+    2026
+  ],
+  "historical_last_date": "2026-09-13",
+  "split_contract": {
+    "fit": "2006-01-01 through preceding year June30",
+    "tune": "preceding year July1-September30",
+    "cal": "preceding year October1-December31",
+    "eval": "calendar year;2026 truncated September13",
+    "no_refit_after_tune_or_cal": true
+  },
+  "max_boost_round": 300,
+  "tune_iteration_candidates": [
+    100,
+    200,
+    300
+  ],
+  "tree_candidates": {
+    "B0": [],
+    "H1_form": [
+      "form"
+    ],
+    "H2_ability": [
+      "form",
+      "ability"
+    ],
+    "H3_relative": [
+      "form",
+      "ability",
+      "relative"
+    ]
+  },
+  "score_baselines": [
+    "uniform",
+    "rating_only",
+    "elo_only",
+    "speed_only"
+  ],
+  "temperature_bounds": [
+    0.25,
+    4.0
+  ],
+  "venue_calibration_min_races": 100,
+  "selection": {
+    "evaluation_data": "development2021-24 only; neither reference2025 nor2026 for selection",
+    "criteria": "candidate must beat B0 mean race NLL and Brier in BOTH SEOUL and BUSAN, improve NLL in >=3 of4 years pervenue, and date-cluster paired bootstrap upper98.3333%two-sided CI belowzero for overall NLL; minimum pooleddevelopmentNLL among eligible elseB0",
+    "bootstrap_repetitions": 2000,
+    "familywise_ci_level": 0.9833333333333333
+  },
+  "prospective_contract": "observed rawcards and immutable predictions before scheduled start; no bets,nooperationalpromotion; no future results yet so no prospectiveperformance claim",
+  "historical_status": "All historical evaluations development or already-exposed reference. None newlyblind."
+}

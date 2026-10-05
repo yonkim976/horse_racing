@@ -1,0 +1,304 @@
+{
+  "run_id": "1df135aa-85e5-49e6-b9c9-75ab44f0a0b8",
+  "created_at_ms": 1788514022466,
+  "model_name": "RacePortfolio V1",
+  "promotion_status": "RESEARCH_ONLY",
+  "racefit_predictions": "data/experiments/walk_forward/b3eed694-89a1-4bcf-ac8c-9677760c1448/predictions.parquet",
+  "dataset": "data/datasets/racefit_v5_sand_rich_v2_matched/start_minus_30m/dataset.parquet",
+  "pools": [
+    "WIN",
+    "PLC",
+    "QPL",
+    "EXA",
+    "TLA"
+  ],
+  "train_end": "2026-04-30",
+  "valid_period": [
+    "2026-05-01",
+    "2026-06-30"
+  ],
+  "test_period": [
+    "2026-07-01",
+    "2026-08-31"
+  ],
+  "lower_quantile": 0.2,
+  "selected_minimum_return": 1.0,
+  "minimum_ticket_probability": 0.05,
+  "minimum_non_loss_probability": 0.1,
+  "valid_results": {
+    "1.0": {
+      "races_available": 459,
+      "races_bet": 1,
+      "tickets_bet": 1,
+      "profitable_races": 1,
+      "hit_races": 1,
+      "stake_units": 10.0,
+      "returned_units": 13.0,
+      "roi": 1.3,
+      "profit_race_rate": 1.0,
+      "hit_race_rate": 1.0,
+      "max_drawdown_units": 0.0,
+      "max_consecutive_losing_races": 0,
+      "top_one_profit_removed_roi": 0.0,
+      "top_three_profit_removed_roi": 0.0,
+      "monthly": [
+        {
+          "month": "2026-05",
+          "races": 1,
+          "stake": 10,
+          "returned": 13.0,
+          "non_loss_races": 1,
+          "roi": 1.3
+        }
+      ]
+    },
+    "1.02": {
+      "races_available": 459,
+      "races_bet": 0,
+      "tickets_bet": 0,
+      "profitable_races": 0,
+      "hit_races": 0,
+      "stake_units": 0.0,
+      "returned_units": 0.0,
+      "roi": 0.0,
+      "profit_race_rate": 0.0,
+      "hit_race_rate": 0.0,
+      "max_drawdown_units": 0.0,
+      "max_consecutive_losing_races": 0,
+      "top_one_profit_removed_roi": 0.0,
+      "top_three_profit_removed_roi": 0.0,
+      "monthly": []
+    },
+    "1.05": {
+      "races_available": 459,
+      "races_bet": 0,
+      "tickets_bet": 0,
+      "profitable_races": 0,
+      "hit_races": 0,
+      "stake_units": 0.0,
+      "returned_units": 0.0,
+      "roi": 0.0,
+      "profit_race_rate": 0.0,
+      "hit_race_rate": 0.0,
+      "max_drawdown_units": 0.0,
+      "max_consecutive_losing_races": 0,
+      "top_one_profit_removed_roi": 0.0,
+      "top_three_profit_removed_roi": 0.0,
+      "monthly": []
+    },
+    "1.1": {
+      "races_available": 459,
+      "races_bet": 0,
+      "tickets_bet": 0,
+      "profitable_races": 0,
+      "hit_races": 0,
+      "stake_units": 0.0,
+      "returned_units": 0.0,
+      "roi": 0.0,
+      "profit_race_rate": 0.0,
+      "hit_race_rate": 0.0,
+      "max_drawdown_units": 0.0,
+      "max_consecutive_losing_races": 0,
+      "top_one_profit_removed_roi": 0.0,
+      "top_three_profit_removed_roi": 0.0,
+      "monthly": []
+    },
+    "1.15": {
+      "races_available": 459,
+      "races_bet": 0,
+      "tickets_bet": 0,
+      "profitable_races": 0,
+      "hit_races": 0,
+      "stake_units": 0.0,
+      "returned_units": 0.0,
+      "roi": 0.0,
+      "profit_race_rate": 0.0,
+      "hit_race_rate": 0.0,
+      "max_drawdown_units": 0.0,
+      "max_consecutive_losing_races": 0,
+      "top_one_profit_removed_roi": 0.0,
+      "top_three_profit_removed_roi": 0.0,
+      "monthly": []
+    }
+  },
+  "test_result": {
+    "races_available": 367,
+    "races_bet": 0,
+    "tickets_bet": 0,
+    "profitable_races": 0,
+    "hit_races": 0,
+    "stake_units": 0.0,
+    "returned_units": 0.0,
+    "roi": 0.0,
+    "profit_race_rate": 0.0,
+    "hit_race_rate": 0.0,
+    "max_drawdown_units": 0.0,
+    "max_consecutive_losing_races": 0,
+    "top_one_profit_removed_roi": 0.0,
+    "top_three_profit_removed_roi": 0.0,
+    "monthly": []
+  },
+  "valid_baselines": {
+    "1순위 연승": {
+      "bet_type": "PLC",
+      "model_ranks": [
+        1
+      ],
+      "races": 436,
+      "hits": 279,
+      "hit_rate": 0.6399082568807339,
+      "returned_units": 385.6,
+      "roi": 0.8844036697247707,
+      "max_drawdown_units": 57.399999999999984,
+      "max_consecutive_losses": 6,
+      "top_one_profit_removed_roi": 0.8783908045977012,
+      "top_three_profit_removed_roi": 0.8697459584295613
+    },
+    "1순위 단승": {
+      "bet_type": "WIN",
+      "model_ranks": [
+        1
+      ],
+      "races": 458,
+      "hits": 151,
+      "hit_rate": 0.3296943231441048,
+      "returned_units": 413.3,
+      "roi": 0.9024017467248908,
+      "max_drawdown_units": 57.00000000000003,
+      "max_consecutive_losses": 16,
+      "top_one_profit_removed_roi": 0.861925601750547,
+      "top_three_profit_removed_roi": 0.8107692307692307
+    },
+    "1-2순위 복연승": {
+      "bet_type": "QPL",
+      "model_ranks": [
+        1,
+        2
+      ],
+      "races": 459,
+      "hits": 153,
+      "hit_rate": 0.3333333333333333,
+      "returned_units": 389.4,
+      "roi": 0.8483660130718954,
+      "max_drawdown_units": 76.59999999999995,
+      "max_consecutive_losses": 15,
+      "top_one_profit_removed_roi": 0.8286026200873362,
+      "top_three_profit_removed_roi": 0.8008771929824561
+    },
+    "1-2순위 쌍승": {
+      "bet_type": "EXA",
+      "model_ranks": [
+        1,
+        2
+      ],
+      "races": 459,
+      "hits": 52,
+      "hit_rate": 0.11328976034858387,
+      "returned_units": 359.4,
+      "roi": 0.7830065359477124,
+      "max_drawdown_units": 134.6,
+      "max_consecutive_losses": 49,
+      "top_one_profit_removed_roi": 0.725764192139738,
+      "top_three_profit_removed_roi": 0.6469298245614035
+    },
+    "1-2-3순위 삼복승": {
+      "bet_type": "TLA",
+      "model_ranks": [
+        1,
+        2,
+        3
+      ],
+      "races": 459,
+      "hits": 40,
+      "hit_rate": 0.08714596949891068,
+      "returned_units": 404.9,
+      "roi": 0.8821350762527232,
+      "max_drawdown_units": 124.5,
+      "max_consecutive_losses": 51,
+      "top_one_profit_removed_roi": 0.5971615720524017,
+      "top_three_profit_removed_roi": 0.5087719298245614
+    }
+  },
+  "test_baselines": {
+    "1순위 연승": {
+      "bet_type": "PLC",
+      "model_ranks": [
+        1
+      ],
+      "races": 353,
+      "hits": 226,
+      "hit_rate": 0.6402266288951841,
+      "returned_units": 321.8,
+      "roi": 0.911614730878187,
+      "max_drawdown_units": 36.29999999999997,
+      "max_consecutive_losses": 6,
+      "top_one_profit_removed_roi": 0.9048295454545454,
+      "top_three_profit_removed_roi": 0.8942857142857142
+    },
+    "1순위 단승": {
+      "bet_type": "WIN",
+      "model_ranks": [
+        1
+      ],
+      "races": 366,
+      "hits": 122,
+      "hit_rate": 0.3333333333333333,
+      "returned_units": 359.9,
+      "roi": 0.9833333333333333,
+      "max_drawdown_units": 42.60000000000001,
+      "max_consecutive_losses": 12,
+      "top_one_profit_removed_roi": 0.9564383561643837,
+      "top_three_profit_removed_roi": 0.9096418732782369
+    },
+    "1-2순위 복연승": {
+      "bet_type": "QPL",
+      "model_ranks": [
+        1,
+        2
+      ],
+      "races": 367,
+      "hits": 100,
+      "hit_rate": 0.2724795640326976,
+      "returned_units": 278.2,
+      "roi": 0.7580381471389646,
+      "max_drawdown_units": 93.69999999999995,
+      "max_consecutive_losses": 14,
+      "top_one_profit_removed_roi": 0.7333333333333333,
+      "top_three_profit_removed_roi": 0.698076923076923
+    },
+    "1-2순위 쌍승": {
+      "bet_type": "EXA",
+      "model_ranks": [
+        1,
+        2
+      ],
+      "races": 367,
+      "hits": 32,
+      "hit_rate": 0.08719346049046321,
+      "returned_units": 347.1,
+      "roi": 0.9457765667574932,
+      "max_drawdown_units": 75.80000000000001,
+      "max_consecutive_losses": 34,
+      "top_one_profit_removed_roi": 0.8136612021857924,
+      "top_three_profit_removed_roi": 0.7016483516483517
+    },
+    "1-2-3순위 삼복승": {
+      "bet_type": "TLA",
+      "model_ranks": [
+        1,
+        2,
+        3
+      ],
+      "races": 367,
+      "hits": 21,
+      "hit_rate": 0.05722070844686648,
+      "returned_units": 229.5,
+      "roi": 0.6253405994550408,
+      "max_drawdown_units": 165.2,
+      "max_consecutive_losses": 50,
+      "top_one_profit_removed_roi": 0.5245901639344263,
+      "top_three_profit_removed_roi": 0.4260989010989011
+    }
+  },
+  "warning": "retrospective research; future paper validation required"
+}

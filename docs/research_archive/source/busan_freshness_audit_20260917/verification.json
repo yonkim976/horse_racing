@@ -1,0 +1,219 @@
+{
+  "verified_at_utc": "2026-09-17T12:10:59.137163+00:00",
+  "as_of_kst": "2026-09-17",
+  "database": "/Users/kimyongjin/Desktop/horse_racing/data/research/busan_complete_db_20260916/busan_complete.sqlite3",
+  "database_sha256": "5e679fce63e8d8dbbe0331653eebf8be39d7b43613d62dacc1fdc8e2b95af22d",
+  "database_integrity": "ok",
+  "foreign_key_violations": 0,
+  "verdict": "partially_current_update_required",
+  "race": {
+    "latest_confirmed_date": "20260911",
+    "fresh_rows_on_or_before_as_of": 5880,
+    "database_rows_2026_on_or_before_as_of": 5880,
+    "api_only_keys": 0,
+    "database_only_keys": 0,
+    "result_value_mismatches": 0,
+    "section_values_compared": 88200,
+    "section_value_mismatches": 0,
+    "future_card": {
+      "dates": {
+        "20260918": 99
+      },
+      "races": 9,
+      "rows": 99,
+      "all_result_fields_zero": true
+    }
+  },
+  "trial": {
+    "latest_date": "20260910",
+    "fresh_rows": 981,
+    "database_rows": 981,
+    "api_only_keys": 0,
+    "database_only_keys": 0,
+    "revised_rows": [
+      {
+        "trial_date": "20260813",
+        "trial_no": 3,
+        "chul_no": 5,
+        "hr_no": "0055595",
+        "horse_name": "닉스원",
+        "changes": {
+          "passFlag": {
+            "database": "합격유보",
+            "fresh_api": "불합격"
+          }
+        }
+      },
+      {
+        "trial_date": "20260903",
+        "trial_no": 2,
+        "chul_no": 8,
+        "hr_no": "0051895",
+        "horse_name": "골든스폿",
+        "changes": {
+          "nopassReason": {
+            "database": "진입불량",
+            "fresh_api": "-"
+          },
+          "passFlag": {
+            "database": "합격유보",
+            "fresh_api": "합격"
+          }
+        }
+      }
+    ]
+  },
+  "daily_training": {
+    "new": {
+      "rows": 1046,
+      "horses": 610,
+      "by_date": {
+        "20260914": 441,
+        "20260916": 605
+      }
+    },
+    "september_date_counts": {
+      "20260902": {
+        "fresh_api": 613,
+        "database": 613,
+        "delta": 0
+      },
+      "20260903": {
+        "fresh_api": 525,
+        "database": 525,
+        "delta": 0
+      },
+      "20260904": {
+        "fresh_api": 547,
+        "database": 547,
+        "delta": 0
+      },
+      "20260905": {
+        "fresh_api": 569,
+        "database": 569,
+        "delta": 0
+      },
+      "20260906": {
+        "fresh_api": 532,
+        "database": 532,
+        "delta": 0
+      },
+      "20260909": {
+        "fresh_api": 619,
+        "database": 619,
+        "delta": 0
+      },
+      "20260910": {
+        "fresh_api": 547,
+        "database": 547,
+        "delta": 0
+      },
+      "20260911": {
+        "fresh_api": 507,
+        "database": 507,
+        "delta": 0
+      },
+      "20260912": {
+        "fresh_api": 510,
+        "database": 510,
+        "delta": 0
+      },
+      "20260913": {
+        "fresh_api": 490,
+        "database": 490,
+        "delta": 0
+      },
+      "20260914": {
+        "fresh_api": 441,
+        "database": 0,
+        "delta": 441
+      },
+      "20260916": {
+        "fresh_api": 605,
+        "database": 0,
+        "delta": 605
+      }
+    }
+  },
+  "start_training": {
+    "new": {
+      "rows": 153,
+      "horses": 153,
+      "by_date": {
+        "20260916": 153
+      }
+    },
+    "september_date_counts": {
+      "20260902": {
+        "fresh_api": 144,
+        "database": 144,
+        "delta": 0
+      },
+      "20260903": {
+        "fresh_api": 65,
+        "database": 65,
+        "delta": 0
+      },
+      "20260905": {
+        "fresh_api": 92,
+        "database": 92,
+        "delta": 0
+      },
+      "20260909": {
+        "fresh_api": 147,
+        "database": 147,
+        "delta": 0
+      },
+      "20260910": {
+        "fresh_api": 80,
+        "database": 80,
+        "delta": 0
+      },
+      "20260912": {
+        "fresh_api": 83,
+        "database": 83,
+        "delta": 0
+      },
+      "20260916": {
+        "fresh_api": 153,
+        "database": 0,
+        "delta": 153
+      }
+    }
+  },
+  "medical": {
+    "new": {
+      "rows": 374,
+      "horses": 239,
+      "by_date": {
+        "20260914": 159,
+        "20260915": 57,
+        "20260916": 158
+      }
+    },
+    "fresh_2026_rows": 40600,
+    "database_2026_rows": 40450,
+    "fresh_multiset_additions": 389,
+    "stale_multiset_rows_removed_by_current_api": 239
+  },
+  "weight": {
+    "historical_actual_api_keys": 246,
+    "historical_confirmed_database_keys": 246,
+    "api_only_actual_keys": 0,
+    "database_only_confirmed_keys": 0,
+    "future_rows": 99,
+    "future_rows_with_positive_weight": 0
+  },
+  "equipment": {
+    "future_rows": 99,
+    "future_dates": [
+      "20260918"
+    ]
+  },
+  "scope_issue": {
+    "yeongcheon_weight_rows_in_base_table": 54,
+    "link_status": "unmatched",
+    "rows_exposed_by_analysis_view": 0,
+    "source_header": "(영천) 26년 9월 13일"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "audited_at_utc": "2026-09-16T12:10:47.050052+00:00",
+  "status": "complete_research_snapshot",
+  "checks": {
+    "isolated_output": "pass",
+    "operating_database_untouched": "pass",
+    "history_tables_preserved": "pass",
+    "full_trial_table_loaded": "pass",
+    "legacy_actor_evidence_loaded": "pass",
+    "canonical_integration_keys": "pass",
+    "venue_region_separation": "pass",
+    "future_history_blocked": "pass",
+    "source_requests_redacted": "pass",
+    "sqlite_integrity": "pass",
+    "foreign_keys": "pass",
+    "ambiguous_rows_quarantined": "pass"
+  },
+  "limitations": [
+    "Five trial entries lack a confirmed hrNo.",
+    "Historical text medical linkage is incomplete and ambiguous rows are quarantined.",
+    "Past publication timestamps are unproven; research features are retrospective_only.",
+    "Future running-trial meet=3/영남 responses require separate Busan/Yeongcheon resolution.",
+    "Source-specific race section fields are not collapsed into one semantic feature."
+  ]
+}

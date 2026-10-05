@@ -1,0 +1,587 @@
+{
+  "run_id": "d461c724-6e56-4df0-bc34-46e96d41e9f7",
+  "created_at_ms": 1788529474940,
+  "model_name": "RaceValue V1",
+  "promotion_status": "RESEARCH_ONLY",
+  "periods": {
+    "train_end": "2026-03-31",
+    "calibration": [
+      "2026-04-01",
+      "2026-04-30"
+    ],
+    "validation": [
+      "2026-05-01",
+      "2026-06-30"
+    ],
+    "test": [
+      "2026-07-01",
+      "2026-08-31"
+    ]
+  },
+  "selected_payout_exponent": 0.5,
+  "probability_metrics": {
+    "validation": {
+      "auc": 0.6581011019979937,
+      "brier": 0.11003525405609381,
+      "ece": 0.0154451860155513,
+      "mean_probability": 0.13049434148356479,
+      "actual_rate": 0.13052076466710613
+    },
+    "test": {
+      "auc": 0.6239050034206588,
+      "brier": 0.11336802565746278,
+      "ece": 0.01866337258609034,
+      "mean_probability": 0.1343258357949082,
+      "actual_rate": 0.1327891156462585
+    }
+  },
+  "validation_alpha_results": [
+    {
+      "alpha": 0.0,
+      "sleeper_hit_rate": 0.2222222222222222,
+      "PLC": 0.9348583877995643,
+      "QPL": 0.9366013071895425,
+      "TLA": 1.1773420479302834,
+      "mean_roi": 1.0162672476397967
+    },
+    {
+      "alpha": 0.25,
+      "sleeper_hit_rate": 0.22657952069716775,
+      "PLC": 0.9387799564270153,
+      "QPL": 0.9631808278867103,
+      "TLA": 1.2712418300653594,
+      "mean_roi": 1.0577342047930285
+    },
+    {
+      "alpha": 0.5,
+      "sleeper_hit_rate": 0.2222222222222222,
+      "PLC": 0.9411764705882353,
+      "QPL": 0.9838779956427016,
+      "TLA": 1.2901960784313726,
+      "mean_roi": 1.071750181554103
+    }
+  ],
+  "test_results": {
+    "PLC": {
+      "bet_type": "PLC",
+      "races": 367,
+      "hits": 71,
+      "hit_rate": 0.19346049046321526,
+      "sleeper_hits": 52,
+      "sleeper_hit_rate": 0.14168937329700274,
+      "average_winning_odds": 3.638028169014084,
+      "returned_units": 258.3,
+      "roi": 0.7038147138964578,
+      "max_drawdown_units": 129.70000000000002,
+      "max_consecutive_losses": 19,
+      "top_one_profit_removed_roi": 0.6377049180327867,
+      "top_three_profit_removed_roi": 0.5942307692307692
+    },
+    "QPL": {
+      "bet_type": "QPL",
+      "races": 367,
+      "hits": 34,
+      "hit_rate": 0.09264305177111716,
+      "sleeper_hits": 52,
+      "sleeper_hit_rate": 0.14168937329700274,
+      "average_winning_odds": 6.0323529411764705,
+      "returned_units": 205.1,
+      "roi": 0.5588555858310627,
+      "max_drawdown_units": 164.70000000000005,
+      "max_consecutive_losses": 40,
+      "top_one_profit_removed_roi": 0.5019125683060107,
+      "top_three_profit_removed_roi": 0.4318681318681319
+    },
+    "TLA": {
+      "bet_type": "TLA",
+      "races": 367,
+      "hits": 8,
+      "hit_rate": 0.021798365122615803,
+      "sleeper_hits": 52,
+      "sleeper_hit_rate": 0.14168937329700274,
+      "average_winning_odds": 24.749999999999996,
+      "returned_units": 198.00000000000003,
+      "roi": 0.5395095367847412,
+      "max_drawdown_units": 211.6,
+      "max_consecutive_losses": 194,
+      "top_one_profit_removed_roi": 0.38852459016393437,
+      "top_three_profit_removed_roi": 0.20714285714285716
+    }
+  },
+  "baseline_results": {
+    "PLC": {
+      "bet_type": "PLC",
+      "races": 366,
+      "hits": 148,
+      "hit_rate": 0.40437158469945356,
+      "sleeper_hits": 53,
+      "sleeper_hit_rate": 0.1448087431693989,
+      "average_winning_odds": 1.9858108108108115,
+      "returned_units": 293.90000000000003,
+      "roi": 0.8030054644808744,
+      "max_drawdown_units": 77.60000000000002,
+      "max_consecutive_losses": 12,
+      "top_one_profit_removed_roi": 0.7835616438356161,
+      "top_three_profit_removed_roi": 0.7578512396694216
+    },
+    "QPL": {
+      "bet_type": "QPL",
+      "races": 366,
+      "hits": 83,
+      "hit_rate": 0.226775956284153,
+      "sleeper_hits": 53,
+      "sleeper_hit_rate": 0.1448087431693989,
+      "average_winning_odds": 3.563855421686748,
+      "returned_units": 295.8,
+      "roi": 0.8081967213114755,
+      "max_drawdown_units": 101.70000000000002,
+      "max_consecutive_losses": 24,
+      "top_one_profit_removed_roi": 0.7660273972602734,
+      "top_three_profit_removed_roi": 0.7162534435261705
+    },
+    "TLA": {
+      "bet_type": "TLA",
+      "races": 366,
+      "hits": 21,
+      "hit_rate": 0.05737704918032787,
+      "sleeper_hits": 53,
+      "sleeper_hit_rate": 0.1448087431693989,
+      "average_winning_odds": 10.92857142857143,
+      "returned_units": 229.5,
+      "roi": 0.6270491803278688,
+      "max_drawdown_units": 166.2,
+      "max_consecutive_losses": 46,
+      "top_one_profit_removed_roi": 0.5260273972602739,
+      "top_three_profit_removed_roi": 0.4272727272727272
+    }
+  },
+  "confidence_results": [
+    {
+      "quantile": 0.0,
+      "threshold": -1.5223218514685382,
+      "results": {
+        "PLC": {
+          "bet_type": "PLC",
+          "races": 367,
+          "hits": 71,
+          "hit_rate": 0.19346049046321526,
+          "sleeper_hits": 52,
+          "sleeper_hit_rate": 0.14168937329700274,
+          "average_winning_odds": 3.638028169014084,
+          "returned_units": 258.3,
+          "roi": 0.7038147138964578,
+          "max_drawdown_units": 129.70000000000002,
+          "max_consecutive_losses": 19,
+          "top_one_profit_removed_roi": 0.6377049180327867,
+          "top_three_profit_removed_roi": 0.5942307692307692
+        },
+        "QPL": {
+          "bet_type": "QPL",
+          "races": 367,
+          "hits": 34,
+          "hit_rate": 0.09264305177111716,
+          "sleeper_hits": 52,
+          "sleeper_hit_rate": 0.14168937329700274,
+          "average_winning_odds": 6.0323529411764705,
+          "returned_units": 205.1,
+          "roi": 0.5588555858310627,
+          "max_drawdown_units": 164.70000000000005,
+          "max_consecutive_losses": 40,
+          "top_one_profit_removed_roi": 0.5019125683060107,
+          "top_three_profit_removed_roi": 0.4318681318681319
+        },
+        "TLA": {
+          "bet_type": "TLA",
+          "races": 367,
+          "hits": 8,
+          "hit_rate": 0.021798365122615803,
+          "sleeper_hits": 52,
+          "sleeper_hit_rate": 0.14168937329700274,
+          "average_winning_odds": 24.749999999999996,
+          "returned_units": 198.00000000000003,
+          "roi": 0.5395095367847412,
+          "max_drawdown_units": 211.6,
+          "max_consecutive_losses": 194,
+          "top_one_profit_removed_roi": 0.38852459016393437,
+          "top_three_profit_removed_roi": 0.20714285714285716
+        }
+      }
+    },
+    {
+      "quantile": 0.5,
+      "threshold": -0.8346139348949763,
+      "results": {
+        "PLC": {
+          "bet_type": "PLC",
+          "races": 185,
+          "hits": 38,
+          "hit_rate": 0.20540540540540542,
+          "sleeper_hits": 27,
+          "sleeper_hit_rate": 0.14594594594594595,
+          "average_winning_odds": 3.3526315789473684,
+          "returned_units": 127.4,
+          "roi": 0.6886486486486487,
+          "max_drawdown_units": 62.1,
+          "max_consecutive_losses": 15,
+          "top_one_profit_removed_roi": 0.6516304347826086,
+          "top_three_profit_removed_roi": 0.5818681318681319
+        },
+        "QPL": {
+          "bet_type": "QPL",
+          "races": 185,
+          "hits": 19,
+          "hit_rate": 0.10270270270270271,
+          "sleeper_hits": 27,
+          "sleeper_hit_rate": 0.14594594594594595,
+          "average_winning_odds": 6.321052631578947,
+          "returned_units": 120.1,
+          "roi": 0.6491891891891891,
+          "max_drawdown_units": 72.69999999999999,
+          "max_consecutive_losses": 27,
+          "top_one_profit_removed_roi": 0.5364130434782609,
+          "top_three_profit_removed_roi": 0.44120879120879125
+        },
+        "TLA": {
+          "bet_type": "TLA",
+          "races": 185,
+          "hits": 4,
+          "hit_rate": 0.021621621621621623,
+          "sleeper_hits": 27,
+          "sleeper_hit_rate": 0.14594594594594595,
+          "average_winning_odds": 19.55,
+          "returned_units": 78.19999999999999,
+          "roi": 0.42270270270270266,
+          "max_drawdown_units": 132.0,
+          "max_consecutive_losses": 132,
+          "top_one_profit_removed_roi": 0.28695652173913044,
+          "top_three_profit_removed_roi": 0.08956043956043956
+        }
+      }
+    },
+    {
+      "quantile": 0.75,
+      "threshold": -0.7037138804871361,
+      "results": {
+        "PLC": {
+          "bet_type": "PLC",
+          "races": 113,
+          "hits": 23,
+          "hit_rate": 0.20353982300884957,
+          "sleeper_hits": 18,
+          "sleeper_hit_rate": 0.1592920353982301,
+          "average_winning_odds": 3.582608695652174,
+          "returned_units": 82.4,
+          "roi": 0.7292035398230089,
+          "max_drawdown_units": 32.2,
+          "max_consecutive_losses": 15,
+          "top_one_profit_removed_roi": 0.6732142857142857,
+          "top_three_profit_removed_roi": 0.5590909090909091
+        },
+        "QPL": {
+          "bet_type": "QPL",
+          "races": 113,
+          "hits": 13,
+          "hit_rate": 0.11504424778761062,
+          "sleeper_hits": 18,
+          "sleeper_hit_rate": 0.1592920353982301,
+          "average_winning_odds": 6.5,
+          "returned_units": 84.5,
+          "roi": 0.7477876106194691,
+          "max_drawdown_units": 33.6,
+          "max_consecutive_losses": 19,
+          "top_one_profit_removed_roi": 0.5633928571428573,
+          "top_three_profit_removed_roi": 0.42727272727272725
+        },
+        "TLA": {
+          "bet_type": "TLA",
+          "races": 113,
+          "hits": 2,
+          "hit_rate": 0.017699115044247787,
+          "sleeper_hits": 18,
+          "sleeper_hit_rate": 0.1592920353982301,
+          "average_winning_odds": 21.1,
+          "returned_units": 42.2,
+          "roi": 0.37345132743362836,
+          "max_drawdown_units": 76.2,
+          "max_consecutive_losses": 76,
+          "top_one_profit_removed_roi": 0.15,
+          "top_three_profit_removed_roi": 0.0
+        }
+      }
+    },
+    {
+      "quantile": 0.9,
+      "threshold": -0.5746142174688983,
+      "results": {
+        "PLC": {
+          "bet_type": "PLC",
+          "races": 41,
+          "hits": 7,
+          "hit_rate": 0.17073170731707318,
+          "sleeper_hits": 7,
+          "sleeper_hit_rate": 0.17073170731707318,
+          "average_winning_odds": 3.9285714285714284,
+          "returned_units": 27.5,
+          "roi": 0.6707317073170732,
+          "max_drawdown_units": 15.5,
+          "max_consecutive_losses": 10,
+          "top_one_profit_removed_roi": 0.5149999999999999,
+          "top_three_profit_removed_roi": 0.3157894736842105
+        },
+        "QPL": {
+          "bet_type": "QPL",
+          "races": 41,
+          "hits": 3,
+          "hit_rate": 0.07317073170731707,
+          "sleeper_hits": 7,
+          "sleeper_hit_rate": 0.17073170731707318,
+          "average_winning_odds": 11.799999999999999,
+          "returned_units": 35.4,
+          "roi": 0.8634146341463415,
+          "max_drawdown_units": 14.0,
+          "max_consecutive_losses": 12,
+          "top_one_profit_removed_roi": 0.35,
+          "top_three_profit_removed_roi": 0.0
+        },
+        "TLA": {
+          "bet_type": "TLA",
+          "races": 41,
+          "hits": 1,
+          "hit_rate": 0.024390243902439025,
+          "sleeper_hits": 7,
+          "sleeper_hit_rate": 0.17073170731707318,
+          "average_winning_odds": 25.4,
+          "returned_units": 25.4,
+          "roi": 0.6195121951219512,
+          "max_drawdown_units": 30.0,
+          "max_consecutive_losses": 30,
+          "top_one_profit_removed_roi": 0.0,
+          "top_three_profit_removed_roi": 0.0
+        }
+      }
+    }
+  ],
+  "feature_importance": [
+    {
+      "feature": "prob_top3",
+      "gain": 2546.6717479228973
+    },
+    {
+      "feature": "prob_win",
+      "gain": 1799.902718782425
+    },
+    {
+      "feature": "exact_distance_top3_rate_race_z",
+      "gain": 1411.656686782837
+    },
+    {
+      "feature": "rating_race_z",
+      "gain": 1281.5253794193268
+    },
+    {
+      "feature": "gate_top3_index_context",
+      "gain": 1203.1606936454773
+    },
+    {
+      "feature": "speed_figure_trend",
+      "gain": 1177.414968252182
+    },
+    {
+      "feature": "condition_weight_z",
+      "gain": 1164.541754245758
+    },
+    {
+      "feature": "gate_early_speed_front_fit",
+      "gain": 1042.4276127815247
+    },
+    {
+      "feature": "ability_elo_context_race_z",
+      "gain": 1020.4703600406647
+    },
+    {
+      "feature": "prob_top2",
+      "gain": 993.9334402084351
+    },
+    {
+      "feature": "jockey_top3_rate_90d",
+      "gain": 930.8878989219666
+    },
+    {
+      "feature": "speed_figure_median5_race_z",
+      "gain": 918.0421693325043
+    },
+    {
+      "feature": "carried_weight_rel",
+      "gain": 910.3261082172394
+    },
+    {
+      "feature": "sand_exposure_risk",
+      "gain": 797.2197124958038
+    },
+    {
+      "feature": "horse_number_pct",
+      "gain": 792.6498191356659
+    },
+    {
+      "feature": "rank_score",
+      "gain": 790.8183209896088
+    },
+    {
+      "feature": "condition_form_delta",
+      "gain": 766.794233083725
+    },
+    {
+      "feature": "trainer_top3_rate_90d",
+      "gain": 757.6871337890625
+    },
+    {
+      "feature": "speed_figure_last",
+      "gain": 721.3510794639587
+    },
+    {
+      "feature": "jockey_win_rate_90d",
+      "gain": 712.6207008361816
+    },
+    {
+      "feature": "speed_rel_avg5",
+      "gain": 710.610399723053
+    },
+    {
+      "feature": "win_rate_career",
+      "gain": 674.6528387069702
+    },
+    {
+      "feature": "energy_finish_rel_avg5",
+      "gain": 637.9396820068359
+    },
+    {
+      "feature": "trainer_win_rate_90d",
+      "gain": 635.7167725563049
+    },
+    {
+      "feature": "gate_early_speed_context",
+      "gain": 625.564798116684
+    },
+    {
+      "feature": "form_recent3_pct",
+      "gain": 623.9549894332886
+    },
+    {
+      "feature": "condition_speed_delta",
+      "gain": 623.6554505825043
+    },
+    {
+      "feature": "energy_resilience_avg5",
+      "gain": 623.6055827140808
+    },
+    {
+      "feature": "load_ratio_pct",
+      "gain": 621.4552502632141
+    },
+    {
+      "feature": "form_recent5_pct",
+      "gain": 581.8298013210297
+    },
+    {
+      "feature": "pace_fade_avg5",
+      "gain": 562.2746815681458
+    },
+    {
+      "feature": "early_pos_pct_avg5",
+      "gain": 554.0213987827301
+    },
+    {
+      "feature": "speed_rel_best5",
+      "gain": 549.7443313598633
+    },
+    {
+      "feature": "ability_elo_vs_field",
+      "gain": 547.4406380653381
+    },
+    {
+      "feature": "days_since_last_race",
+      "gain": 546.6414699554443
+    },
+    {
+      "feature": "ability_elo_context",
+      "gain": 531.5634305477142
+    },
+    {
+      "feature": "ability_elo_global",
+      "gain": 470.48066902160645
+    },
+    {
+      "feature": "speed_figure_avg3",
+      "gain": 464.23414063453674
+    },
+    {
+      "feature": "late_gain_pct_avg5_race_z",
+      "gain": 451.3566007614136
+    },
+    {
+      "feature": "late_gain_pct_avg5",
+      "gain": 418.00559258461
+    },
+    {
+      "feature": "horse_jockey_starts",
+      "gain": 356.21168088912964
+    },
+    {
+      "feature": "top3_rate_career",
+      "gain": 337.12355852127075
+    },
+    {
+      "feature": "condition_uncertainty",
+      "gain": 305.7956087589264
+    },
+    {
+      "feature": "model_rank",
+      "gain": 263.7209391593933
+    },
+    {
+      "feature": "energy_early_rel_avg5",
+      "gain": 233.27235913276672
+    },
+    {
+      "feature": "career_starts",
+      "gain": 225.4146203994751
+    },
+    {
+      "feature": "top3_rate_recent5",
+      "gain": 86.70867943763733
+    },
+    {
+      "feature": "ability_elo_uncertainty",
+      "gain": 73.10998106002808
+    },
+    {
+      "feature": "front_runner_count",
+      "gain": 36.531699895858765
+    },
+    {
+      "feature": "sand_recovery_score",
+      "gain": 27.06651997566223
+    },
+    {
+      "feature": "front_rival_count",
+      "gain": 21.06611967086792
+    },
+    {
+      "feature": "sand_expected_penalty",
+      "gain": 9.51550006866455
+    },
+    {
+      "feature": "sand_recovered_flag",
+      "gain": 0.0
+    },
+    {
+      "feature": "condition_evidence",
+      "gain": 0.0
+    },
+    {
+      "feature": "jockey_changed",
+      "gain": 0.0
+    }
+  ],
+  "warning": "retrospective research; future paper validation required"
+}

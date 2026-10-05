@@ -1,0 +1,26 @@
+{
+  "frozen_at_utc": "2026-09-18T12:07:05.267786+00:00",
+  "hypothesis": "Mix frozen win72 and direct-top3 joint probabilities to test complementary podium/order information.",
+  "alphas_win72": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "new_fitting": false,
+  "development_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "already_exposed_reference_years": [
+    2025,
+    2026
+  ],
+  "selection": "Per target: pooled development loss no worse and top1 hit no worse than top3_allcore, strict gain in at least one; >=3/4 years nonworse loss and >=3/4 nonworse hit in EACH Seoul/Busan. Select minimum pooled development loss, then maximum hit, then candidate name. Otherwise retain top3_allcore. Selection excludes Yeongcheon and boundary ties for A.",
+  "temperature": "Reuse target/venue CAL temperatures from each component; no post-eval recalibration.",
+  "probability": "Convex mixture of complete joint distributions on identical support; A/B/C marginals coherent within target. Targets use separately calibrated component distributions.",
+  "historical_limit": "All years previously exposed across prior studies. Development is reused and reference is descriptive, not pristine holdout."
+}

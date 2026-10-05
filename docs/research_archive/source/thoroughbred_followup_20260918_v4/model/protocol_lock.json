@@ -1,0 +1,16 @@
+{
+  "locked_before_results": true,
+  "amended_before_valid_results": true,
+  "invalid_attempt": "invalid_attempt_01: interrupted during 2022; implementation-contract defects; metrics not inspected; ineligible",
+  "selection_years": [2021, 2022, 2023, 2024],
+  "exposed_reference_years": [2025, 2026],
+  "candidate_limit": 2,
+  "candidates_run": ["top3_growth_strength"],
+  "primary_cohort": "full_card",
+  "comparator": "top3_allcore",
+  "secondary_baseline": "win72_pl",
+  "selection_gate": "pooled logloss <= comparator and pooled top1 exact-hit >= comparator, one strict; each metric separately nonworse in >=3/4 years for each venue; ties retain comparator",
+  "same_day_results_forbidden": true,
+  "opponent_definition": "leave-one-out current-card pre-race ELO mean",
+  "historical_finish_source": "canonical corrected target_finish_order"
+}

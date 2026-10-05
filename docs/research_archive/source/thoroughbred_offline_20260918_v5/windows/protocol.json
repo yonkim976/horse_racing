@@ -1,0 +1,26 @@
+{
+  "frozen_before_results": true,
+  "candidates": ["rolling_all", "rolling_3y", "rolling_5y", "rolling_decay2y"],
+  "evaluation_folds": ["2021H1", "2021H2", "2022H1", "2022H2", "2023H1", "2023H2", "2024H1", "2024H2", "2025H1", "2025H2", "2026H1", "2026H2"],
+  "reference_last_date": "2026-09-13",
+  "feature_join_keys": ["race_id", "hr_no", "race_date"],
+  "feature_count": 110,
+  "family": "top3_set_energy",
+  "max_boost_round": 120,
+  "tune_iterations": [60, 120],
+  "seed": 20260918,
+  "decay_half_life_days": 730.5,
+  "decay_normalization": "mean one across FIT races before multiplying 1/field_size",
+  "development_years": [2021, 2022, 2023, 2024],
+  "reference_years": [2025, 2026],
+  "selection_target": "A",
+  "selection_rank": ["pooled_hit_desc", "pooled_log_loss_asc", "candidate_order"],
+  "selection_gate": {
+    "pooled": "hit >= current_target_baseline and log_loss <= baseline and at least one strict",
+    "each_venue": "loss nonworse >= 3/4 years and hit nonworse >= 3/4 years"
+  },
+  "primary_cohort": "full_card",
+  "unknown_venue_win_temperature": 1.0,
+  "probability_tolerance": 1e-10,
+  "overwrite_policy": "refuse"
+}
