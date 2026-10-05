@@ -1,0 +1,58 @@
+# 제주 구간 원문 잔여 검토 — 2026-10-02
+
+기존 구간·통과조 감사에서 보류한 2002년 API6/API303 차이 26지점, 구형 압축 표기 10지점, `·` 표기 162지점과 말별 시간·착순 결측을 저장된 원문 및 이미 확보된 공식 홈페이지 HTML로 대조했다. 공유 SQLite는 읽기 전용으로 열었다. 원문, 기존 감사 폴더, DB와 스키마를 변경하지 않았다.
+
+## 결론
+
+| 검토 항목 | 확인 결과 |
+|---|---|
+| API6/API303 값이 모두 있던 2002년 차이 | 26지점·14경주. API6 값은 홈페이지 26/26과 일치하고 API303 값은 0/26과 일치했다. |
+| 공식 홈페이지 18개 2002년 경주 비교 | 108개 측정 지점 중 API6 일치 108/108, API303 불일치 78/108. 나머지 30지점은 홈페이지와 API303 값이 일치했다. |
+| 구형 압축 표기 | 10지점·6경주. API6/홈페이지는 10/10 일치, API303은 0/10 일치했다. 각 경주 출전번호는 모두 한 자리 범위였다. |
+| `·` 미해석 표기 | 162/162 행에 `·`가 있고, 공백·`·`만 제거하면 모두 보수 검사기의 공통 문자 문법에 맞는다. 뒤쪽 166개 마번 관측은 홈페이지에서 모두 순위칸 공란인 특수결과 말로 확인됐다. |
+| 말별 구간시간 전필드 결측 | 25행·7경주. API4 원문에서 일곱 구간시간 키 모두 정수 0이었고, 홈페이지의 말별 표에서도 각 7칸이 `0:00.0` 또는 공란이었다. |
+| 말별 통과착순 전필드 결측 | 2002-11-09 R1 7번 야망의불꽃(말 ID 3005890) 1행. API4의 여섯 착순 키가 모두 정수 0이고 홈페이지 통과표도 `- - - - - -`였다. |
+
+이 검토는 어느 출처가 홈페이지 관측과 일치하는지 확인했지만 API303 값이 왜 다르게 제공됐는지 내부 원인을 규명하지는 못했다. 다른 경주·연도에 일괄 적용할 보정 규칙이나 자료 변경을 만들지 않았다.
+
+## 2002 API6/API303 비교
+
+원문 차이 26지점은 모두 2002년 14개 경주에 있다. 공식 홈페이지를 포함한 18개 경주 108지점 비교에서 API6의 점·값은 전부 홈페이지 값과 같았고, API303은 78지점에서 달랐다. 원래 양 API에 모두 유효값이 있는데 서로 달랐던 26지점은 API6이 홈페이지와 26/26 일치, API303은 0/26 일치다. API6 값은 다른 API303 `corner_*` 필드에 나타나는 경우가 20/26지점이어서 필드 위치 불일치 가능성을 보여주지만 원인을 확정하지 않는다.
+
+API303 DB 행은 기존 감사에서 보관 원문 응답과 payload·필드가 일치함을 검증했다. 따라서 확인된 차이는 DB 정규화 과정에서 생긴 불일치로 설명되지 않는다. API6 보관 응답과 API303 보관 응답 자체가 다르며, API6이 이번 2002년 홈페이지 표와 일치한다. API303 원천이나 그 열 의미에 대한 원인 판정은 미확정으로 둔다.
+
+## 구형 압축 표기 10지점
+
+모든 대상 경주의 전체 결과 출전번호는 `1..7`, `1..8` 또는 `1..9`였다. 그러므로 표기의 `29`, `61`, `2435671` 같은 문자열을 실제 2자리 이상 마번으로 읽을 수 없다. 경주 출전표와 양립하는 후보는 한 자리 마번이 구분자 없이 이어진 형식이지만, 붙은 숫자를 어떻게 나눌지와 괄호가 동착 무리인지 원문만으로 확정하지 않았다.
+
+10지점 모두 홈페이지 원문과 API6는 일치했고 API303 값은 일치하지 않았다. 예를 들어 2002-08-24 R5에서 API303 1C·G1F의 `2435671`은 홈페이지에서 공란이며, 같은 홈페이지 표기는 3C·4C에 있다. 2002-08-10 R2의 API303 4C `(67)(45)2(19)3`은 홈페이지/API6의 `(67)(245)(19)3`과 다르다. 2002-07-28 R4에서도 API303 4C `3(48)6(57)(12)`과 홈페이지/API6 `34856(17)2`가 다르다. 이 차이를 괄호를 풀거나 경주 위치를 옮겨 맞추지 않았다.
+
+각 원문 표기와 출전번호 전체 목록 및 같은 지점의 홈페이지/API6/API303 문자열은 [legacy_compact_website_review_10_points.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/legacy_compact_website_review_10_points.csv>)에 있다. 행 단위 원래 감사 결과는 [legacy_compact_notations.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/legacy_compact_notations.csv>)다.
+
+## `·` 뒤 말과 경계 해석
+
+162개 행은 모두 `·`를 포함한다. 보수 검사기는 `[0-9(),^=≡-]+` 문자만 받으며 ASCII 공백을 먼저 제거한다. 원문에서 `·`와 공백만 제거하면 162개 모두 허용 문법에 들어간다. 따라서 기존의 `unparsed`는 검사기의 미지원 기호로 생긴 보류다.
+
+원문 `·` 뒤를 보수적으로 마번 토큰으로 읽어도 되는지 홈페이지·API4에 별도 대조했다. 162지점의 `·` 뒤에는 166개 마번 관측이 있었고, 47경주에서 48두에 대응했다. 166/166 모두 홈페이지 마번·경주 행에 연결됐으며 순위칸은 비어 있었다. 결과 상태는 164개 `주행중지`(API4 코드 92), 2개 `실격`(코드 91)으로 홈페이지 표시와 API4 원문이 모두 일치했다. 마명 앞 `★` 표시는 2015-04-24 R8 10번 말의 네 관측뿐이며 상태·마번은 일치했다.
+
+예를 들어 2007-08-18 R6 S1F 원문 `7,8,9-1,6,(2,3)-4·5`에서 `·5` 뒤 5번은 홈페이지에 순위 공란·`주행중지`, API4에는 92로 기록돼 있다. 같은 경주 10번은 홈페이지에서 `출전제외`지만 `·` 뒤 토큰에는 없다. 이는 이 사례에서 `·`가 4와 정상 착순이 없는 5번 사이에 경계를 두는 것으로 보인다는 근거다. 그렇다고 `·`를 쉼표나 동착 기호로 바꾸거나, 뒤의 말에 실제 통과순위를 부여할 근거가 되지는 않는다.
+
+## 말별 시간·착순 결측
+
+25개 양수 완주 기록 행에서 API4 payload는 `jeS1fTime`, `je_1cTime`, `je_2cTime`, `je_3cTime`, `je_4cTime`, `jeG3fTime`, `jeG1fTime` 키를 모두 보유하고 값은 각각 정수 `0`이었다. 출처 파일·item 위치·페이지 SHA와 payload SHA는 [api4_all_times_explicit_zero_25.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/api4_all_times_explicit_zero_25.csv>)에 있다. 25행은 2002-11-09 R1 1행, 2002-08-24 R5 7행, 2002-08-11 R1 3행, 2002-08-10 R1 1행, 2002-08-10 R2 1행, 2002-07-28 R4 8행, 2002-07-14 R3 4행이다.
+
+공식 홈페이지의 말별 표에는 이 25행의 일곱 시간 칸 175개 중 168개가 `0:00.0`, 7개가 공란이었다. 25/25의 완주착순도 API4와 같았다. 따라서 이 자료에서 확인된 결측은 원문 수집·변환 중 값이 탈락한 상황과 맞지 않는다. 원천/API가 역사 행에서 0/공란을 반환한 이유가 의도적 기본값인지, 측정값 미제공인지까지는 확정할 수 없다. 분석에서는 실제 0초가 아니라 미제공 시간으로 유지한다.
+
+착순 6개 키가 모두 정수 0인 한 행은 2002-11-09 R1 7번 야망의불꽃(3005890)이다. 홈페이지의 완주착순은 5로 API4와 일치하지만 통과 경로는 `- - - - - -`이며 숫자 순위가 없다. 원문과 홈페이지 값을 [api4_all_orders_explicit_zero_1.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/api4_all_orders_explicit_zero_1.csv>)에서 확인할 수 있다. 이 행은 시간 결측 25행에도 포함돼 있다.
+
+## 재현 및 원문 위치
+
+읽기 전용 대조기는 [verify_dot_suffix_website.py](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/verify_dot_suffix_website.py>)다. 로컬 SQLite는 `mode=ro`로 열며 기존 공식 홈페이지 증거 JSON과 HTML을 읽고 HTML별 SHA-256·byte size·경주 identity를 확인한 뒤 증거 CSV와 요약 JSON을 작성한다. 이 실행에서 기존 저장 홈페이지 92페이지 전체와 `·` 대상 47페이지를 검증했다.
+
+- API6/API303 원문·manifest: `jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/` (2002 API6 page SHA-256 `3744f058f3bc71549e477f8abbf52a63f613e168587503a500543cc61f2568bf`; API303 `0cf921c01d65d8dda0a988a5ee07f14f1a3086b5648531f91afb857b05d82935`)
+- 홈페이지 원문·대조 manifest: `jeju/research/20261002_section_remaining_review/website_evidence.json` (SHA-256 `48a4fafdb0eb23c19298e3b8b0eb58639cca5818c246aefed01519dfdb0cca`), HTML은 같은 폴더의 `website_html/`
+- API4 원문 연결·요약: `jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2002/source_pages/page_0001.json`; 결측행의 원문 item 인덱스 및 페이지 hash는 위 CSV들에 기록
+- 주요 집계: [dot_suffix_website_api4_status_summary.json](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/dot_suffix_website_api4_status_summary.json>)
+- 26개 API6/API303 차이의 홈페이지 대조: [api6_api303_website_review_26_points.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/api6_api303_website_review_26_points.csv>)
+- 18개 경주에서 확인한 API303/홈페이지 차이 78지점: [website_api303_differences_78_points.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/website_api303_differences_78_points.csv>)
+- 검사기 보류 표기 원문: [unparsed_notations.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_section_remaining_review/legacy_review/evidence/unparsed_notations.csv>)

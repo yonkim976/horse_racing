@@ -1,0 +1,44 @@
+{
+  "review_date": "2026-10-02",
+  "scope": "Independent arithmetic and linkage check of the official website comparison and adjudication summaries; no new source retrieval or database writes.",
+  "inputs": [
+    "jeju/research/20261002_section_remaining_review/website_comparison_summary.json",
+    "jeju/research/20261002_section_remaining_review/adjudication_summary.json",
+    "jeju/research/20261002_section_remaining_review/order_adjudications.json",
+    "jeju/research/20261002_section_remaining_review/runner_website_comparisons.json",
+    "jeju/research/20261002_section_remaining_review/group_website_comparisons.json",
+    "jeju/research/20261002_section_remaining_review/website_horse_identity_verification.json",
+    "jeju/research/20261002_section_passing_audit/root_audit/api4_group_order_disagreements.csv"
+  ],
+  "checks": {
+    "105_original_observations_equal_26_api303_point_differences_plus_9_api4_website_order_differences_plus_70_same_page_rank_group_conflicts": true,
+    "27_flagged_races_partition_as_6_plus_2_plus_19": true,
+    "70_remaining_conflicts_are_70_observations_20_points_19_races_under_current_group_parser": true,
+    "all_105_flags_have_one_adjudication": true,
+    "adjudication_race_sets_are_disjoint": true,
+    "5304_runner_point_comparisons_recounted": true,
+    "884_unique_race_starter_identity_rows_recounted": true,
+    "all_884_website_horse_ids_match_api4_and_names_match_after_leading_star_marker_removal": true,
+    "33_order_and_2_time_mismatches_recounted_across_all_runner_comparisons": true,
+    "14_positive_order_differences_are_in_2_races": true,
+    "19_api_99_vs_website_blank_observations_are_in_5_races": true,
+    "552_group_point_comparisons_recounted_78_api303_website_differences_and_zero_api6_website_differences_when_api6_present": true,
+    "official_page_hash_and_event_identity_flags_pass_for_92_pages": true,
+    "website_comparison_sqlite_connection_is_read_only_mode": true
+  },
+  "adjudication_counts": {
+    "api303_point_difference_resolved_by_website": {"observations": 26, "races": 6},
+    "api4_website_order_difference_resolved_by_website": {"observations": 9, "races": 2},
+    "website_row_order_outside_same_page_group_bounds": {"observations": 70, "points": 20, "races": 19}
+  },
+  "other_verified_counts": {
+    "website_pages": 92,
+    "runner_rows": 884,
+    "runner_point_comparisons": 5304,
+    "additional_positive_api_order_website_differences": 14,
+    "api_99_website_blank_observations": 19
+  },
+  "output_state": {"positive_order_corrections_applied": false},
+  "assessment": "Reported counts recalculate from the retained comparison rows and partition cleanly. Name/ID linkage passes. The 70 same-page conflicts are conditional on the existing group parser; they do not establish which display is correct until punctuation and grouping semantics are confirmed. Keep the 14 positive-order differences and 19 API-99/blank cases separate; no replacement order should be inferred from this audit.",
+  "method": "Recounted retained JSON/CSV rows and race/point keys, rechecked the 884 identity booleans, verified official-page SHA-256 values against local HTML files, and inspected the website comparison code for SQLite URI mode=ro. No DB rows or source evidence were changed."
+}

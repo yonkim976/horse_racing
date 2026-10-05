@@ -1,0 +1,60 @@
+# 미해결 통과착순·통과조 의미 재검토
+
+작성일: 2026-10-03  
+범위: 2026-10-02 검토의 19경주·70 관측·20 지점. 전체 출전마 원장, 보유 API4/API303/API6 원문, 공식 홈페이지 보관본, 기존 보수 통과조 파서를 대조했다. 이 하위검토는 DB를 읽기 전용으로 열었고 새 결과만 이 폴더에 저장했다.
+
+## 판정 요약
+
+- 기존 괄호 마군의 보수적 순위 범위 파서는 19경주의 원인을 만들어 내지 않았다. 공식 용어 정의와 일치하는 문법으로 비어 있지 않은 홈페이지 통과조 77개를 읽었고, 77개 모두 전체 출전표의 마번을 중복·누락·외부번호 없이 포함했다. 괄호 안의 마번 순서는 개별착순으로 복원하지 않았다.
+- 홈페이지 개별 순위와 같은 지점 통과조 범위의 충돌은 기존 70건 그대로다. 전체 출전마와 이 19경주의 모든 비어 있지 않은 통과조 지점을 다시 대조했을 때 기존 70건 밖의 추가 범위 이탈은 0건이었다.
+- 이 20개 충돌 지점의 API303 통과조, API6 통과조, 홈페이지 통과조는 각각 20/20 일치한다. API4 개별 순위와 홈페이지 개별 순위도 70/70 일치한다. 이는 공식 표출 두 종류가 서로 다르다는 뜻이며, 어느 값이 맞는지는 확정하지 않는다. root가 별도로 시행한 최신 API4 재조회도 70개 원값이 바뀌지 않았다고 전달했다.
+- 19개 공식 표의 마번·말 ID를 DB 전체 출전표와 대조한 184두에서 식별 오류가 없었다. 37개 공란 지점 라벨은 해당 경주의 미사용·미기재 지점이며 파서 실패가 아니다. 유효 통과조 77개에서 문법 파싱 실패나 전체 출전표 마번 불일치는 없었다.
+- 20개 충돌 지점의 개별 통과시간을 순위로 환산하면 19지점에서 적어도 한 말의 시간순위가 같은 지점 통과조 범위 밖에 있다. 충돌 70건 중 시간자료가 있는 69건에서 시간순위 구간이 홈페이지 개별순위를 포함한 건은 64건, 포함하지 않은 건은 5건이며, 1건은 사용할 G1F 시간이 없다. 전체 70건 가운데 58건은 시간순위 구간도 통과조 범위를 벗어난다. 시간은 충돌을 판정하거나 정정값을 선택하는 근거가 아니라 추가 검토 후보를 가리키는 보조 대조다.
+- 명시된 지점 사이의 한 칸 밀림이나 전역 교환으로 70건을 설명할 증거는 나오지 않았다. 충돌 지점마다 다른 순위 필드를 넣어 범위 위반 수를 최소화하는 탐색은 일부 지점의 위반 수를 줄였지만 가장 낮은 필드가 `S1F`, `3C`, 해당 지점 등으로 달라졌다. 7/20 지점에서만 사용 가능한 다른 필드의 위반 수가 더 작았고, 이는 사후 적합 가설이지 지점대응 정정이 아니다. 정확한 결과는 [지점대응 진단](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/rank_field_shift_hypotheses.json>)에 보존했다.
+- 따라서 정답 선택 없이 선택 조회에서 보류할 대상은 홈페이지 개별값과 같은 API4 필드의 해당 말 70개 행, 그리고 그룹에서 숫자 순위·범위를 만든 20개 지점이다. 원문 API·홈페이지 그룹 문자열은 보존한다. 한 경주 전체 또는 그 지점의 무충돌 개별 순위까지 일괄 제거할 근거는 발견되지 않았다.
+
+## 공식 표기 정의와 범위 계산
+
+한국마사회 공식 [경주성적표 용어해설 PDF](https://race.kra.co.kr/down/term_desc.pdf)는 괄호를 1마신 미만의 마군으로 정의하고 괄호 안 마번은 내측부터 표시한다고 설명한다. `^`는 선두집단 표시다. 쉼표는 1마신 이상 2마신 미만, 하이픈은 2마신 이상 5마신 미만, `=`는 5마신 이상 10마신 미만, `≡`는 10마신 이상 차이를 나타내며, 가운데점 `·`는 주행중지를 표시한다. 공식 용어해설은 괄호 안 순서를 개별 통과착순으로 정의하지 않는다.
+
+이에 따라 파서는 괄호 묶음의 크기로만 순위 범위 `[앞선 마번 수 + 1, 그룹 끝 순위]`를 계산했다. 예를 들어 `(6,8)` 앞에 5두가 있으면 두 마번의 가능 범위는 6–7위다. 괄호 안의 내측 순서는 순위를 부여하는 데 쓰지 않았다. 구분 기호의 거리차 의미는 기록했지만 범위 계산에서 정확한 마신 차이를 추정하지 않았다. 이 19경주에는 `·`가 없었고, `≡`는 공식 정의대로 큰 거리 차이 구분자로 처리했다.
+
+공식 용어해설은 S1F·코너·G1F를 위치 기록으로 설명한다. 개별 `G1F` 시간은 결승선 전 마지막 200m 구간시간이므로 G1F 위치 도달시간 대조에 쓴 값은 `완주기록 − G1F 구간시간`이며 0.1초로 반올림했다. 두 표시 시간이 이미 0.1초 단위이고, 차감한 시간으로 정확한 순위를 복원하는 공식 정의도 없으므로 이는 근사 대조다. 동시간 값은 같은 순위 범위로 처리했다. 이 환산으로 광해청명 2026-01-17 5R G1F 결측·NULL 상태를 대체하지 않았다.
+
+## 2025-11-01 제주 5R: 특수결과 비교 가설
+
+공식 [제주 5R 성적표](https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20251101&realRcNo=5)에서 2번 완벽세대(ID `3018812`)는 도착차 `주행중지`로 표시되고 API 완주 순위는 92, 완주 시간은 0이다. 해당 경주의 4C 그룹은 `10-(7,8),(5,9),(4,3),(6,1)≡2`, G1F 그룹은 `(10,8),(5,3),(4,9,6),7,1≡2`다. 두 지점의 그룹은 2번을 맨 뒤 `≡` 마군에 둔다. 반면 API4와 홈페이지 개별 순위 필드에는 2번이 두 지점 모두 1위이며, 4C 개별시간은 69.2초, G1F 개별 시간은 0/미제공이다. 2번을 비교에서 제외하면 나머지 9두의 API4 순위를 1씩 낮춘 진단 순위가 4C·G1F 범위와 각각 9/9, 총 18/18 비교에서 맞는다. 2번을 제외한 시간순위도 두 지점의 나머지 9두에서 범위와 맞는다.
+
+이 패턴은 특수결과 말이 개별 숫자 순위와 그룹 비교의 기준 모집단을 다르게 만들었을 가능성을 설명한다. 2번의 보유 순위 `1` 또는 4C 시간 `69.2`를 고치라는 근거는 아니다. 비교용 제외·순위 압축도 승인된 정답 계약이 아니다. 해당 원문을 보존하고 정정하지 않는다. 상세 비교는 [특수결과 진단 JSON](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/special_result_case_20251101_5R.json>)에 있다.
+
+## 선택 필드와 모델 입력 경계
+
+보류할 선택 개별 순위 필드는 다음 70개 출전키·필드 조합이다. 각 행에는 말 ID, 마번, API4 원값, 홈페이지 값, 그룹 범위, 시간 비교가 있다. `selected_value`는 전 행 NULL이며 대체값은 넣지 않았다.
+
+| 지점 | 보류 개별 순위 선택 필드 | 행 수 |
+|---|---|---:|
+| S1F | `s1f_order` | 14 |
+| 3C | `c3_order` | 5 |
+| 4C | `c4_order` | 28 |
+| G1F | `g1f_order` | 23 |
+
+각 지점 전체의 그룹 순서에서 파생한 순위·범위 피처도 20개 지점에서 보류한다. 대상은 [그룹 피처 보류목록](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/group_feature_hold_candidates.csv>)에 있으며 각 목록행은 API303 필드, API6 필드, 홈페이지 원문 그룹 문자열을 연결한다. 그룹 문자열·원 API 관측은 지우지 않는다. 검토된 14개 홈페이지 순위 정정과 광해청명 G1F NULL 상태는 이번 검토에서 바꾸지 않았다.
+
+| 파일 | 내용 |
+|---|---|
+| [semantic_audit_summary.json](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/semantic_audit_summary.json>) | 기계 요약, 보류 필드 목록, 시간 대조 후보 |
+| [field_hold_candidates.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/field_hold_candidates.csv>) | 70개 개별 순위 선택행 상세 |
+| [group_feature_hold_candidates.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/group_feature_hold_candidates.csv>) | 20개 통과조 파생 피처 보류 대상 |
+| [group_point_audit.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/group_point_audit.csv>) | 77개 비어 있지 않은 그룹의 파싱·전체 출전표·시간 대조 |
+| [runner_point_audit.csv](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/runner_point_audit.csv>) | 전체 출전마·그룹 지점별 순위와 시간 비교 |
+| [rank_field_shift_hypotheses.json](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/rank_field_shift_hypotheses.json>) | 다른 순위 필드가 범위 위반 수를 줄이는지 본 사후 가설 진단 |
+| [special_result_case_20251101_5R.json](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/special_result_case_20251101_5R.json>) | 주행중지 2번을 포함한 기준/제외 비교 |
+| [identity_roster_checks.json](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20261003_unresolved_section_review/semantic_review/identity_roster_checks.json>) | 홈페이지·API 원장의 전체 출전마 마번 및 ID 연결 확인 |
+
+## 재현과 보존
+
+```sh
+.venv/bin/python jeju/research/20261003_unresolved_section_review/semantic_review/audit_unresolved_semantics.py
+```
+
+SQLite는 `mode=ro`와 `PRAGMA query_only=ON`으로 열고, 공식 홈페이지 HTML과 API6 원문 페이지 해시를 다시 확인한다. 코드는 현재 보유 원본을 재사용하며 API를 다시 호출하지 않는다. root가 보고한 별도 최신 API4 재조회 결과는 70개 원값 모두 변하지 않았다는 것이다. 이 보고서 작성 코드는 DB 변경 없이 이 폴더에만 산출물을 썼다.

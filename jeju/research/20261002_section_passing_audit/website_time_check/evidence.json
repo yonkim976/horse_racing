@@ -1,0 +1,51 @@
+{
+  "checked_date_kst": "2026-10-02",
+  "source": "한국마사회 제주경마 경주별 상세 성적표",
+  "observation_method": "Browser navigation followed by accessibility state and read-only rendered DOM table cell extraction",
+  "api_reference": "../root_audit/time_flags_original_page_verification.json",
+  "db_modified": false,
+  "horse_id_origin": "Existing API4 case list; website matching uses date, meet=2, race number, program number, name and finish rank",
+  "time_headers": ["순위", "마번", "S1F-1C-2C-3C-4C-G1F", "S-1F", "1코너", "2코너", "3코너", "4코너", "G-3F", "G-1F", "경주기록"],
+  "cases": [
+    {
+      "date": "2024-03-02", "race_no": 3, "horse_id": "3018048", "program_no": 9, "horse_name_raw": "절대권력",
+      "url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20240302&realRcNo=3",
+      "race_heading": "2024년 03월 02일 (토) 제3경주 제주",
+      "website_time_cells": ["7", "9", "10-   -   - 8- 8- 8", "0:20.0", "", "", "0:46.2", "1:03.8", "0:52.1", "0:17.8", "1:38.3"],
+      "api_field": "jeS1fTime", "api_seconds": 120, "website_display": "0:20.0", "website_seconds": 20.0,
+      "status": "api_website_disagreement_confirmed_no_db_correction"
+    },
+    {
+      "date": "2025-10-17", "race_no": 7, "horse_id": "3017473", "program_no": 8, "horse_name_raw": "어정적기",
+      "url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20251017&realRcNo=7",
+      "race_heading": "2025년 10월 17일 (금) 제7경주 제주",
+      "website_time_cells": ["3", "8", "4-   -   - 4- 4- 3", "0:17.8", "", "", "0:52.6", "1:09.1", "0:50.0", "0:17.3", "1:42.6"],
+      "api_field": "jeS1fTime", "api_seconds": 77.8, "website_display": "0:17.8", "website_seconds": 17.8,
+      "status": "api_website_disagreement_confirmed_no_db_correction"
+    },
+    {
+      "date": "2026-01-17", "race_no": 5, "horse_id": "3016494", "program_no": 8, "horse_name_raw": "광해청명",
+      "url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20260117&realRcNo=5",
+      "race_heading": "2026년 01월 17일 (토) 제5경주 제주",
+      "website_time_cells": ["5", "8", "9-   -   - 9- 8- 1", "0:18.1", "", "", "0:51.5", "1:08.0", "0:49.9", "1:17.2", "1:41.4"],
+      "api_field": "jeG1fTime", "api_seconds": 77.2, "website_display": "1:17.2", "website_seconds": 77.2,
+      "status": "anomaly_also_present_on_official_website_correct_value_unresolved"
+    },
+    {
+      "date": "2026-03-06", "race_no": 8, "horse_id": "3018729", "program_no": 6, "horse_name_raw": "시긴트",
+      "url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20260306&realRcNo=8",
+      "race_heading": "2026년 03월 06일 (금) 제8경주 제주",
+      "website_time_cells": ["4", "6", "8-   - 9- 10- 10- 4", "0:19.8", "", "0:10.9", "1:05.4", "1:22.3", "0:48.1", "0:16.0", "1:53.5"],
+      "api_field": "jeG1fTime", "api_seconds": 76, "website_display": "0:16.0", "website_seconds": 16.0,
+      "status": "api_website_disagreement_confirmed_no_db_correction"
+    }
+  ],
+  "comparison": {
+    "api_website_disagreements": 3,
+    "anomaly_also_present_on_website": 1,
+    "other_s1f_3c_4c_g3f_g1f_finish_comparisons": 20,
+    "other_time_disagreements": 0,
+    "cause": "미확정. 저장된 API 원응답과 DB가 일치하므로 로컬 적재 중 변형으로는 설명되지 않는다. API와 홈페이지의 차이는 확인했으나 원천 오류 발생 경로는 확인하지 못했다.",
+    "policy": "API 원문 보존. 세 홈페이지 값은 정정 근거 후보로 기록. 광해청명 G1F는 미해결 이상값이며 17.2초로 추정 보정하지 않는다. 실제 DB 값이나 모델 입력은 변경하지 않았다."
+  }
+}

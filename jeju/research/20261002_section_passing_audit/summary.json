@@ -1,0 +1,75 @@
+{
+  "status": "source_integrity_passed_with_semantic_review_flags",
+  "scope": {
+    "candidate_rows": 92513,
+    "candidate_races": 9494,
+    "positive_finish_races": 9347,
+    "cancelled_or_invalid_races_previously_confirmed": 147,
+    "partial_candidate_races": 44,
+    "valid_finish_rows": 90210
+  },
+  "integrity": {
+    "api6_api303_source_pages_verified": 50,
+    "api303_db_raw_rows_equal": 19933,
+    "api4_candidate_payload_hashes_equal": true,
+    "duplicate_horse_event_keys": 0,
+    "duplicate_program_event_keys": 0
+  },
+  "coverage": {
+    "completed_races_without_any_api303_group": 0,
+    "completed_races_missing_api6": 6,
+    "valid_finish_rows_without_times": 25,
+    "valid_finish_rows_without_orders": 1
+  },
+  "flags": {
+    "distinct_time_review_rows": 4,
+    "api4_order_group_bound_observations": 105,
+    "api4_order_group_bound_points": 31,
+    "api4_order_group_bound_races": 27,
+    "api6_api303_literal_different_points": 26,
+    "api6_api303_literal_different_races": 14,
+    "legacy_compact_notation_points": 10,
+    "unhandled_notation_points": 162
+  },
+  "initial_audit_database_modified": false,
+  "database_modified": true,
+  "model_input_adoption": false,
+  "point_distance_contract": "C1/C2 travel order not inferred from display column order; raw values retained",
+  "group_comparison": "Conservative notation member-count rank bounds; flags are not corrected diagnoses of source error.",
+  "website_time_followup": {
+    "status": "applied_and_verified",
+    "database_modified": true,
+    "api_source_values_modified": false,
+    "website_corrected_fields": 3,
+    "unresolved_fields_null": 1,
+    "postrace_view": "jeju_race_postrace_sections_2026",
+    "application_manifest": "website_time_check/application_manifest.json"
+  },
+  "remaining_items_followup": {
+    "report": "../20261002_section_remaining_review/README.md",
+    "database_modified": true,
+    "official_internal_conflict_races": 19,
+    "positive_order_correction_candidates": 14,
+    "positive_order_corrections_applied": true,
+    "website_order_followup": {
+      "status": "applied_and_independently_verified",
+      "database_modified": true,
+      "corrected_fields": 14,
+      "current_selected_view": "jeju_race_postrace_sections_reviewed_2026",
+      "application_manifest": "../20261002_section_order_website_load/application_manifest.json",
+      "historical_audit_counts_and_raw_observations_preserved": true
+    }
+  },
+  "internal_conflict_quality_followup": {
+    "review_date_kst": "2026-10-03",
+    "status": "rechecked_and_quality_hold_applied",
+    "correct_replacement_orders_confirmed": false,
+    "conflict_races": 19,
+    "order_fields_selected_null": 70,
+    "group_points_selected_null": 20,
+    "database_modified": true,
+    "selected_view": "jeju_race_postrace_sections_quality_2026",
+    "report": "../20261003_unresolved_section_review/README.md",
+    "original_audit_observations_preserved": true
+  }
+}

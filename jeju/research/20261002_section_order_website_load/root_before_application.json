@@ -1,0 +1,80 @@
+{
+  "protected_views": {
+    "jeju_race_analysis_2026": "CREATE VIEW jeju_race_analysis_2026 AS\nWITH profile_current AS (\n    SELECT hpl.*,\n           CASE\n             WHEN length(trim(hpl.birth_date_raw)) >= 4\n              AND substr(trim(hpl.birth_date_raw), 1, 4) NOT GLOB '*[^0-9]*'\n              AND CAST(substr(trim(hpl.birth_date_raw), 1, 4) AS INTEGER) BETWEEN 1 AND 2026\n             THEN CAST(substr(trim(hpl.birth_date_raw), 1, 4) AS INTEGER)\n             ELSE NULL\n           END AS birth_year\n    FROM horse_profile_latest hpl\n)\nSELECT p.api_record_id,\n       p.race_date,\n       p.meet_code,\n       p.race_number,\n       p.horse_number,\n       p.horse_id,\n       coalesce(nullif(trim(pc.horse_name_raw), ''), p.horse_name) AS horse_name,\n       p.horse_name AS historical_horse_name_raw,\n       p.race_distance_m,\n       p.rank_class_raw,\n       p.race_name_raw,\n       p.finish_position,\n       p.finish_status_raw,\n       p.finish_time_seconds,\n       p.carried_weight_kg,\n       p.body_weight_raw,\n       p.jockey_id,\n       p.jockey_name,\n       p.trainer_id,\n       p.trainer_name,\n       p.owner_id,\n       p.owner_name,\n       p.track_raw,\n       p.weather_raw,\n       p.breed_label_raw,\n       p.breed_assessment,\n       p.breed_assessment_note,\n       p.api4_3_sjS1fOrd_raw,\n       p.api4_3_sjS1fOrd_json_type,\n       p.api4_3_sjG1fOrd_raw,\n       p.api4_3_sjG1fOrd_json_type,\n       p.api4_3_sjG3fOrd_raw,\n       p.api4_3_sjG3fOrd_json_type,\n       p.api4_3_sj_1cOrd_raw,\n       p.api4_3_sj_1cOrd_json_type,\n       p.api4_3_sj_2cOrd_raw,\n       p.api4_3_sj_2cOrd_json_type,\n       p.api4_3_sj_3cOrd_raw,\n       p.api4_3_sj_3cOrd_json_type,\n       p.api4_3_sj_4cOrd_raw,\n       p.api4_3_sj_4cOrd_json_type,\n       p.api4_3_payload_sha256,\n       p.api4_3_source_artifact_id,\n       p.api4_3_source_page_sha256,\n       p.api4_3_source_page_path,\n       p.api303_api_record_id,\n       p.api303_meet_raw,\n       p.api303_meet_json_type,\n       p.api303_corner_1_raw,\n       p.api303_corner_1_json_type,\n       p.api303_corner_2_raw,\n       p.api303_corner_2_json_type,\n       p.api303_corner_3_raw,\n       p.api303_corner_3_json_type,\n       p.api303_corner_4_raw,\n       p.api303_corner_4_json_type,\n       p.api303_corner_5_raw,\n       p.api303_corner_5_json_type,\n       p.api303_corner_6_raw,\n       p.api303_corner_6_json_type,\n       p.api303_corner_7_raw,\n       p.api303_corner_7_json_type,\n       p.api303_corner_8_raw,\n       p.api303_corner_8_json_type,\n       p.api303_corner_9_raw,\n       p.api303_corner_9_json_type,\n       p.api303_passtime_3f_raw,\n       p.api303_passtime_3f_json_type,\n       p.api303_passtime_4f_raw,\n       p.api303_passtime_4f_json_type,\n       p.api303_tempo_raw,\n       p.api303_tempo_json_type,\n       p.api303_payload_sha256,\n       p.api303_source_artifact_id,\n       p.api303_source_page_sha256,\n       p.api303_source_page_path,\n       pc.birth_date_raw,\n       pc.birth_year,\n       CASE WHEN pc.birth_year IS NOT NULL THEN 2026 - pc.birth_year END AS age,\n       CASE WHEN pc.birth_year IS NOT NULL THEN 2026 - pc.birth_year END AS age_2026,\n       2026 AS age_reference_year,\n       json_extract(api4.payload_json, '$.age') AS age_at_race_raw,\n       json_type(api4.payload_json, '$.age') AS age_at_race_json_type,\n       json_extract(api4.payload_json, '$.sex') AS sex,\n       json_extract(api4.payload_json, '$.sex') AS sex_at_race_raw,\n       json_type(api4.payload_json, '$.sex') AS sex_at_race_json_type,\n       pc.sex_raw AS sex_current_profile,\n       pc.horse_profile_observation_id,\n       pc.api_record_id AS profile_api_record_id,\n       pc.age_raw AS profile_age_raw,\n       pc.observed_at_utc AS profile_observed_at_utc,\n       pc.observed_kst_date AS profile_observed_kst_date,\n       pc.payload_json AS profile_payload_json,\n       pc.payload_sha256 AS profile_payload_sha256,\n       pc.source_artifact_id AS profile_source_artifact_id,\n       pc.source_response_sha256 AS profile_source_response_sha256,\n       pc.raw_relative_path AS profile_raw_relative_path\nFROM jeju_race_candidate_passing_with_corner_rank p\nLEFT JOIN profile_current pc ON pc.horse_id = p.horse_id\nLEFT JOIN api_records api4 ON api4.api_record_id = p.api_record_id",
+    "jeju_race_section_time_values": "CREATE VIEW jeju_race_section_time_values AS\nWITH fields(field_name) AS (VALUES\n        ('jeS1fTime'),\n        ('je_1cTime'),\n        ('je_2cTime'),\n        ('je_3cTime'),\n        ('je_4cTime'),\n        ('jeG3fTime'),\n        ('jeG1fTime')\n), known_reviews(race_date,meet_code,race_number,horse_number,horse_id,field_name) AS (VALUES\n        ('2024-03-02', 2, 3, 9, '3018048', 'jeS1fTime'),\n        ('2025-10-17', 2, 7, 8, '3017473', 'jeS1fTime'),\n        ('2026-01-17', 2, 5, 8, '3016494', 'jeG1fTime'),\n        ('2026-03-06', 2, 8, 6, '3018729', 'jeG1fTime')\n), raw_values AS (\n    SELECT r.api_record_id, r.race_date, r.meet_code, r.race_number,\n           r.horse_number, r.horse_id, r.horse_name AS historical_horse_name_raw,\n           f.field_name, json_extract(a.payload_json, '$.' || f.field_name) AS api_value_raw,\n           json_type(a.payload_json, '$.' || f.field_name) AS api_value_json_type,\n           a.payload_sha256 AS api_payload_sha256,\n           a.source_artifact_id AS api_source_artifact_id,\n           s.sha256 AS api_source_page_sha256, s.raw_relative_path AS api_source_page_path,\n           CASE WHEN k.field_name IS NOT NULL THEN 1 ELSE 0 END AS known_website_review\n    FROM jeju_race_population_candidates r\n    JOIN api_records a ON a.api_record_id=r.api_record_id\n    JOIN source_artifacts s ON s.source_artifact_id=a.source_artifact_id\n    CROSS JOIN fields f\n    LEFT JOIN known_reviews k\n      ON (k.race_date,k.meet_code,k.race_number,k.horse_number,k.horse_id,k.field_name)\n       = (r.race_date,r.meet_code,r.race_number,r.horse_number,r.horse_id,f.field_name)\n)\nSELECT v.*,\n       CASE\n         WHEN o.api_record_id IS NOT NULL AND o.api_payload_sha256_at_review<>v.api_payload_sha256 THEN NULL\n         WHEN o.api_record_id IS NOT NULL THEN o.effective_seconds\n         WHEN v.known_website_review=1 THEN NULL\n         WHEN v.api_value_json_type IN ('integer','real') AND v.api_value_raw>0 THEN CAST(v.api_value_raw AS REAL)\n         ELSE NULL\n       END AS time_seconds,\n       CASE\n         WHEN o.api_record_id IS NOT NULL AND o.api_payload_sha256_at_review<>v.api_payload_sha256 THEN 'api_source_changed_since_review'\n         WHEN o.api_record_id IS NOT NULL THEN o.review_status\n         WHEN v.known_website_review=1 THEN 'website_review_not_applied'\n         WHEN v.api_value_json_type IN ('integer','real') AND v.api_value_raw>0 THEN 'api_positive_unreviewed'\n         ELSE 'api_unavailable_or_nonpositive'\n       END AS time_status,\n       o.website_display, o.website_seconds, o.website_url, o.checked_date_kst,\n       o.evidence_relative_path, o.evidence_sha256, o.decision_reason, o.applied_at_utc\nFROM raw_values v\nLEFT JOIN race_section_time_reviews o\n  ON o.api_record_id=v.api_record_id AND o.field_name=v.field_name",
+    "jeju_race_section_times": "CREATE VIEW jeju_race_section_times AS\nSELECT api_record_id,\n       MAX(CASE WHEN field_name='jeS1fTime' THEN time_seconds END) AS s1f_time_seconds,\n       MAX(CASE WHEN field_name='jeS1fTime' THEN time_status END) AS s1f_time_status,\n       MAX(CASE WHEN field_name='je_1cTime' THEN time_seconds END) AS c1_time_seconds,\n       MAX(CASE WHEN field_name='je_1cTime' THEN time_status END) AS c1_time_status,\n       MAX(CASE WHEN field_name='je_2cTime' THEN time_seconds END) AS c2_time_seconds,\n       MAX(CASE WHEN field_name='je_2cTime' THEN time_status END) AS c2_time_status,\n       MAX(CASE WHEN field_name='je_3cTime' THEN time_seconds END) AS c3_time_seconds,\n       MAX(CASE WHEN field_name='je_3cTime' THEN time_status END) AS c3_time_status,\n       MAX(CASE WHEN field_name='je_4cTime' THEN time_seconds END) AS c4_time_seconds,\n       MAX(CASE WHEN field_name='je_4cTime' THEN time_status END) AS c4_time_status,\n       MAX(CASE WHEN field_name='jeG3fTime' THEN time_seconds END) AS g3f_time_seconds,\n       MAX(CASE WHEN field_name='jeG3fTime' THEN time_status END) AS g3f_time_status,\n       MAX(CASE WHEN field_name='jeG1fTime' THEN time_seconds END) AS g1f_time_seconds,\n       MAX(CASE WHEN field_name='jeG1fTime' THEN time_status END) AS g1f_time_status,\n       SUM(time_status='website_corrected') AS section_time_website_correction_count,\n       SUM(time_status IN ('unresolved_official_website_anomaly','website_review_not_applied','api_source_changed_since_review')) AS section_time_review_required_count\nFROM jeju_race_section_time_values\nGROUP BY api_record_id",
+    "jeju_race_postrace_sections_2026": "CREATE VIEW jeju_race_postrace_sections_2026 AS\nSELECT a.*,\n       s.s1f_time_seconds,\n       s.s1f_time_status,\n       s.c1_time_seconds,\n       s.c1_time_status,\n       s.c2_time_seconds,\n       s.c2_time_status,\n       s.c3_time_seconds,\n       s.c3_time_status,\n       s.c4_time_seconds,\n       s.c4_time_status,\n       s.g3f_time_seconds,\n       s.g3f_time_status,\n       s.g1f_time_seconds,\n       s.g1f_time_status,\n       s.section_time_website_correction_count,\n       s.section_time_review_required_count\nFROM jeju_race_analysis_2026 a\nLEFT JOIN jeju_race_section_times s ON s.api_record_id=a.api_record_id"
+  },
+  "api_record_fingerprint": "8cf85d88d18db397728870fb30a7d927d7c71e0bb881836e77ca0eb9f89a8567",
+  "api_record_count": 273506,
+  "race_result_rows": 191604,
+  "candidate_rows": 92513,
+  "time_review_rows": [
+    {
+      "api_record_id": 178142,
+      "field_name": "jeS1fTime",
+      "review_status": "website_corrected",
+      "api_seconds_at_review": 120.0,
+      "api_payload_sha256_at_review": "ff2e514a109155d7902f5c172c6df60babd5a1fc6dffa8ea6bb354c4eb11728a",
+      "website_display": "0:20.0",
+      "website_seconds": 20.0,
+      "effective_seconds": 20.0,
+      "website_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20240302&realRcNo=3",
+      "checked_date_kst": "2026-10-02",
+      "evidence_relative_path": "jeju/research/20261002_section_passing_audit/website_time_check/evidence.json",
+      "evidence_sha256": "8d5e71b21181b45ee0f3feb25432e0ef52a44ee0d58d78d677f31ba1ac6b14d9",
+      "decision_reason": "User approved official website value on 2026-10-02; preserve API original.",
+      "applied_at_utc": "2026-10-02T08:06:33+00:00"
+    },
+    {
+      "api_record_id": 180747,
+      "field_name": "jeS1fTime",
+      "review_status": "website_corrected",
+      "api_seconds_at_review": 77.8,
+      "api_payload_sha256_at_review": "f0c55ec22d147d438fa099122769964ee642270c519266b0734379df889218da",
+      "website_display": "0:17.8",
+      "website_seconds": 17.8,
+      "effective_seconds": 17.8,
+      "website_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20251017&realRcNo=7",
+      "checked_date_kst": "2026-10-02",
+      "evidence_relative_path": "jeju/research/20261002_section_passing_audit/website_time_check/evidence.json",
+      "evidence_sha256": "8d5e71b21181b45ee0f3feb25432e0ef52a44ee0d58d78d677f31ba1ac6b14d9",
+      "decision_reason": "User approved official website value on 2026-10-02; preserve API original.",
+      "applied_at_utc": "2026-10-02T08:06:33+00:00"
+    },
+    {
+      "api_record_id": 190686,
+      "field_name": "jeG1fTime",
+      "review_status": "website_corrected",
+      "api_seconds_at_review": 76.0,
+      "api_payload_sha256_at_review": "d44f67a90d51dd1d82366950031af96b47160e04311b84b4301be2d9a57c148f",
+      "website_display": "0:16.0",
+      "website_seconds": 16.0,
+      "effective_seconds": 16.0,
+      "website_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20260306&realRcNo=8",
+      "checked_date_kst": "2026-10-02",
+      "evidence_relative_path": "jeju/research/20261002_section_passing_audit/website_time_check/evidence.json",
+      "evidence_sha256": "8d5e71b21181b45ee0f3feb25432e0ef52a44ee0d58d78d677f31ba1ac6b14d9",
+      "decision_reason": "User approved official website value on 2026-10-02; preserve API original.",
+      "applied_at_utc": "2026-10-02T08:06:33+00:00"
+    },
+    {
+      "api_record_id": 191451,
+      "field_name": "jeG1fTime",
+      "review_status": "unresolved_official_website_anomaly",
+      "api_seconds_at_review": 77.2,
+      "api_payload_sha256_at_review": "575ac47b3ebe8b3d03e089efe0b2e3706b8ff4e181e7ec4a596d39da9e009150",
+      "website_display": "1:17.2",
+      "website_seconds": 77.2,
+      "effective_seconds": null,
+      "website_url": "https://race.kra.co.kr/raceScore/ScoretableDetailList.do?Act=04&Sub=1&meet=2&realRcDate=20260117&realRcNo=5",
+      "checked_date_kst": "2026-10-02",
+      "evidence_relative_path": "jeju/research/20261002_section_passing_audit/website_time_check/evidence.json",
+      "evidence_sha256": "8d5e71b21181b45ee0f3feb25432e0ef52a44ee0d58d78d677f31ba1ac6b14d9",
+      "decision_reason": "Website also shows 1:17.2; G1F exceeds G3F. Preserve observations; effective value NULL, no inferred 17.2.",
+      "applied_at_utc": "2026-10-02T08:06:33+00:00"
+    }
+  ],
+  "guanghae_g1f_selected_value": null,
+  "guanghae_g1f_original_api_value": 77.2
+}

@@ -1,0 +1,35 @@
+# API42_1 마필정보 조회 결과
+
+- 조회일(KST): 2026-09-30
+- 동결 대상: 경주결과 후보 4,006마리와 API20_1 `majong=제주` 보조 후보 611마리의 합집합 4,617마리
+- 수집기 요청 시작: 3,000/3,000회 (앞선 실행 600회 + 이번 연속 실행 2,400회)
+- API42 검증 완료: 고유 마필 2,900마리 (경주 후보 2,900, 보조 후보 0)
+- 미완료: 1,717마리 (경주 후보 1,106, 보조 후보 611)
+
+## 결과
+
+검증된 API42_1 현재 프로필 품종값은 `제주마` 2,900건이다. 2,900건 모두 HTTP 200, API `resultCode=00`, `totalCount=1`, 요청한 `hrNo`와 반환 ID 일치, 품종 필드 존재를 통과했다. 성공 응답 원문 2,900건은 저장 후 크기와 SHA-256을 재검증했다. 별도로 HTTP 504 응답 원문 1건도 보존하고 격리했다.
+
+검증된 2,900개 ID는 모두 API20_1 주행심사 이벤트의 `majong=제주`와 일치했다. API20_1 값은 심사 이벤트일의 관측이고 API42_1 `breed=제주마`는 조회 당시 프로필 값이므로 각각 따로 보존했다. 현재값을 과거 경주일에 소급 적용하지 않는다.
+
+경주결과 후보 기준 현재 프로필 조회 coverage는 2,900/4,006 (72.39%)이다. 동결된 전체 대상 기준은 2,900/4,617 (62.81%)이다. 보조 후보 611마리는 아직 조회하지 않았다.
+
+## 호출 제한과 미완료 ID
+
+공공데이터포털의 [마필종합 상세정보 API 신청 페이지](https://www.data.go.kr/data/15057985/openapi.do)가 API42_1 개발계정 트래픽을 일일 3,000회로 표시한다. 수집기는 이전 실행의 600회를 포함해 오늘 총 3,000회 시작한 시점에 멈췄다. 공개 페이지는 계정의 실시간 사용량을 보여주지 않으므로, 상한 계산은 이 수집기가 기록한 시작 요청 수에 근거한다. 다른 한국마사회 API 호출은 API42_1 서비스 한도와 별도로 취급했다. 요청 시작 간격은 최소 1.05초로 설정했다.
+
+3,000회 중 99회는 첫 기본 샌드박스 경로의 연결 오류로 HTTP 응답을 받지 못했다. 이 호출도 일일 요청 수에 포함했고, 이후 승인된 네트워크 경로에서 대상 ID를 처리했다. 한 ID(`3012744`)에서 단일 HTTP 504/API 오류가 발생해 응답 원문을 보존하고 격리했다. 나머지 2,900개 고유 ID는 검증 완료다. HTTP 429나 API 일일/초당 한도 오류(코드 22/23)는 발생하지 않았다.
+
+현재 미완료 1,717개는 경주 후보 1,106개(위 504 ID 포함)와 API20_1 보조 후보 611개다. 따라서 전체 4,617마리 프로필 수집은 완료되지 않았다. 다음 KST 날짜에 수집기 명령을 수동 실행하면 동결 파일 해시를 확인하고 미완료 ID부터 재개한다. 예약 작업이나 cron은 만들지 않았다.
+
+## 날짜 필드와 해석
+
+API가 반환한 날짜 관련 필드는 원문 그대로 원장에 보존했다. `-`, `--`, `—`, 0, `N/A`, `NA`, `null`, 빈 값 등 placeholder는 집계에서 제외했다. 나머지는 `collection_summary.json`에서 필드별 빈도로 집계했다. `chgDt` 등의 공식 정의와 품종 유효기간은 확인되지 않았으므로 원문으로만 다룬다.
+
+## 파일
+
+- [`collect_api42_profiles.py`](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20260930_api42_horse_breed_collection/collect_api42_profiles.py>): 일일 3,000회 상한, 최소 1.05초 간격, 재개 실행
+- [`target_manifest.json`](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20260930_api42_horse_breed_collection/target_manifest.json>): 4,617개 동결 대상과 파일 해시
+- [`request_ledger.jsonl`](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20260930_api42_horse_breed_collection/request_ledger.jsonl>): 누적 3,000회 요청의 상태 및 검증 기록
+- [`quarantine_ledger.jsonl`](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20260930_api42_horse_breed_collection/quarantine_ledger.jsonl>): 연결 실패와 검토 대상
+- [`collection_summary.json`](</Users/kimyongjin/Desktop/horse_racing/jeju/research/20260930_api42_horse_breed_collection/collection_summary.json>): 최신 누적 통계와 미완료 수
