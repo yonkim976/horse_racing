@@ -1,0 +1,72 @@
+{
+  "backup": {
+    "bytes": 570015744,
+    "path": "jeju/research/20261001_api42_profile_db_import/backups/jeju_native_core_before_api42_20261001.sqlite3",
+    "reused_existing_verified_backup": false,
+    "sha256": "392c05dceef4ab50c14ace448af59f152324b7e278fe627cb462d9908594b1b8"
+  },
+  "database_path": "jeju/data/jeju_native_core.sqlite3",
+  "generated_at_utc": "2026-10-01T07:34:58.277+00:00",
+  "idempotency_verified": false,
+  "import_batch_id": "api42_current_profile_observations_20261001",
+  "inserted": {
+    "api_records_inserted": 4617,
+    "breed_evidence_inserted": 4617,
+    "created_at_utc": "2026-10-01T07:34:42.929+00:00",
+    "horse_profile_observations_inserted": 4617,
+    "schema_metadata_keys_added": 4,
+    "source_artifacts_inserted": 4617
+  },
+  "migration_path": "jeju/data/schema/migrations/20261001_add_api42_horse_profiles.sql",
+  "source": {
+    "api20_crosswalk_sha256": "ad7842ea63eddab755cdf0faa3ba8b6f33938dd6cf0eadd5f087c0c620ddec94",
+    "collection_dates_kst": {
+      "2026-09-30": 2900,
+      "2026-10-01": 1717
+    },
+    "collection_dir": "jeju/research/20260930_api42_horse_breed_collection",
+    "groups": {
+      "api20_jeju_supplement": 611,
+      "race_result_candidate": 4006
+    },
+    "normalized_official_fields": {
+      "age_raw": "age",
+      "birth_date_raw": "birthDt",
+      "breed_label_raw": "breed",
+      "color_raw": "color",
+      "horse_name_raw": "hrNm",
+      "production_country_raw": "prdCty",
+      "sex_raw": "sex"
+    },
+    "profile_observation_timing": "retrieval-time observation; not backdated to any race or trial date",
+    "raw_response_field_count_in_payload_json": 218,
+    "request_attempt_count": 4718,
+    "request_ledger_sha256": "007b5f426e15898c4ef61be75e3247091c158816d549a39a9fb2dfd5bc14a235",
+    "target_count": 4617,
+    "target_ids_sha256": "b2f0737ee92f4b9d54f4b5d0ecb5cb45ff370e03b279d942b99cd81f90a0a117"
+  },
+  "status": "imported",
+  "verification": {
+    "api42_breed_evidence_with_event_date": 0,
+    "api_record_count": 4617,
+    "breed_evidence_count": 4617,
+    "candidate_join_coverage": {
+      "covered": 4006,
+      "target": 4006
+    },
+    "foreign_key_violations": [],
+    "horse_profile_observation_count": 4617,
+    "integrity_check": [
+      "ok"
+    ],
+    "latest_breed_distribution": {
+      "제주마": 4617
+    },
+    "latest_profile_unique_horse_count": 4617,
+    "source_artifact_count": 4617,
+    "supplement_join_coverage": {
+      "covered": 611,
+      "target": 611
+    }
+  }
+}

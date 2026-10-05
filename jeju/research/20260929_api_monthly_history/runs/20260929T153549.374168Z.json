@@ -1,0 +1,43 @@
+{
+  "run_id": "20260929T153549.374168Z",
+  "kst_date": "2026-09-30",
+  "status": "first_positive_training_checkpoint",
+  "credential_recorded": false,
+  "source": "KRA official API response pages",
+  "request_attempts": 19,
+  "request_attempt_limit_this_run": 1800,
+  "max_new_partitions_this_run": 594,
+  "stop_after_first_training_positive": true,
+  "transient_retry_limit_per_page": 3,
+  "transient_backoff_seconds": [
+    1,
+    2,
+    4
+  ],
+  "page_size": 1000,
+  "pace_seconds_between_successful_pages": 0.35,
+  "shared_daily_quota": 3000,
+  "shared_other_agents_request_count_known": false,
+  "partitions_touched": [
+    "daily_training:200704",
+    "daily_training:200705",
+    "daily_training:200706",
+    "daily_training:200707",
+    "daily_training:200708",
+    "daily_training:200709",
+    "daily_training:200710",
+    "entry_weight:200705",
+    "entry_weight:200706",
+    "entry_weight:200707",
+    "entry_weight:200708",
+    "entry_weight:200709",
+    "entry_weight:200710"
+  ],
+  "failed_partitions": [],
+  "successful_pages": 19,
+  "failed_request_attempts": 0,
+  "quota_or_error": null,
+  "last_completed_partition": "daily_training:200710",
+  "first_positive_training_month": "200710",
+  "finished_at_utc": "2026-09-29T15:37:46.348866+00:00"
+}

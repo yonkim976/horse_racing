@@ -1,0 +1,453 @@
+{
+  "source": "KRA official OpenAPI via data.go.kr/B551015",
+  "endpoint": "/API16_1/raceHorseClinic_1",
+  "operation": "raceHorseClinic_1",
+  "meet": 2,
+  "filter_field": "clinic_year",
+  "row_date_field": "clinicDate",
+  "requested_years": [
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2009,
+    2010,
+    2011
+  ],
+  "page_size": 1000,
+  "credential_recorded": false,
+  "retry_policy": {
+    "max_transient_retries": 2,
+    "min_interval_seconds_between_requests": 1.2,
+    "rate_limit_retry": false
+  },
+  "years": {
+    "2002": {
+      "year": 2002,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915832669
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915830239,
+          "retrieved_at_ms": 1790915832668,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2002",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2002/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2003": {
+      "year": 2003,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915836101
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915833874,
+          "retrieved_at_ms": 1790915836101,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2003",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2003/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2004": {
+      "year": 2004,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915839798
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915837306,
+          "retrieved_at_ms": 1790915839798,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2004",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2004/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2005": {
+      "year": 2005,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915843682
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915841001,
+          "retrieved_at_ms": 1790915843682,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2005",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2005/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2006": {
+      "year": 2006,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915847117
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915844885,
+          "retrieved_at_ms": 1790915847117,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2006",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2006/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2007": {
+      "year": 2007,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915850657
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915848322,
+          "retrieved_at_ms": 1790915850656,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2007",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2007/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2009": {
+      "year": 2009,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915854614
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915851862,
+          "retrieved_at_ms": 1790915854614,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2009",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2009/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2010": {
+      "year": 2010,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915858131
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915855819,
+          "retrieved_at_ms": 1790915858131,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2010",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2010/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "2011": {
+      "year": 2011,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "http_response",
+          "completed_at_ms": 1790915861951
+        }
+      ],
+      "pages": [
+        {
+          "page_no": 1,
+          "http_status": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "requested_at_ms": 1790915859336,
+          "retrieved_at_ms": 1790915861951,
+          "public_params": {
+            "meet": 2,
+            "clinic_year": "2011",
+            "_type": "json",
+            "pageNo": 1,
+            "numOfRows": 1000
+          },
+          "api_result_code": "00",
+          "api_total_count": 0,
+          "api_page_size": 1000,
+          "api_reported_page_no": 1,
+          "actual_page_rows": 0,
+          "expected_page_count": 1,
+          "rows_matching_requested_year": 0,
+          "rows_with_unparseable_date": 0,
+          "rows_after_cutoff": 0,
+          "date_min": null,
+          "date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/clinic/year=2011/page_0001.json",
+          "attempts_used": 1,
+          "sample_rows": []
+        }
+      ],
+      "status": "query_complete_zero_rows",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    }
+  },
+  "last_run_finished_at_utc": "2026-10-02T04:37:41.955946+00:00",
+  "run_status": "completed_all_requested_years"
+}

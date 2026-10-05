@@ -1,0 +1,48 @@
+{
+  "decision_date_kst": "2026-10-02",
+  "rider_absence_clarification": {
+    "candidate_rows": 10666,
+    "key_absent_rows": 5797,
+    "explicit_null_rows": 0,
+    "empty_string_rows": 0,
+    "dash_rows": 0,
+    "provided_rows": 4869,
+    "missing_does_not_mean_no_rider": true
+  },
+  "external_horse_trainer_display": {
+    "horse_id": "3103317",
+    "exam_date": "20230831",
+    "trainNo": 1,
+    "trainer_display_name": "외부마",
+    "trainer_name_raw": "외부마",
+    "trainer_code_raw": "0BBBBB",
+    "normalized_trainer_id": null,
+    "preserve_horse_id_and_native_breed": true,
+    "exclude_exam_row": false,
+    "applies_when_loading_api21_candidates": true,
+    "user_instruction": "외부마는 외부마라고 적재하면 되고"
+  },
+  "small_bear_age_review": {
+    "horse_id": "3005648",
+    "horse_name": "작은곰",
+    "status": "deleted_by_user",
+    "user_instruction": "작은곰은 한번 확인해보고 알려줄게",
+    "source_age_or_birth_date_corrected": false,
+    "previous_status": "awaiting_user_verification",
+    "latest_user_instruction": "작은곰은 데이터 삭제해줘 어차피 뭐가 없어서..",
+    "deletion_receipt": "../../maintenance/small_bear_removal_20261002/deletion_receipt.json"
+  },
+  "database_write_performed": false,
+  "subsequent_small_bear_deletion_database_write_performed": true,
+  "rider_missing_accepted": {
+    "decision_date_kst": "2026-10-02",
+    "user_instruction": "라이더 없다고 문서에 남겨주고 다음으로 넘어가자",
+    "current_missing_rows": 5795,
+    "storage_value": null,
+    "missing_reason": "API field not provided",
+    "infer_no_rider": false,
+    "additional_collection_in_this_step": false,
+    "next_step": "Import 21 already-verified API42 profiles, then load API21 native candidates and verify links/counts/duplicates/FK",
+    "database_load_executed_in_this_followup": false
+  }
+}

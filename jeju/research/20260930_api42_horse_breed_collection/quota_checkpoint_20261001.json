@@ -1,0 +1,22 @@
+{
+  "checked_on_kst": "2026-10-01",
+  "source": "https://www.data.go.kr/data/15057985/openapi.do",
+  "portal_dataset_id": "15057985",
+  "quota_scope": "API42_1 horse profile service development account",
+  "portal_advertised_daily_request_limit": 3000,
+  "portal_error_code_22": "daily request allowance for this API service exceeded",
+  "portal_error_code_23": "per-second request allowance for this API service exceeded",
+  "collector_request_start_interval_seconds": 1.05,
+  "collector_kst_day_safety_window": true,
+  "collector_requests_started_before_resume": 0,
+  "maximum_additional_collector_requests_today": 3000,
+  "other_kra_api_calls_subtracted": false,
+  "account_live_remaining_usage_visible_on_public_page": false,
+  "stop_conditions": [
+    "HTTP 429",
+    "API resultCode 22",
+    "API resultCode 23",
+    "permission or service-key error"
+  ],
+  "notes": "Portal limit checked for 2026-10-01 KST. The public page does not expose live account usage; collector-owned earlier starts are counted conservatively. Other KRA API services have separate advertised service limits and are not subtracted here."
+}

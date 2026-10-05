@@ -1,0 +1,147 @@
+{
+  "after": {
+    "api_records": 261395,
+    "breed_evidence": 39012,
+    "horse_profile_observations": 4637,
+    "source_artifacts": 4778,
+    "starting_exam_api_rows": 10664
+  },
+  "backup": {
+    "bytes": 1721880576,
+    "integrity_check": "ok",
+    "path": "/private/tmp/starting-exam-api21-backup-spq2quol/database.sqlite3",
+    "sha256": "372e1dcf82c07d1c3e80f4f25727c08d9d62e674e1f68d1cfe99b9bb1f23c31d",
+    "temporary": true
+  },
+  "before": {
+    "api_records": 250710,
+    "breed_evidence": 38991,
+    "horse_profile_observations": 4616,
+    "source_artifacts": 4722,
+    "starting_exam_api_rows": 0
+  },
+  "database_path": "/private/tmp/jeju_api21_load_stage_20261002.sqlite3",
+  "generated_at_utc": "2026-10-01T21:43:40.380+00:00",
+  "idempotency_replay": {
+    "after": {
+      "api_records": 261395,
+      "breed_evidence": 39012,
+      "horse_profile_observations": 4637,
+      "source_artifacts": 4778,
+      "starting_exam_api_rows": 10664
+    },
+    "inserted": {
+      "api_records": 0,
+      "breed_evidence": 0,
+      "horse_profile_observations": 0,
+      "schema_metadata_keys": 0,
+      "source_artifacts": 0,
+      "starting_exam_api_rows": 0
+    },
+    "verification": {
+      "analysis_current_profile_breed_is_historical_claim": false,
+      "analysis_view_event_date_cutoff": "2026-09-19",
+      "analysis_view_name": "starting_exam_api_rows_analysis_2026",
+      "analysis_view_rows": 10620,
+      "api21_api_record_item_links": 10664,
+      "api21_candidate_unique_horse_ids": 4636,
+      "api21_dash_judgement_rows_normalized_null_unknown": 4,
+      "api21_external_trainer_rows_raw_retained_normalized_null": 1,
+      "api21_field_absence_counts": {
+        "chulNo": 14,
+        "daySerial": 14,
+        "rider": 5795
+      },
+      "api21_normalized_rows": 10664,
+      "api21_same_horse_date_multi_round_groups": 779,
+      "api21_same_horse_date_multi_round_rows": 1558,
+      "api21_source_artifact_record_index_mismatches": 0,
+      "api42_followup_profiles": 21,
+      "api42_horse_profile_observations": 21,
+      "api42_horse_profile_records": 21,
+      "automatic_model_input": false,
+      "current_profile_join_missing_horse_ids": [],
+      "excluded_small_bear_exam_rows": 0,
+      "excluded_small_bear_profile_rows": 0,
+      "foreign_key_issues": [],
+      "integrity_check": [
+        "ok"
+      ],
+      "publication_time_available": false,
+      "rows_after_analysis_cutoff_excluded": 44
+    },
+    "zero_additional_rows": true
+  },
+  "import_batch_id": "api21_starting_exam_candidate_load_20261002",
+  "inserted": {
+    "api_records": 10685,
+    "breed_evidence": 21,
+    "horse_profile_observations": 21,
+    "schema_metadata_keys": 12,
+    "source_artifacts": 56,
+    "starting_exam_api_rows": 10664
+  },
+  "metadata_keys_added": 12,
+  "migration_path": "jeju/research/20261002_starting_exam_db_load/20261002_add_starting_exam_api_rows.sql",
+  "policy": {
+    "analysis_cutoff": "2026-09-19",
+    "analysis_view": "starting_exam_api_rows_analysis_2026",
+    "api21_exam_date_policy": "Source trainDate is an event date without publication timestamp. For a race-date join, require exam_date < race_date; do not infer availability from source collection time.",
+    "api21_name_field_note": "API21 name_raw is source text (often '한국') and is not a breed label.",
+    "api42_profile_timing": "The 21 profile observations use API42 attempt completed_at_utc because individual request timestamps are absent.",
+    "automatic_model_input": false,
+    "profile_breed_timing": "Current profile breed is a retrieval-time observation and is not asserted as the historical breed on exam_date.",
+    "raw_field_policy": "Original item values and types remain in api_records.payload_json; raw source pages remain in source_artifacts files with page SHA-256."
+  },
+  "source": {
+    "api21_candidate_pages": 35,
+    "api21_candidate_sha256": "4965639c7e39c5e1c458bf530106ffb3c9f18f64634444e5720cb1df616a38d1",
+    "api21_collection_dir": "jeju/research/20261001_starting_exam_api_collection",
+    "api21_collection_manifest_sha256": "e95da35fcdccca78806d6bb2e4186148f6d683369f169f4698475d6f2d5d8066",
+    "api21_horse_ids": 4636,
+    "api21_independent_verification_sha256": "87b62b049fd6c60213b8c5ab8b5851313712622fa156c0529c38b4c387c97d10",
+    "api21_rows": 10664,
+    "api21_success_report_sha256": "51cb61aac938c6ee188e518e8ae7b2c10eb730bd04eb86d1548d15063ddf448d",
+    "api42_followup_attempt_id": "20261001T151147.863223Z",
+    "api42_followup_manifest_sha256": "ea2404ca3d012257f406ec2b1ba68a9ed2fabaa389046347589d39ffc48dccef",
+    "api42_followup_profiles": 21,
+    "api42_followup_summary_sha256": "397c5beea150b240efc791beafc1e358fc6146a3693deea20dbac4fc8c31f117",
+    "api42_observed_at_utc": "2026-10-01T15:12:06.027315+00:00",
+    "api42_profile_raw_field_count": 218,
+    "api42_timestamp_basis": "attempt completed_at_utc; individual probe timestamps are absent",
+    "excluded_horse_id": "3005648"
+  },
+  "status": "imported",
+  "verification": {
+    "analysis_current_profile_breed_is_historical_claim": false,
+    "analysis_view_event_date_cutoff": "2026-09-19",
+    "analysis_view_name": "starting_exam_api_rows_analysis_2026",
+    "analysis_view_rows": 10620,
+    "api21_api_record_item_links": 10664,
+    "api21_candidate_unique_horse_ids": 4636,
+    "api21_dash_judgement_rows_normalized_null_unknown": 4,
+    "api21_external_trainer_rows_raw_retained_normalized_null": 1,
+    "api21_field_absence_counts": {
+      "chulNo": 14,
+      "daySerial": 14,
+      "rider": 5795
+    },
+    "api21_normalized_rows": 10664,
+    "api21_same_horse_date_multi_round_groups": 779,
+    "api21_same_horse_date_multi_round_rows": 1558,
+    "api21_source_artifact_record_index_mismatches": 0,
+    "api42_followup_profiles": 21,
+    "api42_horse_profile_observations": 21,
+    "api42_horse_profile_records": 21,
+    "automatic_model_input": false,
+    "current_profile_join_missing_horse_ids": [],
+    "excluded_small_bear_exam_rows": 0,
+    "excluded_small_bear_profile_rows": 0,
+    "foreign_key_issues": [],
+    "integrity_check": [
+      "ok"
+    ],
+    "publication_time_available": false,
+    "rows_after_analysis_cutoff_excluded": 44
+  }
+}

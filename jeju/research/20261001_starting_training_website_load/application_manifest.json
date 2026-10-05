@@ -1,0 +1,39 @@
+{
+  "status": "complete",
+  "scope": "starting_training_homepage_primary",
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "database_sha256_before": "34a491aaf8d9dd878315acd090c2af1719a2bbfda27a5309f631a3201acb7de0",
+  "database_sha256_after": "d99fbb079055f420e3a660099b076d82722e6a76ddb66698a4608ac4c9a632d0",
+  "backup_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3.pre_website_training_20261001T122553.450179Z.bak",
+  "backup_sha256": "416c3501ef65b4b8619b3195a904d5f6c33609b5876d00a39360bc77ba2fc9f7",
+  "worker_model": "gpt-6-luna",
+  "worker_reasoning_effort": "xhigh",
+  "root_responsibility": "source collection, code review, independent validation, production application and reporting",
+  "website_dates": 2529,
+  "website_raw_rows": 295470,
+  "native_horses": 4476,
+  "native_rows": 190842,
+  "analysis_rows_through_20260919": 190790,
+  "native_rows_after_cutoff": 52,
+  "january_17_website_only_native_horses": 24,
+  "january_17_website_only_native_rows": 27,
+  "original_api_raw_preserved": true,
+  "original_table_counts_and_definitions_unchanged": true,
+  "model_input_promotion": false,
+  "daily_api18_imported": false,
+  "production_replay_performed": false,
+  "staging_replay_rows_added": 0,
+  "staging_replay_artifacts_added": 0,
+  "integrity_check": "ok",
+  "foreign_key_violations": 0,
+  "source_manifest_sha256": "e4215d39f958c771072d6a7a88f6b33dde0c3944f67c9fc1bc9c12c8d532d60e",
+  "implementation_sha256": "e745dcbfab7434705b5495f91b28a7ecd70182f5671b14a3b101f5e0980e67c9",
+  "review_history": [
+    {
+      "version": "v1",
+      "issue": "Long profile join in new analysis view; overlapping readonly validation blocked staging replay",
+      "database_scope": "temporary staging only",
+      "resolution": "Interrupted readonly verifier; compact profile observation query in v2; sequential replay and verification passed"
+    }
+  ]
+}

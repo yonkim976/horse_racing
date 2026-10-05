@@ -1,0 +1,81 @@
+{
+  "report_date_local": "2026-10-02",
+  "requested_interval": {
+    "from": "2000-01-01",
+    "through_inclusive": "2026-10-02",
+    "meet": 2,
+    "from_year_note": "2000 is the requested search start; official API earliest availability was not established."
+  },
+  "api21_official_collection": {
+    "endpoint": "https://apis.data.go.kr/B551015/API21_1/startingTestResult_1",
+    "status": "blocked_service_key_not_registered",
+    "http_status": 403,
+    "error_code": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
+    "reason_code": "30",
+    "successful_pages": 0,
+    "rows_collected": 0,
+    "interpretation": "Collection failure only; no conclusion about whether exams took place or what their results were.",
+    "same_configured_key_api42_control": "HTTP 200; resultCode 00; 1 row returned.",
+    "attempt_reporting_cutoff": "2026-10-01",
+    "successful_capture_through": null
+  },
+  "verified_website_candidate_source": {
+    "dates": {
+      "2026-09-13": 11,
+      "2026-09-16": 11,
+      "2026-09-20": 16,
+      "2026-09-27": 8,
+      "2026-09-30": 20
+    },
+    "total_rows": 66,
+    "distinct_official_horse_ids": 40,
+    "website_pages_hash_verified": 14,
+    "current_api42_breed_confirmed_rows": 66,
+    "profile_source_rows": {
+      "existing_database_api42_profile": 36,
+      "new_api42_followup_profile": 30
+    },
+    "current_api42_followup_unique_ids": 21,
+    "current_api42_followup_breed_jeju_ma": 21,
+    "explicit_website_judgement_counts": {
+      "합격": 39,
+      "불합격": 15,
+      "1차합격": 12
+    },
+    "final_pass_count": 39,
+    "first_stage_pass_kept_separate": 12,
+    "inspection_reason_raw_counts": {
+      "출발미합(신)": 33,
+      "출발지정(신)": 8,
+      "출발지정(재)": 25
+    },
+    "failure_reason_raw_counts": {
+      "<blank>": 51,
+      "발진불량": 6,
+      "진입불량": 3,
+      "출발불량": 5,
+      "출발자세불량": 1
+    },
+    "source_key_duplicate_groups": 0,
+    "exact_content_duplicate_groups_removed": 0,
+    "duplicates_removed": 0,
+    "age_2026_derived_from_valid_current_profile_birth_date": 66,
+    "historical_breed_effective_on_exam_date_established": false,
+    "source_specific_jsonl": "website_native_candidate_rows.jsonl",
+    "source_specific_jsonl_sha256": "395c1e48b2f900c9df74470750f04d99fcc476dd755d9f012089559ae2140ffc",
+    "latest_observed_date": "2026-09-30",
+    "no_captured_rows_for": [
+      "2026-10-01",
+      "2026-10-02"
+    ]
+  },
+  "database_write_performed": false,
+  "api21_month_or_date_fallback_attempted": false,
+  "fallback_reason": "The same configured service key returned official API error 30. Further API21 partitions would repeat the service-registration failure.",
+  "credential_exposure_assessment": {
+    "exposure_surface": "One early diagnostic tool output displayed an exception URL containing the configured service-key query value.",
+    "persisted_research_files_scanned": 65,
+    "configured_value_matches": 0,
+    "recommended_handling": "Treat the credential as exposed in the task transcript and assess rotation before another API21 request."
+  }
+}

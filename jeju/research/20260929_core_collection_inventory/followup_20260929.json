@@ -1,0 +1,679 @@
+{
+  "verification_date": "2026-09-29",
+  "purpose": "Follow-up evidence only; no canonical data merged and no shared database changed.",
+  "official_result_api_retry": {
+    "attempt_manifest": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T070858.176641Z/attempt_manifest.json",
+    "status": "failed_dns_resolution",
+    "request_host": "apis.data.go.kr",
+    "started_at_utc": "2026-09-29T07:08:58.177021+00:00",
+    "failed_at_utc": "2026-09-29T07:09:29.263213+00:00",
+    "exception_types": [
+      "KraApiTransientError",
+      "ConnectError",
+      "ConnectError",
+      "gaierror"
+    ],
+    "exception_message": "[Errno 8] nodename nor servname provided, or not known",
+    "completed_response_pages": 0,
+    "persisted_response_files": [],
+    "service_key_recorded": false,
+    "existing_artifacts_overwritten": false,
+    "endpoint_url": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+    "operation": "raceResult_3",
+    "public_request_params": {
+      "meet": 2,
+      "rc_year": "2026",
+      "_type": "json"
+    },
+    "client_added_request_params": {
+      "pageNo": 1,
+      "numOfRows": 20000,
+      "service_key_parameter": "ServiceKey",
+      "service_key_value_recorded": false
+    },
+    "dns_failed_before_http_response": true,
+    "not_the_15057985_profile_api": true
+  },
+  "sep_13_19_result_candidates": {
+    "source_file": "jeju/research/20260929_core_collection_inventory/candidate_core_extension_20260913_19.jsonl",
+    "candidate_races": 22,
+    "candidate_entries": 206,
+    "local_operational_race_entry_id_and_horse_id_matches": 206,
+    "official_scorecard_race_counts": [
+      {
+        "date": "2026-09-17",
+        "races": 8
+      },
+      {
+        "date": "2026-09-18",
+        "races": 7
+      },
+      {
+        "date": "2026-09-19",
+        "races": 7
+      }
+    ],
+    "official_scorecard_list_url": "https://race.kra.co.kr/raceScore/ScoretableScoreList.do?Act=10&Sub=1&meet=2",
+    "reconciliation_status": "race_date_counts_match; individual horse IDs, placings, and times remain unverified against official result rows",
+    "canonical_merge_allowed": false
+  },
+  "running_trial_source": {
+    "official_list_url": "https://race.kra.co.kr/referee/RacingTrainCheckList.do?Act=06&Sub=7&meet=2",
+    "latest_date_shown": "2026-09-16",
+    "latest_event_type": "running_trial",
+    "latest_summary": {
+      "trial_races": 3,
+      "entries": 20,
+      "passed": 13
+    },
+    "local_phase2_latest_event_date": "2026-09-09",
+    "local_phase2_trial_events": 1945,
+    "local_phase2_trial_entries": 15688,
+    "profile_linkage": {
+      "detail_url_as_exposed_by_browser": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+      "profile_url_as_exposed_by_browser": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+      "profile_linkage_method": "Opened each horse-name link in the official 2026-09-16 running-trial result table; matched the linked profile display name and read its official horse number (마번) and breed (마종).",
+      "profile_snapshot_limitation": "The profile shows the current breed but does not expose a historical effective-from/to date for 2026-09-16.",
+      "raw_html_preserved": false,
+      "raw_html_limitation": "Browser-visible official pages were inspected, but their original HTTP response bytes were not saved. The API retry above returned no bytes.",
+      "verification_time_utc_bounds": {
+        "not_before": "2026-09-29T07:09:29.263213+00:00",
+        "not_after": "2026-09-29T07:16:31+00:00",
+        "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+      },
+      "detail_url_reproduction_note": "The displayed detail route is a shared endpoint and does not encode the selected date/race. Each entry is reproducible by opening the official list and selecting 2026-09-16 race 1, 2, or 3, then clicking that row’s horse-name link.",
+      "profile_url_reproduction_note": "The displayed profile route is a shared endpoint without a horse ID parameter; the official detail-table horse-name link selects the profile in the site context. The row name and captured official ID identify the profile inspected."
+    },
+    "entries": [
+      {
+        "trial_race": 1,
+        "horse_name": "청정소리",
+        "official_horse_id": "3109212",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 1,
+        "horse_name": "마시프",
+        "official_horse_id": "3109298",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 1,
+        "horse_name": "백두히트",
+        "official_horse_id": "3107912",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 1,
+        "horse_name": "천하통일",
+        "official_horse_id": "3109110",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 1,
+        "horse_name": "해강",
+        "official_horse_id": "3109424",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 1,
+        "horse_name": "무진로",
+        "official_horse_id": "3108201",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 1,
+        "horse_name": "돈마공주",
+        "official_horse_id": "3108965",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 1
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "선봉대",
+        "official_horse_id": "3103372",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "원중원",
+        "official_horse_id": "3104656",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "예쁘다",
+        "official_horse_id": "3109196",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "백두노을",
+        "official_horse_id": "3109010",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "장타로",
+        "official_horse_id": "3107886",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "광풍비상",
+        "official_horse_id": "3109375",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 2,
+        "horse_name": "스톰킹덤",
+        "official_horse_id": "3109011",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 2
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 3,
+        "horse_name": "텐언더",
+        "official_horse_id": "3107471",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 3
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 3,
+        "horse_name": "인자무적",
+        "official_horse_id": "3102254",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 3
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 3,
+        "horse_name": "라이덴",
+        "official_horse_id": "3101444",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 3
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 3,
+        "horse_name": "천하군자",
+        "official_horse_id": "3102482",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 3
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 3,
+        "horse_name": "아라천마",
+        "official_horse_id": "3104261",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 3
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      },
+      {
+        "trial_race": 3,
+        "horse_name": "전승맨",
+        "official_horse_id": "3109163",
+        "profile_breed": "제주마",
+        "identity_status": "profile_linked",
+        "breed_status": "current_profile_confirmed",
+        "official_detail_url": "https://race.kra.co.kr/referee/RacingTrainCheckScoreTable.do",
+        "official_profile_url": "https://race.kra.co.kr/racehorse/profileHorseItem.do",
+        "verification_window_utc": {
+          "not_before": "2026-09-29T07:09:29.263213+00:00",
+          "not_after": "2026-09-29T07:16:31+00:00",
+          "precision_note": "Per-profile exact timestamps were not recorded; this is the observed verification window."
+        },
+        "linkage_method": "Click this horse name in the specified KRA trial detail table; match official profile name and read 마번 and 마종.",
+        "detail_row_context": {
+          "date": "2026-09-16",
+          "trial_race": 3
+        },
+        "detail_url_is_standalone": false,
+        "profile_url_is_standalone": false
+      }
+    ],
+    "canonical_merge_allowed": false
+  },
+  "starting_inspection_source": {
+    "official_list_url": "https://race.kra.co.kr/referee/StartingRacingTrainCheckList.do?Act=06&Sub=6&meet=2",
+    "event_type": "starting_inspection; separate from running_trial",
+    "within_cutoff_rows": [
+      {
+        "date": "2026-09-13",
+        "rounds": 2,
+        "entries": 11,
+        "passed": 7
+      },
+      {
+        "date": "2026-09-16",
+        "rounds": 3,
+        "entries": 11,
+        "passed": 6
+      }
+    ],
+    "after_cutoff_visible_rows_excluded": [
+      "2026-09-20",
+      "2026-09-27"
+    ]
+  },
+  "trial_identity_breed_overlap": {
+    "source_db": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+    "read_only_query": "SELECT en.identity_status, en.breed_status, COUNT(*) FROM entry en JOIN event ev ON ev.id=en.event_id WHERE ev.event_type='trial' AND ev.meet=2 GROUP BY en.identity_status,en.breed_status ORDER BY en.identity_status,en.breed_status;",
+    "cross_tab": [
+      {
+        "identity_status": "official_trial_hr_tr_linked",
+        "breed_status": "native_confirmed",
+        "rows": 15633
+      },
+      {
+        "identity_status": "official_trial_identity_unresolved",
+        "breed_status": "native_candidate_breed_unconfirmed",
+        "rows": 14
+      },
+      {
+        "identity_status": "official_trial_identity_unresolved",
+        "breed_status": "native_confirmed",
+        "rows": 41
+      }
+    ],
+    "totals": {
+      "entries": 15688,
+      "identity_unresolved": 55,
+      "breed_unconfirmed": 14,
+      "intersection_unresolved_and_breed_unconfirmed": 14
+    },
+    "interpretation": "The 14 breed-unconfirmed rows are a subset of the 55 identity-unresolved rows. The dimensions overlap and must not be summed as disjoint categories."
+  },
+  "rank_prefix_breed_evidence_review": {
+    "existing_ledger_rule": "official_result_rank_explicit_je",
+    "observed_source_fields": [
+      "meet",
+      "rank",
+      "hrNo",
+      "hrName"
+    ],
+    "official_detailed_result_dataset_url": "https://www.data.go.kr/data/15089492/openapi.do",
+    "official_racehorse_roster_dataset_url": "https://www.data.go.kr/en/data/15089503/openapi.do",
+    "finding": "All 92,208 rows in the existing 9,423-race result layer are marked native_confirmed solely with breed_evidence=official_result_rank_explicit_je. This establishes the implementation rule, not its biological validity. The current API4_3 field semantics need direct documentation; the KRA roster API calls its own rank field racehorse grade, and a separate standings API provides blood codes (1 제주마, 2 재래마, 3 한라마). Treat the existing rank-derived breed labels as provisional pending a full re-audit against explicit horse ID/profile or blood evidence.",
+    "next_evidence_for_canonical_breed": "Join official horse ID to event-time KRA profile/blood evidence; preserve unknown or conflicting records as unresolved.",
+    "official_breed_codes_dataset_url": "https://www.data.go.kr/data/15089725/openapi.do",
+    "existing_race_ledger_rows": 92208,
+    "existing_race_ledger_evidence_counts": [
+      {
+        "breed_status": "native_confirmed",
+        "breed_evidence": "official_result_rank_explicit_je",
+        "rows": 92208
+      }
+    ],
+    "official_detailed_result_dataset_note": "15089492 documents the separate racedetailresult/getracedetailresult service, not the current API4_3/raceResult_3 endpoint. Its field list omits breed, but it is not direct schema evidence for API4_3.",
+    "official_roster_rank_definition_note": "The separate KRA racehorse roster API describes its rank field as racehorse grade; matching semantics to API4_3 is an inference because the API4_3 schema was not available in this retry.",
+    "classification_is_inference": true
+  },
+  "official_source_recency_check": {
+    "checked_as_of": "2026-09-29",
+    "latest_official_jeju_result_date": "2026-09-19",
+    "official_result_list_url": "https://race.kra.co.kr/raceScore/ScoretableScoreList.do?Act=10&Sub=1&meet=2",
+    "official_result_races": {
+      "2026-09-17": 8,
+      "2026-09-18": 7,
+      "2026-09-19": 7
+    },
+    "2026-09-24_result_list_entry": false,
+    "official_race_plan_url": "https://race.kra.co.kr/down/raceplan2026_20260516.pdf",
+    "official_holiday_period": {
+      "start": "2026-09-25",
+      "end": "2026-09-27",
+      "reason": "Chuseok"
+    },
+    "candidate_scope_remains_through": "2026-09-19",
+    "rowwise_official_result_comparison": "not completed; keep all 22 races / 206 entries isolated as candidates",
+    "latest_official_jeju_running_trial_date": "2026-09-16",
+    "running_trial_entries": 20,
+    "running_trial_passed": 13,
+    "running_trial_list_url": "https://race.kra.co.kr/referee/RacingTrainCheckList.do?Act=06&Sub=7&meet=2",
+    "local_running_trial_last_date": "2026-09-09",
+    "running_trial_raw_html_bytes_saved": false
+  },
+  "horse_breed_profile_api_15057985": {
+    "dataset_title": "한국마사회 마필종합 상세정보",
+    "dataset_id": "15057985",
+    "official_portal_url": "https://www.data.go.kr/data/15057985/openapi.do",
+    "used_by_failed_result_retry": false,
+    "endpoint_url": "https://apis.data.go.kr/B551015/API42_1/totalHorseInfo_1",
+    "method": "GET",
+    "operation": "totalHorseInfo_1",
+    "request_parameters": {
+      "required": [
+        "ServiceKey",
+        "pageNo",
+        "numOfRows"
+      ],
+      "optional": [
+        "hr_no",
+        "hr_name",
+        "hr_eng_name"
+      ]
+    },
+    "response_fields": {
+      "horse_id": "hrNo",
+      "horse_name": "hrNm",
+      "breed": "breed"
+    },
+    "breed_field_description": "품종",
+    "portal_time_range": "-",
+    "effective_date_or_as_of_parameter_documented": false,
+    "portal_last_modified": "2026-04-19",
+    "observed_existing_result_population": {
+      "rows": 92208,
+      "unique_horse_ids": 3996
+    },
+    "use_for": "horse-ID-level current-profile breed cross-check only; separate from race result reconciliation",
+    "temporal_limit": "No historical effective-date contract was found; current breed must not silently be asserted as valid on every historical race date.",
+    "api_response_bytes_collected": false,
+    "reason_not_called": "This host is covered by the environment DNS failure; no same-host retries were made."
+  },
+  "execution_environment_dns_diagnostic": {
+    "hosts": [
+      "apis.data.go.kr",
+      "race.kra.co.kr",
+      "www.data.go.kr"
+    ],
+    "result": "socket.getaddrinfo raised gaierror errno 8 for each host in the shell environment",
+    "provenance": "independent read-only diagnostic reported by the coordinating agent",
+    "same_dns_retries_performed_after_diagnostic": false
+  }
+}

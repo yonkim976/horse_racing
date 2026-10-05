@@ -1,0 +1,769 @@
+{
+  "inspected_at_kst": "2026-10-05T20:16:15.189912+09:00",
+  "db_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "db_bytes": 1793323008,
+  "sqlite_version": "3.50.4",
+  "access": "mode=ro; PRAGMA query_only=ON",
+  "scope": "Current local DB aggregates, structural checks, quality hold checks; not a full source revalidation or training eligibility decision.",
+  "quick_check": [
+    {
+      "quick_check": "ok"
+    }
+  ],
+  "foreign_key_violation_count": 0,
+  "schema_objects": [
+    {
+      "type": "index",
+      "count": 29
+    },
+    {
+      "type": "table",
+      "count": 32
+    },
+    {
+      "type": "view",
+      "count": 29
+    }
+  ],
+  "candidate_population_all": {
+    "rows": 92513,
+    "races": 9494,
+    "first_date": "2002-07-06",
+    "last_date": "2026-09-19",
+    "horses": 4006,
+    "valid_finish_rows": 90210,
+    "races_with_any_valid_finish": 9347,
+    "races_without_valid_finish": 147,
+    "partial_candidate_races": [
+      {
+        "race_date": "2002-07-06",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2002-07-14",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 4,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-08-10",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-08-10",
+        "meet_code": 2,
+        "race_number": 2,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-08-11",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 3,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-08-31",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 2,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-10-05",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-10-12",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-10-13",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2002-11-02",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2002-11-09",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2002-11-09",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2002-11-10",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2002-11-10",
+        "meet_code": 2,
+        "race_number": 8,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2002-12-07",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-01-12",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-01-12",
+        "meet_code": 2,
+        "race_number": 6,
+        "candidate_entries": 1,
+        "all_stored_entries": 7
+      },
+      {
+        "race_date": "2003-02-23",
+        "meet_code": 2,
+        "race_number": 7,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-03-09",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-03-15",
+        "meet_code": 2,
+        "race_number": 7,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-03-29",
+        "meet_code": 2,
+        "race_number": 5,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-04-19",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 2,
+        "all_stored_entries": 7
+      },
+      {
+        "race_date": "2003-04-19",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 2,
+        "all_stored_entries": 7
+      },
+      {
+        "race_date": "2003-04-27",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-05-03",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 1,
+        "all_stored_entries": 7
+      },
+      {
+        "race_date": "2003-05-17",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 2,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-05-31",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-06-14",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 7
+      },
+      {
+        "race_date": "2003-06-28",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 3,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-07-12",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-07-13",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 2,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-07-13",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-07-26",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-07-26",
+        "meet_code": 2,
+        "race_number": 2,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-07-27",
+        "meet_code": 2,
+        "race_number": 5,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-08-09",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-08-09",
+        "meet_code": 2,
+        "race_number": 2,
+        "candidate_entries": 1,
+        "all_stored_entries": 7
+      },
+      {
+        "race_date": "2003-08-16",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 2,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-08-16",
+        "meet_code": 2,
+        "race_number": 8,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-08-17",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      },
+      {
+        "race_date": "2003-09-07",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-09-07",
+        "meet_code": 2,
+        "race_number": 3,
+        "candidate_entries": 1,
+        "all_stored_entries": 8
+      },
+      {
+        "race_date": "2003-09-07",
+        "meet_code": 2,
+        "race_number": 10,
+        "candidate_entries": 1,
+        "all_stored_entries": 9
+      },
+      {
+        "race_date": "2003-11-15",
+        "meet_code": 2,
+        "race_number": 1,
+        "candidate_entries": 1,
+        "all_stored_entries": 10
+      }
+    ],
+    "duplicate_race_horse_number_keys": 0,
+    "duplicate_race_horse_id_keys": 0,
+    "missing_current_profile_rows": 0,
+    "missing_current_profile_horses": [],
+    "missing_core_values": {
+      "horse_id": 0,
+      "race_distance_m": 229,
+      "rank_class_raw": 229,
+      "carried_weight_kg": 0,
+      "jockey_id": 0,
+      "trainer_id": 0,
+      "owner_id": 0,
+      "track_raw": 229
+    },
+    "breed_assessment_counts": {
+      "api_cross_reference_candidate": 66153,
+      "program_rule_candidate": 26360
+    },
+    "finish_status_raw_counts": {
+      "1": 9321,
+      "2": 9305,
+      "3": 9315,
+      "4": 9310,
+      "5": 9298,
+      "6": 9323,
+      "7": 9281,
+      "8": 8852,
+      "9": 8077,
+      "10": 6749,
+      "99": 1357,
+      "95": 367,
+      "94": 313,
+      "93": 18,
+      "91": 163,
+      "92": 55,
+      "11": 762,
+      "12": 615,
+      "13": 2,
+      "98": 10,
+      "0": 20
+    }
+  },
+  "candidate_population_2017_plus": {
+    "rows": 59042,
+    "races": 5901,
+    "first_date": "2017-01-13",
+    "last_date": "2026-09-19",
+    "horses": 2868,
+    "valid_finish_rows": 57850,
+    "races_with_any_valid_finish": 5828,
+    "races_without_valid_finish": 73,
+    "partial_candidate_races": [],
+    "duplicate_race_horse_number_keys": 0,
+    "duplicate_race_horse_id_keys": 0,
+    "missing_current_profile_rows": 0,
+    "missing_current_profile_horses": [],
+    "missing_core_values": {
+      "horse_id": 0,
+      "race_distance_m": 0,
+      "rank_class_raw": 0,
+      "carried_weight_kg": 0,
+      "jockey_id": 0,
+      "trainer_id": 0,
+      "owner_id": 0,
+      "track_raw": 0
+    },
+    "breed_assessment_counts": {
+      "api_cross_reference_candidate": 32682,
+      "program_rule_candidate": 26360
+    },
+    "finish_status_raw_counts": {
+      "1": 5837,
+      "2": 5828,
+      "3": 5829,
+      "4": 5827,
+      "5": 5822,
+      "6": 5835,
+      "7": 5817,
+      "8": 5712,
+      "9": 5413,
+      "10": 4728,
+      "11": 661,
+      "12": 539,
+      "95": 152,
+      "94": 277,
+      "93": 8,
+      "92": 23,
+      "99": 699,
+      "91": 3,
+      "13": 2,
+      "98": 10,
+      "0": 20
+    }
+  },
+  "candidate_by_year": [
+    {
+      "year": "2002",
+      "entries": 69,
+      "races": 21
+    },
+    {
+      "year": "2003",
+      "entries": 138,
+      "races": 41
+    },
+    {
+      "year": "2004",
+      "entries": 499,
+      "races": 54
+    },
+    {
+      "year": "2005",
+      "entries": 802,
+      "races": 88
+    },
+    {
+      "year": "2006",
+      "entries": 1235,
+      "races": 138
+    },
+    {
+      "year": "2007",
+      "entries": 1822,
+      "races": 193
+    },
+    {
+      "year": "2008",
+      "entries": 2269,
+      "races": 242
+    },
+    {
+      "year": "2009",
+      "entries": 2713,
+      "races": 286
+    },
+    {
+      "year": "2010",
+      "entries": 2609,
+      "races": 277
+    },
+    {
+      "year": "2011",
+      "entries": 2682,
+      "races": 283
+    },
+    {
+      "year": "2012",
+      "entries": 3015,
+      "races": 319
+    },
+    {
+      "year": "2013",
+      "entries": 3132,
+      "races": 336
+    },
+    {
+      "year": "2014",
+      "entries": 3552,
+      "races": 382
+    },
+    {
+      "year": "2015",
+      "entries": 3981,
+      "races": 429
+    },
+    {
+      "year": "2016",
+      "entries": 4953,
+      "races": 504
+    },
+    {
+      "year": "2017",
+      "entries": 5493,
+      "races": 553
+    },
+    {
+      "year": "2018",
+      "entries": 6089,
+      "races": 601
+    },
+    {
+      "year": "2019",
+      "entries": 6354,
+      "races": 622
+    },
+    {
+      "year": "2020",
+      "entries": 3574,
+      "races": 358
+    },
+    {
+      "year": "2021",
+      "entries": 4978,
+      "races": 481
+    },
+    {
+      "year": "2022",
+      "entries": 6194,
+      "races": 602
+    },
+    {
+      "year": "2023",
+      "entries": 7086,
+      "races": 715
+    },
+    {
+      "year": "2024",
+      "entries": 6903,
+      "races": 695
+    },
+    {
+      "year": "2025",
+      "entries": 7071,
+      "races": 722
+    },
+    {
+      "year": "2026",
+      "entries": 5300,
+      "races": 552
+    }
+  ],
+  "profiles": {
+    "horses": 4718,
+    "missing_birth_year": 0,
+    "age_reference_year": 2026
+  },
+  "raw_race_result_rows": {
+    "rows": 191604,
+    "first_date": "2002-01-12",
+    "last_date": "2026-09-19"
+  },
+  "events": {
+    "running_trial_analysis": {
+      "rows": 15736,
+      "horses": 4616,
+      "first_date": "2002-06-12",
+      "last_date": "2026-09-16"
+    },
+    "daily_training_raw": {
+      "rows": 908316,
+      "horses": 4545,
+      "first_date": "2007-10-01",
+      "last_date": "2026-09-28"
+    },
+    "daily_training_analysis": {
+      "rows": 907389,
+      "horses": 4545,
+      "first_date": "2007-10-01",
+      "last_date": "2026-09-19"
+    },
+    "starting_training_analysis": {
+      "rows": 190790,
+      "horses": 4476,
+      "first_date": "2007-10-17",
+      "last_date": "2026-09-16"
+    },
+    "starting_exam_raw": {
+      "rows": 10664,
+      "horses": 4636,
+      "first_date": "2002-06-07",
+      "last_date": "2026-09-30"
+    },
+    "starting_exam_analysis": {
+      "rows": 10620,
+      "horses": 4626,
+      "first_date": "2002-06-07",
+      "last_date": "2026-09-16"
+    },
+    "medical_raw": {
+      "rows": 12030,
+      "horses": 944,
+      "first_date": "2008-04-02",
+      "last_date": "2026-09-27"
+    },
+    "medical_analysis": {
+      "rows": 11991,
+      "horses": 939,
+      "first_date": "2008-04-02",
+      "last_date": "2026-09-19"
+    }
+  },
+  "daily_duration_status": [
+    {
+      "duration_status": "positive_matches_valid_times",
+      "rows": 890288
+    },
+    {
+      "duration_status": "raw_zero_unavailable",
+      "rows": 18028
+    }
+  ],
+  "starting_training_link_status": [
+    {
+      "matching_status": "profile_not_found",
+      "rows": 104628
+    },
+    {
+      "matching_status": "verified_website_id_jeju",
+      "rows": 190842
+    }
+  ],
+  "starting_exam_rider_missing": {
+    "rows": 5795
+  },
+  "section_review_counts": {
+    "time": [
+      {
+        "review_status": "unresolved_official_website_anomaly",
+        "fields": 1
+      },
+      {
+        "review_status": "website_corrected",
+        "fields": 3
+      }
+    ],
+    "order": [
+      {
+        "review_status": "website_corrected",
+        "fields": 14
+      }
+    ],
+    "conflict": [
+      {
+        "source_kind": "group",
+        "review_status": "unresolved_official_internal_conflict",
+        "fields": 20
+      },
+      {
+        "source_kind": "individual_order",
+        "review_status": "unresolved_official_internal_conflict",
+        "fields": 70
+      }
+    ]
+  },
+  "quality_view": {
+    "rows": 92513,
+    "unique_entry_ids": 92513,
+    "held_order_fields": 70,
+    "held_group_entry_points": 194,
+    "order_corrections": 14,
+    "time_corrections": 3
+  },
+  "held_order_values": [
+    {
+      "quality_order_status": "unresolved_official_internal_conflict",
+      "fields": 70,
+      "nonnull_fields": 0
+    }
+  ],
+  "held_group_values": [
+    {
+      "group_status": "unresolved_official_internal_conflict",
+      "race_points": 20,
+      "nonnull_fields": 0
+    }
+  ],
+  "gwanghae_g1f": [
+    {
+      "race_date": "2026-01-17",
+      "race_number": 5,
+      "horse_id": "3016494",
+      "horse_name": "광해청명",
+      "g1f_time_seconds": null,
+      "g1f_time_status": "unresolved_official_website_anomaly"
+    }
+  ],
+  "excluded_horse_candidate_rows": {
+    "rows": 0
+  },
+  "open_provenance_issues": [
+    {
+      "issue_type": "current_profile_vs_historical_race_sex_conflict",
+      "status": "open",
+      "issues": 1
+    },
+    {
+      "issue_type": "breed_label_conflict",
+      "status": "quarantined",
+      "issues": 1
+    }
+  ],
+  "feature_snapshot_files": {
+    "jeju/data/features": [],
+    "jeju/data/snapshots": []
+  },
+  "raw_links": [
+    {
+      "path": "jeju/data/raw/jeju_native_health_weight",
+      "resolved": "/Users/kimyongjin/Desktop/horse_racing/data/raw/jeju_native_health_weight",
+      "exists": true
+    },
+    {
+      "path": "jeju/data/raw/jeju_native_text_phase2.sqlite3",
+      "resolved": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+      "exists": true
+    },
+    {
+      "path": "jeju/data/raw/medical_injury_race_impact_20260925",
+      "resolved": "/Users/kimyongjin/Desktop/horse_racing/research/medical_injury_race_impact_20260925",
+      "exists": true
+    }
+  ],
+  "baseline_model_sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+  "db_sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+  "db_size_and_mtime_unchanged": true,
+  "rank_prefix_candidate_population": {
+    "first_date": "2002-07-28",
+    "last_date": "2026-09-19",
+    "rows": 92232
+  },
+  "internal_conflict_races": {
+    "races": 19
+  },
+  "document_reconciliation": {
+    "current_trial_rows": 15736,
+    "older_document_trial_rows": 15738,
+    "difference_reason": "User-requested exclusion of horse 3005648 removed two running_trial_rows on 2026-10-02.",
+    "deletion_receipt": "jeju/maintenance/small_bear_removal_20261002/deletion_receipt.json",
+    "partial_candidate_scope": "44 races in 2002-2003; no candidate subset deficiency relative to stored race_result_rows in 2017+; this does not independently establish completeness against original entry cards.",
+    "old_build_manifest_is_historical": true,
+    "candidate_scope_note": "Candidate population is not identical to individually confirmed breed at each historical race date."
+  }
+}

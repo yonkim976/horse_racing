@@ -1,0 +1,72 @@
+{
+  "attempt_events_in_stage": 82,
+  "attempted_unique_profile_count": 81,
+  "completed_at_utc": "2026-10-02T04:33:19.099+00:00",
+  "completed_profile_count": 81,
+  "failed_or_invalid_profile_count": 0,
+  "files": {
+    "quarantine_ledger": "quarantine_ledger.jsonl",
+    "request_ledger": "request_ledger.jsonl",
+    "target_manifest": "target_manifest.json",
+    "validated_profile_rows": "validated_profile_rows.jsonl"
+  },
+  "kst_date": "2026-10-02",
+  "pending_unique_profile_count": 0,
+  "prior_known_api42_requests": 21,
+  "profile_timing_note": "Current API42 profile observations do not establish breed on historical clinic dates.",
+  "quarantine_event_count": 1,
+  "quota_assessment": {
+    "api21_calls_counted_against_api42": false,
+    "cap_checkpoint_path": "jeju/research/20260930_api42_horse_breed_collection/quota_checkpoint_20261001.json",
+    "cap_last_checked_on_kst": "2026-10-01",
+    "daily_advertised_request_cap": 3000,
+    "known_api42_request_total_kst_today": 103,
+    "live_account_remaining_usage_visible_on_public_page": false,
+    "minimum_request_start_interval_seconds": 1.05,
+    "prior_known_api42_requests_kst_today": 21,
+    "prior_request_evidence": [
+      {
+        "attempt_id_utc": "20261001T151147.863223Z",
+        "completed_request_count": 21,
+        "kst_date": "2026-10-02",
+        "path": "jeju/research/20261001_starting_exam_api_collection/raw/api42_followup/attempts/20261001T151147.863223Z/attempt_manifest.json",
+        "request_count": 21
+      }
+    ],
+    "quota_note": "Portal checkpoint last checked 2026-10-01; API42 public page does not expose live account usage. Known same-day API42 requests total 103, including one initial transport failure and its successful retry. API21 endpoint calls have a separate service limit.",
+    "remaining_by_known_count_after_collection": 2897,
+    "this_stage_api42_requests_kst_today": 82
+  },
+  "requests_started_by_this_stage_today": 82,
+  "requests_started_this_run": 80,
+  "retry_exhausted_or_failed_targets": 0,
+  "run_id": "20261002T043155.332209Z",
+  "schema_version": 1,
+  "small_bear_3005648_reimport_allowed": false,
+  "source_summary": {
+    "after_20260919_cutoff_clinic_rows": 6,
+    "after_20260919_cutoff_horse_ids": 5,
+    "api16_source_pages": 32,
+    "api16_source_rows": 12030,
+    "api16_source_run_id": "20260929T150517.740550Z",
+    "profile_latest_unique_official_horse_ids": 4637,
+    "reimport_exclusion_target_count": 0,
+    "small_bear_3005648_clinic_rows": 0,
+    "unlinked_clinic_rows": 156,
+    "unlinked_unique_horse_ids": 81,
+    "within_20260919_cutoff_clinic_rows": 150,
+    "within_20260919_cutoff_horse_ids": 76
+  },
+  "started_at_utc": "2026-10-02T04:31:55.332+00:00",
+  "status": "complete",
+  "target_unique_profile_count": 81,
+  "unqueried_unique_targets": 0,
+  "validated_breed_counts": {
+    "제주마": 81
+  },
+  "validated_profile_count": 81,
+  "validation_status_counts": {
+    "transport_error": 1,
+    "validated": 81
+  }
+}

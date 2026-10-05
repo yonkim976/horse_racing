@@ -1,0 +1,88 @@
+{
+  "all_passed": true,
+  "checks": {
+    "dry_run_and_apply_plans_agree": true,
+    "expected_clinic_and_cutoff_counts": true,
+    "expected_slots_and_safe_phrase_coverage": true,
+    "initial_apply_was_explicit_copy": true,
+    "initial_baseline_sha_matches_approved_snapshot": true,
+    "initial_database_sha_matches_apply_report": true,
+    "migration_sha_frozen": true,
+    "one_row_per_analysis_event": true,
+    "reapply_database_sha_unchanged": true,
+    "reapply_inserted_zero_rows": true,
+    "reapply_schema_unchanged": true,
+    "reapply_table_counts_unchanged": true
+  },
+  "database": {
+    "after_sha256": "2475466cf35e511dc881da844621037728a8460a1a3f2f55bf86e920df3cb5d3",
+    "before_sha256": "2475466cf35e511dc881da844621037728a8460a1a3f2f55bf86e920df3cb5d3",
+    "path": "/private/tmp/jeju_medical_20261002/load/staging_v4.sqlite3"
+  },
+  "diagnostics": {
+    "all_nonblank_phrases_have_reviewed_safe_exact_mapping": true,
+    "analysis_view_query_plan": [
+      "MATERIALIZE current_profiles",
+      "CO-ROUTINE ranked",
+      "CO-ROUTINE (subquery-8)",
+      "SCAN hpo USING INDEX ix_horse_profile_observations_horse_time",
+      "SCAN (subquery-8)",
+      "SCAN sa USING COVERING INDEX ix_source_artifacts_service_attempt",
+      "BLOOM FILTER ON r (observation_rank=? AND breed_label_raw=?)",
+      "SEARCH r USING AUTOMATIC PARTIAL COVERING INDEX (observation_rank=? AND breed_label_raw=?)",
+      "SEARCH a USING INTEGER PRIMARY KEY (rowid=?)",
+      "SCAN sa USING COVERING INDEX ix_source_artifacts_service_attempt",
+      "SEARCH r USING INDEX ix_medical_api_rows_artifact_order (source_artifact_id=?)",
+      "SEARCH ar USING COVERING INDEX sqlite_autoindex_api_records_1 (source_artifact_id=? AND record_index=? AND rowid=?)",
+      "SEARCH ha USING AUTOMATIC COVERING INDEX (horse_id=?)"
+    ],
+    "api33_source_rows_with_ill_desc_dash": 3523,
+    "api_slot_target_titles_with_captured_text": 40,
+    "api_slot_target_titles_without_captured_text": 128,
+    "medical_api_diagnosis_slots": 24060,
+    "medical_api_rows": 12030,
+    "medical_api_rows_analysis_2026": 11991,
+    "nonblank_slot_occurrences": 11344,
+    "nonblank_unique_phrases": 168,
+    "raw_row_grain_unchanged_by_glossary_joins": true,
+    "repeated_exact_api_item_hash_groups": 18,
+    "repeated_exact_api_item_rows_in_groups": 38,
+    "reviewed_safe_slot_occurrences": 11344,
+    "reviewed_safe_unique_phrases": 168,
+    "rows_in_same_horse_date_different_payload_groups": 211,
+    "same_horse_date_groups_with_different_payloads": 105,
+    "slot_review_dispositions": [
+      {
+        "disposition": "reviewed_exact_phrase_component_metadata_only",
+        "occurrences": 11344,
+        "phrases": 168
+      },
+      {
+        "disposition": "unknown_placeholder_dash",
+        "occurrences": 12716,
+        "phrases": 1
+      }
+    ],
+    "unique_api_slot_target_titles": 168,
+    "unknown_dash_slots_preserved_raw_and_normalized_null": 12716
+  },
+  "initial_apply_report_path": "stage_v4/apply_report.json",
+  "inserted": {
+    "api16_api_records": 0,
+    "api16_load_metadata": 0,
+    "api16_page_ledger_rows": 0,
+    "api16_source_artifacts": 0,
+    "api16_year_coverage_rows": 0,
+    "api42_api_records": 0,
+    "api42_source_artifacts": 0,
+    "breed_evidence": 0,
+    "dictionary_tables_and_metadata": {
+      "medical_dictionary_metadata": 0
+    },
+    "horse_profile_observations": 0,
+    "medical_api_diagnosis_slots": 0,
+    "medical_api_rows": 0
+  },
+  "reapply_report_path": "stage_v4_reapply/apply_report.json",
+  "source_profile_target_manifest_sha256": "c8c891ec6af5a7be74efa0c71fba3cfe7029182db8216f09d4f225b89770bef1"
+}

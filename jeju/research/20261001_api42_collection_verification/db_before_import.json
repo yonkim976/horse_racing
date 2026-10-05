@@ -1,0 +1,62 @@
+{
+  "database": "jeju/data/jeju_native_core.sqlite3",
+  "tables": {
+    "api303_corner_rank_rows": {
+      "rows": 19933,
+      "max_rowid": 246096,
+      "sha256": "d67f9294788f9b040438219216c007003fb7e3a112e856c2d6eaf0b059cb37a9"
+    },
+    "api_records": {
+      "rows": 246096,
+      "max_rowid": 246096,
+      "sha256": "e9f6a5280b83ec1a9f9959048af83fb303439530a2c231ec5cd07c4accfd551f"
+    },
+    "breed_evidence": {
+      "rows": 34377,
+      "max_rowid": 34377,
+      "sha256": "067a796ca5cd3a36df11eb74ff0b9468fe5f61c7e2230d8fae93e6acfb0ed8ed"
+    },
+    "collection_coverage": {
+      "rows": 77,
+      "max_rowid": 77,
+      "sha256": "3dbbafe7499d8bd8a9a6f503414320631c815fe2310e7e613be1c596c68a0ef3"
+    },
+    "provenance_issues": {
+      "rows": 1,
+      "max_rowid": 1,
+      "sha256": "66bf223e8cecef6608dbf0a521210500a37a94f9bf8f42638fcc040eb1189905"
+    },
+    "race_result_rows": {
+      "rows": 191604,
+      "max_rowid": 191786,
+      "sha256": "5d9bf57d692cf7ffa873096f87afe878f78e119604f03d7025de6b01e99fd4f9"
+    },
+    "running_trial_rows": {
+      "rows": 34377,
+      "max_rowid": 226163,
+      "sha256": "f244d9a7253830af3e83749058d9f874ba7fe944eb60d3cf1a3d452d9fdcfde7"
+    },
+    "schema_metadata": {
+      "rows": 5,
+      "max_rowid": 5,
+      "sha256": "b12402662a8f39a6650b1a21f3fbdc01cdedcdab74419cc716e8ce5887d8e8a0"
+    },
+    "source_artifacts": {
+      "rows": 105,
+      "max_rowid": 105,
+      "sha256": "f74521d0eb81f6616eb3f02201e66cc284444e7f6d00b50d3e728ca572e1f2fe"
+    },
+    "supplemental_facts": {
+      "rows": 4,
+      "max_rowid": 4,
+      "sha256": "6981664b241220bdd1c831801f547a08e4668ef4258ce11677ef890a41714c0c"
+    }
+  },
+  "existing_views": {
+    "api_explicit_jeju_trial_rows": "CREATE VIEW api_explicit_jeju_trial_rows AS\nSELECT * FROM running_trial_rows\nWHERE breed_assessment = 'api_native_label'",
+    "jeju_race_candidate_corner_rank_coverage": "CREATE VIEW jeju_race_candidate_corner_rank_coverage AS\nSELECT c.race_date, c.meet_code, c.race_number,\n       count(*) AS candidate_horse_rows,\n       cr.api_record_id AS api303_api_record_id,\n       CASE WHEN cr.api_record_id IS NULL THEN 0 ELSE 1 END AS api303_present,\n       CASE WHEN cr.api_record_id IS NOT NULL AND (\n           coalesce(trim(cr.corner_1_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_2_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_3_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_4_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_5_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_6_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_7_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_8_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_9_raw), '') NOT IN ('', '-', 'X')\n       ) THEN 1 ELSE 0 END AS api303_has_corner_order_content,\n       CASE WHEN cr.api_record_id IS NOT NULL AND (\n           coalesce(trim(cr.passtime_3f_raw), '') NOT IN ('', '0:00.0', '0:00') OR\n           coalesce(trim(cr.passtime_4f_raw), '') NOT IN ('', '0:00.0', '0:00')\n       ) THEN 1 ELSE 0 END AS api303_has_nonzero_passing_time,\n       cra.payload_sha256 AS api303_payload_sha256,\n       sa.sha256 AS api303_source_page_sha256,\n       sa.raw_relative_path AS api303_source_page_path\nFROM jeju_race_population_candidates c\nLEFT JOIN api303_corner_rank_rows cr\n  ON cr.race_date = c.race_date\n AND cr.meet_code = c.meet_code\n AND cr.race_number = c.race_number\nLEFT JOIN api_records cra ON cra.api_record_id = cr.api_record_id\nLEFT JOIN source_artifacts sa ON sa.source_artifact_id = cra.source_artifact_id\nGROUP BY c.race_date, c.meet_code, c.race_number",
+    "jeju_race_candidate_passing_with_corner_rank": "CREATE VIEW jeju_race_candidate_passing_with_corner_rank AS\nSELECT p.*,\n       cr.api_record_id AS api303_api_record_id,\n       json_extract(cra.payload_json, '$.meet') AS api303_meet_raw,\n       json_type(cra.payload_json, '$.meet') AS api303_meet_json_type,\n       json_extract(cra.payload_json, '$.corner_1') AS api303_corner_1_raw,\n       json_type(cra.payload_json, '$.corner_1') AS api303_corner_1_json_type,\n       json_extract(cra.payload_json, '$.corner_2') AS api303_corner_2_raw,\n       json_type(cra.payload_json, '$.corner_2') AS api303_corner_2_json_type,\n       json_extract(cra.payload_json, '$.corner_3') AS api303_corner_3_raw,\n       json_type(cra.payload_json, '$.corner_3') AS api303_corner_3_json_type,\n       json_extract(cra.payload_json, '$.corner_4') AS api303_corner_4_raw,\n       json_type(cra.payload_json, '$.corner_4') AS api303_corner_4_json_type,\n       json_extract(cra.payload_json, '$.corner_5') AS api303_corner_5_raw,\n       json_type(cra.payload_json, '$.corner_5') AS api303_corner_5_json_type,\n       json_extract(cra.payload_json, '$.corner_6') AS api303_corner_6_raw,\n       json_type(cra.payload_json, '$.corner_6') AS api303_corner_6_json_type,\n       json_extract(cra.payload_json, '$.corner_7') AS api303_corner_7_raw,\n       json_type(cra.payload_json, '$.corner_7') AS api303_corner_7_json_type,\n       json_extract(cra.payload_json, '$.corner_8') AS api303_corner_8_raw,\n       json_type(cra.payload_json, '$.corner_8') AS api303_corner_8_json_type,\n       json_extract(cra.payload_json, '$.corner_9') AS api303_corner_9_raw,\n       json_type(cra.payload_json, '$.corner_9') AS api303_corner_9_json_type,\n       json_extract(cra.payload_json, '$.passtime_3f') AS api303_passtime_3f_raw,\n       json_type(cra.payload_json, '$.passtime_3f') AS api303_passtime_3f_json_type,\n       json_extract(cra.payload_json, '$.passtime_4f') AS api303_passtime_4f_raw,\n       json_type(cra.payload_json, '$.passtime_4f') AS api303_passtime_4f_json_type,\n       json_extract(cra.payload_json, '$.tempo') AS api303_tempo_raw,\n       json_type(cra.payload_json, '$.tempo') AS api303_tempo_json_type,\n       cra.payload_sha256 AS api303_payload_sha256,\n       sa.source_artifact_id AS api303_source_artifact_id,\n       sa.sha256 AS api303_source_page_sha256,\n       sa.raw_relative_path AS api303_source_page_path\nFROM jeju_race_population_candidate_passing_orders p\nLEFT JOIN api303_corner_rank_rows cr\n  ON cr.race_date = p.race_date\n AND cr.meet_code = p.meet_code\n AND cr.race_number = p.race_number\nLEFT JOIN api_records cra ON cra.api_record_id = cr.api_record_id\nLEFT JOIN source_artifacts sa ON sa.source_artifact_id = cra.source_artifact_id",
+    "jeju_race_population_candidate_passing_orders": "CREATE VIEW jeju_race_population_candidate_passing_orders AS\nSELECT c.*,\n       json_extract(a.payload_json, '$.sjS1fOrd') AS api4_3_sjS1fOrd_raw,\n       json_type(a.payload_json, '$.sjS1fOrd') AS api4_3_sjS1fOrd_json_type,\n       json_extract(a.payload_json, '$.sjG1fOrd') AS api4_3_sjG1fOrd_raw,\n       json_type(a.payload_json, '$.sjG1fOrd') AS api4_3_sjG1fOrd_json_type,\n       json_extract(a.payload_json, '$.sjG3fOrd') AS api4_3_sjG3fOrd_raw,\n       json_type(a.payload_json, '$.sjG3fOrd') AS api4_3_sjG3fOrd_json_type,\n       json_extract(a.payload_json, '$.sj_1cOrd') AS api4_3_sj_1cOrd_raw,\n       json_type(a.payload_json, '$.sj_1cOrd') AS api4_3_sj_1cOrd_json_type,\n       json_extract(a.payload_json, '$.sj_2cOrd') AS api4_3_sj_2cOrd_raw,\n       json_type(a.payload_json, '$.sj_2cOrd') AS api4_3_sj_2cOrd_json_type,\n       json_extract(a.payload_json, '$.sj_3cOrd') AS api4_3_sj_3cOrd_raw,\n       json_type(a.payload_json, '$.sj_3cOrd') AS api4_3_sj_3cOrd_json_type,\n       json_extract(a.payload_json, '$.sj_4cOrd') AS api4_3_sj_4cOrd_raw,\n       json_type(a.payload_json, '$.sj_4cOrd') AS api4_3_sj_4cOrd_json_type,\n       a.payload_sha256 AS api4_3_payload_sha256,\n       sa.source_artifact_id AS api4_3_source_artifact_id,\n       sa.sha256 AS api4_3_source_page_sha256,\n       sa.raw_relative_path AS api4_3_source_page_path\nFROM jeju_race_population_candidates c\nJOIN api_records a ON a.api_record_id = c.api_record_id\nJOIN source_artifacts sa ON sa.source_artifact_id = a.source_artifact_id",
+    "jeju_race_population_candidates": "CREATE VIEW jeju_race_population_candidates AS\nSELECT * FROM race_result_rows\nWHERE breed_assessment IN (\n    'rank_class_candidate', 'api_cross_reference_candidate', 'program_rule_candidate'\n)"
+  }
+}

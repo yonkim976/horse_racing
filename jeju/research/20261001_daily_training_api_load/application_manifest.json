@@ -1,0 +1,51 @@
+{
+  "created_at_utc": "2026-10-01T13:25:18.221068+00:00",
+  "status": "complete_verified",
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "database_size_bytes": 1721880576,
+  "database_sha256_before": "d99fbb079055f420e3a660099b076d82722e6a76ddb66698a4608ac4c9a632d0",
+  "database_sha256_after": "fbc21f5229aa654ea3442141c3f3e7044f41bf7069c8f77e6f3c9f0af562f0b3",
+  "backup_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3.pre_daily_training_api_20261001T131716.010709Z.bak",
+  "backup_sha256": "161fac63e259831e2145aa4a02ba9a2aa118f0df50686462b9500a01cc31c82d",
+  "source_api_name": "한국마사회 일별훈련 상세정보",
+  "source_endpoint": "/API18_1/dailyTraining_1",
+  "scope_dates": [
+    "2007-10-01",
+    "2026-09-28"
+  ],
+  "analysis_cutoff": "2026-09-19",
+  "native_rows": 908316,
+  "native_horses": 4545,
+  "analysis_rows": 907389,
+  "after_cutoff_rows": 927,
+  "source_artifacts": 337,
+  "usable_duration_rows": 890288,
+  "zero_unavailable_duration_rows": 18028,
+  "model_input_promotion": false,
+  "implementation_agent_model": "gpt-6-luna",
+  "implementation_agent_reasoning_effort": "xhigh",
+  "root_independent_verification": true,
+  "reports": {
+    "database_before.json": "718b295f225ee6fe0d13926abf346bbc7250b85ab60e043a909e9ae0a2afcb85",
+    "independent_source_audit.json": "4a165bee5aaef8505c8ea7dc887b17608cd9f55bbdfac17a0f5e81d69e4f0954",
+    "independent_source_pages.json": "eb2f3cf9516bc4238434e8a98ac170d9371fd115958cb18d0164ab9a23a3dae8",
+    "stage_apply.json": "688687e32c68b399e9363835d33f92b85130a3be082119e73b45ad7d8b67b179",
+    "stage_replay.json": "5c40ea025497e812fa5b058ae07978eb59ce7604bd08c8853045238a677593e2",
+    "stage_verification.json": "95eba2738b11a37fe9a4c165a685b5a264b10681828083ba6ad5b710969369c6",
+    "production_apply.json": "758b2d856195e6b8645c5bae18f0a2294292678b3754918f3ab2d703cb1c160d",
+    "production_verification.json": "388df902c4db7444084a2bc5b825b6b03d4d7240aa4e695466da08dab77d78e2",
+    "validation_attempts.json": "deaf572960510bb5c447191c32b59bc240b7120f505c6e06ebd40e5534035ca5"
+  },
+  "code_sha256": {
+    "daily_training_api_load.py": "a5bd5aacad57ec198ecbe0c0baa9077854be3956b4d0405008d6ca7fe764b331",
+    "apply_verified_plan.py": "96db2ff61411179e219202d3e82d8fe4da9b38a2ae019d8c27545ff82de33262",
+    "independent_daily_audit.py": "df83b945e51f0b17df36484506d48cf9778983693c9812ebda7f2204552e3466",
+    "independent_db_verification.py": "4a460db48410225c89fad030c679cc3ae56debae6a80d39c73d47c425607c81c",
+    "independent_db_verification_initial.py": "02a1710509a5c3e21e3ed08f4e49ba3f77f960cc3aa5cb2c5c9e2dee4f42f7a1"
+  },
+  "documentation_sha256": {
+    "AGENTS.md": "f63bec0fa8e4b72f7b096e2df11c087e345baefe8fa8ce7268d7ed3800fed300",
+    "docs/JEJU_TRAINING_API_INPUT_CONTRACT_2026-10-01.md": "d7c81fc22ec45972045b30ab495256e331ebc83169c23c1f0f255c22df49929e",
+    "research/20261001_daily_training_api_load/README.md": "241fd407917422c8fe863ed1140dd5e49eb6195d77e9f961c85d87aff10aeb06"
+  }
+}

@@ -1,0 +1,2718 @@
+{
+  "as_of_collection_completion_kst": "2026-10-01",
+  "profile_count": 4617,
+  "raw_profile_field_count": 218,
+  "fields_per_profile": {
+    "218": 4617
+  },
+  "officially_described_raw_fields": 218,
+  "raw_fields_not_in_official_spec": [],
+  "valid_birth_dates": 4617,
+  "age_equals_observation_calendar_year_minus_birth_year": 4617,
+  "raw_age_range": [
+    2,
+    55
+  ],
+  "age_over_35_count": 11,
+  "date_values_requiring_review": {
+    "fkraOutDt": {
+      "raw_99991231_count": 20,
+      "calendar_date_after_observation_count": 20,
+      "invalid_calendar_date_count": 0
+    },
+    "kraOutDt": {
+      "raw_99991231_count": 448,
+      "calendar_date_after_observation_count": 448,
+      "invalid_calendar_date_count": 0
+    },
+    "outDt": {
+      "raw_99991231_count": 448,
+      "calendar_date_after_observation_count": 448,
+      "invalid_calendar_date_count": 0
+    },
+    "restOutDt": {
+      "raw_99991231_count": 945,
+      "calendar_date_after_observation_count": 945,
+      "invalid_calendar_date_count": 0
+    }
+  },
+  "existing_db_horse_id_linkage": {
+    "profiles_with_existing_race_result_rows": 4006,
+    "profiles_with_existing_trial_rows": 4617,
+    "profiles_with_trial_but_no_race_result_rows": 611,
+    "existing_candidate_entry_rows": 92513,
+    "existing_candidate_unique_horse_ids": 4006
+  },
+  "useNm_distribution": {
+    "용도미정": 1766,
+    "폐사": 1214,
+    "관상용": 1,
+    "경주용(휴양)": 459,
+    "용도미정(휴양)": 311,
+    "경주용": 863,
+    "승용": 3
+  },
+  "sex_distribution": {
+    "수": 712,
+    "암": 2187,
+    "거": 1718
+  },
+  "fields": {
+    "age": {
+      "official_description": "연령",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "amt": {
+      "official_description": "상금",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 1263,
+      "populated_nonzero": 3354,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "auctionDt": {
+      "official_description": "최종경매일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionGubun": {
+      "official_description": "경매구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionMgr": {
+      "official_description": "경매주관자",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionMon": {
+      "official_description": "경매낙찰가",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "auctionOwNm": {
+      "official_description": "경매낙찰자성명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionOwNmSebu": {
+      "official_description": "경매일반인낙찰자성명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionOwNo": {
+      "official_description": "경매낙찰자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionResult": {
+      "official_description": "경매결과",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "auctionYear": {
+      "official_description": "경매연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "avgWinDist": {
+      "official_description": "평균우승거리",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2253,
+      "populated_nonzero": 2364,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "baljuDt": {
+      "official_description": "최초발주검사합격일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "beforeHrEngNm": {
+      "official_description": "변경전영문마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4590,
+      "zero": 0,
+      "populated_nonzero": 27,
+      "nonplaceholder_count": 27,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "beforeHrNm": {
+      "official_description": "변경전마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4548,
+      "zero": 0,
+      "populated_nonzero": 69,
+      "nonplaceholder_count": 69,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bhrGubun": {
+      "official_description": "번식마구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bhrMon": {
+      "official_description": "번식등록직전거래가",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "bhrOwNm": {
+      "official_description": "번식등록시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bhrOwNo": {
+      "official_description": "번식등록시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bhrPoNm": {
+      "official_description": "번식등록시소재지명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bhrPoNo": {
+      "official_description": "번식등록시소재지번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "birthDt": {
+      "official_description": "출생일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "birthYr": {
+      "official_description": "출생년도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "bldCanDt": {
+      "official_description": "혈통등록취소일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bldOwNm": {
+      "official_description": "혈통등록시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bldOwNo": {
+      "official_description": "혈통등록시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "bldRegDt": {
+      "official_description": "혈통등록일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 3063,
+      "zero": 0,
+      "populated_nonzero": 1554,
+      "nonplaceholder_count": 1554,
+      "json_types": {
+        "str": 3063,
+        "int": 1554
+      }
+    },
+    "bldRegYr": {
+      "official_description": "혈통등록연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 3063,
+      "zero": 0,
+      "populated_nonzero": 1554,
+      "nonplaceholder_count": 1554,
+      "json_types": {
+        "str": 3063,
+        "int": 1554
+      }
+    },
+    "brNm": {
+      "official_description": "생산자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4549,
+      "zero": 0,
+      "populated_nonzero": 68,
+      "nonplaceholder_count": 68,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brNo": {
+      "official_description": "생산자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4549,
+      "zero": 0,
+      "populated_nonzero": 68,
+      "nonplaceholder_count": 68,
+      "json_types": {
+        "str": 4572,
+        "int": 45
+      }
+    },
+    "brPoArea": {
+      "official_description": "출생지소재지지역구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brPoGubun": {
+      "official_description": "생산목장소재지구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brPoNm": {
+      "official_description": "생산목장",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brPoNo": {
+      "official_description": "생산목장소재지번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brand1": {
+      "official_description": "낙인_좌",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brand2": {
+      "official_description": "낙인_우",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "brand3": {
+      "official_description": "낙인_기타_입술문신",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "breed": {
+      "official_description": "품종",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "breedFarm": {
+      "official_description": "육성목장",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "breedGubun": {
+      "official_description": "육성주체구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 3063,
+      "zero": 0,
+      "populated_nonzero": 1554,
+      "nonplaceholder_count": 1554,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "breedPoArea": {
+      "official_description": "경주마입사6개월전소재지역",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "breedPoNm": {
+      "official_description": "경주마입사6개월전소재지",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "breedSerial": {
+      "official_description": "번식년차",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "char1": {
+      "official_description": "특징_머리",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2617,
+      "zero": 0,
+      "populated_nonzero": 2000,
+      "nonplaceholder_count": 2000,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "char2": {
+      "official_description": "특징_목",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2617,
+      "zero": 0,
+      "populated_nonzero": 2000,
+      "nonplaceholder_count": 2000,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "char3": {
+      "official_description": "특징_다리",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2617,
+      "zero": 0,
+      "populated_nonzero": 2000,
+      "nonplaceholder_count": 2000,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "char4": {
+      "official_description": "특징_몸통",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2617,
+      "zero": 0,
+      "populated_nonzero": 2000,
+      "nonplaceholder_count": 2000,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "chefHrNm": {
+      "official_description": "셰프드라스마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "chefHrNo": {
+      "official_description": "셰프드라스마번",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "chgDt": {
+      "official_description": "거세일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2943,
+      "zero": 0,
+      "populated_nonzero": 1674,
+      "nonplaceholder_count": 1674,
+      "json_types": {
+        "str": 2943,
+        "int": 1674
+      }
+    },
+    "color": {
+      "official_description": "모색",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "condAmt": {
+      "official_description": "조건상금",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "crossSubsidy": {
+      "official_description": "교배지원자격마여부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "crossSupport": {
+      "official_description": "교배지원자격여부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "crossSupportPo": {
+      "official_description": "교배지원대상농가소재여부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4168,
+      "zero": 0,
+      "populated_nonzero": 449,
+      "nonplaceholder_count": 449,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "damInDusu": {
+      "official_description": "씨암말경주마입사두수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "damPrdDusu": {
+      "official_description": "씨암말생산두수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "deadDt": {
+      "official_description": "폐사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 3403,
+      "zero": 0,
+      "populated_nonzero": 1214,
+      "nonplaceholder_count": 1214,
+      "json_types": {
+        "str": 3403,
+        "int": 1214
+      }
+    },
+    "discardDt": {
+      "official_description": "경마마불용일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1322,
+      "zero": 0,
+      "populated_nonzero": 3295,
+      "nonplaceholder_count": 3295,
+      "json_types": {
+        "int": 3295,
+        "str": 1322
+      }
+    },
+    "discardMgrNm": {
+      "official_description": "경주마불용시조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4366,
+      "zero": 0,
+      "populated_nonzero": 251,
+      "nonplaceholder_count": 251,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardMgrNo": {
+      "official_description": "경주마불용시조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4366,
+      "zero": 0,
+      "populated_nonzero": 251,
+      "nonplaceholder_count": 251,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardMon": {
+      "official_description": "경주마불용시처분가",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "discardOwNm": {
+      "official_description": "경주마불용시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1379,
+      "zero": 0,
+      "populated_nonzero": 3238,
+      "nonplaceholder_count": 3238,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardOwNo": {
+      "official_description": "경주마불용시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1379,
+      "zero": 0,
+      "populated_nonzero": 3238,
+      "nonplaceholder_count": 3238,
+      "json_types": {
+        "str": 3071,
+        "int": 1546
+      }
+    },
+    "discardPart": {
+      "official_description": "경주마불용시조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4366,
+      "populated_nonzero": 251,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "discardRes": {
+      "official_description": "경주마불용사유",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1387,
+      "zero": 0,
+      "populated_nonzero": 3230,
+      "nonplaceholder_count": 3230,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardResSebu": {
+      "official_description": "경주마불용사유세부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardSellCls": {
+      "official_description": "경주마불용후처분구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4133,
+      "zero": 0,
+      "populated_nonzero": 484,
+      "nonplaceholder_count": 484,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardUse": {
+      "official_description": "경주마불용후용도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1322,
+      "zero": 0,
+      "populated_nonzero": 3295,
+      "nonplaceholder_count": 3295,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "discardYr": {
+      "official_description": "경주마불용연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1322,
+      "zero": 0,
+      "populated_nonzero": 3295,
+      "nonplaceholder_count": 3295,
+      "json_types": {
+        "int": 3295,
+        "str": 1322
+      }
+    },
+    "doipNo": {
+      "official_description": "경주마일괄수입차수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "doipYr": {
+      "official_description": "경주마일괄수입연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "engOrgNm": {
+      "official_description": "원마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "expCty": {
+      "official_description": "수입국",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fdebutDt": {
+      "official_description": "최초출주일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 614,
+      "zero": 0,
+      "populated_nonzero": 4003,
+      "nonplaceholder_count": 4003,
+      "json_types": {
+        "int": 4003,
+        "str": 614
+      }
+    },
+    "fdebutYr": {
+      "official_description": "최초출주연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fgnAuctAmt": {
+      "official_description": "외국경매시장낙찰가",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fgnAvgWinDist": {
+      "official_description": "외국평균우승거리",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fgnCrossDate": {
+      "official_description": "외국교배일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fgnFstCnt": {
+      "official_description": "외국일착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fgnRcCnt": {
+      "official_description": "외국출주횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fgnSndCnt": {
+      "official_description": "외국이착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fgnSubsidy": {
+      "official_description": "수입장려금지급대상여부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fgnTrdCnt": {
+      "official_description": "외국삼착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fhrCty": {
+      "official_description": "부생산국",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 67,
+      "zero": 0,
+      "populated_nonzero": 4550,
+      "nonplaceholder_count": 4550,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fhrNm": {
+      "official_description": "부마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 67,
+      "zero": 0,
+      "populated_nonzero": 4550,
+      "nonplaceholder_count": 4550,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fhrNo": {
+      "official_description": "부마번",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 67,
+      "zero": 0,
+      "populated_nonzero": 4550,
+      "nonplaceholder_count": 4550,
+      "json_types": {
+        "str": 67,
+        "int": 4550
+      }
+    },
+    "fhrYr": {
+      "official_description": "부생년",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 67,
+      "zero": 0,
+      "populated_nonzero": 4550,
+      "nonplaceholder_count": 4550,
+      "json_types": {
+        "str": 67,
+        "int": 4550
+      }
+    },
+    "fifthCnt": {
+      "official_description": "오착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 1962,
+      "populated_nonzero": 2655,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "finAge": {
+      "official_description": "최초경주마입사시연령",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "finDt": {
+      "official_description": "최초마방입사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "finGubun": {
+      "official_description": "최초경주마입사구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1557,
+      "zero": 0,
+      "populated_nonzero": 3060,
+      "nonplaceholder_count": 3060,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "finMeet": {
+      "official_description": "최초입사경마공원",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "finOwNm": {
+      "official_description": "최초마주명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 40,
+      "zero": 0,
+      "populated_nonzero": 4577,
+      "nonplaceholder_count": 4577,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "finOwNo": {
+      "official_description": "최초마주번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 40,
+      "zero": 0,
+      "populated_nonzero": 4577,
+      "nonplaceholder_count": 4577,
+      "json_types": {
+        "str": 2212,
+        "int": 2405
+      }
+    },
+    "finSex": {
+      "official_description": "최초경주마입사시 성별",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "finYr": {
+      "official_description": "최초경주마입사 연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fkraInDt": {
+      "official_description": "최초마사회부서입사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fkraOutDt": {
+      "official_description": "최초마사회부서퇴사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fkraPoNm": {
+      "official_description": "최초마사회부서명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fkraPoNo": {
+      "official_description": "최초마사회부서번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fmeet": {
+      "official_description": "서울_부산경마공원구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fmgrNm": {
+      "official_description": "최초조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fmgrNo": {
+      "official_description": "최초조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "foalDiscardDt": {
+      "official_description": "육성마도태일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "foalDiscardRes": {
+      "official_description": "육성마도태사유",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "foalDiscardResSebu": {
+      "official_description": "육성마도태사유세부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "foalDiscardUse": {
+      "official_description": "육성마도태후용도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "forthCnt": {
+      "official_description": "사착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2020,
+      "populated_nonzero": 2597,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fowNm": {
+      "official_description": "최초소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "fowNo": {
+      "official_description": "최초소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 2181,
+        "int": 2436
+      }
+    },
+    "fpart": {
+      "official_description": "최초조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 13,
+      "populated_nonzero": 4604,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fstCnt": {
+      "official_description": "일착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2253,
+      "populated_nonzero": 2364,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "ftrainYr": {
+      "official_description": "최초능력검사연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "fuseNm": {
+      "official_description": "최초용도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "getMon": {
+      "official_description": "외국수득상금",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "hrEngNm": {
+      "official_description": "영문마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "hrNm": {
+      "official_description": "마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "hrNmChgDt": {
+      "official_description": "마명변경일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4588,
+      "zero": 0,
+      "populated_nonzero": 29,
+      "nonplaceholder_count": 29,
+      "json_types": {
+        "str": 4588,
+        "int": 29
+      }
+    },
+    "hrNmDt": {
+      "official_description": "마명부여일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "hrNo": {
+      "official_description": "마번",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "impDt": {
+      "official_description": "수입일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "impGubun": {
+      "official_description": "외국산경주마매입구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "impMon": {
+      "official_description": "수입가",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "impUse": {
+      "official_description": "수입용도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "impYr": {
+      "official_description": "수입연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "inChasu": {
+      "official_description": "경매차수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "inCont": {
+      "official_description": "경주마입사세부내역",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2132,
+      "zero": 0,
+      "populated_nonzero": 2485,
+      "nonplaceholder_count": 2485,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "inDt": {
+      "official_description": "마방입사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "inMgrNm": {
+      "official_description": "경주마입사시조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "inMgrNo": {
+      "official_description": "경주마입사시조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "inOwNm": {
+      "official_description": "경주마입사시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "inOwNo": {
+      "official_description": "경주마입사시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 2159,
+        "int": 2458
+      }
+    },
+    "inPart": {
+      "official_description": "경주마입사시조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 9,
+      "populated_nonzero": 4608,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "inRes": {
+      "official_description": "경주마입사사유",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "kraInDt": {
+      "official_description": "최종마사회부서입사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "kraOutDt": {
+      "official_description": "최종마사회부서퇴사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "kraPoNm": {
+      "official_description": "최종마사회부서명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "kraPoNo": {
+      "official_description": "최종마사회부서번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "lchulDt": {
+      "official_description": "최종출주일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 614,
+      "zero": 0,
+      "populated_nonzero": 4003,
+      "nonplaceholder_count": 4003,
+      "json_types": {
+        "int": 4003,
+        "str": 614
+      }
+    },
+    "mgrNm": {
+      "official_description": "조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2885,
+      "zero": 0,
+      "populated_nonzero": 1732,
+      "nonplaceholder_count": 1732,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "mgrNo": {
+      "official_description": "조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2885,
+      "zero": 0,
+      "populated_nonzero": 1732,
+      "nonplaceholder_count": 1732,
+      "json_types": {
+        "str": 3333,
+        "int": 1284
+      }
+    },
+    "mhrCty": {
+      "official_description": "모생산국",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 63,
+      "zero": 0,
+      "populated_nonzero": 4554,
+      "nonplaceholder_count": 4554,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "mhrFhrCty": {
+      "official_description": "외조부마생산국",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1073,
+      "zero": 0,
+      "populated_nonzero": 3544,
+      "nonplaceholder_count": 3544,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "mhrFhrNm": {
+      "official_description": "외조부마마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1073,
+      "zero": 0,
+      "populated_nonzero": 3544,
+      "nonplaceholder_count": 3544,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "mhrFhrNo": {
+      "official_description": "외조부마마번",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1073,
+      "zero": 0,
+      "populated_nonzero": 3544,
+      "nonplaceholder_count": 3544,
+      "json_types": {
+        "str": 1073,
+        "int": 3544
+      }
+    },
+    "mhrFhrYr": {
+      "official_description": "외조부마생년",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1073,
+      "zero": 0,
+      "populated_nonzero": 3544,
+      "nonplaceholder_count": 3544,
+      "json_types": {
+        "str": 1073,
+        "int": 3544
+      }
+    },
+    "mhrNm": {
+      "official_description": "모마명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 197,
+      "zero": 0,
+      "populated_nonzero": 4420,
+      "nonplaceholder_count": 4420,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "mhrNo": {
+      "official_description": "모마",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 63,
+      "zero": 0,
+      "populated_nonzero": 4554,
+      "nonplaceholder_count": 4554,
+      "json_types": {
+        "str": 63,
+        "int": 4554
+      }
+    },
+    "mhrYr": {
+      "official_description": "모생년",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 63,
+      "zero": 0,
+      "populated_nonzero": 4554,
+      "nonplaceholder_count": 4554,
+      "json_types": {
+        "str": 63,
+        "int": 4554
+      }
+    },
+    "monCd": {
+      "official_description": "외국통화기호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "outCnt": {
+      "official_description": "착외횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 722,
+      "populated_nonzero": 3895,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "outCont": {
+      "official_description": "경주마퇴사세부내역",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 446,
+      "zero": 0,
+      "populated_nonzero": 4171,
+      "nonplaceholder_count": 4171,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "outDt": {
+      "official_description": "마방퇴사일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "outMgrNm": {
+      "official_description": "경주마퇴사시조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 448,
+      "zero": 0,
+      "populated_nonzero": 4169,
+      "nonplaceholder_count": 4169,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "outMgrNo": {
+      "official_description": "경주마퇴사시조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 448,
+      "zero": 0,
+      "populated_nonzero": 4169,
+      "nonplaceholder_count": 4169,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "outOwNm": {
+      "official_description": "경주마퇴사시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "outOwNo": {
+      "official_description": "경주마퇴사시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 2160,
+        "int": 2457
+      }
+    },
+    "outPart": {
+      "official_description": "경주마퇴사시조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 454,
+      "populated_nonzero": 4163,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "outRes": {
+      "official_description": "경주마퇴사사유",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 446,
+      "zero": 0,
+      "populated_nonzero": 4171,
+      "nonplaceholder_count": 4171,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "owNm": {
+      "official_description": "소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2818,
+      "zero": 0,
+      "populated_nonzero": 1799,
+      "nonplaceholder_count": 1799,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "owNo": {
+      "official_description": "소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 2818,
+      "zero": 0,
+      "populated_nonzero": 1799,
+      "nonplaceholder_count": 1799,
+      "json_types": {
+        "str": 3500,
+        "int": 1117
+      }
+    },
+    "part": {
+      "official_description": "조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2885,
+      "populated_nonzero": 1732,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "poArea": {
+      "official_description": "소재지지역구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4167,
+      "zero": 0,
+      "populated_nonzero": 450,
+      "nonplaceholder_count": 450,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "poGubun": {
+      "official_description": "소재지구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4167,
+      "zero": 0,
+      "populated_nonzero": 450,
+      "nonplaceholder_count": 450,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "poNm": {
+      "official_description": "소재지명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4167,
+      "zero": 0,
+      "populated_nonzero": 450,
+      "nonplaceholder_count": 450,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "poNo": {
+      "official_description": "소재지의 고유번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4167,
+      "zero": 0,
+      "populated_nonzero": 450,
+      "nonplaceholder_count": 450,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "poip": {
+      "official_description": "포입마",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "prdCty": {
+      "official_description": "생산국",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "prdSerial": {
+      "official_description": "생산년차",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "quinRate": {
+      "official_description": "복승률",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 1780,
+      "populated_nonzero": 2837,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 2359,
+        "float": 2257,
+        "str": 1
+      }
+    },
+    "rankGubun": {
+      "official_description": "부산경마공원군변경반영",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "rankLast": {
+      "official_description": "최종군",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "rankTop": {
+      "official_description": "최고군",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 561,
+      "zero": 0,
+      "populated_nonzero": 4056,
+      "nonplaceholder_count": 4056,
+      "json_types": {
+        "int": 4056,
+        "str": 561
+      }
+    },
+    "rcCnt": {
+      "official_description": "출주횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 614,
+      "populated_nonzero": 4003,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "regDelDt": {
+      "official_description": "번식등록취소일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regDt": {
+      "official_description": "번식등록일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutDt": {
+      "official_description": "번식종료일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutOwNm": {
+      "official_description": "번식종료시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutOwNo": {
+      "official_description": "번식종료시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutPoArea": {
+      "official_description": "번식종료시소재지역구분",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutPoNm": {
+      "official_description": "번식종료시소재지명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutPoNo": {
+      "official_description": "번식종료시소재지번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regOutYr": {
+      "official_description": "번식종료연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "regYr": {
+      "official_description": "번식등록연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "restAreaNm": {
+      "official_description": "최종휴양지",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4615,
+      "zero": 0,
+      "populated_nonzero": 2,
+      "nonplaceholder_count": 2,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "restDt": {
+      "official_description": "최종휴양일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 49,
+      "zero": 0,
+      "populated_nonzero": 4568,
+      "nonplaceholder_count": 4568,
+      "json_types": {
+        "int": 4568,
+        "str": 49
+      }
+    },
+    "restDt2": {
+      "official_description": "최종직전휴양일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4499,
+      "zero": 0,
+      "populated_nonzero": 118,
+      "nonplaceholder_count": 118,
+      "json_types": {
+        "str": 4499,
+        "int": 118
+      }
+    },
+    "restOutDt": {
+      "official_description": "최종휴양종료일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 49,
+      "zero": 0,
+      "populated_nonzero": 4568,
+      "nonplaceholder_count": 4568,
+      "json_types": {
+        "int": 4568,
+        "str": 49
+      }
+    },
+    "restOutDt2": {
+      "official_description": "최종직전휴양종료일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4499,
+      "zero": 0,
+      "populated_nonzero": 118,
+      "nonplaceholder_count": 118,
+      "json_types": {
+        "str": 4499,
+        "int": 118
+      }
+    },
+    "rhrMgrNm": {
+      "official_description": "경주마등록시조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 652,
+      "zero": 0,
+      "populated_nonzero": 3965,
+      "nonplaceholder_count": 3965,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "rhrMgrNo": {
+      "official_description": "경주마등록시조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 652,
+      "zero": 0,
+      "populated_nonzero": 3965,
+      "nonplaceholder_count": 3965,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "rhrMon": {
+      "official_description": "경주마등록직전거래가",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2377,
+      "populated_nonzero": 2240,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "rhrOwNm": {
+      "official_description": "경주마등록시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "rhrOwNo": {
+      "official_description": "경주마등록시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 2181,
+        "int": 2436
+      }
+    },
+    "rhrPart": {
+      "official_description": "경주마등록시조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 665,
+      "populated_nonzero": 3952,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "rhrRegDt1": {
+      "official_description": "경주마등록일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "rhrRegDt2": {
+      "official_description": "경주마등록취소일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 1633,
+      "zero": 0,
+      "populated_nonzero": 2984,
+      "nonplaceholder_count": 2984,
+      "json_types": {
+        "int": 2984,
+        "str": 1633
+      }
+    },
+    "rhrRegYr1": {
+      "official_description": "경주마등록연도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "sanji": {
+      "official_description": "산지",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "sex": {
+      "official_description": "성별",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "sexHis": {
+      "official_description": "거세사유",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "sexMgrNm": {
+      "official_description": "거세시조교사명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4398,
+      "zero": 0,
+      "populated_nonzero": 219,
+      "nonplaceholder_count": 219,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "sexMgrNo": {
+      "official_description": "거세시조교사번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4398,
+      "zero": 0,
+      "populated_nonzero": 219,
+      "nonplaceholder_count": 219,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "sexOwNm": {
+      "official_description": "거세시소유자명",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4607,
+      "zero": 0,
+      "populated_nonzero": 10,
+      "nonplaceholder_count": 10,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "sexOwNo": {
+      "official_description": "거세시소유자번호",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4607,
+      "zero": 0,
+      "populated_nonzero": 10,
+      "nonplaceholder_count": 10,
+      "json_types": {
+        "str": 4612,
+        "int": 5
+      }
+    },
+    "sexPart": {
+      "official_description": "거세시조",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4399,
+      "populated_nonzero": 218,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "sndCnt": {
+      "official_description": "이착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2088,
+      "populated_nonzero": 2529,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "stkFlag": {
+      "official_description": "대상특별경주우승착순마1_3착여부",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 614,
+      "zero": 4003,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4003,
+      "json_types": {
+        "int": 4003,
+        "str": 614
+      }
+    },
+    "stkFstCnt": {
+      "official_description": "대상경주우승횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 4617,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "tameCancelDate": {
+      "official_description": "육성조교취소일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "tameDate": {
+      "official_description": "육성순치일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "tamePlace": {
+      "official_description": "육성조교검사장소",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "tameTrainer": {
+      "official_description": "육성조련사",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 4617,
+      "zero": 0,
+      "populated_nonzero": 0,
+      "nonplaceholder_count": 0,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "trainIlja": {
+      "official_description": "최초능력검사합격일",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 559,
+      "zero": 0,
+      "populated_nonzero": 4058,
+      "nonplaceholder_count": 4058,
+      "json_types": {
+        "int": 4058,
+        "str": 559
+      }
+    },
+    "trdCnt": {
+      "official_description": "삼착횟수",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2027,
+      "populated_nonzero": 2590,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 4617
+      }
+    },
+    "useNm": {
+      "official_description": "용도",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 0,
+      "populated_nonzero": 4617,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "str": 4617
+      }
+    },
+    "winRate": {
+      "official_description": "승률",
+      "field_present": 4617,
+      "absent": 0,
+      "placeholder_or_null": 0,
+      "zero": 2253,
+      "populated_nonzero": 2364,
+      "nonplaceholder_count": 4617,
+      "json_types": {
+        "int": 2657,
+        "float": 1960
+      }
+    }
+  },
+  "zero_policy": "Numeric zero is counted separately; it is not automatically interpreted as missing or as a verified historical statistic.",
+  "temporal_policy": "All fields belong to each profile retrieval observation; present affiliation and cumulative statistics are not race-day historical values.",
+  "official_source": "https://www.data.go.kr/data/15057985/openapi.do",
+  "official_spec_sha256": "8b54ce8cf8964c55adacbd71dc0d5fe06d456c707e551df2423789ee86054c36"
+}

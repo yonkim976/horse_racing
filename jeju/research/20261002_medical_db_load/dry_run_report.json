@@ -1,0 +1,776 @@
+{
+  "database": {
+    "baseline_table_counts": {
+      "api303_corner_rank_rows": 19933,
+      "api_records": 261395,
+      "breed_evidence": 39012,
+      "collection_coverage": 77,
+      "daily_training_api_artifacts": 337,
+      "daily_training_api_rows": 908316,
+      "horse_profile_observations": 4637,
+      "provenance_issues": 2,
+      "race_result_rows": 191604,
+      "running_trial_rows": 34375,
+      "schema_metadata": 25,
+      "source_artifacts": 4778,
+      "starting_exam_api_rows": 10664,
+      "starting_training_website_rows": 295470,
+      "supplemental_facts": 4,
+      "website_training_artifacts": 2529
+    },
+    "existing_api_record_rows": 261395,
+    "existing_profile_observation_rows": 4637,
+    "existing_source_artifact_rows": 4778,
+    "path": "/private/tmp/jeju_medical_20261002/root/before_load.sqlite3",
+    "sha256": "aa79adddb21787e648ee442127ec5e4881087e86e985e9efc359a5806ba06d8f"
+  },
+  "frozen_input_hashes": {
+    "api16_page_2002_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2003_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2004_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2005_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2006_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2007_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2008_1": {
+      "bytes": 302,
+      "sha256": "250ba768fca16d55143d7944edc02c6386848391a308a39c9db2a8b3c014563b"
+    },
+    "api16_page_2009_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2010_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2011_1": {
+      "bytes": 136,
+      "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d"
+    },
+    "api16_page_2012_1": {
+      "bytes": 1012,
+      "sha256": "b7133a6cb6d58b52f5762214d08230553ac12c87786c872f7329c2bd6d2c5056"
+    },
+    "api16_page_2013_1": {
+      "bytes": 3016,
+      "sha256": "361e86691a370d1c743372a9824f90e5d06cd14df173188c9feb2c003c2a9bb9"
+    },
+    "api16_page_2014_1": {
+      "bytes": 7474,
+      "sha256": "4a1f0f42ca4d85034d423b61182ff298c6ee3ed9e792ab2cd5d1d1f5faac4782"
+    },
+    "api16_page_2015_1": {
+      "bytes": 15401,
+      "sha256": "58125ba4bb5fc3f2bcfcf7256b7d799ff02d0b2f555e05d6cc7b557a50c656bd"
+    },
+    "api16_page_2016_1": {
+      "bytes": 19392,
+      "sha256": "a4a478728e9e6b40720f8a5159a7ccc52a2d22b6703877b5e70d6987e7ba64d1"
+    },
+    "api16_page_2017_1": {
+      "bytes": 44725,
+      "sha256": "a362a691161e647beb669b41f46a6f1bab5b1860c871689b2bb00108dee7c0f1"
+    },
+    "api16_page_2018_1": {
+      "bytes": 52255,
+      "sha256": "c2ede8d7fffdfff84c047d8ee1f9078d1c8b3fccb1ee59ebfde49dff7e41b710"
+    },
+    "api16_page_2019_1": {
+      "bytes": 66953,
+      "sha256": "aad0e5320590ec594c8e76dc761e52dc960e428fdc3b20d78f48da7f146652d9"
+    },
+    "api16_page_2020_1": {
+      "bytes": 82529,
+      "sha256": "b2a5fe19bd2ffb4c925ec885fe386a599485c05540ca1d84ebd410607f9b14cc"
+    },
+    "api16_page_2021_1": {
+      "bytes": 111188,
+      "sha256": "483658a166c2b09e51af14cf5f2c0dd06d856e1bf64dbdf45c41f329dd64c90f"
+    },
+    "api16_page_2022_1": {
+      "bytes": 122345,
+      "sha256": "243d986783d7dcfea26a7f9b1542633c31c4cbfd1b79e317efa57aa93ad7a6d6"
+    },
+    "api16_page_2023_1": {
+      "bytes": 176519,
+      "sha256": "ca66bb444c6de893a72471b090eadf1eff441833443b256e5ba226e7ae2c8090"
+    },
+    "api16_page_2023_2": {
+      "bytes": 35509,
+      "sha256": "a44663919730c0e5745cb396943b711a025233ef31bdd36ed33cf488cefccba6"
+    },
+    "api16_page_2024_1": {
+      "bytes": 178096,
+      "sha256": "caec66be3c416f526eda8250075d210019c5bcc7f4a3d18b2f5a523f61496224"
+    },
+    "api16_page_2024_2": {
+      "bytes": 179048,
+      "sha256": "d6df258abd59519dd6eca297f59ae46e78d137fb73447963d8094f0e9a2661f7"
+    },
+    "api16_page_2024_3": {
+      "bytes": 4576,
+      "sha256": "8556d72365fe750ae291ecb157139d4c550a0544469b89a83bc10d275b4f9cbe"
+    },
+    "api16_page_2025_1": {
+      "bytes": 178475,
+      "sha256": "b75afda02489401e188131c7d7b548fe51381fbd6b052136ff6b25482346dc0d"
+    },
+    "api16_page_2025_2": {
+      "bytes": 177907,
+      "sha256": "b73bf765f7d564cebbab7af76eab42b0d811a2905a496280c496c8c9c05e8b96"
+    },
+    "api16_page_2025_3": {
+      "bytes": 168703,
+      "sha256": "379991b537771ae47ac8a32e540dd33ac3e36f796b28dc190bd83a5629f13729"
+    },
+    "api16_page_2026_1": {
+      "bytes": 179715,
+      "sha256": "8895e52d0fbd7248b90e67d261272b72f749eeec9441ef41e9355938c1cc54e6"
+    },
+    "api16_page_2026_2": {
+      "bytes": 177360,
+      "sha256": "7b47f6fafd4128e6539fc3c435f062eb6b8257228645e81c7070c63776043904"
+    },
+    "api16_page_2026_3": {
+      "bytes": 166117,
+      "sha256": "be93a50c7d9485c4b7a4c678c7f190df9664f9544e74e2aa1318eb0cb428a736"
+    },
+    "api16_run_manifest": {
+      "bytes": 469826,
+      "sha256": "2984aeb0c982e67b4d8157ae1afe7a202aa199d2c9944b1a099b03450d79bd38"
+    },
+    "api16_year_manifest_2002": {
+      "bytes": 3042,
+      "sha256": "c89dd7ca062f22aa0e8c64c3211b6a04c3642dc363e5985aefc05e3eda8e71d6"
+    },
+    "api16_year_manifest_2003": {
+      "bytes": 1423,
+      "sha256": "eb52867005666a8a7675506a0321f0ebc50266dc1eb792910e8b41ee329dfe9e"
+    },
+    "api16_year_manifest_2004": {
+      "bytes": 1423,
+      "sha256": "f592ca9e0f0592ae6b7e58afcf4ad9d078b3034085fbf09fd07ca8ceea24b776"
+    },
+    "api16_year_manifest_2005": {
+      "bytes": 1423,
+      "sha256": "e98e923b19a70ba9625d70c336d4b966bb0c54bcfac7b25e969cde91a456997b"
+    },
+    "api16_year_manifest_2006": {
+      "bytes": 1423,
+      "sha256": "fd39a14a1d81c90c8254bafb84db96a866471abac10017f275692a29d0865297"
+    },
+    "api16_year_manifest_2007": {
+      "bytes": 1423,
+      "sha256": "56b662e2e8d8dfd397d22cf08919398846ec1fa9827ad38a4c93d50afb406430"
+    },
+    "api16_year_manifest_2008": {
+      "bytes": 1445,
+      "sha256": "9bc01dee486b09d96dbf0423190622073ef0790c7297844a96b3418c7cb15f9b"
+    },
+    "api16_year_manifest_2009": {
+      "bytes": 1423,
+      "sha256": "0057aa4cbcf67e9f4e9ae5981f6d7ff902c34bd94a817ca6d0298e17f1420fb8"
+    },
+    "api16_year_manifest_2010": {
+      "bytes": 1423,
+      "sha256": "08f0bc773e23d1089b7cb3344f71adb5b03cf4af455e4d226744b366f3efd128"
+    },
+    "api16_year_manifest_2011": {
+      "bytes": 1423,
+      "sha256": "0d0546d7f6cdb3b1b16ba42336c435d9dc079a7e7a8aa7d0cd91b74dbded0199"
+    },
+    "api16_year_manifest_2012": {
+      "bytes": 1446,
+      "sha256": "ae4e1b82f4558ce07ddbdc24b3e129c49c427818b9ca17b3d5e533ed61d3913d"
+    },
+    "api16_year_manifest_2013": {
+      "bytes": 1452,
+      "sha256": "1f2d63145ba9aa4d929178fa2feac8b160245924890bf65ac7848e090d0d4906"
+    },
+    "api16_year_manifest_2014": {
+      "bytes": 1452,
+      "sha256": "ecf00824e693fbdb0f1ca50c994e9a447ccfb3290cea776d66a5d18dfee32c47"
+    },
+    "api16_year_manifest_2015": {
+      "bytes": 1453,
+      "sha256": "8490e55422fc9f43a6883e7fe6697dd2681484dad84174ecf9b2578478a0f5c7"
+    },
+    "api16_year_manifest_2016": {
+      "bytes": 1459,
+      "sha256": "410403d201dde328628658e5b78c25772b368ae6529abeb6929bc4807ce28e1e"
+    },
+    "api16_year_manifest_2017": {
+      "bytes": 1459,
+      "sha256": "cfe45fe3596d90e09626c3a1d85ef4ceb5834c70a6418f53b9ef98649aa3b0a6"
+    },
+    "api16_year_manifest_2018": {
+      "bytes": 1459,
+      "sha256": "3d45b593b757a1fbd0867e9de7a40a46aaafd65eb2caff8935d19f5703fe8253"
+    },
+    "api16_year_manifest_2019": {
+      "bytes": 1459,
+      "sha256": "f7716ea018abcfd8ce6077332786a064a2f39658f388d9c61989798bf9d05221"
+    },
+    "api16_year_manifest_2020": {
+      "bytes": 1459,
+      "sha256": "5add2affd06d8c452f143e73198d942ccbb5bed622f0d8c30f7e8ed39a6fe2ee"
+    },
+    "api16_year_manifest_2021": {
+      "bytes": 1460,
+      "sha256": "3a154f6b6e2cd41a3ac4e253dce0d5b2e4541d17da5c8468f90f901cc1979971"
+    },
+    "api16_year_manifest_2022": {
+      "bytes": 1460,
+      "sha256": "020d03a955d6c256204cea16329b00c0f60bced22e7442882eeea7bd79f37118"
+    },
+    "api16_year_manifest_2023": {
+      "bytes": 2387,
+      "sha256": "05c9a6b99a3c3c819a22eb0485818b78d46349c32b69657780b24a3e4ab8cf72"
+    },
+    "api16_year_manifest_2024": {
+      "bytes": 3308,
+      "sha256": "2f8c8fe32a4f6dc4fd64a8a89ac6b2494c70c0f2844e78c20a4726fefb5320c8"
+    },
+    "api16_year_manifest_2025": {
+      "bytes": 3312,
+      "sha256": "4cca5bcc75c0aa01cf98f65d211276971c02ffa6ed077946a5386694939ed48d"
+    },
+    "api16_year_manifest_2026": {
+      "bytes": 3314,
+      "sha256": "5f560b00d789e62f5358ec971be81cdd908f2f9620432aeb0d6614b62f213228"
+    },
+    "api42_response_3103407": {
+      "bytes": 3831,
+      "sha256": "e9a524d5f1751437f928bd9b51aa397b73e75ceacb9f5f63539c50cf4f425ab5"
+    },
+    "api42_response_3107302": {
+      "bytes": 3780,
+      "sha256": "07453fe0bd1c3331a74d3607333232463aaa59ac3ce7cd5e0281b83420f55c77"
+    },
+    "api42_response_3107385": {
+      "bytes": 3801,
+      "sha256": "6b26652fdfbcdc423f5ce065cff7927f196f279df03446f90958795ed16e5750"
+    },
+    "api42_response_3107418": {
+      "bytes": 3786,
+      "sha256": "976012aede4722ff19ad79d66dedcc56beb54f31dfc8a0f0a0ea9f3996c7ba2c"
+    },
+    "api42_response_3107448": {
+      "bytes": 3781,
+      "sha256": "45a9125c4960e520e254e8430febd126677f62881d6b705a35505b48b6fed544"
+    },
+    "api42_response_3107476": {
+      "bytes": 3810,
+      "sha256": "668514adcdd9593b49f1ecac6d701927f479d5749ce4eed1e9a6a12a331f96ec"
+    },
+    "api42_response_3107504": {
+      "bytes": 3788,
+      "sha256": "363e63a2436c9d1eb8903232920fab2c33f5cc33bb94e71a0eb2d6e06dd66b38"
+    },
+    "api42_response_3107513": {
+      "bytes": 3836,
+      "sha256": "520fc7c401e321c796b49203193098e68683c115a6b60b9c5bc2eee9d3e15b4f"
+    },
+    "api42_response_3107570": {
+      "bytes": 3809,
+      "sha256": "14f6232d4b15ee038a2156322f5882b0cd2c5705fffaec90c7b5027f36888ec0"
+    },
+    "api42_response_3107575": {
+      "bytes": 3814,
+      "sha256": "7715a6e95763cd4ddb5fa961c6d5915e7ccb01743dcbc46123eb3af690b44d83"
+    },
+    "api42_response_3107576": {
+      "bytes": 3795,
+      "sha256": "1c5ff72dcafa571401033941c7bbfc11da90dd90952f39985ae29c68d8a6f0d8"
+    },
+    "api42_response_3107588": {
+      "bytes": 3795,
+      "sha256": "2af9c1481e1df5ccabf36d28fb4cfafc19148179ed3c7ea934025949d4a20c15"
+    },
+    "api42_response_3107608": {
+      "bytes": 3795,
+      "sha256": "f53122df9ef58dd94975a2835b52f6f717b028049ae6d418e761075cf7583d23"
+    },
+    "api42_response_3107856": {
+      "bytes": 3807,
+      "sha256": "b3711be99b5d74a0933b7f4bbcf5deea3e0ceba7d2a686bb8cefbf064b9cabdc"
+    },
+    "api42_response_3108121": {
+      "bytes": 3798,
+      "sha256": "e83b3b6d989ff2be4db9bfb5c1d82957c280d52ec3ad7827b023776b11b679b1"
+    },
+    "api42_response_3108141": {
+      "bytes": 3798,
+      "sha256": "9c3d735041ce5a8ead0c94c74235fa9cc01d033b8d248522b6fb9414a2355de7"
+    },
+    "api42_response_3108180": {
+      "bytes": 3800,
+      "sha256": "a2731bdba251b9c2c1480cdaede461210074a1c6899f81e3a080ebb653157d64"
+    },
+    "api42_response_3108193": {
+      "bytes": 3781,
+      "sha256": "35f28d1088ec8f4fbf4b7e1f801d7271abdbc8e22801465f7d713e69ebe5e945"
+    },
+    "api42_response_3108219": {
+      "bytes": 3779,
+      "sha256": "3f5425fc805251df68f5ef04520aeac21ca50e5e258f40034e0776b6a33e8e16"
+    },
+    "api42_response_3108254": {
+      "bytes": 3804,
+      "sha256": "61fc31c9d6ec147279e394a860a86f25cd2d7fd2675c602ba65df7f664f72788"
+    },
+    "api42_response_3108449": {
+      "bytes": 3774,
+      "sha256": "a6bbd888d5ff1cd1f21d3197cd64e7702797aaefb8984f651490148cdd377bd3"
+    },
+    "api42_response_3108461": {
+      "bytes": 3820,
+      "sha256": "06533fef118a083e0898600a89139a022a5ae9e36b7df10e56177aab56b12ca1"
+    },
+    "api42_response_3108912": {
+      "bytes": 3818,
+      "sha256": "29b6caa185eac2052cfa85a967ce2d9da3e4196d6b52cc19d68c1db95a8919a1"
+    },
+    "api42_response_3108915": {
+      "bytes": 3792,
+      "sha256": "3447f1baf8377639c7b2149ec9cf80ac9237232ff37642668aa22716dc55f424"
+    },
+    "api42_response_3108927": {
+      "bytes": 3797,
+      "sha256": "584dfdcdf97e303c15549ade896e4a12921bf17eddd6f9da5af73bfec4dc92f4"
+    },
+    "api42_response_3108951": {
+      "bytes": 3811,
+      "sha256": "6274c1cac69aede044b606ceaa6e9c8a0fb4b7777de405a9643c3692a6df0ce8"
+    },
+    "api42_response_3108955": {
+      "bytes": 3800,
+      "sha256": "2f8822139e9bf924df91a0dc361062fab85edae3c4caa0da0ad6fbf1c50839f2"
+    },
+    "api42_response_3108991": {
+      "bytes": 3794,
+      "sha256": "7e42b13513807f39d2633002e59eb154987f8ba773cc7682ac42bfdfd69d99b4"
+    },
+    "api42_response_3108992": {
+      "bytes": 3804,
+      "sha256": "6daf7be61cf363e297e440ff3fb73570b18f2fd4d665f357e1aa30318cb9d7f8"
+    },
+    "api42_response_3109001": {
+      "bytes": 3794,
+      "sha256": "0a37654141b4b89afbd4e2b57eab407f41802a3eb0440a0c9fa9b51aa0cf65be"
+    },
+    "api42_response_3109009": {
+      "bytes": 3812,
+      "sha256": "36d62d2815253a289c84d5def05b54c39935bad216be5cfc11a8830271dbb922"
+    },
+    "api42_response_3109026": {
+      "bytes": 3799,
+      "sha256": "57b87f1579bdb3bd09db59637405fa65f440423178d03288d6a31052869f60bc"
+    },
+    "api42_response_3109027": {
+      "bytes": 3815,
+      "sha256": "4abd08bbe3473c348c9eb72d2353a67e78f9bf7589d6e19fc93f8dd67985a6ab"
+    },
+    "api42_response_3109055": {
+      "bytes": 3786,
+      "sha256": "29705a32dd1e1c1c8f249b22074a648cc685a66a53065c038185aa73a7a503c6"
+    },
+    "api42_response_3109060": {
+      "bytes": 3778,
+      "sha256": "74f0ccbcd197558fca055416141325a920c1e1757b61f05138545b0e38944ddc"
+    },
+    "api42_response_3109070": {
+      "bytes": 3818,
+      "sha256": "918d30f8c0de78b86f1f54d78a3cbf3b26c46995a7d53b8cc4ed830032ed7b55"
+    },
+    "api42_response_3109073": {
+      "bytes": 3827,
+      "sha256": "daf30e3e6ac58ab0a17ef19fa09e406ad8bf3a526682625d661e28cf1f5aa3fe"
+    },
+    "api42_response_3109076": {
+      "bytes": 3823,
+      "sha256": "e350cd45a4610ff4ac50c294aac0f5393ca8c0156c3ebd51fc4acdffc1cff649"
+    },
+    "api42_response_3109086": {
+      "bytes": 3775,
+      "sha256": "dc89a465da2bb4b404fdb267ee93822a7a9bc8c5cef4c854f618ad9dbfba86e5"
+    },
+    "api42_response_3109091": {
+      "bytes": 3811,
+      "sha256": "6c71f1dbe20a6dc2c2b76e6b4dfea7cfc7b8ea7986562a576c0ddc0be3728083"
+    },
+    "api42_response_3109096": {
+      "bytes": 3741,
+      "sha256": "ce00b7acaafa4dfacc7e818ec3c6eaacb035f2d47bd16ebc546d14635328dd3a"
+    },
+    "api42_response_3109100": {
+      "bytes": 3807,
+      "sha256": "3e8b34f0aa5870238a09e5304285035ad008a6b7da2050bdd47d87e465cc9f23"
+    },
+    "api42_response_3109119": {
+      "bytes": 3788,
+      "sha256": "06cae1c6a3c03a851f5797dc31ceebd0fdd0a952cfa007791ea81ba8e6ce766b"
+    },
+    "api42_response_3109123": {
+      "bytes": 3785,
+      "sha256": "61284cd85b5fe6bf6408fbc9c367028e53023c5b79fef184ce92320939990209"
+    },
+    "api42_response_3109147": {
+      "bytes": 3795,
+      "sha256": "911336402b08310c0e135471b37de8cd8a836998562c872bd8b87b3640e9e742"
+    },
+    "api42_response_3109153": {
+      "bytes": 3795,
+      "sha256": "9c48939c5850c6af0c31a713f0f92ab1b91a3bb13476591fe7f76a529c566f49"
+    },
+    "api42_response_3109154": {
+      "bytes": 3812,
+      "sha256": "b3f10f2de7dcc17be188228b57bc9f844953d6ef4264c919ca0b6b16cec41e46"
+    },
+    "api42_response_3109157": {
+      "bytes": 3769,
+      "sha256": "4152db0959c399f822e0a437471567a4858bca4f5c0cdeff6da1c1f8e2c6622f"
+    },
+    "api42_response_3109161": {
+      "bytes": 3784,
+      "sha256": "cf697d438a18fc83fe27b7be576e5ba32a2a2cbedb4461646c26c680dc522e5b"
+    },
+    "api42_response_3109164": {
+      "bytes": 3772,
+      "sha256": "a58b7880b2d7be9538d4853742bc4159346145fea2fdff3387119ccc59a47af0"
+    },
+    "api42_response_3109195": {
+      "bytes": 3771,
+      "sha256": "6dc8aeace520f513982429451defd949c36152a0f8184d932bc77cc83c5db746"
+    },
+    "api42_response_3109197": {
+      "bytes": 3782,
+      "sha256": "ad8e467d23d15b928046624c77b90f5c634a733cde482acb08e3ef48e4368dde"
+    },
+    "api42_response_3109214": {
+      "bytes": 3778,
+      "sha256": "0b38502a8e342b264a943e69f66f4532740e6593ee79d0d61b82bf379305519d"
+    },
+    "api42_response_3109215": {
+      "bytes": 3787,
+      "sha256": "24c900f3084dbf3638feb36620399998b5c673fbbd8cec4e1efee6023bf32454"
+    },
+    "api42_response_3109219": {
+      "bytes": 3793,
+      "sha256": "ddfe2609ea5bc2b5b45390344704dcedbbbd160281b508c366c370ab5ed1c3ba"
+    },
+    "api42_response_3109221": {
+      "bytes": 3780,
+      "sha256": "e577f8cc539dce6558ea1c747b71267cc20e85d3be26e35bc6a32656e75cf31d"
+    },
+    "api42_response_3109228": {
+      "bytes": 3792,
+      "sha256": "828df30d5ce49329e8c64932d1bdfb122f266f3fd9881abb91820be2faec5b13"
+    },
+    "api42_response_3109229": {
+      "bytes": 3778,
+      "sha256": "1b998d660e1023634b223d6506fe61c766df94887d106822e0eb17a2506fb65c"
+    },
+    "api42_response_3109232": {
+      "bytes": 3809,
+      "sha256": "4ca9ad9402290911672ab0e35efaabb9847870678d20789926349137136029bb"
+    },
+    "api42_response_3109233": {
+      "bytes": 3800,
+      "sha256": "5ebe2b535ebfcdf706b882fea17e3052b1c6ce68ff206ecc59c99377d8be541c"
+    },
+    "api42_response_3109234": {
+      "bytes": 3771,
+      "sha256": "27365f3c4bc6f9e50df00811228d4917afaa7d11920c303fd1303d1cb463b35a"
+    },
+    "api42_response_3109245": {
+      "bytes": 3787,
+      "sha256": "9014b649f9382ce6f40c7700f6ad2fd56f5079bebdb1e79885dc9c0c07a56741"
+    },
+    "api42_response_3109250": {
+      "bytes": 3798,
+      "sha256": "02c54f4e84dea0961a4796f61638b3685aae4d0baf57e13e1e02f3f4e489401d"
+    },
+    "api42_response_3109272": {
+      "bytes": 3808,
+      "sha256": "51c31eee943ae3b1c960bc38fb0efe73a9dd18ee483f9fa6e566a3e8c8acb944"
+    },
+    "api42_response_3109293": {
+      "bytes": 3797,
+      "sha256": "3ffebee1926cbda04038553b5c80081eeac8030f21335571ba16fc783de0a069"
+    },
+    "api42_response_3109313": {
+      "bytes": 3796,
+      "sha256": "8874f203d501b232e68907750dfdabe6131d5609b0787117e58e50692dfa5336"
+    },
+    "api42_response_3109323": {
+      "bytes": 3805,
+      "sha256": "f199889c36482010f334cb16b2e8d293056fb589cdc7ec889cf59e8f8e51d025"
+    },
+    "api42_response_3109340": {
+      "bytes": 3797,
+      "sha256": "7a23775e5c18f00b1721c8db5fc14e2f2333fd3d4f0eff3c12f6fed174b7db01"
+    },
+    "api42_response_3109350": {
+      "bytes": 3793,
+      "sha256": "6f93dbc62a843cd5c9bc613f100f54d03c13a9cef744e7dc51563b8c032a217c"
+    },
+    "api42_response_3109366": {
+      "bytes": 3766,
+      "sha256": "3bff8aecdf2292b859eb856ca08735d58b3588c552b8356c9157bea044a64631"
+    },
+    "api42_response_3109372": {
+      "bytes": 3771,
+      "sha256": "7dd3ff826ce13337dab84e40e2737f74c34cc57c2d3d1ce19e1c6096343d6875"
+    },
+    "api42_response_3109377": {
+      "bytes": 3807,
+      "sha256": "41978c73fc0a8f0086e57ba159351c7e2a66e8d4e35a2c929cf947874e729138"
+    },
+    "api42_response_3109390": {
+      "bytes": 3782,
+      "sha256": "b7fb99304fbab04a074806f930b3808733f3f6544f43a8e862c9ebf25950edc6"
+    },
+    "api42_response_3109427": {
+      "bytes": 3782,
+      "sha256": "ac063063a01e8d708acf6af7369244ba264b259169e1761299b4eeb5570a0aec"
+    },
+    "api42_response_3109441": {
+      "bytes": 3781,
+      "sha256": "a2d74a81d856a27465afe0f50ad06d7a75851d1e9af19ec83562f003926a8fb8"
+    },
+    "api42_response_3109442": {
+      "bytes": 3792,
+      "sha256": "0ac217f911dd39c37fd7cca5c71e7ab29254429fe9924a7490113ef9f9689ac6"
+    },
+    "api42_response_3109448": {
+      "bytes": 3806,
+      "sha256": "4d9482eac3624194855e9fef71b3c3461b1c90c01ef25025c82903b8c4266f00"
+    },
+    "api42_response_3109450": {
+      "bytes": 3791,
+      "sha256": "7ec706239633ef624240d1e32649dbeee928d52e2d6a84d0210e9f3df0f2817e"
+    },
+    "api42_response_3109459": {
+      "bytes": 3807,
+      "sha256": "036ecb3df58f1a60d69b7fba86d295604481b9a758fcd45830943b7ff92b7d74"
+    },
+    "api42_response_3109479": {
+      "bytes": 3783,
+      "sha256": "820de8d1bad8469d7247308c85a2206ad453409797b14e2b56dc563927400358"
+    },
+    "api42_response_3110031": {
+      "bytes": 3786,
+      "sha256": "c4198e48f3e6993e5f056d32bc460660043ed8daff69f6d5f1e15aa0a7b573a6"
+    },
+    "dictionary_README.md": {
+      "bytes": 4437,
+      "sha256": "134599fd27b6dce1ded46f4a569292d0fb5e3be42c68aa44e73d37e954aa68b9"
+    },
+    "dictionary_api33_source_rows.parquet": {
+      "bytes": 252942,
+      "sha256": "3e9e8e99f5a2f79e135f70f40f41d019df94c43556443a7d9d0fec7580c62a75"
+    },
+    "dictionary_api33_terms.parquet": {
+      "bytes": 201047,
+      "sha256": "8766e10b60fc240d2277affc115bd3bdf57f8ff5f5e2c59c2f1103510ad05945"
+    },
+    "dictionary_build_dictionary.py": {
+      "bytes": 47670,
+      "sha256": "4e10697fc66318fc16ec537624818c12aaf76c8aa0e44ef11f2788a5dc82e9fd"
+    },
+    "dictionary_explanation_observations.parquet": {
+      "bytes": 157534,
+      "sha256": "57b6c6c612a73b32bfef165ae2e12c8f4309505e025f641d7f76f3c4e3e9181a"
+    },
+    "dictionary_explanation_terms.parquet": {
+      "bytes": 72477,
+      "sha256": "7bfce6799b4f328dd6cfc2a6f0fdd11e8585568ee10b02610ba361f342dc7857"
+    },
+    "dictionary_manifest.json": {
+      "bytes": 12937,
+      "sha256": "08f85681b4125faea6be5912ad4b136c7199f25eb2ef3bad5ae856fb90b024ab"
+    },
+    "dictionary_phrase_components.parquet": {
+      "bytes": 289639,
+      "sha256": "9d1e55d8ffb9dd2796b375385871a162a4533c66c305e0fbc4a332c79d6eb5bb"
+    },
+    "dictionary_phrase_decisions.parquet": {
+      "bytes": 362145,
+      "sha256": "bc8eb16e757f7ee98587b16a7cb5e762ab5b1db04bf12c7fca249821d08810b4"
+    },
+    "dictionary_schema.json": {
+      "bytes": 9614,
+      "sha256": "8b5fbf61dd72b7234384ab41c3b97548f3f9f65078cb1415f6a9a180a9521963"
+    },
+    "jeju_horse_exclusions": {
+      "bytes": 349,
+      "sha256": "5a88a0f19880a5b19ed7bfdec5a2465cb6652cff4b91c5cbe255fff377bcf84a"
+    },
+    "load_sql_migration": {
+      "bytes": 11591,
+      "sha256": "552cbd843ccefc393bb48b67b3e70788d44d07e3fc3fc6a3e9dc93b3a3c0e253"
+    },
+    "profile_collection_manifest": {
+      "bytes": 2974,
+      "sha256": "9906d8915e392499ebb21f7294aafbc9e6340284113f4eae0d8e8b10a7e227c9"
+    },
+    "profile_target_manifest": {
+      "bytes": 114032,
+      "sha256": "c8c891ec6af5a7be74efa0c71fba3cfe7029182db8216f09d4f225b89770bef1"
+    },
+    "profile_validated_rows": {
+      "bytes": 1101485,
+      "sha256": "174c540c06ca47baaa42a830c4e120d7836617f59d984bc64b244cc4b031faff"
+    }
+  },
+  "inputs": {
+    "api16_post_cutoff_rows": 39,
+    "api16_run_manifest_sha256": "2984aeb0c982e67b4d8157ae1afe7a202aa199d2c9944b1a099b03450d79bd38",
+    "api16_source_pages": 32,
+    "api16_source_rows": 12030,
+    "api42_collection_manifest_sha256": "9906d8915e392499ebb21f7294aafbc9e6340284113f4eae0d8e8b10a7e227c9",
+    "api42_exact_missing_profile_ids": 81,
+    "api42_profile_count": 81,
+    "api42_target_manifest_sha256": "c8c891ec6af5a7be74efa0c71fba3cfe7029182db8216f09d4f225b89770bef1",
+    "api42_validated_rows_sha256": "174c540c06ca47baaa42a830c4e120d7836617f59d984bc64b244cc4b031faff",
+    "clinic_source_rows_per_profile_verified": 156,
+    "dictionary_manifest_sha256": "08f85681b4125faea6be5912ad4b136c7199f25eb2ef3bad5ae856fb90b024ab",
+    "dictionary_parquet_rows": {
+      "medical_api33_source_rows": 3523,
+      "medical_api33_terms": 3511,
+      "medical_explanation_observations": 145,
+      "medical_explanation_terms": 119,
+      "medical_phrase_components": 9113,
+      "medical_phrase_decisions": 5397
+    }
+  },
+  "planned_counts": {
+    "api16_api_records_all_source_items": 12030,
+    "api16_source_artifacts": 32,
+    "api42_collection_target_profiles": 81,
+    "api42_horse_profile_observations": 81,
+    "api42_source_artifacts": 81,
+    "medical_api_diagnosis_slots": 24060,
+    "medical_api_rows_analysis_2026_cutoff": 11991,
+    "medical_api_rows_exact_profile_linked": 12030
+  },
+  "production_database_modified": false,
+  "quarantine": {
+    "policy": "Raw API page and api_records retain every source item; medical_api_rows requires exact current 제주마 profile ID, exact meet text, valid date, and no exclusion.",
+    "quarantine_items_are_not_deleted": true,
+    "quarantined_after_profile_import": {
+      "by_reason": {},
+      "row_count": 0,
+      "rows": []
+    },
+    "raw_source_rows": 12030,
+    "unlinked_before_api42_profile_import": {
+      "horse_count": 81,
+      "official_horse_ids": [
+        "3103407",
+        "3107302",
+        "3107385",
+        "3107418",
+        "3107448",
+        "3107476",
+        "3107504",
+        "3107513",
+        "3107570",
+        "3107575",
+        "3107576",
+        "3107588",
+        "3107608",
+        "3107856",
+        "3108121",
+        "3108141",
+        "3108180",
+        "3108193",
+        "3108219",
+        "3108254",
+        "3108449",
+        "3108461",
+        "3108912",
+        "3108915",
+        "3108927",
+        "3108951",
+        "3108955",
+        "3108991",
+        "3108992",
+        "3109001",
+        "3109009",
+        "3109026",
+        "3109027",
+        "3109055",
+        "3109060",
+        "3109070",
+        "3109073",
+        "3109076",
+        "3109086",
+        "3109091",
+        "3109096",
+        "3109100",
+        "3109119",
+        "3109123",
+        "3109147",
+        "3109153",
+        "3109154",
+        "3109157",
+        "3109161",
+        "3109164",
+        "3109195",
+        "3109197",
+        "3109214",
+        "3109215",
+        "3109219",
+        "3109221",
+        "3109228",
+        "3109229",
+        "3109232",
+        "3109233",
+        "3109234",
+        "3109245",
+        "3109250",
+        "3109272",
+        "3109293",
+        "3109313",
+        "3109323",
+        "3109340",
+        "3109350",
+        "3109366",
+        "3109372",
+        "3109377",
+        "3109390",
+        "3109427",
+        "3109441",
+        "3109442",
+        "3109448",
+        "3109450",
+        "3109459",
+        "3109479",
+        "3110031"
+      ],
+      "reason": "No exact current 제주마 profile existed in the frozen pre-import database baseline.",
+      "row_count": 156
+    }
+  },
+  "status": "dry_run_only"
+}

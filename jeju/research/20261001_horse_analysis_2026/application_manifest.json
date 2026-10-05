@@ -1,0 +1,46 @@
+{
+  "applied_at_utc": "2026-10-01T09:16:51.860+00:00",
+  "backup": {
+    "bytes": 595075072,
+    "created_at_utc": "2026-10-01T09:15:11.768+00:00",
+    "foreign_key_violations": 0,
+    "integrity_check": "ok",
+    "path": "jeju/research/20261001_horse_analysis_2026/backups/jeju_native_core_before_horse_analysis_20261001.sqlite3",
+    "sha256": "e34b7410db591d8219c5c2145dde177f7ff34cca1bb5ca11d0022d5ab331eb47"
+  },
+  "database_path": "jeju/data/jeju_native_core.sqlite3",
+  "last_check": {
+    "checked_at_utc": "2026-10-01T09:19:15.424+00:00",
+    "database_changed": false,
+    "mode": "idempotency_verified"
+  },
+  "migration_path": "jeju/data/schema/migrations/20261001_add_horse_analysis_2026.sql",
+  "migration_sha256": "f2d06e415e1a7b528972b05f7313291c26cd9667dec19b4ea7f5a7e7efb06a0f",
+  "runs": [
+    {
+      "checked_at_utc": "2026-10-01T09:16:51.860+00:00",
+      "database_changed": true,
+      "mode": "applied"
+    },
+    {
+      "checked_at_utc": "2026-10-01T09:19:15.424+00:00",
+      "database_changed": false,
+      "mode": "idempotency_verified"
+    }
+  ],
+  "source_counts_before_apply": {
+    "api_explicit_jeju_trial_rows": 15738,
+    "horse_profile_latest": 4617,
+    "jeju_race_candidate_passing_with_corner_rank": 92513
+  },
+  "status": "idempotency_verified",
+  "verification": {
+    "foreign_key_violations": 0,
+    "integrity_check": "ok",
+    "view_counts": {
+      "horse_analysis_2026": 4617,
+      "jeju_race_analysis_2026": 92513,
+      "jeju_trial_analysis_2026": 15738
+    }
+  }
+}

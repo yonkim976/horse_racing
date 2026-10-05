@@ -1,0 +1,89 @@
+{
+  "audit_scope": "Read-only independent check of exact horse-ID joins between race_result_rows and horse_profile_latest, plus the observed name and sex exceptions.",
+  "database_access": "SQLite opened with mode=ro; no database or code changes.",
+  "id_link_check": {
+    "race_result_rows_total": 191604,
+    "race_result_distinct_horse_ids": 12763,
+    "target_race_candidate_ids_with_profiles": 4006,
+    "target_race_candidate_ids_expected": 4006,
+    "matched_race_result_rows": 92513,
+    "matched_races": 9494,
+    "missing_target_profile_ids": 0,
+    "race_raw_hrNo_or_profile_raw_hrNo_disagreements_on_joined_rows": 0,
+    "note": "The other historical race IDs are outside this frozen 4,006-horse candidate cohort; the 611 supplemental profiles are a separate target group."
+  },
+  "name_exception": {
+    "mismatching_race_rows": 1,
+    "horse_id": "3107458",
+    "race": {
+      "date": "2026-01-16",
+      "race_number": 1,
+      "horse_number": 3,
+      "raw_hrNo": 3107458,
+      "raw_hrName": "동방라오",
+      "raw_sex": "암",
+      "official_order": 94,
+      "raw_race_time": 0
+    },
+    "api42_profile": {
+      "observed_at_utc": "2026-10-01T06:44:55.481+00:00",
+      "raw_hrNo": 3107458,
+      "hrNm": "무명전설",
+      "beforeHrNm": "-",
+      "hrNmChgDt": "-",
+      "hrNmDt": 20251015,
+      "sex": "암"
+    },
+    "api20_crosscheck": [
+      {"date": "2025-10-30", "raw_hrNo": 3107458, "hrName": "무명전설", "sex": "암"},
+      {"date": "2025-11-06", "raw_hrNo": 3107458, "hrName": "무명전설", "sex": "암"}
+    ],
+    "interpretation": "Official horse IDs agree in race, API20, and API42 data. API20 already reports 무명전설 before the 2026-01-16 race, while that race row reports 동방라오. API42 has no previous-name or name-change value; hrNmDt is officially described as the name-assignment date. This one race-row name discrepancy remains unresolved; the row is non-finishing (ord 94, time 0).",
+    "api42_raw_file": "jeju/research/20260930_api42_horse_breed_collection/raw/3107458/attempt_01_20261001T064455424+0000.json"
+  },
+  "sex_exception": {
+    "mismatching_race_rows_against_current_profile": 1,
+    "horse_id": "3005897",
+    "race": {
+      "date": "2002-12-14",
+      "race_number": 3,
+      "horse_number": 2,
+      "raw_hrNo": 3005897,
+      "hrName": "토종등극",
+      "sex": "수",
+      "age": 8
+    },
+    "api20_crosscheck": {
+      "date": "2002-11-22",
+      "raw_hrNo": 3005897,
+      "hrName": "토종등극",
+      "sex": "암",
+      "age": 8
+    },
+    "api42_profile": {
+      "observed_at_utc": "2026-09-29T19:01:01.028+00:00",
+      "raw_hrNo": 3005897,
+      "hrNm": "토종등극",
+      "sex": "암",
+      "birthDt": 19940401,
+      "age": 32
+    },
+    "interpretation": "The official ID and name agree across all three records. API20 reports 암 22 days before the race and API42 reports 암 currently, while the single 2002 race row reports 수. This is an unresolved event-row sex inconsistency, not a same-ID join failure; it is distinct from 수-to-거 status changes.",
+    "api42_raw_file": "jeju/research/20260930_api42_horse_breed_collection/raw/3005897/attempt_02_20260929T190100671+0000.json"
+  },
+  "historical_male_to_gelding_observations": {
+    "race_rows_with_sex_수_and_current_api42_sex_거": 6634,
+    "distinct_horse_ids": 493,
+    "raw_race_hrNo_and_profile_hrNo_match_joined_horse_id": true,
+    "sample_horse_id": "3005967",
+    "sample_name": "천둥방울",
+    "sample_timeline": [
+      {"date": "2003-03-22", "race_raw_hrNo": 3005967, "sex": "수"},
+      {"date": "2005-07-24", "race_raw_hrNo": 3005967, "sex": "수"},
+      {"date": "2005-11-12", "race_raw_hrNo": 3005967, "sex": "거"},
+      {"date": "2009-11-28", "race_raw_hrNo": 3005967, "sex": "거"}
+    ],
+    "current_api42_sex": "거",
+    "interpretation": "The sample shows a same-ID event-time transition from 수 to 거, followed by 거 records and current API42 status 거. The 6,634 rows across 493 IDs are temporal status differences and do not indicate horse-ID mismatches."
+  }
+}

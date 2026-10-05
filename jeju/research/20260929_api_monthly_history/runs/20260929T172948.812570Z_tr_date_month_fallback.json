@@ -1,0 +1,1393 @@
+{
+  "run_id": "20260929T172948.812570Z",
+  "dataset": "daily_training",
+  "month": "201506",
+  "method": "official API18_1 tr_date exact-date partition fallback",
+  "source": "KRA official API response pages",
+  "credential_recorded": false,
+  "page_size": 1000,
+  "transient_retry_limit_per_page": 3,
+  "transient_backoff_seconds": [
+    1,
+    2,
+    4
+  ],
+  "request_attempts": 28,
+  "date_count": 30,
+  "dates": {
+    "20150601": {
+      "date": "20150601",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150601",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702988872,
+          "requested_at_ms": 1790702988890,
+          "retrieved_at_ms": 1790702991834,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150601&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150601",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 242,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 59654,
+          "response_sha256": "c6c2c19d2a5e923f6f135a1af511892df36e1ef52fa19291ec7c2edbc279bd63",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150601/page_0001.json",
+          "actual_page_rows": 242,
+          "row_date_field": "trDate",
+          "row_date_min": "20150601",
+          "row_date_max": "20150601",
+          "records_matching_requested_date": 242
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 242,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 242
+    },
+    "20150602": {
+      "date": "20150602",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150602",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702992244,
+          "requested_at_ms": 1790702992261,
+          "retrieved_at_ms": 1790702996231,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150602&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150602",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 0,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150602/page_0001.json",
+          "actual_page_rows": 0,
+          "row_date_field": "trDate",
+          "row_date_min": null,
+          "row_date_max": null,
+          "records_matching_requested_date": 0
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "empty_response_exact_date",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "20150603": {
+      "date": "20150603",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150603",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702996639,
+          "requested_at_ms": 1790702996657,
+          "retrieved_at_ms": 1790703000592,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150603&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150603",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 273,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 67436,
+          "response_sha256": "efac949396d825ddbaaf0a094a1c7a514109d2cdf69d9ebd257abb1707fbe397",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150603/page_0001.json",
+          "actual_page_rows": 273,
+          "row_date_field": "trDate",
+          "row_date_min": "20150603",
+          "row_date_max": "20150603",
+          "records_matching_requested_date": 273
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 273,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 273
+    },
+    "20150604": {
+      "date": "20150604",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150604",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703001001,
+          "requested_at_ms": 1790703001018,
+          "retrieved_at_ms": 1790703005588,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150604&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150604",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 298,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 73681,
+          "response_sha256": "52de82d4600bf205552f3d0d6a4df07e1124c7d7dadbc3778c38d817c661c953",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150604/page_0001.json",
+          "actual_page_rows": 298,
+          "row_date_field": "trDate",
+          "row_date_min": "20150604",
+          "row_date_max": "20150604",
+          "records_matching_requested_date": 298
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 298,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 298
+    },
+    "20150605": {
+      "date": "20150605",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150605",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703005997,
+          "requested_at_ms": 1790703006014,
+          "retrieved_at_ms": 1790703011879,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150605&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150605",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 141,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 35020,
+          "response_sha256": "33506bf1427fb17a03af67cb45e4622bc756a3bd8b8abcf7f5c91146e4e9f6fa",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150605/page_0001.json",
+          "actual_page_rows": 141,
+          "row_date_field": "trDate",
+          "row_date_min": "20150605",
+          "row_date_max": "20150605",
+          "records_matching_requested_date": 141
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 141,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 141
+    },
+    "20150606": {
+      "date": "20150606",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150606",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703012288,
+          "requested_at_ms": 1790703012305,
+          "retrieved_at_ms": 1790703017921,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150606&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150606",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 244,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 60330,
+          "response_sha256": "a7a007d5558643e34f87bd97d262e4067fd05c4c71379dadd56c26967f6e544f",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150606/page_0001.json",
+          "actual_page_rows": 244,
+          "row_date_field": "trDate",
+          "row_date_min": "20150606",
+          "row_date_max": "20150606",
+          "records_matching_requested_date": 244
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 244,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 244
+    },
+    "20150607": {
+      "date": "20150607",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150607",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703018330,
+          "requested_at_ms": 1790703018347,
+          "retrieved_at_ms": 1790703022269,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150607&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150607",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 269,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 66497,
+          "response_sha256": "dbed07a0963590613aad360531a0511c33ea1b326f836e526ea24208ed4de095",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150607/page_0001.json",
+          "actual_page_rows": 269,
+          "row_date_field": "trDate",
+          "row_date_min": "20150607",
+          "row_date_max": "20150607",
+          "records_matching_requested_date": 269
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 269,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 269
+    },
+    "20150608": {
+      "date": "20150608",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150608",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703022679,
+          "requested_at_ms": 1790703022696,
+          "retrieved_at_ms": 1790703026965,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150608&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150608",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 257,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 63579,
+          "response_sha256": "3bfb82934c8f4adb0ecee0a0be6c9753d7b3a9dac816dd050909d2fa4f4d10c5",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150608/page_0001.json",
+          "actual_page_rows": 257,
+          "row_date_field": "trDate",
+          "row_date_min": "20150608",
+          "row_date_max": "20150608",
+          "records_matching_requested_date": 257
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 257,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 257
+    },
+    "20150609": {
+      "date": "20150609",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150609",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703027377,
+          "requested_at_ms": 1790703027394,
+          "retrieved_at_ms": 1790703031147,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150609&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150609",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 0,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150609/page_0001.json",
+          "actual_page_rows": 0,
+          "row_date_field": "trDate",
+          "row_date_min": null,
+          "row_date_max": null,
+          "records_matching_requested_date": 0
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "empty_response_exact_date",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "20150610": {
+      "date": "20150610",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150610",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703031556,
+          "requested_at_ms": 1790703031573,
+          "retrieved_at_ms": 1790703035415,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150610&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150610",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 286,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 70950,
+          "response_sha256": "160941862bde7e5821f5c2be91712cc2862348596fbb492657f457fd3009094c",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150610/page_0001.json",
+          "actual_page_rows": 286,
+          "row_date_field": "trDate",
+          "row_date_min": "20150610",
+          "row_date_max": "20150610",
+          "records_matching_requested_date": 286
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 286,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 286
+    },
+    "20150611": {
+      "date": "20150611",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150611",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703035825,
+          "requested_at_ms": 1790703035842,
+          "retrieved_at_ms": 1790703039706,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150611&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150611",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 283,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 69888,
+          "response_sha256": "f28b5f97ed03d1898bdd298c34cb5ce1da184777fffed9de89f308a9d5aab51a",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150611/page_0001.json",
+          "actual_page_rows": 283,
+          "row_date_field": "trDate",
+          "row_date_min": "20150611",
+          "row_date_max": "20150611",
+          "records_matching_requested_date": 283
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 283,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 283
+    },
+    "20150612": {
+      "date": "20150612",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150612",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703040125,
+          "requested_at_ms": 1790703040143,
+          "retrieved_at_ms": 1790703044903,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150612&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150612",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 253,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 62420,
+          "response_sha256": "443a6798ab3356d8f95996262ad8aed97801d9421d7c85a1429b1caf1c5b45c8",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150612/page_0001.json",
+          "actual_page_rows": 253,
+          "row_date_field": "trDate",
+          "row_date_min": "20150612",
+          "row_date_max": "20150612",
+          "records_matching_requested_date": 253
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 253,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 253
+    },
+    "20150613": {
+      "date": "20150613",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150613",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703045312,
+          "requested_at_ms": 1790703045330,
+          "retrieved_at_ms": 1790703049056,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150613&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150613",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 217,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 53626,
+          "response_sha256": "90d4045a41bd26af8afb62ddc0bcefacc9dd6792c501ec61138ce58be4438c80",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150613/page_0001.json",
+          "actual_page_rows": 217,
+          "row_date_field": "trDate",
+          "row_date_min": "20150613",
+          "row_date_max": "20150613",
+          "records_matching_requested_date": 217
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 217,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 217
+    },
+    "20150614": {
+      "date": "20150614",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150614",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703049466,
+          "requested_at_ms": 1790703049483,
+          "retrieved_at_ms": 1790703053251,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150614&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150614",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 240,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 59288,
+          "response_sha256": "e783c70adc9d1b34214bffc02195a4e83b5fa0bc4504099fe140adf8b9f39f05",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150614/page_0001.json",
+          "actual_page_rows": 240,
+          "row_date_field": "trDate",
+          "row_date_min": "20150614",
+          "row_date_max": "20150614",
+          "records_matching_requested_date": 240
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 240,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 240
+    },
+    "20150615": {
+      "date": "20150615",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150615",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702234200,
+          "requested_at_ms": 1790702234218,
+          "retrieved_at_ms": 1790702237896,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150615&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150615",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 233,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "actual_page_rows": 233,
+          "row_date_min": "20150615",
+          "row_date_max": "20150615",
+          "response_bytes": 57764,
+          "response_sha256": "a34c7a82c83e26f90f54432ec1e5fd9de4c44aab8e2a43aa732e4e47cadca8d2",
+          "response_file": "raw/date_probes/20150615/20260929T171714.115073Z/page_0001.json"
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 233,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 233,
+      "source_probe_run_id": "20260929T171714.115073Z"
+    },
+    "20150616": {
+      "date": "20150616",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150616",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703053698,
+          "requested_at_ms": 1790703053715,
+          "retrieved_at_ms": 1790703056816,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150616&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150616",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 0,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150616/page_0001.json",
+          "actual_page_rows": 0,
+          "row_date_field": "trDate",
+          "row_date_min": null,
+          "row_date_max": null,
+          "records_matching_requested_date": 0
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "empty_response_exact_date",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "20150617": {
+      "date": "20150617",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150617",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703057236,
+          "requested_at_ms": 1790703057253,
+          "retrieved_at_ms": 1790703060084,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150617&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150617",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 271,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 67036,
+          "response_sha256": "24e2468750e9566c2be004bcf6f79c0953133b40b41dc3e488c17854c15df0aa",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150617/page_0001.json",
+          "actual_page_rows": 271,
+          "row_date_field": "trDate",
+          "row_date_min": "20150617",
+          "row_date_max": "20150617",
+          "records_matching_requested_date": 271
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 271,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 271
+    },
+    "20150618": {
+      "date": "20150618",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150618",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703060495,
+          "requested_at_ms": 1790703060512,
+          "retrieved_at_ms": 1790703064985,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150618&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150618",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 277,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 68403,
+          "response_sha256": "8a042e3016cb35caed1642a69eba1384a4c6654837a37aeb6b389252de2402cb",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150618/page_0001.json",
+          "actual_page_rows": 277,
+          "row_date_field": "trDate",
+          "row_date_min": "20150618",
+          "row_date_max": "20150618",
+          "records_matching_requested_date": 277
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 277,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 277
+    },
+    "20150619": {
+      "date": "20150619",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150619",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703065396,
+          "requested_at_ms": 1790703065413,
+          "retrieved_at_ms": 1790703069623,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150619&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150619",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 241,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 59435,
+          "response_sha256": "3c1e68fba37a8f32e7dc2b67d46866e908c60b49ca3d7b2b595829996b8e8c29",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150619/page_0001.json",
+          "actual_page_rows": 241,
+          "row_date_field": "trDate",
+          "row_date_min": "20150619",
+          "row_date_max": "20150619",
+          "records_matching_requested_date": 241
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 241,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 241
+    },
+    "20150620": {
+      "date": "20150620",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150620",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703070033,
+          "requested_at_ms": 1790703070050,
+          "retrieved_at_ms": 1790703074276,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150620&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150620",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 218,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 53883,
+          "response_sha256": "500ced55e2d6632d9cc76db58613a7351176d9426bc32f944cc83e5b403a1dfc",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150620/page_0001.json",
+          "actual_page_rows": 218,
+          "row_date_field": "trDate",
+          "row_date_min": "20150620",
+          "row_date_max": "20150620",
+          "records_matching_requested_date": 218
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 218,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 218
+    },
+    "20150621": {
+      "date": "20150621",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150621",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703074686,
+          "requested_at_ms": 1790703074704,
+          "retrieved_at_ms": 1790703077872,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150621&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150621",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 251,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 62025,
+          "response_sha256": "523a1b8d9a56d3b5ae44f7d99377f0f85ed41bece323199cf0f9d31dcc6a3bc2",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150621/page_0001.json",
+          "actual_page_rows": 251,
+          "row_date_field": "trDate",
+          "row_date_min": "20150621",
+          "row_date_max": "20150621",
+          "records_matching_requested_date": 251
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 251,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 251
+    },
+    "20150622": {
+      "date": "20150622",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150622",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703078282,
+          "requested_at_ms": 1790703078300,
+          "retrieved_at_ms": 1790703081911,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150622&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150622",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 133,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 33022,
+          "response_sha256": "02a24eeb1520a0cc730ea5e211609dd62141caeb29a84a72ab6af66b2014ed4c",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150622/page_0001.json",
+          "actual_page_rows": 133,
+          "row_date_field": "trDate",
+          "row_date_min": "20150622",
+          "row_date_max": "20150622",
+          "records_matching_requested_date": 133
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 133,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 133
+    },
+    "20150623": {
+      "date": "20150623",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150623",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703082324,
+          "requested_at_ms": 1790703082343,
+          "retrieved_at_ms": 1790703086964,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150623&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150623",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 0,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150623/page_0001.json",
+          "actual_page_rows": 0,
+          "row_date_field": "trDate",
+          "row_date_min": null,
+          "row_date_max": null,
+          "records_matching_requested_date": 0
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "empty_response_exact_date",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0
+    },
+    "20150624": {
+      "date": "20150624",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150624",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703087372,
+          "requested_at_ms": 1790703087390,
+          "retrieved_at_ms": 1790703091164,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150624&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150624",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 229,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 56734,
+          "response_sha256": "e0ecf90968fea30381170c5bde683d351bbd8eb2f841fd907d76506182d89557",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150624/page_0001.json",
+          "actual_page_rows": 229,
+          "row_date_field": "trDate",
+          "row_date_min": "20150624",
+          "row_date_max": "20150624",
+          "records_matching_requested_date": 229
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 229,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 229
+    },
+    "20150625": {
+      "date": "20150625",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150625",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703091573,
+          "requested_at_ms": 1790703091591,
+          "retrieved_at_ms": 1790703094677,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150625&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150625",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 227,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 56284,
+          "response_sha256": "2525cf7f51bb4b1782cb4df7e672632c46b460f0dc3ab0e9c00660c8c1d1aee8",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150625/page_0001.json",
+          "actual_page_rows": 227,
+          "row_date_field": "trDate",
+          "row_date_min": "20150625",
+          "row_date_max": "20150625",
+          "records_matching_requested_date": 227
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 227,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 227
+    },
+    "20150626": {
+      "date": "20150626",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150626",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703095088,
+          "requested_at_ms": 1790703095105,
+          "retrieved_at_ms": 1790703099031,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150626&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150626",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 203,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 50262,
+          "response_sha256": "29e8f949fd96698e4c98c61949fd45f2508b2b31cf0c44d4e601ae7504820725",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150626/page_0001.json",
+          "actual_page_rows": 203,
+          "row_date_field": "trDate",
+          "row_date_min": "20150626",
+          "row_date_max": "20150626",
+          "records_matching_requested_date": 203
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 203,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 203
+    },
+    "20150627": {
+      "date": "20150627",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150627",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703099442,
+          "requested_at_ms": 1790703099460,
+          "retrieved_at_ms": 1790703103247,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150627&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150627",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 205,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 50750,
+          "response_sha256": "d6b462c716f18d49411d97a81c470f6c235cf50f516f7316262cd28d6e58cb33",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150627/page_0001.json",
+          "actual_page_rows": 205,
+          "row_date_field": "trDate",
+          "row_date_min": "20150627",
+          "row_date_max": "20150627",
+          "records_matching_requested_date": 205
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 205,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 205
+    },
+    "20150628": {
+      "date": "20150628",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150628",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703103657,
+          "requested_at_ms": 1790703103675,
+          "retrieved_at_ms": 1790703107623,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150628&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150628",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 236,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 58339,
+          "response_sha256": "e202383a59309b499e9ae092fee47cb006e34a6e86e2e6898710aff393715806",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150628/page_0001.json",
+          "actual_page_rows": 236,
+          "row_date_field": "trDate",
+          "row_date_min": "20150628",
+          "row_date_max": "20150628",
+          "records_matching_requested_date": 236
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 236,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 236
+    },
+    "20150629": {
+      "date": "20150629",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150629",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790703108033,
+          "requested_at_ms": 1790703108051,
+          "retrieved_at_ms": 1790703111142,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150629&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150629",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 243,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "response_bytes": 60121,
+          "response_sha256": "1377ddd064691965739669f5e19c6bacd9c6fffe222d9133c5394311d3853271",
+          "response_file": "raw/tr_date_fallback/201506/20260929T172948.812570Z/20150629/page_0001.json",
+          "actual_page_rows": 243,
+          "row_date_field": "trDate",
+          "row_date_min": "20150629",
+          "row_date_max": "20150629",
+          "records_matching_requested_date": 243
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "complete_exact_date",
+      "api_total_count": 243,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 243
+    },
+    "20150630": {
+      "date": "20150630",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150630",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702238292,
+          "requested_at_ms": 1790702238312,
+          "retrieved_at_ms": 1790702241989,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150630&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150630",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 0,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "actual_page_rows": 0,
+          "row_date_min": null,
+          "row_date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/date_probes/20150630/20260929T171714.115073Z/page_0001.json"
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "validation_errors": [],
+      "status": "empty_response_exact_date",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0,
+      "source_probe_run_id": "20260929T171714.115073Z"
+    }
+  },
+  "quota_or_error": null,
+  "status": "complete_via_daily_tr_date_partition",
+  "fallback_summary": {
+    "method": "official API18_1 exact-date tr_date monthly fallback",
+    "month": "201506",
+    "date_count": 30,
+    "completed_date_count": 30,
+    "empty_date_count": 5,
+    "failed_dates": [],
+    "date_sequence_complete": true,
+    "date_range_requested": [
+      "20150601",
+      "20150630"
+    ],
+    "observed_date_range": [
+      "20150601",
+      "20150629"
+    ],
+    "page_count": 30,
+    "total_count_sum": 5970,
+    "actual_total_rows": 5970,
+    "all_rows_match_requested_exact_date": true,
+    "exact_duplicate_row_excess": 0,
+    "duplicate_horse_day_excess": 0
+  },
+  "finished_at_utc": "2026-09-29T17:31:51.590560+00:00"
+}

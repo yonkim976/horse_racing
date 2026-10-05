@@ -1,0 +1,28 @@
+{
+  "collected_at_utc": "2026-09-29T06:38:01.011381+00:00",
+  "scope": {
+    "meet_code": 2,
+    "from": "2026-09-13",
+    "through": "2026-09-19"
+  },
+  "method": "read-only extraction of held Jeju scorecard entries joined by their operational race-entry IDs; race/entry/official horse ID cross-check retained per row",
+  "status": "candidate_extension_not_officially_reconciled",
+  "race_count": 22,
+  "entry_count": 206,
+  "cross_source_key_matches": 206,
+  "unresolved_links": [],
+  "output": "jeju/research/20260929_core_collection_inventory/candidate_core_extension_20260913_19.jsonl",
+  "output_sha256": "6db02be2a4c1edb8471ed661e67ddba1f4961cc5e0b6f7f535ee0c83a84a4c4d",
+  "inputs": [
+    {
+      "path": "data/research/jeju_2026_score_20260925/jeju_2026.sqlite3",
+      "sha256": "255526e2f93ce2cec8080417336ca746a3d3bd5bd41ae32667bdbf837f91156c"
+    },
+    {
+      "path": "data/horse_racing.sqlite3",
+      "sha256": "f4692743f8f1edd84bc8402a4caf7ac65a636ee607b97ec2d415d33a211079b1",
+      "scope_note": "racecourse-level source; used only after exact scorecard race-entry ID and horse ID matches"
+    }
+  ],
+  "caution": "Operational roster fields are preserved as source candidates and do not independently establish native breed or historical person profile validity."
+}

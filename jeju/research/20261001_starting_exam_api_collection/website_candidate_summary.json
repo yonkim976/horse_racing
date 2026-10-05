@@ -1,0 +1,61 @@
+{
+  "created_at_local_date": "2026-10-02",
+  "candidate_source": "KRA starting-exam website observations + current API42 profile observations",
+  "api21_source_status": "no_successful_result_rows; service_key_not_registered_error_30",
+  "website_source_rows": 66,
+  "candidate_jsonl_rows": 66,
+  "distinct_official_horse_ids": 40,
+  "website_pages_hash_verified": 14,
+  "current_api42_jeju_breed_confirmed_rows": 66,
+  "current_profile_source_row_counts": {
+    "existing_api42_database_profile": 36,
+    "new_api42_followup_profile": 30
+  },
+  "current_profile_source_distinct_horse_ids": {
+    "existing_api42_database_profile": 19,
+    "new_api42_followup_profile": 21
+  },
+  "website_event_date_row_counts": {
+    "20260913": 11,
+    "20260916": 11,
+    "20260920": 16,
+    "20260927": 8,
+    "20260930": 20
+  },
+  "first_website_event_date": "20260913",
+  "last_website_event_date": "20260930",
+  "website_judgement_raw_counts": {
+    "1차합격": 12,
+    "불합격": 15,
+    "합격": 39
+  },
+  "website_judgement_category_counts": {
+    "fail": 15,
+    "first_stage_pass": 12,
+    "pass": 39
+  },
+  "website_inspection_reason_raw_counts": {
+    "출발미합(신)": 33,
+    "출발지정(신)": 8,
+    "출발지정(재)": 25
+  },
+  "website_failure_reason_raw_counts": {
+    "<blank>": 51,
+    "발진불량": 6,
+    "진입불량": 3,
+    "출발불량": 5,
+    "출발자세불량": 1
+  },
+  "final_pass_only_count": 39,
+  "interim_first_stage_pass_count": 12,
+  "source_key_duplicate_groups": [],
+  "exact_content_duplicate_groups_preserved": [],
+  "duplicates_removed": 0,
+  "age_2026_derived_rows": 66,
+  "invalid_birth_date_rows_age_omitted": 0,
+  "data_interpretation": "Rows are current-profile-linked website observations, not API21 output. Current API42 breed is not asserted as historically effective on the exam date.",
+  "database_write_performed": false,
+  "api42_followup_attempt_manifest": "raw/api42_followup/attempts/20261001T151147.863223Z/attempt_manifest.json",
+  "output_file": "website_native_candidate_rows.jsonl",
+  "output_sha256": "395c1e48b2f900c9df74470750f04d99fcc476dd755d9f012089559ae2140ffc"
+}

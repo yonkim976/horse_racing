@@ -1,0 +1,138 @@
+{
+  "inventory_type": "read_only_local_inventory",
+  "scope": "Official KRA Text/RPT files for the three 2026 API24_1 rcDate scope-mismatch request dates; no source files were modified and no TXT/RPT values were loaded into API24 raw or core DB.",
+  "source_root": "data/raw/kra_text",
+  "mismatch_dates": {
+    "20260707": {
+      "status": "no_meet_2_RPT_or_TXT_file_found",
+      "files": []
+    },
+    "20260825": {
+      "status": "no_meet_2_RPT_or_TXT_file_found",
+      "files": []
+    },
+    "20260826": {
+      "status": "files_found",
+      "files": [
+        {
+          "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=08/day=26/20260826dacom01.rpt",
+          "file_type": "rpt",
+          "bytes": 45705,
+          "sha256": "b72d30f4894639b5311b7caa1cb8095c3026cc17afc1db0084899445275cc02d",
+          "field_scope_note": "Race-card/report; no explicit API24-equivalent field label confirmed in this inventory."
+        },
+        {
+          "path": "data/raw/kra_text/dacom55/meet=2/year=2026/month=08/day=26/20260826dacom55.rpt",
+          "file_type": "rpt",
+          "bytes": 26584,
+          "sha256": "9074213e40e867236b28c96c8f19903471c4131ee72801fc730abbb1692499e2",
+          "field_scope_note": "Starting inspection/training report; no API24-equivalent gear, bleeding, or illness field confirmed."
+        },
+        {
+          "path": "data/raw/kra_text/dacom71/meet=2/year=2026/month=08/day=26/20260826dacom71.rpt",
+          "file_type": "rpt",
+          "bytes": 31187,
+          "sha256": "b1ec012df57fd34932c6834f6d5f6adb35a4477edfe6f9f0719230956ddd52c4",
+          "field_labels": [
+            "보조장구",
+            "폐출혈",
+            "진료사항"
+          ],
+          "report_race_dates": [
+            "2026.08.28",
+            "2026.08.29"
+          ],
+          "text_date_values": [
+            "2025.08.09",
+            "2026.05.31",
+            "2026.06.07",
+            "2026.06.11",
+            "2026.06.13",
+            "2026.06.19",
+            "2026.06.20",
+            "2026.06.21",
+            "2026.06.25",
+            "2026.06.26",
+            "2026.06.27",
+            "2026.06.28",
+            "2026.07.01",
+            "2026.07.05",
+            "2026.07.09",
+            "2026.07.10",
+            "2026.07.11",
+            "2026.07.17",
+            "2026.07.19",
+            "2026.07.22",
+            "2026.07.23",
+            "2026.07.25",
+            "2026.07.26",
+            "2026.07.30",
+            "2026.08.01",
+            "2026.08.05",
+            "2026.08.08",
+            "2026.08.09",
+            "2026.08.12",
+            "2026.08.13",
+            "2026.08.15",
+            "2026.08.16",
+            "2026.08.17",
+            "2026.08.21",
+            "2026.08.28",
+            "2026.08.29"
+          ],
+          "api24_field_concept_mapping": {
+            "toolName": "보조장구 (conceptual candidate; schema/row mapping not validated)",
+            "bleedingCnt/bleedingDate": "폐출혈 (conceptual candidate; count/date mapping not validated)",
+            "illName": "진료사항 (conceptual candidate; code/definition/row mapping not validated)"
+          }
+        },
+        {
+          "path": "data/raw/kra_text/dacom72/meet=2/year=2026/month=08/day=26/20260826dacom72.rpt",
+          "file_type": "rpt",
+          "bytes": 7644,
+          "sha256": "3a7e4f68a55b855055cca3652347316e4606fa11770badf1c442ca18f2868376",
+          "field_labels_present": false,
+          "nonblank_rows": 52,
+          "text_date_values": [
+            "2026.08.22",
+            "2026.08.23",
+            "2026.08.26"
+          ],
+          "field_scope_note": "Fixed-width clinic report with date-bearing clinical text; exact column boundaries and API24 row mapping not independently validated.",
+          "api24_field_concept_mapping": {
+            "illName": "clinical-note candidate only; code/row mapping not validated",
+            "toolName": "not observed as labelled field",
+            "bleedingCnt/bleedingDate": "not observed as labelled fields"
+          }
+        },
+        {
+          "path": "data/raw/kra_text/db4/meet=2/year=2026/month=08/day=26/20260826jdb4.txt",
+          "file_type": "txt",
+          "bytes": 3187,
+          "sha256": "326e06d63bb838bf609bc1d3e537f9eae7901457291975c18656d46d3106c981",
+          "field_scope_note": "Starting inspection/training report; no API24-equivalent gear, bleeding, or illness field confirmed."
+        },
+        {
+          "path": "data/raw/kra_text/db5/meet=2/year=2026/month=08/day=26/20260826jdb5.txt",
+          "file_type": "txt",
+          "bytes": 8796,
+          "sha256": "4946df68d2254d6d5b4a33208dc5e166f4230739421f43f90ab77a2fc7b218c8",
+          "field_scope_note": "Starting inspection/training report; no API24-equivalent gear, bleeding, or illness field confirmed."
+        }
+      ]
+    }
+  },
+  "api24_sample_fields_observed": [
+    "toolName",
+    "bleedingCnt",
+    "bleedingDate",
+    "illName",
+    "rcDate",
+    "rcNo",
+    "chulNo",
+    "hrNo",
+    "hrName",
+    "meet"
+  ],
+  "interpretation": "dacom71 has explicit conceptual fields for equipment, pulmonary bleeding, and clinic notes; dacom72 offers possible clinical-note material only. Exact row/date/horse-ID equivalence to API24 is not established. 2026-08-26 dacom71 report content covers race dates 2026-08-28 and 2026-08-29; its event-date values do not make it a direct replacement for API24 rcDate=20260826. Do not replace API24 values. Any future supplementary use requires exact horse/race/date key linkage and separate supplement provenance; the 2026-07-07 and 2026-08-25 days currently have no corresponding local meet=2 RPT/TXT file."
+}

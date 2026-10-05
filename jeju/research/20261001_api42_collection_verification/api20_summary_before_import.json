@@ -1,0 +1,50 @@
+{
+  "candidate_definition": "race_result_rows.rank_class_raw starts with 제; this is an API rank-class candidate, not confirmed breed",
+  "candidate_rows": 92232,
+  "candidate_horse_ids": 4006,
+  "disjoint_event_time_categories": {
+    "api20_jeju_observed_on_or_before_race": {
+      "candidate_rows": 92232,
+      "distinct_horse_ids": 4006
+    },
+    "multiple_api20_labels_possible_temporal_or_id_conflict": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    },
+    "api20_jeju_observed_only_after_race": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    },
+    "api20_non_jeju_label_only": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    },
+    "no_same_id_api20_breed_observation": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    }
+  },
+  "overlapping_api20_evidence_counts": {
+    "with_any_api20_jeju_observation_rows": {
+      "candidate_rows": 92232,
+      "distinct_horse_ids": 4006
+    },
+    "with_api20_jeju_observation_on_or_before_rows": {
+      "candidate_rows": 92232,
+      "distinct_horse_ids": 4006
+    },
+    "with_api20_jeju_future_only_rows": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    },
+    "with_api20_non_jeju_observation_rows": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    },
+    "with_api20_jeju_and_non_jeju_observations_rows": {
+      "candidate_rows": 0,
+      "distinct_horse_ids": 0
+    }
+  },
+  "interpretation": "API20 majong is an event-date observation. Observations after a race are not retroactive proof. Multiple labels and non-Jeju labels are review flags; they do not automatically remove a race candidate."
+}

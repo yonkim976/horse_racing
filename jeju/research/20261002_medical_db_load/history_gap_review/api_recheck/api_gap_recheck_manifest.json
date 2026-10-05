@@ -1,0 +1,338 @@
+{
+  "source": "KRA official OpenAPI via data.go.kr/B551015",
+  "endpoint": "/API16_1/raceHorseClinic_1",
+  "operation": "raceHorseClinic_1",
+  "meet": 2,
+  "filter_field": "clinic_year",
+  "row_date_field": "clinicDate",
+  "requested_years": [
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2009,
+    2010,
+    2011
+  ],
+  "page_size": 1000,
+  "credential_recorded": false,
+  "retry_policy": {
+    "max_transient_retries": 2,
+    "min_interval_seconds_between_requests": 1.2,
+    "rate_limit_retry": false
+  },
+  "years": {
+    "2002": {
+      "year": 2002,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915522466,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915523680,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915524893,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2003": {
+      "year": 2003,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915526100,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915527309,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915528518,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2004": {
+      "year": 2004,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915529731,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915530935,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915532145,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2005": {
+      "year": 2005,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915533349,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915534562,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915535768,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2006": {
+      "year": 2006,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915536980,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915538190,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915539397,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2007": {
+      "year": 2007,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915540610,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915541823,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915543032,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2009": {
+      "year": 2009,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915544245,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915545456,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915546657,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2010": {
+      "year": 2010,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915547870,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915549083,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915550296,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    },
+    "2011": {
+      "year": 2011,
+      "attempts": [
+        {
+          "attempt_no": 1,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915551506,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 2,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915552713,
+          "stage": "default_sandbox_transport_attempt"
+        },
+        {
+          "attempt_no": 3,
+          "outcome": "transient_error",
+          "exception_type": "KraApiTransientError",
+          "completed_at_ms": 1790915553926,
+          "stage": "default_sandbox_transport_attempt"
+        }
+      ],
+      "pages": [],
+      "status": "transient_error_exhausted",
+      "failure": {
+        "type": "transient_error_exhausted",
+        "attempt_count": 3
+      },
+      "network_environment": "default_sandbox",
+      "http_response_pages_received": 0
+    }
+  },
+  "last_run_finished_at_utc": "2026-10-02T04:32:33.928622+00:00",
+  "run_status": "default_sandbox_transport_failures_no_http_responses",
+  "network_environment": "default_sandbox",
+  "note": "All nine requested page-1 calls exhausted the bounded transient retry policy in the default sandbox; no HTTP response page or source payload was received. The separate escalated run is recorded in a different staging directory."
+}

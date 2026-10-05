@@ -1,0 +1,56 @@
+{
+  "run_id": "20260929T154304.153351Z",
+  "kst_date": "2026-09-30",
+  "kind": "API18_1_numOfRows_probe",
+  "status": "probe_complete_20000_accepted",
+  "credential_recorded": false,
+  "public_params": {
+    "meet": 2,
+    "tr_month": "201609",
+    "_type": "json"
+  },
+  "page_no": 1,
+  "requested_num_of_rows": 20000,
+  "request_attempts": 1,
+  "transient_retry_limit": 3,
+  "backoff_seconds": [
+    1,
+    2,
+    4
+  ],
+  "quota_signal": false,
+  "probe_result": {
+    "status_code": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "requested_at_ms": 1790696584187,
+    "retrieved_at_ms": 1790696592524,
+    "request_started_at_ms": 1790696584182,
+    "request_attempt_number": 1,
+    "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_month=201609&_type=json&pageNo=1&numOfRows=20000",
+    "public_params": {
+      "meet": 2,
+      "tr_month": "201609",
+      "_type": "json"
+    },
+    "page_no": 1,
+    "api_page_size": 20000,
+    "requested_num_of_rows": 20000,
+    "api_total_count": 5357,
+    "actual_rows": 5357,
+    "row_date_field": "trDate",
+    "row_date_min": "20160901",
+    "row_date_max": "20160930",
+    "rows_matching_requested_month": 5357,
+    "response_bytes": 1334034,
+    "response_sha256": "ec911d2658d3b0f4c5f336b90ac08ae50a236f6ecb269b7d14d158fb3cc86bf5",
+    "response_file": "raw_probes/daily_training/201609/20260929T154304.153351Z/page_0001_numOfRows_20000.json",
+    "credential_recorded": false,
+    "credential_echo_rejected": false,
+    "matches_prior_1000_rows_sample_total": true
+  },
+  "complete_positive_probe": true,
+  "finished_at_utc": "2026-09-29T15:43:12.556248+00:00",
+  "request_errors": [],
+  "request_attempts_by_this_collector_total": 151,
+  "request_attempts_kst_date_total": 151
+}

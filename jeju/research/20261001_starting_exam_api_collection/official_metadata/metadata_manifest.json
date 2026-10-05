@@ -1,0 +1,28 @@
+{
+  "portal_url": "https://www.data.go.kr/data/15057405/openapi.do",
+  "official_api_name": "한국마사회 출발심사 결과",
+  "portal_metadata_updated_date": "2026-08-16",
+  "retrieved_local_date": "2026-10-02",
+  "portal_page_file": "portal_openapi.html",
+  "portal_page_bytes": 205678,
+  "portal_page_sha256": "698b59f34de4ea3ac59e02ba10d2e33ec1a1da30879b3e5c97b974d08d0edbdd",
+  "embedded_swagger_file": "swagger.json",
+  "embedded_swagger_sha256": "1e2a4623e86751649c37462fdb56aac272b67f8c4ce1c89704378c8b2eb868ce",
+  "host": "apis.data.go.kr/B551015/API21_1",
+  "scheme_used": "https",
+  "path": "/startingTestResult_1",
+  "operation_id": "startingTestResult_1",
+  "authentication_parameter_name": "ServiceKey",
+  "required_parameters": ["ServiceKey", "pageNo", "numOfRows"],
+  "optional_parameters": {
+    "meet": "Venue filter; 2 is Jeju Park, not a breed filter.",
+    "tr_year": "Training/exam year, YYYY.",
+    "tr_month": "Training/exam month, YYYYMM.",
+    "tr_date": "Training/exam date, YYYYMMDD.",
+    "_type": "Response format; json used."
+  },
+  "response_item_fields": [
+    "meet", "trainDate", "daySerial", "trainNo", "chulNo", "hrName", "hrNo", "name", "sex", "age", "rider", "trName", "trNo", "owName", "owNo", "passFlag", "reason", "nopassReason"
+  ],
+  "provenance_note": "The HTML and embedded Swagger JSON were fetched from the official public data portal page. The third-party API directory was only used to locate the operation name before it was confirmed in the official embedded Swagger."
+}

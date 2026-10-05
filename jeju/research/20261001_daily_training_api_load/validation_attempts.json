@@ -1,0 +1,11 @@
+{
+  "root_initial_stage_verification": {
+    "status": "failed_read_only_checker_assumption",
+    "failed_condition": "Fallback partition inferred from archive folder; official June15/30 date_probes archives are reused by ledger",
+    "preserved_checker": "independent_db_verification_initial.py",
+    "fix": "Use ledger public_params.tr_date and source kind instead of folder names",
+    "database_modified": false
+  },
+  "corrected_stage_verification": "stage_verification.json",
+  "production_verification": "production_verification.json"
+}

@@ -1,0 +1,111 @@
+{
+  "run_id": "20260929T171714.115073Z",
+  "probe": "API18_1 tr_date exact-date parameter",
+  "source": "KRA official API response pages",
+  "credential_recorded": false,
+  "requested_dates": [
+    "20150615",
+    "20150630"
+  ],
+  "page_size": 1000,
+  "transient_retry_limit_per_page": 3,
+  "transient_backoff_seconds": [
+    1,
+    2,
+    4
+  ],
+  "dates": {
+    "20150615": {
+      "date": "20150615",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150615",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702234200,
+          "requested_at_ms": 1790702234218,
+          "retrieved_at_ms": 1790702237896,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150615&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150615",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 233,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "actual_page_rows": 233,
+          "row_date_min": "20150615",
+          "row_date_max": "20150615",
+          "response_bytes": 57764,
+          "response_sha256": "a34c7a82c83e26f90f54432ec1e5fd9de4c44aab8e2a43aa732e4e47cadca8d2",
+          "response_file": "raw/date_probes/20150615/20260929T171714.115073Z/page_0001.json"
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "status": "validated_exact_date",
+      "api_total_count": 233,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 233,
+      "exact_date_rows": 233,
+      "validation_errors": []
+    },
+    "20150630": {
+      "date": "20150630",
+      "public_params": {
+        "meet": 2,
+        "tr_date": "20150630",
+        "_type": "json"
+      },
+      "page_size": 1000,
+      "pages": [
+        {
+          "page_no": 1,
+          "status_code": 200,
+          "content_type": "application/json;charset=UTF-8",
+          "request_started_at_ms": 1790702238292,
+          "requested_at_ms": 1790702238312,
+          "retrieved_at_ms": 1790702241989,
+          "source_url_without_key": "https://apis.data.go.kr/B551015/API18_1/dailyTraining_1?meet=2&tr_date=20150630&_type=json&pageNo=1&numOfRows=1000",
+          "public_params": {
+            "meet": 2,
+            "tr_date": "20150630",
+            "_type": "json"
+          },
+          "requested_page_size": 1000,
+          "api_total_count": 0,
+          "api_page_no": 1,
+          "api_page_size": 1000,
+          "actual_page_rows": 0,
+          "row_date_min": null,
+          "row_date_max": null,
+          "response_bytes": 136,
+          "response_sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+          "response_file": "raw/date_probes/20150630/20260929T171714.115073Z/page_0001.json"
+        }
+      ],
+      "request_errors": [],
+      "transient_retry_events": [],
+      "status": "empty_or_unverified",
+      "api_total_count": 0,
+      "expected_page_count": 1,
+      "actual_page_count": 1,
+      "actual_total_rows": 0,
+      "exact_date_rows": 0,
+      "validation_errors": []
+    }
+  },
+  "request_attempts": 2,
+  "status": "probe_complete",
+  "quota_or_error": null,
+  "finished_at_utc": "2026-09-29T17:17:22.365599+00:00"
+}

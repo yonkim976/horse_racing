@@ -1,0 +1,799 @@
+{
+  "aggregate_coverage": {
+    "combined_years_2000_2025": {
+      "all_years_completed": true,
+      "exact_jeju_label_first_train_date": "20020612",
+      "exact_jeju_label_last_train_date": "20251231",
+      "majong_value_counts": {
+        "제주": 14766,
+        "한라": 18284,
+        "한라(래)": 355
+      },
+      "raw_first_train_date": "20000105",
+      "raw_last_train_date": "20251231",
+      "raw_majong_exact_jeju_label_rows": 14766,
+      "response_pages": 52,
+      "upstream_rows_seen": 33405,
+      "upstream_total_count": 33405,
+      "years_completed": 26,
+      "years_expected": 26
+    },
+    "requested_years_2003_2025": {
+      "all_years_completed": true,
+      "exact_jeju_label_first_train_date": "20030221",
+      "exact_jeju_label_last_train_date": "20251231",
+      "majong_value_counts": {
+        "제주": 14746,
+        "한라": 14527,
+        "한라(래)": 284
+      },
+      "raw_first_train_date": "20030110",
+      "raw_last_train_date": "20251231",
+      "raw_majong_exact_jeju_label_rows": 14746,
+      "response_pages": 46,
+      "upstream_rows_seen": 29557,
+      "upstream_total_count": 29557,
+      "years_completed": 23,
+      "years_expected": 23
+    },
+    "supplemental_probe_years_2000_2002": {
+      "all_years_completed": true,
+      "exact_jeju_label_first_train_date": "20020612",
+      "exact_jeju_label_last_train_date": "20021129",
+      "majong_value_counts": {
+        "제주": 20,
+        "한라": 3757,
+        "한라(래)": 71
+      },
+      "raw_first_train_date": "20000105",
+      "raw_last_train_date": "20021220",
+      "raw_majong_exact_jeju_label_rows": 20,
+      "response_pages": 6,
+      "upstream_rows_seen": 3848,
+      "upstream_total_count": 3848,
+      "years_completed": 3,
+      "years_expected": 3
+    }
+  },
+  "complete_years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "endpoint": "/API20_1/ridingTestResult_1",
+  "failed_years": [],
+  "official_definition": {
+    "breed_code_dictionary_verified": false,
+    "note": "공식 포털 설명은 majong/마종 필드의 의미와 응답항목을 명시하지만 enum 코드표는 공개 화면에서 확인되지 않았다. 원문 label 빈도만 보존하며 label을 코드로 단정하지 않는다.",
+    "observed_json_field_for_breed": "majong",
+    "portal_declared_fields_include": [
+      "마종",
+      "마번",
+      "주행심사일자",
+      "심사차수",
+      "경주기록"
+    ],
+    "url": "https://www.data.go.kr/data/15056974/openapi.do"
+  },
+  "operation": "ridingTestResult_1",
+  "operational_db_modified": false,
+  "phase2_db_modified": false,
+  "requested_years": [
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "rpt_or_txt_used_as_source": false,
+  "run_id": "20260929T133431.549332Z",
+  "service_key_recorded": false,
+  "source": "KRA OpenAPI 15056974 한국마사회 주행심사 상세결과",
+  "source_host": "apis.data.go.kr",
+  "started_at_utc": "2026-09-29T13:34:31.549471+00:00",
+  "supplemental_probe_years": [
+    2000,
+    2001,
+    2002
+  ],
+  "unattempted_years": [],
+  "updated_at_utc": "2026-09-29T13:55:46.439181+00:00",
+  "year_status": {
+    "2000": {
+      "attempt_id": "20260929T133431.559684Z",
+      "attempt_manifest": "raw/trials/2000/attempts/20260929T133431.559684Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 54,
+        "exact_jeju_label_first_train_date": null,
+        "exact_jeju_label_last_train_date": null,
+        "first_train_date": "20000105",
+        "last_train_date": "20001220",
+        "raw_majong_exact_jeju_label_rows": 0,
+        "raw_majong_value_counts": {
+          "한라": 1277,
+          "한라(래)": 2
+        },
+        "rows_seen": 1279,
+        "rows_with_horse_id": 1279,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 747
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1279,
+      "upstream_total_count": 1279
+    },
+    "2001": {
+      "attempt_id": "20260929T133432.723963Z",
+      "attempt_manifest": "raw/trials/2001/attempts/20260929T133432.723963Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 50,
+        "exact_jeju_label_first_train_date": null,
+        "exact_jeju_label_last_train_date": null,
+        "first_train_date": "20010103",
+        "last_train_date": "20011219",
+        "raw_majong_exact_jeju_label_rows": 0,
+        "raw_majong_value_counts": {
+          "한라": 1246,
+          "한라(래)": 13
+        },
+        "rows_seen": 1259,
+        "rows_with_horse_id": 1259,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 778
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1259,
+      "upstream_total_count": 1259
+    },
+    "2002": {
+      "attempt_id": "20260929T133412.505836Z",
+      "attempt_manifest": "raw/trials/2002/attempts/20260929T133412.505836Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20020612",
+        "exact_jeju_label_last_train_date": "20021129",
+        "first_train_date": "20020109",
+        "last_train_date": "20021220",
+        "raw_majong_exact_jeju_label_rows": 20,
+        "raw_majong_value_counts": {
+          "제주": 20,
+          "한라": 1234,
+          "한라(래)": 56
+        },
+        "rows_seen": 1310,
+        "rows_with_horse_id": 1310,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 820
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1310,
+      "upstream_total_count": 1310
+    },
+    "2003": {
+      "attempt_id": "20260929T132909.428398Z",
+      "attempt_manifest": "raw/trials/2003/attempts/20260929T132909.428398Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 47,
+        "exact_jeju_label_first_train_date": "20030221",
+        "exact_jeju_label_last_train_date": "20031219",
+        "first_train_date": "20030110",
+        "last_train_date": "20031219",
+        "raw_majong_exact_jeju_label_rows": 44,
+        "raw_majong_value_counts": {
+          "제주": 44,
+          "한라": 1027,
+          "한라(래)": 86
+        },
+        "rows_seen": 1157,
+        "rows_with_horse_id": 1157,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 804
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1157,
+      "upstream_total_count": 1157
+    },
+    "2004": {
+      "attempt_id": "20260929T132934.333894Z",
+      "attempt_manifest": "raw/trials/2004/attempts/20260929T132934.333894Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20040109",
+        "exact_jeju_label_last_train_date": "20041126",
+        "first_train_date": "20040109",
+        "last_train_date": "20041224",
+        "raw_majong_exact_jeju_label_rows": 55,
+        "raw_majong_value_counts": {
+          "제주": 55,
+          "한라": 1053,
+          "한라(래)": 75
+        },
+        "rows_seen": 1183,
+        "rows_with_horse_id": 1183,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 845
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1183,
+      "upstream_total_count": 1183
+    },
+    "2005": {
+      "attempt_id": "20260929T132935.606822Z",
+      "attempt_manifest": "raw/trials/2005/attempts/20260929T132935.606822Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20050225",
+        "exact_jeju_label_last_train_date": "20051223",
+        "first_train_date": "20050107",
+        "last_train_date": "20051223",
+        "raw_majong_exact_jeju_label_rows": 76,
+        "raw_majong_value_counts": {
+          "제주": 76,
+          "한라": 1041,
+          "한라(래)": 50
+        },
+        "rows_seen": 1167,
+        "rows_with_horse_id": 1167,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 854
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1167,
+      "upstream_total_count": 1167
+    },
+    "2006": {
+      "attempt_id": "20260929T132936.672973Z",
+      "attempt_manifest": "raw/trials/2006/attempts/20260929T132936.672973Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20060106",
+        "exact_jeju_label_last_train_date": "20061222",
+        "first_train_date": "20060106",
+        "last_train_date": "20061222",
+        "raw_majong_exact_jeju_label_rows": 151,
+        "raw_majong_value_counts": {
+          "제주": 151,
+          "한라": 1033,
+          "한라(래)": 28
+        },
+        "rows_seen": 1212,
+        "rows_with_horse_id": 1212,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 884
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1212,
+      "upstream_total_count": 1212
+    },
+    "2007": {
+      "attempt_id": "20260929T132937.795939Z",
+      "attempt_manifest": "raw/trials/2007/attempts/20260929T132937.795939Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20070105",
+        "exact_jeju_label_last_train_date": "20071221",
+        "first_train_date": "20070105",
+        "last_train_date": "20071221",
+        "raw_majong_exact_jeju_label_rows": 160,
+        "raw_majong_value_counts": {
+          "제주": 160,
+          "한라": 1020,
+          "한라(래)": 27
+        },
+        "rows_seen": 1207,
+        "rows_with_horse_id": 1207,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 913
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1207,
+      "upstream_total_count": 1207
+    },
+    "2008": {
+      "attempt_id": "20260929T132938.966343Z",
+      "attempt_manifest": "raw/trials/2008/attempts/20260929T132938.966343Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20080111",
+        "exact_jeju_label_last_train_date": "20081219",
+        "first_train_date": "20080104",
+        "last_train_date": "20081219",
+        "raw_majong_exact_jeju_label_rows": 189,
+        "raw_majong_value_counts": {
+          "제주": 189,
+          "한라": 1005,
+          "한라(래)": 14
+        },
+        "rows_seen": 1208,
+        "rows_with_horse_id": 1208,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 966
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1208,
+      "upstream_total_count": 1208
+    },
+    "2009": {
+      "attempt_id": "20260929T132940.050413Z",
+      "attempt_manifest": "raw/trials/2009/attempts/20260929T132940.050413Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20090109",
+        "exact_jeju_label_last_train_date": "20091224",
+        "first_train_date": "20090109",
+        "last_train_date": "20091224",
+        "raw_majong_exact_jeju_label_rows": 269,
+        "raw_majong_value_counts": {
+          "제주": 269,
+          "한라": 942,
+          "한라(래)": 4
+        },
+        "rows_seen": 1215,
+        "rows_with_horse_id": 1215,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 934
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1215,
+      "upstream_total_count": 1215
+    },
+    "2010": {
+      "attempt_id": "20260929T132941.200448Z",
+      "attempt_manifest": "raw/trials/2010/attempts/20260929T132941.200448Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 44,
+        "exact_jeju_label_first_train_date": "20100110",
+        "exact_jeju_label_last_train_date": "20101219",
+        "first_train_date": "20100110",
+        "last_train_date": "20101219",
+        "raw_majong_exact_jeju_label_rows": 300,
+        "raw_majong_value_counts": {
+          "제주": 300,
+          "한라": 831
+        },
+        "rows_seen": 1131,
+        "rows_with_horse_id": 1131,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 860
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1131,
+      "upstream_total_count": 1131
+    },
+    "2011": {
+      "attempt_id": "20260929T132942.334333Z",
+      "attempt_manifest": "raw/trials/2011/attempts/20260929T132942.334333Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 48,
+        "exact_jeju_label_first_train_date": "20110109",
+        "exact_jeju_label_last_train_date": "20111222",
+        "first_train_date": "20110109",
+        "last_train_date": "20111222",
+        "raw_majong_exact_jeju_label_rows": 357,
+        "raw_majong_value_counts": {
+          "제주": 357,
+          "한라": 880
+        },
+        "rows_seen": 1237,
+        "rows_with_horse_id": 1237,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 892
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1237,
+      "upstream_total_count": 1237
+    },
+    "2012": {
+      "attempt_id": "20260929T132943.388361Z",
+      "attempt_manifest": "raw/trials/2012/attempts/20260929T132943.388361Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 50,
+        "exact_jeju_label_first_train_date": "20120105",
+        "exact_jeju_label_last_train_date": "20121227",
+        "first_train_date": "20120105",
+        "last_train_date": "20121227",
+        "raw_majong_exact_jeju_label_rows": 435,
+        "raw_majong_value_counts": {
+          "제주": 435,
+          "한라": 880
+        },
+        "rows_seen": 1315,
+        "rows_with_horse_id": 1315,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 905
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1315,
+      "upstream_total_count": 1315
+    },
+    "2013": {
+      "attempt_id": "20260929T132944.644092Z",
+      "attempt_manifest": "raw/trials/2013/attempts/20260929T132944.644092Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20130110",
+        "exact_jeju_label_last_train_date": "20131226",
+        "first_train_date": "20130110",
+        "last_train_date": "20131226",
+        "raw_majong_exact_jeju_label_rows": 496,
+        "raw_majong_value_counts": {
+          "제주": 496,
+          "한라": 876
+        },
+        "rows_seen": 1372,
+        "rows_with_horse_id": 1372,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 969
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1372,
+      "upstream_total_count": 1372
+    },
+    "2014": {
+      "attempt_id": "20260929T132945.971807Z",
+      "attempt_manifest": "raw/trials/2014/attempts/20260929T132945.971807Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20140109",
+        "exact_jeju_label_last_train_date": "20141224",
+        "first_train_date": "20140109",
+        "last_train_date": "20141224",
+        "raw_majong_exact_jeju_label_rows": 577,
+        "raw_majong_value_counts": {
+          "제주": 577,
+          "한라": 875
+        },
+        "rows_seen": 1452,
+        "rows_with_horse_id": 1452,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 914
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1452,
+      "upstream_total_count": 1452
+    },
+    "2015": {
+      "attempt_id": "20260929T132947.290385Z",
+      "attempt_manifest": "raw/trials/2015/attempts/20260929T132947.290385Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20150108",
+        "exact_jeju_label_last_train_date": "20151224",
+        "first_train_date": "20150108",
+        "last_train_date": "20151224",
+        "raw_majong_exact_jeju_label_rows": 719,
+        "raw_majong_value_counts": {
+          "제주": 719,
+          "한라": 767
+        },
+        "rows_seen": 1486,
+        "rows_with_horse_id": 1486,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 935
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1486,
+      "upstream_total_count": 1486
+    },
+    "2016": {
+      "attempt_id": "20260929T132948.546402Z",
+      "attempt_manifest": "raw/trials/2016/attempts/20260929T132948.546402Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 50,
+        "exact_jeju_label_first_train_date": "20160107",
+        "exact_jeju_label_last_train_date": "20161229",
+        "first_train_date": "20160107",
+        "last_train_date": "20161229",
+        "raw_majong_exact_jeju_label_rows": 852,
+        "raw_majong_value_counts": {
+          "제주": 852,
+          "한라": 626
+        },
+        "rows_seen": 1478,
+        "rows_with_horse_id": 1478,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 865
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1478,
+      "upstream_total_count": 1478
+    },
+    "2017": {
+      "attempt_id": "20260929T132949.955585Z",
+      "attempt_manifest": "raw/trials/2017/attempts/20260929T132949.955585Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20170112",
+        "exact_jeju_label_last_train_date": "20171228",
+        "first_train_date": "20170112",
+        "last_train_date": "20171228",
+        "raw_majong_exact_jeju_label_rows": 979,
+        "raw_majong_value_counts": {
+          "제주": 979,
+          "한라": 471
+        },
+        "rows_seen": 1450,
+        "rows_with_horse_id": 1450,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 850
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1450,
+      "upstream_total_count": 1450
+    },
+    "2018": {
+      "attempt_id": "20260929T132951.287137Z",
+      "attempt_manifest": "raw/trials/2018/attempts/20260929T132951.287137Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 48,
+        "exact_jeju_label_first_train_date": "20180111",
+        "exact_jeju_label_last_train_date": "20181227",
+        "first_train_date": "20180111",
+        "last_train_date": "20181227",
+        "raw_majong_exact_jeju_label_rows": 1003,
+        "raw_majong_value_counts": {
+          "제주": 1003,
+          "한라": 375
+        },
+        "rows_seen": 1378,
+        "rows_with_horse_id": 1378,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 788
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1378,
+      "upstream_total_count": 1378
+    },
+    "2019": {
+      "attempt_id": "20260929T132952.617184Z",
+      "attempt_manifest": "raw/trials/2019/attempts/20260929T132952.617184Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 47,
+        "exact_jeju_label_first_train_date": "20190110",
+        "exact_jeju_label_last_train_date": "20191229",
+        "first_train_date": "20190110",
+        "last_train_date": "20191229",
+        "raw_majong_exact_jeju_label_rows": 1206,
+        "raw_majong_value_counts": {
+          "제주": 1206,
+          "한라": 287
+        },
+        "rows_seen": 1493,
+        "rows_with_horse_id": 1493,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 859
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1493,
+      "upstream_total_count": 1493
+    },
+    "2020": {
+      "attempt_id": "20260929T132954.014336Z",
+      "attempt_manifest": "raw/trials/2020/attempts/20260929T132954.014336Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 48,
+        "exact_jeju_label_first_train_date": "20200102",
+        "exact_jeju_label_last_train_date": "20201227",
+        "first_train_date": "20200102",
+        "last_train_date": "20201227",
+        "raw_majong_exact_jeju_label_rows": 1162,
+        "raw_majong_value_counts": {
+          "제주": 1162,
+          "한라": 320
+        },
+        "rows_seen": 1482,
+        "rows_with_horse_id": 1482,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 949
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1482,
+      "upstream_total_count": 1482
+    },
+    "2021": {
+      "attempt_id": "20260929T132955.394361Z",
+      "attempt_manifest": "raw/trials/2021/attempts/20260929T132955.394361Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 47,
+        "exact_jeju_label_first_train_date": "20210114",
+        "exact_jeju_label_last_train_date": "20211223",
+        "first_train_date": "20210114",
+        "last_train_date": "20211223",
+        "raw_majong_exact_jeju_label_rows": 937,
+        "raw_majong_value_counts": {
+          "제주": 937,
+          "한라": 148
+        },
+        "rows_seen": 1085,
+        "rows_with_horse_id": 1085,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 649
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1085,
+      "upstream_total_count": 1085
+    },
+    "2022": {
+      "attempt_id": "20260929T132956.571172Z",
+      "attempt_manifest": "raw/trials/2022/attempts/20260929T132956.571172Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 47,
+        "exact_jeju_label_first_train_date": "20220106",
+        "exact_jeju_label_last_train_date": "20221222",
+        "first_train_date": "20220106",
+        "last_train_date": "20221222",
+        "raw_majong_exact_jeju_label_rows": 952,
+        "raw_majong_value_counts": {
+          "제주": 952,
+          "한라": 70
+        },
+        "rows_seen": 1022,
+        "rows_with_horse_id": 1022,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 614
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1022,
+      "upstream_total_count": 1022
+    },
+    "2023": {
+      "attempt_id": "20260929T132957.720068Z",
+      "attempt_manifest": "raw/trials/2023/attempts/20260929T132957.720068Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20230105",
+        "exact_jeju_label_last_train_date": "20231228",
+        "first_train_date": "20230105",
+        "last_train_date": "20231228",
+        "raw_majong_exact_jeju_label_rows": 1165,
+        "raw_majong_value_counts": {
+          "제주": 1165
+        },
+        "rows_seen": 1165,
+        "rows_with_horse_id": 1165,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 665
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1165,
+      "upstream_total_count": 1165
+    },
+    "2024": {
+      "attempt_id": "20260929T132958.930611Z",
+      "attempt_manifest": "raw/trials/2024/attempts/20260929T132958.930611Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 49,
+        "exact_jeju_label_first_train_date": "20240104",
+        "exact_jeju_label_last_train_date": "20241226",
+        "first_train_date": "20240104",
+        "last_train_date": "20241226",
+        "raw_majong_exact_jeju_label_rows": 1224,
+        "raw_majong_value_counts": {
+          "제주": 1224
+        },
+        "rows_seen": 1224,
+        "rows_with_horse_id": 1224,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 675
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1224,
+      "upstream_total_count": 1224
+    },
+    "2025": {
+      "attempt_id": "20260929T133000.261112Z",
+      "attempt_manifest": "raw/trials/2025/attempts/20260929T133000.261112Z/attempt_manifest.json",
+      "response_page_count": 2,
+      "row_coverage": {
+        "breed_filter_note": "Exact majong=제주 is reported as an upstream label count only; it is not silently normalized to an official breed code.",
+        "distinct_train_dates": 50,
+        "exact_jeju_label_first_train_date": "20250102",
+        "exact_jeju_label_last_train_date": "20251231",
+        "first_train_date": "20250102",
+        "last_train_date": "20251231",
+        "raw_majong_exact_jeju_label_rows": 1438,
+        "raw_majong_value_counts": {
+          "제주": 1438
+        },
+        "rows_seen": 1438,
+        "rows_with_horse_id": 1438,
+        "rows_without_parseable_train_date": 0,
+        "unique_horse_ids": 811
+      },
+      "status": "completed_api_response",
+      "upstream_rows_seen": 1438,
+      "upstream_total_count": 1438
+    }
+  }
+}

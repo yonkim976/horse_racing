@@ -1,0 +1,251 @@
+{
+  "created_at_utc": "2026-10-01T12:47:08.463197+00:00",
+  "database_before_sha256": "d99fbb079055f420e3a660099b076d82722e6a76ddb66698a4608ac4c9a632d0",
+  "ledger_sha256": "8ab8b4a8a7080140973891a7d4574ff6ecc57a114877b0ffc7fbaceff93e123a",
+  "pages": 337,
+  "nonempty_pages": 263,
+  "stats": {
+    "all": {
+      "rows": 1444319,
+      "start:missing": 79528,
+      "end:missing": 79527,
+      "not_usable_duration": 79528,
+      "issue:start_missing": 79528,
+      "issue:end_missing": 79527,
+      "issue:duration_zero_unavailable": 79528,
+      "start:valid": 1364791,
+      "end:valid": 1364792,
+      "valid_consistent": 1364791,
+      "after_cutoff": 1039
+    },
+    "native": {
+      "rows": 908316,
+      "start:missing": 18028,
+      "end:missing": 18028,
+      "not_usable_duration": 18028,
+      "issue:start_missing": 18028,
+      "issue:end_missing": 18028,
+      "issue:duration_zero_unavailable": 18028,
+      "start:valid": 890288,
+      "end:valid": 890288,
+      "valid_consistent": 890288,
+      "after_cutoff": 927
+    }
+  },
+  "raw_json_types": {
+    "stTime": {
+      "NoneType": 79528,
+      "int": 1364791
+    },
+    "spTime": {
+      "NoneType": 79527,
+      "int": 1364792
+    },
+    "trTerm": {
+      "int": 1444319
+    },
+    "hrNo": {
+      "int": 1444316,
+      "str": 3
+    },
+    "run1Cnt": {
+      "int": 1444319
+    },
+    "run2Cnt": {
+      "int": 1444319
+    }
+  },
+  "native_horses": 4545,
+  "all_date_range": [
+    "20071001",
+    "20260928"
+  ],
+  "native_date_range": [
+    "20071001",
+    "20260928"
+  ],
+  "invalid_raw_id_rows": [
+    {
+      "source_file": "research/20260929_api_monthly_history/raw/daily_training/202008/20260929T154650.696781Z/page_0001.json",
+      "row_no": 4045,
+      "raw": {
+        "hrNo": "018570 ",
+        "meet": "제주",
+        "part": 0,
+        "partNo": 0,
+        "prGubun": "-",
+        "prNo": "006034",
+        "run1Cnt": 0,
+        "run2Cnt": 0,
+        "spTime": 20200813093000,
+        "stTime": 20200813092000,
+        "trDate": 20200813,
+        "trTerm": 600
+      }
+    },
+    {
+      "source_file": "research/20260929_api_monthly_history/raw/daily_training/202008/20260929T154650.696781Z/page_0001.json",
+      "row_no": 4934,
+      "raw": {
+        "hrNo": "018570 ",
+        "meet": "제주",
+        "part": 0,
+        "partNo": 0,
+        "prGubun": "-",
+        "prNo": "006034",
+        "run1Cnt": 0,
+        "run2Cnt": 0,
+        "spTime": 20200809093500,
+        "stTime": 20200809092000,
+        "trDate": 20200809,
+        "trTerm": 900
+      }
+    },
+    {
+      "source_file": "research/20260929_api_monthly_history/raw/daily_training/202008/20260929T154650.696781Z/page_0001.json",
+      "row_no": 5204,
+      "raw": {
+        "hrNo": "018570 ",
+        "meet": "제주",
+        "part": 0,
+        "partNo": 0,
+        "prGubun": "-",
+        "prNo": "006034",
+        "run1Cnt": 0,
+        "run2Cnt": 0,
+        "spTime": 20200808094000,
+        "stTime": 20200808092500,
+        "trDate": 20200808,
+        "trTerm": 900
+      }
+    }
+  ],
+  "issue_examples": {
+    "start_missing|end_missing|duration_zero_unavailable": [
+      {
+        "native": false,
+        "source_file": "research/20260929_api_monthly_history/raw/daily_training/200710/20260929T153549.374168Z/page_0001.json",
+        "row_no": 1,
+        "raw": {
+          "chulGubun": "금주출전예정",
+          "hrName": "가는대로",
+          "hrNo": 1007684,
+          "meet": "제주",
+          "part": 0,
+          "partNo": 0,
+          "prGubun": "-",
+          "prNo": "003029",
+          "run1Cnt": 0,
+          "run2Cnt": 0,
+          "trDate": 20071031,
+          "trTerm": 0
+        },
+        "elapsed_seconds": null
+      },
+      {
+        "native": false,
+        "source_file": "research/20260929_api_monthly_history/raw/daily_training/200710/20260929T153549.374168Z/page_0001.json",
+        "row_no": 2,
+        "raw": {
+          "chulGubun": "금주출전예정",
+          "hrName": "가마우지",
+          "hrNo": 1009810,
+          "meet": "제주",
+          "part": 0,
+          "partNo": 0,
+          "prGubun": "-",
+          "prNo": "-",
+          "run1Cnt": 0,
+          "run2Cnt": 0,
+          "trDate": 20071031,
+          "trTerm": 0
+        },
+        "elapsed_seconds": null
+      },
+      {
+        "native": false,
+        "source_file": "research/20260929_api_monthly_history/raw/daily_training/200710/20260929T153549.374168Z/page_0001.json",
+        "row_no": 3,
+        "raw": {
+          "chulGubun": "차주출전예정",
+          "hrName": "감목관",
+          "hrNo": 1009677,
+          "meet": "제주",
+          "part": 0,
+          "partNo": 0,
+          "prGubun": "-",
+          "prNo": "-",
+          "run1Cnt": 0,
+          "run2Cnt": 0,
+          "trDate": 20071031,
+          "trTerm": 0
+        },
+        "elapsed_seconds": null
+      },
+      {
+        "native": true,
+        "source_file": "research/20260929_api_monthly_history/raw/daily_training/200710/20260929T153549.374168Z/page_0001.json",
+        "row_no": 4,
+        "raw": {
+          "chulGubun": "차주출전예정",
+          "hrName": "강줄기",
+          "hrNo": 3009880,
+          "meet": "제주",
+          "part": 0,
+          "partNo": 0,
+          "prGubun": "-",
+          "prNo": "003038",
+          "run1Cnt": 0,
+          "run2Cnt": 0,
+          "trDate": 20071031,
+          "trTerm": 0
+        },
+        "elapsed_seconds": null
+      },
+      {
+        "native": false,
+        "source_file": "research/20260929_api_monthly_history/raw/daily_training/200710/20260929T153549.374168Z/page_0001.json",
+        "row_no": 5,
+        "raw": {
+          "chulGubun": "차주출전예정",
+          "hrName": "거력",
+          "hrNo": 1009901,
+          "meet": "제주",
+          "part": 0,
+          "partNo": 0,
+          "prGubun": "-",
+          "prNo": "002030",
+          "run1Cnt": 0,
+          "run2Cnt": 0,
+          "trDate": 20071031,
+          "trTerm": 0
+        },
+        "elapsed_seconds": null
+      }
+    ],
+    "start_missing|duration_zero_unavailable": [
+      {
+        "native": false,
+        "source_file": "research/20260929_api_monthly_history/raw/daily_training/200904/20260929T154650.696781Z/page_0001.json",
+        "row_no": 1044,
+        "raw": {
+          "chulGubun": "금주출전예정",
+          "hrName": "노을지기",
+          "hrNo": 1010461,
+          "meet": "제주",
+          "part": 0,
+          "partNo": 0,
+          "prGubun": "-",
+          "prNo": "003002",
+          "run1Cnt": 0,
+          "run2Cnt": 0,
+          "spTime": 20090424070400,
+          "trDate": 20090424,
+          "trTerm": 0
+        },
+        "elapsed_seconds": null
+      }
+    ]
+  },
+  "database_unchanged": true
+}

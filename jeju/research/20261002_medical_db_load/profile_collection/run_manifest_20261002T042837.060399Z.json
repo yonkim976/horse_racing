@@ -1,0 +1,109 @@
+{
+  "api42_endpoint_path": "/API42_1/totalHorseInfo_1",
+  "api42_operation": "totalHorseInfo_1",
+  "completed_at_utc": "2026-10-02T04:28:37.093+00:00",
+  "completed_profile_count": 0,
+  "database_access": "SQLite read-only; no writes or imports",
+  "kst_date": "2026-10-02",
+  "probes": [
+    {
+      "attempt_no": 1,
+      "clinic_source_rows": [
+        {
+          "after_20260919_cutoff": false,
+          "clinic_date_raw": "20240117",
+          "horse_id": "3103407",
+          "item_index": 965,
+          "meet_raw": "제주",
+          "page_no": 2,
+          "source_page_bytes": 179048,
+          "source_page_relative_path": "clinic/2024/source_pages/page_0002.json",
+          "source_page_sha256": "d6df258abd59519dd6eca297f59ae46e78d137fb73447963d8094f0e9a2661f7",
+          "source_run_id": "20260929T150517.740550Z",
+          "source_run_manifest": "jeju/research/20260929_api_detail_sources/raw/full_year_clinic_judgement_start_training/20260929T150517.740550Z/run_manifest.json"
+        }
+      ],
+      "content_type": null,
+      "endpoint_path": "/API42_1/totalHorseInfo_1",
+      "error_type": "ConnectError",
+      "horse_id": "3103407",
+      "http_status": null,
+      "kst_date": "2026-10-02",
+      "operation": "totalHorseInfo_1",
+      "priority_group": "within_20260919_cutoff",
+      "public_params": {
+        "_type": "json",
+        "hr_no": "3103407",
+        "numOfRows": 1000,
+        "pageNo": 1
+      },
+      "requested_at_utc": "2026-10-02T04:28:37.090+00:00",
+      "response_bytes": 0,
+      "response_sha256": null,
+      "retrieved_at_utc": null,
+      "retryable_transient": true,
+      "run_id": "20261002T042837.060399Z",
+      "service_key_recorded": false,
+      "validation_status": "transport_error"
+    }
+  ],
+  "profile_timing_note": "API42 current profile values are observed at response retrieval time. API16 clinic dates and API42 current breed are not combined into historical breed evidence.",
+  "public_params_template": {
+    "_type": "json",
+    "hr_no": "<exact horse_id>",
+    "numOfRows": 1000,
+    "pageNo": 1
+  },
+  "quarantine_ledger": "quarantine_ledger.jsonl",
+  "quota_assessment": {
+    "cap_checkpoint_path": "jeju/research/20260930_api42_horse_breed_collection/quota_checkpoint_20261001.json",
+    "cap_last_checked_on_kst": "2026-10-01",
+    "daily_advertised_request_cap": 3000,
+    "planned_unique_profiles": 81,
+    "prior_known_api42_requests_kst_today": 21,
+    "prior_request_evidence": [
+      {
+        "attempt_id_utc": "20261001T151147.863223Z",
+        "completed_request_count": 21,
+        "kst_date": "2026-10-02",
+        "path": "jeju/research/20261001_starting_exam_api_collection/raw/api42_followup/attempts/20261001T151147.863223Z/attempt_manifest.json",
+        "request_count": 21
+      }
+    ],
+    "public_page_exposes_live_remaining_usage": false,
+    "quota_note": "Only the 3,000-request service limit and known same-day API42 request records are available; the public page does not expose a live account balance. API21 calls are a separate endpoint service and are not counted against API42.",
+    "remaining_by_known_count_before_this_run": 2979
+  },
+  "raw_response_root": "raw/api42_profiles",
+  "request_ledger": "request_ledger.jsonl",
+  "request_rate": {
+    "max_transient_retries_per_horse": 2,
+    "minimum_start_interval_seconds": 1.05
+  },
+  "requests_started_this_run": 1,
+  "run_id": "20261002T042837.060399Z",
+  "schema_version": 1,
+  "service_key_recorded": false,
+  "small_bear_3005648_reimport_allowed": false,
+  "source_summary": {
+    "after_20260919_cutoff_clinic_rows": 6,
+    "after_20260919_cutoff_horse_ids": 5,
+    "api16_source_pages": 32,
+    "api16_source_rows": 12030,
+    "api16_source_run_id": "20260929T150517.740550Z",
+    "profile_latest_unique_official_horse_ids": 4637,
+    "reimport_exclusion_target_count": 0,
+    "small_bear_3005648_clinic_rows": 0,
+    "unlinked_clinic_rows": 156,
+    "unlinked_unique_horse_ids": 81,
+    "within_20260919_cutoff_clinic_rows": 150,
+    "within_20260919_cutoff_horse_ids": 76
+  },
+  "started_at_utc": "2026-10-02T04:28:37.060+00:00",
+  "status": "daily_request_budget_checkpoint",
+  "validated_profile_count": 0,
+  "validated_profile_rows": "validated_profile_rows.jsonl",
+  "validation_status_counts": {
+    "transport_error": 1
+  }
+}

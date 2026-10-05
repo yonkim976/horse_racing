@@ -1,0 +1,60 @@
+{
+  "reviewed_at_local_date": "2026-10-02",
+  "review_mode": "static_only",
+  "scope": "Independent review of the medical API16/API42 loader and SQL migration; no loader, database, or API execution.",
+  "artifacts": [
+    {
+      "path": "/private/tmp/jeju_medical_20261002/load/load_medical_api16.py",
+      "sha256": "0a71061a6fae8f3c59a16a71b2a0b6b25b5bc09372c28621a229b17d677febc8"
+    },
+    {
+      "path": "/private/tmp/jeju_medical_20261002/load/20261002_add_medical_api_rows.sql",
+      "sha256": "552cbd843ccefc393bb48b67b3e70788d44d07e3fc3fc6a3e9dc93b3a3c0e253"
+    }
+  ],
+  "outcome": "no_blocking_code_findings",
+  "findings": [],
+  "checks": {
+    "transaction_atomicity": {
+      "status": "pass",
+      "evidence": "The loader starts BEGIN IMMEDIATE, executes migration statements one at a time with conn.execute (not executescript), commits after validation, and rolls back on exceptions."
+    },
+    "preserve_existing_schema": {
+      "status": "pass",
+      "evidence": "The migration adds tables, indexes, and views. Before commit the loader compares existing schema object SQL and checks existing table counts, permitting growth only in the declared append targets."
+    },
+    "source_item_identity_and_idempotence": {
+      "status": "pass",
+      "evidence": "API records are keyed by source artifact and 1-based record_index; medical rows are keyed by source artifact and source_row_no. Repeated payload content at different item positions is retained; a re-import at the same location must match the existing payload exactly."
+    },
+    "api42_profile_and_api16_provenance": {
+      "status": "pass",
+      "evidence": "Profiles are checked against the 81-ID target manifest and source candidates. Expected clinic references are derived from frozen API16 items, cross-checked against the target manifest and profile rows, required to total 156, and duplicate profile references are rejected. API42 response status, result code, one-item count, exact horse ID, raw item keys/types, payload SHA, breed, name, birth date, endpoint operation, and public query parameters are validated."
+    },
+    "credentials_and_paths": {
+      "status": "pass",
+      "evidence": "The loader has no network client; source URL validation rejects key-like query parameters, API42 metadata rejects credential-key parameters, and frozen local paths are constrained under their declared roots. The shared operating database guard checks the resolved basename."
+    },
+    "dictionary_parquet_integrity": {
+      "status": "pass",
+      "evidence": "Dictionary files and Parquets are pinned by SHA, byte size, and row count; Arrow schema, nullability, row values, and source-row JSON are checked before loading."
+    },
+    "held_phrase_policy_and_classification": {
+      "status": "pass",
+      "evidence": "The SQL classifies prior_rpt_parser_context_only and contextual-evidence-required mappings as hold dispositions; diagnosis/component/explanation views expose automatically_applied_to_event=0. No new severity field or severity classifier was found."
+    },
+    "analysis_grain_and_current_profile_semantics": {
+      "status": "pass",
+      "evidence": "The 2026 analysis view joins API16 rows to current horse_analysis_2026 name/age/profile fields and does not join one-to-many dictionary views. The loader checks exact expected analysis row counts and exactly two literal diagnosis slots per medical row."
+    }
+  },
+  "non_blocking_scope_note": {
+    "status": "owner_disposition",
+    "note": "The dictionary README excludes Jeju clinical events from the Seoul/Busan event-loader scope. The owner clarified that this is a separate, explicitly approved Jeju medical dataset and that the phrase/explanation joins are metadata-only with automatic diagnosis application disabled. Record this Jeju-specific scope and shared-glossary limitation in the Jeju README/input contract before broader reuse; no code blocker remains."
+  },
+  "verification_limits": [
+    "No loader command or test was executed.",
+    "No API request was made.",
+    "No SQLite database was opened for writing or modified."
+  ]
+}

@@ -1,0 +1,1544 @@
+{
+  "created_at_utc": "2026-09-29T13:59:08.490784+00:00",
+  "comparison_scope": {
+    "first_year": 2003,
+    "last_year": 2025,
+    "meet": 2,
+    "event_type": "trial"
+  },
+  "official_api_source": "KRA OpenAPI 15056974, /API20_1/ridingTestResult_1",
+  "api_breed_semantics": "The official portal describes the response field majong as 마종, but the public page did not expose an enum code table. Exact majong=제주 counts are reported as raw labels; no extra normalization is applied.",
+  "api_primary_total_rows_2003_2025": 29557,
+  "api_primary_exact_majong_jeju_label_rows_2003_2025": 14746,
+  "supplemental_api_coverage_2000_2002": {
+    "2000": {
+      "attempt_manifest": "raw/trials/2000/attempts/20260929T133431.559684Z/attempt_manifest.json",
+      "attempt_id": "20260929T133431.559684Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1279,
+      "api_raw_majong_value_counts": {
+        "한라": 1277,
+        "한라(래)": 2
+      },
+      "api_exact_majong_jeju_label_rows": 0,
+      "api_first_date": "20000105",
+      "api_last_date": "20001220",
+      "api_jeju_label_first_date": null,
+      "api_jeju_label_last_date": null
+    },
+    "2001": {
+      "attempt_manifest": "raw/trials/2001/attempts/20260929T133432.723963Z/attempt_manifest.json",
+      "attempt_id": "20260929T133432.723963Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1259,
+      "api_raw_majong_value_counts": {
+        "한라": 1246,
+        "한라(래)": 13
+      },
+      "api_exact_majong_jeju_label_rows": 0,
+      "api_first_date": "20010103",
+      "api_last_date": "20011219",
+      "api_jeju_label_first_date": null,
+      "api_jeju_label_last_date": null
+    },
+    "2002": {
+      "attempt_manifest": "raw/trials/2002/attempts/20260929T133412.505836Z/attempt_manifest.json",
+      "attempt_id": "20260929T133412.505836Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1310,
+      "api_raw_majong_value_counts": {
+        "제주": 20,
+        "한라": 1234,
+        "한라(래)": 56
+      },
+      "api_exact_majong_jeju_label_rows": 20,
+      "api_first_date": "20020109",
+      "api_last_date": "20021220",
+      "api_jeju_label_first_date": "20020612",
+      "api_jeju_label_last_date": "20021129"
+    }
+  },
+  "api_total_rows_2000_2025": 33405,
+  "api_exact_majong_jeju_label_rows_2000_2025": 14766,
+  "api_exact_majong_jeju_label_first_date_2000_2025": "20020612",
+  "sibling_2026_api_coverage": {
+    "attempt_manifest": "../20260929_core_collection_inventory/raw/trials/2026/attempts/20260929T131937.249978Z/attempt_manifest.json",
+    "attempt_id": "20260929T131937.249978Z",
+    "manifest_status": "completed_api_response",
+    "source_pages_sha256_verified": true,
+    "api_total_rows": 972,
+    "api_exact_majong_jeju_label_rows": 972,
+    "api_first_date": "20260108",
+    "api_last_date": "20260916",
+    "api_jeju_label_first_date": "20260108",
+    "api_jeju_label_last_date": "20260916"
+  },
+  "api_total_rows_2000_2026": 34377,
+  "api_exact_majong_jeju_label_rows_2000_2026": 15738,
+  "api_exact_majong_jeju_label_first_date_2000_2026": "20020612",
+  "api_exact_majong_jeju_label_last_date_2000_2026": "20260916",
+  "distinct_trial_events_majong_jeju_2000_2026": 1967,
+  "phase2_db": "horse_racing/data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+  "phase2_db_sha256": "0f2871c2a8f931bb968d8bf7086c27f0644c0ef7332b41b7a1bd85ff637c638f",
+  "phase2_db_open_mode": "read-only SQLite URI with query_only pragma",
+  "phase2_trial_rows_2003_2025": 14736,
+  "phase2_jeju_candidate_rows_2003_2025": 14736,
+  "annual_comparison": {
+    "2003": {
+      "attempt_manifest": "raw/trials/2003/attempts/20260929T132909.428398Z/attempt_manifest.json",
+      "attempt_id": "20260929T132909.428398Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1157,
+      "api_raw_majong_value_counts": {
+        "제주": 44,
+        "한라": 1027,
+        "한라(래)": 86
+      },
+      "api_exact_majong_jeju_label_rows": 44,
+      "api_first_date": "20030110",
+      "api_last_date": "20031219",
+      "api_jeju_label_first_date": "20030221",
+      "api_jeju_label_last_date": "20031219",
+      "phase2_total_trial_rows": 33,
+      "phase2_first_date": "20030711",
+      "phase2_last_date": "20031219",
+      "phase2_jeju_candidate_rows": 33,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 33
+      },
+      "shared_event_trial_horse_keys": 33,
+      "shared_keys_with_same_hr_no": 33,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [
+        {
+          "event_date": "20030221",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3005611",
+          "horse_name": "오름목마",
+          "majong": "제주",
+          "day_serial": 6
+        },
+        {
+          "event_date": "20030307",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3005967",
+          "horse_name": "천둥방울",
+          "majong": "제주",
+          "day_serial": 8
+        },
+        {
+          "event_date": "20030307",
+          "trial_number": 1,
+          "horse_number": 2,
+          "hr_no": "3005611",
+          "horse_name": "오름목마",
+          "majong": "제주",
+          "day_serial": 8
+        },
+        {
+          "event_date": "20030411",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3006022",
+          "horse_name": "산수도인",
+          "majong": "제주",
+          "day_serial": 13
+        },
+        {
+          "event_date": "20030418",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3006022",
+          "horse_name": "산수도인",
+          "majong": "제주",
+          "day_serial": 14
+        },
+        {
+          "event_date": "20030425",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3006022",
+          "horse_name": "산수도인",
+          "majong": "제주",
+          "day_serial": 15
+        },
+        {
+          "event_date": "20030502",
+          "trial_number": 2,
+          "horse_number": 3,
+          "hr_no": "3006022",
+          "horse_name": "산수도인",
+          "majong": "제주",
+          "day_serial": 16
+        },
+        {
+          "event_date": "20030613",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3006313",
+          "horse_name": "연무신호",
+          "majong": "제주",
+          "day_serial": 22
+        },
+        {
+          "event_date": "20030704",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3006378",
+          "horse_name": "성공일호",
+          "majong": "제주",
+          "day_serial": 25
+        },
+        {
+          "event_date": "20030905",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "3006555",
+          "horse_name": "화려한왕국",
+          "majong": "제주",
+          "day_serial": 33
+        },
+        {
+          "event_date": "20030905",
+          "trial_number": 1,
+          "horse_number": 2,
+          "hr_no": "3006556",
+          "horse_name": "청정호수",
+          "majong": "제주",
+          "day_serial": 33
+        }
+      ],
+      "api_jeju_only_keys_before_phase2_first_date": 9,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 2,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2004": {
+      "attempt_manifest": "raw/trials/2004/attempts/20260929T132934.333894Z/attempt_manifest.json",
+      "attempt_id": "20260929T132934.333894Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1183,
+      "api_raw_majong_value_counts": {
+        "제주": 55,
+        "한라": 1053,
+        "한라(래)": 75
+      },
+      "api_exact_majong_jeju_label_rows": 55,
+      "api_first_date": "20040109",
+      "api_last_date": "20041224",
+      "api_jeju_label_first_date": "20040109",
+      "api_jeju_label_last_date": "20041126",
+      "phase2_total_trial_rows": 55,
+      "phase2_first_date": "20040109",
+      "phase2_last_date": "20041126",
+      "phase2_jeju_candidate_rows": 55,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 55
+      },
+      "shared_event_trial_horse_keys": 55,
+      "shared_keys_with_same_hr_no": 53,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20040903",
+          "trial_number": 1,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3007159"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20041022",
+          "trial_number": 1,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3007159"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2005": {
+      "attempt_manifest": "raw/trials/2005/attempts/20260929T132935.606822Z/attempt_manifest.json",
+      "attempt_id": "20260929T132935.606822Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1167,
+      "api_raw_majong_value_counts": {
+        "제주": 76,
+        "한라": 1041,
+        "한라(래)": 50
+      },
+      "api_exact_majong_jeju_label_rows": 76,
+      "api_first_date": "20050107",
+      "api_last_date": "20051223",
+      "api_jeju_label_first_date": "20050225",
+      "api_jeju_label_last_date": "20051223",
+      "phase2_total_trial_rows": 76,
+      "phase2_first_date": "20050225",
+      "phase2_last_date": "20051223",
+      "phase2_jeju_candidate_rows": 76,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 76
+      },
+      "shared_event_trial_horse_keys": 76,
+      "shared_keys_with_same_hr_no": 75,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20050422",
+          "trial_number": 1,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3007718"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2006": {
+      "attempt_manifest": "raw/trials/2006/attempts/20260929T132936.672973Z/attempt_manifest.json",
+      "attempt_id": "20260929T132936.672973Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1212,
+      "api_raw_majong_value_counts": {
+        "제주": 151,
+        "한라": 1033,
+        "한라(래)": 28
+      },
+      "api_exact_majong_jeju_label_rows": 151,
+      "api_first_date": "20060106",
+      "api_last_date": "20061222",
+      "api_jeju_label_first_date": "20060106",
+      "api_jeju_label_last_date": "20061222",
+      "phase2_total_trial_rows": 151,
+      "phase2_first_date": "20060106",
+      "phase2_last_date": "20061222",
+      "phase2_jeju_candidate_rows": 151,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 151
+      },
+      "shared_event_trial_horse_keys": 151,
+      "shared_keys_with_same_hr_no": 151,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2007": {
+      "attempt_manifest": "raw/trials/2007/attempts/20260929T132937.795939Z/attempt_manifest.json",
+      "attempt_id": "20260929T132937.795939Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1207,
+      "api_raw_majong_value_counts": {
+        "제주": 160,
+        "한라": 1020,
+        "한라(래)": 27
+      },
+      "api_exact_majong_jeju_label_rows": 160,
+      "api_first_date": "20070105",
+      "api_last_date": "20071221",
+      "api_jeju_label_first_date": "20070105",
+      "api_jeju_label_last_date": "20071221",
+      "phase2_total_trial_rows": 160,
+      "phase2_first_date": "20070105",
+      "phase2_last_date": "20071221",
+      "phase2_jeju_candidate_rows": 160,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 160
+      },
+      "shared_event_trial_horse_keys": 160,
+      "shared_keys_with_same_hr_no": 160,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2008": {
+      "attempt_manifest": "raw/trials/2008/attempts/20260929T132938.966343Z/attempt_manifest.json",
+      "attempt_id": "20260929T132938.966343Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1208,
+      "api_raw_majong_value_counts": {
+        "제주": 189,
+        "한라": 1005,
+        "한라(래)": 14
+      },
+      "api_exact_majong_jeju_label_rows": 189,
+      "api_first_date": "20080104",
+      "api_last_date": "20081219",
+      "api_jeju_label_first_date": "20080111",
+      "api_jeju_label_last_date": "20081219",
+      "phase2_total_trial_rows": 189,
+      "phase2_first_date": "20080111",
+      "phase2_last_date": "20081219",
+      "phase2_jeju_candidate_rows": 189,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 189
+      },
+      "shared_event_trial_horse_keys": 189,
+      "shared_keys_with_same_hr_no": 189,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2009": {
+      "attempt_manifest": "raw/trials/2009/attempts/20260929T132940.050413Z/attempt_manifest.json",
+      "attempt_id": "20260929T132940.050413Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1215,
+      "api_raw_majong_value_counts": {
+        "제주": 269,
+        "한라": 942,
+        "한라(래)": 4
+      },
+      "api_exact_majong_jeju_label_rows": 269,
+      "api_first_date": "20090109",
+      "api_last_date": "20091224",
+      "api_jeju_label_first_date": "20090109",
+      "api_jeju_label_last_date": "20091224",
+      "phase2_total_trial_rows": 269,
+      "phase2_first_date": "20090109",
+      "phase2_last_date": "20091224",
+      "phase2_jeju_candidate_rows": 269,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 269
+      },
+      "shared_event_trial_horse_keys": 269,
+      "shared_keys_with_same_hr_no": 269,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2010": {
+      "attempt_manifest": "raw/trials/2010/attempts/20260929T132941.200448Z/attempt_manifest.json",
+      "attempt_id": "20260929T132941.200448Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1131,
+      "api_raw_majong_value_counts": {
+        "제주": 300,
+        "한라": 831
+      },
+      "api_exact_majong_jeju_label_rows": 300,
+      "api_first_date": "20100110",
+      "api_last_date": "20101219",
+      "api_jeju_label_first_date": "20100110",
+      "api_jeju_label_last_date": "20101219",
+      "phase2_total_trial_rows": 300,
+      "phase2_first_date": "20100110",
+      "phase2_last_date": "20101219",
+      "phase2_jeju_candidate_rows": 300,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 300
+      },
+      "shared_event_trial_horse_keys": 300,
+      "shared_keys_with_same_hr_no": 300,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2011": {
+      "attempt_manifest": "raw/trials/2011/attempts/20260929T132942.334333Z/attempt_manifest.json",
+      "attempt_id": "20260929T132942.334333Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1237,
+      "api_raw_majong_value_counts": {
+        "제주": 357,
+        "한라": 880
+      },
+      "api_exact_majong_jeju_label_rows": 357,
+      "api_first_date": "20110109",
+      "api_last_date": "20111222",
+      "api_jeju_label_first_date": "20110109",
+      "api_jeju_label_last_date": "20111222",
+      "phase2_total_trial_rows": 357,
+      "phase2_first_date": "20110109",
+      "phase2_last_date": "20111222",
+      "phase2_jeju_candidate_rows": 357,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 357
+      },
+      "shared_event_trial_horse_keys": 357,
+      "shared_keys_with_same_hr_no": 357,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2012": {
+      "attempt_manifest": "raw/trials/2012/attempts/20260929T132943.388361Z/attempt_manifest.json",
+      "attempt_id": "20260929T132943.388361Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1315,
+      "api_raw_majong_value_counts": {
+        "제주": 435,
+        "한라": 880
+      },
+      "api_exact_majong_jeju_label_rows": 435,
+      "api_first_date": "20120105",
+      "api_last_date": "20121227",
+      "api_jeju_label_first_date": "20120105",
+      "api_jeju_label_last_date": "20121227",
+      "phase2_total_trial_rows": 435,
+      "phase2_first_date": "20120105",
+      "phase2_last_date": "20121227",
+      "phase2_jeju_candidate_rows": 435,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 435
+      },
+      "shared_event_trial_horse_keys": 435,
+      "shared_keys_with_same_hr_no": 435,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2013": {
+      "attempt_manifest": "raw/trials/2013/attempts/20260929T132944.644092Z/attempt_manifest.json",
+      "attempt_id": "20260929T132944.644092Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1372,
+      "api_raw_majong_value_counts": {
+        "제주": 496,
+        "한라": 876
+      },
+      "api_exact_majong_jeju_label_rows": 496,
+      "api_first_date": "20130110",
+      "api_last_date": "20131226",
+      "api_jeju_label_first_date": "20130110",
+      "api_jeju_label_last_date": "20131226",
+      "phase2_total_trial_rows": 496,
+      "phase2_first_date": "20130110",
+      "phase2_last_date": "20131226",
+      "phase2_jeju_candidate_rows": 496,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 496
+      },
+      "shared_event_trial_horse_keys": 496,
+      "shared_keys_with_same_hr_no": 496,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2014": {
+      "attempt_manifest": "raw/trials/2014/attempts/20260929T132945.971807Z/attempt_manifest.json",
+      "attempt_id": "20260929T132945.971807Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1452,
+      "api_raw_majong_value_counts": {
+        "제주": 577,
+        "한라": 875
+      },
+      "api_exact_majong_jeju_label_rows": 577,
+      "api_first_date": "20140109",
+      "api_last_date": "20141224",
+      "api_jeju_label_first_date": "20140109",
+      "api_jeju_label_last_date": "20141224",
+      "phase2_total_trial_rows": 577,
+      "phase2_first_date": "20140109",
+      "phase2_last_date": "20141224",
+      "phase2_jeju_candidate_rows": 577,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 577
+      },
+      "shared_event_trial_horse_keys": 577,
+      "shared_keys_with_same_hr_no": 577,
+      "shared_keys_with_missing_hr_no": [],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2015": {
+      "attempt_manifest": "raw/trials/2015/attempts/20260929T132947.290385Z/attempt_manifest.json",
+      "attempt_id": "20260929T132947.290385Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1486,
+      "api_raw_majong_value_counts": {
+        "제주": 719,
+        "한라": 767
+      },
+      "api_exact_majong_jeju_label_rows": 719,
+      "api_first_date": "20150108",
+      "api_last_date": "20151224",
+      "api_jeju_label_first_date": "20150108",
+      "api_jeju_label_last_date": "20151224",
+      "phase2_total_trial_rows": 719,
+      "phase2_first_date": "20150108",
+      "phase2_last_date": "20151224",
+      "phase2_jeju_candidate_rows": 719,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 719
+      },
+      "shared_event_trial_horse_keys": 719,
+      "shared_keys_with_same_hr_no": 718,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20150618",
+          "trial_number": 3,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3015520"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2016": {
+      "attempt_manifest": "raw/trials/2016/attempts/20260929T132948.546402Z/attempt_manifest.json",
+      "attempt_id": "20260929T132948.546402Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1478,
+      "api_raw_majong_value_counts": {
+        "제주": 852,
+        "한라": 626
+      },
+      "api_exact_majong_jeju_label_rows": 852,
+      "api_first_date": "20160107",
+      "api_last_date": "20161229",
+      "api_jeju_label_first_date": "20160107",
+      "api_jeju_label_last_date": "20161229",
+      "phase2_total_trial_rows": 852,
+      "phase2_first_date": "20160107",
+      "phase2_last_date": "20161229",
+      "phase2_jeju_candidate_rows": 852,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 852
+      },
+      "shared_event_trial_horse_keys": 852,
+      "shared_keys_with_same_hr_no": 849,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20160225",
+          "trial_number": 4,
+          "horse_number": 6,
+          "api_hr_no": [
+            "3012608"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20161215",
+          "trial_number": 2,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3016490"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20161222",
+          "trial_number": 4,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3016490"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2017": {
+      "attempt_manifest": "raw/trials/2017/attempts/20260929T132949.955585Z/attempt_manifest.json",
+      "attempt_id": "20260929T132949.955585Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1450,
+      "api_raw_majong_value_counts": {
+        "제주": 979,
+        "한라": 471
+      },
+      "api_exact_majong_jeju_label_rows": 979,
+      "api_first_date": "20170112",
+      "api_last_date": "20171228",
+      "api_jeju_label_first_date": "20170112",
+      "api_jeju_label_last_date": "20171228",
+      "phase2_total_trial_rows": 979,
+      "phase2_first_date": "20170112",
+      "phase2_last_date": "20171228",
+      "phase2_jeju_candidate_rows": 979,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 979
+      },
+      "shared_event_trial_horse_keys": 979,
+      "shared_keys_with_same_hr_no": 977,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20170406",
+          "trial_number": 2,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3016833"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20170511",
+          "trial_number": 1,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3016870"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2018": {
+      "attempt_manifest": "raw/trials/2018/attempts/20260929T132951.287137Z/attempt_manifest.json",
+      "attempt_id": "20260929T132951.287137Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1378,
+      "api_raw_majong_value_counts": {
+        "제주": 1003,
+        "한라": 375
+      },
+      "api_exact_majong_jeju_label_rows": 1003,
+      "api_first_date": "20180111",
+      "api_last_date": "20181227",
+      "api_jeju_label_first_date": "20180111",
+      "api_jeju_label_last_date": "20181227",
+      "phase2_total_trial_rows": 1003,
+      "phase2_first_date": "20180111",
+      "phase2_last_date": "20181227",
+      "phase2_jeju_candidate_rows": 1003,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 1003
+      },
+      "shared_event_trial_horse_keys": 1003,
+      "shared_keys_with_same_hr_no": 1000,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20180802",
+          "trial_number": 3,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3017469"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20181108",
+          "trial_number": 2,
+          "horse_number": 7,
+          "api_hr_no": [
+            "3017782"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20181115",
+          "trial_number": 2,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3017782"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2019": {
+      "attempt_manifest": "raw/trials/2019/attempts/20260929T132952.617184Z/attempt_manifest.json",
+      "attempt_id": "20260929T132952.617184Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1493,
+      "api_raw_majong_value_counts": {
+        "제주": 1206,
+        "한라": 287
+      },
+      "api_exact_majong_jeju_label_rows": 1206,
+      "api_first_date": "20190110",
+      "api_last_date": "20191229",
+      "api_jeju_label_first_date": "20190110",
+      "api_jeju_label_last_date": "20191229",
+      "phase2_total_trial_rows": 1206,
+      "phase2_first_date": "20190110",
+      "phase2_last_date": "20191229",
+      "phase2_jeju_candidate_rows": 1206,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 1206
+      },
+      "shared_event_trial_horse_keys": 1206,
+      "shared_keys_with_same_hr_no": 1201,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20190214",
+          "trial_number": 5,
+          "horse_number": 5,
+          "api_hr_no": [
+            "3017469"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20190418",
+          "trial_number": 2,
+          "horse_number": 4,
+          "api_hr_no": [
+            "3017931"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20190502",
+          "trial_number": 1,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3017781"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20190502",
+          "trial_number": 1,
+          "horse_number": 8,
+          "api_hr_no": [
+            "3017930"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20190808",
+          "trial_number": 2,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3018111"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2020": {
+      "attempt_manifest": "raw/trials/2020/attempts/20260929T132954.014336Z/attempt_manifest.json",
+      "attempt_id": "20260929T132954.014336Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1482,
+      "api_raw_majong_value_counts": {
+        "제주": 1162,
+        "한라": 320
+      },
+      "api_exact_majong_jeju_label_rows": 1162,
+      "api_first_date": "20200102",
+      "api_last_date": "20201227",
+      "api_jeju_label_first_date": "20200102",
+      "api_jeju_label_last_date": "20201227",
+      "phase2_total_trial_rows": 1162,
+      "phase2_first_date": "20200102",
+      "phase2_last_date": "20201227",
+      "phase2_jeju_candidate_rows": 1162,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 1162
+      },
+      "shared_event_trial_horse_keys": 1162,
+      "shared_keys_with_same_hr_no": 1146,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20200521",
+          "trial_number": 5,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3017867"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20200529",
+          "trial_number": 4,
+          "horse_number": 10,
+          "api_hr_no": [
+            "3017867"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3018630"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3018554"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3018726"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 4,
+          "api_hr_no": [
+            "3017838"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 5,
+          "api_hr_no": [
+            "3018248"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 6,
+          "api_hr_no": [
+            "3018057"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 2,
+          "horse_number": 7,
+          "api_hr_no": [
+            "3018275"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3018239"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3016229"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3016104"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 4,
+          "api_hr_no": [
+            "3016437"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 5,
+          "api_hr_no": [
+            "3016492"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 6,
+          "api_hr_no": [
+            "3018107"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20201227",
+          "trial_number": 3,
+          "horse_number": 7,
+          "api_hr_no": [
+            "3018059"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2021": {
+      "attempt_manifest": "raw/trials/2021/attempts/20260929T132955.394361Z/attempt_manifest.json",
+      "attempt_id": "20260929T132955.394361Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1085,
+      "api_raw_majong_value_counts": {
+        "제주": 937,
+        "한라": 148
+      },
+      "api_exact_majong_jeju_label_rows": 937,
+      "api_first_date": "20210114",
+      "api_last_date": "20211223",
+      "api_jeju_label_first_date": "20210114",
+      "api_jeju_label_last_date": "20211223",
+      "phase2_total_trial_rows": 938,
+      "phase2_first_date": "20210114",
+      "phase2_last_date": "20211223",
+      "phase2_jeju_candidate_rows": 938,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 938
+      },
+      "shared_event_trial_horse_keys": 937,
+      "shared_keys_with_same_hr_no": 934,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20210819",
+          "trial_number": 1,
+          "horse_number": 7,
+          "api_hr_no": [
+            "3018983"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20211014",
+          "trial_number": 2,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3018639"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20211028",
+          "trial_number": 1,
+          "horse_number": 6,
+          "api_hr_no": [
+            "3018639"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": [
+        {
+          "event_date": "20211021",
+          "trial_number": 1,
+          "horse_number": 1,
+          "hr_no": "1019026",
+          "horse_name": "자수정",
+          "breed_status": "native_confirmed",
+          "identity_status": "official_trial_hr_tr_linked",
+          "trial_round": 38,
+          "same_key_api_rows": [
+            {
+              "hr_no": "1019026",
+              "horse_name": "자수정",
+              "majong": "한라",
+              "day_serial": 38
+            }
+          ]
+        }
+      ]
+    },
+    "2022": {
+      "attempt_manifest": "raw/trials/2022/attempts/20260929T132956.571172Z/attempt_manifest.json",
+      "attempt_id": "20260929T132956.571172Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1022,
+      "api_raw_majong_value_counts": {
+        "제주": 952,
+        "한라": 70
+      },
+      "api_exact_majong_jeju_label_rows": 952,
+      "api_first_date": "20220106",
+      "api_last_date": "20221222",
+      "api_jeju_label_first_date": "20220106",
+      "api_jeju_label_last_date": "20221222",
+      "phase2_total_trial_rows": 952,
+      "phase2_first_date": "20220106",
+      "phase2_last_date": "20221222",
+      "phase2_jeju_candidate_rows": 952,
+      "phase2_jeju_candidate_status_counts": {
+        "native_confirmed": 952
+      },
+      "shared_event_trial_horse_keys": 952,
+      "shared_keys_with_same_hr_no": 947,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20220714",
+          "trial_number": 1,
+          "horse_number": 5,
+          "api_hr_no": [
+            "3101724"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20220721",
+          "trial_number": 2,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3101724"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20220915",
+          "trial_number": 3,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3101724"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20220922",
+          "trial_number": 1,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3101724"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20221222",
+          "trial_number": 4,
+          "horse_number": 3,
+          "api_hr_no": [
+            "3102105"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2023": {
+      "attempt_manifest": "raw/trials/2023/attempts/20260929T132957.720068Z/attempt_manifest.json",
+      "attempt_id": "20260929T132957.720068Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1165,
+      "api_raw_majong_value_counts": {
+        "제주": 1165
+      },
+      "api_exact_majong_jeju_label_rows": 1165,
+      "api_first_date": "20230105",
+      "api_last_date": "20231228",
+      "api_jeju_label_first_date": "20230105",
+      "api_jeju_label_last_date": "20231228",
+      "phase2_total_trial_rows": 1165,
+      "phase2_first_date": "20230105",
+      "phase2_last_date": "20231228",
+      "phase2_jeju_candidate_rows": 1165,
+      "phase2_jeju_candidate_status_counts": {
+        "native_candidate_breed_unconfirmed": 2,
+        "native_confirmed": 1163
+      },
+      "shared_event_trial_horse_keys": 1165,
+      "shared_keys_with_same_hr_no": 1163,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20230824",
+          "trial_number": 1,
+          "horse_number": 6,
+          "api_hr_no": [
+            "3104089"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20230831",
+          "trial_number": 2,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3104089"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2024": {
+      "attempt_manifest": "raw/trials/2024/attempts/20260929T132958.930611Z/attempt_manifest.json",
+      "attempt_id": "20260929T132958.930611Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1224,
+      "api_raw_majong_value_counts": {
+        "제주": 1224
+      },
+      "api_exact_majong_jeju_label_rows": 1224,
+      "api_first_date": "20240104",
+      "api_last_date": "20241226",
+      "api_jeju_label_first_date": "20240104",
+      "api_jeju_label_last_date": "20241226",
+      "phase2_total_trial_rows": 1224,
+      "phase2_first_date": "20240104",
+      "phase2_last_date": "20241226",
+      "phase2_jeju_candidate_rows": 1224,
+      "phase2_jeju_candidate_status_counts": {
+        "native_candidate_breed_unconfirmed": 2,
+        "native_confirmed": 1222
+      },
+      "shared_event_trial_horse_keys": 1224,
+      "shared_keys_with_same_hr_no": 1222,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20240613",
+          "trial_number": 1,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3103525"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20240627",
+          "trial_number": 1,
+          "horse_number": 4,
+          "api_hr_no": [
+            "3103525"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    },
+    "2025": {
+      "attempt_manifest": "raw/trials/2025/attempts/20260929T133000.261112Z/attempt_manifest.json",
+      "attempt_id": "20260929T133000.261112Z",
+      "manifest_status": "completed_api_response",
+      "api_total_rows": 1438,
+      "api_raw_majong_value_counts": {
+        "제주": 1438
+      },
+      "api_exact_majong_jeju_label_rows": 1438,
+      "api_first_date": "20250102",
+      "api_last_date": "20251231",
+      "api_jeju_label_first_date": "20250102",
+      "api_jeju_label_last_date": "20251231",
+      "phase2_total_trial_rows": 1438,
+      "phase2_first_date": "20250102",
+      "phase2_last_date": "20251231",
+      "phase2_jeju_candidate_rows": 1438,
+      "phase2_jeju_candidate_status_counts": {
+        "native_candidate_breed_unconfirmed": 7,
+        "native_confirmed": 1431
+      },
+      "shared_event_trial_horse_keys": 1438,
+      "shared_keys_with_same_hr_no": 1431,
+      "shared_keys_with_missing_hr_no": [
+        {
+          "event_date": "20250724",
+          "trial_number": 4,
+          "horse_number": 1,
+          "api_hr_no": [
+            "3104095"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20250807",
+          "trial_number": 2,
+          "horse_number": 8,
+          "api_hr_no": [
+            "3104167"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20251030",
+          "trial_number": 1,
+          "horse_number": 4,
+          "api_hr_no": [
+            "3107458"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20251030",
+          "trial_number": 1,
+          "horse_number": 9,
+          "api_hr_no": [
+            "3107921"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20251106",
+          "trial_number": 2,
+          "horse_number": 4,
+          "api_hr_no": [
+            "3107409"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20251106",
+          "trial_number": 3,
+          "horse_number": 2,
+          "api_hr_no": [
+            "3107458"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        },
+        {
+          "event_date": "20251113",
+          "trial_number": 2,
+          "horse_number": 6,
+          "api_hr_no": [
+            "3107409"
+          ],
+          "phase2_hr_no": [],
+          "phase2_identity_status": [
+            "official_trial_identity_unresolved"
+          ]
+        }
+      ],
+      "shared_keys_with_hr_no_conflict": [],
+      "api_jeju_label_rows_without_phase2_candidate_key": [],
+      "api_jeju_only_keys_before_phase2_first_date": 0,
+      "api_jeju_only_keys_on_or_after_phase2_first_date": 0,
+      "phase2_candidate_rows_without_api_jeju_label_key": []
+    }
+  },
+  "source_pages_sha256_verified": true,
+  "sibling_2026_source_pages_sha256_verified": true,
+  "database_modified": false
+}

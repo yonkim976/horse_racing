@@ -1,0 +1,4172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "한국마사회 마필에 대한 상세정보를 제공합니다. (제공자료는 마번, 마명, 영문마명, 출생일, 성별, 모색, 연령, 생산국, 수입국, 원마명, 품종, 부마 모마 외조부마 관련정보, 용도, 소유자 정보, 조교사, 소재지 정보, 혈통 정보, 번식 정보, 경주마 등록 정보, 경주마 불용정보, 경주마 입사정보, 경주마 퇴사정보, 최종 휴양정보 및 경주 성적정보 등의 자료입니다). \\n- 요청메세지에 페이지 번호(pageNo)와 페이지 당 표출될 건수(numOfRows), 마명(hr_name), 마번(hr_no)을 이용하여 자료를 조회하실 수 있습니다.",
+    "version": "1.0.0",
+    "title": "한국마사회 마필종합 상세정보"
+  },
+  "host": "apis.data.go.kr/B551015/API42_1",
+  "basePath": "",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/totalHorseInfo_1": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "resultCode": {
+                  "type": "string",
+                  "description": "결과코드",
+                  "properties": {}
+                },
+                "resultMsg": {
+                  "type": "string",
+                  "description": "결과메시지",
+                  "properties": {}
+                },
+                "numOfRows": {
+                  "type": "string",
+                  "description": "한 페이지 결과 수",
+                  "properties": {}
+                },
+                "pageNo": {
+                  "type": "string",
+                  "description": "페이지번호",
+                  "properties": {}
+                },
+                "totalCount": {
+                  "type": "string",
+                  "description": "전체 결과 수",
+                  "properties": {}
+                },
+                "hrNo": {
+                  "type": "string",
+                  "description": "마번",
+                  "properties": {}
+                },
+                "hrNm": {
+                  "type": "string",
+                  "description": "마명",
+                  "properties": {}
+                },
+                "hrEngNm": {
+                  "type": "string",
+                  "description": "영문마명",
+                  "properties": {}
+                },
+                "birthDt": {
+                  "type": "string",
+                  "description": "출생일",
+                  "properties": {}
+                },
+                "sex": {
+                  "type": "string",
+                  "description": "성별",
+                  "properties": {}
+                },
+                "color": {
+                  "type": "string",
+                  "description": "모색",
+                  "properties": {}
+                },
+                "age": {
+                  "type": "string",
+                  "description": "연령",
+                  "properties": {}
+                },
+                "prdCty": {
+                  "type": "string",
+                  "description": "생산국",
+                  "properties": {}
+                },
+                "expCty": {
+                  "type": "string",
+                  "description": "수입국",
+                  "properties": {}
+                },
+                "engOrgNm": {
+                  "type": "string",
+                  "description": "원마명",
+                  "properties": {}
+                },
+                "breed": {
+                  "type": "string",
+                  "description": "품종",
+                  "properties": {}
+                },
+                "fhrNo": {
+                  "type": "string",
+                  "description": "부마번",
+                  "properties": {}
+                },
+                "fhrNm": {
+                  "type": "string",
+                  "description": "부마명",
+                  "properties": {}
+                },
+                "fhrCty": {
+                  "type": "string",
+                  "description": "부생산국",
+                  "properties": {}
+                },
+                "fhrYr": {
+                  "type": "string",
+                  "description": "부생년",
+                  "properties": {}
+                },
+                "mhrNo": {
+                  "type": "string",
+                  "description": "모마",
+                  "properties": {}
+                },
+                "mhrNm": {
+                  "type": "string",
+                  "description": "모마명",
+                  "properties": {}
+                },
+                "mhrCty": {
+                  "type": "string",
+                  "description": "모생산국",
+                  "properties": {}
+                },
+                "mhrYr": {
+                  "type": "string",
+                  "description": "모생년",
+                  "properties": {}
+                },
+                "mhrFhrNo": {
+                  "type": "string",
+                  "description": "외조부마마번",
+                  "properties": {}
+                },
+                "mhrFhrNm": {
+                  "type": "string",
+                  "description": "외조부마마명",
+                  "properties": {}
+                },
+                "mhrFhrCty": {
+                  "type": "string",
+                  "description": "외조부마생산국",
+                  "properties": {}
+                },
+                "mhrFhrYr": {
+                  "type": "string",
+                  "description": "외조부마생년",
+                  "properties": {}
+                },
+                "useNm": {
+                  "type": "string",
+                  "description": "용도",
+                  "properties": {}
+                },
+                "owNm": {
+                  "type": "string",
+                  "description": "소유자명",
+                  "properties": {}
+                },
+                "owNo": {
+                  "type": "string",
+                  "description": "소유자번호",
+                  "properties": {}
+                },
+                "mgrNm": {
+                  "type": "string",
+                  "description": "조교사명",
+                  "properties": {}
+                },
+                "mgrNo": {
+                  "type": "string",
+                  "description": "조교사번호",
+                  "properties": {}
+                },
+                "part": {
+                  "type": "string",
+                  "description": "조",
+                  "properties": {}
+                },
+                "poNm": {
+                  "type": "string",
+                  "description": "소재지명",
+                  "properties": {}
+                },
+                "poNo": {
+                  "type": "string",
+                  "description": "소재지의 고유번호",
+                  "properties": {}
+                },
+                "poArea": {
+                  "type": "string",
+                  "description": "소재지지역구분",
+                  "properties": {}
+                },
+                "poGubun": {
+                  "type": "string",
+                  "description": "소재지구분",
+                  "properties": {}
+                },
+                "brNm": {
+                  "type": "string",
+                  "description": "생산자명",
+                  "properties": {}
+                },
+                "brNo": {
+                  "type": "string",
+                  "description": "생산자번호",
+                  "properties": {}
+                },
+                "brPoNm": {
+                  "type": "string",
+                  "description": "생산목장",
+                  "properties": {}
+                },
+                "brPoNo": {
+                  "type": "string",
+                  "description": "생산목장소재지번호",
+                  "properties": {}
+                },
+                "brPoArea": {
+                  "type": "string",
+                  "description": "출생지소재지지역구분",
+                  "properties": {}
+                },
+                "brPoGubun": {
+                  "type": "string",
+                  "description": "생산목장소재지구분",
+                  "properties": {}
+                },
+                "bldRegDt": {
+                  "type": "string",
+                  "description": "혈통등록일",
+                  "properties": {}
+                },
+                "bldOwNm": {
+                  "type": "string",
+                  "description": "혈통등록시소유자명",
+                  "properties": {}
+                },
+                "bldOwNo": {
+                  "type": "string",
+                  "description": "혈통등록시소유자번호",
+                  "properties": {}
+                },
+                "bldCanDt": {
+                  "type": "string",
+                  "description": "혈통등록취소일",
+                  "properties": {}
+                },
+                "regDt": {
+                  "type": "string",
+                  "description": "번식등록일",
+                  "properties": {}
+                },
+                "bhrOwNm": {
+                  "type": "string",
+                  "description": "번식등록시소유자명",
+                  "properties": {}
+                },
+                "bhrOwNo": {
+                  "type": "string",
+                  "description": "번식등록시소유자번호",
+                  "properties": {}
+                },
+                "bhrPoNm": {
+                  "type": "string",
+                  "description": "번식등록시소재지명",
+                  "properties": {}
+                },
+                "bhrPoNo": {
+                  "type": "string",
+                  "description": "번식등록시소재지번호",
+                  "properties": {}
+                },
+                "regDelDt": {
+                  "type": "string",
+                  "description": "번식등록취소일",
+                  "properties": {}
+                },
+                "regOutDt": {
+                  "type": "string",
+                  "description": "번식종료일",
+                  "properties": {}
+                },
+                "hrNmDt": {
+                  "type": "string",
+                  "description": "마명부여일",
+                  "properties": {}
+                },
+                "hrNmChgDt": {
+                  "type": "string",
+                  "description": "마명변경일",
+                  "properties": {}
+                },
+                "beforeHrNm": {
+                  "type": "string",
+                  "description": "변경전마명",
+                  "properties": {}
+                },
+                "beforeHrEngNm": {
+                  "type": "string",
+                  "description": "변경전영문마명",
+                  "properties": {}
+                },
+                "rhrRegDt1": {
+                  "type": "string",
+                  "description": "경주마등록일",
+                  "properties": {}
+                },
+                "rhrOwNm": {
+                  "type": "string",
+                  "description": "경주마등록시소유자명",
+                  "properties": {}
+                },
+                "rhrOwNo": {
+                  "type": "string",
+                  "description": "경주마등록시소유자번호",
+                  "properties": {}
+                },
+                "rhrMgrNm": {
+                  "type": "string",
+                  "description": "경주마등록시조교사명",
+                  "properties": {}
+                },
+                "rhrMgrNo": {
+                  "type": "string",
+                  "description": "경주마등록시조교사번호",
+                  "properties": {}
+                },
+                "rhrPart": {
+                  "type": "string",
+                  "description": "경주마등록시조",
+                  "properties": {}
+                },
+                "rhrRegDt2": {
+                  "type": "string",
+                  "description": "경주마등록취소일",
+                  "properties": {}
+                },
+                "discardDt": {
+                  "type": "string",
+                  "description": "경마마불용일",
+                  "properties": {}
+                },
+                "discardUse": {
+                  "type": "string",
+                  "description": "경주마불용후용도",
+                  "properties": {}
+                },
+                "discardSellCls": {
+                  "type": "string",
+                  "description": "경주마불용후처분구분",
+                  "properties": {}
+                },
+                "discardRes": {
+                  "type": "string",
+                  "description": "경주마불용사유",
+                  "properties": {}
+                },
+                "discardOwNm": {
+                  "type": "string",
+                  "description": "경주마불용시소유자명",
+                  "properties": {}
+                },
+                "discardOwNo": {
+                  "type": "string",
+                  "description": "경주마불용시소유자번호",
+                  "properties": {}
+                },
+                "discardMgrNm": {
+                  "type": "string",
+                  "description": "경주마불용시조교사명",
+                  "properties": {}
+                },
+                "discardMgrNo": {
+                  "type": "string",
+                  "description": "경주마불용시조교사번호",
+                  "properties": {}
+                },
+                "discardPart": {
+                  "type": "string",
+                  "description": "경주마불용시조",
+                  "properties": {}
+                },
+                "discardMon": {
+                  "type": "string",
+                  "description": "경주마불용시처분가",
+                  "properties": {}
+                },
+                "finDt": {
+                  "type": "string",
+                  "description": "최초마방입사일",
+                  "properties": {}
+                },
+                "fmgrNm": {
+                  "type": "string",
+                  "description": "최초조교사명",
+                  "properties": {}
+                },
+                "fmgrNo": {
+                  "type": "string",
+                  "description": "최초조교사번호",
+                  "properties": {}
+                },
+                "fpart": {
+                  "type": "string",
+                  "description": "최초조",
+                  "properties": {}
+                },
+                "finOwNm": {
+                  "type": "string",
+                  "description": "최초마주명",
+                  "properties": {}
+                },
+                "finOwNo": {
+                  "type": "string",
+                  "description": "최초마주번호",
+                  "properties": {}
+                },
+                "finGubun": {
+                  "type": "string",
+                  "description": "최초경주마입사구분",
+                  "properties": {}
+                },
+                "finAge": {
+                  "type": "string",
+                  "description": "최초경주마입사시연령",
+                  "properties": {}
+                },
+                "finSex": {
+                  "type": "string",
+                  "description": "최초경주마입사시 성별",
+                  "properties": {}
+                },
+                "inDt": {
+                  "type": "string",
+                  "description": "마방입사일",
+                  "properties": {}
+                },
+                "inMgrNm": {
+                  "type": "string",
+                  "description": "경주마입사시조교사명",
+                  "properties": {}
+                },
+                "inMgrNo": {
+                  "type": "string",
+                  "description": "경주마입사시조교사번호",
+                  "properties": {}
+                },
+                "inPart": {
+                  "type": "string",
+                  "description": "경주마입사시조",
+                  "properties": {}
+                },
+                "inOwNm": {
+                  "type": "string",
+                  "description": "경주마입사시소유자명",
+                  "properties": {}
+                },
+                "inOwNo": {
+                  "type": "string",
+                  "description": "경주마입사시소유자번호",
+                  "properties": {}
+                },
+                "inRes": {
+                  "type": "string",
+                  "description": "경주마입사사유",
+                  "properties": {}
+                },
+                "inCont": {
+                  "type": "string",
+                  "description": "경주마입사세부내역",
+                  "properties": {}
+                },
+                "outDt": {
+                  "type": "string",
+                  "description": "마방퇴사일",
+                  "properties": {}
+                },
+                "outMgrNm": {
+                  "type": "string",
+                  "description": "경주마퇴사시조교사명",
+                  "properties": {}
+                },
+                "outMgrNo": {
+                  "type": "string",
+                  "description": "경주마퇴사시조교사번호",
+                  "properties": {}
+                },
+                "outPart": {
+                  "type": "string",
+                  "description": "경주마퇴사시조",
+                  "properties": {}
+                },
+                "outOwNm": {
+                  "type": "string",
+                  "description": "경주마퇴사시소유자명",
+                  "properties": {}
+                },
+                "outOwNo": {
+                  "type": "string",
+                  "description": "경주마퇴사시소유자번호",
+                  "properties": {}
+                },
+                "outRes": {
+                  "type": "string",
+                  "description": "경주마퇴사사유",
+                  "properties": {}
+                },
+                "outCont": {
+                  "type": "string",
+                  "description": "경주마퇴사세부내역",
+                  "properties": {}
+                },
+                "restDt": {
+                  "type": "string",
+                  "description": "최종휴양일",
+                  "properties": {}
+                },
+                "restOutDt": {
+                  "type": "string",
+                  "description": "최종휴양종료일",
+                  "properties": {}
+                },
+                "restAreaNm": {
+                  "type": "string",
+                  "description": "최종휴양지",
+                  "properties": {}
+                },
+                "restDt2": {
+                  "type": "string",
+                  "description": "최종직전휴양일",
+                  "properties": {}
+                },
+                "restOutDt2": {
+                  "type": "string",
+                  "description": "최종직전휴양종료일",
+                  "properties": {}
+                },
+                "trainIlja": {
+                  "type": "string",
+                  "description": "최초능력검사합격일",
+                  "properties": {}
+                },
+                "fdebutDt": {
+                  "type": "string",
+                  "description": "최초출주일",
+                  "properties": {}
+                },
+                "lchulDt": {
+                  "type": "string",
+                  "description": "최종출주일",
+                  "properties": {}
+                },
+                "rcCnt": {
+                  "type": "string",
+                  "description": "출주횟수",
+                  "properties": {}
+                },
+                "fstCnt": {
+                  "type": "string",
+                  "description": "일착횟수",
+                  "properties": {}
+                },
+                "sndCnt": {
+                  "type": "string",
+                  "description": "이착횟수",
+                  "properties": {}
+                },
+                "trdCnt": {
+                  "type": "string",
+                  "description": "삼착횟수",
+                  "properties": {}
+                },
+                "forthCnt": {
+                  "type": "string",
+                  "description": "사착횟수",
+                  "properties": {}
+                },
+                "fifthCnt": {
+                  "type": "string",
+                  "description": "오착횟수",
+                  "properties": {}
+                },
+                "outCnt": {
+                  "type": "string",
+                  "description": "착외횟수",
+                  "properties": {}
+                },
+                "amt": {
+                  "type": "string",
+                  "description": "상금",
+                  "properties": {}
+                },
+                "condAmt": {
+                  "type": "string",
+                  "description": "조건상금",
+                  "properties": {}
+                },
+                "winRate": {
+                  "type": "string",
+                  "description": "승률",
+                  "properties": {}
+                },
+                "quinRate": {
+                  "type": "string",
+                  "description": "복승률",
+                  "properties": {}
+                },
+                "avgWinDist": {
+                  "type": "string",
+                  "description": "평균우승거리",
+                  "properties": {}
+                },
+                "rankTop": {
+                  "type": "string",
+                  "description": "최고군",
+                  "properties": {}
+                },
+                "rankLast": {
+                  "type": "string",
+                  "description": "최종군",
+                  "properties": {}
+                },
+                "char1": {
+                  "type": "string",
+                  "description": "특징_머리",
+                  "properties": {}
+                },
+                "char2": {
+                  "type": "string",
+                  "description": "특징_목",
+                  "properties": {}
+                },
+                "char3": {
+                  "type": "string",
+                  "description": "특징_다리",
+                  "properties": {}
+                },
+                "char4": {
+                  "type": "string",
+                  "description": "특징_몸통",
+                  "properties": {}
+                },
+                "brand1": {
+                  "type": "string",
+                  "description": "낙인_좌",
+                  "properties": {}
+                },
+                "brand2": {
+                  "type": "string",
+                  "description": "낙인_우",
+                  "properties": {}
+                },
+                "brand3": {
+                  "type": "string",
+                  "description": "낙인_기타_입술문신",
+                  "properties": {}
+                },
+                "auctionDt": {
+                  "type": "string",
+                  "description": "최종경매일",
+                  "properties": {}
+                },
+                "auctionYear": {
+                  "type": "string",
+                  "description": "경매연도",
+                  "properties": {}
+                },
+                "inChasu": {
+                  "type": "string",
+                  "description": "경매차수",
+                  "properties": {}
+                },
+                "auctionMon": {
+                  "type": "string",
+                  "description": "경매낙찰가",
+                  "properties": {}
+                },
+                "auctionGubun": {
+                  "type": "string",
+                  "description": "경매구분",
+                  "properties": {}
+                },
+                "auctionResult": {
+                  "type": "string",
+                  "description": "경매결과",
+                  "properties": {}
+                },
+                "auctionMgr": {
+                  "type": "string",
+                  "description": "경매주관자",
+                  "properties": {}
+                },
+                "auctionOwNo": {
+                  "type": "string",
+                  "description": "경매낙찰자번호",
+                  "properties": {}
+                },
+                "auctionOwNm": {
+                  "type": "string",
+                  "description": "경매낙찰자성명",
+                  "properties": {}
+                },
+                "auctionOwNmSebu": {
+                  "type": "string",
+                  "description": "경매일반인낙찰자성명",
+                  "properties": {}
+                },
+                "impDt": {
+                  "type": "string",
+                  "description": "수입일",
+                  "properties": {}
+                },
+                "impUse": {
+                  "type": "string",
+                  "description": "수입용도",
+                  "properties": {}
+                },
+                "doipYr": {
+                  "type": "string",
+                  "description": "경주마일괄수입연도",
+                  "properties": {}
+                },
+                "doipNo": {
+                  "type": "string",
+                  "description": "경주마일괄수입차수",
+                  "properties": {}
+                },
+                "impMon": {
+                  "type": "string",
+                  "description": "수입가",
+                  "properties": {}
+                },
+                "impGubun": {
+                  "type": "string",
+                  "description": "외국산경주마매입구분",
+                  "properties": {}
+                },
+                "fgnSubsidy": {
+                  "type": "string",
+                  "description": "수입장려금지급대상여부",
+                  "properties": {}
+                },
+                "fgnAuctAmt": {
+                  "type": "string",
+                  "description": "외국경매시장낙찰가",
+                  "properties": {}
+                },
+                "fgnRcCnt": {
+                  "type": "string",
+                  "description": "외국출주횟수",
+                  "properties": {}
+                },
+                "fgnFstCnt": {
+                  "type": "string",
+                  "description": "외국일착횟수",
+                  "properties": {}
+                },
+                "fgnSndCnt": {
+                  "type": "string",
+                  "description": "외국이착횟수",
+                  "properties": {}
+                },
+                "fgnTrdCnt": {
+                  "type": "string",
+                  "description": "외국삼착횟수",
+                  "properties": {}
+                },
+                "getMon": {
+                  "type": "string",
+                  "description": "외국수득상금",
+                  "properties": {}
+                },
+                "monCd": {
+                  "type": "string",
+                  "description": "외국통화기호",
+                  "properties": {}
+                },
+                "fgnAvgWinDist": {
+                  "type": "string",
+                  "description": "외국평균우승거리",
+                  "properties": {}
+                },
+                "chgDt": {
+                  "type": "string",
+                  "description": "거세일",
+                  "properties": {}
+                },
+                "sexHis": {
+                  "type": "string",
+                  "description": "거세사유",
+                  "properties": {}
+                },
+                "sexMgrNm": {
+                  "type": "string",
+                  "description": "거세시조교사명",
+                  "properties": {}
+                },
+                "sexMgrNo": {
+                  "type": "string",
+                  "description": "거세시조교사번호",
+                  "properties": {}
+                },
+                "sexPart": {
+                  "type": "string",
+                  "description": "거세시조",
+                  "properties": {}
+                },
+                "sexOwNm": {
+                  "type": "string",
+                  "description": "거세시소유자명",
+                  "properties": {}
+                },
+                "sexOwNo": {
+                  "type": "string",
+                  "description": "거세시소유자번호",
+                  "properties": {}
+                },
+                "fowNm": {
+                  "type": "string",
+                  "description": "최초소유자명",
+                  "properties": {}
+                },
+                "fowNo": {
+                  "type": "string",
+                  "description": "최초소유자번호",
+                  "properties": {}
+                },
+                "fkraInDt": {
+                  "type": "string",
+                  "description": "최초마사회부서입사일",
+                  "properties": {}
+                },
+                "fkraOutDt": {
+                  "type": "string",
+                  "description": "최초마사회부서퇴사일",
+                  "properties": {}
+                },
+                "fkraPoNo": {
+                  "type": "string",
+                  "description": "최초마사회부서번호",
+                  "properties": {}
+                },
+                "fkraPoNm": {
+                  "type": "string",
+                  "description": "최초마사회부서명",
+                  "properties": {}
+                },
+                "kraInDt": {
+                  "type": "string",
+                  "description": "최종마사회부서입사일",
+                  "properties": {}
+                },
+                "kraOutDt": {
+                  "type": "string",
+                  "description": "최종마사회부서퇴사일",
+                  "properties": {}
+                },
+                "kraPoNo": {
+                  "type": "string",
+                  "description": "최종마사회부서번호",
+                  "properties": {}
+                },
+                "kraPoNm": {
+                  "type": "string",
+                  "description": "최종마사회부서명",
+                  "properties": {}
+                },
+                "fuseNm": {
+                  "type": "string",
+                  "description": "최초용도",
+                  "properties": {}
+                },
+                "deadDt": {
+                  "type": "string",
+                  "description": "폐사일",
+                  "properties": {}
+                },
+                "stkFstCnt": {
+                  "type": "string",
+                  "description": "대상경주우승횟수",
+                  "properties": {}
+                },
+                "stkFlag": {
+                  "type": "string",
+                  "description": "대상특별경주우승착순마1_3착여부",
+                  "properties": {}
+                },
+                "breedGubun": {
+                  "type": "string",
+                  "description": "육성주체구분",
+                  "properties": {}
+                },
+                "rhrMon": {
+                  "type": "string",
+                  "description": "경주마등록직전거래가",
+                  "properties": {}
+                },
+                "bhrMon": {
+                  "type": "string",
+                  "description": "번식등록직전거래가",
+                  "properties": {}
+                },
+                "bhrGubun": {
+                  "type": "string",
+                  "description": "번식마구분",
+                  "properties": {}
+                },
+                "crossSubsidy": {
+                  "type": "string",
+                  "description": "교배지원자격마여부",
+                  "properties": {}
+                },
+                "birthYr": {
+                  "type": "string",
+                  "description": "출생년도",
+                  "properties": {}
+                },
+                "bldRegYr": {
+                  "type": "string",
+                  "description": "혈통등록연도",
+                  "properties": {}
+                },
+                "finYr": {
+                  "type": "string",
+                  "description": "최초경주마입사 연도",
+                  "properties": {}
+                },
+                "rhrRegYr1": {
+                  "type": "string",
+                  "description": "경주마등록연도",
+                  "properties": {}
+                },
+                "discardYr": {
+                  "type": "string",
+                  "description": "경주마불용연도",
+                  "properties": {}
+                },
+                "regYr": {
+                  "type": "string",
+                  "description": "번식등록연도",
+                  "properties": {}
+                },
+                "regOutYr": {
+                  "type": "string",
+                  "description": "번식종료연도",
+                  "properties": {}
+                },
+                "fdebutYr": {
+                  "type": "string",
+                  "description": "최초출주연도",
+                  "properties": {}
+                },
+                "ftrainYr": {
+                  "type": "string",
+                  "description": "최초능력검사연도",
+                  "properties": {}
+                },
+                "impYr": {
+                  "type": "string",
+                  "description": "수입연도",
+                  "properties": {}
+                },
+                "baljuDt": {
+                  "type": "string",
+                  "description": "최초발주검사합격일",
+                  "properties": {}
+                },
+                "chefHrNo": {
+                  "type": "string",
+                  "description": "셰프드라스마번",
+                  "properties": {}
+                },
+                "chefHrNm": {
+                  "type": "string",
+                  "description": "셰프드라스마명",
+                  "properties": {}
+                },
+                "sanji": {
+                  "type": "string",
+                  "description": "산지",
+                  "properties": {}
+                },
+                "crossSupport": {
+                  "type": "string",
+                  "description": "교배지원자격여부",
+                  "properties": {}
+                },
+                "crossSupportPo": {
+                  "type": "string",
+                  "description": "교배지원대상농가소재여부",
+                  "properties": {}
+                },
+                "poip": {
+                  "type": "string",
+                  "description": "포입마",
+                  "properties": {}
+                },
+                "discardResSebu": {
+                  "type": "string",
+                  "description": "경주마불용사유세부",
+                  "properties": {}
+                },
+                "foalDiscardDt": {
+                  "type": "string",
+                  "description": "육성마도태일",
+                  "properties": {}
+                },
+                "foalDiscardRes": {
+                  "type": "string",
+                  "description": "육성마도태사유",
+                  "properties": {}
+                },
+                "foalDiscardResSebu": {
+                  "type": "string",
+                  "description": "육성마도태사유세부",
+                  "properties": {}
+                },
+                "foalDiscardUse": {
+                  "type": "string",
+                  "description": "육성마도태후용도",
+                  "properties": {}
+                },
+                "damPrdDusu": {
+                  "type": "string",
+                  "description": "씨암말생산두수",
+                  "properties": {}
+                },
+                "damInDusu": {
+                  "type": "string",
+                  "description": "씨암말경주마입사두수",
+                  "properties": {}
+                },
+                "breedSerial": {
+                  "type": "string",
+                  "description": "번식년차",
+                  "properties": {}
+                },
+                "prdSerial": {
+                  "type": "string",
+                  "description": "생산년차",
+                  "properties": {}
+                },
+                "regOutOwNm": {
+                  "type": "string",
+                  "description": "번식종료시소유자명",
+                  "properties": {}
+                },
+                "regOutOwNo": {
+                  "type": "string",
+                  "description": "번식종료시소유자번호",
+                  "properties": {}
+                },
+                "regOutPoNm": {
+                  "type": "string",
+                  "description": "번식종료시소재지명",
+                  "properties": {}
+                },
+                "regOutPoNo": {
+                  "type": "string",
+                  "description": "번식종료시소재지번호",
+                  "properties": {}
+                },
+                "regOutPoArea": {
+                  "type": "string",
+                  "description": "번식종료시소재지역구분",
+                  "properties": {}
+                },
+                "fgnCrossDate": {
+                  "type": "string",
+                  "description": "외국교배일",
+                  "properties": {}
+                },
+                "finMeet": {
+                  "type": "string",
+                  "description": "최초입사경마공원",
+                  "properties": {}
+                },
+                "fmeet": {
+                  "type": "string",
+                  "description": "서울_부산경마공원구분",
+                  "properties": {}
+                },
+                "breedPoNm": {
+                  "type": "string",
+                  "description": "경주마입사6개월전소재지",
+                  "properties": {}
+                },
+                "breedPoArea": {
+                  "type": "string",
+                  "description": "경주마입사6개월전소재지역",
+                  "properties": {}
+                },
+                "tameDate": {
+                  "type": "string",
+                  "description": "육성순치일",
+                  "properties": {}
+                },
+                "tameCancelDate": {
+                  "type": "string",
+                  "description": "육성조교취소일",
+                  "properties": {}
+                },
+                "rankGubun": {
+                  "type": "string",
+                  "description": "부산경마공원군변경반영",
+                  "properties": {}
+                },
+                "tamePlace": {
+                  "type": "string",
+                  "description": "육성조교검사장소",
+                  "properties": {}
+                },
+                "tameTrainer": {
+                  "type": "string",
+                  "description": "육성조련사",
+                  "properties": {}
+                },
+                "breedFarm": {
+                  "type": "string",
+                  "description": "육성목장",
+                  "properties": {}
+                }
+              },
+              "xml": {
+                "name": "response"
+              }
+            }
+          }
+        },
+        "tags": [
+          "API 목록"
+        ],
+        "summary": "마필종합정보",
+        "description": "서울, 제주, 부산경남 경마장의 마필 상세정보 (은퇴마 포함) ( 생산국, 수입국, 원마명, 품종, 털색등 ) - 마번/마명/영문마명 정보 모두 입력하지 않을 경우 임의 100건의 데이터만 표출됩니다.",
+        "operationId": "totalHorseInfo_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "ServiceKey",
+          "description": "공공데이터포털에서 받은 인증키",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        {
+          "name": "pageNo",
+          "description": "페이지번호",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        {
+          "name": "numOfRows",
+          "description": "한 페이지 결과 수",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        {
+          "name": "hr_eng_name",
+          "description": "영문마명",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        },
+        {
+          "name": "hr_name",
+          "description": "마명",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        },
+        {
+          "name": "hr_no",
+          "description": "마번",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "totalHorseInfo_1_response": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "description": "결과코드"
+        },
+        "resultMsg": {
+          "type": "string",
+          "description": "결과메시지"
+        },
+        "numOfRows": {
+          "type": "string",
+          "description": "한 페이지 결과 수"
+        },
+        "pageNo": {
+          "type": "string",
+          "description": "페이지번호"
+        },
+        "totalCount": {
+          "type": "string",
+          "description": "전체 결과 수"
+        },
+        "hrNo": {
+          "type": "string",
+          "description": "마번"
+        },
+        "hrNm": {
+          "type": "string",
+          "description": "마명"
+        },
+        "hrEngNm": {
+          "type": "string",
+          "description": "영문마명"
+        },
+        "birthDt": {
+          "type": "string",
+          "description": "출생일"
+        },
+        "sex": {
+          "type": "string",
+          "description": "성별"
+        },
+        "color": {
+          "type": "string",
+          "description": "모색"
+        },
+        "age": {
+          "type": "string",
+          "description": "연령"
+        },
+        "prdCty": {
+          "type": "string",
+          "description": "생산국"
+        },
+        "expCty": {
+          "type": "string",
+          "description": "수입국"
+        },
+        "engOrgNm": {
+          "type": "string",
+          "description": "원마명"
+        },
+        "breed": {
+          "type": "string",
+          "description": "품종"
+        },
+        "fhrNo": {
+          "type": "string",
+          "description": "부마번"
+        },
+        "fhrNm": {
+          "type": "string",
+          "description": "부마명"
+        },
+        "fhrCty": {
+          "type": "string",
+          "description": "부생산국"
+        },
+        "fhrYr": {
+          "type": "string",
+          "description": "부생년"
+        },
+        "mhrNo": {
+          "type": "string",
+          "description": "모마"
+        },
+        "mhrNm": {
+          "type": "string",
+          "description": "모마명"
+        },
+        "mhrCty": {
+          "type": "string",
+          "description": "모생산국"
+        },
+        "mhrYr": {
+          "type": "string",
+          "description": "모생년"
+        },
+        "mhrFhrNo": {
+          "type": "string",
+          "description": "외조부마마번"
+        },
+        "mhrFhrNm": {
+          "type": "string",
+          "description": "외조부마마명"
+        },
+        "mhrFhrCty": {
+          "type": "string",
+          "description": "외조부마생산국"
+        },
+        "mhrFhrYr": {
+          "type": "string",
+          "description": "외조부마생년"
+        },
+        "useNm": {
+          "type": "string",
+          "description": "용도"
+        },
+        "owNm": {
+          "type": "string",
+          "description": "소유자명"
+        },
+        "owNo": {
+          "type": "string",
+          "description": "소유자번호"
+        },
+        "mgrNm": {
+          "type": "string",
+          "description": "조교사명"
+        },
+        "mgrNo": {
+          "type": "string",
+          "description": "조교사번호"
+        },
+        "part": {
+          "type": "string",
+          "description": "조"
+        },
+        "poNm": {
+          "type": "string",
+          "description": "소재지명"
+        },
+        "poNo": {
+          "type": "string",
+          "description": "소재지의 고유번호"
+        },
+        "poArea": {
+          "type": "string",
+          "description": "소재지지역구분"
+        },
+        "poGubun": {
+          "type": "string",
+          "description": "소재지구분"
+        },
+        "brNm": {
+          "type": "string",
+          "description": "생산자명"
+        },
+        "brNo": {
+          "type": "string",
+          "description": "생산자번호"
+        },
+        "brPoNm": {
+          "type": "string",
+          "description": "생산목장"
+        },
+        "brPoNo": {
+          "type": "string",
+          "description": "생산목장소재지번호"
+        },
+        "brPoArea": {
+          "type": "string",
+          "description": "출생지소재지지역구분"
+        },
+        "brPoGubun": {
+          "type": "string",
+          "description": "생산목장소재지구분"
+        },
+        "bldRegDt": {
+          "type": "string",
+          "description": "혈통등록일"
+        },
+        "bldOwNm": {
+          "type": "string",
+          "description": "혈통등록시소유자명"
+        },
+        "bldOwNo": {
+          "type": "string",
+          "description": "혈통등록시소유자번호"
+        },
+        "bldCanDt": {
+          "type": "string",
+          "description": "혈통등록취소일"
+        },
+        "regDt": {
+          "type": "string",
+          "description": "번식등록일"
+        },
+        "bhrOwNm": {
+          "type": "string",
+          "description": "번식등록시소유자명"
+        },
+        "bhrOwNo": {
+          "type": "string",
+          "description": "번식등록시소유자번호"
+        },
+        "bhrPoNm": {
+          "type": "string",
+          "description": "번식등록시소재지명"
+        },
+        "bhrPoNo": {
+          "type": "string",
+          "description": "번식등록시소재지번호"
+        },
+        "regDelDt": {
+          "type": "string",
+          "description": "번식등록취소일"
+        },
+        "regOutDt": {
+          "type": "string",
+          "description": "번식종료일"
+        },
+        "hrNmDt": {
+          "type": "string",
+          "description": "마명부여일"
+        },
+        "hrNmChgDt": {
+          "type": "string",
+          "description": "마명변경일"
+        },
+        "beforeHrNm": {
+          "type": "string",
+          "description": "변경전마명"
+        },
+        "beforeHrEngNm": {
+          "type": "string",
+          "description": "변경전영문마명"
+        },
+        "rhrRegDt1": {
+          "type": "string",
+          "description": "경주마등록일"
+        },
+        "rhrOwNm": {
+          "type": "string",
+          "description": "경주마등록시소유자명"
+        },
+        "rhrOwNo": {
+          "type": "string",
+          "description": "경주마등록시소유자번호"
+        },
+        "rhrMgrNm": {
+          "type": "string",
+          "description": "경주마등록시조교사명"
+        },
+        "rhrMgrNo": {
+          "type": "string",
+          "description": "경주마등록시조교사번호"
+        },
+        "rhrPart": {
+          "type": "string",
+          "description": "경주마등록시조"
+        },
+        "rhrRegDt2": {
+          "type": "string",
+          "description": "경주마등록취소일"
+        },
+        "discardDt": {
+          "type": "string",
+          "description": "경마마불용일"
+        },
+        "discardUse": {
+          "type": "string",
+          "description": "경주마불용후용도"
+        },
+        "discardSellCls": {
+          "type": "string",
+          "description": "경주마불용후처분구분"
+        },
+        "discardRes": {
+          "type": "string",
+          "description": "경주마불용사유"
+        },
+        "discardOwNm": {
+          "type": "string",
+          "description": "경주마불용시소유자명"
+        },
+        "discardOwNo": {
+          "type": "string",
+          "description": "경주마불용시소유자번호"
+        },
+        "discardMgrNm": {
+          "type": "string",
+          "description": "경주마불용시조교사명"
+        },
+        "discardMgrNo": {
+          "type": "string",
+          "description": "경주마불용시조교사번호"
+        },
+        "discardPart": {
+          "type": "string",
+          "description": "경주마불용시조"
+        },
+        "discardMon": {
+          "type": "string",
+          "description": "경주마불용시처분가"
+        },
+        "finDt": {
+          "type": "string",
+          "description": "최초마방입사일"
+        },
+        "fmgrNm": {
+          "type": "string",
+          "description": "최초조교사명"
+        },
+        "fmgrNo": {
+          "type": "string",
+          "description": "최초조교사번호"
+        },
+        "fpart": {
+          "type": "string",
+          "description": "최초조"
+        },
+        "finOwNm": {
+          "type": "string",
+          "description": "최초마주명"
+        },
+        "finOwNo": {
+          "type": "string",
+          "description": "최초마주번호"
+        },
+        "finGubun": {
+          "type": "string",
+          "description": "최초경주마입사구분"
+        },
+        "finAge": {
+          "type": "string",
+          "description": "최초경주마입사시연령"
+        },
+        "finSex": {
+          "type": "string",
+          "description": "최초경주마입사시 성별"
+        },
+        "inDt": {
+          "type": "string",
+          "description": "마방입사일"
+        },
+        "inMgrNm": {
+          "type": "string",
+          "description": "경주마입사시조교사명"
+        },
+        "inMgrNo": {
+          "type": "string",
+          "description": "경주마입사시조교사번호"
+        },
+        "inPart": {
+          "type": "string",
+          "description": "경주마입사시조"
+        },
+        "inOwNm": {
+          "type": "string",
+          "description": "경주마입사시소유자명"
+        },
+        "inOwNo": {
+          "type": "string",
+          "description": "경주마입사시소유자번호"
+        },
+        "inRes": {
+          "type": "string",
+          "description": "경주마입사사유"
+        },
+        "inCont": {
+          "type": "string",
+          "description": "경주마입사세부내역"
+        },
+        "outDt": {
+          "type": "string",
+          "description": "마방퇴사일"
+        },
+        "outMgrNm": {
+          "type": "string",
+          "description": "경주마퇴사시조교사명"
+        },
+        "outMgrNo": {
+          "type": "string",
+          "description": "경주마퇴사시조교사번호"
+        },
+        "outPart": {
+          "type": "string",
+          "description": "경주마퇴사시조"
+        },
+        "outOwNm": {
+          "type": "string",
+          "description": "경주마퇴사시소유자명"
+        },
+        "outOwNo": {
+          "type": "string",
+          "description": "경주마퇴사시소유자번호"
+        },
+        "outRes": {
+          "type": "string",
+          "description": "경주마퇴사사유"
+        },
+        "outCont": {
+          "type": "string",
+          "description": "경주마퇴사세부내역"
+        },
+        "restDt": {
+          "type": "string",
+          "description": "최종휴양일"
+        },
+        "restOutDt": {
+          "type": "string",
+          "description": "최종휴양종료일"
+        },
+        "restAreaNm": {
+          "type": "string",
+          "description": "최종휴양지"
+        },
+        "restDt2": {
+          "type": "string",
+          "description": "최종직전휴양일"
+        },
+        "restOutDt2": {
+          "type": "string",
+          "description": "최종직전휴양종료일"
+        },
+        "trainIlja": {
+          "type": "string",
+          "description": "최초능력검사합격일"
+        },
+        "fdebutDt": {
+          "type": "string",
+          "description": "최초출주일"
+        },
+        "lchulDt": {
+          "type": "string",
+          "description": "최종출주일"
+        },
+        "rcCnt": {
+          "type": "string",
+          "description": "출주횟수"
+        },
+        "fstCnt": {
+          "type": "string",
+          "description": "일착횟수"
+        },
+        "sndCnt": {
+          "type": "string",
+          "description": "이착횟수"
+        },
+        "trdCnt": {
+          "type": "string",
+          "description": "삼착횟수"
+        },
+        "forthCnt": {
+          "type": "string",
+          "description": "사착횟수"
+        },
+        "fifthCnt": {
+          "type": "string",
+          "description": "오착횟수"
+        },
+        "outCnt": {
+          "type": "string",
+          "description": "착외횟수"
+        },
+        "amt": {
+          "type": "string",
+          "description": "상금"
+        },
+        "condAmt": {
+          "type": "string",
+          "description": "조건상금"
+        },
+        "winRate": {
+          "type": "string",
+          "description": "승률"
+        },
+        "quinRate": {
+          "type": "string",
+          "description": "복승률"
+        },
+        "avgWinDist": {
+          "type": "string",
+          "description": "평균우승거리"
+        },
+        "rankTop": {
+          "type": "string",
+          "description": "최고군"
+        },
+        "rankLast": {
+          "type": "string",
+          "description": "최종군"
+        },
+        "char1": {
+          "type": "string",
+          "description": "특징_머리"
+        },
+        "char2": {
+          "type": "string",
+          "description": "특징_목"
+        },
+        "char3": {
+          "type": "string",
+          "description": "특징_다리"
+        },
+        "char4": {
+          "type": "string",
+          "description": "특징_몸통"
+        },
+        "brand1": {
+          "type": "string",
+          "description": "낙인_좌"
+        },
+        "brand2": {
+          "type": "string",
+          "description": "낙인_우"
+        },
+        "brand3": {
+          "type": "string",
+          "description": "낙인_기타_입술문신"
+        },
+        "auctionDt": {
+          "type": "string",
+          "description": "최종경매일"
+        },
+        "auctionYear": {
+          "type": "string",
+          "description": "경매연도"
+        },
+        "inChasu": {
+          "type": "string",
+          "description": "경매차수"
+        },
+        "auctionMon": {
+          "type": "string",
+          "description": "경매낙찰가"
+        },
+        "auctionGubun": {
+          "type": "string",
+          "description": "경매구분"
+        },
+        "auctionResult": {
+          "type": "string",
+          "description": "경매결과"
+        },
+        "auctionMgr": {
+          "type": "string",
+          "description": "경매주관자"
+        },
+        "auctionOwNo": {
+          "type": "string",
+          "description": "경매낙찰자번호"
+        },
+        "auctionOwNm": {
+          "type": "string",
+          "description": "경매낙찰자성명"
+        },
+        "auctionOwNmSebu": {
+          "type": "string",
+          "description": "경매일반인낙찰자성명"
+        },
+        "impDt": {
+          "type": "string",
+          "description": "수입일"
+        },
+        "impUse": {
+          "type": "string",
+          "description": "수입용도"
+        },
+        "doipYr": {
+          "type": "string",
+          "description": "경주마일괄수입연도"
+        },
+        "doipNo": {
+          "type": "string",
+          "description": "경주마일괄수입차수"
+        },
+        "impMon": {
+          "type": "string",
+          "description": "수입가"
+        },
+        "impGubun": {
+          "type": "string",
+          "description": "외국산경주마매입구분"
+        },
+        "fgnSubsidy": {
+          "type": "string",
+          "description": "수입장려금지급대상여부"
+        },
+        "fgnAuctAmt": {
+          "type": "string",
+          "description": "외국경매시장낙찰가"
+        },
+        "fgnRcCnt": {
+          "type": "string",
+          "description": "외국출주횟수"
+        },
+        "fgnFstCnt": {
+          "type": "string",
+          "description": "외국일착횟수"
+        },
+        "fgnSndCnt": {
+          "type": "string",
+          "description": "외국이착횟수"
+        },
+        "fgnTrdCnt": {
+          "type": "string",
+          "description": "외국삼착횟수"
+        },
+        "getMon": {
+          "type": "string",
+          "description": "외국수득상금"
+        },
+        "monCd": {
+          "type": "string",
+          "description": "외국통화기호"
+        },
+        "fgnAvgWinDist": {
+          "type": "string",
+          "description": "외국평균우승거리"
+        },
+        "chgDt": {
+          "type": "string",
+          "description": "거세일"
+        },
+        "sexHis": {
+          "type": "string",
+          "description": "거세사유"
+        },
+        "sexMgrNm": {
+          "type": "string",
+          "description": "거세시조교사명"
+        },
+        "sexMgrNo": {
+          "type": "string",
+          "description": "거세시조교사번호"
+        },
+        "sexPart": {
+          "type": "string",
+          "description": "거세시조"
+        },
+        "sexOwNm": {
+          "type": "string",
+          "description": "거세시소유자명"
+        },
+        "sexOwNo": {
+          "type": "string",
+          "description": "거세시소유자번호"
+        },
+        "fowNm": {
+          "type": "string",
+          "description": "최초소유자명"
+        },
+        "fowNo": {
+          "type": "string",
+          "description": "최초소유자번호"
+        },
+        "fkraInDt": {
+          "type": "string",
+          "description": "최초마사회부서입사일"
+        },
+        "fkraOutDt": {
+          "type": "string",
+          "description": "최초마사회부서퇴사일"
+        },
+        "fkraPoNo": {
+          "type": "string",
+          "description": "최초마사회부서번호"
+        },
+        "fkraPoNm": {
+          "type": "string",
+          "description": "최초마사회부서명"
+        },
+        "kraInDt": {
+          "type": "string",
+          "description": "최종마사회부서입사일"
+        },
+        "kraOutDt": {
+          "type": "string",
+          "description": "최종마사회부서퇴사일"
+        },
+        "kraPoNo": {
+          "type": "string",
+          "description": "최종마사회부서번호"
+        },
+        "kraPoNm": {
+          "type": "string",
+          "description": "최종마사회부서명"
+        },
+        "fuseNm": {
+          "type": "string",
+          "description": "최초용도"
+        },
+        "deadDt": {
+          "type": "string",
+          "description": "폐사일"
+        },
+        "stkFstCnt": {
+          "type": "string",
+          "description": "대상경주우승횟수"
+        },
+        "stkFlag": {
+          "type": "string",
+          "description": "대상특별경주우승착순마1_3착여부"
+        },
+        "breedGubun": {
+          "type": "string",
+          "description": "육성주체구분"
+        },
+        "rhrMon": {
+          "type": "string",
+          "description": "경주마등록직전거래가"
+        },
+        "bhrMon": {
+          "type": "string",
+          "description": "번식등록직전거래가"
+        },
+        "bhrGubun": {
+          "type": "string",
+          "description": "번식마구분"
+        },
+        "crossSubsidy": {
+          "type": "string",
+          "description": "교배지원자격마여부"
+        },
+        "birthYr": {
+          "type": "string",
+          "description": "출생년도"
+        },
+        "bldRegYr": {
+          "type": "string",
+          "description": "혈통등록연도"
+        },
+        "finYr": {
+          "type": "string",
+          "description": "최초경주마입사 연도"
+        },
+        "rhrRegYr1": {
+          "type": "string",
+          "description": "경주마등록연도"
+        },
+        "discardYr": {
+          "type": "string",
+          "description": "경주마불용연도"
+        },
+        "regYr": {
+          "type": "string",
+          "description": "번식등록연도"
+        },
+        "regOutYr": {
+          "type": "string",
+          "description": "번식종료연도"
+        },
+        "fdebutYr": {
+          "type": "string",
+          "description": "최초출주연도"
+        },
+        "ftrainYr": {
+          "type": "string",
+          "description": "최초능력검사연도"
+        },
+        "impYr": {
+          "type": "string",
+          "description": "수입연도"
+        },
+        "baljuDt": {
+          "type": "string",
+          "description": "최초발주검사합격일"
+        },
+        "chefHrNo": {
+          "type": "string",
+          "description": "셰프드라스마번"
+        },
+        "chefHrNm": {
+          "type": "string",
+          "description": "셰프드라스마명"
+        },
+        "sanji": {
+          "type": "string",
+          "description": "산지"
+        },
+        "crossSupport": {
+          "type": "string",
+          "description": "교배지원자격여부"
+        },
+        "crossSupportPo": {
+          "type": "string",
+          "description": "교배지원대상농가소재여부"
+        },
+        "poip": {
+          "type": "string",
+          "description": "포입마"
+        },
+        "discardResSebu": {
+          "type": "string",
+          "description": "경주마불용사유세부"
+        },
+        "foalDiscardDt": {
+          "type": "string",
+          "description": "육성마도태일"
+        },
+        "foalDiscardRes": {
+          "type": "string",
+          "description": "육성마도태사유"
+        },
+        "foalDiscardResSebu": {
+          "type": "string",
+          "description": "육성마도태사유세부"
+        },
+        "foalDiscardUse": {
+          "type": "string",
+          "description": "육성마도태후용도"
+        },
+        "damPrdDusu": {
+          "type": "string",
+          "description": "씨암말생산두수"
+        },
+        "damInDusu": {
+          "type": "string",
+          "description": "씨암말경주마입사두수"
+        },
+        "breedSerial": {
+          "type": "string",
+          "description": "번식년차"
+        },
+        "prdSerial": {
+          "type": "string",
+          "description": "생산년차"
+        },
+        "regOutOwNm": {
+          "type": "string",
+          "description": "번식종료시소유자명"
+        },
+        "regOutOwNo": {
+          "type": "string",
+          "description": "번식종료시소유자번호"
+        },
+        "regOutPoNm": {
+          "type": "string",
+          "description": "번식종료시소재지명"
+        },
+        "regOutPoNo": {
+          "type": "string",
+          "description": "번식종료시소재지번호"
+        },
+        "regOutPoArea": {
+          "type": "string",
+          "description": "번식종료시소재지역구분"
+        },
+        "fgnCrossDate": {
+          "type": "string",
+          "description": "외국교배일"
+        },
+        "finMeet": {
+          "type": "string",
+          "description": "최초입사경마공원"
+        },
+        "fmeet": {
+          "type": "string",
+          "description": "서울_부산경마공원구분"
+        },
+        "breedPoNm": {
+          "type": "string",
+          "description": "경주마입사6개월전소재지"
+        },
+        "breedPoArea": {
+          "type": "string",
+          "description": "경주마입사6개월전소재지역"
+        },
+        "tameDate": {
+          "type": "string",
+          "description": "육성순치일"
+        },
+        "tameCancelDate": {
+          "type": "string",
+          "description": "육성조교취소일"
+        },
+        "rankGubun": {
+          "type": "string",
+          "description": "부산경마공원군변경반영"
+        },
+        "tamePlace": {
+          "type": "string",
+          "description": "육성조교검사장소"
+        },
+        "tameTrainer": {
+          "type": "string",
+          "description": "육성조련사"
+        },
+        "breedFarm": {
+          "type": "string",
+          "description": "육성목장"
+        }
+      }
+    }
+  },
+  "swaggerOprtinVOs": [
+    {
+      "oprtinUrl": "http://kradata.kra.co.kr:8082/service/api42/getOpenDataList",
+      "oprtinNm": "마필종합정보",
+      "oprtinDc": "서울, 제주, 부산경남 경마장의 마필 상세정보 (은퇴마 포함) ( 생산국, 수입국, 원마명, 품종, 털색등 ) - 마번/마명/영문마명 정보 모두 입력하지 않을 경우 임의 100건의 데이터만 표출됩니다.",
+      "gwSvcNm": "totalHorseInfo_1",
+      "operationId": "totalHorseInfo_1",
+      "publicDataTyDetailCode": "PRDE02",
+      "reqList": [
+        {
+          "paramtrNm": "ServiceKey",
+          "paramtrDc": "공공데이터포털에서 받은 인증키",
+          "paramtrBassValue": "-",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "pageNo",
+          "paramtrDc": "페이지번호",
+          "paramtrBassValue": "1",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "numOfRows",
+          "paramtrDc": "한 페이지 결과 수",
+          "paramtrBassValue": "10",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hr_eng_name",
+          "paramtrDc": "영문마명",
+          "paramtrBassValue": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hr_name",
+          "paramtrDc": "마명",
+          "paramtrBassValue": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hr_no",
+          "paramtrDc": "마번",
+          "paramtrBassValue": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        }
+      ],
+      "resList": [
+        {
+          "paramtrNm": "resultCode",
+          "paramtrDc": "결과코드",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "resultMsg",
+          "paramtrDc": "결과메시지",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "numOfRows",
+          "paramtrDc": "한 페이지 결과 수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "pageNo",
+          "paramtrDc": "페이지번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "totalCount",
+          "paramtrDc": "전체 결과 수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hrNo",
+          "paramtrDc": "마번",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hrNm",
+          "paramtrDc": "마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hrEngNm",
+          "paramtrDc": "영문마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "birthDt",
+          "paramtrDc": "출생일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sex",
+          "paramtrDc": "성별",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "color",
+          "paramtrDc": "모색",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "age",
+          "paramtrDc": "연령",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "prdCty",
+          "paramtrDc": "생산국",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "expCty",
+          "paramtrDc": "수입국",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "engOrgNm",
+          "paramtrDc": "원마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "breed",
+          "paramtrDc": "품종",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fhrNo",
+          "paramtrDc": "부마번",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fhrNm",
+          "paramtrDc": "부마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fhrCty",
+          "paramtrDc": "부생산국",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fhrYr",
+          "paramtrDc": "부생년",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrNo",
+          "paramtrDc": "모마",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrNm",
+          "paramtrDc": "모마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrCty",
+          "paramtrDc": "모생산국",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrYr",
+          "paramtrDc": "모생년",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrFhrNo",
+          "paramtrDc": "외조부마마번",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrFhrNm",
+          "paramtrDc": "외조부마마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrFhrCty",
+          "paramtrDc": "외조부마생산국",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mhrFhrYr",
+          "paramtrDc": "외조부마생년",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "useNm",
+          "paramtrDc": "용도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "owNm",
+          "paramtrDc": "소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "owNo",
+          "paramtrDc": "소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mgrNm",
+          "paramtrDc": "조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "mgrNo",
+          "paramtrDc": "조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "part",
+          "paramtrDc": "조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "poNm",
+          "paramtrDc": "소재지명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "poNo",
+          "paramtrDc": "소재지의 고유번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "poArea",
+          "paramtrDc": "소재지지역구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "poGubun",
+          "paramtrDc": "소재지구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brNm",
+          "paramtrDc": "생산자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brNo",
+          "paramtrDc": "생산자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brPoNm",
+          "paramtrDc": "생산목장",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brPoNo",
+          "paramtrDc": "생산목장소재지번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brPoArea",
+          "paramtrDc": "출생지소재지지역구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brPoGubun",
+          "paramtrDc": "생산목장소재지구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bldRegDt",
+          "paramtrDc": "혈통등록일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bldOwNm",
+          "paramtrDc": "혈통등록시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bldOwNo",
+          "paramtrDc": "혈통등록시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bldCanDt",
+          "paramtrDc": "혈통등록취소일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regDt",
+          "paramtrDc": "번식등록일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bhrOwNm",
+          "paramtrDc": "번식등록시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bhrOwNo",
+          "paramtrDc": "번식등록시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bhrPoNm",
+          "paramtrDc": "번식등록시소재지명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bhrPoNo",
+          "paramtrDc": "번식등록시소재지번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regDelDt",
+          "paramtrDc": "번식등록취소일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutDt",
+          "paramtrDc": "번식종료일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hrNmDt",
+          "paramtrDc": "마명부여일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "hrNmChgDt",
+          "paramtrDc": "마명변경일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "beforeHrNm",
+          "paramtrDc": "변경전마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "beforeHrEngNm",
+          "paramtrDc": "변경전영문마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrRegDt1",
+          "paramtrDc": "경주마등록일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrOwNm",
+          "paramtrDc": "경주마등록시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrOwNo",
+          "paramtrDc": "경주마등록시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrMgrNm",
+          "paramtrDc": "경주마등록시조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrMgrNo",
+          "paramtrDc": "경주마등록시조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrPart",
+          "paramtrDc": "경주마등록시조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrRegDt2",
+          "paramtrDc": "경주마등록취소일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardDt",
+          "paramtrDc": "경마마불용일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardUse",
+          "paramtrDc": "경주마불용후용도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardSellCls",
+          "paramtrDc": "경주마불용후처분구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardRes",
+          "paramtrDc": "경주마불용사유",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardOwNm",
+          "paramtrDc": "경주마불용시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardOwNo",
+          "paramtrDc": "경주마불용시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardMgrNm",
+          "paramtrDc": "경주마불용시조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardMgrNo",
+          "paramtrDc": "경주마불용시조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardPart",
+          "paramtrDc": "경주마불용시조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardMon",
+          "paramtrDc": "경주마불용시처분가",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finDt",
+          "paramtrDc": "최초마방입사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fmgrNm",
+          "paramtrDc": "최초조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fmgrNo",
+          "paramtrDc": "최초조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fpart",
+          "paramtrDc": "최초조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finOwNm",
+          "paramtrDc": "최초마주명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finOwNo",
+          "paramtrDc": "최초마주번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finGubun",
+          "paramtrDc": "최초경주마입사구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finAge",
+          "paramtrDc": "최초경주마입사시연령",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finSex",
+          "paramtrDc": "최초경주마입사시 성별",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inDt",
+          "paramtrDc": "마방입사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inMgrNm",
+          "paramtrDc": "경주마입사시조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inMgrNo",
+          "paramtrDc": "경주마입사시조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inPart",
+          "paramtrDc": "경주마입사시조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inOwNm",
+          "paramtrDc": "경주마입사시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inOwNo",
+          "paramtrDc": "경주마입사시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inRes",
+          "paramtrDc": "경주마입사사유",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inCont",
+          "paramtrDc": "경주마입사세부내역",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outDt",
+          "paramtrDc": "마방퇴사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outMgrNm",
+          "paramtrDc": "경주마퇴사시조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outMgrNo",
+          "paramtrDc": "경주마퇴사시조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outPart",
+          "paramtrDc": "경주마퇴사시조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outOwNm",
+          "paramtrDc": "경주마퇴사시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outOwNo",
+          "paramtrDc": "경주마퇴사시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outRes",
+          "paramtrDc": "경주마퇴사사유",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outCont",
+          "paramtrDc": "경주마퇴사세부내역",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "restDt",
+          "paramtrDc": "최종휴양일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "restOutDt",
+          "paramtrDc": "최종휴양종료일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "restAreaNm",
+          "paramtrDc": "최종휴양지",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "restDt2",
+          "paramtrDc": "최종직전휴양일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "restOutDt2",
+          "paramtrDc": "최종직전휴양종료일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "trainIlja",
+          "paramtrDc": "최초능력검사합격일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fdebutDt",
+          "paramtrDc": "최초출주일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "lchulDt",
+          "paramtrDc": "최종출주일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rcCnt",
+          "paramtrDc": "출주횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fstCnt",
+          "paramtrDc": "일착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sndCnt",
+          "paramtrDc": "이착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "trdCnt",
+          "paramtrDc": "삼착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "forthCnt",
+          "paramtrDc": "사착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fifthCnt",
+          "paramtrDc": "오착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "outCnt",
+          "paramtrDc": "착외횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "amt",
+          "paramtrDc": "상금",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "condAmt",
+          "paramtrDc": "조건상금",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "winRate",
+          "paramtrDc": "승률",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "quinRate",
+          "paramtrDc": "복승률",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "avgWinDist",
+          "paramtrDc": "평균우승거리",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rankTop",
+          "paramtrDc": "최고군",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rankLast",
+          "paramtrDc": "최종군",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "char1",
+          "paramtrDc": "특징_머리",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "char2",
+          "paramtrDc": "특징_목",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "char3",
+          "paramtrDc": "특징_다리",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "char4",
+          "paramtrDc": "특징_몸통",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brand1",
+          "paramtrDc": "낙인_좌",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brand2",
+          "paramtrDc": "낙인_우",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "brand3",
+          "paramtrDc": "낙인_기타_입술문신",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionDt",
+          "paramtrDc": "최종경매일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionYear",
+          "paramtrDc": "경매연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "inChasu",
+          "paramtrDc": "경매차수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionMon",
+          "paramtrDc": "경매낙찰가",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionGubun",
+          "paramtrDc": "경매구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionResult",
+          "paramtrDc": "경매결과",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionMgr",
+          "paramtrDc": "경매주관자",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionOwNo",
+          "paramtrDc": "경매낙찰자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionOwNm",
+          "paramtrDc": "경매낙찰자성명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "auctionOwNmSebu",
+          "paramtrDc": "경매일반인낙찰자성명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "impDt",
+          "paramtrDc": "수입일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "impUse",
+          "paramtrDc": "수입용도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "doipYr",
+          "paramtrDc": "경주마일괄수입연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "doipNo",
+          "paramtrDc": "경주마일괄수입차수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "impMon",
+          "paramtrDc": "수입가",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "impGubun",
+          "paramtrDc": "외국산경주마매입구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnSubsidy",
+          "paramtrDc": "수입장려금지급대상여부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnAuctAmt",
+          "paramtrDc": "외국경매시장낙찰가",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnRcCnt",
+          "paramtrDc": "외국출주횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnFstCnt",
+          "paramtrDc": "외국일착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnSndCnt",
+          "paramtrDc": "외국이착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnTrdCnt",
+          "paramtrDc": "외국삼착횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "getMon",
+          "paramtrDc": "외국수득상금",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "monCd",
+          "paramtrDc": "외국통화기호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnAvgWinDist",
+          "paramtrDc": "외국평균우승거리",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "chgDt",
+          "paramtrDc": "거세일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sexHis",
+          "paramtrDc": "거세사유",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sexMgrNm",
+          "paramtrDc": "거세시조교사명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sexMgrNo",
+          "paramtrDc": "거세시조교사번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sexPart",
+          "paramtrDc": "거세시조",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sexOwNm",
+          "paramtrDc": "거세시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sexOwNo",
+          "paramtrDc": "거세시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fowNm",
+          "paramtrDc": "최초소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fowNo",
+          "paramtrDc": "최초소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fkraInDt",
+          "paramtrDc": "최초마사회부서입사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fkraOutDt",
+          "paramtrDc": "최초마사회부서퇴사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fkraPoNo",
+          "paramtrDc": "최초마사회부서번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fkraPoNm",
+          "paramtrDc": "최초마사회부서명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "kraInDt",
+          "paramtrDc": "최종마사회부서입사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "kraOutDt",
+          "paramtrDc": "최종마사회부서퇴사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "kraPoNo",
+          "paramtrDc": "최종마사회부서번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "kraPoNm",
+          "paramtrDc": "최종마사회부서명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fuseNm",
+          "paramtrDc": "최초용도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "deadDt",
+          "paramtrDc": "폐사일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "stkFstCnt",
+          "paramtrDc": "대상경주우승횟수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "stkFlag",
+          "paramtrDc": "대상특별경주우승착순마1_3착여부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "breedGubun",
+          "paramtrDc": "육성주체구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrMon",
+          "paramtrDc": "경주마등록직전거래가",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bhrMon",
+          "paramtrDc": "번식등록직전거래가",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bhrGubun",
+          "paramtrDc": "번식마구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "crossSubsidy",
+          "paramtrDc": "교배지원자격마여부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "birthYr",
+          "paramtrDc": "출생년도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "bldRegYr",
+          "paramtrDc": "혈통등록연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finYr",
+          "paramtrDc": "최초경주마입사 연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rhrRegYr1",
+          "paramtrDc": "경주마등록연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardYr",
+          "paramtrDc": "경주마불용연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regYr",
+          "paramtrDc": "번식등록연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutYr",
+          "paramtrDc": "번식종료연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fdebutYr",
+          "paramtrDc": "최초출주연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "ftrainYr",
+          "paramtrDc": "최초능력검사연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "impYr",
+          "paramtrDc": "수입연도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "baljuDt",
+          "paramtrDc": "최초발주검사합격일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "chefHrNo",
+          "paramtrDc": "셰프드라스마번",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "chefHrNm",
+          "paramtrDc": "셰프드라스마명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "sanji",
+          "paramtrDc": "산지",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "crossSupport",
+          "paramtrDc": "교배지원자격여부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "crossSupportPo",
+          "paramtrDc": "교배지원대상농가소재여부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "poip",
+          "paramtrDc": "포입마",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "discardResSebu",
+          "paramtrDc": "경주마불용사유세부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "foalDiscardDt",
+          "paramtrDc": "육성마도태일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "foalDiscardRes",
+          "paramtrDc": "육성마도태사유",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "foalDiscardResSebu",
+          "paramtrDc": "육성마도태사유세부",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "foalDiscardUse",
+          "paramtrDc": "육성마도태후용도",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "damPrdDusu",
+          "paramtrDc": "씨암말생산두수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "damInDusu",
+          "paramtrDc": "씨암말경주마입사두수",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "breedSerial",
+          "paramtrDc": "번식년차",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "prdSerial",
+          "paramtrDc": "생산년차",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutOwNm",
+          "paramtrDc": "번식종료시소유자명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutOwNo",
+          "paramtrDc": "번식종료시소유자번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutPoNm",
+          "paramtrDc": "번식종료시소재지명",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutPoNo",
+          "paramtrDc": "번식종료시소재지번호",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "regOutPoArea",
+          "paramtrDc": "번식종료시소재지역구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fgnCrossDate",
+          "paramtrDc": "외국교배일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "finMeet",
+          "paramtrDc": "최초입사경마공원",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "fmeet",
+          "paramtrDc": "서울_부산경마공원구분",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "breedPoNm",
+          "paramtrDc": "경주마입사6개월전소재지",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "breedPoArea",
+          "paramtrDc": "경주마입사6개월전소재지역",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tameDate",
+          "paramtrDc": "육성순치일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tameCancelDate",
+          "paramtrDc": "육성조교취소일",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "rankGubun",
+          "paramtrDc": "부산경마공원군변경반영",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tamePlace",
+          "paramtrDc": "육성조교검사장소",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tameTrainer",
+          "paramtrDc": "육성조련사",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "breedFarm",
+          "paramtrDc": "육성목장",
+          "arrayYn": "N",
+          "paramtrDefNm": "",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,766 @@
+{
+  "as_of": "2026-09-29",
+  "purpose": "read-only preflight; no ingestion into a new canonical DB, no model fitting, no source modification",
+  "phase2_native_base": {
+    "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+    "bytes": 1535651840,
+    "mtime_ns": 1789468792285848257,
+    "source_artifact_rows": 14806,
+    "recorded_scope": {
+      "meet": 2,
+      "operational_db_modified": false,
+      "purpose": "research_only",
+      "race_dates": [
+        "20020728",
+        "20260912"
+      ],
+      "trial_dates": [
+        "20030711",
+        "20260909"
+      ]
+    },
+    "text_scope": {
+      "mixed_non_native_content_copied": false,
+      "operational_db_modified": false,
+      "parser_version": "phase2-v1"
+    },
+    "native_race_years": [
+      {
+        "year": 2002,
+        "races": 6,
+        "entries": 48,
+        "normal_completed_entries": 48,
+        "non_positive_result_entries": 0,
+        "entries_in_quarantined_no_positive_races": 0,
+        "first_date": "2002-07-28",
+        "last_date": "2002-12-14"
+      },
+      {
+        "year": 2003,
+        "races": 12,
+        "entries": 102,
+        "normal_completed_entries": 100,
+        "non_positive_result_entries": 2,
+        "entries_in_quarantined_no_positive_races": 0,
+        "first_date": "2003-01-25",
+        "last_date": "2003-12-13"
+      },
+      {
+        "year": 2004,
+        "races": 53,
+        "entries": 491,
+        "normal_completed_entries": 463,
+        "non_positive_result_entries": 11,
+        "entries_in_quarantined_no_positive_races": 17,
+        "first_date": "2004-01-10",
+        "last_date": "2004-12-25"
+      },
+      {
+        "year": 2005,
+        "races": 88,
+        "entries": 802,
+        "normal_completed_entries": 780,
+        "non_positive_result_entries": 3,
+        "entries_in_quarantined_no_positive_races": 19,
+        "first_date": "2005-01-08",
+        "last_date": "2005-12-18"
+      },
+      {
+        "year": 2006,
+        "races": 135,
+        "entries": 1209,
+        "normal_completed_entries": 1186,
+        "non_positive_result_entries": 5,
+        "entries_in_quarantined_no_positive_races": 18,
+        "first_date": "2006-01-07",
+        "last_date": "2006-12-24"
+      },
+      {
+        "year": 2007,
+        "races": 191,
+        "entries": 1805,
+        "normal_completed_entries": 1757,
+        "non_positive_result_entries": 18,
+        "entries_in_quarantined_no_positive_races": 30,
+        "first_date": "2007-01-06",
+        "last_date": "2007-12-23"
+      },
+      {
+        "year": 2008,
+        "races": 239,
+        "entries": 2239,
+        "normal_completed_entries": 2188,
+        "non_positive_result_entries": 15,
+        "entries_in_quarantined_no_positive_races": 36,
+        "first_date": "2008-01-05",
+        "last_date": "2008-12-21"
+      },
+      {
+        "year": 2009,
+        "races": 280,
+        "entries": 2656,
+        "normal_completed_entries": 2626,
+        "non_positive_result_entries": 21,
+        "entries_in_quarantined_no_positive_races": 9,
+        "first_date": "2009-01-10",
+        "last_date": "2009-12-26"
+      },
+      {
+        "year": 2010,
+        "races": 274,
+        "entries": 2581,
+        "normal_completed_entries": 2503,
+        "non_positive_result_entries": 30,
+        "entries_in_quarantined_no_positive_races": 48,
+        "first_date": "2010-01-08",
+        "last_date": "2010-12-18"
+      },
+      {
+        "year": 2011,
+        "races": 283,
+        "entries": 2682,
+        "normal_completed_entries": 2645,
+        "non_positive_result_entries": 17,
+        "entries_in_quarantined_no_positive_races": 20,
+        "first_date": "2011-01-07",
+        "last_date": "2011-12-16"
+      },
+      {
+        "year": 2012,
+        "races": 313,
+        "entries": 2957,
+        "normal_completed_entries": 2896,
+        "non_positive_result_entries": 36,
+        "entries_in_quarantined_no_positive_races": 25,
+        "first_date": "2012-01-06",
+        "last_date": "2012-12-29"
+      },
+      {
+        "year": 2013,
+        "races": 336,
+        "entries": 3132,
+        "normal_completed_entries": 3094,
+        "non_positive_result_entries": 19,
+        "entries_in_quarantined_no_positive_races": 19,
+        "first_date": "2013-01-11",
+        "last_date": "2013-12-28"
+      },
+      {
+        "year": 2014,
+        "races": 382,
+        "entries": 3552,
+        "normal_completed_entries": 3429,
+        "non_positive_result_entries": 39,
+        "entries_in_quarantined_no_positive_races": 84,
+        "first_date": "2014-01-10",
+        "last_date": "2014-12-27"
+      },
+      {
+        "year": 2015,
+        "races": 429,
+        "entries": 3981,
+        "normal_completed_entries": 3942,
+        "non_positive_result_entries": 30,
+        "entries_in_quarantined_no_positive_races": 9,
+        "first_date": "2015-01-09",
+        "last_date": "2015-12-26"
+      },
+      {
+        "year": 2016,
+        "races": 504,
+        "entries": 4953,
+        "normal_completed_entries": 4802,
+        "non_positive_result_entries": 44,
+        "entries_in_quarantined_no_positive_races": 107,
+        "first_date": "2016-01-08",
+        "last_date": "2016-12-30"
+      },
+      {
+        "year": 2017,
+        "races": 553,
+        "entries": 5493,
+        "normal_completed_entries": 5441,
+        "non_positive_result_entries": 42,
+        "entries_in_quarantined_no_positive_races": 10,
+        "first_date": "2017-01-13",
+        "last_date": "2017-12-30"
+      },
+      {
+        "year": 2018,
+        "races": 601,
+        "entries": 6089,
+        "normal_completed_entries": 6029,
+        "non_positive_result_entries": 40,
+        "entries_in_quarantined_no_positive_races": 20,
+        "first_date": "2018-01-12",
+        "last_date": "2018-12-29"
+      },
+      {
+        "year": 2019,
+        "races": 622,
+        "entries": 6354,
+        "normal_completed_entries": 6244,
+        "non_positive_result_entries": 29,
+        "entries_in_quarantined_no_positive_races": 81,
+        "first_date": "2019-01-11",
+        "last_date": "2019-12-28"
+      },
+      {
+        "year": 2020,
+        "races": 358,
+        "entries": 3574,
+        "normal_completed_entries": 3531,
+        "non_positive_result_entries": 24,
+        "entries_in_quarantined_no_positive_races": 19,
+        "first_date": "2020-01-03",
+        "last_date": "2020-12-20"
+      },
+      {
+        "year": 2021,
+        "races": 481,
+        "entries": 4978,
+        "normal_completed_entries": 4857,
+        "non_positive_result_entries": 61,
+        "entries_in_quarantined_no_positive_races": 60,
+        "first_date": "2021-01-08",
+        "last_date": "2021-12-25"
+      },
+      {
+        "year": 2022,
+        "races": 602,
+        "entries": 6194,
+        "normal_completed_entries": 6025,
+        "non_positive_result_entries": 75,
+        "entries_in_quarantined_no_positive_races": 94,
+        "first_date": "2022-01-07",
+        "last_date": "2022-12-24"
+      },
+      {
+        "year": 2023,
+        "races": 715,
+        "entries": 7086,
+        "normal_completed_entries": 6869,
+        "non_positive_result_entries": 35,
+        "entries_in_quarantined_no_positive_races": 182,
+        "first_date": "2023-01-06",
+        "last_date": "2023-12-30"
+      },
+      {
+        "year": 2024,
+        "races": 695,
+        "entries": 6903,
+        "normal_completed_entries": 6850,
+        "non_positive_result_entries": 53,
+        "entries_in_quarantined_no_positive_races": 0,
+        "first_date": "2024-01-05",
+        "last_date": "2024-12-28"
+      },
+      {
+        "year": 2025,
+        "races": 722,
+        "entries": 7071,
+        "normal_completed_entries": 6951,
+        "non_positive_result_entries": 52,
+        "entries_in_quarantined_no_positive_races": 68,
+        "first_date": "2025-01-03",
+        "last_date": "2025-12-27"
+      },
+      {
+        "year": 2026,
+        "races": 549,
+        "entries": 5276,
+        "normal_completed_entries": 4892,
+        "non_positive_result_entries": 43,
+        "entries_in_quarantined_no_positive_races": 341,
+        "first_date": "2026-01-02",
+        "last_date": "2026-09-12"
+      }
+    ],
+    "trial_candidate_years": [
+      {
+        "year": 2003,
+        "candidate_trial_events": 15,
+        "candidate_entries": 33,
+        "official_hr_no_linked": 33,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 33,
+        "breed_unconfirmed": 0,
+        "first_date": "2003-07-11",
+        "last_date": "2003-12-19"
+      },
+      {
+        "year": 2004,
+        "candidate_trial_events": 34,
+        "candidate_entries": 55,
+        "official_hr_no_linked": 53,
+        "unresolved_identity": 2,
+        "native_confirmed_breed": 55,
+        "breed_unconfirmed": 0,
+        "first_date": "2004-01-09",
+        "last_date": "2004-11-26"
+      },
+      {
+        "year": 2005,
+        "candidate_trial_events": 36,
+        "candidate_entries": 76,
+        "official_hr_no_linked": 75,
+        "unresolved_identity": 1,
+        "native_confirmed_breed": 76,
+        "breed_unconfirmed": 0,
+        "first_date": "2005-02-25",
+        "last_date": "2005-12-23"
+      },
+      {
+        "year": 2006,
+        "candidate_trial_events": 49,
+        "candidate_entries": 151,
+        "official_hr_no_linked": 151,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 151,
+        "breed_unconfirmed": 0,
+        "first_date": "2006-01-06",
+        "last_date": "2006-12-22"
+      },
+      {
+        "year": 2007,
+        "candidate_trial_events": 49,
+        "candidate_entries": 160,
+        "official_hr_no_linked": 160,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 160,
+        "breed_unconfirmed": 0,
+        "first_date": "2007-01-05",
+        "last_date": "2007-12-21"
+      },
+      {
+        "year": 2008,
+        "candidate_trial_events": 43,
+        "candidate_entries": 189,
+        "official_hr_no_linked": 189,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 189,
+        "breed_unconfirmed": 0,
+        "first_date": "2008-01-11",
+        "last_date": "2008-12-19"
+      },
+      {
+        "year": 2009,
+        "candidate_trial_events": 53,
+        "candidate_entries": 269,
+        "official_hr_no_linked": 269,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 269,
+        "breed_unconfirmed": 0,
+        "first_date": "2009-01-09",
+        "last_date": "2009-12-24"
+      },
+      {
+        "year": 2010,
+        "candidate_trial_events": 45,
+        "candidate_entries": 300,
+        "official_hr_no_linked": 300,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 300,
+        "breed_unconfirmed": 0,
+        "first_date": "2010-01-10",
+        "last_date": "2010-12-19"
+      },
+      {
+        "year": 2011,
+        "candidate_trial_events": 52,
+        "candidate_entries": 357,
+        "official_hr_no_linked": 357,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 357,
+        "breed_unconfirmed": 0,
+        "first_date": "2011-01-09",
+        "last_date": "2011-12-22"
+      },
+      {
+        "year": 2012,
+        "candidate_trial_events": 56,
+        "candidate_entries": 435,
+        "official_hr_no_linked": 435,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 435,
+        "breed_unconfirmed": 0,
+        "first_date": "2012-01-05",
+        "last_date": "2012-12-27"
+      },
+      {
+        "year": 2013,
+        "candidate_trial_events": 63,
+        "candidate_entries": 496,
+        "official_hr_no_linked": 496,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 496,
+        "breed_unconfirmed": 0,
+        "first_date": "2013-01-10",
+        "last_date": "2013-12-26"
+      },
+      {
+        "year": 2014,
+        "candidate_trial_events": 66,
+        "candidate_entries": 577,
+        "official_hr_no_linked": 577,
+        "unresolved_identity": 0,
+        "native_confirmed_breed": 577,
+        "breed_unconfirmed": 0,
+        "first_date": "2014-01-09",
+        "last_date": "2014-12-24"
+      },
+      {
+        "year": 2015,
+        "candidate_trial_events": 83,
+        "candidate_entries": 719,
+        "official_hr_no_linked": 718,
+        "unresolved_identity": 1,
+        "native_confirmed_breed": 719,
+        "breed_unconfirmed": 0,
+        "first_date": "2015-01-08",
+        "last_date": "2015-12-24"
+      },
+      {
+        "year": 2016,
+        "candidate_trial_events": 95,
+        "candidate_entries": 852,
+        "official_hr_no_linked": 849,
+        "unresolved_identity": 3,
+        "native_confirmed_breed": 852,
+        "breed_unconfirmed": 0,
+        "first_date": "2016-01-07",
+        "last_date": "2016-12-29"
+      },
+      {
+        "year": 2017,
+        "candidate_trial_events": 105,
+        "candidate_entries": 979,
+        "official_hr_no_linked": 977,
+        "unresolved_identity": 2,
+        "native_confirmed_breed": 979,
+        "breed_unconfirmed": 0,
+        "first_date": "2017-01-12",
+        "last_date": "2017-12-28"
+      },
+      {
+        "year": 2018,
+        "candidate_trial_events": 107,
+        "candidate_entries": 1003,
+        "official_hr_no_linked": 1000,
+        "unresolved_identity": 3,
+        "native_confirmed_breed": 1003,
+        "breed_unconfirmed": 0,
+        "first_date": "2018-01-11",
+        "last_date": "2018-12-27"
+      },
+      {
+        "year": 2019,
+        "candidate_trial_events": 121,
+        "candidate_entries": 1206,
+        "official_hr_no_linked": 1201,
+        "unresolved_identity": 5,
+        "native_confirmed_breed": 1206,
+        "breed_unconfirmed": 0,
+        "first_date": "2019-01-10",
+        "last_date": "2019-12-29"
+      },
+      {
+        "year": 2020,
+        "candidate_trial_events": 127,
+        "candidate_entries": 1162,
+        "official_hr_no_linked": 1146,
+        "unresolved_identity": 16,
+        "native_confirmed_breed": 1162,
+        "breed_unconfirmed": 0,
+        "first_date": "2020-01-02",
+        "last_date": "2020-12-27"
+      },
+      {
+        "year": 2021,
+        "candidate_trial_events": 109,
+        "candidate_entries": 938,
+        "official_hr_no_linked": 935,
+        "unresolved_identity": 3,
+        "native_confirmed_breed": 938,
+        "breed_unconfirmed": 0,
+        "first_date": "2021-01-14",
+        "last_date": "2021-12-23"
+      },
+      {
+        "year": 2022,
+        "candidate_trial_events": 112,
+        "candidate_entries": 952,
+        "official_hr_no_linked": 947,
+        "unresolved_identity": 5,
+        "native_confirmed_breed": 952,
+        "breed_unconfirmed": 0,
+        "first_date": "2022-01-06",
+        "last_date": "2022-12-22"
+      },
+      {
+        "year": 2023,
+        "candidate_trial_events": 129,
+        "candidate_entries": 1165,
+        "official_hr_no_linked": 1163,
+        "unresolved_identity": 2,
+        "native_confirmed_breed": 1163,
+        "breed_unconfirmed": 2,
+        "first_date": "2023-01-05",
+        "last_date": "2023-12-28"
+      },
+      {
+        "year": 2024,
+        "candidate_trial_events": 136,
+        "candidate_entries": 1224,
+        "official_hr_no_linked": 1222,
+        "unresolved_identity": 2,
+        "native_confirmed_breed": 1222,
+        "breed_unconfirmed": 2,
+        "first_date": "2024-01-04",
+        "last_date": "2024-12-26"
+      },
+      {
+        "year": 2025,
+        "candidate_trial_events": 157,
+        "candidate_entries": 1438,
+        "official_hr_no_linked": 1431,
+        "unresolved_identity": 7,
+        "native_confirmed_breed": 1431,
+        "breed_unconfirmed": 7,
+        "first_date": "2025-01-02",
+        "last_date": "2025-12-31"
+      },
+      {
+        "year": 2026,
+        "candidate_trial_events": 103,
+        "candidate_entries": 952,
+        "official_hr_no_linked": 949,
+        "unresolved_identity": 3,
+        "native_confirmed_breed": 949,
+        "breed_unconfirmed": 3,
+        "first_date": "2026-01-08",
+        "last_date": "2026-09-09"
+      }
+    ],
+    "race_record_status_totals": {
+      "non_positive_result_entry": 744,
+      "normal_completed": 90148,
+      "quarantined_no_positive_result_race": 1316
+    },
+    "trial_identity_status_totals": {
+      "official_trial_hr_tr_linked": 15633,
+      "official_trial_identity_unresolved": 55
+    },
+    "trial_breed_status_totals": {
+      "native_candidate_breed_unconfirmed": 14,
+      "native_confirmed": 15674
+    },
+    "official_result_field_coverage": {
+      "hrNo": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "jkNo": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "trNo": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "owNo": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "rcDist": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "rank": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "budam": {
+        "rows": 92208,
+        "present": 92208
+      },
+      "track": {
+        "rows": 92208,
+        "present": 92208
+      }
+    },
+    "native_text_record_types": [
+      {
+        "type": "daily_training",
+        "rows": 520424,
+        "first_date": "20150429",
+        "last_date": "20260913"
+      },
+      {
+        "type": "entry_card",
+        "rows": 54219,
+        "first_date": "20030830",
+        "last_date": "20260912"
+      },
+      {
+        "type": "entry_medical_equipment",
+        "rows": 55787,
+        "first_date": "20150501",
+        "last_date": "20260912"
+      },
+      {
+        "type": "jockey_change",
+        "rows": 1341,
+        "first_date": "20040110",
+        "last_date": "20260911"
+      },
+      {
+        "type": "medical",
+        "rows": 7362,
+        "first_date": "20121021",
+        "last_date": "20260909"
+      },
+      {
+        "type": "race_cancellation",
+        "rows": 724,
+        "first_date": "20031213",
+        "last_date": "20260911"
+      },
+      {
+        "type": "race_weight",
+        "rows": 81322,
+        "first_date": "20030830",
+        "last_date": "20260912"
+      },
+      {
+        "type": "start_inspection",
+        "rows": 3807,
+        "first_date": "20141019",
+        "last_date": "20211020"
+      },
+      {
+        "type": "start_training",
+        "rows": 150014,
+        "first_date": "20141019",
+        "last_date": "20260913"
+      },
+      {
+        "type": "track_snapshot",
+        "rows": 1813,
+        "first_date": "20030830",
+        "last_date": "20260912"
+      }
+    ]
+  },
+  "native_scorecard_dbs": [
+    {
+      "year": 2017,
+      "races": 552,
+      "entries": 5483,
+      "first_date": "2017-01-13",
+      "last_date": "2017-12-30",
+      "source": "data/research/jeju_2017_score_20260925/jeju_2017.sqlite3"
+    },
+    {
+      "year": 2018,
+      "races": 599,
+      "entries": 6069,
+      "first_date": "2018-01-12",
+      "last_date": "2018-12-29",
+      "source": "data/research/jeju_2018_score_20260925/jeju_2018.sqlite3"
+    },
+    {
+      "year": 2019,
+      "races": 614,
+      "entries": 6273,
+      "first_date": "2019-01-11",
+      "last_date": "2019-12-28",
+      "source": "data/research/jeju_2019_score_20260925/jeju_2019.sqlite3"
+    },
+    {
+      "year": 2020,
+      "races": 356,
+      "entries": 3555,
+      "first_date": "2020-01-03",
+      "last_date": "2020-12-20",
+      "source": "data/research/jeju_2020_score_20260925/jeju_2020.sqlite3"
+    },
+    {
+      "year": 2021,
+      "races": 475,
+      "entries": 4918,
+      "first_date": "2021-01-08",
+      "last_date": "2021-12-25",
+      "source": "data/research/jeju_2021_score_20260925/jeju_2021.sqlite3"
+    },
+    {
+      "year": 2022,
+      "races": 593,
+      "entries": 6100,
+      "first_date": "2022-01-07",
+      "last_date": "2022-12-24",
+      "source": "data/research/jeju_2022_score_20260925/jeju_2022.sqlite3"
+    },
+    {
+      "year": 2023,
+      "races": 697,
+      "entries": 6904,
+      "first_date": "2023-01-06",
+      "last_date": "2023-12-30",
+      "source": "data/research/jeju_2023_score_20260925/jeju_2023.sqlite3"
+    },
+    {
+      "year": 2024,
+      "races": 695,
+      "entries": 6903,
+      "first_date": "2024-01-05",
+      "last_date": "2024-12-28",
+      "source": "data/research/jeju_2024_score_20260925/jeju_2024.sqlite3"
+    },
+    {
+      "year": 2025,
+      "races": 722,
+      "entries": 7071,
+      "first_date": "2025-01-03",
+      "last_date": "2025-12-27",
+      "source": "data/research/jeju_2025_score_20260925/jeju_2025.sqlite3"
+    },
+    {
+      "year": 2026,
+      "races": 552,
+      "entries": 5300,
+      "first_date": "2026-01-02",
+      "last_date": "2026-09-19",
+      "source": "data/research/jeju_2026_score_20260925/jeju_2026.sqlite3"
+    }
+  ],
+  "operational_db_context_only": {
+    "path": "data/horse_racing.sqlite3",
+    "bytes": 3077263360,
+    "mtime_ns": 1790525363520147853,
+    "all_jeju_course_races": {
+      "count": 9368,
+      "first_date": "2002-07-28",
+      "last_date": "2026-09-19",
+      "warning": "meet/course scope only; not itself a Jeju-native filter"
+    },
+    "post_2026_09_12_to_09_19_course_races": {
+      "count": 22,
+      "entries": 206,
+      "first_date": "2026-09-17",
+      "last_date": "2026-09-19",
+      "warning": "course-only availability; must reconcile against native scorecards and explicit breed evidence"
+    }
+  },
+  "collection_gaps_to_close": [
+    "Reconcile native results after the verified official-result cutoff 2026-09-12 through 2026-09-19.",
+    "Reconcile Jeju-native running-trial sources after the saved text cutoff 2026-09-09 through 2026-09-19.",
+    "Recover jockey IDs and event-time trainer/owner/jockey relations into a separate link ledger; do not infer identities from names alone.",
+    "Keep resultless, non-positive, breed-unconfirmed, and unresolved-ID records with explicit statuses rather than deleting or fabricating labels."
+  ],
+  "extension_collection_status": {
+    "candidate_manifest": "jeju/research/20260929_core_collection_inventory/candidate_core_extension_20260913_19.manifest.json",
+    "direct_official_api_attempt": "failed_dns_resolution; no API result bytes written by this run",
+    "candidate_records": "held Jeju scorecard rows for 2026-09-13..2026-09-19 with exact operational entry ID and horse ID cross-check; still pending official reconciliation"
+  }
+}

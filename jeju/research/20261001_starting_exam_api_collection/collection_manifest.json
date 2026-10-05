@@ -1,0 +1,96 @@
+{
+  "research_directory": "jeju/research/20261001_starting_exam_api_collection",
+  "requested_api_scope": {
+    "meet": 2,
+    "from_year": 2000,
+    "through_date_inclusive": "2026-10-02",
+    "pagination": "pageNo / numOfRows",
+    "from_year_note": "2000 is the requested search start; the official API earliest availability date was not established."
+  },
+  "official_api": {
+    "portal_dataset_id": "15057405",
+    "name": "한국마사회 출발심사 결과",
+    "endpoint": "https://apis.data.go.kr/B551015/API21_1/startingTestResult_1",
+    "authentication_parameter_name": "ServiceKey",
+    "official_metadata_manifest": "official_metadata/metadata_manifest.json"
+  },
+  "api21_collection_status": "complete_27_annual_partitions",
+  "api21_successful_response_pages": 37,
+  "api21_rows_collected": 25614,
+  "api42_same_key_control": {
+    "endpoint": "API42_1/totalHorseInfo_1",
+    "http_status": 200,
+    "result_code": "00",
+    "returned_rows": 1,
+    "interpretation": "In the earlier probe the configured key worked for API42 while API21 returned reason code 30. After the user reported service-key reuse complete, the corrected API21 collector completed all 37 response pages; see api21_successful_collection_report.json.",
+    "observation_phase": "before_user_reapplication"
+  },
+  "api42_unlinked_horse_followup": {
+    "status": "completed",
+    "attempt_manifest": "raw/api42_followup/attempts/20261001T151147.863223Z/attempt_manifest.json",
+    "summary": "api42_followup_summary.json",
+    "unique_horse_ids_queried": 21,
+    "exact_profiles_returned": 21,
+    "current_breed_jeju_ma": 21,
+    "database_imported": false
+  },
+  "website_crosscheck_candidate": {
+    "input": "website_validation/website_observations.json",
+    "candidate_rows": 66,
+    "distinct_horse_ids": 40,
+    "source_page_hashes_verified": 14,
+    "output_jsonl": "website_native_candidate_rows.jsonl",
+    "summary": "website_candidate_summary.json",
+    "output_sha256": "395c1e48b2f900c9df74470750f04d99fcc476dd755d9f012089559ae2140ffc"
+  },
+  "database_write_performed": false,
+  "secret_recorded": false,
+  "scope_interpretation": "27 annual API partitions are complete. meet=2 identifies Jeju venue, not breed. Breed-specific candidate rows require official horse-ID profile evidence; unlinked rows remain unclassified and no DB import was performed.",
+  "website_observation_coverage": {
+    "latest_observed_date": "2026-09-30",
+    "no_captured_rows_for": [
+      "2026-10-01",
+      "2026-10-02"
+    ],
+    "source": "verified official website pages; not API21 data"
+  },
+  "credential_exposure_assessment": {
+    "exposure_surface": "One early diagnostic tool output displayed an exception URL containing the configured service-key query value.",
+    "persisted_research_files_scanned": 65,
+    "configured_value_matches": 0,
+    "recommended_handling": "Treat the credential as exposed in the task transcript and assess rotation before another API21 request.",
+    "post_collection_file_scan_count": 138,
+    "post_collection_matches": 0
+  },
+  "api21_complete_annual_partitions": 27,
+  "api21_latest_completed_attempt_manifest": "raw/api21_1/partitions/year_2026/attempts/20261001T162616.270735Z/attempt_manifest.json",
+  "api21_successful_collection_report": "api21_successful_collection_report.json",
+  "api21_independent_verification": "api21_independent_verification.json",
+  "api21_verified_native_candidate_rows": "api21_verified_native_candidate_rows.jsonl",
+  "api21_unlinked_horse_inventory": "api21_unlinked_horse_inventory.jsonl",
+  "api21_data_coverage": {
+    "observed_train_date_min": "20000107",
+    "observed_train_date_max": "20260930",
+    "rows_after_requested_cutoff": 0,
+    "rows_without_parseable_train_date": 0,
+    "page_sha256_and_count_checks": "passed for all 37 response pages"
+  },
+  "api21_initial_failed_authorization_attempt": {
+    "manifest": "raw/api21_1/partitions/year_2026/attempts/20261001T153247.916166Z/attempt_manifest.json",
+    "http_status": 403,
+    "error_code": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
+    "reason_code": "30",
+    "attempt_reporting_cutoff": "2026-10-01"
+  },
+  "api21_aborted_client_error_attempt": {
+    "manifest": "raw/api21_1/partitions/year_2026/attempts/20261001T162325.052286Z/attempt_manifest.json",
+    "status": "aborted_code_error",
+    "preserved_successful_page_rows": 807,
+    "note": "The raw page is retained unchanged; subsequent corrected attempt completed successfully."
+  },
+  "raw_data_coverage_note": "Annual response pages preserve source rows byte-for-byte. The 2026 API response returned through 2026-09-30; candidate cutoff remains 2026-10-02.",
+  "historical_authorization_state": {
+    "previously_blocked_error": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR reason 30; original attempt preserved in api21_initial_failed_authorization_attempt.",
+    "current_state": "API21 annual collection succeeded after service-key reuse was reported complete."
+  }
+}

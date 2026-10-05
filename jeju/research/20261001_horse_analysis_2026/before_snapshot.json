@@ -1,0 +1,66 @@
+{
+  "retrieved_at_utc": "2026-10-01T08:53:36.351082+00:00",
+  "tables": {
+    "api303_corner_rank_rows": {
+      "rows": 19933,
+      "ordered_rows_sha256": "d04f500632247a06d40fe641b2cd5223f38109e222b57ad9d0f253d6fdd530b9"
+    },
+    "api_records": {
+      "rows": 250713,
+      "ordered_rows_sha256": "e519cf0c37bd922b5687f58156f6307651ba9593ffd66f91e467441f7c0d8250"
+    },
+    "breed_evidence": {
+      "rows": 38994,
+      "ordered_rows_sha256": "38a3e9264e83c62bbae946a4369d276657ca3f897cd3755808c597acc6c51fbb"
+    },
+    "collection_coverage": {
+      "rows": 77,
+      "ordered_rows_sha256": "cd1087382695c06e0a44c2998ba10fec8f785bd8786455befc83c458476e8792"
+    },
+    "horse_profile_observations": {
+      "rows": 4617,
+      "ordered_rows_sha256": "3843423e265927eaf8fe67c3667acdfa5155b9239eeb78da9788534d7f87fe38"
+    },
+    "provenance_issues": {
+      "rows": 1,
+      "ordered_rows_sha256": "4c6ad6dd08d6c39db66d3f32d61481f072cb6e9674d52967c03fe44c8f5b5271"
+    },
+    "race_result_rows": {
+      "rows": 191604,
+      "ordered_rows_sha256": "8002b635eff5bb379a279a922c8653f65a7c46d3a06e96bc7bf18b7dd422843b"
+    },
+    "running_trial_rows": {
+      "rows": 34377,
+      "ordered_rows_sha256": "469aa1b0e754e26c9bf1be6e767e0c2d9f73f7c624442590ac95356aec7be401"
+    },
+    "schema_metadata": {
+      "rows": 9,
+      "ordered_rows_sha256": "e52f64b0d2286afba408f11bc0a53ab4dfca42772df195e164bfa2b373df7cbb"
+    },
+    "source_artifacts": {
+      "rows": 4722,
+      "ordered_rows_sha256": "8d5fa54543a4410f2df2884337927f14076e9f2bdeec910deb953318990f0252"
+    },
+    "supplemental_facts": {
+      "rows": 4,
+      "ordered_rows_sha256": "25e155493c6f656b65e96971705a562d14703a4b02d9ffc587ba9c0024eeb366"
+    }
+  },
+  "views": {
+    "jeju_race_population_candidates": "CREATE VIEW jeju_race_population_candidates AS\nSELECT * FROM race_result_rows\nWHERE breed_assessment IN (\n    'rank_class_candidate', 'api_cross_reference_candidate', 'program_rule_candidate'\n)",
+    "api_explicit_jeju_trial_rows": "CREATE VIEW api_explicit_jeju_trial_rows AS\nSELECT * FROM running_trial_rows\nWHERE breed_assessment = 'api_native_label'",
+    "jeju_race_population_candidate_passing_orders": "CREATE VIEW jeju_race_population_candidate_passing_orders AS\nSELECT c.*,\n       json_extract(a.payload_json, '$.sjS1fOrd') AS api4_3_sjS1fOrd_raw,\n       json_type(a.payload_json, '$.sjS1fOrd') AS api4_3_sjS1fOrd_json_type,\n       json_extract(a.payload_json, '$.sjG1fOrd') AS api4_3_sjG1fOrd_raw,\n       json_type(a.payload_json, '$.sjG1fOrd') AS api4_3_sjG1fOrd_json_type,\n       json_extract(a.payload_json, '$.sjG3fOrd') AS api4_3_sjG3fOrd_raw,\n       json_type(a.payload_json, '$.sjG3fOrd') AS api4_3_sjG3fOrd_json_type,\n       json_extract(a.payload_json, '$.sj_1cOrd') AS api4_3_sj_1cOrd_raw,\n       json_type(a.payload_json, '$.sj_1cOrd') AS api4_3_sj_1cOrd_json_type,\n       json_extract(a.payload_json, '$.sj_2cOrd') AS api4_3_sj_2cOrd_raw,\n       json_type(a.payload_json, '$.sj_2cOrd') AS api4_3_sj_2cOrd_json_type,\n       json_extract(a.payload_json, '$.sj_3cOrd') AS api4_3_sj_3cOrd_raw,\n       json_type(a.payload_json, '$.sj_3cOrd') AS api4_3_sj_3cOrd_json_type,\n       json_extract(a.payload_json, '$.sj_4cOrd') AS api4_3_sj_4cOrd_raw,\n       json_type(a.payload_json, '$.sj_4cOrd') AS api4_3_sj_4cOrd_json_type,\n       a.payload_sha256 AS api4_3_payload_sha256,\n       sa.source_artifact_id AS api4_3_source_artifact_id,\n       sa.sha256 AS api4_3_source_page_sha256,\n       sa.raw_relative_path AS api4_3_source_page_path\nFROM jeju_race_population_candidates c\nJOIN api_records a ON a.api_record_id = c.api_record_id\nJOIN source_artifacts sa ON sa.source_artifact_id = a.source_artifact_id",
+    "jeju_race_candidate_corner_rank_coverage": "CREATE VIEW jeju_race_candidate_corner_rank_coverage AS\nSELECT c.race_date, c.meet_code, c.race_number,\n       count(*) AS candidate_horse_rows,\n       cr.api_record_id AS api303_api_record_id,\n       CASE WHEN cr.api_record_id IS NULL THEN 0 ELSE 1 END AS api303_present,\n       CASE WHEN cr.api_record_id IS NOT NULL AND (\n           coalesce(trim(cr.corner_1_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_2_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_3_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_4_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_5_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_6_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_7_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_8_raw), '') NOT IN ('', '-', 'X') OR\n           coalesce(trim(cr.corner_9_raw), '') NOT IN ('', '-', 'X')\n       ) THEN 1 ELSE 0 END AS api303_has_corner_order_content,\n       CASE WHEN cr.api_record_id IS NOT NULL AND (\n           coalesce(trim(cr.passtime_3f_raw), '') NOT IN ('', '0:00.0', '0:00') OR\n           coalesce(trim(cr.passtime_4f_raw), '') NOT IN ('', '0:00.0', '0:00')\n       ) THEN 1 ELSE 0 END AS api303_has_nonzero_passing_time,\n       cra.payload_sha256 AS api303_payload_sha256,\n       sa.sha256 AS api303_source_page_sha256,\n       sa.raw_relative_path AS api303_source_page_path\nFROM jeju_race_population_candidates c\nLEFT JOIN api303_corner_rank_rows cr\n  ON cr.race_date = c.race_date\n AND cr.meet_code = c.meet_code\n AND cr.race_number = c.race_number\nLEFT JOIN api_records cra ON cra.api_record_id = cr.api_record_id\nLEFT JOIN source_artifacts sa ON sa.source_artifact_id = cra.source_artifact_id\nGROUP BY c.race_date, c.meet_code, c.race_number",
+    "jeju_race_candidate_passing_with_corner_rank": "CREATE VIEW jeju_race_candidate_passing_with_corner_rank AS\nSELECT p.*,\n       cr.api_record_id AS api303_api_record_id,\n       json_extract(cra.payload_json, '$.meet') AS api303_meet_raw,\n       json_type(cra.payload_json, '$.meet') AS api303_meet_json_type,\n       json_extract(cra.payload_json, '$.corner_1') AS api303_corner_1_raw,\n       json_type(cra.payload_json, '$.corner_1') AS api303_corner_1_json_type,\n       json_extract(cra.payload_json, '$.corner_2') AS api303_corner_2_raw,\n       json_type(cra.payload_json, '$.corner_2') AS api303_corner_2_json_type,\n       json_extract(cra.payload_json, '$.corner_3') AS api303_corner_3_raw,\n       json_type(cra.payload_json, '$.corner_3') AS api303_corner_3_json_type,\n       json_extract(cra.payload_json, '$.corner_4') AS api303_corner_4_raw,\n       json_type(cra.payload_json, '$.corner_4') AS api303_corner_4_json_type,\n       json_extract(cra.payload_json, '$.corner_5') AS api303_corner_5_raw,\n       json_type(cra.payload_json, '$.corner_5') AS api303_corner_5_json_type,\n       json_extract(cra.payload_json, '$.corner_6') AS api303_corner_6_raw,\n       json_type(cra.payload_json, '$.corner_6') AS api303_corner_6_json_type,\n       json_extract(cra.payload_json, '$.corner_7') AS api303_corner_7_raw,\n       json_type(cra.payload_json, '$.corner_7') AS api303_corner_7_json_type,\n       json_extract(cra.payload_json, '$.corner_8') AS api303_corner_8_raw,\n       json_type(cra.payload_json, '$.corner_8') AS api303_corner_8_json_type,\n       json_extract(cra.payload_json, '$.corner_9') AS api303_corner_9_raw,\n       json_type(cra.payload_json, '$.corner_9') AS api303_corner_9_json_type,\n       json_extract(cra.payload_json, '$.passtime_3f') AS api303_passtime_3f_raw,\n       json_type(cra.payload_json, '$.passtime_3f') AS api303_passtime_3f_json_type,\n       json_extract(cra.payload_json, '$.passtime_4f') AS api303_passtime_4f_raw,\n       json_type(cra.payload_json, '$.passtime_4f') AS api303_passtime_4f_json_type,\n       json_extract(cra.payload_json, '$.tempo') AS api303_tempo_raw,\n       json_type(cra.payload_json, '$.tempo') AS api303_tempo_json_type,\n       cra.payload_sha256 AS api303_payload_sha256,\n       sa.source_artifact_id AS api303_source_artifact_id,\n       sa.sha256 AS api303_source_page_sha256,\n       sa.raw_relative_path AS api303_source_page_path\nFROM jeju_race_population_candidate_passing_orders p\nLEFT JOIN api303_corner_rank_rows cr\n  ON cr.race_date = p.race_date\n AND cr.meet_code = p.meet_code\n AND cr.race_number = p.race_number\nLEFT JOIN api_records cra ON cra.api_record_id = cr.api_record_id\nLEFT JOIN source_artifacts sa ON sa.source_artifact_id = cra.source_artifact_id",
+    "horse_profile_latest": "CREATE VIEW horse_profile_latest AS\nWITH ranked AS (\n    SELECT hpo.*,\n           row_number() OVER (\n               PARTITION BY hpo.horse_id\n               ORDER BY hpo.observed_at_utc DESC, hpo.api_record_id DESC\n           ) AS observation_rank\n    FROM horse_profile_observations hpo\n)\nSELECT r.horse_profile_observation_id,\n       r.api_record_id,\n       r.horse_id,\n       r.observed_at_utc,\n       r.observed_kst_date,\n       r.horse_name_raw,\n       r.birth_date_raw,\n       r.age_raw,\n       r.breed_label_raw,\n       r.sex_raw,\n       r.color_raw,\n       r.production_country_raw,\n       a.payload_json,\n       a.payload_sha256,\n       sa.source_artifact_id,\n       sa.sha256 AS source_response_sha256,\n       sa.raw_relative_path\nFROM ranked r\nJOIN api_records a ON a.api_record_id = r.api_record_id\nJOIN source_artifacts sa ON sa.source_artifact_id = a.source_artifact_id\nWHERE r.observation_rank = 1"
+  },
+  "candidate_rows": 92513,
+  "native_trial_rows": 15738,
+  "native_trial_missing_profiles": 0,
+  "torjong_race": [
+    326,
+    "3005897",
+    "토종등극",
+    "{\"age\":8,\"buG1fAccTime\":0,\"buG1fOrd\":0,\"buG2fAccTime\":0,\"buG2fOrd\":0,\"buG3fAccTime\":0,\"buG3fOrd\":0,\"buG4fAccTime\":0,\"buG4fOrd\":0,\"buG6fAccTime\":0,\"buG6fOrd\":0,\"buG8fAccTime\":0,\"buG8fOrd\":0,\"buS1fAccTime\":0,\"buS1fOrd\":0,\"buS1fTime\":0,\"bu_10_8fTime\":0,\"bu_1fGTime\":0,\"bu_2fGTime\":0,\"bu_3fGTime\":0,\"bu_4_2fTime\":0,\"bu_6_4fTime\":0,\"bu_8_6fTime\":0,\"budam\":\"별정Ⅰ\",\"buga1\":0,\"buga2\":0,\"buga3\":0,\"chaksun1\":4686300,\"chaksun2\":2499360,\"chaksun3\":1353820,\"chaksun4\":1041400,\"chaksun5\":833120,\"chulNo\":2,\"diffUnit\":2,\"hrName\":\"토종등극\",\"hrNameEn\":\"T'OJONGDEUNGGEUK\",\"hrNo\":3005897,\"ilsu\":87,\"jeG1fTime\":19.2,\"jeG3fTime\":53.7,\"jeS1fTime\":18.3,\"je_1cTime\":0,\"je_2cTime\":0,\"je_3cTime\":18.3,\"je_4cTime\":35.2,\"jkName\":\"정영수\",\"jkNameEn\":\"JUNG YOUNG SOO\",\"jkNo\":\"003020\",\"meet\":\"제주\",\"name\":\"한국\",\"ord\":10,\"owName\":\"김보준\",\"owNameEn\":\"KIM BO JOON\",\"owNo\":\"001127\",\"plcOdds\":9.9,\"prizeCond\":\"650만점이하\",\"rank\":\"제1\",\"rating\":0,\"rcDate\":20021214,\"rcDay\":\"토요일\",\"rcDist\":800,\"rcName\":\"일반\",\"rcNo\":3,\"rcTime\":72,\"seG1fAccTime\":0,\"seG3fAccTime\":0,\"seS1fAccTime\":0,\"se_1cAccTime\":0,\"se_2cAccTime\":0,\"se_3cAccTime\":0,\"se_4cAccTime\":0,\"sex\":\"수\",\"sexCond\":\"암수거\",\"sjG1fOrd\":10,\"sjG3fOrd\":0,\"sjS1fOrd\":6,\"sj_1cOrd\":0,\"sj_2cOrd\":0,\"sj_3cOrd\":6,\"sj_4cOrd\":8,\"trName\":\"김영래\",\"trNameEn\":\"Kim Young Rae\",\"trNo\":\"002019\",\"track\":\"포화 (15%)\",\"weather\":\"흐림\",\"wgBudam\":51,\"wgHr\":\"251(+1)\",\"winOdds\":58.2}"
+  ]
+}

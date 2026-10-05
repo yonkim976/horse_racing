@@ -1,0 +1,89 @@
+{
+  "source": "archived API24_1 raw response bodies and collection ledger; no new requests made for this audit",
+  "cause_assessment": "unknown; date scope mismatches are observed response behavior and are not attributed to ignored filters or race-day mapping",
+  "mismatch_partitions": [
+    {
+      "ledger_status": "validation_failed",
+      "requested_rc_date": "20260707",
+      "result_code": "00",
+      "api_total_count": 69,
+      "actual_rows": 69,
+      "expected_pages": 1,
+      "actual_pages": 1,
+      "returned_rcDate_counts": {
+        "20260704": 69
+      },
+      "response_sha256": "b747a27fb9bbb0651e238891f828b7da86cf286f7af826f8b9ac49d48df389ef",
+      "response_file": "raw/api24_1/20260707/page_0001.json",
+      "previous_normal_race_date": "20260704",
+      "byte_identical_to_previous_normal": true
+    },
+    {
+      "ledger_status": "validation_failed",
+      "requested_rc_date": "20260825",
+      "result_code": "00",
+      "api_total_count": 67,
+      "actual_rows": 67,
+      "expected_pages": 1,
+      "actual_pages": 1,
+      "returned_rcDate_counts": {
+        "20260822": 67
+      },
+      "response_sha256": "5770fec8ec1e5f7b5191c10ca6f61d97742bb5a35a263d8e7c16b89777ee465a",
+      "response_file": "raw/api24_1/20260825/page_0001.json",
+      "previous_normal_race_date": "20260822",
+      "byte_identical_to_previous_normal": true
+    },
+    {
+      "ledger_status": "validation_failed",
+      "requested_rc_date": "20260826",
+      "result_code": "00",
+      "api_total_count": 67,
+      "actual_rows": 67,
+      "expected_pages": 1,
+      "actual_pages": 1,
+      "returned_rcDate_counts": {
+        "20260822": 67
+      },
+      "response_sha256": "5770fec8ec1e5f7b5191c10ca6f61d97742bb5a35a263d8e7c16b89777ee465a",
+      "response_file": "raw/api24_1/20260826/page_0001.json",
+      "previous_normal_race_date": "20260822",
+      "byte_identical_to_previous_normal": true
+    }
+  ],
+  "following_scope_valid_partitions": [
+    {
+      "ledger_status": "complete",
+      "requested_rc_date": "20260828",
+      "result_code": "00",
+      "api_total_count": 80,
+      "actual_rows": 80,
+      "expected_pages": 1,
+      "actual_pages": 1,
+      "returned_rcDate_counts": {
+        "20260828": 80
+      },
+      "response_sha256": "6489a94d7bcd0773bfd3fc3892917d53c8258e1baf1691414bc37b291037671b",
+      "response_file": "raw/api24_1/20260828/page_0001.json",
+      "previous_normal_race_date": "20260822",
+      "byte_identical_to_previous_normal": false
+    },
+    {
+      "ledger_status": "complete",
+      "requested_rc_date": "20260829",
+      "result_code": "00",
+      "api_total_count": 68,
+      "actual_rows": 68,
+      "expected_pages": 1,
+      "actual_pages": 1,
+      "returned_rcDate_counts": {
+        "20260829": 68
+      },
+      "response_sha256": "7565a2ac290ab7cd5f680a270ccc397db422d7efcec5a3373ad4f9a035c79cc4",
+      "response_file": "raw/api24_1/20260829/page_0001.json",
+      "previous_normal_race_date": "20260828",
+      "byte_identical_to_previous_normal": false
+    }
+  ],
+  "note": "2026-08-25 and 2026-08-26 bodies are both byte-identical to 2026-08-22; 2026-07-07 body is byte-identical to 2026-07-04."
+}

@@ -1,0 +1,580 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "한국마사회 서울, 부산경남, 제주 경마장의 출발심사 결과 정보를 제공합니다.(제공자료는 시행경마장명, 출발심사일자, 심사차수, 경주번호, 출전번호, 마명, 마번, 산지, 성별, 나이, 기승자, 조교사명, 조교사 고유번호, 마주명, 마주번호, 판정, 심사사유, 불합격사유 자료입니다.) \\n- 요청메세지로 시행경마장구분(meet), 훈련심사년도(tr_year), 훈련심사년월(tr_month), 훈련심사일자(tr_date)를 이용하여 자료를 조회할 수 있습니다. 요청메시지 중 심사관련 연도, 년월, 일자 등의 날짜 변수를 모두 누락한 경우에는 최근 한달간의 정보가 표출됩니다.",
+    "version": "1.0.0",
+    "title": "한국마사회 출발심사 결과"
+  },
+  "host": "apis.data.go.kr/B551015/API21_1",
+  "basePath": "",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/startingTestResult_1": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "description": "header",
+                  "properties": {
+                    "resultCode": {
+                      "type": "string",
+                      "description": "결과코드",
+                      "properties": {}
+                    },
+                    "resultMsg": {
+                      "type": "string",
+                      "description": "결과메시지",
+                      "properties": {}
+                    }
+                  }
+                },
+                "body": {
+                  "type": "object",
+                  "description": "body",
+                  "properties": {
+                    "items": {
+                      "type": "object",
+                      "description": "items",
+                      "properties": {
+                        "item": {
+                          "type": "object",
+                          "description": "item",
+                          "properties": {
+                            "meet": {
+                              "type": "string",
+                              "description": "시행경마장명",
+                              "properties": {}
+                            },
+                            "trainDate": {
+                              "type": "string",
+                              "description": "출발심사일자",
+                              "properties": {}
+                            },
+                            "daySerial": {
+                              "type": "string",
+                              "description": "심사차수",
+                              "properties": {}
+                            },
+                            "trainNo": {
+                              "type": "string",
+                              "description": "경주번호",
+                              "properties": {}
+                            },
+                            "chulNo": {
+                              "type": "string",
+                              "description": "마번(출주번호)",
+                              "properties": {}
+                            },
+                            "hrName": {
+                              "type": "string",
+                              "description": "마명",
+                              "properties": {}
+                            },
+                            "hrNo": {
+                              "type": "string",
+                              "description": "마번(고유번호)",
+                              "properties": {}
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "산지",
+                              "properties": {}
+                            },
+                            "sex": {
+                              "type": "string",
+                              "description": "성별",
+                              "properties": {}
+                            },
+                            "age": {
+                              "type": "string",
+                              "description": "연령",
+                              "properties": {}
+                            },
+                            "rider": {
+                              "type": "string",
+                              "description": "기승자",
+                              "properties": {}
+                            },
+                            "trName": {
+                              "type": "string",
+                              "description": "조교사명",
+                              "properties": {}
+                            },
+                            "trNo": {
+                              "type": "string",
+                              "description": "조교사번호",
+                              "properties": {}
+                            },
+                            "owName": {
+                              "type": "string",
+                              "description": "마주명",
+                              "properties": {}
+                            },
+                            "owNo": {
+                              "type": "string",
+                              "description": "마주번호",
+                              "properties": {}
+                            },
+                            "passFlag": {
+                              "type": "string",
+                              "description": "판정",
+                              "properties": {}
+                            },
+                            "reason": {
+                              "type": "string",
+                              "description": "심사사유",
+                              "properties": {}
+                            },
+                            "nopassReason": {
+                              "type": "string",
+                              "description": "불합격사유",
+                              "properties": {}
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "numOfRows": {
+                      "type": "string",
+                      "description": "numOfRows\\t",
+                      "properties": {}
+                    },
+                    "pageNo": {
+                      "type": "string",
+                      "description": "pageNo",
+                      "properties": {}
+                    },
+                    "totalCount": {
+                      "type": "string",
+                      "description": "totalCount\\t",
+                      "properties": {}
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "response"
+              }
+            }
+          }
+        },
+        "tags": [
+          "API 목록"
+        ],
+        "summary": "출발심사결과 정보",
+        "description": "서울, 부산경남, 제주 경마장에서 시행된 출발심사결과 정보 (출발심사일자, 심사차수, 마명, 산지 등)",
+        "operationId": "startingTestResult_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "ServiceKey",
+          "description": "공공데이터포털에서 받은 인증키",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        {
+          "name": "pageNo",
+          "description": "페이지번호",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        {
+          "name": "numOfRows",
+          "description": "한 페이지 결과 수",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        {
+          "name": "meet",
+          "description": "시행경마장구분",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        },
+        {
+          "name": "tr_date",
+          "description": "훈련일(YYYYMMDD형식)",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        },
+        {
+          "name": "tr_month",
+          "description": "훈련월(YYYYMM형식)",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        },
+        {
+          "name": "tr_year",
+          "description": "훈련년(YYYY형식)",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        },
+        {
+          "name": "_type",
+          "description": "데이터형식변경",
+          "type": "string",
+          "required": false,
+          "in": "query"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "description": "결과코드"
+        },
+        "resultMsg": {
+          "type": "string",
+          "description": "결과메시지"
+        }
+      }
+    },
+    "body": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "$ref": "#/definitions/items"
+        },
+        "numOfRows": {
+          "type": "string",
+          "description": "numOfRows    "
+        },
+        "pageNo": {
+          "type": "string",
+          "description": "pageNo"
+        },
+        "totalCount": {
+          "type": "string",
+          "description": "totalCount    "
+        }
+      }
+    },
+    "items": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/item"
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "properties": {
+        "meet": {
+          "type": "string",
+          "description": "시행경마장명"
+        },
+        "trainDate": {
+          "type": "string",
+          "description": "출발심사일자"
+        },
+        "daySerial": {
+          "type": "string",
+          "description": "심사차수"
+        },
+        "trainNo": {
+          "type": "string",
+          "description": "경주번호"
+        },
+        "chulNo": {
+          "type": "string",
+          "description": "마번(출주번호)"
+        },
+        "hrName": {
+          "type": "string",
+          "description": "마명"
+        },
+        "hrNo": {
+          "type": "string",
+          "description": "마번(고유번호)"
+        },
+        "name": {
+          "type": "string",
+          "description": "산지"
+        },
+        "sex": {
+          "type": "string",
+          "description": "성별"
+        },
+        "age": {
+          "type": "string",
+          "description": "연령"
+        },
+        "rider": {
+          "type": "string",
+          "description": "기승자"
+        },
+        "trName": {
+          "type": "string",
+          "description": "조교사명"
+        },
+        "trNo": {
+          "type": "string",
+          "description": "조교사번호"
+        },
+        "owName": {
+          "type": "string",
+          "description": "마주명"
+        },
+        "owNo": {
+          "type": "string",
+          "description": "마주번호"
+        },
+        "passFlag": {
+          "type": "string",
+          "description": "판정"
+        },
+        "reason": {
+          "type": "string",
+          "description": "심사사유"
+        },
+        "nopassReason": {
+          "type": "string",
+          "description": "불합격사유"
+        }
+      }
+    },
+    "startingTestResult_1_response": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "header",
+          "properties": {
+            "resultCode": {
+              "type": "string",
+              "description": "결과코드"
+            },
+            "resultMsg": {
+              "type": "string",
+              "description": "결과메시지"
+            }
+          }
+        },
+        "body": {
+          "type": "object",
+          "description": "body",
+          "properties": {
+            "items": {
+              "type": "object",
+              "description": "items",
+              "properties": {
+                "item": {
+                  "type": "object",
+                  "description": "item",
+                  "properties": {
+                    "meet": {
+                      "type": "string",
+                      "description": "시행경마장명"
+                    },
+                    "trainDate": {
+                      "type": "string",
+                      "description": "출발심사일자"
+                    },
+                    "daySerial": {
+                      "type": "string",
+                      "description": "심사차수"
+                    },
+                    "trainNo": {
+                      "type": "string",
+                      "description": "경주번호"
+                    },
+                    "chulNo": {
+                      "type": "string",
+                      "description": "마번(출주번호)"
+                    },
+                    "hrName": {
+                      "type": "string",
+                      "description": "마명"
+                    },
+                    "hrNo": {
+                      "type": "string",
+                      "description": "마번(고유번호)"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "산지"
+                    },
+                    "sex": {
+                      "type": "string",
+                      "description": "성별"
+                    },
+                    "age": {
+                      "type": "string",
+                      "description": "연령"
+                    },
+                    "rider": {
+                      "type": "string",
+                      "description": "기승자"
+                    },
+                    "trName": {
+                      "type": "string",
+                      "description": "조교사명"
+                    },
+                    "trNo": {
+                      "type": "string",
+                      "description": "조교사번호"
+                    },
+                    "owName": {
+                      "type": "string",
+                      "description": "마주명"
+                    },
+                    "owNo": {
+                      "type": "string",
+                      "description": "마주번호"
+                    },
+                    "passFlag": {
+                      "type": "string",
+                      "description": "판정"
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "심사사유"
+                    },
+                    "nopassReason": {
+                      "type": "string",
+                      "description": "불합격사유"
+                    }
+                  }
+                }
+              }
+            },
+            "numOfRows": {
+              "type": "string",
+              "description": "numOfRows\\t"
+            },
+            "pageNo": {
+              "type": "string",
+              "description": "pageNo"
+            },
+            "totalCount": {
+              "type": "string",
+              "description": "totalCount\\t"
+            }
+          }
+        }
+      }
+    }
+  },
+  "swaggerOprtinVOs": [
+    {
+      "oprtinUrl": "http://kradata.kra.co.kr:8082/service/api21/getOpenDataList",
+      "oprtinNm": "출발심사결과 정보",
+      "oprtinDc": "서울, 부산경남, 제주 경마장에서 시행된 출발심사결과 정보 (출발심사일자, 심사차수, 마명, 산지 등)",
+      "gwSvcNm": "startingTestResult_1",
+      "operationId": "startingTestResult_1",
+      "publicDataTyDetailCode": "PRDE02",
+      "reqList": [
+        {
+          "paramtrNm": "ServiceKey",
+          "paramtrDc": "공공데이터포털에서 받은 인증키",
+          "paramtrBassValue": "-",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "pageNo",
+          "paramtrDc": "페이지번호",
+          "paramtrBassValue": "1",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "numOfRows",
+          "paramtrDc": "한 페이지 결과 수",
+          "paramtrBassValue": "10",
+          "paramtrTy": "string",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "meet",
+          "paramtrDc": "시행경마장구분",
+          "paramtrBassValue": "1",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tr_date",
+          "paramtrDc": "훈련일(YYYYMMDD형식)",
+          "paramtrBassValue": "20220901",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tr_month",
+          "paramtrDc": "훈련월(YYYYMM형식)",
+          "paramtrBassValue": "202209",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        },
+        {
+          "paramtrNm": "tr_year",
+          "paramtrDc": "훈련년(YYYY형식)",
+          "paramtrBassValue": "2022",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        },
+        {
+          "paramtrNm": "_type",
+          "paramtrDc": "데이터형식변경",
+          "paramtrBassValue": "xml",
+          "paramtrTy": "string",
+          "paramtrDivision": "옵션",
+          "ck": true
+        }
+      ],
+      "resList": [
+        {
+          "paramtrNm": "header",
+          "paramtrDc": "header",
+          "paramtrDefNm": "#/definitions/header",
+          "subDefNm": "header",
+          "paramtrTy": "object",
+          "paramtrDivision": "필수",
+          "ck": true
+        },
+        {
+          "paramtrNm": "body",
+          "paramtrDc": "body",
+          "paramtrDefNm": "#/definitions/body",
+          "subDefNm": "body",
+          "paramtrTy": "object",
+          "paramtrDivision": "필수",
+          "ck": true
+        }
+      ]
+    }
+  ]
+}

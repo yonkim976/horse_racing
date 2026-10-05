@@ -1,0 +1,84 @@
+{
+  "checked_at_kst": "2026-10-01",
+  "database_access": "mode=ro; no database or code changes",
+  "name_case": {
+    "horse_id": "3107458",
+    "identity_match": "Official KRA program and horse profile agree on birth date 2023-03-25, sex 암, gray coat, sire 태흥성, dam 신천백호, trainer 심도연, and owner 정창학; they identify the same horse despite the displayed-name difference.",
+    "current_kra_profile": {
+      "name": "무명전설",
+      "sex": "암",
+      "birth_date": "2023-03-25",
+      "registration_period": "2025-10-15 through 2026-04-01",
+      "source_file": "profile_3107458.html"
+    },
+    "race_day_sources": {
+      "date": "2026-01-16",
+      "meet": "Jeju",
+      "race": 1,
+      "horse_number": 3,
+      "entry_program_and_jockey_sheet_name": "동방라오",
+      "final_score_table_name": "무명전설",
+      "final_status": "출전제외",
+      "exclusion_reason": "왼 앞다리 절음",
+      "stewards_report_display_name": "동방라오",
+      "source_files": [
+        "race_program_20260116_jeju_r1.pdf",
+        "jockey_mounts_20260116_jeju.pdf",
+        "result_20260116_jeju_r1.html"
+      ]
+    },
+    "change_fields": {
+      "API42_hrNmDt": "20251015",
+      "official_hrNmDt_description": "마명부여일",
+      "API42_beforeHrNm": "-",
+      "API42_hrNmChgDt": "-",
+      "conclusion": "Evidence supports an official current-name assignment by 2025-10-15 while contemporaneous static race materials retain 동방라오. A formal prior-name/change-date record and the reason for the change were not found in the public material reviewed. This supports a name transition with stale historical display text, but does not establish the formal rename date or cause."
+    },
+    "api20_historical_trial_rows": {
+      "records": [
+        {"event_date": "2025-10-30", "horse_id": "3107458", "name": "무명전설", "sex": "암"},
+        {"event_date": "2025-11-06", "horse_id": "3107458", "name": "무명전설", "sex": "암"}
+      ],
+      "retrieved_at_utc": "2026-09-29T13:30:00.807000+00:00",
+      "source_artifact_id": 76,
+      "raw_file": "jeju/research/20260929_trial_api_backfill_2003_2025/raw/trials/2025/attempts/20260929T133000.261112Z/source_pages/page_0001.json",
+      "raw_bytes": 702381,
+      "raw_sha256": "91beedb3eb9a5a5b4cc36a8479cbd3dda3d9866af49072b7ab41010c052bc74d",
+      "temporal_caveat": "This historical trial API page was retrieved in 2026; its horse name can reflect the current profile name and is not a contemporaneous 2025 name-change log."
+    }
+  },
+  "sex_case": {
+    "horse_id": "3005897",
+    "name": "토종등극",
+    "identity_match": "The API42 profile, API20 trial row, and KRA race-result row all use official horse ID 3005897 and name 토종등극.",
+    "current_kra_profile": {
+      "sex": "암",
+      "birth_date": "1994-04-01",
+      "career_record": "1전; 출전기간 2002-12-14 only",
+      "source_file": "profile_3005897.html"
+    },
+    "api20_pre_race_trial": {
+      "date": "2002-11-22",
+      "sex": "암",
+      "age": 8,
+      "source_artifact_id": 30,
+      "retrieved_at_utc": "2026-09-29T13:34:13.066000+00:00",
+      "raw_file": "jeju/research/20260929_trial_api_backfill_2003_2025/raw/trials/2002/attempts/20260929T133412.505836Z/source_pages/page_0001.json",
+      "raw_bytes": 678267,
+      "raw_sha256": "abd5d0ecc4ec02b8036752a18b9e36b4e98dc88004c33e597136f3cb4354cd0a"
+    },
+    "kra_race_result": {
+      "date": "2002-12-14",
+      "race": 3,
+      "horse_number": 2,
+      "sex": "수",
+      "age": 8,
+      "finish": "10위, 1:12.0",
+      "was_scratched": false,
+      "source_file": "result_20021214_jeju_r3.html"
+    },
+    "conclusion": "One historical race row conflicts with the same-ID KRA profile and the API20 trial record from 22 days earlier. It is not a join mismatch or a scratch record. The reviewed public sources establish the source-data inconsistency but do not identify whether the historical event row or the later profile entry was the original mistake."
+  },
+  "public_kra_html_sources_manifest": "source_fetches.json",
+  "public_kra_pdf_sources_manifest": "additional_sources.json"
+}

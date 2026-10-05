@@ -1,0 +1,125 @@
+{
+  "status": "partial_probe_not_full_history",
+  "source_role": "temporary_validation_and_supplement_candidate_until_official_API21_1_access_is_resolved",
+  "database_written": false,
+  "api_primary_source": {
+    "name": "KRA OpenAPI API21_1 startingTestResult_1",
+    "status": "access_denied",
+    "http_status": 403,
+    "error_code": "30",
+    "error_message": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
+    "website_is_not_a_substitute": true
+  },
+  "website_ui": {
+    "official_host": "race.kra.co.kr",
+    "list_endpoint": "https://race.kra.co.kr/referee/StartingRacingTrainCheckList.do?Act=07&Sub=6&meet=2",
+    "list_method": "POST",
+    "visible_list_form_fields": ["pageIndex"],
+    "date_filter_controls_found": false,
+    "detail_endpoint": "https://race.kra.co.kr/referee/StartingRacingTrainCheckScoreTable.do",
+    "detail_method": "POST",
+    "detail_parameters": ["meet", "trno", "date", "doFlag", "Act", "Sub"],
+    "detail_pages_per_listed_round": 1,
+    "official_horse_id_location": "detail-row JavaScript link goPage1('<horse_id>', ...); preserve both href and onclick"
+  },
+  "capture_window_utc": {
+    "earliest_bound": "2026-10-01T15:18:42Z",
+    "latest_bound": "2026-10-01T15:28:45Z",
+    "note": "The exact individual retrieval times for page 2 and the detail sample were not recorded; both were fetched within this interval. Page 1 was reused from the earlier official capture listed below."
+  },
+  "artifacts": [
+    {
+      "kind": "listing_page",
+      "page_index": 1,
+      "path": "raw/list_pages/page_0001.html",
+      "method": "GET",
+      "url": "https://race.kra.co.kr/referee/StartingRacingTrainCheckList.do?Act=07&Sub=6&meet=2",
+      "reused_from": "../website_validation/list.html",
+      "observed_at_utc": "2026-10-01T14:52:10.883821+00:00",
+      "bytes": 31521,
+      "sha256": "6245b3dcb0c6afccd289ea7c0c3efcecf3063f1b03846f24aacbd98fc65b37f8",
+      "date_range": ["20260826", "20260930"],
+      "listed_dates": 10,
+      "listed_rounds": 23
+    },
+    {
+      "kind": "listing_page",
+      "page_index": 2,
+      "path": "raw/list_pages/page_0002.html",
+      "method": "POST",
+      "url": "https://race.kra.co.kr/referee/StartingRacingTrainCheckList.do?Act=07&Sub=6&meet=2",
+      "params": {"pageIndex": "2"},
+      "observed_at_window_utc": ["2026-10-01T15:18:42Z", "2026-10-01T15:28:45Z"],
+      "http_status": 200,
+      "bytes": 31292,
+      "sha256": "2dd75fcfd629c6d2971395c2d51a73dd4482992368368a8ec03f31b7f382a8ab",
+      "date_range": ["20260719", "20260823"],
+      "listed_dates": 10,
+      "listed_rounds": 21
+    },
+    {
+      "kind": "detail_page_sample",
+      "path": "raw/detail_pages/20260823_1.html",
+      "method": "POST",
+      "url": "https://race.kra.co.kr/referee/StartingRacingTrainCheckScoreTable.do",
+      "params": {"meet": "2", "trno": "1", "date": "20260823", "doFlag": "결과표", "Act": "07", "Sub": "6"},
+      "observed_at_window_utc": ["2026-10-01T15:18:42Z", "2026-10-01T15:28:45Z"],
+      "http_status": 200,
+      "bytes": 31228,
+      "sha256": "aa616dac921c16ce2955cb24d866f16d98054281a57bdb56dac46fbc866e3437",
+      "date": "20260823",
+      "round": 1,
+      "parsed_horse_rows": 5
+    }
+  ],
+  "probe_counts": {
+    "listing_pages_archived": 2,
+    "listing_dates_archived": 20,
+    "listed_rounds": 44,
+    "detail_pages_archived_in_this_directory": 1,
+    "detail_horse_rows_archived_in_this_directory": 5,
+    "detail_rounds_pending_if_resuming_only_these_two_pages": 43,
+    "new_http_requests_in_this_probe": 2,
+    "listing_page_1_request_already_in_website_validation": true
+  },
+  "volume_estimate": {
+    "basis": "The two 2026 list pages cover 73 calendar days, 20 result dates and 44 rounds; this recent-period density is only a planning proxy.",
+    "date_rate_per_year_approx": 100,
+    "round_rate_per_year_approx": 220,
+    "estimated_list_requests_for_2002_through_2026_approx": 250,
+    "estimated_detail_requests_for_2002_through_2026_approx": 5500,
+    "certainty": "low; historical cadence and the website's oldest retained page were not measured",
+    "full_history_claimed": false
+  },
+  "recent_66_row_crosscheck": {
+    "reference_report": "../website_validation/website_validation_report.json",
+    "reference_independent_verification": "../website_validation/independent_verification.json",
+    "api42_followup_summary": "../api42_followup_summary.json",
+    "date_range": ["20260913", "20260930"],
+    "rows": 66,
+    "official_source_pages": 14,
+    "verified_sha256_count": 14,
+    "listing_count_matches_by_date": true,
+    "judgement_counts": {"합격": 39, "불합격": 15, "1차합격": 12},
+    "rows_with_official_horse_id": 66,
+    "rows_without_official_horse_id": 0,
+    "distinct_horse_ids": 40,
+    "existing_profile_rows": 36,
+    "new_profile_rows": 30,
+    "new_profile_unique_ids": 21,
+    "new_profile_ids_exact_api42_match": 21,
+    "new_profile_ids_with_breed_jeju": 21,
+    "current_jeju_profile_evidence_rows": 66,
+    "historical_breed_confirmed": false,
+    "loaded_to_database": false,
+    "duplicate_source_keys": 0,
+    "interpretation": "Homepage listing/detail count reconciliation and API42 current-profile crosscheck. Historical breed at the exam date is unresolved; this does not prove the website replaces API21_1 as the primary source."
+  },
+  "resume_checkpoint": {
+    "next_list_page_index": 3,
+    "next_oldest_date_cursor": "20260719",
+    "idempotency_keys": ["listing page_index", "detail date + round"],
+    "next_action": "If collection is resumed after API21_1 access review, archive and count list pages first. Do not begin all detail requests until the oldest page and full listing size are known.",
+    "database_write": "prohibited"
+  }
+}

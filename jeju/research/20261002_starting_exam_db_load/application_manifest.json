@@ -1,0 +1,86 @@
+{
+  "status": "complete",
+  "generated_at_utc": "2026-10-01T21:54:13.918026+00:00",
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "database_sha256_after": "34dad9cb2e707625c77056518ecb111582189279146bf6b364ad868dc85dce64",
+  "database_bytes": 1735045120,
+  "backup": {
+    "path": "before_load.sqlite3",
+    "sha256": "372e1dcf82c07d1c3e80f4f25727c08d9d62e674e1f68d1cfe99b9bb1f23c31d"
+  },
+  "source_candidate_sha256": "4965639c7e39c5e1c458bf530106ffb3c9f18f64634444e5720cb1df616a38d1",
+  "inserted": {
+    "api_records": 10685,
+    "breed_evidence": 21,
+    "horse_profile_observations": 21,
+    "schema_metadata_keys": 12,
+    "source_artifacts": 56,
+    "starting_exam_api_rows": 10664
+  },
+  "analysis_rows": 10620,
+  "preserved_after_analysis_cutoff_rows": 44,
+  "profile_total": 4637,
+  "idempotency_replay_added_rows": 0,
+  "existing_all_tables_rows_unchanged": {
+    "schema_metadata": 13,
+    "source_artifacts": 4722,
+    "collection_coverage": 77,
+    "api_records": 250710,
+    "race_result_rows": 191604,
+    "running_trial_rows": 34375,
+    "breed_evidence": 38991,
+    "supplemental_facts": 4,
+    "provenance_issues": 2,
+    "api303_corner_rank_rows": 19933,
+    "horse_profile_observations": 4616,
+    "website_training_artifacts": 2529,
+    "starting_training_website_rows": 295470,
+    "daily_training_api_artifacts": 337,
+    "daily_training_api_rows": 908316
+  },
+  "foreign_key_violations": 0,
+  "sqlite_integrity_check": [
+    "ok"
+  ],
+  "independent_sqlite_quick_check": [
+    "ok"
+  ],
+  "source_payloads_and_normalized_fields_verified": true,
+  "excluded_small_bear_active_rows": 0,
+  "analysis_view_sql_sha256": "641cffd68b171a7821891a2e47698f49c7b535dd6845a1139330f490f2c7f013",
+  "implementation_agent": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "xhigh"
+  },
+  "review_and_application": "root",
+  "root_review_fixes": [
+    "Remove reference to absent v.sex_raw",
+    "Require explicit local DB path and reject shared data/horse_racing.sqlite3",
+    "Materialize current profile lookup per analysis query"
+  ],
+  "network_calls_this_load": 0,
+  "automatic_model_input": false,
+  "artifacts_sha256": {
+    "jeju/research/20261002_starting_exam_db_load/20261002_add_starting_exam_api_rows.sql": "7fec65825e7e064d306fb82a82a9d3c06e4ca5028fe33b271eee46f9846005ff",
+    "jeju/research/20261002_starting_exam_db_load/staging_report.json": "2a7288cc89767350553302ad493491ae379952931389fca5fbef4e8a4e456a0c",
+    "jeju/research/20261002_starting_exam_db_load/root_check_production_precondition.py": "a26e23e9493916c8eddb1f4e39ee737a28722208a7d2e93638fd9f6cfece75e8",
+    "jeju/research/20261002_starting_exam_db_load/staging_independent_verification.json": "15bf650af56c52fa69fa367aee508ad9b7e23fd5dd6ce293342aeefcaf63b0c8",
+    "jeju/research/20261002_starting_exam_db_load/root_source_precheck.json": "9b42152fe3686082ae037d90b52fb0aa2e0361e879461c51e7dbd1a072e7b81b",
+    "jeju/research/20261002_starting_exam_db_load/production_precondition.json": "da00ae0f69e895b8c48c2001cafe60a70058757d8eeb993478316aceaf65faf8",
+    "jeju/research/20261002_starting_exam_db_load/root_followup_profiles.json": "b232e8326dbbf7f00e7936556ece7c0f8a3e424752f62150d5609ffaea20530c",
+    "jeju/research/20261002_starting_exam_db_load/README.md": "9f892ad478f80cfedb31c855a84a7941202169aabec2be9cef14023e0ac7f435",
+    "jeju/research/20261002_starting_exam_db_load/root_verify_loaded_db.py": "b12ec3e11bd5172442c6d0f5c1d95cfc9305ad0f3a5affc515a4ede5d3368cef",
+    "jeju/research/20261002_starting_exam_db_load/production_independent_verification.json": "4ddb3610de08e6cd10e3025045adfc28cc81568e718e584f3685961fa10eae7e",
+    "jeju/research/20261002_starting_exam_db_load/root_prepare_snapshot.py": "d593b7f92159a60228bf4c9f513b0ad30abe22875cff0f858e2eadead3015b83",
+    "jeju/research/20261002_starting_exam_db_load/root_before_load.json": "8a0e60b1696adb62a7b5d11a9dba50c6a7e3ed1aec389daa121fa1db17215cb4",
+    "jeju/research/20261002_starting_exam_db_load/staging_view_optimization_verification.json": "153b2a1926b5b8322c38f41ca143e8f77ce13218c467aa5d604c3140f97bd2ba",
+    "jeju/research/20261002_starting_exam_db_load/production_load_report.json": "6406c6dae421b33031eeff10eb3b321ab60d81e1dba458127fc1ebb3a41f7927",
+    "jeju/research/20261002_starting_exam_db_load/load_starting_exam_api.py": "dd1bb8b98fc9c97a5a4aca5cdc069488efb207e085f4358f88e3292f7e355dbd",
+    "jeju/AGENTS.md": "2c94f26175446a20886023af3ccccbc90d7f68ef17496a7f377dec253e9f1b4d",
+    "jeju/docs/JEJU_NATIVE_DB_COLLECTION_PLAN_2026-09-29.md": "26a821ecb892f86ab2a42a6fab8bf3b1bb59f7a0d3cc9be004972f2a26983c65",
+    "jeju/research/20261001_starting_exam_api_collection/README.md": "31412012add9bcc7c8c3686c987fae94de8ff89840c15b78ab975c44aeb12dc9",
+    "jeju/research/20261002_starting_exam_data_audit/README.md": "9fa9639b8b418f959bdf13b2fff173202b477a1029385ad4c776351abcb95d2e",
+    "docs/KRA_API_USAGE_INVENTORY_2026-09-30.md": "15127b17bdfa243d80f607d5c14c3e9cb06d1f7e65e7cfb695ce4b6ddddfc618",
+    "docs/KRA_APPROVED_42_API_CATALOG_2026-09-30.md": "d2f559a490abd35df455195a17df922d3bf2986a07ecf86a9c42155a654b8377"
+  }
+}
