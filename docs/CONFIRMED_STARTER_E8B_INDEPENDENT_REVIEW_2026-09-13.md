@@ -38,4 +38,4 @@
 이 진단 이후 실제 공개된 미래 출전표로 한 번 더 capture 검증할 시점과 조건을 정한다. 이번에는 자동 수집을 등록하지 않는다. API 대기 문제를 새로운 모델 감사 과제로 늘리지 않는다.
 
 - [검증 JSON 및 재현 소스](../data/logs/confirmed_starter_e8b_independent_review_20260913.json)
-- [다음 에이전트용 제한 원천 진단 지시문](CONFIRMED_STARTER_E8B_SOURCE_CONTROL_AGENT_PROMPT_2026-09-13.md)
+- 당시 다음 에이전트용 제한 원천 진단 지시문은 2026-10-04 사용자 승인으로 삭제했다.

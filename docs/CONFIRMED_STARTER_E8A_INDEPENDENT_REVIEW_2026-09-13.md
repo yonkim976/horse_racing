@@ -55,4 +55,4 @@ target race 7의 entry 11/12에 값 `999/-999`를 넣고, 관계없는 race 999�
 기존 594개 테스트를 유지하고 위 반례를 회귀 테스트로 추가한 새 보완본을 제출한다. attempt4와 기존 보고서·출력은 보존한다. 실제 수집·학습·운영 연결 없이 재검증한다.
 
 - [기계 판독 검증·재현 소스](../data/logs/confirmed_starter_e8a_independent_review_20260913.json)
-- [다음 에이전트 보완 지시문](CONFIRMED_STARTER_E8A_REMEDIATION_AGENT_PROMPT_2026-09-13.md)
+- 당시 다음 에이전트 보완 지시문은 2026-10-04 사용자 승인으로 삭제했다.

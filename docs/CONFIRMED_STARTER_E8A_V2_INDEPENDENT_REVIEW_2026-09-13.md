@@ -50,4 +50,4 @@
 - 전체 diff-check는 기존 `src/horse_racing/web/racecourse.py:347` EOF 빈 줄 1건. 전체 Ruff/format은 이번 재검증에서 재실행하지 않았으며 이전 숫자를 현재 실측으로 주장하지 않는다.
 - 검증 중 실제 수집·tree 학습·확률 발행·성능 계산·실제 결과 조회는 0회. 구현 수정 없이 새 검증 문서·로그·프롬프트만 작성했다.
 
-두 반례와 source는 [검증 JSON](../data/logs/confirmed_starter_e8a_v2_independent_review_20260913.json)에 보존했다. [H1/H2 보완 지시문](CONFIRMED_STARTER_E8A_V2_H1_H2_AGENT_PROMPT_2026-09-13.md)은 이 두 시간 검사와 회귀검증만 요청한다. 실제 수집에 필요한 원천·주기·scheduler 검증은 이번 보완 범위에 추가하지 않는다.
+두 반례와 source는 [검증 JSON](../data/logs/confirmed_starter_e8a_v2_independent_review_20260913.json)에 보존했다. 당시 H1/H2 보완 지시문은 이 두 시간 검사와 회귀검증만 요청했으며, 2026-10-04 사용자 승인으로 삭제했다. 실제 수집에 필요한 원천·주기·scheduler 검증은 이번 보완 범위에 추가하지 않았다.

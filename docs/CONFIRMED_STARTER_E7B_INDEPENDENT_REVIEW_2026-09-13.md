@@ -62,4 +62,4 @@ E6-B 중량 묶음과 E7-B 시퀀스 묶음 모두 우월성 근거를 확보하
 
 다음 에이전트용 E8-A 지시문은 기존 원장과 E1 계약을 재사용하는 **격리된 offline 최소 구현 및 합성 replay**만 제안한다. 현재 수집·운영 연결·실제 모델 발행은 실행하지 않는다. 그 기반 위에서 새 정보 연구를 재개할 때에는 단순 이력 재포장과 구분되는 심판 사건·전개 부담 등 가려진 성능 관측을 다음 후보로 검토하되, 아직 효과나 채택을 선언하지 않는다.
 
-기계 재현 기록: [JSON](../data/logs/confirmed_starter_e7b_independent_review_20260913.json). 다음 작업 지시문: [E8-A](CONFIRMED_STARTER_E8A_AGENT_PROMPT_2026-09-13.md).
+기계 재현 기록: [JSON](../data/logs/confirmed_starter_e7b_independent_review_20260913.json). 당시 다음 작업 지시문 E8-A는 2026-10-04 사용자 승인으로 삭제했다.

@@ -1,0 +1,129 @@
+문서 점검 결과 — 2026-10-04
+
+이번 점검은 기존 문서 수정·삭제·이동 없이 수행했다.
+루트 docs Markdown 328개; 종별 문서·연구·검토 사본 및 진입점 README를 함께 확인했다.
+
+권장 처리
+1. docs/session_handoff_prompt_ko.md: 현재 모델 안내로 교체할 우선 대상. 이전 모델 실행 지시가 포함됨.
+2. CURRENT_STATUS / PROGRESS / MODEL_RESEARCH_INDEX: 현행 모델·스케줄·종별 DB 기준으로 요약 갱신.
+3. MODELING_ROADMAP: 오래된 계획이지만 현재 코드가 참조하는 라벨·피처·지표 정의는 유지.
+4. 루트 README / docs README: 현재 실행 진입점으로 안내하고 사라진 제주 V1/V2 링크 정리.
+5. 구간 DB 보고서 4개와 연도별 DB 안내 1개: 폐기 경로 표시 또는 과거 기록으로 분리.
+6. 제주 검토용 사본 78개: 원본 모두 존재. 원본 링크 색인으로 단순화할 수 있으나 상태표·재점검 목록·보존 manifest는 유지.
+7. 연구 결과 보관본: 결론·판정·검증 원문 보존. README 수량은 실제 88 Markdown / 80 JSON으로 갱신할 대상.
+
+이전 작업 프롬프트·초안 후보: 32개. 이름에 AGENT_PROMPT가 있는 확률/추천/서빙 계약 1개는 별도 보존 판단.
+최신 종별 입력 계약·품질 정정/보류 근거·모델 입력 감사·운영 가이드·연구 결론은 계속 유지.
+
+스냅샷 점검
+{
+  "declared_copies": 78,
+  "originals_exist": 78,
+  "copy_hashes_match": 78,
+  "originals_changed_since_snapshot": [
+    "jeju/README.md",
+    "jeju/docs/SOURCE_CATALOG.md"
+  ]
+}
+
+과거 작업 프롬프트·초안 후보
+docs/CONFIRMED_STARTER_CONDITIONAL_E2_AGENT_PROMPT_2026-09-11.md
+docs/CONFIRMED_STARTER_CONDITIONAL_E2_REMEDIATION_AGENT_PROMPT_2026-09-11.md
+docs/CONFIRMED_STARTER_E2_H1_AGENT_PROMPT_2026-09-11.md
+docs/CONFIRMED_STARTER_E4_DIAGNOSTIC_AGENT_PROMPT_2026-09-11.md
+docs/CONFIRMED_STARTER_E5A_AGENT_PROMPT_2026-09-12.md
+docs/CONFIRMED_STARTER_E5A_R3_R4_AGENT_PROMPT_2026-09-12.md
+docs/CONFIRMED_STARTER_E5B_AGENT_PROMPT_2026-09-12.md
+docs/CONFIRMED_STARTER_E6A_AGENT_PROMPT_2026-09-12.md
+docs/CONFIRMED_STARTER_E6A_REMEDIATION_AGENT_PROMPT_2026-09-12.md
+docs/CONFIRMED_STARTER_E6B_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E6B_PROTOCOL_DRAFT_2026-09-12.md
+docs/CONFIRMED_STARTER_E7A_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E7B_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E7B_PROTOCOL_DRAFT_2026-09-13.md
+docs/CONFIRMED_STARTER_E8A_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E8A_REMEDIATION_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E8A_V2_H1_H2_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E8B_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E8B_SOURCE_CONTROL_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E9A_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E9A_H1_H2_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E9A_REMEDIATION_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E9B_BLIND_PACKAGE_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_E9B_FROZEN_EVALUATION_AGENT_PROMPT_2026-09-13.md
+docs/CONFIRMED_STARTER_N_VS_A_E3_AGENT_PROMPT_2026-09-11.md
+docs/CONFIRMED_STARTER_RACE_OBJECTIVE_PROTOCOL_DRAFT_2026-09-12.md
+docs/MEDICAL_INJURY_RACE_IMPACT_TAXONOMY_DRAFT_2026-09-25.md
+docs/PRE_RACE_FIELD_DNF_E1_AGENT_PROMPT_2026-09-11.md
+docs/PRE_RACE_FIELD_DNF_E1_REMEDIATION_AGENT_PROMPT_2026-09-11.md
+docs/PROSPECTIVE_SHADOW_E10A_AGENT_PROMPT_2026-09-14.md
+docs/PROSPECTIVE_SHADOW_E10B_CAPTURE_RUNNER_AGENT_PROMPT_2026-09-14.md
+docs/SEOUL_BACKFILL_AGENT_PROMPT_2026-09-15.md
+
+삭제된 스크립트를 언급하는 문서 (과거 기록은 오류/폐기 확정이 아님)
+docs/BUSAN_COLLECTION_AND_INGESTION_PROCESS_2026-09-16.md : build_busan_complete_db.py, verify_busan_complete_db.py
+docs/BUSAN_DATA_FRESHNESS_AUDIT_2026-09-17.md : audit_busan_freshness.py, verify_busan_freshness_audit.py
+docs/CANONICAL_SECTION_RESEARCH_2026-09-11.md : audit_canonical_sections.py
+docs/CANONICAL_SECTION_REVIEW_2026-09-11.md : audit_canonical_sections.py
+docs/EQUIPMENT_STATUS_AND_DATA_STORAGE_REVIEW_2026-09-30.md : adjudicate_section_points.py
+docs/JEJU_NATIVE_ANALYSIS_DB_LOAD_2026-09-15.md : build_jeju_native_analysis_db.py, verify_jeju_native_analysis_db.py
+docs/JEJU_NATIVE_COLLECTION_AND_INGESTION_PROCESS_2026-09-15.md : build_jeju_native_analysis_db.py, build_jeju_native_extended_db.py, build_jeju_native_text_phase2_db.py, build_jeju_running_trial_links.py, confirm_jeju_trial_breed_profiles.py, materialize_jeju_confirmed_race_ids.py, reconcile_jeju_race_time_ids.py, validate_jeju_running_trial_links.py, verify_jeju_native_analysis_db.py, verify_jeju_native_extended_db.py, verify_jeju_native_text_phase2_db.py
+docs/JEJU_NATIVE_COMPLETE_RESEARCH_DB_REPORT_2026-09-15.md : build_jeju_native_text_phase2_db.py, verify_jeju_native_analysis_db.py, verify_jeju_native_extended_db.py, verify_jeju_native_text_phase2_db.py
+docs/JEJU_NATIVE_DATA_CATALOG_AND_INDEPENDENT_VERIFICATION_2026-09-15.md : build_jeju_native_analysis_db.py, validate_jeju_running_trial_links.py, verify_jeju_native_analysis_db.py, verify_jeju_other_sources.py
+docs/JEJU_NATIVE_DB_LOAD_200M_READINESS_2026-09-15.md : validate_jeju_running_trial_links.py, verify_jeju_trial_inspection_exclusions.py
+docs/JEJU_NATIVE_EXTENDED_DB_PHASE1_LOAD_2026-09-15.md : build_jeju_native_extended_db.py, verify_jeju_native_extended_db.py
+docs/JEJU_NATIVE_RUNNING_TRIAL_LINKAGE_2026-09-15.md : build_jeju_running_trial_links.py, confirm_jeju_trial_breed_profiles.py, validate_jeju_running_trial_links.py
+docs/JEJU_OTHER_SOURCE_VERIFICATION_2026-09-15.md : verify_jeju_other_sources.py
+docs/JEJU_RACE_TIME_ID_UNRESOLVED_29_2026-09-14.md : materialize_jeju_confirmed_race_ids.py, verify_jeju_confirmed_race_ids.py
+docs/JEJU_RACE_TIME_OFFICIAL_ID_INDEPENDENT_VERIFICATION_2026-09-14.md : reconcile_jeju_race_time_ids.py, verify_jeju_race_time_ids.py
+docs/MEET_SCORE_AND_TRIAL_DB_2026-09-25.md : build_busan_2017_score_db.py, build_busan_2018_score_db.py, build_busan_2019_score_db.py, build_busan_2020_score_db.py, build_busan_2021_score_db.py, build_busan_2022_score_db.py, build_busan_2023_score_db.py, build_busan_2024_score_db.py, build_busan_2025_score_db.py, build_busan_2026_score_db.py, build_jeju_2017_score_db.py, build_jeju_2018_score_db.py, build_jeju_2019_score_db.py, build_jeju_2020_score_db.py, build_jeju_2021_score_db.py, build_jeju_2022_score_db.py, build_jeju_2023_score_db.py, build_jeju_2024_score_db.py, build_jeju_2025_score_db.py, build_jeju_2026_score_db.py, build_running_trials_2017_score_db.py, build_running_trials_2018_score_db.py, build_running_trials_2019_score_db.py, build_running_trials_2020_score_db.py, build_running_trials_2021_score_db.py, build_running_trials_2022_score_db.py, build_running_trials_2023_score_db.py, build_running_trials_2024_score_db.py, build_running_trials_2025_score_db.py, build_running_trials_2026_score_db.py, build_seoul_2017_score_db.py, build_seoul_2018_score_db.py, build_seoul_2019_score_db.py, build_seoul_2020_score_db.py, build_seoul_2021_score_db.py, build_seoul_2022_score_db.py, build_seoul_2023_score_db.py, build_seoul_2024_score_db.py, build_seoul_2025_score_db.py, build_seoul_2026_score_db.py, build_yeongcheon_2026_score_db.py
+docs/PASSING_RANK_GROUP_HANDOFF_2026-09-26.md : load_busan_point_passing.py, load_jeju_point_passing.py, load_seoul_point_passing.py
+docs/SECTION_POINT_DB_HANDOFF_2026-09-25.md : adjudicate_section_points.py, build_section_point_db.py
+docs/SECTION_POINT_DB_REPORT_2026-09-25.md : build_section_point_db.py
+docs/SECTION_POINT_DB_SOURCE_ADJUDICATION_2026-09-25.md : adjudicate_section_points.py, build_section_point_db.py
+docs/SECTION_POINT_DB_VERIFIED_REPORT_2026-09-25.md : build_section_point_db.py
+docs/SEOUL_UNIFIED_MODEL_READINESS_AUDIT_2026-09-18.md : audit_seoul_freshness.py
+docs/research_archive/source/busan_complete_db_20260916/REPORT.md : build_busan_complete_db.py, verify_busan_complete_db.py
+docs/research_archive/source/busan_history_20260915/REPORT.md : collect_busan_medical_api.py, verify_busan_history.py
+docs/research_archive/source/busan_temp_id_linkage_20260915/REPORT.md : link_busan_temporary_ids.py
+docs/research_archive/source/busan_trial_linkage_20260915/REPORT.md : build_busan_trial_linkage.py, collect_busan_trial_api.py, verify_busan_trial_linkage.py
+docs/research_archive/source/seoul_backfill_20260915_v1/REPORT.md : audit_seoul_result_status_codes.py, verify_seoul_backfill.py
+docs/research_archive/source/seoul_running_trials_20260915_v1/REPORT.md : build_seoul_running_trials.py
+docs/research_archive/source/seoul_text_id_linkage_20260915_v1/README.md : link_seoul_text_ids.py
+
+문서별 링크 문제 (과거 보관본은 일부 깨진 링크가 원래 허용됨)
+docs/BUSAN_COLLECTION_AND_INGESTION_PROCESS_2026-09-16.md : ../data/research/busan_complete_db_20260916/busan_complete.sqlite3, ../data/research/busan_complete_db_20260916/catalog.json, ../data/research/busan_complete_db_20260916/completion_audit.json, ../data/research/busan_complete_db_20260916/independent_validation.json, ../data/research/busan_history_20260915/history.sqlite3, ../data/research/busan_temp_id_linkage_20260915/linkage.sqlite3, ../data/research/busan_trial_linkage_20260915/trials.sqlite3
+docs/COURSE_RACE_REGIME_COMPARABILITY_2000_2026_2026-09-14.md : JEJU_HORSE_TYPE_TRACK_HISTORY_2026-09-14.md
+docs/HORSE_ABILITY_MODEL_BLUEPRINT_2026-09-15.md : JEJU_NATIVE_MODEL_V1_READINESS_2026-09-15.md
+docs/JEJU_20260918_READINESS_WEIGHT_TEMPO_REPORT_2026-09-17.md : /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_steward_2024_events_20260917/audit_result.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_steward_2024_events_20260917/coverage.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_steward_2024_events_20260917/features_2024_2026.parquet, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_steward_2024_events_20260917/verification.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_weight_tempo_pilot_20260917/coverage.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_weight_tempo_pilot_20260917/primary_comparisons.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_weight_tempo_pilot_20260917/summary.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_weight_tempo_pilot_20260917/verification.json, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_WEIGHT_TEMPO_READINESS_PLAN_2026-09-17.md
+docs/JEJU_NATIVE_ANALYSIS_DB_LOAD_2026-09-15.md : ../data/research/jeju_native_analysis_db_20260915/independent_validation.json, ../data/research/jeju_native_analysis_db_20260915/jeju_native_analysis.sqlite3, ../data/research/jeju_native_analysis_db_20260915/validation.json, ../scripts/build_jeju_native_analysis_db.py, ../scripts/verify_jeju_native_analysis_db.py
+docs/JEJU_NATIVE_COLLECTION_AND_INGESTION_PROCESS_2026-09-15.md : ../data/research/jeju_native_analysis_db_20260915/jeju_native_analysis.sqlite3, ../data/research/jeju_native_extended_db_20260915/jeju_native_extended.sqlite3, ../data/research/jeju_race_time_official_ids_20260914, ../scripts/audit_jeju_trial_web_sections_2015_2018.py, ../scripts/build_jeju_native_analysis_db.py, ../scripts/build_jeju_native_extended_db.py, ../scripts/build_jeju_native_text_phase2_db.py, ../scripts/build_jeju_running_trial_links.py, ../scripts/confirm_jeju_trial_breed_profiles.py, ../scripts/export_jeju_native_text_phase2_catalog.py, ../scripts/materialize_jeju_confirmed_race_ids.py, ../scripts/reconcile_jeju_race_time_ids.py, ../scripts/validate_jeju_running_trial_links.py, ../scripts/verify_jeju_native_analysis_db.py, ../scripts/verify_jeju_native_extended_db.py, ../scripts/verify_jeju_native_text_phase2_db.py
+docs/JEJU_NATIVE_COMPLETE_RESEARCH_DB_REPORT_2026-09-15.md : ../scripts/build_jeju_native_text_phase2_db.py, ../scripts/export_jeju_native_text_phase2_catalog.py, ../scripts/verify_jeju_native_text_phase2_db.py
+docs/JEJU_NATIVE_CONTEXT_VARIABLES_2026-09-16.md : /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NATIVE_H3_MODEL_REPORT_2026-09-16.md
+docs/JEJU_NATIVE_DATA_CATALOG_AND_INDEPENDENT_VERIFICATION_2026-09-15.md : ../data/research/jeju_native_analysis_db_20260915/catalog.json, ../data/research/jeju_native_analysis_db_20260915/independent_validation.json, ../data/research/jeju_native_analysis_db_20260915/jeju_native_analysis.sqlite3, ../data/research/jeju_native_analysis_db_20260915/manifest.json, ../data/research/jeju_native_analysis_db_20260915/validation.json, ../data/research/jeju_other_sources_verification_20260915/issues.jsonl, ../scripts/build_jeju_native_analysis_db.py
+docs/JEJU_NATIVE_DB_LOAD_200M_READINESS_2026-09-15.md : ../data/research/jeju_native_200m_readiness_20260915/checkpoint_geometry_source.json, ../data/research/jeju_native_200m_readiness_20260915/inspection_exclusion_audit.json, ../data/research/jeju_native_200m_readiness_20260915/older_trial_web_spot_checks.json, ../data/research/jeju_native_200m_readiness_20260915/race_200m_quality_issues.json, ../data/research/jeju_native_200m_readiness_20260915/race_by_distance.json, ../data/research/jeju_native_200m_readiness_20260915/race_by_year.json, ../data/research/jeju_native_200m_readiness_20260915/summary.json, ../data/research/jeju_native_200m_readiness_20260915/trial_200m_quality_issues.json, ../data/research/jeju_native_200m_readiness_20260915/validation.json, ../data/research/jeju_native_running_trial_links_20260915/older_trial_section_audit_native_only.jsonl, ../data/research/jeju_native_running_trial_links_20260915/older_trial_section_audit_summary.json, ../data/research/jeju_native_running_trial_links_20260915/validation.json
+docs/JEJU_NATIVE_EVALUATION_REGISTER.md : /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ACCURACY_CANDIDATES_DEBUT_REPORT_2026-09-19.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ACCURACY_CANDIDATES_PROTOCOL_2026-09-19.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ACCURACY_RESET_AND_ASSET_REVIEW_2026-09-18.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ANNUAL_VALIDATION_RETURNS_REPORT_2026-09-18.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ELO_OBSERVED_PROTOCOL_2026-09-22.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ELO_OBSERVED_REPORT_2026-09-22.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NATIVE_STEWARD_PACE_NEXT_STAGE_REPORT_2026-09-17.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NATIVE_TEMPO_PACE_PILOT_PLAN_2026-09-17.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NATIVE_TRANSITION_HOLDOUT_REPORT_2026-09-16.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NESTED_CALIBRATION_PROTOCOL_2026-09-22.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NESTED_CALIBRATION_REPORT_2026-09-22.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_PLACE_OBJECTIVE_PROTOCOL_2026-09-19.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_PLACE_OBJECTIVE_ZERO_HISTORY_REPORT_2026-09-19.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ROLLING_ZERO_PROTOCOL_2026-09-20.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ROLLING_ZERO_REPORT_2026-09-20.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_STEWARD_MARKETS_GAP_REPORT_2026-09-18.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_STEWARD_MARKETS_PROTOCOL_2026-09-18.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_TRIAL_RELATIVE_PROTOCOL_2026-09-22.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_TRIAL_RELATIVE_REPORT_2026-09-22.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_WEIGHT_TEMPO_READINESS_PLAN_2026-09-17.md, JEJU_TRIAL_GATE_PROTOCOL_2026-09-28.md, JEJU_TRIAL_GATE_REPORT_2026-09-28.md
+docs/JEJU_NATIVE_EXTENDED_DB_PHASE1_LOAD_2026-09-15.md : ../data/research/jeju_native_extended_db_20260915/catalog.json, ../data/research/jeju_native_extended_db_20260915/independent_validation.json, ../data/research/jeju_native_extended_db_20260915/jeju_native_extended.sqlite3, ../scripts/build_jeju_native_extended_db.py, ../scripts/export_jeju_native_extended_catalog.py, ../scripts/verify_jeju_native_extended_db.py
+docs/JEJU_NATIVE_RUNNING_TRIAL_LINKAGE_2026-09-15.md : ../data/research/jeju_confirmed_race_time_ids_20260914/linked_official_ids.jsonl, ../data/research/jeju_native_running_trial_links_20260915, ../data/research/jeju_native_running_trial_links_20260915/api_probe.json, ../data/research/jeju_native_running_trial_links_20260915/unresolved_trials_final.jsonl, ../data/research/jeju_native_running_trial_links_20260915/validation.json
+docs/JEJU_NATIVE_TEMPO_GATE_PACE_PILOT_REPORT_2026-09-17.md : /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_gate_tempo_audit_20260917/report_adjudications.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_gate_tempo_audit_20260917/summary.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_tempo_api303_20260917/manifest.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_tempo_pace_features_20260917/manifest.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_tempo_pace_pilot_20260917/primary_comparisons.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_tempo_pace_pilot_20260917/summary.json, /Users/kimyongjin/Desktop/horse_racing/data/research/jeju_tempo_pace_pilot_20260917/verification.json, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_NATIVE_TEMPO_PACE_PILOT_PLAN_2026-09-17.md, /Users/kimyongjin/Desktop/horse_racing/src/horse_racing/analysis/jeju_native_top3_states.py:30, /Users/kimyongjin/Desktop/horse_racing/src/horse_racing/analysis/jeju_tempo_pace.py
+docs/JEJU_NATIVE_THREE_OBJECTIVES_STEWARD_ROADMAP_2026-09-16.md : /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_ANNUAL_VALIDATION_RETURNS_REPORT_2026-09-18.md, /Users/kimyongjin/Desktop/horse_racing/docs/JEJU_STEWARD_MARKETS_GAP_REPORT_2026-09-18.md, JEJU_ACCURACY_CANDIDATES_DEBUT_REPORT_2026-09-19.md, JEJU_ACCURACY_RESET_AND_ASSET_REVIEW_2026-09-18.md, JEJU_ELO_OBSERVED_REPORT_2026-09-22.md, JEJU_NESTED_CALIBRATION_REPORT_2026-09-22.md, JEJU_PLACE_OBJECTIVE_ZERO_HISTORY_REPORT_2026-09-19.md, JEJU_ROLLING_ZERO_REPORT_2026-09-20.md, JEJU_TRIAL_GATE_REPORT_2026-09-28.md, JEJU_TRIAL_RELATIVE_REPORT_2026-09-22.md
+docs/JEJU_NATIVE_TOP3_DATASET_BUILD_REPORT_2026-09-15.md : JEJU_NATIVE_TOP3_MODEL_V1_PLAN_2026-09-15.md
+docs/JEJU_OTHER_SOURCE_VERIFICATION_2026-09-15.md : ../data/research/jeju_other_sources_verification_20260915/issues.jsonl, ../data/research/jeju_other_sources_verification_20260915/verification.json
+docs/JEJU_OWNER_ID_CONFLICT_FOLLOWUP_2026-09-14.md : ../data/research/jeju_confirmed_race_time_ids_20260914/linked_official_ids.jsonl, ../data/research/jeju_confirmed_race_time_ids_20260914/unresolved_29.jsonl, ../data/research/jeju_owner_boundary_entry_sheets_20260914/five_native_entry_sheet_rows.json, ../data/research/jeju_owner_conflict_followup_20260914_v4/api_rows_absent_from_db_by_race.jsonl, ../data/research/jeju_owner_conflict_followup_20260914_v4/no_positive_result_races.jsonl, ../data/research/jeju_owner_conflict_followup_20260914_v4/positive_result_annual_coverage.json, ../data/research/jeju_owner_conflict_followup_20260914_v4/supported_race_specific_owNo.jsonl, ../data/research/jeju_owner_conflict_followup_20260914_v4/verification.json, ../scripts/analyze_jeju_owner_conflicts.py, ../scripts/probe_jeju_owner_boundary_entry_sheets.py, ../scripts/verify_jeju_owner_followup.py
+docs/JEJU_RACE_TIME_ID_UNRESOLVED_29_2026-09-14.md : ../data/research/jeju_confirmed_race_time_ids_20260914/linked_official_ids.jsonl, ../data/research/jeju_confirmed_race_time_ids_20260914/unresolved_29.jsonl, ../data/research/jeju_confirmed_race_time_ids_20260914/verification.json, ../data/research/jeju_owner_boundary_entry_sheets_20260914/five_native_entry_sheet_rows.json, ../data/research/jeju_race_time_official_ids_20260914/official_native_results_2017.jsonl, ../data/research/jeju_race_time_official_ids_20260914/official_native_results_2019.jsonl, ../data/research/jeju_race_time_official_ids_20260914/official_native_results_2022.jsonl, ../data/research/jeju_race_time_official_ids_20260914/official_native_results_2023.jsonl, ../data/research/jeju_race_time_official_ids_20260914/official_native_results_2026.jsonl, ../scripts/materialize_jeju_confirmed_race_ids.py, ../scripts/verify_jeju_confirmed_race_ids.py
+docs/JEJU_RACE_TIME_OFFICIAL_ID_INDEPENDENT_VERIFICATION_2026-09-14.md : ../data/research/jeju_confirmed_race_time_ids_20260914, ../data/research/jeju_race_time_official_ids_20260914/annual_coverage.json, ../data/research/jeju_race_time_official_ids_20260914/independent_verification.json, ../data/research/jeju_race_time_official_ids_20260914/race_time_official_id_links.jsonl, ../data/research/jeju_race_time_official_ids_20260914/source_requests_and_hashes.json, ../data/research/jeju_race_time_official_ids_20260914/unconfirmed_db_rows.jsonl, ../data/research/jeju_race_time_official_ids_20260914/unresolved_rows.jsonl, ../scripts/reconcile_jeju_race_time_ids.py, ../scripts/verify_jeju_race_time_ids.py, JEJU_HORSE_TYPE_TRACK_HISTORY_2026-09-14.md
+docs/MODEL_RESEARCH_INDEX.md : ../data/experiments/race_portfolio_v1, ../data/experiments/race_value_v1, JEJU_STANDALONE_V1.md, JEJU_STANDALONE_V2.md
+docs/OLDEST_MODEL_DATA_BY_MEET_2026-09-14.md : JEJU_HORSE_TYPE_TRACK_HISTORY_2026-09-14.md
+docs/PROGRESS.md : JEJU_STANDALONE_V2.md
+docs/README.md : JEJU_STANDALONE_V1.md, JEJU_STANDALONE_V2.md
+docs/research_archive/source/busan_history_20260915/REPORT.md : sample_trace.json
+docs/research_archive/source/seoul_backfill_20260915_v1/REPORT.md : ../../../docs/SEOUL_BACKFILL_REGIME_BOUNDARIES_2026-09-15.md
+docs/revisions/JEJU_NATIVE_HORSE_MODEL_V1_AGENT_PROMPT_2026-09-15_R2_TOP1.md : HORSE_ABILITY_MODEL_BLUEPRINT_2026-09-15.md, JEJU_NATIVE_COMPLETE_RESEARCH_DB_REPORT_2026-09-15.md, JEJU_NATIVE_HORSE_MODEL_V1_PLAN_REVIEW_2026-09-15.md, JEJU_NATIVE_MODEL_V1_READINESS_2026-09-15.md, JEJU_STANDALONE_V1.md, JEJU_STANDALONE_V2.md, revisions/JEJU_NATIVE_HORSE_MODEL_V1_AGENT_PROMPT_2026-09-15_BEFORE_REVIEW.md
+jeju/research/20261001_api42_profile_db_import/README.md : backups/jeju_native_core_before_api42_20261001.sqlite3
+jeju/research/20261002_starting_exam_db_load/README.md : before_load.sqlite3
+jeju/review_documents/20261003/documents/jeju/docs/SOURCE_CATALOG.md : /Users/kimyongjin/Desktop/horse_racing/data/research/section_point_db_20260925/section_points.sqlite3, /Users/kimyongjin/Desktop/horse_racing/data/research/section_point_db_20260925/section_points_adjudicated.sqlite3, /Users/kimyongjin/Desktop/horse_racing/data/research/section_point_db_20260925/section_points_verified.sqlite3
+jeju/review_documents/20261003/documents/jeju/research/20261001_api42_profile_db_import/README.md : /Users/kimyongjin/Desktop/horse_racing/jeju/research/20261001_api42_profile_db_import/backups/jeju_native_core_before_api42_20261001.sqlite3
+jeju/review_documents/20261003/documents/jeju/research/20261002_starting_exam_db_load/README.md : /Users/kimyongjin/Desktop/horse_racing/jeju/research/20261002_starting_exam_db_load/before_load.sqlite3
+thoroughbred/research/20261002_core_validation_before_reports_v1/README.md : ../../data/core_api_2010_20260929_v1/backups/20261002_before_steward_reports/thoroughbred_core.duckdb
+thoroughbred/research/20261002_equipment_full_v1/README.md : ../../data/core_api_2010_20260929_v1/backups/20261002_before_equipment_api78_full/
+thoroughbred/research/SESSION_ARTIFACT_POLICY.md : ARTIFACT_SIZE_LOG.md
