@@ -1,0 +1,83 @@
+{
+  "checked_at_utc": "2026-10-03T10:06:39.412980+00:00",
+  "project_directory_allocated_GiB_rounded": {
+    "data": 17.173,
+    "thoroughbred": 6.936,
+    "git": 4.8,
+    "jeju": 3.047,
+    "venv": 0.857,
+    "total": 33
+  },
+  "untracked_not_ignored": {
+    "files": 22691,
+    "logical_GiB": 4.569,
+    "jeju_GiB": 3.027,
+    "thoroughbred_GiB": 1.422
+  },
+  "confirmed_producer": {
+    "client": "codex_chatgpt_ios_remote",
+    "client_version": "1.2026.266",
+    "process_name": "codex-workspace-diff",
+    "parent_process": "ChatGPT.app embedded Codex app-server",
+    "timeout_ms": 20000,
+    "observed_child_command": "git add --pathspec-from-file=... --pathspec-file-nul",
+    "temporary_environment": [
+      "GIT_OBJECT_DIRECTORY=temporary_directory/objects",
+      "GIT_INDEX_FILE=temporary_directory/index"
+    ],
+    "scope": "workspace unstaged changes including untracked files"
+  },
+  "cleanup_failure_assessment": "Temporary directory creation and recurrent abandoned directories confirmed; 20-second request timeout observed. Forced interruption preventing EXIT cleanup is an inference, not an independently verified exit signal.",
+  "new_temporary_directories": [
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.wTYz3Xq5pw",
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.WCITPtIOzJ",
+      "allocated_bytes": 126758912
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.HnPNDcvTkA",
+      "allocated_bytes": 134230016
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.ErgJMcqLqG",
+      "allocated_bytes": 134238208
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.pWsPndfjKd",
+      "allocated_bytes": 135147520
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.11gyGR8Zq0",
+      "allocated_bytes": 118370304
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.7WeH818ATP",
+      "allocated_bytes": 134361088
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.JTFWyff4dY",
+      "allocated_bytes": 134230016
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.hTd9NfYNUw",
+      "allocated_bytes": 134238208
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.VITt71i4zJ",
+      "allocated_bytes": 134230016
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.HeLsmpBkkj",
+      "allocated_bytes": 134242304
+    },
+    {
+      "path": "/private/var/folders/k9/jcbqk2h536b_fytkztts2sdh0000gn/T/tmp.gwu2U5fC6F",
+      "allocated_bytes": 10379264
+    }
+  ],
+  "new_temporary_allocated_GiB": 1.239,
+  "proposed_prevention": "Exclude database files, raw collection data and generated large artifacts under jeju/thoroughbred from Git change collection, preserving source code and review documents. No ignore/config changes applied during diagnosis."
+}

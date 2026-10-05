@@ -1,0 +1,599 @@
+{
+  "started_at": "2026-10-04T04:31:34.719674+09:00",
+  "status": "completed",
+  "authorization": "User explicitly requested deletion of safe-to-retire DBs after discussion of the three shared section databases.",
+  "scope": "Only three shared section DB files and five exact symlinks; domain DBs, active model dependencies and source/audit documents retained.",
+  "retirement_basis": "Retire old section reconstruction/adjudication workflow; not a claim that domain DBs duplicate all historical source rows.",
+  "deleted_files": [
+    {
+      "path": "data/research/section_point_db_20260925/section_points.sqlite3",
+      "bytes": 712994816,
+      "inode": 92535802,
+      "mtime_ns": 1790338735624248636,
+      "mode": 33188,
+      "sha256": "2099f94a07575b64c571fb992ee712e07a2e4e221f144e1058242c12bdb139d7"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_verified.sqlite3",
+      "bytes": 1363853312,
+      "inode": 92547122,
+      "mtime_ns": 1790328915395730249,
+      "mode": 33152,
+      "sha256": "9a39970bfeb08e6b91e9f389beafa69684b2114148fb82bdb5bbce796e4d1053"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+      "bytes": 1393250304,
+      "inode": 92593505,
+      "mtime_ns": 1790331626983962084,
+      "mode": 33152,
+      "sha256": "82a95378ae0a5c71114e9f1b5038efdd2e1d683e2977310e9224b3b17b9f0e6c"
+    }
+  ],
+  "deleted_links": [
+    {
+      "path": "jeju/data/raw/section_points.sqlite3",
+      "target": "../../../data/research/section_point_db_20260925/section_points.sqlite3"
+    },
+    {
+      "path": "jeju/data/raw/section_points_verified.sqlite3",
+      "target": "../../../data/research/section_point_db_20260925/section_points_verified.sqlite3"
+    },
+    {
+      "path": "jeju/data/raw/section_points_adjudicated.sqlite3",
+      "target": "../../../data/research/section_point_db_20260925/section_points_adjudicated.sqlite3"
+    },
+    {
+      "path": "thoroughbred/data/section_points_verified_20260925.sqlite3",
+      "target": "../../data/research/section_point_db_20260925/section_points_verified.sqlite3"
+    },
+    {
+      "path": "thoroughbred/data/section_points_adjudicated_20260925.sqlite3",
+      "target": "../../data/research/section_point_db_20260925/section_points_adjudicated.sqlite3"
+    }
+  ],
+  "targets_before": {
+    "section_points.sqlite3": {
+      "bytes": 712994816,
+      "inode": 92535802,
+      "mtime_ns": 1790338735624248636,
+      "mode": 33188,
+      "sha256": "2099f94a07575b64c571fb992ee712e07a2e4e221f144e1058242c12bdb139d7"
+    },
+    "section_points_verified.sqlite3": {
+      "bytes": 1363853312,
+      "inode": 92547122,
+      "mtime_ns": 1790328915395730249,
+      "mode": 33152,
+      "sha256": "9a39970bfeb08e6b91e9f389beafa69684b2114148fb82bdb5bbce796e4d1053"
+    },
+    "section_points_adjudicated.sqlite3": {
+      "bytes": 1393250304,
+      "inode": 92593505,
+      "mtime_ns": 1790331626983962084,
+      "mode": 33152,
+      "sha256": "82a95378ae0a5c71114e9f1b5038efdd2e1d683e2977310e9224b3b17b9f0e6c"
+    }
+  },
+  "protected_db_signatures_before": {
+    "data/horse_racing.sqlite3": {
+      "bytes": 3077263360,
+      "inode": 87568535,
+      "mtime_ns": 1790954386700207901,
+      "mode": 33188
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "inode": 93724961,
+      "mtime_ns": 1790957930815247537,
+      "mode": 33152
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb": {
+      "bytes": 2742300672,
+      "inode": 94326869,
+      "mtime_ns": 1790922801758258602,
+      "mode": 33188
+    },
+    "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb": {
+      "bytes": 552611840,
+      "inode": 93555094,
+      "mtime_ns": 1790707496646005201,
+      "mode": 33188
+    },
+    "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb": {
+      "bytes": 1323053056,
+      "inode": 91154130,
+      "mtime_ns": 1789665943191187414,
+      "mode": 33188
+    },
+    "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3": {
+      "bytes": 1535651840,
+      "inode": 90882110,
+      "mtime_ns": 1789468792285848257,
+      "mode": 33188
+    }
+  },
+  "model_verification_before": {
+    "thoroughbred": {
+      "active_profile": "thoroughbred-main-20260919-v1",
+      "champion_id": "thoroughbred-abc-current-a-b-c-20260919",
+      "combination_algorithm_version": "top3_set_joint_v1",
+      "components": {
+        "A": {
+          "artifact": "A_model",
+          "candidate": "current_A",
+          "metadata": "A_metadata",
+          "model_version": "v5_2026H2_rolling_all"
+        },
+        "B": {
+          "artifact": "BC_model",
+          "candidate": "current_B",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength"
+        },
+        "C": {
+          "artifact": "BC_model",
+          "candidate": "current_C",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength+v2_2026_H3_relative",
+          "order_artifact": "WIN_ORDER_model",
+          "order_metadata": "WIN_ORDER_metadata"
+        }
+      },
+      "domain": "thoroughbred",
+      "ok": true,
+      "probability_contract": "thoroughbred_abc_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "A_model",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt",
+          "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+        },
+        {
+          "name": "A_metadata",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/metadata.json",
+          "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+        },
+        {
+          "name": "BC_model",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt",
+          "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+        },
+        {
+          "name": "BC_metadata",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/metadata.json",
+          "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+        },
+        {
+          "name": "WIN_ORDER_model",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt",
+          "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+        },
+        {
+          "name": "WIN_ORDER_metadata",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/metadata.json",
+          "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+        },
+        {
+          "name": "reference_inference",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/infer.py",
+          "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+        },
+        {
+          "name": "frozen_selection",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+          "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+          "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+        },
+        {
+          "name": "latest_challenger_review",
+          "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+          "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+        }
+      ]
+    },
+    "jeju": {
+      "active_profile": "jeju-hy-r-form-20260919-v1",
+      "champion_id": "HY_R_FORM",
+      "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+      "components": {
+        "A_B_C": {
+          "artifact": "HY_R_FORM_model",
+          "candidate": "HY_R_FORM",
+          "model_version": "frozen_2026_HY_R_FORM",
+          "order_score": "order_score",
+          "set_score": "rank_score"
+        }
+      },
+      "domain": "jeju",
+      "ok": true,
+      "probability_contract": "jeju_hy_r_form_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "HY_R_FORM_model",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+          "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+        },
+        {
+          "name": "reference_inference",
+          "path": "scripts/predict_jeju_live_hy_r_form.py",
+          "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+          "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+        },
+        {
+          "name": "latest_challenger_decision",
+          "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+          "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+        },
+        {
+          "name": "latest_challenger_verification",
+          "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+          "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+        }
+      ]
+    }
+  },
+  "archived_models_before": [
+    {
+      "path": "jeju/models/HY_R_FORM.pkl",
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    {
+      "path": "jeju/models/metadata.json",
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870"
+    },
+    {
+      "path": "jeju/reference/predict_jeju_live_hy_r_form.py",
+      "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+    },
+    {
+      "path": "jeju/verification/baseline_verification.json",
+      "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+    },
+    {
+      "path": "jeju/verification/latest_challenger_decision.json",
+      "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+    },
+    {
+      "path": "jeju/verification/latest_challenger_verification.json",
+      "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+    },
+    {
+      "path": "thoroughbred/models/A/metadata.json",
+      "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+    },
+    {
+      "path": "thoroughbred/models/A/top3.txt",
+      "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+    },
+    {
+      "path": "thoroughbred/models/BC/metadata.json",
+      "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+    },
+    {
+      "path": "thoroughbred/models/BC/top3.txt",
+      "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+    },
+    {
+      "path": "thoroughbred/models/order/metadata.json",
+      "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+    },
+    {
+      "path": "thoroughbred/models/order/model.txt",
+      "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+    },
+    {
+      "path": "thoroughbred/reference/infer.py",
+      "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+    },
+    {
+      "path": "thoroughbred/verification/baseline_verification.json",
+      "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+    },
+    {
+      "path": "thoroughbred/verification/frozen_selection.json",
+      "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+    },
+    {
+      "path": "thoroughbred/verification/latest_challenger_review.json",
+      "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+    },
+    {
+      "path": "tools/resolve_main_model.py",
+      "sha256": "c381f403cae54119f35e4f0559ab5ac71077ac73d444706c070109fe16c24f1c"
+    }
+  ],
+  "disk_before": {
+    "available_bytes": 41997647872,
+    "free_bytes": 41997647872
+  },
+  "open_handle_check": {
+    "command": "lsof -nP -- [three exact DB paths]",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "",
+    "meaning": "no open handles reported"
+  },
+  "all_targets_absent": true,
+  "protected_db_signatures_after": {
+    "data/horse_racing.sqlite3": {
+      "bytes": 3077263360,
+      "inode": 87568535,
+      "mtime_ns": 1790954386700207901,
+      "mode": 33188
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "inode": 93724961,
+      "mtime_ns": 1790957930815247537,
+      "mode": 33152
+    },
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb": {
+      "bytes": 2742300672,
+      "inode": 94326869,
+      "mtime_ns": 1790922801758258602,
+      "mode": 33188
+    },
+    "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb": {
+      "bytes": 552611840,
+      "inode": 93555094,
+      "mtime_ns": 1790707496646005201,
+      "mode": 33188
+    },
+    "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb": {
+      "bytes": 1323053056,
+      "inode": 91154130,
+      "mtime_ns": 1789665943191187414,
+      "mode": 33188
+    },
+    "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3": {
+      "bytes": 1535651840,
+      "inode": 90882110,
+      "mtime_ns": 1789468792285848257,
+      "mode": 33188
+    }
+  },
+  "protected_db_files_unchanged": true,
+  "model_verification_after": {
+    "thoroughbred": {
+      "active_profile": "thoroughbred-main-20260919-v1",
+      "champion_id": "thoroughbred-abc-current-a-b-c-20260919",
+      "combination_algorithm_version": "top3_set_joint_v1",
+      "components": {
+        "A": {
+          "artifact": "A_model",
+          "candidate": "current_A",
+          "metadata": "A_metadata",
+          "model_version": "v5_2026H2_rolling_all"
+        },
+        "B": {
+          "artifact": "BC_model",
+          "candidate": "current_B",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength"
+        },
+        "C": {
+          "artifact": "BC_model",
+          "candidate": "current_C",
+          "metadata": "BC_metadata",
+          "model_version": "v4_2026_top3_growth_strength+v2_2026_H3_relative",
+          "order_artifact": "WIN_ORDER_model",
+          "order_metadata": "WIN_ORDER_metadata"
+        }
+      },
+      "domain": "thoroughbred",
+      "ok": true,
+      "probability_contract": "thoroughbred_abc_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "A_model",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt",
+          "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+        },
+        {
+          "name": "A_metadata",
+          "path": "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/metadata.json",
+          "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+        },
+        {
+          "name": "BC_model",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt",
+          "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+        },
+        {
+          "name": "BC_metadata",
+          "path": "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/metadata.json",
+          "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+        },
+        {
+          "name": "WIN_ORDER_model",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt",
+          "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+        },
+        {
+          "name": "WIN_ORDER_metadata",
+          "path": "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/metadata.json",
+          "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+        },
+        {
+          "name": "reference_inference",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/infer.py",
+          "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+        },
+        {
+          "name": "frozen_selection",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/selection.json",
+          "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/thoroughbred_boundary_20260918_v6/verification.json",
+          "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+        },
+        {
+          "name": "latest_challenger_review",
+          "path": "data/research/thoroughbred_weight_20260919_v8/validation_summary.json",
+          "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+        }
+      ]
+    },
+    "jeju": {
+      "active_profile": "jeju-hy-r-form-20260919-v1",
+      "champion_id": "HY_R_FORM",
+      "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+      "components": {
+        "A_B_C": {
+          "artifact": "HY_R_FORM_model",
+          "candidate": "HY_R_FORM",
+          "model_version": "frozen_2026_HY_R_FORM",
+          "order_score": "order_score",
+          "set_score": "rank_score"
+        }
+      },
+      "domain": "jeju",
+      "ok": true,
+      "probability_contract": "jeju_hy_r_form_runner_v1",
+      "registry_path": "config/prediction_model_registry.json",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "verified_artifacts": [
+        {
+          "name": "HY_R_FORM_model",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+          "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+        },
+        {
+          "name": "reference_inference",
+          "path": "scripts/predict_jeju_live_hy_r_form.py",
+          "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+        },
+        {
+          "name": "baseline_verification",
+          "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+          "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+        },
+        {
+          "name": "latest_challenger_decision",
+          "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+          "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+        },
+        {
+          "name": "latest_challenger_verification",
+          "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+          "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+        }
+      ]
+    }
+  },
+  "archived_models_after": [
+    {
+      "path": "jeju/models/HY_R_FORM.pkl",
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    {
+      "path": "jeju/models/metadata.json",
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870"
+    },
+    {
+      "path": "jeju/reference/predict_jeju_live_hy_r_form.py",
+      "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+    },
+    {
+      "path": "jeju/verification/baseline_verification.json",
+      "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+    },
+    {
+      "path": "jeju/verification/latest_challenger_decision.json",
+      "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+    },
+    {
+      "path": "jeju/verification/latest_challenger_verification.json",
+      "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+    },
+    {
+      "path": "thoroughbred/models/A/metadata.json",
+      "sha256": "528e69c1fbb84bf585364c68a172ff14e94f6c033c979bd0dc52fbd2ad7b0c97"
+    },
+    {
+      "path": "thoroughbred/models/A/top3.txt",
+      "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e"
+    },
+    {
+      "path": "thoroughbred/models/BC/metadata.json",
+      "sha256": "3ba09de9289f9e8069f5d7750dffe1e2eb87fed18e90502fb621b4ad0656180a"
+    },
+    {
+      "path": "thoroughbred/models/BC/top3.txt",
+      "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1"
+    },
+    {
+      "path": "thoroughbred/models/order/metadata.json",
+      "sha256": "28c9e1171a2569eafa00b8a33125743421e18c225bbe52952cd03cd693ea1edf"
+    },
+    {
+      "path": "thoroughbred/models/order/model.txt",
+      "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7"
+    },
+    {
+      "path": "thoroughbred/reference/infer.py",
+      "sha256": "f8cd8244ed8ef9a0373a0229a54913180614fe2c155db343c48daba2ad0758aa"
+    },
+    {
+      "path": "thoroughbred/verification/baseline_verification.json",
+      "sha256": "ff54665578491d4082037d12d612f2923932a11a30cb0d93a1006698326ef651"
+    },
+    {
+      "path": "thoroughbred/verification/frozen_selection.json",
+      "sha256": "6602f887e534b523dcceccd143dc83dffd294cf2e8b7cb8c430c70274d65b5f0"
+    },
+    {
+      "path": "thoroughbred/verification/latest_challenger_review.json",
+      "sha256": "641f0fe0836519aad71123b4a74580fb8ad71511fd5cd2573c27662d581fadbb"
+    },
+    {
+      "path": "tools/resolve_main_model.py",
+      "sha256": "c381f403cae54119f35e4f0559ab5ac71077ac73d444706c070109fe16c24f1c"
+    }
+  ],
+  "deleted_db_bytes": 3470098432,
+  "deleted_db_gib": 3.231781005859375,
+  "disk_after": {
+    "available_bytes": 45470306304,
+    "free_bytes": 45470306304
+  },
+  "observed_available_byte_increase": 3472658432,
+  "finished_at": "2026-10-04T04:31:37.560445+09:00",
+  "retirement_documentation": [
+    {
+      "path": "jeju/docs/SOURCE_CATALOG.md",
+      "sha256": "ad7bba20f4332340aaa0435b9f9ed730edc06810cde9212a55a75b2aa8587a23"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/RETIRED_INTERMEDIATES_2026-09-28.md",
+      "sha256": "587c8d241942cee55193d4bcc6eebac2bf397f475b68e8303d168e0848ad39af"
+    },
+    {
+      "path": "thoroughbred/research/20260929_dataset_v1/README.md",
+      "sha256": "2d77963e38ebf431c7fb09d7193a401c9b217316d787edaf0890d39f260cf7c9"
+    },
+    {
+      "path": "thoroughbred/README.md",
+      "sha256": "e36266540bf8c5714da1a8e37bd360334f9dd1ba776ae2378eaaf692d11767b7"
+    }
+  ],
+  "final_available_bytes": 45468704768,
+  "post_documentation_verification_passed": true
+}

@@ -1,0 +1,570 @@
+{
+  "scope": "Read-only deletion assessment; no data deletions performed",
+  "major_databases": [
+    {
+      "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+      "decision": "preserve",
+      "reasons": [
+        "Direct input to scripts/predict_jeju_live_hy_r_form.py and web analysis_archive.py",
+        "Contains 876813 text_native_record rows and 14131 source text documents",
+        "New Jeju native core manifest explicitly says phase2_or_operational_db_used_as_input=false"
+      ]
+    },
+    {
+      "path": "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb",
+      "decision": "preserve",
+      "reasons": [
+        "Direct source for scripts/build_current_prediction_bundles.py and thoroughbred/predict_busan_20261002_readonly.py",
+        "Source manifest for newer thoroughbred dataset explicitly references this DB",
+        "489851 entry_result rows including 157852 before 2010; newer dataset starts in 2010",
+        "Original staging SQLite inputs are absent according to newer dataset manifest"
+      ]
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points.sqlite3",
+      "bytes": 712994816,
+      "sha256": "2099f94a07575b64c571fb992ee712e07a2e4e221f144e1058242c12bdb139d7",
+      "matches_prior_strong_comparison": true,
+      "preserve_reason": "The stronger source key comparison found 756700 distinct source-value tuples absent from the retained adjudicated DB; do not delete the base snapshot based on the earlier weaker-key report.",
+      "decision": "preserve"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_verified.sqlite3",
+      "bytes": 1363853312,
+      "sha256": "9a39970bfeb08e6b91e9f389beafa69684b2114148fb82bdb5bbce796e4d1053",
+      "matches_prior_strong_comparison": true,
+      "preserve_reason": "Retained, independently validated source database and direct input to the adjudication build.",
+      "decision": "preserve"
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+      "bytes": 1393250304,
+      "sha256": "82a95378ae0a5c71114e9f1b5038efdd2e1d683e2977310e9224b3b17b9f0e6c",
+      "matches_prior_strong_comparison": true,
+      "preserve_reason": "Retained latest research database, used by current reports and analyses.",
+      "decision": "preserve"
+    }
+  ],
+  "annual_score_databases": {
+    "decision": "hold_for_full_value_and_provenance_comparison",
+    "files": [
+      {
+        "path": "data/research/busan_2024_score_20260925/busan_2024.sqlite3",
+        "bytes": 13332480
+      },
+      {
+        "path": "data/research/running_trials_2025_score_20260925/running_trials_2025.sqlite3",
+        "bytes": 2383872
+      },
+      {
+        "path": "data/research/seoul_2021_score_20260925/seoul_2021.sqlite3",
+        "bytes": 9224192
+      },
+      {
+        "path": "data/research/busan_2023_score_20260925/busan_2023.sqlite3",
+        "bytes": 13262848
+      },
+      {
+        "path": "data/research/seoul_2026_score_20260925/seoul_2026.sqlite3",
+        "bytes": 6529024
+      },
+      {
+        "path": "data/research/running_trials_2022_score_20260925/running_trials_2022.sqlite3",
+        "bytes": 2064384
+      },
+      {
+        "path": "data/research/running_trials_2023_score_20260925/running_trials_2023.sqlite3",
+        "bytes": 2129920
+      },
+      {
+        "path": "data/research/busan_2022_score_20260925/busan_2022.sqlite3",
+        "bytes": 12435456
+      },
+      {
+        "path": "data/research/seoul_2020_score_20260925/seoul_2020.sqlite3",
+        "bytes": 6479872
+      },
+      {
+        "path": "data/research/running_trials_2024_score_20260925/running_trials_2024.sqlite3",
+        "bytes": 2252800
+      },
+      {
+        "path": "data/research/busan_2025_score_20260925/busan_2025.sqlite3",
+        "bytes": 12734464
+      },
+      {
+        "path": "data/research/seoul_2022_score_20260925/seoul_2022.sqlite3",
+        "bytes": 9625600
+      },
+      {
+        "path": "data/research/running_trials_2026_score_20260925/running_trials_2026.sqlite3",
+        "bytes": 1617920
+      },
+      {
+        "path": "data/research/running_trials_2021_score_20260925/running_trials_2021.sqlite3",
+        "bytes": 2019328
+      },
+      {
+        "path": "data/research/seoul_2025_score_20260925/seoul_2025.sqlite3",
+        "bytes": 8949760
+      },
+      {
+        "path": "data/research/busan_2020_score_20260925/busan_2020.sqlite3",
+        "bytes": 8810496
+      },
+      {
+        "path": "data/research/busan_2021_score_20260925/busan_2021.sqlite3",
+        "bytes": 11710464
+      },
+      {
+        "path": "data/research/seoul_2024_score_20260925/seoul_2024.sqlite3",
+        "bytes": 9781248
+      },
+      {
+        "path": "data/research/running_trials_2020_score_20260925/running_trials_2020.sqlite3",
+        "bytes": 3244032
+      },
+      {
+        "path": "data/research/busan_2026_score_20260925/busan_2026.sqlite3",
+        "bytes": 9338880
+      },
+      {
+        "path": "data/research/seoul_2023_score_20260925/seoul_2023.sqlite3",
+        "bytes": 9879552
+      },
+      {
+        "path": "data/research/seoul_2017_score_20260925/seoul_2017.sqlite3",
+        "bytes": 10633216
+      },
+      {
+        "path": "data/research/seoul_2018_score_20260925/seoul_2018.sqlite3",
+        "bytes": 10653696
+      },
+      {
+        "path": "data/research/seoul_2019_score_20260925/seoul_2019.sqlite3",
+        "bytes": 10915840
+      },
+      {
+        "path": "data/research/busan_2019_score_20260925/busan_2019.sqlite3",
+        "bytes": 14372864
+      },
+      {
+        "path": "data/research/running_trials_2018_score_20260925/running_trials_2018.sqlite3",
+        "bytes": 1765376
+      },
+      {
+        "path": "data/research/running_trials_2017_score_20260925/running_trials_2017.sqlite3",
+        "bytes": 1744896
+      },
+      {
+        "path": "data/research/yeongcheon_2026_score_20260925/yeongcheon_2026.sqlite3",
+        "bytes": 126976
+      },
+      {
+        "path": "data/research/busan_2017_score_20260925/busan_2017.sqlite3",
+        "bytes": 14389248
+      },
+      {
+        "path": "data/research/running_trials_2019_score_20260925/running_trials_2019.sqlite3",
+        "bytes": 2449408
+      },
+      {
+        "path": "data/research/busan_2018_score_20260925/busan_2018.sqlite3",
+        "bytes": 13664256
+      }
+    ],
+    "total_bytes": 238522368,
+    "reason": "Existing loader still reads annual score files; no full source-value/identity/quality/coverage equivalence has been certified."
+  },
+  "raw_data": {
+    "decision": "preserve",
+    "reason": "Original evidence used for extraction, source review, and rebuilding; transformed DBs alone do not certify complete original payload preservation."
+  },
+  "dataset_and_experiment_folders": {
+    "decision": "review_each_run_before_deleting",
+    "approx_size_GiB": 1.28,
+    "reason": "Not all versions were evaluated for feature, replay, source, and provenance dependencies; no blanket deletion clearance."
+  },
+  "safe_regenerable_file_candidates": [
+    {
+      "path": "data/.DS_Store",
+      "bytes": 24580,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/.DS_Store",
+      "bytes": 57348,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/kra_disease_glossary_api33_20260930/composite_review_20260930/__pycache__/review_composites.cpython-313.pyc",
+      "bytes": 16632,
+      "source": "data/research/kra_disease_glossary_api33_20260930/composite_review_20260930/review_composites.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/kra_disease_glossary_api33_20260930/profile_hover_review_20260930/__pycache__/collect_profile_hover_review.cpython-313.pyc",
+      "bytes": 23055,
+      "source": "data/research/kra_disease_glossary_api33_20260930/profile_hover_review_20260930/collect_profile_hover_review.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_three_targets_20260918_v3/.DS_Store",
+      "bytes": 10244,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_three_targets_20260918_v3/code/__pycache__/context_features.cpython-312.pyc",
+      "bytes": 51369,
+      "source": "data/research/thoroughbred_three_targets_20260918_v3/code/context_features.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_three_targets_20260918_v3/code/__pycache__/test_context_features.cpython-312-pytest-8.4.2.pyc",
+      "bytes": 21244,
+      "source": "data/research/thoroughbred_three_targets_20260918_v3/code/test_context_features.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_three_targets_20260918_v3/code/__pycache__/infer_targets.cpython-312.pyc",
+      "bytes": 15756,
+      "source": "data/research/thoroughbred_three_targets_20260918_v3/code/infer_targets.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_three_targets_20260918_v3/code/__pycache__/targets_core.cpython-312.pyc",
+      "bytes": 33394,
+      "source": "data/research/thoroughbred_three_targets_20260918_v3/code/targets_core.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_three_targets_20260918_v3/code/__pycache__/run_targets.cpython-312.pyc",
+      "bytes": 52036,
+      "source": "data/research/thoroughbred_three_targets_20260918_v3/code/run_targets.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/jeju_native_top3_dataset_v1_20260915_r2/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/jeju_native_transition_features_v1_20260916/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/jeju_accuracy_candidates_20260919/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_offline_20260918_v5/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_followup_20260918_v4/.DS_Store",
+      "bytes": 8196,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_followup_20260918_v4/review_model/__pycache__/test_strict_feature_contract.cpython-312-pytest-8.4.2.pyc",
+      "bytes": 4671,
+      "source": "data/research/thoroughbred_followup_20260918_v4/review_model/test_strict_feature_contract.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_followup_20260918_v4/model/code/__pycache__/run_v4_model.cpython-312.pyc",
+      "bytes": 15062,
+      "source": "data/research/thoroughbred_followup_20260918_v4/model/code/run_v4_model.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/jeju_native_h3_features_v1_20260916/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_boundary_20260918_v6/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_boundary_20260918_v6/__pycache__/core.cpython-312.pyc",
+      "bytes": 18109,
+      "source": "data/research/thoroughbred_boundary_20260918_v6/core.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_win_research_20260918_v2/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/research/thoroughbred_win_research_20260918_v2/code/__pycache__/features_v2.cpython-312.pyc",
+      "bytes": 40749,
+      "source": "data/research/thoroughbred_win_research_20260918_v2/code/features_v2.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_win_research_20260918_v2/code/__pycache__/shadow.cpython-312.pyc",
+      "bytes": 57834,
+      "source": "data/research/thoroughbred_win_research_20260918_v2/code/shadow.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_win_research_20260918_v2/code/__pycache__/test_features_v2.cpython-312-pytest-8.4.2.pyc",
+      "bytes": 14259,
+      "source": "data/research/thoroughbred_win_research_20260918_v2/code/test_features_v2.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/thoroughbred_win_research_20260918_v2/code/__pycache__/test_shadow.cpython-312-pytest-8.4.2.pyc",
+      "bytes": 9627,
+      "source": "data/research/thoroughbred_win_research_20260918_v2/code/test_shadow.py",
+      "reason": "Regenerable Python cache; source exists"
+    },
+    {
+      "path": "data/research/jeju_native_transition_holdout_v13_20260916/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/.DS_Store",
+      "bytes": 20484,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e8a_v2_20260913/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e5b_race_objective_20260912/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/calibration/.DS_Store",
+      "bytes": 8196,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e3_20260911/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/models/.DS_Store",
+      "bytes": 36868,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e7b_20260913/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e8a_v2_h1h2_20260913/.DS_Store",
+      "bytes": 8196,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e6b_20260913/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/pre2025_source_feasibility_20260914/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/walk_forward/.DS_Store",
+      "bytes": 26628,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/experiments/confirmed_starter_e8b_source_control_20260913/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/datasets/.DS_Store",
+      "bytes": 18436,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/archives/.DS_Store",
+      "bytes": 10244,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/.DS_Store",
+      "bytes": 10244,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/.DS_Store",
+      "bytes": 12292,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/race_plan/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/horse_start_training/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/horse_weights/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/race_steward_reports/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/jockey_changes/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/horse_training/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/entry_equipment/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/race_scratches/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/entry_sheet/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/horse_medical/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/gate_entry_sheet/.DS_Store",
+      "bytes": 8196,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra/final_dividend/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_api_monthly/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/.DS_Store",
+      "bytes": 8196,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom11/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom72/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom12/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom23/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom13/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom71/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/db5/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/db4/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/raw/kra_text/dacom55/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/.DS_Store",
+      "bytes": 22532,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/publication_bundles_20260919T041500+0900/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/live_20260911/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/current_cards_20260919T034100+0900/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/jeju_auto_update_20260919T1108/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/20260904/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    },
+    {
+      "path": "data/predictions/preliminary_20260912/.DS_Store",
+      "bytes": 6148,
+      "reason": "Finder display metadata"
+    }
+  ],
+  "safe_regenerable_total_bytes": 922893,
+  "bytecode_without_confirmed_source": [],
+  "limitations": [
+    "No exhaustive cross-schema row/value equivalence has been asserted for newer databases. Existing direct dependencies and concrete missing historical scope already rule out safe immediate deletion of the major databases.",
+    "Safety labels apply to exact files, not parent directories."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "checked_at_kst": "2026-10-04T14:48:08.231525+09:00",
+  "scope": "Read-only inspection after the user reported phone access; no forced mobile workspace-diff replay or repository mutation.",
+  "git_allocated_bytes": 31412224,
+  "git_logical_bytes": 30246599,
+  "previous_post_cleanup_git_allocated_bytes": 28975104,
+  "allocated_growth_since_cleanup_bytes": 2437120,
+  "git_temporary_directory_count": 0,
+  "git_temporary_pack_or_tmp_count": 0,
+  "git_object_counts": "count: 304\nsize: 2348\nin-pack: 3917\npacks: 1\nsize-pack: 26796\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n",
+  "untracked_visible_files": 1951,
+  "untracked_visible_regular_bytes": 100190759,
+  "previous_problem_untracked_logical_GiB": 4.569,
+  "ignored_db_checks": [
+    "jeju/data/jeju_native_core.sqlite3",
+    "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "jeju/data/raw/jeju_native_text_phase2.sqlite3"
+  ],
+  "disk_free_bytes": 45263593472,
+  "past_confirmed_producer": {
+    "client": "codex_chatgpt_ios_remote",
+    "client_version": "1.2026.266",
+    "process_name": "codex-workspace-diff",
+    "parent_process": "ChatGPT.app embedded Codex app-server",
+    "timeout_ms": 20000,
+    "observed_child_command": "git add --pathspec-from-file=... --pathspec-file-nul",
+    "temporary_environment": [
+      "GIT_OBJECT_DIRECTORY=temporary_directory/objects",
+      "GIT_INDEX_FILE=temporary_directory/index"
+    ],
+    "scope": "workspace unstaged changes including untracked files"
+  },
+  "interpretation": "The previous large abandoned-directory accumulation is absent at this inspection. Existing ignore rules still exclude large DBs; normal small Git snapshot growth remains possible. This is a current-state observation, not a guarantee for future accesses.",
+  "current_log_limit": "Available logs did not independently establish a new ios-workspace-diff execution today; agent tool-output echoes were excluded from evidence."
+}

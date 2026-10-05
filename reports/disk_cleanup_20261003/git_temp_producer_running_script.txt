@@ -1,0 +1,450 @@
+/bin/bash -lc set -euo pipefail
+
+# This script must not mutate the repository while collecting a workspace diff.
+export GIT_OPTIONAL_LOCKS=0
+
+preferred_comparison_ref="$1"
+diff_source="$2"
+requires_preferred_comparison_ref="$3"
+query_remote_default_branch="$4"
+include_file_contents="$5"
+maximum_inline_changed_line_count="$6"
+maximum_inline_total_changed_line_count="$7"
+path_argument_batch_size=1024
+temp_files=()
+temp_directories=()
+diff_git_environment=(GIT_LITERAL_PATHSPECS=1)
+cleanup() {
+  if ((${#temp_files[@]})); then
+    rm -f "${temp_files[@]}"
+  fi
+  if ((${#temp_directories[@]})); then
+    rm -rf "${temp_directories[@]}"
+  fi
+}
+trap cleanup EXIT
+
+make_temp_file() {
+  temp_path="$(mktemp)"
+  temp_files+=("$temp_path")
+}
+
+make_temp_directory() {
+  temp_path="$(mktemp -d)"
+  temp_directories+=("$temp_path")
+}
+
+emit_encoded() {
+  local label="$1"
+  local file_path="$2"
+  printf '%s\0' "$label"
+  base64 <"$file_path" | tr -d '\n'
+  printf '\0'
+}
+
+fail_with_reason() {
+  printf 'commandFailed\0'
+  printf '%s' "$1" | base64 | tr -d '\n'
+  printf '\0'
+  exit 0
+}
+
+run_git_capture() {
+  local output_file="$1"
+  shift
+  make_temp_file
+  local error_file="$temp_path"
+  # Successful Git diffs can warn on stderr; mixing those warnings into stdout corrupts the snapshot protocol.
+  set +e
+  "$@" >"$output_file" 2>"$error_file"
+  local status=$?
+  set -e
+  if [[ "$status" != 0 && "$status" != 1 ]]; then
+    printf 'commandFailed\0'
+    if [[ -s "$error_file" ]]; then
+      base64 <"$error_file" | tr -d '\n'
+    else
+      base64 <"$output_file" | tr -d '\n'
+    fi
+    printf '\0'
+    exit 1
+  fi
+}
+
+run_with_timeout() {
+  local timeout_seconds="$1"
+  shift
+  local command_status=0
+  "$@" &
+  local command_pid=$!
+  (
+    sleep "$timeout_seconds"
+    kill -TERM "$command_pid" 2>/dev/null || true
+  ) &
+  local watchdog_pid=$!
+  wait "$command_pid" || command_status=$?
+  kill "$watchdog_pid" 2>/dev/null || true
+  wait "$watchdog_pid" 2>/dev/null || true
+  return "$command_status"
+}
+
+resolve_remote_default_branch() {
+  local remote="$1"
+  local symbolic_ref
+  local remote_default_branch
+  local branch
+
+  [[ "$remote" == -* ]] && return 1
+
+  symbolic_ref="$(git symbolic-ref --quiet --short "refs/remotes/$remote/HEAD" 2>/dev/null || true)"
+  if [[ -n "$symbolic_ref" ]] && git show-ref --verify --quiet "refs/remotes/$symbolic_ref"; then
+    printf '%s\n' "$symbolic_ref"
+    return 0
+  fi
+
+  if [[ "$query_remote_default_branch" == true ]]; then
+    remote_default_branch="$(
+      run_with_timeout 10 env GIT_TERMINAL_PROMPT=0 git ls-remote --symref -- "$remote" HEAD 2>/dev/null \
+        | awk '$1 == "ref:" && $3 == "HEAD" { sub("^refs/heads/", "", $2); print $2; exit }' \
+        || true
+    )"
+    if
+      [[ -n "$remote_default_branch" ]] \
+      && git show-ref --verify --quiet "refs/remotes/$remote/$remote_default_branch"
+    then
+      printf '%s/%s\n' "$remote" "$remote_default_branch"
+      return 0
+    fi
+  fi
+
+  if
+    [[ "$preferred_comparison_ref" == "$remote/"* ]] \
+    && git show-ref --verify --quiet "refs/remotes/$preferred_comparison_ref"
+  then
+    printf '%s\n' "$preferred_comparison_ref"
+    return 0
+  fi
+
+  for branch in main master; do
+    if git show-ref --verify --quiet "refs/remotes/$remote/$branch"; then
+      printf '%s/%s\n' "$remote" "$branch"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+resolve_default_branch() {
+  local remote
+  local has_origin=false
+  local remotes=()
+
+  while IFS= read -r remote; do
+    [[ -z "$remote" ]] && continue
+    remotes+=("$remote")
+    [[ "$remote" == origin ]] && has_origin=true
+  done < <(git remote)
+
+  if [[ "$has_origin" == true ]]; then
+    resolve_remote_default_branch origin && return 0
+  fi
+
+  for remote in "${remotes[@]}"; do
+    [[ "$remote" == origin ]] && continue
+    resolve_remote_default_branch "$remote" && return 0
+  done
+
+  return 1
+}
+
+resolve_comparison_ref() {
+  if [[ "$requires_preferred_comparison_ref" == true ]]; then
+    if
+      [[ -n "$preferred_comparison_ref" ]] \
+      && git rev-parse --verify --quiet "$preferred_comparison_ref^{commit}" >/dev/null
+    then
+      printf '%s\n' "$preferred_comparison_ref"
+      return 0
+    fi
+    return 1
+  fi
+
+  resolve_default_branch && return 0
+
+  if
+    [[ -n "$preferred_comparison_ref" ]] \
+    && git rev-parse --verify --quiet "$preferred_comparison_ref^{commit}" >/dev/null
+  then
+    printf '%s\n' "$preferred_comparison_ref"
+    return 0
+  fi
+
+  return 1
+}
+
+if ! repository_root_path="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+  printf 'notGitRepository\0'
+  exit 0
+fi
+cd "$repository_root_path"
+
+comparison_ref=""
+diff_base=""
+if [[ "$diff_source" == branch ]]; then
+  current_branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+  if git rev-parse --verify --quiet HEAD >/dev/null; then
+    comparison_ref="$(resolve_comparison_ref || true)"
+    if [[ -n "$comparison_ref" ]]; then
+      if merge_base="$(git merge-base HEAD "$comparison_ref" 2>/dev/null)"; then
+        diff_base="$merge_base"
+      elif [[ "$requires_preferred_comparison_ref" == true ]]; then
+        fail_with_reason "comparisonBranchDoesNotShareHistory"
+      else
+        diff_base=HEAD
+      fi
+    elif [[ "$requires_preferred_comparison_ref" == true ]]; then
+      fail_with_reason "comparisonBranchUnavailable"
+    else
+      diff_base=HEAD
+    fi
+  else
+    diff_base="$(git hash-object -t tree /dev/null)"
+  fi
+fi
+
+printf 'git\0%s\0' "$repository_root_path"
+if [[ "$diff_source" == branch ]]; then
+  printf 'currentBranch\0%s\0' "$current_branch"
+  while IFS= read -r recent_branch; do
+    [[ -z "$recent_branch" ]] && continue
+    printf 'recentBranch\0%s\0' "$recent_branch"
+  done < <(git for-each-ref --count=8 --sort=-committerdate refs/heads --format='%(refname:short)')
+fi
+if [[ -n "$comparison_ref" ]]; then
+  printf 'comparisonRef\0%s\0' "$comparison_ref"
+fi
+
+untracked_paths_file=""
+if [[ "$diff_source" != staged ]]; then
+  make_temp_file
+  untracked_paths_file="$temp_path"
+  # Tracked state is collected by `git diff`; avoid asking `git status` to scan it again.
+  run_git_capture "$untracked_paths_file" git ls-files --others --exclude-standard -z
+fi
+
+case "$diff_source" in
+  branch)
+    diff_arguments=("$diff_base")
+    ;;
+  staged)
+    diff_arguments=(--cached)
+    ;;
+  unstaged)
+    diff_arguments=()
+    ;;
+  *)
+    printf 'commandFailed\0'
+    printf '%s' "$(printf 'Unknown diff source: %s' "$diff_source" | base64 | tr -d '\n')"
+    printf '\0'
+    exit 1
+    ;;
+esac
+untracked_diff_arguments=()
+
+if [[ -n "$untracked_paths_file" && -s "$untracked_paths_file" ]]; then
+  make_temp_directory
+  temp_index_directory="$temp_path"
+  temp_index_path="$temp_index_directory/index"
+  temp_object_directory="$temp_index_directory/objects"
+  mkdir -p "$temp_object_directory"
+  repository_object_directory="$(git rev-parse --git-path objects)"
+  repository_object_directory="$(cd "$repository_object_directory" && pwd -P)"
+  temporary_index_git_environment=(
+    GIT_LITERAL_PATHSPECS=1
+    GIT_OBJECT_DIRECTORY="$temp_object_directory"
+    GIT_ALTERNATE_OBJECT_DIRECTORIES="$repository_object_directory"
+  )
+  diff_git_environment+=(GIT_ALTERNATE_OBJECT_DIRECTORIES="$temp_object_directory")
+  make_temp_file
+  working_tree_error_file="$temp_path"
+  uses_separate_untracked_diff=false
+  if [[ "$diff_source" == unstaged ]]; then
+    if ! env "${temporary_index_git_environment[@]}" GIT_INDEX_FILE="$temp_index_path" git read-tree --empty >"$working_tree_error_file" 2>&1; then
+      printf 'commandFailed\0'
+      base64 <"$working_tree_error_file" | tr -d '\n'
+      printf '\0'
+      exit 1
+    fi
+    uses_separate_untracked_diff=true
+  else
+    repository_index_path="$(git rev-parse --git-path index)"
+    if [[ -f "$repository_index_path" ]]; then
+      cp "$repository_index_path" "$temp_index_path"
+    fi
+
+    shared_index_path="$(git rev-parse --shared-index-path 2>/dev/null || true)"
+    if [[ -n "$shared_index_path" && -f "$shared_index_path" ]]; then
+      cp "$shared_index_path" "$temp_index_directory/$(basename "$shared_index_path")"
+    fi
+
+    if ! env "${temporary_index_git_environment[@]}" GIT_INDEX_FILE="$temp_index_path" git add -u >"$working_tree_error_file" 2>&1; then
+      if [[ -n "$(git ls-files -u)" ]]; then
+        uses_separate_untracked_diff=true
+        rm -f "$temp_index_path"
+        if ! env "${temporary_index_git_environment[@]}" GIT_INDEX_FILE="$temp_index_path" git read-tree --empty >"$working_tree_error_file" 2>&1; then
+          printf 'commandFailed\0'
+          base64 <"$working_tree_error_file" | tr -d '\n'
+          printf '\0'
+          exit 1
+        fi
+      else
+        printf 'commandFailed\0'
+        base64 <"$working_tree_error_file" | tr -d '\n'
+        printf '\0'
+        exit 1
+      fi
+    fi
+  fi
+
+  set +e
+  env "${temporary_index_git_environment[@]}" GIT_INDEX_FILE="$temp_index_path" git add --pathspec-from-file="$untracked_paths_file" --pathspec-file-nul >"$working_tree_error_file" 2>&1
+  untracked_path_add_status=$?
+  set -e
+  if [[ "$untracked_path_add_status" == 129 ]]; then
+    if ! xargs -0 -n "$path_argument_batch_size" env "${temporary_index_git_environment[@]}" GIT_INDEX_FILE="$temp_index_path" git add -- <"$untracked_paths_file" >"$working_tree_error_file" 2>&1; then
+      printf 'commandFailed\0'
+      base64 <"$working_tree_error_file" | tr -d '\n'
+      printf '\0'
+      exit 1
+    fi
+  elif [[ "$untracked_path_add_status" != 0 ]]; then
+    printf 'commandFailed\0'
+    base64 <"$working_tree_error_file" | tr -d '\n'
+    printf '\0'
+    exit 1
+  fi
+
+  if ! working_tree_tree="$(env "${temporary_index_git_environment[@]}" GIT_INDEX_FILE="$temp_index_path" git write-tree 2>"$working_tree_error_file")"; then
+    printf 'commandFailed\0'
+    base64 <"$working_tree_error_file" | tr -d '\n'
+    printf '\0'
+    exit 1
+  fi
+  if [[ "$uses_separate_untracked_diff" == true ]]; then
+    untracked_diff_arguments=("$(git hash-object -t tree /dev/null)" "$working_tree_tree")
+  else
+    diff_arguments+=("$working_tree_tree")
+  fi
+fi
+
+make_temp_file
+tracked_numstat_file="$temp_path"
+: >"$tracked_numstat_file"
+append_numstat_diff() {
+  make_temp_file
+  comparison_file="$temp_path"
+  run_git_capture "$comparison_file" env "${diff_git_environment[@]}" git diff --find-renames --numstat -z --no-ext-diff "$@" --
+  cat "$comparison_file" >>"$tracked_numstat_file"
+}
+# macOS Bash 3.2 treats expansion of an empty array as unbound under `set -u`.
+if ((${#diff_arguments[@]})); then
+  append_numstat_diff "${diff_arguments[@]}"
+else
+  append_numstat_diff
+fi
+if ((${#untracked_diff_arguments[@]})); then
+  append_numstat_diff "${untracked_diff_arguments[@]}"
+fi
+emit_encoded "trackedNumstat" "$tracked_numstat_file"
+
+if [[ "$include_file_contents" == true && -s "$tracked_numstat_file" ]]; then
+  make_temp_file
+  tracked_diff_file="$temp_path"
+  : >"$tracked_diff_file"
+  inline_path_batch=()
+  inline_changed_line_count=0
+
+  append_inline_diff_comparison() {
+    make_temp_file
+    comparison_file="$temp_path"
+    run_git_capture "$comparison_file" env "${diff_git_environment[@]}" git diff --find-renames --src-prefix=a/ --dst-prefix=b/ --unified=2 --no-ext-diff "$@" -- "${inline_path_batch[@]}"
+    cat "$comparison_file" >>"$tracked_diff_file"
+  }
+
+  append_inline_diff_batch() {
+    ((${#inline_path_batch[@]})) || return 0
+    if ((${#diff_arguments[@]})); then
+      append_inline_diff_comparison "${diff_arguments[@]}"
+    else
+      append_inline_diff_comparison
+    fi
+    if ((${#untracked_diff_arguments[@]})); then
+      append_inline_diff_comparison "${untracked_diff_arguments[@]}"
+    fi
+    inline_path_batch=()
+  }
+
+  while IFS= read -r -d '' numstat_entry; do
+    IFS=$'\t' read -r lines_added lines_removed path <<<"$numstat_entry"
+    if [[ -z "$path" ]]; then
+      IFS= read -r -d '' previous_path || break
+      IFS= read -r -d '' path || break
+    fi
+
+    # Only identify changed repositories while their diff is visible; their contents load on demand.
+    if [[ ! -L "$path" && ( -d "$path/.git" || -f "$path/.git" ) ]]; then
+      printf 'repositoryPath\0%s\0' "$path"
+    fi
+
+    [[ "$lines_added" =~ ^[0-9]+$ ]] || lines_added=0
+    [[ "$lines_removed" =~ ^[0-9]+$ ]] || lines_removed=0
+    changed_line_count=$((lines_added + lines_removed))
+    if
+      (( changed_line_count > 0 )) \
+      && (( changed_line_count <= $maximum_inline_changed_line_count ))
+    then
+      inline_changed_line_count=$((inline_changed_line_count + changed_line_count))
+    fi
+  done <"$tracked_numstat_file"
+
+  if (( inline_changed_line_count <= maximum_inline_total_changed_line_count )); then
+    while IFS= read -r -d '' numstat_entry; do
+      previous_path=""
+      IFS=$'\t' read -r lines_added lines_removed path <<<"$numstat_entry"
+      if [[ -z "$path" ]]; then
+        IFS= read -r -d '' previous_path || break
+        IFS= read -r -d '' path || break
+      fi
+
+      [[ "$lines_added" =~ ^[0-9]+$ ]] || lines_added=0
+      [[ "$lines_removed" =~ ^[0-9]+$ ]] || lines_removed=0
+      changed_line_count=$((lines_added + lines_removed))
+      if
+        (( changed_line_count > 0 )) \
+        && (( changed_line_count <= $maximum_inline_changed_line_count ))
+      then
+        path_count=1
+        if [[ -n "$previous_path" ]]; then
+          path_count=2
+        fi
+        if
+          ((${#inline_path_batch[@]})) \
+          && (( ${#inline_path_batch[@]} + path_count > path_argument_batch_size ))
+        then
+          append_inline_diff_batch
+        fi
+        if [[ -n "$previous_path" ]]; then
+          inline_path_batch+=("$previous_path")
+        fi
+        inline_path_batch+=("$path")
+      fi
+    done <"$tracked_numstat_file"
+    append_inline_diff_batch
+  fi
+
+  if [[ -s "$tracked_diff_file" ]]; then
+    emit_encoded "trackedDiff" "$tracked_diff_file"
+  fi
+fi
+ codex-workspace-diff  unstaged false false false 1500 9000

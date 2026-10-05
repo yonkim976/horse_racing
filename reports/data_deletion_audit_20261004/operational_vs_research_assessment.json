@@ -1,0 +1,65 @@
+{
+  "checked_at_kst": "2026-10-04T03:38:14.120429+09:00",
+  "scope": "Read-only clarification of operational prediction versus historical rebuilding; no database or file deletion",
+  "supabase_project": "horse-racing-prod / xkykmhhkjtosptoibduo",
+  "supabase_exact_counts": {
+    "horses": 61651,
+    "race_entries": 577459,
+    "race_results": 577099,
+    "race_section_times": 1823443,
+    "race_section_results": 1332806,
+    "race_passing_groups": 103410,
+    "race_point_source_batches": 31
+  },
+  "current_domain_section_counts": {
+    "thoroughbred_core.section_measurements_api": 4380065,
+    "thoroughbred_core.race_passing_groups": 144001,
+    "thoroughbred_dataset.section_point": 1243425,
+    "jeju_native_core.jeju_race_postrace_sections_quality_2026": 92513
+  },
+  "clarification": "The preceding audit conservatively preserved both runtime dependencies and historical reconstruction assets. Preservation of full historical intermediate databases is not mandatory for model scoring alone.",
+  "layers": {
+    "model_scoring": "Registered weights, metadata/calibration/category maps, inference code, a complete prepared feature card, and small registry-required verification artifacts. The scoring routines do not read the large section-point databases.",
+    "feature_preparation": "Existing Thoroughbred feature builders still use the historical unified DuckDB and retained prepared Parquet histories. The existing Jeju live feature builder still reads the text phase2 SQLite and historical feature Parquets.",
+    "historical_rebuilding": "The verified section DB is an input to adjudicate_section_points.py. The adjudicated DB feeds the 20260929 domain dataset builder and reconciliation audits. The original section DB belongs to a retired intermediate pipeline.",
+    "web_runtime": "The analysis_archive.py SQLite supplement is optional: absent archive returns empty mapping. The Dockerfile copies src only and .dockerignore excludes data; no necessity for the archive in deployed operation is established by the existence of this fallback."
+  },
+  "candidate_policy": [
+    {
+      "path": "data/research/section_point_db_20260925/section_points.sqlite3",
+      "MiB": 679.96,
+      "classification": "conditional_cleanup_candidate",
+      "condition": "If retiring historical base-snapshot inspection; full source-value equivalence is not established. Not a direct scoring or current feature-builder input."
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_verified.sqlite3",
+      "MiB": 1300.67,
+      "classification": "conditional_cleanup_candidate",
+      "condition": "If retiring reconstruction of the old adjudication pipeline; not a current scoring input."
+    },
+    {
+      "path": "data/research/section_point_db_20260925/section_points_adjudicated.sqlite3",
+      "MiB": 1328.71,
+      "classification": "retain_until_rebuild_and_analysis_dependencies_are_retired_or_redirected",
+      "condition": "Current domain dataset contains a selected 2010+ Thoroughbred subset; the old DB contains wider source variants and review tables."
+    },
+    {
+      "path": "data/research/thoroughbred_unified_20260918/thoroughbred_unified.duckdb",
+      "classification": "retain_for_existing_feature_preparation",
+      "condition": "Can be retired after replacing legacy feature preparation with a proven equivalent path based on retained domain/operational DBs."
+    },
+    {
+      "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+      "classification": "retain_for_existing_jeju_feature_preparation",
+      "condition": "Optional for web supplement, but still directly read by the current live feature builder."
+    }
+  ],
+  "outside_pure_scoring": [
+    "Old ability_v*/racefit_v* datasets",
+    "Old experimental models and walk-forward runs",
+    "Full section validation/adjudication databases",
+    "Source response archives and TXT/RPT documents",
+    "Historic predictions, model-comparison results and evaluation outputs"
+  ],
+  "limitation": "Exact row counts and presence of current domain section tables do not certify full cross-schema source-value equivalence. No replacement feature-generation parity was asserted."
+}
