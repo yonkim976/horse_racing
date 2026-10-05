@@ -1,0 +1,1310 @@
+{
+  "executed_at_utc": "2026-09-28 13:53:45 UTC",
+  "source_manifest": "approved_remaining_v3.json",
+  "source_manifest_sha256": "64363a7ed37ec6f2fc38754f06337de92676d2976c41bc76e8605b912f431f39",
+  "parent_reviewed_manifest_sha256": "8890de26c2433ecbcc3bd3947201075a6920be88476795b234b606a0a8f1bb1e",
+  "method": "Verified every path against the approved manifest SHA-256 and byte size in one full preflight, then unlinked only those files. No directory-wide deletion.",
+  "deleted_count": 183,
+  "deleted_bytes": 1533167,
+  "groups": {
+    "obsolete_experiment_script": {
+      "count": 100,
+      "bytes": 909018
+    },
+    "obsolete_experiment_test": {
+      "count": 17,
+      "bytes": 41406
+    },
+    "obsolete_research_module": {
+      "count": 11,
+      "bytes": 54859
+    },
+    "obsolete_root_jeju_doc": {
+      "count": 55,
+      "bytes": 527884
+    }
+  },
+  "deleted_files": [
+    {
+      "path": "docs/JEJU_20260918_FORECAST_READINESS_SUMMARY.md",
+      "sha256": "63d58770a78875dc60e6251b84d980cc4849d7fa3a3b3aa1eb6e90a545fb1912",
+      "bytes": 1875,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ACCURACY_CANDIDATES_DEBUT_REPORT_2026-09-19.md",
+      "sha256": "0e3ad1ee23bb5b96ea61f539c232d44ca5ec4397b44a6276d40a4951e1706f92",
+      "bytes": 13151,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ACCURACY_CANDIDATES_PROTOCOL_2026-09-19.md",
+      "sha256": "3c49e059036ba5c663eb144aee391190de338b374bc0f23f44d7bc0af32cd485",
+      "bytes": 2674,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ACCURACY_RESET_AND_ASSET_REVIEW_2026-09-18.md",
+      "sha256": "9bbfc3b512d520e5ac7fb1d478e3e003507c8d05d6574f99eff94ecaa7de9ddf",
+      "bytes": 16536,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ANNUAL_VALIDATION_RETURNS_REPORT_2026-09-18.md",
+      "sha256": "177ed6ff09358504a8c6a79d38b7f39e6aa34dbf7976c66c8dbf71a581cfb2c6",
+      "bytes": 13109,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ELO_OBSERVED_PROTOCOL_2026-09-22.md",
+      "sha256": "53451dcf4155afdb5cd3c84fb8fbc6e541e920676fd0cad6230816e02a22b3c4",
+      "bytes": 3473,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ELO_OBSERVED_REPORT_2026-09-22.md",
+      "sha256": "fd8f765e9d39745624ba32beae9b35d405874659d861facf67ed40e4aac84cc4",
+      "bytes": 8862,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_HORSE_TYPE_TRACK_HISTORY_2026-09-14.md",
+      "sha256": "a5c57daa4cbf6808b80b8bcd33d9bb469850bd4f4f0832d4d7b7bceba11f3c38",
+      "bytes": 12720,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_MULTYEAR_RETURN_PROTOCOL_2026-09-18.md",
+      "sha256": "148c0eabd705b64b0698aea33bb0fab445610efaf6752031c5740b3fa7bc89e6",
+      "bytes": 3282,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_ABLATION_ORDER_PLAN_2026-09-16.md",
+      "sha256": "45ac6818e169f58f266ada2263c6916f6b45e9493eabdf02e92766f381b0cd70",
+      "bytes": 3743,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_ABLATION_ORDER_REPORT_2026-09-16.md",
+      "sha256": "801b1cb2a3f5ade06c36a79a709522e029da385504c6a597c874d982428bf681",
+      "bytes": 10653,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_CONDITIONAL_ORDER_PLAN_2026-09-16.md",
+      "sha256": "335405a7d39755fc063733104d01a4b7bb888082c19f20ebf5c1dd34ab066177",
+      "bytes": 5749,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_CONDITIONAL_ORDER_REPORT_2026-09-16.md",
+      "sha256": "7cb38b0ca7d28208e1a5b38e1521e85b8646b8dfd6e603c44677d719e3cd88e0",
+      "bytes": 12856,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_CONDITIONS_PACE_WEIGHT_REVIEW_2026-09-17.md",
+      "sha256": "18e1a4d1c39aa5eef5fea1cdcef21ea4b06be907419e266aad12e96fb48d100c",
+      "bytes": 15197,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_CONTEXT_MODEL_PLAN_2026-09-16.md",
+      "sha256": "de7e8c178c349361ae98642d6931d1b0d598c9d41370980b5e70dbf2c16ece46",
+      "bytes": 16725,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_CONTEXT_MODEL_REPORT_2026-09-16.md",
+      "sha256": "0b4c9ae794ceea33e422286c64222f3994af93746ab55f868d36e0a7281d4b31",
+      "bytes": 12471,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_ERROR_CONDITIONS_REPORT_2026-09-16.md",
+      "sha256": "9a13e60aeda9d16e3b680a667c303f298083a2bdb2005b182363fcf60346312c",
+      "bytes": 23410,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_EXPERIENCE_CALIBRATION_PLAN_2026-09-16.md",
+      "sha256": "d38c14dc10b0e382bbf67e2654ded227765e372738db58c94d4b3c8bdd8eea69",
+      "bytes": 7881,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_EXPERIENCE_CALIBRATION_REPORT_2026-09-16.md",
+      "sha256": "4c7603f1e0308956a855b1d99b8058311b6bbbc7202e0bf5205f3b6f2dc3d06d",
+      "bytes": 13186,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_H3_MODEL_REPORT_2026-09-16.md",
+      "sha256": "bf138b078ac67bebadffcfd394dd4cb9ffefc0d45388436dd1ce1d3a44d8edae",
+      "bytes": 12652,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_HORSE_MODEL_V1_AGENT_PROMPT_2026-09-15.md",
+      "sha256": "54b5c7d8bfcee2cf2b440b93b01b28541fe37007d33c723dbf05f40d90df95cd",
+      "bytes": 42279,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_HORSE_MODEL_V1_PLAN_REVIEW_2026-09-15.md",
+      "sha256": "7c219c127f60b28d97c2264a7bb3de89ac8fe15685fcef7f3dff9180f5167362",
+      "bytes": 13722,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_JOINT_TOP3_PLAN_2026-09-16.md",
+      "sha256": "667216ffeffdac93da0b2e6dda361cd91e1886293beb63b3b523624bbfc42b7b",
+      "bytes": 3734,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_JOINT_TOP3_REPORT_2026-09-16.md",
+      "sha256": "08aa3a562d12fbe7c357893beebf8fe90ee5e13534ba1f239ee19e93a7add58e",
+      "bytes": 8262,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_MODEL_V1_READINESS_2026-09-15.md",
+      "sha256": "bd7ea5ba3ba8b5cdc7e5962417610a482a5525cdfbaee1e8d2a99bd192381b38",
+      "bytes": 14106,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_PREGAME_READINESS_REPORT_2026-09-16.md",
+      "sha256": "00a1051c91af61dc5fcebb74d8befba9a375fd66184c9e0b756a1723be44567f",
+      "bytes": 9987,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_SET_INTERACTION_PLAN_2026-09-16.md",
+      "sha256": "c5ad04abda8e7ed70610e2ead5f5ca399320bc806845ef86d0d4442b5ecfbe68",
+      "bytes": 6197,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_SET_INTERACTION_REPORT_2026-09-16.md",
+      "sha256": "c584cb2a939015a69786326a50fdf26978e83f61fbd6c36c24f5caa0b66d5d0c",
+      "bytes": 12625,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_STEWARD_NEXT_STAGE_PLAN_2026-09-17.md",
+      "sha256": "da765a51579a461303ad03e09c148fce86653a452fc8f6816b1edcc441299fe4",
+      "bytes": 2952,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_STEWARD_PACE_NEXT_STAGE_REPORT_2026-09-17.md",
+      "sha256": "f1f5d81a74e79195c4364d9e2782991fc000f1cf146dc24ce8e5e00914a7254c",
+      "bytes": 15612,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TEMPO_PACE_PILOT_PLAN_2026-09-17.md",
+      "sha256": "2cb77f35d8b86738701b48a1b38f9b5b42610016928fc06170341ed4042728a0",
+      "bytes": 4453,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_THREE_TARGETS_PLAN_2026-09-15.md",
+      "sha256": "90d1f2035c2f238af87abd44b4c45a30494df2b9fabcd23feea0ba6ab0d8bbb5",
+      "bytes": 4526,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_THREE_TARGETS_REPORT_2026-09-15.md",
+      "sha256": "370f4c7cec518657b5eece141e7b4e9d20a799b5c737a5936081f0506925cdff",
+      "bytes": 12261,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TOP3_FIRST_MODEL_REPORT_2026-09-15.md",
+      "sha256": "7dc2a6a445542801e5c0effabafa8e2fee61f3bc8870b0243b078b48717f7362",
+      "bytes": 12740,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TOP3_MODEL_V1_PLAN_2026-09-15.md",
+      "sha256": "54c5743f1db59e20ceebe91b7b055977149d511b5e67968d8cef11ff5df7fd1b",
+      "bytes": 22987,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TRANSITION_HOLDOUT_PLAN_2026-09-16.md",
+      "sha256": "2b4029f4c4097b22f0cfdd7119d334ebc5f0f2d0e9d5f8c5adee94d3230c1e99",
+      "bytes": 3246,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TRANSITION_HOLDOUT_REPORT_2026-09-16.md",
+      "sha256": "bfbe21f26665efa50b48455ba64066005d69bd3c151b70eb40846124fca0d151",
+      "bytes": 8931,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TRIAL_EXPERIMENT_PLAN_2026-09-16.md",
+      "sha256": "3b48c7f81a6c375e4066766e3b2b36a733e80afd9002bdec6ff6efebce1b1b51",
+      "bytes": 3344,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NATIVE_TRIAL_EXPERIMENT_REPORT_2026-09-16.md",
+      "sha256": "2633f55460be624d76352ce427f9cd466397f895c3d5576a415b23a09c53bb8a",
+      "bytes": 9424,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NESTED_CALIBRATION_PROTOCOL_2026-09-22.md",
+      "sha256": "10311cac737a8b073a65f148c908986028747fb8901e281ca92080feab13e299",
+      "bytes": 2889,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_NESTED_CALIBRATION_REPORT_2026-09-22.md",
+      "sha256": "c805a2c6c3d8a1c0273e133a6b30ee409ca4dc331e748722ae130f94a2305373",
+      "bytes": 8848,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_PLACE_OBJECTIVE_PROTOCOL_2026-09-19.md",
+      "sha256": "5bde8eb545e052c18d2c70a15d61df7f39af8a6642702c2115d59c5e59ad2302",
+      "bytes": 2908,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_PLACE_OBJECTIVE_ZERO_HISTORY_REPORT_2026-09-19.md",
+      "sha256": "08aa285ee0350a6ed2bd0195669eefd8027cf103510140b53ae8b1c9e8945638",
+      "bytes": 10084,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ROLLING_ZERO_PROTOCOL_2026-09-20.md",
+      "sha256": "042de73d358a814b02a4c64de7550616d4fd9e8de96628125f715dfcdf1de7f4",
+      "bytes": 3116,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_ROLLING_ZERO_REPORT_2026-09-20.md",
+      "sha256": "0a74b6885e0cd19cb1824b894bf1b30ad3e2add1e9fa83aa2f1788322c1734de",
+      "bytes": 10487,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_STANDALONE_V1.md",
+      "sha256": "4b0f6e58116d583042298ad63ada63b57433b4ce3ff7af05c7ed99d2970691fb",
+      "bytes": 2500,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_STANDALONE_V2.md",
+      "sha256": "360f3e10b5a49f90c64ad13a2a581c8f10d53963dd5396396620a373080db3e3",
+      "bytes": 3386,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_STEWARD_MARKETS_GAP_REPORT_2026-09-18.md",
+      "sha256": "788060f19de693168eca1bdb2e30648141257c9da4a64b5ae52aacc6c92e756a",
+      "bytes": 18182,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_STEWARD_MARKETS_PROTOCOL_2026-09-18.md",
+      "sha256": "beb8372130e47be2a3b265c95c4f137c3dfa08b75d1451ff85047ecd758d194c",
+      "bytes": 3127,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_STEWARD_PASSING_ORDER_TRACK_SPEED_AUDIT_2026-09-17.md",
+      "sha256": "255e57d3e8311d02b5313dce570ac46622252c9b2c267f5a79925a9b359631cf",
+      "bytes": 11532,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_TRIAL_GATE_PROTOCOL_2026-09-28.md",
+      "sha256": "4e010da10ed093e485e5904c1bb15b4a2ce47c94de82fe1f4707a2b25b133f87",
+      "bytes": 3889,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_TRIAL_GATE_REPORT_2026-09-28.md",
+      "sha256": "0df92f87f474fb6bdf8c584596ad2b044003f3fad4d90a4eda1c8776d5f1e882",
+      "bytes": 8957,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_TRIAL_RELATIVE_PROTOCOL_2026-09-22.md",
+      "sha256": "2da2e72fcd180a20a62ffc1c159a6075c48991f159945838beae377a53c81601",
+      "bytes": 3549,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_TRIAL_RELATIVE_REPORT_2026-09-22.md",
+      "sha256": "2a918f34fa4425839d07a5f4a6a866bc17ae65e2062a61fc90aff60a4c3f18e8",
+      "bytes": 9720,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "docs/JEJU_WEIGHT_TEMPO_READINESS_PLAN_2026-09-17.md",
+      "sha256": "c3a8285f24f9f0217432d6f1b62c4156124f2416ef28b0af0075e5d826461720",
+      "bytes": 3117,
+      "category": "obsolete_root_jeju_doc",
+      "reason": "Discontinued Jeju experiment note/report/protocol; delete after updating inbound links to the Jeju workspace."
+    },
+    {
+      "path": "scripts/analyze_jeju_conditions_questions.py",
+      "sha256": "a4457556d11833332a91c564ef657ba880f8f1dea91ed5f5748cf555be07b2c1",
+      "bytes": 14304,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/analyze_jeju_debut_races.py",
+      "sha256": "7b712763b9d2a977af13f4d824cb27aaac1a98d01543a701d805bb7682de59a9",
+      "bytes": 8109,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/analyze_jeju_owner_conflicts.py",
+      "sha256": "1600c470a30a6c4ad2365c929ff033dd9d575e9d10f4dea98699d1020f69dd4a",
+      "bytes": 11061,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/analyze_jeju_steward_pace_next_stage.py",
+      "sha256": "d716f521f183f4c0f714bd3635ac85cd2f3a719d0240fe8a1c7213a4cc901a89",
+      "bytes": 8052,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_accuracy_reset.py",
+      "sha256": "e6b2d438a5ad8791898967761957d9addce1c2f32af8f85f27a9a4183724949c",
+      "bytes": 9302,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_burden_pace_people.py",
+      "sha256": "b64462edd68d2a369fb0fe4ad0ec8f6fa574bdc9f6a881415630745d6e665765",
+      "bytes": 13226,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_db_load_readiness.py",
+      "sha256": "1c46e93764f7ef7207d7fd139dabc9be44d910cc37a301734152aade56970ae3",
+      "bytes": 10472,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_error_conditions.py",
+      "sha256": "5ca8d0049d9218f99b14e73464abd7cb3d59d8a00846da442a84941adf86b6b9",
+      "bytes": 20056,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_experience_calibration.py",
+      "sha256": "2a52a2604c8a717d2bcfdaaf3ef8059cdc5de3433aae08a0a79bd2a945215e22",
+      "bytes": 6842,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_gate_tempo.py",
+      "sha256": "5c49c7391f691d0505c43d38cecd5661d64c04768915c8a0f08d672ea1910950",
+      "bytes": 5899,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_markets_and_gap.py",
+      "sha256": "fe425fa1d704d11f5e7b2a52c8b5d9c00240ffdca4a6fc117319776b03fb18f2",
+      "bytes": 8156,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_native_era_times.py",
+      "sha256": "336cb0e7af1b9a9ac350e2a40377430663a5c2249fc634bacc9d1ec724eabc38",
+      "bytes": 5838,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/audit_jeju_trial_web_sections_2015_2018.py",
+      "sha256": "d1c8fe0f983215d0cc9ca23ff44f6b50f7eddd2c89e120cbe3e8fedb214b2d40",
+      "bytes": 7705,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/build_jeju_rebound_features.py",
+      "sha256": "6d3e57af332725ebbffc2f42d27db3c488694a4ee31b86fb63b97803f6909394",
+      "bytes": 2684,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/build_jeju_tempo_pace.py",
+      "sha256": "db7e1dadcd473416ff64141ca637dc431a4b6034b93524cda2aa8d4f17740f2f",
+      "bytes": 5011,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/build_jeju_trial_features.py",
+      "sha256": "71d36f3affbc84e0a448d89e2f0c8a64bcd5aba3cb905884afc07583b6ea2c30",
+      "bytes": 3865,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/build_jeju_weight_tempo_features.py",
+      "sha256": "5c518f8937c01a72b3cdd1cc419a836b11a9c3ab37eae688e57162c58f94271e",
+      "bytes": 1041,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_debut_calibration.py",
+      "sha256": "cab9ea56dcf8c5bd67a67c358239996aa26cf397523ad9514a29f6f281333795",
+      "bytes": 1921,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_grade_transitions.py",
+      "sha256": "c7551e2b30bcd30a2537db51f890c1d692e2b82397fe7bc3aaba639be8ee5904",
+      "bytes": 5719,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_missing_podium.py",
+      "sha256": "517879ee67ec0a19a80fdfa6342323b7324855a5d056c7f16ac4ff67428fc436",
+      "bytes": 4481,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_rolling_zero_inputs.py",
+      "sha256": "32f8f287492a8ec9c8dac7a1407625ead9466727c6e18663d7a39145da923a5a",
+      "bytes": 6380,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_transition_holdout.py",
+      "sha256": "0f43fc9d28b0f314ad95e4d5f3ec5106ff2be8ce7162f7310fd49eb687cd6591",
+      "bytes": 3926,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_trial_experiment.py",
+      "sha256": "905f8779fbd6d7e72b84a2ea28f1c52f2fcfb91d20eb7058643e7d7012d64e7b",
+      "bytes": 3081,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_trial_gate.py",
+      "sha256": "34b38281684c056f89577d7371dad413563e2ce782e87297ba2327216fb482ef",
+      "bytes": 3051,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/diagnose_jeju_trial_relative.py",
+      "sha256": "706304fee098656c045b93b5500c7c4d0ed6ee0351429ff460bc8f26962dc97a",
+      "bytes": 1473,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/evaluate_jeju_annual_returns.py",
+      "sha256": "553f06869e6e64b32c566c7941433befc7479250d59ca666002412d73556d1e9",
+      "bytes": 14351,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/export_jeju_data_catalog.py",
+      "sha256": "bc72347817b21cb5cc538278ebedbb959c6bf789c0eb97f27eadf62331801733",
+      "bytes": 5700,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/export_jeju_native_extended_catalog.py",
+      "sha256": "28e10c44916b073532f58b6239625687a01dd9f80f2e35571c8bd8900bdcbec4",
+      "bytes": 3219,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/export_jeju_native_text_phase2_catalog.py",
+      "sha256": "e326d2db4d8648af24d12f3fcb877005cd1b0205004750efeea1f0b31d45e477",
+      "bytes": 1969,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/freeze_jeju_ablation_protocol.py",
+      "sha256": "2ecc55fec973e48e3988c940f560896d6ad154b6e9aa5e9363828dddbf292b11",
+      "bytes": 4790,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/freeze_jeju_conditional_protocol.py",
+      "sha256": "3a171b0aa91a2ef82e362bf14bbc0220f69353087eada3e9e3f1da4b77034bc6",
+      "bytes": 4717,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/probe_jeju_owner_boundary_entry_sheets.py",
+      "sha256": "540688f9a32da4ebecf5aba6f30c76ac58e13d8dab231e6c43c8509b2b38328b",
+      "bytes": 3323,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_ablation_order.py",
+      "sha256": "d8245091b49288fc00505bbe4d33e2af131a064b207231709102519f77887102",
+      "bytes": 8528,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_conditional_experiment.py",
+      "sha256": "aef2365027be18fb0f01789aabb4ae0d689ac74daa2ad94d8ac6bc7c93e60a9f",
+      "bytes": 8595,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_conditions_questions.py",
+      "sha256": "a18e33de92893bfd901b7b20c2ae6307341e78fdf0b7b55bed911d5e18de5aa5",
+      "bytes": 16469,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_context_experiment.py",
+      "sha256": "d63062389b1af4f1f3186620ae9d79cbb40b1613942625232232bb08dc7f5b82",
+      "bytes": 8425,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_error_conditions.py",
+      "sha256": "5c6a9745ddc32d9a69732fa933ab7419012b08d6cd359a14356b03f178622830",
+      "bytes": 21976,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_experience_calibration.py",
+      "sha256": "fac769009587b7db2fa1d4de1dd893bfb1d60847131dd0de316a723dd805bcf3",
+      "bytes": 8282,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_h3_experiment.py",
+      "sha256": "f0a543752038be3808a4f1e1de0a05e6b66639749c9417485a621facd4ffb885",
+      "bytes": 7952,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_joint_top3.py",
+      "sha256": "0e0a30b67ceb6cfcf69d8322057094d8e610f59522f3c5fda02aae2d7aee2218",
+      "bytes": 8336,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_set_interaction.py",
+      "sha256": "5badaccae33d51cd3ea70e9bd2938fb3a3f1538837d7f44c832454765a17ee1a",
+      "bytes": 8263,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_three_targets.py",
+      "sha256": "8ed64b5b704a32ff8c5a4fbd7e2f777c824f91ea56a59e3c315e040b50f85c21",
+      "bytes": 7729,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_top3_experiment.py",
+      "sha256": "6ad204117ef8dd5f1fbe01a9c3a32b4bdb7cfd5c0bf33d0edbf6b6bd8cb30a59",
+      "bytes": 11306,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_transition_holdout.py",
+      "sha256": "43fda7e1e9c1e470378055a03523dd18c9a9d0ff2788bf09e4f7d32bc98a72ca",
+      "bytes": 8680,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/report_jeju_trial_experiment.py",
+      "sha256": "18ce7b57e33a5d76291f08dbbf0c4ba33d86b8859febb12ec233ddcc33410c41",
+      "bytes": 8277,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_ablation_order.py",
+      "sha256": "85c1ac688727c09f2a514334ce3cd1b24589b99d2d052b683fdfbcc51454b86e",
+      "bytes": 18560,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_accuracy_candidates.py",
+      "sha256": "d239a41565744a1909befa24bbca2b26843d6aa2d796d8ea021efee400d1fad0",
+      "bytes": 10121,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_annual_revalidation.py",
+      "sha256": "b178061b6596eb3a10475418e179ede431e37bb88f738d6901573df3c14b4caf",
+      "bytes": 10752,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_conditional_experiment.py",
+      "sha256": "00f910a0f64d37e976a2594fb2ed15544bc5500c360faede1dda97c31a2a584c",
+      "bytes": 17466,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_context_experiment.py",
+      "sha256": "bd4be754e583185830b488227b7131c6317afbe2291ea3f27e40a4e2cf48d91f",
+      "bytes": 14465,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_experience_calibration.py",
+      "sha256": "ff7db77610d813c1186319281cb4b901c6ee5daf4d4341e2b6e9c8476629c28f",
+      "bytes": 12811,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_h3_experiment.py",
+      "sha256": "7cf570db6db19d9f75b7d26173a5635b16064381893a5274257fd1b7580dca10",
+      "bytes": 14440,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_nested_calibration.py",
+      "sha256": "86d1819689c7e6ff128589ce4f6ac1870b02a2c416d64720aa8b244f27d3d415",
+      "bytes": 15403,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_observed_elo.py",
+      "sha256": "e69270a45797d67b3041b06707b65d28770e3cfc065850bbd6ca9af5baad03a6",
+      "bytes": 12775,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_place_objective.py",
+      "sha256": "d36b8aff1c6e02bbbea4864487a686d5e37d9470dffa60090d80f6fde7fb3b7b",
+      "bytes": 11767,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_rolling_zero.py",
+      "sha256": "cf317c05584e0f6a1307a2a59451f932a025036ad3744f74a1d4d4716c47df0e",
+      "bytes": 12446,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_set_interaction.py",
+      "sha256": "257fa9a37c4fc47ce1113bba7c406e9cbff3c7e4aa476c644249cabcd6abf5e2",
+      "bytes": 12820,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_steward_pace_v2_pilot.py",
+      "sha256": "928a4756a8d94d6c3a3a67f30d155ad3261b1af016e8ee6693fb9d9ba66a2428",
+      "bytes": 8617,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_tempo_pace_pilot.py",
+      "sha256": "3865c430f62dfa30a5648ced3c2722eb0675a550496bdac5604714b5548f974f",
+      "bytes": 10498,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_three_targets.py",
+      "sha256": "316b062434d3c8cf5930f6d38758bb40fcf35574a0ee8a61dd6e8e248b28f5bc",
+      "bytes": 12392,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_transition_holdout.py",
+      "sha256": "07ba828ab00db15b5070b8316be7e8751c75cba25c50fc241e357e1a82676f13",
+      "bytes": 14753,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_trial_experiment.py",
+      "sha256": "e284668969e3f152ed04503b58a3b59b5424c35e824c23fa3921aeade0aad651",
+      "bytes": 10572,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_trial_gate.py",
+      "sha256": "4496d31615523b54f2c5cdf135083636ab3699d906d3330a0c6e4f2b70a223b4",
+      "bytes": 13412,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_trial_relative.py",
+      "sha256": "f7e35eca2ae1bc6d172b96482180d891eb0e98934ebd99c70dd3e0a02e0c06b0",
+      "bytes": 14262,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/run_jeju_weight_tempo_pilot.py",
+      "sha256": "928c192baa1ed2035a5f53b23b7e8b24aa144a7e0c8650528d205e3ecf230b1c",
+      "bytes": 10652,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/summarize_jeju_h3_features.py",
+      "sha256": "1de6807bff5f0ea697faaef97e77df4af088e254f2ee976778228b01dcfc0f47",
+      "bytes": 1500,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_ablation_order.py",
+      "sha256": "124b4d8f0c79b9bd153902af8c8bde635f4ebd52641694ac2e5bc0815b92601a",
+      "bytes": 10074,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_accuracy_candidates.py",
+      "sha256": "e807d0ff36e4f62e5c10c9eac17bf9c751297fc29727c370d86f0e9d6211fee3",
+      "bytes": 6018,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_annual_returns.py",
+      "sha256": "2b202d37748e022ffac96730179c33e461977bf0239a4630ccb095a2e3b4bd2d",
+      "bytes": 8148,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_burden_pace_people.py",
+      "sha256": "db92457ede497fe5a274f5d99f25b2b330e14e8877410cbeac8dfc5ca0d54efc",
+      "bytes": 4675,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_conditional_experiment.py",
+      "sha256": "cb5b6ecb0a93376ae8db1dd56594a0df4512f84241ac2c555fd1b823354ff0fb",
+      "bytes": 11683,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_context_experiment.py",
+      "sha256": "1f72a24406bf80839bc2abb82eda1d178a12b6abf887adf96489fcd529a88116",
+      "bytes": 9206,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_error_conditions.py",
+      "sha256": "ad0f10adf501fecf5d48a24f85a68a6983829cb96011caf4f6c146975bbe7172",
+      "bytes": 12518,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_experience_calibration.py",
+      "sha256": "f1a3ac554b01c5c647f3cf620fd4a403c6059da57510b856715f94f371463e5a",
+      "bytes": 11891,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_h3_experiment.py",
+      "sha256": "0956fb254aa492e800094edeb323788ae16e7488a8d7d54d597d1d4e7506ef76",
+      "bytes": 7982,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_joint_top3.py",
+      "sha256": "630fdf59fcb956b34aa8afafeddcdb79d584ee591cb1bd7be98712e5cf3fd9cb",
+      "bytes": 8593,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_nested_calibration.py",
+      "sha256": "e3122dc76c69030a05ca21427b6838030a6277f9ad1b96a3d1cdd548b385baef",
+      "bytes": 7833,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_observed_elo.py",
+      "sha256": "c4af463f80631d9a6fad13e1dc984f69844e59de32ec5fc0196df3f53114042e",
+      "bytes": 6386,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_owner_followup.py",
+      "sha256": "3573ff4ffb266b007157c9166f070872dfdf26e6dfce49b85907b2fe7c3b36bf",
+      "bytes": 3551,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_place_objective.py",
+      "sha256": "aaaf80e3b97779e74a9979042e9613d5a5057097531de50ee43f0d4e417a661c",
+      "bytes": 5511,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_rolling_zero.py",
+      "sha256": "aee6981a73ac4e3dc2b59bc98ce62467c7aea2b0648299d31d187905d11daa62",
+      "bytes": 6922,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_set_interaction.py",
+      "sha256": "a579926254502660cd97f2e101726c95a4ec38923c396b17d4416c0d34cd75d8",
+      "bytes": 9422,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_steward_markets.py",
+      "sha256": "388981c33900b173b230cb7f73bda034e39db3140eded16aa59cc2b38942f289",
+      "bytes": 5459,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_steward_next_stage.py",
+      "sha256": "fe9d3c38d24c789b581a3f7bdfd10cbae9c8287c5815ecfc4bf6b5b7a95d1712",
+      "bytes": 4254,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_tempo_pace_pilot.py",
+      "sha256": "5c4fb8f1076829a18ad6f94986a33110f45fcd58fc2c883437bfa4c5bceba07d",
+      "bytes": 5697,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_three_targets.py",
+      "sha256": "4d10f295e63adf0edd3c72a85075c989eeadb1fe5a02c9059486ae7a978489f8",
+      "bytes": 6713,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_top3_experiment.py",
+      "sha256": "b5d4bd83f63bcde6ee105afe7a6f94821402c269e13140dce404181ddcbedd86",
+      "bytes": 5493,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_transition_holdout.py",
+      "sha256": "39bdd79c5f2f57eb928b47017d494b79118efa6cbb80f0ee45c779a514c8fa05",
+      "bytes": 14647,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_trial_experiment.py",
+      "sha256": "d571c746b9f178973cd46e2d24ed14c61d6303d0b1ca72f7511d8153a582178c",
+      "bytes": 12139,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_trial_gate.py",
+      "sha256": "9614e63ee7e938e20e5271c5faa2a69afc629c76573a261c7e299e56ad355c69",
+      "bytes": 6837,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_trial_relative.py",
+      "sha256": "a8f9b93920b42d3ec83fec5e10355f522c22dc44cfaf467424bef768ac44369e",
+      "bytes": 8119,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/verify_jeju_weight_tempo_readiness.py",
+      "sha256": "4054519a22a6dd4ce5da932cc67674a6a64399fb006d086a159f776070bec669",
+      "bytes": 6624,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_ablation_report.py",
+      "sha256": "4ff73c6e257b53374cb74c81719e0a78d5982e881347d99149240b59e362192d",
+      "bytes": 11286,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_conditional_report.py",
+      "sha256": "187dd3876f6b1fd3e9670866051880984173cb18475d4d22c80d6af838ffaea8",
+      "bytes": 11840,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_experience_calibration_report.py",
+      "sha256": "6e9fb8898614e736d4a631902abc23883d7f89f89be38f20cc824b3a8b1cfe87",
+      "bytes": 16554,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_joint_report.py",
+      "sha256": "247e7cf88e7fea7df6b2a535adf3b8dded819925be47ee7a5506797a0ee3bf67",
+      "bytes": 10318,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_section_lineage_report.py",
+      "sha256": "14a08acdd820772c62ed04ab4a34616290eec9943adf9b6a085a685dd695bb64",
+      "bytes": 11292,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_set_interaction_report.py",
+      "sha256": "e494853f7d90691f04ee156e0c3ef3b55ff850a237906da66565833aa91fdcee",
+      "bytes": 14597,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_transition_report.py",
+      "sha256": "b02522380c746cf4cb1c5a36c0694556ccf02fcca74697dcf61d66fe98e54e34",
+      "bytes": 12463,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "scripts/write_jeju_trial_report.py",
+      "sha256": "9d9a3013ac4b0dd2d223c9ebc4dac25fb2aa03a5a7c7629be63535c232d2f229",
+      "bytes": 11247,
+      "category": "obsolete_experiment_script",
+      "reason": "Discontinued experiment, training/evaluation, diagnostic, or report script; live inference and retained ingestion do not call it."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_conditional_order.py",
+      "sha256": "af187bf107679be88d3dc9b51ad102a167a0aaadd051a3a3d7db7b6b5ebb154e",
+      "bytes": 5898,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_error_conditions.py",
+      "sha256": "b1fb42950ff9be0d0c77ca13d0b50b4e2716695afe9897f95ef8550ae97bd521",
+      "bytes": 2553,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_experience_calibration.py",
+      "sha256": "22202d8da2d0994d6cd945d152b3617ca5827252988d26fbe08ace606bf5209d",
+      "bytes": 5724,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_observed_elo.py",
+      "sha256": "4b000c7453ebf8f11e689e582d514b9b65930d86868973c1c014ff19d686a685",
+      "bytes": 3212,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_rebound_features.py",
+      "sha256": "4433529ce062d63c94a4141efc48f6f8403cf853ef489b047d936cf19bc3079e",
+      "bytes": 6678,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_set_interaction.py",
+      "sha256": "9dbca393ffb09c2a5636c04b7ec46ad8bc4a7d3723fe2a93f8eb154f2bf52ed1",
+      "bytes": 9981,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_tempo_pace.py",
+      "sha256": "e026360a86432fb68b86a88aa2e9ae3c9ba52b8d7f374537d999530922ed001a",
+      "bytes": 6736,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_trial_gate.py",
+      "sha256": "f500be7af3eabe3cffddf79c7db8adc45dc9197d3749a3883cdf99da7c0bc182",
+      "bytes": 1459,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_trial_relative.py",
+      "sha256": "de0f2ac1eb45c2f99337de39c5db4b649aee4dbbbdbb670e6e14ab506cde6788",
+      "bytes": 4281,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_wager_probabilities.py",
+      "sha256": "4ebc702bcb1e984d06ad02572925ee32b96083ba93ce3fe7a1134f460255cdda",
+      "bytes": 3779,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_weight_tempo_features.py",
+      "sha256": "41a13e1270176503b66e74f0733a6028f059f24be3dfbb28ec18f0fbb89cff29",
+      "bytes": 4558,
+      "category": "obsolete_research_module",
+      "reason": "Discontinued Jeju experiment module outside retained runtime/source-analysis dependency chain."
+    },
+    {
+      "path": "tests/test_jeju_ablation_order.py",
+      "sha256": "b1958d2198a4c30eaf4c0171dadabfb2a14921ec1098a83841ba4b55a2dbdcf1",
+      "bytes": 1444,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_conditional_order.py",
+      "sha256": "62224d7036ccd42b112acee3c7e11e750bb23a4bed5004b443519f34b3068f2f",
+      "bytes": 2764,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_error_conditions.py",
+      "sha256": "d061d06dbdb2910fffc2c2b809ac7bd481ef0eaad42093e580f34d021769661b",
+      "bytes": 1829,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_experience_calibration.py",
+      "sha256": "0939b52dd808847a7456729bac5af23f68e3d7e3ec27a9398484e57510ab0285",
+      "bytes": 3594,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_nested_calibration.py",
+      "sha256": "524eeadc7628e8ed39b0995c6fb1e10235df8690c7d55b0a46ea5dd5d336fc7e",
+      "bytes": 3029,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_observed_elo.py",
+      "sha256": "18282f6e53a0628a4cd6b4e4db561ce9634c272f435f20304a913e6e2adb7f99",
+      "bytes": 2570,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_rebound_features.py",
+      "sha256": "6d51e10d4fdd28aa91391a27f2d8bb70810e55cf236b36c40590c3f57f8b8af0",
+      "bytes": 2895,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_rolling_zero.py",
+      "sha256": "6909112bddff7e0c8a85d51905dd40f251ab6b20ef4fe85692872fa1277c3938",
+      "bytes": 1126,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_set_interaction.py",
+      "sha256": "5db7263dc6c2bf43b14a112ee147af074dcb3a88f21135c3dda71c7599afec80",
+      "bytes": 4461,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_tempo_pace.py",
+      "sha256": "9f49d3e71fa7c61dbc49ad26c16ca21de73444eacd896e39f92f6e0292562ade",
+      "bytes": 2356,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_top3_direct.py",
+      "sha256": "6aac65d7399be216a72b487b39a449e63ddb68abe4aadfc2951cf8a3e757d735",
+      "bytes": 3183,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_top3_experiment.py",
+      "sha256": "a15d20123052fd042f223132616d110097b4f4260c3b4c93e3bfd6440d7ee6ac",
+      "bytes": 872,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_trial_features.py",
+      "sha256": "b10e4d2180920ac34c1d81c569724be7c67194dc0bb1b50b9f7e6c1760e68456",
+      "bytes": 3793,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_trial_gate.py",
+      "sha256": "c46d21961b947192a20e2f4aa2d47dd95c9df9a1169dd897f5d08e35fd6fd4d7",
+      "bytes": 1494,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_trial_relative.py",
+      "sha256": "c1aaec01d9694a7f79f0fc4a0b4326d36159bc2c9533d62f0e14ada1c595b2a3",
+      "bytes": 2715,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_wager_probabilities.py",
+      "sha256": "bb06d4b0206169f3ebd3be5a1284a9f881514a32f2eb62a14d6ff1a48c273053",
+      "bytes": 1487,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    },
+    {
+      "path": "tests/test_jeju_weight_tempo_features.py",
+      "sha256": "568743dda0b06a5fbdc65c4d0f222208353d5c0cf48bacba024980aeb5618153",
+      "bytes": 1794,
+      "category": "obsolete_experiment_test",
+      "reason": "Test only for a discontinued Jeju experiment or research module."
+    }
+  ]
+}
