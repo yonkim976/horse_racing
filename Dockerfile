@@ -12,6 +12,9 @@ ENV PYTHONUNBUFFERED=1 \
 COPY pyproject.toml uv.lock .python-version README.md ./
 COPY src ./src
 
-RUN uv sync --locked --no-dev --only-group web-prod --no-install-project
+RUN uv sync --locked --no-dev --only-group web-prod --no-install-project \
+    && useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin app
+
+USER app
 
 CMD ["sh", "-c", "exec uvicorn horse_racing.web.app:app --host 0.0.0.0 --port ${PORT:-8080} --no-proxy-headers"]

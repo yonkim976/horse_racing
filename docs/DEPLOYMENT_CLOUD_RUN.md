@@ -17,6 +17,14 @@ The container runs `horse_racing.web.app:app` with Uvicorn, listens on
 is supplied from Secret Manager as `HORSE_RACING_DATABASE_URL`; it must never
 be committed or stored as a plain Cloud Run environment variable.
 
+Per-client rate limits key on the client IP. Cloud Run delivers every request
+from its front-end proxy, so the service must set `TRUSTED_PROXY_CIDRS` to the
+proxy ranges (comma-separated CIDRs, no `0.0.0.0/0`) for `X-Forwarded-For` to be
+used. When it is empty on Cloud Run, the app logs a
+`trusted_proxy_cidrs_missing` warning at startup and every visitor shares one
+rate-limit bucket. Confirm the peer address seen by the container before
+choosing the ranges.
+
 ## First deployment
 
 1. Build and push the image with Cloud Build.

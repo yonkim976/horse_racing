@@ -4,6 +4,20 @@ substitutions:
   _SERVICE_NAME: mapilog
 
 steps:
+  - id: Test
+    name: ghcr.io/astral-sh/uv:python3.12-trixie-slim
+    entrypoint: sh
+    args:
+      - -c
+      - |
+        set -e
+        uv sync --locked --group dev --group web
+        uv run ruff check src/horse_racing/web
+        uv run pytest -q -p no:cacheprovider \
+          tests/test_dashboard.py tests/test_distance_page.py tests/test_race_analysis.py \
+          tests/test_racecourse.py tests/test_web_request_policy.py \
+          tests/test_web_security.py tests/test_web_security_integration.py
+
   - id: Build
     name: gcr.io/cloud-builders/docker
     args:
