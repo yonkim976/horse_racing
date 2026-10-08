@@ -1,8 +1,9 @@
 {% extends "mobile/base.html" %}
 {% block body_class %}mobile-analysis{% endblock %}
-{% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
+{% block title %}{% if page.selected_race %}{% set race = page.selected_race %}{% if race.date and race.date|length >= 10 %}{{ race.date[0:4] }}.{{ race.date[5:7] }}.{{ race.date[8:10] }} {% endif %}{{ race.meet }} {{ race.number }}R 경주 분석{% else %}경주 분석{% endif %} · 마필로그 Mapilog{% endblock %}
+{% block meta_description %}{% if page.selected_race %}{{ page.selected_race.meet }} {{ page.selected_race.number }}R {{ page.selected_race.distance }}m 출전마의 최근 기록, 전개 성향, 3위 안 확률을 확인합니다.{% else %}한국 경마 일정과 결과, 출전마 기록과 예측 확률을 확인하는 마필로그 Mapilog{% endif %}{% endblock %}
 {% block extra_head %}
-<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=11" defer></script>
+<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v={{ asset_version('/js/mobile-analysis.js') }}" defer></script>
 {% endblock %}
 
 {% macro kr_date(value) -%}
@@ -82,8 +83,9 @@
 </li>
 {%- endmacro %}
 {% macro runner_row(runner) -%}
-<button type="button" class="ma-horse-row{% if runner.state == '출전취소' %} is-scratched{% endif %}" data-select-runner="{{ runner.entry_id }}" data-runner-card aria-expanded="false" aria-controls="runner-details-{{ runner.entry_id }}">
-  <span class="ma-horse-main">
+<div class="ma-horse-row{% if runner.state == '출전취소' %} is-scratched{% endif %}" data-select-runner="{{ runner.entry_id }}" data-runner-card aria-expanded="false">
+  <span class="ma-horse-silk silk-{{ runner.number }}" aria-hidden="true"></span>
+  <button type="button" class="ma-horse-main" aria-controls="runner-details-{{ runner.entry_id }}">
     <span class="ma-num">{{ runner.number }}</span>
     <span class="ma-horse-copy">
       <span class="ma-horse-name">
@@ -98,8 +100,8 @@
       {% if runner.state == '경주 완료' and runner.win_pct %}<span class="ma-result-prediction">예측 {{ runner.win_pct }}{% if runner.win_label %} · {{ role_name(runner.win_label) }}{% endif %}</span>{% endif %}
       {% if runner.state == '출전취소' %}<span class="ma-scratch-label">출전 취소</span>{% endif %}
     </span>
-  </span>
-  <span class="ma-horse-silk silk-{{ runner.number }}">
+  </button>
+  <button type="button" class="ma-why" data-open-reason="{{ runner.entry_id }}" aria-label="{{ runner.number }}번 {{ runner.horse }} 확률을 이렇게 본 이유">
     {% if runner.state == '경주 완료' and runner.result_label != '—' %}
     <span class="ma-win-block ma-result-block">
       <span class="ma-win-pct">{{ runner.result_label }}</span>
@@ -111,8 +113,8 @@
       <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
     </span>
     {% endif %}
-  </span>
-</button>
+  </button>
+</div>
 {%- endmacro %}
 
 {% block content %}
@@ -152,6 +154,7 @@
     <div class="ma-title-line">
       <h1>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</h1>
       {% if page.selected_race.status == 'completed' %}<span class="ma-race-status">종료</span>{% endif %}
+      <a class="ma-reasons-link" href="{{ reasons_href }}">왜 이 확률</a>
     </div>
     <p>{{ page.selected_race.start_time }} · {{ page.selected_race.distance }}m · {{ page.selected_race.grade }} · {{ page.selected_race.field_size }}두</p>
     {% if page.prediction_state %}
@@ -163,6 +166,9 @@
         </div>
         <span class="mobile-field-state" data-state="{{ page.prediction_state }}">{{ page.prediction_state }}</span>
       </div>
+      {% if page.prediction_historical %}
+      <p class="ma-historical-note"><span class="mobile-field-state" data-state="과거 검증">과거 검증</span> 경주 전에 공개한 예측이 아니라 과거 자료로 다시 계산한 확률입니다.</p>
+      {% endif %}
       <div class="ma-summary-groups">
         {% for group in page.prediction_groups %}
         <div class="ma-summary-group" data-role="{{ role_name(group.key) }}">
@@ -278,6 +284,32 @@
       </div>
     </article>
     {% endfor %}
+  </div>
+  <script type="application/json" id="ma-reason-data">{
+  {%- for runner in page.runners %}
+  "{{ runner.entry_id }}": {{ {
+    "number": runner.number,
+    "horse": runner.horse,
+    "pct": runner.win_pct or "",
+    "role": role_name(runner.win_label) if runner.win_label else "",
+    "lines": runner.reason_lines
+  } | tojson }}{% if not loop.last %},{% endif %}
+  {%- endfor %}
+  }</script>
+  <div class="ma-reason-sheet" data-reason-sheet hidden>
+    <button type="button" class="ma-reason-backdrop" data-reason-close tabindex="-1" aria-label="이유 닫기"></button>
+    <div class="ma-reason-panel" role="dialog" aria-modal="true" aria-labelledby="ma-reason-title">
+      <div class="ma-reason-handle" aria-hidden="true"></div>
+      <header class="ma-reason-head">
+        <span class="ma-reason-num" data-reason-num></span>
+        <div>
+          <h2 id="ma-reason-title" data-reason-title>왜 이 확률</h2>
+          <p data-reason-sub></p>
+        </div>
+        <button type="button" class="ma-reason-close" data-reason-close>닫기</button>
+      </header>
+      <ul class="ma-reason-list" data-reason-list></ul>
+    </div>
   </div>
   {% else %}
   <div class="mobile-empty">

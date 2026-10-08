@@ -67,6 +67,7 @@
             <span class="mobile-round-sub">
               <span class="mobile-round-meta">{{ race.start_time }} · {{ race.race_label }} · {{ race.distance }}</span>
               {% if race.prediction_state %}<span class="mobile-field-state" data-state="{{ race.prediction_state }}">{{ race.prediction_state }}</span>{% endif %}
+              {% if race.prediction_historical %}<span class="mobile-field-state" data-state="과거 검증" title="경주 전에 공개한 예측이 아니라 과거 자료로 다시 계산한 확률입니다.">과거 검증</span>{% endif %}
             </span>
           </a>
           <div class="mobile-poster-row">

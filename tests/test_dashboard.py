@@ -21,6 +21,7 @@ from horse_racing.db.models import (
     HorseWeightHistory,
     Jockey,
     ModelPrediction,
+    ModelPredictionExplanation,
     OddsSnapshot,
     Owner,
     PredictionOutcome,
@@ -35,10 +36,16 @@ from horse_racing.db.models import (
     RunningTrialResult,
     Trainer,
 )
-from horse_racing.web.app import create_app
+from horse_racing.web.app import asset_version, create_app
+from horse_racing.web.insights import (
+    explanation_sentence,
+    latest_runner_explanations,
+    latest_win_probabilities,
+)
 from horse_racing.web.request_policy import RequestPolicy
 
 PHONE_HEADERS = {"user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)"}
+DASHBOARD_CSS_V = asset_version("/css/dashboard.css")
 
 
 @pytest.fixture
@@ -74,14 +81,29 @@ def test_search_engine_files_are_public_and_use_canonical_urls(tmp_path: Path) -
     assert "Sitemap: https://mapilog.xyz/sitemap.xml" in robots.text
     assert sitemap.status_code == 200
     assert sitemap.headers["content-type"].startswith("application/xml")
-    root = ElementTree.fromstring(sitemap.content)
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-    urls = [item.text for item in root.findall("s:url/s:loc", namespace)]
+    index = ElementTree.fromstring(sitemap.content)
+    sections = [item.text or "" for item in index.findall("s:sitemap/s:loc", namespace)]
+    assert "https://mapilog.xyz/sitemaps/pages.xml" in sections
+    assert "https://mapilog.xyz/sitemaps/races-1.xml" in sections
+    assert "https://mapilog.xyz/sitemaps/horses-1.xml" in sections
+
+    urls: list[str] = []
+    for section in sections:
+        response = client.get(section.removeprefix("https://mapilog.xyz"), headers=phone)
+        assert response.status_code == 200
+        assert response.headers["content-type"].startswith("application/xml")
+        root = ElementTree.fromstring(response.content)
+        urls.extend(item.text or "" for item in root.findall("s:url/s:loc", namespace))
     assert "https://mapilog.xyz/" in urls
     assert "https://mapilog.xyz/forecast" in urls
     assert "https://mapilog.xyz/racecourses/jeju/distances" in urls
-    assert all(url is not None and url.startswith("https://mapilog.xyz/") for url in urls)
-    assert not any("/m/" in url for url in urls if url is not None)
+    assert "https://mapilog.xyz/races/1" in urls
+    assert any(url.startswith("https://mapilog.xyz/horses/") for url in urls)
+    assert all(url.startswith("https://mapilog.xyz/") for url in urls)
+    assert not any("/m/" in url for url in urls)
+    assert client.get("/sitemaps/races-99.xml").status_code == 404
+    assert client.get("/sitemaps/unknown.xml").status_code == 404
 
 
 def test_anthropic_crawlers_can_read_robots_but_cannot_fetch_pages(tmp_path: Path) -> None:
@@ -134,10 +156,9 @@ def test_www_redirects_to_apex_without_leaking_cached_asset_urls(tmp_path: Path)
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in apex_response.text
     assert '<meta name="robots" content="index,follow">' in apex_response.text
     assert 'rel="alternate"' not in apex_response.text
-    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=15"' in apex_response.text
-    assert (
-        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=15"'
-    ) in run_response.text
+    css_href = f"/static/css/dashboard.css?v={DASHBOARD_CSS_V}"
+    assert f'href="https://mapilog.xyz{css_href}"' in apex_response.text
+    assert f'href="https://mapilog-example.run.app{css_href}"' in run_response.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in run_response.text
     assert 'aria-label="마필로그 홈"' in apex_response.text
     assert "mapilog-symbol-color.svg" in apex_response.text
@@ -172,7 +193,7 @@ def test_www_redirect_preserves_path_query_and_mobile_rendering(tmp_path: Path) 
     assert mobile.status_code == 200
     assert 'class="mobile-app mobile-analysis"' in mobile.text
     assert {part.strip().lower() for part in mobile.headers["vary"].split(",")} == {
-        "user-agent", "accept-encoding"
+        "user-agent", "cookie", "accept-encoding"
     }
     assert client.get("https://www.mapilog.xyz/sitemap.xml", follow_redirects=False).headers[
         "location"
@@ -302,7 +323,9 @@ def test_race_detail_embeds_only_its_distance_route(
     assert "다른 거리의 경주로도 보기 ↗" in response.text
 
 
-def seeded_session(tmp_path: Path) -> sessionmaker[Session]:
+def seeded_session(
+    tmp_path: Path, *, prediction_mode: str = "live"
+) -> sessionmaker[Session]:
     database_url = f"sqlite:///{tmp_path / 'dashboard.sqlite3'}"
     config = Config("alembic.ini")
     config.attributes["database_url"] = database_url
@@ -549,7 +572,7 @@ def seeded_session(tmp_path: Path) -> sessionmaker[Session]:
             race_date_local=date(2026, 8, 21),
             feature_cutoff_at_ms=scheduled_at - 3_600_000,
             published_at_ms=scheduled_at - 1_800_000,
-            publication_mode="live",
+            publication_mode=prediction_mode,
             model_artifact_sha256="a" * 64,
             feature_hash="b" * 64,
             predictions_sha256="c" * 64,
@@ -809,8 +832,8 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
     app = create_app(seeded_session(tmp_path))
 
     with TestClient(app) as client:
-        page = client.get("/analysis?start=2026-08-01&end=2026-08-31&horse=1")
-        exported = client.get("/api/analysis/export.csv?start=2026-08-01&end=2026-08-31&horse=1")
+        page = client.get("/analysis?start=2026-08-01&end=2026-08-31")
+        exported = client.get("/api/analysis/export.csv?start=2026-08-01&end=2026-08-31")
         invalid = client.get("/analysis?start=2026-09-01&end=2026-08-01")
 
     assert page.status_code == 200
@@ -830,6 +853,7 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
     assert "모델 예측 ↗" not in page.text
     assert exported.status_code == 200
     assert exported.headers["content-type"].startswith("text/csv")
+    assert exported.content.startswith(b"\xef\xbb\xbfdate,")
     assert "track_condition" in exported.text
     assert "S1F" in exported.text
     assert invalid.status_code == 422
@@ -1074,7 +1098,7 @@ def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) ->
     assert ".silk-8 { background: #ef7eb2" in css.text
     assert ".silk-11 {" in css.text
     assert "repeating-linear-gradient" in css.text
-    assert "dashboard.css?v=15" in page.text
+    assert f"dashboard.css?v={DASHBOARD_CSS_V}" in page.text
 
 
 def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
@@ -1122,7 +1146,7 @@ def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> 
         'content="a71202c329d9767a2c3589e8637e278720be227f">'
     ) in page.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in page.text
-    assert "mobile.css?v=81" in page.text
+    assert f"mobile.css?v={asset_version('/css/mobile.css')}" in page.text
     assert 'data-easy-toggle' in page.text
     assert "큰글씨 모드" in page.text
     assert "mapilog-favicon-final.svg" in page.text
@@ -1189,7 +1213,7 @@ def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> 
     assert "RACE CALENDAR" in desktop.text
     assert mobile.status_code == 200
     assert {part.strip().lower() for part in mobile.headers["vary"].split(",")} == {
-        "user-agent", "accept-encoding"
+        "user-agent", "cookie", "accept-encoding"
     }
 
 
@@ -1209,7 +1233,7 @@ def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
             assert response.status_code == 200, path
             assert 'class="mobile-app ' in response.text
             assert {part.strip().lower() for part in response.headers["vary"].split(",")} == {
-                "user-agent", "accept-encoding"
+                "user-agent", "cookie", "accept-encoding"
             }
 
         for path in (
@@ -1266,8 +1290,204 @@ def test_tablets_keep_desktop_pages_while_android_phones_use_mobile(tmp_path: Pa
         assert phone.status_code == 200
         assert 'class="mobile-app mobile-home"' in phone.text
         assert {part.strip().lower() for part in phone.headers["vary"].split(",")} == {
-            "user-agent", "accept-encoding"
+            "user-agent", "cookie", "accept-encoding"
         }
+
+
+def test_explanation_sentence_states_the_direction() -> None:
+    raised = explanation_sentence("부담중량", "positive")
+    lowered = explanation_sentence("최근 출전 간격", "negative")
+    assert raised == "부담중량 때문에 확률이 올랐습니다"
+    assert lowered == "최근 출전 간격 때문에 확률이 내렸습니다"
+
+
+def _add_explained_run(
+    session: Session,
+    *,
+    public_id: str,
+    mode: str,
+    published_at_ms: int,
+    prob_top3: float,
+    reason: str | None,
+) -> None:
+    run = PredictionRun(
+        public_id=public_id,
+        experiment_run_id=public_id,
+        model_type="probability_ensemble",
+        dataset_version="v2_trials",
+        as_of_policy="start_minus_30m",
+        race_date_local=date(2026, 8, 21),
+        feature_cutoff_at_ms=published_at_ms - 1,
+        published_at_ms=published_at_ms,
+        publication_mode=mode,
+        model_artifact_sha256="a" * 64,
+        feature_hash="b" * 64,
+        predictions_sha256=public_id.replace("-", "")[:1] * 64,
+    )
+    session.add(run)
+    session.flush()
+    prediction = ModelPrediction(
+        prediction_run_id=run.id,
+        race_id=1,
+        race_entry_id=1,
+        horse_number=1,
+        prob_win=prob_top3 / 3,
+        prob_top2=prob_top3 / 2,
+        prob_top3=prob_top3,
+    )
+    session.add(prediction)
+    session.flush()
+    if reason is not None:
+        session.add(
+            ModelPredictionExplanation(
+                model_prediction_id=prediction.id,
+                feature_name="feature",
+                readable_feature_name=reason,
+                feature_value_json="1",
+                contribution_direction="positive",
+                contribution_value=0.5,
+                contribution_rank=1,
+                explanation_type="interpretable",
+                explanation_method="tree_shap",
+            )
+        )
+    session.commit()
+
+
+def test_displayed_probability_prefers_live_run_and_reasons_follow_it(
+    tmp_path: Path,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        seeded_published = session.get(PredictionRun, 1).published_at_ms
+        _add_explained_run(
+            session,
+            public_id="55555555-5555-5555-5555-555555555555",
+            mode="live",
+            published_at_ms=seeded_published + 1,
+            prob_top3=0.5,
+            reason="이전 실행 특성",
+        )
+        _add_explained_run(
+            session,
+            public_id="33333333-3333-3333-3333-333333333333",
+            mode="live",
+            published_at_ms=seeded_published + 2,
+            prob_top3=0.4,
+            reason=None,
+        )
+        _add_explained_run(
+            session,
+            public_id="44444444-4444-4444-4444-444444444444",
+            mode="historical",
+            published_at_ms=seeded_published + 3,
+            prob_top3=0.9,
+            reason="사후 검증 특성",
+        )
+
+        assert latest_win_probabilities(session, [1]) == {1: 0.4}
+        assert latest_runner_explanations(session, 1) == {}
+
+
+def test_backtest_only_probabilities_are_labelled_historical(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path, prediction_mode="historical"))
+
+    with TestClient(app) as client:
+        race = client.get("/races/1", headers=PHONE_HEADERS)
+        home = client.get("/?date=2026-08-21&meet=2", headers=PHONE_HEADERS)
+        reasons = client.get("/reasons?race_id=1")
+
+    assert "과거 자료로 다시 계산한 확률" in race.text
+    assert 'data-state="과거 검증"' in home.text
+    assert "과거 자료로 다시 계산한 확률" in reasons.text
+
+
+def test_live_probabilities_are_not_labelled_historical(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        race = client.get("/races/1", headers=PHONE_HEADERS)
+
+    assert "과거 검증" not in race.text
+
+
+def test_mobile_race_page_title_names_the_race(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        race = client.get("/races/1", headers=PHONE_HEADERS)
+
+    assert "<title>2026.08.21 제주 1R 경주 분석 · 마필로그 Mapilog</title>" in race.text
+
+
+def test_versioned_static_assets_are_cached_long_term(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+    version = asset_version("/css/dashboard.css")
+
+    with TestClient(app) as client:
+        versioned = client.get(f"/static/css/dashboard.css?v={version}")
+        bare = client.get("/static/css/dashboard.css")
+
+    assert versioned.headers["cache-control"] == "public, max-age=31536000, immutable"
+    assert bare.headers["cache-control"] == "public, max-age=3600"
+
+
+def test_missing_mobile_race_returns_html_not_found(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        mobile = client.get("/races/987654", headers=PHONE_HEADERS)
+        desktop = client.get("/horses/NOPE")
+        api = client.get("/api/analysis/export.csv?meet=9")
+
+    assert mobile.status_code == 404
+    assert mobile.headers["content-type"].startswith("text/html")
+    assert "페이지를 찾을 수 없습니다" in mobile.text
+    assert "mobile-tabbar" in mobile.text
+    assert mobile.headers["x-robots-tag"] == "noindex"
+    assert desktop.status_code == 404
+    assert "페이지를 찾을 수 없습니다" in desktop.text
+    assert '"detail"' not in desktop.text
+    assert api.status_code == 422
+    assert api.headers["content-type"].startswith("application/json")
+
+
+def test_static_assets_do_not_spend_the_page_rate_limit(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        statuses = {client.get("/static/css/dashboard.css").status_code for _ in range(70)}
+        page = client.get("/data-status")
+
+    assert statuses == {200}
+    assert page.status_code == 200
+
+
+def test_mobile_reasons_page_lists_why_each_probability(
+    tmp_path: Path,
+) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        page = client.get("/reasons?race_id=1", headers=PHONE_HEADERS)
+        desktop = client.get("/reasons?race_id=1")
+
+    assert page.status_code == 200
+    assert "2026.08.21 제주 1R" in page.text
+    assert "왜 이 확률" not in page.text
+    assert "3위 안에 들 확률을 이렇게 본 이유입니다." not in page.text
+    assert "바람의별" in page.text
+    assert 'class="ma-win-block mr-win" data-role="' in page.text
+    assert 'class="reason-board-pct"' in desktop.text
+    assert 'href="/reasons?race_id=1"' in page.text
+    assert 'aria-current="page"' in page.text
+    tabbar = page.text.split('class="mobile-tabbar"', 1)[1].split("</nav>", 1)[0]
+    assert ">이유<" in tabbar
+    assert desktop.status_code == 200
+    assert "2026.08.21 제주 1R" in desktop.text
+    assert "왜 이 확률" not in desktop.text
+    assert "3위 안에 들 확률을 이렇게 본 이유입니다." not in desktop.text
+    assert "mobile-tabbar" not in desktop.text
 
 
 def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
@@ -1290,7 +1510,7 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert '<link rel="canonical" href="https://mapilog.xyz/analysis">' in desktop.text
     assert '<meta name="robots" content="noindex,follow">' in desktop.text
     assert 'rel="alternate"' not in desktop.text
-    assert "mobile-analysis.js?v=11" in page.text
+    assert f"mobile-analysis.js?v={asset_version('/js/mobile-analysis.js')}" in page.text
     assert "경주 목록" in page.text
     assert 'aria-label="실제 착순별 출전마"' in page.text
     assert "과거 전개 성향" in page.text
@@ -1321,6 +1541,9 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert ">1:15.2<" in page.text
     assert "예상 순위" not in page.text
     assert 'data-runner-card aria-expanded="false"' in page.text
+    assert 'data-open-reason="' in page.text
+    assert 'data-reason-sheet' in page.text
+    assert "왜 이 확률" in page.text
     assert 'class="ma-record-store" data-record-store hidden' in page.text
     assert 'id="runner-details-1"' in page.text
     assert "최근 기록 1" in page.text

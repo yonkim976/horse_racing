@@ -1,0 +1,11 @@
+{% extends layout %}
+{% block title %}{{ heading }} · 마필로그 Mapilog{% endblock %}
+{% block meta_description %}{{ message }}{% endblock %}
+
+{% block content %}
+<section class="{{ 'mobile-empty' if layout == 'mobile/base.html' else 'empty-state' }}">
+  <strong>{{ heading }}</strong>
+  <p>{{ message }}</p>
+  <p><a href="/">경주 목록으로 돌아가기</a></p>
+</section>
+{% endblock %}

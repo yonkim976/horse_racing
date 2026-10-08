@@ -22,6 +22,7 @@ from horse_racing.db.models import (
     Horse,
     Jockey,
     ModelPrediction,
+    ModelPredictionExplanation,
     PredictionOutcome,
     PredictionRun,
     Race,
@@ -217,30 +218,119 @@ def format_trial_form_line(tokens: Sequence[str], *, limit: int = 5) -> str:
     return "심 " + "-".join(picked)
 
 
-def latest_win_probabilities(session: Session, race_ids: Sequence[int]) -> dict[int, float]:
-    """Latest published run's top-3 probability keyed by race entry id."""
+def displayed_prediction_runs(session: Session, race_ids: Sequence[int]) -> dict[int, int]:
+    """Run shown for each race: the newest live publication, else the newest historical one.
+
+    A historical backtest published after the race must never mask the pre-race live run.
+    """
     if not race_ids:
+        return {}
+    rows = session.execute(
+        select(
+            ModelPrediction.race_id,
+            PredictionRun.id,
+            PredictionRun.publication_mode,
+            PredictionRun.published_at_ms,
+        )
+        .join(PredictionRun, PredictionRun.id == ModelPrediction.prediction_run_id)
+        .where(ModelPrediction.race_id.in_(list(race_ids)))
+        .distinct()
+        .order_by(PredictionRun.published_at_ms.desc(), PredictionRun.id.desc())
+    ).all()
+    live: dict[int, int] = {}
+    fallback: dict[int, int] = {}
+    for race_id, run_id, mode, _published_at in rows:
+        if mode == "live":
+            live.setdefault(race_id, run_id)
+        fallback.setdefault(race_id, run_id)
+    return {race_id: live.get(race_id, run_id) for race_id, run_id in fallback.items()}
+
+
+def historical_prediction_races(session: Session, race_ids: Sequence[int]) -> set[int]:
+    """Races whose displayed probabilities come from a backtest, not a pre-race publication."""
+    chosen = displayed_prediction_runs(session, race_ids)
+    if not chosen:
+        return set()
+    live_runs = set(
+        session.scalars(
+            select(PredictionRun.id).where(
+                PredictionRun.id.in_(set(chosen.values())),
+                PredictionRun.publication_mode == "live",
+            )
+        )
+    )
+    return {race_id for race_id, run_id in chosen.items() if run_id not in live_runs}
+
+
+def latest_win_probabilities(session: Session, race_ids: Sequence[int]) -> dict[int, float]:
+    """Displayed run's top-3 probability keyed by race entry id."""
+    chosen_run = displayed_prediction_runs(session, race_ids)
+    if not chosen_run:
         return {}
     rows = session.execute(
         select(
             ModelPrediction.race_id,
             ModelPrediction.race_entry_id,
             ModelPrediction.prob_top3,
-            PredictionRun.id,
+            ModelPrediction.prediction_run_id,
+        ).where(
+            ModelPrediction.race_id.in_(list(chosen_run)),
+            ModelPrediction.prediction_run_id.in_(set(chosen_run.values())),
         )
-        .join(PredictionRun, PredictionRun.id == ModelPrediction.prediction_run_id)
-        .where(ModelPrediction.race_id.in_(list(race_ids)))
-        .order_by(PredictionRun.published_at_ms.desc(), PredictionRun.id.desc())
     ).all()
-    chosen_run: dict[int, int] = {}
-    probabilities: dict[int, float] = {}
-    for race_id, entry_id, probability, run_id in rows:
-        if race_id not in chosen_run:
-            chosen_run[race_id] = run_id
-        if run_id != chosen_run[race_id]:
-            continue
-        probabilities[entry_id] = probability
-    return probabilities
+    return {
+        entry_id: probability
+        for race_id, entry_id, probability, run_id in rows
+        if chosen_run.get(race_id) == run_id
+    }
+
+
+def explanation_sentence(name: str, direction: str) -> str:
+    """One plain line for a stored model contribution."""
+    verb = "올랐습니다" if direction == "positive" else "내렸습니다"
+    return f"{name} 때문에 확률이 {verb}"
+
+
+def latest_runner_explanations(session: Session, race_id: int) -> dict[int, list[str]]:
+    """Reasons stored with the same run as :func:`latest_win_probabilities`, keyed by entry id.
+
+    Interpretable contributions only: two that raised the score, then one that lowered it.
+    """
+    run_id = displayed_prediction_runs(session, [race_id]).get(race_id)
+    if run_id is None:
+        return {}
+    rows = session.execute(
+        select(
+            ModelPrediction.race_entry_id,
+            ModelPredictionExplanation.readable_feature_name,
+            ModelPredictionExplanation.contribution_direction,
+            ModelPredictionExplanation.contribution_rank,
+        )
+        .join(
+            ModelPredictionExplanation,
+            ModelPredictionExplanation.model_prediction_id == ModelPrediction.id,
+        )
+        .where(
+            ModelPrediction.race_id == race_id,
+            ModelPrediction.prediction_run_id == run_id,
+            ModelPredictionExplanation.explanation_type != "categorical_model_effect",
+        )
+        .order_by(ModelPredictionExplanation.contribution_rank.asc())
+    ).all()
+    grouped: dict[int, list[tuple[str, str, int]]] = defaultdict(list)
+    for entry_id, name, direction, rank in rows:
+        grouped[entry_id].append((direction, name, rank))
+    sentences: dict[int, list[str]] = {}
+    for entry_id, items in grouped.items():
+        positive = [item for item in items if item[0] == "positive"][:2]
+        negative = [item for item in items if item[0] == "negative"][:1]
+        lines = [
+            explanation_sentence(name, direction)
+            for direction, name, _rank in positive + negative
+        ]
+        if lines:
+            sentences[entry_id] = lines
+    return sentences
 
 
 def win_probability_sort_key(

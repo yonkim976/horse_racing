@@ -2705,3 +2705,165 @@ th[aria-sort] {
   .analysis-race-list { grid-template-columns: 1fr; max-height: 330px; padding: 12px; }
   .analysis-selected-race { align-items: flex-start; }
 }
+
+.reason-board {
+  display: grid;
+  gap: 18px;
+  max-width: 820px;
+}
+
+.reason-board-intro h1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin: 4px 0 8px;
+}
+
+.reason-board-when {
+  color: var(--muted);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.reason-board-kicker,
+.reason-board-historical strong {
+  margin-right: 6px;
+  color: var(--ink-strong);
+}
+
+.reason-board-intro p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.reason-board-races {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reason-board-races a {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.reason-board-races a[aria-current="page"] {
+  color: var(--ink-strong);
+  background: var(--accent-soft);
+}
+
+.reason-board-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reason-board-list li {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-2);
+}
+
+.reason-board-list header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.reason-board-list header > .reason-board-num {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.reason-board-win {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  --role: #87928e;
+}
+
+.reason-board-win[data-role="강축"] { --role: #4ade80; }
+.reason-board-win[data-role="축마"] { --role: #86df6c; }
+.reason-board-win[data-role="축 후보"] { --role: #bddc63; }
+.reason-board-win[data-role="상대마"] { --role: #d6d96b; }
+.reason-board-win[data-role="후착후보"] { --role: #f2c14e; }
+.reason-board-win[data-role="공동축"] { --role: #4fd1c5; }
+.reason-board-win[data-role="혼전권"] { --role: #73a7ff; }
+.reason-board-win[data-role="관심마"],
+.reason-board-win[data-role="입상후보"] { --role: #f59e42; }
+.reason-board-win[data-role="후순위"],
+.reason-board-win[data-role="예측없음"] { --role: #87928e; }
+
+[data-theme="light"] .reason-board-win[data-role="강축"] { --role: #168a42; }
+[data-theme="light"] .reason-board-win[data-role="축마"] { --role: #3e7b22; }
+[data-theme="light"] .reason-board-win[data-role="축 후보"] { --role: #667a0a; }
+[data-theme="light"] .reason-board-win[data-role="상대마"] { --role: #756900; }
+[data-theme="light"] .reason-board-win[data-role="후착후보"] { --role: #9a6500; }
+[data-theme="light"] .reason-board-win[data-role="공동축"] { --role: #087f78; }
+[data-theme="light"] .reason-board-win[data-role="혼전권"] { --role: #2f66c8; }
+[data-theme="light"] .reason-board-win[data-role="관심마"],
+[data-theme="light"] .reason-board-win[data-role="입상후보"] { --role: #b85d00; }
+[data-theme="light"] .reason-board-win[data-role="후순위"],
+[data-theme="light"] .reason-board-win[data-role="예측없음"] { --role: #58635f; }
+
+.reason-board-pct,
+.reason-board-win span {
+  color: var(--role);
+}
+
+.reason-board-pct {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.reason-board-win span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.reason-board-list h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.reason-board-list header p {
+  margin: 2px 0 0;
+  font-size: 13px;
+}
+
+.reason-board-list ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reason-board-list ul li {
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--surface-1);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  word-break: keep-all;
+}

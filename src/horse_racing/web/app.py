@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import os
 import random
@@ -8,6 +9,7 @@ import re
 from collections.abc import Callable
 from dataclasses import asdict
 from datetime import date
+from functools import lru_cache
 from io import StringIO
 from pathlib import Path
 from time import monotonic
@@ -16,6 +18,11 @@ from typing import Annotated, TypeVar
 from urllib.parse import quote, urlencode
 
 from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.exception_handlers import (
+    http_exception_handler,
+    request_validation_exception_handler,
+)
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import (
     FileResponse,
     HTMLResponse,
@@ -27,6 +34,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.middleware.gzip import GZipMiddleware
 
 from horse_racing.db.session import SessionLocal
@@ -60,6 +68,7 @@ from horse_racing.web.security import (
     resolve_client_ip,
     trusted_forwarded_scheme,
 )
+from horse_racing.web.sitemap import sitemap_index, sitemap_section
 from horse_racing.web.trial_page import load_running_trial_page
 
 WEB_ROOT = Path(__file__).parent
@@ -97,11 +106,41 @@ _CRAWLER_REQUESTS_PER_BURST = 10
 _TRUSTED_PROXY_CIDRS = parse_trusted_proxy_cidrs(os.getenv("TRUSTED_PROXY_CIDRS"))
 _MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 _MAX_RESPONSE_CACHE_ENTRY_BYTES = 512 * 1024
+_ERROR_HEADINGS = {
+    404: "페이지를 찾을 수 없습니다",
+    422: "요청 조건이 올바르지 않습니다",
+}
+_ERROR_FALLBACK_MESSAGES = {
+    404: "주소가 바뀌었거나 없는 경주·기록입니다.",
+    422: "조건을 확인한 뒤 다시 시도해 주세요.",
+}
+
+
+@lru_cache(maxsize=256)
+def _file_digest(path: Path, mtime_ns: int, size: int) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:10]
+
+
+def asset_version(relative_path: str) -> str:
+    """Content hash for a static asset so browsers refetch only after it changes."""
+    path = WEB_ROOT / "static" / relative_path.lstrip("/")
+    stat = path.stat()
+    return _file_digest(path, stat.st_mtime_ns, stat.st_size)
+
+
+def _rate_limited_path(path: str) -> bool:
+    # One page view pulls ~10 assets; counting them would let a few page loads
+    # (or users sharing a carrier NAT address) exhaust the per-client budget.
+    return path not in {"/health", "/favicon.ico"} and not path.startswith("/static/")
+
+
+def _wants_json_error(path: str) -> bool:
+    return path.startswith("/api/") or path.startswith("/health")
 
 
 def _diagnostic_path(path: str) -> str:
     """Keep logs low-cardinality and omit user supplied identifiers."""
-    if path in {"/", "/analysis", "/m/analysis", "/forecast", "/validation",
+    if path in {"/", "/analysis", "/reasons", "/m/analysis", "/forecast", "/validation",
                 "/api/analysis/export.csv", "/predictions", "/api/predictions",
                 "/data-status", "/robots.txt", "/health", "/health/ready"}:
         return path
@@ -117,6 +156,8 @@ def _diagnostic_path(path: str) -> str:
         return "/racecourses/{meet}/distances"
     if path.startswith("/static/"):
         return "/static/{asset}"
+    if path == "/sitemap.xml" or path.startswith("/sitemaps/"):
+        return "/sitemaps/{name}"
     return "/_other"
 
 
@@ -181,6 +222,7 @@ def create_app(
         description="한국마사회 일정과 결과를 조회하는 로컬 대시보드",
     )
     templates = Jinja2Templates(directory=WEB_ROOT / "templates")
+    templates.env.globals["asset_version"] = asset_version
     app.mount("/static", StaticFiles(directory=WEB_ROOT / "static"), name="static")
 
     # Read-only public surface: bounded per-client protection and short-lived caches.
@@ -201,6 +243,50 @@ def create_app(
     response_locks: AsyncLockRegistry[str] = AsyncLockRegistry()
     request_policy = RequestPolicy()
     active_request_gate = ActiveRequestGate(limit=16)
+    if os.getenv("K_SERVICE") and not _TRUSTED_PROXY_CIDRS:
+        # Cloud Run delivers every request from its front-end proxy, so without
+        # trusted CIDRs all visitors share one rate-limit bucket.
+        print(json.dumps({
+            "event": "trusted_proxy_cidrs_missing",
+            "severity": "WARNING",
+            "message": "TRUSTED_PROXY_CIDRS is empty; rate limits apply to the proxy, "
+            "not to individual clients.",
+        }, separators=(",", ":")), flush=True)
+
+    def render_error(request: Request, status_code: int, message: str | None) -> HTMLResponse:
+        mobile_view = _is_mobile_request(request)
+        return templates.TemplateResponse(
+            request=request,
+            name="error.html",
+            status_code=status_code,
+            context={
+                "layout": "mobile/base.html" if mobile_view else "base.html",
+                "active_nav": "",
+                "heading": _ERROR_HEADINGS.get(status_code, "요청을 처리하지 못했습니다"),
+                "message": message
+                or _ERROR_FALLBACK_MESSAGES.get(status_code, "잠시 후 다시 시도해 주세요."),
+            },
+            headers={"Cache-Control": "no-store", "X-Robots-Tag": "noindex"},
+        )
+
+    @app.exception_handler(StarletteHTTPException)
+    async def http_error_page(request: Request, exc: StarletteHTTPException) -> Response:
+        if _wants_json_error(request.url.path) or exc.status_code < 400:
+            return await http_exception_handler(request, exc)
+        detail = exc.detail if isinstance(exc.detail, str) else None
+        # Route details such as "Not found" are developer-facing English.
+        if detail and detail.isascii():
+            detail = None
+        response = render_error(request, exc.status_code, detail)
+        if exc.headers:
+            response.headers.update(exc.headers)
+        return response
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_error_page(request: Request, exc: RequestValidationError) -> Response:
+        if _wants_json_error(request.url.path):
+            return await request_validation_exception_handler(request, exc)
+        return render_error(request, 422, None)
 
     def cached(key: tuple[object, ...], loader: Callable[[], T], ttl: float = 20.0) -> T:
         now = monotonic()
@@ -289,7 +375,7 @@ def create_app(
         # Import URL helpers only after applying a proxy scheme from a trusted peer.
         path = request.url.path
 
-        if path != "/health":
+        if _rate_limited_path(path):
             client = _client_rate_key(request)
             crawler_request = bool(_CRAWLER_UA.search(user_agent))
             window_limit = (
@@ -337,7 +423,7 @@ def create_app(
             ))
 
         cacheable = request.method == "GET" and (
-            path in {"/", "/m", "/forecast", "/validation", "/analysis", "/m/analysis"}
+            path in {"/", "/m", "/forecast", "/validation", "/analysis", "/reasons", "/m/analysis"}
             or path.startswith("/races/")
         )
         view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
@@ -370,17 +456,26 @@ def create_app(
             response.headers["X-Frame-Options"] = "DENY"
             response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
             response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
-            if path in {"/", "/analysis"} or path.startswith("/races/"):
+            if path in {"/", "/analysis", "/reasons"} or path.startswith("/races/"):
                 vary = [
                     value.strip()
                     for value in response.headers.get("Vary", "").split(",")
                     if value.strip()
                 ]
-                if not any(value.lower() == "user-agent" for value in vary):
-                    vary.append("User-Agent")
+                present = {value.lower() for value in vary}
+                # Layout follows the User-Agent unless the hr-layout cookie overrides it.
+                vary.extend(
+                    name for name in ("User-Agent", "Cookie") if name.lower() not in present
+                )
                 response.headers["Vary"] = ", ".join(vary)
+            if path.startswith("/static/") and response.status_code == 200:
+                response.headers["Cache-Control"] = (
+                    "public, max-age=31536000, immutable"
+                    if request.query_params.get("v")
+                    else "public, max-age=3600"
+                )
             if response.status_code == 200 and path in {
-                "/forecast", "/validation", "/analysis", "/m/analysis",
+                "/forecast", "/validation", "/analysis", "/reasons", "/m/analysis",
             }:
                 response.headers["Cache-Control"] = "private, max-age=20"
             response.headers["Content-Security-Policy"] = (
@@ -518,16 +613,25 @@ def create_app(
 
     @app.get("/sitemap.xml", include_in_schema=False)
     def sitemap_xml() -> Response:
-        urls = "\n".join(
-            f"  <url><loc>{_PUBLIC_SITE_ORIGIN}{path}</loc></url>"
-            for path in _SITEMAP_PATHS
+        def load() -> str:
+            with session_factory() as session:
+                return sitemap_index(session, _PUBLIC_SITE_ORIGIN)
+
+        return Response(
+            content=cached(("sitemap-index",), load, ttl=3600.0),
+            media_type="application/xml",
+            headers={"Cache-Control": "public, max-age=3600"},
         )
-        body = (
-            '<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            f"{urls}\n"
-            "</urlset>\n"
-        )
+
+    @app.get("/sitemaps/{name}.xml", include_in_schema=False)
+    def sitemap_section_xml(name: str) -> Response:
+        def load() -> str | None:
+            with session_factory() as session:
+                return sitemap_section(session, name, _PUBLIC_SITE_ORIGIN, _SITEMAP_PATHS)
+
+        body = cached(("sitemap-section", name), load, ttl=3600.0)
+        if body is None:
+            raise HTTPException(status_code=404, detail="Not found")
         return Response(
             content=body,
             media_type="application/xml",
@@ -586,9 +690,7 @@ def create_app(
                 meet=None,
                 distance=None,
                 grade="",
-                horse=[],
-                jockey_id=None,
-                q="",
+                require_race=True,
             )
         with session_factory() as session:
             page = load_race_page(session, race_id=race_id)
@@ -766,9 +868,6 @@ def create_app(
         meet: int | None,
         distance: int | None,
         grade: str,
-        horse: list[int],
-        jockey_id: int | None,
-        q: str,
         race_date: date | None = None,
         history_limit: int = 12,
     ):
@@ -800,9 +899,6 @@ def create_app(
                 meet,
                 distance,
                 grade,
-                tuple(horse),
-                jockey_id,
-                q,
             ),
             load,
         )
@@ -820,9 +916,8 @@ def create_app(
         meet: int | None,
         distance: int | None,
         grade: str,
-        horse: list[int],
-        jockey_id: int | None,
-        q: str,
+        active_nav: str = "analysis",
+        require_race: bool = False,
     ) -> HTMLResponse:
         page = _analysis_data(
             race_id=race_id,
@@ -833,10 +928,9 @@ def create_app(
             meet=meet,
             distance=distance,
             grade=grade,
-            horse=horse,
-            jockey_id=jockey_id,
-            q=q,
         )
+        if require_race and (page.selected_race is None or page.selected_race.id != race_id):
+            raise HTTPException(status_code=404, detail="Not found")
         forecast = None
         if page.selected_race is not None:
             selected = page.selected_race
@@ -856,9 +950,14 @@ def create_app(
             name=template_name,
             context={
                 "layout": layout,
-                "active_nav": "analysis",
+                "active_nav": active_nav,
                 "page": page,
                 "forecast": forecast,
+                "reasons_href": (
+                    f"/reasons?race_id={page.selected_race.id}"
+                    if page.selected_race is not None
+                    else "/reasons"
+                ),
                 "analysis_payload": {
                     "race": asdict(page.selected_race) if page.selected_race else None,
                     "runners": [asdict(runner) for runner in page.runners],
@@ -877,9 +976,6 @@ def create_app(
         meet: Annotated[int | None, Query(ge=1, le=4)] = None,
         distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
         grade: Annotated[str, Query(max_length=50)] = "",
-        horse: Annotated[list[int] | None, Query()] = None,
-        jockey_id: Annotated[int | None, Query(ge=1)] = None,
-        q: Annotated[str, Query(max_length=50)] = "",
     ) -> HTMLResponse:
         if _is_mobile_request(request):
             return _render_analysis(
@@ -894,9 +990,6 @@ def create_app(
                 meet=meet,
                 distance=distance,
                 grade=grade,
-                horse=horse or [],
-                jockey_id=jockey_id,
-                q=q,
             )
         return _render_analysis(
             request,
@@ -910,9 +1003,34 @@ def create_app(
             meet=meet,
             distance=distance,
             grade=grade,
-            horse=horse or [],
-            jockey_id=jockey_id,
-            q=q,
+        )
+
+    @app.get("/reasons", response_class=HTMLResponse, response_model=None)
+    def probability_reasons(
+        request: Request,
+        race_date: Annotated[date | None, Query(alias="date")] = None,
+        history_limit: Annotated[int, Query(ge=1, le=60)] = 12,
+        race_id: Annotated[int | None, Query(ge=1)] = None,
+        start: Annotated[date | None, Query()] = None,
+        end: Annotated[date | None, Query()] = None,
+        meet: Annotated[int | None, Query(ge=1, le=4)] = None,
+        distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
+        grade: Annotated[str, Query(max_length=50)] = "",
+    ) -> HTMLResponse:
+        mobile_view = _is_mobile_request(request)
+        return _render_analysis(
+            request,
+            layout="mobile/base.html" if mobile_view else "base.html",
+            template_name="mobile/reasons.html" if mobile_view else "reasons.html",
+            active_nav="reasons",
+            race_date=race_date,
+            history_limit=history_limit,
+            race_id=race_id,
+            start=start,
+            end=end,
+            meet=meet,
+            distance=distance,
+            grade=grade,
         )
 
     @app.get("/m/analysis", response_class=HTMLResponse)
@@ -941,9 +1059,6 @@ def create_app(
         meet: Annotated[int | None, Query(ge=1, le=4)] = None,
         distance: Annotated[int | None, Query(ge=800, le=4000)] = None,
         grade: Annotated[str, Query(max_length=50)] = "",
-        horse: Annotated[list[int] | None, Query()] = None,
-        jockey_id: Annotated[int | None, Query(ge=1)] = None,
-        q: Annotated[str, Query(max_length=50)] = "",
     ) -> PlainTextResponse:
         page = _analysis_data(
             race_id=race_id,
@@ -954,11 +1069,10 @@ def create_app(
             meet=meet,
             distance=distance,
             grade=grade,
-            horse=horse or [],
-            jockey_id=jockey_id,
-            q=q,
         )
         output = StringIO()
+        # Excel only detects UTF-8 (and shows Korean correctly) with a BOM.
+        output.write("\ufeff")
         writer = csv.DictWriter(
             output,
             fieldnames=[

@@ -364,6 +364,6 @@
     {% endif %}
 </section>
 {% endif %}
-<script src="{{ url_for('static', path='/js/race-video.js') }}?v=1" defer></script>
-<script src="{{ url_for('static', path='/js/race-chart.js') }}?v=5" defer></script>
+<script src="{{ url_for('static', path='/js/race-video.js') }}?v={{ asset_version('/js/race-video.js') }}" defer></script>
+<script src="{{ url_for('static', path='/js/race-chart.js') }}?v={{ asset_version('/js/race-chart.js') }}" defer></script>
 {% endblock %}

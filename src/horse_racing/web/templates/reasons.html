@@ -1,0 +1,55 @@
+{% extends layout %}
+{% block title %}{% if page.selected_race %}{{ race_heading(page.selected_race) }}{% else %}이유{% endif %} · 마필로그 Mapilog{% endblock %}
+{% block meta_description %}출전마가 3위 안에 들 확률을 이렇게 본 이유를 경주별로 확인합니다.{% endblock %}
+
+{% macro race_heading(race) -%}
+{%- if race.date and race.date|length >= 10 -%}{{ race.date[0:4] }}.{{ race.date[5:7] }}.{{ race.date[8:10] }} {% endif -%}{{ race.meet }} {{ race.number }}R
+{%- endmacro %}
+{% macro role_name(value) -%}
+{%- if value == "입상후보" -%}관심마{%- else -%}{{ value or "예측없음" }}{%- endif -%}
+{%- endmacro %}
+
+{% block content %}
+<section class="reason-board">
+  <header class="reason-board-intro">
+    <h1 class="reason-board-heading">{% if page.selected_race %}{% if page.selected_race.date and page.selected_race.date|length >= 10 %}<span class="reason-board-when">{{ page.selected_race.date[0:4] }}.{{ page.selected_race.date[5:7] }}.{{ page.selected_race.date[8:10] }}</span>{% endif %}<span>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</span>{% else %}이유{% endif %}</h1>
+    {% if page.selected_race %}
+    <p>{{ page.selected_race.distance }}m · {{ page.selected_race.field_size }}두</p>
+    {% if page.prediction_historical %}
+    <p class="reason-board-historical"><strong>과거 검증</strong> 경주 전에 공개한 예측이 아니라 과거 자료로 다시 계산한 확률입니다.</p>
+    {% endif %}
+    {% endif %}
+    <p><a href="{% if page.selected_race %}/analysis?race_id={{ page.selected_race.id }}{% else %}/analysis{% endif %}">경주 분석으로</a></p>
+  </header>
+  {% if page.races %}
+  <nav class="reason-board-races" aria-label="경주 선택">
+    {% for race in page.races %}
+    <a href="/reasons?race_id={{ race.id }}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>{{ race.meet }} {{ race.number }}R</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+  {% if page.selected_race %}
+  <ol class="reason-board-list">
+    {% for runner in page.runners %}
+    <li>
+      <header>
+        <span class="reason-board-num silk-{{ runner.number }}">{{ runner.number }}</span>
+        <div>
+          <h2>{{ runner.horse }}</h2>
+        </div>
+        <span class="reason-board-win" data-role="{{ role_name(runner.win_label) }}">
+          <strong class="reason-board-pct">{{ runner.win_pct or "—" }}</strong>
+          <span>{{ role_name(runner.win_label) }}</span>
+        </span>
+      </header>
+      <ul>
+        {% for line in runner.reason_lines %}<li>{{ line }}</li>{% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p>선택한 날짜의 출전표가 없습니다.</p>
+  {% endif %}
+</section>
+{% endblock %}

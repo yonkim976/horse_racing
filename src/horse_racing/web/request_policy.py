@@ -38,10 +38,6 @@ _QUOTAS: dict[str, tuple[int, int]] = {
 }
 
 _ANALYSIS_KEYS = frozenset(
-    {"date", "history_limit", "race_id", "start", "end", "meet", "distance",
-     "grade", "horse", "jockey_id", "q"}
-)
-_ANALYSIS_OUTPUT_KEYS = frozenset(
     {"date", "history_limit", "race_id", "start", "end", "meet", "distance", "grade"}
 )
 _FORECAST_KEYS = frozenset({"date", "meet", "distance", "grade", "race_id"})
@@ -58,7 +54,7 @@ def _category(path: str) -> str | None:
         return "dashboard"
     if re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path):
         return "distance"
-    if path == "/analysis":
+    if path in {"/analysis", "/reasons"}:
         return "analysis"
     if path == "/api/analysis/export.csv":
         return "csv"
@@ -82,7 +78,7 @@ def _category(path: str) -> str | None:
 
 
 def _query_keys(path: str) -> frozenset[str] | None:
-    if path in {"/analysis", "/api/analysis/export.csv"}:
+    if path in {"/analysis", "/reasons", "/api/analysis/export.csv"}:
         return _ANALYSIS_KEYS
     if path == "/forecast":
         return _FORECAST_KEYS
@@ -146,7 +142,8 @@ def _validate(request: Request) -> Response | None:
             if numeric_id > 9223372036854775807:
                 return _bad_request("개체 식별자가 올바르지 않습니다.")
     raw = request.scope.get("query_string", b"")
-    limit = 4096 if path in {"/analysis", "/api/analysis/export.csv", "/m/analysis"} else 2048
+    long_query_paths = {"/analysis", "/reasons", "/api/analysis/export.csv", "/m/analysis"}
+    limit = 4096 if path in long_query_paths else 2048
     if len(raw) > limit:
         return _bad_request("요청 조건이 너무 깁니다.")
 
@@ -154,27 +151,18 @@ def _validate(request: Request) -> Response | None:
     params = request.query_params
     values = {key: params.getlist(key) for key in params.keys()}
     relevant_keys = set() if allowed is None else set(values) & allowed
-    repeated_scalars = relevant_keys - {"horse"}
-    if any(len(values[key]) > 1 for key in repeated_scalars):
+    if any(len(values[key]) > 1 for key in relevant_keys):
         return _bad_request("같은 조건을 여러 번 지정할 수 없습니다.")
 
-    if path in {"/analysis", "/api/analysis/export.csv"}:
-        if len(values.get("horse", [])) > 40:
-            return _bad_request("말 필터는 최대 40개까지 지정할 수 있습니다.")
-        if any(not value.isdecimal() or len(value) > 19 or int(value) > 9223372036854775807
-               for value in values.get("horse", [])):
-            return _bad_request("말 식별자가 올바르지 않습니다.")
-        if len(params.get("q", "")) > 50:
-            return _bad_request("검색어가 너무 깁니다.")
+    if path in {"/analysis", "/reasons", "/api/analysis/export.csv"}:
         raw_history = params.get("history_limit")
         if raw_history is not None and (
             not raw_history.isdecimal() or not 1 <= int(raw_history) <= 60
         ):
             return _bad_request("history_limit은 1부터 60까지 지정해 주세요.")
-        for key in ("race_id", "jockey_id"):
-            raw_id = params.get(key)
-            if raw_id is not None and not _valid_positive_integer(raw_id):
-                return _bad_request(f"{key} 값이 올바르지 않습니다.")
+        raw_id = params.get("race_id")
+        if raw_id is not None and not _valid_positive_integer(raw_id):
+            return _bad_request("race_id 값이 올바르지 않습니다.")
         start, end = _date_value(params.get("start")), _date_value(params.get("end"))
         if start is _INVALID or end is _INVALID:
             return _bad_request("날짜 조건 형식이 올바르지 않습니다.")
@@ -327,15 +315,8 @@ def normalized_query_key(request: Request) -> str:
     allowed = _query_keys(request.url.path)
     if allowed is None:
         return ""
-    if request.url.path in {"/analysis", "/api/analysis/export.csv"}:
-        allowed = _ANALYSIS_OUTPUT_KEYS
     params = request.query_params
-    items: list[tuple[str, str]] = []
-    for key in sorted(allowed):
-        if key == "horse":
-            items.extend((key, value) for value in params.getlist(key))
-        elif key in params:
-            items.append((key, params.get(key, "")))
+    items = [(key, params.get(key, "")) for key in sorted(allowed) if key in params]
     normalized = urlencode(items)
     if request.scope.get("query_string", b"") and not normalized:
         # The base template marks any queried URL noindex, so query presence is

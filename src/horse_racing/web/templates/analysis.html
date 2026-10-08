@@ -2,10 +2,10 @@
 {% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}당일 출전마의 과거 경주, 주행심사, 영상과 조교 기록을 한 화면에서 비교합니다.{% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="{{ url_for('static', path='/css/race-analysis.css') }}?v=5">
-<link rel="stylesheet" href="{{ url_for('static', path='/css/analysis-pace.css') }}?v=4">
-<script src="{{ url_for('static', path='/js/race-analysis.js') }}?v=4" defer></script>
-<script src="{{ url_for('static', path='/js/analysis-pace.js') }}?v=4" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-analysis.css') }}?v={{ asset_version('/css/race-analysis.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/analysis-pace.css') }}?v={{ asset_version('/css/analysis-pace.css') }}">
+<script src="{{ url_for('static', path='/js/race-analysis.js') }}?v={{ asset_version('/js/race-analysis.js') }}" defer></script>
+<script src="{{ url_for('static', path='/js/analysis-pace.js') }}?v={{ asset_version('/js/analysis-pace.js') }}" defer></script>
 {% endblock %}
 
 {% macro stone(number) -%}<span class="ra-stone" data-number="{{ number }}">{{ number }}</span>{%- endmacro %}
@@ -35,7 +35,7 @@
 
 {% block content %}
 <div class="ra-workspace" data-race-workspace data-race-id="{{ page.selected_race.id if page.selected_race else '' }}">
-<header class="ra-intro"><div><p class="ra-eyebrow">RACE STUDY</p><h1>경주 분석</h1><p>출전마의 기록을 읽고, 비교하고, 전개를 그려보세요.</p></div><span class="ra-intro-label">출전표에서 시작하는 데이터 분석</span></header>
+<header class="ra-intro"><div><p class="ra-eyebrow">RACE STUDY</p><h1>경주 분석</h1><p>출전마의 기록을 읽고, 비교하고, 전개를 그려보세요.</p></div><a class="ra-intro-label" href="{{ reasons_href }}">왜 이 확률</a></header>
 <section class="ra-browser" aria-label="분석할 경주 선택">
 <form action="/analysis" method="get" class="ra-date-form">
 <label for="analysis-date">경주일</label><input id="analysis-date" name="date" type="date" value="{{ page.selected_date }}" list="race-dates">

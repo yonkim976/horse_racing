@@ -43,6 +43,8 @@ from horse_racing.web.formatting import (
 from horse_racing.web.insights import (
     format_trial_form_token,
     format_win_pct,
+    historical_prediction_races,
+    latest_runner_explanations,
     latest_win_probabilities,
     summarize_top3_field,
     win_probability_sort_key,
@@ -181,6 +183,7 @@ class AnalysisRunner:
     result_label: str = "—"
     result_time: str = "—"
     finish_sort: int = 999
+    reason_lines: list[str] = field(default_factory=list)
 
 
 @dataclass(slots=True)
@@ -208,6 +211,7 @@ class RaceAnalysisPage:
     pace_board: list[PaceBoardLane] = field(default_factory=list)
     pace_summaries: list[dict[str, Any]] = field(default_factory=list)
     prediction_state: str | None = None
+    prediction_historical: bool = False
     candidate_count: int = 0
     prediction_count: int = 0
     prediction_groups: list[PredictionRunnerGroup] = field(default_factory=list)
@@ -350,6 +354,8 @@ def load_race_analysis_page(
         .all()
     )
     win_probs = latest_win_probabilities(session, [selected.id])
+    explanations = latest_runner_explanations(session, selected.id)
+    page.prediction_historical = bool(historical_prediction_races(session, [selected.id]))
     horse_ids = [row["horse_id"] for row in entries]
     jockey_ids = list({row["jockey_id"] for row in entries if row["jockey_id"] is not None})
     histories, totals = _load_histories(
@@ -483,6 +489,11 @@ def load_race_analysis_page(
             result_time=format_race_time(entry["finish_time_ms"]),
             finish_sort=finish_sort,
         )
+        model_lines = explanations.get(entry["entry_id"], [])
+        if model_lines:
+            runner.reason_lines = model_lines
+        else:
+            runner.reason_lines = _record_reason_lines(runner)
         page.runners.append(runner)
         for item in history:
             page.rows.append(
@@ -1691,6 +1702,60 @@ def _pace_style(samples):
         f"최근 {len(samples)}회 초반 상대위치 평균 {score * 100:.0f}% "
         "(0%=선두, 100%=후미). 통과순위 기반 추정이며 이번 경주의 확정 전개가 아닙니다."
     )
+
+
+_EMPTY_REASON = "최근 경주 기록이 아직 없습니다."
+_STYLE_REASON = {
+    "선행": "초반은 앞에서 이끄는 편",
+    "선입": "초반은 선두권",
+    "중단": "초반은 중위권",
+    "추입": "초반은 뒤에서 따라붙는 편",
+}
+_TRIAL_MARK = {"합": "합격", "불": "불합격", "연": "연습", "유": "유보"}
+
+
+def _spoken_form_token(token: str) -> str:
+    mark = _TRIAL_MARK.get(token[-1:])
+    number = token[:-1] if mark else token
+    if number.isdigit():
+        place = f"{number}위"
+        return f"{place} {mark}" if mark else place
+    return mark or token
+
+
+def _record_reason_lines(runner: AnalysisRunner) -> list[str]:
+    """Plain record facts, used when a run has no stored contributions."""
+    lines: list[str] = []
+    if runner.form_tokens:
+        spoken = ", ".join(_spoken_form_token(token) for token in runner.form_tokens[:5])
+        if len(runner.form_tokens) > 1:
+            prefix = "심사" if runner.form_kind == "trial" else "최근부터"
+            lines.append(f"{prefix} {spoken}")
+        elif runner.form_kind == "trial":
+            lines.append(f"주행심사 {spoken}")
+        else:
+            lines.append(f"최근 성적 {spoken}")
+    starts = runner.metrics.get("normal_starts") or 0
+    top3_rate = runner.metrics.get("top3_rate")
+    if starts and top3_rate is not None:
+        if top3_rate == 0:
+            lines.append(f"최근 {starts}번, 3위 밖")
+        elif top3_rate == 100:
+            lines.append(f"최근 {starts}번, 모두 3위 안")
+        else:
+            lines.append(f"최근 {starts}번 중 3위 안 {top3_rate:g}%")
+    if runner.same_distance_starts:
+        best = runner.metrics.get("same_distance_best")
+        if best and best != "—":
+            lines.append(f"이 거리 {runner.same_distance_starts}번, 최고 {best}")
+        else:
+            lines.append(f"이 거리 {runner.same_distance_starts}번")
+    elif runner.style and runner.style != "자료 부족":
+        fallback = f"초반은 {runner.style}"
+        lines.append(_STYLE_REASON.get(runner.style, fallback))
+    if not lines:
+        lines.append(_EMPTY_REASON)
+    return lines[:3]
 
 
 def _metrics(history, distance, meet, cutoff, distance_stats):

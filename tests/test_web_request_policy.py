@@ -29,13 +29,12 @@ def make_request(path: str, query: str = "", *, user_agent: str = "") -> Request
 
 def test_rejects_input_complexity_before_route_loader() -> None:
     policy = RequestPolicy()
-    too_many_horses = "&".join(f"horse={index}" for index in range(41))
-    too_many_horses_response = policy.check_request(
-        make_request("/analysis", too_many_horses), client_key="horse-list"
+    repeated_race = policy.check_request(
+        make_request("/analysis", "race_id=1&race_id=2"), client_key="repeated-race"
     )
-    assert too_many_horses_response is not None
-    assert too_many_horses_response.status_code == 422
-    assert too_many_horses_response.policy_diagnostics == {
+    assert repeated_race is not None
+    assert repeated_race.status_code == 422
+    assert repeated_race.policy_diagnostics == {
         "category": "request_validation",
         "reason": "invalid_request",
         "count": None,
@@ -120,6 +119,8 @@ def test_semantic_cache_key_coalesces_irrelevant_query_but_preserves_effective_i
     assert normalized_query_key(make_request("/analysis", "date=2026-09-23&q=one")) == (
         "date=2026-09-23"
     )
+    assert normalized_query_key(make_request("/reasons", "race_id=1")) == "race_id=1"
+    assert normalized_query_key(make_request("/reasons", "race_id=2")) == "race_id=2"
 
 
 def test_mobile_legacy_redirect_inputs_remain_supported() -> None:

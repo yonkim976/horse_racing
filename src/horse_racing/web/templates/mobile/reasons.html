@@ -1,0 +1,84 @@
+{% extends "mobile/base.html" %}
+{% block body_class %}mobile-reasons{% endblock %}
+{% block title %}{% if page.selected_race %}{{ race_heading(page.selected_race) }}{% else %}이유{% endif %} · 마필로그 Mapilog{% endblock %}
+{% block meta_description %}출전마가 3위 안에 들 확률을 이렇게 본 이유를 경주별로 확인합니다.{% endblock %}
+
+{% macro race_heading(race) -%}
+{%- if race.date and race.date|length >= 10 -%}{{ race.date[0:4] }}.{{ race.date[5:7] }}.{{ race.date[8:10] }} {% endif -%}{{ race.meet }} {{ race.number }}R
+{%- endmacro %}
+{% macro role_name(value) -%}
+{%- if value == "입상후보" -%}관심마{%- else -%}{{ value or "예측없음" }}{%- endif -%}
+{%- endmacro %}
+
+{% block content %}
+<div class="ma-page mr-page">
+  <nav class="ma-chrome" aria-label="이유를 볼 경주 선택" data-mobile-chrome>
+    <div class="ma-chrome-row" data-chrome-filters>
+      <a class="ma-back" href="{% if page.selected_race %}/races/{{ page.selected_race.id }}{% else %}/analysis{% endif %}" aria-label="경주 분석">분석</a>
+      {% if page.races %}
+      {% set ns = namespace(meets=[]) %}
+      <div class="mobile-meet-bar" aria-label="경마장">
+        {% for race in page.races %}
+          {% if race.meet_code not in ns.meets %}
+            {% set ns.meets = ns.meets + [race.meet_code] %}
+            <a href="/reasons?date={{ page.selected_date }}&amp;meet={{ race.meet_code }}" class="{% if page.selected_race and page.selected_race.meet_code == race.meet_code %}active{% endif %}" {% if page.selected_race and page.selected_race.meet_code == race.meet_code %}aria-current="page"{% endif %}>{{ race.meet }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% if page.races %}
+    <div class="ma-rounds" aria-label="경주 선택">
+      {% for race in page.races %}
+        {% if not page.selected_race or race.meet_code == page.selected_race.meet_code %}
+        <a href="/reasons?race_id={{ race.id }}" class="{% if page.selected_race and race.id == page.selected_race.id %}active{% endif %}{% if race.is_current %} is-next{% endif %}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>
+          <strong>{{ race.number }}R</strong>
+          <span>{% if race.status == 'completed' %}<span class="ma-finished-label">종료 · </span>{% elif race.is_current %}<span class="ma-next-label">예정 · </span>{% endif %}{{ race.start_time }}</span>
+        </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </nav>
+
+  {% if page.selected_race %}
+  <header class="ma-title">
+    <h1 class="mr-heading">
+      {% if page.selected_race.date and page.selected_race.date|length >= 10 %}<span class="mr-when">{{ page.selected_race.date[0:4] }}.{{ page.selected_race.date[5:7] }}.{{ page.selected_race.date[8:10] }}</span>{% endif %}
+      <span>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</span>
+    </h1>
+    <p>{{ page.selected_race.start_time }} · {{ page.selected_race.distance }}m · {{ page.selected_race.field_size }}두</p>
+    {% if page.prediction_historical %}
+    <p class="ma-historical-note"><span class="mobile-field-state" data-state="과거 검증">과거 검증</span> 경주 전에 공개한 예측이 아니라 과거 자료로 다시 계산한 확률입니다.</p>
+    {% endif %}
+  </header>
+  <ol class="mr-list">
+    {% for runner in page.runners %}
+    <li class="mr-card{% if runner.state == '출전취소' %} is-scratched{% endif %}">
+      <header class="mr-head">
+        <span class="mr-num silk-{{ runner.number }}">{{ runner.number }}</span>
+        <div>
+          <h2>{{ runner.horse }}</h2>
+          <p>
+            {% if runner.state == '출전취소' %}출전 취소{% elif runner.state == '경주 완료' and runner.result_label != '—' %}결과 {{ runner.result_label }}{% endif %}
+          </p>
+        </div>
+        <span class="ma-win-block mr-win" data-role="{{ role_name(runner.win_label) }}">
+          <span class="ma-win-pct">{{ runner.win_pct or '—' }}</span>
+          <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
+        </span>
+      </header>
+      <ul class="mr-lines">
+        {% for line in runner.reason_lines %}<li>{{ line }}</li>{% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <div class="mobile-empty">
+    <strong>선택한 날짜의 출전표가 없습니다.</strong>
+    <p>경주 목록에서 다른 날짜를 골라 주세요.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

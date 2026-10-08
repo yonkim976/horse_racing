@@ -37,6 +37,7 @@ from horse_racing.web.insights import (
     format_trial_form_line,
     format_trial_form_token,
     format_win_pct,
+    historical_prediction_races,
     latest_win_probabilities,
     summarize_top3_field,
     win_probability_sort_key,
@@ -89,6 +90,7 @@ class RaceRow:
     scheduled_at_ms: int | None = None
     is_current: bool = False
     prediction_state: str | None = None
+    prediction_historical: bool = False
     candidate_count: int = 0
     prediction_count: int = 0
     stakes_grade: str | None = None
@@ -317,8 +319,13 @@ def load_dashboard(
     debut_ids = [horse_id for horse_id in horse_ids if horse_id not in form_by_horse]
     if debut_ids:
         form_by_horse.update(_recent_trial_form_by_horse(session, debut_ids, selected_date))
-    win_probs = latest_win_probabilities(session, [race.id for race in races])
-    race_rows = [_race_row(race, filter_query, form_by_horse, win_probs) for race in races]
+    race_ids = [race.id for race in races]
+    win_probs = latest_win_probabilities(session, race_ids)
+    historical_races = historical_prediction_races(session, race_ids)
+    race_rows = [
+        _race_row(race, filter_query, form_by_horse, win_probs, historical_races)
+        for race in races
+    ]
     if mobile_view:
         race_rows = _order_mobile_races(
             race_rows,
@@ -653,6 +660,7 @@ def _race_row(
     filter_query: str,
     form_by_horse: dict[int, str],
     win_probs: dict[int, float],
+    historical_races: set[int] | frozenset[int] = frozenset(),
 ) -> RaceRow:
     winner_entry = next(
         (
@@ -739,6 +747,7 @@ def _race_row(
         posters=posters,
         scheduled_at_ms=race.scheduled_at_ms,
         prediction_state=top3_summary.race_state,
+        prediction_historical=race.id in historical_races,
         candidate_count=top3_summary.candidate_count,
         prediction_count=top3_summary.prediction_count,
         stakes_grade=stakes_grade(race.race_name),

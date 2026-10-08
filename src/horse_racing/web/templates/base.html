@@ -34,10 +34,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=15">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=20" defer></script>
-    <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v={{ asset_version('/css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v={{ asset_version('/css/insights.css') }}">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v={{ asset_version('/js/dashboard.js') }}" defer></script>
+    <script src="{{ url_for('static', path='/js/insights.js') }}?v={{ asset_version('/js/insights.js') }}" defer></script>
     {% block extra_head %}{% endblock %}
   </head>
   <body class="{% block body_class %}{% endblock %}">

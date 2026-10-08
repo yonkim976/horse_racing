@@ -1,6 +1,6 @@
 {% set course_map_url = '/racecourses/jeju/course' %}
-<link rel="stylesheet" href="{{ url_for('static', path='/css/course-explorer.css') }}?v=13">
-<link rel="stylesheet" href="{{ url_for('static', path='/css/seoul-map.css') }}?v=15">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/course-explorer.css') }}?v={{ asset_version('/css/course-explorer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/seoul-map.css') }}?v={{ asset_version('/css/seoul-map.css') }}">
 <section id="racecourse-map" class="panel course-explorer seoul-explorer jeju-explorer" data-racecourse-map="jeju" data-course-name="제주" data-course-explorer data-distance="{{ page.distance_m }}">
   <header class="course-heading">
     <div><p class="panel-kicker">JEJU · COURSE EXPLORER</p><h2>제주 경주로 <span>{{ '거리 선택' if is_course_explorer else page.distance }}</span></h2><p>{% if is_course_explorer %}거리를 선택해 출발점과 주행 경로를 확인하세요.{% else %}현재 경주에 해당하는 출발점과 주행 경로입니다.{% endif %}</p></div>
@@ -71,4 +71,4 @@
     <a href="https://race.kra.co.kr/chulmainfo/trackView.do?Act=02&Sub=9&meet=2" target="_blank" rel="noopener">마사회 공식 경주로 안내 ↗</a>
   </details>
 </section>
-<script src="{{ url_for('static', path='/js/course-explorer.js') }}?v=14" defer></script>
+<script src="{{ url_for('static', path='/js/course-explorer.js') }}?v={{ asset_version('/js/course-explorer.js') }}" defer></script>
