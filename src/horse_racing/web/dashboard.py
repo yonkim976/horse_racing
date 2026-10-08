@@ -5,7 +5,7 @@ from dataclasses import dataclass, replace
 from datetime import date, timedelta
 from itertools import groupby
 
-from sqlalchemy import select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session, contains_eager, selectinload
 
 from horse_racing.db.models import (
@@ -19,6 +19,7 @@ from horse_racing.db.models import (
 )
 from horse_racing.services.entry_sheet import MEET_METADATA
 from horse_racing.web.formatting import (
+    MAX_NORMAL_FINISH,
     adjacent_dates,
     display_race_title,
     format_age,
@@ -137,6 +138,19 @@ class CalendarDateOption:
 
 
 @dataclass(frozen=True, slots=True)
+class CalendarDay:
+    day: date
+    status: str
+    has_race: bool
+    has_trial: bool
+
+
+@dataclass(frozen=True, slots=True)
+class CalendarIndex:
+    days: tuple[CalendarDay, ...]
+
+
+@dataclass(frozen=True, slots=True)
 class TrialRow:
     id: int
     detail_href: str
@@ -200,6 +214,8 @@ class DashboardData:
     available_dates: list[date]
     date_groups: list[DateGroup]
     calendar_dates: list[CalendarDateOption]
+    calendar_min_date: date | None
+    calendar_max_date: date | None
     weekend_days: list[WeekendDay]
     day_meets: list[DayMeet]
     prev_date: date | None
@@ -222,6 +238,60 @@ class DashboardData:
     meet_count: int
 
 
+def load_calendar_index(session: Session) -> CalendarIndex:
+    race_dates = tuple(
+        session.scalars(
+            select(Race.race_date_local)
+            .join(Racecourse)
+            .where(active_race_clause())
+            .distinct()
+            .order_by(Race.race_date_local.desc())
+        )
+    )
+    trial_dates = tuple(
+        session.scalars(
+            select(RunningTrial.trial_date_local)
+            .distinct()
+            .order_by(RunningTrial.trial_date_local.desc())
+        )
+    )
+    status_rows = session.execute(
+        select(Race.race_date_local, Race.status)
+        .join(Racecourse)
+        .where(active_race_clause())
+        .distinct()
+    ).all()
+    statuses: dict[date, set[str]] = {}
+    for race_date, status in status_rows:
+        statuses.setdefault(race_date, set()).add(status)
+    race_date_set = set(race_dates)
+    trial_date_set = set(trial_dates)
+    return CalendarIndex(
+        days=tuple(
+            CalendarDay(
+                day=day,
+                status=_calendar_status(statuses.get(day, set())),
+                has_race=day in race_date_set,
+                has_trial=day in trial_date_set,
+            )
+            for day in sorted(race_date_set | trial_date_set, reverse=True)
+        )
+    )
+
+
+def calendar_month_options(index: CalendarIndex, month: date) -> list[CalendarDateOption]:
+    return [
+        CalendarDateOption(
+            value=item.day.isoformat(),
+            status=item.status,
+            has_race=item.has_race,
+            has_trial=item.has_trial,
+        )
+        for item in reversed(index.days)
+        if item.day.year == month.year and item.day.month == month.month
+    ]
+
+
 def load_dashboard(
     session: Session,
     *,
@@ -231,35 +301,10 @@ def load_dashboard(
     selected_trial_id: int | None = None,
     home_path: str = "/",
     mobile_view: bool = False,
+    calendar_index: CalendarIndex | None = None,
 ) -> DashboardData:
-    race_dates = list(
-        session.scalars(
-            select(Race.race_date_local)
-            .join(Racecourse)
-            .where(active_race_clause())
-            .distinct()
-            .order_by(Race.race_date_local.desc())
-        )
-    )
-    trial_dates = list(
-        session.scalars(
-            select(RunningTrial.trial_date_local)
-            .distinct()
-            .order_by(RunningTrial.trial_date_local.desc())
-        )
-    )
-    race_date_set = set(race_dates)
-    available_dates = sorted(race_date_set | set(trial_dates), reverse=True)
-    date_status_rows = session.execute(
-        select(Race.race_date_local, Race.status)
-        .join(Racecourse)
-        .where(active_race_clause())
-        .distinct()
-    ).all()
-    statuses_by_date: dict[date, set[str]] = {}
-    for race_date, status in date_status_rows:
-        statuses_by_date.setdefault(race_date, set()).add(status)
-    trial_date_set = set(trial_dates)
+    calendar_index = calendar_index or load_calendar_index(session)
+    available_dates = [item.day for item in calendar_index.days]
     if selected_date is None and available_dates:
         selected_date = _pick_live_date(available_dates, today_seoul())
     older_date, newer_date = adjacent_dates(available_dates, selected_date)
@@ -353,15 +398,12 @@ def load_dashboard(
             DateGroup(label=label, dates=items)
             for label, items in group_dates_by_month(available_dates)
         ],
-        calendar_dates=[
-            CalendarDateOption(
-                value=available_date.isoformat(),
-                status=_calendar_status(statuses_by_date.get(available_date, set())),
-                has_race=available_date in race_date_set,
-                has_trial=available_date in trial_date_set,
-            )
-            for available_date in available_dates
-        ],
+        calendar_dates=(
+            calendar_month_options(calendar_index, selected_date or available_dates[0])
+            if available_dates else []
+        ),
+        calendar_min_date=available_dates[-1] if available_dates else None,
+        calendar_max_date=available_dates[0] if available_dates else None,
         weekend_days=_weekend_days(selected_date, selected_meet, home_path),
         day_meets=_day_meets(session, selected_date, selected_meet, home_path),
         prev_date=older_date,
@@ -581,13 +623,17 @@ def _recent_form_by_horse(
 ) -> dict[int, str]:
     if not horse_ids or before is None:
         return {}
-    rows = session.execute(
+    ranked = (
         select(
-            RaceEntry.horse_id,
-            Race.race_date_local,
-            Race.id,
-            RaceResult.finish_position,
-            RaceResult.disqualified,
+            RaceEntry.horse_id.label("horse_id"),
+            Race.race_date_local.label("race_date"),
+            Race.id.label("race_id"),
+            RaceResult.finish_position.label("position"),
+            RaceResult.disqualified.label("disqualified"),
+            func.row_number().over(
+                partition_by=RaceEntry.horse_id,
+                order_by=(Race.race_date_local.desc(), Race.id.desc()),
+            ).label("recency"),
         )
         .join(Race, Race.id == RaceEntry.race_id)
         .join(RaceResult, RaceResult.race_entry_id == RaceEntry.id)
@@ -596,13 +642,21 @@ def _recent_form_by_horse(
             Race.race_date_local < before,
             RaceResult.finish_position.is_not(None),
         )
-        .order_by(RaceEntry.horse_id, Race.race_date_local.desc(), Race.id.desc())
+    ).subquery()
+    rows = session.execute(
+        select(
+            ranked.c.horse_id,
+            ranked.c.race_date,
+            ranked.c.race_id,
+            ranked.c.position,
+            ranked.c.disqualified,
+        )
+        .where(ranked.c.recency <= 5)
+        .order_by(ranked.c.horse_id, ranked.c.recency)
     ).all()
     form: dict[int, list[str]] = defaultdict(list)
     for horse_id, _race_date, _race_id, position, disqualified in rows:
         finishes = form[horse_id]
-        if len(finishes) >= 5:
-            continue
         if disqualified or position >= 90:
             finishes.append("-")
         else:
@@ -620,30 +674,44 @@ def _recent_trial_form_by_horse(
 ) -> dict[int, str]:
     if not horse_ids or before is None:
         return {}
-    rows = session.execute(
+    judgement = func.trim(func.coalesce(RunningTrialResult.judgement, ""))
+    ranked = (
         select(
-            RunningTrialResult.horse_id,
-            RunningTrial.trial_date_local,
-            RunningTrial.id,
-            RunningTrialResult.finish_position,
-            RunningTrialResult.judgement,
+            RunningTrialResult.horse_id.label("horse_id"),
+            RunningTrial.trial_date_local.label("trial_date"),
+            RunningTrial.id.label("trial_id"),
+            RunningTrialResult.finish_position.label("position"),
+            RunningTrialResult.judgement.label("judgement"),
+            func.row_number().over(
+                partition_by=RunningTrialResult.horse_id,
+                order_by=(RunningTrial.trial_date_local.desc(), RunningTrial.id.desc()),
+            ).label("recency"),
         )
         .join(RunningTrial, RunningTrial.id == RunningTrialResult.running_trial_id)
         .where(
             RunningTrialResult.horse_id.in_(horse_ids),
             RunningTrial.trial_date_local < before,
+            ~judgement.in_(("출", "심", "주")),
+            or_(
+                RunningTrialResult.finish_position.between(1, MAX_NORMAL_FINISH),
+                judgement.in_(("합", "불", "연", "유")),
+            ),
         )
-        .order_by(
-            RunningTrialResult.horse_id,
-            RunningTrial.trial_date_local.desc(),
-            RunningTrial.id.desc(),
+    ).subquery()
+    rows = session.execute(
+        select(
+            ranked.c.horse_id,
+            ranked.c.trial_date,
+            ranked.c.trial_id,
+            ranked.c.position,
+            ranked.c.judgement,
         )
+        .where(ranked.c.recency <= 5)
+        .order_by(ranked.c.horse_id, ranked.c.recency)
     ).all()
     form: dict[int, list[str]] = defaultdict(list)
     for horse_id, _trial_date, _trial_id, position, judgement in rows:
         tokens = form[horse_id]
-        if len(tokens) >= 5:
-            continue
         token = format_trial_form_token(position, judgement)
         if token:
             tokens.append(token)

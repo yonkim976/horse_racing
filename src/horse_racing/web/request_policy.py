@@ -25,6 +25,7 @@ _MAX_CLIENT_BUCKETS = 8192
 # bypassing the per-route ceilings.  CSV has a tighter independent ceiling.
 _QUOTAS: dict[str, tuple[int, int]] = {
     "expensive": (24, 8),
+    "calendar": (90, 30),
     "analysis": (24, 8),
     "csv": (6, 2),
     "validation": (24, 8),
@@ -56,6 +57,8 @@ _HOME_KEYS = frozenset({"date", "meet", "race_id", "trial_id"})
 def _category(path: str) -> str | None:
     if path == "/":
         return "dashboard"
+    if path == "/api/calendar":
+        return "calendar"
     if re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path):
         return "distance"
     if path == "/analysis":
@@ -82,6 +85,8 @@ def _category(path: str) -> str | None:
 
 
 def _query_keys(path: str) -> frozenset[str] | None:
+    if path == "/api/calendar":
+        return frozenset({"month"})
     if path in {"/analysis", "/api/analysis/export.csv"}:
         return _ANALYSIS_KEYS
     if path == "/forecast":
@@ -264,7 +269,7 @@ class RequestPolicy:
         if category is None:
             return None
         current = monotonic() if now is None else now
-        categories = ["expensive", category]
+        categories = [category] if category == "calendar" else ["expensive", category]
         with self._lock:
             # Drop only fully idle state. Live quota records remain until their
             # full window expires; saturation fails closed for new clients.

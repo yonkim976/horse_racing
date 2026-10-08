@@ -1,5 +1,6 @@
 import csv
-from datetime import date, datetime
+import re
+from datetime import date, datetime, timedelta
 from io import StringIO
 from pathlib import Path
 from xml.etree import ElementTree
@@ -9,6 +10,7 @@ import pytest
 from alembic import command
 from alembic.config import Config
 from fastapi.testclient import TestClient
+from sqlalchemy import event
 from sqlalchemy.orm import Session, sessionmaker
 
 from horse_racing.db.engine import create_engine_for_url
@@ -37,6 +39,11 @@ from horse_racing.db.models import (
     TrainerAffiliationSnapshot,
 )
 from horse_racing.web.app import create_app
+from horse_racing.web.dashboard import (
+    _recent_form_by_horse,
+    _recent_trial_form_by_horse,
+    load_calendar_index,
+)
 from horse_racing.web.request_policy import RequestPolicy
 
 PHONE_HEADERS = {"user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)"}
@@ -115,6 +122,31 @@ def test_anthropic_crawlers_can_read_robots_but_cannot_fetch_pages(tmp_path: Pat
     assert page.headers["x-robots-tag"] == "noindex, nofollow"
 
 
+@pytest.mark.parametrize("agent", ["SerpstatBot", "AhrefsBot"])
+def test_bulk_harvesters_are_denied_before_database_access(agent: str) -> None:
+    def unavailable_session():
+        raise AssertionError("blocked requests must not open the database")
+
+    with TestClient(create_app(session_factory=unavailable_session)) as client:
+        robots = client.get("/robots.txt", headers={"user-agent": agent})
+        page = client.get("/", headers={"user-agent": agent})
+
+    assert robots.status_code == 200
+    assert f"User-agent: {agent}\nDisallow: /" in robots.text
+    assert page.status_code == 403
+
+
+def test_wordpress_rest_route_probe_is_rejected_before_database_access() -> None:
+    def unavailable_session():
+        raise AssertionError("scanner probes must not open the database")
+
+    with TestClient(create_app(session_factory=unavailable_session)) as client:
+        response = client.get("/?rest_route=/wp/v2/users")
+
+    assert response.status_code == 404
+    assert response.content == b""
+
+
 def test_generic_crawlers_are_rate_limited_without_blocking_search(tmp_path: Path) -> None:
     client = TestClient(create_app())
     headers = {"user-agent": "ExampleCrawler/1.0", "x-forwarded-for": "203.0.113.10"}
@@ -125,6 +157,91 @@ def test_generic_crawlers_are_rate_limited_without_blocking_search(tmp_path: Pat
 
     assert limited.status_code == 429
     assert limited.headers["retry-after"] == "60"
+
+
+def test_calendar_metadata_is_shared_and_html_contains_only_selected_month(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        session.add(RunningTrial(
+            meet_code=2,
+            trial_date_local=date(2026, 7, 4),
+            trial_race_number=1,
+            distance_m=800,
+            observed_at_ms=1,
+        ))
+        session.commit()
+
+    calls = 0
+
+    def tracked_calendar_index(session: Session):
+        nonlocal calls
+        calls += 1
+        return load_calendar_index(session)
+
+    monkeypatch.setattr("horse_racing.web.app.load_calendar_index", tracked_calendar_index)
+    with TestClient(create_app(factory)) as client:
+        august = client.get("/?date=2026-08-21")
+        another_day = client.get("/?date=2026-08-13")
+        july = client.get("/api/calendar?month=2026-07")
+        invalid = client.get("/api/calendar?month=2026-13")
+
+    assert august.status_code == another_day.status_code == july.status_code == 200
+    calendar_data = re.search(
+        r'<script id="race-calendar-data"[^>]*>(.*?)</script>', august.text, re.S
+    )
+    assert calendar_data is not None
+    assert "2026-08-13" in calendar_data.group(1)
+    assert "2026-07-04" not in calendar_data.group(1)
+    assert july.json() == [{
+        "date": "2026-07-04", "status": "trial-only", "hasRace": False, "hasTrial": True,
+    }]
+    assert invalid.status_code == 422
+    assert calls == 1
+
+
+def test_recent_form_returns_five_eligible_rows_per_horse_from_sql(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        horse = session.query(Horse).filter_by(kra_horse_id="003001").one()
+        course = session.query(Racecourse).filter_by(kra_meet_code=2).one()
+        for number in range(1, 8):
+            day = date(2026, 8, 1) + timedelta(days=number - 1)
+            race = Race(
+                racecourse=course, race_date_local=day, race_number=1,
+                distance_m=900, status="completed",
+            )
+            entry = RaceEntry(race=race, horse=horse, horse_number=1)
+            session.add(RaceResult(race_entry=entry, finish_position=number))
+            trial = RunningTrial(
+                meet_code=2, trial_date_local=day, trial_race_number=1,
+                distance_m=800, observed_at_ms=1,
+            )
+            session.add(RunningTrialResult(
+                trial=trial, horse=horse, horse_number=1,
+                horse_name_raw=horse.name_ko, finish_position=number,
+                judgement="주" if number == 7 else "합", observed_at_ms=1,
+            ))
+        session.commit()
+
+        ranked_queries: list[str] = []
+
+        def capture_query(_connection, _cursor, statement, _parameters, _context, _many):
+            if "row_number" in statement.lower():
+                ranked_queries.append(statement.lower())
+
+        event.listen(session.bind, "before_cursor_execute", capture_query)
+        try:
+            race_form = _recent_form_by_horse(session, [horse.id], date(2026, 8, 13))
+            trial_form = _recent_trial_form_by_horse(session, [horse.id], date(2026, 8, 13))
+        finally:
+            event.remove(session.bind, "before_cursor_execute", capture_query)
+
+    assert race_form[horse.id] == "7-6-5-4-3"
+    assert trial_form[horse.id] == "심 6합-5합-4합-3합-2합"
+    assert len(ranked_queries) == 2
+    assert all("recency <= " in statement for statement in ranked_queries)
 
 
 def test_www_redirects_to_apex_without_leaking_cached_asset_urls(tmp_path: Path) -> None:

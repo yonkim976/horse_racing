@@ -88,7 +88,9 @@
   </div>
 </dialog>
 
-<script id="race-calendar-data" type="application/json">
+<script id="race-calendar-data" type="application/json"
+  data-min-date="{{ dashboard.calendar_min_date.isoformat() if dashboard.calendar_min_date else '' }}"
+  data-max-date="{{ dashboard.calendar_max_date.isoformat() if dashboard.calendar_max_date else '' }}">
 [
   {% for item in dashboard.calendar_dates %}
     {"date": {{ item.value | tojson }}, "status": {{ item.status | tojson }}, "hasRace": {{ item.has_race | tojson }}, "hasTrial": {{ item.has_trial | tojson }}}{% if not loop.last %},{% endif %}

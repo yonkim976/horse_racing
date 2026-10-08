@@ -188,6 +188,22 @@ def test_denial_logs_are_structured_and_omit_client_ip_and_query(capsys) -> None
     assert "token" not in output
 
 
+def test_repeated_bot_denials_emit_one_app_log_per_minute(capsys) -> None:
+    async def render():
+        raise AssertionError("blocked bot must not reach the route")
+
+    with middleware_client(render) as client:
+        responses = [
+            client.get("/analysis", headers={"user-agent": "SerpstatBot/1.0"})
+            for _ in range(12)
+        ]
+
+    assert all(response.status_code == 403 for response in responses)
+    events = [json.loads(line) for line in capsys.readouterr().out.splitlines()]
+    assert len(events) == 1
+    assert events[0]["reason"] == "bulk_harvester"
+
+
 def test_sampled_success_logs_normalized_path_duration_and_bytes(monkeypatch, capsys) -> None:
     module = importlib.import_module("horse_racing.web.app")
     monkeypatch.setattr(module.random, "random", lambda: 0.0)

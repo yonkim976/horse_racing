@@ -12,6 +12,7 @@ from dataclasses import asdict
 from datetime import date
 from io import StringIO
 from pathlib import Path
+from threading import Lock
 from time import monotonic
 from types import SimpleNamespace
 from typing import Annotated, TypeVar
@@ -21,6 +22,7 @@ from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import (
     FileResponse,
     HTMLResponse,
+    JSONResponse,
     PlainTextResponse,
     RedirectResponse,
     Response,
@@ -32,7 +34,12 @@ from sqlalchemy.orm import Session
 from starlette.middleware.gzip import GZipMiddleware
 
 from horse_racing.db.session import SessionLocal
-from horse_racing.web.dashboard import load_dashboard
+from horse_racing.web.dashboard import (
+    CalendarIndex,
+    calendar_month_options,
+    load_calendar_index,
+    load_dashboard,
+)
 from horse_racing.web.distance_page import GRADE_LABELS, SEOUL_GRADE_LABELS, load_distance_page
 from horse_racing.web.entities import (
     DEFAULT_PAGE_SIZE,
@@ -86,6 +93,7 @@ _BLOCKED_ANTHROPIC_UA = re.compile(
     r"ClaudeBot|Claude-SearchBot|Claude-User|Claude-Web|anthropic-ai",
     re.I,
 )
+_BLOCKED_HARVESTER_UA = re.compile(r"SerpstatBot|AhrefsBot", re.I)
 _CRAWLER_UA = re.compile(r"bot|crawler|spider|slurp|archiver", re.I)
 _RATE_LIMIT_WINDOW_SECONDS = 60.0
 _RATE_LIMIT_BURST_SECONDS = 10.0
@@ -103,7 +111,7 @@ def _diagnostic_path(path: str) -> str:
     """Keep logs low-cardinality and omit user supplied identifiers."""
     if path in {"/", "/analysis", "/m/analysis", "/forecast", "/validation",
                 "/api/analysis/export.csv", "/predictions", "/api/predictions",
-                "/data-status", "/robots.txt", "/health", "/health/ready"}:
+                "/data-status", "/api/calendar", "/robots.txt", "/health", "/health/ready"}:
         return path
     match = re.fullmatch(r"/(races|running-trials)/[^/]+", path)
     if match:
@@ -196,6 +204,12 @@ def create_app(
         size_of=lambda value: bounded_size(value, limit=1024 * 1024),
     )
     cache_key_locks: SyncLockRegistry[tuple[object, ...]] = SyncLockRegistry()
+    calendar_cache: BoundedTTLCache[str, CalendarIndex] = BoundedTTLCache(
+        max_entries=1,
+        max_bytes=4 * 1024 * 1024,
+        max_entry_bytes=4 * 1024 * 1024,
+        size_of=lambda value: bounded_size(value, limit=4 * 1024 * 1024),
+    )
     response_cache: BoundedTTLCache[str, tuple[int, dict[str, str], bytes]] = BoundedTTLCache(
         max_entries=128,
         max_bytes=4 * 1024 * 1024,
@@ -205,6 +219,19 @@ def create_app(
     response_locks: AsyncLockRegistry[str] = AsyncLockRegistry()
     request_policy = RequestPolicy()
     active_request_gate = ActiveRequestGate(limit=16)
+    policy_log_lock = Lock()
+    policy_log_state: dict[tuple[str, str], tuple[float, int]] = {}
+
+    def policy_log_suppressed(category: str, reason: str) -> int | None:
+        key = (category, reason)
+        now = monotonic()
+        with policy_log_lock:
+            last_log, suppressed = policy_log_state.get(key, (now - 60.0, 0))
+            if now - last_log < 60.0:
+                policy_log_state[key] = (last_log, suppressed + 1)
+                return None
+            policy_log_state[key] = (now, 0)
+            return suppressed
     origin_token = os.getenv("MAPILOG_ORIGIN_TOKEN", "")
     if origin_token and len(origin_token) < 32:
         raise ValueError("MAPILOG_ORIGIN_TOKEN must be at least 32 characters")
@@ -221,6 +248,19 @@ def create_app(
             value = loader()
             page_cache.set(key, value, ttl=ttl)
             return value
+
+    def calendar_index_data() -> CalendarIndex:
+        index = calendar_cache.get("dates")
+        if index is not None:
+            return index
+        with cache_key_locks.hold(("dashboard-calendar",)):
+            index = calendar_cache.get("dates")
+            if index is not None:
+                return index
+            with session_factory() as session:
+                index = load_calendar_index(session)
+            calendar_cache.set("dates", index, ttl=300.0)
+            return index
 
     @app.middleware("http")
     async def public_safety(request: Request, call_next):  # type: ignore[no-untyped-def]
@@ -249,7 +289,13 @@ def create_app(
                     "duration_ms": round((monotonic() - started_at) * 1000, 2),
                     "response_bytes": _response_bytes(response),
                 }
-                print(json.dumps(event, separators=(",", ":")), flush=True)
+                suppressed = policy_log_suppressed(
+                    str(policy.get("category")), str(policy.get("reason"))
+                )
+                if suppressed is not None:
+                    if suppressed:
+                        event["suppressed_count"] = suppressed
+                    print(json.dumps(event, separators=(",", ":")), flush=True)
             elif status < 400 and random.random() < 0.01:
                 event = {
                     "event": "request_sample",
@@ -283,7 +329,12 @@ def create_app(
             }
             return finish(denied)
         user_agent = request.headers.get("user-agent", "")
-        if path != "/robots.txt" and _BLOCKED_ANTHROPIC_UA.search(user_agent):
+        blocked_reason = None
+        if _BLOCKED_ANTHROPIC_UA.search(user_agent):
+            blocked_reason = "anthropic_crawler"
+        elif _BLOCKED_HARVESTER_UA.search(user_agent):
+            blocked_reason = "bulk_harvester"
+        if path != "/robots.txt" and blocked_reason is not None:
             denied = Response(
                 status_code=403,
                 headers={
@@ -293,7 +344,17 @@ def create_app(
             )
             denied.policy_diagnostics = {  # type: ignore[attr-defined]
                 "category": "user_agent_block",
-                "reason": "anthropic_crawler",
+                "reason": blocked_reason,
+                "count": None,
+                "limit": None,
+            }
+            return finish(denied)
+
+        if path == "/" and "rest_route" in request.query_params:
+            denied = Response(status_code=404, headers={"Cache-Control": "no-store"})
+            denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                "category": "scanner_probe",
+                "reason": "wordpress_route",
                 "count": None,
                 "limit": None,
             }
@@ -363,7 +424,7 @@ def create_app(
             ))
 
         cacheable = request.method == "GET" and (
-            path in {"/", "/m", "/analysis", "/m/analysis"}
+            path in {"/", "/m", "/analysis", "/m/analysis", "/api/calendar"}
             or path.startswith("/races/")
         )
         view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
@@ -535,6 +596,8 @@ def create_app(
             "User-agent: Claude-User\nDisallow: /\n\n"
             "User-agent: Claude-Web\nDisallow: /\n\n"
             "User-agent: anthropic-ai\nDisallow: /\n\n"
+            "User-agent: SerpstatBot\nDisallow: /\n\n"
+            "User-agent: AhrefsBot\nDisallow: /\n\n"
             "User-agent: *\nAllow: /\n\n"
             f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n",
             headers={"Cache-Control": "public, max-age=3600"},
@@ -576,6 +639,7 @@ def create_app(
     ) -> HTMLResponse:
         mobile_view = _is_mobile_request(request)
         selected_meet = int(meet) if meet and meet.isdigit() else None
+        calendar_index = calendar_index_data()
         with session_factory() as session:
             data = load_dashboard(
                 session,
@@ -584,11 +648,34 @@ def create_app(
                 selected_race_id=race_id,
                 selected_trial_id=trial_id,
                 mobile_view=mobile_view,
+                calendar_index=calendar_index,
             )
         return templates.TemplateResponse(
             request=request,
             name="mobile/home.html" if mobile_view else "dashboard.html",
             context={"active_nav": "races", "dashboard": data},
+        )
+
+    @app.get("/api/calendar", include_in_schema=False)
+    def calendar_month(
+        month: Annotated[str, Query(pattern=r"^[0-9]{4}-(0[1-9]|1[0-2])$")],
+    ) -> JSONResponse:
+        try:
+            first_day = date.fromisoformat(f"{month}-01")
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail="유효한 연월을 입력해 주세요.") from exc
+        options = calendar_month_options(calendar_index_data(), first_day)
+        return JSONResponse(
+            [
+                {
+                    "date": option.value,
+                    "status": option.status,
+                    "hasRace": option.has_race,
+                    "hasTrial": option.has_trial,
+                }
+                for option in options
+            ],
+            headers={"Cache-Control": "public, max-age=30"},
         )
 
     @app.get("/m", response_class=HTMLResponse)

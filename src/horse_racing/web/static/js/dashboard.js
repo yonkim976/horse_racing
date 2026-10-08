@@ -105,9 +105,8 @@
       return;
     }
 
-    const dates = new Map(records.map((item) => [item.date, item]));
-    const sortedDates = [...dates.keys()].sort();
-    if (!sortedDates.length) {
+    let dates = new Map(records.map((item) => [item.date, item]));
+    if (!dataElement.dataset.minDate || !dataElement.dataset.maxDate) {
       openButton.disabled = true;
       return;
     }
@@ -118,11 +117,13 @@
     };
     const toIso = (year, month, day) =>
       `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-    const selected = parseIso(valueInput.value || sortedDates[sortedDates.length - 1]);
-    const minimum = parseIso(sortedDates[0]);
-    const maximum = parseIso(sortedDates[sortedDates.length - 1]);
+    const minimum = parseIso(dataElement.dataset.minDate);
+    const maximum = parseIso(dataElement.dataset.maxDate);
+    const selected = parseIso(valueInput.value || dataElement.dataset.maxDate);
     let viewYear = selected.year;
     let viewMonth = selected.month;
+    const monthKey = (year, month) => `${year}-${String(month).padStart(2, "0")}`;
+    const monthCache = new Map([[monthKey(viewYear, viewMonth), records]]);
 
     const monthIndex = (year, month) => year * 12 + month - 1;
     const minimumMonth = monthIndex(minimum.year, minimum.month);
@@ -186,17 +187,42 @@
       nextButton.disabled = currentMonth >= maximumMonth;
     };
 
-    const moveMonth = (delta) => {
+    const moveMonth = async (delta) => {
       const nextDate = new Date(viewYear, viewMonth - 1 + delta, 1);
-      viewYear = nextDate.getFullYear();
-      viewMonth = nextDate.getMonth() + 1;
+      const nextYear = nextDate.getFullYear();
+      const nextMonth = nextDate.getMonth() + 1;
+      const key = monthKey(nextYear, nextMonth);
+      if (!monthCache.has(key)) {
+        const previousDisabled = prevButton.disabled;
+        const followingDisabled = nextButton.disabled;
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+        try {
+          const response = await fetch(`/api/calendar?month=${key}`);
+          if (!response.ok) {
+            throw new Error("calendar request failed");
+          }
+          monthCache.set(key, await response.json());
+        } catch (error) {
+          monthLabel.textContent = "달력을 불러오지 못했습니다";
+          prevButton.disabled = previousDisabled;
+          nextButton.disabled = followingDisabled;
+          return;
+        }
+      }
+      dates = new Map(monthCache.get(key).map((item) => [item.date, item]));
+      viewYear = nextYear;
+      viewMonth = nextMonth;
       render();
     };
 
     openButton.addEventListener("click", () => {
-      const current = parseIso(valueInput.value || sortedDates[sortedDates.length - 1]);
+      const current = parseIso(valueInput.value || dataElement.dataset.maxDate);
       viewYear = current.year;
       viewMonth = current.month;
+      dates = new Map((monthCache.get(monthKey(viewYear, viewMonth)) || []).map(
+        (item) => [item.date, item]
+      ));
       render();
       modal.showModal();
     });
