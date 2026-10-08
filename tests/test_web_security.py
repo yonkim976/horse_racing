@@ -10,7 +10,9 @@ from fastapi.testclient import TestClient
 from horse_racing.web.app import create_app
 from horse_racing.web.security import (
     ActiveRequestGate,
+    AsyncLockCapacityExceeded,
     AsyncLockRegistry,
+    BoundedAsyncGate,
     BoundedRequestLimiter,
     BoundedTTLCache,
     SyncLockRegistry,
@@ -36,7 +38,7 @@ def test_proxy_wildcard_is_rejected_and_empty_is_safe_default() -> None:
 
 
 def test_bounded_limiter_does_not_evict_active_clients_to_reset_quota() -> None:
-    limiter = BoundedRequestLimiter(max_clients=2, idle_ttl=120)
+    limiter = BoundedRequestLimiter(max_clients=3, idle_ttl=120)
     limits = dict(window_seconds=60, window_limit=1, burst_seconds=10, burst_limit=1)
     assert limiter.allow("client-a", now=1, **limits)
     assert limiter.allow("client-b", now=2, **limits)
@@ -78,6 +80,19 @@ def test_bounded_size_walks_slotted_dataclasses() -> None:
     assert len(cache) == 0
 
 
+def test_page_size_does_not_follow_shared_model_class_metadata() -> None:
+    class SharedModel:
+        metadata = {"large_shared_registry": "x" * 100_000}
+
+    @dataclass(slots=True)
+    class Page:
+        model: type
+        rows: list[str]
+
+    assert bounded_size(Page(SharedModel, ["small page"]), limit=10_000) < 10_000
+    assert bounded_size(Page(SharedModel, ["x" * 20_000]), limit=10_000) > 10_000
+
+
 def test_lock_registries_have_fixed_memory_after_success_and_exception() -> None:
     sync_locks: SyncLockRegistry[str] = SyncLockRegistry(stripes=8)
     for index in range(1000):
@@ -113,3 +128,93 @@ def test_blocked_user_agent_cannot_poison_shared_cache() -> None:
     assert blocked.status_code == 403
     assert blocked.headers["cache-control"] == "no-store"
     assert normal.status_code == 200
+
+
+def test_bounded_async_gate_cancellation_timeout_and_recovery() -> None:
+    async def exercise() -> None:
+        gate = BoundedAsyncGate(limit=1, max_waiters=1, wait_timeout=0.04)
+        assert await gate.acquire()
+        waiting = asyncio.create_task(gate.acquire())
+        await asyncio.sleep(0)
+        assert gate.waiting_count == 1
+        assert not await gate.acquire()  # full queue fails without growing state
+        waiting.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await waiting
+        assert gate.waiting_count == 0
+        assert gate.active_count == 1
+        await gate.release()
+        assert await gate.acquire()
+
+        timed_out = asyncio.create_task(gate.acquire())
+        assert not await timed_out
+        assert gate.waiting_count == 0
+        await gate.release()
+        assert await gate.acquire()
+        await gate.release()
+        assert gate.active_count == gate.waiting_count == 0
+
+    asyncio.run(exercise())
+
+
+def test_async_singleflight_waiters_are_bounded_and_recover_after_cancel() -> None:
+    async def exercise() -> None:
+        locks: AsyncLockRegistry[str] = AsyncLockRegistry(
+            stripes=8, max_waiters=2, wait_timeout=0.04
+        )
+        entered = asyncio.Event()
+        release_owner = asyncio.Event()
+
+        async def owner() -> None:
+            async with locks.hold("same-key"):
+                entered.set()
+                await release_owner.wait()
+
+        async def waiter() -> None:
+            async with locks.hold("same-key"):
+                raise AssertionError("same-key waiter should not pass the owner")
+
+        owner_task = asyncio.create_task(owner())
+        await entered.wait()
+        waiter_task = asyncio.create_task(waiter())
+        await asyncio.sleep(0)
+        assert locks.outstanding_count == 2
+        with pytest.raises(AsyncLockCapacityExceeded):
+            async with locks.hold("different-key"):
+                pass
+
+        waiter_task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await waiter_task
+        release_owner.set()
+        await owner_task
+        assert locks.outstanding_count == 0
+        async with locks.hold("same-key"):
+            assert locks.outstanding_count == 1
+        assert locks.outstanding_count == 0
+
+    asyncio.run(exercise())
+
+
+def test_crawler_and_human_quotas_do_not_share_token_state() -> None:
+    limiter = BoundedRequestLimiter(max_clients=8)
+    human_limits = dict(
+        window_seconds=60,
+        window_limit=5,
+        burst_seconds=10,
+        burst_limit=5,
+        strict_sliding_window=False,
+    )
+    crawler_limits = dict(
+        window_seconds=60,
+        window_limit=1,
+        burst_seconds=10,
+        burst_limit=1,
+        strict_sliding_window=True,
+    )
+
+    assert limiter.allow("shared-ip", now=1, **human_limits)
+    assert limiter.allow("shared-ip", now=2, **crawler_limits)
+    assert not limiter.allow("shared-ip", now=3, **crawler_limits)
+    assert limiter.allow("shared-ip", now=4, **human_limits)
+    assert len(limiter) == 2

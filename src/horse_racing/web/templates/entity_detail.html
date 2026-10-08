@@ -3,8 +3,22 @@
 
 {% block title %}{{ detail.name_ko }} · {{ detail.kind.label }} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}{{ detail.name_ko }}의 기본 정보와 출전 이력을 확인합니다.{% endblock %}
+{% block extra_head %}
+  {% if detail.kind.slug in ['horses', 'jockeys'] %}
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/horse-detail.css') }}?v=3">
+  {% endif %}
+  {% if detail.kind.slug == 'jockeys' %}
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/jockey-detail.css') }}?v=2">
+  {% endif %}
+  {% if detail.evaluation %}
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/horse-evaluation.css') }}?v=2">
+  {% endif %}
+{% endblock %}
 
 {% block content %}
+{% set is_horse = detail.kind.slug == 'horses' %}
+{% set is_jockey = detail.kind.slug == 'jockeys' %}
+{% set has_detail_tabs = is_horse or is_jockey %}
 <section class="page-intro compact-intro">
   <div>
     <p class="eyebrow">{{ detail.kind.label | upper }} PROFILE</p>
@@ -13,20 +27,27 @@
       {% if detail.status_label %}<span class="horse-status-badge" data-status="{{ detail.status_key }}">{{ detail.status_label }}</span>{% endif %}
     </div>
     <p>{{ detail.kind.id_label }} {{ detail.official_id }}</p>
-    {% if detail.kind.slug == 'horses' %}
-      <p class="history-jump">
-        <a href="#horse-profile">프로필</a>
-        ·
-        <a href="#start-history">출전</a>
-        {% if detail.running_trials or detail.ratings or detail.weights or detail.training or detail.medical or detail.grade_changes or detail.equipment or detail.start_training or detail.jockey_changes or detail.scratches %}
-          <span> · </span><a href="#horse-history">이력</a>
-        {% endif %}
-      </p>
-    {% endif %}
   </div>
   <a class="back-link" href="/{{ detail.kind.slug }}">← {{ detail.kind.plural_label }} 목록</a>
 </section>
 
+{% if is_horse %}
+<nav class="horse-detail-tabs" aria-label="말 상세 메뉴">
+  {% for key, label in [('profile', '기본정보'), ('records', '전적'), ('evaluation', '말별 평가표'), ('history', '말이력')] %}
+  <a href="/horses/{{ detail.official_id }}?tab={{ key }}"{% if horse_tab == key %} aria-current="page"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+{% if is_jockey %}
+<nav class="horse-detail-tabs" aria-label="기수 상세 메뉴">
+  {% for key, label in [('profile', '기본정보'), ('records', '출전 이력'), ('performance', '기간별 성적'), ('partners', '함께 입상')] %}
+  <a href="/jockeys/{{ detail.official_id }}?tab={{ key }}&amp;period={{ detail.jockey_detail.partner_period }}"{% if horse_tab == key %} aria-current="page"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+{% if not has_detail_tabs %}
 <section class="summary-grid" aria-label="성적 요약">
   <article class="summary-card primary">
     <span>출전</span>
@@ -49,6 +70,18 @@
     <small>WIN RATE</small>
   </article>
 </section>
+{% endif %}
+
+{% if is_horse and horse_tab == 'evaluation' %}
+  {% if detail.evaluation %}
+    {% include "_horse_evaluation.html" %}
+  {% else %}
+    <section id="horse-evaluation" class="panel">
+      <div class="panel-heading"><h2>말별 평가표</h2></div>
+      <div class="empty-state"><strong>제공되는 평가표가 없습니다.</strong><p>이 말의 경마장·거리에서 지원되는 평가 자료가 아직 없습니다.</p></div>
+    </section>
+  {% endif %}
+{% endif %}
 
 {% if detail.kind.slug == 'trainers' %}
 <section id="trainer-managed-horses" class="panel">
@@ -98,7 +131,9 @@
 </section>
 {% endif %}
 
-<section class="board-layout entity-detail-layout">
+{% if not has_detail_tabs or horse_tab in ['profile', 'records'] %}
+<section class="{% if has_detail_tabs %}horse-detail-content{% else %}board-layout entity-detail-layout{% endif %}">
+  {% if not has_detail_tabs or horse_tab == 'profile' %}
   <article id="horse-profile" class="panel">
     <div class="panel-heading">
       <div>
@@ -106,6 +141,11 @@
         <h2>기본 정보</h2>
       </div>
     </div>
+    {% if is_horse %}
+      {% include "_horse_profile.html" %}
+    {% elif is_jockey %}
+      {% include "_jockey_profile.html" %}
+    {% else %}
     <dl class="meta-list">
       {% for label, value in detail.meta_rows %}
         <div>
@@ -114,16 +154,16 @@
         </div>
       {% endfor %}
     </dl>
-    {% if detail.kind.slug == 'horses' and detail.profile %}
-      <p class="panel-note">통산·올해 성적은 수집 시점 기준입니다.</p>
     {% endif %}
   </article>
+  {% endif %}
 
+  {% if not has_detail_tabs or horse_tab == 'records' %}
   <article id="start-history" class="panel">
     <div class="panel-heading">
       <div>
         <p class="panel-kicker">START HISTORY</p>
-        <h2>출전 이력</h2>
+        <h2>{{ '전적' if is_horse else '출전 이력' }}</h2>
       </div>
       <span>최신순{% if detail.entry_count > detail.history | length %} · 최근 {{ detail.history | length }}건{% endif %}</span>
     </div>
@@ -135,6 +175,7 @@
             <tr>
               <th>날짜</th>
               <th>경주</th>
+              {% if has_detail_tabs %}<th>조건</th>{% endif %}
               <th>마번 / 마명</th>
               <th>기수</th>
               <th>조교사</th>
@@ -153,6 +194,7 @@
                   <a class="race-number" href="{{ row.dashboard_href }}">{{ row.course_name }} {{ row.race_number }}R</a>
                   <span>{{ row.distance }}</span>
                 </td>
+                {% if has_detail_tabs %}<td class="horse-record-condition">{{ row.condition }}</td>{% endif %}
                 <td>
                   <div class="horse-cell">
                     {{ silk(row.horse_number) }}
@@ -188,7 +230,7 @@
                 </td>
                 <td><strong class="placing">{{ row.finish_position }}</strong></td>
                 <td class="numeric result-time">{{ row.finish_time }}</td>
-                <td class="numeric margin">{{ row.margin }}</td>
+                <td class="numeric margin">{% if has_detail_tabs %}{% for char in row.margin %}{% if char in "¼½¾⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞↉" %}<span class="margin-fraction">{{ char }}</span>{% elif char >= "가" and char <= "힣" %}<span class="margin-text">{{ char }}</span>{% else %}{{ char }}{% endif %}{% endfor %}{% else %}{{ row.margin }}{% endif %}</td>
               </tr>
             {% endfor %}
           </tbody>
@@ -201,9 +243,18 @@
       </div>
     {% endif %}
   </article>
+  {% endif %}
 </section>
+{% endif %}
 
-{% if detail.kind.slug == 'horses' %}
+{% if is_jockey and horse_tab == 'performance' %}
+  {% include "_jockey_performance.html" %}
+{% endif %}
+{% if is_jockey and horse_tab == 'partners' %}
+  {% include "_jockey_partners.html" %}
+{% endif %}
+
+{% if is_horse and horse_tab == 'history' %}
   {% set ns = namespace(tabs=[], first='') %}
   {% if detail.running_trials %}{% set ns.tabs = ns.tabs + [('running-trial', '주행심사', detail.running_trial_count)] %}{% endif %}
   {% if detail.ratings %}{% set ns.tabs = ns.tabs + [('rating', '레이팅', detail.rating_count)] %}{% endif %}
@@ -538,6 +589,11 @@
     </div>
   </div>
   {% endif %}
+</section>
+  {% else %}
+<section id="horse-history" class="panel">
+  <div class="panel-heading"><h2>말 이력</h2></div>
+  <div class="empty-state"><strong>말 이력이 없습니다.</strong><p>아직 연결된 주행심사·훈련·진료 등의 이력이 없습니다.</p></div>
 </section>
   {% endif %}
 {% endif %}

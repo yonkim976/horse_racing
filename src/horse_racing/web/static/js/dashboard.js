@@ -1,5 +1,22 @@
 (() => {
   const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let scheduleHeaderResizeObserver = null;
+
+  const entityNav = document.querySelector("[data-entity-nav]");
+  if (entityNav) {
+    document.addEventListener("click", (event) => {
+      if (entityNav.open && event.target instanceof Node && !entityNav.contains(event.target)) {
+        entityNav.open = false;
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && entityNav.open) {
+        entityNav.open = false;
+        entityNav.querySelector("summary").focus();
+        event.preventDefault();
+      }
+    });
+  }
 
   /* ------------------------------------------------------------------
      테마 토글 (다크/라이트, localStorage 유지)
@@ -90,11 +107,14 @@
     const closeButton = document.querySelector("[data-calendar-close]");
     const prevButton = document.querySelector("[data-calendar-prev]");
     const nextButton = document.querySelector("[data-calendar-next]");
-    const monthLabel = document.querySelector("[data-calendar-month-label]");
+    const yearSelect = document.querySelector("[data-calendar-year]");
+    const monthSelect = document.querySelector("[data-calendar-month]");
+    const monthStatus = document.querySelector("[data-calendar-month-status]");
     const grid = document.querySelector("[data-calendar-grid]");
     const valueInput = document.querySelector("[data-calendar-value]");
     const dataElement = document.querySelector("#race-calendar-data");
-    if (!modal || !openButton || !grid || !valueInput || !dataElement || !filterForm) {
+    if (!modal || !openButton || !prevButton || !nextButton || !yearSelect || !monthSelect
+      || !monthStatus || !grid || !valueInput || !dataElement || !filterForm) {
       return;
     }
 
@@ -128,9 +148,47 @@
     const monthIndex = (year, month) => year * 12 + month - 1;
     const minimumMonth = monthIndex(minimum.year, minimum.month);
     const maximumMonth = monthIndex(maximum.year, maximum.month);
+    let monthRequestSequence = 0;
+
+    for (let year = minimum.year; year <= maximum.year; year += 1) {
+      const option = document.createElement("option");
+      option.value = String(year);
+      option.textContent = String(year);
+      yearSelect.append(option);
+    }
+    for (let month = 1; month <= 12; month += 1) {
+      const option = document.createElement("option");
+      option.value = String(month);
+      option.textContent = String(month);
+      monthSelect.append(option);
+    }
+
+    const clampMonth = (year, month) => Math.max(
+      year === minimum.year ? minimum.month : 1,
+      Math.min(year === maximum.year ? maximum.month : 12, month),
+    );
+
+    const syncControls = (year, month) => {
+      yearSelect.value = String(year);
+      const lowerMonth = year === minimum.year ? minimum.month : 1;
+      const upperMonth = year === maximum.year ? maximum.month : 12;
+      [...monthSelect.options].forEach((option) => {
+        const value = Number(option.value);
+        option.disabled = value < lowerMonth || value > upperMonth;
+      });
+      const safeMonth = clampMonth(year, month);
+      monthSelect.value = String(safeMonth);
+      const currentMonth = monthIndex(year, safeMonth);
+      prevButton.disabled = currentMonth <= minimumMonth;
+      nextButton.disabled = currentMonth >= maximumMonth;
+      return safeMonth;
+    };
 
     const render = () => {
-      monthLabel.textContent = `${viewYear}년 ${viewMonth}월`;
+      monthStatus.hidden = true;
+      monthStatus.textContent = "";
+      grid.removeAttribute("aria-busy");
+      syncControls(viewYear, viewMonth);
       grid.replaceChildren();
 
       const firstWeekday = (new Date(viewYear, viewMonth - 1, 1).getDay() + 6) % 7;
@@ -149,7 +207,8 @@
         button.className = "calendar-day";
         button.textContent = String(day);
         button.setAttribute("role", "gridcell");
-        button.setAttribute("aria-label", `${viewYear}년 ${viewMonth}월 ${day}일`);
+        const dateLabel = `${viewYear}년 ${viewMonth}월 ${day}일`;
+        button.setAttribute("aria-label", dateLabel);
 
         if (!record) {
           button.disabled = true;
@@ -163,17 +222,26 @@
           }
           const labels = [];
           if (record.hasRace) {
-            labels.push(record.status === "scheduled" ? "공식 경주 예정" : "공식 경주 결과 있음");
+            const raceStatusLabel = {
+              scheduled: "공식 경주 예정",
+              completed: "공식 경주 종료",
+              mixed: "공식 경주 예정·종료",
+            }[record.status] || "공식 경주 일정";
+            labels.push(raceStatusLabel);
           }
           if (record.hasTrial) {
-            labels.push("주행심사 결과 있음");
+            labels.push("주행심사");
           }
           button.title = labels.join(" · ");
+          button.setAttribute("aria-label", `${dateLabel} · ${labels.join(" · ")}`);
           if (iso === valueInput.value) {
             button.classList.add("selected");
             button.setAttribute("aria-current", "date");
           }
           button.addEventListener("click", () => {
+            if (grid.hasAttribute("aria-busy")) {
+              return;
+            }
             valueInput.value = iso;
             modal.close();
             filterForm.requestSubmit();
@@ -182,53 +250,71 @@
         grid.appendChild(button);
       }
 
-      const currentMonth = monthIndex(viewYear, viewMonth);
-      prevButton.disabled = currentMonth <= minimumMonth;
-      nextButton.disabled = currentMonth >= maximumMonth;
     };
 
-    const moveMonth = async (delta) => {
-      const nextDate = new Date(viewYear, viewMonth - 1 + delta, 1);
-      const nextYear = nextDate.getFullYear();
-      const nextMonth = nextDate.getMonth() + 1;
-      const key = monthKey(nextYear, nextMonth);
+    const loadMonth = async (year, month) => {
+      const targetYear = Math.max(minimum.year, Math.min(maximum.year, year));
+      const targetMonth = clampMonth(targetYear, month);
+      const key = monthKey(targetYear, targetMonth);
+      const sequence = ++monthRequestSequence;
+      syncControls(targetYear, targetMonth);
+      monthStatus.textContent = "달력을 불러오는 중입니다.";
+      monthStatus.hidden = false;
+      grid.setAttribute("aria-busy", "true");
+
+      let monthRecords = monthCache.get(key);
       if (!monthCache.has(key)) {
-        const previousDisabled = prevButton.disabled;
-        const followingDisabled = nextButton.disabled;
-        prevButton.disabled = true;
-        nextButton.disabled = true;
         try {
-          const response = await fetch(`/api/calendar?month=${key}`);
+          const response = await fetch("/api/calendar?month=" + key);
           if (!response.ok) {
             throw new Error("calendar request failed");
           }
-          monthCache.set(key, await response.json());
+          monthRecords = await response.json();
+          if (!Array.isArray(monthRecords)) {
+            throw new Error("calendar response was invalid");
+          }
+          monthCache.set(key, monthRecords);
         } catch (error) {
-          monthLabel.textContent = "달력을 불러오지 못했습니다";
-          prevButton.disabled = previousDisabled;
-          nextButton.disabled = followingDisabled;
-          return;
+          if (sequence !== monthRequestSequence) {
+            return false;
+          }
+          syncControls(viewYear, viewMonth);
+          grid.removeAttribute("aria-busy");
+          monthStatus.textContent = "달력 정보를 불러오지 못했습니다. 다시 선택해 주세요.";
+          monthStatus.hidden = false;
+          return false;
         }
       }
-      dates = new Map(monthCache.get(key).map((item) => [item.date, item]));
-      viewYear = nextYear;
-      viewMonth = nextMonth;
+      if (sequence !== monthRequestSequence) {
+        return false;
+      }
+      dates = new Map(monthRecords.map((item) => [item.date, item]));
+      viewYear = targetYear;
+      viewMonth = targetMonth;
       render();
+      return true;
     };
 
     openButton.addEventListener("click", () => {
       const current = parseIso(valueInput.value || dataElement.dataset.maxDate);
-      viewYear = current.year;
-      viewMonth = current.month;
-      dates = new Map((monthCache.get(monthKey(viewYear, viewMonth)) || []).map(
-        (item) => [item.date, item]
-      ));
-      render();
       modal.showModal();
+      loadMonth(current.year, current.month);
     });
     closeButton.addEventListener("click", () => modal.close());
-    prevButton.addEventListener("click", () => moveMonth(-1));
-    nextButton.addEventListener("click", () => moveMonth(1));
+    prevButton.addEventListener("click", () => {
+      const next = new Date(Number(yearSelect.value), Number(monthSelect.value) - 2, 1);
+      loadMonth(next.getFullYear(), next.getMonth() + 1);
+    });
+    nextButton.addEventListener("click", () => {
+      const next = new Date(Number(yearSelect.value), Number(monthSelect.value), 1);
+      loadMonth(next.getFullYear(), next.getMonth() + 1);
+    });
+    yearSelect.addEventListener("change", () => {
+      loadMonth(Number(yearSelect.value), Number(monthSelect.value));
+    });
+    monthSelect.addEventListener("change", () => {
+      loadMonth(Number(yearSelect.value), Number(monthSelect.value));
+    });
     modal.addEventListener("click", (event) => {
       if (event.target === modal) {
         modal.close();
@@ -238,36 +324,589 @@
 
   initRaceCalendar();
 
-  /* ------------------------------------------------------------------
-     클릭 가능한 행 내비게이션
-     ------------------------------------------------------------------ */
-  document.querySelectorAll("[data-href]").forEach((row) => {
-    const href = row.dataset.href;
-    if (!href) {
+  function initScheduleHeaderOffset() {
+    const schedule = document.querySelector("[data-dashboard-schedule]");
+    const header = document.querySelector(".site-header");
+    if (!schedule || !header) {
       return;
     }
 
-    const navigate = (newTab) => {
-      if (newTab) {
-        window.open(href, "_blank", "noopener");
-        return;
+    const updateOffset = () => {
+      const height = header.getBoundingClientRect().height;
+      if (height > 0) {
+        document.documentElement.style.setProperty("--dashboard-header-height", `${height}px`);
       }
-      window.location.href = href;
+    };
+    updateOffset();
+    if (typeof ResizeObserver === "function") {
+      scheduleHeaderResizeObserver = new ResizeObserver(updateOffset);
+      scheduleHeaderResizeObserver.observe(header);
+    } else {
+      window.addEventListener("resize", updateOffset, { passive: true });
+    }
+  }
+
+  initScheduleHeaderOffset();
+
+  function syncScheduleHeadingHeight() {
+    const schedule = document.querySelector("[data-dashboard-schedule]");
+    const hero = document.querySelector("[data-dashboard-detail] .race-hero");
+    if (!schedule) {
+      return;
+    }
+    if (!hero || !window.matchMedia("(min-width: 1101px)").matches) {
+      schedule.style.removeProperty("--schedule-toolbar-height");
+      return;
+    }
+    const height = hero.getBoundingClientRect().height;
+    if (height > 0) {
+      schedule.style.setProperty("--schedule-toolbar-height", `${height}px`);
+    }
+  }
+
+  let disposeScheduleBodyScroll = null;
+
+  function initScheduleBodyScroll() {
+    disposeScheduleBodyScroll?.();
+    const schedule = document.querySelector("[data-dashboard-schedule]");
+    const fixedHeader = schedule?.querySelector("[data-schedule-fixed-head]");
+    const body = schedule?.querySelector("[data-schedule-body-scroll]");
+    if (!schedule || !fixedHeader || !body) {
+      return;
+    }
+
+    const tables = [...body.querySelectorAll("[data-schedule-table-section] table.race-table")];
+    if (!tables.length) {
+      return;
+    }
+    const wideLayout = window.matchMedia("(min-width: 1101px)");
+    let activeTable = null;
+    let observer = null;
+    let enabled = false;
+    let syncingScroll = false;
+    let resizeQueued = false;
+
+    const updateScrollbarGutter = () => {
+      const width = Math.max(0, body.offsetWidth - body.clientWidth);
+      schedule.style.setProperty("--schedule-scrollbar-width", `${width}px`);
     };
 
-    row.addEventListener("click", (event) => {
-      if (event.target.closest("a, button, input, select, label")) {
+    const cloneHeader = (table) => {
+      const visualTable = document.createElement("table");
+      visualTable.className = "schedule-fixed-header-table";
+      visualTable.setAttribute("aria-hidden", "true");
+      visualTable.style.tableLayout = "fixed";
+      const head = document.createElement("thead");
+      const sourceHead = table.tHead;
+      [...(sourceHead?.rows || [])].forEach((sourceRow) => {
+        const row = document.createElement("tr");
+        [...sourceRow.cells].forEach((sourceCell) => {
+          const cell = document.createElement("th");
+          cell.textContent = sourceCell.textContent.trim();
+          if (sourceCell.colSpan > 1) {
+            cell.colSpan = sourceCell.colSpan;
+          }
+          if (sourceCell.scope) {
+            cell.scope = sourceCell.scope;
+          }
+          row.append(cell);
+        });
+        head.append(row);
+      });
+      visualTable.append(head);
+      return visualTable;
+    };
+
+    const alignHeaderColumns = (table, visualTable) => {
+      const sourceRow = [...(table.tBodies[0]?.rows || [])]
+        .find((row) => !row.classList.contains("group-row")
+          && row.cells.length === visualTable.tHead.rows[0]?.cells.length);
+      const sourceCells = sourceRow ? [...sourceRow.cells] : [];
+      const headerCells = [...(visualTable.tHead.rows[0]?.cells || [])];
+      const widths = headerCells.map((cell, index) => {
+        const width = sourceCells[index]?.getBoundingClientRect().width
+          || table.tHead?.rows[0]?.cells[index]?.getBoundingClientRect().width
+          || cell.getBoundingClientRect().width;
+        return Math.max(0, width);
+      });
+      const width = Math.max(
+        table.getBoundingClientRect().width,
+        widths.reduce((total, value) => total + value, 0),
+      );
+      visualTable.style.width = `${width}px`;
+      headerCells.forEach((cell, index) => {
+        cell.style.width = `${widths[index]}px`;
+      });
+    };
+
+    const showHeaderFor = (table) => {
+      if (!table || table === activeTable) {
         return;
       }
-      navigate(event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1);
-    });
-    row.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        navigate(event.metaKey || event.ctrlKey);
+      activeTable = table;
+      const visualTable = cloneHeader(table);
+      fixedHeader.replaceChildren(visualTable);
+      alignHeaderColumns(table, visualTable);
+      fixedHeader.scrollLeft = body.scrollLeft;
+    };
+
+    const tableAtScrollTop = () => {
+      const bodyTop = body.getBoundingClientRect().top;
+      let active = tables[0];
+      for (const table of tables) {
+        if (table.getBoundingClientRect().top <= bodyTop + 1) {
+          active = table;
+        } else {
+          break;
+        }
       }
+      return active;
+    };
+
+    const onBodyScroll = () => {
+      if (!syncingScroll && fixedHeader.scrollLeft !== body.scrollLeft) {
+        syncingScroll = true;
+        fixedHeader.scrollLeft = body.scrollLeft;
+        syncingScroll = false;
+      }
+      showHeaderFor(tableAtScrollTop());
+    };
+
+    const onHeaderScroll = () => {
+      if (!syncingScroll && body.scrollLeft !== fixedHeader.scrollLeft) {
+        syncingScroll = true;
+        body.scrollLeft = fixedHeader.scrollLeft;
+        syncingScroll = false;
+      }
+    };
+
+    const queueResize = () => {
+      if (resizeQueued) {
+        return;
+      }
+      resizeQueued = true;
+      window.requestAnimationFrame(() => {
+        resizeQueued = false;
+        if (!enabled) {
+          return;
+        }
+        syncScheduleHeadingHeight();
+        updateScrollbarGutter();
+        activeTable = null;
+        showHeaderFor(tableAtScrollTop());
+      });
+    };
+
+    const enable = () => {
+      if (enabled) {
+        return;
+      }
+      enabled = true;
+      schedule.classList.add("has-fixed-schedule-head");
+      fixedHeader.hidden = false;
+      tables.forEach((table) => table.tHead?.classList.add("schedule-semantic-head"));
+      body.addEventListener("scroll", onBodyScroll, { passive: true });
+      fixedHeader.addEventListener("scroll", onHeaderScroll, { passive: true });
+      if (typeof ResizeObserver === "function") {
+        observer = new ResizeObserver(queueResize);
+        observer.observe(schedule);
+        observer.observe(body);
+        const detailPanel = document.querySelector("[data-dashboard-detail]");
+        if (detailPanel) {
+          observer.observe(detailPanel);
+        }
+        tables.forEach((table) => observer.observe(table));
+      } else {
+        window.addEventListener("resize", queueResize, { passive: true });
+      }
+      syncScheduleHeadingHeight();
+      updateScrollbarGutter();
+      showHeaderFor(tableAtScrollTop());
+    };
+
+    const disable = () => {
+      if (!enabled) {
+        return;
+      }
+      enabled = false;
+      observer?.disconnect();
+      observer = null;
+      window.removeEventListener("resize", queueResize);
+      body.removeEventListener("scroll", onBodyScroll);
+      fixedHeader.removeEventListener("scroll", onHeaderScroll);
+      schedule.classList.remove("has-fixed-schedule-head");
+      schedule.style.removeProperty("--schedule-scrollbar-width");
+      schedule.style.removeProperty("--schedule-toolbar-height");
+      tables.forEach((table) => table.tHead?.classList.remove("schedule-semantic-head"));
+      fixedHeader.replaceChildren();
+      fixedHeader.hidden = true;
+      activeTable = null;
+    };
+
+    const syncMode = () => {
+      if (wideLayout.matches) {
+        enable();
+      } else {
+        disable();
+      }
+    };
+    wideLayout.addEventListener("change", syncMode);
+    syncMode();
+    disposeScheduleBodyScroll = () => {
+      disable();
+      wideLayout.removeEventListener("change", syncMode);
+    };
+  }
+
+  initScheduleBodyScroll();
+
+  /* ------------------------------------------------------------------
+     클릭 가능한 행 내비게이션
+     ------------------------------------------------------------------ */
+  let dashboardSelectionController = null;
+  let dashboardSelectionSequence = 0;
+  const dashboardInitialUrl = new URL(window.location.href);
+  const dashboardScheduleAtLoad = document.querySelector("[data-dashboard-schedule]");
+  const firstDashboardRace = dashboardScheduleAtLoad?.querySelector("[data-dashboard-race-id]");
+  let dashboardFilterUrl = new URL(firstDashboardRace?.dataset.href || dashboardInitialUrl.href,
+    window.location.href);
+  const dashboardSelectionEnabled = Boolean(
+    dashboardScheduleAtLoad && document.querySelector("[data-dashboard-detail]")
+  );
+
+  function dashboardFiltersMatch(target, current) {
+    const withoutRaceId = (url) => [...url.searchParams.entries()]
+      .filter(([key]) => key !== "race_id")
+      .sort(([leftKey, leftValue], [rightKey, rightValue]) =>
+        leftKey.localeCompare(rightKey) || leftValue.localeCompare(rightValue)
+      );
+    return JSON.stringify(withoutRaceId(target)) === JSON.stringify(withoutRaceId(current));
+  }
+
+  function isDashboardSelectionUrl(value, allowDefault = false) {
+    try {
+      const target = new URL(value, window.location.href);
+      const raceIds = target.searchParams.getAll("race_id");
+      const validRaceId = raceIds.length === 1 && /^[1-9]\d*$/.test(raceIds[0]);
+      const defaultRace = allowDefault && raceIds.length === 0;
+      const matchesFilters = dashboardFiltersMatch(target, dashboardFilterUrl);
+      const matchesInitialUrl = defaultRace && dashboardFiltersMatch(target, dashboardInitialUrl);
+      return target.origin === window.location.origin
+        && target.pathname === dashboardInitialUrl.pathname
+        && ((validRaceId && matchesFilters)
+          || (defaultRace && (matchesFilters || matchesInitialUrl)));
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function safeRaceDetailHref(value) {
+    try {
+      const url = new URL(value, window.location.href);
+      return url.origin === window.location.origin && /^\/races\/[1-9]\d*$/.test(url.pathname)
+        ? url.href
+        : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function isDashboardVenueUrl(value) {
+    try {
+      const target = new URL(value, window.location.href);
+      const selectedDate = document.querySelector("[data-calendar-value]")?.value;
+      return target.origin === window.location.origin
+        && target.pathname === dashboardInitialUrl.pathname
+        && [...target.searchParams.keys()].every((key) => ["date", "meet", "race_id"].includes(key))
+        && [...new Set(target.searchParams.keys())].every((key) => target.searchParams.getAll(key).length === 1)
+        && (target.searchParams.get("date") === selectedDate
+          || dashboardFiltersMatch(target, dashboardInitialUrl))
+        && /^(?:[1-4])?$/.test(target.searchParams.get("meet") || "")
+        && (!target.searchParams.has("race_id") || /^[1-9]\d*$/.test(target.searchParams.get("race_id")));
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function animateDashboardContent(elements) {
+    if (REDUCED_MOTION || typeof Element.prototype.animate !== "function") {
+      return;
+    }
+    elements.filter((element) => element && !element.hidden).forEach((element) => {
+      try {
+        element.animate([{ opacity: 0.8 }, { opacity: 1 }], {
+          duration: 170,
+          easing: "ease-out",
+        });
+      } catch (error) { /* animation is decorative */ }
     });
+  }
+
+  function showDashboardSelectionError(panel, href, detailHref, pushHistory, allowDefault) {
+    const status = panel.querySelector("[data-dashboard-detail-status]");
+    if (!status) {
+      return;
+    }
+    status.replaceChildren(document.createTextNode("출전마 정보를 불러오지 못했습니다. "));
+    const retry = document.createElement("button");
+    retry.type = "button";
+    retry.textContent = "다시 시도";
+    retry.addEventListener("click", () =>
+      loadDashboardRace(href, detailHref, pushHistory, allowDefault)
+    );
+    status.append(retry);
+
+    const safeDetailHref = safeRaceDetailHref(detailHref);
+    if (safeDetailHref) {
+      const detail = document.createElement("a");
+      detail.href = safeDetailHref;
+      detail.textContent = "경주 상세 보기";
+      status.append(document.createTextNode(" · "), detail);
+    }
+    status.hidden = false;
+  }
+
+  function sanitizeDashboardPanel(panel) {
+    panel.querySelectorAll("script, iframe, object, embed, base, link, meta").forEach((node) => node.remove());
+    [panel, ...panel.querySelectorAll("*")].forEach((node) => {
+      [...node.attributes].forEach((attribute) => {
+        const name = attribute.name.toLowerCase();
+        if (name.startsWith("on")) {
+          node.removeAttribute(attribute.name);
+        } else if (["href", "src", "xlink:href", "formaction"].includes(name)
+          && /^\s*javascript:/i.test(attribute.value)) {
+          node.removeAttribute(attribute.name);
+        }
+      });
+    });
+  }
+
+  async function loadDashboardRace(value, detailHref, pushHistory = true, allowDefault = false, updateSchedule = false) {
+    if (!(updateSchedule ? isDashboardVenueUrl(value) : isDashboardSelectionUrl(value, allowDefault))) {
+      return false;
+    }
+    const target = new URL(value, window.location.href);
+    const schedule = document.querySelector("[data-dashboard-schedule]");
+    const currentPanel = document.querySelector("[data-dashboard-detail]");
+    if (!schedule || !currentPanel) {
+      return false;
+    }
+
+    if (dashboardSelectionController) {
+      dashboardSelectionController.abort();
+    }
+    const controller = new AbortController();
+    dashboardSelectionController = controller;
+    const sequence = ++dashboardSelectionSequence;
+    const raceId = target.searchParams.get("race_id");
+    const status = currentPanel.querySelector("[data-dashboard-detail-status]");
+    if (status) {
+      status.hidden = true;
+      status.replaceChildren();
+    }
+    schedule.setAttribute("aria-busy", "true");
+    currentPanel.setAttribute("aria-busy", "true");
+
+    try {
+      const response = await fetch(target.href, {
+        credentials: "same-origin",
+        headers: { Accept: "text/html" },
+        signal: controller.signal,
+      });
+      if (!response.ok) {
+        throw new Error("dashboard selection request failed");
+      }
+      const responseUrl = new URL(response.url || target.href, window.location.href);
+      if (responseUrl.origin !== window.location.origin
+        || responseUrl.pathname !== window.location.pathname
+        || !dashboardFiltersMatch(responseUrl, target)) {
+        throw new Error("dashboard selection response location was invalid");
+      }
+      const html = await response.text();
+      const parsed = new DOMParser().parseFromString(html, "text/html");
+      const incomingSchedule = parsed.querySelector("[data-dashboard-schedule]");
+      const incomingPanel = parsed.querySelector("[data-dashboard-detail]");
+      const responseRaceId = incomingPanel?.dataset.raceId;
+      const raceIsInSchedule = responseRaceId && [...(updateSchedule ? incomingSchedule : schedule)?.querySelectorAll(
+        "[data-dashboard-race-id]"
+      ) || []].some((row) => row.dataset.dashboardRaceId === responseRaceId);
+      if (!incomingPanel || (updateSchedule && !incomingSchedule?.querySelector("[data-schedule-body-scroll]"))
+        || (!raceIsInSchedule && !(updateSchedule && incomingPanel.hidden && !responseRaceId))
+        || (raceId && responseRaceId !== raceId)) {
+        throw new Error("dashboard selection response panel was invalid");
+      }
+      sanitizeDashboardPanel(incomingPanel);
+      if (updateSchedule) {
+        sanitizeDashboardPanel(incomingSchedule);
+      }
+      if (controller.signal.aborted || sequence !== dashboardSelectionSequence) {
+        return false;
+      }
+
+      const replacement = document.importNode(incomingPanel, true);
+      const previousPanel = document.querySelector("[data-dashboard-detail]");
+      if (!previousPanel) {
+        throw new Error("dashboard detail panel is unavailable");
+      }
+      previousPanel.replaceChildren(...replacement.childNodes);
+      previousPanel.dataset.raceId = responseRaceId;
+      previousPanel.hidden = incomingPanel.hidden;
+      if (updateSchedule) {
+        disposeScheduleBodyScroll?.();
+        const body = schedule.querySelector("[data-schedule-body-scroll]");
+        const incomingBody = document.importNode(incomingSchedule.querySelector("[data-schedule-body-scroll]"), true);
+        body.replaceChildren(...incomingBody.childNodes);
+        body.scrollTop = 0;
+        const venueBar = schedule.querySelector(".schedule-venue-filter");
+        const incomingVenueBar = incomingSchedule.querySelector(".schedule-venue-filter");
+        if (venueBar && incomingVenueBar) {
+          venueBar.replaceChildren(...document.importNode(incomingVenueBar, true).childNodes);
+        }
+        const form = schedule.querySelector("[data-filter-form]");
+        form.querySelector('input[name="meet"]')?.remove();
+        const meetInput = incomingSchedule.querySelector('input[name="meet"]');
+        if (meetInput) {
+          form.append(document.importNode(meetInput, true));
+        }
+        schedule.querySelectorAll(".schedule-date-arrow[href]").forEach((arrow) => {
+          const incomingArrow = incomingSchedule.querySelector(`.schedule-date-arrow[aria-label="${arrow.getAttribute("aria-label")}"]`);
+          if (incomingArrow?.hasAttribute("href")) {
+            arrow.setAttribute("href", incomingArrow.getAttribute("href"));
+          }
+        });
+        dashboardFilterUrl = new URL(target.href);
+        initScheduleBodyScroll();
+        initClickableRows(body);
+        animateDashboardContent([body]);
+      }
+      syncScheduleHeadingHeight();
+      initSortableTables(previousPanel);
+      animateDashboardContent([...previousPanel.children]);
+      schedule.querySelectorAll("[data-dashboard-race-id]").forEach((row) => {
+        row.classList.toggle("selected", row.dataset.dashboardRaceId === previousPanel.dataset.raceId);
+      });
+      if (pushHistory) {
+        window.history.pushState({ dashboardRaceSelection: true }, "", target.href);
+      }
+      schedule.removeAttribute("aria-busy");
+      previousPanel.removeAttribute("aria-busy");
+      return true;
+    } catch (error) {
+      if (controller.signal.aborted || sequence !== dashboardSelectionSequence) {
+        return false;
+      }
+      schedule.removeAttribute("aria-busy");
+      currentPanel.removeAttribute("aria-busy");
+      if (updateSchedule) {
+        window.location.assign(target.href);
+      } else {
+        showDashboardSelectionError(currentPanel, target.href, detailHref, pushHistory, allowDefault);
+      }
+      return false;
+    } finally {
+      if (sequence === dashboardSelectionSequence) {
+        dashboardSelectionController = null;
+      }
+    }
+  }
+
+  document.addEventListener("click", (event) => {
+    const venueLink = event.target instanceof Element
+      ? event.target.closest(".schedule-venue-button")
+      : null;
+    if (dashboardSelectionEnabled && venueLink && !event.defaultPrevented && event.button === 0
+      && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
+      && isDashboardVenueUrl(venueLink.href)) {
+      event.preventDefault();
+      loadDashboardRace(venueLink.href, null, true, true, true);
+      return;
+    }
+    const link = event.target instanceof Element
+      ? event.target.closest("a[data-dashboard-race-select]")
+      : null;
+    if (!link || event.defaultPrevented || event.button !== 0
+      || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
+      || (link.target && link.target !== "_self") || link.hasAttribute("download")) {
+      return;
+    }
+    if (!isDashboardSelectionUrl(link.href)) {
+      return;
+    }
+    if (!document.querySelector("[data-dashboard-schedule]")
+      || !document.querySelector("[data-dashboard-detail]")) {
+      return;
+    }
+    event.preventDefault();
+    loadDashboardRace(link.href, link.dataset.raceDetailHref);
   });
+
+  if (dashboardSelectionEnabled) {
+    window.addEventListener("popstate", () => {
+      const current = new URL(window.location.href);
+      if (!dashboardFiltersMatch(current, dashboardFilterUrl) && isDashboardVenueUrl(current.href)) {
+        loadDashboardRace(current.href, null, false, true, true);
+        return;
+      }
+      if (!isDashboardSelectionUrl(current.href, true)) {
+        window.location.reload();
+        return;
+      }
+      const panel = document.querySelector("[data-dashboard-detail]");
+      const raceId = current.searchParams.get("race_id") || panel?.dataset.raceId;
+      const selectedRow = [...document.querySelectorAll("[data-dashboard-race-id]")]
+        .find((row) => row.dataset.dashboardRaceId === raceId);
+      loadDashboardRace(current.href, selectedRow?.dataset.raceDetailHref, false, true);
+    });
+  }
+
+  function initClickableRows(root = document) {
+    root.querySelectorAll("[data-href]").forEach((row) => {
+      if (row.dataset.navigationInitialized === "true") {
+        return;
+      }
+      row.dataset.navigationInitialized = "true";
+      const href = row.dataset.href;
+      if (!href) {
+        return;
+      }
+
+      const navigate = (newTab) => {
+        if (newTab) {
+          window.open(href, "_blank", "noopener");
+          return;
+        }
+        if (row.matches("[data-dashboard-race-id]")) {
+          if (isDashboardSelectionUrl(href)
+            && document.querySelector("[data-dashboard-schedule]")
+            && document.querySelector("[data-dashboard-detail]")) {
+            loadDashboardRace(href, row.dataset.raceDetailHref);
+          } else {
+            window.location.href = href;
+          }
+          return;
+        }
+        window.location.href = href;
+      };
+
+      row.addEventListener("click", (event) => {
+        if (event.target.closest("a, button, input, select, label")) {
+          return;
+        }
+        navigate(event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1);
+      });
+      row.addEventListener("keydown", (event) => {
+        if (event.target.closest("a, button, input, select, label")) {
+          return;
+        }
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          navigate(event.metaKey || event.ctrlKey);
+        }
+      });
+    });
+  }
+
+  initClickableRows();
 
   /* ------------------------------------------------------------------
      말 이력 탭
@@ -352,16 +991,30 @@
     };
   }
 
-  function initSortableTables() {
-    document.querySelectorAll("table[data-sortable]").forEach((table) => {
+  function initSortableTables(root = document) {
+    const tables = root.matches?.("table[data-sortable]")
+      ? [root]
+      : root.querySelectorAll("table[data-sortable]");
+    tables.forEach((table) => {
+      if (table.dataset.sortableInitialized === "true") {
+        return;
+      }
       const tbody = table.querySelector("tbody");
       const headRow = table.querySelector("thead tr");
       if (!tbody || !headRow) {
         return;
       }
+      table.dataset.sortableInitialized = "true";
       const headers = [...headRow.children];
 
       headers.forEach((th, columnIndex) => {
+        if (th.hasAttribute("data-server-sort")) {
+          const link = th.querySelector("a[href]");
+          th.addEventListener("click", (event) => {
+            if (link && !event.target.closest("a")) link.click();
+          });
+          return;
+        }
         if (!th.textContent.trim()) {
           return;
         }
@@ -377,7 +1030,8 @@
           const rows = [...tbody.querySelectorAll("tr")];
           const keyed = rows.map((row, order) => {
             const cell = row.children[columnIndex];
-            return { row, order, value: cellSortValue(cell ? cell.textContent : "") };
+            const sortText = cell?.dataset.sortValue ?? cell?.textContent ?? "";
+            return { row, order, value: cellSortValue(sortText) };
           });
 
           const useNumber = keyed.some((item) => item.value.number != null);

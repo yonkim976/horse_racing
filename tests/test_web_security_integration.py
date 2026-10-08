@@ -29,6 +29,11 @@ def middleware_client(
 
 def test_origin_guard_rejects_direct_requests_before_route_loader(monkeypatch, capsys) -> None:
     token = "a" * 32
+    module = importlib.import_module("horse_racing.web.app")
+    monkeypatch.setattr(module.random, "random", lambda: 1.0)
+    monkeypatch.delenv("MAPILOG_REQUIRE_ORIGIN_TOKEN", raising=False)
+    monkeypatch.delenv("MAPILOG_ORIGIN_HTTPS", raising=False)
+    monkeypatch.setenv("MAPILOG_CLIENT_IP_HEADER", "cf-connecting-ip")
     monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", token)
     calls = []
 
@@ -51,11 +56,15 @@ def test_origin_guard_rejects_direct_requests_before_route_loader(monkeypatch, c
     assert calls == [True]
     output = capsys.readouterr().out
     assert token not in output
+    assert "203.0.113.5" not in output
     assert '"category":"origin_guard"' in output
 
 
 def test_origin_guard_uses_verified_cloudflare_client_ip(monkeypatch) -> None:
     token = "a" * 32
+    monkeypatch.delenv("MAPILOG_REQUIRE_ORIGIN_TOKEN", raising=False)
+    monkeypatch.delenv("MAPILOG_ORIGIN_HTTPS", raising=False)
+    monkeypatch.setenv("MAPILOG_CLIENT_IP_HEADER", "cf-connecting-ip")
     monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", token)
 
     async def render(request: Request):
@@ -76,16 +85,97 @@ def test_origin_guard_uses_verified_cloudflare_client_ip(monkeypatch) -> None:
             "X-Mapilog-Origin-Token": token,
             "CF-Connecting-IP": "not-an-ip",
         })
+        multiple_ips = client.get("/robots.txt", headers={
+            "X-Mapilog-Origin-Token": token,
+            "CF-Connecting-IP": "203.0.113.5, 198.51.100.8",
+        })
+        duplicate_ip_headers = client.get("/robots.txt", headers=[
+            ("X-Mapilog-Origin-Token", token),
+            ("CF-Connecting-IP", "203.0.113.5"),
+            ("CF-Connecting-IP", "198.51.100.8"),
+        ])
+        duplicate_token_headers = client.get("/robots.txt", headers=[
+            ("X-Mapilog-Origin-Token", token),
+            ("X-Mapilog-Origin-Token", token),
+            ("CF-Connecting-IP", "203.0.113.5"),
+        ])
 
     assert first.text == "203.0.113.5"
     assert second.text == "2001:db8::5"
     assert invalid.status_code == 403
+    assert multiple_ips.status_code == duplicate_ip_headers.status_code == 403
+    assert duplicate_token_headers.status_code == 403
+
+
+def test_origin_guard_uses_only_configured_client_ip_header(monkeypatch) -> None:
+    token = "b" * 32
+    monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", token)
+    monkeypatch.setenv("MAPILOG_CLIENT_IP_HEADER", "X-Mapilog-Client-IP")
+    monkeypatch.setenv("MAPILOG_REQUIRE_ORIGIN_TOKEN", "0")
+    monkeypatch.setenv("MAPILOG_ORIGIN_HTTPS", "0")
+
+    async def render(request: Request):
+        module = importlib.import_module("horse_racing.web.app")
+        return PlainTextResponse(module._client_rate_key(request))
+
+    with middleware_client(render, peer="10.1.2.3") as client:
+        accepted = client.get("/robots.txt", headers={
+            "X-Mapilog-Origin-Token": token,
+            "X-Mapilog-Client-IP": "192.0.2.41",
+            "CF-Connecting-IP": "203.0.113.52",
+            "X-Forwarded-For": "198.51.100.63",
+        })
+        missing = client.get("/robots.txt", headers={
+            "X-Mapilog-Origin-Token": token,
+            "CF-Connecting-IP": "203.0.113.52",
+            "X-Forwarded-For": "198.51.100.63",
+        })
+
+    assert accepted.status_code == 200
+    assert accepted.text == "192.0.2.41"
+    assert missing.status_code == 403
+
+
+def test_required_origin_token_fails_startup_when_missing(monkeypatch) -> None:
+    monkeypatch.setenv("MAPILOG_REQUIRE_ORIGIN_TOKEN", "1")
+    monkeypatch.delenv("MAPILOG_ORIGIN_TOKEN", raising=False)
+    with pytest.raises(ValueError, match="MAPILOG_ORIGIN_TOKEN must be set"):
+        create_app()
+
+
+def test_origin_client_ip_header_rejects_untrusted_name(monkeypatch) -> None:
+    monkeypatch.setenv("MAPILOG_CLIENT_IP_HEADER", "x-forwarded-for")
+    with pytest.raises(ValueError, match="MAPILOG_CLIENT_IP_HEADER"):
+        create_app()
 
 
 def test_origin_guard_rejects_short_configured_token(monkeypatch) -> None:
+    monkeypatch.setenv("MAPILOG_REQUIRE_ORIGIN_TOKEN", "1")
     monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", "too-short")
     with pytest.raises(ValueError, match="at least 32 characters"):
         create_app()
+
+
+def test_authenticated_lb_mode_generates_https_urls(monkeypatch) -> None:
+    token = "c" * 32
+    monkeypatch.setenv("MAPILOG_REQUIRE_ORIGIN_TOKEN", "1")
+    monkeypatch.setenv("MAPILOG_ORIGIN_HTTPS", "1")
+    monkeypatch.setenv("MAPILOG_ORIGIN_TOKEN", token)
+    monkeypatch.setenv("MAPILOG_CLIENT_IP_HEADER", "x-mapilog-client-ip")
+
+    async def render(request: Request):
+        return PlainTextResponse(str(request.url_for("render", path="static/site.css")))
+
+    with middleware_client(render) as client:
+        response = client.get("/", headers={
+            "Host": "mapilog.xyz",
+            "X-Mapilog-Origin-Token": token,
+            "X-Mapilog-Client-IP": "192.0.2.44",
+            "X-Forwarded-Proto": "http",
+        })
+
+    assert response.status_code == 200
+    assert response.text == "https://mapilog.xyz/static/site.css"
 
 
 def test_home_cache_preserves_selected_race_and_trial() -> None:
@@ -143,7 +233,11 @@ def test_cookie_and_authorization_requests_do_not_share_anonymous_cache() -> Non
     assert calls == ["anon", "Bearer example", "session=example"]
 
 
-def test_costly_route_rotation_shares_one_client_budget() -> None:
+def test_costly_route_rotation_shares_one_client_budget(monkeypatch) -> None:
+    import horse_racing.web.request_policy as policy_module
+
+    monkeypatch.setitem(policy_module._QUOTAS, "expensive", (8, 8))
+
     async def render():
         return PlainTextResponse("ok")
 
@@ -159,7 +253,11 @@ def test_costly_route_rotation_shares_one_client_budget() -> None:
     assert results[-1].headers["retry-after"] == "60"
 
 
-def test_denial_logs_are_structured_and_omit_client_ip_and_query(capsys) -> None:
+def test_denial_logs_are_structured_and_omit_client_ip_and_query(capsys, monkeypatch) -> None:
+    import horse_racing.web.request_policy as policy_module
+
+    monkeypatch.setitem(policy_module._QUOTAS, "expensive", (24, 8))
+
     async def render():
         return PlainTextResponse("ok")
 
@@ -226,7 +324,11 @@ def test_sampled_success_logs_normalized_path_duration_and_bytes(monkeypatch, ca
     assert "secret" not in output
 
 
-def test_distinct_app_instances_do_not_share_usage_records() -> None:
+def test_distinct_app_instances_do_not_share_usage_records(monkeypatch) -> None:
+    import horse_racing.web.request_policy as policy_module
+
+    monkeypatch.setitem(policy_module._QUOTAS, "expensive", (24, 8))
+
     async def render():
         return PlainTextResponse("ok")
 
@@ -379,3 +481,15 @@ def test_concurrency_guard_rejects_excess_and_releases_cancelled_request(
     assert denied["reason"] == "active_request_limit"
     assert denied["count"] == denied["limit"] == 2
     assert denied["retry_after"] == "1"
+
+
+def test_oversized_wordpress_probe_is_rejected_before_query_parsing() -> None:
+    async def render():
+        return PlainTextResponse("route should not execute")
+
+    long_probe = "rest_route=" + "x" * 2100
+    with middleware_client(render) as client:
+        response = client.get("/?" + long_probe)
+
+    assert response.status_code == 404
+    assert response.text != "route should not execute"

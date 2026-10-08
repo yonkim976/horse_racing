@@ -1,0 +1,19 @@
+<section class="page-intro compact-intro course-analysis-intro">
+  <div>
+    <p class="eyebrow">COURSE &amp; DISTANCE</p>
+    <h1>{{ course_name|replace('부산경남', '부산')|replace('부경', '부산') }} 경주로·거리 분석</h1>
+    <p>거리별 기록과 경주로의 출발점·주행 경로를 확인하세요.</p>
+  </div>
+  <a class="entity-link" href="/?meet={{ meet_code }}">{{ course_name|replace('부산경남', '부산')|replace('부경', '부산') }} 일정 보기 →</a>
+</section>
+{% set meet_urls = data.meet_urls if active_view == 'distances' else {} %}
+<nav class="distance-options course-map-meets" aria-label="경마장 선택" data-course-meet-nav>
+  {% for slug, label, code in [('seoul', '서울', 1), ('busan', '부산', 3), ('yeongcheon', '영천', 4), ('jeju', '제주', 2)] %}
+    <a href="{{ meet_urls.get(slug, '/racecourses/' ~ slug ~ '/' ~ ('course' if active_view == 'course' else 'distances')) }}" data-course-meet="{{ slug }}" {% if meet_code == code %}aria-current="page"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>
+<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴" data-course-view-tabs data-course="{{ course }}">
+  <a href="/racecourses/{{ course }}/distances" data-course-view-link data-course="{{ course }}" data-course-view="distances" {% if active_view == 'distances' %}aria-current="page"{% endif %}>거리별 분석</a>
+  <a href="/racecourses/{{ course }}/course" data-course-view-link data-course="{{ course }}" data-course-view="course" {% if active_view == 'course' %}aria-current="page"{% endif %}>지도 보기</a>
+  <div class="course-view-status is-visually-hidden" data-course-view-status role="status" aria-live="polite" aria-atomic="true" hidden></div>
+</nav>

@@ -1,53 +1,191 @@
 {% extends "base.html" %}
-{% block title %}{{ data.course_name }} 거리별 분석 · 마필로그 Mapilog{% endblock %}
+{% block title %}{{ data.course_name }} {{ '주행심사 구간 분석' if data.view == 'trials' else '거리별 분석' }} · 마필로그 Mapilog{% endblock %}
+{% block extra_head %}<script src="{{ url_for('static', path='/js/course-view.js') }}?v=11" defer></script>{% endblock %}
 {% block content %}
-<section class="page-intro compact-intro">
-  <div>
-    <p class="eyebrow">{{ data.course|upper }} · DISTANCE RECORDS</p>
-    <h1>{{ data.course_name }} 거리별 분석</h1>
-    <p>거리를 선택하고 등급별 경주 기록을 살펴보세요.</p>
-  </div>
-  <a class="entity-link" href="/?meet={{ data.meet_code }}">{{ data.course_name }} 일정 보기 →</a>
-</section>
-
-<nav class="distance-options" aria-label="경마장 선택"><a href="/racecourses/seoul/distances" {% if data.meet_code == 1 %}aria-current="page"{% endif %}>서울</a><a href="/racecourses/jeju/distances" {% if data.meet_code == 2 %}aria-current="page"{% endif %}>제주</a><a href="/racecourses/busan/distances" {% if data.meet_code == 3 %}aria-current="page"{% endif %}>부경</a></nav>
-<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">
-  <a href="{{ data.base_url }}" aria-current="page">거리별 분석</a>
-  <a href="/racecourses/{{ data.course }}/course">지도 보기</a>
-</nav>
+{% set course = data.course %}
+{% set course_name = data.course_name %}
+{% set meet_code = data.meet_code %}
+{% set active_view = 'distances' %}
+{% include "_course_analysis_shell.html" %}
+<div class="course-view-content" data-course-view-content data-course="{{ course }}" data-view="distances">
 <section class="panel distance-controls" aria-label="경주 검색 조건">
   <form class="filters" method="get" action="{{ data.base_url }}">
-    <input type="hidden" name="distance" value="{{ data.distance }}">
+    {% if data.view == 'trials' %}<input type="hidden" name="view" value="trials">{% else %}<input type="hidden" name="distance" value="{{ data.distance }}">{% endif %}
     <label><span>연도</span><select name="year">
       <option value="0" {% if data.year == 0 %}selected{% endif %}>전체 기간</option>
-      {% if data.year and data.year|string not in data.years %}<option value="{{ data.year }}" selected>{{ data.year }}년</option>{% endif %}
+      {% if data.year and data.year not in data.years %}<option value="{{ data.year }}" selected>{{ data.year }}년</option>{% endif %}
       {% for year in data.years %}<option value="{{ year }}" {% if year|int == data.year %}selected{% endif %}>{{ year }}년</option>{% endfor %}
     </select></label>
+    {% if data.view != 'trials' %}
     <label><span>등급</span><select name="grade">
       <option value="">전체 등급</option>
       {% for grade in data.grade_labels %}<option value="{{ grade }}" {% if grade == data.grade %}selected{% endif %}>{{ grade }}{% if grade == '미분류' %} · 과거 등급 확인 필요{% endif %}</option>{% endfor %}
     </select></label>
+    {% if data.benchmark %}
+    <label><span>함수율 기준</span><select name="band">
+      <option value="건조" {% if data.band == '건조' %}selected{% endif %}>건조 · 1–5%</option>
+      <option value="양호" {% if data.band == '양호' %}selected{% endif %}>양호 · 6–9%</option>
+      <option value="다습" {% if data.band == '다습' %}selected{% endif %}>다습 · 10–14%</option>
+      <option value="포화" {% if data.band == '포화' %}selected{% endif %}>포화 · 15–19%</option>
+      <option value="불량" {% if data.band == '불량' %}selected{% endif %}>불량 · 20% 이상</option>
+    </select></label>
+    {% endif %}
+    {% endif %}
     <button type="submit">필터 적용</button>
     <a class="entity-link" href="{{ data.reset_url }}">초기화</a>
   </form>
   <nav class="distance-options" aria-label="경주거리 선택">
-    <a href="{{ data.all_url }}" {% if not data.distance %}aria-current="page"{% endif %}><strong>전체 거리</strong><span>거리별 분포</span></a>
+    <a href="{{ data.all_url }}" {% if data.view != 'trials' and not data.distance %}aria-current="page"{% endif %}><strong>전체 거리</strong><span>거리별 분포</span></a>
+    <a href="{{ data.trials_url }}" {% if data.view == 'trials' %}aria-current="page"{% endif %}><strong>주행심사</strong><span>실제 심사거리별 구간 기록</span></a>
     {% for item in data.distances %}
-    <a href="{{ item.url }}" {% if data.distance == item.distance %}aria-current="page"{% endif %}>
+    <a href="{{ item.url }}" {% if data.view != 'trials' and data.distance == item.distance %}aria-current="page"{% endif %}>
       <strong>{{ "{:,}".format(item.distance) }}<small> m</small></strong><span>{{ "{:,}".format(item.count) }}경주</span>
     </a>
     {% endfor %}
   </nav>
-  <p class="distance-note">거리별 건수에도 선택한 연도·등급이 적용됩니다. 정규 경주 중 완료된 기록만 표시하며, 주행심사는 포함하지 않습니다.</p>
+  <p class="distance-note">{% if data.view == 'trials' %}연도별 심사 구간 통계에는 등급 필터를 적용하지 않습니다. 거리 카드를 선택하면 정규 경주 분석으로 이동합니다.{% else %}거리별 건수에도 선택한 연도·등급이 적용됩니다. 정규 경주 중 완료된 기록만 표시하며, 주행심사는 별도 탭에서 확인합니다.{% endif %}</p>
 </section>
 
-<section class="summary-grid" aria-label="선택 조건 통계">
-  <article class="summary-card primary"><span>완료 경주</span><strong>{{ "{:,}".format(data.total) }}</strong><small>{{ data.grade or '전체 등급' }} · {{ data.year or '전체 기간' }}</small></article>
-  <article class="summary-card"><span>출전 기록</span><strong>{{ "{:,}".format(data.entries) }}</strong><small>기록 집계 대상 {{ "{:,}".format(data.timed) }}건</small></article>
-  <article class="summary-card"><span>평균 완주시간</span><strong>{{ data.average }}</strong><small>{{ '정상 완주마 기준' if data.distance else '거리 선택 후 표시' }}</small></article>
-  <article class="summary-card"><span>최단 완주시간</span><strong>{{ data.best }}</strong><small>{{ '현재 필터 내 기록' if data.distance else '거리 선택 후 표시' }}</small></article>
-</section>
+{% if data.benchmark %}
+<section class="panel distance-benchmark-panel" aria-label="1200m 기록 기준">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">RESEARCH REFERENCE · 1,200M</p><h2>1200m 기록 기준</h2></div>
+    <span>{{ data.benchmark.source.version }} · {{ data.benchmark.source.reference_period_label }} · 기준 종료 {{ data.benchmark.source.input_end[data.benchmark.meet] }}</span>
+  </div>
+  <p class="distance-note benchmark-explanation">연구용 추정 기준의 빠른 20% 경계(P20), 중앙값, 가운데 60% 평균, 느린 20% 경계(P80)입니다. <strong>함수율 {{ data.band }}</strong>({% if data.band == '건조' %}1–5%{% elif data.band == '양호' %}6–9%{% elif data.band == '다습' %}10–14%{% elif data.band == '포화' %}15–19%{% else %}20% 이상{% endif %})을 반영합니다. 실제 관측 평균은 해당 함수율의 원자료 평균이라 추정 기준과 의미가 다릅니다.</p>
+  <details class="benchmark-method"><summary>기준표 읽는 법</summary>
+    <p>P20 이하는 빠른 쪽, P80 이상은 느린 쪽의 시간 경계이며 우승·능력·확률 판정이 아닙니다. 가운데 60% 평균은 빠른 쪽과 느린 쪽 꼬리를 뺀 가운데 기록의 평균입니다. 동률 때문에 실제 꼬리 비율은 정확히 20%가 아닐 수 있으며 정상 기록을 분석에서 제거하지 않았습니다.</p>
+    <p>기준표는 2024년 이후 관측에 기반한 고정 연구기간이며 연도 필터와 별도입니다. 함수율 선택은 기준표에만 적용됩니다. 아래 실측 구간 집계는 선택 연도·등급의 함수율 전체 기록입니다.</p>
+  </details>
 
+  {% if not data.grade %}
+    <div class="table-scroll benchmark-table-scroll">
+      <table class="entry-table distance-benchmark-table">
+        <thead><tr><th>등급</th><th>빠른 경계 P20</th><th>중앙값</th><th>가운데 60% 평균</th><th>느린 경계 P80</th><th>실제 관측 평균</th><th>관측 출전기록/경주/일</th><th>기준 상태</th></tr></thead>
+        <tbody>{% for row in data.benchmark.summary_rows %}
+          <tr>
+            <td><a class="entity-link" href="{{ row.url }}">{{ row.grade_label }} 세부 보기 →</a></td>
+            <td class="numeric">{{ row.p20 }}</td><td class="numeric">{{ row.median }}</td><td class="numeric">{{ row.middle60_mean }}</td><td class="numeric">{{ row.p80 }}</td>
+            <td class="numeric">{{ row.observed_mean }}</td><td class="numeric">{{ row.observed_n }} / {{ row.observed_races }} / {{ row.observed_days }}</td>
+            <td><span class="benchmark-status benchmark-status-{{ row.status }}">{{ row.status_label }}</span><details class="benchmark-more"><summary>보조 통계</summary><span>추정 평균 {{ row.estimate_mean }} · 빠른/가운데/느린 표본 {{ row.estimate_fast20_n }}/{{ row.estimate_middle60_n }}/{{ row.estimate_slow20_n }} · 실제 중앙값 {{ row.observed_median }}</span></details></td>
+          </tr>
+        {% endfor %}</tbody>
+      </table>
+    </div>
+    <p class="distance-note benchmark-explanation">등급을 선택하면 해당 등급의 5개 함수율별 전체시간 기준과 선택 함수율의 구간별 기준을 볼 수 있습니다.</p>
+  {% elif not data.benchmark.grade_supported %}
+    <p class="distance-note benchmark-empty">{{ data.grade }} 연구 기준 자료가 없습니다.</p>
+  {% else %}
+    <h3 class="distance-benchmark-title">{{ data.grade }} · 전체 1,200m 함수율별 기준</h3>
+    <div class="table-scroll benchmark-table-scroll">
+      <table class="entry-table distance-benchmark-table">
+        <thead><tr><th>함수율</th><th>빠른 경계 P20</th><th>중앙값</th><th>가운데 60% 평균</th><th>느린 경계 P80</th><th>실제 관측 평균</th><th>관측 출전기록/경주/일</th><th>기준 상태</th></tr></thead>
+        <tbody>{% for row in data.benchmark.state_finish_rows %}
+          <tr><td>{{ row.band }}</td><td class="numeric">{{ row.p20 }}</td><td class="numeric">{{ row.median }}</td><td class="numeric">{{ row.middle60_mean }}</td><td class="numeric">{{ row.p80 }}</td><td class="numeric">{{ row.observed_mean }}</td><td class="numeric">{{ row.observed_n }} / {{ row.observed_races }} / {{ row.observed_days }}</td>
+            <td><span class="benchmark-status benchmark-status-{{ row.status }}">{{ row.status_label }}</span><details class="benchmark-more"><summary>보조 통계</summary><span>추정 평균 {{ row.estimate_mean }} · 빠른/가운데/느린 표본 {{ row.estimate_fast20_n }}/{{ row.estimate_middle60_n }}/{{ row.estimate_slow20_n }} · 실제 중앙값 {{ row.observed_median }}</span></details></td></tr>
+        {% endfor %}</tbody>
+      </table>
+    </div>
+    <h3 class="distance-benchmark-title">{{ data.band }} 함수율 · 구간별 기준</h3>
+    {% if data.benchmark.detail_rows %}
+    <div class="table-scroll benchmark-table-scroll">
+      <table class="entry-table distance-benchmark-table">
+        <thead><tr><th>구간</th><th>빠른 경계 P20</th><th>중앙값</th><th>가운데 60% 평균</th><th>느린 경계 P80</th><th>실제 관측 평균</th><th>관측 출전기록/경주/일</th><th>기준 상태</th></tr></thead>
+        <tbody>{% for row in data.benchmark.detail_rows %}
+          <tr><td>{{ row.part_label }}</td><td class="numeric">{{ row.p20 }}</td><td class="numeric">{{ row.median }}</td><td class="numeric">{{ row.middle60_mean }}</td><td class="numeric">{{ row.p80 }}</td><td class="numeric">{{ row.observed_mean }}</td><td class="numeric">{{ row.observed_n }} / {{ row.observed_races }} / {{ row.observed_days }}</td>
+            <td><span class="benchmark-status benchmark-status-{{ row.status }}">{{ row.status_label }}</span><details class="benchmark-more"><summary>보조 통계</summary><span>추정 평균 {{ row.estimate_mean }} · 빠른/가운데/느린 표본 {{ row.estimate_fast20_n }}/{{ row.estimate_middle60_n }}/{{ row.estimate_slow20_n }} · 실제 중앙값 {{ row.observed_median }}</span></details></td></tr>
+        {% endfor %}</tbody>
+      </table>
+    </div>
+    {% else %}<p class="distance-note benchmark-empty">이 등급·함수율 조합에 구간별 연구 기준이 없습니다.</p>{% endif %}
+  {% endif %}
+</section>
+{% endif %}
+
+{% if data.view != 'trials' and data.section_analysis.visible %}
+<section class="panel distance-section-panel" aria-label="구간 기록 통계">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">SECTION TIMES</p><h2>구간 기록 요약</h2></div>
+    {% if data.section_analysis.enabled %}<span>정규 경주 {{ "{:,}".format(data.section_analysis.normal_count) }}두 정상 완주</span>{% endif %}
+  </div>
+  {% if data.section_analysis.enabled %}
+  <h3 class="distance-section-title">{{ "{:,}m".format(data.distance) }} 정규 경주 · 선택 연도/등급 실측 · 함수율 전체</h3>
+  <p class="distance-note">평균·중앙값은 말별 기록에서 계산합니다. 상대속도는 각 말의 해당 구간 속도를 그 말의 경주 전체 평균속도와 비교한 평균입니다. 100%보다 커도 능력 우위를 뜻하지 않습니다. 근거가 있는 계측 지점만 사용하며 빠진 지점은 보간하지 않습니다.</p>
+  <div class="distance-section-block">
+    <h3>주요 구간</h3>
+    <div class="table-scroll">
+      <table class="entry-table distance-section-table">
+        <thead><tr><th>구간</th><th>평균</th><th>중앙값</th><th>자기 전체 평균 대비</th><th>유효 표본</th><th>기록 확인</th></tr></thead>
+        <tbody>{% for row in data.section_analysis.core %}
+          <tr>
+            <td>{{ row.label }}</td>
+            {% if row.applicable %}
+            <td class="numeric">{{ row.mean_time }}</td><td class="numeric">{{ row.median_time }}</td><td class="numeric">{{ row.relative_speed }}</td>
+            <td class="numeric">{{ row.sample_count }} / {{ row.normal_count }}</td>
+            <td>{{ row.positive_count }} 양수 · {{ row.basis_count }} 기준확인 · {{ row.shorter_count }} 완주보다 짧음</td>
+            {% else %}<td colspan="5">이 경주거리에서는 구간 정의가 적용되지 않습니다.</td>{% endif %}
+          </tr>
+        {% endfor %}</tbody>
+      </table>
+    </div>
+    <p class="distance-note">확인 건수는 양수 원기록·명시된 누적/막판 기준·완주보다 짧은 계산값 순입니다.{% if data.meet_code == 2 and data.distance == 1110 %} 제주 1,110m S1F는 200m가 아닌 210m로 표시합니다.{% endif %}</p>
+  </div>
+
+  <div class="distance-section-block">
+    <h3>확인된 정확한 200m 구간</h3>
+    {% if data.section_analysis.intervals %}
+    <div class="table-scroll">
+      <table class="entry-table distance-section-table">
+        <thead><tr><th>구간</th><th>평균</th><th>중앙값</th><th>자기 전체 평균 대비</th><th>유효 표본</th></tr></thead>
+            <tbody>{% for row in data.section_analysis.intervals %}
+          <tr><td>{{ row.label }}</td><td class="numeric">{{ row.mean_time }}</td><td class="numeric">{{ row.median_time }}</td><td class="numeric">{{ row.relative_speed }}</td><td class="numeric">{% if row.sample_count %}{{ row.sample_count }} / {{ row.normal_count }}{% else %}미제공{% endif %}</td></tr>
+        {% endfor %}</tbody>
+      </table>
+    </div>
+    {% else %}<p class="distance-note">이 거리에는 정확한 200m 계측 지점 사이 구간이 없습니다.</p>{% endif %}
+    <p class="distance-note">200m 간격으로 위치를 확인한 끝점 사이에서만 계산합니다. 표본 0은 해당 구간 기록 미제공입니다. 코너 통과점은 정확한 200m 지점으로 가정하지 않습니다.</p>
+  </div>
+  {% else %}
+  <p class="distance-note distance-analysis-hint">{% if data.section_analysis.reason == 'over_limit' %}정규 경주 구간 분석은 1,200m 이하에서 제공합니다. 경주 목록은 계속 표시됩니다.{% else %}정규 경주 구간 분석을 보려면 먼저 경주거리를 선택하세요.{% endif %}</p>
+  {% endif %}
+
+</section>
+{% endif %}
+
+{% if data.view == 'trials' %}
+<section class="panel distance-section-panel trial-section-block" aria-label="주행심사 구간 통계">
+  <div class="panel-heading"><div><p class="panel-kicker">RUNNING TRIALS</p><h2>주행심사 구간 기록</h2></div></div>
+  <p class="distance-note">{{ data.course_name }}의 {{ data.year or '전체 기간' }} · 1,200m 이하 주행심사입니다. 출처와 계측 기준이 확인된 원문만 시간 통계에 반영하며, 원문 미검증 심사는 집계에서 제외합니다. 등급 조건은 적용되지 않습니다.</p>
+  {% if data.section_analysis.trials %}
+    {% for trial in data.section_analysis.trials %}
+    <div class="distance-trial-group">
+      <div class="distance-trial-heading"><h3>{{ "{:,}m".format(trial.distance) }} 심사</h3><span>{{ trial.trial_count }}회 · 검증 원문 {{ trial.verified_trial_count }}회{% if trial.unverified_trial_count %} · 원문 미검증 {{ trial.unverified_trial_count }}회{% endif %} · 검증 원문 정상 완주 {{ trial.normal_count }}두</span></div>
+      {% if trial.verified_trial_count == 0 %}<p class="distance-note">이 기간에는 검증된 주행심사 원문이 없습니다. 원문 출처가 확인되지 않은 심사는 시간 통계에서 제외했습니다.</p>{% endif %}
+      <div class="table-scroll">
+        <table class="entry-table distance-section-table">
+          <thead><tr><th>구간</th><th>평균</th><th>중앙값</th><th>자기 전체 평균 대비</th><th>유효 표본</th><th>기록 확인</th></tr></thead>
+          <tbody>{% for row in trial.core %}
+            <tr><td>{{ row.label }}</td><td class="numeric">{{ row.mean_time }}</td><td class="numeric">{{ row.median_time }}</td><td class="numeric">{{ row.relative_speed }}</td><td class="numeric">{{ row.sample_count }} / {{ row.normal_count }}</td>
+              <td>{% if row.basis_note %}<span class="distance-basis-note">기준 미확인 · 집계 제외</span>{% else %}{{ row.positive_count }} 양수 · {{ row.basis_count }} 기준확인 · {{ row.shorter_count }} 완주보다 짧음{% endif %}</td></tr>
+          {% endfor %}</tbody>
+        </table>
+      </div>
+      <h4>정확한 200m 구간</h4>
+      {% if trial.intervals %}
+      <div class="table-scroll">
+        <table class="entry-table distance-section-table">
+          <thead><tr><th>구간</th><th>평균</th><th>중앙값</th><th>자기 전체 평균 대비</th><th>유효 표본</th></tr></thead>
+          <tbody>{% for row in trial.intervals %}<tr><td>{{ row.label }}</td><td class="numeric">{{ row.mean_time }}</td><td class="numeric">{{ row.median_time }}</td><td class="numeric">{{ row.relative_speed }}</td><td class="numeric">{% if row.sample_count %}{{ row.sample_count }} / {{ row.normal_count }}{% else %}미제공{% endif %}</td></tr>{% endfor %}</tbody>
+        </table>
+      </div>
+      {% else %}<p class="distance-note">이 심사거리에는 정확한 200m 구간을 계산할 지점이 없습니다.</p>{% endif %}
+    </div>
+    {% endfor %}
+  {% else %}<p class="distance-note">이 경마장·연도에는 1,200m 이하 주행심사 기록이 없습니다.</p>{% endif %}
+</section>
+{% endif %}
+
+{% if data.view != 'trials' %}
 <section class="panel">
   <div class="panel-heading">
     <div><p class="panel-kicker">RACE HISTORY</p><h2>{{ "{:,}m".format(data.distance) if data.distance else '전체 거리' }} 경주 기록</h2></div>
@@ -61,7 +199,7 @@
       <tbody>{% for row in data["items"] %}
         <tr>
           <td class="numeric">{{ row.race_date_local }}</td>
-          <td><a class="entity-link" href="/races/{{ row.id }}">제주 {{ row.race_number }}경주 →</a>{% if row.race_name and row.race_name not in ['일반', '일반경주'] %}<small class="distance-subtitle">{{ row.race_name }}</small>{% endif %}</td>
+          <td><a class="entity-link" href="/races/{{ row.id }}">{{ data.course_name }} {{ row.race_number }}경주 →</a>{% if row.race_name and row.race_name not in ['일반', '일반경주'] %}<small class="distance-subtitle">{{ row.race_name }}</small>{% endif %}</td>
           <td class="numeric">{{ "{:,}".format(row.distance_m) }}m</td>
           <td>{{ row.display_grade }}{% if row.grade != row.display_grade %}<small class="distance-subtitle">원문: {{ row.grade or '없음' }}</small>{% endif %}</td>
           <td class="numeric">{{ row.entries or 0 }}두</td><td class="numeric">{{ row.timed or 0 }}두</td>
@@ -79,4 +217,6 @@
   <div class="empty-state"><strong>선택한 조건의 경주 기록이 없습니다.</strong><p>다른 거리·등급·연도를 선택해 보세요.</p><a href="{{ data.all_url }}">전체 거리 보기</a></div>
   {% endif %}
 </section>
+{% endif %}
+</div>
 {% endblock %}

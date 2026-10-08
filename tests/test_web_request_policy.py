@@ -112,6 +112,9 @@ def test_semantic_cache_key_coalesces_irrelevant_query_but_preserves_effective_i
     second = normalized_query_key(make_request("/analysis", "date=2026-09-23&meet=2"))
     assert first == second == "date=2026-09-23&meet=2"
     assert normalized_query_key(make_request("/analysis", "date=2026-09-22&meet=2")) != first
+    assert normalized_query_key(make_request("/analysis", "race_id=1&tab=records")) != (
+        normalized_query_key(make_request("/analysis", "race_id=1&tab=memo"))
+    )
 
     home_one = normalized_query_key(make_request("/", "race_id=14&trial_id=4"))
     home_two = normalized_query_key(make_request("/", "trial_id=4&race_id=14"))
@@ -131,13 +134,16 @@ def test_mobile_legacy_redirect_inputs_remain_supported() -> None:
     assert RequestPolicy().check_request(normal_mobile, client_key="mobile") is None
 
 
-def test_costly_route_rotation_shares_client_quota_and_returns_retry_after() -> None:
+def test_costly_route_rotation_shares_client_quota_and_returns_retry_after(monkeypatch) -> None:
+    import horse_racing.web.request_policy as module
+
+    monkeypatch.setitem(module._QUOTAS, "expensive", (24, 8))
     client = "route-rotation"
     policy = RequestPolicy()
     for i in range(8):
         route = "/analysis" if i % 2 == 0 else "/forecast"
-        assert policy.check_request(make_request(route), client_key=client, now=100.0 + i) is None
-    limited = policy.check_request(make_request("/validation"), client_key=client, now=109.0)
+        assert policy.check_request(make_request(route), client_key=client, now=100.0) is None
+    limited = policy.check_request(make_request("/validation"), client_key=client, now=100.0)
     assert limited is not None
     assert limited.status_code == 429
     assert limited.headers["Retry-After"] == "60"
@@ -163,16 +169,67 @@ def test_csv_has_a_tighter_endpoint_quota() -> None:
     assert limited is not None and limited.status_code == 429
 
 
-def test_dashboard_and_distance_pages_share_expensive_request_budget() -> None:
+def test_dashboard_and_distance_pages_share_expensive_request_budget(monkeypatch) -> None:
+    import horse_racing.web.request_policy as module
+
+    monkeypatch.setitem(module._QUOTAS, "expensive", (24, 8))
     policy = RequestPolicy()
     for i in range(8):
         route = "/" if i % 2 == 0 else "/racecourses/seoul/distances"
         assert (
-            policy.check_request(make_request(route), client_key="dashboard", now=300 + i)
+            policy.check_request(make_request(route), client_key="dashboard", now=300)
             is None
         )
-    limited = policy.check_request(make_request("/analysis"), client_key="dashboard", now=309)
+    limited = policy.check_request(make_request("/analysis"), client_key="dashboard", now=300)
     assert limited is not None and limited.status_code == 429
+
+
+def test_yeongcheon_distance_page_accepts_the_distance_query_policy() -> None:
+    response = RequestPolicy().check_request(
+        make_request(
+            "/racecourses/yeongcheon/distances",
+            "year=2026&distance=1200&grade=1%EB%93%B1%EA%B8%89&page=1",
+        ),
+        client_key="yeongcheon-distance",
+    )
+    assert response is None
+
+
+def test_distance_trial_view_is_validated_and_separated_in_cache_key() -> None:
+    policy = RequestPolicy()
+    path = "/racecourses/seoul/distances"
+    regular = make_request(path, "year=2026")
+    trials = make_request(path, "view=trials&year=2026")
+
+    assert policy.check_request(regular, client_key="distance-regular") is None
+    assert policy.check_request(trials, client_key="distance-trials") is None
+    assert normalized_query_key(regular) == "year=2026"
+    assert normalized_query_key(trials) == "view=trials&year=2026"
+    assert normalized_query_key(regular) != normalized_query_key(trials)
+
+    for query in ("view=regular", "view=unknown", "view="):
+        rejected = policy.check_request(
+            make_request(path, query), client_key=f"invalid-distance-view-{query}"
+        )
+        assert rejected is not None and rejected.status_code == 422
+
+
+def test_distance_benchmark_band_is_validated_and_separated_in_cache_key() -> None:
+    policy = RequestPolicy()
+    path = "/racecourses/seoul/distances"
+    dry = make_request(path, "year=2026&distance=1200&band=%EA%B1%B4%EC%A1%B0")
+    wet = make_request(path, "year=2026&distance=1200&band=%EB%B6%88%EB%9F%89")
+    assert policy.check_request(dry, client_key="distance-dry") is None
+    assert policy.check_request(wet, client_key="distance-wet") is None
+    assert normalized_query_key(dry) != normalized_query_key(wet)
+    assert "band=%EB%B6%88%EB%9F%89" in normalized_query_key(wet)
+
+    for value in ("invalid", ""):
+        rejected = policy.check_request(
+            make_request(path, f"distance=1200&band={value}"),
+            client_key=f"invalid-distance-band-{value}",
+        )
+        assert rejected is not None and rejected.status_code == 422
 
 
 def test_race_and_trial_path_ids_cannot_bypass_the_expensive_budget() -> None:
@@ -229,3 +286,45 @@ def test_live_quota_buckets_are_not_evicted_when_capacity_is_full(monkeypatch) -
     # Once the first client's whole window is idle its state expires and a new
     # client can reserve both of the bounded slots.
     assert policy.check_request(make_request("/analysis"), client_key="second", now=562) is None
+
+
+def test_calendar_query_accepts_only_one_valid_month() -> None:
+    policy = RequestPolicy()
+    for query in (
+        "month=2026-00",
+        "month=2026-13",
+        "month=2026-8",
+        "month=0000-01",
+        "month=2026-08&month=2026-09",
+        "month=2026-08&tenant=other",
+        "month=2026-08&" + "x" * 2100,
+    ):
+        rejected = policy.check_request(
+            make_request("/api/calendar", query), client_key=f"calendar-{len(query)}"
+        )
+        assert rejected is not None and rejected.status_code == 422, query
+
+    assert policy.check_request(
+        make_request("/api/calendar", "month=2026-08"), client_key="calendar-valid"
+    ) is None
+
+
+@pytest.mark.parametrize("query", ["page=201", "page=99999999999999999999", "page=1&page=2", "q=" + "a" * 101])
+def test_horse_separate_list_has_directory_query_bounds(query):
+    response = RequestPolicy().check_request(
+        make_request("/horses/list", query), client_key="directory-bounds",
+    )
+    assert response is not None and response.status_code == 422
+
+
+def test_entity_response_keys_separate_filters_and_detail_tabs():
+    for path, first, second in [
+        ("/owners", "meet=1&period=month", "meet=2&period=month"),
+        ("/jockeys", "period=month", "period=year"),
+        ("/horses/list", "grade=1&origin=domestic", "grade=2&origin=domestic"),
+        ("/horses/0045769", "tab=profile", "tab=records"),
+        ("/jockeys/080361", "tab=partners&period=month", "tab=partners&period=year"),
+    ]:
+        assert normalized_query_key(make_request(path, first)) != normalized_query_key(
+            make_request(path, second),
+        )

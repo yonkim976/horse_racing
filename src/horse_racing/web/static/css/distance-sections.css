@@ -1,0 +1,37 @@
+.distance-section-panel { overflow: hidden; }
+.distance-section-title { margin: 0 24px; font-size: 17px; }
+.distance-section-block { padding: 0 24px 24px; }
+.distance-section-block h3 { margin: 12px 0; font-size: 17px; }
+.distance-section-block h5 { margin: 18px 0 10px; font-size: 13px; }
+.distance-section-table { min-width: 790px; }
+.distance-trial-group { margin-top: 18px; padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.distance-trial-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.distance-trial-heading h4 { margin: 0 0 12px; font-size: 15px; }
+.distance-trial-heading span, .distance-basis-note { color: var(--muted); font-size: 12px; }
+.distance-analysis-hint { margin: 16px 0 24px; }
+.distance-benchmark-panel { overflow: hidden; }
+.benchmark-explanation { margin: 0 24px 12px; line-height: 1.65; }
+.benchmark-explanation strong { color: var(--ink-strong); }
+.benchmark-method { margin: 0 24px 18px; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--muted); font-size: 13px; line-height: 1.6; }
+.benchmark-method summary { color: var(--ink); cursor: pointer; font-weight: 650; }
+.benchmark-method p { margin: 8px 0 0; }
+.distance-benchmark-title { margin: 20px 24px 10px; font-size: 16px; }
+.benchmark-table-scroll { margin: 0 24px 12px; }
+.distance-benchmark-table { min-width: 1040px; }
+.distance-benchmark-table th, .distance-benchmark-table td { vertical-align: top; }
+.benchmark-status { display: inline-block; font-size: 12px; font-weight: 650; white-space: nowrap; }
+.benchmark-status-small_recent_sample { color: var(--gold); }
+.benchmark-status-no_recent_observation { color: var(--muted); }
+.benchmark-more { margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.benchmark-more summary { cursor: pointer; }
+.benchmark-more span { display: block; max-width: 240px; padding-top: 4px; }
+.benchmark-empty { margin: 16px 24px 24px; }
+@media (max-width: 640px) {
+  .distance-section-block { padding: 0 16px 18px; }
+  .distance-trial-group { padding: 12px; }
+  .benchmark-explanation { margin-right: 16px; margin-left: 16px; }
+  .benchmark-method { margin-right: 16px; margin-left: 16px; }
+  .distance-benchmark-title { margin-right: 16px; margin-left: 16px; }
+  .benchmark-table-scroll { margin-right: 16px; margin-left: 16px; }
+  .benchmark-empty { margin-right: 16px; margin-left: 16px; }
+}

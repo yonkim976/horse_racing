@@ -1,0 +1,25 @@
+{% set course = page.racecourse_map %}
+{% set selected = course.diagram.selected if course.meet_code != 2 else none %}
+<aside class="passing-course-panel" aria-label="전개 구간 경주로 위치">
+  <div class="passing-course-heading"><strong>{{ course.course_name }} {{ page.distance }}</strong><a href="#racecourse-map">경주로 크게 보기 ↗</a></div>
+  <p class="passing-course-title" data-passing-map-title></p>
+  <svg class="passing-course-map" viewBox="{{ '-167.5 -166.5 830 380' if course.meet_code == 2 else '-20 -20 830 560' }}" role="img" aria-label="{{ course.course_name }} 경주로의 선택 구간 위치">
+    <path class="passing-map-surface" d="{{ course.loop_path }}"/>
+    {% if course.meet_code == 2 %}<path class="passing-map-road" d="{{ course.loop_path }} {{ course.chute_path }}"/>{% endif %}
+    <path class="passing-map-field" d="{{ course.inner_path }}"/>
+    {% if course.meet_code == 3 %}<path class="passing-map-road" d="{{ course.diagram.inner_lane }} {{ course.diagram.connectors }}"/>{% endif %}
+    <path class="passing-map-route" d="{{ course.route_path }}"/>
+    {% if course.meet_code == 2 %}
+      {% for point in page.map_checkpoints if point.label != 'FIN' %}
+      <g class="passing-map-point" data-passing-map-codes="{{ point.label }}" transform="translate({{ point.x }} {{ point.y }})"><circle r="7"/><text y="{{ -22 if point.y < 0 else 30 }}" text-anchor="middle">{{ point.label }}</text></g>
+      {% endfor %}
+    {% elif selected %}
+      {% for marker in selected.metric.markers %}
+      <g class="passing-map-point" data-passing-map-codes="{{ marker.aliases|join('/') }}" transform="translate({{ marker.x }} {{ marker.y }})"><circle r="7"/><text x="{{ marker.label_x if course.meet_code in [3, 4] else (23 if marker.y < 400 else 0) }}" y="{{ marker.label_y if course.meet_code in [3, 4] else (5 if marker.y < 400 else 30) }}" text-anchor="{{ marker.label_anchor if course.meet_code in [3, 4] else ('start' if marker.y < 400 else 'middle') }}">{{ marker.aliases|join('/') }}</text></g>
+      {% endfor %}
+    {% endif %}
+    <g class="passing-map-point" data-passing-map-codes="FIN" transform="translate({{ course.goal_x }} {{ course.bottom_y }})"><path d="M 0 -12 v 24"/><circle r="7"/><text y="34" text-anchor="middle">결승</text></g>
+    <g class="passing-map-start" transform="translate({{ course.selected_start.x }} {{ course.selected_start.y }})"><circle r="6"/><text y="-17" text-anchor="middle">출발</text></g>
+  </svg>
+  <p class="passing-course-status" data-passing-map-status></p>
+</aside>

@@ -1,0 +1,16 @@
+{% macro stats_table(rows, first_label='기간') %}
+<div class="table-scroll">
+  <table class="entry-table jockey-stats-table">
+    <thead><tr><th>{{ first_label }}</th><th>출전</th><th>1위</th><th>2위</th><th>3위</th><th>승률</th><th>복승률</th><th>입상률</th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <th scope="row">{{ row.label }}</th>
+        <td class="numeric">{{ row.stats.starts }}</td><td class="numeric">{{ row.stats.wins }}</td><td class="numeric">{{ row.stats.seconds }}</td><td class="numeric">{{ row.stats.thirds }}</td>
+        <td class="numeric">{{ row.stats.win_rate }}</td><td class="numeric">{{ row.stats.quinella_rate }}</td><td class="numeric">{{ row.stats.place_rate }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endmacro %}

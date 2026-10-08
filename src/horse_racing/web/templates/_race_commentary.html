@@ -1,0 +1,39 @@
+{% if page.race_commentary %}
+{% set commentary = page.race_commentary %}
+{% set completed = page.selected_race.status == "completed" %}
+<section class="race-commentary" aria-label="운영자 경주 전 분석" data-race-commentary>
+  <div class="rc-heading-row">
+    <div class="rc-heading-copy">
+      <p class="rc-byline">운영자 분석 · {{ commentary.analysis_as_of }} 기준</p>
+      <h2>운영자 분석</h2>
+    </div>
+    <span class="rc-status">{{ "경주 전 참고 분석" if completed else "경주 전 분석" }}</span>
+  </div>
+  <p class="rc-summary">{{ commentary.summary }}</p>
+  {% if completed %}
+  <p class="rc-completed-note">당시 분석을 보존한 참고 자료이며, 경주 결과를 반영한 평가는 아닙니다.</p>
+  {% endif %}
+  <details class="rc-details">
+    <summary>말별 근거·변수·당일 체중 보기</summary>
+    <div class="rc-details-body">
+      <p class="rc-model-date">이 분석에서 참고한 모델 이력 기준 {{ commentary.model_history_as_of }}</p>
+      <ul class="rc-evidence-list">
+        {% for item in commentary.runner_notes %}
+        <li class="rc-evidence-item">
+          <div class="rc-runner-label"><span class="rc-stone silk-{{ item.number }}">{{ item.number }}</span><strong>{{ item.horse }}</strong></div>
+          <p>{{ item.evidence }}</p>
+          <p class="rc-variable">변수 · {{ item.variables }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <h3 class="rc-weight-heading">당일 마체중</h3>
+      <ul class="rc-weight-list">
+        {% for item in commentary.body_weights %}
+        <li><span class="rc-stone silk-{{ item.number }}">{{ item.number }}</span><span class="rc-weight-name">{{ item.horse }}</span><span class="rc-weight-value">{{ item.kg }}kg ({{ "+" if item.change_kg > 0 else "" }}{{ item.change_kg }}kg)</span></li>
+        {% endfor %}
+      </ul>
+      <p class="rc-source-note">운영자가 제공한 기록 해석·체중 기준으로 작성 · <a href="{{ commentary.source_url }}" target="_blank" rel="noopener noreferrer">공식 출전마 체중표 ↗</a></p>
+    </div>
+  </details>
+</section>
+{% endif %}

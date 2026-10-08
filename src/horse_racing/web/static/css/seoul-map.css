@@ -1,6 +1,7 @@
 .seoul-explorer { --seoul-surface: #293a32; --seoul-field: #15251c; --seoul-rail: #779080; }
 [data-theme="light"] .seoul-explorer { --seoul-surface: #e4ebe5; --seoul-field: #f4f8f3; --seoul-rail: #8ea396; }
-.seoul-map-body { padding:0 28px 22px; border-top:1px solid var(--border); background:linear-gradient(180deg,var(--surface-2),var(--surface-1)); }
+.seoul-map-body { padding:0 28px 12px; border-top:1px solid var(--border); background:linear-gradient(180deg,var(--surface-2),var(--surface-1)); }
+.seoul-map-body > :last-child { margin-bottom:0; }
 .seoul-viewport { overflow:auto; }
 .seoul-plan { display:block; width:100%; max-height:620px; }
 .seoul-plan [hidden] { display:none; }
@@ -37,7 +38,33 @@
 .seoul-metric-point text { fill:var(--ink-strong); font:600 12px var(--font-mono); paint-order:stroke; stroke:var(--surface-1); stroke-width:4px; stroke-linejoin:round; }
 
 @media(max-width:850px) { .seoul-viewport.with-source { grid-template-columns:1fr; } }
-@media(max-width:600px) { .seoul-map-body { padding:0 12px 18px; } .seoul-plan { min-width:420px; } }
+@media(max-width:600px) { .seoul-map-body { padding:0 12px 12px; } .seoul-plan { min-width:420px; } }
+
+.race-detail-map .seoul-plan {
+  width:min(100%, 540px);
+  min-width:0;
+  height:auto;
+  max-height:none;
+  aspect-ratio:830 / 560;
+  margin-inline:auto;
+}
+
+.race-detail-map .course-heading > div:first-child {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:8px 16px;
+}
+
+.race-detail-map .course-heading > div:first-child > p {
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.race-detail-map .course-heading .course-color-key {
+  flex-basis:100%;
+}
 
 /* Busan's infield separates the outer and inner racing lanes. Open ends
    reproduce the transfer gaps in the official plan. */

@@ -10,109 +10,30 @@
     <p class="eyebrow">RACE CALENDAR</p>
     <h1>경주 일정과 결과</h1>
   </div>
-
-  <form class="filters" method="get" data-filter-form>
-    <div class="date-picker-field">
-      <span class="filter-label">경주일</span>
-      <button class="calendar-trigger" type="button" data-calendar-open aria-haspopup="dialog"
-        aria-controls="race-calendar-modal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="16" rx="2"/>
-          <path d="M16 3v4M8 3v4M3 10h18"/>
-        </svg>
-        <span>
-          <strong data-calendar-trigger-label>
-            {% if dashboard.selected_date %}{{ dashboard.selected_date.strftime('%Y.%m.%d') }}{% else %}날짜 선택{% endif %}
-          </strong>
-          <small>달력에서 선택</small>
-        </span>
-        <span class="calendar-trigger-caret" aria-hidden="true">⌄</span>
-      </button>
-      <input type="hidden" name="date"
-        value="{% if dashboard.selected_date %}{{ dashboard.selected_date.isoformat() }}{% endif %}"
-        data-calendar-value>
-    </div>
-    <label>
-      <span>경마장</span>
-      <select name="meet" aria-label="경마장 선택">
-        <option value="">전체 경마장</option>
-        {% for racecourse in dashboard.racecourses %}
-          <option value="{{ racecourse.meet_code }}"
-            {% if racecourse.meet_code == dashboard.selected_meet %}selected{% endif %}>
-            {{ racecourse.name }}
-          </option>
-        {% endfor %}
-      </select>
-    </label>
-    <div class="date-nav" aria-label="경주일 이동">
-      {% if dashboard.prev_date %}
-        <a class="chip-link" href="/?date={{ dashboard.prev_date.isoformat() }}{% if dashboard.selected_meet %}&meet={{ dashboard.selected_meet }}{% endif %}">이전 일</a>
-      {% else %}
-        <span class="chip-link disabled">이전 일</span>
-      {% endif %}
-      {% if dashboard.next_date %}
-        <a class="chip-link" href="/?date={{ dashboard.next_date.isoformat() }}{% if dashboard.selected_meet %}&meet={{ dashboard.selected_meet }}{% endif %}">다음 일</a>
-      {% else %}
-        <span class="chip-link disabled">다음 일</span>
-      {% endif %}
-    </div>
-  </form>
 </section>
 
-<dialog class="calendar-modal" id="race-calendar-modal" data-calendar-modal
-  aria-labelledby="race-calendar-title">
-  <div class="calendar-dialog">
-    <div class="calendar-heading">
-      <div>
-        <p class="panel-kicker">RACE DAYS</p>
-        <h2 id="race-calendar-title">경주·주행심사일 선택</h2>
-      </div>
-      <button class="calendar-close" type="button" data-calendar-close aria-label="달력 닫기">×</button>
-    </div>
-    <div class="calendar-month-nav">
-      <button type="button" data-calendar-prev aria-label="이전 달">←</button>
-      <strong data-calendar-month-label></strong>
-      <button type="button" data-calendar-next aria-label="다음 달">→</button>
-    </div>
-    <div class="calendar-weekdays" aria-hidden="true">
-      <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span>
-    </div>
-    <div class="calendar-grid" data-calendar-grid role="grid" aria-label="경주·주행심사 달력"></div>
-    <div class="calendar-legend">
-      <span><i class="completed"></i>결과 있음</span>
-      <span><i class="scheduled"></i>예정</span>
-      <span><i class="trial"></i>주행심사</span>
-      <small>공식 경주와 주행심사를 서로 다른 표시로 구분합니다.</small>
-    </div>
-  </div>
-</dialog>
-
-<script id="race-calendar-data" type="application/json"
-  data-min-date="{{ dashboard.calendar_min_date.isoformat() if dashboard.calendar_min_date else '' }}"
-  data-max-date="{{ dashboard.calendar_max_date.isoformat() if dashboard.calendar_max_date else '' }}">
-[
-  {% for item in dashboard.calendar_dates %}
-    {"date": {{ item.value | tojson }}, "status": {{ item.status | tojson }}, "hasRace": {{ item.has_race | tojson }}, "hasTrial": {{ item.has_trial | tojson }}}{% if not loop.last %},{% endif %}
-  {% endfor %}
-]
-</script>
+{% with calendar=dashboard %}{% include "_race_calendar.html" %}{% endwith %}
 
 <section class="board-layout race-board">
-  <article class="panel schedule-panel">
-    <div class="panel-heading">
-      <div>
-        <p class="panel-kicker">DAILY CARD</p>
-        <h2>공식 경주와 주행심사</h2>
-      </div>
-      {% if dashboard.selected_date %}
-        <time>{{ dashboard.selected_date.strftime('%Y년 %m월 %d일') }}</time>
+  <article class="panel schedule-panel" data-dashboard-schedule aria-label="경주 일정">
+    <form class="filters schedule-toolbar" method="get" data-filter-form>
+      {% with calendar=dashboard, calendar_path="/" %}{% include "_race_date_control.html" %}{% endwith %}
+      {% if dashboard.selected_meet %}
+        <input type="hidden" name="meet" value="{{ dashboard.selected_meet }}">
       {% endif %}
-    </div>
-
+      {% if dashboard.day_meets %}
+        <nav class="schedule-venue-filter" aria-label="당일 경마장 선택">
+          {% for meet in dashboard.day_meets %}
+            <a class="schedule-venue-button" href="{{ meet.href }}"
+              {% if meet.selected %}aria-current="page"{% endif %}>{{ meet.label }}</a>
+          {% endfor %}
+        </nav>
+      {% endif %}
+    </form>
+    <div class="schedule-fixed-head" data-schedule-fixed-head aria-hidden="true" hidden></div>
+    <div class="schedule-body-scroll" data-schedule-body-scroll>
     {% if dashboard.races %}
-      <div class="event-section-heading"><span class="event-type race">공식 경주</span><small>예측 대상 경주</small></div>
-      <div class="table-scroll">
+      <div class="table-scroll" data-schedule-table-section>
         <table class="race-table">
           <thead>
             <tr>
@@ -120,7 +41,6 @@
               <th>출발</th>
               <th>조건</th>
               <th>출전</th>
-              <th>상태</th>
               <th>우승마</th>
             </tr>
           </thead>
@@ -128,21 +48,26 @@
             {% for group in dashboard.race_groups %}
               {% if group.course_name and dashboard.race_groups | length > 1 %}
                 <tr class="group-row">
-                  <th colspan="6">{{ group.course_name }}</th>
+                  <th colspan="5">{{ group.course_name|replace('부산경남', '부산') }}</th>
                 </tr>
               {% endif %}
               {% for race in group.races %}
                 <tr class="clickable-row {% if dashboard.selected_race and race.id == dashboard.selected_race.id %}selected{% endif %}"
                   tabindex="0"
-                  data-href="{{ race.href }}">
+                  data-href="{{ race.href }}"
+                  data-dashboard-race-id="{{ race.id }}"
+                  data-race-detail-href="{{ race.detail_href }}">
                   <td>
-                    <a class="race-number" href="{{ race.detail_href }}">{{ race.course_name }} {{ race.race_number }}R</a>
+                    <div class="race-title-with-status">
+                      <a class="race-number" href="{{ race.href }}" data-dashboard-race-select
+                        data-race-detail-href="{{ race.detail_href }}">{{ race.course_name|replace('부산경남', '부산') }} {{ race.race_number }}R</a>
+                      <span class="race-status-badge status {{ race.status }}">{{ race.status_label }}</span>
+                    </div>
                     <span>{{ race.distance }}</span>
                   </td>
                   <td class="numeric">{{ race.start_time }}</td>
-                  <td>{{ race.race_label }}</td>
+                  <td>{{ race.condition_label }}</td>
                   <td class="numeric">{{ race.entry_count }}두</td>
-                  <td><span class="status {{ race.status }}">{{ race.status_label }}</span></td>
                   <td>
                     <strong>{{ race.winner }}</strong>
                     <span>{{ race.winning_time }}</span>
@@ -157,13 +82,13 @@
 
     {% if dashboard.trials %}
       <div class="event-section-heading trial"><span class="event-type trial">주행심사</span><small>예측 대상 제외 · 과거 상태 변수로 사용</small></div>
-      <div class="table-scroll">
+      <div class="table-scroll" data-schedule-table-section>
         <table class="race-table trial-card-table">
           <thead><tr><th>심사</th><th>회차</th><th>거리</th><th>참가</th><th>판정</th><th>구분</th></tr></thead>
           <tbody>
             {% for trial in dashboard.trials %}
             <tr class="clickable-row trial-row {% if dashboard.selected_trial_id == trial.id %}selected{% endif %}" tabindex="0" data-href="{{ trial.detail_href }}">
-              <td><a class="race-number trial-link" href="{{ trial.detail_href }}">{{ trial.course_name }} {{ trial.race_number }}R</a></td>
+              <td><a class="race-number trial-link" href="{{ trial.detail_href }}">{{ trial.course_name|replace('부산경남', '부산') }} {{ trial.race_number }}R</a></td>
               <td>{{ trial.trial_round }}</td><td class="numeric">{{ trial.distance }}</td><td class="numeric">{{ trial.entry_count }}두</td>
               <td><span class="trial-pass-text">합격 {{ trial.pass_count }}</span> · <span class="trial-fail-text">불합격 {{ trial.fail_count }}</span></td>
               <td><span class="event-type trial">{{ trial.status_label }}</span></td>
@@ -180,10 +105,13 @@
         <p>다른 날짜나 경마장을 선택해 주세요.</p>
       </div>
     {% endif %}
+    </div>
   </article>
 
-  {% if dashboard.selected_race %}
-    <article class="panel detail-panel">
+    <article class="panel detail-panel" data-dashboard-detail data-race-id="{{ dashboard.selected_race.id if dashboard.selected_race else '' }}" {% if not dashboard.selected_race %}hidden{% endif %}>
+      <div class="dashboard-selection-status" data-dashboard-detail-status role="status"
+        aria-live="polite" hidden></div>
+      {% if dashboard.selected_race %}
       <div class="race-hero" data-racecourse="{{ dashboard.selected_race.course_name }}">
         <div class="race-badge">
           <span>{{ dashboard.selected_race.course_name }}</span>
@@ -199,7 +127,7 @@
               <span class="status {{ dashboard.selected_race.status }}">
                 {{ dashboard.selected_race.status_label }}
               </span>
-              <a class="detail-link" href="{{ dashboard.selected_race.detail_href }}">구간 · 배당 · 심판 →</a>
+              <a class="detail-link" href="{{ dashboard.selected_race.detail_href }}">경주 상세 보기 →</a>
             </div>
           </div>
           <div class="race-meta">
@@ -208,20 +136,13 @@
               <span>{{ dashboard.selected_race.grade }}</span>
             {% endif %}
             <span>{{ dashboard.selected_race.weather_track }}</span>
+            <span>{{ dashboard.selected_race.entries | length }}두</span>
           </div>
         </div>
       </div>
 
-      <div class="panel-heading entries-heading">
-        <div>
-          <p class="panel-kicker">RUNNERS</p>
-          <h2>출전마 및 결과</h2>
-        </div>
-        <span>{{ dashboard.selected_race.entries | length }}두</span>
-      </div>
-
-      {{ entry_table(dashboard.selected_race.entries) }}
+      {{ entry_table(dashboard.selected_race.entries, scheduled=dashboard.selected_race.status == 'scheduled') }}
+      {% endif %}
     </article>
-  {% endif %}
 </section>
 {% endblock %}

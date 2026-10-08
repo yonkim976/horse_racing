@@ -1,0 +1,127 @@
+.public-info {
+  width: min(100%, 860px);
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.public-info-heading {
+  margin-bottom: 28px;
+}
+
+.public-info-kicker {
+  margin: 0 0 8px;
+  color: var(--accent-strong);
+  font: 700 11px/1.4 var(--font-mono);
+  letter-spacing: .1em;
+}
+
+.public-info-heading h1 {
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: clamp(28px, 5vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -.04em;
+}
+
+.public-info-heading > p:last-child {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.public-info-section {
+  margin-top: 16px;
+  padding: 22px 24px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.public-info-section h2 {
+  margin: 0 0 12px;
+  color: var(--ink-strong);
+  font-size: 18px;
+  letter-spacing: -.025em;
+}
+
+.public-info-section p,
+.public-info-section li {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.public-info-section p {
+  margin: 8px 0 0;
+}
+
+.public-info-section ul,
+.public-info-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.public-info-steps strong {
+  display: block;
+  color: var(--ink);
+}
+
+.public-info-steps span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.public-info a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.public-info-note,
+.public-info-review {
+  margin-top: 16px;
+  padding: 14px 16px;
+  color: var(--muted);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.public-info-contact {
+  overflow-wrap: anywhere;
+}
+
+.public-info code {
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: .9em;
+}
+
+@media (max-width: 560px) {
+  .public-info {
+    width: calc(100% - 28px);
+    padding: 10px 0 32px;
+  }
+
+  .public-info-heading {
+    margin-bottom: 20px;
+  }
+
+  .public-info-section {
+    padding: 18px 16px;
+    border-radius: var(--radius);
+  }
+
+  .public-info-section h2 {
+    font-size: 17px;
+  }
+}

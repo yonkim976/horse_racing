@@ -39,16 +39,18 @@ def _time_priority(point_code: str, time_kind: str) -> int:
 
 
 def load_section_observations(
-    session: Session, entry_ids: Sequence[int]
+    session: Session, entry_ids: Sequence[int], *, batch_size: int = 500
 ) -> dict[int, list[SectionObservation]]:
     """Use score-sheet values for matching points, old rows only for uncovered points."""
     if not entry_ids:
         return {}
+    if batch_size < 1:
+        raise ValueError("batch_size must be positive")
     ids = sorted(set(entry_ids))
     canonical = []
     legacy = []
-    for start in range(0, len(ids), 500):
-        batch = ids[start : start + 500]
+    for start in range(0, len(ids), batch_size):
+        batch = ids[start : start + batch_size]
         canonical.extend(
             session.scalars(
                 select(RaceSectionTime).where(

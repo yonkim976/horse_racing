@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, replace
 from itertools import groupby
 from statistics import median
@@ -14,6 +15,7 @@ from horse_racing.db.models import (
     OddsSnapshot,
     Race,
     RaceEntry,
+    RacePassingGroup,
     RaceScratch,
     RaceStewardReport,
 )
@@ -23,6 +25,7 @@ from horse_racing.services.section_read import (
     load_section_observations,
 )
 from horse_racing.web.dashboard import EntryRow, _entry_row, _status
+from horse_racing.web.entry_preview import load_entry_previews
 from horse_racing.web.formatting import (
     display_race_title,
     dividend_label,
@@ -90,6 +93,8 @@ class SectionEntryRow:
     cells: list[SectionCell]
     closing_600: str = "—"
     closing_200: str = "—"
+    finish_time_ms: int | None = None
+    finish_margin: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -215,7 +220,8 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
             )
         )
     }
-    entries = [_entry_row(entry, odds) for entry in race.entries]
+    previews = load_entry_previews(session, race)
+    entries = [_entry_row(entry, odds, previews.get(entry.horse_id)) for entry in race.entries]
     entries.sort(key=lambda entry: (entry.finish_sort, entry.horse_number))
 
     section_columns = _section_columns(race)
@@ -241,7 +247,13 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
         )
         for row in section_rows
     ]
-    chart_data = build_section_chart_data(section_columns, section_rows)
+    passing_notations = {
+        group.point_code: group.notation_raw
+        for group in session.scalars(
+            select(RacePassingGroup).where(RacePassingGroup.race_id == race.id)
+        )
+    }
+    chart_data = build_section_chart_data(section_columns, section_rows, passing_notations)
     condition_parts = [part for part in (race.weather, race.track_condition) if part]
     if race.track_moisture_percent is not None:
         condition_parts.append(f"함수율 {race.track_moisture_percent:g}%")
@@ -500,6 +512,7 @@ def _horse_name(session: Session, horse_id: int | None) -> str:
 def build_section_chart_data(
     columns: list[SectionColumn],
     rows: list[SectionEntryRow],
+    passing_notations: dict[str, str] | None = None,
 ) -> dict[str, object]:
     if not columns or not rows:
         return {"labels": [], "series": [], "maxPosition": 0}
@@ -522,9 +535,6 @@ def build_section_chart_data(
             if pos is not None:
                 max_position = max(max_position, pos)
 
-        if all(position is None for position in positions):
-            continue
-
         series.append(
             {
                 "horseId": row.horse_id,
@@ -534,8 +544,42 @@ def build_section_chart_data(
                 "positions": positions,
                 "segmentTimes": segment_times,
                 "cumulativeTimes": cumulative_times,
+                "positionsInferred": [cell.position_inferred for cell in row.cells],
+                "finishTimeMs": row.finish_time_ms,
+                "finishMargin": row.finish_margin,
             }
         )
+
+    known_numbers = {row.horse_number for row in rows}
+    finish_offsets = cumulative_finish_margins(rows)
+    checkpoints = []
+    for index, column in enumerate(columns):
+        notation = next(
+            (passing_notations[code] for code in column.codes
+             if passing_notations and passing_notations.get(code)),
+            "",
+        )
+        groups = parse_passing_groups(notation, known_numbers)
+        official = bool(groups)
+        offset = 0.0
+        for group in groups:
+            offset += {",": 1.5, "-": 3.5, "=": 7.5, "≡": 10.0}.get(group["gap"], 0.0)
+            group["distanceLengths"] = offset
+        if not groups:
+            groups = [
+                {"horses": [row.horse_number], "gap": ",", "distanceLengths":
+                 finish_offsets.get(row.horse_number) if column.code == FINISH_LABEL else None}
+                for row in sorted(rows, key=lambda row: (row.cells[index].sort_position,
+                                                        row.horse_number))
+                if 0 < row.cells[index].sort_position < 90
+            ]
+        checkpoints.append({
+            "label": column.label,
+            "location": column.location,
+            "notation": notation,
+            "mode": "official" if official else "finish" if column.code == FINISH_LABEL else "rank",
+            "groups": groups,
+        })
 
     return {
         "labels": labels,
@@ -543,7 +587,90 @@ def build_section_chart_data(
                           else "구간" for c in columns],
         "series": series,
         "maxPosition": max_position,
+        "checkpoints": checkpoints,
     }
+
+
+def parse_finish_margin(value: str) -> float | None:
+    """Numeric margins are lengths; anatomical terms use display-only representatives.
+
+    KRA's race guide lists nose/head/neck as physical ranges and one length as
+    about 2.4m. These small display values are estimates, not official conversions.
+    https://park.kra.co.kr/race_guide_.pdf
+    """
+    value = value.strip().replace("마신", "").strip()
+    if not value or len(value) > 50:
+        return None
+    special = {"코": 0.05, "머리": 0.15, "목": 0.3, "동착": 0, "동": 0, "대차": 10}
+    if value in special:
+        return special[value]
+    fractions = {"¼": .25, "½": .5, "¾": .75, "⅛": .125, "⅜": .375,
+                 "⅝": .625, "⅞": .875}
+    mixed = re.fullmatch(r"(\d*)\s*([¼½¾⅛⅜⅝⅞])", value)
+    if mixed:
+        return int(mixed[1] or 0) + fractions[mixed[2]]
+    fraction = re.fullmatch(r"(?:(\d+)\s+)?(\d+)\s*/\s*(\d+)", value)
+    if fraction and int(fraction[3]) > 0:
+        return int(fraction[1] or 0) + int(fraction[2]) / int(fraction[3])
+    if re.fullmatch(r"\d+(?:\.\d+)?", value):
+        return float(value)
+    return None
+
+
+def cumulative_finish_margins(rows: list[SectionEntryRow]) -> dict[int, float | None]:
+    """Official margins compare consecutive placings, so accumulate from the winner.
+
+    A missing placing or margin breaks the cumulative chain. Equal placings share
+    one offset, even if each tied runner repeats the same margin to the prior place.
+    """
+    output = {}
+    total: float | None = 0.0
+    expected_rank = 1
+    finishers = sorted((row for row in rows if 0 < row.finish_sort < 90),
+                       key=lambda row: (row.finish_sort, row.horse_number))
+    for rank, tied in groupby(finishers, key=lambda row: row.finish_sort):
+        batch = list(tied)
+        if rank != expected_rank:
+            total = None
+        if rank == 1:
+            total = 0.0
+        elif total is not None:
+            margins = {parse_finish_margin(row.finish_margin) for row in batch}
+            margins.discard(None)
+            if len(batch) > 1 and len(margins) > 1:
+                margins.discard(0.0)  # "동착" may accompany a shared margin.
+            if len(margins) == 1:
+                total = round(total + margins.pop(), 4)
+            else:
+                total = None
+        for row in batch:
+            output[row.horse_number] = total
+        expected_rank = rank + len(batch)
+    return output
+
+
+def parse_passing_groups(notation: str, known_numbers: set[int]) -> list[dict[str, object]]:
+    """Keep official parenthesized packs and separators; never infer packs from ranks."""
+    compact = re.sub(r"\s+", "", notation)
+    if not compact or len(compact) > 500:
+        return []
+    tokens = list(re.finditer(r"\(\^?\d+(?:,\^?\d+)*\)|\^?\d+", compact))
+    groups = []
+    seen: set[int] = set()
+    end = 0
+    for token in tokens:
+        separator = compact[end:token.start()]
+        if (groups and not re.fullmatch(r",|-+|=+|≡+", separator)) or (not groups and separator):
+            return []
+        horses = [int(number) for number in re.findall(r"\d+", token.group())]
+        if len(horses) != len(set(horses)) or any(
+            horse not in known_numbers or horse in seen for horse in horses
+        ):
+            return []
+        groups.append({"horses": horses, "gap": separator})
+        seen.update(horses)
+        end = token.end()
+    return groups if end == len(compact) else []
 
 
 def _section_columns(race: Race) -> list[SectionColumn]:
@@ -810,6 +937,8 @@ def _section_rows(
                 cells=cells,
                 closing_600=_closing_time(entry, "G3F", meet_code),
                 closing_200=_closing_time(entry, "G1F", meet_code),
+                finish_time_ms=entry.result.finish_time_ms if entry.result is not None else None,
+                finish_margin=(entry.result.margin_text or "") if entry.result is not None else "",
             )
         )
     rows.sort(key=lambda row: (row.finish_sort, row.horse_number))

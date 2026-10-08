@@ -23,7 +23,8 @@ def factory():
     with factory() as session:
         jeju = Racecourse(kra_meet_code=2, code="JEJU", name_ko="제주")
         seoul = Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울")
-        session.add_all([jeju, seoul])
+        yeongcheon = Racecourse(kra_meet_code=4, code="YEONGCHEON", name_ko="영천")
+        session.add_all([jeju, seoul, yeongcheon])
         for number in range(1, 33):
             race = Race(
                 racecourse=jeju,
@@ -114,6 +115,7 @@ def test_render_empty_and_validation(factory):
     response = client.get("/racecourses/jeju/distances")
     assert response.status_code == 200
     assert "제주 거리별 분석" in response.text
+    assert response.text.count('<option value="2026"') == 1
     assert "/races/" in response.text
     empty = client.get("/racecourses/jeju/distances?year=2026&distance=400")
     assert empty.status_code == 200
@@ -135,6 +137,7 @@ def test_seoul_distance_page_is_separate_and_validates_course(factory):
     response = client.get("/racecourses/seoul/distances?year=2026&grade=혼4등급&distance=1700")
     assert response.status_code == 200
     assert "서울 거리별 분석" in response.text
+    assert "course-view.js?v=11" in response.text
     assert 'action="/racecourses/seoul/distances"' in response.text
     assert '1,700' in response.text
     assert client.get("/racecourses/unknown/distances").status_code == 404
@@ -143,3 +146,104 @@ def test_seoul_distance_page_is_separate_and_validates_course(factory):
                                   page=1, meet_code=1)
         assert data["total"] == 1
         assert data["items"][0]["display_grade"] == "혼4등급"
+
+
+def test_yeongcheon_distance_page_supports_general_grade_labels(factory):
+    client = TestClient(create_app(session_factory=factory))
+    response = client.get(
+        "/racecourses/yeongcheon/distances?year=2026&distance=1200&grade=1%EB%93%B1%EA%B8%89"
+    )
+    assert response.status_code == 200
+    assert "영천 거리별 분석" in response.text
+    assert "주행심사" in response.text
+    assert "/racecourses/yeongcheon/course" in response.text
+
+
+
+def test_course_view_shell_preserves_trial_year_in_meet_links(factory):
+    client = TestClient(create_app(session_factory=factory))
+    response = client.get("/racecourses/seoul/distances?view=trials&year=2026")
+    assert response.status_code == 200
+    assert (
+        '<div class="course-view-content" data-course-view-content '
+        'data-course="seoul" data-view="distances">'
+    ) in response.text
+    for slug in ("seoul", "busan", "yeongcheon", "jeju"):
+        assert (
+            f'href="/racecourses/{slug}/distances?view=trials&amp;year=2026" '
+            f'data-course-meet="{slug}"'
+        ) in response.text
+
+def test_seoul_1200_benchmark_routes_validate_band_and_render_grade_views(factory):
+    client = TestClient(create_app(session_factory=factory))
+    all_grades = client.get(
+        "/racecourses/seoul/distances?year=2026&distance=1200&band=다습"
+    )
+    assert all_grades.status_code == 200
+    assert "1200m 기록 기준" in all_grades.text
+    assert "다습 · 10–14%" in all_grades.text
+    assert "연구용 추정 기준" in all_grades.text
+    assert "관측 출전기록/경주/일" in all_grades.text
+    assert "전체 등급을 합친 기록" not in all_grades.text
+    assert "band=%EB%8B%A4%EC%8A%B5" in all_grades.text
+
+    selected = client.get(
+        "/racecourses/seoul/distances?year=2026&distance=1200&grade=%EA%B5%AD5%EB%93%B1%EA%B8%89&band=%EB%B6%88%EB%9F%89"
+    )
+    assert selected.status_code == 200
+    assert "5개 함수율별 전체시간 기준" not in selected.text
+    assert "불량 함수율 · 구간별 기준" in selected.text
+    assert "1:15.09" in selected.text
+    assert "마지막 400m" not in selected.text
+
+    unsupported = client.get(
+        "/racecourses/seoul/distances?year=2026&distance=1200&grade=%EA%B5%AD2%EB%93%B1%EA%B8%89"
+    )
+    assert unsupported.status_code == 200
+    assert "국2등급 연구 기준 자료가 없습니다" in unsupported.text
+    for path in (
+        "/racecourses/seoul/distances?distance=1200&band=invalid",
+        "/racecourses/seoul/distances?distance=1200&band=",
+        "/racecourses/seoul/distances?distance=1000&band=건조",
+        "/racecourses/jeju/distances?distance=1200&band=건조",
+        "/racecourses/seoul/distances?view=trials&band=건조",
+    ):
+        assert client.get(path).status_code == 422
+
+
+def test_links_to_1200m_from_distance_and_trial_views_get_a_valid_default_band(factory):
+    target_urls = []
+    with factory() as session:
+        seoul = session.query(Racecourse).filter_by(kra_meet_code=1).one()
+        session.add(
+            Race(
+                racecourse=seoul,
+                race_date_local=date(2026, 9, 6),
+                race_number=100,
+                distance_m=1200,
+                grade="국5",
+                status="completed",
+            )
+        )
+        session.commit()
+
+        for distance, view in ((0, "regular"), (1700, "regular"), (0, "trials")):
+            data = load_distance_page(
+                session,
+                year=2026 if view == "regular" else None,
+                distance=distance,
+                grade="",
+                page=1,
+                meet_code=1,
+                view=view,
+            )
+            target = next(item for item in data["distances"] if item["distance"] == 1200)
+            query = parse_qs(urlparse(target["url"]).query)
+            assert query.get("band") in (None, ["건조"])
+            target_urls.append(target["url"])
+
+    client = TestClient(create_app(session_factory=factory))
+    for url in target_urls:
+        response = client.get(url)
+        assert response.status_code == 200
+        assert 'option value="건조" selected' in response.text

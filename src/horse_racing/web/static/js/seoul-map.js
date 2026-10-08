@@ -1,4 +1,6 @@
 document.querySelectorAll('[data-seoul-map]').forEach((root) => {
+  if (root.dataset.seoulRouteMapInitialized === 'true') return;
+  root.dataset.seoulRouteMapInitialized = 'true';
   const buttons = [...root.querySelectorAll('[data-seoul-distance]')];
   const routes = [...root.querySelectorAll('[data-seoul-route]')];
   const current = root.dataset.distance;
@@ -64,6 +66,8 @@ document.querySelectorAll('[data-seoul-map]').forEach((root) => {
 });
 
 document.querySelectorAll('[data-seoul-map]').forEach((root) => {
+  if (root.dataset.seoulSectionsInitialized === 'true') return;
+  root.dataset.seoulSectionsInitialized = 'true';
   const reset = root.querySelector('[data-course-reset]');
   if (!reset) return;
   const steps = [...root.querySelectorAll('[data-course-select]')];

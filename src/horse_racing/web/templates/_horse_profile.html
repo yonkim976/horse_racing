@@ -1,0 +1,35 @@
+{% set meta = dict(detail.meta_rows) %}
+<div class="horse-profile-groups">
+  {% for title, labels in [
+    ('말 정보', ['마번', '영문 마명', '나이', '성별', '산지', '생년월일']),
+    ('소속·혈통', ['등급', '소속', '조교사', '마주', '부마', '모마']),
+    ('성적·거래', ['마지막 경주 레이팅', '통산 성적', '올해 성적', '통산 상금', '거래가'])
+  ] %}
+  <section class="horse-profile-group" aria-labelledby="horse-profile-group-{{ loop.index }}">
+    <h3 id="horse-profile-group-{{ loop.index }}">{{ title }}</h3>
+    <dl class="horse-profile-facts">
+      {% for label in labels %}
+      <div>
+        <dt>{{ label }}</dt>
+        <dd>{{ meta.get(label, '—') }}</dd>
+        {% if label == '마지막 경주 레이팅' and meta.get('레이팅 기준 경주') %}
+        <dd class="horse-profile-context">{{ meta['레이팅 기준 경주'] }} 기준</dd>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </dl>
+    {% if title == '성적·거래' and detail.profile %}
+    <p class="horse-profile-note">통산·올해 성적은 수집 시점 기준입니다.</p>
+    {% endif %}
+  </section>
+  {% endfor %}
+</div>
+<details class="horse-profile-reference">
+  <summary>이력 건수·정보 확인 날짜</summary>
+  <dl class="horse-profile-reference-facts">
+    {% for label in ['체중 이력', '훈련 이력', '진료 이력', '주행심사', '현역 상태', '상태 확인', '프로필 관측'] %}
+      {% if label in meta %}<div><dt>{{ label }}</dt><dd>{{ meta[label] }}</dd></div>{% endif %}
+    {% endfor %}
+  </dl>
+  <a href="/horses/{{ detail.official_id }}?tab=history">말이력 보기 →</a>
+</details>

@@ -1,4 +1,6 @@
 document.querySelectorAll('[data-course-explorer]').forEach((root) => {
+  if (root.dataset.courseExplorerInitialized === 'true') return;
+  root.dataset.courseExplorerInitialized = 'true';
   const steps = [...root.querySelectorAll('[data-course-select]')];
   const closing = [...root.querySelectorAll('[data-course-closing]')];
   const reset = root.querySelector('[data-course-reset]');

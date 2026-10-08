@@ -1,0 +1,80 @@
+{% macro passing_order(record) -%}
+  {% if record.passing_order is defined and record.passing_order and record.passing_order != '—' %}
+    <span title="공식 통과순위 원문">{{ record.passing_order }}</span>
+  {% else %}
+    {% set order = namespace(values=[], labels=[], found=false) %}
+    {% for code, cell in record.section_details.items() if code != 'G3F' or cell.get('position') %}
+      {% set order.labels = order.labels + [code] %}
+      {% set order.values = order.values + [cell.get('position') | string if cell.get('position') else ' '] %}
+      {% if cell.get('position') %}{% set order.found = true %}{% endif %}
+    {% endfor %}
+    <span title="{{ order.labels | join(' - ') }} · 빈칸은 확인된 순위 없음">{{ order.values | join('-') if order.found else '—' }}</span>
+  {% endif %}
+{%- endmacro %}
+
+{% set sections = namespace(available=[], codes=[]) %}
+{% for runner in page.runners %}
+  {% for record in runner.history + runner.trials %}
+    {% for code, cell in record.section_details.items() %}
+      {% if (cell.get('time_ms') or (cell.get('raw_time_ms') or 0) > 0) and code not in sections.available %}
+        {% set sections.available = sections.available + [code] %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+{% for code in page.section_codes if code in sections.available or code in ['S1F','G3F','G1F'] %}
+  {% set sections.codes = sections.codes + [code] %}
+{% endfor %}
+{% for code in sections.available if code not in sections.codes %}
+  {% set sections.codes = sections.codes + [code] %}
+{% endfor %}
+{% set column_count = 6 + sections.codes|length %}
+
+<section id="all-runner-records" class="ra-panel ra-all-records" aria-labelledby="all-records-title">
+  <div class="ra-panel-heading">
+    <div><h2 id="all-records-title">출전마 최근 경주·주행심사</h2><p>마번 순서 · 경주와 주행심사를 최신순으로 함께 표시 · 경주 최근 {{ page.history_limit }}전, 주행심사 최근 12회까지</p></div>
+  </div>
+  <div class="ra-table-scroll" tabindex="0" aria-label="전체 출전마 최근 경주와 주행심사 기록표">
+    <table class="ra-all-records-table">
+      <thead><tr>
+        <th scope="col">경주일 · 영상</th><th scope="col">조건</th><th scope="col">거리</th><th scope="col">순위</th><th scope="col">기록</th>
+        {% for code in sections.codes %}<th scope="col" data-all-records-section="{{ code }}">{{ code }}</th>{% endfor %}
+        <th scope="col">구간착순</th>
+      </tr></thead>
+      {% for runner in page.runners | sort(attribute='number') %}
+      <tbody data-all-records-horse="{{ runner.number }}">
+        <tr class="ra-all-records-horse-heading"><th scope="rowgroup" colspan="{{ column_count }}">
+          <div class="ra-all-records-identity">
+            {{ stone(runner.number) }}
+            <a href="/horses/{{ runner.profile.get('official_id', runner.horse_id) }}?tab=records">{{ runner.horse }}</a>
+            <span>{{ runner.jockey }} 기수 · {{ runner.trainer }} 조교사 · {{ runner.weight }}{% if runner.state == '출전취소' %} · 출전취소{% endif %}</span>
+            <span>경주 {{ runner.history|length }}건 · 심사 {{ runner.trials|length }}건</span>
+          </div>
+        </th></tr>
+        {% set rows = namespace(items=[]) %}
+        {% for record in runner.history %}{% set rows.items = rows.items + [{'kind':'race', 'record':record}] %}{% endfor %}
+        {% for record in runner.trials %}{% set rows.items = rows.items + [{'kind':'trial', 'record':record}] %}{% endfor %}
+        {% for item in rows.items | sort(attribute='record.date', reverse=true) %}
+        {% set record, kind = item.record, item.kind %}
+        <tr data-all-records-kind="{{ kind }}">
+          <td class="ra-all-records-date">
+            <div class="ra-all-records-date-line">{% if kind == 'race' and record.race_id %}<a href="/races/{{ record.race_id }}">{{ record.date }}</a>{% else %}<span>{{ record.date }}</span>{% endif %}{% if record.video_url %}{{ video(record.video_url, runner.horse ~ ' · ' ~ record.date ~ (' 경주' if kind == 'race' else ' 주행심사')) }}{% endif %}</div>
+            <small>{{ record.meet }} {{ record.race_number ~ 'R' if kind == 'race' else record.number ~ '차' }}</small>
+          </td>
+          <td class="ra-all-records-condition"><strong>{% if kind == 'race' %}{{ record.grade ~ '등급' if record.grade.isdecimal() else record.grade }}{% else %}주행심사{% endif %}</strong><small>{{ record.condition }}</small></td>
+          <td class="ra-number">{{ record.distance }}m</td>
+          <td class="ra-all-records-finish"><strong{% if kind == 'race' and record.valid_finish and record.finish_position <= 3 %} class="ra-placed"{% endif %}>{{ record.finish }}</strong>{% if kind == 'race' and record.field_size %}<small>/ {{ record.field_size }}두</small>{% elif kind == 'trial' %}<small title="{{ record.reason }}">{{ record.judgement }}</small>{% endif %}</td>
+          <td class="ra-number">{{ record.time }}</td>
+          {% for code in sections.codes %}
+          {% set cell = record.section_details.get(code, {}) %}
+          <td class="ra-number ra-all-records-section{% if not cell.get('time_ms') and (cell.get('raw_time_ms') or 0) > 0 %} is-raw{% endif %}" data-section="{{ code }}" title="{{ cell.get('label', code) }} · {{ cell.get('note', '') }}">{% if cell.get('time_ms') %}{{ '%.1f' | format(cell.get('time_ms') / 1000) }}{% elif (cell.get('raw_time_ms') or 0) > 0 %}{{ '%.1f' | format(cell.get('raw_time_ms') / 1000) }}<sup aria-label="원문 기록">*</sup>{% else %}—{% endif %}</td>
+          {% endfor %}
+          <td class="ra-all-records-passing-order">{{ passing_order(record) }}</td>
+        </tr>
+        {% else %}<tr><td class="ra-all-records-empty" colspan="{{ column_count }}">조회 범위에 연결된 경주·주행심사 기록이 없습니다.</td></tr>{% endfor %}
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <p class="ra-footnote">{{ page.selected_race.date }} 이전 기록 · 구간기록은 초 단위 숫자입니다. *는 시간 기준 미확인 또는 비교 제외 원문으로, 상세 내용은 숫자 위에 마우스를 올려 확인할 수 있습니다. 구간착순의 빈칸은 확인된 순위가 없는 지점입니다.{% if page.filters.start %} 경주는 {{ page.filters.start }} ~ {{ page.filters.end }} 기간으로 조회했습니다.{% endif %}</p>
+</section>

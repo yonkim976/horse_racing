@@ -30,9 +30,60 @@
       state.sameDistance = saved.sameDistance === true;
     }
   } catch (_) { /* A stale browser preference must not block records. */ }
-  const hash = location.hash.match(/^#runner-(\d+)$/);
+  const hash = location.hash.match(/^#runner-(\d+)(?:-(history|trials|training|jockey))?$/);
   if (hash && runners.has(Number(hash[1]))) state.selected = Number(hash[1]);
   root.classList.add("is-enhanced");
+  const analysisTabs = [...root.querySelectorAll("[data-analysis-tab]")];
+  const analysisPanes = [...root.querySelectorAll("[data-analysis-pane]")];
+  const legacyTabs = new Map([
+    ["#forecast-panel", "forecast"], ["#field-overview", "field"],
+    ["#runner-records", "records"], ["#pace-workbench", "pace"], ["#race-memo", "memo"]
+  ]);
+  function showAnalysisTab(name, push = false) {
+    if (!analysisTabs.some((tab) => tab.dataset.analysisTab === name)) name = "forecast";
+    if (name !== root.dataset.analysisTabCurrent) {
+      const url = new URL(location.href);
+      url.searchParams.set("tab", name);
+      url.searchParams.set("race_id", data.race.id);
+      if (push) url.hash = "";
+      location.assign(url.href);
+      return;
+    }
+    analysisTabs.forEach((tab) => {
+      if (tab.dataset.analysisTab === name) tab.setAttribute("aria-current", "page");
+      else tab.removeAttribute("aria-current");
+    });
+    analysisPanes.forEach((pane) => { pane.hidden = pane.dataset.analysisPane !== name; });
+    // Carry the current tab through date, venue and round navigation.
+    root.querySelectorAll(".ra-browser a[href], [data-analysis-tab]").forEach((link) => {
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin || url.pathname !== "/analysis") return;
+      url.searchParams.set("tab", link.dataset.analysisTab || name);
+      link.href = url.pathname + url.search + url.hash;
+    });
+    const dateTab = root.querySelector('.ra-date-form input[name="tab"]');
+    if (dateTab) dateTab.value = name;
+    if (push) {
+      const url = new URL(location.href);
+      url.searchParams.set("tab", name);
+      url.searchParams.set("race_id", data.race.id);
+      url.hash = "";
+      if (url.href !== location.href) history.pushState(null, "", url);
+    }
+  }
+  function restoreAnalysisTab() {
+    const runnerHash = location.hash.match(/^#runner-(\d+)(?:-(history|trials|training|jockey))?$/);
+    showAnalysisTab(runnerHash ? "records" : legacyTabs.get(location.hash) || new URL(location.href).searchParams.get("tab"));
+    if (runnerHash) selectRunner(Number(runnerHash[1]), runnerHash[2], false);
+  }
+  analysisTabs.forEach((tab) => tab.addEventListener("click", (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    showAnalysisTab(tab.dataset.analysisTab, true);
+  }));
+  window.addEventListener("popstate", restoreAnalysisTab);
+  window.addEventListener("hashchange", restoreAnalysisTab);
+  showAnalysisTab(hash ? "records" : legacyTabs.get(location.hash) || new URL(location.href).searchParams.get("tab"));
   const save = () => write(key, JSON.stringify(state));
   let toastTimer;
   function toast(message) {
@@ -66,7 +117,20 @@
       row.classList.toggle("is-selected", Number(row.dataset.fieldEntry) === id);
     });
     if (tabName) showTab(root.querySelector('[data-dossier="' + id + '"]'), tabName);
-    if (scroll) document.getElementById("runner-records").scrollIntoView({ behavior: "auto", block: "start" });
+    if (scroll) {
+      save();
+      const records = document.getElementById("runner-records");
+      if (!records) {
+        const url = new URL(location.href);
+        url.searchParams.set("tab", "records");
+        url.searchParams.set("race_id", data.race.id);
+        url.hash = "runner-" + id + (tabName ? "-" + tabName : "");
+        location.assign(url.href);
+        return;
+      }
+      showAnalysisTab("records", true);
+      records.scrollIntoView({ behavior: "auto", block: "start" });
+    }
     save();
     if (emit) document.dispatchEvent(new CustomEvent("analysis:runner-select", { detail: { entryId: id, horseId: runner.horse_id } }));
   }
@@ -94,13 +158,13 @@
     if (Number(event.detail?.entryId) === state.selected) return;
     // Keep the board under the pointer when the record panel above changes height.
     const board = document.getElementById("pace-workbench");
-    const before = board.getBoundingClientRect().top;
+    const before = (board?.getBoundingClientRect().top || 0);
     selectRunner(Number(event.detail?.entryId), null, false);
-    const delta = board.getBoundingClientRect().top - before;
+    const delta = (board?.getBoundingClientRect().top || 0) - before;
     if (delta) window.scrollBy({ top: delta, behavior: "instant" });
   });
   const sameDistance = root.querySelector("[data-same-distance]");
-  sameDistance.checked = state.sameDistance;
+  if (sameDistance) sameDistance.checked = state.sameDistance;
   function filterHistory() {
     root.querySelectorAll("[data-dossier]").forEach((article) => {
       const rows = [...article.querySelectorAll("[data-history-distance]")];
@@ -111,7 +175,7 @@
         : "날짜를 펼치면 코너 통과순위·기록과 출전 간격을 확인할 수 있습니다. 거리·주로 조건이 다른 총기록을 그대로 비교하지 마세요.";
     });
   }
-  sameDistance.addEventListener("change", () => { state.sameDistance = sameDistance.checked; filterHistory(); renderComparison(); save(); });
+  sameDistance?.addEventListener("change", () => { state.sameDistance = sameDistance.checked; filterHistory(); renderComparison(); save(); });
   function miniHistory(runner) {
     const rows = (runner.history || []).filter((r) => !state.sameDistance || r.distance === data.race.distance).slice(0, 5);
     if (!rows.length) return '<p>해당 조건의 경주 이력이 없습니다.</p>';
@@ -119,6 +183,7 @@
   }
   function renderComparison() {
     const panel = root.querySelector("[data-comparison-panel]");
+    if (!panel) return;
     const list = state.compare.map((id) => runners.get(id)).filter(Boolean);
     panel.hidden = !list.length;
     root.querySelector("[data-comparison-count]").textContent = list.length + "두";
@@ -144,7 +209,7 @@
   }));
   root.querySelectorAll("[data-clear-comparison]").forEach((button) => button.addEventListener("click", () => { state.compare = []; renderComparison(); save(); }));
   const search = root.querySelector("[data-runner-search]");
-  search.addEventListener("input", () => {
+  search?.addEventListener("input", () => {
     const query = search.value.trim().toLocaleLowerCase();
     let count = 0;
     root.querySelectorAll("[data-field-entry]").forEach((row) => {
@@ -229,10 +294,11 @@
   const memo = root.querySelector("[data-race-memo]");
   const memoState = root.querySelector("[data-race-memo-state]");
   const memoKey = "hr-race-study:note:" + data.race.id;
-  memo.value = read(memoKey) || "";
-  memo.addEventListener("input", () => {
+  if (memo) memo.value = read(memoKey) || "";
+  memo?.addEventListener("input", () => {
     memoState.textContent = write(memoKey, memo.value) ? "이 브라우저에 저장됨" : "브라우저 저장 불가 · 내용을 복사해 보관하세요";
   });
-  selectRunner(state.selected, null, false);
+  selectRunner(state.selected, hash?.[2], false);
   filterHistory(); renderComparison();
+  if (hash?.[2]) document.getElementById("runner-" + state.selected)?.scrollIntoView({ block: "start" });
 })();

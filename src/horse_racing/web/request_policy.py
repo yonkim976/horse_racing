@@ -17,6 +17,9 @@ from urllib.parse import urlencode
 from fastapi import Request
 from fastapi.responses import PlainTextResponse, Response
 
+from horse_racing.web.distance_benchmarks import BENCHMARK_BANDS
+from horse_racing.web.security import _DualRateBucket
+
 _WINDOW = 60.0
 _BURST_WINDOW = 10.0
 _MAX_CLIENT_BUCKETS = 8192
@@ -24,24 +27,28 @@ _MAX_CLIENT_BUCKETS = 8192
 # Shared expensive-read quota prevents rotating among expensive routes from
 # bypassing the per-route ceilings.  CSV has a tighter independent ceiling.
 _QUOTAS: dict[str, tuple[int, int]] = {
-    "expensive": (24, 8),
-    "calendar": (90, 30),
-    "analysis": (24, 8),
+    # Quotas aggregate by verified client IP. The larger per-IP ceilings admit
+    # a shared household/racecourse network while keeping query shape bounds,
+    # active DB admission, and CSV's intentionally narrow budget in force.
+    "expensive": (1800, 1200),
+    "calendar": (600, 300),
+    "analysis": (300, 150),
     "csv": (6, 2),
-    "validation": (24, 8),
-    "forecast": (30, 10),
-    "detail": (60, 15),
-    "entity-list": (60, 15),
-    "ledger": (24, 8),
-    "data-status": (24, 8),
-    "dashboard": (60, 15),
-    "distance": (60, 15),
+    "validation": (180, 60),
+    "forecast": (300, 120),
+    "detail": (900, 450),
+    "entity-list": (300, 120),
+    "ledger": (180, 60),
+    "data-status": (180, 60),
+    "dashboard": (600, 300),
+    "distance": (300, 120),
 }
 
 _ANALYSIS_KEYS = frozenset(
     {"date", "history_limit", "race_id", "start", "end", "meet", "distance",
      "grade", "horse", "jockey_id", "q"}
 )
+_ANALYSIS_PAGE_KEYS = _ANALYSIS_KEYS | {"layout", "tab"}
 _ANALYSIS_OUTPUT_KEYS = frozenset(
     {"date", "history_limit", "race_id", "start", "end", "meet", "distance", "grade"}
 )
@@ -49,17 +56,19 @@ _FORECAST_KEYS = frozenset({"date", "meet", "distance", "grade", "race_id"})
 _VALIDATION_KEYS = frozenset(
     {"start", "end", "meet", "distance", "grade", "model", "mode"}
 )
-_ENTITY_KEYS = frozenset({"q", "page", "sort", "status"})
-_DISTANCE_KEYS = frozenset({"year", "distance", "grade", "page"})
-_HOME_KEYS = frozenset({"date", "meet", "race_id", "trial_id"})
+_ENTITY_KEYS = frozenset({"q", "page", "sort", "status", "meet", "grade", "origin", "period"})
+_DISTANCE_KEYS = frozenset({"year", "distance", "grade", "page", "view", "band"})
+_HOME_KEYS = frozenset({"date", "meet", "race_id", "trial_id", "layout"})
 
 
 def _category(path: str) -> str | None:
+    if path == "/horses/list":
+        return "entity-list"
     if path == "/":
         return "dashboard"
     if path == "/api/calendar":
         return "calendar"
-    if re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path):
+    if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path):
         return "distance"
     if path == "/analysis":
         return "analysis"
@@ -85,17 +94,27 @@ def _category(path: str) -> str | None:
 
 
 def _query_keys(path: str) -> frozenset[str] | None:
+    if path == "/horses/list":
+        return _ENTITY_KEYS
+    if re.fullmatch(r"/(horses|jockeys|trainers|owners)/[^/]+", path):
+        return frozenset({"tab", "period"})
     if path == "/api/calendar":
         return frozenset({"month"})
-    if path in {"/analysis", "/api/analysis/export.csv"}:
+    if path in {"/guide", "/privacy"}:
+        return frozenset({"layout"})
+    if path == "/analysis":
+        return _ANALYSIS_PAGE_KEYS
+    if path == "/api/analysis/export.csv":
         return _ANALYSIS_KEYS
+    if re.fullmatch(r"/races/[^/]+", path):
+        return frozenset({"layout"})
     if path == "/forecast":
         return _FORECAST_KEYS
     if path == "/validation":
         return _VALIDATION_KEYS
     if re.fullmatch(r"/(horses|jockeys|trainers|owners)", path):
         return _ENTITY_KEYS
-    if re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path):
+    if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path):
         return _DISTANCE_KEYS
     if path == "/":
         return _HOME_KEYS
@@ -162,6 +181,19 @@ def _validate(request: Request) -> Response | None:
     repeated_scalars = relevant_keys - {"horse"}
     if any(len(values[key]) > 1 for key in repeated_scalars):
         return _bad_request("같은 조건을 여러 번 지정할 수 없습니다.")
+    if "layout" in relevant_keys and params.get("layout") not in {"mobile", "desktop", "auto"}:
+        return _bad_request("layout은 mobile, desktop, auto 중 하나로 지정해 주세요.")
+
+    if path == "/api/calendar":
+        if set(values) - {"month"}:
+            return _bad_request("연월 이외의 조건은 지정할 수 없습니다.")
+        month = params.get("month", "")
+        if not re.fullmatch(r"[0-9]{4}-(0[1-9]|1[0-2])", month):
+            return _bad_request("연월은 YYYY-MM 형식으로 지정해 주세요.")
+        try:
+            date.fromisoformat(f"{month}-01")
+        except ValueError:
+            return _bad_request("유효한 연월을 입력해 주세요.")
 
     if path in {"/analysis", "/api/analysis/export.csv"}:
         if len(values.get("horse", [])) > 40:
@@ -213,7 +245,7 @@ def _validate(request: Request) -> Response | None:
             raw_id = params.get(key)
             if raw_id is not None and not _valid_positive_integer(raw_id):
                 return _bad_request(f"{key} 값이 올바르지 않습니다.")
-    elif re.fullmatch(r"/(horses|jockeys|trainers|owners)", path):
+    elif path == "/horses/list" or re.fullmatch(r"/(horses|jockeys|trainers|owners)", path):
         if len(params.get("q", "")) > 100:
             return _bad_request("검색어가 너무 깁니다.")
         raw_page = params.get("page")
@@ -223,6 +255,13 @@ def _validate(request: Request) -> Response | None:
         raw_page = params.get("page")
         if raw_page is not None and (not raw_page.isdecimal() or not 1 <= int(raw_page) <= 200):
             return _bad_request("페이지는 1부터 200까지 지정해 주세요.")
+        if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path):
+            raw_view = params.get("view")
+            if raw_view is not None and raw_view != "trials":
+                return _bad_request("view는 trials만 지정할 수 있습니다.")
+            raw_band = params.get("band")
+            if raw_band is not None and raw_band not in BENCHMARK_BANDS:
+                return _bad_request("지원하지 않는 함수율 기준입니다.")
     return None
 
 
@@ -256,7 +295,15 @@ class RequestPolicy:
 
     def __init__(self) -> None:
         self._lock = Lock()
-        self._requests: OrderedDict[tuple[str, str], deque[float]] = OrderedDict()
+        # Fixed-size token state avoids keeping one Python timestamp per
+        # accepted request when an aggregate quota is deliberately generous.
+        self._requests: OrderedDict[
+            tuple[str, str], _DualRateBucket | deque[float]
+        ] = OrderedDict()
+
+    @staticmethod
+    def is_database_backed(path: str) -> bool:
+        return _category(path) is not None
 
     def check_request(
         self, request: Request, *, client_key: str, now: float | None = None
@@ -271,11 +318,14 @@ class RequestPolicy:
         current = monotonic() if now is None else now
         categories = [category] if category == "calendar" else ["expensive", category]
         with self._lock:
-            # Drop only fully idle state. Live quota records remain until their
-            # full window expires; saturation fails closed for new clients.
+            # Drop only quota state that has not been touched for a whole
+            # window; saturation still fails closed for new clients.
             expired = [
                 key for key, bucket in self._requests.items()
-                if not bucket or bucket[-1] <= current - _WINDOW
+                if (
+                    current - (bucket[-1] if isinstance(bucket, deque) else bucket.last_seen)
+                    >= _WINDOW
+                )
             ]
             for key in expired:
                 self._requests.pop(key, None)
@@ -292,22 +342,60 @@ class RequestPolicy:
                 bucket = self._requests.get(key)
                 if bucket is None:
                     continue
-                while bucket and bucket[0] <= current - _WINDOW:
-                    bucket.popleft()
-                in_burst = sum(t >= current - _BURST_WINDOW for t in bucket)
-                if len(bucket) >= limit or in_burst >= burst_limit:
-                    active_count = len(bucket)
+                if group == "csv":
+                    assert isinstance(bucket, deque)
+                    while bucket and bucket[0] <= current - _WINDOW:
+                        bucket.popleft()
                     in_burst = sum(t >= current - _BURST_WINDOW for t in bucket)
-                    exceeded = "window" if active_count >= limit else "burst"
+                    if len(bucket) >= limit or in_burst >= burst_limit:
+                        exceeded_window = len(bucket) >= limit
+                        return _too_many_requests(
+                            category=group,
+                            reason="window_limit" if exceeded_window else "burst_limit",
+                            count=len(bucket) if exceeded_window else in_burst,
+                            limit=limit if exceeded_window else burst_limit,
+                        )
+                    continue
+                assert isinstance(bucket, _DualRateBucket)
+                bucket.update_policy(
+                    current,
+                    window_seconds=_WINDOW,
+                    window_limit=limit,
+                    burst_seconds=_BURST_WINDOW,
+                    burst_limit=burst_limit,
+                )
+                exceeded = bucket.deny_diagnostics()
+                if exceeded is not None:
                     return _too_many_requests(
                         category=group,
-                        reason=f"{exceeded}_limit",
-                        count=active_count if exceeded == "window" else in_burst,
-                        limit=limit if exceeded == "window" else burst_limit,
+                        reason=str(exceeded["reason"]),
+                        count=int(exceeded["count"]),
+                        limit=int(exceeded["limit"]),
                     )
             # Reserve both shared and route buckets atomically after all checks.
-            for key in keys:
-                self._requests.setdefault(key, deque()).append(current)
+            for group, key in zip(categories, keys, strict=True):
+                limit, burst_limit = _QUOTAS[group]
+                bucket = self._requests.get(key)
+                if bucket is None:
+                    bucket = (
+                        deque()
+                        if group == "csv"
+                        else _DualRateBucket.create(
+                            current,
+                            window_seconds=_WINDOW,
+                            window_limit=limit,
+                            burst_seconds=_BURST_WINDOW,
+                            burst_limit=burst_limit,
+                        )
+                    )
+                    self._requests[key] = bucket
+                if group == "csv":
+                    assert isinstance(bucket, deque)
+                    bucket.append(current)
+                else:
+                    assert isinstance(bucket, _DualRateBucket)
+                    bucket.consume(current)
+                self._requests.move_to_end(key)
         return None
 
 
@@ -334,6 +422,8 @@ def normalized_query_key(request: Request) -> str:
         return ""
     if request.url.path in {"/analysis", "/api/analysis/export.csv"}:
         allowed = _ANALYSIS_OUTPUT_KEYS
+        if request.url.path == "/analysis":
+            allowed = allowed | {"tab"}
     params = request.query_params
     items: list[tuple[str, str]] = []
     for key in sorted(allowed):

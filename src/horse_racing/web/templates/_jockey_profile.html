@@ -1,0 +1,22 @@
+{% from '_jockey_stats_table.html' import stats_table %}
+{% set jockey = detail.jockey_detail %}
+{% set meta = dict(detail.meta_rows) %}
+<div class="jockey-profile-overview">
+  <div class="jockey-profile-identity">
+    <p class="panel-kicker">JOCKEY</p>
+    <h3>{{ detail.name_ko }}</h3>
+    <p>{{ jockey.region }}{% if detail.status_label %} · {{ detail.status_label }}{% endif %}</p>
+    <small>기수번호 {{ detail.official_id }}</small>
+  </div>
+  <div class="jockey-profile-info">
+    <dl class="horse-profile-facts">
+      {% for label, value in [('영문 이름', meta.get('영문 이름', '—')), ('기본 소속', jockey.region), ('데뷔일자', jockey.debut_date), ('기승가능중량', jockey.riding_weight), ('소속 확인일', jockey.affiliation_date.strftime('%Y.%m.%d') if jockey.affiliation_date else '—')] %}
+      <div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>
+      {% endfor %}
+    </dl>
+    <p class="horse-profile-note">확인되지 않은 정보는 —로 표시합니다.</p>
+  </div>
+</div>
+<div class="jockey-section-title"><h3>성적 요약</h3><span>{{ jockey.as_of.strftime('%Y.%m.%d') }} 기준</span></div>
+{{ stats_table(jockey.periods) }}
+<p class="panel-note">최근 1개월 {{ jockey.periods[0].start.strftime('%Y.%m.%d') }}부터 · 최근 1년 {{ jockey.periods[1].start.strftime('%Y.%m.%d') }}부터<br>승률 1위 · 복승률 1~2위 · 입상률 1~3위 / 해당 기간 출전수</p>

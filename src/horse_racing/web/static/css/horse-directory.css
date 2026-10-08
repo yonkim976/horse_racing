@@ -1,0 +1,60 @@
+.horse-directory-summary { margin-bottom: 24px; }
+.horse-grade-table th,.horse-grade-table td { position: static; height: 40px; padding: 8px 16px; text-align: center; font-size: 13px; }
+.horse-grade-table th:first-child { text-align: left; }
+.horse-grade-table tbody th { background: transparent; font-weight: 600; }
+.horse-grade-table td,.horse-grade-table tfoot a { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.horse-grade-table a { display: inline-block; min-width: 32px; padding: 2px 4px; color: var(--ink); text-decoration: none; border-radius: 4px; }
+.horse-grade-table a:hover { background: var(--accent-soft); text-decoration: underline; }
+.horse-grade-table tfoot { background: var(--surface-2); font-weight: 700; }
+.horse-directory-note { margin: 0; padding: 14px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; line-height: 1.7; }
+#horse-directory-list { scroll-margin-top: 140px; }
+.horse-directory-current-filter { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+.horse-directory-current-filter a { margin-left: 8px; color: var(--accent-strong); }
+@media (max-width: 480px) {
+  .horse-grade-table th,.horse-grade-table td { padding-inline: 10px; }
+}
+.horse-directory-back { display: inline-flex; margin-bottom: 20px; color: var(--accent-strong); font-size: 13px; text-decoration: none; }
+.horse-directory-back:hover { text-decoration: underline; }
+.horse-list-form, .horse-list-record { white-space: nowrap; }
+.horse-list-table th, .horse-list-table td { padding-inline: 8px; }
+.trainer-list-table th, .trainer-list-table td { padding-inline: 10px; white-space: nowrap; }
+.horse-list-table .horse-list-affiliation { font-size: 12px; font-weight: 700; }
+.horse-list-affiliation a, .horse-list-form a { color: inherit; text-decoration: none; }
+.horse-list-affiliation a:hover, .horse-list-affiliation a:focus-visible,
+.horse-list-form a:hover, .horse-list-form a:focus-visible { text-decoration: underline; }
+.horse-list-table .horse-list-owner { display: block; max-width: 100px; overflow: hidden; text-overflow: ellipsis; margin: 0; color: inherit; font-size: inherit; font-weight: inherit; }
+.horse-list-table .entity-link, .horse-list-table .entity-link:hover,
+.trainer-list-table .entity-link, .trainer-list-table .entity-link:hover,
+.jockey-list-table .entity-link, .jockey-list-table .entity-link:hover,
+.owner-list-table .entity-link, .owner-list-table .entity-link:hover { border-bottom: 0; text-decoration: none; }
+.horse-list-form .recent-finish { display: inline; margin: 0; color: inherit; font-size: inherit; }
+.horse-list-form .recent-finish-1,
+.horse-list-form .recent-finish-2,
+.horse-list-form .recent-finish-3 { font-weight: 900; }
+.horse-list-form .recent-finish-1 { color: #c62828; }
+.horse-list-form .recent-finish-2 { color: #2563eb; }
+.horse-list-form .recent-finish-3 { color: #15803d; }
+[data-theme="dark"] .horse-list-form .recent-finish-1 { color: #ff8585; }
+[data-theme="dark"] .horse-list-form .recent-finish-2 { color: #83b4ff; }
+[data-theme="dark"] .horse-list-form .recent-finish-3 { color: #6ee7a0; }
+
+.jockey-list-table th, .jockey-list-table td { padding-inline: 8px; white-space: nowrap; }
+
+.jockey-period-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 16px; border-top: 1px solid var(--border); }
+.jockey-period-tabs { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-2); }
+.jockey-period-tabs a { padding: 7px 14px; border: 1px solid transparent; border-radius: 999px; color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; text-decoration: none; }
+.jockey-period-tabs a:hover { color: var(--ink); background: var(--accent-soft); }
+.jockey-period-tabs a[aria-current="page"] { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-soft); }
+.jockey-period-tabs a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.jockey-period-range { margin: 0; color: var(--muted); font-size: 12px; }
+
+#horse-directory-list .directory-performance-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px 16px; }
+.directory-performance-heading .directory-list-count { white-space: nowrap; }
+.directory-performance-heading .jockey-period-toolbar { grid-column: 1 / -1; padding: 0; border: 0; }
+
+.owner-list-table th:first-child, .owner-list-table td:first-child { width: 64px; }
+.owner-list-table th, .owner-list-table td { padding-inline: 8px; white-space: nowrap; }
+.owner-list-table th:nth-child(2), .owner-list-table td:nth-child(2) { min-width: 96px; }
+.owner-count-note { padding: 12px 16px; }
+.owner-list-table [data-server-sort] a { color: inherit; text-decoration: none; }
+.owner-list-table [data-server-sort] a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }

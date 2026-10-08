@@ -2,6 +2,7 @@
 {% block body_class %}mobile-analysis{% endblock %}
 {% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-commentary.css') }}?v=1">
 <script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=11" defer></script>
 {% endblock %}
 
@@ -107,7 +108,7 @@
     </span>
     {% else %}
     <span class="ma-win-block" data-role="{{ role_name(runner.win_label) }}">
-      <span class="ma-win-pct" title="3위 안 입상 확률">{{ runner.win_pct or '00%' }}</span>
+      <span class="ma-win-pct" title="3위 안 입상 확률">{{ runner.win_pct if runner.win_pct is not none else '—' }}</span>
       <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
     </span>
     {% endif %}
@@ -182,8 +183,10 @@
       </div>
     </section>
     {% include "mobile/_prediction_guide.html" %}
-    {% endif %}
+  {% endif %}
   </header>
+
+  {% include "_race_commentary.html" %}
 
   {% set completed_race = page.selected_race.status == 'completed' %}
   {% set card_runners = page.runners|sort(attribute='finish_sort,number') if completed_race else page.runners %}

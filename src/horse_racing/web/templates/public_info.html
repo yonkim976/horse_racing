@@ -1,0 +1,110 @@
+{% extends "mobile/base.html" if mobile_view else "base.html" %}
+
+{% block title %}{{ '이용 안내' if info_page == 'guide' else '개인정보처리방침' }} | 마필로그 Mapilog{% endblock %}
+{% block meta_description %}{{ '마필로그 경주 선택과 예측 확률, 과거 기록을 보는 방법을 안내합니다.' if info_page == 'guide' else '마필로그 개인정보처리방침과 문의 방법을 안내합니다.' }}{% endblock %}
+{% block body_class %}public-info-page{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/public-info.css') }}?v=2">
+{% endblock %}
+
+{% block content %}
+<article class="public-info">
+  {% if info_page == 'guide' %}
+  <header class="public-info-heading">
+    <p class="public-info-kicker">MAPILOG · BETA</p>
+    <h1>이용 안내</h1>
+    <p>경주를 고르고 출전마의 기록과 예측을 살펴보는 방법입니다.</p>
+  </header>
+
+  <section class="public-info-section">
+    <h2>경주와 말을 살펴보기</h2>
+    <ol class="public-info-steps">
+      <li><strong>날짜와 경마장 선택</strong><span>첫 화면에서 경주일과 경마장을 고른 뒤 경주를 선택합니다.</span></li>
+      <li><strong>출전마 이름 누르기</strong><span>경주 분석에서 말을 누르면 최근 실제 경주 기록과 주행심사를 볼 수 있습니다. 영상과 상세 자료는 공개된 경우에 표시됩니다.</span></li>
+      <li><strong>재방문하기</strong><span>첫 화면 <a href="/">/</a>를 즐겨찾기에 저장하거나 휴대전화 홈 화면에 추가해 두세요. 날짜가 고정된 경주 주소 대신 첫 화면 주소를 저장하면 다음 방문에도 날짜를 선택할 수 있습니다.</span></li>
+    </ol>
+    <p class="public-info-note">모바일 첫 화면 위쪽의 ‘큰글씨 모드’로 글자 크기를 키울 수 있습니다. 과거 구간 순위와 전개도는 이전 경주를 돌아보는 참고 자료이며 다음 경주 흐름을 예측하거나 보장하지 않습니다.</p>
+  </section>
+
+  <section class="public-info-section">
+    <h2>예측 확률과 말 역할</h2>
+    <ul>
+      <li>표시된 퍼센트는 각 말이 3위 안에 들 확률을 모델이 각각 계산한 값입니다. 말마다 따로 계산하므로 모두 더하면 약 300%가 될 수 있습니다. 우승 확률이나 정확히 2·3위에 들 확률은 아닙니다.</li>
+      <li>‘—’는 예측값이 없는 상태이고, ‘0%’는 계산된 확률이 0%인 상태입니다.</li>
+      <li>‘강축’, ‘축마’, ‘공동축’, ‘후착후보’ 같은 표시는 모델 점수에 따른 후보 구분입니다. ‘후착후보’는 정확히 2·3위에 들 확률을 뜻하지 않으며, 어떤 예측도 경주 결과를 보장하지 않습니다.</li>
+      <li>‘최근’은 과거 경주의 실제 착순입니다. 과거 기록과 주행심사는 참고 자료이며 미래 결과를 확정하지 않습니다.</li>
+    </ul>
+  </section>
+
+  <section class="public-info-section">
+    <h2>시험 운영 안내</h2>
+    <p>마필로그는 한국마사회 공개 자료를 바탕으로 한 독립 서비스이며 한국마사회 공식 서비스가 아닙니다. 현재 BETA 시험 운영 중입니다. 다음 주 출전표와 예측의 생성 시점은 자료 공개와 처리 상황에 따라 달라질 수 있어 시간을 보장하지 않습니다.</p>
+  </section>
+  {% else %}
+  <header class="public-info-heading">
+    <p class="public-info-kicker">MAPILOG · PRIVACY</p>
+    <h1>개인정보처리방침</h1>
+    <p>마필로그가 다루는 정보와 이용 목적, 보관 기간, 문의 방법을 안내합니다.</p>
+  </header>
+
+  <p class="public-info-note">최종 개정일: 2026년 10월 3일</p>
+
+  <section class="public-info-section">
+    <h2>운영자와 개인정보 문의</h2>
+    <p><strong>{{ operator_brand|default('마필로그 운영자') }}</strong> (운영자 {{ operator_name|default('김용진') }})가 서비스를 운영합니다. 개인정보 열람·정정·삭제·처리정지 요청은 아래 이메일로 보내 주세요.</p>
+    {% if contact_email %}
+    <p class="public-info-contact"><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+    {% else %}
+    <p class="public-info-contact">이메일 문의처는 현재 준비 중입니다.</p>
+    {% endif %}
+  </section>
+
+  <section class="public-info-section">
+    <h2>수집 항목과 이용 목적</h2>
+    <ul>
+      <li><strong>서비스 접속 정보:</strong> IP 주소, 요청 URL, 요청 시각, 응답 상태 등이 서비스 운영 및 보안 관리용 기록에 포함될 수 있습니다. 가입과 로그인은 제공하지 않습니다.</li>
+      <li><strong>화면 설정:</strong> 화면 방식 선택 쿠키와 테마·큰글씨 설정, 메모·전개 배치 등 브라우저 저장 항목은 화면 제공과 이용 편의를 위해 사용합니다.</li>
+      <li><strong>이메일:</strong> 이용자가 보내는 의견·문의·권리 요청의 이메일 주소, 메시지 내용과 첨부 자료는 의견 관리, 답변 및 요청 처리를 위해 담당자에게 전달됩니다.</li>
+    </ul>
+  </section>
+
+  <section class="public-info-section">
+    <h2>보관 기간과 파기</h2>
+    <ul>
+      <li><strong>일반 접속 기록:</strong> 30일 보관한 뒤 제공자의 보관·삭제 정책에 따라 정리됩니다.</li>
+      <li><strong>관리자·시스템 보안 기록:</strong> 400일 보관되며, 이 기간이 지나면 제공자의 정책에 따라 정리됩니다.</li>
+      <li><strong>접속 제한용 정보:</strong> 요청 횟수 제한을 위해 일시적으로 사용하며, 비활성 정보는 약 2분 기준으로 정리되도록 운영합니다. 실제 정리 시점은 이용 상황에 따라 달라질 수 있습니다.</li>
+      <li><strong>브라우저 저장 항목:</strong> 이용자가 브라우저에서 삭제할 때까지 보관합니다.</li>
+      <li><strong>이메일 의견:</strong> 수신일부터 7일간 보관한 뒤 파기합니다.</li>
+      <li><strong>일반 문의·권리 요청 이메일:</strong> 요청 처리를 마칠 때까지 보관하고, 처리 완료 후 7일 이내 파기합니다.</li>
+    </ul>
+    <p>이메일은 담당자가 보유 기간에 맞춰 삭제합니다. 브라우저 저장 항목은 브라우저 설정에서 mapilog.xyz의 쿠키와 사이트 데이터를 삭제해 지울 수 있습니다.</p>
+  </section>
+
+  <section class="public-info-section">
+    <h2>쿠키와 브라우저 저장소 선택</h2>
+    <p>모바일·데스크톱 화면 방식을 직접 선택하면 선택 상태를 최대 1년 기억하는 쿠키가 저장됩니다. ‘자동’ 방식을 선택하면 쿠키를 지웁니다. 브라우저 설정에서 쿠키를 차단하거나 삭제할 수 있으며, 차단하면 화면 방식 선택이 저장되지 않고 기기 설정에 따라 표시됩니다.</p>
+    <p>테마와 큰글씨 설정, 메모와 전개 배치는 브라우저에 저장되며 저장 항목 자체는 서버로 전송되지 않습니다. 경주일·경마장·분석 조건을 적용해 자료를 조회하면 해당 조건이 서버 요청에 포함될 수 있습니다. 브라우저 설정에서 사이트 데이터를 삭제하면 저장한 화면 설정과 메모도 지워집니다.</p>
+  </section>
+
+  <section class="public-info-section">
+    <h2>외부 서비스와 국외 처리</h2>
+    <p>서비스 운영 및 접속 기록 관리, 이메일 수신, 글꼴 표시를 위해 Google의 서비스와 jsDelivr를 이용합니다. 서비스 접속 정보는 일본 소재의 서비스 운영 시설에서 처리될 수 있습니다. 운영 기록의 실제 처리·보관 국가는 현재 확인되지 않았습니다.</p>
+    <p>외부 제공자별 정보의 처리·보관 국가와 국외 처리 조건은 현재 확인되지 않았습니다.</p>
+  </section>
+
+  <section class="public-info-section">
+    <h2>외부 글꼴 요청</h2>
+    <p>글꼴을 불러올 때 브라우저가 Google과 jsDelivr가 제공하는 글꼴 서비스에 직접 연결하며, 이 요청으로 IP 주소와 브라우저 요청 정보가 해당 제공자에게 전달될 수 있습니다. 브라우저나 네트워크에서 외부 글꼴 요청을 차단할 수 있지만 글꼴 표시가 달라질 수 있습니다.</p>
+  </section>
+
+  <section class="public-info-section">
+    <h2>이메일 의견·문의 보내기</h2>
+    {% if contact_email %}
+    <p><a href="mailto:{{ contact_email }}">{{ contact_email }}</a>을 누르면 이용자의 메일 프로그램에서 메시지를 작성할 수 있습니다. 이메일은 운영자가 이용하는 Google의 이메일 서비스로 전달됩니다. 이름이나 연락처 등 필요한 범위에서만 기재해 주세요.</p>
+    {% endif %}
+    <p>이메일 의견은 수신일부터 7일, 일반 문의와 개인정보 권리 요청은 처리를 마친 날부터 7일 이내 파기합니다. 개인정보 권리행사는 운영자 이메일로 요청할 수 있습니다.</p>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

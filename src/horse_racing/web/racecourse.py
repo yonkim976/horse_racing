@@ -92,6 +92,43 @@ def jeju_checkpoint_point(remaining_m: int) -> MapPoint:
     return _point_on_forward_loop((JEJU_LAP_M - remaining_m) % JEJU_LAP_M)
 
 
+def jeju_course_checkpoints(distance_m: int) -> list[dict]:
+    """Return the approximate timing points shown on the Jeju course explorer."""
+    early = 210 if distance_m in (1110, 1610) else 200
+    remaining_by_label = (
+        ("S1F", distance_m - early),
+        ("1C", 1400),
+        ("2C", 1200),
+        ("3C", 600),
+        ("G3F", 600),
+        ("4C", 400),
+        ("G1F", 200),
+    )
+    grouped: dict[int, list[str]] = {}
+    for label, remaining in remaining_by_label:
+        if 0 < remaining < distance_m:
+            grouped.setdefault(remaining, []).append(label)
+
+    result = []
+    for index, remaining in enumerate(sorted(grouped, reverse=True)):
+        labels = grouped[remaining]
+        point = jeju_checkpoint_point(remaining)
+        approximate = any(label in {"1C", "2C", "3C", "4C"} for label in labels)
+        location = (
+            f"출발 후 {distance_m - remaining}m"
+            if labels == ["S1F"]
+            else f"결승 {'약 ' if approximate else ''}{remaining}m 전"
+        )
+        result.append({
+            "index": index,
+            "label": "/".join(labels),
+            "location": location,
+            "x": point.x,
+            "y": point.y,
+        })
+    return result
+
+
 def build_jeju_racecourse_map(distance_m: int) -> RacecourseMapView:
     selected_start, route_path, supported = _jeju_route(distance_m)
     starts = [
@@ -127,11 +164,23 @@ def build_jeju_racecourse_map(distance_m: int) -> RacecourseMapView:
         furlong_markers=furlongs,
         selected_start=selected_start,
         geometry_note=(f"중심선 기준 2×493.7m + 2π×97.5m = {JEJU_LAP_M:,.2f}m (공식 1주 1,600m)"),
-        diagram={"variants": [
-            {"distance": d, "path": route, "x": start.x, "y": start.y}
-            for d in sorted(set(JEJU_DIAGRAM_STARTS) | {distance_m})
-            for start, route, _supported in [_jeju_route(d)]
-        ]},
+        diagram={
+            "start_label": {
+                800: "뒤쪽 직선 출발",
+                900: "뒤쪽 직선 출발",
+                1000: "뒤쪽 직선 출발",
+                1110: "뒤쪽 직선 출발",
+                1200: "뒤쪽 직선 연장부 출발",
+                1300: "1·2코너 사이 출발",
+                1400: "1코너 부근 출발",
+                1610: "결승선 앞 직선 출발 · 한 바퀴",
+            }.get(distance_m, f"{distance_m:,}m 출발"),
+            "variants": [
+                {"distance": d, "path": route, "x": start.x, "y": start.y}
+                for d in sorted(set(JEJU_DIAGRAM_STARTS) | {distance_m})
+                for start, route, _supported in [_jeju_route(d)]
+            ],
+        },
     )
 
 

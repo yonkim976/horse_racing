@@ -2,11 +2,10 @@
 <html lang="ko" data-theme="light" data-layout="desktop">
   <head>
     <meta charset="utf-8">
-    {% include "_layout_switch.html" %}
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="naver-site-verification" content="a71202c329d9767a2c3589e8637e278720be227f">
     <meta name="description" content="{% block meta_description %}한국 경마 일정과 결과, 출전마 기록과 예측 확률을 확인하는 마필로그 Mapilog{% endblock %}">
-    <meta name="robots" content="{{ 'noindex,follow' if request.url.query else 'index,follow' }}">
+    <meta name="robots" content="{{ 'noindex,follow' if request.url.query or privacy_noindex|default(false) else 'index,follow' }}">
     <link rel="canonical" href="https://mapilog.xyz{{ request.url.path }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ko_KR">
@@ -33,10 +32,12 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=19">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/dashboard.css') }}?v=77">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/distance-sections.css') }}?v=3">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/insights.css') }}?v=2">
-    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=21" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/site-footer.css') }}?v=2">
+    <script src="{{ url_for('static', path='/js/dashboard.js') }}?v=33" defer></script>
     <script src="{{ url_for('static', path='/js/insights.js') }}?v=1" defer></script>
     {% block extra_head %}{% endblock %}
   </head>
@@ -52,11 +53,18 @@
         <nav class="site-nav" aria-label="주요 메뉴">
           <a href="/" class="{% if active_nav == 'races' %}active{% endif %}">경주</a>
           <a href="/analysis" class="{% if active_nav == 'analysis' %}active{% endif %}">경주 분석</a>
-          <a href="/racecourses/jeju/distances" class="{% if active_nav == 'distances' %}active{% endif %}">거리별 분석</a>
-          <a href="/horses" class="{% if active_nav == 'horses' %}active{% endif %}">말</a>
-          <a href="/jockeys" class="{% if active_nav == 'jockeys' %}active{% endif %}">기수</a>
-          <a href="/trainers" class="{% if active_nav == 'trainers' %}active{% endif %}">조교사</a>
-          <a href="/owners" class="{% if active_nav == 'owners' %}active{% endif %}">마주</a>
+          <a href="/racecourses/seoul/distances" class="{% if active_nav == 'distances' %}active{% endif %}">거리별 분석</a>
+          <details class="site-nav-dropdown" data-entity-nav>
+            <summary class="{% if active_nav in ['horses', 'jockeys', 'trainers', 'owners'] %}active{% endif %}">
+              말·관계자
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+            </summary>
+            <div class="site-nav-menu">
+              {% for key, label in [('horses', '말 정보'), ('jockeys', '기수 정보'), ('trainers', '조교사 정보'), ('owners', '마주 정보')] %}
+              <a href="/{{ key }}" class="{% if active_nav == key %}active{% endif %}" {% if active_nav == key %}aria-current="page"{% endif %}>{{ label }}</a>
+              {% endfor %}
+            </div>
+          </details>
         </nav>
         <div class="header-actions">
           <button type="button" class="theme-toggle" data-theme-toggle aria-label="다크 모드로 전환">
@@ -76,9 +84,6 @@
       {% block content %}{% endblock %}
     </main>
 
-    <footer>
-      <span>HORSE RACING DATA PLATFORM</span>
-      <span>한국마사회 공공데이터 기반 · 로컬 분석용</span>
-    </footer>
+    {% include "_site_footer.html" %}
   </body>
 </html>

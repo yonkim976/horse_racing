@@ -1,0 +1,32 @@
+{% set jockey = detail.jockey_detail %}
+<section class="panel jockey-partner-toolbar" aria-label="동반 입상 기간 선택">
+  <nav class="jockey-detail-periods" aria-label="동반 입상 기간">
+    {% for key, label in [('month', '최근 1개월'), ('year', '최근 1년'), ('career', '통산')] %}
+      <a href="/jockeys/{{ detail.official_id }}?tab=partners&amp;period={{ key }}"{% if jockey.partner_period == key %} aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+  </nav>
+  <p>{% if jockey.partner_start %}{{ jockey.partner_start.strftime('%Y.%m.%d') }} ~ {% endif %}{{ jockey.as_of.strftime('%Y.%m.%d') }}{% if not jockey.partner_start %}까지 통산{% endif %}</p>
+</section>
+<div class="jockey-partner-panels">
+  {% for kind, label, rows in [('trainers', '조교사', jockey.trainers), ('owners', '마주', jockey.owners)] %}
+  <section id="jockey-partner-{{ kind }}" class="panel horse-detail-content">
+    <div class="panel-heading"><div><p class="panel-kicker">PODIUM PARTNERS</p><h2>함께 입상한 {{ label }}</h2></div><span>상위 10명</span></div>
+    <p class="panel-note">{{ jockey.partner_period_label }} 동반 입상(1~3위) 횟수 순 · 경주 당시 {{ label }} 기준</p>
+    {% if rows %}
+    <div class="table-scroll">
+      <table class="entry-table jockey-stats-table jockey-partner-table">
+        <thead><tr><th>순번</th><th>{{ label }}</th><th>동반 입상</th><th>출전</th><th>1위</th><th>2위</th><th>3위</th><th>입상률</th></tr></thead>
+        <tbody>
+          {% for row in rows %}
+          <tr><td class="numeric">{{ loop.index }}</td><th scope="row"><a href="{{ row.href }}">{{ row.name }}</a></th><td class="numeric jockey-partner-places">{{ row.places }}</td><td class="numeric">{{ row.stats.starts }}</td><td class="numeric">{{ row.stats.wins }}</td><td class="numeric">{{ row.stats.seconds }}</td><td class="numeric">{{ row.stats.thirds }}</td><td class="numeric">{{ row.stats.place_rate }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="empty-state"><strong>연결된 입상 기록이 없습니다.</strong></div>
+    {% endif %}
+    <p class="panel-note">{{ jockey.as_of.strftime('%Y.%m.%d') }}까지 수집된 실전 · 입상률은 해당 기간에 {{ label }}와 함께 출전한 경주 중 1~3위 비율입니다.</p>
+  </section>
+  {% endfor %}
+</div>

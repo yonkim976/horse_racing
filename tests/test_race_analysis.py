@@ -127,6 +127,11 @@ def test_meet_filter_keeps_other_tracks_available_on_the_same_day(session):
     jeju_page = load_race_analysis_page(session, race_date=date(2026, 9, 18), meet=2)
     assert {item.meet_code for item in jeju_page.races} == {1, 2}
     assert jeju_page.selected_race.id == jeju_race.id
+    empty = load_race_analysis_page(session, race_date=date(2026, 9, 18), meet=3)
+    assert empty.selected_race is None
+    assert empty.runners == []
+    assert empty.filters["meet"] == 3
+    assert {item.meet_code for item in empty.races} == {1, 2}
 
 
 def test_no_today_uses_nearest_published_date_and_explains_fallback(session):

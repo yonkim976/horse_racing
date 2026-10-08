@@ -1,0 +1,21 @@
+{% set summary = page_data.horse_summary %}
+<section class="horse-directory-summary" aria-label="말 현황">
+  <section class="panel horse-grade-panel">
+    <div class="panel-heading">
+      <div><p class="panel-kicker">HORSE DIRECTORY</p><h2>{{ summary.title }}</h2></div>
+      <span>두수를 선택하면 별도 목록 페이지로 이동합니다.</span>
+    </div>
+    <div class="table-scroll">
+      <table class="horse-grade-table">
+        <thead><tr><th scope="col">등급</th>{% for label in summary.columns %}<th scope="col">{{ label }}</th>{% endfor %}</tr></thead>
+        <tbody>
+          {% for row in summary.rows %}
+          <tr><th scope="row">{{ row.label }}</th>{% for cell in row.cells %}<td>{% if cell.href %}<a href="{{ cell.href }}">{{ '{:,}'.format(cell.count) }}</a>{% else %}{{ '{:,}'.format(cell.count) }}{% endif %}</td>{% endfor %}</tr>
+          {% endfor %}
+        </tbody>
+        <tfoot><tr><th scope="row">합계</th>{% for cell in summary.totals %}<td>{% if cell.href %}<a href="{{ cell.href }}">{{ '{:,}'.format(cell.count) }}</a>{% else %}{{ '{:,}'.format(cell.count) }}{% endif %}</td>{% endfor %}</tr></tfoot>
+      </table>
+    </div>
+    <p class="horse-directory-note">등록된 말 프로필의 현역마만 집계합니다. 은퇴마는 이름 또는 마번으로 검색할 수 있습니다.{% if summary.is_jeju %} 제주는 국산·외산 구분 없이 집계하며, 입사·휴양 구분은 현재 자료에 없습니다.{% endif %}</p>
+  </section>
+</section>

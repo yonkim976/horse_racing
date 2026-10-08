@@ -1,0 +1,16 @@
+{% from '_jockey_stats_table.html' import stats_table %}
+{% set jockey = detail.jockey_detail %}
+<section id="jockey-period-performance" class="panel horse-detail-content">
+  <div class="panel-heading"><div><p class="panel-kicker">RECENT PERFORMANCE</p><h2>기간별 성적</h2></div><span>{{ jockey.as_of.strftime('%Y.%m.%d') }} 기준</span></div>
+  {{ stats_table(jockey.periods) }}
+  <p class="panel-note">최근 1개월 {{ jockey.periods[0].start.strftime('%Y.%m.%d') }} ~ {{ jockey.as_of.strftime('%Y.%m.%d') }}<br>최근 1년 {{ jockey.periods[1].start.strftime('%Y.%m.%d') }} ~ {{ jockey.as_of.strftime('%Y.%m.%d') }}</p>
+</section>
+<section id="jockey-year-performance" class="panel horse-detail-content">
+  <div class="panel-heading"><div><p class="panel-kicker">YEARLY PERFORMANCE</p><h2>연도별 성적</h2></div><span>최신 연도순</span></div>
+  {% if jockey.years %}
+    {{ stats_table(jockey.years, '연도') }}
+  {% else %}
+    <div class="empty-state"><strong>집계할 출전 기록이 없습니다.</strong></div>
+  {% endif %}
+  <p class="panel-note">연도별 1월 1일 ~ 12월 31일 · 올해는 기준일까지 집계합니다.<br>수집된 실전 기록 기준 · 승률 1위 · 복승률 1~2위 · 입상률 1~3위 / 출전수</p>
+</section>

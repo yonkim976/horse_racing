@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import csv
 import hmac
 import ipaddress
@@ -40,6 +41,7 @@ from horse_racing.web.dashboard import (
     load_calendar_index,
     load_dashboard,
 )
+from horse_racing.web.distance_benchmarks import BENCHMARK_BANDS
 from horse_racing.web.distance_page import GRADE_LABELS, SEOUL_GRADE_LABELS, load_distance_page
 from horse_racing.web.entities import (
     DEFAULT_PAGE_SIZE,
@@ -48,15 +50,20 @@ from horse_racing.web.entities import (
     load_entity_list,
     load_entity_official_id,
 )
+from horse_racing.web.horse_directory import GRADE_LABELS as HORSE_GRADE_LABELS
+from horse_racing.web.horse_directory import ORIGIN_LABELS
 from horse_racing.web.insights import load_forecast_page
 from horse_racing.web.predictions import load_prediction_ledger
 from horse_racing.web.race_analysis import load_race_analysis_page
 from horse_racing.web.race_page import load_race_page
-from horse_racing.web.racecourse import build_racecourse_map
+from horse_racing.web.racecourse import build_racecourse_map, jeju_course_checkpoints
 from horse_racing.web.request_policy import RequestPolicy, normalized_query_key
 from horse_racing.web.security import (
     ActiveRequestGate,
+    AsyncLockCapacityExceeded,
     AsyncLockRegistry,
+    BoundedAsyncGate,
+    BoundedEventSampler,
     BoundedRequestLimiter,
     BoundedTTLCache,
     SyncLockRegistry,
@@ -70,12 +77,18 @@ from horse_racing.web.trial_page import load_running_trial_page
 WEB_ROOT = Path(__file__).parent
 T = TypeVar("T")
 _PUBLIC_SITE_ORIGIN = "https://mapilog.xyz"
+_PUBLIC_CONTACT_EMAIL_RE = re.compile(
+    r"(?i)^[A-Z0-9](?:[A-Z0-9._%+-]{0,62}[A-Z0-9])?@"
+    r"(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,63}$"
+)
 _SITEMAP_PATHS = (
     "/",
+    "/guide",
     "/analysis",
     "/racecourses/seoul/distances",
     "/racecourses/jeju/distances",
     "/racecourses/busan/distances",
+    "/racecourses/yeongcheon/distances",
     "/racecourses/seoul/course",
     "/racecourses/jeju/course",
     "/racecourses/busan/course",
@@ -89,6 +102,7 @@ _MOBILE_UA = re.compile(
     r"Android.+Mobile|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini",
     re.I,
 )
+_LAYOUT_QUERY_VALUES = frozenset({"mobile", "desktop", "auto"})
 _BLOCKED_ANTHROPIC_UA = re.compile(
     r"ClaudeBot|Claude-SearchBot|Claude-User|Claude-Web|anthropic-ai",
     re.I,
@@ -97,14 +111,22 @@ _BLOCKED_HARVESTER_UA = re.compile(r"SerpstatBot|AhrefsBot", re.I)
 _CRAWLER_UA = re.compile(r"bot|crawler|spider|slurp|archiver", re.I)
 _RATE_LIMIT_WINDOW_SECONDS = 60.0
 _RATE_LIMIT_BURST_SECONDS = 10.0
-_HUMAN_REQUESTS_PER_WINDOW = 180
-_HUMAN_REQUESTS_PER_BURST = 60
+_HUMAN_REQUESTS_PER_WINDOW = 3600
+_HUMAN_REQUESTS_PER_BURST = 1800
 _CRAWLER_REQUESTS_PER_WINDOW = 30
 _CRAWLER_REQUESTS_PER_BURST = 10
 _TRUSTED_PROXY_CIDRS = parse_trusted_proxy_cidrs(os.getenv("TRUSTED_PROXY_CIDRS"))
 _MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 _MAX_RESPONSE_CACHE_ENTRY_BYTES = 512 * 1024
 _ORIGIN_TOKEN_HEADER = "x-mapilog-origin-token"
+_ORIGIN_CLIENT_IP_HEADERS = frozenset({"cf-connecting-ip", "x-mapilog-client-ip"})
+
+
+def _enabled_environment_flag(name: str) -> bool:
+    value = os.getenv(name, "0").strip()
+    if value not in {"0", "1"}:
+        raise ValueError(f"{name} must be 0 or 1")
+    return value == "1"
 
 
 def _diagnostic_path(path: str) -> str:
@@ -120,7 +142,7 @@ def _diagnostic_path(path: str) -> str:
     if match:
         base = f"/{match.group(1)}"
         return base if path == base else f"{base}/{{id}}"
-    match = re.fullmatch(r"/racecourses/(seoul|jeju|busan)/distances", path)
+    match = re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path)
     if match:
         return "/racecourses/{meet}/distances"
     match = re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/course", path)
@@ -129,6 +151,22 @@ def _diagnostic_path(path: str) -> str:
     if path.startswith("/static/"):
         return "/static/{asset}"
     return "/_other"
+
+
+def _public_policy_contact() -> tuple[str, str | None]:
+    """Return only validated, intentionally public contact details."""
+    operator_name = os.getenv("MAPILOG_OPERATOR_NAME", "김용진").strip()
+    if (
+        not operator_name
+        or len(operator_name) > 80
+        or any(ord(character) < 32 or ord(character) == 127 for character in operator_name)
+    ):
+        operator_name = "마필로그 운영자"
+
+    contact_email = os.getenv("MAPILOG_CONTACT_EMAIL", "mapilog@mapilog.xyz").strip()
+    if len(contact_email) > 254 or not _PUBLIC_CONTACT_EMAIL_RE.fullmatch(contact_email):
+        return operator_name, None
+    return operator_name, contact_email
 
 
 def _response_bytes(response: Response) -> int | None:
@@ -150,12 +188,50 @@ def _client_rate_key(request: Request) -> str:
     )
 
 
-def _is_mobile_request(request: Request) -> bool:
-    layout = request.cookies.get("hr-layout")
-    if layout == "mobile":
+def _layout_aware_request(request: Request) -> bool:
+    path = request.url.path
+    return path in {"/", "/analysis", "/guide", "/privacy"} or bool(
+        re.fullmatch(r"/races/[^/]+", path)
+    )
+
+
+def _layout_query_value(request: Request) -> str | None:
+    values = request.query_params.getlist("layout")
+    if len(values) != 1 or values[0] not in _LAYOUT_QUERY_VALUES:
+        return None
+    return values[0]
+
+
+def _layout_cookie_cache_safe(request: Request) -> bool:
+    """Allow only the known layout preference to share local HTML variants."""
+    raw_cookie = request.headers.get("cookie", "")
+    if not raw_cookie:
         return True
-    if layout == "desktop":
+    parts = [part.strip() for part in raw_cookie.split(";") if part.strip()]
+    if len(parts) != 1:
         return False
+    name, separator, value = parts[0].partition("=")
+    return (
+        separator == "="
+        and name == "hr-layout"
+        and value in {"mobile", "desktop"}
+        and request.cookies.get("hr-layout") == value
+    )
+
+
+def _is_mobile_request(request: Request) -> bool:
+    requested_layout = _layout_query_value(request)
+    if requested_layout == "mobile":
+        return True
+    if requested_layout == "desktop":
+        return False
+
+    layout = request.cookies.get("hr-layout")
+    if requested_layout != "auto":
+        if layout == "mobile":
+            return True
+        if layout == "desktop":
+            return False
     return bool(_MOBILE_UA.search(request.headers.get("user-agent", "")))
 
 
@@ -232,9 +308,34 @@ def create_app(
                 return None
             policy_log_state[key] = (now, 0)
             return suppressed
+
+    # PostgreSQL's configured pool is three connections per instance. Queue a
+    # bounded number of cache-miss reads behind those slots rather than
+    # rejecting a shared-NAT burst or letting every worker hit the pool.
+    database_admission = BoundedAsyncGate(limit=3, max_waiters=192)
+    # Static assets are cheap and required by every cold browser; keep their
+    # response buffering bounded while allowing a normal 100-client burst.
+    response_admission = BoundedAsyncGate(limit=16, max_waiters=2048)
+    denial_sampler = BoundedEventSampler(max_keys=32, events_per_window=10)
     origin_token = os.getenv("MAPILOG_ORIGIN_TOKEN", "")
     if origin_token and len(origin_token) < 32:
         raise ValueError("MAPILOG_ORIGIN_TOKEN must be at least 32 characters")
+    require_origin_token = _enabled_environment_flag("MAPILOG_REQUIRE_ORIGIN_TOKEN")
+    if require_origin_token and not origin_token:
+        raise ValueError(
+            "MAPILOG_ORIGIN_TOKEN must be set to at least 32 characters when "
+            "MAPILOG_REQUIRE_ORIGIN_TOKEN=1"
+        )
+    origin_client_ip_header = os.getenv(
+        "MAPILOG_CLIENT_IP_HEADER", "cf-connecting-ip"
+    ).strip().lower()
+    if origin_client_ip_header not in _ORIGIN_CLIENT_IP_HEADERS:
+        raise ValueError(
+            "MAPILOG_CLIENT_IP_HEADER must be cf-connecting-ip or x-mapilog-client-ip"
+        )
+    origin_https = _enabled_environment_flag("MAPILOG_ORIGIN_HTTPS")
+    if origin_https and not origin_token:
+        raise ValueError("MAPILOG_ORIGIN_HTTPS=1 requires MAPILOG_ORIGIN_TOKEN")
 
     def cached(key: tuple[object, ...], loader: Callable[[], T], ttl: float = 20.0) -> T:
         now = monotonic()
@@ -267,6 +368,38 @@ def create_app(
         started_at = monotonic()
 
         def finish(response: Response) -> Response:
+            layout_choice = (
+                _layout_query_value(request) if _layout_aware_request(request) else None
+            )
+            has_layout_cookie = (
+                _layout_aware_request(request) and "hr-layout" in request.cookies
+            )
+            if (
+                has_layout_cookie
+                or layout_choice is not None
+                or request.url.path in {"/guide", "/privacy"}
+            ):
+                response.headers["Cache-Control"] = "private, no-store"
+                vary = [
+                    value.strip()
+                    for value in response.headers.get("Vary", "").split(",")
+                    if value.strip()
+                ]
+                if not any(value.lower() == "cookie" for value in vary):
+                    vary.append("Cookie")
+                response.headers["Vary"] = ", ".join(vary)
+                if layout_choice is not None and response.status_code < 400:
+                    secure_cookie = request.url.scheme == "https"
+                    if layout_choice == "auto":
+                        response.delete_cookie(
+                            "hr-layout", path="/", secure=secure_cookie,
+                            httponly=True, samesite="lax",
+                        )
+                    else:
+                        response.set_cookie(
+                            "hr-layout", layout_choice, max_age=31_536_000, path="/",
+                            secure=secure_cookie, httponly=True, samesite="lax",
+                        )
             policy = getattr(response, "policy_diagnostics", None)
             status = response.status_code
             if policy is not None or status in {413, 429}:
@@ -305,18 +438,27 @@ def create_app(
                     "duration_ms": round((monotonic() - started_at) * 1000, 2),
                     "response_bytes": _response_bytes(response),
                 }
-                print(json.dumps(event, separators=(",", ":")), flush=True)
+                should_log, _ = denial_sampler.should_log("request_sample", now=monotonic())
+                if should_log:
+                    print(json.dumps(event, separators=(",", ":")), flush=True)
             return response
 
         path = request.scope.get("path", "")
-        token_matches = not origin_token or hmac.compare_digest(
-            request.headers.get(_ORIGIN_TOKEN_HEADER, "").encode("utf-8"),
-            origin_token.encode("utf-8"),
+        token_values = request.headers.getlist(_ORIGIN_TOKEN_HEADER)
+        token_matches = not origin_token or (
+            len(token_values) == 1
+            and hmac.compare_digest(
+                token_values[0].encode("utf-8"), origin_token.encode("utf-8")
+            )
         )
-        cloudflare_ip = request.headers.get("cf-connecting-ip", "")
         if origin_token and token_matches:
             try:
-                request.state.verified_client_ip = str(ipaddress.ip_address(cloudflare_ip))
+                client_ip_values = request.headers.getlist(origin_client_ip_header)
+                if len(client_ip_values) != 1:
+                    raise ValueError("expected exactly one client IP")
+                request.state.verified_client_ip = str(
+                    ipaddress.ip_address(client_ip_values[0].strip())
+                )
             except ValueError:
                 token_matches = False
         if not token_matches:
@@ -360,18 +502,23 @@ def create_app(
             }
             return finish(denied)
 
-        peer = request.client.host if request.client else None
-        trusted_scheme = trusted_forwarded_scheme(
-            peer, request.headers.get("x-forwarded-proto"), _TRUSTED_PROXY_CIDRS
-        )
-        if trusted_scheme:
-            request.scope["scheme"] = trusted_scheme
-        elif request.headers.get("host", "").lower().split(":", 1)[0] in {
-            "mapilog.xyz", "www.mapilog.xyz"
-        }:
-            # The production host is HTTPS-only. This keeps url_for output
-            # correct behind TLS termination without trusting arbitrary XFP.
+        if origin_https:
+            # This mode is reached only after the configured origin token and
+            # client IP have both been validated above. The LB frontend is TLS.
             request.scope["scheme"] = "https"
+        else:
+            peer = request.client.host if request.client else None
+            trusted_scheme = trusted_forwarded_scheme(
+                peer, request.headers.get("x-forwarded-proto"), _TRUSTED_PROXY_CIDRS
+            )
+            if trusted_scheme:
+                request.scope["scheme"] = trusted_scheme
+            elif request.headers.get("host", "").lower().split(":", 1)[0] in {
+                "mapilog.xyz", "www.mapilog.xyz"
+            }:
+                # The production host is HTTPS-only. This keeps url_for output
+                # correct behind TLS termination without trusting arbitrary XFP.
+                request.scope["scheme"] = "https"
 
         # Import URL helpers only after applying a proxy scheme from a trusted peer.
         path = request.url.path
@@ -397,6 +544,7 @@ def create_app(
                 window_limit=window_limit,
                 burst_seconds=_RATE_LIMIT_BURST_SECONDS,
                 burst_limit=burst_limit,
+                strict_sliding_window=crawler_request,
             )
             if not allowed:
                 denied = PlainTextResponse(
@@ -424,8 +572,10 @@ def create_app(
             ))
 
         cacheable = request.method == "GET" and (
-            path in {"/", "/m", "/analysis", "/m/analysis", "/api/calendar"}
+            path in {"/", "/m", "/analysis", "/m/analysis"}
+            or path == "/api/calendar"
             or path.startswith("/races/")
+            or bool(re.fullmatch(r"/(horses|jockeys|trainers|owners)(?:/[^/]+)?", path))
         )
         view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
         # Template responses contain absolute URLs generated from the request
@@ -435,11 +585,12 @@ def create_app(
         normalized_query = normalized_query_key(request)
         response_key = (
             f"{request.url.scheme}://{request.url.netloc}"
-            f"|{view_bit}:{path}?{normalized_query}"
+            f"|{'shared' if path == '/api/calendar' else view_bit}:{path}?{normalized_query}"
         )
         request_cache_safe = (
             not request.headers.get("authorization")
-            and not request.headers.get("cookie")
+            and _layout_cookie_cache_safe(request)
+            and (path != "/api/calendar" or not request.headers.get("cookie"))
         )
         cacheable = cacheable and request_cache_safe
         if cacheable:
@@ -457,7 +608,12 @@ def create_app(
             response.headers["X-Frame-Options"] = "DENY"
             response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
             response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
-            if path in {"/", "/analysis"} or path.startswith("/races/"):
+            if (
+                (path.startswith("/static/") or path == "/favicon.ico")
+                and response.status_code < 400
+            ):
+                response.headers.setdefault("Cache-Control", "public, max-age=3600")
+            if path in {"/", "/analysis", "/guide", "/privacy"} or path.startswith("/races/"):
                 vary = [
                     value.strip()
                     for value in response.headers.get("Vary", "").split(",")
@@ -547,7 +703,7 @@ def create_app(
                 response = buffered_response
             return response
 
-        if not active_request_gate.try_enter():
+        def concurrency_denial(*, reason: str, count: int, limit: int) -> Response:
             denied = PlainTextResponse(
                 "서버가 바쁩니다. 잠시 후 다시 시도해 주세요.",
                 status_code=503,
@@ -555,13 +711,66 @@ def create_app(
             )
             denied.policy_diagnostics = {  # type: ignore[attr-defined]
                 "category": "concurrency",
-                "reason": "active_request_limit",
-                "count": active_request_gate.active_count,
-                "limit": active_request_gate.limit,
+                "reason": reason,
+                "count": count,
+                "limit": limit,
             }
-            return finish(denied)
-        try:
-            if cacheable:
+            return denied
+
+        database_backed = (
+            request.method in {"GET", "HEAD"}
+            and request_policy.is_database_backed(path)
+        ) or path == "/health/ready"
+        asset_request = path.startswith("/static/") or path in {
+            "/favicon.ico", "/sitemap.xml",
+        }
+        queued_request = path != "/health" and (
+            database_backed or asset_request or path != "/robots.txt"
+        )
+
+        async def admitted_response():  # type: ignore[no-untyped-def]
+            if path == "/health":
+                return await build_response()
+            # A cacheable response is single-flighted before reaching this
+            # admission path, so same-key waiters never occupy request/DB slots.
+            if queued_request:
+                if not await response_admission.acquire():
+                    return concurrency_denial(
+                        reason="response_queue_full",
+                        count=response_admission.waiting_count,
+                        limit=response_admission.max_waiters,
+                    )
+                try:
+                    if database_backed:
+                        if not await database_admission.acquire():
+                            return concurrency_denial(
+                                reason="database_queue_full",
+                                count=database_admission.waiting_count,
+                                limit=database_admission.max_waiters,
+                            )
+                        try:
+                            return await build_response()
+                        finally:
+                            await asyncio.shield(database_admission.release())
+                    return await build_response()
+                finally:
+                    await asyncio.shield(response_admission.release())
+
+            # Keep the immediate emergency cap for the small diagnostics and
+            # crawler endpoints that are outside the read-page admission path.
+            if not active_request_gate.try_enter():
+                return concurrency_denial(
+                    reason="active_request_limit",
+                    count=active_request_gate.active_count,
+                    limit=active_request_gate.limit,
+                )
+            try:
+                return await build_response()
+            finally:
+                active_request_gate.leave()
+
+        if cacheable:
+            try:
                 async with response_locks.hold(response_key):
                     cached_response = response_cache.get(response_key)
                     if cached_response is not None:
@@ -570,10 +779,14 @@ def create_app(
                             status_code=cached_response[0],
                             headers=cached_response[1],
                         ))
-                    return finish(await build_response())
-            return finish(await build_response())
-        finally:
-            active_request_gate.leave()
+                    return finish(await admitted_response())
+            except AsyncLockCapacityExceeded:
+                return finish(concurrency_denial(
+                    reason="singleflight_capacity_or_timeout",
+                    count=response_locks.outstanding_count,
+                    limit=response_locks.max_waiters,
+                ))
+        return finish(await admitted_response())
 
     @app.get("/health")
     def health() -> dict[str, str]:
@@ -627,6 +840,30 @@ def create_app(
             WEB_ROOT / "static/images/brand/mapilog-favicon.ico",
             media_type="image/x-icon",
             headers={"Cache-Control": "public, max-age=86400"},
+        )
+
+    @app.get("/guide", response_class=HTMLResponse)
+    def public_guide(request: Request) -> HTMLResponse:
+        return templates.TemplateResponse(
+            request=request,
+            name="public_info.html",
+            context={"info_page": "guide", "mobile_view": _is_mobile_request(request)},
+        )
+
+    @app.get("/privacy", response_class=HTMLResponse)
+    def privacy_notice(request: Request) -> HTMLResponse:
+        operator_name, contact_email = _public_policy_contact()
+        return templates.TemplateResponse(
+            request=request,
+            name="public_info.html",
+            context={
+                "info_page": "privacy",
+                "mobile_view": _is_mobile_request(request),
+                "operator_name": operator_name,
+                "operator_brand": "마필로그 운영자",
+                "contact_email": contact_email,
+                "privacy_noindex": True,
+            },
         )
 
     @app.get("/", response_class=HTMLResponse, response_model=None)
@@ -731,16 +968,29 @@ def create_app(
         distance: Annotated[int, Query(ge=0, le=10000)] = 0,
         grade: str = "",
         page: Annotated[int, Query(ge=1)] = 1,
+        view: str = "",
+        band: str = "",
     ) -> HTMLResponse:
-        if course not in ("jeju", "seoul", "busan"):
+        if course not in ("jeju", "seoul", "busan", "yeongcheon"):
             raise HTTPException(status_code=404, detail="지원하지 않는 경마장입니다.")
-        meet_code = {"seoul": 1, "jeju": 2, "busan": 3}[course]
+        if view not in {"", "trials"}:
+            raise HTTPException(status_code=422, detail="지원하지 않는 보기입니다.")
+        selected_view = "trials" if view == "trials" else "regular"
+        if selected_view == "trials":
+            grade = ""
+        meet_code = {"seoul": 1, "jeju": 2, "busan": 3, "yeongcheon": 4}[course]
+        benchmark_enabled = selected_view == "regular" and meet_code in {1, 3} and distance == 1200
+        if band and (not benchmark_enabled or band not in BENCHMARK_BANDS):
+            raise HTTPException(status_code=422, detail="지원하지 않는 함수율 기준입니다.")
+        selected_band = (band or "건조") if benchmark_enabled else ""
         allowed_grades = GRADE_LABELS if meet_code == 2 else SEOUL_GRADE_LABELS
         if grade and grade not in allowed_grades:
             raise HTTPException(status_code=422, detail="지원하지 않는 등급입니다.")
         with session_factory() as session:
             data = load_distance_page(
-                session, year=year, distance=distance, grade=grade, page=page, meet_code=meet_code,
+                session, year=year, distance=distance, grade=grade, page=page,
+                meet_code=meet_code, view=selected_view, band=selected_band,
+                cache=lambda key, loader: cached(key, loader, ttl=120.0),
             )
         return templates.TemplateResponse(
             request=request, name="distance_page.html",
@@ -776,7 +1026,7 @@ def create_app(
             distance_m=track.distance_m,
             distance=f"{track.distance_m:,}m",
             racecourse_map=track,
-            map_checkpoints=[],
+            map_checkpoints=(jeju_course_checkpoints(track.distance_m) if meet_code == 2 else []),
         )
         return templates.TemplateResponse(
             request=request,
@@ -867,8 +1117,29 @@ def create_app(
             jockey_id=jockey_id,
             q=q,
         )
+        calendar = None
+        if template_name == "analysis.html":
+            index = calendar_index_data()
+            selected_day = date.fromisoformat(page.selected_date)
+            days = [item.day for item in index.days]
+            calendar = {
+                "selected_date": selected_day,
+                "selected_meet": (
+                    page.selected_race.meet_code if page.selected_race else page.filters["meet"]
+                ),
+                "calendar_dates": calendar_month_options(index, selected_day),
+                "calendar_min_date": min(days) if days else None,
+                "calendar_max_date": max(days) if days else None,
+                "prev_date": max((day for day in days if day < selected_day), default=None),
+                "next_date": min((day for day in days if day > selected_day), default=None),
+            }
+        analysis_tab = request.query_params.get("tab", "forecast")
+        if analysis_tab not in {"forecast", "field", "records", "overview", "pace", "memo"}:
+            analysis_tab = "forecast"
         forecast = None
-        if page.selected_race is not None:
+        if page.selected_race is not None and (
+            template_name != "analysis.html" or analysis_tab == "forecast"
+        ):
             selected = page.selected_race
 
             def load_forecast():
@@ -881,17 +1152,49 @@ def create_app(
                     )
 
             forecast = cached(("forecast-embed", selected.id), load_forecast)
+        runner_payload = []
+        for runner in page.runners:
+            if template_name != "analysis.html":
+                item = asdict(runner)
+            elif analysis_tab == "field":
+                item = asdict(runner)
+                # Keep the complete bounded history for the saved same-distance
+                # filter, but omit detailed cells already rendered on other tabs.
+                item["history"] = [{
+                    **{key: row[key] for key in (
+                        "date", "distance", "finish", "time", "early_position",
+                    )},
+                    "section_details": {code: {
+                        key: value for key, value in cell.items()
+                        if key in {"time", "time_ms", "display"}
+                    } for code, cell in row["section_details"].items()
+                        if code in {"S1F", "G1F"}},
+                } for row in item["history"]]
+                item["trials"] = item["trials"][:1]
+                item.pop("training", None)
+                item.pop("start_training", None)
+            elif analysis_tab == "records":
+                item = {key: getattr(runner, key) for key in (
+                    "entry_id", "horse_id", "number", "horse", "jockey", "history_total",
+                    "training", "start_training", "training_summary", "jockey_stats",
+                    "combination_stats",
+                )}
+            else:
+                item = {"entry_id": runner.entry_id, "horse_id": runner.horse_id}
+            runner_payload.append(item)
         return templates.TemplateResponse(
             request=request,
             name=template_name,
             context={
                 "layout": layout,
                 "active_nav": "analysis",
+                "analysis_tab": analysis_tab,
                 "page": page,
                 "forecast": forecast,
+                "calendar": calendar,
                 "analysis_payload": {
                     "race": asdict(page.selected_race) if page.selected_race else None,
-                    "runners": [asdict(runner) for runner in page.runners],
+                    "runners": runner_payload,
                 },
             },
         )
@@ -1045,39 +1348,75 @@ def create_app(
             ],
         }
 
+    def entity_list_response(
+        request: Request, kind_slug: str, q: str, page: int, sort: str,
+        meet: int | None, grade: str, origin: str, *, horse_list_page: bool = False,
+        period: str = "career",
+    ) -> HTMLResponse:
+        if kind_slug not in ENTITY_KINDS:
+            raise HTTPException(status_code=404, detail="Not found")
+        period = (period if kind_slug in {"jockeys", "owners", "trainers"}
+                  and period in {"month", "year"} else "career")
+        is_horse = kind_slug == "horses"
+        is_search = bool(q.strip())
+        directory_only = is_horse and not horse_list_page and not is_search
+        # Name/ID searches include retired horses; unfiltered lists contain active horses only.
+        status = "all" if is_horse and is_search else "active"
+        if is_horse and is_search:
+            grade, origin = "", ""
+
+        def load():  # type: ignore[no-untyped-def]
+            with session_factory() as session:
+                return load_entity_list(
+                    session, kind_slug=kind_slug, query=q, page=page,
+                    page_size=DEFAULT_PAGE_SIZE, sort=sort, status=status,
+                    meet=meet, grade=grade, origin=origin,
+                    directory_only=directory_only, include_summary=directory_only, period=period,
+                )
+
+        data = cached(
+            ("entity-list", kind_slug, q, page, sort, status, meet, grade, origin,
+             directory_only, period), load, ttl=60.0,
+        )
+        if data is None:
+            raise HTTPException(status_code=404, detail="Not found")
+        return templates.TemplateResponse(
+            request=request, name="entity_list.html",
+            context={
+                "active_nav": kind_slug, "page_data": data,
+                "horse_list_page": is_horse and not directory_only,
+                "horse_grade_labels": HORSE_GRADE_LABELS, "horse_origin_labels": ORIGIN_LABELS,
+            },
+        )
+
+    @app.get("/horses/list", response_class=HTMLResponse)
+    def horse_list(
+        request: Request,
+        q: Annotated[str, Query(max_length=100)] = "",
+        page: Annotated[int, Query(ge=1)] = 1,
+        sort: Annotated[str, Query()] = "rating",
+        meet: Annotated[int | None, Query(ge=1, le=3)] = None,
+        grade: Annotated[str, Query(max_length=20)] = "",
+        origin: Annotated[str, Query(max_length=20)] = "",
+    ) -> HTMLResponse:
+        return entity_list_response(
+            request, "horses", q, page, sort, meet, grade, origin, horse_list_page=True,
+        )
+
     @app.get("/{kind_slug}", response_class=HTMLResponse)
     def entity_list(
         request: Request,
         kind_slug: str,
         q: Annotated[str, Query(max_length=100)] = "",
         page: Annotated[int, Query(ge=1)] = 1,
-        sort: Annotated[str, Query()] = "starts",
-        status: Annotated[str, Query()] = "all",
+        sort: Annotated[str, Query()] = "",
         meet: Annotated[int | None, Query(ge=1, le=3)] = None,
+        grade: Annotated[str, Query(max_length=20)] = "",
+        origin: Annotated[str, Query(max_length=20)] = "",
+        period: Annotated[str, Query(max_length=16)] = "career",
     ) -> HTMLResponse:
-        if kind_slug not in ENTITY_KINDS:
-            raise HTTPException(status_code=404, detail="Not found")
-
-        def load():  # type: ignore[no-untyped-def]
-            with session_factory() as session:
-                return load_entity_list(
-                    session,
-                    kind_slug=kind_slug,
-                    query=q,
-                    page=page,
-                    page_size=DEFAULT_PAGE_SIZE,
-                    sort=sort,
-                    status=status,
-                    meet=meet,
-                )
-
-        data = cached(("entity-list", kind_slug, q, page, sort, status, meet), load, ttl=60.0)
-        if data is None:
-            raise HTTPException(status_code=404, detail="Not found")
-        return templates.TemplateResponse(
-            request=request,
-            name="entity_list.html",
-            context={"active_nav": kind_slug, "page_data": data},
+        return entity_list_response(
+            request, kind_slug, q, page, sort, meet, grade, origin, period=period,
         )
 
     @app.get("/{kind_slug}/{entity_key}", response_class=HTMLResponse)
@@ -1085,31 +1424,42 @@ def create_app(
         request: Request,
         kind_slug: str,
         entity_key: str,
+        tab: Annotated[str, Query(max_length=16)] = "profile",
+        period: Annotated[str, Query(max_length=10)] = "career",
     ) -> Response:
         if kind_slug not in ENTITY_KINDS:
             raise HTTPException(status_code=404, detail="Not found")
-        with session_factory() as session:
-            data = load_entity_detail(
-                session,
-                kind_slug=kind_slug,
-                official_id=entity_key,
-            )
-            if data is None and entity_key.isdecimal():
-                official_id = load_entity_official_id(
-                    session,
-                    kind_slug=kind_slug,
-                    internal_id=int(entity_key),
+        period = period if kind_slug == "jockeys" and period in {"month", "year"} else "career"
+
+        def load_detail():
+            with session_factory() as session:
+                data = load_entity_detail(
+                    session, kind_slug=kind_slug, official_id=entity_key, partner_period=period,
                 )
-                if official_id is not None:
-                    return _permanent_redirect(
-                        f"/{kind_slug}/{quote(official_id, safe='')}"
+                official_id = None
+                if data is None and entity_key.isdecimal():
+                    official_id = load_entity_official_id(
+                        session, kind_slug=kind_slug, internal_id=int(entity_key),
                     )
+                return data, official_id
+
+        data, official_id = cached(("entity-detail", kind_slug, entity_key, period), load_detail,
+                                   ttl=60.0)
+        if data is None and official_id is not None:
+            target = request.url.replace(path=f"/{kind_slug}/{quote(official_id, safe='')}")
+            return _permanent_redirect(target.path + (f"?{target.query}" if target.query else ""))
         if data is None:
             raise HTTPException(status_code=404, detail="Not found")
+        detail_tabs = ({"profile", "records", "performance", "partners"}
+                       if kind_slug == "jockeys"
+                       else {"profile", "records", "evaluation", "history"})
         return templates.TemplateResponse(
             request=request,
             name="entity_detail.html",
-            context={"active_nav": kind_slug, "detail": data},
+            context={
+                "active_nav": kind_slug, "detail": data,
+                "horse_tab": tab if tab in detail_tabs else "profile",
+            },
         )
 
     # Compress server-rendered HTML after application caching so large pages do

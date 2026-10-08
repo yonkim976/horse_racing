@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from datetime import date, datetime
+from math import isfinite
 from zoneinfo import ZoneInfo
 
 SEOUL = ZoneInfo("Asia/Seoul")
@@ -46,6 +47,25 @@ def format_race_time(milliseconds: int | None) -> str:
     minutes, remaining = divmod(milliseconds, 60_000)
     seconds = remaining / 1000
     return f"{minutes}:{seconds:04.1f}" if minutes else f"{seconds:.1f}초"
+
+
+def format_distance_seconds(seconds: float | int | None) -> str:
+    """Format distance-page timing at centisecond precision as seconds or m:ss.xx."""
+    if seconds is None:
+        return "—"
+    value = float(seconds)
+    if not isfinite(value):
+        return "—"
+    rounded = f"{value:.2f}"
+    if value < 0:
+        return rounded
+    whole, fraction = rounded.split(".", 1)
+    total_centiseconds = int(whole) * 100 + int(fraction)
+    minutes, remainder = divmod(total_centiseconds, 6000)
+    second, centiseconds = divmod(remainder, 100)
+    if minutes:
+        return f"{minutes}:{second:02d}.{centiseconds:02d}"
+    return f"{second}.{centiseconds:02d}"
 
 
 def format_odds(value: float | None) -> str:

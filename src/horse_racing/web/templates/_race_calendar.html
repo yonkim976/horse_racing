@@ -1,0 +1,41 @@
+<dialog class="calendar-modal" id="race-calendar-modal" data-calendar-modal
+  aria-labelledby="race-calendar-title">
+  <div class="calendar-dialog">
+    <div class="calendar-heading">
+      <div>
+        <p class="panel-kicker">RACE DAYS</p>
+        <h2 id="race-calendar-title">경주·주행심사일 선택</h2>
+      </div>
+      <button class="calendar-close" type="button" data-calendar-close aria-label="달력 닫기">×</button>
+    </div>
+    <div class="calendar-month-nav">
+      <button type="button" data-calendar-prev aria-label="이전 달">←</button>
+      <div class="calendar-month-selects">
+        <label><select data-calendar-year aria-label="연도 선택"></select><span aria-hidden="true">년</span></label>
+        <label><select data-calendar-month aria-label="월 선택"></select><span aria-hidden="true">월</span></label>
+      </div>
+      <button type="button" data-calendar-next aria-label="다음 달">→</button>
+    </div>
+    <p class="calendar-month-status" data-calendar-month-status role="status" aria-live="polite" hidden></p>
+    <div class="calendar-weekdays" aria-hidden="true">
+      <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span>
+    </div>
+    <div class="calendar-grid" data-calendar-grid role="grid" aria-label="경주·주행심사 달력"></div>
+    <div class="calendar-legend">
+      <span><i class="scheduled"></i>예정</span>
+      <span><i class="completed"></i>종료</span>
+      <span><i class="trial"></i>주행심사</span>
+      <small>공식 경주와 주행심사를 서로 다른 표시로 구분합니다.</small>
+    </div>
+  </div>
+</dialog>
+
+<script id="race-calendar-data" type="application/json"
+  data-min-date="{{ calendar.calendar_min_date.isoformat() if calendar.calendar_min_date else '' }}"
+  data-max-date="{{ calendar.calendar_max_date.isoformat() if calendar.calendar_max_date else '' }}">
+[
+  {% for item in calendar.calendar_dates %}
+    {"date": {{ item.value | tojson }}, "status": {{ item.status | tojson }}, "hasRace": {{ item.has_race | tojson }}, "hasTrial": {{ item.has_trial | tojson }}}{% if not loop.last %},{% endif %}
+  {% endfor %}
+]
+</script>

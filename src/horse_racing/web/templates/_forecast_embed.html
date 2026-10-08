@@ -2,7 +2,6 @@
 <section class="forecast-embed-intro">
   <p class="panel-kicker">PRE-RACE EXPLORER</p>
   <h2>미래 경주 예측</h2>
-  <p>공식 출전표와 불변 원장에 발행된 예측만 표시합니다. 데이터 기준 {{ page.data_cutoff }}</p>
 </section>
 {% else %}
 <section class="race-heading-line">
@@ -16,9 +15,10 @@
   <div><span>구분</span><strong>{{ page.model.mode }}</strong></div><div><span>모델</span><strong>{{ page.model.model }}</strong></div><div><span>버전</span><strong>{{ page.model.version }}</strong></div><div><span>발행</span><strong>{{ page.model.published }}</strong></div><div><span>데이터 마감</span><strong>{{ page.model.cutoff }}</strong></div><div><span>정책</span><strong>{{ page.model.policy }}</strong></div>
 </section>
 {% else %}
-<div class="notice-box warning"><strong>정식 예측 미발행</strong><span>이 경주의 모델 결과가 불변 원장에 없습니다. 아래 과거 성적과 전개 추정은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.</span></div>
+<div class="notice-box warning"><strong>정식 예측 미발행</strong><span>이 경주의 모델 결과가 불변 원장에 없습니다. {% if forecast_embedded|default(false) %}아래 과거 성적은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.{% else %}아래 과거 성적과 전개 추정은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.{% endif %}</span></div>
 {% endif %}
 
+{% if show_pace_explorer|default(true) %}
 <section class="panel pace-panel" data-pace-root>
   <div class="panel-heading">
     <div><p class="panel-kicker">SCENARIO, NOT OBSERVATION</p><h2>예상 전개 탐색</h2></div>
@@ -34,13 +34,14 @@
   </div>
   <script type="application/json" data-pace-data>{{ page.pace_json()|tojson }}</script>
 </section>
+{% endif %}
 
 <section class="panel">
   <div class="panel-heading"><div><p class="panel-kicker">RUNNERS & EVIDENCE</p><h2>{% if forecast_embedded|default(false) %}모델 예측{% else %}출전마 비교{% endif %}</h2></div><span>과거 이력은 현재 경주일 이전만 집계</span></div>
   <div class="table-scroll"><table class="entry-table insight-table" data-sortable data-runner-table>
     <thead><tr><th>마번</th><th>출전마 / 상태</th><th>기수</th><th>부담중량</th><th>예상순위</th><th>우승</th><th>입상</th><th>최근 5회</th><th>통산</th><th>동일거리</th><th>전개 근거</th></tr></thead>
     <tbody>{% for row in page.runners %}<tr data-entry-id="{{ row.entry_id }}" class="{% if row.scratched %}is-muted{% endif %}" tabindex="0">
-      <td><button type="button" class="runner-number" data-highlight="{{ row.entry_id }}">{{ row.number }}</button></td>
+      <td>{% if forecast_embedded|default(false) %}<span>{{ row.number }}</span>{% else %}<button type="button" class="runner-number" data-highlight="{{ row.entry_id }}">{{ row.number }}</button>{% endif %}</td>
       <td><a href="/horses/{{ row.horse_id }}"><strong>{{ row.horse }}</strong></a><small class="cell-note">{{ row.state }}</small></td>
       <td>{{ row.jockey }}</td><td class="numeric">{{ row.weight }}</td><td class="numeric">{{ row.predicted_rank or '—' }}</td><td class="numeric">{{ row.prob_win }}</td><td class="numeric">{{ row.prob_top3 }}</td><td class="numeric">{{ row.recent_finishes }}</td><td>{{ row.starts }}전 · 승 {{ row.win_rate }} · 입상 {{ row.top3_rate }}</td><td>{{ row.same_distance }}</td><td><strong>{{ row.style }}</strong><small class="cell-note">{{ row.style_reason }}{% if row.closing_time is not none %} · G1F 평균 {{ row.closing_time }}초{% endif %}</small></td>
     </tr>{% endfor %}</tbody>

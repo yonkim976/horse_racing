@@ -1,0 +1,37 @@
+      <div class="schedule-toolbar-mainrow">
+        <div class="date-picker-field">
+          <button class="calendar-trigger" type="button" data-calendar-open aria-haspopup="dialog"
+            aria-controls="race-calendar-modal" aria-label="경주일 선택">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2"/>
+              <path d="M16 3v4M8 3v4M3 10h18"/>
+            </svg>
+            <span class="schedule-date-label">
+              <strong data-calendar-trigger-label>
+                {% if calendar.selected_date %}{{ calendar.selected_date.strftime('%Y.%m.%d') }}{% else %}날짜 선택{% endif %}
+              </strong>
+              <small>
+                {% if calendar.selected_date %}{{ ['월', '화', '수', '목', '금', '토', '일'][calendar.selected_date.weekday()] }}요일{% else %}달력 열기{% endif %}
+              </small>
+            </span>
+          </button>
+          <input type="hidden" name="date"
+            value="{% if calendar.selected_date %}{{ calendar.selected_date.isoformat() }}{% endif %}"
+            data-calendar-value>
+        </div>
+        <div class="schedule-date-nav" aria-label="경주일 이동">
+          {% if calendar.prev_date %}
+            <a class="schedule-date-arrow" href="{{ calendar_path }}?date={{ calendar.prev_date.isoformat() }}{% if calendar.selected_meet %}&meet={{ calendar.selected_meet }}{% endif %}{% if calendar_tab %}&tab={{ calendar_tab }}{% endif %}"
+              aria-label="이전 일" title="이전 일">←</a>
+          {% else %}
+            <span class="schedule-date-arrow disabled" aria-label="이전 일" aria-disabled="true">←</span>
+          {% endif %}
+          {% if calendar.next_date %}
+            <a class="schedule-date-arrow" href="{{ calendar_path }}?date={{ calendar.next_date.isoformat() }}{% if calendar.selected_meet %}&meet={{ calendar.selected_meet }}{% endif %}{% if calendar_tab %}&tab={{ calendar_tab }}{% endif %}"
+              aria-label="다음 일" title="다음 일">→</a>
+          {% else %}
+            <span class="schedule-date-arrow disabled" aria-label="다음 일" aria-disabled="true">→</span>
+          {% endif %}
+        </div>
+      </div>

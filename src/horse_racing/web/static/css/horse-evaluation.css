@@ -1,0 +1,47 @@
+.horse-evaluation { margin-bottom: 24px; scroll-margin-top: 96px; }
+.evaluation-status { color: var(--accent); white-space: nowrap; }
+.evaluation-context { display: flex; flex-wrap: wrap; gap: 16px 32px; padding: 8px 22px 16px; }
+.evaluation-context div { display: grid; gap: 5px; }
+.evaluation-context span { color: var(--muted); font-size: 12px; }
+.evaluation-context strong { font-size: 14px; }
+.evaluation-metrics { min-width: 620px; table-layout: fixed; }
+.evaluation-metrics thead th:first-child { width: 34%; }
+.evaluation-metrics thead th:nth-child(2), .evaluation-metrics thead th:nth-child(3) { width: 16%; }
+.evaluation-scroll-hint { display: none; }
+.horse-evaluation th { text-align: left; }
+.horse-evaluation small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; font-weight: 400; white-space: normal; }
+.evaluation-primary { font-weight: 700; color: var(--accent); }
+.evaluation-interpretation { display: block; margin-top: 8px; color: var(--text); font-size: 13px; line-height: 1.7; font-weight: 500; white-space: normal; }
+.evaluation-explanation { margin: 12px 22px 20px; padding: 16px; border: 1px solid var(--border-strong); border-radius: 10px; }
+.evaluation-explanation p, .evaluation-record p { margin: 8px 0 0; font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.evaluation-records { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 22px 24px; }
+.evaluation-record { min-width: 0; padding: 16px; border: 1px solid var(--border-strong); border-radius: 10px; }
+.evaluation-record h3 { margin: 0; font-size: 15px; }
+.evaluation-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+.evaluation-flow div { display: grid; gap: 8px; padding: 10px 0; }
+.evaluation-flow span { color: var(--muted); font-size: 12px; }
+.evaluation-flow strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.evaluation-flow div:last-child strong, .evaluation-conclusion { color: var(--accent); }
+.evaluation-formula { border-top: 1px solid var(--border); margin-top: 12px; }
+.horse-evaluation .evaluation-formula summary { white-space: normal; line-height: 1.7; font-size: 12px; }
+.horse-evaluation .evaluation-metrics thead th { white-space: normal; }
+.evaluation-caption { text-align: left; font-weight: 600; padding: 0 22px 12px; }
+.evaluation-best { margin: 16px 22px; padding: 14px 16px; border: 1px solid var(--border-strong); border-radius: 10px; line-height: 1.8; font-size: 13px; }
+.evaluation-best strong { display: block; }
+.evaluation-history, .evaluation-method { margin: 18px 22px 0; }
+.horse-evaluation summary { cursor: pointer; font-size: 14px; font-weight: 600; padding: 12px 0; }
+.evaluation-history table { min-width: 1250px; }
+.evaluation-method { border-top: 1px solid var(--border); color: var(--muted); }
+.evaluation-method p { max-width: 90ch; font-size: 13px; line-height: 1.9; }
+@media (max-width: 640px) {
+  .horse-evaluation .panel-heading { align-items: flex-start; gap: 12px; }
+  .evaluation-context { gap: 16px 24px; }
+  .evaluation-context div { flex: 1 1 42%; min-width: 0; }
+  .evaluation-context strong { overflow-wrap: anywhere; }
+  .evaluation-scroll-hint { display: block; }
+  .evaluation-records { grid-template-columns: 1fr; }
+  .evaluation-flow strong { font-size: 18px; }
+}
+@media (min-width: 641px) and (max-width: 1000px) {
+  .evaluation-records { grid-template-columns: 1fr; }
+}

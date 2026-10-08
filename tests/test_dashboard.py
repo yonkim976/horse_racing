@@ -263,9 +263,9 @@ def test_www_redirects_to_apex_without_leaking_cached_asset_urls(tmp_path: Path)
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in apex_response.text
     assert '<meta name="robots" content="index,follow">' in apex_response.text
     assert 'rel="alternate"' not in apex_response.text
-    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=19"' in apex_response.text
+    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=77"' in apex_response.text
     assert (
-        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=19"'
+        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=77"'
     ) in run_response.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in run_response.text
     assert 'aria-label="마필로그 홈"' in apex_response.text
@@ -358,33 +358,43 @@ def test_course_map_page_loads_one_selected_route_for_each_meet(
     assert response.status_code == 200
     assert len(response.content) < 2 * 1024 * 1024
     assert f"{name} 경주로" in response.text
-    assert f"<h1>{name} 경주로 지도</h1>" in response.text
+    display_name = "부산" if name == "부경" else name
+    assert f"<h1>{display_name} 경주로·거리 분석</h1>" in response.text
+    assert "course-view.js?v=11" in response.text
     assert f"distance={distance}" in response.text
     assert "COURSE EXPLORER" not in response.text
     assert "공식 도면 비교" not in response.text
     assert "확대 보기" not in response.text
-    assert "경마장을 선택하고 거리별 출발점과 주행 경로를 확인하세요." in response.text
-    assert '<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">' in response.text
-    assert f'href="/racecourses/{course}/course" aria-current="page">지도 보기</a>' in response.text
-    assert '<nav class="distance-options course-map-meets" aria-label="지도 볼 경마장 선택">' in response.text
-    for meet in ("seoul", "jeju", "busan", "yeongcheon"):
-        assert f'href="/racecourses/{meet}/course"' in response.text
-    if meet_code == 4:
-        assert f'href="/racecourses/{course}/distances"' not in response.text
-    else:
-        assert f'href="/racecourses/{course}/distances">거리별 분석</a>' in response.text
+    assert "거리별 기록과 경주로의 출발점·주행 경로를 확인하세요." in response.text
+    assert 'data-course-view-tabs data-course="' + course + '"' in response.text
+    assert (
+        f'href="/racecourses/{course}/course" data-course-view-link '
+        f'data-course="{course}" data-course-view="course" aria-current="page">지도 보기</a>'
+    ) in response.text
+    assert '<nav class="distance-options course-map-meets" aria-label="경마장 선택" data-course-meet-nav>' in response.text
+    for meet in ("seoul", "busan", "yeongcheon", "jeju"):
+        assert f'href="/racecourses/{meet}/course" data-course-meet="{meet}"' in response.text
+    assert (
+        f'href="/racecourses/{course}/distances" data-course-view-link '
+        f'data-course="{course}" data-course-view="distances"'
+    ) in response.text
+    assert (
+        f'<div class="course-view-content" data-course-view-content '
+        f'data-course="{course}" data-view="course">'
+    ) in response.text
+    assert 'data-course-view-status role="status" aria-live="polite"' in response.text
     if meet_code == 1:
         assert f"서울 경주로 <span>{distance:,}m</span>" in response.text
         assert 'data-seoul-view-label' not in response.text
         assert 'aria-label="지도 구간 색상 안내"' in response.text
-        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index("<svg viewBox")
+        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index('class="seoul-viewport"')
         assert "4C는 G3F 이후 70m, 결승 전 530m" in response.text
         assert 'class="course-method"' not in response.text
         assert "선택한 거리의 출발점과 주행 경로를 확인합니다" not in response.text
         assert "2023년 이전의 예외 경로는 반영하지 않습니다" not in response.text
     else:
         assert 'class="course-method"' in response.text
-        assert "선택 거리" in response.text
+        assert "선택 거리 ·" not in response.text
     assert "현재 경주" not in response.text
     assert "전체 거리 보기 ↗" not in response.text
     assert "지점을 선택하면 구간 기록을 확인할 수 있습니다." not in response.text
@@ -454,7 +464,7 @@ def test_race_detail_embeds_only_its_distance_route(
     assert f'<div class="race-hero" data-racecourse="{name}">' in response.text
     assert response.text.count('data-seoul-route="') == (0 if meet_code == 2 else 1)
     assert response.text.count("data-jeju-route/>") == (1 if meet_code == 2 else 0)
-    map_script = "course-explorer.js?v=15" if meet_code == 2 else "seoul-map.js?v=15"
+    map_script = "course-explorer.js?v=17" if meet_code == 2 else "seoul-map.js?v=17"
     assert map_script in response.text
     assert f"href=\"/racecourses/{course}/course?distance={distance}\"" in response.text
     assert "COURSE EXPLORER" not in response.text
@@ -471,7 +481,7 @@ def test_race_detail_embeds_only_its_distance_route(
     assert "현재 경주" in response.text
     assert "전체 거리 보기 ↗" in response.text
     if meet_code != 2:
-        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index("<svg viewBox")
+        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index('class="seoul-viewport"')
         assert "다른 거리의 경주로도 보기 ↗" not in response.text
         assert "지도 지점은 거리 기준 개략 위치" not in response.text
         assert "현재 출발점과 표준 주로를 표시합니다" not in response.text
@@ -797,10 +807,11 @@ def test_dashboard_renders_schedule_and_result(tmp_path: Path) -> None:
     assert 'aria-label="선택일 요약"' not in response.text
     assert "제주 1R" in response.text
     assert "바람의별" in response.text
-    assert response.text.index("제주 1R") < response.text.index("출전마 및 결과")
+    assert response.text.index("제주 1R") < response.text.index('class="entry-table"')
+    assert "출전마 및 결과" not in response.text
     assert "4세" in response.text
     assert "1:15.2" in response.text
-    assert "2.1배" in response.text
+    assert "2.1" in response.text
     assert ">착차<" in response.text
     assert ">상금<" not in response.text
     assert 'href="/horses/003001"' in response.text
@@ -809,7 +820,7 @@ def test_dashboard_renders_schedule_and_result(tmp_path: Path) -> None:
     assert 'href="/owners/050101"' in response.text
     assert "이마주" in response.text
     assert 'href="/races/1"' in response.text
-    assert "구간 · 배당 · 심판" in response.text
+    assert "경주 상세 보기" in response.text
     assert 'data-calendar-modal' in response.text
     assert 'data-calendar-open' in response.text
     assert 'data-calendar-value' in response.text
@@ -823,6 +834,157 @@ def test_dashboard_renders_schedule_and_result(tmp_path: Path) -> None:
     assert "출전제외" in response.text
     assert "제6등급" in response.text
     assert "silk-1" in response.text
+
+
+def test_scheduled_entry_table_has_preview_columns_and_completed_table_keeps_results(
+    tmp_path: Path,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with TestClient(create_app(factory)) as client:
+        completed = client.get("/?date=2026-08-21&race_id=1&meet=2")
+    completed_head = completed.text.split('<table class="entry-table"', 1)[1].split(
+        "</thead>", 1
+    )[0]
+    assert ">마체중<" in completed_head
+    assert ">착차<" in completed_head
+    with factory() as session:
+        race = session.get(Race, 1)
+        race.status = "scheduled"
+        race.entries[0].equipment_card_raw = "망사눈가면+, 혀보정끈- <장구&>"
+        session.commit()
+    with TestClient(create_app(factory)) as client:
+        home = client.get("/?date=2026-08-21&race_id=1&meet=2")
+        detail = client.get("/races/1")
+    for response in (home, detail):
+        assert response.status_code == 200
+        table = response.text.split('<table class="entry-table scheduled-entry-table"', 1)[1]
+        table = table.split("</table>", 1)[0]
+        head = table.split("</thead>", 1)[0]
+        names = ["부담중량", "출전주기", "장구현황", "조교횟수", "레이팅"]
+        assert [head.index(name) for name in names] == sorted(head.index(n) for n in names)
+        assert all(f">{name}<" not in head for name in ["마체중", "기록", "착차", "단승", "연승"])
+        assert '<span class="equipment-added">망사눈가면+</span>' in table
+        assert '<span class="equipment-removed">혀보정끈-</span>' in table
+        assert '&lt;장구&amp;&gt;' in table
+        assert 'title="최근 1개월 · 경주일 기준, 경주 당일 제외 · 수집된 조교 세션 수"' in head
+        assert '<small>최근 1개월</small>' not in head
+        assert "<장구&>" not in table
+
+
+def test_entry_table_truncates_owner_names_with_escaped_full_label(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    full_name = "베스트샤인조합 <대표&>"
+    escaped_name = "베스트샤인조합 &lt;대표&amp;&gt;"
+    with factory() as session:
+        owner = session.query(Owner).filter_by(kra_owner_id="050101").one()
+        owner.name_ko = full_name
+        race = session.get(Race, 1)
+        assert race is not None
+        unowned_horse = Horse(kra_horse_id="ui-ownerless-test", name_ko="마주 없음")
+        session.add(unowned_horse)
+        session.flush()
+        session.add(RaceEntry(race=race, horse=unowned_horse, horse_number=2))
+        session.commit()
+
+    with TestClient(create_app(factory)) as client:
+        home = client.get("/?date=2026-08-21&meet=2")
+        detail = client.get("/races/1")
+
+    assert home.status_code == detail.status_code == 200
+    for page in (home, detail):
+        cell_start = page.text.index(f'<td data-sort-value="{escaped_name}">')
+        cell_end = page.text.index("</td>", cell_start)
+        owner_cell = " ".join(page.text[cell_start:cell_end].split())
+        assert (
+            f'href="/owners/050101" aria-label="{escaped_name}"'
+        ) in owner_cell
+        assert f'class="owner-name-full" aria-hidden="true">{escaped_name}</span>' in owner_cell
+        assert "베스트샤인…" in owner_cell
+        assert 'title=' not in owner_cell
+        missing_owner_start = page.text.index('<td data-sort-value="—">')
+        missing_owner_end = page.text.index("</td>", missing_owner_start)
+        missing_owner_cell = page.text[missing_owner_start:missing_owner_end]
+        assert 'class="owner-name owner-name-static" role="group" tabindex="0"' in missing_owner_cell
+        assert 'aria-label="—"' in missing_owner_cell
+        assert 'class="owner-name-full" aria-hidden="true">—</span>' in missing_owner_cell
+
+
+def test_dashboard_condition_uses_grade_and_preserves_special_race_name(
+    tmp_path: Path,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        seoul = Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울")
+        special = Race(
+            racecourse=seoul,
+            race_date_local=date(2026, 8, 21),
+            race_number=1,
+            distance_m=1200,
+            grade="국OPEN",
+            race_name="대상경주 특별명",
+            scheduled_at_ms=_seoul_ms(10, 35),
+            status="scheduled",
+        )
+        regular = Race(
+            racecourse=seoul,
+            race_date_local=date(2026, 8, 21),
+            race_number=2,
+            distance_m=1400,
+            grade="5등급",
+            race_name="일반",
+            scheduled_at_ms=_seoul_ms(11, 0),
+            status="scheduled",
+        )
+        ungraded = Race(
+            racecourse=seoul,
+            race_date_local=date(2026, 8, 21),
+            race_number=3,
+            distance_m=1600,
+            grade=None,
+            race_name="일반",
+            scheduled_at_ms=_seoul_ms(11, 25),
+            status="scheduled",
+        )
+        session.add_all([seoul, special, regular, ungraded])
+        session.flush()
+        special_race_id = special.id
+        session.commit()
+
+    with TestClient(create_app(factory)) as client:
+        desktop = client.get("/?date=2026-08-21&meet=1")
+        detail = client.get(f"/races/{special_race_id}")
+        mobile = client.get("/?date=2026-08-21&meet=1", headers=PHONE_HEADERS)
+
+    assert desktop.status_code == detail.status_code == mobile.status_code == 200
+    official_table = desktop.text.split('<table class="race-table">', 1)[1].split(
+        "</tbody>", 1
+    )[0]
+
+    def condition_for(race_label: str) -> str:
+        row = next(row for row in official_table.split("<tr") if race_label in row)
+        cells = [
+            cell.split(">", 1)[1].split("</td>", 1)[0]
+            for cell in row.split("<td")[1:]
+        ]
+        assert len(cells) == 5
+        return cells[2].strip()
+
+    assert condition_for("서울 1R") == "국OPEN"
+    assert condition_for("서울 2R") == "5등급"
+    assert condition_for("서울 3R") == "등급 미제공"
+    assert "대상경주 특별명" in detail.text
+    assert "국OPEN" in detail.text
+    assert "대상경주 특별명" in mobile.text
+    special_row = next(
+        row for row in official_table.split("<tr")
+        if f'data-dashboard-race-id="{special_race_id}"' in row
+    )
+    assert f'data-href="/?date=2026-08-21&amp;meet=1&amp;race_id={special_race_id}"' in special_row
+    assert f'href="/?date=2026-08-21&amp;meet=1&amp;race_id={special_race_id}" data-dashboard-race-select' in special_row
+    assert f'data-race-detail-href="/races/{special_race_id}"' in special_row
+    assert f'data-dashboard-detail data-race-id="{special_race_id}"' in desktop.text
+    assert f'href="/races/{special_race_id}"' in desktop.text
+    assert 'class="entry-table scheduled-entry-table" data-sortable' in desktop.text
 
 
 def test_race_detail_page_shows_results_and_sections(tmp_path: Path) -> None:
@@ -841,6 +1003,9 @@ def test_race_detail_page_shows_results_and_sections(tmp_path: Path) -> None:
     assert "제주 경주로 · 900m 주행 경로" in response.text
     assert "출전마 및 결과" in response.text
     assert "구간기록 · 전개" in response.text
+    assert 'aria-label="전개 구간 경주로 위치"' in response.text
+    assert 'data-passing-map-codes="FIN"' in response.text
+    assert 'data-passing-map-title' in response.text
     assert "이전 경주" in response.text
     assert "다음 경주" in response.text
     assert 'id="section-chart-data"' in response.text
@@ -862,9 +1027,33 @@ def test_race_detail_page_shows_results_and_sections(tmp_path: Path) -> None:
     assert "출전제외" in response.text
     assert "94위" not in response.text
     assert "복승" in response.text
-    assert "8.4배" in response.text
+    assert "8.4" in response.text
     assert 'href="/races/2"' in response.text
     assert missing.status_code == 404
+
+
+@pytest.mark.parametrize(("meet", "name", "distance"), [
+    (1, "서울", 1000), (2, "제주", 1200), (3, "부경", 1600),
+])
+def test_passing_course_map_uses_each_regions_existing_geometry(
+    tmp_path: Path, meet: int, name: str, distance: int,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        race = session.get(Race, 1)
+        race.racecourse.kra_meet_code = meet
+        race.racecourse.name_ko = name
+        race.distance_m = distance
+        session.commit()
+    with TestClient(create_app(factory)) as client:
+        response = client.get("/races/1")
+    assert response.status_code == 200
+    mini = response.text.split('<aside class="passing-course-panel"', 1)[1].split("</aside>", 1)[0]
+    assert f'aria-label="{name} 경주로의 선택 구간 위치"' in mini
+    assert 'data-passing-map-codes="FIN"' in mini
+    assert re.search(r'data-passing-map-codes="[^"]*S1F', mini)
+    assert 'class="passing-map-route" d="M' in mini
+    assert 'data-passing-map-title' in mini
 
 
 def test_running_trial_appears_in_calendar_and_has_race_like_detail_page(
@@ -878,10 +1067,14 @@ def test_running_trial_appears_in_calendar_and_has_race_like_detail_page(
         missing = client.get("/running-trials/999")
 
     assert dashboard.status_code == 200
-    assert "공식 경주와 주행심사" in dashboard.text
+    assert 'aria-label="경주 일정"' in dashboard.text
     assert "제주 2R" in dashboard.text
     assert "예측 대상 제외" in dashboard.text
     assert 'href="/running-trials/1"' in dashboard.text
+    trial_header = dashboard.text.split(
+        '<table class="race-table trial-card-table">', 1
+    )[1].split("</thead>", 1)[0]
+    assert trial_header.count("<th>") == 6
     assert detail.status_code == 200
     assert "주행심사 결과" in detail.text
     assert "예측 대상 아님 · 과거 변수로만 사용" in detail.text
@@ -940,8 +1133,8 @@ def test_jeju_distance_page_uses_portable_year_extraction(tmp_path: Path) -> Non
 
     assert response.status_code == 200
     assert "제주" in response.text
-    assert '<nav class="distance-view-tabs" aria-label="거리별 분석 메뉴">' in response.text
-    assert 'href="/racecourses/jeju/course">지도 보기</a>' in response.text
+    assert 'data-course-view-tabs data-course="jeju"' in response.text
+    assert 'href="/racecourses/jeju/course" data-course-view-link data-course="jeju" data-course-view="course"' in response.text
 
 
 def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
@@ -953,19 +1146,54 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
         page = client.get("/analysis?start=2026-08-01&end=2026-08-31&horse=1")
         exported = client.get("/api/analysis/export.csv?start=2026-08-01&end=2026-08-31&horse=1")
         invalid = client.get("/analysis?start=2026-09-01&end=2026-08-01")
+        race_analysis_css = client.get("/static/css/race-analysis.css")
+        empty_meet = client.get("/analysis?date=2026-08-21&meet=1")
 
     assert page.status_code == 200
     assert "경주 분석" in page.text
     assert "내 분석" not in page.text
     assert "바람의별" in page.text
-    assert "이 브라우저에 저장" in page.text
-    assert "말별 기록과 영상" in page.text
-    assert "현재 출전마" in page.text
-    assert "수집된 과거 경주 기록이 없습니다" in page.text
+    assert "경주 메모" not in page.text
+    assert "말별 기록과 영상" not in page.text
+    assert "출전마 비교" in page.text
+    assert "수집된 과거 경주 기록이 없습니다" not in page.text
     assert 'data-selected-race-id="1"' in page.text
+    assert "ra-selection-note" not in page.text
+    assert "가장 가까운 공개 경주일" not in page.text
+    assert "이전 기록 기준" not in page.text
+    assert "공식 출전표와 불변 원장에 발행된 예측만 표시합니다." not in page.text
+    assert "race-analysis.css?v=14" in page.text
+    assert 'data-calendar-open' in page.text
+    assert 'data-calendar-modal' in page.text
+    assert 'data-calendar-value' in page.text
+    assert 'class="schedule-date-nav"' in page.text
+    assert 'class="ra-date-form filters schedule-toolbar" data-filter-form' in page.text
+    assert 'id="analysis-date"' not in page.text
+    meet_nav_start = page.text.index('<nav class="ra-meets schedule-venue-filter"')
+    meet_nav_end = page.text.index("</nav>", meet_nav_start)
+    meet_nav = page.text[meet_nav_start:meet_nav_end]
+    meet_order = [
+        name for name in ("서울", "부산", "영천", "제주") if f">{name}</a>" in meet_nav
+    ]
+    assert meet_order == ["제주"]
+    assert 'class="schedule-venue-button"' in meet_nav
+    assert "부산경남" not in meet_nav
+    assert 'aria-current="page"' in meet_nav
+    assert race_analysis_css.status_code == 200
+    active_round_rule = race_analysis_css.text.split(
+        ".ra-rounds a.active {", maxsplit=1
+    )[1].split("}", maxsplit=1)[0]
+    assert "box-shadow" not in active_round_rule
+    assert "background:var(--accent-soft)" in active_round_rule
+    assert "border-color:var(--accent-line)" in active_round_rule
     assert "미래 경주 예측" in page.text
-    assert "예상 전개 탐색" in page.text
-    assert "SCENARIO, NOT OBSERVATION" in page.text
+    assert "예상 전개 탐색" not in page.text
+    assert "SCENARIO, NOT OBSERVATION" not in page.text
+    assert 'data-pace-root' not in page.text
+    assert 'data-pace-data' not in page.text
+    assert 'data-highlight="' not in page.text
+    assert "전개 그리기" in page.text
+    assert "출전마 비교" in page.text
     assert "probability_ensemble" in page.text
     assert "100.0%" in page.text
     assert "모델 예측 ↗" not in page.text
@@ -974,6 +1202,136 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
     assert "track_condition" in exported.text
     assert "S1F" in exported.text
     assert invalid.status_code == 422
+    assert empty_meet.status_code == 200
+    assert 'href="/analysis?date=2026-08-21&meet=1"' not in empty_meet.text
+    assert 'name="meet" value="1"' in empty_meet.text
+    assert "선택한 날짜·경기장의 출전표가 없습니다." in empty_meet.text
+    assert 'class="ra-rounds"' not in empty_meet.text
+    assert 'data-selected-race-id="1"' not in empty_meet.text
+
+
+def test_analysis_tabs_support_direct_links_and_preserve_race_navigation(
+    tmp_path: Path, paced_requests,
+) -> None:
+    from bs4 import BeautifulSoup
+
+    tabs = {"forecast", "field", "records", "overview", "pace", "memo"}
+    with TestClient(create_app(seeded_session(tmp_path))) as client:
+        for requested in [*sorted(tabs), "unknown"]:
+            response = client.get(f"/analysis?race_id=1&history_limit=60&tab={requested}")
+            assert response.status_code == 200
+            document = BeautifulSoup(response.text, "html.parser")
+            selected = requested if requested in tabs else "forecast"
+            panes = document.select("[data-analysis-pane]")
+            assert {pane["data-analysis-pane"] for pane in panes} == tabs
+            visible = [pane["data-analysis-pane"] for pane in panes if not pane.has_attr("hidden")]
+            assert visible == [selected]
+            active = document.select_one('.ra-section-nav [aria-current="page"]')
+            assert active["data-analysis-tab"] == selected
+            for link in document.select("[data-analysis-tab]"):
+                assert "race_id=1" in link["href"]
+                assert "history_limit=60" in link["href"]
+                assert f'tab={link["data-analysis-tab"]}' in link["href"]
+                assert document.find(id=link["aria-controls"]) is not None
+            assert document.select_one('.ra-date-form input[name="tab"]')["value"] == selected
+            for link in document.select(".ra-browser a[href]"):
+                assert f"tab={selected}" in link["href"]
+            for pane in panes:
+                if pane.has_attr("hidden"):
+                    assert not pane.get_text(strip=True)
+                    assert not pane.find("table")
+            if selected == "records":
+                assert document.select_one('.ra-history-filter input[name="tab"]')["value"] == "records"
+
+
+def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_video(
+    tmp_path: Path,
+) -> None:
+    from bs4 import BeautifulSoup
+
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        busan = Racecourse(kra_meet_code=3, code="BUSAN", name_ko="부산")
+        session.add(busan)
+        for day in [date(2026, 7, 14), date(2026, 8, 14)]:
+            past = Race(
+                racecourse=busan, race_date_local=day, race_number=3,
+                distance_m=1400, grade="국6등급", status="completed", field_size=10,
+                weather="맑음", track_condition="건조",
+            )
+            past_entry = RaceEntry(race=past, horse_id=1, horse_number=4)
+            session.add_all([
+                past, past_entry,
+                RaceResult(race_entry=past_entry, finish_position=2, finish_time_ms=90_000),
+                RaceSectionResult(
+                    race_entry=past_entry, section_code="G6F", elapsed_time_ms=28_000,
+                    position=4, time_basis="cumulative",
+                ),
+                RaceSectionResult(
+                    race_entry=past_entry, section_code="G3F", elapsed_time_ms=55_000,
+                    position=3, time_basis="cumulative",
+                ),
+                RaceSectionResult(
+                    race_entry=past_entry, section_code="G1F", elapsed_time_ms=16_000,
+                    position=2, time_basis="closing",
+                ),
+                RaceSectionResult(
+                    race_entry=past_entry, section_code="S1F", elapsed_time_ms=15_000,
+                    position=5, time_basis=None,
+                ),
+            ])
+        session.get(RunningTrialResult, 1).passing_order_raw = "2-1-1"
+        session.commit()
+
+    with TestClient(create_app(factory)) as client:
+        response = client.get("/analysis?race_id=1&tab=overview")
+    assert response.status_code == 200
+    document = BeautifulSoup(response.text, "html.parser")
+    pane = document.select_one('[data-analysis-pane="overview"]')
+    assert not pane.has_attr("hidden")
+    horses = pane.select("[data-all-records-horse]")
+    assert [card["data-all-records-horse"] for card in horses] == ["1", "7"]
+    horse_link = horses[0].select_one(".ra-all-records-identity a")
+    assert horse_link["href"] == "/horses/003001?tab=records"
+    assert len(pane.select("table")) == 1
+    headers = [cell.get_text(strip=True) for cell in pane.select("thead th")]
+    assert headers[:5] == ["경주일 · 영상", "조건", "거리", "순위", "기록"]
+    assert headers[-1] == "구간착순"
+    assert "영상" not in headers
+    combined_dates = [
+        row.select_one(".ra-all-records-date-line").get_text(strip=True)[:10]
+        for row in horses[0].select("tr[data-all-records-kind]")
+    ]
+    assert combined_dates == [
+        "2026-08-14", "2026-08-13", "2026-07-14",
+    ]
+    races = horses[0].select('tr[data-all-records-kind="race"]')
+    assert [row.select_one("td a").get_text(strip=True) for row in races] == [
+        "2026-08-14", "2026-07-14",
+    ]
+    cells = races[0].find_all("td", recursive=False)
+    assert "국6등급" in cells[1].get_text()
+    assert cells[2].get_text(strip=True) == "1400m"
+    assert "2위" in cells[3].get_text()
+    assert cells[0].select_one(".ra-video-link") is not None
+    times = {cell["data-section"]: cell.get_text(strip=True)
+             for cell in races[0].select("[data-section]")}
+    assert times["G6F"] == "28.0"
+    assert times["G3F"] == "35.0"  # Closing time, not the cumulative source value.
+    assert times["G1F"] == "16.0"
+    assert times["S1F"] == "15.0*"
+    assert all("초" not in value for value in times.values())
+    assert cells[-1].get_text(strip=True) == "5- -4- -3- -2"
+    assert "S1F - G8F - G6F" in cells[-1].span["title"]
+    trial = horses[0].select_one('tr[data-all-records-kind="trial"]')
+    assert "2026-08-13" in trial.get_text()
+    assert "합격" in trial.get_text()
+    assert trial.select_one('[data-section="G6F"]').get_text(strip=True) == "—"
+    assert trial.find_all("td", recursive=False)[-1].get_text(strip=True) == "2-1-1"
+    assert horses[1].select("tr[data-all-records-kind]") == []
+    assert "연결된 경주·주행심사 기록이 없습니다" in horses[1].get_text()
+    column_count = len(headers)
+    assert all(int(cell["colspan"]) == column_count for cell in pane.select("[colspan]"))
 
 
 def test_analysis_busan_csv_uses_course_sections_and_preserves_unverified_raw_time(
@@ -1114,8 +1472,8 @@ def test_analysis_defaults_to_nearest_upcoming_race_and_allows_explicit_selectio
     assert default_page.status_code == 200
     assert f'data-selected-race-id="{first_id}"' in default_page.text
     assert "2099-09-18 · 10:50 · 제주" in default_page.text
-    assert "날씨·주로·함수율" in default_page.text
-    assert "S1F" in default_page.text
+    assert "날씨·주로·함수율" not in default_page.text
+    assert "S1F" not in default_page.text
     assert f'data-selected-race-id="{second_id}"' in explicit_page.text
 
 
@@ -1200,6 +1558,81 @@ def test_dashboard_health_check(tmp_path: Path) -> None:
     assert readiness.json() == {"status": "ready"}
 
 
+def test_public_guide_and_privacy_pages_render_without_database(monkeypatch) -> None:
+    monkeypatch.delenv("MAPILOG_OPERATOR_NAME", raising=False)
+    monkeypatch.delenv("MAPILOG_CONTACT_EMAIL", raising=False)
+
+    def unexpected_database_access():
+        raise AssertionError("public information pages must not open a database session")
+
+    with TestClient(create_app(session_factory=unexpected_database_access)) as client:
+        guide = client.get("/guide")
+        mobile_guide = client.get("/guide", headers=PHONE_HEADERS)
+        privacy = client.get("/privacy")
+        layout_mobile = client.get("/guide?layout=mobile")
+        layout_desktop = client.get("/privacy?layout=desktop", headers=PHONE_HEADERS)
+        invalid_layout = client.get("/guide?layout=tablet")
+
+    assert all(
+        response.status_code == 200
+        for response in (guide, mobile_guide, privacy, layout_mobile, layout_desktop)
+    )
+    assert invalid_layout.status_code == 422
+    for response in (guide, mobile_guide, privacy):
+        assert response.headers["cache-control"] == "private, no-store"
+        assert {"cookie", "user-agent"} <= {
+            value.strip().lower() for value in response.headers["vary"].split(",")
+        }
+    assert 'data-layout="mobile"' in layout_mobile.text
+    assert "hr-layout=mobile" in layout_mobile.headers["set-cookie"]
+    assert 'data-layout="desktop"' in layout_desktop.text
+    assert "hr-layout=desktop" in layout_desktop.headers["set-cookie"]
+    assert 'href="/guide"' in guide.text and 'href="/privacy"' in guide.text
+    assert "3위 안에 들 확률" in guide.text
+    assert "약 300%" in guide.text
+    assert "정확히 2·3위에 들 확률" in guide.text
+    assert "후착후보" in guide.text
+    assert "즐겨찾기" in guide.text and "홈 화면" in guide.text
+    assert "생성 시점" in guide.text and "보장하지 않습니다" in guide.text
+    assert 'class="mobile-app public-info-page"' in mobile_guide.text
+    assert "김용진" in privacy.text
+    assert 'href="mailto:mapilog@mapilog.xyz"' in privacy.text
+    assert 'content="noindex,follow"' in privacy.text
+    assert "개인정보처리방침" in privacy.text
+    assert "일반 접속 기록:</strong> 30일 보관한 뒤" in privacy.text
+    assert "관리자·시스템 보안 기록:</strong> 400일 보관" in privacy.text
+    assert "수신일부터 7일간 보관한 뒤 파기합니다" in privacy.text
+    assert "담당자가 보유 기간에 맞춰 삭제합니다" in privacy.text
+    assert "개인정보 열람·정정·삭제·처리정지 요청" in privacy.text
+    assert "게시 전 검토본" not in privacy.text
+
+
+def test_public_contact_email_validation_and_draft_noindex(monkeypatch) -> None:
+    monkeypatch.setenv("MAPILOG_OPERATOR_NAME", "김용진")
+    monkeypatch.setenv("MAPILOG_CONTACT_EMAIL", "owner@example.com?subject=<script>")
+
+    with TestClient(create_app()) as client:
+        privacy = client.get("/privacy")
+
+    assert privacy.status_code == 200
+    assert 'content="noindex,follow"' in privacy.text
+    assert "이메일 문의처는 현재 준비 중입니다" in privacy.text
+    assert "owner@example.com" not in privacy.text
+    assert 'href="mailto:' not in privacy.text
+
+
+def test_public_operator_name_is_html_escaped(monkeypatch) -> None:
+    monkeypatch.setenv("MAPILOG_OPERATOR_NAME", "<img src=x onerror=alert(1)>")
+    monkeypatch.setenv("MAPILOG_CONTACT_EMAIL", "owner@example.com")
+
+    with TestClient(create_app()) as client:
+        privacy = client.get("/privacy")
+
+    assert privacy.status_code == 200
+    assert '<img src=x onerror=alert(1)>' not in privacy.text
+    assert "&lt;img src=x onerror=alert(1)&gt;" in privacy.text
+
+
 def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) -> None:
     app = create_app(seeded_session(tmp_path))
 
@@ -1221,7 +1654,7 @@ def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) ->
     assert '.race-hero[data-racecourse="영천"]' in css.text
     assert "background: linear-gradient(125deg," in css.text
     assert "#2d234b 0%, #47366f 58%, #55417c 100%);" in css.text
-    assert "dashboard.css?v=19" in page.text
+    assert "dashboard.css?v=77" in page.text
 
 
 def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
@@ -1231,7 +1664,43 @@ def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
         response = client.get("/?date=2026-08-21&meet=")
 
     assert response.status_code == 200
-    assert "전체 경마장" in response.text
+    assert 'aria-label="당일 경마장 선택"' in response.text
+    assert '<select name="meet"' not in response.text
+
+
+def test_dashboard_venue_buttons_keep_all_day_options_when_filtered(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        session.add_all([
+            Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울"),
+            Racecourse(kra_meet_code=3, code="BUSAN", name_ko="부산경남"),
+            RunningTrial(
+                meet_code=1,
+                trial_date_local=date(2026, 8, 21),
+                trial_round=1,
+                trial_race_number=1,
+                distance_m=1000,
+                observed_at_ms=1,
+            ),
+        ])
+        session.commit()
+
+    with TestClient(create_app(factory)) as client:
+        filtered = client.get("/?date=2026-08-21&meet=2")
+        trial_only = client.get("/?date=2026-08-13")
+
+    assert filtered.status_code == trial_only.status_code == 200
+    buttons = filtered.text.split('aria-label="당일 경마장 선택">', 1)[1].split("</nav>", 1)[0]
+    assert ">전체</a>" in buttons
+    assert ">서울</a>" in buttons
+    assert 'aria-current="page">제주</a>' in buttons
+    assert "부산" not in buttons
+    assert "영천" not in buttons
+    assert 'href="/?date=2026-08-21&amp;meet=1"' in buttons
+    assert 'type="hidden" name="meet" value="2"' in filtered.text
+    trial_buttons = trial_only.text.split('aria-label="당일 경마장 선택">', 1)[1].split("</nav>", 1)[0]
+    assert ">제주</a>" in trial_buttons
+    assert "서울" not in trial_buttons
 
 
 def test_layout_cookie_overrides_user_agent(tmp_path: Path) -> None:
@@ -1245,7 +1714,54 @@ def test_layout_cookie_overrides_user_agent(tmp_path: Path) -> None:
     assert 'class="mobile-app mobile-home"' in mobile.text
     assert 'data-layout="desktop"' in desktop.text
     assert "mobile-app" not in desktop.text
-    assert "hr-layout" in mobile.text
+    assert mobile.headers["cache-control"] == "private, no-store"
+    assert "cookie" in {part.strip().lower() for part in mobile.headers["vary"].split(",")}
+    assert "_layout_switch" not in mobile.text
+
+
+def test_layout_query_overrides_cookie_persists_and_auto_resets(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+    desktop_ua = {"user-agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/130.0"}
+
+    with TestClient(app) as client:
+        desktop = client.get("/?layout=desktop", headers=PHONE_HEADERS)
+        persisted = client.get("/races/1", headers=PHONE_HEADERS)
+        mobile_override = client.get("/analysis?layout=mobile", headers=desktop_ua)
+        desktop_again = client.get("/?layout=desktop", headers=PHONE_HEADERS)
+        automatic = client.get("/?layout=auto", headers=PHONE_HEADERS)
+        restored = client.get("/races/1", headers=PHONE_HEADERS)
+        invalid = client.get("/?layout=tablet", headers=PHONE_HEADERS)
+        repeated = client.get("/?layout=mobile&layout=desktop", headers=PHONE_HEADERS)
+
+    assert desktop.status_code == 200
+    assert 'data-layout="desktop"' in desktop.text
+    assert "hr-layout=desktop" in desktop.headers["set-cookie"]
+    assert desktop.headers["cache-control"] == "private, no-store"
+    assert "cookie" in {part.strip().lower() for part in desktop.headers["vary"].split(",")}
+    assert 'data-layout="desktop"' in persisted.text
+    assert persisted.headers["cache-control"] == "private, no-store"
+    assert 'data-layout="mobile"' in mobile_override.text
+    assert "hr-layout=mobile" in mobile_override.headers["set-cookie"]
+    assert 'data-layout="desktop"' in desktop_again.text
+    assert 'data-layout="mobile"' in automatic.text
+    assert "Max-Age=0" in automatic.headers["set-cookie"]
+    assert 'data-layout="mobile"' in restored.text
+    assert invalid.status_code == 422
+    assert repeated.status_code == 422
+
+
+def test_desktop_user_agent_has_no_viewport_layout_switch(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+    desktop_ua = {"user-agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/130.0"}
+
+    with TestClient(app) as client:
+        response = client.get("/", headers=desktop_ua)
+
+    assert response.status_code == 200
+    assert 'data-layout="desktop"' in response.text
+    assert "max-width: 1100px" not in response.text
+    assert "location.reload()" not in response.text
+    assert "_layout_switch" not in response.text
 
 
 def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> None:
@@ -1269,7 +1785,7 @@ def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> 
         'content="a71202c329d9767a2c3589e8637e278720be227f">'
     ) in page.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in page.text
-    assert "mobile.css?v=81" in page.text
+    assert "mobile.css?v=83" in page.text
     assert 'data-easy-toggle' in page.text
     assert "큰글씨 모드" in page.text
     assert "mapilog-favicon-final.svg" in page.text
@@ -1340,6 +1856,48 @@ def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> 
     }
 
 
+def test_mobile_probability_displays_zero_and_missing_values_distinctly(
+    tmp_path: Path,
+) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        race = session.get(Race, 1)
+        run = session.get(PredictionRun, 1)
+        assert race is not None and run is not None
+        for number, name, probability in (
+            (2, "정확한0퍼센트", 0.0),
+            (3, "누락확률", None),
+        ):
+            horse = Horse(kra_horse_id=f"ui-probability-{number}", name_ko=name)
+            entry = RaceEntry(race=race, horse=horse, horse_number=number)
+            session.add_all([horse, entry])
+            session.flush()
+            if probability is not None:
+                session.add(
+                    ModelPrediction(
+                        prediction_run_id=run.id,
+                        race_id=race.id,
+                        race_entry_id=entry.id,
+                        horse_number=number,
+                        prob_win=0.0,
+                        prob_top2=0.0,
+                        prob_top3=probability,
+                    )
+                )
+        session.commit()
+
+    with TestClient(create_app(factory)) as client:
+        home = client.get("/?date=2026-08-21&meet=2", headers=PHONE_HEADERS)
+        analysis = client.get("/races/1", headers=PHONE_HEADERS)
+
+    assert 'mobile-poster-pct" title="3위 안 입상 확률">0%</span>' in home.text
+    assert 'mobile-poster-pct" title="3위 안 입상 확률">—</span>' in home.text
+    assert 'ma-win-pct" title="3위 안 입상 확률">0%</span>' in analysis.text
+    assert 'ma-win-pct" title="3위 안 입상 확률">—</span>' in analysis.text
+    assert ">00%<" not in home.text
+    assert ">00%<" not in analysis.text
+
+
 def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
     tmp_path: Path, paced_requests,
 ) -> None:
@@ -1355,10 +1913,18 @@ def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
             response = client.get(path, headers=headers, follow_redirects=False)
             assert response.status_code == 200, path
             assert 'class="mobile-app ' in response.text
-            assert "dashboard.css?v=18" in response.text
+            assert "dashboard.css?v=77" in response.text
+            assert "mobile.css?v=83" in response.text
             assert {part.strip().lower() for part in response.headers["vary"].split(",")} == {
                 "user-agent", "accept-encoding"
             }
+
+        mobile_css = client.get("/static/css/mobile.css", headers=headers).text
+        arrow_rule = mobile_css.split(".mobile-round-analysis {", maxsplit=1)[1].split(
+            "}", maxsplit=1
+        )[0]
+        assert "background:" not in arrow_rule
+        assert ".mobile-round-title > :not(.mobile-round-analysis)" not in mobile_css
 
         for path in (
             "/running-trials/1",
@@ -1424,7 +1990,7 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
 
     with TestClient(app) as client:
         page = client.get("/races/1", headers=PHONE_HEADERS)
-        desktop = client.get("/analysis?race_id=1")
+        desktop = client.get("/analysis?race_id=1&tab=field")
         mobile = client.get(
             "/analysis?race_id=1",
             headers=PHONE_HEADERS,
@@ -1452,7 +2018,7 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert 'data-role="강축"' in page.text
     assert "100%" in page.text
     assert "강축" in page.text
-    assert "00%" in page.text
+    assert ">00%<" not in page.text
     assert "각 말이 1~3위 안에 들 입상확률" not in page.text
     assert "같은 경주의 합계는 약 300%" not in page.text
     assert "모델 선정 입상 후보 1두" not in page.text
@@ -1498,10 +2064,12 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert "RACE STUDY" not in page.text
     assert "PRE-RACE EXPLORER" not in page.text
     assert "SCENARIO, NOT OBSERVATION" not in page.text
+    assert 'data-pace-root' not in page.text
+    assert 'data-pace-data' not in page.text
     assert "말별 기록과 영상" not in page.text
     assert desktop.status_code == 200
     assert "RACE STUDY" in desktop.text
-    assert "말별 기록과 영상" in desktop.text
+    assert "말별 기록·영상" in desktop.text
     assert mobile.status_code == 200
     assert 'class="mobile-app mobile-analysis"' in mobile.text
 
@@ -1687,6 +2255,123 @@ def test_mobile_all_meets_lists_races_in_start_time_order(tmp_path: Path) -> Non
     assert 'class="mobile-round-race">1R<' in seoul_only.text
     assert "바람의별" not in seoul_only.text
     assert seoul_only.text.index("서울말") < seoul_only.text.index("서울이착")
+
+
+def test_desktop_all_meets_lists_races_in_start_time_order(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        seoul = Racecourse(kra_meet_code=1, code="SEOUL", name_ko="서울")
+        busan = Racecourse(kra_meet_code=3, code="BUSAN", name_ko="부경")
+        jeju = session.query(Racecourse).filter_by(kra_meet_code=2).one()
+        races = [
+            Race(
+                racecourse=seoul,
+                race_date_local=date(2026, 8, 21),
+                race_number=1,
+                distance_m=1200,
+                grade="국6등급",
+                race_name="일반",
+                scheduled_at_ms=_seoul_ms(10, 35),
+                status="scheduled",
+            ),
+            Race(
+                racecourse=busan,
+                race_date_local=date(2026, 8, 21),
+                race_number=1,
+                distance_m=1200,
+                grade="국6등급",
+                race_name="일반",
+                scheduled_at_ms=_seoul_ms(10, 35),
+                status="scheduled",
+            ),
+            Race(
+                racecourse=busan,
+                race_date_local=date(2026, 8, 21),
+                race_number=2,
+                distance_m=1200,
+                grade="국6등급",
+                race_name="일반",
+                scheduled_at_ms=_seoul_ms(10, 35),
+                status="scheduled",
+            ),
+            Race(
+                racecourse=jeju,
+                race_date_local=date(2026, 8, 21),
+                race_number=3,
+                distance_m=900,
+                grade="제6등급",
+                race_name="일반",
+                scheduled_at_ms=_seoul_ms(10, 35),
+                status="scheduled",
+            ),
+            Race(
+                racecourse=seoul,
+                race_date_local=date(2026, 8, 21),
+                race_number=2,
+                distance_m=1400,
+                grade="국6등급",
+                race_name="일반",
+                scheduled_at_ms=_seoul_ms(11, 25),
+                status="scheduled",
+            ),
+            Race(
+                racecourse=busan,
+                race_date_local=date(2026, 8, 21),
+                race_number=3,
+                distance_m=1400,
+                grade="국6등급",
+                race_name="일반",
+                scheduled_at_ms=_seoul_ms(12, 30),
+                status="scheduled",
+            ),
+            Race(
+                racecourse=busan,
+                race_date_local=date(2026, 8, 21),
+                race_number=4,
+                distance_m=1400,
+                grade="국6등급",
+                race_name="일반",
+                scheduled_at_ms=None,
+                status="scheduled",
+            ),
+        ]
+        session.add_all([seoul, busan, *races])
+        session.commit()
+
+    with TestClient(create_app(factory)) as client:
+        page = client.get("/?date=2026-08-21")
+
+    assert page.status_code == 200
+    official_table = page.text.split('<table class="race-table">', 1)[1].split(
+        "</tbody>", 1
+    )[0]
+    official_header = official_table.split("</thead>", 1)[0]
+    assert official_header.count("<th>") == 5
+    assert "<th>상태</th>" not in official_header
+    first_race_row = official_table.split("<tbody>", 1)[1].split("</tr>", 1)[0]
+    first_race_cell = first_race_row.split("<td>", 1)[1].split("</td>", 1)[0]
+    assert 'class="race-status-badge status scheduled">예정</span>' in first_race_cell
+    expected_order = [
+        "서울 1R",
+        "부경 1R",
+        "부경 2R",
+        "제주 3R",
+        "서울 2R",
+        "부경 3R",
+        "제주 1R",
+        "제주 2R",
+        "부경 4R",
+    ]
+    positions = [official_table.index(label) for label in expected_order]
+    assert positions == sorted(positions)
+    assert 'class="group-row"' not in official_table
+    unknown_time_row = official_table.rsplit("<tr", 1)[1].split("</tr>", 1)[0]
+    unknown_time_cells = [
+        cell.split(">", 1)[1].split("</td>", 1)[0]
+        for cell in unknown_time_row.split("<td")[1:]
+    ]
+    assert len(unknown_time_cells) == 5
+    assert "미정" in unknown_time_cells[1]
 
 
 def test_mobile_puts_current_race_first_on_today(tmp_path: Path, monkeypatch) -> None:
@@ -2056,7 +2741,7 @@ def test_mobile_shows_trial_form_for_debut_horses(tmp_path: Path) -> None:
     with TestClient(app) as client:
         home = client.get("/?date=2026-08-21&meet=2", headers=PHONE_HEADERS)
         analysis = client.get("/races/1", headers=PHONE_HEADERS)
-        desktop = client.get("/analysis?race_id=1")
+        desktop = client.get("/analysis?race_id=1&tab=field")
 
     assert "심사 1합" in home.text
     assert "송당퍼스트" in home.text
@@ -2121,26 +2806,31 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
 
     with TestClient(app) as client:
         horses = client.get("/horses?q=바람")
-        horse_list = client.get("/horses")
-        horse_by_name = client.get("/horses?sort=name")
-        active_horses = client.get("/horses?status=active")
-        retired_horses = client.get("/horses?status=retired")
-        seoul_horses = client.get("/horses?meet=1")
-        jeju_horses = client.get("/horses?meet=2")
-        bukyeong_horses = client.get("/horses?meet=3")
+        directory = client.get("/horses?meet=1")
+        horse_list = client.get("/horses/list?status=all")
+        horse_by_name = client.get("/horses/list?sort=name&q=가가나")
+        active_horses = client.get("/horses/list?status=active")
+        retired_horses = client.get("/horses/list?q=가가나")
+        retired_browse = client.get("/horses/list?status=retired")
+        seoul_horses = client.get("/horses/list?meet=1")
+        jeju_horses = client.get("/horses/list?meet=2")
+        bukyeong_horses = client.get("/horses/list?meet=3&q=제외마")
         filtered_search = client.get("/horses?meet=2&q=바람")
         trainers = client.get("/trainers")
+        unclassified_trainer_search = client.get("/trainers?q=미확인조교사")
         seoul_trainers = client.get("/trainers?meet=1")
         jeju_trainers = client.get("/trainers?meet=2")
         bukyeong_trainers = client.get("/trainers?meet=3")
         filtered_trainer_search = client.get("/trainers?meet=2&q=070101")
         horse_detail = client.get("/horses/003001")
+        horse_records = client.get("/horses/003001?tab=records")
+        horse_history = client.get("/horses/003001?tab=history")
         legacy_horse_detail = client.get("/horses/1", follow_redirects=False)
         jockey_detail = client.get("/jockeys/080101")
         legacy_jockey_detail = client.get("/jockeys/1", follow_redirects=False)
         trainer_detail = client.get("/trainers/070101")
         legacy_trainer_detail = client.get("/trainers/1", follow_redirects=False)
-        owners = client.get("/owners")
+        owners = client.get("/owners?q=050101")
         owner_detail = client.get("/owners/050101")
         legacy_owner_detail = client.get("/owners/1", follow_redirects=False)
         unknown_horse = client.get("/horses/not-a-kra-id")
@@ -2153,18 +2843,28 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert "출전 많은 순" in horses.text
     assert 'href="/horses/003001"' in horses.text
     assert 'href="/horses/1"' not in horses.text
-    assert horse_list.text.index("바람의별") < horse_list.text.index("가가나")
-    assert horse_by_name.text.index("가가나") < horse_by_name.text.index("바람의별")
+    assert directory.status_code == 200
+    assert 'class="horse-grade-table"' in directory.text
+    assert 'id="horse-directory-list"' not in directory.text
+    assert 'horse-directory-statuses' not in directory.text
+    assert 'name="status"' not in directory.text
+    assert 'action="/horses/list"' in directory.text
+    assert 'href="/horses/list?' in directory.text
+    assert '#horse-directory-list' not in directory.text
+    assert "바람의별" in horse_list.text
+    assert "가가나" not in horse_list.text
+    assert "가가나" in horse_by_name.text
+    assert 'class="horse-grade-table"' not in horse_list.text
+    assert 'class="horse-directory-back"' in horse_list.text
+    assert "가가나" not in retired_browse.text
     assert 'data-status="active">현역<' in active_horses.text
     assert "바람의별" in active_horses.text
     assert "가가나" not in active_horses.text
     assert 'data-status="retired">은퇴<' in retired_horses.text
     assert "가가나" in retired_horses.text
     assert "바람의별" not in retired_horses.text
-    assert 'href="/horses?meet=1' in horse_list.text
-    assert "가가나" in seoul_horses.text
+    assert "가가나" not in seoul_horses.text
     assert "바람의별" not in seoul_horses.text
-    assert 'href="/horses?meet=2' in jeju_horses.text
     assert "바람의별" in jeju_horses.text
     assert "가가나" not in jeju_horses.text
     assert "제외마" in bukyeong_horses.text
@@ -2174,6 +2874,16 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert trainers.status_code == 200
     assert "2026-09-29 기준 현역 조교사" in trainers.text
     assert "미확인조교사" not in trainers.text
+    assert "미확인조교사" in unclassified_trainer_search.text
+    trainer_table = re.search(
+        r'<table class="trainer-list-table".*?</table>', trainers.text, re.DOTALL,
+    ).group(0)
+    trainer_head = re.search(r"<thead>(.*?)</thead>", trainer_table, re.DOTALL).group(1)
+    assert re.findall(r"<th(?:\s[^>]*)?>(.*?)</th>", trainer_head, re.DOTALL) == [
+        "번호", "이름", "조", "관리두수", "출전", "1위", "2위", "3위", "승률", "복승률", "입상률",
+    ]
+    trainer_row = re.search(r"<tbody>\s*<tr[^>]*>(.*?)</tr>", trainer_table, re.DOTALL).group(1)
+    assert len(re.findall(r"<td(?:\s[^>]*)?>", trainer_row)) == 11
     assert 'href="/trainers?meet=1' in trainers.text
     assert "서울조교사" in seoul_trainers.text
     assert "김조교" not in seoul_trainers.text
@@ -2183,8 +2893,15 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert "서울조교사" not in bukyeong_trainers.text
     assert "김조교" in filtered_trainer_search.text
     assert 'name="meet" value="2"' in filtered_trainer_search.text
-    assert "체중" in horses.text
-    assert "훈련" in horses.text
+    assert "최근 5전" in horses.text
+    assert "통산 전적" in horses.text
+    assert "입상률" in horses.text
+    assert "레이팅 높은 순" in horses.text
+    assert "<th>번호</th>" in horses.text
+    assert "<th>마번</th>" not in horses.text
+    assert "<th>체중</th>" not in horses.text
+    assert "<th>훈련</th>" not in horses.text
+    assert "<th>진료</th>" not in horses.text
 
     assert horse_detail.status_code == 200
     assert legacy_horse_detail.status_code == 301
@@ -2196,19 +2913,20 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert "상태 확인" in horse_detail.text
     assert "나이" in horse_detail.text
     assert "4세" in horse_detail.text
-    assert "출전 이력" in horse_detail.text
-    assert "제주 1R" in horse_detail.text
-    assert "1위" in horse_detail.text
-    assert "<th>착차</th>" in horse_detail.text
-    assert "<th>상금</th>" not in horse_detail.text
-    assert 'class="numeric margin">-</td>' in horse_detail.text
-    assert "레이팅" in horse_detail.text
-    assert "체중" in horse_detail.text
-    assert "훈련" in horse_detail.text
-    assert "진료" in horse_detail.text
-    assert "280kg" in horse_detail.text
-    assert "근막염" in horse_detail.text
-    assert 'id="horse-history"' in horse_detail.text
+    assert 'class="summary-grid"' not in horse_detail.text
+    assert 'id="start-history"' in horse_records.text
+    assert "제주 1R" in horse_records.text
+    assert "1위" in horse_records.text
+    assert "<th>착차</th>" in horse_records.text
+    assert "<th>상금</th>" not in horse_records.text
+    assert 'class="numeric margin">-</td>' in horse_records.text
+    assert "레이팅" in horse_history.text
+    assert "체중" in horse_history.text
+    assert "훈련" in horse_history.text
+    assert "진료" in horse_history.text
+    assert "280kg" in horse_history.text
+    assert "근막염" in horse_history.text
+    assert 'id="horse-history"' in horse_history.text
     assert 'id="horse-profile"' in horse_detail.text
     assert "기본 정보" in horse_detail.text
     assert "12전 3/2/1" in horse_detail.text
@@ -2216,17 +2934,18 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert "최신 레이팅" not in horse_detail.text
     assert "현재 레이팅" not in horse_detail.text
     assert "마지막 경주 레이팅" in horse_detail.text
-    assert "경주 당시 레이팅" in horse_detail.text
-    assert "주행심사" in horse_detail.text
-    assert "합격" in horse_detail.text
-    assert "1:07.1" in horse_detail.text
-    assert "S1F 18.1" in horse_detail.text
-    assert "주행미합(신)" in horse_detail.text
+    assert "경주 당시 레이팅" in horse_history.text
+    assert "주행심사" in horse_history.text
+    assert "합격" in horse_history.text
+    assert "1:07.1" in horse_history.text
+    assert "S1F 18.1" in horse_history.text
+    assert "주행미합(신)" in horse_history.text
 
     assert jockey_detail.status_code == 200
     assert legacy_jockey_detail.status_code == 301
     assert legacy_jockey_detail.headers["location"] == "/jockeys/080101"
     assert trainer_detail.status_code == 200
+    assert 'class="summary-grid"' in trainer_detail.text
     assert legacy_trainer_detail.status_code == 301
     assert legacy_trainer_detail.headers["location"] == "/trainers/070101"
     managed_section = trainer_detail.text.split('id="trainer-managed-horses"', 1)[1].split(
@@ -2254,3 +2973,37 @@ def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:
     assert "바람의별" in owner_detail.text
     assert unknown_horse.status_code == 404
     assert missing.status_code == 404
+
+
+def test_entity_detail_tab_switch_reuses_data_without_more_sql(tmp_path):
+    factory = seeded_session(tmp_path)
+    statements = []
+
+    def count_sql(_connection, _cursor, statement, _parameters, _context, _many):
+        if statement.lstrip().upper().startswith("SELECT"):
+            statements.append(statement)
+
+    event.listen(factory.kw["bind"], "before_cursor_execute", count_sql)
+    with TestClient(create_app(factory)) as client:
+        profile = client.get("/horses/003001?tab=profile")
+        cold_queries = len(statements)
+        assert profile.status_code == 200 and cold_queries > 0
+        records = client.get("/horses/003001?tab=records")
+        assert records.status_code == 200
+        assert 'id="start-history"' in records.text
+        assert len(statements) == cold_queries
+        repeat = client.get("/horses/003001?tab=records")
+        assert repeat.text == records.text
+        assert len(statements) == cold_queries
+        redirect = client.get("/horses/1?tab=records", follow_redirects=False)
+        assert redirect.status_code == 301
+        assert redirect.headers["location"] == "/horses/003001?tab=records"
+
+
+def test_horse_list_rejects_unbounded_pages_before_sql():
+    def forbidden_session():
+        raise AssertionError("Invalid pages must never open the DB")
+
+    with TestClient(create_app(forbidden_session)) as client:
+        for page in ("201", "9223372036854775807", "9" * 100):
+            assert client.get(f"/horses/list?page={page}").status_code == 422

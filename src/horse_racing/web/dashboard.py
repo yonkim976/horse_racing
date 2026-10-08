@@ -18,6 +18,7 @@ from horse_racing.db.models import (
     RunningTrialResult,
 )
 from horse_racing.services.entry_sheet import MEET_METADATA
+from horse_racing.web.entry_preview import EntryPreview, load_entry_previews
 from horse_racing.web.formatting import (
     MAX_NORMAL_FINISH,
     adjacent_dates,
@@ -29,7 +30,6 @@ from horse_racing.web.formatting import (
     format_odds,
     format_race_time,
     format_rating,
-    group_dates_by_month,
     now_seoul_ms,
     stakes_grade,
     today_seoul,
@@ -83,6 +83,7 @@ class RaceRow:
     start_time: str
     distance: str
     race_label: str
+    condition_label: str
     entry_count: int
     runner_count: int
     status: str
@@ -104,12 +105,6 @@ class RaceGroup:
     course_name: str
     races: list[RaceRow]
     kind: str = "course"
-
-
-@dataclass(frozen=True, slots=True)
-class DateGroup:
-    label: str
-    dates: list[date]
 
 
 @dataclass(frozen=True, slots=True)
@@ -148,6 +143,13 @@ class CalendarDay:
 @dataclass(frozen=True, slots=True)
 class CalendarIndex:
     days: tuple[CalendarDay, ...]
+
+
+_TRIAL_JUDGEMENT_STRIP_CHARS = (
+    "\t\n\v\f\r \x1c\x1d\x1e\x1f\x85\xa0\u1680"
+    + "".join(chr(codepoint) for codepoint in range(0x2000, 0x200B))
+    + "\u2028\u2029\u202f\u205f\u3000"
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -189,6 +191,11 @@ class EntryRow:
     win_odds: str
     place_odds: str
     margin: str
+    carried_weight_delta: float | None = None
+    rest_weeks: str = "—"
+    previous_race_date: str = ""
+    equipment: str = "—"
+    training_count: int | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -211,8 +218,6 @@ class RaceDetail:
 
 @dataclass(frozen=True, slots=True)
 class DashboardData:
-    available_dates: list[date]
-    date_groups: list[DateGroup]
     calendar_dates: list[CalendarDateOption]
     calendar_min_date: date | None
     calendar_max_date: date | None
@@ -239,6 +244,7 @@ class DashboardData:
 
 
 def load_calendar_index(session: Session) -> CalendarIndex:
+    """Load public date/status metadata for reuse across home and calendar requests."""
     race_dates = tuple(
         session.scalars(
             select(Race.race_date_local)
@@ -287,7 +293,7 @@ def calendar_month_options(index: CalendarIndex, month: date) -> list[CalendarDa
             has_race=item.has_race,
             has_trial=item.has_trial,
         )
-        for item in reversed(index.days)
+        for item in index.days
         if item.day.year == month.year and item.day.month == month.month
     ]
 
@@ -378,7 +384,8 @@ def load_dashboard(
             else []
         )
     else:
-        race_groups = _race_groups(race_rows, grouped=True)
+        race_rows = _sort_races_by_start(race_rows)
+        race_groups = _race_groups(race_rows, grouped=False)
     if selected_race_id is None and default_race_order:
         chosen_race = next(
             (race for race in races if race.id == default_race_order[0].id),
@@ -392,15 +399,11 @@ def load_dashboard(
     scheduled_count = sum(race.status == "scheduled" for race in races)
     meet_count = len({race.racecourse_id for race in races})
 
+    calendar_month = selected_date or (available_dates[0] if available_dates else None)
     return DashboardData(
-        available_dates=available_dates,
-        date_groups=[
-            DateGroup(label=label, dates=items)
-            for label, items in group_dates_by_month(available_dates)
-        ],
         calendar_dates=(
-            calendar_month_options(calendar_index, selected_date or available_dates[0])
-            if available_dates else []
+            calendar_month_options(calendar_index, calendar_month)
+            if calendar_month is not None else []
         ),
         calendar_min_date=available_dates[-1] if available_dates else None,
         calendar_max_date=available_dates[0] if available_dates else None,
@@ -656,11 +659,10 @@ def _recent_form_by_horse(
     ).all()
     form: dict[int, list[str]] = defaultdict(list)
     for horse_id, _race_date, _race_id, position, disqualified in rows:
-        finishes = form[horse_id]
         if disqualified or position >= 90:
-            finishes.append("-")
+            form[horse_id].append("-")
         else:
-            finishes.append(str(position))
+            form[horse_id].append(str(position))
     return {
         horse_id: "-".join(finishes) if finishes else "—"
         for horse_id, finishes in form.items()
@@ -674,7 +676,11 @@ def _recent_trial_form_by_horse(
 ) -> dict[int, str]:
     if not horse_ids or before is None:
         return {}
-    judgement = func.trim(func.coalesce(RunningTrialResult.judgement, ""))
+    raw_judgement = func.coalesce(RunningTrialResult.judgement, "")
+    judgement = func.ltrim(
+        func.rtrim(raw_judgement, _TRIAL_JUDGEMENT_STRIP_CHARS),
+        _TRIAL_JUDGEMENT_STRIP_CHARS,
+    )
     ranked = (
         select(
             RunningTrialResult.horse_id.label("horse_id"),
@@ -711,10 +717,9 @@ def _recent_trial_form_by_horse(
     ).all()
     form: dict[int, list[str]] = defaultdict(list)
     for horse_id, _trial_date, _trial_id, position, judgement in rows:
-        tokens = form[horse_id]
         token = format_trial_form_token(position, judgement)
         if token:
-            tokens.append(token)
+            form[horse_id].append(token)
     return {
         horse_id: format_trial_form_line(tokens)
         for horse_id, tokens in form.items()
@@ -804,6 +809,7 @@ def _race_row(
         start_time=format_clock(race.scheduled_at_ms),
         distance=f"{race.distance_m:,}m",
         race_label=display_race_title(race.grade, race.race_name),
+        condition_label=(race.grade or "").strip() or "등급 미제공",
         entry_count=len(race.entries),
         runner_count=sum(not entry.scratched for entry in race.entries),
         status=status,
@@ -829,7 +835,8 @@ def _race_detail(session: Session, race: Race) -> RaceDetail:
             )
         )
     }
-    entries = [_entry_row(entry, odds) for entry in race.entries]
+    previews = load_entry_previews(session, race)
+    entries = [_entry_row(entry, odds, previews.get(entry.horse_id)) for entry in race.entries]
     entries.sort(key=lambda entry: (entry.finish_sort, entry.horse_number))
     condition_parts = [part for part in (race.weather, race.track_condition) if part]
     if race.track_moisture_percent is not None:
@@ -858,6 +865,7 @@ def _race_detail(session: Session, race: Race) -> RaceDetail:
 def _entry_row(
     entry: RaceEntry,
     odds: dict[tuple[str, str], float],
+    preview: EntryPreview | None = None,
 ) -> EntryRow:
     result = entry.result
     finish_position = result.finish_position if result is not None else None
@@ -885,6 +893,16 @@ def _entry_row(
         classes.append("placed")
         classes.append(f"placed-{sort_key}")
     selection_key = str(entry.horse_number)
+    carried_weight = (
+        f"{entry.carried_weight_kg:g}kg" if entry.carried_weight_kg is not None else "—"
+    )
+    if preview is not None and preview.weight_delta is not None:
+        change_label = f"{preview.weight_delta:+g}" if preview.weight_delta else "0"
+        carried_weight += f" ({change_label})"
+    rest_weeks = "—"
+    if preview is not None and preview.previous_date is not None:
+        days = (entry.race.race_date_local - preview.previous_date).days
+        rest_weeks = f"{round(days / 7)}주"
     return EntryRow(
         horse_id=entry.horse.kra_horse_id,
         horse_number=entry.horse_number,
@@ -896,9 +914,7 @@ def _entry_row(
         trainer_name=entry.trainer.name_ko if entry.trainer else "—",
         owner_id=entry.owner.kra_owner_id if entry.owner else None,
         owner_name=entry.owner.name_ko if entry.owner else "—",
-        carried_weight=(
-            f"{entry.carried_weight_kg:g}kg" if entry.carried_weight_kg is not None else "—"
-        ),
+        carried_weight=carried_weight,
         body_weight=body_weight,
         weight_delta=entry.body_weight_change_kg,
         rating=format_rating(entry.rating),
@@ -911,6 +927,12 @@ def _entry_row(
         win_odds=format_odds(odds.get(("WIN", selection_key))),
         place_odds=format_odds(odds.get(("PLC", selection_key))),
         margin=format_margin(result.margin_text if result else None),
+        carried_weight_delta=preview.weight_delta if preview else None,
+        rest_weeks=rest_weeks,
+        previous_race_date=preview.previous_date.isoformat()
+        if preview and preview.previous_date else "",
+        equipment=preview.equipment if preview else "—",
+        training_count=preview.training_count if preview else None,
     )
 
 

@@ -6,9 +6,12 @@ No target-day result, training, trial or jockey performance is used as evidence.
 
 from __future__ import annotations
 
+import json
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date, timedelta
+from functools import lru_cache
+from pathlib import Path
 from statistics import mean
 from types import SimpleNamespace
 from typing import Any
@@ -211,6 +214,68 @@ class RaceAnalysisPage:
     candidate_count: int = 0
     prediction_count: int = 0
     prediction_groups: list[PredictionRunnerGroup] = field(default_factory=list)
+    race_commentary: dict[str, Any] | None = None
+
+
+@lru_cache(maxsize=1)
+def _race_commentary_assets() -> list[dict[str, Any]]:
+    """Load the optional package-owned commentary list from one fixed path."""
+    path = Path(__file__).with_name("race_commentary.json")
+    try:
+        with path.open(encoding="utf-8") as source:
+            assets = json.load(source)
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return []
+    return assets if isinstance(assets, list) else []
+
+
+def attach_race_commentary(page: RaceAnalysisPage) -> None:
+    """Attach only commentary whose full race and runner identity still matches."""
+    page.race_commentary = None
+    race = page.selected_race
+    if race is None:
+        return
+
+    actual_runners = sorted((runner.number, runner.horse) for runner in page.runners)
+    for commentary in _race_commentary_assets():
+        if not isinstance(commentary, dict):
+            continue
+        expected_race = commentary.get("race")
+        if not isinstance(expected_race, dict):
+            continue
+        expected_field = expected_race.get("runners")
+        if not isinstance(expected_field, list):
+            continue
+        if (
+            race.date != expected_race.get("date")
+            or race.meet_code != expected_race.get("meet_code")
+            or race.number != expected_race.get("number")
+            or race.distance != expected_race.get("distance")
+            or race.field_size != len(expected_field)
+            or len(actual_runners) != len(expected_field)
+        ):
+            continue
+        if any(
+            not isinstance(item, dict)
+            or not isinstance(item.get("number"), int)
+            or not isinstance(item.get("horse"), str)
+            for item in expected_field
+        ):
+            continue
+        expected_runners = sorted(
+            (item["number"], item["horse"]) for item in expected_field
+        )
+        if actual_runners != expected_runners:
+            continue
+
+        matched = dict(commentary)
+        date_key = race.date.replace("-", "")
+        matched["source_url"] = (
+            "https://race.kra.co.kr/raceFastreport/ChuljumaWeightList.do"
+            f"?Act=03&Sub=4&meet={race.meet_code}&date={date_key}&rcNo={race.number}"
+        )
+        page.race_commentary = matched
+        return
 
 
 @dataclass(slots=True)
@@ -278,7 +343,7 @@ def load_race_analysis_page(
     if selected is None:
         if meet is not None:
             selected = next((item for item in races if item.meet_code == meet), None)
-        if selected is None:
+        else:
             selected = races[0] if races else None
     filters = {
         "race_id": selected.id if selected else None,
@@ -449,6 +514,7 @@ def load_race_analysis_page(
             history=history,
             jockey_id=entry["jockey_id"],
             profile={
+                "official_id": entry["kra_horse_id"],
                 "sex": entry["sex"],
                 "age": age_years(entry["birth_date"], cutoff),
                 "origin": entry["origin_country"],
@@ -567,6 +633,7 @@ def load_race_analysis_page(
         page.runners.sort(key=lambda runner: (runner.finish_sort, runner.number))
     page.prediction_groups = _prediction_runner_groups(page.runners)
     page.pace_board, page.pace_summaries = _pace_board(page.runners)
+    attach_race_commentary(page)
     return page
 
 

@@ -96,14 +96,14 @@ def test_last_race_rating_ignores_api77_future_cards_and_cancellations(rating_se
     assert session.scalar(select(func.count()).select_from(HorseRatingSnapshot)) == 1
 
     client = TestClient(create_app(session_factory=factory))
-    listing = client.get("/horses")
-    detail = client.get("/horses/0024630")
+    listing = client.get("/horses/list?q=올수")
+    detail = client.get("/horses/0024630?tab=records")
     assert listing.status_code == detail.status_code == 200
     assert "마지막 경주 레이팅" in listing.text
-    assert "마지막 경주 레이팅" in detail.text
+    assert "마지막 경주 레이팅" in client.get("/horses/0024630").text
     assert "현재 레이팅" not in detail.text
-    assert "2026.09.10 부산경남 1R" in detail.text
-    assert "경주 당시 레이팅" in detail.text
+    assert "2026.09.10 부산경남 1R" in client.get("/horses/0024630").text
+    assert "경주 당시 레이팅" in client.get("/horses/0024630?tab=history").text
     assert "<th>R4</th>" not in detail.text
     assert ">999<" not in listing.text + detail.text
 

@@ -2,27 +2,46 @@
 
 {% block title %}{{ page_data.kind.plural_label }} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}수집된 {{ page_data.kind.plural_label }} 목록을 검색하고 출전 이력을 확인합니다.{% endblock %}
+{% block extra_head %}
+{% if page_data.kind.slug in ['horses', 'trainers', 'jockeys', 'owners'] %}<link rel="stylesheet" href="{{ url_for('static', path='/css/horse-directory.css') }}?v=23">{% endif %}
+{% endblock %}
 
 {% block content %}
+{% set is_horse = page_data.kind.slug == 'horses' %}
+{% set is_trainer = page_data.kind.slug == 'trainers' %}
+{% set is_jockey = page_data.kind.slug == 'jockeys' %}
+{% set is_owner = page_data.kind.slug == 'owners' %}
+{% set has_performance = is_jockey or is_owner or is_trainer %}
+{% set performance_period_query = '&period=' ~ page_data.period if has_performance else '' %}
+{% set owner_count_label = '현소유두수' if page_data.meet_filter else '총소유두수' %}
+{% set list_path = '/horses/list' if is_horse else '/' ~ page_data.kind.slug %}
+{% if horse_list_page %}
+<a class="horse-directory-back" href="/horses{% if page_data.meet_filter %}?meet={{ page_data.meet_filter }}{% endif %}">← 등급별 말 현황</a>
+{% endif %}
 <section class="page-intro compact-intro">
   <div>
     <p class="eyebrow">DIRECTORY</p>
-    <h1>{{ page_data.kind.plural_label }}</h1>
+    <h1>{% if horse_list_page %}{{ "말 검색 결과" if page_data.query else "말 목록" }}{% else %}{{ page_data.kind.plural_label }}{% endif %}</h1>
     <p>
       {% if page_data.kind.slug == 'horses' %}
-        이름 또는 마번으로 검색하세요. 기본은 출전이 많은 순입니다.
+        이름 또는 마번으로 검색하세요. 검색 결과에는 은퇴마도 포함됩니다.
       {% elif page_data.kind.slug == 'trainers' %}
-        최신 공식 현역 명단에 확인된 조교사만 표시합니다. 이름 또는 조교사번호로 검색하세요.
+        현역 조교사를 지역별로 확인하세요. 이름 또는 조교사번호로 검색하면 비현역·상태 미확인 조교사도 찾을 수 있습니다.
+      {% elif is_jockey %}
+        현역 기수를 기본 소속별로 확인하세요. 이름 또는 기수번호로 검색할 수 있습니다.
+      {% elif is_owner %}
+        기본은 소유두수가 많은 순입니다. 현재 소유두수가 0두인 마주는 이름 또는 마주번호로 검색할 수 있습니다.
       {% else %}
         이름 또는 {{ page_data.kind.id_label }}로 검색하세요. 기본은 출전이 많은 순입니다.
       {% endif %}
     </p>
   </div>
 
-  <form class="filters search-filters" method="get" action="/{{ page_data.kind.slug }}">
-    {% if page_data.kind.slug in ['horses', 'trainers'] and page_data.meet_filter %}
+  <form class="filters search-filters" method="get" action="{{ list_path }}">
+    {% if page_data.kind.slug in ['horses', 'trainers', 'jockeys', 'owners'] and page_data.meet_filter %}
     <input type="hidden" name="meet" value="{{ page_data.meet_filter }}">
     {% endif %}
+    {% if has_performance %}<input type="hidden" name="period" value="{{ page_data.period }}">{% endif %}
     <label class="search-field">
       <span>검색</span>
       <input type="search" name="q" value="{{ page_data.query }}"
@@ -30,70 +49,116 @@
         aria-label="{{ page_data.kind.plural_label }} 검색">
     </label>
     {% if page_data.kind.slug == 'horses' %}
-    <label>
-      <span>현역 상태</span>
-      <select name="status" aria-label="현역 상태">
-        <option value="all" {% if page_data.status_filter == 'all' %}selected{% endif %}>전체</option>
-        <option value="active" {% if page_data.status_filter == 'active' %}selected{% endif %}>현역</option>
-        <option value="retired" {% if page_data.status_filter == 'retired' %}selected{% endif %}>은퇴</option>
-        <option value="unknown" {% if page_data.status_filter == 'unknown' %}selected{% endif %}>미확인</option>
-      </select>
-    </label>
+    {% if page_data.grade_filter %}<input type="hidden" name="grade" value="{{ page_data.grade_filter }}">{% endif %}
+    {% if page_data.origin_filter %}<input type="hidden" name="origin" value="{{ page_data.origin_filter }}">{% endif %}
     {% endif %}
+    {% if not is_horse or horse_list_page %}
     <label>
       <span>정렬</span>
       <select name="sort" aria-label="정렬">
-        <option value="starts" {% if page_data.sort == 'starts' %}selected{% endif %}>출전 많은 순</option>
+        {% if is_horse %}<option value="rating" {% if page_data.sort == 'rating' %}selected{% endif %}>레이팅 높은 순</option>{% endif %}
+        {% if is_owner %}
+        <option value="owned" {% if page_data.sort == 'owned' %}selected{% endif %}>{{ owner_count_label }} 많은 순</option>
+        <option value="owned_asc" {% if page_data.sort == 'owned_asc' %}selected{% endif %}>{{ owner_count_label }} 적은 순</option>
+        {% endif %}
+        <option value="starts" {% if page_data.sort == 'starts' %}selected{% endif %}>{{ '선택 기간 출전 많은 순' if has_performance else '출전 많은 순' }}</option>
         <option value="name" {% if page_data.sort == 'name' %}selected{% endif %}>이름순</option>
       </select>
     </label>
+    {% endif %}
     <button type="submit">검색</button>
   </form>
 </section>
 
-{% if page_data.kind.slug in ['horses', 'trainers'] %}
+{% if page_data.kind.slug in ['trainers', 'jockeys', 'owners'] or (is_horse and not horse_list_page) %}
 <nav class="entity-region-filter" aria-label="경마장별 {{ page_data.kind.plural_label }} 목록">
   <div class="entity-region-tabs">
-    <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+    <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}"
       {% if not page_data.meet_filter %}aria-current="page"{% endif %}>전체</a>
-    <a href="/{{ page_data.kind.slug }}?meet=1&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+    <a href="/{{ page_data.kind.slug }}?meet=1&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}"
       {% if page_data.meet_filter == 1 %}aria-current="page"{% endif %}>서울</a>
-    <a href="/{{ page_data.kind.slug }}?meet=2&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
+    <a href="/{{ page_data.kind.slug }}?meet=3&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}"
+      {% if page_data.meet_filter == 3 %}aria-current="page"{% endif %}>부산</a>
+    <a href="/{{ page_data.kind.slug }}?meet=2&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}"
       {% if page_data.meet_filter == 2 %}aria-current="page"{% endif %}>제주</a>
-    <a href="/{{ page_data.kind.slug }}?meet=3&q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}"
-      {% if page_data.meet_filter == 3 %}aria-current="page"{% endif %}>부경</a>
   </div>
   {% if page_data.kind.slug == 'trainers' %}
-  <p class="entity-region-note">{{ page_data.affiliation_observed_on.isoformat() if page_data.affiliation_observed_on else '공식 명단 미확인' }} 기준 현역 조교사입니다. 퇴역·초청·해외 조교사는 데이터 정리 후 추가됩니다.</p>
+  <p class="entity-region-note">{% if page_data.query %}검색 결과에는 비현역·상태 미확인 조교사도 포함됩니다.{% else %}{{ page_data.affiliation_observed_on.isoformat() if page_data.affiliation_observed_on else '공식 명단 미확인' }} 기준 현역 조교사입니다.{% endif %}</p>
+  {% elif is_jockey %}
+  <p class="entity-region-note">{{ page_data.affiliation_observed_on.isoformat() if page_data.affiliation_observed_on else '공식 명단 미확인' }} 기준 현역 · 기본 소속 기준입니다. 교류·영천 출전과 구분됩니다.</p>
+  {% elif is_owner %}
+  <p class="entity-region-note">{% if page_data.meet_filter %}선택한 지역의 현소유두수입니다.{% else %}총소유두수는 서울·부산·제주의 현소유두수 합계입니다.{% endif %}</p>
   {% else %}
-  <p class="entity-region-note">말 정보에 등록된 경마장 기준입니다. 영천·미분류 말은 전체 목록에서 확인할 수 있습니다.</p>
+  <p class="entity-region-note">말 정보에 등록된 경마장 기준입니다. 영천·미분류 말은 전체 지역에 포함됩니다.</p>
   {% endif %}
 </nav>
 {% endif %}
 
-<section class="panel">
-  <div class="panel-heading">
+{% if page_data.horse_summary %}{% include "_horse_directory_summary.html" %}{% endif %}
+
+{% if not is_horse or horse_list_page %}
+<section class="panel" id="horse-directory-list">
+  <div class="panel-heading{% if has_performance %} directory-performance-heading{% endif %}">
     <div>
       <p class="panel-kicker">{{ page_data.kind.plural_label | upper }}</p>
-      <h2>{{ page_data.kind.plural_label }} 목록</h2>
+      <h2>{% if is_trainer %}{{ {1: '서울', 3: '부산', 2: '제주'}.get(page_data.meet_filter, '전체 지역') }} {{ '조교사 검색 결과' if page_data.query else '현역 조교사' }}{% elif is_jockey %}{{ {1: '서울', 3: '부산', 2: '제주'}.get(page_data.meet_filter, '전체 지역') }} 현역 기수{% else %}{{ page_data.kind.plural_label }} 목록{% endif %}</h2>
+      {% if is_horse %}
+      <p class="horse-directory-current-filter">
+        {{ {1: '서울', 3: '부산', 2: '제주'}.get(page_data.meet_filter, '전체 지역') }} · {{ '은퇴마 포함' if page_data.query else '현역마' }}{% if page_data.grade_filter %} · {{ horse_grade_labels[page_data.grade_filter] }}{% endif %}{% if page_data.origin_filter %} · {{ horse_origin_labels[page_data.origin_filter] }}{% endif %}
+        {% if page_data.grade_filter or page_data.origin_filter %}<a href="/horses/list{% if page_data.meet_filter %}?meet={{ page_data.meet_filter }}{% endif %}">등급·산지 필터 해제</a>{% endif %}
+      </p>
+      {% endif %}
     </div>
-    <span>{{ page_data.total_count }}건 · {{ page_data.page }}/{{ page_data.total_pages }}페이지</span>
+    <span class="directory-list-count">{{ page_data.total_count }}건 · {{ page_data.page }}/{{ page_data.total_pages }}페이지</span>
+  {% if has_performance %}
+  <div class="jockey-period-toolbar">
+    <nav class="jockey-period-tabs" aria-label="{{ page_data.kind.label }} 전적 기간">
+      {% for mode, label in [('month', '최근 1개월'), ('year', '최근 1년'), ('career', '통산')] %}
+      <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&period={{ mode }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}"
+        {% if page_data.period == mode %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <p class="jockey-period-range">{% if page_data.period_start %}{{ page_data.period_start.strftime('%Y.%m.%d') }} ~ {{ page_data.period_end.strftime('%Y.%m.%d') }}{% else %}{{ page_data.period_end.strftime('%Y.%m.%d') }}까지 통산{% endif %}</p>
+  </div>
+  {% endif %}
   </div>
   {% if page_data.items %}
     <div class="table-scroll">
-      <table data-sortable>
+      <table {% if is_horse %}class="horse-list-table"{% elif is_trainer %}class="trainer-list-table"{% elif is_jockey %}class="jockey-list-table"{% elif is_owner %}class="owner-list-table"{% endif %} data-sortable>
         <thead>
           <tr>
-            <th>이름</th>
-            {% if page_data.kind.slug == 'horses' %}<th>상태</th>{% endif %}
-            <th>{{ page_data.kind.id_label }}</th>
-            <th>정보</th>
-            <th>출전</th>
+            {% if is_horse or is_trainer or is_jockey or is_owner %}<th>번호</th>{% endif %}
+            <th>{{ "마주명" if is_owner else "이름" }}</th>
+            {% if is_trainer %}
+            <th title="최신 공식 현역 명단의 마방 조 번호">조</th>
+            <th title="최신 말 프로필 기준 해당 조교사 소속 현역마 두수">관리두수</th>
+            {% elif is_owner %}
+            <th data-server-sort class="sortable-col"{% if page_data.sort in ['owned', 'owned_asc'] %} aria-sort="{{ 'ascending' if page_data.sort == 'owned_asc' else 'descending' }}"{% endif %} title="한국마사회 공식 현재 소유두수 · 전체 목록 기준으로 정렬합니다."><a href="/owners?q={{ page_data.query | urlencode }}&sort={{ 'owned_asc' if page_data.sort == 'owned' else 'owned' }}{{ performance_period_query }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}">{{ owner_count_label }}</a></th>
+            {% endif %}
+            {% if has_performance %}
+            {% if is_jockey %}
+            <th title="공식 기본 소속 지역 · 교류·영천 출전 장소와 구분됩니다.">지역</th>
+            {% endif %}
+            <th title="{{ page_data.period_label }} 수집된 실제 출전수 · 취소·출전 제외는 집계하지 않습니다.">출전</th>
+            <th>1위</th>
+            <th>2위</th>
+            <th>3위</th>
+            <th title="{{ page_data.period_label }} 1위 횟수 ÷ 출전수">승률</th>
+            <th title="{{ page_data.period_label }} 1·2위 횟수 합계 ÷ 출전수">복승률</th>
+            <th title="{{ page_data.period_label }} 1·2·3위 횟수 합계 ÷ 출전수">입상률</th>
+            {% elif not is_trainer %}
+            {% if is_horse %}<th>상태</th>{% else %}<th>{{ page_data.kind.id_label }}</th>{% endif %}
+            <th>{{ '기본 소속' if is_jockey else '정보' }}</th>
+            {% if not is_horse %}<th>출전</th>{% endif %}
             {% if page_data.kind.slug == 'horses' %}
-              <th>마지막 경주 레이팅</th>
-              <th>체중</th>
-              <th>훈련</th>
-              <th>진료</th>
+              <th title="최신 말 프로필 기준 · 정보가 없으면 마지막 실제 출전 경주 기준">조교사</th>
+              <th title="최신 말 프로필 기준 · 정보가 없으면 마지막 실제 출전 경주 기준">마주</th>
+              <th title="마지막 경주 레이팅 · 최근 실제 출전 경주 기준">레이팅</th>
+              <th title="최신 경기부터 순서대로 표시">최근 5전</th>
+              <th title="출전수전 1위/2위/3위. 최신 공식 프로필 기준이며, 자료가 없으면 수집된 실제 출전으로 집계합니다.">통산 전적</th>
+              <th title="통산 1위 횟수 ÷ 통산 출전수">승률</th>
+              <th title="통산 3위 이내 횟수 ÷ 통산 출전수">입상률</th>
+            {% endif %}
             {% endif %}
           </tr>
         </thead>
@@ -101,22 +166,48 @@
           {% for item in page_data.items %}
             <tr class="clickable-row" tabindex="0"
               data-href="/{{ page_data.kind.slug }}/{{ item.official_id }}">
+              {% if is_horse or is_trainer or is_jockey or is_owner %}<td class="numeric">{{ (page_data.page - 1) * page_data.page_size + loop.index }}</td>{% endif %}
               <td>
                 <a class="entity-link" href="/{{ page_data.kind.slug }}/{{ item.official_id }}">
                   <strong>{{ item.name_ko }}</strong>
                 </a>
               </td>
-              {% if page_data.kind.slug == 'horses' %}
+              {% if is_trainer %}
+                <td>{{ item.trainer_stats.stable }}</td>
+                <td class="numeric">{{ item.trainer_stats.managed_count }}두</td>
+              {% elif is_owner %}
+                <td class="numeric"{% if item.owner_regional_counts %} title="{% for region, count in item.owner_regional_counts %}{{ region }} {{ count }}두{% if not loop.last %} · {% endif %}{% endfor %}"{% endif %}>
+                  {% if item.owner_current_count is not none %}{{ item.owner_current_count }}두
+                  {% else %}—{% endif %}
+                </td>
+              {% elif is_jockey %}
+                <td>{{ item.subtitle }}</td>
+              {% else %}
+              {% if is_horse %}
                 <td><span class="horse-status-badge" data-status="{{ item.status_key }}">{{ item.status_label }}</span></td>
               {% endif %}
-              <td class="numeric">{{ item.official_id }}</td>
+              {% if not is_horse %}<td class="numeric">{{ item.official_id }}</td>{% endif %}
               <td>{{ item.subtitle }}</td>
-              <td class="numeric">{{ item.entry_count }}회</td>
+              {% if not is_horse %}<td class="numeric">{{ item.entry_count }}회</td>{% endif %}
               {% if page_data.kind.slug == 'horses' %}
+                <td class="horse-list-affiliation">{% if item.trainer_href %}<a href="{{ item.trainer_href }}">{{ item.trainer_name }}</a>{% else %}{{ item.trainer_name }}{% endif %}</td>
+                <td class="horse-list-affiliation"><span class="horse-list-owner" title="{{ item.owner_name }}">{% if item.owner_href %}<a href="{{ item.owner_href }}">{{ item.owner_name }}</a>{% else %}{{ item.owner_name }}{% endif %}</span></td>
                 <td class="numeric">{{ item.last_race_rating }}</td>
-                <td class="numeric">{{ item.weight_count }}</td>
-                <td class="numeric">{{ item.training_count }}</td>
-                <td class="numeric">{{ item.medical_count }}</td>
+                <td class="numeric horse-list-form">{% for start in item.recent_starts %}{% if not loop.first %} · {% endif %}<a class="recent-finish{% if start.finish in ['1', '2', '3'] %} recent-finish-{{ start.finish }}{% endif %}" href="/races/{{ start.race_id }}" title="{{ start.title }}" aria-label="{{ start.title }}">{{ start.finish }}</a>{% else %}—{% endfor %}</td>
+                <td class="numeric horse-list-record">{{ item.career_record }}</td>
+                <td class="numeric">{{ item.win_rate }}</td>
+                <td class="numeric">{{ item.place_rate }}</td>
+              {% endif %}
+              {% endif %}
+              {% if has_performance %}
+                {% set stats = item.owner_stats if is_owner else item.trainer_stats.performance if is_trainer else item.jockey_stats %}
+                <td class="numeric">{{ stats.starts }}</td>
+                <td class="numeric">{{ stats.wins }}</td>
+                <td class="numeric">{{ stats.seconds }}</td>
+                <td class="numeric">{{ stats.thirds }}</td>
+                <td class="numeric">{{ stats.win_rate }}</td>
+                <td class="numeric">{{ stats.quinella_rate }}</td>
+                <td class="numeric">{{ stats.place_rate }}</td>
               {% endif %}
             </tr>
           {% endfor %}
@@ -124,10 +215,12 @@
       </table>
     </div>
 
+    {% if is_owner %}<p class="entity-region-note owner-count-note">현소유두수는 공식 현재 소유두수이며, —는 확인되지 않은 정보입니다. 전적은 수집된 실제 경주 결과 기준{% if page_data.meet_filter %}이며, 선택한 지역의 경주만 집계합니다{% else %}으로 모든 지역의 경주를 집계합니다{% endif %}. 출전이 없으면 비율은 —로 표시합니다.</p>{% endif %}
+
     {% if page_data.total_pages > 1 %}
       <nav class="pagination" aria-label="페이지 이동">
         {% if page_data.page > 1 %}
-          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&page={{ page_data.page - 1 }}">이전</a>
+          <a href="{{ list_path }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&grade={{ page_data.grade_filter }}&origin={{ page_data.origin_filter }}&page={{ page_data.page - 1 }}">이전</a>
         {% else %}
           <span class="disabled">이전</span>
         {% endif %}
@@ -138,12 +231,12 @@
             {% elif item == page_data.page %}
               <strong>{{ item }}</strong>
             {% else %}
-              <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&page={{ item }}">{{ item }}</a>
+              <a href="{{ list_path }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&grade={{ page_data.grade_filter }}&origin={{ page_data.origin_filter }}&page={{ item }}">{{ item }}</a>
             {% endif %}
           {% endfor %}
         </span>
         {% if page_data.page < page_data.total_pages %}
-          <a href="/{{ page_data.kind.slug }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}&status={{ page_data.status_filter }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&page={{ page_data.page + 1 }}">다음</a>
+          <a href="{{ list_path }}?q={{ page_data.query | urlencode }}&sort={{ page_data.sort }}{{ performance_period_query }}{% if page_data.meet_filter %}&meet={{ page_data.meet_filter }}{% endif %}&grade={{ page_data.grade_filter }}&origin={{ page_data.origin_filter }}&page={{ page_data.page + 1 }}">다음</a>
         {% else %}
           <span class="disabled">다음</span>
         {% endif %}
@@ -156,4 +249,5 @@
     </div>
   {% endif %}
 </section>
+{% endif %}
 {% endblock %}

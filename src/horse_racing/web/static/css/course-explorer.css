@@ -77,7 +77,7 @@
 .course-distance-picker small { font-size:10px; margin-left:2px; }
 .course-distance-picker span { display:block; font:400 9px var(--font-sans); margin-top:4px; }
 .course-distance-picker button[aria-pressed="true"] { border-color:var(--course-accent); color:var(--course-accent); background:color-mix(in srgb,var(--course-accent) 8%,var(--surface-1)); }
-.course-distance-picker a { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:48px; padding:10px 5px; border:1px solid var(--border); border-radius:8px; background:var(--surface-1); color:var(--muted); font:500 13px var(--font-mono); text-decoration:none; }
+.course-distance-picker a { display:flex; flex-direction:row; align-items:center; justify-content:center; white-space:nowrap; min-height:48px; padding:10px 5px; border:1px solid var(--border); border-radius:8px; background:var(--surface-1); color:var(--muted); font:500 13px var(--font-mono); text-decoration:none; }
 .course-distance-picker a[aria-current="page"] { border-color:var(--course-accent); color:var(--course-accent); background:color-mix(in srgb,var(--course-accent) 8%,var(--surface-1)); }
 .course-distance-picker a:hover { color:var(--ink-strong); border-color:var(--course-accent); }
 .course-distance-picker a small { font-size:10px; margin-left:2px; }

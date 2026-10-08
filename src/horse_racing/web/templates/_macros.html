@@ -2,9 +2,28 @@
   <span class="silk-number silk-{{ number }}">{{ number }}</span>
 {%- endmacro %}
 
-{% macro entry_table(entries) %}
+{% macro equipment_label(label) -%}
+  {%- for group in label.split(',') -%}
+    {%- if not loop.first %} {% endif -%}
+    <span class="equipment-item">
+    {%- for item in group.split() -%}
+      {%- if not loop.first %} {% endif -%}
+      {%- if item.endswith('+') -%}
+        <span class="equipment-added">{{ item }}</span>
+      {%- elif item.endswith('-') -%}
+        <span class="equipment-removed">{{ item }}</span>
+      {%- else -%}
+        {{ item }}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if not loop.last %},{% endif -%}
+    </span>
+  {%- endfor -%}
+{%- endmacro %}
+
+{% macro entry_table(entries, scheduled=false) %}
   <div class="table-scroll">
-    <table class="entry-table" data-sortable>
+    <table class="entry-table{% if scheduled %} scheduled-entry-table{% endif %}" data-sortable>
       <thead>
         <tr>
           <th>순위</th>
@@ -12,6 +31,13 @@
           <th>기수</th>
           <th>조교사</th>
           <th>마주</th>
+          {% if scheduled %}
+          <th title="괄호는 직전 실제 출전 대비 증감 · kg">부담중량</th>
+          <th title="직전 실제 출전일부터 이번 경주일까지 · 주 단위 반올림">출전주기</th>
+          <th title="출전표 기준 · + 신규 착용, - 해제">장구현황</th>
+          <th title="최근 1개월 · 경주일 기준, 경주 당일 제외 · 수집된 조교 세션 수">조교횟수</th>
+          <th>레이팅</th>
+          {% else %}
           <th>부담중량</th>
           <th>마체중</th>
           <th>레이팅</th>
@@ -19,6 +45,7 @@
           <th>착차</th>
           <th>단승</th>
           <th>연승</th>
+          {% endif %}
         </tr>
       </thead>
       <tbody>
@@ -54,22 +81,38 @@
                 {{ entry.trainer_name }}
               {% endif %}
             </td>
-            <td>
+            <td data-sort-value="{{ entry.owner_name }}">
               {% if entry.owner_id %}
-                <a class="entity-link" href="/owners/{{ entry.owner_id }}">{{ entry.owner_name }}</a>
+                <a class="entity-link owner-name" href="/owners/{{ entry.owner_id }}"
+                  aria-label="{{ entry.owner_name }}">
+                  <span class="owner-name-short">{{ entry.owner_name[:5] }}{% if entry.owner_name|length > 5 %}…{% endif %}</span>
+                  <span class="owner-name-full" aria-hidden="true">{{ entry.owner_name }}</span>
+                </a>
               {% else %}
-                {{ entry.owner_name }}
+                <span class="owner-name owner-name-static" role="group" tabindex="0"
+                  aria-label="{{ entry.owner_name }}">
+                  <span class="owner-name-short">{{ entry.owner_name[:5] }}{% if entry.owner_name|length > 5 %}…{% endif %}</span>
+                  <span class="owner-name-full" aria-hidden="true">{{ entry.owner_name }}</span>
+                </span>
               {% endif %}
             </td>
+            {% if scheduled %}
+            <td class="numeric {% if entry.carried_weight_delta is not none and entry.carried_weight_delta > 0 %}delta-up{% elif entry.carried_weight_delta is not none and entry.carried_weight_delta < 0 %}delta-down{% endif %}">{{ entry.carried_weight }}</td>
+            <td class="numeric" title="{{ '직전 출전일 ' ~ entry.previous_race_date if entry.previous_race_date else '직전 출전 기록 미제공' }}">{{ entry.rest_weeks }}</td>
+            <td class="entry-equipment" data-sort-value="{{ entry.equipment }}">{{ equipment_label(entry.equipment) }}</td>
+            <td class="numeric" data-sort-value="{{ entry.training_count if entry.training_count is not none else '' }}">{{ entry.training_count ~ '회' if entry.training_count is not none else '—' }}</td>
+            <td class="numeric">{{ entry.rating }}</td>
+            {% else %}
             <td class="numeric">{{ entry.carried_weight }}</td>
             <td class="numeric {% if entry.weight_delta and entry.weight_delta > 0 %}delta-up{% elif entry.weight_delta and entry.weight_delta < 0 %}delta-down{% endif %}">
               {{ entry.body_weight }}
             </td>
             <td class="numeric">{{ entry.rating }}</td>
             <td class="numeric result-time">{{ entry.finish_time }}</td>
-            <td class="numeric margin">{{ entry.margin }}</td>
-            <td class="numeric odds">{{ entry.win_odds }}</td>
-            <td class="numeric odds">{{ entry.place_odds }}</td>
+            <td class="numeric margin">{% for margin_char in entry.margin %}{% if margin_char in "¼½¾⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞↉" %}<span class="margin-fraction">{{ margin_char }}</span>{% elif margin_char >= "가" and margin_char <= "힣" %}<span class="margin-text">{{ margin_char }}</span>{% else %}{{ margin_char }}{% endif %}{% endfor %}</td>
+            <td class="numeric odds">{{ entry.win_odds|replace('배', '') }}</td>
+            <td class="numeric odds">{{ entry.place_odds|replace('배', '') }}</td>
+            {% endif %}
           </tr>
         {% endfor %}
       </tbody>

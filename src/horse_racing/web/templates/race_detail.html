@@ -84,7 +84,7 @@
   </div>
 
   {% if page.entries %}
-    {{ entry_table(page.entries) }}
+    {{ entry_table(page.entries, scheduled=page.status == 'scheduled') }}
   {% else %}
     <div class="empty-state compact">
       <p>출전 데이터가 없습니다.</p>
@@ -99,7 +99,7 @@
       <h2>구간기록 · 전개</h2>
     </div>
     {% if page.has_sections %}
-      <span>{{ page.section_columns | length }}개 표시 지점</span>
+      <span data-passing-summary>{{ page.section_columns | length }}개 기록 지점</span>
     {% else %}
       <span>데이터 없음</span>
     {% endif %}
@@ -108,15 +108,43 @@
   {% if page.has_sections %}
     <script type="application/json" id="section-chart-data">{{ page.chart_data | tojson }}</script>
     <div class="section-chart" data-section-chart>
+      <nav class="passing-checkpoints" data-passing-checkpoints aria-label="전개 구간 선택"></nav>
+      <div class="passing-workspace{% if page.racecourse_map %} has-course-map{% endif %}">
       <div class="section-chart-frame">
-        <svg data-chart-svg role="img" aria-label="구간 통과순위 전개 차트"></svg>
-        <div class="chart-tooltip" data-chart-tooltip hidden></div>
+        <div class="passing-heading"><div><strong data-passing-title></strong><span data-passing-location></span></div><span class="passing-source" data-passing-source></span></div>
+        <div class="passing-direction"><span>후미</span><span>진행 방향 →</span><span>선두 →</span></div>
+        <div class="passing-scale"><span aria-hidden="true"></span>이 눈금이 1마신 · 네모 크기는 마번 식별용입니다.</div>
+        <p class="passing-estimate" data-passing-lanes></p>
+        <div class="passing-formation" data-passing-formation role="group" aria-label="선택 구간 통과조"></div>
+        <p class="passing-estimate" data-passing-estimate></p>
+        <p class="passing-notation" data-passing-notation></p>
       </div>
-      <div class="chart-legend" data-chart-legend aria-label="출전마 선택"></div>
+      {% if page.racecourse_map %}{% include '_passing_course_map.html' %}{% endif %}
+      </div>
+      <div class="passing-navigation"><button type="button" data-passing-prev aria-label="이전 구간">← 이전 구간</button><span data-passing-count></span><button type="button" data-passing-next aria-label="다음 구간">다음 구간 →</button></div>
+      <div class="passing-detail" data-passing-detail aria-live="polite"></div>
+      <div class="chart-legend" data-chart-legend aria-label="전개에서 강조할 출전마"></div>
+        <aside class="passing-symbol-guide" aria-label="통과조 기호 안내">
+          <div class="passing-guide-heading">
+            <strong>통과조 기호 안내</strong>
+            <a href="https://race.kra.co.kr/down/term_desc.pdf" target="_blank" rel="noopener noreferrer">한국마사회 공식 안내 ↗</a>
+          </div>
+          <dl>
+            <div><dt><code>(1,2,3)</code></dt><dd><strong>1마신 미만의 같은 조</strong><span>괄호 안은 안쪽 말부터 표기</span></dd></div>
+            <div><dt><code>^</code></dt><dd><strong>선두집단 표시</strong><span>예: (1,^2,3)</span></dd></div>
+            <div><dt><code>,</code></dt><dd><strong>1마신 이상 · 2마신 미만</strong></dd></div>
+            <div><dt><code>-</code></dt><dd><strong>2마신 이상 · 5마신 미만</strong></dd></div>
+            <div><dt><code>=</code></dt><dd><strong>5마신 이상 · 10마신 미만</strong></dd></div>
+            <div><dt><code>≡</code></dt><dd><strong>10마신 이상 · 대차</strong></dd></div>
+            <div><dt><code>·3</code></dt><dd><strong>해당 말의 주행중지</strong><span>예: (1,2,4)-5 ·3</span></dd></div>
+          </dl>
+          <p>간격 기호는 바로 앞선 말과의 차이를 나타냅니다. 가로 배치는 기호 범위의 대표값을 사용한 추정치이며, 정확한 실측 간격은 아닙니다.</p>
+          <p>결승 착차 기준: <a href="https://park.kra.co.kr/race_guide_.pdf" target="_blank" rel="noopener noreferrer">한국마사회 경마가이드 ↗</a></p>
+        </aside>
       <p class="section-note chart-help">
-        기본은 착순 상위 5두를 강조합니다. 범례를 클릭해 말을 켜고 끌 수 있습니다.
-        세로축 위쪽이 앞순위, 가로축은 표시 지점을 통과하는 순서입니다.
-        {% if page.meet_code in [1, 2] %}지점 간 간격은 실제 거리 비율이 아닙니다.{% endif %}
+        모든 지역에서 오른쪽이 선두, 왼쪽이 후미입니다. 통과조 원문은 왼쪽부터 선두 순서로 읽습니다.
+        같은 조 안에서는 원문에 적힌 안쪽 말부터 위에서 아래로 표시하며, 실제 주행 라인의 폭을 뜻하지 않습니다.
+        결승의 세로 위치는 말들이 겹치지 않도록 배치한 것입니다. 마번이나 마명을 선택하면 선두와의 추정 간격, 구간별 순위와 기록을 확인할 수 있습니다.
       </p>
     </div>
 
@@ -382,5 +410,5 @@
 </section>
 {% endif %}
 <script src="{{ url_for('static', path='/js/race-video.js') }}?v=1" defer></script>
-<script src="{{ url_for('static', path='/js/race-chart.js') }}?v=5" defer></script>
+<script src="{{ url_for('static', path='/js/race-chart.js') }}?v=15" defer></script>
 {% endblock %}

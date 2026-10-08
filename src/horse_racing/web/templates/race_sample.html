@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}경주 샘플 | 마필로그{% endblock %}
+{% block body_class %}race-sample-page{% endblock %}
+{% block meta_description %}모바일 경주 화면 비교용 샘플{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/mobile.css') }}?v=81">
+{% endblock %}
+
+{% block content %}
+<div class="race-sample-preview" aria-label="모바일 경주 화면 샘플">
+  {% include "mobile/_home_content.html" %}
+</div>
+{% endblock %}

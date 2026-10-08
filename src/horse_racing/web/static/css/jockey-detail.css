@@ -1,0 +1,36 @@
+.jockey-profile-overview { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px; padding: 24px 22px; }
+.jockey-profile-identity { padding: 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); }
+.jockey-profile-identity h3 { margin: 8px 0 12px; color: var(--ink-strong); font-size: 24px; }
+.jockey-profile-identity p:not(.panel-kicker) { margin: 0 0 8px; color: var(--ink); font-size: 13px; }
+.jockey-profile-identity small { color: var(--muted); font-size: 11px; }
+.jockey-profile-info { align-self: center; }
+.jockey-section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 22px; border-block: 1px solid var(--border); }
+.jockey-section-title h3 { margin: 0; font-size: 14px; }
+.jockey-section-title span { color: var(--muted); font-size: 11px; }
+.jockey-stats-table tbody th { color: var(--ink); font-size: 12px; font-weight: 700; background: var(--surface-2); }
+.jockey-partner-panels { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.jockey-partner-table tbody th { background: none; }
+.jockey-partner-table a { color: var(--ink-strong); font-size: 12px; font-weight: 700; text-decoration: none; }
+.jockey-partner-table a:hover { text-decoration: underline; }
+.jockey-partner-table a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.jockey-partner-places { font-weight: 800; }
+@media (min-width: 1500px) {
+  .jockey-partner-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+}
+@media (max-width: 700px) {
+  .jockey-profile-overview { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .jockey-profile-identity { padding: 14px 18px; }
+  .jockey-profile-identity h3 { font-size: 22px; }
+}
+/* Racing-entry column spacing does not apply to these performance tables. */
+.entry-table.jockey-stats-table :is(th, td) { width: auto; padding-inline: 14px; text-align: right; }
+.entry-table.jockey-stats-table :is(th, td):first-child { text-align: left; padding-left: 22px; }
+.entry-table.jockey-stats-table :is(th, td):last-child { min-width: 84px; padding-left: 16px; padding-right: 22px; }
+.entry-table.jockey-partner-table :is(th, td):nth-child(2) { text-align: left; }
+.jockey-partner-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 16px 22px; margin-bottom: 20px; }
+.jockey-partner-toolbar p { margin: 0; font-size: 11px; color: var(--muted); }
+.jockey-detail-periods { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-2); }
+.jockey-detail-periods a { padding: 7px 14px; border: 1px solid transparent; border-radius: 999px; color: var(--muted); font-size: 12px; font-weight: 700; white-space: nowrap; text-decoration: none; }
+.jockey-detail-periods a:hover { color: var(--ink); background: var(--accent-soft); }
+.jockey-detail-periods a[aria-current="page"] { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-soft); }
+.jockey-detail-periods a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

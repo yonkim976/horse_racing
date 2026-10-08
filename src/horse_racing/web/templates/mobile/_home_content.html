@@ -86,7 +86,7 @@
               </span>
               {% else %}
               <span class="mobile-poster-odds" data-role="{{ '관심마' if horse.win_label == '입상후보' else horse.win_label or '예측없음' }}">
-                <span class="mobile-poster-pct" title="3위 안 입상 확률">{{ horse.win_pct or '00%' }}</span>
+                <span class="mobile-poster-pct" title="3위 안 입상 확률">{{ horse.win_pct if horse.win_pct is not none else '—' }}</span>
                 <span class="mobile-poster-role">{{ '관심마' if horse.win_label == '입상후보' else horse.win_label or '예측없음' }}</span>
               </span>
               {% endif %}

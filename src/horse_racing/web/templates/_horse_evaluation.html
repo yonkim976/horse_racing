@@ -1,0 +1,132 @@
+{% set evaluation = detail.evaluation %}
+{% macro index_value(value) -%}
+  {{ '%+.2f' | format(value) if value is not none else '—' }}
+{%- endmacro %}
+{% macro record_story(row, title) %}
+  <article class="evaluation-record">
+    <h3>{{ title }}</h3>
+    <p>
+      {% if row.href %}<a href="{{ row.href }}">{% endif %}{{ row.source.race_date.isoformat() }} · {{ row.race_label }}{% if row.href %}</a>{% endif %}
+    </p>
+    <div class="evaluation-flow">
+      <div><span>실제 완주기록</span><strong>{{ '%.2f초' | format(row.raw_seconds) if row.raw_seconds is not none else '—' }}</strong></div>
+      <div><span>함수율 시간 조정</span><strong>{{ '%+.2f초' | format(row.correction_seconds) if row.supported and row.correction_seconds is not none else '미적용' }}</strong></div>
+      <div><span>비교용 보정 기록</span><strong>{{ '%.2f초' | format(row.corrected_seconds) if row.corrected_seconds is not none else '—' }}</strong></div>
+    </div>
+    <p>{{ row.moisture_label }} · {{ row.correction_explanation }}</p>
+    {% if row.moist_reference and row.corrected_seconds is not none %}
+      <p class="evaluation-conclusion"><strong>{{ row.comparison }}</strong></p>
+      <p>비교 중앙기록 {{ '%.2f초' | format(row.moist_reference[0]) }} · {{ row.source.race_date.year - 1 }}년까지 같은 경마장·거리의 전체 등급 기록 기준</p>
+      <details class="evaluation-formula">
+        <summary>이 기록이 지수 {{ index_value(row.moist_index) }}가 되는 계산 보기</summary>
+        <p>함수율 반영 지수 ≈ (중앙기록 {{ '%.2f' | format(row.moist_reference[0]) }}초 − 보정 기록 {{ '%.2f' | format(row.corrected_seconds) }}초) ÷ 비교 단위 {{ '%.2f' | format(row.moist_reference[1]) }}초 = {{ index_value(row.moist_index) }}</p>
+        {% if row.raw_reference and row.raw_index is not none %}
+          <p>원기록 지수 ≈ (중앙기록 {{ '%.2f' | format(row.raw_reference[0]) }}초 − 실제 기록 {{ '%.2f' | format(row.raw_seconds) }}초) ÷ 비교 단위 {{ '%.2f' | format(row.raw_reference[1]) }}초 = {{ index_value(row.raw_index) }}</p>
+        {% endif %}
+        <p>표시 지수는 −10~+10으로 제한합니다. 식의 초는 소수 둘째 자리로 표시하므로 반올림 차이가 있을 수 있습니다.</p>
+      </details>
+    {% else %}
+      <p>{{ row.status }}</p>
+    {% endif %}
+  </article>
+{% endmacro %}
+<section id="horse-evaluation" class="panel horse-evaluation" aria-labelledby="evaluation-title">
+  <div class="panel-heading">
+    <div>
+      <p class="panel-kicker">HORSE EVALUATION · 기초 평가</p>
+      <h2 id="evaluation-title">말별 평가표</h2>
+    </div>
+    <span class="evaluation-status">{{ evaluation.status }}</span>
+  </div>
+  <p class="panel-note">
+    평가 기준일 {{ evaluation.as_of.isoformat() }} · {{ evaluation.cutoff.isoformat() }}까지의 DB 실전 이력 · 최대 최근 10전
+  </p>
+  {% if evaluation.history %}
+    <div class="evaluation-context">
+      {% for label, value in evaluation.state %}
+        <div><span>{{ label }}</span><strong>{{ value }}</strong></div>
+      {% endfor %}
+    </div>
+    <p class="panel-note">최근 5전 유효 지수 {{ evaluation.valid5 }}개 · 이 중 주로 보정 근거 충족 {{ evaluation.supported5 }}개</p>
+    <div class="evaluation-explanation">
+      <strong>이 표는 무엇을 비교하나요?</strong>
+      <p><b>원기록 지수</b>는 실제 완주기록을 과거 기록에 비교한 값입니다.
+        <b>함수율 반영 지수</b>는 건조 주로 대비 함수율 효과를 추정해 시간을 조정한 뒤 비교한 값입니다.
+        지수 0은 과거 중앙기록, 양수는 빠른 기록, 음수는 느린 기록을 뜻하며 초·백분율 단위가 아닙니다.</p>
+      <p>기수·게이트·부담중량·전개·등급 차이는 이 보정에 포함하지 않습니다. 따라서 말 자체의 능력을 완전히 분리한 값은 아닙니다.</p>
+    </div>
+    <div class="evaluation-records">
+      {{ record_story(evaluation.history[0], '직전 경주를 초 단위로 보면') }}
+      {% if evaluation.best and evaluation.best != evaluation.history[0] %}
+        {{ record_story(evaluation.best, '최근 5전 최고 기록을 초 단위로 보면') }}
+      {% endif %}
+    </div>
+    <div class="table-scroll">
+      <table class="entry-table evaluation-metrics">
+        <caption class="evaluation-caption">전체기록으로 본 최근 능력과 변화</caption>
+        <thead><tr><th scope="col">평가 항목 / 초 단위 해석</th><th scope="col">함수율 반영 지수</th><th scope="col">원기록 지수</th><th scope="col">관측 근거</th></tr></thead>
+        <tbody>
+          {% for row in evaluation.metrics %}
+            <tr>
+              <th scope="row">{{ row.label }}<small>{{ row.description }}</small><span class="evaluation-interpretation">{{ row.interpretation }}</span></th>
+              <td class="numeric evaluation-primary">{{ index_value(row.corrected) }}</td>
+              <td class="numeric">{{ index_value(row.raw) }}</td>
+              <td>{{ row.evidence }}{% if row.corrected is none %}<small>평가 자료 부족</small>{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="panel-note evaluation-scroll-hint">표를 가로로 밀면 원기록 지수와 관측 근거도 볼 수 있습니다.</p>
+    <p class="panel-note">
+      기록 지수는 같은 경마장·거리의 과거 기준에서 얼마나 빠른지 나타내며, 높을수록 빠릅니다. 0은 비교 기준의 중앙값입니다.
+      변화·변동성은 지수의 차이와 퍼짐을 뜻합니다. 우승·입상 확률이나 순수 능력 점수는 아닙니다.
+    </p>
+    {% if evaluation.best %}
+      <p class="evaluation-best">
+        <strong>최근 5전 최고 기록 근거</strong>
+        {% if evaluation.best.href %}<a href="{{ evaluation.best.href }}">{% endif %}
+          {{ evaluation.best.source.race_date.isoformat() }} · {{ evaluation.best.race_label }}
+        {% if evaluation.best.href %}</a>{% endif %}
+        · {{ evaluation.best.status }}
+      </p>
+    {% endif %}
+    <details class="evaluation-history">
+      <summary>평가에 사용한 최근 {{ evaluation.history | length }}전 보기</summary>
+      <div class="table-scroll">
+        <table class="entry-table">
+          <thead><tr><th>날짜 / 경주</th><th>결과</th><th>실제 기록</th><th>함수율 / 시간 조정</th><th>비교용 기록</th><th>과거 중앙기록 / 차이</th><th>원기록 → 함수율 반영 지수</th></tr></thead>
+          <tbody>
+            {% for row in evaluation.history %}
+              <tr>
+                <th scope="row">
+                  {% if row.href %}<a href="{{ row.href }}">{% endif %}{{ row.source.race_date.isoformat() }}{% if row.href %}</a>{% endif %}
+                  <small>{{ row.race_label }}</small>
+                </th>
+                <td>{{ row.finish_label }}</td>
+                <td class="numeric">{{ '%.2f초' | format(row.raw_seconds) if row.raw_seconds is not none else '—' }}<small>{{ row.time_label }}</small></td>
+                <td>{{ row.moisture_label }}<small>{{ '%+.2f초' | format(row.correction_seconds) if row.supported and row.correction_seconds is not none else '시간 보정 미적용' }}</small><small>{{ row.status }}</small></td>
+                <td class="numeric">{{ '%.2f초' | format(row.corrected_seconds) if row.corrected_seconds is not none else '—' }}</td>
+                <td>{{ '%.2f초' | format(row.moist_reference[0]) if row.moist_reference else '—' }}<small>{{ row.comparison }}</small></td>
+                <td class="numeric">{{ index_value(row.raw_index) }} → {{ index_value(row.moist_index) }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  {% else %}
+    <div class="empty-state"><strong>평가할 실전 이력이 없습니다.</strong><p>기준일까지 수집된 서울·부산 실전 기록이 쌓이면 평가가 표시됩니다.</p></div>
+  {% endif %}
+  <details class="evaluation-method">
+    <summary>평가 기준과 보정 범위</summary>
+    <p>최근 3전·5전은 실제 출전 순서로 정합니다. 기록이 없는 출전을 건너뛰어 더 오래된 기록으로 채우지 않습니다.
+      최근 변화는 최근 3전과 그 이전 3전에 유효 기록이 각각 2개 이상, 변동성은 최근 5전에 3개 이상일 때 표시합니다.</p>
+    <p>각 기록의 전년도까지의 경마장·거리별 자료로 비교 지수를 계산합니다. 함수율에 따른 전체기록 보정만 적용하며,
+      보정 근거가 부족하면 시간은 원기록을 유지합니다. 보정 전후의 비교 기준도 달라 원기록을 유지해도 지수가 달라질 수 있습니다.
+      서로 다른 거리의 기록이 포함될 수 있으므로 거리별 적성은 별도로 확인해야 합니다.</p>
+    <p>기수·게이트·부담중량 효과와 구간기록은 이번 기초 지수에 보정하지 않았습니다. 직전 체중·부담중량은 관측 정보입니다.
+      연도별 비교 기준이 없는 기록은 지수를 비워둡니다. 빈 값은 낮은 능력을 뜻하지 않습니다.</p>
+    <p class="panel-note">평가 기준 버전 {{ evaluation.version }}</p>
+  </details>
+</section>

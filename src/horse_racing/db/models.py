@@ -206,6 +206,39 @@ class Jockey(Base):
     )
 
 
+class JockeyAffiliationSnapshot(Base):
+    """Membership of a complete official active roster, by base affiliation."""
+
+    __tablename__ = "jockey_affiliation_snapshots"
+
+    jockey_id: Mapped[int] = mapped_column(
+        ForeignKey("jockeys.id", ondelete="RESTRICT"), primary_key=True
+    )
+    observed_on: Mapped[date] = mapped_column(Date, primary_key=True)
+    meet_code: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    official_name_ko: Mapped[str] = mapped_column(String(100), nullable=False)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    source_url: Mapped[str] = mapped_column(Text, nullable=False)
+    source_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    api_source_url: Mapped[str] = mapped_column(Text, nullable=False)
+    api_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    debut_date: Mapped[date | None] = mapped_column(Date)
+    riding_weight_own_kg: Mapped[Decimal | None] = mapped_column(Numeric(4, 1))
+    riding_weight_other_kg: Mapped[Decimal | None] = mapped_column(Numeric(4, 1))
+
+    __table_args__ = (
+        CheckConstraint("meet_code IN (1, 2, 3)", name="valid_meet_code"),
+        CheckConstraint("length(source_sha256) = 64", name="source_sha256_length"),
+        CheckConstraint("length(api_sha256) = 64", name="api_sha256_length"),
+        CheckConstraint("debut_date >= '1900-01-01'", name="jockey_profile_debut_valid"),
+        CheckConstraint("riding_weight_own_kg > 0 AND riding_weight_own_kg < 100",
+                        name="jockey_profile_own_weight_valid"),
+        CheckConstraint("riding_weight_other_kg > 0 AND riding_weight_other_kg < 100",
+                        name="jockey_profile_other_weight_valid"),
+        Index("ix_jockey_affiliation_snapshots_observed_meet", "observed_on", "meet_code"),
+    )
+
+
 class Trainer(Base):
     __tablename__ = "trainers"
 
@@ -404,6 +437,37 @@ class Owner(Base):
     name_en: Mapped[str | None] = mapped_column(String(150))
 
     entries: Mapped[list[RaceEntry]] = relationship(back_populates="owner")
+
+
+class OwnerCatalogSnapshot(Base):
+    __tablename__ = "owner_catalog_snapshots"
+
+    ingestion_run_id: Mapped[int] = mapped_column(
+        ForeignKey("ingestion_runs.id", ondelete="RESTRICT"), primary_key=True
+    )
+    meet_code: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    kra_owner_id: Mapped[str] = mapped_column(String(6), primary_key=True)
+    owner_id: Mapped[int | None] = mapped_column(ForeignKey("owners.id", ondelete="SET NULL"))
+    official_name_ko: Mapped[str] = mapped_column(String(100), nullable=False)
+    registration_date: Mapped[date | None] = mapped_column(Date)
+    total_registered_horses: Mapped[int] = mapped_column(Integer, nullable=False)
+    current_owned_horses: Mapped[int | None] = mapped_column(Integer)
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    source_document_id: Mapped[int] = mapped_column(
+        ForeignKey("source_documents.id", ondelete="RESTRICT"), nullable=False
+    )
+
+    __table_args__ = (
+        CheckConstraint("meet_code IN (1, 2, 3)", name="valid_meet_code"),
+        CheckConstraint("length(kra_owner_id) = 6", name="official_owner_id_length"),
+        CheckConstraint("total_registered_horses >= 0", name="registered_horses_nonnegative"),
+        CheckConstraint(
+            "current_owned_horses >= 0 AND current_owned_horses <= total_registered_horses",
+            name="current_owned_horses_valid",
+        ),
+        Index("ix_owner_catalog_snapshots_owner_run", "owner_id", "ingestion_run_id"),
+        Index("ix_owner_catalog_snapshots_source_document", "source_document_id"),
+    )
 
 
 class Race(Base):

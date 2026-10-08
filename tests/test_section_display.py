@@ -6,6 +6,8 @@ from horse_racing.web.race_page import (
     _section_columns,
     _section_rows,
     build_section_chart_data,
+    cumulative_finish_margins,
+    parse_finish_margin,
 )
 
 
@@ -185,3 +187,107 @@ def test_seoul_keeps_corners_distinct_and_displays_closing_windows():
     for entry in race.entries:
         entry.section_results[2].elapsed_time_ms = 28000
     assert "3C/G3F" not in [c.label for c in _section_columns(race)]
+
+
+def test_passing_group_parser_preserves_packs_and_official_separators():
+    from horse_racing.web.race_page import parse_passing_groups
+
+    groups = parse_passing_groups('(^1,6),(3,7),(4,5,10),(9,11)-2=8≡12', set(range(1, 13)))
+    assert [group['horses'] for group in groups] == [
+        [1, 6], [3, 7], [4, 5, 10], [9, 11], [2], [8], [12]
+    ]
+    assert [group['gap'] for group in groups] == ['', ',', ',', ',', '-', '=', '≡']
+
+
+@pytest.mark.parametrize(
+    'notation', ['(1,1),2', '(1,9)', '(1,2', '1foo2', '1,2)', '1,,(2,1)', '<img>1']
+)
+def test_invalid_passing_groups_do_not_create_partial_packs(notation):
+    from horse_racing.web.race_page import parse_passing_groups
+    assert parse_passing_groups(notation, {1, 2}) == []
+
+
+def test_passing_view_uses_alias_notation_and_preserves_rank_fallback():
+    race = make_race()
+    columns = _section_columns(race)
+    rows = _section_rows(race.entries, columns, meet_code=2)
+    chart = build_section_chart_data(columns, rows, {'3C': '(^1,2)-3'})
+    points = chart['checkpoints']
+    assert points[1]['label'] == '3C/G3F'
+    assert points[1]['mode'] == 'official'
+    assert [g['horses'] for g in points[1]['groups']] == [[1, 2], [3]]
+    assert points[0]['mode'] == 'rank'
+    assert all(len(g['horses']) == 1 for g in points[0]['groups'])
+    assert points[-1]['mode'] == 'finish'
+    assert chart['series'][2]['positionsInferred'][1]
+
+
+def test_official_packs_keep_horses_without_individual_positions():
+    from horse_racing.web.race_page import SectionCell, SectionColumn, SectionEntryRow
+    rows = [SectionEntryRow('1', 1, '통과순위미제공', '—', 999,
+                            [SectionCell('—', '—', '—', 999)])]
+    chart = build_section_chart_data([SectionColumn('2C', '2C')], rows, {'2C': '1'})
+    assert chart['series'][0]['positions'] == [None]
+    assert chart['checkpoints'][0]['groups'][0]['horses'] == [1]
+
+
+def test_passing_offsets_use_symbol_midpoints_and_finish_uses_official_margins():
+    from horse_racing.web.race_page import SectionCell, SectionColumn, SectionEntryRow
+    rows = [
+        SectionEntryRow(str(number), number, f'말{number}', f'{number}위', number,
+                        [SectionCell(f'{number}위', '—', '—', number)] * 2,
+                        finish_time_ms=finish, finish_margin=margin)
+        for number, finish, margin in [(1, 60_000, ""), (2, 60_000, "목"),
+                                       (3, 60_200, "1"), (4, 60_700, "2½"),
+                                       (5, None, "")]
+    ]
+    chart = build_section_chart_data(
+        [SectionColumn('4C', '4C'), SectionColumn('FIN', 'FIN')], rows,
+        {'4C': '1,2-3=4≡5'},
+    )
+    points = chart['checkpoints']
+    assert [g['distanceLengths'] for g in points[0]['groups']] == [0, 1.5, 5, 12.5, 22.5]
+    assert [g['distanceLengths'] for g in points[1]['groups']] == [0, .3, 1.3, 3.8, None]
+    assert chart['series'][0]['finishTimeMs'] == 60_000
+    assert chart['series'][1]['finishMargin'] == '목'
+
+
+def test_missing_winner_does_not_invent_a_finish_gap():
+    from horse_racing.web.race_page import SectionCell, SectionColumn, SectionEntryRow
+    rows = [SectionEntryRow('2', 2, '말2', '2위', 2,
+                            [SectionCell('2위', '—', '—', 2)], finish_time_ms=60_200)]
+    chart = build_section_chart_data([SectionColumn('FIN', 'FIN')], rows)
+    assert chart['checkpoints'][0]['groups'][0]['distanceLengths'] is None
+
+
+@pytest.mark.parametrize(("raw", "expected"), [
+    ("1", 1), ("2.5", 2.5), ("½", .5), ("2½", 2.5), ("1¼", 1.25),
+    ("¾", .75), ("⅛", .125), ("1/2", .5), ("2 1/2", 2.5), (" 1 마신 ", 1),
+    ("코", .05), ("머리", .15), ("목", .3), ("동착", 0), ("대차", 10),
+    ("", None), ("—", None), ("1/0", None), ("-2", None), ("미상", None),
+])
+def test_parse_official_finish_margins(raw, expected):
+    assert parse_finish_margin(raw) == expected
+
+
+def finish_row(number, rank, margin):
+    from horse_racing.web.race_page import SectionCell, SectionEntryRow
+    return SectionEntryRow(str(number), number, f"말{number}", f"{rank}위", rank,
+                           [SectionCell(f"{rank}위", "—", "—", rank)],
+                           finish_margin=margin)
+
+
+def test_official_margins_work_without_times_and_accumulate_tied_places_once():
+    rows = [finish_row(1, 1, ""), finish_row(2, 2, "목"), finish_row(3, 2, "목"),
+            finish_row(4, 4, "1¼")]
+    assert cumulative_finish_margins(rows) == {1: 0, 2: .3, 3: .3, 4: 1.55}
+
+
+@pytest.mark.parametrize("missing", ["margin", "placing"])
+def test_missing_margin_or_placing_breaks_cumulative_chain(missing):
+    rows = [finish_row(1, 1, ""), finish_row(2, 2, ""), finish_row(3, 3, "1")]
+    if missing == "placing":
+        rows.pop(1)
+    offsets = cumulative_finish_margins(rows)
+    assert offsets[1] == 0
+    assert offsets[3] is None
