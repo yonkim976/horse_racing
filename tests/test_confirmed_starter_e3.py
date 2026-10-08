@@ -17,6 +17,7 @@ from horse_racing.analysis.confirmed_starter_e3 import (
 )
 from horse_racing.analysis.experiments import get_run, load_runs
 from horse_racing.analysis.metrics import expected_topk_inclusion
+from tests._artifacts import requires_local_artifacts
 
 
 def _expected() -> pl.DataFrame:
@@ -101,6 +102,7 @@ def test_paired_bootstraps_are_reproducible_and_keep_date_blocks() -> None:
     assert clustered["blocks"] == 2
 
 
+@requires_local_artifacts("data/experiments/confirmed_starter_e3_20260911")
 def test_generated_e3_artifacts_preserve_denominator_and_isolated_registry() -> None:
     root = Path(__file__).resolve().parents[1]
     output = root / "data/experiments/confirmed_starter_e3_20260911"

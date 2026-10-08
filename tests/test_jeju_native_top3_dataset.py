@@ -10,6 +10,7 @@ from horse_racing.analysis.jeju_native_top3_dataset import (
     build_top3_labels,
     extract_dataset,
 )
+from tests._artifacts import requires_local_artifacts
 
 DB = Path("data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3")
 
@@ -66,6 +67,7 @@ def test_dq_and_dnf_are_started_but_rank_and_time_are_masked() -> None:
     )
 
 
+@requires_local_artifacts(DB)
 def test_snapshot_counts_splits_and_400m_history() -> None:
     data = extract_dataset(DB)
     assert data["entries"].height == 84_583

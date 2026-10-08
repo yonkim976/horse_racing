@@ -6,6 +6,7 @@ from pathlib import Path
 from horse_racing.analysis.confirmed_starter_e9a import Runner
 from horse_racing.analysis.confirmed_starter_e9a_h1h2 import extract_report_h1h2
 from scripts.run_confirmed_starter_e9a import POPULATION, _raw_item, _runners
+from tests._artifacts import requires_local_artifacts
 
 RUNNERS = [
     Runner(1, "20250101", 1, 1, "H1", "가온"),
@@ -103,6 +104,7 @@ def test_separate_sentence_or_negated_relationship_does_not_clear_actor() -> Non
     assert ("interference", "actor", 2) not in _clear(denied)
 
 
+@requires_local_artifacts(POPULATION)
 def test_actual_1698_actor_links_later_discomfort_not_mutual_contact() -> None:
     selected = next(
         row

@@ -15,6 +15,7 @@ from horse_racing.analysis.confirmed_starter_e5_r3r4 import (
     fit_temperature,
     grouped_soft_label_ce,
 )
+from tests._artifacts import requires_local_artifacts
 
 
 def test_temperature_true_flat_uses_t1() -> None:
@@ -119,6 +120,9 @@ def test_raw_margin_metric_preserves_positive_and_negative_saturation_counterexa
     )
 
 
+@requires_local_artifacts(
+    "data/experiments/confirmed_starter_e5a_r3_r4_20260912/callback_evidence.json"
+)
 def test_generated_r3r4_spike_uses_raw_callbacks_and_real_weight_policy() -> None:
     root = Path(__file__).resolve().parents[1]
     output = root / "data/experiments/confirmed_starter_e5a_r3_r4_20260912"

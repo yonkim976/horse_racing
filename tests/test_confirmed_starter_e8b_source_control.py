@@ -14,8 +14,10 @@ from scripts.run_confirmed_starter_e8b_source_control import (
     _sha,
     compare_first_page,
 )
+from tests._artifacts import requires_local_artifacts
 
 
+@requires_local_artifacts(*EXISTING.values())
 def test_fixed_control_evidence_is_pre_may_31_nonempty_and_hashed() -> None:
     assert DATE == "20260517"
     for endpoint, path in EXISTING.items():

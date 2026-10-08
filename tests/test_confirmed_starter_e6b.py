@@ -21,6 +21,7 @@ from horse_racing.analysis.confirmed_starter_e6b import (
 )
 from scripts import run_confirmed_starter_e6b as runner
 from scripts.run_confirmed_starter_e6b import fold_input, preflight_input, verify_sealed_files
+from tests._artifacts import requires_local_artifacts
 
 
 def _flat_diagnosis():
@@ -139,6 +140,9 @@ def test_runner_stops_fold_and_pooled_comparison_on_fit_failure(tmp_path, monkey
     assert not (tmp_path / "F1" / "comparison.json").exists()
 
 
+@requires_local_artifacts(
+    "data/datasets/confirmed_starter_e2_h1_remediation_retrospective/start_minus_30m/dataset.parquet"
+)
 def test_sealed_real_input_and_fold_encoding_contract():
     verify_sealed_files()
     frame, features, audit = preflight_input()

@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from horse_racing.collectors.kra_api import FetchedPage
-from horse_racing.collectors.special_training import FetchedXmlPage
 from horse_racing.collectors.kra_text import FetchedTextReport, KraTextFile
+from horse_racing.collectors.special_training import FetchedXmlPage
 
 
 @dataclass(frozen=True, slots=True)

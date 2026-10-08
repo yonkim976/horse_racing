@@ -6,6 +6,7 @@ from pathlib import Path
 from horse_racing.analysis.confirmed_starter_e9a import Runner
 from horse_racing.analysis.confirmed_starter_e9a_remediation import remediate_report
 from scripts.run_confirmed_starter_e9a import POPULATION, _raw_item, _runners
+from tests._artifacts import requires_local_artifacts
 
 RUNNERS = [
     Runner(1, "20250101", 1, 1, "H1", "가온"),
@@ -67,6 +68,7 @@ def test_mixed_fact_and_rider_quote_preserves_fact_only() -> None:
     assert ("interference", "victim", 2) not in rows
 
 
+@requires_local_artifacts(POPULATION)
 def test_three_sealed_wrong_subject_reports_and_raw_clause_offsets() -> None:
     population = json.loads(POPULATION.read_text(encoding="utf-8"))["population"]
     selected = [row for row in population if row["race_id"] in {3275, 3095, 277}]
@@ -89,6 +91,7 @@ def test_three_sealed_wrong_subject_reports_and_raw_clause_offsets() -> None:
             assert source[row["clause_start"] : row["clause_end"]] == row["clause_text"]
 
 
+@requires_local_artifacts(POPULATION)
 def test_factual_victim_and_joint_actor_survive_scoped_review() -> None:
     population = json.loads(POPULATION.read_text(encoding="utf-8"))["population"]
     selected = [row for row in population if row["race_id"] in {127, 286}]

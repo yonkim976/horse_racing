@@ -21,6 +21,7 @@ from horse_racing.analysis.confirmed_starter_e5 import (
     race_softmax_objective_arrays,
     soft_labels_from_winners,
 )
+from tests._artifacts import requires_local_artifacts
 
 
 def test_shifted_ce_fixes_large_common_shift_counterexample() -> None:
@@ -145,6 +146,7 @@ def test_temperature_policy_uses_t1_for_flat_scores_and_interior_for_signal() ->
     assert math.exp(-4) < signal.temperature < math.exp(4)
 
 
+@requires_local_artifacts("data/experiments/confirmed_starter_e5a_20260912/callback_evidence.json")
 def test_generated_e5a_spike_uses_public_api_and_reload_is_exact() -> None:
     root = Path(__file__).resolve().parents[1]
     output = root / "data/experiments/confirmed_starter_e5a_20260912"

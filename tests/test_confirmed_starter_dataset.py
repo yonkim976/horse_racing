@@ -31,6 +31,7 @@ from horse_racing.analysis.confirmed_starter_dataset import (
 from horse_racing.analysis.features import ability, form, load_source_frames, style
 from horse_racing.analysis.features.base import SourceFrames
 from horse_racing.analysis.pre_race_field_contract import SealedFieldManifest
+from tests._artifacts import requires_local_artifacts
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -503,6 +504,10 @@ def test_target_result_and_sections_do_not_change_target_history_predictors() ->
     assert before.select(names).equals(after.select(names))
 
 
+@requires_local_artifacts(
+    "data/datasets/confirmed_starter_e2_h1_remediation_retrospective/start_minus_30m/dataset.parquet",
+    "data/logs/pre_race_field_dnf_evidence_e1_v2_20260911.parquet",
+)
 def test_generated_e2_artifact_has_exact_a_keys_splits_and_field_denominators() -> None:
     dataset = pl.read_parquet(
         ROOT / "data/datasets/confirmed_starter_e2_h1_remediation_retrospective/"

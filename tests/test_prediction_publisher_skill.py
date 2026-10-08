@@ -25,6 +25,7 @@ from horse_racing.db.models import (
     Racecourse,
     RaceEntry,
 )
+from tests._artifacts import requires_local_artifacts
 
 PUBLISHED_AT = 2_000_000_000_000
 
@@ -33,6 +34,9 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+@requires_local_artifacts(
+    "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt"
+)
 def test_skill_publisher_appends_and_reads_back_bundle(tmp_path: Path) -> None:
     database_path = tmp_path / "publisher.sqlite3"
     database_url = f"sqlite:///{database_path}"

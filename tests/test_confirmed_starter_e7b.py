@@ -20,6 +20,7 @@ from horse_racing.analysis.confirmed_starter_e7b import (
     verify_shared_base_matrices,
 )
 from scripts import run_confirmed_starter_e7b as runner
+from tests._artifacts import requires_local_artifacts
 
 
 def _flat():
@@ -73,6 +74,9 @@ def test_148_column_matrix_rejects_changed_old_cell():
         verify_shared_base_matrices(base, added)
 
 
+@requires_local_artifacts(
+    "data/datasets/confirmed_starter_e2_h1_remediation_retrospective/start_minus_30m/dataset.parquet"
+)
 def test_sequence_contract_rejects_missing_key_and_filled_absent_slot():
     h1 = pl.read_parquet(runner.H1)
     sequence = pl.read_parquet(runner.SEQUENCE)
@@ -157,6 +161,9 @@ def test_runner_stops_current_fold_on_selector_failure(tmp_path, monkeypatch):
     assert not (tmp_path / "F1" / "comparison.json").exists()
 
 
+@requires_local_artifacts(
+    "data/datasets/confirmed_starter_e2_h1_remediation_retrospective/start_minus_30m/dataset.parquet"
+)
 def test_real_sealed_preflight_and_fold_inputs_without_fitting():
     runner.verify_sealed()
     frame, features, audit = runner.preflight_input()
@@ -170,6 +177,7 @@ def test_real_sealed_preflight_and_fold_inputs_without_fitting():
         assert contract["partitions"]["evaluation"]["dates"][1] <= "2026-02-28"
 
 
+@requires_local_artifacts("data/experiments/confirmed_starter_e7b_20260913/F1/BASE_136/run.json")
 def test_baseline_reproduction_rejects_modified_saved_margin():
     fold = "F1"
     path = runner.OUTPUT_BASE / fold / ARMS[0]

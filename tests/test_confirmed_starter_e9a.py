@@ -5,6 +5,7 @@ from pathlib import Path
 
 from horse_racing.analysis.confirmed_starter_e9a import Runner, extract_report
 from scripts.run_confirmed_starter_e9a import LABELS, POPULATION, _anchor_span, _raw_item, _runners
+from tests._artifacts import requires_local_artifacts
 
 RUNNERS = [
     Runner(1, "20250104", 1, 1, "H1", "가온"),
@@ -127,6 +128,7 @@ def test_sand_only_is_separate_and_requires_no_outcome() -> None:
     assert rows[0]["certainty"] == "abstain"
 
 
+@requires_local_artifacts(POPULATION, LABELS)
 def test_sealed_sixty_review_anchors_and_entry_identity_are_available() -> None:
     manifest = json.loads(POPULATION.read_text(encoding="utf-8"))
     labels = json.loads(LABELS.read_text(encoding="utf-8"))["labels"]

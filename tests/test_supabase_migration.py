@@ -10,6 +10,7 @@ from scripts.migrate_sqlite_to_postgres import (
     _validate_source_numeric_types,
     _validate_source_string_lengths,
 )
+from tests._artifacts import requires_local_artifacts
 
 MIGRATION = next(Path("supabase/migrations").glob("*_create_horse_racing_schema.sql"))
 HARDENING_MIGRATION = next(
@@ -64,6 +65,7 @@ def test_legacy_identifiers_and_status_are_unbounded_text() -> None:
     assert widening_sql.count("TYPE text") == 7
 
 
+@requires_local_artifacts("data/backups/after_historical_backfill_20260918.sqlite3")
 def test_source_string_length_preflight_accepts_frozen_snapshot() -> None:
     import sqlite3
 
@@ -72,6 +74,7 @@ def test_source_string_length_preflight_accepts_frozen_snapshot() -> None:
         _validate_source_string_lengths(connection)
 
 
+@requires_local_artifacts("data/backups/after_historical_backfill_20260918.sqlite3")
 def test_source_integer_range_preflight_accepts_frozen_snapshot() -> None:
     import sqlite3
 
@@ -80,6 +83,7 @@ def test_source_integer_range_preflight_accepts_frozen_snapshot() -> None:
         _validate_source_integer_ranges(connection)
 
 
+@requires_local_artifacts("data/backups/after_historical_backfill_20260918.sqlite3")
 def test_source_numeric_type_preflight_accepts_frozen_snapshot() -> None:
     import sqlite3
 

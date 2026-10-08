@@ -4,6 +4,7 @@ import json
 
 from horse_racing.analysis.jeju_context_features import FEATURES
 from scripts.freeze_jeju_ablation_protocol import GROUPS, OUT
+from tests._artifacts import requires_local_artifacts
 
 
 def test_new_feature_groups_partition_all_observations():
@@ -12,6 +13,7 @@ def test_new_feature_groups_partition_all_observations():
     assert set(flattened) == set(FEATURES)
 
 
+@requires_local_artifacts("data/research/jeju_native_ablation_order_v6_20260916/protocol.json")
 def test_leave_one_group_out_retains_base_and_removes_exact_group():
     p = json.loads((OUT / "protocol.json").read_text())
     all_features = p["joint_features"]
@@ -24,6 +26,7 @@ def test_leave_one_group_out_retains_base_and_removes_exact_group():
         assert not set(features) & {"finish_position", "label_top3", "body_weight_kg", "weather"}
 
 
+@requires_local_artifacts("data/research/jeju_native_ablation_order_v6_20260916/protocol.json")
 def test_fit_budget_and_references_separate_new_candidates():
     p = json.loads((OUT / "protocol.json").read_text())
     assert p["counts"] == dict(

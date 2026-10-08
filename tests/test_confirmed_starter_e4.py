@@ -16,6 +16,7 @@ from horse_racing.analysis.confirmed_starter_e4 import (
     tie_and_rank_diagnostics,
     validate_win_output,
 )
+from tests._artifacts import requires_local_artifacts
 
 
 def _expected() -> pl.DataFrame:
@@ -105,6 +106,7 @@ def test_race_softmax_math_is_stable_invariant_and_matches_finite_difference() -
         assert numerical_gradient == pytest.approx(gradient[index], abs=1e-7)
 
 
+@requires_local_artifacts("data/experiments/confirmed_starter_e4_diagnostic_20260911")
 def test_generated_e4_artifacts_reproduce_e3_and_preserve_contracts() -> None:
     root = Path(__file__).resolve().parents[1]
     output = root / "data/experiments/confirmed_starter_e4_diagnostic_20260911"
