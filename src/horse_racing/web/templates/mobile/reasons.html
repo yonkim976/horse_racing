@@ -1,7 +1,10 @@
 {% extends "mobile/base.html" %}
 {% block body_class %}mobile-reasons{% endblock %}
-{% block title %}{% if page.selected_race %}{{ race_heading(page.selected_race) }}{% else %}이유{% endif %} · 마필로그 Mapilog{% endblock %}
+{% block title %}{% if page.selected_race %}{{ race_heading(page.selected_race) }} 말 풀이{% else %}말 풀이{% endif %} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}출전마가 3위 안에 들 확률을 이렇게 본 이유를 경주별로 확인합니다.{% endblock %}
+{% block extra_head %}
+<script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v={{ asset_version('/js/mobile-analysis.js') }}" defer></script>
+{% endblock %}
 
 {% macro race_heading(race) -%}
 {%- if race.date and race.date|length >= 10 -%}{{ race.date[0:4] }}.{{ race.date[5:7] }}.{{ race.date[8:10] }} {% endif -%}{{ race.meet }} {{ race.number }}R
@@ -11,8 +14,8 @@
 {%- endmacro %}
 
 {% block content %}
-<div class="ma-page mr-page">
-  <nav class="ma-chrome" aria-label="이유를 볼 경주 선택" data-mobile-chrome>
+<div class="ma-page mr-page" data-analysis-page>
+  <nav class="ma-chrome" aria-label="말 풀이를 볼 경주 선택" data-mobile-chrome>
     <div class="ma-chrome-row" data-chrome-filters>
       <a class="ma-back" href="{% if page.selected_race %}/races/{{ page.selected_race.id }}{% else %}/analysis{% endif %}" aria-label="경주 분석">분석</a>
       {% if page.races %}
@@ -59,18 +62,31 @@
         <span class="mr-num silk-{{ runner.number }}">{{ runner.number }}</span>
         <div>
           <h2>{{ runner.horse }}</h2>
-          <p>
-            {% if runner.state == '출전취소' %}출전 취소{% elif runner.state == '경주 완료' and runner.result_label != '—' %}결과 {{ runner.result_label }}{% endif %}
-          </p>
+          <p>{% if runner.state == '출전취소' %}출전 취소{% elif runner.state == '경주 완료' and runner.result_label != '—' %}결과 {{ runner.result_label }}{% endif %}</p>
+          {% if runner.form_tokens %}
+          <p class="mr-form"><span>{{ '심사' if runner.form_kind == 'trial' else '최근' }}</span> {{ runner.form_tokens[:5] | join(' · ') }}</p>
+          {% endif %}
         </div>
         <span class="ma-win-block mr-win" data-role="{{ role_name(runner.win_label) }}">
           <span class="ma-win-pct">{{ runner.win_pct or '—' }}</span>
           <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
         </span>
       </header>
-      <ul class="mr-lines">
-        {% for line in runner.reason_lines %}<li>{{ line }}</li>{% endfor %}
+      {% set good = runner.reason_lines | selectattr('tone', 'equalto', 'up') | list %}
+      {% set weak = runner.reason_lines | selectattr('tone', 'equalto', 'down') | list %}
+      {% set facts = runner.reason_lines | selectattr('tone', 'equalto', 'fact') | list %}
+      {% set hidden_good = [good | length - 1, 0] | max %}
+      {% set hidden_weak = [weak | length - 1, 0] | max %}
+      {% set hidden_fact = [facts | length - 1, 0] | max %}
+      <ul class="mr-lines" id="mr-lines-{{ runner.entry_id }}">
+        {% for line in runner.reason_lines %}<li data-tone="{{ line.tone }}">{{ line.text }}</li>{% endfor %}
       </ul>
+      {% if hidden_good or hidden_weak or hidden_fact %}
+      <button type="button" class="mr-more" data-reason-more aria-expanded="false" aria-controls="mr-lines-{{ runner.entry_id }}">
+        <span data-more-closed>{% if hidden_good %}좋은 점 {{ hidden_good }}{% endif %}{% if hidden_good and hidden_weak %} · {% endif %}{% if hidden_weak %}아쉬운 점 {{ hidden_weak }}{% endif %}{% if (hidden_good or hidden_weak) and hidden_fact %} · {% endif %}{% if hidden_fact %}기록 {{ hidden_fact }}{% endif %} 더 보기</span>
+        <span data-more-open hidden>접기</span>
+      </button>
+      {% endif %}
     </li>
     {% endfor %}
   </ol>

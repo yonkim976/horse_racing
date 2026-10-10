@@ -600,3 +600,133 @@ def test_pace_stages_are_limited_to_six_recent_normal_finishes_without_old_fallb
     stages = load_race_analysis_page(session, race_id=target.id).pace["runners"][0]["stages"]
     assert all(stage["normalized"] is None and stage["samples"] == 0 for stage in stages.values())
     assert all("최근 6회" in stage["label"] for stage in stages.values())
+
+
+def _record_runner(**overrides):
+    values = {
+        "entry_id": 1,
+        "horse_id": 1,
+        "number": 1,
+        "gate": "1",
+        "horse": "테스트",
+        "jockey": "기수",
+        "trainer": "조교사",
+        "weight": "54",
+        "rating": "—",
+        "state": "출전",
+        "starts": 6,
+        "top3": 4,
+        "same_distance_starts": 0,
+        "section_starts": 0,
+        "history": [object()],
+        "metrics": {
+            "normal_starts": 6,
+            "top3_rate": 66.7,
+            "recent_finishes": [1],
+            "days_since_last": 28,
+        },
+    }
+    values.update(overrides)
+    return race_analysis.AnalysisRunner(**values)
+
+
+def _past(**overrides):
+    values = {
+        "carried_weight": "56kg",
+        "body_weight": "480kg",
+        "gate": "8",
+        "jockey": "이전 기수",
+        "valid_finish": True,
+        "finish_position": 2,
+        "field_size": 12,
+        "early_normalized": 0.1,
+    }
+    values.update(overrides)
+    return type("Past", (), values)()
+
+
+def test_record_reasons_always_state_every_factor() -> None:
+    lines = race_analysis._record_reason_lines(_record_runner())
+    texts = [line["text"] for line in lines]
+
+    assert "최근 6번 중 4번 3위 안" in texts
+    assert "직전 경주 1위" in texts
+    assert "직전 출전 후 28일" in texts
+    assert lines[0]["text"] == "최근 6번 중 4번 3위 안"
+    assert lines[0]["tone"] == "up"
+    assert "이 거리 첫 출전" in texts
+    assert any(text.startswith("기수") for text in texts)
+    assert any(text.startswith("부담") for text in texts)
+    assert any(text.startswith("게이트") for text in texts)
+    assert "당일 체중 기록 없음" in texts
+    assert "구간 통과순위 없음" in texts
+
+
+def test_record_reasons_keep_small_changes_and_split_jockey() -> None:
+    past = _past()
+    runner = _record_runner(
+        weight="54.5kg",
+        gate="2",
+        jockey="새 기수",
+        history=[past],
+        same_distance_history=[past],
+        same_distance_starts=1,
+        jockey_stats={"starts": 40, "top3_rate": 45.0},
+        combination_stats={"starts": 0, "top3": 0},
+        body_weight_kg=478,
+        body_weight_change_kg=-2,
+        field_size=12,
+    )
+
+    lines = race_analysis._record_reason_lines(runner)
+    texts = [line["text"] for line in lines]
+    tones = [line["tone"] for line in lines]
+
+    assert tones == sorted(tones, key=lambda tone: {"up": 0, "down": 1, "fact": 2}[tone])
+    assert "이 거리 1번 중 1번 3위 안" in texts
+    assert "부담 54.5kg · 직전보다 1.5kg 가벼움" in texts
+    assert "기수 변경 새 기수" in texts
+    assert "최근 1년 40번 중 3위 안 45%" in texts
+    assert "함께 뛴 기록 없음" in texts
+    assert "체중 478kg" in texts
+    assert "2kg 감소" in texts
+    assert "입상했던 체중과 비슷" in texts
+    assert any(text.startswith("게이트 2 · 직전 게이트 8") for text in texts)
+    assert any(text.startswith("선행 1번 중 1번 3위 안") for text in texts)
+
+
+def test_record_reasons_mark_a_long_layoff_and_a_cold_jockey() -> None:
+    lines = race_analysis._record_reason_lines(
+        _record_runner(
+            metrics={
+                "normal_starts": 8,
+                "top3_rate": 0,
+                "recent_finishes": [10],
+                "days_since_last": 120,
+            },
+            jockey_stats={"starts": 80, "top3_rate": 10.0},
+        )
+    )
+    texts = [line["text"] for line in lines]
+
+    assert lines[0]["text"] == "최근 8번 모두 3위 밖"
+    assert "4개월 넘게 쉬고 출전" in texts
+    assert lines[0]["tone"] == "down"
+    assert any("최근 1년 80번 중 3위 안 10%" in text for text in texts)
+
+
+def test_collapsed_record_tag_and_promotion() -> None:
+    assert race_analysis._glance_tag("루키", "별정A") == "루키"
+    assert race_analysis._glance_tag(None, "별정B") == "별정"
+    assert race_analysis._glance_tag("", "핸디캡") == "핸디"
+    assert race_analysis._glance_tag("", "마령") == "마령"
+    assert race_analysis._glance_tag("", None) == ""
+
+    class Start:
+        def __init__(self, grade: str) -> None:
+            self.grade = grade
+            self.promoted = False
+
+    starts = [Start("국OPEN"), Start("국5등급"), Start("혼4등급"), Start("혼4등급")]
+    race_analysis._mark_promotions(starts)
+    assert [start.promoted for start in starts] == [True, False, False, False]

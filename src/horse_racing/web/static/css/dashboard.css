@@ -2737,22 +2737,73 @@ th[aria-sort] {
   color: var(--muted);
 }
 
+.reason-board-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin-bottom: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.reason-board-back:hover {
+  color: var(--ink-strong);
+  background: var(--accent-soft);
+}
+
+.reason-board-intro {
+  display: grid;
+}
+
 .reason-board-races {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 8px;
 }
 
+.reason-board-meet {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reason-board-meet-name {
+  flex: 0 0 auto;
+  min-width: 3em;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.reason-board-meet-races {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .reason-board-races a {
+  min-width: 44px;
   padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--ink);
   font-size: 13px;
   font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.reason-board-races a.is-finished {
+  color: var(--muted);
 }
 
 .reason-board-races a[aria-current="page"] {
+  border-color: var(--accent-line);
   color: var(--ink-strong);
   background: var(--accent-soft);
 }
@@ -2765,13 +2816,28 @@ th[aria-sort] {
   list-style: none;
 }
 
-.reason-board-list li {
+.reason-board-list > li {
   display: grid;
+  align-content: start;
   gap: 10px;
   padding: 16px;
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--surface-2);
+}
+
+.reason-board-list > li.is-scratched {
+  opacity: 0.55;
+}
+
+@media (min-width: 1180px) {
+  .reason-board {
+    max-width: 1120px;
+  }
+
+  .reason-board-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .reason-board-list header {
@@ -2846,7 +2912,13 @@ th[aria-sort] {
 
 .reason-board-list header p {
   margin: 2px 0 0;
+  color: var(--muted);
   font-size: 13px;
+  font-weight: 700;
+}
+
+.reason-board-list header p:empty {
+  display: none;
 }
 
 .reason-board-list ul {
@@ -2867,3 +2939,29 @@ th[aria-sort] {
   line-height: 1.35;
   word-break: keep-all;
 }
+
+/* Shared by the desktop board, the mobile reasons page, and the mobile reason sheet. */
+li[data-tone="up"],
+li[data-tone="down"],
+li[data-tone="fact"] {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  box-shadow: inset 3px 0 0 var(--tone);
+}
+
+li[data-tone="up"] { --tone: var(--accent); }
+li[data-tone="down"] { --tone: var(--red); }
+li[data-tone="fact"] { --tone: var(--muted); }
+
+li[data-tone="up"]::before,
+li[data-tone="down"]::before,
+li[data-tone="fact"]::before {
+  flex: 0 0 auto;
+  color: var(--tone);
+  font-size: 0.8em;
+}
+
+li[data-tone="up"]::before { content: "▲"; content: "▲" / "좋은 점"; }
+li[data-tone="down"]::before { content: "▼"; content: "▼" / "아쉬운 점"; }
+li[data-tone="fact"]::before { content: "−"; content: "−" / "기록"; }

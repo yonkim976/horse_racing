@@ -178,8 +178,10 @@ def collect_schedule(race_dates: list[str], meets: list[int], page_size: int) ->
         ) as client,
         SessionLocal() as session,
     ):
+        gate_failures = 0
         for race_date in race_dates:
             for meet in meets:
+                meet_name = MEET_METADATA[meet][1]
                 summary = ingest_race_schedule(
                     session,
                     client,
@@ -191,25 +193,38 @@ def collect_schedule(race_dates: list[str], meets: list[int], page_size: int) ->
                 fetched = summary.records_fetched
                 if fetched:
                     print(
-                        f"일정 수집: 날짜={race_date}, 경마장={MEET_METADATA[meet][1]}, "
+                        f"일정 수집: 날짜={race_date}, 경마장={meet_name}, "
                         f"fetched={fetched}",
                         flush=True,
                     )
-                    gate_summary = ingest_gate_numbers(
-                        session,
-                        client,
-                        race_date=race_date,
-                        meet=meet,
-                        raw_data_dir=settings.raw_data_dir,
-                        page_size=page_size,
-                    )
-                    print(
-                        f"출발번호 확인: 날짜={race_date}, 경마장={MEET_METADATA[meet][1]}, "
-                        f"fetched={gate_summary.records_fetched}, "
-                        f"written={gate_summary.records_written}",
-                        flush=True,
-                    )
+                if summary.stages["entry_sheet"].records_written:
+                    try:
+                        gate_summary = ingest_gate_numbers(
+                            session,
+                            client,
+                            race_date=race_date,
+                            meet=meet,
+                            raw_data_dir=settings.raw_data_dir,
+                            page_size=page_size,
+                        )
+                    except (KraApiError, ValueError) as exc:
+                        gate_failures += 1
+                        print(
+                            f"출발번호 확인 실패: 날짜={race_date}, 경마장={meet_name} / {exc}",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                    else:
+                        print(
+                            f"출발번호 확인: 날짜={race_date}, 경마장={meet_name}, "
+                            f"fetched={gate_summary.records_fetched}, "
+                            f"written={gate_summary.records_written}",
+                            flush=True,
+                        )
                 session.expunge_all()
+    if gate_failures:
+        print(f"출발번호 확인 실패 {gate_failures}건", file=sys.stderr, flush=True)
+        return 1
     return 0
 
 

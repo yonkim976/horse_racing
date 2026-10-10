@@ -25,6 +25,16 @@
   requestAnimationFrame(revealActiveRoundChip);
   window.addEventListener("pageshow", revealActiveRoundChip);
 
+  root.addEventListener("click", (event) => {
+    const more = event.target.closest("[data-reason-more]");
+    if (!more) return;
+    const open = more.getAttribute("aria-expanded") !== "true";
+    more.setAttribute("aria-expanded", String(open));
+    more.closest(".mr-card, .ma-brief")?.classList.toggle("is-open", open);
+    more.querySelector("[data-more-closed]").hidden = open;
+    more.querySelector("[data-more-open]").hidden = !open;
+  });
+
   const form = root.querySelector("[data-auto-submit]");
   if (form) {
     form.addEventListener("change", (event) => {
@@ -112,9 +122,14 @@
   }
 
   root.addEventListener("click", (event) => {
-    const reason = event.target.closest("[data-open-reason]");
-    if (reason) {
-      openReason(Number(reason.dataset.openReason), reason);
+    const recordToggle = event.target.closest("[data-record-toggle]");
+    if (recordToggle) {
+      const item = recordToggle.closest(".ma-record");
+      const open = recordToggle.getAttribute("aria-expanded") !== "true";
+      recordToggle.setAttribute("aria-expanded", String(open));
+      item?.classList.toggle("is-open", open);
+      const detail = item?.querySelector("[data-record-detail]");
+      if (detail) detail.hidden = !open;
       return;
     }
     const select = event.target.closest("[data-select-runner]");
@@ -133,78 +148,4 @@
 
   selectRunner(selected);
   if (ids.includes(requested)) openRunner(requested, { scroll: true });
-
-  const reasonSheet = root.querySelector("[data-reason-sheet]");
-  const reasonNode = document.getElementById("ma-reason-data");
-  let reasons = {};
-  try {
-    reasons = JSON.parse(reasonNode?.textContent || "{}");
-  } catch (error) {
-    reasons = {};
-  }
-
-  let reasonTrigger = null;
-
-  function openReason(id, trigger) {
-    const item = reasons[String(id)];
-    if (!reasonSheet || !item) return;
-    reasonTrigger = trigger || null;
-    const number = reasonSheet.querySelector("[data-reason-num]");
-    const title = reasonSheet.querySelector("[data-reason-title]");
-    const sub = reasonSheet.querySelector("[data-reason-sub]");
-    const list = reasonSheet.querySelector("[data-reason-list]");
-    if (number) {
-      number.textContent = String(item.number);
-      number.className = `ma-reason-num silk-${item.number}`;
-    }
-    if (title) title.textContent = item.horse || "왜 이 확률";
-    if (sub) {
-      const bits = [
-        item.pct ? `3위 안 ${item.pct}` : "",
-        item.role && item.role !== "예측없음" ? item.role : "",
-      ].filter(Boolean);
-      sub.textContent = bits.join(" · ");
-    }
-    if (list) {
-      list.replaceChildren(...(item.lines || []).map((line) => {
-        const row = document.createElement("li");
-        row.textContent = line;
-        return row;
-      }));
-    }
-    reasonSheet.hidden = false;
-    document.body.classList.add("reason-open");
-    reasonSheet.querySelector(".ma-reason-close")?.focus();
-  }
-
-  function closeReason() {
-    if (!reasonSheet || reasonSheet.hidden) return;
-    reasonSheet.hidden = true;
-    document.body.classList.remove("reason-open");
-    reasonTrigger?.focus();
-    reasonTrigger = null;
-  }
-
-  reasonSheet?.querySelectorAll("[data-reason-close]").forEach((button) => {
-    button.addEventListener("click", closeReason);
-  });
-  document.addEventListener("keydown", (event) => {
-    if (!reasonSheet || reasonSheet.hidden) return;
-    if (event.key === "Escape") {
-      closeReason();
-      return;
-    }
-    if (event.key !== "Tab") return;
-    const focusable = [...reasonSheet.querySelectorAll("button:not([tabindex='-1'])")];
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  });
 })();

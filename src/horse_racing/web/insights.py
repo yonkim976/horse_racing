@@ -12,7 +12,7 @@ from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from datetime import date, timedelta
 from itertools import combinations
-from typing import Any
+from typing import Any, Literal, TypedDict
 from zoneinfo import ZoneInfo
 
 from sqlalchemy import case, func, select
@@ -285,16 +285,21 @@ def latest_win_probabilities(session: Session, race_ids: Sequence[int]) -> dict[
     }
 
 
-def explanation_sentence(name: str, direction: str) -> str:
-    """One plain line for a stored model contribution."""
-    verb = "올랐습니다" if direction == "positive" else "내렸습니다"
-    return f"{name} 때문에 확률이 {verb}"
+class ReasonLine(TypedDict):
+    """A reason shown under a runner; a plain dict so templates can ``tojson`` it."""
+
+    text: str
+    tone: Literal["up", "down", "fact"]
 
 
-def latest_runner_explanations(session: Session, race_id: int) -> dict[int, list[str]]:
+REASONS_PER_SIDE = 4
+
+
+def latest_runner_explanations(session: Session, race_id: int) -> dict[int, list[ReasonLine]]:
     """Reasons stored with the same run as :func:`latest_win_probabilities`, keyed by entry id.
 
-    Interpretable contributions only: two that raised the score, then one that lowered it.
+    Interpretable contributions only: the strongest few that raised the score, then the
+    strongest few that lowered it.
     """
     run_id = displayed_prediction_runs(session, [race_id]).get(race_id)
     if run_id is None:
@@ -304,7 +309,6 @@ def latest_runner_explanations(session: Session, race_id: int) -> dict[int, list
             ModelPrediction.race_entry_id,
             ModelPredictionExplanation.readable_feature_name,
             ModelPredictionExplanation.contribution_direction,
-            ModelPredictionExplanation.contribution_rank,
         )
         .join(
             ModelPredictionExplanation,
@@ -317,20 +321,20 @@ def latest_runner_explanations(session: Session, race_id: int) -> dict[int, list
         )
         .order_by(ModelPredictionExplanation.contribution_rank.asc())
     ).all()
-    grouped: dict[int, list[tuple[str, str, int]]] = defaultdict(list)
-    for entry_id, name, direction, rank in rows:
-        grouped[entry_id].append((direction, name, rank))
-    sentences: dict[int, list[str]] = {}
-    for entry_id, items in grouped.items():
-        positive = [item for item in items if item[0] == "positive"][:2]
-        negative = [item for item in items if item[0] == "negative"][:1]
-        lines = [
-            explanation_sentence(name, direction)
-            for direction, name, _rank in positive + negative
-        ]
-        if lines:
-            sentences[entry_id] = lines
-    return sentences
+    raised: dict[int, list[ReasonLine]] = defaultdict(list)
+    lowered: dict[int, list[ReasonLine]] = defaultdict(list)
+    for entry_id, name, direction in rows:
+        side = raised if direction == "positive" else lowered
+        if len(side[entry_id]) < REASONS_PER_SIDE and all(
+            line["text"] != name for line in side[entry_id]
+        ):
+            side[entry_id].append(
+                {"text": name, "tone": "up" if direction == "positive" else "down"}
+            )
+    return {
+        entry_id: raised.get(entry_id, []) + lowered.get(entry_id, [])
+        for entry_id in raised.keys() | lowered.keys()
+    }
 
 
 def win_probability_sort_key(

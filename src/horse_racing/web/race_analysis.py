@@ -6,6 +6,7 @@ No target-day result, training, trial or jockey performance is used as evidence.
 
 from __future__ import annotations
 
+import json
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date, timedelta
@@ -20,6 +21,7 @@ from horse_racing.db.models import (
     Horse,
     HorseStartTraining,
     HorseTraining,
+    IngestionRun,
     Jockey,
     Race,
     Racecourse,
@@ -28,6 +30,7 @@ from horse_racing.db.models import (
     RaceSectionResult,
     RunningTrial,
     RunningTrialResult,
+    SourceDocument,
     Trainer,
 )
 from horse_racing.web.analysis_archive import load_verified_archive
@@ -41,6 +44,7 @@ from horse_racing.web.formatting import (
     today_seoul,
 )
 from horse_racing.web.insights import (
+    ReasonLine,
     format_trial_form_token,
     format_win_pct,
     historical_prediction_races,
@@ -110,6 +114,8 @@ class PastStart:
     horse_number: int | None = None
     race_name: str = ""
     weather: str = ""
+    glance_tag: str = ""
+    promoted: bool = False
 
 
 @dataclass(slots=True)
@@ -183,7 +189,10 @@ class AnalysisRunner:
     result_label: str = "—"
     result_time: str = "—"
     finish_sort: int = 999
-    reason_lines: list[str] = field(default_factory=list)
+    reason_lines: list[ReasonLine] = field(default_factory=list)
+    body_weight_kg: int | None = None
+    body_weight_change_kg: int | None = None
+    field_size: int | None = None
 
 
 @dataclass(slots=True)
@@ -212,6 +221,7 @@ class RaceAnalysisPage:
     pace_summaries: list[dict[str, Any]] = field(default_factory=list)
     prediction_state: str | None = None
     prediction_historical: bool = False
+    gates_confirmed: bool = False
     candidate_count: int = 0
     prediction_count: int = 0
     prediction_groups: list[PredictionRunnerGroup] = field(default_factory=list)
@@ -337,6 +347,8 @@ def load_race_analysis_page(
                 Jockey.name_ko.label("jockey"),
                 Trainer.name_ko.label("trainer"),
                 RaceEntry.carried_weight_kg,
+                RaceEntry.body_weight_kg,
+                RaceEntry.body_weight_change_kg,
                 RaceEntry.rating,
                 RaceEntry.scratched,
                 RaceResult.finish_position,
@@ -356,6 +368,9 @@ def load_race_analysis_page(
     win_probs = latest_win_probabilities(session, [selected.id])
     explanations = latest_runner_explanations(session, selected.id)
     page.prediction_historical = bool(historical_prediction_races(session, [selected.id]))
+    page.gates_confirmed = official_gates_confirmed(
+        session, race_date=selected.date, meet_code=selected.meet_code
+    )
     horse_ids = [row["horse_id"] for row in entries]
     jockey_ids = list({row["jockey_id"] for row in entries if row["jockey_id"] is not None})
     histories, totals = _load_histories(
@@ -488,12 +503,10 @@ def load_race_analysis_page(
             result_label=result_label,
             result_time=format_race_time(entry["finish_time_ms"]),
             finish_sort=finish_sort,
+            body_weight_kg=entry["body_weight_kg"],
+            body_weight_change_kg=entry["body_weight_change_kg"],
+            field_size=selected.field_size,
         )
-        model_lines = explanations.get(entry["entry_id"], [])
-        if model_lines:
-            runner.reason_lines = model_lines
-        else:
-            runner.reason_lines = _record_reason_lines(runner)
         page.runners.append(runner)
         for item in history:
             page.rows.append(
@@ -511,6 +524,10 @@ def load_race_analysis_page(
                     **{code: item.sections.get(code, "—") for code in page.section_codes},
                 }
             )
+    for runner in page.runners:
+        runner.reason_lines = _ordered_reason_lines(
+            explanations.get(runner.entry_id) or _record_reason_lines(runner)
+        )
     page.pace = {
         "race": {
             "id": selected.id,
@@ -716,6 +733,8 @@ def _load_histories(session, horse_ids, cutoff, limit, *, start, end):
             Race.distance_m,
             Race.grade,
             Race.race_name,
+            Race.burden_type,
+            Race.newcomer_condition,
             Race.weather,
             Race.track_condition,
             Race.track_moisture_percent,
@@ -860,8 +879,11 @@ def _load_histories(session, horse_ids, cutoff, limit, *, start, end):
                 horse_number=row["horse_number"],
                 race_name=row["race_name"] or "",
                 weather=row["weather"] or "",
+                glance_tag=_glance_tag(row["newcomer_condition"], row["burden_type"]),
             )
         )
+    for starts in histories.values():
+        _mark_promotions(starts)
     return histories, totals
 
 
@@ -1161,6 +1183,7 @@ def _merge_archive(
                 if previous_date
                 else None
             )
+        _mark_promotions(combined)
         histories[horse_id] = combined[:history_limit]
         existing_trials = trial_keys.get(horse_id, set())
         extra_trials = []
@@ -1336,6 +1359,33 @@ def _archive_trial(row):
         form_token=format_trial_form_token(row.get("finish_position"), row.get("judgement")),
         weather=row.get("weather") or "",
     )
+
+
+def official_gates_confirmed(session: Session, *, race_date: str, meet_code: int) -> bool:
+    """Whether KRA API78 start-gate numbers were checked for this race day and meet.
+
+    The gate ingester aborts the whole run when any API78 gate differs from the stored
+    horse number, so a completed run that wrote rows means the stored gates are official.
+    """
+    day = race_date.replace("-", "")
+    params = session.scalars(
+        select(SourceDocument.request_params_json)
+        .join(IngestionRun, IngestionRun.id == SourceDocument.ingestion_run_id)
+        .where(
+            IngestionRun.data_type == "gate_entry_sheet",
+            IngestionRun.status == "completed",
+            IngestionRun.records_written > 0,
+            SourceDocument.request_params_json.contains(f'"race_dt":"{day}"'),
+        )
+    ).all()
+    for raw in params:
+        try:
+            request = json.loads(raw)
+        except ValueError:
+            continue
+        if str(request.get("race_dt")) == day and str(request.get("rccrs_cd")) == str(meet_code):
+            return True
+    return False
 
 
 def _record_form(
@@ -1704,58 +1754,328 @@ def _pace_style(samples):
     )
 
 
-_EMPTY_REASON = "최근 경주 기록이 아직 없습니다."
-_STYLE_REASON = {
-    "선행": "초반은 앞에서 이끄는 편",
-    "선입": "초반은 선두권",
-    "중단": "초반은 중위권",
-    "추입": "초반은 뒤에서 따라붙는 편",
-}
-_TRIAL_MARK = {"합": "합격", "불": "불합격", "연": "연습", "유": "유보"}
+_LONG_LAYOFF_DAYS = 90
 
 
-def _spoken_form_token(token: str) -> str:
-    mark = _TRIAL_MARK.get(token[-1:])
-    number = token[:-1] if mark else token
-    if number.isdigit():
-        place = f"{number}위"
-        return f"{place} {mark}" if mark else place
-    return mark or token
+def _parse_kg(value) -> float | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    text = str(value).lower().replace("kg", "").strip()
+    if not text or text == "—":
+        return None
+    try:
+        return float(text)
+    except ValueError:
+        return None
 
 
-def _record_reason_lines(runner: AnalysisRunner) -> list[str]:
-    """Plain record facts, used when a run has no stored contributions."""
-    lines: list[str] = []
-    if runner.form_tokens:
-        spoken = ", ".join(_spoken_form_token(token) for token in runner.form_tokens[:5])
-        if len(runner.form_tokens) > 1:
-            prefix = "심사" if runner.form_kind == "trial" else "최근부터"
-            lines.append(f"{prefix} {spoken}")
-        elif runner.form_kind == "trial":
-            lines.append(f"주행심사 {spoken}")
+def _gate_number(value) -> int | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    try:
+        return int(str(value).strip())
+    except ValueError:
+        return None
+
+
+def _gate_zone(gate: int | None, field_size: int | None) -> str | None:
+    if gate is None or field_size is None or field_size <= 1:
+        return None
+    ratio = (gate - 1) / (field_size - 1)
+    if ratio <= 0.33:
+        return "안쪽"
+    if ratio <= 0.66:
+        return "중간"
+    return "바깥"
+
+
+def _history_rows(runner: AnalysisRunner):
+    rows = []
+    for item in runner.history:
+        if isinstance(item, PastStart) or any(
+            hasattr(item, name)
+            for name in ("carried_weight", "body_weight", "early_normalized", "valid_finish")
+        ):
+            rows.append(item)
+    return rows
+
+
+def _line(text: str, tone: str) -> ReasonLine:
+    return {"text": text, "tone": tone}
+
+
+def _recent_form_lines(runner: AnalysisRunner) -> list[ReasonLine]:
+    metrics = runner.metrics
+    starts = metrics.get("normal_starts") or 0
+    rate = metrics.get("top3_rate")
+    top3 = round(rate * starts / 100) if starts and rate is not None else 0
+    lines: list[ReasonLine] = []
+    if starts and rate is not None:
+        if rate == 100:
+            lines.append(_line(f"최근 {starts}번 모두 3위 안", "up"))
+        elif rate >= 50:
+            lines.append(_line(f"최근 {starts}번 중 {top3}번 3위 안", "up"))
+        elif rate == 0:
+            lines.append(_line(f"최근 {starts}번 모두 3위 밖", "down"))
+        elif rate < 25:
+            lines.append(_line(f"최근 {starts}번 중 3위 안 {top3}번뿐", "down"))
         else:
-            lines.append(f"최근 성적 {spoken}")
-    starts = runner.metrics.get("normal_starts") or 0
-    top3_rate = runner.metrics.get("top3_rate")
-    if starts and top3_rate is not None:
-        if top3_rate == 0:
-            lines.append(f"최근 {starts}번, 3위 밖")
-        elif top3_rate == 100:
-            lines.append(f"최근 {starts}번, 모두 3위 안")
+            lines.append(_line(f"최근 {starts}번 중 3위 안 {top3}번", "fact"))
+    elif runner.form_kind == "trial":
+        passed = runner.form_tokens and runner.form_tokens[0].endswith("합")
+        lines.append(_line("최근 주행심사 합격" if passed else "최근 주행심사 기록", "down"))
+        lines.append(_line("정식 경주 첫 출전", "down"))
+    else:
+        lines.append(_line("최근 경주 기록 없음", "fact"))
+
+    finishes = metrics.get("recent_finishes") or []
+    if finishes:
+        last = finishes[0]
+        if last is None:
+            lines.append(_line("직전 경주 정상 완주 못 함", "down"))
+        elif last <= 3:
+            lines.append(_line(f"직전 경주 {last}위", "up"))
+        elif last >= 8:
+            lines.append(_line(f"직전 경주 {last}위", "down"))
         else:
-            lines.append(f"최근 {starts}번 중 3위 안 {top3_rate:g}%")
+            lines.append(_line(f"직전 경주 {last}위", "fact"))
+    layoff = metrics.get("days_since_last")
+    if layoff is not None:
+        if layoff >= _LONG_LAYOFF_DAYS:
+            lines.append(_line(f"{layoff // 30}개월 넘게 쉬고 출전", "down"))
+        else:
+            lines.append(_line(f"직전 출전 후 {layoff}일", "fact"))
+    return lines
+
+
+def _distance_line(runner: AnalysisRunner) -> ReasonLine:
+    rows = [
+        row
+        for row in runner.same_distance_history
+        if getattr(row, "valid_finish", False) or getattr(row, "finish_position", None) is not None
+    ]
+    valid = [row for row in rows if getattr(row, "valid_finish", False)]
+    if valid:
+        top3 = sum((getattr(row, "finish_position", None) or 99) <= 3 for row in valid)
+        rate = top3 / len(valid)
+        tone = "up" if rate >= 0.5 else "down" if top3 == 0 else "fact"
+        return _line(f"이 거리 {len(valid)}번 중 {top3}번 3위 안", tone)
+    if rows:
+        return _line(f"이 거리 {len(rows)}번 · 정상 완주 없음", "down")
     if runner.same_distance_starts:
-        best = runner.metrics.get("same_distance_best")
-        if best and best != "—":
-            lines.append(f"이 거리 {runner.same_distance_starts}번, 최고 {best}")
-        else:
-            lines.append(f"이 거리 {runner.same_distance_starts}번")
-    elif runner.style and runner.style != "자료 부족":
-        fallback = f"초반은 {runner.style}"
-        lines.append(_STYLE_REASON.get(runner.style, fallback))
-    if not lines:
-        lines.append(_EMPTY_REASON)
-    return lines[:3]
+        return _line(f"이 거리 경험 {runner.same_distance_starts}번", "fact")
+    return _line("이 거리 첫 출전", "down")
+
+
+def _jockey_lines(runner: AnalysisRunner, rows) -> list[ReasonLine]:
+    name = runner.jockey or "미정"
+    if name == "미정":
+        return [_line("기수 미정", "fact")]
+    last = next(
+        (
+            getattr(row, "jockey", None)
+            for row in rows
+            if getattr(row, "jockey", None) not in (None, "", "—")
+        ),
+        None,
+    )
+    changed = last is not None and last != name
+    pair = runner.combination_stats or {}
+    stats = runner.jockey_stats or {}
+    pair_starts = pair.get("starts") or 0
+    pair_top = pair.get("top3") or 0
+    year_starts = stats.get("starts") or 0
+    year_rate = stats.get("top3_rate")
+    head = (
+        f"기수 변경 {name}" if changed else f"기수 {name} 유지" if last else f"기수 {name}"
+    )
+    pair_text = (
+        f"함께 {pair_starts}번 중 {pair_top}번 3위 안" if pair_starts else "함께 뛴 기록 없음"
+    )
+    year_text = (
+        f"최근 1년 {year_starts}번 중 3위 안 {year_rate:g}%"
+        if year_starts and year_rate is not None
+        else "최근 1년 성적 없음"
+    )
+    if pair_starts and pair_top / pair_starts >= 0.5:
+        pair_tone = "up"
+    elif changed and not pair_starts:
+        pair_tone = "down"
+    else:
+        pair_tone = "fact"
+    if year_starts and year_rate is not None and year_rate >= 40:
+        year_tone = "up"
+    elif year_starts and year_rate is not None and year_rate < 15:
+        year_tone = "down"
+    else:
+        year_tone = "fact"
+    return [
+        _line(head, "fact"),
+        _line(pair_text, pair_tone),
+        _line(year_text, year_tone),
+    ]
+
+
+def _carried_weight_line(runner: AnalysisRunner, rows) -> ReasonLine:
+    current = _parse_kg(runner.weight)
+    if current is None:
+        return _line("부담중량 미정", "fact")
+    previous = next(
+        (
+            _parse_kg(getattr(row, "carried_weight", None))
+            for row in rows
+            if _parse_kg(getattr(row, "carried_weight", None)) is not None
+        ),
+        None,
+    )
+    text = f"부담 {current:g}kg"
+    if previous is None:
+        return _line(f"{text} · 직전 부담 없음", "fact")
+    delta = current - previous
+    if abs(delta) < 0.05:
+        return _line(f"{text} · 직전과 같음", "fact")
+    amount = f"{abs(delta):g}kg"
+    if delta < 0:
+        tone = "up" if abs(delta) >= 2 else "fact"
+        return _line(f"{text} · 직전보다 {amount} 가벼움", tone)
+    tone = "down" if delta >= 2 else "fact"
+    return _line(f"{text} · 직전보다 {amount} 무거움", tone)
+
+
+def _gate_lines(runner: AnalysisRunner, rows) -> list[ReasonLine]:
+    gate = _gate_number(runner.gate)
+    head = f"게이트 {gate}" if gate is not None else "게이트 미확정"
+    last_gate = next(
+        (
+            _gate_number(getattr(row, "gate", None))
+            for row in rows
+            if _gate_number(getattr(row, "gate", None)) is not None
+        ),
+        None,
+    )
+    if last_gate is not None:
+        head = f"{head} · 직전 게이트 {last_gate}"
+    lines = [_line(head, "fact")]
+    buckets = {"안쪽": [0, 0], "중간": [0, 0], "바깥": [0, 0]}
+    for row in rows:
+        if not getattr(row, "valid_finish", False):
+            continue
+        zone = _gate_zone(
+            _gate_number(getattr(row, "gate", None)), getattr(row, "field_size", None)
+        )
+        if zone is None:
+            continue
+        buckets[zone][0] += 1
+        if (getattr(row, "finish_position", None) or 99) <= 3:
+            buckets[zone][1] += 1
+    if not any(count for count, _top in buckets.values()):
+        lines.append(_line("과거 게이트 성적 없음", "fact"))
+        return lines
+    today = _gate_zone(gate, runner.field_size)
+    today_rate = None
+    if today and buckets[today][0]:
+        today_rate = buckets[today][1] / buckets[today][0]
+    others = [top / count for name, (count, top) in buckets.items() if name != today and count]
+    for name, (count, top) in buckets.items():
+        tone = "fact"
+        if name == today and today_rate is not None and others:
+            if today_rate >= max(others) and today_rate >= 0.5:
+                tone = "up"
+            elif today_rate <= min(others) and today_rate < 0.5:
+                tone = "down"
+        lines.append(_line(f"{name} {count}번 중 {top}번 3위 안", tone))
+    return lines
+
+
+def _body_weight_lines(runner: AnalysisRunner, rows) -> list[ReasonLine]:
+    weight = runner.body_weight_kg
+    if weight is None:
+        missing = "체중 계체 전" if runner.state == "출전 예정" else "당일 체중 기록 없음"
+        return [_line(missing, "fact")]
+    change = runner.body_weight_change_kg
+    if change is None:
+        previous = next(
+            (
+                _parse_kg(getattr(row, "body_weight", None))
+                for row in rows
+                if _parse_kg(getattr(row, "body_weight", None)) is not None
+            ),
+            None,
+        )
+        if previous is not None:
+            change = int(round(weight - previous))
+    lines = [_line(f"체중 {weight}kg", "fact")]
+    if change is None:
+        lines.append(_line("직전 체중 없음", "fact"))
+    elif change == 0:
+        lines.append(_line("직전과 같음", "fact"))
+    elif change > 0:
+        lines.append(_line(f"{change}kg 증가", "down" if change >= 10 else "fact"))
+    else:
+        lines.append(_line(f"{abs(change)}kg 감소", "down" if change <= -10 else "fact"))
+    placed = []
+    for row in rows:
+        placed_finish = (getattr(row, "finish_position", None) or 99) <= 3
+        kg = _parse_kg(getattr(row, "body_weight", None))
+        if getattr(row, "valid_finish", False) and placed_finish and kg is not None:
+            placed.append(kg)
+    if placed and any(abs(weight - kg) <= 4 for kg in placed):
+        lines.append(_line("입상했던 체중과 비슷", "up"))
+    return lines
+
+
+def _section_lines(rows) -> list[ReasonLine]:
+    groups = {"선행": [0, 0], "중간": [0, 0], "추입": [0, 0]}
+    for row in rows:
+        if not getattr(row, "valid_finish", False):
+            continue
+        position = getattr(row, "early_normalized", None)
+        if position is None:
+            continue
+        name = "선행" if position <= 0.33 else "중간" if position <= 0.66 else "추입"
+        groups[name][0] += 1
+        if (getattr(row, "finish_position", None) or 99) <= 3:
+            groups[name][1] += 1
+    if not any(count for count, _top in groups.values()):
+        return [_line("구간 통과순위 없음", "fact")]
+    rates = [top / count for count, top in groups.values() if count]
+    best = max(rates)
+    lines = []
+    for name, (count, top) in groups.items():
+        tone = "fact"
+        if count and best >= 0.5 and best > min(rates) and top / count == best:
+            tone = "up"
+        elif count and best == 0:
+            tone = "down"
+        lines.append(_line(f"{name} {count}번 중 {top}번 3위 안", tone))
+    return lines
+
+
+def _ordered_reason_lines(lines: list[ReasonLine]) -> list[ReasonLine]:
+    order = {"up": 0, "down": 1, "fact": 2}
+    return sorted(lines, key=lambda line: order.get(line["tone"], 3))
+
+
+def _record_reason_lines(runner: AnalysisRunner) -> list[ReasonLine]:
+    """One line each for form, distance, jockey, weight, gate, body and section.
+
+    A factor is still stated when the change is small or the record is missing.
+    Good points come first, then weak points, then unmarked records.
+    """
+    rows = _history_rows(runner)
+    return _ordered_reason_lines(
+        [
+            *_recent_form_lines(runner),
+            _distance_line(runner),
+            *_jockey_lines(runner, rows),
+            _carried_weight_line(runner, rows),
+            *_gate_lines(runner, rows),
+            *_body_weight_lines(runner, rows),
+            *_section_lines(rows),
+        ]
+    )
 
 
 def _metrics(history, distance, meet, cutoff, distance_stats):
@@ -1796,6 +2116,49 @@ def _metrics(history, distance, meet, cutoff, distance_stats):
         result[f"avg_{code.lower()}_samples"] = len(values)
     result["s1f_distance_m"] = expected_s1f
     return result
+
+
+def _glance_tag(newcomer: str | None, burden: str | None) -> str:
+    """One short race-condition word for the collapsed record row."""
+    tag = (newcomer or "").strip()
+    if tag:
+        return tag
+    burden = (burden or "").strip()
+    if burden.startswith("별정"):
+        return "별정"
+    if burden == "핸디캡":
+        return "핸디"
+    if burden == "마령":
+        return "마령"
+    return ""
+
+
+def _grade_level(grade: str) -> tuple[str, int] | None:
+    """Class series and rank. A smaller rank is a higher class. OPEN is 0."""
+    text = (grade or "").replace(" ", "")
+    if text.endswith("등급"):
+        body = text[:-2]
+    elif text.endswith("OPEN"):
+        prefix = text[:-4]
+        return (prefix, 0) if prefix in {"", "국", "혼", "제"} else None
+    else:
+        return None
+    prefix = body[:1] if body[:1] in {"국", "혼", "제"} else ""
+    number = body[1:] if prefix else body
+    if not number.isdigit():
+        return None
+    return prefix, int(number)
+
+
+def _mark_promotions(starts: list[PastStart]) -> None:
+    """Mark a start when its class is higher than the chronologically previous start."""
+    for start in starts:
+        start.promoted = False
+    for newer, older in zip(starts, starts[1:]):
+        current = _grade_level(newer.grade)
+        previous = _grade_level(older.grade)
+        if current and previous and current[0] == previous[0] and current[1] < previous[1]:
+            newer.promoted = True
 
 
 def _condition(weather: str | None, track: str | None, moisture: float | None) -> str:

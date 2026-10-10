@@ -9,6 +9,7 @@ import pytest
 from alembic import command
 from alembic.config import Config
 from fastapi.testclient import TestClient
+from sqlalchemy import select
 from sqlalchemy.orm import Session, sessionmaker
 
 from horse_racing.db.engine import create_engine_for_url
@@ -19,6 +20,7 @@ from horse_racing.db.models import (
     HorseRatingSnapshot,
     HorseTraining,
     HorseWeightHistory,
+    IngestionRun,
     Jockey,
     ModelPrediction,
     ModelPredictionExplanation,
@@ -34,11 +36,11 @@ from horse_racing.db.models import (
     RaceSectionResult,
     RunningTrial,
     RunningTrialResult,
+    SourceDocument,
     Trainer,
 )
 from horse_racing.web.app import asset_version, create_app
 from horse_racing.web.insights import (
-    explanation_sentence,
     latest_runner_explanations,
     latest_win_probabilities,
 )
@@ -1294,13 +1296,6 @@ def test_tablets_keep_desktop_pages_while_android_phones_use_mobile(tmp_path: Pa
         }
 
 
-def test_explanation_sentence_states_the_direction() -> None:
-    raised = explanation_sentence("부담중량", "positive")
-    lowered = explanation_sentence("최근 출전 간격", "negative")
-    assert raised == "부담중량 때문에 확률이 올랐습니다"
-    assert lowered == "최근 출전 간격 때문에 확률이 내렸습니다"
-
-
 def _add_explained_run(
     session: Session,
     *,
@@ -1309,6 +1304,7 @@ def _add_explained_run(
     published_at_ms: int,
     prob_top3: float,
     reason: str | None,
+    lowering_reason: str | None = None,
 ) -> None:
     run = PredictionRun(
         public_id=public_id,
@@ -1347,6 +1343,20 @@ def _add_explained_run(
                 contribution_direction="positive",
                 contribution_value=0.5,
                 contribution_rank=1,
+                explanation_type="interpretable",
+                explanation_method="tree_shap",
+            )
+        )
+    if lowering_reason is not None:
+        session.add(
+            ModelPredictionExplanation(
+                model_prediction_id=prediction.id,
+                feature_name="lowering_feature",
+                readable_feature_name=lowering_reason,
+                feature_value_json="1",
+                contribution_direction="negative",
+                contribution_value=-0.4,
+                contribution_rank=2,
                 explanation_type="interpretable",
                 explanation_method="tree_shap",
             )
@@ -1482,12 +1492,148 @@ def test_mobile_reasons_page_lists_why_each_probability(
     assert 'href="/reasons?race_id=1"' in page.text
     assert 'aria-current="page"' in page.text
     tabbar = page.text.split('class="mobile-tabbar"', 1)[1].split("</nav>", 1)[0]
-    assert ">이유<" in tabbar
+    assert ">말 풀이<" in tabbar
+    assert "<title>2026.08.21 제주 1R 말 풀이 · 마필로그 Mapilog</title>" in page.text
     assert desktop.status_code == 200
     assert "2026.08.21 제주 1R" in desktop.text
     assert "왜 이 확률" not in desktop.text
     assert "3위 안에 들 확률을 이렇게 본 이유입니다." not in desktop.text
     assert "mobile-tabbar" not in desktop.text
+
+
+def test_mobile_reasons_split_good_and_weak_model_points(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        _add_explained_run(
+            session,
+            public_id="55555555-5555-5555-5555-555555555555",
+            mode="live",
+            published_at_ms=session.get(PredictionRun, 1).published_at_ms + 1,
+            prob_top3=0.5,
+            reason="최근 같은 거리 성적",
+            lowering_reason="부담중량",
+        )
+    app = create_app(factory)
+
+    with TestClient(app) as client:
+        mobile = client.get("/reasons?race_id=1", headers=PHONE_HEADERS)
+        desktop = client.get("/reasons?race_id=1")
+        sheet = client.get("/races/1", headers=PHONE_HEADERS)
+
+    good = '<li data-tone="up">최근 같은 거리 성적</li>'
+    weak = '<li data-tone="down">부담중량</li>'
+    for page in (mobile, desktop):
+        assert good in page.text
+        assert weak in page.text
+        assert page.text.index(good) < page.text.index(weak)
+    assert good not in sheet.text
+    assert weak not in sheet.text
+    assert "/js/mobile-analysis.js" in mobile.text
+    assert "data-analysis-page" in mobile.text
+
+
+def test_mobile_reasons_collapse_extra_points_behind_a_button(tmp_path: Path) -> None:
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        _add_explained_run(
+            session,
+            public_id="55555555-5555-5555-5555-555555555555",
+            mode="live",
+            published_at_ms=session.get(PredictionRun, 1).published_at_ms + 1,
+            prob_top3=0.5,
+            reason="최근 같은 거리 성적",
+            lowering_reason="부담중량",
+        )
+        prediction = session.scalars(
+            select(ModelPrediction).order_by(ModelPrediction.id.desc())
+        ).first()
+        for rank, name in enumerate(["기수 입상률", "직전 경주 순위"], start=2):
+            session.add(
+                ModelPredictionExplanation(
+                    model_prediction_id=prediction.id,
+                    feature_name=f"feature_{rank}",
+                    readable_feature_name=name,
+                    feature_value_json="1",
+                    contribution_direction="positive",
+                    contribution_value=0.1,
+                    contribution_rank=rank,
+                    explanation_type="interpretable",
+                    explanation_method="tree_shap",
+                )
+            )
+        session.commit()
+    app = create_app(factory)
+
+    with TestClient(app) as client:
+        page = client.get("/reasons?race_id=1", headers=PHONE_HEADERS)
+
+    card = page.text.split('id="mr-lines-1"', 1)[1].split("</ul>", 1)[0]
+    assert card.count('data-tone="up"') == 3
+    assert card.count('data-tone="down"') == 1
+    assert "좋은 점 2 더 보기" in page.text
+    assert 'aria-controls="mr-lines-1"' in page.text
+
+
+def _add_gate_check(session: Session, *, race_dt: str, meet: int, status: str) -> None:
+    run = IngestionRun(
+        source="data.go.kr/B551015/API78",
+        data_type="gate_entry_sheet",
+        started_at_ms=1,
+        completed_at_ms=2,
+        status=status,
+        records_fetched=1,
+        records_written=1 if status == "completed" else 0,
+    )
+    session.add(run)
+    session.flush()
+    session.add(
+        SourceDocument(
+            ingestion_run_id=run.id,
+            source_url=f"https://example.test/api78/{run.id}",
+            operation="chulmainfo",
+            request_params_json=f'{{"pageNo":1,"race_dt":"{race_dt}","rccrs_cd":{meet}}}',
+            requested_at_ms=1,
+            retrieved_at_ms=2,
+            local_path="raw/api78.json",
+            sha256="c" * 64,
+        )
+    )
+    session.commit()
+
+
+def test_mobile_analysis_omits_gate_badge_on_horse_row(tmp_path: Path) -> None:
+    for name in ("unchecked", "checked"):
+        (tmp_path / name).mkdir()
+    unchecked = seeded_session(tmp_path / "unchecked")
+    with unchecked() as session:
+        _add_gate_check(session, race_dt="20260821", meet=2, status="failed")
+        _add_gate_check(session, race_dt="20260821", meet=1, status="completed")
+    checked = seeded_session(tmp_path / "checked")
+    with checked() as session:
+        for entry in session.scalars(select(RaceEntry)):
+            entry.gate_number = entry.horse_number
+        _add_gate_check(session, race_dt="20260821", meet=2, status="completed")
+
+    with TestClient(create_app(unchecked)) as client:
+        before = client.get("/races/1", headers=PHONE_HEADERS)
+    with TestClient(create_app(checked)) as client:
+        after = client.get("/races/1", headers=PHONE_HEADERS)
+
+    assert 'class="ma-gate"' not in before.text
+    assert 'class="ma-gate"' not in after.text
+    assert "GATE " not in after.text
+
+
+def test_desktop_reasons_page_groups_races_by_meet(tmp_path: Path) -> None:
+    app = create_app(seeded_session(tmp_path))
+
+    with TestClient(app) as client:
+        page = client.get("/reasons?race_id=1")
+
+    nav = page.text.split('class="reason-board-races"', 1)[1].split("</nav>", 1)[0]
+    assert '<span class="reason-board-meet-name">제주</span>' in nav
+    assert 'href="/reasons?race_id=1" aria-current="page"' in nav
+    assert 'class="reason-board-back"' in page.text
 
 
 def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
@@ -1541,9 +1687,15 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert ">1:15.2<" in page.text
     assert "예상 순위" not in page.text
     assert 'data-runner-card aria-expanded="false"' in page.text
-    assert 'data-open-reason="' in page.text
-    assert 'data-reason-sheet' in page.text
+    assert 'data-open-reason="' not in page.text
+    assert 'data-reason-sheet' not in page.text
+    assert 'class="ma-why"' in page.text
     assert "왜 이 확률" in page.text
+    assert 'class="ma-brief"' not in page.text
+    assert "좋은 점" not in page.text
+    assert "아쉬운 점" not in page.text
+    assert 'data-record-toggle' in page.text
+    assert 'data-place="up"' in page.text
     assert 'class="ma-record-store" data-record-store hidden' in page.text
     assert 'id="runner-details-1"' in page.text
     assert "최근 기록 1" in page.text
@@ -1560,6 +1712,11 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert "26.8.13" in page.text
     assert 'class="ma-record-head"' in page.text
     assert 'class="ma-record-meta"' in page.text
+    record_head = page.text.split('class="ma-record-head"', 1)[1].split("data-record-detail", 1)[0]
+    assert 'class="ma-record-splits"' in record_head
+    assert ">S1F</small><strong>18.1</strong>" in record_head
+    assert ">G3F</small><strong>49.0</strong>" in record_head
+    assert ">G1F</small><strong>17.1</strong>" in record_head
     assert 'class="ma-record-condition"' in page.text
     assert 'class="ma-record-video"' in page.text
     assert ">영상</a>" in page.text

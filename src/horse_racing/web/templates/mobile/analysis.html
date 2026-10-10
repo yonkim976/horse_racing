@@ -24,6 +24,27 @@
 {%- set cell = record.section_details.get(code, {}) -%}
 {%- if cell.get("time_ms") -%}{{ cell.get("time") }}{%- else -%}—{%- endif -%}
 {%- endmacro %}
+{% macro split_number(record, code) -%}
+{%- set raw = split_time(record, code) -%}
+{%- if raw.endswith("초") -%}{{ raw[:-1] }}{%- else -%}{{ raw }}{%- endif -%}
+{%- endmacro %}
+{% macro record_splits(record) -%}
+<span class="ma-record-splits" aria-label="구간별 기록">{% for code in ["S1F", "G3F", "G1F"] %}<span><small>{{ code }}</small><strong>{{ split_number(record, code) }}</strong></span>{% endfor %}</span>
+{%- endmacro %}
+{% macro finish_place(sort) -%}
+{%- if sort <= 3 -%}up{%- elif sort <= 7 -%}fact{%- else -%}down{%- endif -%}
+{%- endmacro %}
+{% macro token_place(token) -%}
+{%- set raw = token[:-1] if token.endswith("합") else token -%}
+{%- if raw.isdigit() and raw|int <= 3 -%}up{%- elif raw.isdigit() and raw|int <= 7 -%}fact{%- else -%}down{%- endif -%}
+{%- endmacro %}
+{% macro trial_place(trial) -%}
+{%- set raw = trial.finish[:-1] if trial.finish.endswith("위") else "" -%}
+{%- if raw.isdigit() -%}{{ finish_place(raw|int) }}
+{%- elif trial.judgement == "합격" -%}up
+{%- elif trial.judgement in ["불합격", "주행중지"] -%}down
+{%- else -%}fact{%- endif -%}
+{%- endmacro %}
 {% macro record_video(url, title) -%}
 {%- if url -%}<a class="ma-record-video" href="{{ url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ title }} 영상 보기">영상</a>{%- endif -%}
 {%- endmacro %}
@@ -41,45 +62,50 @@
     {% endfor %}
     {% if not ns.count %}<span class="ma-record-section-empty">통과순위 자료 없음</span>{% endif %}
   </div>
-  <div class="ma-record-section-row ma-record-section-times" aria-label="구간별 기록">
-    <span><small>S1F</small><strong>{{ split_time(record, "S1F") }}</strong></span>
-    <span><small>G3F</small><strong>{{ split_time(record, "G3F") }}</strong></span>
-    <span><small>G1F</small><strong>{{ split_time(record, "G1F") }}</strong></span>
-  </div>
 </div>
 {%- endmacro %}
+{% macro glance_grade(past) -%}
+{%- set label = compact_grade(past.grade) -%}
+{%- if label -%}{{ label }}{% if past.promoted %}승{% endif %}{%- endif -%}
+{%- endmacro %}
 {% macro race_record(past) -%}
-<li data-history-distance="{{ past.distance }}">
+<li class="ma-record" data-place="{{ finish_place(past.finish_sort) }}" data-history-distance="{{ past.distance }}">
   <div class="ma-record-head">
-    <div class="ma-record-head-copy">
-      <p class="ma-record-meta">{{ short_date(past.date) }} · {{ past.meet }} {{ past.race_number }}R{% if past.grade and past.grade != "—" %} · {{ compact_grade(past.grade) }}{% endif %} · {{ past.distance }}m</p>
-      {% if past.condition and past.condition != "—" %}<p class="ma-record-condition">{{ past.condition }}</p>{% endif %}
-    </div>
-    {{ record_video(past.video_url, past.meet ~ ' ' ~ past.race_number ~ 'R') }}
+    <button type="button" class="ma-record-toggle" data-record-toggle aria-expanded="false">
+      <b class="ma-place">{{ past.finish }}</b>
+      <span class="ma-record-line"><span class="ma-record-facts">{{ short_date(past.date) }}{% set grade = glance_grade(past) %}{% if grade %} · {{ grade }}{% endif %}{% if past.jockey and past.jockey != "—" %} · {{ past.jockey }}{% endif %} · {{ past.distance }}m{% if past.horse_number %} · <span class="ma-record-num" aria-label="마번 {{ past.horse_number }}"><small>마번</small> {{ past.horse_number }}</span>{% endif %}{% if past.field_size %} · 출전 {{ past.field_size }}두{% endif %}{% if "함수율" in past.condition %} · 함수율 {{ past.condition.split("함수율")[-1].strip() }}{% endif %}</span>{{ record_splits(past) }}</span>
+    </button>
   </div>
-  <p class="ma-record-result">
-    <strong>{{ past.jockey }}</strong>
-    <span>{{ past.finish }}{% if past.field_size %} · {{ past.field_size }}두{% endif %}</span>
-    <b>{{ past.time }}</b>
-  </p>
-  {{ record_sections(past) }}
+  <div data-record-detail hidden>
+    <p class="ma-record-result">
+      <strong>{{ past.jockey }}</strong>
+      <span>{{ past.meet }} {{ past.race_number }}R{% if past.grade and past.grade != "—" %} · {{ compact_grade(past.grade) }}{% endif %}{% if past.field_size %} · {{ past.field_size }}두{% endif %}</span>
+      <b>{{ past.time }}</b>
+      {{ record_video(past.video_url, past.meet ~ ' ' ~ past.race_number ~ 'R') }}
+    </p>
+    {% if past.condition and past.condition != "—" %}<p class="ma-record-condition">{{ past.condition }}</p>{% endif %}
+    {{ record_sections(past) }}
+  </div>
 </li>
 {%- endmacro %}
 {% macro trial_record(trial) -%}
-<li data-history-distance="{{ trial.distance }}">
+<li class="ma-record" data-place="{{ trial_place(trial) }}" data-history-distance="{{ trial.distance }}">
   <div class="ma-record-head">
-    <div class="ma-record-head-copy">
-      <p class="ma-record-meta">{{ short_date(trial.date) }} · {{ trial.meet }} 주행심사 {{ trial.number }}차 · {{ trial.distance }}m</p>
-      {% if trial.condition and trial.condition != "—" %}<p class="ma-record-condition">{{ trial.condition }}</p>{% endif %}
-    </div>
-    {{ record_video(trial.video_url, trial.meet ~ ' 주행심사 ' ~ trial.number ~ '차') }}
+    <button type="button" class="ma-record-toggle" data-record-toggle aria-expanded="false">
+      <b class="ma-place">{{ trial.finish }}</b>
+      <span class="ma-record-line"><span class="ma-record-meta" aria-label="{{ short_date(trial.date) }} · 주행심사 {{ trial.number }}차">{{ short_date(trial.date) }} · 심{{ trial.number }}</span><span class="ma-record-pace"><b>{{ trial.distance }}m</b>{{ record_splits(trial) }}</span></span>
+    </button>
   </div>
-  <p class="ma-record-result">
-    <strong>{{ trial.jockey }}</strong>
-    <span>{{ trial.finish }}{% if trial.judgement %} · {{ trial.judgement }}{% endif %}</span>
-    <b>{{ trial.time }}</b>
-  </p>
-  {{ record_sections(trial) }}
+  <div data-record-detail hidden>
+    <p class="ma-record-result">
+      <strong>{{ trial.jockey }}</strong>
+      <span>주행심사 {{ trial.number }}차{% if trial.judgement %} · {{ trial.judgement }}{% endif %}</span>
+      <b>{{ trial.time }}</b>
+      {{ record_video(trial.video_url, trial.meet ~ ' 주행심사 ' ~ trial.number ~ '차') }}
+    </p>
+    {% if trial.condition and trial.condition != "—" %}<p class="ma-record-condition">{{ trial.condition }}</p>{% endif %}
+    {{ record_sections(trial) }}
+  </div>
 </li>
 {%- endmacro %}
 {% macro runner_row(runner) -%}
@@ -91,28 +117,29 @@
       <span class="ma-horse-name">
         <strong>{{ runner.horse }}</strong>
       </span>
-      <span>{{ runner.jockey }} · {{ runner.weight }}</span>
+      <span class="ma-horse-meta">{{ runner.jockey }} · {{ runner.weight }}</span>
       <span class="ma-form">
-        {% if runner.form_kind == "trial" %}심사 {{ runner.form_tokens|join("-") }}
-        {% elif runner.form_tokens %}최근 {{ runner.form_tokens|join("-") }}
+        {% if runner.form_kind == "trial" %}심사
+        {% elif runner.form_tokens %}최근
         {% else %}최근 착순 없음{% endif %}
+        {% for token in runner.form_tokens %}<b data-place="{{ token_place(token) }}">{{ token }}</b>{% endfor %}
       </span>
       {% if runner.state == '경주 완료' and runner.win_pct %}<span class="ma-result-prediction">예측 {{ runner.win_pct }}{% if runner.win_label %} · {{ role_name(runner.win_label) }}{% endif %}</span>{% endif %}
       {% if runner.state == '출전취소' %}<span class="ma-scratch-label">출전 취소</span>{% endif %}
     </span>
-  </button>
-  <button type="button" class="ma-why" data-open-reason="{{ runner.entry_id }}" aria-label="{{ runner.number }}번 {{ runner.horse }} 확률을 이렇게 본 이유">
-    {% if runner.state == '경주 완료' and runner.result_label != '—' %}
-    <span class="ma-win-block ma-result-block">
-      <span class="ma-win-pct">{{ runner.result_label }}</span>
-      <span class="ma-win-role">{{ runner.result_time }}</span>
+    <span class="ma-why">
+      {% if runner.state == '경주 완료' and runner.result_label != '—' %}
+      <span class="ma-win-block ma-result-block">
+        <span class="ma-win-pct">{{ runner.result_label }}</span>
+        <span class="ma-win-role">{{ runner.result_time }}</span>
+      </span>
+      {% else %}
+      <span class="ma-win-block" data-role="{{ role_name(runner.win_label) }}">
+        <span class="ma-win-pct" title="3위 안 입상 확률">{{ runner.win_pct or '00%' }}</span>
+        <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
+      </span>
+      {% endif %}
     </span>
-    {% else %}
-    <span class="ma-win-block" data-role="{{ role_name(runner.win_label) }}">
-      <span class="ma-win-pct" title="3위 안 입상 확률">{{ runner.win_pct or '00%' }}</span>
-      <span class="ma-win-role">{{ role_name(runner.win_label) }}</span>
-    </span>
-    {% endif %}
   </button>
 </div>
 {%- endmacro %}
@@ -284,32 +311,6 @@
       </div>
     </article>
     {% endfor %}
-  </div>
-  <script type="application/json" id="ma-reason-data">{
-  {%- for runner in page.runners %}
-  "{{ runner.entry_id }}": {{ {
-    "number": runner.number,
-    "horse": runner.horse,
-    "pct": runner.win_pct or "",
-    "role": role_name(runner.win_label) if runner.win_label else "",
-    "lines": runner.reason_lines
-  } | tojson }}{% if not loop.last %},{% endif %}
-  {%- endfor %}
-  }</script>
-  <div class="ma-reason-sheet" data-reason-sheet hidden>
-    <button type="button" class="ma-reason-backdrop" data-reason-close tabindex="-1" aria-label="이유 닫기"></button>
-    <div class="ma-reason-panel" role="dialog" aria-modal="true" aria-labelledby="ma-reason-title">
-      <div class="ma-reason-handle" aria-hidden="true"></div>
-      <header class="ma-reason-head">
-        <span class="ma-reason-num" data-reason-num></span>
-        <div>
-          <h2 id="ma-reason-title" data-reason-title>왜 이 확률</h2>
-          <p data-reason-sub></p>
-        </div>
-        <button type="button" class="ma-reason-close" data-reason-close>닫기</button>
-      </header>
-      <ul class="ma-reason-list" data-reason-list></ul>
-    </div>
   </div>
   {% else %}
   <div class="mobile-empty">

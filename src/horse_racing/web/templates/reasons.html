@@ -1,5 +1,5 @@
 {% extends layout %}
-{% block title %}{% if page.selected_race %}{{ race_heading(page.selected_race) }}{% else %}이유{% endif %} · 마필로그 Mapilog{% endblock %}
+{% block title %}{% if page.selected_race %}{{ race_heading(page.selected_race) }} 말 풀이{% else %}말 풀이{% endif %} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}출전마가 3위 안에 들 확률을 이렇게 본 이유를 경주별로 확인합니다.{% endblock %}
 
 {% macro race_heading(race) -%}
@@ -12,30 +12,41 @@
 {% block content %}
 <section class="reason-board">
   <header class="reason-board-intro">
-    <h1 class="reason-board-heading">{% if page.selected_race %}{% if page.selected_race.date and page.selected_race.date|length >= 10 %}<span class="reason-board-when">{{ page.selected_race.date[0:4] }}.{{ page.selected_race.date[5:7] }}.{{ page.selected_race.date[8:10] }}</span>{% endif %}<span>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</span>{% else %}이유{% endif %}</h1>
+    <a class="reason-board-back" href="{% if page.selected_race %}/analysis?race_id={{ page.selected_race.id }}{% else %}/analysis{% endif %}">← 경주 분석</a>
+    <h1 class="reason-board-heading">{% if page.selected_race %}{% if page.selected_race.date and page.selected_race.date|length >= 10 %}<span class="reason-board-when">{{ page.selected_race.date[0:4] }}.{{ page.selected_race.date[5:7] }}.{{ page.selected_race.date[8:10] }}</span>{% endif %}<span>{{ page.selected_race.meet }} {{ page.selected_race.number }}R</span>{% else %}말 풀이{% endif %}</h1>
     {% if page.selected_race %}
-    <p>{{ page.selected_race.distance }}m · {{ page.selected_race.field_size }}두</p>
+    <p>{% if page.selected_race.start_time %}{{ page.selected_race.start_time }} · {% endif %}{{ page.selected_race.distance }}m · {{ page.selected_race.field_size }}두</p>
     {% if page.prediction_historical %}
     <p class="reason-board-historical"><strong>과거 검증</strong> 경주 전에 공개한 예측이 아니라 과거 자료로 다시 계산한 확률입니다.</p>
     {% endif %}
     {% endif %}
-    <p><a href="{% if page.selected_race %}/analysis?race_id={{ page.selected_race.id }}{% else %}/analysis{% endif %}">경주 분석으로</a></p>
   </header>
   {% if page.races %}
+  {% set ns = namespace(meets=[]) %}
+  {% for race in page.races %}{% if race.meet_code not in ns.meets %}{% set ns.meets = ns.meets + [race.meet_code] %}{% endif %}{% endfor %}
   <nav class="reason-board-races" aria-label="경주 선택">
-    {% for race in page.races %}
-    <a href="/reasons?race_id={{ race.id }}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}>{{ race.meet }} {{ race.number }}R</a>
+    {% for meet_code in ns.meets %}
+    {% set meet_races = page.races | selectattr("meet_code", "equalto", meet_code) | list %}
+    <div class="reason-board-meet">
+      <span class="reason-board-meet-name">{{ meet_races[0].meet }}</span>
+      <div class="reason-board-meet-races">
+        {% for race in meet_races %}
+        <a href="/reasons?race_id={{ race.id }}" {% if page.selected_race and race.id == page.selected_race.id %}aria-current="page"{% endif %}{% if race.status == 'completed' %} class="is-finished"{% endif %}>{{ race.number }}R</a>
+        {% endfor %}
+      </div>
+    </div>
     {% endfor %}
   </nav>
   {% endif %}
   {% if page.selected_race %}
   <ol class="reason-board-list">
     {% for runner in page.runners %}
-    <li>
+    <li{% if runner.state == '출전취소' %} class="is-scratched"{% endif %}>
       <header>
         <span class="reason-board-num silk-{{ runner.number }}">{{ runner.number }}</span>
         <div>
           <h2>{{ runner.horse }}</h2>
+          <p>{% if runner.state == '출전취소' %}출전 취소{% elif runner.state == '경주 완료' and runner.result_label != '—' %}결과 {{ runner.result_label }}{% endif %}</p>
         </div>
         <span class="reason-board-win" data-role="{{ role_name(runner.win_label) }}">
           <strong class="reason-board-pct">{{ runner.win_pct or "—" }}</strong>
@@ -43,7 +54,7 @@
         </span>
       </header>
       <ul>
-        {% for line in runner.reason_lines %}<li>{{ line }}</li>{% endfor %}
+        {% for line in runner.reason_lines %}<li data-tone="{{ line.tone }}">{{ line.text }}</li>{% endfor %}
       </ul>
     </li>
     {% endfor %}

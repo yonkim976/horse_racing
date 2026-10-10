@@ -70,7 +70,7 @@
     <nav class="mobile-tabbar" aria-label="모바일 주요 메뉴">
       <a href="/" {% if active_nav == 'races' %}aria-current="page"{% endif %}>경주</a>
       <a href="/analysis" {% if active_nav == 'analysis' %}aria-current="page"{% endif %}>경주 분석</a>
-      <a href="{{ reasons_href|default('/reasons') }}" {% if active_nav == 'reasons' %}aria-current="page"{% endif %}>이유</a>
+      <a href="{{ reasons_href|default('/reasons') }}" {% if active_nav == 'reasons' %}aria-current="page"{% endif %}>말 풀이</a>
       <a href="https://m.kra.co.kr/comp/view/kraAppList.do" data-open-derbyon rel="noopener noreferrer" aria-label="더비온 앱 열기">더비온</a>
     </nav>
   </body>
