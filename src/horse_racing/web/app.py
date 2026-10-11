@@ -652,11 +652,17 @@ def create_app(
             if response.status_code == 200 and path in {"/analysis", "/m/analysis"}:
                 response.headers["Cache-Control"] = "private, max-age=20"
             response.headers["Content-Security-Policy"] = (
-                "default-src 'self'; script-src 'self' 'unsafe-inline'; "
+                "default-src 'self'; script-src 'self' 'unsafe-inline' "
+                "https://www.googletagmanager.com; "
                 "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net "
                 "https://fonts.googleapis.com; "
                 "font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; "
-                "img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
+                "img-src 'self' data: https://www.googletagmanager.com "
+                "https://*.google-analytics.com; "
+                "connect-src 'self' https://www.googletagmanager.com "
+                "https://*.google-analytics.com https://*.google.com; "
+                "frame-src 'self' https://www.googletagmanager.com; "
+                "frame-ancestors 'none'"
             )
             content_length = response.headers.get("content-length")
             if (
