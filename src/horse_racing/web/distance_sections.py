@@ -25,7 +25,7 @@ from horse_racing.web.formatting import format_distance_seconds
 _SQLITE_BATCH_SIZE = 500
 _POSTGRES_BATCH_SIZE = 2000
 _NORMAL_FINISH_POSITIONS = (1, 89)
-_EXCLUDED_TRIAL_JUDGEMENTS = frozenset({"출", "심", "주"})
+_PASSED_TRIAL_JUDGEMENTS = frozenset({"합", "합격"})
 _CORE_CODES = ("S1F", "G3F", "G1F")
 AnalysisCache = Callable[[tuple[object, ...], Callable[[], Any]], Any]
 
@@ -322,7 +322,8 @@ def _trial_result_is_normal(
         and 1 <= position <= field_size
         and finish_ms is not None
         and finish_ms > 0
-        and (judgement is None or judgement.strip() not in _EXCLUDED_TRIAL_JUDGEMENTS)
+        and judgement is not None
+        and judgement.strip() in _PASSED_TRIAL_JUDGEMENTS
     )
 
 

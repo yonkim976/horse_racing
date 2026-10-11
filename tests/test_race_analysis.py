@@ -229,11 +229,23 @@ def test_debutant_gets_prior_trials_and_training_but_no_target_day_evidence(sess
                 horse_number=1,
                 horse_name_raw=runner.name_ko,
                 finish_position=2,
+                carried_weight_base_kg=54,
+                carried_weight_extra_kg=1,
                 finish_time_ms=65000,
                 judgement="합",
                 s1f_ms=17000,
                 g3f_ms=48000,
                 g1f_ms=16000,
+                observed_at_ms=1,
+            )
+        )
+        session.add(
+            RunningTrialResult(
+                running_trial_id=trial.id,
+                horse_number=2,
+                horse_name_raw="미연결 심사마",
+                finish_position=1,
+                judgement="합",
                 observed_at_ms=1,
             )
         )
@@ -263,6 +275,9 @@ def test_debutant_gets_prior_trials_and_training_but_no_target_day_evidence(sess
     assert len(result.trials) == 1
     assert result.trials[0].date == "2026-09-16"
     assert result.trials[0].judgement == "합격"
+    assert result.trials[0].field_size == 2
+    assert result.trials[0].horse_number == 1
+    assert result.trials[0].carried_weight == "55kg"
     assert result.trials[0].video_url.endswith("vod_type=t")
     assert result.trials[0].section_details["G3F"]["time_ms"] == 48000
     assert [row["kind"] for row in result.recent_records] == ["trial"]
@@ -464,6 +479,8 @@ def test_archive_supplements_unlinked_old_trials_but_preserves_operational_recor
     assert selected.trials[0].horse_number == 1
     assert selected.trials[1].id is None
     assert selected.trials[1].horse_number == 7
+    assert selected.trials[1].field_size == 10
+    assert selected.trials[1].carried_weight == "—"
     assert selected.trials[1].video_url.endswith("vod_type=t")
     assert [row["record"].date for row in selected.recent_records] == ["2026-09-16"]
 

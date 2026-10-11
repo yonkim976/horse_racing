@@ -1,20 +1,11 @@
-{% if forecast_embedded|default(false) %}
-<section class="forecast-embed-intro">
-  <p class="panel-kicker">PRE-RACE EXPLORER</p>
-  <h2>미래 경주 예측</h2>
-</section>
-{% else %}
+{% if not forecast_embedded|default(false) %}
 <section class="race-heading-line">
   <div><p class="panel-kicker">{{ page.selected_race.date }} · {{ page.selected_race.meet }}</p><h2>{{ page.selected_race.number }}경주 · {{ page.selected_race.distance }}m · {{ page.selected_race.grade }}</h2></div>
   <span class="status {{ 'completed' if page.model else 'running' }}">{{ page.selected_race.prediction_state }}</span>
 </section>
 {% endif %}
 
-{% if page.model %}
-<section class="model-receipt" aria-label="예측 메타데이터">
-  <div><span>구분</span><strong>{{ page.model.mode }}</strong></div><div><span>모델</span><strong>{{ page.model.model }}</strong></div><div><span>버전</span><strong>{{ page.model.version }}</strong></div><div><span>발행</span><strong>{{ page.model.published }}</strong></div><div><span>데이터 마감</span><strong>{{ page.model.cutoff }}</strong></div><div><span>정책</span><strong>{{ page.model.policy }}</strong></div>
-</section>
-{% else %}
+{% if not page.model %}
 <div class="notice-box warning"><strong>정식 예측 미발행</strong><span>이 경주의 모델 결과가 불변 원장에 없습니다. {% if forecast_embedded|default(false) %}아래 과거 성적은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.{% else %}아래 과거 성적과 전개 추정은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.{% endif %}</span></div>
 {% endif %}
 

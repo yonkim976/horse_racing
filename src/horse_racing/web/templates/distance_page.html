@@ -155,11 +155,11 @@
 {% if data.view == 'trials' %}
 <section class="panel distance-section-panel trial-section-block" aria-label="주행심사 구간 통계">
   <div class="panel-heading"><div><p class="panel-kicker">RUNNING TRIALS</p><h2>주행심사 구간 기록</h2></div></div>
-  <p class="distance-note">{{ data.course_name }}의 {{ data.year or '전체 기간' }} · 1,200m 이하 주행심사입니다. 출처와 계측 기준이 확인된 원문만 시간 통계에 반영하며, 원문 미검증 심사는 집계에서 제외합니다. 등급 조건은 적용되지 않습니다.</p>
+  <p class="distance-note">{{ data.course_name }}의 {{ data.year or '전체 기간' }} · 1,200m 이하 주행심사입니다. 출처와 계측 기준이 확인된 원문의 합격마만 시간 통계에 반영합니다. 불합격·합격 외 판정·판정 미확인 및 원문 미검증 기록은 제외하며, 등급 조건은 적용되지 않습니다.</p>
   {% if data.section_analysis.trials %}
     {% for trial in data.section_analysis.trials %}
     <div class="distance-trial-group">
-      <div class="distance-trial-heading"><h3>{{ "{:,}m".format(trial.distance) }} 심사</h3><span>{{ trial.trial_count }}회 · 검증 원문 {{ trial.verified_trial_count }}회{% if trial.unverified_trial_count %} · 원문 미검증 {{ trial.unverified_trial_count }}회{% endif %} · 검증 원문 정상 완주 {{ trial.normal_count }}두</span></div>
+      <div class="distance-trial-heading"><h3>{{ "{:,}m".format(trial.distance) }} 심사</h3><span>{{ trial.trial_count }}회 · 검증 원문 {{ trial.verified_trial_count }}회{% if trial.unverified_trial_count %} · 원문 미검증 {{ trial.unverified_trial_count }}회{% endif %} · 검증 원문 합격마 {{ trial.normal_count }}두</span></div>
       {% if trial.verified_trial_count == 0 %}<p class="distance-note">이 기간에는 검증된 주행심사 원문이 없습니다. 원문 출처가 확인되지 않은 심사는 시간 통계에서 제외했습니다.</p>{% endif %}
       <div class="table-scroll">
         <table class="entry-table distance-section-table">

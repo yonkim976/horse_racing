@@ -14,7 +14,10 @@ __pycache__
 *.py[cod]
 
 backups
-data
+# Keep application reference JSON while excluding local runtime databases.
+/data/
+!src/horse_racing/web/data/
+!src/horse_racing/web/data/*.json
 docs
 migrations
 models

@@ -1960,13 +1960,11 @@ html[data-easy="1"] .mobile-home .mobile-poster-pct {
 
 .ma-record-meta {
   min-width: 0;
-  overflow: hidden;
   color: var(--ink-strong) !important;
   font-size: 13px !important;
   font-weight: 800;
   line-height: 1.35 !important;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .ma-record-condition {
@@ -2024,6 +2022,13 @@ html[data-easy="1"] .mobile-home .mobile-poster-pct {
   font: 800 13px/1.2 var(--font-mono);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.ma-record-finish {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 750;
+  line-height: 1.35 !important;
 }
 
 .ma-record-sections {

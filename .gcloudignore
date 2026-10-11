@@ -14,7 +14,10 @@ __pycache__
 *.py[cod]
 
 backups
-data
+# Exclude runtime data at the repository root, not packaged web reference data.
+/data/
+!src/horse_racing/web/data/
+!src/horse_racing/web/data/*.json
 docs
 migrations
 models

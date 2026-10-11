@@ -52,16 +52,17 @@
 <li data-history-distance="{{ past.distance }}">
   <div class="ma-record-head">
     <div class="ma-record-head-copy">
-      <p class="ma-record-meta">{{ short_date(past.date) }} · {{ past.meet }} {{ past.race_number }}R{% if past.grade and past.grade != "—" %} · {{ compact_grade(past.grade) }}{% endif %} · {{ past.distance }}m</p>
+      <p class="ma-record-meta">{{ short_date(past.date) }} · {{ past.meet }} {{ past.race_number }}R{% if past.grade and past.grade != "—" %} · {{ compact_grade(past.grade) }}{% endif %} · {{ past.distance }}m{% if past.field_size %} · {{ past.field_size }}두{% endif %}</p>
       {% if past.condition and past.condition != "—" %}<p class="ma-record-condition">{{ past.condition }}</p>{% endif %}
     </div>
     {{ record_video(past.video_url, past.meet ~ ' ' ~ past.race_number ~ 'R') }}
   </div>
   <p class="ma-record-result">
     <strong>{{ past.jockey }}</strong>
-    <span>{{ past.finish }}{% if past.field_size %} · {{ past.field_size }}두{% endif %}</span>
+    <span aria-label="부담중량">{{ past.carried_weight }}</span>
     <b>{{ past.time }}</b>
   </p>
+  <p class="ma-record-finish">{% if past.horse_number %}마번 {{ past.horse_number }}번 · {% endif %}{{ past.finish }}</p>
   {{ record_sections(past) }}
 </li>
 {%- endmacro %}
@@ -69,16 +70,17 @@
 <li data-history-distance="{{ trial.distance }}">
   <div class="ma-record-head">
     <div class="ma-record-head-copy">
-      <p class="ma-record-meta">{{ short_date(trial.date) }} · {{ trial.meet }} 주행심사 {{ trial.number }}차 · {{ trial.distance }}m</p>
+      <p class="ma-record-meta">{{ short_date(trial.date) }} · {{ trial.meet }} 주행심사 {{ trial.number }}차 · {{ trial.distance }}m{% if trial.field_size %} · {{ trial.field_size }}두{% endif %}</p>
       {% if trial.condition and trial.condition != "—" %}<p class="ma-record-condition">{{ trial.condition }}</p>{% endif %}
     </div>
     {{ record_video(trial.video_url, trial.meet ~ ' 주행심사 ' ~ trial.number ~ '차') }}
   </div>
   <p class="ma-record-result">
     <strong>{{ trial.jockey }}</strong>
-    <span>{{ trial.finish }}{% if trial.judgement %} · {{ trial.judgement }}{% endif %}</span>
+    <span aria-label="부담중량">{{ trial.carried_weight }}</span>
     <b>{{ trial.time }}</b>
   </p>
+  <p class="ma-record-finish">{% if trial.horse_number %}마번 {{ trial.horse_number }}번 · {% endif %}{{ trial.finish }}{% if trial.judgement %} · {{ trial.judgement }}{% endif %}</p>
   {{ record_sections(trial) }}
 </li>
 {%- endmacro %}

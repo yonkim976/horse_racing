@@ -17,6 +17,36 @@ The container runs `horse_racing.web.app:app` with Uvicorn, listens on
 is supplied from Secret Manager as `HORSE_RACING_DATABASE_URL`; it must never
 be committed or stored as a plain Cloud Run environment variable.
 
+The web process now uses its own engine: PostgreSQL transactions are READ ONLY,
+with a 15-second **per-statement** timeout, a 3-second lock timeout and a
+20-second idle-in-transaction timeout. SQLite web connections use `query_only`.
+Collectors and migrations retain their existing writable engine and settings.
+These guards do not impose a total HTTP deadline or a billing cap.
+
+Prefer a dedicated SELECT-only login supplied as the Secret Manager binding
+`HORSE_RACING_WEB_DATABASE_URL`. When absent, the web process uses
+`HORSE_RACING_DATABASE_URL` with the transaction guards above. This fallback
+does **not** remove privileges from an existing `postgres` credential. A separate
+login requires explicit table grants and an RLS policy compatible with backend
+reads; do not grant `BYPASSRLS` or loosen `anon`/`authenticated` as a shortcut.
+
+The web image is digest-pinned (same base as the jobs image) and runs as UID/GID
+10001, with `/app/data` writable for local SQLite fallback. Source and
+dependencies remain root-owned. Rebuild and smoke-test the image before release.
+
+The packaged `src/horse_racing/web/data/horse_evaluation_v1.json` is required by
+horse detail pages. Both upload/build ignore files must preserve this directory:
+exclude root `/data/`, not every directory named `data`. The Docker build fails
+if this reference file is absent. Include a real horse detail request in the
+private container smoke test before routing any production traffic.
+
+Keep Uvicorn `--no-proxy-headers`. Do not enable wildcard forwarded-header trust
+to solve shared-IP rate limiting. Verify real client identity from two separate
+networks against a protected candidate revision before configuring precise
+trusted proxy CIDRs or an authenticated origin proxy. Neither has been verified
+by local request tests. Never expose a public diagnostics route containing IPs,
+headers, credentials or configuration values.
+
 ## First deployment
 
 1. Build and push the image with Cloud Build.

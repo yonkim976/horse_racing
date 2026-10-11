@@ -10,9 +10,49 @@ import pytest
 from fastapi import Request
 from fastapi.responses import PlainTextResponse, StreamingResponse
 from fastapi.testclient import TestClient
+from psycopg.errors import LockNotAvailable, QueryCanceled
+from sqlalchemy.exc import OperationalError
 
 from horse_racing.web.app import create_app
 from horse_racing.web.security import ActiveRequestGate, parse_trusted_proxy_cidrs
+
+
+@pytest.mark.parametrize("error,reason", [
+    (QueryCanceled, "statement_timeout"),
+    (LockNotAvailable, "lock_timeout"),
+])
+def test_database_timeout_is_safe_retryable_and_not_cached(error, reason, capsys):
+    calls = []
+
+    def render():
+        calls.append(True)
+        if len(calls) == 1:
+            raise OperationalError(
+                "SELECT private_secret", {"password": "private_password"}, error("private_detail")
+            )
+        return PlainTextResponse("recovered")
+
+    with middleware_client(render) as client:
+        timed_out = client.get("/")
+        recovered = client.get("/")
+    assert timed_out.status_code == 503
+    assert timed_out.headers["cache-control"] == "no-store"
+    assert timed_out.headers["retry-after"] == "3"
+    assert timed_out.headers["x-content-type-options"] == "nosniff"
+    assert recovered.status_code == 200
+    assert recovered.text == "recovered"
+    assert len(calls) == 2
+    output = capsys.readouterr().out
+    assert f'"reason":"{reason}"' in output
+    assert "private_" not in timed_out.text + output
+
+
+def test_non_timeout_database_errors_are_not_misclassified():
+    def render():
+        raise OperationalError("SELECT 1", {}, RuntimeError("not a timeout"))
+
+    with middleware_client(render) as client, pytest.raises(OperationalError):
+        client.get("/")
 
 
 def middleware_client(

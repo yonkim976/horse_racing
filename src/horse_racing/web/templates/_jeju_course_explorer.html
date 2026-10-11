@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="{{ url_for('static', path='/css/course-explorer.css') }}?v=15">
 <link rel="stylesheet" href="{{ url_for('static', path='/css/seoul-map.css') }}?v=20">
 <section id="racecourse-map" class="panel course-explorer seoul-explorer jeju-explorer{% if not is_course_explorer %} race-detail-map{% endif %}" data-racecourse-map="jeju" data-course-name="제주" data-course-explorer data-distance="{{ page.distance_m }}">
-  <header class="course-heading">
-    <div><h2>제주 경주로 <span>{{ '거리 선택' if is_course_explorer else page.distance }}</span></h2><p>{% if is_course_explorer %}거리를 선택해 출발점과 주행 경로를 확인하세요.{% else %}현재 경주에 해당하는 출발점과 주행 경로입니다.{% endif %}</p></div>
+  <header class="course-heading course-heading-with-key">
+    <div><h2>제주 경주로 <span>{{ page.distance }}</span></h2><p>{% if is_course_explorer %}선택한 거리의 출발점과 주행 경로입니다.{% else %}현재 경주에 해당하는 출발점과 주행 경로입니다.{% endif %}</p>{% include '_course_color_key.html' %}</div>
     <div class="course-heading-links">{% if not is_course_explorer %}<a class="course-record-link" href="{{ course_map_url }}?distance={{ page.distance_m }}">전체 거리 보기 ↗</a>{% endif %}<a class="course-record-link" href="https://race.kra.co.kr/chulmainfo/trackView.do?Act=02&Sub=9&meet=2" target="_blank" rel="noopener">공식 안내 ↗</a></div>
   </header>
   <div class="seoul-map-body">
@@ -43,10 +43,7 @@
       <div class="seoul-official" data-jeju-official hidden><img src="https://race.kra.co.kr/down/racetrackinfo/jeju/%EC%A0%9C%EC%A3%BC%EA%B2%BD%EC%A3%BC%EB%A1%9C1%28750x400%29.jpg" referrerpolicy="no-referrer" loading="lazy" alt="한국마사회 제주 경주로 공식 평면도"><p data-jeju-official-caption>한국마사회 공식 평면도 · 거리별 출발점과 주로 배치를 비교하세요.</p><p data-jeju-official-fallback hidden>공식 도면을 이 화면에 표시할 수 없습니다. <a href="https://race.kra.co.kr/down/racetrackinfo/jeju/%EC%A0%9C%EC%A3%BC%EA%B2%BD%EC%A3%BC%EB%A1%9C1%28750x400%29.jpg" target="_blank" rel="noopener noreferrer">공식 도면 새 창으로 열기 ↗</a></p></div>
     </div>
     <div class="seoul-route-caption" aria-live="polite"><strong data-jeju-route-title>{{ track.diagram.start_label }}</strong><span data-jeju-route-description>제주 시계 방향 경로입니다.{% if not is_course_explorer %} 아래 기록은 현재 경주의 기록입니다.{% endif %}</span></div>
-    {% include '_course_color_key.html' %}
-    <p class="course-hint" data-course-map-note>{% if is_course_explorer %}선택한 거리의 출발점과 주행 경로를 확인합니다. 구간 기록은 해당 경주 상세에서 볼 수 있습니다.{% else %}지도 지점은 위치 참고 표시입니다. 코너 이름은 구역 안내이며 측정 지점과 구분됩니다.{% endif %}</p>
     {% if not is_course_explorer %}<p class="course-distance-all-link"><a href="{{ course_map_url }}?distance={{ page.distance_m }}">다른 거리의 경주로도 보기 ↗</a></p>{% endif %}
-    <p class="course-hint">제주 공식 치수 기준의 개략 경로입니다.{% if not is_course_explorer %} 아래 기록은 현재 {{ page.distance }} 경주에 해당합니다.{% endif %}</p>
   </div>
   {% if is_course_explorer %}<details class="course-method"><summary>지도 기준과 정확도 <span>공식 치수 기반 구조도</span></summary>
     <p>한국마사회 공개 치수로 만든 구조도입니다. 직선 493.7m · 곡선 R 97.5m · 폭 20m. {{ track.geometry_note }}. 실제 GPS·측량 좌표가 아니며 고저차는 표시하지 않습니다.</p>

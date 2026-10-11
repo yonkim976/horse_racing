@@ -31,16 +31,17 @@ from fastapi.responses import (
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
+from sqlalchemy.exc import DBAPIError
 from sqlalchemy.orm import Session
 from starlette.middleware.gzip import GZipMiddleware
 
-from horse_racing.db.session import SessionLocal
 from horse_racing.web.dashboard import (
     CalendarIndex,
     calendar_month_options,
     load_calendar_index,
     load_dashboard,
 )
+from horse_racing.web.database import get_web_session_factory
 from horse_racing.web.distance_benchmarks import BENCHMARK_BANDS
 from horse_racing.web.distance_page import GRADE_LABELS, SEOUL_GRADE_LABELS, load_distance_page
 from horse_racing.web.entities import (
@@ -262,8 +263,10 @@ def _permanent_redirect(url: str) -> RedirectResponse:
 
 
 def create_app(
-    session_factory: Callable[[], Session] = SessionLocal,
+    session_factory: Callable[[], Session] | None = None,
 ) -> FastAPI:
+    if session_factory is None:
+        session_factory = get_web_session_factory()
     app = FastAPI(
         title="한국 경마 데이터 보드",
         description="한국마사회 일정과 결과를 조회하는 로컬 대시보드",
@@ -603,7 +606,29 @@ def create_app(
                 ))
 
         async def build_response():  # type: ignore[no-untyped-def]
-            response = await call_next(request)
+            try:
+                response = await call_next(request)
+            except DBAPIError as exc:
+                sqlstate = getattr(exc.orig, "sqlstate", None)
+                if sqlstate not in {"57014", "55P03"}:
+                    raise
+                # Do not expose SQL, bind parameters or connection details.
+                # The route's session context has already rolled back here.
+                denied = JSONResponse(
+                    {"detail": "조회 시간이 초과되었습니다. 잠시 후 다시 시도해 주세요."},
+                    status_code=503,
+                    headers={
+                        "Cache-Control": "no-store", "Retry-After": "3",
+                        "X-Content-Type-Options": "nosniff",
+                    },
+                )
+                denied.policy_diagnostics = {  # type: ignore[attr-defined]
+                    "category": "database",
+                    "reason": "statement_timeout" if sqlstate == "57014" else "lock_timeout",
+                    "count": None,
+                    "limit": None,
+                }
+                return denied
             response.headers["X-Content-Type-Options"] = "nosniff"
             response.headers["X-Frame-Options"] = "DENY"
             response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"

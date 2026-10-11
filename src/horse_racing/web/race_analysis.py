@@ -137,6 +137,8 @@ class TrialStart:
     horse_number: int | None = None
     form_token: str | None = None
     weather: str = ""
+    carried_weight: str = "—"
+    field_size: int | None = None
 
 
 @dataclass(slots=True)
@@ -989,14 +991,20 @@ def _load_trials(session, horse_ids, cutoff):
         )
         .subquery()
     )
+    trial_field_size = (
+        select(func.count(RunningTrialResult.id))
+        .where(RunningTrialResult.running_trial_id == RunningTrial.id)
+        .correlate(RunningTrial)
+        .scalar_subquery()
+    )
     rows = session.execute(
-        select(RunningTrialResult, RunningTrial, ranked.c.total)
+        select(RunningTrialResult, RunningTrial, ranked.c.total, trial_field_size)
         .join(ranked, ranked.c.id == RunningTrialResult.id)
         .join(RunningTrial)
         .where(ranked.c.rn <= MAX_TRIALS)
         .order_by(RunningTrial.trial_date_local.desc()),
     ).all()
-    for result, trial, total in rows:
+    for result, trial, total, field_size in rows:
         totals[result.horse_id] = total
         details = {}
         finish_ms = (
@@ -1066,6 +1074,12 @@ def _load_trials(session, horse_ids, cutoff):
                 horse_number=result.horse_number,
                 form_token=format_trial_form_token(result.finish_position, result.judgement),
                 weather=trial.weather or "",
+                carried_weight=_trial_carried_weight(
+                    result.carried_weight_base_kg,
+                    result.carried_weight_extra_kg,
+                    result.carried_weight_raw,
+                ),
+                field_size=field_size,
             )
         )
     return output, totals
@@ -1344,6 +1358,12 @@ def _archive_start(row):
     )
 
 
+def _trial_carried_weight(base, extra, raw):
+    if base is None:
+        return raw or "—"
+    return _weight(base + (extra or 0))
+
+
 def _archive_trial(row):
     details = {
         code: _archive_section_detail(code, raw, row) for code, raw in row["sections"].items()
@@ -1382,6 +1402,12 @@ def _archive_trial(row):
         horse_number=row.get("horse_number"),
         form_token=format_trial_form_token(row.get("finish_position"), row.get("judgement")),
         weather=row.get("weather") or "",
+        carried_weight=_trial_carried_weight(
+            row.get("carried_weight_kg"),
+            row.get("carried_weight_extra_kg"),
+            row.get("carried_weight_raw"),
+        ),
+        field_size=row.get("field_size"),
     )
 
 

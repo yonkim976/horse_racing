@@ -346,6 +346,9 @@ def test_page_filters_races_but_keeps_separate_source_verified_trial_scope(facto
                 (1, 65_000, "불", 13_000),
                 (2, 70_000, "합", 14_000),
                 (None, None, "주", None),
+                (3, 71_000, "연", 14_000),
+                (4, 72_000, "유", 14_000),
+                (5, 73_000, None, 14_000),
             ],
         )
         _trial(
@@ -396,9 +399,10 @@ def test_page_filters_races_but_keeps_separate_source_verified_trial_scope(facto
             trial["verified_trial_count"],
             trial["unverified_trial_count"],
         ) == (2, 1, 1)
-        assert trial["normal_count"] == 2
-        assert trial["core"][1]["sample_count"] == 2
+        assert trial["normal_count"] == 1
+        assert trial["core"][1]["sample_count"] == 1
         assert trial["core"][1]["mean_time"] == "41.00"
+        assert trial["core"][2]["mean_time"] == "14.00"
 
         all_scope = load_distance_page(
             session, year=0, distance=0, grade="", page=1, meet_code=1

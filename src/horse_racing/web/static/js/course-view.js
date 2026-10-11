@@ -284,6 +284,11 @@
     const incomingTitle = incomingHeading?.querySelector('h2 > span');
     const currentTitle = currentHeading?.querySelector('h2 > span');
     if (incomingTitle && currentTitle) currentTitle.textContent = incomingTitle.textContent;
+    const incomingEarlyLabel = incomingHeading?.querySelector('[data-course-early-label]');
+    const currentEarlyLabel = currentHeading?.querySelector('[data-course-early-label]');
+    if (incomingEarlyLabel && currentEarlyLabel) {
+      currentEarlyLabel.textContent = incomingEarlyLabel.textContent;
+    }
     if (incomingHeading && currentHeading) incomingHeading.replaceWith(currentHeading);
 
     const incomingPicker = stage.element.querySelector('.course-distance-picker');

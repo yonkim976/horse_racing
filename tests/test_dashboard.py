@@ -360,7 +360,7 @@ def test_course_map_page_loads_one_selected_route_for_each_meet(
     assert f"{name} 경주로" in response.text
     display_name = "부산" if name == "부경" else name
     assert f"<h1>{display_name} 경주로·거리 분석</h1>" in response.text
-    assert "course-view.js?v=11" in response.text
+    assert "course-view.js?v=12" in response.text
     assert f"distance={distance}" in response.text
     assert "COURSE EXPLORER" not in response.text
     assert "공식 도면 비교" not in response.text
@@ -565,6 +565,8 @@ def seeded_session(tmp_path: Path) -> sessionmaker[Session]:
             trainer=trainer,
             horse_number=4,
             horse_name_raw="바람의별",
+            carried_weight_base_kg=54,
+            carried_weight_extra_kg=1,
             finish_position=1,
             finish_rank_raw="01",
             body_weight_kg=278,
@@ -1186,7 +1188,7 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
     assert "box-shadow" not in active_round_rule
     assert "background:var(--accent-soft)" in active_round_rule
     assert "border-color:var(--accent-line)" in active_round_rule
-    assert "미래 경주 예측" in page.text
+    assert "미래 경주 예측" not in page.text
     assert "예상 전개 탐색" not in page.text
     assert "SCENARIO, NOT OBSERVATION" not in page.text
     assert 'data-pace-root' not in page.text
@@ -1194,7 +1196,7 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
     assert 'data-highlight="' not in page.text
     assert "전개 그리기" in page.text
     assert "출전마 비교" in page.text
-    assert "probability_ensemble" in page.text
+    assert 'class="model-receipt"' not in page.text
     assert "100.0%" in page.text
     assert "모델 예측 ↗" not in page.text
     assert exported.status_code == 200
@@ -1785,7 +1787,7 @@ def test_mobile_home_lists_races_without_desktop_chrome_copy(tmp_path: Path) -> 
         'content="a71202c329d9767a2c3589e8637e278720be227f">'
     ) in page.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in page.text
-    assert "mobile.css?v=83" in page.text
+    assert "mobile.css?v=84" in page.text
     assert 'data-easy-toggle' in page.text
     assert "큰글씨 모드" in page.text
     assert "mapilog-favicon-final.svg" in page.text
@@ -1914,7 +1916,7 @@ def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
             assert response.status_code == 200, path
             assert 'class="mobile-app ' in response.text
             assert "dashboard.css?v=77" in response.text
-            assert "mobile.css?v=83" in response.text
+            assert "mobile.css?v=84" in response.text
             assert {part.strip().lower() for part in response.headers["vary"].split(",")} == {
                 "user-agent", "accept-encoding"
             }
@@ -2054,6 +2056,9 @@ def test_mobile_analysis_uses_senior_layout_instead_of_desktop_workspace(
     assert 'class="ma-record-video"' in page.text
     assert ">영상</a>" in page.text
     assert "<strong>한기수</strong>" in page.text
+    assert 'aria-label="부담중량">55kg</span>' in page.text
+    assert "마번 4번 · 1위 · 합격" in page.text
+    assert "800m · 1두</p>" in page.text
     assert "<strong>한기수 기수</strong>" not in page.text
     assert 'aria-label="구간별 통과순위"' in page.text
     assert 'aria-label="구간별 기록"' in page.text

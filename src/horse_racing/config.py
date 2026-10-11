@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables or a local .env file."""
 
     database_url: str = "sqlite:///data/horse_racing.sqlite3"
+    # Optional separate credential for the public read-only web process.
+    web_database_url: str | None = None
     log_level: str = "INFO"
     data_go_kr_service_key: SecretStr | None = None
     discord_webhook_url: SecretStr | None = None
