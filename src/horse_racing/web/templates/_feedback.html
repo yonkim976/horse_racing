@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="{{ url_for('static', path='/css/feedback.css') }}?v=1">
+<script src="{{ url_for('static', path='/js/feedback.js') }}?v=1" defer></script>
+<button class="fb-launcher" type="button" data-feedback-open aria-haspopup="dialog" aria-controls="feedback-dialog">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/><path d="M7 10h8M7 14h5"/></svg>
+  의견 남기기
+</button>
+<dialog id="feedback-dialog" class="fb-dialog" aria-labelledby="feedback-title" aria-describedby="feedback-description">
+  <div class="fb-sheet">
+    <header class="fb-heading">
+      <div><span class="fb-eyebrow">함께 만드는 마필로그</span>
+        <h2 id="feedback-title">의견 남기기</h2>
+        <p id="feedback-description">불편했던 점이나 바라는 기능을 알려주세요.</p>
+      </div>
+      <button class="fb-close" type="button" data-feedback-close aria-label="의견 남기기 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </header>
+    <form class="fb-form" data-feedback-form novalidate>
+      <fieldset class="fb-types">
+        <legend>어떤 의견인가요?</legend>
+        <div class="fb-type-options">
+          <label><input type="radio" name="feedback-type" value="오류 제보" checked><span>오류 제보</span></label>
+          <label><input type="radio" name="feedback-type" value="개선 제안"><span>개선 제안</span></label>
+          <label><input type="radio" name="feedback-type" value="기타 의견"><span>기타 의견</span></label>
+        </div>
+      </fieldset>
+      <div class="fb-field">
+        <label for="feedback-message">의견 내용 <span class="fb-required">필수</span></label>
+        <textarea id="feedback-message" name="message" rows="4" minlength="10" maxlength="1000" required placeholder="어떤 화면에서 어떤 점이 불편했나요?&#10;원하시는 모습을 함께 적어주시면 도움이 됩니다." aria-describedby="feedback-message-help"></textarea>
+        <div class="fb-field-help" id="feedback-message-help"><span>10자 이상 작성해 주세요.</span><span data-feedback-count>0 / 1,000</span></div>
+      </div>
+      <div class="fb-field">
+        <label for="feedback-email">답변 받을 이메일 <span class="fb-optional">선택</span></label>
+        <input id="feedback-email" type="email" name="email" maxlength="254" placeholder="답변이 필요할 때만 적어주세요." autocomplete="email">
+      </div>
+      <div class="fb-context">
+        <label><input type="checkbox" name="include-page" checked><span>현재 화면 함께 보내기</span></label>
+        <p data-feedback-page-title></p><small data-feedback-page-path></small>
+      </div>
+      <div class="fb-honeypot" aria-hidden="true"><label for="feedback-website">Website</label><input id="feedback-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="fb-demo-note">의견과 선택 이메일은 접수·답변을 위해 7일간 보관합니다.<br><a href="/privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침</a></p>
+      <p class="fb-error" data-feedback-error role="alert" hidden></p>
+      <button class="fb-primary" type="submit" disabled>의견 보내기 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button>
+    </form>
+    <section class="fb-success" data-feedback-success hidden aria-labelledby="feedback-success-title" tabindex="-1">
+      <div class="fb-success-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 16 5 5L24 10"/></svg></div>
+      <h3 id="feedback-success-title">소중한 의견, 감사합니다.</h3>
+      <p>보내주신 의견은 더 나은 마필로그를<br>만드는 데 참고하겠습니다.</p>
+      <div class="fb-success-summary"><span data-feedback-result-type></span><p data-feedback-result-message></p></div>
+      <p class="fb-demo-note" data-feedback-reference></p>
+      <button class="fb-primary" type="button" data-feedback-close>확인</button>
+    </section>
+  </div>
+</dialog>

@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///data/horse_racing.sqlite3"
     # Optional separate credential for the public read-only web process.
     web_database_url: str | None = None
+    # Separate least-privilege connection for private feedback, never race-data writes.
+    feedback_database_url: SecretStr | None = None
+    feedback_secret: SecretStr | None = None
     log_level: str = "INFO"
     data_go_kr_service_key: SecretStr | None = None
     discord_webhook_url: SecretStr | None = None

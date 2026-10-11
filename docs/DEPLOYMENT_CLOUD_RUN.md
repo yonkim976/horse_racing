@@ -65,7 +65,48 @@ headers, credentials or configuration values.
 must target the protected `main` branch. Secret bindings and service-level
 settings persist when the trigger updates only the container image.
 
-## Operational separation
+## Feedback writes
+
+The floating feedback form posts JSON to `/api/feedback`; `/api/feedback/token`
+provides a signed one-hour CSRF token and an HttpOnly, SameSite=Lax anonymous
+cookie scoped to the feedback API (seven-day lifetime). Neither endpoint is
+cached. Email is optional. No feedback or email is exposed by a public read API.
+
+Production requires these **independent** Secret Manager bindings:
+
+- `HORSE_RACING_FEEDBACK_DATABASE_URL`: `mapilog-feedback-database-url`
+- `HORSE_RACING_FEEDBACK_SECRET`: `mapilog-feedback-signing-key`
+
+The dedicated `mapilog_feedback_writer` login can INSERT only into
+`mapilog_feedback.entries`, and SELECT only request IDs, timestamps and hashes
+for deduplication and quotas. It cannot read messages/emails, UPDATE/DELETE
+feedback, or write racing tables. Both RLS and private schema grants apply.
+The existing racing read-only engine and collector credentials are unchanged.
+The feedback engine reserves at most one connection per instance.
+
+The submitter's cookie is hashed with a secret; IP addresses are not stored in
+feedback. Limits are five submissions per browser per hour, twenty per day,
+and one thousand total per rolling day, serialized with a transaction advisory
+lock. A UUID request ID makes retries idempotent. Input/body limits, origin
+validation, signed tokens, a honeypot and bounded in-memory request limits run
+before insertion. Browser drafts remain in memory only.
+
+Operators read submitted opinions through the Supabase SQL editor, using their
+existing administrative account, for example:
+
+```sql
+select request_id, created_at, category, message, email, page_path
+from mapilog_feedback.entries
+order by created_at desc
+limit 100;
+```
+
+`pg_cron` job `mapilog-feedback-retention` deletes entries older than seven days
+hourly. Database backups follow the database provider's retention settings.
+Local development uses a separate `data/feedback.sqlite3` when no feedback URL
+is supplied. A Cloud Run process never silently falls back to local storage.
+
+## Collection jobs
 
 The public web service is deployed first. Long-running collection commands
 such as `sync-latest` belong in separate Cloud Run Jobs. Raw source artifacts

@@ -51,6 +51,7 @@ from horse_racing.web.entities import (
     load_entity_list,
     load_entity_official_id,
 )
+from horse_racing.web.feedback import create_feedback_router
 from horse_racing.web.horse_directory import GRADE_LABELS as HORSE_GRADE_LABELS
 from horse_racing.web.horse_directory import ORIGIN_LABELS
 from horse_racing.web.insights import load_forecast_page
@@ -273,6 +274,7 @@ def create_app(
     )
     templates = Jinja2Templates(directory=WEB_ROOT / "templates")
     app.mount("/static", StaticFiles(directory=WEB_ROOT / "static"), name="static")
+    app.include_router(create_feedback_router(client_key=_client_rate_key))
 
     # Read-only public surface: bounded per-client protection and short-lived caches.
     request_limiter = BoundedRequestLimiter(max_clients=4096, idle_ttl=120.0)
