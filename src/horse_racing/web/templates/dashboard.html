@@ -56,6 +56,7 @@
                   tabindex="0"
                   data-href="{{ race.href }}"
                   data-dashboard-race-id="{{ race.id }}"
+                  data-racecourse="{{ race.course_name }}"
                   data-race-detail-href="{{ race.detail_href }}">
                   <td>
                     <div class="race-title-with-status">
@@ -141,7 +142,7 @@
         </div>
       </div>
 
-      {{ entry_table(dashboard.selected_race.entries, scheduled=dashboard.selected_race.status == 'scheduled') }}
+      {{ entry_table(dashboard.selected_race.entries, scheduled=dashboard.selected_race.status == 'scheduled', highlight_weight_changes=true) }}
       {% endif %}
     </article>
 </section>

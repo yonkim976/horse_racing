@@ -20,6 +20,7 @@ from typing import Annotated, TypeVar
 from urllib.parse import quote, urlencode
 
 from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi import Path as PathParameter
 from fastapi.responses import (
     FileResponse,
     HTMLResponse,
@@ -74,6 +75,14 @@ from horse_racing.web.security import (
     resolve_client_ip,
     trusted_forwarded_scheme,
 )
+from horse_racing.web.seo import is_presentation_parameter, search_metadata
+from horse_racing.web.sitemaps import (
+    DETAIL_MODELS,
+    MAX_PARTITION,
+    load_detail_sitemap,
+    load_distance_sitemap,
+    load_sitemap_index,
+)
 from horse_racing.web.trial_page import load_running_trial_page
 
 WEB_ROOT = Path(__file__).parent
@@ -106,7 +115,7 @@ _MOBILE_UA = re.compile(
 )
 _LAYOUT_QUERY_VALUES = frozenset({"mobile", "desktop", "auto"})
 _BLOCKED_ANTHROPIC_UA = re.compile(
-    r"ClaudeBot|Claude-SearchBot|Claude-User|Claude-Web|anthropic-ai",
+    r"ClaudeBot|Claude-Web|anthropic-ai",
     re.I,
 )
 _BLOCKED_HARVESTER_UA = re.compile(r"SerpstatBot|AhrefsBot", re.I)
@@ -273,6 +282,7 @@ def create_app(
         description="한국마사회 일정과 결과를 조회하는 로컬 대시보드",
     )
     templates = Jinja2Templates(directory=WEB_ROOT / "templates")
+    templates.env.globals["search_metadata"] = search_metadata
     app.mount("/static", StaticFiles(directory=WEB_ROOT / "static"), name="static")
     app.include_router(create_feedback_router(client_key=_client_rate_key))
 
@@ -580,6 +590,8 @@ def create_app(
             path in {"/", "/m", "/analysis", "/m/analysis"}
             or path == "/api/calendar"
             or path.startswith("/races/")
+            or path == "/sitemap-index.xml"
+            or path.startswith("/sitemaps/")
             or bool(re.fullmatch(r"/(horses|jockeys|trainers|owners)(?:/[^/]+)?", path))
         )
         view_bit = "m" if _is_mobile_request(request) or request.url.path.startswith("/m") else "d"
@@ -838,14 +850,15 @@ def create_app(
     def robots_txt() -> PlainTextResponse:
         return PlainTextResponse(
             "User-agent: ClaudeBot\nDisallow: /\n\n"
-            "User-agent: Claude-SearchBot\nDisallow: /\n\n"
-            "User-agent: Claude-User\nDisallow: /\n\n"
+            "User-agent: Claude-SearchBot\nAllow: /\n\n"
+            "User-agent: Claude-User\nAllow: /\n\n"
             "User-agent: Claude-Web\nDisallow: /\n\n"
             "User-agent: anthropic-ai\nDisallow: /\n\n"
             "User-agent: SerpstatBot\nDisallow: /\n\n"
             "User-agent: AhrefsBot\nDisallow: /\n\n"
             "User-agent: *\nAllow: /\n\n"
-            f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n",
+            f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n"
+            f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap-index.xml\n",
             headers={"Cache-Control": "public, max-age=3600"},
         )
 
@@ -866,6 +879,38 @@ def create_app(
             media_type="application/xml",
             headers={"Cache-Control": "public, max-age=3600"},
         )
+
+    def sitemap_response(body: bytes) -> Response:
+        return Response(
+            content=body, media_type="application/xml",
+            headers={"Cache-Control": "public, max-age=3600"},
+        )
+
+    @app.get("/sitemap-index.xml", include_in_schema=False)
+    def sitemap_index() -> Response:
+        def load():
+            with session_factory() as session:
+                return load_sitemap_index(session)
+        return sitemap_response(cached(("sitemap-index",), load, ttl=3600.0))
+
+    @app.get("/sitemaps/distances.xml", include_in_schema=False)
+    def distance_sitemap() -> Response:
+        def load():
+            with session_factory() as session:
+                return load_distance_sitemap(session)
+        return sitemap_response(cached(("sitemap-distances",), load, ttl=3600.0))
+
+    @app.get("/sitemaps/{kind}/{partition}.xml", include_in_schema=False)
+    def detail_sitemap(
+        kind: str, partition: Annotated[int, PathParameter(ge=0, le=MAX_PARTITION)],
+    ) -> Response:
+        if kind not in DETAIL_MODELS:
+            raise HTTPException(status_code=404, detail="지원하지 않는 사이트맵입니다.")
+
+        def load():
+            with session_factory() as session:
+                return load_detail_sitemap(session, kind, partition)
+        return sitemap_response(cached(("sitemap", kind, partition), load, ttl=3600.0))
 
     @app.get("/favicon.ico", include_in_schema=False)
     def favicon_ico() -> FileResponse:
@@ -993,19 +1038,32 @@ def create_app(
             context={"active_nav": "races", "page": page},
         )
 
+    @app.get("/racecourses/{course}/distances/{distance}", response_class=HTMLResponse)
     @app.get("/racecourses/{course}/distances", response_class=HTMLResponse)
     def course_distances(
         request: Request,
         course: str,
         year: Annotated[int | None, Query(ge=0, le=9999)] = None,
-        distance: Annotated[int, Query(ge=0, le=10000)] = 0,
+        distance: int = 0,
         grade: str = "",
         page: Annotated[int, Query(ge=1)] = 1,
         view: str = "",
         band: str = "",
-    ) -> HTMLResponse:
+    ) -> Response:
         if course not in ("jeju", "seoul", "busan", "yeongcheon"):
             raise HTTPException(status_code=404, detail="지원하지 않는 경마장입니다.")
+        distance_landing = "distance" in request.path_params
+        if not 0 <= distance <= 10000 or (distance_landing and not 800 <= distance <= 4000):
+            raise HTTPException(status_code=422, detail="지원하지 않는 경주 거리입니다.")
+        if distance_landing and request.path_params["distance"] != str(distance):
+            suffix = f"?{request.url.query}" if request.url.query else ""
+            return _permanent_redirect(f"/racecourses/{course}/distances/{distance}{suffix}")
+        if (
+            not distance_landing and 800 <= distance <= 4000
+            and all(key == "distance" or is_presentation_parameter(key)
+                    for key in request.query_params)
+        ):
+            return _permanent_redirect(f"/racecourses/{course}/distances/{distance}")
         if view not in {"", "trials"}:
             raise HTTPException(status_code=422, detail="지원하지 않는 보기입니다.")
         selected_view = "trials" if view == "trials" else "regular"
@@ -1025,6 +1083,14 @@ def create_app(
                 meet_code=meet_code, view=selected_view, band=selected_band,
                 cache=lambda key, loader: cached(key, loader, ttl=120.0),
             )
+        if distance_landing and selected_view == "regular" and not data["total"]:
+            raise HTTPException(status_code=404, detail="해당 거리의 경주 기록이 없습니다.")
+        # Keep filter links on the existing query interface. Unfiltered distance
+        # navigation points directly at indexable representative pages.
+        if selected_view == "regular" and year is None and not grade and not band:
+            for item in data["distances"]:
+                if 800 <= item["distance"] <= 4000:
+                    item["url"] = f"/racecourses/{course}/distances/{item['distance']}"
         return templates.TemplateResponse(
             request=request, name="distance_page.html",
             context={"active_nav": "distances", "data": data},
@@ -1195,7 +1261,8 @@ def create_app(
                 # filter, but omit detailed cells already rendered on other tabs.
                 item["history"] = [{
                     **{key: row[key] for key in (
-                        "date", "distance", "finish", "time", "early_position",
+                        "date", "distance", "grade", "horse_number", "track_moisture_percent",
+                        "finish", "finish_position", "valid_finish", "time", "early_position",
                     )},
                     "section_details": {code: {
                         key: value for key, value in cell.items()

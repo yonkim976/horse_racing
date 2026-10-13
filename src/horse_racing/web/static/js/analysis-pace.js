@@ -7,7 +7,6 @@
 
   const STAGES = ["early", "middle", "late"];
   const STAGE_LABELS = { early: "초반 직선", middle: "중반 코너", late: "종반 직선" };
-  const COLORS = ["#f6f3e8", "#263b33", "#b94c47", "#3b71ac", "#dfbd4f", "#557d56", "#bd8561", "#9b739b", "#4d8991", "#aa687f", "#717e45", "#6c79a4"];
   const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
   const finite = (value) => typeof value === "number" && Number.isFinite(value);
   const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -154,9 +153,7 @@
   }
   function remember() { undoState = clone(state); find("[data-ap-undo]").disabled = false; }
   function color(runner, node) {
-    const index = ((runner.number - 1) % COLORS.length + COLORS.length) % COLORS.length;
-    node.style.setProperty("--stone-color", COLORS[index]);
-    node.style.setProperty("--stone-ink", index === 0 ? "#233c31" : index === 4 ? "#332d18" : "#ffffff");
+    node.classList.add("silk-number", `silk-${runner.number}`);
   }
   function evidenceText(runner) {
     const evidence = stageEvidence(runner, state.stage);
@@ -309,9 +306,9 @@
     roster.type = "button";
     roster.className = "analysis-pace-runner";
     roster.setAttribute("aria-pressed", "false");
-    color(runner, roster);
     const number = document.createElement("span");
     number.className = "analysis-pace-runner-number";
+    color(runner, number);
     number.textContent = String(runner.number);
     const copy = document.createElement("span");
     copy.className = "analysis-pace-runner-copy";

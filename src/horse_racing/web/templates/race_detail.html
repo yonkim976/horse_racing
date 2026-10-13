@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "_macros.html" import entry_table, silk %}
 
-{% block title %}{{ page.course_name }} {{ page.race_number }}R · 경주 상세 · 마필로그 Mapilog{% endblock %}
+{% block title %}{{ page.date_label }} {{ page.course_name }} {{ page.race_number }}경주 {{ '결과·구간기록' if page.status == 'completed' else '출전표·경주정보' }} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}{{ page.date_label }} {{ page.course_name }} {{ page.race_number }}R 결과와 구간기록을 확인합니다.{% endblock %}
 
 {% block content %}
@@ -31,7 +31,7 @@
       <div class="race-title-row">
         <div>
           <p>{{ page.date_label }} · {{ page.start_time }} 출발</p>
-          <h1 class="race-page-title">{{ page.race_name }}</h1>
+          <h1 class="race-page-title">{{ page.course_name }} {{ page.race_number }}경주 · {{ page.race_name }}</h1>
         </div>
         <div class="race-hero-actions">
           <span class="status {{ page.status }}">{{ page.status_label }}</span>

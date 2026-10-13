@@ -2,7 +2,7 @@
 
 {% block title %}{{ page.course_name }} 경주로 전체 거리 · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}{{ page.course_name }} 경주로를 거리별로 확인합니다.{% endblock %}
-{% block extra_head %}<script src="{{ url_for('static', path='/js/course-view.js') }}?v=12" defer></script>{% endblock %}
+{% block extra_head %}<script src="{{ url_for('static', path='/js/course-view.js') }}?v=13" defer></script>{% endblock %}
 
 {% block content %}
 {% set course = 'seoul' if page.meet_code == 1 else 'jeju' if page.meet_code == 2 else 'busan' if page.meet_code == 3 else 'yeongcheon' %}

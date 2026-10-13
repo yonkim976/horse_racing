@@ -106,7 +106,8 @@ def test_semantic_cache_key_coalesces_irrelevant_query_but_preserves_effective_i
     tracking_a = normalized_query_key(make_request("/analysis", "utm_source=one"))
     tracking_b = normalized_query_key(make_request("/analysis", "noise=two"))
     assert base == ""
-    assert tracking_a == tracking_b == "__has_query=1"
+    assert tracking_a == "__has_query=1"
+    assert tracking_b == "__noindex=1"
 
     first = normalized_query_key(make_request("/analysis", "meet=2&date=2026-09-23"))
     second = normalized_query_key(make_request("/analysis", "date=2026-09-23&meet=2"))

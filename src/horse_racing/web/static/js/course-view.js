@@ -25,7 +25,9 @@
       return null;
     }
     if (url.origin !== window.location.origin) return null;
-    const match = url.pathname.match(/^\/racecourses\/(seoul|busan|yeongcheon|jeju)\/(distances|course)$/);
+    const match = url.pathname.match(/^\/racecourses\/(seoul|busan|yeongcheon|jeju)\/(distances|course)(?:\/([1-9]\d{2,3}))?$/);
+    if (match?.[3] && (match[2] !== 'distances'
+      || Number(match[3]) < 800 || Number(match[3]) > 4000)) return null;
     return match ? {
       url,
       course: match[1],
@@ -412,6 +414,18 @@
 
       const incomingTitle = parsedDocument.querySelector('title');
       if (incomingTitle) document.title = incomingTitle.textContent;
+      // Keep metadata consistent with the visible view after client navigation,
+      // including when returning to a canonical distance landing from the map.
+      [
+        'meta[name="robots"]', 'meta[name="description"]', 'link[rel="canonical"]',
+        'meta[property="og:url"]', 'meta[property="og:title"]',
+        'meta[property="og:description"]', 'meta[name="twitter:title"]',
+        'meta[name="twitter:description"]', 'script[type="application/ld+json"]'
+      ].forEach((selector) => {
+        const current = document.head.querySelector(selector);
+        const incoming = parsedDocument.head.querySelector(selector);
+        if (current && incoming) current.replaceWith(incoming.cloneNode(true));
+      });
       updateMeetLinks(parsedDocument, route.view);
       setTabs(route.view);
       rememberedViewUrls.set(course + '|' + route.view, route.url.href);

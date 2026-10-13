@@ -136,8 +136,8 @@ def test_seoul_distance_page_is_separate_and_validates_course(factory):
     client = TestClient(create_app(session_factory=factory))
     response = client.get("/racecourses/seoul/distances?year=2026&grade=혼4등급&distance=1700")
     assert response.status_code == 200
-    assert "서울 거리별 분석" in response.text
-    assert "course-view.js?v=11" in response.text
+    assert "서울 1700m 거리별 분석" in response.text
+    assert "course-view.js?v=13" in response.text
     assert 'action="/racecourses/seoul/distances"' in response.text
     assert '1,700' in response.text
     assert client.get("/racecourses/unknown/distances").status_code == 404
@@ -154,7 +154,7 @@ def test_yeongcheon_distance_page_supports_general_grade_labels(factory):
         "/racecourses/yeongcheon/distances?year=2026&distance=1200&grade=1%EB%93%B1%EA%B8%89"
     )
     assert response.status_code == 200
-    assert "영천 거리별 분석" in response.text
+    assert "영천 1200m 거리별 분석" in response.text
     assert "주행심사" in response.text
     assert "/racecourses/yeongcheon/course" in response.text
 

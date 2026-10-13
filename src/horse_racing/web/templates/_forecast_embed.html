@@ -32,7 +32,7 @@
   <div class="table-scroll"><table class="entry-table insight-table" data-sortable data-runner-table>
     <thead><tr><th>마번</th><th>출전마 / 상태</th><th>기수</th><th>부담중량</th><th>예상순위</th><th>우승</th><th>입상</th><th>최근 5회</th><th>통산</th><th>동일거리</th><th>전개 근거</th></tr></thead>
     <tbody>{% for row in page.runners %}<tr data-entry-id="{{ row.entry_id }}" class="{% if row.scratched %}is-muted{% endif %}" tabindex="0">
-      <td>{% if forecast_embedded|default(false) %}<span>{{ row.number }}</span>{% else %}<button type="button" class="runner-number" data-highlight="{{ row.entry_id }}">{{ row.number }}</button>{% endif %}</td>
+      <td>{% if forecast_embedded|default(false) %}<span class="silk-number silk-{{ row.number }} ra-stone" data-number="{{ row.number }}">{{ row.number }}</span>{% else %}<button type="button" class="runner-number" data-highlight="{{ row.entry_id }}">{{ row.number }}</button>{% endif %}</td>
       <td><a href="/horses/{{ row.horse_id }}"><strong>{{ row.horse }}</strong></a><small class="cell-note">{{ row.state }}</small></td>
       <td>{{ row.jockey }}</td><td class="numeric">{{ row.weight }}</td><td class="numeric">{{ row.predicted_rank or '—' }}</td><td class="numeric">{{ row.prob_win }}</td><td class="numeric">{{ row.prob_top3 }}</td><td class="numeric">{{ row.recent_finishes }}</td><td>{{ row.starts }}전 · 승 {{ row.win_rate }} · 입상 {{ row.top3_rate }}</td><td>{{ row.same_distance }}</td><td><strong>{{ row.style }}</strong><small class="cell-note">{{ row.style_reason }}{% if row.closing_time is not none %} · G1F 평균 {{ row.closing_time }}초{% endif %}</small></td>
     </tr>{% endfor %}</tbody>

@@ -111,6 +111,7 @@ class PastStart:
     horse_number: int | None = None
     race_name: str = ""
     weather: str = ""
+    track_moisture_percent: float | None = None
 
 
 @dataclass(slots=True)
@@ -909,6 +910,7 @@ def _load_histories(session, horse_ids, cutoff, limit, *, start, end):
                 horse_number=row["horse_number"],
                 race_name=row["race_name"] or "",
                 weather=row["weather"] or "",
+                track_moisture_percent=row["track_moisture_percent"],
             )
         )
     return histories, totals
@@ -1355,6 +1357,7 @@ def _archive_start(row):
         horse_number=row.get("horse_number"),
         race_name=row.get("race_name") or "",
         weather=row.get("weather") or "",
+        track_moisture_percent=row.get("track_moisture_percent"),
     )
 
 

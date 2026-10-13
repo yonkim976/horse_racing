@@ -1,6 +1,7 @@
 {% extends "base.html" %}
-{% block title %}{{ data.course_name }} {{ '주행심사 구간 분석' if data.view == 'trials' else '거리별 분석' }} · 마필로그 Mapilog{% endblock %}
-{% block extra_head %}<script src="{{ url_for('static', path='/js/course-view.js') }}?v=11" defer></script>{% endblock %}
+{% block title %}{{ data.course_name }} {% if data.distance %}{{ data.distance }}m {% endif %}{{ '주행심사 구간 분석' if data.view == 'trials' else '거리별 분석' }} · 마필로그 Mapilog{% endblock %}
+{% block meta_description %}{{ data.course_name }} {% if data.distance %}{{ data.distance }}m {% endif %}{{ data.year or '전체 기간' }} 경주 기록과 구간 통계를 비교합니다. 등급과 함수율별 기록 기준, 표본 수와 집계 방법을 확인하세요.{% endblock %}
+{% block extra_head %}<script src="{{ url_for('static', path='/js/course-view.js') }}?v=13" defer></script>{% endblock %}
 {% block content %}
 {% set course = data.course %}
 {% set course_name = data.course_name %}
@@ -8,6 +9,17 @@
 {% set active_view = 'distances' %}
 {% include "_course_analysis_shell.html" %}
 <div class="course-view-content" data-course-view-content data-course="{{ course }}" data-view="distances">
+{% if data.view == 'regular' and data.distance and data.total %}
+<section class="panel seo-summary" aria-label="거리별 기록 요약">
+  <div class="panel-heading"><h2>{{ data.course_name }} {{ data.distance }}m 기록 요약</h2></div>
+  <div class="seo-summary-content">
+  <p>{{ data.year or '전체 기간' }}{% if data.grade %} · {{ data.grade }}{% endif %} 기준 완료된 {{ "{:,}".format(data.total) }}경주를 집계했습니다.
+    정상 완주 기록 {{ "{:,}".format(data.timed) }}건의 평균은 {{ data.average }}, 가장 빠른 기록은 {{ data.best }}입니다.</p>
+  <p class="distance-note">집계 기간 {{ data.first }}–{{ data.last }}. 출처: <a class="entity-link" href="https://race.kra.co.kr/" rel="noopener noreferrer">한국마사회 공개 경주 자료</a>. 취소·실격·비정상 착순과 유효하지 않은 시간은 기록 평균에서 제외합니다.
+    관측 평균과 연구용 추정 기준은 구분해서 표시하며, 조건별 표본 수를 함께 확인해야 합니다.</p>
+  </div>
+</section>
+{% endif %}
 <section class="panel distance-controls" aria-label="경주 검색 조건">
   <form class="filters" method="get" action="{{ data.base_url }}">
     {% if data.view == 'trials' %}<input type="hidden" name="view" value="trials">{% else %}<input type="hidden" name="distance" value="{{ data.distance }}">{% endif %}

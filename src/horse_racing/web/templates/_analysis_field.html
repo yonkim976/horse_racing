@@ -1,0 +1,40 @@
+<section id="field-overview" class="ra-panel">
+  <div class="ra-panel-heading">
+    <div><h2>출전마 비교 <span>{{ page.runners|length }}두</span></h2><p>말을 선택해 요약을 확인하고, 비교 담기로 최대 4두를 나란히 보세요.</p></div>
+    <label class="ra-check-label"><input type="checkbox" data-same-distance> 현재 거리 {{ page.selected_race.distance }}m만</label>
+  </div>
+  <div class="ra-field-workspace" data-field-workspace>
+    <aside class="ra-field-rail" aria-label="비교할 출전마 선택">
+      <label class="ra-search-label"><span class="ra-sr-only">출전마 또는 기수 검색</span><input type="search" data-runner-search placeholder="말 · 기수 검색"></label>
+      <div class="ra-field-sort" role="group" aria-label="출전마 정렬">
+        <button type="button" data-sort="number" aria-label="마번으로 정렬" aria-pressed="true">마번 ↑</button>
+        <button type="button" data-sort="rating" aria-label="레이팅으로 정렬" aria-pressed="false">레이팅 ↕</button>
+      </div>
+      <div class="ra-field-list" data-field-list>
+        {% for runner in page.runners | sort(attribute='number') %}
+        <div class="ra-field-rail-item{% if runner.state == '출전취소' %} ra-scratched{% endif %}" data-field-entry="{{ runner.entry_id }}" data-runner-name="{{ runner.horse }} {{ runner.jockey }}" data-number="{{ runner.number }}" data-rating="{{ runner.rating }}">
+          <button type="button" class="ra-field-runner" data-select-runner="{{ runner.entry_id }}" data-field-select aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-controls="field-runner-summary" aria-label="{{ runner.number }}번 {{ runner.horse }} 요약 보기">
+            {{ stone(runner.number) }}
+            <span><strong>{{ runner.horse }}</strong><small>{{ runner.jockey }} · {{ runner.weight }}</small>{% if runner.state == '출전취소' %}<small>출전취소</small>{% endif %}</span>
+          </button>
+          <label class="ra-field-compare-check"><input type="checkbox" data-compare-entry="{{ runner.entry_id }}" aria-label="{{ runner.number }}번 {{ runner.horse }} 비교 담기"><span>비교 담기</span></label>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="ra-field-list-status" data-field-status aria-live="polite">{{ page.runners|length }}두 · 비교는 최대 4두</p>
+    </aside>
+    <section class="ra-field-detail" data-comparison-panel aria-label="출전마 요약 정보">
+      <div class="ra-field-detail-toolbar">
+        <div class="ra-field-modes" role="group" aria-label="정보 보기 방식">
+          <button type="button" data-field-mode="single" aria-pressed="true">개별 보기</button>
+          <button type="button" data-field-mode="compare" aria-pressed="false" disabled>나란히 비교 <span data-comparison-count>0두</span></button>
+        </div>
+        <button type="button" class="ra-button" data-clear-comparison disabled>비교 비우기</button>
+      </div>
+      <p class="ra-sr-only" data-field-detail-status aria-live="polite"></p>
+      <div id="field-runner-summary" class="ra-compare-grid" data-comparison-content></div>
+      <noscript><p class="ra-footnote">출전마 요약을 전환하려면 자바스크립트를 켜 주세요. 전체 기록은 말별 기록·영상 탭에서 확인할 수 있습니다.</p></noscript>
+    </section>
+  </div>
+  <p class="ra-footnote">각질은 과거 S1F 통과순위에 따른 추정입니다. 경주와 주행심사는 구분하며, 확인되지 않은 기록은 ‘—’로 표시합니다.</p>
+</section>

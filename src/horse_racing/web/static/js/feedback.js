@@ -1,8 +1,8 @@
 (() => {
   'use strict';
   const dialog = document.getElementById('feedback-dialog');
-  const launcher = document.querySelector('[data-feedback-open]');
-  if (!dialog || !launcher) return;
+  const launchers = document.querySelectorAll('[data-feedback-open]');
+  if (!dialog || !launchers.length) return;
   const form = dialog.querySelector('[data-feedback-form]');
   const message = form.elements.message;
   const success = dialog.querySelector('[data-feedback-success]');
@@ -24,8 +24,10 @@
   dialog.querySelector('[data-feedback-page-title]').textContent = title;
   dialog.querySelector('[data-feedback-page-path]').textContent = current.pathname + (context.size ? `?${context}` : '');
 
-  launcher.addEventListener('click', () => {
-    if (!dialog.open) dialog.showModal();
+  launchers.forEach(launcher => {
+    launcher.addEventListener('click', () => {
+      if (!dialog.open) dialog.showModal();
+    });
   });
   dialog.querySelectorAll('[data-feedback-close]').forEach(button => {
     button.addEventListener('click', () => dialog.close());

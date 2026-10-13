@@ -21,7 +21,15 @@
   {%- endfor -%}
 {%- endmacro %}
 
-{% macro entry_table(entries, scheduled=false) %}
+{% macro weight_value(value, delta, highlight=false) -%}
+  {%- if highlight and delta is not none and ' (' in value -%}
+    {{ value.rsplit(' (', 1)[0] }} <span class="weight-change{% if delta > 0 %} delta-up{% elif delta < 0 %} delta-down{% endif %}">({{ value.rsplit(' (', 1)[1] }}</span>
+  {%- else -%}
+    {{ value }}
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro entry_table(entries, scheduled=false, highlight_weight_changes=false) %}
   <div class="table-scroll">
     <table class="entry-table{% if scheduled %} scheduled-entry-table{% endif %}" data-sortable>
       <thead>
@@ -84,28 +92,28 @@
             <td data-sort-value="{{ entry.owner_name }}">
               {% if entry.owner_id %}
                 <a class="entity-link owner-name" href="/owners/{{ entry.owner_id }}"
-                  aria-label="{{ entry.owner_name }}">
+                  aria-label="{{ entry.owner_name }}" data-owner-expandable="{{ 'true' if entry.owner_name|length > 5 else 'false' }}">
                   <span class="owner-name-short">{{ entry.owner_name[:5] }}{% if entry.owner_name|length > 5 %}…{% endif %}</span>
                   <span class="owner-name-full" aria-hidden="true">{{ entry.owner_name }}</span>
                 </a>
               {% else %}
                 <span class="owner-name owner-name-static" role="group" tabindex="0"
-                  aria-label="{{ entry.owner_name }}">
+                  aria-label="{{ entry.owner_name }}" data-owner-expandable="{{ 'true' if entry.owner_name|length > 5 else 'false' }}">
                   <span class="owner-name-short">{{ entry.owner_name[:5] }}{% if entry.owner_name|length > 5 %}…{% endif %}</span>
                   <span class="owner-name-full" aria-hidden="true">{{ entry.owner_name }}</span>
                 </span>
               {% endif %}
             </td>
             {% if scheduled %}
-            <td class="numeric {% if entry.carried_weight_delta is not none and entry.carried_weight_delta > 0 %}delta-up{% elif entry.carried_weight_delta is not none and entry.carried_weight_delta < 0 %}delta-down{% endif %}">{{ entry.carried_weight }}</td>
+            <td class="numeric {% if not highlight_weight_changes %}{% if entry.carried_weight_delta is not none and entry.carried_weight_delta > 0 %}delta-up{% elif entry.carried_weight_delta is not none and entry.carried_weight_delta < 0 %}delta-down{% endif %}{% endif %}">{{ weight_value(entry.carried_weight, entry.carried_weight_delta, highlight_weight_changes) }}</td>
             <td class="numeric" title="{{ '직전 출전일 ' ~ entry.previous_race_date if entry.previous_race_date else '직전 출전 기록 미제공' }}">{{ entry.rest_weeks }}</td>
             <td class="entry-equipment" data-sort-value="{{ entry.equipment }}">{{ equipment_label(entry.equipment) }}</td>
             <td class="numeric" data-sort-value="{{ entry.training_count if entry.training_count is not none else '' }}">{{ entry.training_count ~ '회' if entry.training_count is not none else '—' }}</td>
             <td class="numeric">{{ entry.rating }}</td>
             {% else %}
-            <td class="numeric">{{ entry.carried_weight }}</td>
-            <td class="numeric {% if entry.weight_delta and entry.weight_delta > 0 %}delta-up{% elif entry.weight_delta and entry.weight_delta < 0 %}delta-down{% endif %}">
-              {{ entry.body_weight }}
+            <td class="numeric">{{ weight_value(entry.carried_weight, entry.carried_weight_delta, highlight_weight_changes) }}</td>
+            <td class="numeric {% if not highlight_weight_changes %}{% if entry.weight_delta and entry.weight_delta > 0 %}delta-up{% elif entry.weight_delta and entry.weight_delta < 0 %}delta-down{% endif %}{% endif %}">
+              {{ weight_value(entry.body_weight, entry.weight_delta, highlight_weight_changes) }}
             </td>
             <td class="numeric">{{ entry.rating }}</td>
             <td class="numeric result-time">{{ entry.finish_time }}</td>

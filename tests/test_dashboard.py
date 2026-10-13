@@ -1,4 +1,5 @@
 import csv
+import json
 import re
 from datetime import date, datetime, timedelta
 from io import StringIO
@@ -78,8 +79,8 @@ def test_search_engine_files_are_public_and_use_canonical_urls(tmp_path: Path) -
     assert robots.status_code == 200
     assert robots.headers["content-type"].startswith("text/plain")
     assert "User-agent: ClaudeBot\nDisallow: /" in robots.text
-    assert "User-agent: Claude-SearchBot\nDisallow: /" in robots.text
-    assert "User-agent: Claude-User\nDisallow: /" in robots.text
+    assert "User-agent: Claude-SearchBot\nAllow: /" in robots.text
+    assert "User-agent: Claude-User\nAllow: /" in robots.text
     assert "User-agent: *\nAllow: /" in robots.text
     assert "Sitemap: https://mapilog.xyz/sitemap.xml" in robots.text
     assert sitemap.status_code == 200
@@ -360,7 +361,7 @@ def test_course_map_page_loads_one_selected_route_for_each_meet(
     assert f"{name} 경주로" in response.text
     display_name = "부산" if name == "부경" else name
     assert f"<h1>{display_name} 경주로·거리 분석</h1>" in response.text
-    assert "course-view.js?v=12" in response.text
+    assert "course-view.js?v=13" in response.text
     assert f"distance={distance}" in response.text
     assert "COURSE EXPLORER" not in response.text
     assert "공식 도면 비교" not in response.text
@@ -1164,7 +1165,7 @@ def test_analysis_workspace_filters_exports_and_rejects_invalid_range(
     assert "가장 가까운 공개 경주일" not in page.text
     assert "이전 기록 기준" not in page.text
     assert "공식 출전표와 불변 원장에 발행된 예측만 표시합니다." not in page.text
-    assert "race-analysis.css?v=14" in page.text
+    assert re.search(r"/static/css/race-analysis\.css\?v=\d+", page.text)
     assert 'data-calendar-open' in page.text
     assert 'data-calendar-modal' in page.text
     assert 'data-calendar-value' in page.text
@@ -1244,6 +1245,18 @@ def test_analysis_tabs_support_direct_links_and_preserve_race_navigation(
                     assert not pane.find("table")
             if selected == "records":
                 assert document.select_one('.ra-history-filter input[name="tab"]')["value"] == "records"
+            if selected == "field":
+                rail = document.select_one('[data-field-list]')
+                choices = rail.select('[data-field-select]')
+                assert choices
+                assert len(choices) == len(rail.select('[data-compare-entry]'))
+                numbers = [int(row['data-number']) for row in rail.select('[data-field-entry]')]
+                assert numbers == sorted(numbers)
+                assert all(button['aria-controls'] == 'field-runner-summary' for button in choices)
+                assert document.find(id='field-runner-summary') is not None
+                assert document.select_one('[data-field-mode="single"]')['aria-pressed'] == 'true'
+                assert document.select_one('[data-field-mode="compare"]').has_attr('disabled')
+                assert document.select_one('[data-field-table]') is None
 
 
 def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_video(
@@ -1297,7 +1310,9 @@ def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_vid
     assert horse_link["href"] == "/horses/003001?tab=records"
     assert len(pane.select("table")) == 1
     headers = [cell.get_text(strip=True) for cell in pane.select("thead th")]
-    assert headers[:5] == ["경주일 · 영상", "조건", "거리", "순위", "기록"]
+    assert headers[:9] == ["마명", "경주일 · 영상", "조건", "거리", "기수", "부중", "순위", "체중", "기록"]
+    assert horses[0].select_one('th[scope="rowgroup"]')["rowspan"] == "3"
+    assert len(horses[0].select('th[scope="rowgroup"]')) == 1
     assert headers[-1] == "구간착순"
     assert "영상" not in headers
     combined_dates = [
@@ -1314,7 +1329,8 @@ def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_vid
     cells = races[0].find_all("td", recursive=False)
     assert "국6등급" in cells[1].get_text()
     assert cells[2].get_text(strip=True) == "1400m"
-    assert "2위" in cells[3].get_text()
+    assert "2위" in races[0].select_one('.ra-all-records-finish').get_text()
+    assert "당시 4번" in cells[1].get_text()
     assert cells[0].select_one(".ra-video-link") is not None
     times = {cell["data-section"]: cell.get_text(strip=True)
              for cell in races[0].select("[data-section]")}
@@ -1333,7 +1349,7 @@ def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_vid
     assert horses[1].select("tr[data-all-records-kind]") == []
     assert "연결된 경주·주행심사 기록이 없습니다" in horses[1].get_text()
     column_count = len(headers)
-    assert all(int(cell["colspan"]) == column_count for cell in pane.select("[colspan]"))
+    assert all(int(cell["colspan"]) + 1 == column_count for cell in pane.select("[colspan]"))
 
 
 def test_analysis_busan_csv_uses_course_sections_and_preserves_unverified_raw_time(
@@ -2688,6 +2704,8 @@ def test_mobile_lists_horses_highest_win_probability_first(tmp_path: Path) -> No
 
 
 def test_mobile_shows_trial_form_for_debut_horses(tmp_path: Path) -> None:
+    from bs4 import BeautifulSoup
+
     factory = seeded_session(tmp_path)
     with factory() as session:
         race = session.get(Race, 1)
@@ -2753,7 +2771,11 @@ def test_mobile_shows_trial_form_for_debut_horses(tmp_path: Path) -> None:
     assert "심사 1합" in analysis.text
     assert "첫 출전마는 주행심사 착순입니다" not in analysis.text
     assert "송당퍼스트" in desktop.text
-    assert ">1합<" in desktop.text
+    document = BeautifulSoup(desktop.text, "html.parser")
+    payload = json.loads(document.find(id="race-study-data").string)
+    debut_runner = next(row for row in payload["runners"] if row["horse"] == "송당퍼스트")
+    assert debut_runner["form_kind"] == "trial"
+    assert debut_runner["form_tokens"] == ["1합"]
 
 
 def test_entity_list_and_detail_pages(tmp_path: Path, paced_requests) -> None:

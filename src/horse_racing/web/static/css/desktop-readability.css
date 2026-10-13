@@ -1,0 +1,273 @@
+/* Desktop light-mode reading scale. Mobile and dark-mode styles stay independent. */
+html[data-layout="desktop"] .header-actions .fb-launcher-header { display: none; }
+@media (min-width: 761px) {
+  html[data-layout="desktop"][data-theme="light"] {
+    --faint: #5d7066;
+    --accent: #047857;
+    --reading-body: 15px;
+    --reading-table: 13px;
+    --reading-note: 12px;
+  }
+
+  html[data-layout="desktop"][data-theme="light"] body { font-size: var(--reading-body); }
+  html[data-layout="desktop"][data-theme="light"] table { font-size: 14px; }
+  html[data-layout="desktop"][data-theme="light"] th {
+    font-size: var(--reading-note);
+    font-weight: 650;
+    letter-spacing: .01em;
+  }
+  html[data-layout="desktop"][data-theme="light"] :is(.numeric, .entry-table td.margin) { font-size: var(--reading-table); }
+  html[data-layout="desktop"][data-theme="light"] :is(td > span, .horse-cell small, .cell-note, .distance-subtitle) { font-size: var(--reading-note); }
+  html[data-layout="desktop"][data-theme="light"] .entry-table tbody td:is(:nth-child(3), :nth-child(4), :nth-child(5)) { font-size: var(--reading-table); }
+  html[data-layout="desktop"][data-theme="light"] .entry-table td.entry-equipment { font-size: var(--reading-note); }
+  /* Keep the requested compact, bold trainer/owner names and saddlecloth numbers. */
+  html[data-layout="desktop"][data-theme="light"] .horse-list-table .horse-list-affiliation { font-size: 12px; }
+  html[data-layout="desktop"][data-theme="light"] .horse-grade-table th { font-size: var(--reading-table); }
+
+  html[data-layout="desktop"][data-theme="light"] :is(.eyebrow, .panel-kicker, .ra-eyebrow) {
+    color: var(--accent-strong);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: .12em;
+  }
+  html[data-layout="desktop"][data-theme="light"] :is(.filters label span, .filter-label) { font-size: var(--reading-note); }
+  html[data-layout="desktop"][data-theme="light"] :is(input, textarea)::placeholder { color: var(--muted); opacity: 1; }
+  html[data-layout="desktop"][data-theme="light"] th[aria-sort] { color: var(--accent-strong); }
+  html[data-layout="desktop"][data-theme="light"] :is(.site-footer, .site-footer-beta) { font-size: var(--reading-note); }
+  html[data-layout="desktop"][data-theme="light"] :is(.public-info-section p, .public-info-section li, .public-info-steps span) {
+    font-size: var(--reading-body);
+    line-height: 1.8;
+  }
+  html[data-layout="desktop"][data-theme="light"] :is(.public-info-note, .public-info-review) { color: var(--ink); }
+
+  /* Labels and timestamps share a minimum reading size across profile pages. */
+  html[data-layout="desktop"][data-theme="light"] :is(
+    .horse-profile-facts dt, .horse-profile-facts .horse-profile-context,
+    .horse-profile-note, .horse-profile-reference-facts dt,
+    .jockey-profile-identity small, .jockey-section-title span,
+    .jockey-partner-toolbar p, .benchmark-more, .status-error
+  ) { font-size: var(--reading-note); line-height: 1.6; }
+  html[data-layout="desktop"][data-theme="light"] :is(
+    .horse-record-condition, .jockey-partner-table a,
+    .jockey-stats-table tbody th, .jockey-period-tabs a,
+    .jockey-detail-periods a, .horse-detail-tabs a
+  ) { font-size: var(--reading-table); }
+
+  /* The analysis workspace previously reduced record values to 10–11px. */
+  html[data-layout="desktop"][data-theme="light"] .ra-workspace table { font-size: var(--reading-table); }
+  html[data-layout="desktop"][data-theme="light"] .ra-workspace th { font-size: var(--reading-note); font-weight: 650; }
+  html[data-layout="desktop"][data-theme="light"] .ra-workspace :is(td small, th small) {
+    font-size: var(--reading-note);
+    line-height: 1.5;
+  }
+  html[data-layout="desktop"][data-theme="light"] :is(.ra-number, .ra-all-records-passing-order) {
+    font-size: var(--reading-table);
+    font-weight: 500;
+  }
+  html[data-layout="desktop"][data-theme="light"] .ra-workspace .ra-number > span {
+    color: inherit;
+    font-size: inherit;
+  }
+  html[data-layout="desktop"][data-theme="light"] :is(
+    .ra-panel-heading p, .ra-dossier-heading p, .ra-style-explanation,
+    .ra-horse-rail small, .ra-record-tabs button span, .ra-record-toolbar,
+    .ra-past-detail > div, .ra-video-link, .ra-all-records-date-line .ra-video-link,
+    .ra-all-records-identity > span:not(.ra-stone), .ra-raw-section,
+    .ra-footnote, .ra-history-filter, .ra-no-form, .ra-style-tag,
+    .ra-compare-card p, .ra-compare-card .ra-mini-history,
+    .ra-mini-history > small, .ra-jockey-grid p, .ra-stat-row,
+    .ra-training-summary span, .ra-training-summary strong small,
+    .ra-memo [data-race-memo-state], .ra-video-heading span,
+    .ra-video-footer
+  ) { font-size: var(--reading-note); line-height: 1.6; }
+  html[data-layout="desktop"][data-theme="light"] :is(.ra-record-tabs button, .ra-check-label, .ra-compare-card dl, .ra-horse-rail strong) {
+    font-size: var(--reading-table);
+  }
+  html[data-layout="desktop"][data-theme="light"] .ra-form-chips > span:not(.ra-no-form) {
+    font-size: var(--reading-note);
+    min-width: 24px;
+    height: 26px;
+  }
+  html[data-layout="desktop"][data-theme="light"] .ra-record-workspace { grid-template-columns: 210px minmax(0, 1fr); }
+  html[data-layout="desktop"][data-theme="light"] .ra-horse-rail > button > :not(.ra-stone) { min-width: 0; overflow-wrap: anywhere; }
+
+  /* Give the race-detail diagram enough space for its SVG labels to be read. */
+  html[data-layout="desktop"][data-theme="light"] .race-detail-map .seoul-plan { width: min(100%, 840px); }
+  html[data-layout="desktop"][data-theme="light"] :is(
+    .course-toolbar, .course-method, .course-detail-kicker,
+    .course-horse-times li, .course-selected-interval span,
+    .course-section-sequence small, .course-step-length,
+    .seoul-official p
+  ) { font-size: var(--reading-note); }
+  html[data-layout="desktop"][data-theme="light"] :is(.course-color-key, .seoul-route-caption span) { font-size: var(--reading-table); }
+  html[data-layout="desktop"][data-theme="light"] :is(.seoul-corners text, .seoul-metric-point text, .seoul-grandstand text) { font-size: 14px; }
+
+  html[data-layout="desktop"][data-theme="light"] :is(
+    .fb-required, .fb-optional, .fb-field-help, .fb-context small,
+    .fb-demo-note, .fb-eyebrow
+  ) { font-size: var(--reading-note); }
+}
+
+/* Keep the feedback entry in the sticky desktop header, clear of table cells. */
+@media (min-width: 761px) {
+  html[data-layout="desktop"][data-theme="light"] .header-actions .fb-launcher {
+    display: inline-flex;
+    position: static;
+    flex-shrink: 0;
+    box-shadow: none;
+    min-height: 38px;
+    padding-inline: 12px;
+    font-size: 12px;
+  }
+  html[data-layout="desktop"][data-theme="light"] body > .fb-launcher { display: none; }
+}
+/* On narrow desktop fallback pages and in dark mode retain the floating entry. */
+
+/* Desktop data values use the foreground color at every viewport size.
+   Keep headings, explanations, and controls separate from recorded values. */
+html[data-layout="desktop"][data-theme] .page-shell table tbody td:not(:where(.delta-up, .delta-down)) {
+  color: var(--ink);
+}
+html[data-layout="desktop"][data-theme] .page-shell table tbody td
+  :is(a, small, span, strong, time, em, b):not(:where(
+    [class*="silk-"], .silk-number, .ra-stone, .runner-number,
+    .cell-note, .ra-no-form, .ra-video-link, .video-link,
+    /* Preserve colors that convey changes, results, or status. */
+    .equipment-added, .equipment-removed, .delta-up, .delta-down,
+    .trial-judgement, .trial-pass-text, .trial-fail-text,
+    .status, .horse-status-badge, .source-kind, .event-type,
+    .placing, .ra-placed, .ra-style-tag, .ra-form-chips > .placed,
+    .recent-finish-1, .recent-finish-2, .recent-finish-3,
+    .benchmark-status, .evaluation-status
+  )) {
+  color: inherit;
+}
+html[data-layout="desktop"][data-theme] .page-shell table thead th {
+  color: var(--muted);
+}
+html[data-layout="desktop"][data-theme] .page-shell :is(
+  .eyebrow, .panel-kicker, .ra-eyebrow,
+  .horse-profile-facts dt, .horse-profile-reference-facts dt,
+  .meta-list dt, .ra-compare-card dt, .ra-compare-card h4
+) {
+  color: var(--muted);
+}
+html[data-layout="desktop"][data-theme] .page-shell :where(
+  .group-row th, .horse-grade-table tbody th,
+  .ra-all-records-horse, .ra-all-records-name > a,
+  .ra-all-records-identity > span,
+  .horse-cell small, .insight-table td:nth-child(2) .cell-note,
+  .horse-profile-facts dd, .horse-profile-reference-facts dd,
+  .meta-list dd, .meta-list dd a,
+  .jockey-profile-identity p:not(.panel-kicker), .jockey-profile-identity small,
+  .jockey-section-title > span, .jockey-partner-toolbar p,
+  .panel-heading time,
+  .ra-race-title p, .ra-rounds a span,
+  .ra-dossier-heading p, .ra-horse-rail small,
+  .ra-compare-card dd, .ra-compare-card > header p,
+  .ra-mini-history > span, .ra-mini-history > strong, .ra-mini-history > small,
+  .ra-compare-card > p:has(+ .ra-mini-history), .ra-compare-card > .ra-mini-history + p,
+  .ra-past-detail > div span, .ra-training-summary strong,
+  .evaluation-context span
+) {
+  color: var(--ink);
+}
+
+/* Race metadata sits on the dark regional hero, so keep its component contrast. */
+html[data-layout="desktop"][data-theme] .race-hero .race-meta {
+  color: #fff;
+}
+
+/* Highlight the selected schedule row with its regional color, without a side bar. */
+html[data-layout="desktop"][data-theme] .race-table [data-dashboard-race-id] {
+  --schedule-region-rgb: 16 185 129;
+}
+html[data-layout="desktop"][data-theme] .race-table [data-racecourse="서울"] {
+  --schedule-region-rgb: 14 165 233;
+}
+html[data-layout="desktop"][data-theme] .race-table [data-racecourse="제주"] {
+  --schedule-region-rgb: 239 89 71;
+}
+html[data-layout="desktop"][data-theme] .race-table [data-racecourse="영천"] {
+  --schedule-region-rgb: 122 96 183;
+}
+html[data-layout="desktop"][data-theme] .race-table [data-dashboard-race-id]:is(:hover, :focus) {
+  background: rgb(var(--schedule-region-rgb) / 8%);
+}
+html[data-layout="desktop"][data-theme] .race-table [data-dashboard-race-id].selected {
+  background: rgb(var(--schedule-region-rgb) / 14%);
+}
+html[data-layout="desktop"][data-theme] .race-table [data-dashboard-race-id].selected td:first-child {
+  box-shadow: none;
+}
+
+/* Main schedule: keep horse names readable at narrow desktop widths too. */
+html[data-layout="desktop"][data-theme] [data-dashboard-detail]
+  .horse-cell .entity-link > strong {
+  font-size: 12px;
+}
+
+/* Main schedule: only the signed weight change carries a directional color. */
+html[data-layout="desktop"][data-theme] [data-dashboard-detail] .weight-change {
+  display: inline;
+  margin: 0;
+  font: inherit;
+  color: var(--ink);
+}
+html[data-layout="desktop"][data-theme] [data-dashboard-detail] .weight-change.delta-up {
+  color: var(--accent-strong);
+}
+html[data-layout="desktop"][data-theme] [data-dashboard-detail] .weight-change.delta-down {
+  color: var(--red);
+}
+
+/* Expand long owner names in the table flow without a floating background. */
+html[data-layout="desktop"][data-theme] .page-shell .entry-table
+  .owner-name:is(:hover, :focus) {
+  color: var(--accent-strong);
+}
+html[data-layout="desktop"][data-theme] .entry-table .owner-name .owner-name-full {
+  display: none;
+  position: static;
+  margin: 0;
+  max-width: none;
+  background: transparent;
+  line-height: inherit;
+  white-space: nowrap;
+  transform: none;
+}
+html[data-layout="desktop"][data-theme] .entry-table .owner-name .owner-name-short {
+  visibility: visible;
+  white-space: nowrap;
+}
+html[data-layout="desktop"][data-theme] .entry-table
+  .owner-name[data-owner-expandable="true"]:is(:hover, :focus) .owner-name-short {
+  display: none;
+}
+html[data-layout="desktop"][data-theme] .entry-table
+  .owner-name[data-owner-expandable="true"]:is(:hover, :focus) .owner-name-full {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Share one text-link emphasis, including labels nested inside links.
+   Filled action buttons and saddlecloth badges retain their own contrast. */
+html[data-layout="desktop"][data-theme] .race-hero {
+  --desktop-link-hover: #6ee7b7;
+}
+html[data-layout="desktop"][data-theme] body
+  a[href]:not(:where(.brand, .detail-link, .button-primary, .race-video-button)):is(:hover, :focus-visible) {
+  color: var(--desktop-link-hover, var(--accent-strong));
+  text-decoration-color: currentColor;
+}
+html[data-layout="desktop"][data-theme] body
+  a[href]:not(:where(.brand, .detail-link, .button-primary, .race-video-button)):is(:hover, :focus-visible)
+  :is(span, strong, small, b, em, time):not(:where(
+    [class*="silk-"], .silk-number, .ra-stone, .runner-number,
+    .status, .horse-status-badge, .source-kind, .event-type,
+    .equipment-added, .equipment-removed, .trial-judgement,
+    .trial-pass-text, .trial-fail-text, .placing, .benchmark-status
+  )) {
+  color: inherit;
+}

@@ -58,20 +58,46 @@
 .ra-field-table tbody tr:hover { background:var(--row-hover); }
 .ra-field-table :is(th,td):first-child { padding-left:20px;padding-right:6px;width:42px; }
 .ra-field-table td:nth-child(2) { padding-left:5px;padding-right:8px;width:48px; }
+#field-overview { overflow:clip;overflow-anchor:none; }
+.ra-field-workspace { display:grid;grid-template-columns:230px minmax(0,1fr);align-items:start; }
+.ra-field-rail { min-width:0;position:sticky;top:calc(var(--ra-header-offset,69px) + 65px);display:flex;flex-direction:column;max-height:calc(100dvh - var(--ra-header-offset,69px) - 85px);padding:12px;border-right:1px solid var(--border);background:var(--surface-2); }
+.ra-field-rail .ra-search-label input { width:100%; }
+.ra-field-sort { display:flex;gap:8px;padding:10px 0; }
+.ra-field-sort button { border:0;background:none;padding:3px;color:var(--muted);font-size:11px;cursor:pointer; }
+.ra-field-sort button[aria-pressed="true"] { color:var(--accent-strong);font-weight:700; }
+.ra-field-list { overflow-y:auto;min-height:0;overscroll-behavior:contain; }
+.ra-field-rail-item { border:1px solid transparent;border-radius:8px;margin-bottom:4px; }
+.ra-field-rail-item.is-selected { background:var(--surface-1);border-color:var(--accent-line); }
+.ra-field-rail-item.ra-scratched { opacity:.55; }
+.ra-field-runner { display:flex;align-items:center;gap:9px;width:100%;padding:10px 8px 5px;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer; }
+.ra-field-runner>span:last-child { min-width:0; }
+.ra-field-runner strong { display:block;font-size:12px;font-weight:700;overflow-wrap:anywhere; }
+.ra-field-runner small { display:block;font-size:11px;margin-top:3px;color:var(--ink); }
+.ra-field-runner:hover strong { color:var(--accent-strong); }
+.ra-field-compare-check { display:flex;align-items:center;gap:5px;width:max-content;padding:3px 8px 8px 46px;font-size:11px;color:var(--muted);cursor:pointer; }
+.ra-field-list-status { margin:9px 0 0;font-size:11px;color:var(--muted); }
+.ra-field-detail { min-width:0; }
+.ra-field-detail-toolbar { display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:14px 20px;border-bottom:1px solid var(--border); }
+.ra-field-modes { display:flex;gap:3px;padding:3px;border:1px solid var(--border);border-radius:9px;background:var(--surface-2); }
+.ra-field-modes button { padding:7px 10px;border:0;border-radius:6px;background:none;color:var(--muted);font-size:12px;cursor:pointer; }
+.ra-field-modes button[aria-pressed="true"] { color:var(--accent-strong);background:var(--surface-1);font-weight:700; }
+.ra-field-modes span { font:500 11px var(--font-mono);margin-left:4px; }
+.ra-field-detail-toolbar button:disabled { opacity:.45;cursor:default; }
+.ra-field-detail .ra-compare-grid { grid-template-columns:repeat(var(--compare-count,1),minmax(225px,1fr)); }
+.ra-field-form { display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px; }
+.ra-field-form>span:first-child { color:var(--muted);font-size:12px; }
+@media(max-width:1100px) { .ra-field-workspace { grid-template-columns:190px minmax(0,1fr); } }
+@media(max-width:760px) {
+  .ra-field-workspace { grid-template-columns:154px minmax(0,1fr); }
+  .ra-field-rail { padding:8px; }
+  .ra-field-runner { gap:7px;padding-inline:5px; }
+  .ra-field-compare-check { padding-left:41px; }
+  .ra-field-detail-toolbar { padding:12px; }
+  .ra-field-modes button { padding:7px;font-size:11px; }
+}
 .ra-workspace input[type=checkbox] { accent-color:var(--accent);cursor:pointer;width:15px;height:15px; }
-.ra-stone { --stone-bg:#557d56;--stone-ink:#fff;display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;background:var(--stone-bg);color:var(--stone-ink);width:29px;height:29px;border-radius:50%;border:1px solid rgb(255 255 255 / 28%);box-shadow:inset 0 1px 2px rgb(255 255 255 / 15%),0 2px 4px rgb(0 0 0 / 15%);font:700 12px var(--font-mono); }
-.ra-stone:is([data-number="1"],[data-number="13"]) { --stone-bg:#f6f3e8;--stone-ink:#233c31;border-color:#c5c9bb; }
-.ra-stone:is([data-number="2"],[data-number="14"]) { --stone-bg:#263b33; }
-.ra-stone:is([data-number="3"],[data-number="15"]) { --stone-bg:#b94c47; }
-.ra-stone:is([data-number="4"],[data-number="16"]) { --stone-bg:#3b71ac; }
-.ra-stone[data-number="5"] { --stone-bg:#dfbd4f;--stone-ink:#332d18; }
-.ra-stone[data-number="6"] { --stone-bg:#557d56; }
-.ra-stone[data-number="7"] { --stone-bg:#bd8561; }
-.ra-stone[data-number="8"] { --stone-bg:#9b739b; }
-.ra-stone[data-number="9"] { --stone-bg:#4d8991; }
-.ra-stone[data-number="10"] { --stone-bg:#aa687f; }
-.ra-stone[data-number="11"] { --stone-bg:#717e45; }
-.ra-stone[data-number="12"] { --stone-bg:#6c79a4; }
+/* Share saddlecloth colors and patterns with race details and mobile cards. */
+.ra-stone { display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;width:29px;height:29px;border-radius:50%;box-shadow:inset 0 1px 2px rgb(255 255 255 / 15%),0 2px 4px rgb(0 0 0 / 15%);font:700 12px var(--font-mono); }
 .ra-horse-button,.ra-inline-button { font-weight:650!important;color:var(--ink);background:none;border:0;padding:0;text-align:left; }
 .ra-horse-button { font-size:14px!important; }
 .ra-horse-button:hover,.ra-inline-button:hover { color:var(--accent-strong);text-decoration:underline;text-underline-offset:4px; }
@@ -82,21 +108,36 @@
 .ra-no-form { color:var(--muted);font-size:11px; }
 .ra-number { font:500 11px var(--font-mono);white-space:nowrap; }
 /* One continuous table, with a shared set of section columns for every horse. */
-.ra-all-records-table { min-width:1040px; }
-.ra-all-records-table tr[data-all-records-kind] td:first-child,.ra-all-records-table thead th:first-child { position:sticky;left:0;z-index:1;white-space:nowrap; }
-.ra-all-records-table tr[data-all-records-kind] td:first-child { background:var(--surface-1); }
-.ra-all-records-table .ra-all-records-horse-heading th { padding:13px 16px;background:var(--accent-soft);border-top:1px solid var(--border-strong); }
-.ra-all-records-identity { position:sticky;left:16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;width:max-content;max-width:calc(100vw - 70px);color:var(--ink); }
-.ra-all-records-identity>a { color:var(--ink);font-size:14px;font-weight:700; }
+.ra-all-records-table { min-width:1390px; }
+.ra-all-records-table :is(th,td) { border-right:1px solid var(--border); }
+.ra-all-records-table :is(th,td):last-child { border-right:0; }
+.ra-all-records-table thead th { text-align:center;padding:10px 9px; }
+.ra-all-records-table thead th:nth-child(2),.ra-all-records-table thead th.ra-all-records-condition { text-align:left; }
+.ra-all-records-table tbody { --record-group-bg:var(--surface-1); }
+.ra-all-records-table tbody:nth-of-type(even) { --record-group-bg:var(--surface-2); }
+.ra-all-records-table tbody td { background:var(--record-group-bg);padding:8px 9px; }
+.ra-all-records-table tbody+tbody tr:first-child>* { border-top:2px solid var(--border-strong); }
+.ra-all-records-table tbody tr:last-child td { border-bottom:1px solid var(--border); }
+.ra-all-records-table :is(.ra-all-records-horse-col,.ra-all-records-horse) { position:sticky;left:0;z-index:2;width:184px;min-width:184px;max-width:184px;background:var(--surface-2);border-right:2px solid var(--border-strong); }
+.ra-all-records-table .ra-all-records-horse { padding:12px;vertical-align:top;white-space:normal; }
+.ra-all-records-identity { display:flex;flex-direction:column;align-items:flex-start;gap:3px;color:var(--ink); }
+.ra-all-records-name { display:flex;align-items:center;gap:8px;margin-bottom:4px; }
+.ra-all-records-name>a { color:var(--ink);font-size:14px;font-weight:700;overflow-wrap:anywhere; }
 .ra-all-records-identity>span:not(.ra-stone) { font-size:11px;color:var(--muted);font-weight:400; }
 .ra-all-records-date-line { display:flex;align-items:center;gap:8px; }
 .ra-all-records-date-line>a:not(.ra-video-link) { color:var(--ink);font-weight:600; }
 .ra-all-records-date-line .ra-video-link { padding:3px 5px;font-size:10px; }
-.ra-all-records-date-line>a:hover,.ra-all-records-identity>a:hover { color:var(--accent-strong); }
+.ra-all-records-date-line>a:hover,.ra-all-records-name>a:hover { color:var(--accent-strong); }
+.ra-all-records-date { white-space:nowrap; }
+.ra-all-records-jockey { text-align:center;white-space:nowrap; }
 .ra-all-records-condition { min-width:125px;max-width:160px; }
+.ra-all-records-table .ra-all-records-condition > strong { display:inline; }
+.ra-all-records-condition > [data-record-field="horse-number"] { display:inline;white-space:nowrap; }
 .ra-all-records-condition small { line-height:1.5; }
 .ra-all-records-finish { white-space:nowrap; }
-.ra-all-records-section { text-align:right; }
+.ra-all-records-table th[data-all-records-section],
+.ra-all-records-table td.ra-all-records-section { text-align:center; }
+.ra-all-records-table td.ra-number,.ra-all-records-table td.ra-all-records-finish { text-align:center; }
 .ra-all-records-section.is-raw { color:var(--muted); }
 .ra-all-records-section sup { font-size:9px; }
 .ra-all-records-passing-order { white-space:nowrap;font:500 12px var(--font-mono); }
@@ -104,7 +145,7 @@
 .ra-all-records-table .ra-all-records-empty { padding:22px 16px;color:var(--muted);font-size:12px; }
 .ra-footnote { color:var(--muted);font-size:11px;line-height:1.8;margin:0;padding:13px 20px;border-top:1px solid var(--border); }
 .ra-compare-grid { display:grid;grid-template-columns:repeat(var(--compare-count,2),minmax(225px,1fr));gap:1px;background:var(--border);overflow-x:auto; }
-.ra-compare-card { background:var(--surface-1);padding:20px; }
+.ra-compare-card { background:var(--surface-1);padding:20px;container:comparison-card / inline-size; }
 .ra-compare-card>header { display:flex;gap:10px;align-items:center;margin-bottom:15px; }
 .ra-compare-card h3 { font-size:16px;margin:0 0 4px; }
 .ra-compare-card p { font-size:11px;color:var(--muted);margin:4px 0; }
@@ -114,7 +155,20 @@
 .ra-compare-card h4 { font-size:12px;font-weight:600;border-top:1px solid var(--border);padding-top:13px;margin:14px 0 8px; }
 .ra-compare-card .ra-mini-history { display:grid;grid-template-columns:1fr auto auto;gap:8px;font-size:11px;padding:7px 0;align-items:center; }
 .ra-mini-history>span { color:var(--muted); }
+.ra-mini-history>.ra-mini-history-condition { grid-column:1/-1; }
 .ra-mini-history>small { grid-column:1/-1;color:var(--muted);font-size:10px; }
+@container comparison-card (min-width:480px) {
+  .ra-compare-card .ra-mini-history-race { grid-template-columns:max-content minmax(0,1fr) auto auto; }
+  .ra-mini-history-race>.ra-mini-history-date { grid-column:1;grid-row:1; }
+  .ra-mini-history-race>.ra-mini-history-condition { grid-column:2;grid-row:1;white-space:nowrap; }
+  .ra-mini-history-race>.ra-mini-history-condition::before { content:"· "; }
+  .ra-mini-history-race>strong { grid-column:3;grid-row:1; }
+  .ra-mini-history-race>.ra-mini-history-time { grid-column:4;grid-row:1; }
+  .ra-mini-history-race>small { grid-row:2; }
+}
+@container comparison-card (min-width:600px) {
+  .ra-field-detail.is-single .ra-compare-card dl { grid-template-columns:minmax(120px,1fr) auto minmax(120px,1fr) auto;column-gap:18px;padding:16px;background:var(--surface-2);border-radius:8px; }
+}
 .ra-records-panel { overflow-anchor:none; }
 .ra-check-label { display:inline-flex;gap:6px;align-items:center;color:var(--muted);font-size:12px; }
 .ra-record-workspace { display:grid;grid-template-columns:190px minmax(0,1fr); }

@@ -158,6 +158,24 @@
   </article>
   {% endif %}
 
+  {% if has_detail_tabs and horse_tab == 'profile' %}
+<section class="panel seo-summary" aria-label="최근 출전 요약">
+  <div class="panel-heading"><h2>{{ detail.name_ko }} 최근 출전 기록</h2></div>
+  <div class="seo-summary-content">
+  {% if detail.history %}
+  <p>수집된 출전 {{ detail.entry_count }}건 중 최근 {{ [detail.history|length, 5]|min }}건입니다. 각 경주에서 전체 결과와 구간기록을 확인할 수 있습니다.</p>
+  <ul>
+    {% for row in detail.history[:5] %}
+    <li><a class="entity-link" href="{{ row.dashboard_href }}">{{ row.race_date.strftime('%Y.%m.%d') }} {{ row.course_name }} {{ row.race_number }}경주</a>
+      · {{ row.horse_name }} · {{ row.distance }} · {{ row.finish_position }} · {{ row.finish_time }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}<p>아직 연결된 출전 기록이 없습니다.</p>{% endif %}
+  <a class="entity-link" href="/{{ detail.kind.slug }}/{{ detail.official_id }}?tab=records">전체 전적 보기 →</a>
+  </div>
+</section>
+{% endif %}
+
   {% if not has_detail_tabs or horse_tab == 'records' %}
   <article id="start-history" class="panel">
     <div class="panel-heading">

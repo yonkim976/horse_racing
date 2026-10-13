@@ -19,6 +19,7 @@ from fastapi.responses import PlainTextResponse, Response
 
 from horse_racing.web.distance_benchmarks import BENCHMARK_BANDS
 from horse_racing.web.security import _DualRateBucket
+from horse_racing.web.seo import is_presentation_parameter
 
 _WINDOW = 60.0
 _BURST_WINDOW = 10.0
@@ -62,13 +63,15 @@ _HOME_KEYS = frozenset({"date", "meet", "race_id", "trial_id", "layout"})
 
 
 def _category(path: str) -> str | None:
+    if path == "/sitemap-index.xml" or path.startswith("/sitemaps/"):
+        return "detail"
     if path == "/horses/list":
         return "entity-list"
     if path == "/":
         return "dashboard"
     if path == "/api/calendar":
         return "calendar"
-    if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path):
+    if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances(?:/[^/]+)?", path):
         return "distance"
     if path == "/analysis":
         return "analysis"
@@ -114,7 +117,7 @@ def _query_keys(path: str) -> frozenset[str] | None:
         return _VALIDATION_KEYS
     if re.fullmatch(r"/(horses|jockeys|trainers|owners)", path):
         return _ENTITY_KEYS
-    if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path):
+    if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances(?:/[^/]+)?", path):
         return _DISTANCE_KEYS
     if path == "/":
         return _HOME_KEYS
@@ -255,7 +258,7 @@ def _validate(request: Request) -> Response | None:
         raw_page = params.get("page")
         if raw_page is not None and (not raw_page.isdecimal() or not 1 <= int(raw_page) <= 200):
             return _bad_request("페이지는 1부터 200까지 지정해 주세요.")
-        if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances", path):
+        if re.fullmatch(r"/racecourses/(seoul|jeju|busan|yeongcheon)/distances(?:/[^/]+)?", path):
             raw_view = params.get("view")
             if raw_view is not None and raw_view != "trials":
                 return _bad_request("view는 trials만 지정할 수 있습니다.")
@@ -432,8 +435,12 @@ def normalized_query_key(request: Request) -> str:
         elif key in params:
             items.append((key, params.get(key, "")))
     normalized = urlencode(items)
+    filtered = any(not is_presentation_parameter(key) for key in params)
+    normalized_filtered = any(not is_presentation_parameter(key) for key, _ in items)
+    if filtered and not normalized_filtered:
+        # Ignored unknown parameters still change robots metadata. Never serve
+        # a cached noindex variant to a tracking-only or canonical request.
+        return normalized + ("&" if normalized else "") + "__noindex=1"
     if request.scope.get("query_string", b"") and not normalized:
-        # The base template marks any queried URL noindex, so query presence is
-        # itself response-relevant even if the parameters are ignored.
         return "__has_query=1"
     return normalized

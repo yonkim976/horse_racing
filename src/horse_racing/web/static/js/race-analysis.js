@@ -21,13 +21,15 @@
   const shown = (value) => value == null || value === "" ? "—" : escape(value);
   const read = (name) => { try { return localStorage.getItem(name); } catch (_) { return null; } };
   const write = (name, value) => { try { localStorage.setItem(name, value); return true; } catch (_) { return false; } };
-  const state = { selected: data.runners[0]?.entry_id, compare: [], sameDistance: false };
+  const firstFieldRunner = root.querySelector("[data-field-select]")?.dataset.selectRunner;
+  const state = { selected: firstFieldRunner ? Number(firstFieldRunner) : data.runners[0]?.entry_id, compare: [], sameDistance: false, fieldMode: "single" };
   try {
     const saved = JSON.parse(read(key) || "null");
     if (saved && typeof saved === "object") {
       if (runners.has(saved.selected)) state.selected = saved.selected;
       if (Array.isArray(saved.compare)) state.compare = [...new Set(saved.compare)].filter((id) => runners.has(id)).slice(0, 4);
       state.sameDistance = saved.sameDistance === true;
+      if (saved.fieldMode === "compare" && state.compare.length >= 2) state.fieldMode = "compare";
     }
   } catch (_) { /* A stale browser preference must not block records. */ }
   const hash = location.hash.match(/^#runner-(\d+)(?:-(history|trials|training|jockey))?$/);
@@ -116,6 +118,7 @@
     root.querySelectorAll("[data-field-entry]").forEach((row) => {
       row.classList.toggle("is-selected", Number(row.dataset.fieldEntry) === id);
     });
+    renderComparison();
     if (tabName) showTab(root.querySelector('[data-dossier="' + id + '"]'), tabName);
     if (scroll) {
       save();
@@ -137,6 +140,7 @@
   root.addEventListener("click", (event) => {
     const select = event.target.closest("[data-select-runner]");
     if (select) {
+      if (select.hasAttribute("data-field-select")) state.fieldMode = "single";
       const fromOverview = Boolean(select.closest("[data-field-table], [data-comparison-panel]"));
       selectRunner(Number(select.dataset.selectRunner), select.dataset.openTab, true, fromOverview);
     }
@@ -179,22 +183,42 @@
   function miniHistory(runner) {
     const rows = (runner.history || []).filter((r) => !state.sameDistance || r.distance === data.race.distance).slice(0, 5);
     if (!rows.length) return '<p>해당 조건의 경주 이력이 없습니다.</p>';
-    return rows.map((r) => '<div class="ra-mini-history"><span>' + escape(r.date.slice(2)) + ' · ' + escape(r.distance) + 'm</span><strong>' + escape(r.finish) + '</strong><span>' + escape(r.time) + '</span><small>초반 ' + shown(r.section_details?.S1F?.time) + ' · 종반 200m ' + shown(r.section_details?.G1F?.time) + (r.early_position ? ' · 초반 ' + Number(r.early_position) + '위' : '') + '</small></div>').join("");
+    return rows.map((r) => {
+      const grade = String(r.grade || "—");
+      const condition = /^\d+(등급)?$/.test(grade)
+        ? grade.replace(/등급$/, "") + "등급" : grade.replace(/등급$/, "");
+      const number = r.horse_number != null ? String(r.horse_number) + "번" : "—";
+      const moisture = r.track_moisture_percent != null ? String(r.track_moisture_percent) + "%" : "—";
+      return '<div class="ra-mini-history ra-mini-history-race"><span class="ra-mini-history-date">' + escape(r.date.slice(2)) + ' · ' + escape(r.distance) + 'm</span><strong>' + escape(r.finish) + '</strong><span class="ra-mini-history-time">' + escape(r.time) + '</span><span class="ra-mini-history-condition">' + escape(condition) + ' · 마번 ' + escape(number) + ' · 함수율 ' + escape(moisture) + '</span><small>S1F ' + shown(r.section_details?.S1F?.time) + ' · G1F ' + shown(r.section_details?.G1F?.time) + (r.early_position ? ' · 초반 ' + Number(r.early_position) + '위' : '') + '</small></div>';
+    }).join("");
   }
   function renderComparison() {
     const panel = root.querySelector("[data-comparison-panel]");
     if (!panel) return;
-    const list = state.compare.map((id) => runners.get(id)).filter(Boolean);
+    const comparing = state.fieldMode === "compare" && state.compare.length >= 2;
+    const list = (comparing ? state.compare : [state.selected]).map((id) => runners.get(id)).filter(Boolean);
     panel.hidden = !list.length;
-    root.querySelector("[data-comparison-count]").textContent = list.length + "두";
+    panel.classList.toggle("is-single", !comparing);
+    root.querySelector("[data-comparison-count]").textContent = state.compare.length + "두";
+    root.querySelectorAll("[data-field-mode]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.fieldMode === (comparing ? "compare" : "single")));
+      if (button.dataset.fieldMode === "compare") button.disabled = state.compare.length < 2;
+    });
+    root.querySelectorAll("[data-clear-comparison]").forEach((button) => { button.disabled = !state.compare.length; });
+    root.querySelector("[data-field-detail-status]").textContent = comparing
+      ? list.length + "두를 나란히 비교합니다." : (list[0]?.horse || "") + " 요약 정보";
     const content = root.querySelector("[data-comparison-content]");
-    content.style.setProperty("--compare-count", Math.max(2, list.length));
+    content.style.setProperty("--compare-count", list.length || 1);
     content.innerHTML = list.map((r) => {
       const t = r.trials?.[0]; const training = r.training_summary || {};
-      return '<article class="ra-compare-card"><header><span class="ra-stone" data-number="' + Number(r.number) + '">' + Number(r.number) + '</span><div><h3>' + escape(r.horse) + '</h3><p>' + escape(r.style) + ' · ' + escape(r.jockey) + '</p></div></header>' +
-        '<dl><dt>부담중량</dt><dd>' + escape(r.weight) + '</dd><dt>직전 출전 간격</dt><dd>' + (r.metrics?.last_start_days == null ? "—" : Number(r.metrics.last_start_days) + "일") +
+      const form = r.form_kind === "trial"
+        ? (r.form_tokens || []).map((token) => '<span>' + escape(token) + '</span>').join("")
+        : (r.history || []).slice(0, 5).map((past) => '<span' + (past.valid_finish && past.finish_position <= 3 ? ' class="placed"' : '') + '>' + escape(past.finish) + '</span>').join("");
+      return '<article class="ra-compare-card" data-summary-entry="' + Number(r.entry_id) + '"><header><span class="silk-number silk-' + Number(r.number) + ' ra-stone" data-number="' + Number(r.number) + '">' + Number(r.number) + '</span><div><h3>' + escape(r.horse) + '</h3><p>' + escape(r.style) + ' · ' + escape(r.jockey) + ' 기수</p><p>' + escape(r.trainer) + ' 조교사 · ' + escape(r.state) + '</p></div></header>' +
+        '<div class="ra-field-form"><span>' + (r.form_kind === "trial" ? '최근 주행심사' : '최근 착순') + '</span><span class="ra-form-chips">' + (form || '<span class="ra-no-form">자료 없음</span>') + '</span></div>' +
+        '<dl><dt>부담중량</dt><dd>' + escape(r.weight) + '</dd><dt>레이팅</dt><dd>' + escape(r.rating) + '</dd><dt>직전 출전 간격</dt><dd>' + (r.metrics?.last_start_days == null ? "—" : Number(r.metrics.last_start_days) + "일") +
         '</dd><dt>동일거리 출전</dt><dd>' + Number(r.same_distance_starts) + '전</dd><dt>동일거리 최고</dt><dd>' + shown(r.metrics?.same_distance_best) +
-        '</dd><dt>최근 28일 조교</dt><dd>' + Number(training.sessions || 0) + '회 · ' + shown(training.minutes) + '분</dd><dt>기수와 정상완주 (365일)</dt><dd>' + Number(r.combination_stats?.starts || 0) + '전</dd></dl>' +
+        '</dd><dt>최근 28일 조교</dt><dd>' + Number(training.sessions || 0) + '회 · ' + shown(training.minutes) + '분</dd><dt>출발조교</dt><dd>' + Number(training.start_sessions || 0) + '회</dd><dt>기수와 정상완주 (365일)</dt><dd>' + Number(r.combination_stats?.starts || 0) + '전</dd></dl>' +
         '<h4>최근 경주 · 최신순' + (state.sameDistance ? ' / ' + data.race.distance + 'm' : '') + '</h4>' + miniHistory(r) +
         '<h4>최근 주행심사</h4>' + (t ? '<p>' + escape(t.date) + ' · ' + escape(t.distance) + 'm · ' + escape(t.judgement) + '</p><div class="ra-mini-history"><span>' + escape(t.finish) + '</span><strong>' + escape(t.time) + '</strong>' + replayLink(t.video_url, r.horse + ' · ' + t.date + ' 주행심사' + (t.horse_number ? ' · 당시 ' + t.horse_number + '번' : '')) + '</div><p>S1F ' + shown(t.section_details?.S1F?.time_ms ? t.section_details.S1F.time : t.section_details?.S1F?.display) + ' · G1F ' + shown(t.section_details?.G1F?.time_ms ? t.section_details.G1F.time : t.section_details?.G1F?.display) + '</p>' : '<p>연결된 자료 없음</p>') +
         '<button type="button" class="ra-button" data-select-runner="' + r.entry_id + '">상세 기록 열기</button></article>';
@@ -205,9 +229,15 @@
     const id = Number(box.dataset.compareEntry);
     if (box.checked && state.compare.length >= 4) { box.checked = false; toast("최대 4두까지 나란히 비교할 수 있습니다."); return; }
     state.compare = box.checked ? [...new Set([...state.compare, id])] : state.compare.filter((value) => value !== id);
+    state.fieldMode = state.compare.length >= 2 ? "compare" : "single";
+    if (state.compare.length === 1) state.selected = state.compare[0];
+    selectRunner(state.selected, null, false);
+  }));
+  root.querySelectorAll("[data-field-mode]").forEach((button) => button.addEventListener("click", () => {
+    state.fieldMode = button.dataset.fieldMode === "compare" && state.compare.length >= 2 ? "compare" : "single";
     renderComparison(); save();
   }));
-  root.querySelectorAll("[data-clear-comparison]").forEach((button) => button.addEventListener("click", () => { state.compare = []; renderComparison(); save(); }));
+  root.querySelectorAll("[data-clear-comparison]").forEach((button) => button.addEventListener("click", () => { state.compare = []; state.fieldMode = "single"; renderComparison(); save(); }));
   const search = root.querySelector("[data-runner-search]");
   search?.addEventListener("input", () => {
     const query = search.value.trim().toLocaleLowerCase();
@@ -216,22 +246,24 @@
       row.hidden = !row.dataset.runnerName.toLocaleLowerCase().includes(query);
       if (!row.hidden) count += 1;
     });
-    root.querySelector("[data-field-status]").textContent = query ? count + "두 검색됨 · 비교 선택은 유지됩니다." : "각질은 수집된 과거 초반 통과순위에 따른 추정입니다. 기록이 없는 항목은 ‘—’로 표시합니다.";
+    root.querySelector("[data-field-status]").textContent = query ? count + "두 검색됨 · 비교 선택은 유지됩니다." : data.runners.length + "두 · 비교는 최대 4두";
   });
-  const sortDirections = {};
+  const sortDirections = { number: true };
   root.querySelectorAll("[data-sort]").forEach((button) => button.addEventListener("click", () => {
     const field = button.dataset.sort; sortDirections[field] = !(sortDirections[field] ?? (field === "rating"));
     const direction = sortDirections[field] ? 1 : -1;
-    const tbody = root.querySelector("[data-field-table] tbody");
-    const rows = [...tbody.rows].sort((a, b) => {
+    const container = root.querySelector("[data-field-list]");
+    if (!container) return;
+    const rows = [...container.children].sort((a, b) => {
       const av = Number.parseFloat(a.dataset[field]), bv = Number.parseFloat(b.dataset[field]);
       if (!Number.isFinite(av)) return Number.isFinite(bv) ? 1 : 0;
       if (!Number.isFinite(bv)) return -1;
       return (av - bv) * direction;
     });
-    rows.forEach((row) => tbody.appendChild(row));
-    button.closest("thead").querySelectorAll("th").forEach((th) => th.removeAttribute("aria-sort"));
-    button.closest("th").setAttribute("aria-sort", direction === 1 ? "ascending" : "descending");
+    rows.forEach((row) => container.appendChild(row));
+    button.parentElement.querySelectorAll("[data-sort]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+    button.setAttribute("aria-pressed", "true");
+    button.textContent = (field === "number" ? "마번" : "레이팅") + (direction === 1 ? " ↑" : " ↓");
   }));
   function allowedVideo(value) {
     try { const u = new URL(value); return u.origin === "https://kraplayer.starplayer.net" && u.pathname === "/kra/vod/starplayer.php" ? u.href : null; } catch (_) { return null; }
@@ -299,6 +331,6 @@
     memoState.textContent = write(memoKey, memo.value) ? "이 브라우저에 저장됨" : "브라우저 저장 불가 · 내용을 복사해 보관하세요";
   });
   selectRunner(state.selected, hash?.[2], false);
-  filterHistory(); renderComparison();
+  filterHistory();
   if (hash?.[2]) document.getElementById("runner-" + state.selected)?.scrollIntoView({ block: "start" });
 })();
