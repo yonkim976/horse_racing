@@ -1,6 +1,8 @@
 /* Desktop light-mode reading scale. Mobile and dark-mode styles stay independent. */
+html[data-layout="desktop"] { overflow-x:auto; }
+html[data-layout="desktop"] body { min-width:1200px; }
 html[data-layout="desktop"] .header-actions .fb-launcher-header { display: none; }
-@media (min-width: 761px) {
+
   html[data-layout="desktop"][data-theme="light"] {
     --faint: #5d7066;
     --accent: #047857;
@@ -106,10 +108,10 @@ html[data-layout="desktop"] .header-actions .fb-launcher-header { display: none;
     .fb-required, .fb-optional, .fb-field-help, .fb-context small,
     .fb-demo-note, .fb-eyebrow
   ) { font-size: var(--reading-note); }
-}
+
 
 /* Keep the feedback entry in the sticky desktop header, clear of table cells. */
-@media (min-width: 761px) {
+
   html[data-layout="desktop"][data-theme="light"] .header-actions .fb-launcher {
     display: inline-flex;
     position: static;
@@ -120,8 +122,8 @@ html[data-layout="desktop"] .header-actions .fb-launcher-header { display: none;
     font-size: 12px;
   }
   html[data-layout="desktop"][data-theme="light"] body > .fb-launcher { display: none; }
-}
-/* On narrow desktop fallback pages and in dark mode retain the floating entry. */
+
+/* Dark mode retains the floating feedback entry. */
 
 /* Desktop data values use the foreground color at every viewport size.
    Keep headings, explanations, and controls separate from recorded values. */

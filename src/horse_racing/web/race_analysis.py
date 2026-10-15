@@ -50,6 +50,7 @@ from horse_racing.web.insights import (
     summarize_top3_field,
     win_probability_sort_key,
 )
+from horse_racing.web.jeju_wagers import load_jeju_wagers
 from horse_racing.web.race_video import race_video_url, running_trial_video_url
 
 SECTION_CODES = ("S1F", "1C", "2C", "3C", "4C", "G3F", "G1F")
@@ -218,6 +219,7 @@ class RaceAnalysisPage:
     prediction_count: int = 0
     prediction_groups: list[PredictionRunnerGroup] = field(default_factory=list)
     race_commentary: dict[str, Any] | None = None
+    jeju_wagers: dict[str, Any] | None = None
 
 
 @lru_cache(maxsize=1)
@@ -637,6 +639,8 @@ def load_race_analysis_page(
     page.prediction_groups = _prediction_runner_groups(page.runners)
     page.pace_board, page.pace_summaries = _pace_board(page.runners)
     attach_race_commentary(page)
+    page.jeju_wagers = load_jeju_wagers(session, race_id=selected.id,
+                                      meet_code=selected.meet_code)
     return page
 
 

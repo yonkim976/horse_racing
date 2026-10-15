@@ -27,6 +27,7 @@
 .benchmark-more span { display: block; max-width: 240px; padding-top: 4px; }
 .benchmark-empty { margin: 16px 24px 24px; }
 @media (max-width: 640px) {
+  :where(html:not([data-layout="desktop"])) {
   .distance-section-block { padding: 0 16px 18px; }
   .distance-trial-group { padding: 12px; }
   .benchmark-explanation { margin-right: 16px; margin-left: 16px; }
@@ -34,4 +35,6 @@
   .distance-benchmark-title { margin-right: 16px; margin-left: 16px; }
   .benchmark-table-scroll { margin-right: 16px; margin-left: 16px; }
   .benchmark-empty { margin-right: 16px; margin-left: 16px; }
+
+  }
 }

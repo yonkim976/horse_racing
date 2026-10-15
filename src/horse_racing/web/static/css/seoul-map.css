@@ -37,8 +37,14 @@
 .seoul-metric-point .seoul-metric-hit { fill:transparent; stroke:none; }
 .seoul-metric-point text { fill:var(--ink-strong); font:600 12px var(--font-mono); paint-order:stroke; stroke:var(--surface-1); stroke-width:4px; stroke-linejoin:round; }
 
-@media(max-width:850px) { .seoul-viewport.with-source { grid-template-columns:1fr; } }
-@media(max-width:600px) { .seoul-map-body { padding:0 12px 12px; } .seoul-plan { min-width:420px; } }
+@media (max-width:850px) {
+  :where(html:not([data-layout="desktop"])) { .seoul-viewport.with-source { grid-template-columns:1fr; }
+  }
+}
+@media (max-width:600px) {
+  :where(html:not([data-layout="desktop"])) { .seoul-map-body { padding:0 12px 12px; } .seoul-plan { min-width:420px; }
+  }
+}
 
 .race-detail-map .seoul-plan {
   width:min(100%, 540px);
@@ -95,4 +101,7 @@
 .jeju-explorer .seoul-metric-point[hidden] { display:none; }
 .jeju-explorer .seoul-official [hidden] { display:none; }
 .jeju-explorer [data-jeju-official-fallback] a { color:var(--course-accent); font-weight:700; }
-@media(max-width:600px) { .jeju-view-actions { justify-content:flex-start; gap:8px; } }
+@media (max-width:600px) {
+  :where(html:not([data-layout="desktop"])) { .jeju-view-actions { justify-content:flex-start; gap:8px; }
+  }
+}

@@ -1,0 +1,71 @@
+{% for kind, label in [('training', '조교'), ('medical', '진료')] %}
+<div id="race-detail-pane-{{ kind }}" {{ pane_attrs(kind) }}>
+<section class="panel race-care-panel" aria-label="출전마 {{ label }} 기록">
+  <div class="panel-heading">
+    <div><p class="panel-kicker">{{ 'TRAINING' if kind == 'training' else 'CLINIC RECORDS' }}</p><h2>출전마 {{ label }}</h2></div>
+    <span>경주 전 {{ 28 if kind == 'training' else 90 }}일</span>
+  </div>
+  <p class="race-care-guide">{{ page.care.training_start if kind == 'training' else page.care.medical_start }} ~ {{ page.care.through }} · 말을 선택하면 최신순 세부 기록이 펼쳐집니다.</p>
+  {% if kind == 'medical' %}
+  <p class="race-care-guide">건수는 위 조회기간 내 기록만 집계합니다. 이전 진료 이력은 말 상세 기록에서 확인할 수 있으며, 기간 내 기록이 없다는 표시가 전체 진료 이력이 없거나 건강하다는 뜻은 아닙니다.</p>
+  {% else %}
+  <details class="race-care-help">
+    <summary>조교 항목·기호 안내</summary>
+    <dl>
+      <div><dt>조교사</dt><dd>해당 조교 기록에 등록된 담당 조교사입니다. 이 이름만으로 직접 기승했다고 판단하지 않습니다.</dd></div>
+      <div><dt>기승자 구분</dt><dd>기승자의 이름이 아닌 수집 자료의 구분값입니다. ‘기수’는 기수, ‘조교사’는 조교사가 기승한 것으로 기록된 경우입니다.</dd></div>
+      <div><dt>—</dt><dd>수집된 자료에 해당 항목값이 없어 확인할 수 없다는 뜻입니다. 아무도 기승하지 않았거나 조교를 하지 않았다는 뜻은 아니며, 특정 직종으로 추정하지 않습니다.</dd></div>
+      <div><dt>출발조교 기승자</dt><dd>출발조교 자료에 기재된 기승자 이름입니다. 일일조교의 ‘기승자 구분’과는 다른 항목입니다.</dd></div>
+    </dl>
+  </details>
+  {% endif %}
+  <div class="race-care-list">
+  {% for horse in page.care.horses %}
+    <details class="race-care-horse" data-care-horse="{{ horse.number }}"{% if loop.first %} open{% endif %}>
+      <summary>
+        <span class="race-care-identity">{{ silk(horse.number) }}<strong>{{ horse.name }}</strong>{% if horse.scratched %}<small>출전취소</small>{% endif %}</span>
+        <span class="race-care-summary">
+          {% if kind == 'training' %}
+          <span>일일 {{ horse.training|length }}건 · {{ horse.training_days }}일 / 출발 {{ horse.starts|length }}건</span>
+          <small>최근 {{ horse.latest_training or '수집 기록 없음' }}</small>
+          {% else %}
+          <span>기간 내 진료 {{ horse.medical|length }}건</span>
+          <small>{{ '최근 ' ~ horse.latest_medical if horse.latest_medical else '조회기간 내 기록 없음' }}</small>
+          {% endif %}
+        </span>
+        <span class="race-care-chevron" aria-hidden="true">⌄</span>
+      </summary>
+      <div class="race-care-records">
+      {% if kind == 'training' %}
+        <h3>일일조교</h3>
+        {% if horse.training %}
+        <div class="table-scroll"><table class="entry-table race-care-table">
+          <thead><tr><th scope="col">일자</th><th scope="col">조교시간</th><th scope="col">구보</th><th scope="col">습보</th><th scope="col">조교사</th><th scope="col">기승자 구분</th></tr></thead>
+          <tbody>{% for row in horse.training %}<tr><td>{{ row.date }}</td><td>{{ row.duration }}</td><td>{{ row.canter if row.canter is not none else '—' }}</td><td>{{ row.gallop if row.gallop is not none else '—' }}</td><td>{{ row.trainer }}</td><td{% if row.rider_type == '—' %} title="수집 자료에 기승자 구분값이 없어 확인할 수 없습니다"{% endif %}>{{ row.rider_type }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+        {% else %}<p class="race-care-empty">이 기간에 수집된 일일조교 기록이 없습니다.</p>{% endif %}
+        <h3>출발조교</h3>
+        {% if horse.starts %}
+        <div class="table-scroll"><table class="entry-table race-care-table">
+          <thead><tr><th scope="col">일자</th><th scope="col">기승자</th><th scope="col">장소</th><th scope="col">비고</th></tr></thead>
+          <tbody>{% for row in horse.starts %}<tr><td>{{ row.date }}</td><td>{{ row.rider }}</td><td>{{ row.location }}</td><td class="race-care-text">{{ row.remark }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+        {% else %}<p class="race-care-empty">이 기간에 수집된 출발조교 기록이 없습니다.</p>{% endif %}
+        {% if horse.training|length == page.care.limit or horse.starts|length == page.care.limit %}<p class="race-care-guide">종류별 최신 {{ page.care.limit }}건까지 표시합니다.</p>{% endif %}
+      {% else %}
+        {% if horse.medical %}
+        <div class="table-scroll"><table class="entry-table race-care-table">
+          <thead><tr><th scope="col">진료일</th><th scope="col">진료 내역</th><th scope="col">진료기관</th></tr></thead>
+          <tbody>{% for row in horse.medical %}<tr><td>{{ row.date }}</td><td class="race-care-text">{{ row.diagnosis }}</td><td>{{ row.hospital }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+        {% else %}<p class="race-care-empty">이 기간에 수집된 진료 기록이 없습니다.</p>{% endif %}
+        {% if horse.medical|length == page.care.limit %}<p class="race-care-guide">최신 {{ page.care.limit }}건까지 표시합니다.</p>{% endif %}
+      {% endif %}
+      <a class="entity-link race-care-profile" href="/horses/{{ horse.horse_id }}">말 상세 기록 ↗</a>
+      </div>
+    </details>
+  {% else %}<div class="empty-state compact"><p>출전 데이터가 없습니다.</p></div>{% endfor %}
+  </div>
+</section>
+</div>
+{% endfor %}

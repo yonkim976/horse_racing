@@ -5,9 +5,7 @@
 </section>
 {% endif %}
 
-{% if not page.model %}
-<div class="notice-box warning"><strong>정식 예측 미발행</strong><span>이 경주의 모델 결과가 불변 원장에 없습니다. {% if forecast_embedded|default(false) %}아래 과거 성적은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.{% else %}아래 과거 성적과 전개 추정은 분석 근거이며 우승 확률이나 공식 예상 순위가 아닙니다.{% endif %}</span></div>
-{% endif %}
+{% if show_wagers|default(true) %}{% include "_jeju_wagers.html" %}{% endif %}
 
 {% if show_pace_explorer|default(true) %}
 <section class="panel pace-panel" data-pace-root>
@@ -34,7 +32,7 @@
     <tbody>{% for row in page.runners %}<tr data-entry-id="{{ row.entry_id }}" class="{% if row.scratched %}is-muted{% endif %}" tabindex="0">
       <td>{% if forecast_embedded|default(false) %}<span class="silk-number silk-{{ row.number }} ra-stone" data-number="{{ row.number }}">{{ row.number }}</span>{% else %}<button type="button" class="runner-number" data-highlight="{{ row.entry_id }}">{{ row.number }}</button>{% endif %}</td>
       <td><a href="/horses/{{ row.horse_id }}"><strong>{{ row.horse }}</strong></a><small class="cell-note">{{ row.state }}</small></td>
-      <td>{{ row.jockey }}</td><td class="numeric">{{ row.weight }}</td><td class="numeric">{{ row.predicted_rank or '—' }}</td><td class="numeric">{{ row.prob_win }}</td><td class="numeric">{{ row.prob_top3 }}</td><td class="numeric">{{ row.recent_finishes }}</td><td>{{ row.starts }}전 · 승 {{ row.win_rate }} · 입상 {{ row.top3_rate }}</td><td>{{ row.same_distance }}</td><td><strong>{{ row.style }}</strong><small class="cell-note">{{ row.style_reason }}{% if row.closing_time is not none %} · G1F 평균 {{ row.closing_time }}초{% endif %}</small></td>
+      <td>{{ row.jockey }}</td><td class="numeric">{{ row.weight }}</td><td class="numeric">{{ row.predicted_rank or '—' }}</td><td class="numeric">{{ row.prob_win }}</td><td class="numeric">{{ row.prob_top3 }}</td><td class="numeric">{{ row.recent_finishes }}</td><td>{{ row.starts }}전 · 승 {{ row.win_rate }} · 입상 {{ row.top3_rate }}</td><td{% if row.same_distance == '자료 없음' %} title="동일 거리 · 보유 경주 기록 기준 첫 출전"{% endif %}>{{ '첫출전' if row.same_distance == '자료 없음' else row.same_distance }}</td><td><strong>{{ row.style }}</strong><small class="cell-note">{{ row.style_reason }}{% if row.closing_time is not none %} · G1F 평균 {{ row.closing_time }}초{% endif %}</small></td>
     </tr>{% endfor %}</tbody>
   </table></div>
 </section>

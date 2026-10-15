@@ -3,7 +3,7 @@
 {% block title %}{{ page_data.kind.plural_label }} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}수집된 {{ page_data.kind.plural_label }} 목록을 검색하고 출전 이력을 확인합니다.{% endblock %}
 {% block extra_head %}
-{% if page_data.kind.slug in ['horses', 'trainers', 'jockeys', 'owners'] %}<link rel="stylesheet" href="{{ url_for('static', path='/css/horse-directory.css') }}?v=23">{% endif %}
+{% if page_data.kind.slug in ['horses', 'trainers', 'jockeys', 'owners'] %}<link rel="stylesheet" href="{{ url_for('static', path='/css/horse-directory.css') }}?v=24">{% endif %}
 {% endblock %}
 
 {% block content %}

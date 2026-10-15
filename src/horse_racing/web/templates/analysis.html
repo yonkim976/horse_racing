@@ -2,10 +2,10 @@
 {% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}당일 출전마의 과거 경주, 주행심사, 영상과 조교 기록을 한 화면에서 비교합니다.{% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="{{ url_for('static', path='/css/race-analysis.css') }}?v=28">
-<link rel="stylesheet" href="{{ url_for('static', path='/css/analysis-pace.css') }}?v=5">
-<link rel="stylesheet" href="{{ url_for('static', path='/css/race-commentary.css') }}?v=1">
-<script src="{{ url_for('static', path='/js/race-analysis.js') }}?v=14" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-analysis.css') }}?v=44">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/analysis-pace.css') }}?v=6">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-commentary.css') }}?v=2">
+<script src="{{ url_for('static', path='/js/race-analysis.js') }}?v=28" defer></script>
 <script src="{{ url_for('static', path='/js/analysis-pace.js') }}?v=5" defer></script>
 {% endblock %}
 
@@ -59,16 +59,21 @@
 {% if page.selected_race %}
 <section class="ra-race-title" data-selected-race-id="{{ page.selected_race.id }}"><div><p>{{ page.selected_race.date }} · {{ page.selected_race.start_time }} · {{ page.selected_race.meet }}</p><h2>{{ page.selected_race.meet }} <b>{{ page.selected_race.number }}경주</b><span>{{ page.selected_race.distance }}m</span></h2><p>{{ page.selected_race.grade }} · {{ page.selected_race.name }} · 출전 {{ page.selected_race.field_size }}두</p></div><div class="ra-title-links"><a href="/races/{{ page.selected_race.id }}">기본 경주 상세 ↗</a></div></section>
 <nav class="ra-section-nav" aria-label="분석 영역">
-{% for key, label in [('forecast','미래 예측'),('field','출전마 비교'),('records','말별 기록·영상'),('overview','전체 기록'),('pace','전개 그리기'),('memo','메모')] %}
+{% for key, label in [('forecast','미래 예측'),('wagers','승식·배당 비교'),('field','출전마 비교'),('records','말별 기록·영상'),('overview','전체 기록'),('pace','전개 그리기'),('memo','메모')] if key != 'wagers' or page.jeju_wagers %}
 <a href="{{ request.url.include_query_params(tab=key, race_id=page.selected_race.id).replace(fragment='') }}" data-analysis-tab="{{ key }}" aria-controls="analysis-pane-{{ key }}"{% if analysis_tab == key %} aria-current="page"{% endif %}>{{ label }}</a>
 {% endfor %}
 </nav>
 <div id="analysis-pane-forecast" data-analysis-pane="forecast"{% if analysis_tab != 'forecast' %} hidden{% endif %}>{% if analysis_tab == 'forecast' %}
 {% if forecast and forecast.selected_race %}
-<section id="forecast-panel" class="forecast-embed">{% with page=forecast, forecast_embedded=true, show_pace_explorer=false %}{% include "_forecast_embed.html" %}{% endwith %}</section>
+<section id="forecast-panel" class="forecast-embed">{% with page=forecast, forecast_embedded=true, show_pace_explorer=false, show_wagers=false %}{% include "_forecast_embed.html" %}{% endwith %}</section>
 {% endif %}
 {% include "_race_commentary.html" %}
 {% endif %}</div>
+{% if page.jeju_wagers %}
+<div id="analysis-pane-wagers" data-analysis-pane="wagers"{% if analysis_tab != 'wagers' %} hidden{% endif %}>{% if analysis_tab == 'wagers' %}
+{% include "_jeju_wagers.html" %}
+{% endif %}</div>
+{% endif %}
 <div id="analysis-pane-field" data-analysis-pane="field"{% if analysis_tab != 'field' %} hidden{% endif %}>{% if analysis_tab == 'field' %}
 
 {% include "_analysis_field.html" %}

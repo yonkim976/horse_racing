@@ -2,7 +2,7 @@
 {% block body_class %}mobile-analysis{% endblock %}
 {% block title %}경주 분석 · 마필로그 Mapilog{% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="{{ url_for('static', path='/css/race-commentary.css') }}?v=1">
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-commentary.css') }}?v=2">
 <script src="{{ url_for('static', path='/js/mobile-analysis.js') }}?v=11" defer></script>
 {% endblock %}
 
@@ -188,6 +188,7 @@
   {% endif %}
   </header>
 
+  {% include "_jeju_wagers.html" %}
   {% include "_race_commentary.html" %}
 
   {% set completed_race = page.selected_race.status == 'completed' %}

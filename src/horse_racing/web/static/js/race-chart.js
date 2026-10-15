@@ -151,6 +151,8 @@
     return included;
   }
   function render() {
+    // Measure the formation only after its tab is visible.
+    if (!root.getClientRects().length) return;
     const {point, index} = steps[state.index];
     checkpoints.querySelectorAll("button").forEach((button, step) => {
       button.classList.toggle("is-active", step === state.index);
@@ -212,5 +214,8 @@
   });
   root.querySelector("[data-passing-prev]").addEventListener("click", () => { state.index = Math.max(0, state.index - 1); render(); });
   root.querySelector("[data-passing-next]").addEventListener("click", () => { state.index = Math.min(steps.length - 1, state.index + 1); render(); });
+  root.closest("[data-race-detail-workspace]")?.addEventListener("race-detail-pane-shown", event => {
+    if (event.detail === "sections") render();
+  });
   render();
 })();

@@ -1,0 +1,27 @@
+{% if page.jeju_wagers|default(none) %}
+<section class="jw-panel" data-jeju-wagers aria-label="제주 승식별 확률과 배당 비교">
+  <h2>승식별 확률 · 배당 비교</h2>
+  {% if page.jeju_wagers.message %}
+  <p>{{ page.jeju_wagers.message }}</p>
+  {% else %}
+  <p>HY_R_FORM 예측 확률순입니다. 적정 배당은 원금 포함 손익분기 배당입니다.</p>
+  <p class="jw-note">확인한 배당을 입력하면 기대수익률을 비교합니다. 입력은 현재 화면에서만 사용하며, 경기 후 배당은 사후 비교용입니다. 비용·세금 제외, 모델 확률 기준입니다.</p>
+  {% if page.jeju_wagers.field_size <= 7 %}<p class="jw-note">이 편성의 연승은 2위 이내 확률을 사용합니다.</p>{% endif %}
+  <noscript>배당 계산과 전체 조합 조회에는 JavaScript가 필요합니다.</noscript>
+  {% for pool in page.jeju_wagers.pools %}
+  <details class="jw-pool" data-wager-pool="{{ pool.code }}"{% if pool.code == 'TLA' %} open{% endif %}>
+    <summary>{{ pool.label }} · 전체 {{ pool.count }}조합</summary>
+    <div class="jw-scroll" tabindex="0" aria-label="{{ pool.label }} 조합 비교">
+      <table><thead><tr><th>조합</th><th>예측 확률</th><th>적정 배당</th><th>확인 배당</th><th>기대수익률</th></tr></thead>
+      <tbody data-wager-rows></tbody></table>
+    </div>
+    {% if pool.count > 6 %}<button type="button" data-wager-expand aria-expanded="false">전체 {{ pool.count }}조합 보기</button>{% endif %}
+  </details>
+  {% endfor %}
+  <p class="jw-note">적정 배당 = 1 ÷ 확률 · 기대수익률 = (확률 × 확인 배당 − 1) × 100%</p>
+  <script type="application/json" data-jeju-wager-data>{{ page.jeju_wagers|tojson }}</script>
+  {% endif %}
+</section>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/jeju-wagers.css') }}?v=1">
+<script src="{{ url_for('static', path='/js/jeju-wagers.js') }}?v=1" defer></script>
+{% endif %}

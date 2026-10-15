@@ -49,9 +49,12 @@
 }
 
 @media (max-width: 560px) {
+  :where(html:not([data-layout="desktop"])) {
   .site-footer {
     gap: 14px;
     flex-direction: column;
     font-size: 12px;
+  }
+
   }
 }

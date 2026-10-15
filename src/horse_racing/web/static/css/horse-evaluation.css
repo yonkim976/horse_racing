@@ -34,6 +34,7 @@
 .evaluation-method { border-top: 1px solid var(--border); color: var(--muted); }
 .evaluation-method p { max-width: 90ch; font-size: 13px; line-height: 1.9; }
 @media (max-width: 640px) {
+  :where(html:not([data-layout="desktop"])) {
   .horse-evaluation .panel-heading { align-items: flex-start; gap: 12px; }
   .evaluation-context { gap: 16px 24px; }
   .evaluation-context div { flex: 1 1 42%; min-width: 0; }
@@ -41,7 +42,12 @@
   .evaluation-scroll-hint { display: block; }
   .evaluation-records { grid-template-columns: 1fr; }
   .evaluation-flow strong { font-size: 18px; }
+
+  }
 }
 @media (min-width: 641px) and (max-width: 1000px) {
+  :where(html:not([data-layout="desktop"])) {
   .evaluation-records { grid-template-columns: 1fr; }
+
+  }
 }

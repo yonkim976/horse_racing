@@ -180,17 +180,101 @@
     });
   }
   sameDistance?.addEventListener("change", () => { state.sameDistance = sameDistance.checked; filterHistory(); renderComparison(); save(); });
+  function compactTrackCondition(value) {
+    const labels = new Map([
+      ["맑음", "맑"], ["흐림", "흐"], ["건조", "건"],
+      ["양호", "양"], ["다습", "다"], ["포화", "포"], ["불량", "불"],
+    ]);
+    const conditions = [], moisture = [];
+    String(value || "—").split(/\s*·\s*/).forEach((part) => {
+      const text = part.trim();
+      if (/^함수율/.test(text)) moisture.push(text.replace(/^함수율\s*/, "함"));
+      else conditions.push(labels.get(text) || text);
+    });
+    return [conditions.join("·"), ...moisture].filter(Boolean).join(" ");
+  }
+  function weightDetail(label, value, previousValue, previousDate, kind) {
+    const numeric = (text) => {
+      const match = String(text || "").trim().match(/^(\d+(?:\.\d+)?)\s*kg$/);
+      const weight = match ? Number(match[1]) : NaN;
+      return Number.isFinite(weight) && weight > 0 ? weight : null;
+    };
+    const current = numeric(value), previous = numeric(previousValue);
+    let change = "";
+    if (current != null && previous != null) {
+      const delta = Math.round((current - previous) * 10) / 10;
+      const direction = delta > 0 ? " delta-up" : delta < 0 ? " delta-down" : "";
+      const title = '직전 ' + (kind === 'trial' ? '주행심사' : '경주') + ' ' + previousDate + ' · ' + previousValue + ' 대비';
+      change = ' <em class="ra-weight-change' + direction + '" title="' + escape(title) + '">(' + (delta > 0 ? '+' : '') + delta + ')</em>';
+    }
+    return '<span>' + escape(label + ' ' + (value || '—')) + change + '</span>';
+  }
   function miniHistory(runner) {
-    const rows = (runner.history || []).filter((r) => !state.sameDistance || r.distance === data.race.distance).slice(0, 5);
-    if (!rows.length) return '<p>해당 조건의 경주 이력이 없습니다.</p>';
-    return rows.map((r) => {
+    const byDate = (a, b) => b.date.localeCompare(a.date) || (b.race_number || b.number || 0) - (a.race_number || a.number || 0);
+    const previousRecords = new Map();
+    for (const records of [runner.history || [], runner.trials || []]) {
+      const ordered = [...records].sort(byDate);
+      ordered.forEach((record, index) => {
+        const previous = ordered.slice(index + 1).find((past) =>
+          !["출전제외", "출전취소", "경주제외", "경주취소", "취소"].includes(String(past.finish || "").replace(/\s+/g, "")) &&
+          !["심사제외", "심사취소"].includes(past.judgement));
+        previousRecords.set(record, previous);
+      });
+    }
+    const rows = [
+      ...(runner.history || []).map((record) => ({ kind: "race", record })),
+      ...(runner.trials || []).map((record) => ({ kind: "trial", record })),
+    ].filter(({ record }) => !state.sameDistance || record.distance === data.race.distance)
+      .sort((a, b) => byDate(a.record, b.record)).slice(0, 5);
+    if (!rows.length) return '<p>해당 조건의 경주·주행심사 기록이 없습니다.</p>';
+    const codes = ["S1F", "G3F", "G1F"];
+    let hasRaw = false;
+    const body = rows.map(({ kind, record: r }) => {
+      const trial = kind === "trial";
       const grade = String(r.grade || "—");
       const condition = /^\d+(등급)?$/.test(grade)
         ? grade.replace(/등급$/, "") + "등급" : grade.replace(/등급$/, "");
       const number = r.horse_number != null ? String(r.horse_number) + "번" : "—";
-      const moisture = r.track_moisture_percent != null ? String(r.track_moisture_percent) + "%" : "—";
-      return '<div class="ra-mini-history ra-mini-history-race"><span class="ra-mini-history-date">' + escape(r.date.slice(2)) + ' · ' + escape(r.distance) + 'm</span><strong>' + escape(r.finish) + '</strong><span class="ra-mini-history-time">' + escape(r.time) + '</span><span class="ra-mini-history-condition">' + escape(condition) + ' · 마번 ' + escape(number) + ' · 함수율 ' + escape(moisture) + '</span><small>S1F ' + shown(r.section_details?.S1F?.time) + ' · G1F ' + shown(r.section_details?.G1F?.time) + (r.early_position ? ' · 초반 ' + Number(r.early_position) + '위' : '') + '</small></div>';
+      const sections = codes.map((code) => {
+        const cell = r.section_details?.[code] || {};
+        const valid = Number.isFinite(cell.time_ms) && cell.time_ms > 0;
+        const raw = !valid && Number.isFinite(cell.raw_time_ms) && cell.raw_time_ms > 0;
+        hasRaw ||= raw;
+        const seconds = valid ? cell.time_ms / 1000 : raw ? cell.raw_time_ms / 1000 : null;
+        return '<td data-section="' + code + '" title="' + escape([cell.label || code, cell.note].filter(Boolean).join(' · ')) + '">' +
+          (seconds == null ? '—' : seconds.toFixed(1)) + (raw ? '<sup aria-label="원문 기록">*</sup>' : '') + '</td>';
+      }).join('');
+      const previous = previousRecords.get(r);
+      const stoneNumber = Number(r.horse_number);
+      const numberBadge = Number.isInteger(stoneNumber) && stoneNumber >= 1 && stoneNumber <= 18
+        ? '<span class="ra-history-number"><span class="silk-number silk-' + stoneNumber + ' ra-history-stone" data-number="' + stoneNumber + '" title="당시 마번 ' + stoneNumber + '번">' + stoneNumber + '</span></span>'
+        : '<span title="당시 마번">' + escape(number) + '</span>';
+      const details = numberBadge + '<span>기수 ' + shown(r.jockey) + '</span>' +
+        weightDetail('부중', r.carried_weight, previous?.carried_weight, previous?.date, kind) +
+        weightDetail('마체중', r.body_weight, previous?.body_weight, previous?.date, kind);
+      const judgement = trial ? '<small class="ra-recent-judgement" title="' + escape(r.reason || r.judgement || '') + '">' + shown(r.judgement) + (r.field_size ? ' · ' + shown(r.field_size) + '두' : '') + '</small>'
+        : r.field_size ? '<small>/ ' + shown(r.field_size) + '두</small>' : '';
+      return '<tbody data-recent-kind="' + kind + '"><tr><td class="ra-recent-date">' + escape(r.date.slice(2)) + '<small>' + shown(r.meet) + ' ' + shown(trial ? r.number : r.race_number) + (trial ? '차' : 'R') + '</small></td>' +
+        '<td class="ra-recent-condition"><strong>' + shown(r.distance) + 'm · ' + (trial ? '<span class="ra-recent-trial-label">주행심사</span>' : escape(condition)) + '</strong><small title="' + escape(r.condition || '—') + '">' + escape(compactTrackCondition(r.condition)) + '</small></td>' +
+        '<td><strong' + (!trial && r.valid_finish && r.finish_position <= 3 ? ' class="ra-placed"' : '') + '>' + shown(r.finish) + '</strong>' + judgement + '</td>' +
+        '<td>' + shown(r.time) + '</td>' + sections + '</tr>' +
+        '<tr class="ra-recent-details"><td colspan="7"><div>' + details +
+        (r.video_url ? replayLink(r.video_url, runner.horse + ' · ' + r.date + (trial ? ' 주행심사' : ' 경주')) : '') + '</div></td></tr></tbody>';
     }).join("");
+    return '<div class="ra-table-scroll ra-recent-history-scroll" tabindex="0" role="region" aria-label="' + escape(runner.horse) + ' 최근 경주·주행심사 기록표"><table class="ra-recent-races-table"><caption class="ra-sr-only">최근 5회 경주·주행심사 기록 · 최신순 · 구간 기록은 초 단위</caption><thead><tr>' +
+      ['일자', '경주조건', '착순', '기록', ...codes].map((label) => '<th scope="col">' + label + '</th>').join('') +
+      '</tr></thead>' + body + '</table></div>' +
+      '<p class="ra-recent-history-note">구간 기록은 초 단위입니다.' + (hasRaw ? ' *는 기준 미확인 또는 비교 제외 원문 기록이며, 숫자에 마우스를 올리면 사유를 확인할 수 있습니다.' : '') + '</p>';
+  }
+  function formChip(value, placed = false) {
+    const original = String(value);
+    const status = original.replace(/\s+/g, "");
+    const excluded = ["출전제외", "주행중지", "실격", "출전취소", "경주제외", "취소"].includes(status);
+    const label = excluded ? "X" : status === "경주취소" ? "-" : original.replace(/^(\d+)위$/, "$1");
+    const classes = [placed ? "placed" : "", /[가-힣]/.test(label) ? "ra-form-status" : ""].filter(Boolean).join(" ");
+    const tooltip = label !== original && !/^\d+위$/.test(original)
+      ? ' data-form-tooltip="' + escape(original) + '" tabindex="0" role="img" aria-label="' + escape(original) + '"' : '';
+    return '<span' + (classes ? ' class="' + classes + '"' : '') + tooltip + '>' + escape(label) + '</span>';
   }
   function renderComparison() {
     const panel = root.querySelector("[data-comparison-panel]");
@@ -210,17 +294,16 @@
     const content = root.querySelector("[data-comparison-content]");
     content.style.setProperty("--compare-count", list.length || 1);
     content.innerHTML = list.map((r) => {
-      const t = r.trials?.[0]; const training = r.training_summary || {};
+      const training = r.training_summary || {};
       const form = r.form_kind === "trial"
-        ? (r.form_tokens || []).map((token) => '<span>' + escape(token) + '</span>').join("")
-        : (r.history || []).slice(0, 5).map((past) => '<span' + (past.valid_finish && past.finish_position <= 3 ? ' class="placed"' : '') + '>' + escape(past.finish) + '</span>').join("");
+        ? (r.form_tokens || []).map((token) => formChip(token)).join("")
+        : (r.history || []).slice(0, 5).map((past) => formChip(past.finish, past.valid_finish && past.finish_position <= 3)).join("");
       return '<article class="ra-compare-card" data-summary-entry="' + Number(r.entry_id) + '"><header><span class="silk-number silk-' + Number(r.number) + ' ra-stone" data-number="' + Number(r.number) + '">' + Number(r.number) + '</span><div><h3>' + escape(r.horse) + '</h3><p>' + escape(r.style) + ' · ' + escape(r.jockey) + ' 기수</p><p>' + escape(r.trainer) + ' 조교사 · ' + escape(r.state) + '</p></div></header>' +
         '<div class="ra-field-form"><span>' + (r.form_kind === "trial" ? '최근 주행심사' : '최근 착순') + '</span><span class="ra-form-chips">' + (form || '<span class="ra-no-form">자료 없음</span>') + '</span></div>' +
         '<dl><dt>부담중량</dt><dd>' + escape(r.weight) + '</dd><dt>레이팅</dt><dd>' + escape(r.rating) + '</dd><dt>직전 출전 간격</dt><dd>' + (r.metrics?.last_start_days == null ? "—" : Number(r.metrics.last_start_days) + "일") +
         '</dd><dt>동일거리 출전</dt><dd>' + Number(r.same_distance_starts) + '전</dd><dt>동일거리 최고</dt><dd>' + shown(r.metrics?.same_distance_best) +
         '</dd><dt>최근 28일 조교</dt><dd>' + Number(training.sessions || 0) + '회 · ' + shown(training.minutes) + '분</dd><dt>출발조교</dt><dd>' + Number(training.start_sessions || 0) + '회</dd><dt>기수와 정상완주 (365일)</dt><dd>' + Number(r.combination_stats?.starts || 0) + '전</dd></dl>' +
-        '<h4>최근 경주 · 최신순' + (state.sameDistance ? ' / ' + data.race.distance + 'm' : '') + '</h4>' + miniHistory(r) +
-        '<h4>최근 주행심사</h4>' + (t ? '<p>' + escape(t.date) + ' · ' + escape(t.distance) + 'm · ' + escape(t.judgement) + '</p><div class="ra-mini-history"><span>' + escape(t.finish) + '</span><strong>' + escape(t.time) + '</strong>' + replayLink(t.video_url, r.horse + ' · ' + t.date + ' 주행심사' + (t.horse_number ? ' · 당시 ' + t.horse_number + '번' : '')) + '</div><p>S1F ' + shown(t.section_details?.S1F?.time_ms ? t.section_details.S1F.time : t.section_details?.S1F?.display) + ' · G1F ' + shown(t.section_details?.G1F?.time_ms ? t.section_details.G1F.time : t.section_details?.G1F?.display) + '</p>' : '<p>연결된 자료 없음</p>') +
+        '<h4>최근 기록 · 경주·주행심사' + (state.sameDistance ? ' / ' + data.race.distance + 'm' : '') + '</h4>' + miniHistory(r) +
         '<button type="button" class="ra-button" data-select-runner="' + r.entry_id + '">상세 기록 열기</button></article>';
     }).join("");
     root.querySelectorAll("[data-compare-entry]").forEach((b) => { b.checked = state.compare.includes(Number(b.dataset.compareEntry)); });
@@ -238,16 +321,6 @@
     renderComparison(); save();
   }));
   root.querySelectorAll("[data-clear-comparison]").forEach((button) => button.addEventListener("click", () => { state.compare = []; state.fieldMode = "single"; renderComparison(); save(); }));
-  const search = root.querySelector("[data-runner-search]");
-  search?.addEventListener("input", () => {
-    const query = search.value.trim().toLocaleLowerCase();
-    let count = 0;
-    root.querySelectorAll("[data-field-entry]").forEach((row) => {
-      row.hidden = !row.dataset.runnerName.toLocaleLowerCase().includes(query);
-      if (!row.hidden) count += 1;
-    });
-    root.querySelector("[data-field-status]").textContent = query ? count + "두 검색됨 · 비교 선택은 유지됩니다." : data.runners.length + "두 · 비교는 최대 4두";
-  });
   const sortDirections = { number: true };
   root.querySelectorAll("[data-sort]").forEach((button) => button.addEventListener("click", () => {
     const field = button.dataset.sort; sortDirections[field] = !(sortDirections[field] ?? (field === "rating"));

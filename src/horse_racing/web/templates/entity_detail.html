@@ -5,13 +5,13 @@
 {% block meta_description %}{{ detail.name_ko }}의 기본 정보와 출전 이력을 확인합니다.{% endblock %}
 {% block extra_head %}
   {% if detail.kind.slug in ['horses', 'jockeys'] %}
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/horse-detail.css') }}?v=3">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/horse-detail.css') }}?v=4">
   {% endif %}
   {% if detail.kind.slug == 'jockeys' %}
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/jockey-detail.css') }}?v=2">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/jockey-detail.css') }}?v=3">
   {% endif %}
   {% if detail.evaluation %}
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/horse-evaluation.css') }}?v=2">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/horse-evaluation.css') }}?v=3">
   {% endif %}
 {% endblock %}
 

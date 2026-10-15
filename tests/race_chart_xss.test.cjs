@@ -96,6 +96,7 @@ class FakeElement {
   get offsetWidth() { return 160; }
   get offsetHeight() { return 60; }
   getBoundingClientRect() { return { left: 0, top: 0, width: 800, height: 400 }; }
+  getClientRects() { return this.hidden ? [] : [this.getBoundingClientRect()]; }
 
   matches(selector) {
     const tag = selector.match(/^[a-z]+/i)?.[0];
@@ -109,6 +110,13 @@ class FakeElement {
       if (value != null && this.getAttribute(name) !== value) return false;
     }
     return true;
+  }
+
+  closest(selector) {
+    for (let node = this; node; node = node.parentElement) {
+      if (node.matches(selector)) return node;
+    }
+    return null;
   }
 
   querySelectorAll(selector) {

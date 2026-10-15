@@ -181,10 +181,10 @@ def test_both_analysis_templates_load_shared_note_and_stylesheet_before_runner_l
     desktop = (WEB_ROOT / "templates" / "analysis.html").read_text(encoding="utf-8")
     mobile = (WEB_ROOT / "templates" / "mobile" / "analysis.html").read_text(encoding="utf-8")
 
-    assert "race-commentary.css') }}?v=1" in desktop
-    assert "race-commentary.css') }}?v=1" in mobile
+    assert "race-commentary.css') }}?v=2" in desktop
+    assert "race-commentary.css') }}?v=2" in mobile
     assert desktop.index('{% include "_race_commentary.html" %}') < desktop.index(
-        'id="field-overview"'
+        '{% include "_analysis_field.html" %}'
     )
     assert mobile.index('{% include "_race_commentary.html" %}') < mobile.index(
         "data-runner-shell"

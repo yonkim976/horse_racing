@@ -1233,7 +1233,9 @@ def create_app(
                 "next_date": min((day for day in days if day > selected_day), default=None),
             }
         analysis_tab = request.query_params.get("tab", "forecast")
-        if analysis_tab not in {"forecast", "field", "records", "overview", "pace", "memo"}:
+        if analysis_tab not in {"forecast", "wagers", "field", "records", "overview", "pace", "memo"}:
+            analysis_tab = "forecast"
+        if analysis_tab == "wagers" and not page.jeju_wagers:
             analysis_tab = "forecast"
         forecast = None
         if page.selected_race is not None and (
@@ -1258,19 +1260,32 @@ def create_app(
             elif analysis_tab == "field":
                 item = asdict(runner)
                 # Keep the complete bounded history for the saved same-distance
-                # filter, but omit detailed cells already rendered on other tabs.
+                # filter, with the conditions and sections used by the summary table.
                 item["history"] = [{
                     **{key: row[key] for key in (
                         "date", "distance", "grade", "horse_number", "track_moisture_percent",
                         "finish", "finish_position", "valid_finish", "time", "early_position",
+                        "meet", "race_number", "condition", "jockey", "carried_weight",
+                        "body_weight", "field_size", "video_url",
                     )},
                     "section_details": {code: {
                         key: value for key, value in cell.items()
-                        if key in {"time", "time_ms", "display"}
+                        if key in {"time", "time_ms", "raw_time_ms", "display", "label", "note", "position"}
                     } for code, cell in row["section_details"].items()
-                        if code in {"S1F", "G1F"}},
+                        if code in {"S1F", "G3F", "G1F"}},
                 } for row in item["history"]]
-                item["trials"] = item["trials"][:1]
+                item["trials"] = [{
+                    **{key: row[key] for key in (
+                        "date", "meet", "number", "distance", "condition", "horse_number",
+                        "jockey", "carried_weight", "body_weight", "finish", "judgement",
+                        "reason", "time", "field_size", "video_url",
+                    )},
+                    "section_details": {code: {
+                        key: value for key, value in cell.items()
+                        if key in {"time", "time_ms", "raw_time_ms", "display", "label", "note", "position"}
+                    } for code, cell in row["section_details"].items()
+                        if code in {"S1F", "G3F", "G1F"}},
+                } for row in item["trials"]]
                 item.pop("training", None)
                 item.pop("start_training", None)
             elif analysis_tab == "records":

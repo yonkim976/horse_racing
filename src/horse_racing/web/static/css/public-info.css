@@ -107,6 +107,7 @@
 }
 
 @media (max-width: 560px) {
+  :where(html:not([data-layout="desktop"])) {
   .public-info {
     width: calc(100% - 28px);
     padding: 10px 0 32px;
@@ -123,5 +124,7 @@
 
   .public-info-section h2 {
     font-size: 17px;
+  }
+
   }
 }

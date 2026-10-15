@@ -18,9 +18,12 @@
   .jockey-partner-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 }
 @media (max-width: 700px) {
+  :where(html:not([data-layout="desktop"])) {
   .jockey-profile-overview { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .jockey-profile-identity { padding: 14px 18px; }
   .jockey-profile-identity h3 { font-size: 22px; }
+
+  }
 }
 /* Racing-entry column spacing does not apply to these performance tables. */
 .entry-table.jockey-stats-table :is(th, td) { width: auto; padding-inline: 14px; text-align: right; }

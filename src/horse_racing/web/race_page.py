@@ -26,6 +26,7 @@ from horse_racing.services.section_read import (
 )
 from horse_racing.web.dashboard import EntryRow, _entry_row, _status
 from horse_racing.web.entry_preview import load_entry_previews
+from horse_racing.web.race_care import load_race_care
 from horse_racing.web.formatting import (
     display_race_title,
     dividend_label,
@@ -182,6 +183,7 @@ class RacePageData:
     equipment: list[RaceEquipmentRow]
     steward_report: StewardReportView | None
     video_url: str | None = None
+    care: dict | None = None
 
 
 def _effective_sections(entry: RaceEntry):
@@ -265,6 +267,7 @@ def load_race_page(session: Session, *, race_id: int) -> RacePageData | None:
     prev_race_id, next_race_id = _neighbor_race_ids(session, race)
 
     return RacePageData(
+        care=load_race_care(session, race),
         video_url=race_video_url(meet_code=meet_code, race_date=race.race_date_local,
                                  race_number=race.race_number, status=race.status),
         id=race.id,

@@ -1,5 +1,6 @@
 (() => {
   const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DESKTOP_LAYOUT = document.documentElement.dataset.layout === "desktop";
   let scheduleHeaderResizeObserver = null;
 
   const entityNav = document.querySelector("[data-entity-nav]");
@@ -354,7 +355,7 @@
     if (!schedule) {
       return;
     }
-    if (!hero || !window.matchMedia("(min-width: 1101px)").matches) {
+    if (!hero || (!DESKTOP_LAYOUT && !window.matchMedia("(min-width: 1101px)").matches)) {
       schedule.style.removeProperty("--schedule-toolbar-height");
       return;
     }
@@ -544,7 +545,7 @@
     };
 
     const syncMode = () => {
-      if (wideLayout.matches) {
+      if (DESKTOP_LAYOUT || wideLayout.matches) {
         enable();
       } else {
         disable();

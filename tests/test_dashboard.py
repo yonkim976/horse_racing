@@ -20,6 +20,7 @@ from horse_racing.db.models import (
     HorseMedical,
     HorseProfileSnapshot,
     HorseRatingSnapshot,
+    HorseStartTraining,
     HorseTraining,
     HorseWeightHistory,
     Jockey,
@@ -264,9 +265,9 @@ def test_www_redirects_to_apex_without_leaking_cached_asset_urls(tmp_path: Path)
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in apex_response.text
     assert '<meta name="robots" content="index,follow">' in apex_response.text
     assert 'rel="alternate"' not in apex_response.text
-    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=77"' in apex_response.text
+    assert 'href="https://mapilog.xyz/static/css/dashboard.css?v=78"' in apex_response.text
     assert (
-        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=77"'
+        'href="https://mapilog-example.run.app/static/css/dashboard.css?v=78"'
     ) in run_response.text
     assert '<link rel="canonical" href="https://mapilog.xyz/">' in run_response.text
     assert 'aria-label="마필로그 홈"' in apex_response.text
@@ -481,8 +482,11 @@ def test_race_detail_embeds_only_its_distance_route(
     assert 'class="course-detail-kicker">구간 순서도</p>' not in response.text
     assert "현재 경주" in response.text
     assert "전체 거리 보기 ↗" in response.text
+    from bs4 import BeautifulSoup
+    map_section = BeautifulSoup(response.text, "html.parser").select_one("#racecourse-map")
+    assert map_section.select_one(".course-heading .course-color-key") is None
+    assert map_section.select_one('.seoul-viewport .course-map-legend [aria-label="지도 구간 색상 안내"]') is not None
     if meet_code != 2:
-        assert response.text.index('aria-label="지도 구간 색상 안내"') < response.text.index('class="seoul-viewport"')
         assert "다른 거리의 경주로도 보기 ↗" not in response.text
         assert "지도 지점은 거리 기준 개략 위치" not in response.text
         assert "현재 출발점과 표준 주로를 표시합니다" not in response.text
@@ -1035,6 +1039,104 @@ def test_race_detail_page_shows_results_and_sections(tmp_path: Path) -> None:
     assert missing.status_code == 404
 
 
+@pytest.mark.parametrize(("tab", "expected"), [
+    ("result", "result"), ("course", "course"), ("sections", "sections"),
+    ("not-a-tab", "result"),
+])
+def test_race_detail_tabs_render_one_visible_pane_and_keep_legacy_anchors(
+    tmp_path: Path, tab: str, expected: str,
+) -> None:
+    from bs4 import BeautifulSoup
+
+    with TestClient(create_app(seeded_session(tmp_path))) as client:
+        response = client.get("/races/1", params={"tab": tab, "layout": "desktop"})
+    assert response.status_code == 200
+    soup = BeautifulSoup(response.text, "html.parser")
+    panes = soup.select("[data-race-detail-pane]")
+    assert [p["data-race-detail-pane"] for p in panes if not p.has_attr("hidden")] == [expected]
+    current = soup.select_one('[data-race-detail-tab][aria-current="page"]')
+    assert current["data-race-detail-tab"] == expected
+    assert soup.select_one("#racecourse-map") is not None
+    assert soup.select_one("#race-sections") is not None
+    assert soup.select_one(".race-detail-hero .page-toc") is None
+    assert soup.select_one('[data-race-detail-tab="training"]') is None
+    assert soup.select_one('[data-race-detail-tab="medical"]') is None
+
+
+@pytest.mark.parametrize("tab", ["training", "medical"])
+def test_scheduled_race_care_tabs_show_only_pre_race_records(tmp_path: Path, tab: str) -> None:
+    from bs4 import BeautifulSoup
+
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        session.get(Race, 1).status = "scheduled"
+        for day, label in (
+            (date(2026, 7, 24), "경계조교"),
+            (date(2026, 7, 23), "기간밖조교"),
+            (date(2026, 8, 21), "경주당일조교"),
+            (date(2026, 8, 22), "경주이후조교"),
+        ):
+            session.add(HorseTraining(
+                horse_id=1, meet_code=2, training_date_local=day,
+                trainer_name=label, duration_seconds=0, canter_count=0,
+                observed_at_ms=1,
+            ))
+        session.add(HorseStartTraining(
+            horse_id=1, meet_code=2, training_date_local=date(2026, 8, 20),
+            rider_name="출발기수", remark="양호", location_raw="출발대", observed_at_ms=1,
+        ))
+        for day, diagnosis in (
+            (date(2026, 5, 23), '경계진료<script>alert("test")</script>'),
+            (date(2026, 5, 22), "기간밖진료"),
+            (date(2026, 8, 21), "경주당일진료"),
+            (date(2026, 8, 22), "경주이후진료"),
+        ):
+            session.add(HorseMedical(
+                horse_id=1, meet_code=2, clinic_date_local=day,
+                diagnosis_1=diagnosis, observed_at_ms=1,
+            ))
+        session.commit()
+    with TestClient(create_app(factory)) as client:
+        response = client.get(f"/races/1?layout=desktop&tab={tab}")
+        mobile = client.get(f"/races/1?layout=mobile&tab={tab}")
+    assert response.status_code == 200
+    doc = BeautifulSoup(response.text, "html.parser")
+    assert doc.select_one('[data-race-detail-tab][aria-current="page"]')["data-race-detail-tab"] == tab
+    assert [p["data-race-detail-pane"] for p in doc.select('[data-race-detail-pane]') if not p.has_attr("hidden")] == [tab]
+    training = doc.select_one('#race-detail-pane-training')
+    medical = doc.select_one('#race-detail-pane-medical')
+    assert [int(row["data-care-horse"]) for row in training.select('[data-care-horse]')] == [1, 7]
+    assert "경계조교" in training.get_text()
+    assert "15분" in training.get_text()
+    assert "출발기수" in training.get_text()
+    assert "출발대" in training.get_text()
+    assert "근막염" in medical.get_text()
+    assert "경계진료" in medical.get_text()
+    assert not medical.select('script')
+    for excluded in ("기간밖조교", "경주당일조교", "경주이후조교", "기간밖진료", "경주당일진료", "경주이후진료"):
+        assert excluded not in response.text
+    empty_horse = medical.select_one('[data-care-horse="7"]')
+    assert "이 기간에 수집된 진료 기록이 없습니다." in empty_horse.get_text()
+    assert 'href="/horses/003001"' in str(training)
+    assert mobile.status_code == 200
+    assert 'class="mobile-app ' in mobile.text
+    assert 'data-race-detail-tab="training"' not in mobile.text
+
+
+def test_scheduled_race_care_excludes_not_yet_occurred_days(tmp_path: Path, monkeypatch) -> None:
+    from horse_racing.web.race_care import load_race_care
+
+    monkeypatch.setattr("horse_racing.web.race_care.today_seoul", lambda: date(2026, 8, 18))
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        race = session.get(Race, 1)
+        race.status = "scheduled"
+        care = load_race_care(session, race)
+    assert care["through"] == "2026-08-18"
+    assert not care["horses"][0]["training"]  # Existing session is August 19.
+    assert care["horses"][0]["medical"][0]["date"] == "2026-08-10"
+
+
 @pytest.mark.parametrize(("meet", "name", "distance"), [
     (1, "서울", 1000), (2, "제주", 1200), (3, "부경", 1600),
 ])
@@ -1218,7 +1320,7 @@ def test_analysis_tabs_support_direct_links_and_preserve_race_navigation(
 ) -> None:
     from bs4 import BeautifulSoup
 
-    tabs = {"forecast", "field", "records", "overview", "pace", "memo"}
+    tabs = {"forecast", "wagers", "field", "records", "overview", "pace", "memo"}
     with TestClient(create_app(seeded_session(tmp_path))) as client:
         for requested in [*sorted(tabs), "unknown"]:
             response = client.get(f"/analysis?race_id=1&history_limit=60&tab={requested}")
@@ -1300,6 +1402,17 @@ def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_vid
 
     with TestClient(create_app(factory)) as client:
         response = client.get("/analysis?race_id=1&tab=overview")
+        field_response = client.get("/analysis?race_id=1&tab=field")
+    assert field_response.status_code == 200
+    field_document = BeautifulSoup(field_response.text, "html.parser")
+    field_payload = json.loads(field_document.find(id="race-study-data").string)
+    recent = field_payload["runners"][0]["history"][0]
+    assert recent["horse_number"] == 4
+    assert recent["condition"] == "맑음 · 건조"
+    assert {"meet", "race_number", "jockey", "carried_weight", "body_weight", "field_size"} <= recent.keys()
+    assert set(recent["section_details"]) == {"S1F", "G3F", "G1F"}
+    assert recent["section_details"]["G3F"]["time_ms"] == 35_000
+    assert recent["section_details"]["S1F"]["raw_time_ms"] == 15_000
     assert response.status_code == 200
     document = BeautifulSoup(response.text, "html.parser")
     pane = document.select_one('[data-analysis-pane="overview"]')
@@ -1350,6 +1463,33 @@ def test_analysis_all_records_uses_one_table_with_section_columns_and_inline_vid
     assert "연결된 경주·주행심사 기록이 없습니다" in horses[1].get_text()
     column_count = len(headers)
     assert all(int(cell["colspan"]) + 1 == column_count for cell in pane.select("[colspan]"))
+
+
+def test_analysis_field_keeps_multiple_trials_for_combined_recent_history(tmp_path: Path) -> None:
+    from bs4 import BeautifulSoup
+
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        session.add(RunningTrialResult(
+            trial=RunningTrial(
+                meet_code=2, trial_date_local=date(2026, 7, 9), trial_round=22,
+                trial_race_number=1, distance_m=800, observed_at_ms=1,
+            ),
+            horse_id=1, horse_number=3, horse_name_raw="바람의별", finish_position=2, judgement="합",
+            s1f_ms=18_000, g3f_ms=48_000, g1f_ms=16_000, observed_at_ms=1,
+        ))
+        session.commit()
+    with TestClient(create_app(factory)) as client:
+        response = client.get("/analysis?race_id=1&tab=field")
+    assert response.status_code == 200
+    document = BeautifulSoup(response.text, "html.parser")
+    payload = json.loads(document.find(id="race-study-data").string)
+    trials = payload["runners"][0]["trials"]
+    assert [trial["date"] for trial in trials] == ["2026-08-13", "2026-07-09"]
+    assert trials[0]["carried_weight"] == "55kg"
+    assert trials[0]["judgement"] == "합격"
+    assert trials[0]["section_details"]["G3F"]["time_ms"] == 49_000
+    assert all("video_url" in trial for trial in trials)
 
 
 def test_analysis_busan_csv_uses_course_sections_and_preserves_unverified_raw_time(
@@ -1672,7 +1812,7 @@ def test_official_cap_colors_are_used_for_horse_number_badges(tmp_path: Path) ->
     assert '.race-hero[data-racecourse="영천"]' in css.text
     assert "background: linear-gradient(125deg," in css.text
     assert "#2d234b 0%, #47366f 58%, #55417c 100%);" in css.text
-    assert "dashboard.css?v=77" in page.text
+    assert "dashboard.css?v=78" in page.text
 
 
 def test_dashboard_accepts_empty_racecourse_filter(tmp_path: Path) -> None:
@@ -1931,7 +2071,7 @@ def test_phones_render_equivalent_mobile_pages_on_canonical_urls(
             response = client.get(path, headers=headers, follow_redirects=False)
             assert response.status_code == 200, path
             assert 'class="mobile-app ' in response.text
-            assert "dashboard.css?v=77" in response.text
+            assert "dashboard.css?v=78" in response.text
             assert "mobile.css?v=84" in response.text
             assert {part.strip().lower() for part in response.headers["vary"].split(",")} == {
                 "user-agent", "accept-encoding"

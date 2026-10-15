@@ -4,7 +4,25 @@
 {% block title %}{{ page.date_label }} {{ page.course_name }} {{ page.race_number }}경주 {{ '결과·구간기록' if page.status == 'completed' else '출전표·경주정보' }} · 마필로그 Mapilog{% endblock %}
 {% block meta_description %}{{ page.date_label }} {{ page.course_name }} {{ page.race_number }}R 결과와 구간기록을 확인합니다.{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-detail-tabs.css') }}?v=9">
+<script src="{{ url_for('static', path='/js/race-detail-tabs.js') }}?v=1" defer></script>
+{% endblock %}
+
 {% block content %}
+{% set detail_tabs = [] %}
+{% if page.racecourse_map %}{% set detail_tabs = detail_tabs + [('course', '경주로')] %}{% endif %}
+{% set detail_tabs = detail_tabs + [('result', '결과')] %}
+{% if page.care %}{% set detail_tabs = detail_tabs + [('training', '조교'), ('medical', '진료')] %}{% endif %}
+{% if page.has_sections %}{% set detail_tabs = detail_tabs + [('sections', '구간')] %}{% endif %}
+{% if page.dividends %}{% set detail_tabs = detail_tabs + [('dividends', '배당')] %}{% endif %}
+{% if page.jockey_changes %}{% set detail_tabs = detail_tabs + [('jockey-changes', '기수변경')] %}{% endif %}
+{% if page.scratches %}{% set detail_tabs = detail_tabs + [('scratches', '출전취소')] %}{% endif %}
+{% if page.equipment %}{% set detail_tabs = detail_tabs + [('equipment', '장구')] %}{% endif %}
+{% if page.steward_report %}{% set detail_tabs = detail_tabs + [('steward', '심판')] %}{% endif %}
+{% set requested_tab = request.query_params.get('tab', 'result') %}
+{% set detail_tab = requested_tab if requested_tab in (detail_tabs | map(attribute=0) | list) else 'result' %}
+{% macro pane_attrs(key) %}data-race-detail-pane="{{ key }}" aria-labelledby="race-detail-tab-{{ key }}"{% if detail_tab != key %} hidden{% endif %}{% endmacro %}
 <section class="page-intro compact-intro">
   <nav class="crumb-nav" aria-label="경주 이동">
     <a class="back-link" href="/?{{ page.back_query }}">← 목록</a>
@@ -49,21 +67,20 @@
         <span>{{ page.weather_track }}</span>
         <span>출전 {{ page.entries | length }}두</span>
       </div>
-      <nav class="page-toc" aria-label="이 경주 목차">
-        {% if page.racecourse_map %}<a href="#racecourse-map">경주로</a>{% endif %}
-        <a href="#race-result">결과</a>
-        {% if page.has_sections %}<a href="#race-sections">구간</a>{% endif %}
-        {% if page.dividends %}<a href="#race-dividends">배당</a>{% endif %}
-        {% if page.jockey_changes %}<a href="#race-jockey-changes">기수변경</a>{% endif %}
-        {% if page.scratches %}<a href="#race-scratches">출전취소</a>{% endif %}
-        {% if page.equipment %}<a href="#race-equipment">장구</a>{% endif %}
-        {% if page.steward_report %}<a href="#race-steward">심판</a>{% endif %}
-      </nav>
+
     </div>
   </div>
 </section>
 
+<div class="race-detail-workspace" data-race-detail-workspace>
+<nav class="race-detail-tabs" aria-label="이 경주 목차">
+  {% for key, label in detail_tabs %}
+  <a id="race-detail-tab-{{ key }}" href="{{ request.url.include_query_params(tab=key).replace(fragment='') }}" data-race-detail-tab="{{ key }}" aria-controls="race-detail-pane-{{ key }}"{% if detail_tab == key %} aria-current="page"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>
+
 {% if page.racecourse_map %}
+<div id="race-detail-pane-course" {{ pane_attrs('course') }}>
 {% set track = page.racecourse_map %}
 {% set is_course_explorer = false %}
 {% set map_key = "seoul" if track.meet_code == 1 else "jeju" %}
@@ -72,8 +89,10 @@
 {% else %}
 {% include "_seoul_course_explorer.html" %}
 {% endif %}
+</div>
 {% endif %}
 
+<div id="race-detail-pane-result" {{ pane_attrs('result') }}>
 <section id="race-result" class="panel">
   <div class="panel-heading entries-heading">
     <div>
@@ -91,7 +110,13 @@
     </div>
   {% endif %}
 </section>
+</div>
 
+{% if page.care %}
+{% include "_race_care.html" %}
+{% endif %}
+
+<div id="race-detail-pane-sections" {{ pane_attrs('sections') }}>
 <section id="race-sections" class="panel">
   <div class="panel-heading entries-heading">
     <div>
@@ -234,8 +259,10 @@
     </div>
   {% endif %}
 </section>
+</div>
 
 {% if page.dividends %}
+<div id="race-detail-pane-dividends" {{ pane_attrs('dividends') }}>
 <section id="race-dividends" class="panel">
   <div class="panel-heading">
     <div>
@@ -262,11 +289,13 @@
     {% endfor %}
   </div>
 </section>
+</div>
 {% endif %}
 
 {% if page.jockey_changes or page.scratches or page.equipment or page.steward_report %}
-<section class="board-layout">
+
     {% if page.jockey_changes %}
+    <div id="race-detail-pane-jockey-changes" {{ pane_attrs('jockey-changes') }}>
     <article id="race-jockey-changes" class="panel">
       <div class="panel-heading">
         <div>
@@ -306,9 +335,11 @@
         </table>
       </div>
     </article>
+    </div>
     {% endif %}
 
     {% if page.scratches %}
+    <div id="race-detail-pane-scratches" {{ pane_attrs('scratches') }}>
     <article id="race-scratches" class="panel">
       <div class="panel-heading">
         <div>
@@ -344,9 +375,11 @@
         </table>
       </div>
     </article>
+    </div>
     {% endif %}
 
     {% if page.equipment %}
+    <div id="race-detail-pane-equipment" {{ pane_attrs('equipment') }}>
     <article id="race-equipment" class="panel">
       <div class="panel-heading">
         <div>
@@ -386,9 +419,11 @@
         </table>
       </div>
     </article>
+    </div>
     {% endif %}
 
     {% if page.steward_report %}
+    <div id="race-detail-pane-steward" {{ pane_attrs('steward') }}>
     <article id="race-steward" class="panel">
       <div class="panel-heading">
         <div>
@@ -406,9 +441,10 @@
         <p class="steward-body">{{ page.steward_report.additional_judgement }}</p>
       {% endif %}
     </article>
+    </div>
     {% endif %}
-</section>
 {% endif %}
+</div>
 <script src="{{ url_for('static', path='/js/race-video.js') }}?v=1" defer></script>
-<script src="{{ url_for('static', path='/js/race-chart.js') }}?v=15" defer></script>
+<script src="{{ url_for('static', path='/js/race-chart.js') }}?v=16" defer></script>
 {% endblock %}

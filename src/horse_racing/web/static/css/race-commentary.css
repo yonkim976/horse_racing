@@ -36,9 +36,12 @@
 .rc-source-note a { color:var(--accent-strong);text-decoration:underline;text-underline-offset:2px; }
 .mobile-analysis .race-commentary { margin-inline:20px; }
 @media (max-width:400px) {
+  :where(html:not([data-layout="desktop"])) {
   .race-commentary { padding:10px 11px; }
   .rc-heading-row { align-items:flex-start;gap:6px; }
   .rc-status { font-size:9px;padding:3px 5px; }
   .rc-summary { font-size:12px; }
   .rc-weight-list { grid-template-columns:1fr; }
+
+  }
 }

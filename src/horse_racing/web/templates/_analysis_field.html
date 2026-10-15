@@ -5,14 +5,13 @@
   </div>
   <div class="ra-field-workspace" data-field-workspace>
     <aside class="ra-field-rail" aria-label="비교할 출전마 선택">
-      <label class="ra-search-label"><span class="ra-sr-only">출전마 또는 기수 검색</span><input type="search" data-runner-search placeholder="말 · 기수 검색"></label>
       <div class="ra-field-sort" role="group" aria-label="출전마 정렬">
         <button type="button" data-sort="number" aria-label="마번으로 정렬" aria-pressed="true">마번 ↑</button>
         <button type="button" data-sort="rating" aria-label="레이팅으로 정렬" aria-pressed="false">레이팅 ↕</button>
       </div>
       <div class="ra-field-list" data-field-list>
         {% for runner in page.runners | sort(attribute='number') %}
-        <div class="ra-field-rail-item{% if runner.state == '출전취소' %} ra-scratched{% endif %}" data-field-entry="{{ runner.entry_id }}" data-runner-name="{{ runner.horse }} {{ runner.jockey }}" data-number="{{ runner.number }}" data-rating="{{ runner.rating }}">
+        <div class="ra-field-rail-item{% if runner.state == '출전취소' %} ra-scratched{% endif %}" data-field-entry="{{ runner.entry_id }}" data-number="{{ runner.number }}" data-rating="{{ runner.rating }}">
           <button type="button" class="ra-field-runner" data-select-runner="{{ runner.entry_id }}" data-field-select aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-controls="field-runner-summary" aria-label="{{ runner.number }}번 {{ runner.horse }} 요약 보기">
             {{ stone(runner.number) }}
             <span><strong>{{ runner.horse }}</strong><small>{{ runner.jockey }} · {{ runner.weight }}</small>{% if runner.state == '출전취소' %}<small>출전취소</small>{% endif %}</span>

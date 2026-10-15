@@ -24,9 +24,12 @@
 .horse-profile-reference a { color: var(--ink); font-size: 12px; text-decoration: none; }
 .horse-profile-reference a:hover { text-decoration: underline; }
 @media (max-width: 480px) {
+  :where(html:not([data-layout="desktop"])) {
   .horse-detail-tabs { gap: 2px; padding: 4px; }
   .horse-detail-tabs a { padding: 10px 5px; font-size: 12px; }
   .horse-profile-groups { padding-inline: 16px; }
   .horse-profile-facts, .horse-profile-reference-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .horse-profile-reference { padding-inline: 16px; }
+
+  }
 }

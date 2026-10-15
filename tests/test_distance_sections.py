@@ -450,7 +450,8 @@ def test_page_filters_races_but_keeps_separate_source_verified_trial_scope(facto
         assert response.status_code == 200
         assert "주행심사 구간 기록" in response.text
         assert "1,000m 심사" in response.text
-        assert "경주 기록" not in response.text
+        from bs4 import BeautifulSoup
+        assert "경주 기록" not in BeautifulSoup(response.text, "html.parser").select_one("main").get_text()
         assert 'name="grade"' not in response.text
         assert 'name="view" value="trials"' in response.text
         assert '<option value="2026" selected>' in response.text

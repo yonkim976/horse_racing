@@ -11,7 +11,10 @@
 .horse-directory-current-filter { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
 .horse-directory-current-filter a { margin-left: 8px; color: var(--accent-strong); }
 @media (max-width: 480px) {
+  :where(html:not([data-layout="desktop"])) {
   .horse-grade-table th,.horse-grade-table td { padding-inline: 10px; }
+
+  }
 }
 .horse-directory-back { display: inline-flex; margin-bottom: 20px; color: var(--accent-strong); font-size: 13px; text-decoration: none; }
 .horse-directory-back:hover { text-decoration: underline; }

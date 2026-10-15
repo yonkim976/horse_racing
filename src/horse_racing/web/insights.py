@@ -31,6 +31,7 @@ from horse_racing.db.models import (
 )
 from horse_racing.services.section_read import load_section_observations
 from horse_racing.web.formatting import MAX_NORMAL_FINISH
+from horse_racing.web.jeju_wagers import load_jeju_wagers
 
 KST = ZoneInfo("Asia/Seoul")
 MEET_NAMES = {1: "서울", 2: "제주", 3: "부산경남", 4: "영천"}
@@ -334,6 +335,7 @@ class ForecastPage:
     runners: list[ForecastRunner]
     model: dict[str, str] | None
     data_cutoff: str
+    jeju_wagers: dict[str, Any] | None = None
 
     def pace_json(self) -> list[dict[str, Any]]:
         return [
@@ -655,6 +657,7 @@ def load_forecast_page(
         runners,
         model,
         cutoff,
+        load_jeju_wagers(session, race_id=selected.id, meet_code=selected.meet_code),
     )
 
 
