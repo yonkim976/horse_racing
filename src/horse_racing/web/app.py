@@ -36,6 +36,7 @@ from sqlalchemy.exc import DBAPIError
 from sqlalchemy.orm import Session
 from starlette.middleware.gzip import GZipMiddleware
 
+from horse_racing.web.crawler_policy import scanner_probe_reason
 from horse_racing.web.dashboard import (
     CalendarIndex,
     calendar_month_options,
@@ -119,6 +120,7 @@ _BLOCKED_ANTHROPIC_UA = re.compile(
     re.I,
 )
 _BLOCKED_HARVESTER_UA = re.compile(r"SerpstatBot|AhrefsBot", re.I)
+_BLOCKED_AMAZON_UA = re.compile(r"Amazonbot", re.I)
 _CRAWLER_UA = re.compile(r"bot|crawler|spider|slurp|archiver", re.I)
 _RATE_LIMIT_WINDOW_SECONDS = 60.0
 _RATE_LIMIT_BURST_SECONDS = 10.0
@@ -491,6 +493,8 @@ def create_app(
             blocked_reason = "anthropic_crawler"
         elif _BLOCKED_HARVESTER_UA.search(user_agent):
             blocked_reason = "bulk_harvester"
+        elif _BLOCKED_AMAZON_UA.search(user_agent):
+            blocked_reason = "amazon_crawler"
         if path != "/robots.txt" and blocked_reason is not None:
             denied = Response(
                 status_code=403,
@@ -507,11 +511,19 @@ def create_app(
             }
             return finish(denied)
 
+        probe_reason = scanner_probe_reason(path)
         if path == "/" and "rest_route" in request.query_params:
-            denied = Response(status_code=404, headers={"Cache-Control": "no-store"})
+            probe_reason = "wordpress_route"
+        if probe_reason is not None:
+            # Before rate-key allocation, cache locks, rendering or DB admission.
+            # No search-bot exemption: a spoofed User-Agent must not bypass this.
+            denied = Response(status_code=404, headers={
+                "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow",
+                "X-Content-Type-Options": "nosniff",
+            })
             denied.policy_diagnostics = {  # type: ignore[attr-defined]
                 "category": "scanner_probe",
-                "reason": "wordpress_route",
+                "reason": probe_reason,
                 "count": None,
                 "limit": None,
             }
@@ -856,6 +868,7 @@ def create_app(
             "User-agent: anthropic-ai\nDisallow: /\n\n"
             "User-agent: SerpstatBot\nDisallow: /\n\n"
             "User-agent: AhrefsBot\nDisallow: /\n\n"
+            "User-agent: Amazonbot\nDisallow: /\n\n"
             "User-agent: *\nAllow: /\n\n"
             f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap.xml\n"
             f"Sitemap: {_PUBLIC_SITE_ORIGIN}/sitemap-index.xml\n",

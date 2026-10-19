@@ -41,6 +41,7 @@ from horse_racing.db.models import (
     RunningTrial,
     RunningTrialResult,
 )
+from horse_racing.web.database import create_web_session_factory
 
 _PEER_IP = "198.51.100.80"
 _DESKTOP_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) Chrome/128 Safari/537.36"
@@ -161,7 +162,11 @@ def _seed_database(path: Path) -> tuple[sessionmaker[Session], Any, list[int]]:
             ))
         session.commit()
         race_ids = [race.id for race in main_races]
-    return factory, engine, race_ids
+    # Seed with collector privileges, then exercise the same guarded engine
+    # used by the public web process rather than injecting a writable factory.
+    engine.dispose()
+    web_factory = create_web_session_factory(f"sqlite:///{path}")
+    return web_factory, web_factory.kw["bind"], race_ids
 
 async def run_shared_ip_load(
     scratch: str | Path,
@@ -449,6 +454,7 @@ async def run_shared_ip_load(
         },
         "database": {
             "database_kind": "seeded local SQLite",
+            "web_read_only_guard": True,
             "select_statements": select_count,
             "max_active_session_contexts": tracker.maximum_active,
             "configured_admission_limit": 3,

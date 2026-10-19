@@ -17,6 +17,7 @@ def test_one_hundred_browser_journeys_share_a_peer_ip(tmp_path) -> None:
     assert report["client_count"] == 100
     assert report["peer_ip_count"] == 1
     assert report["database"]["database_kind"] == "seeded local SQLite"
+    assert report["database"]["web_read_only_guard"] is True
     assert report["database"]["max_active_session_contexts"] <= 3
     assert report["database"]["select_statements"] > 0
     assert report["layout_cache_bypass_dashboard_loader_calls"] == 2
