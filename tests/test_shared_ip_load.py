@@ -23,6 +23,8 @@ def test_one_hundred_browser_journeys_share_a_peer_ip(tmp_path) -> None:
     assert report["layout_cache_bypass_dashboard_loader_calls"] == 2
     assert report["asset_cache_control"] == "public, max-age=3600"
     assert report["asset_revalidation_status"] in {200, 304}
+    assert report["warmup_home_requests"] == 2
+    assert 0 <= report["warmup_dashboard_loader_calls"] <= 2
 
     cold = report["journey_phases"]["cold"]
     warm = report["journey_phases"]["warm"]

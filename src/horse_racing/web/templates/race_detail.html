@@ -5,15 +5,15 @@
 {% block meta_description %}{{ page.date_label }} {{ page.course_name }} {{ page.race_number }}R 결과와 구간기록을 확인합니다.{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{{ url_for('static', path='/css/race-detail-tabs.css') }}?v=9">
-<script src="{{ url_for('static', path='/js/race-detail-tabs.js') }}?v=1" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-detail-tabs.css') }}?v=10">
+<script src="{{ url_for('static', path='/js/race-detail-tabs.js') }}?v=2" defer></script>
 {% endblock %}
 
 {% block content %}
 {% set detail_tabs = [] %}
 {% if page.racecourse_map %}{% set detail_tabs = detail_tabs + [('course', '경주로')] %}{% endif %}
 {% set detail_tabs = detail_tabs + [('result', '결과')] %}
-{% if page.care %}{% set detail_tabs = detail_tabs + [('training', '조교'), ('medical', '진료')] %}{% endif %}
+{% if page.care %}{% set detail_tabs = detail_tabs + [('care', '조교·진료')] %}{% endif %}
 {% if page.has_sections %}{% set detail_tabs = detail_tabs + [('sections', '구간')] %}{% endif %}
 {% if page.dividends %}{% set detail_tabs = detail_tabs + [('dividends', '배당')] %}{% endif %}
 {% if page.jockey_changes %}{% set detail_tabs = detail_tabs + [('jockey-changes', '기수변경')] %}{% endif %}
@@ -21,6 +21,7 @@
 {% if page.equipment %}{% set detail_tabs = detail_tabs + [('equipment', '장구')] %}{% endif %}
 {% if page.steward_report %}{% set detail_tabs = detail_tabs + [('steward', '심판')] %}{% endif %}
 {% set requested_tab = request.query_params.get('tab', 'result') %}
+{% if requested_tab in ['training', 'medical'] %}{% set requested_tab = 'care' %}{% endif %}
 {% set detail_tab = requested_tab if requested_tab in (detail_tabs | map(attribute=0) | list) else 'result' %}
 {% macro pane_attrs(key) %}data-race-detail-pane="{{ key }}" aria-labelledby="race-detail-tab-{{ key }}"{% if detail_tab != key %} hidden{% endif %}{% endmacro %}
 <section class="page-intro compact-intro">

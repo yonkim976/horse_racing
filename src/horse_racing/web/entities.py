@@ -37,6 +37,8 @@ from horse_racing.db.models import (
     TrainerIdentityResolution,
     TrainerStatusObservation,
 )
+from horse_racing.services.medical_read import medical_display_filter
+from horse_racing.services.training_read import training_display_fields
 from horse_racing.web.formatting import (
     format_age,
     format_finish_position,
@@ -284,6 +286,7 @@ class TrainingRow:
     canter: str
     gallop: str
     entry_plan: str
+    rider: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -856,7 +859,7 @@ def load_entity_detail(
         )
         weight_count = _count_for_horse(session, HorseWeightHistory, entity_id)
         training_count = _count_for_horse(session, HorseTraining, entity_id)
-        medical_count = _count_for_horse(session, HorseMedical, entity_id)
+        medical_count = _count_for_horse(session, HorseMedical, entity_id, medical_display_filter())
         running_trial_count = _count_for_horse(session, RunningTrialResult, entity_id)
         grade_change_count = _count_for_horse(session, HorseGradeChange, entity_id)
         equipment_count = _count_for_horse(session, EntryEquipment, entity_id)
@@ -1465,15 +1468,17 @@ def _load_training(session: Session, horse_id: int) -> list[TrainingRow]:
             .limit(MAX_HORSE_AUX_ROWS)
         )
     )
+    displays = training_display_fields(session, rows)
     return [
         TrainingRow(
             training_date=row.training_date_local,
             meet_label=_meet_label(row.meet_code),
             trainer_name=row.trainer_name or "—",
             duration=_format_duration(row.duration_seconds),
-            canter=_format_count(row.canter_count),
-            gallop=_format_count(row.gallop_count),
+            canter=_format_count(displays[row.id]["canter_count_display"]),
+            gallop=_format_count(displays[row.id]["gallop_count_display"]),
             entry_plan=row.entry_plan or "—",
+            rider=displays[row.id]["rider_display_label"],
         )
         for row in rows
     ]
@@ -1483,7 +1488,7 @@ def _load_medical(session: Session, horse_id: int) -> list[MedicalRow]:
     rows = list(
         session.scalars(
             select(HorseMedical)
-            .where(HorseMedical.horse_id == horse_id)
+            .where(HorseMedical.horse_id == horse_id, medical_display_filter())
             .order_by(HorseMedical.clinic_date_local.desc())
             .limit(MAX_HORSE_AUX_ROWS)
         )
@@ -1812,9 +1817,11 @@ def _format_trial_reason(failure: str | None, inspection: str | None) -> str:
     return " · ".join(parts) if parts else "—"
 
 
-def _count_for_horse(session: Session, model: type, horse_id: int) -> int:
+def _count_for_horse(session: Session, model: type, horse_id: int, *criteria) -> int:
     return int(
-        session.scalar(select(func.count()).select_from(model).where(model.horse_id == horse_id))
+        session.scalar(
+            select(func.count()).select_from(model).where(model.horse_id == horse_id, *criteria)
+        )
         or 0
     )
 

@@ -757,6 +757,37 @@ class HorseTraining(Base):
     )
 
 
+class HorseTrainingRiderObservation(Base):
+    """Latest same-event website evidence, separate from original API fields."""
+
+    __tablename__ = "horse_training_rider_observations"
+
+    horse_training_id: Mapped[int] = mapped_column(
+        ForeignKey("horse_training.id", ondelete="CASCADE"), primary_key=True
+    )
+    source_document_id: Mapped[int] = mapped_column(
+        ForeignKey("source_documents.id", ondelete="RESTRICT"), nullable=False
+    )
+    source_row_no: Mapped[int] = mapped_column(Integer, nullable=False)
+    source_fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
+    rider_label_raw: Mapped[str] = mapped_column(String(100), nullable=False)
+    rider_role: Mapped[str] = mapped_column(String(30), nullable=False)
+    jockey_name: Mapped[str | None] = mapped_column(String(100))
+    observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    __table_args__ = (
+        CheckConstraint("length(source_fingerprint) = 64", name="training_rider_fingerprint"),
+        CheckConstraint("source_row_no > 0", name="training_rider_source_row"),
+        CheckConstraint(
+            "rider_role IN ('기수', '조교사', '조교보', '조교승인', '교육생', "
+            "'기수후보생', '주로조교', '기수트랙라이더', '미확인')",
+            name="training_rider_role",
+        ),
+        CheckConstraint("rider_role = '기수' OR jockey_name IS NULL", name="training_jockey_only_name"),
+        Index("ix_training_rider_source_document", "source_document_id"),
+    )
+
+
 class HorseMedical(Base):
     __tablename__ = "horse_medical"
 

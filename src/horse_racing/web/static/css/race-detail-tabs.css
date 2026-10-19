@@ -51,12 +51,22 @@
 .race-care-chevron { color:var(--muted);transition:transform .15s; }
 .race-care-horse[open] .race-care-chevron { transform:rotate(180deg); }
 .race-care-records { padding:0 0 18px 40px; }
+.race-care-grid { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start; }
+.race-care-grid > section { min-width:0; }
+.race-care-grid > section + section { border-left:1px solid var(--border);padding-left:28px; }
+.race-care-period { margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.7; }
+.race-care-last-start { margin:0 0 12px;font-size:12px;color:var(--ink); }
+.race-care-grid .race-care-table td:first-child { width:104px; }
+.race-care-grid .race-care-table th,.race-care-grid .race-care-table td { padding:10px 8px; }
+.race-care-grid .race-care-table { min-width:0; }
 .race-care-records h3 { margin:16px 0 8px;font-size:13px; }
 .race-care-records h3:first-child { margin-top:0; }
 .race-care-table { width:100%; }
 .race-care-table th,.race-care-table td { padding:10px 12px; }
 .race-care-table td:first-child { width:130px;font-variant-numeric:tabular-nums; }
 .race-care-table .race-care-text { white-space:normal;overflow-wrap:anywhere; }
+.race-care-table .race-care-scheduled { background:var(--accent-soft); }
+.race-care-table .race-care-scheduled td:last-child { font-weight:600; }
 .race-care-empty { margin:8px 0 16px;color:var(--muted);font-size:12px; }
 .race-care-profile { display:inline-block;margin-top:12px;font-size:12px; }
 /* Let the heading, legend items and links share the available line space. */

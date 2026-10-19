@@ -7,6 +7,7 @@
   const panes = new Map([...root.querySelectorAll("[data-race-detail-pane]")]
     .map(pane => [pane.dataset.raceDetailPane, pane]));
   const activate = key => {
+    if (key === "training" || key === "medical") key = "care";
     if (!availableTabs.has(key)) key = "result";
     panes.forEach((pane, name) => { pane.hidden = name !== key; });
     links.forEach(link => {

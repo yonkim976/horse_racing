@@ -43,6 +43,24 @@ def test_seven_inclusive_dates_and_no_io_default(monkeypatch, capsys):
     assert '"apply": false' in capsys.readouterr().out
 
 
+def test_rider_refresh_failure_keeps_other_horses_running(tmp_path, monkeypatch, capsys):
+    from types import SimpleNamespace
+
+    horses = [SimpleNamespace(kra_horse_id="1"), SimpleNamespace(kra_horse_id="2")]
+    monkeypatch.setattr(job, "upcoming_training_horses", lambda *_a, **_kw: horses)
+    monkeypatch.setattr(job.time, "sleep", lambda _: None)
+
+    def collect(*_a, horse, **_kw):
+        if horse.kra_horse_id == "1":
+            raise ValueError("bad page")
+        return {"fetched": 3, "matched": 2}
+
+    monkeypatch.setattr(job, "ingest_training_riders", collect)
+    rows = job.refresh_rider_evidence(Mock(), Mock(), as_of=date(2026, 10, 17), raw_dir=tmp_path)
+    assert [r["status"] for r in rows] == ["failed", "completed"]
+    assert rows[1]["processed"] == 2
+
+
 def test_worker_routes_jeju_to_website_and_all_dates_once(tmp_path, monkeypatch):
     calls = []
     for name in (

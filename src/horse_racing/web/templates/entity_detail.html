@@ -408,6 +408,7 @@
             <th>날짜</th>
             <th>경마장</th>
             <th>조교사</th>
+            <th>기승자</th>
             <th>시간</th>
             <th>구보</th>
             <th>습보</th>
@@ -420,6 +421,7 @@
               <td class="numeric">{{ row.training_date.strftime('%Y.%m.%d') }}</td>
               <td>{{ row.meet_label }}</td>
               <td>{{ row.trainer_name }}</td>
+              <td>{{ row.rider }}</td>
               <td class="numeric">{{ row.duration }}</td>
               <td class="numeric">{{ row.canter }}</td>
               <td class="numeric">{{ row.gallop }}</td>

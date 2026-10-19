@@ -33,6 +33,7 @@ from horse_racing.db.models import (
     Trainer,
 )
 from horse_racing.services.section_read import load_section_observations
+from horse_racing.services.training_read import training_display_fields
 from horse_racing.web.analysis_archive import load_verified_archive
 from horse_racing.web.formatting import (
     MAX_NORMAL_FINISH,
@@ -1470,6 +1471,7 @@ def _load_training(session, horse_ids, cutoff):
             .where(ranked.c.rn <= MAX_TRAINING)
             .order_by(date_column.desc(), model.id.desc()),
         ).all()
+        displays = training_display_fields(session, records) if model is HorseTraining else {}
         for record in records:
             item = {
                 "date": record.training_date_local.isoformat(),
@@ -1481,12 +1483,13 @@ def _load_training(session, horse_ids, cutoff):
                     duration_minutes=round(record.duration_seconds / 60, 1)
                     if record.duration_seconds is not None
                     else None,
-                    canter_count=record.canter_count,
-                    gallop_count=record.gallop_count,
+                    canter_count=displays[record.id]["canter_count_display"],
+                    gallop_count=displays[record.id]["gallop_count_display"],
                     trainer=record.trainer_name,
                     rider_type=record.rider_type,
                     start_time=record.started_at_raw,
                     end_time=record.ended_at_raw,
+                    **displays[record.id],
                 )
             else:
                 item.update(rider=record.rider_name, remark=record.remark,

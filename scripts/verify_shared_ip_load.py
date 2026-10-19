@@ -328,14 +328,29 @@ async def run_shared_ip_load(
             # Allow burst tokens to refill before repeating the same 100-client
             # journey against the now-warm process-local caches.
             await asyncio.sleep(10.1)
+            # A slow cold journey can outlast the production 20-second TTL.
+            # Explicitly warm both home variants, then baseline the warm phase.
+            # Keep these reads visible in the report rather than pretending the
+            # cold phase's cache necessarily survived the real-time refill gap.
+            before_warmup = dict(loader_counts)
+            for agent in (_DESKTOP_UA, _MOBILE_UA):
+                warmed = await get(
+                    client, "warmup:home", "/", headers={"user-agent": agent}
+                )
+                assert warmed.status_code == 200
+            warmup_dashboard_loads = (
+                loader_counts["load_dashboard"] - before_warmup.get("load_dashboard", 0)
+            )
+            warm_baseline_loaders = dict(loader_counts)
+            warm_baseline_selects = select_count
             await asyncio.gather(*(
                 browser_journey(index, "warm") for index in range(client_count)
             ))
             warm_loader_calls = {
-                name: loader_counts[name] - cold_loader_calls.get(name, 0)
+                name: loader_counts[name] - warm_baseline_loaders.get(name, 0)
                 for name in loader_counts
             }
-            warm_select_count = select_count - cold_select_count
+            warm_select_count = select_count - warm_baseline_selects
             journey_statuses: dict[str, Counter[str]] = {"cold": Counter(), "warm": Counter()}
             for route, statuses in route_statuses.items():
                 for phase in journey_statuses:
@@ -430,6 +445,8 @@ async def run_shared_ip_load(
         },
         "all_requests_including_probes": request_total,
         "warm_phase_gap_seconds": 10.1,
+        "warmup_home_requests": 2,
+        "warmup_dashboard_loader_calls": warmup_dashboard_loads,
         "route_request_counts": {
             route: sum(statuses.values()) for route, statuses in sorted(route_statuses.items())
         },

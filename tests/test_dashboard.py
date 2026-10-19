@@ -1063,10 +1063,11 @@ def test_race_detail_tabs_render_one_visible_pane_and_keep_legacy_anchors(
     assert soup.select_one('[data-race-detail-tab="medical"]') is None
 
 
-@pytest.mark.parametrize("tab", ["training", "medical"])
-def test_scheduled_race_care_tabs_show_only_pre_race_records(tmp_path: Path, tab: str) -> None:
+@pytest.mark.parametrize("tab", ["training", "medical", "care"])
+def test_scheduled_race_care_tabs_show_only_pre_race_records(tmp_path: Path, tab: str, monkeypatch) -> None:
     from bs4 import BeautifulSoup
 
+    monkeypatch.setattr("horse_racing.web.race_care.today_seoul", lambda: date(2026, 8, 20))
     factory = seeded_session(tmp_path)
     with factory() as session:
         session.get(Race, 1).status = "scheduled"
@@ -1081,6 +1082,7 @@ def test_scheduled_race_care_tabs_show_only_pre_race_records(tmp_path: Path, tab
                 trainer_name=label, duration_seconds=0, canter_count=0,
                 observed_at_ms=1,
             ))
+        session.add(Jockey(kra_jockey_id="080002", name_ko="출발기수"))
         session.add(HorseStartTraining(
             horse_id=1, meet_code=2, training_date_local=date(2026, 8, 20),
             rider_name="출발기수", remark="양호", location_raw="출발대", observed_at_ms=1,
@@ -1101,26 +1103,37 @@ def test_scheduled_race_care_tabs_show_only_pre_race_records(tmp_path: Path, tab
         mobile = client.get(f"/races/1?layout=mobile&tab={tab}")
     assert response.status_code == 200
     doc = BeautifulSoup(response.text, "html.parser")
-    assert doc.select_one('[data-race-detail-tab][aria-current="page"]')["data-race-detail-tab"] == tab
-    assert [p["data-race-detail-pane"] for p in doc.select('[data-race-detail-pane]') if not p.has_attr("hidden")] == [tab]
-    training = doc.select_one('#race-detail-pane-training')
-    medical = doc.select_one('#race-detail-pane-medical')
+    assert doc.select_one('[data-race-detail-tab][aria-current="page"]')["data-race-detail-tab"] == "care"
+    assert [p["data-race-detail-pane"] for p in doc.select('[data-race-detail-pane]') if not p.has_attr("hidden")] == ["care"]
+    training = doc.select_one('#race-detail-pane-care')
+    medical = training
+    assert not doc.select('[data-race-detail-tab="training"], [data-race-detail-tab="medical"]')
+    assert len(training.select('.race-care-grid')) == 2
     assert [int(row["data-care-horse"]) for row in training.select('[data-care-horse]')] == [1, 7]
-    assert "경계조교" in training.get_text()
+    daily_table = training.select_one('.race-care-table')
+    assert "2026-07-24" in daily_table.get_text()
+    assert [th.get_text() for th in daily_table.select('th')] == ["일자", "조교시간", "구보", "습보", "기승자"]
+    assert "경계조교" not in training.get_text()
+    scheduled = daily_table.select_one('tbody > tr:first-child')
+    assert scheduled.get_text(" ", strip=True) == "2026-08-21 출전 예정"
+    assert scheduled.select_one('[colspan="4"]') is not None
+    assert not training.select_one('[data-care-horse="7"]').select('.race-care-scheduled')
+    assert "일일 2건" in training.select_one('[data-care-horse="1"] summary').get_text()
     assert "15분" in training.get_text()
     assert "출발기수" in training.get_text()
     assert "출발대" in training.get_text()
-    assert "근막염" in medical.get_text()
+    assert "근막염" in medical.select_one('.race-care-medical').get_text()
     assert "경계진료" in medical.get_text()
     assert not medical.select('script')
     for excluded in ("기간밖조교", "경주당일조교", "경주이후조교", "기간밖진료", "경주당일진료", "경주이후진료"):
         assert excluded not in response.text
-    empty_horse = medical.select_one('[data-care-horse="7"]')
+    empty_horse = medical.select_one('[data-care-horse="7"] .race-care-medical')
     assert "이 기간에 수집된 진료 기록이 없습니다." in empty_horse.get_text()
     assert 'href="/horses/003001"' in str(training)
     assert mobile.status_code == 200
     assert 'class="mobile-app ' in mobile.text
     assert 'data-race-detail-tab="training"' not in mobile.text
+    assert 'data-race-detail-tab="care"' not in mobile.text
 
 
 def test_scheduled_race_care_excludes_not_yet_occurred_days(tmp_path: Path, monkeypatch) -> None:
@@ -1135,6 +1148,34 @@ def test_scheduled_race_care_excludes_not_yet_occurred_days(tmp_path: Path, monk
     assert care["through"] == "2026-08-18"
     assert not care["horses"][0]["training"]  # Existing session is August 19.
     assert care["horses"][0]["medical"][0]["date"] == "2026-08-10"
+
+
+def test_race_care_last_start_uses_actual_past_races_beyond_training_window(tmp_path, monkeypatch):
+    from horse_racing.web.race_care import load_race_care
+
+    monkeypatch.setattr("horse_racing.web.race_care.today_seoul", lambda: date(2026, 8, 18))
+    factory = seeded_session(tmp_path)
+    with factory() as session:
+        race = session.get(Race, 1)
+        race.status = "scheduled"
+        for day, status, position, scratched in [
+            (date(2026, 7, 1), "completed", 2, False),
+            (date(2026, 7, 15), "completed", 93, False),  # 주행중지도 실제 출전.
+            (date(2026, 8, 1), "completed", 94, False),
+            (date(2026, 8, 5), "cancelled", 1, False),
+            (date(2026, 8, 10), "completed", 1, True),
+            (date(2026, 8, 20), "completed", 1, False),  # 조회 기준일 이후 자료.
+        ]:
+            past = Race(
+                racecourse_id=race.racecourse_id, race_date_local=day,
+                race_number=1, distance_m=1000, status=status,
+            )
+            entry = RaceEntry(race=past, horse_id=1, horse_number=1, scratched=scratched)
+            session.add(RaceResult(race_entry=entry, finish_position=position))
+        session.flush()
+        care = load_race_care(session, race)
+    assert care["horses"][0]["last_start_date"] == "2026-07-15"
+    assert care["horses"][1]["last_start_date"] is None
 
 
 @pytest.mark.parametrize(("meet", "name", "distance"), [

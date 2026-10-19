@@ -41,6 +41,10 @@ from horse_racing.services.horse_history import ingest_training
 from horse_racing.services.race_supplemental import ingest_start_training
 from horse_racing.services.special_training import ingest_hill_training, ingest_swim_training_date
 from horse_racing.services.start_training_website import ingest_jeju_start_training_website
+from horse_racing.services.training_riders_website import (
+    ingest_training_riders,
+    upcoming_training_horses,
+)
 
 PROJECT_REF = "xkykmhhkjtosptoibduo"
 LOCK_KEY = int.from_bytes(
@@ -316,6 +320,7 @@ def collect_window(session, settings, days, raw_dir):
         results = run_tasks(
             session, DateCheckedApi(api), DateCheckedXml(xml), web, days=days, raw_dir=raw_dir
         )
+        results.extend(refresh_rider_evidence(session, web, as_of=days[-1], raw_dir=raw_dir))
     after = {name: snapshot(session, name, days[0], days[-1]) for name in MODELS}
     diffs = {name: changes(before[name], after[name]) for name in MODELS}
     latest = {
@@ -323,6 +328,35 @@ def collect_window(session, settings, days, raw_dir):
         for name, rows in after.items()
     }
     return results, diffs, latest
+
+
+def refresh_rider_evidence(session, website, *, as_of, raw_dir):
+    """Refresh confirmed roles for upcoming runners after the API training update."""
+    horses = upcoming_training_horses(session, as_of=as_of)
+    session.rollback()
+    if len(horses) > 500:
+        return [{"kind": "rider_website", "status": "failed", "error_type": "ScopeLimit"}]
+    results = []
+    for horse in horses:
+        try:
+            row = ingest_training_riders(
+                session, website, horse=horse, as_of=as_of, raw_data_dir=raw_dir
+            )
+            result = {
+                "kind": "rider_website", "status": "completed", "horse": horse.kra_horse_id,
+                "fetched": row["fetched"], "processed": row["matched"],
+                "rejected": row.get("rejected", 0),
+            }
+        except Exception as exc:
+            session.rollback()
+            result = {
+                "kind": "rider_website", "status": "failed", "horse": horse.kra_horse_id,
+                "error_type": type(exc).__name__,
+            }
+        results.append(result)
+        emit("training_task", **result)
+        time.sleep(0.2)
+    return results
 
 
 def main():
