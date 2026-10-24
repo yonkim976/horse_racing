@@ -1,0 +1,37 @@
+{
+  "decided_on": "2026-10-25",
+  "authorization": "explicit_user_request_in_this_chat",
+  "user_request": "운영모델을 교체하자 그리고 지금 이 모델은 지속적으로 발전시키자",
+  "previous_profile": "thoroughbred-main-20260919-v1",
+  "selected_profile": "thoroughbred-training-state-20261025-v1",
+  "selected_variant": "personal_t2_2026",
+  "production_changed": true,
+  "technical_verification_passed": true,
+  "new_training_fits": 0,
+  "comparative_evidence": {
+    "matched_races": 1258,
+    "operating_axis_hits": 800,
+    "selected_axis_hits": 830,
+    "axis_difference_pp": 2.384737678855326,
+    "axis_ci95_pp": [
+      0.07029560201874559,
+      4.773468558089691
+    ],
+    "training_only_increment_hits": 13,
+    "busan_qpl_three_difference_hits": -15
+  },
+  "independent_future_validation_passed": false,
+  "historical_training_publication_times_certified": false,
+  "stability_limitations_acknowledged": [
+    "repeated historical development period",
+    "Busan axis uncertainty",
+    "Busan qpl3 deterioration",
+    "data snapshot freshness requires ongoing audit"
+  ],
+  "promotion_basis": "User chose production adoption after comparative report and recommendation to defer; technical release gates completed.",
+  "rollback_profile": "thoroughbred-main-20260919-v1",
+  "rollback_snapshot_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+  "future_candidates_auto_promote": false,
+  "jeju_changed": false,
+  "database_publications_changed": false
+}

@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "phase": "pre_commit_release_finalization",
+  "reason": "Reject duplicate runner program numbers and noninteger race numbers; no weight, probability math or locked predictions changed.",
+  "provisional_registry_sha256": "baf15d4445dfedc7262d25c6c935cd1a88c0fb45fb848c63fce999e740345ac2",
+  "final_registry_sha256": "8b2037420fe888a7c17af27de83da81cc52e1bcba7a69dd6f3054a673726f71e",
+  "changes": [
+    {
+      "artifact": "feature_builder",
+      "before": "e8b56e8c5919cec254d760743f0d9e066c91647e4946d4c11e8a10219ad1e2cb",
+      "after": "01b0620a3dd71e45d4441b73375e8b57ff25b76ae74b9543df9b5ec0257d9449"
+    },
+    {
+      "artifact": "release_verification",
+      "before": "876b4955310344dec8b800c7e6924c79f26100896b67c9c4fff61d708f8cfbad",
+      "after": "d3dba45a1abb2551bef6d28ff0657105687b361700da6c6eb01ce28988337aed"
+    },
+    {
+      "artifact": "release_verifier",
+      "before": "3dae25c052c98b41c15700beaeb8f6edd11b75eaa36c7896db94b9dc810f82f5",
+      "after": "f17c9348bb28c1c9a8bf4eaf4a038ed560c50fd7c07936b7fb5653c69b7fed87"
+    }
+  ],
+  "technical_replay_races": 1288,
+  "contract_tests": 9,
+  "original_operating_and_jeju_profiles_unchanged": true
+}

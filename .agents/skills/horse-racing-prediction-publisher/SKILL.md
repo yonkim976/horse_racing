@@ -84,7 +84,8 @@ Use `historical` only when requested. The production command reads the existing 
 
 ## Current champions
 
-- Thoroughbred: A v5 `rolling_all`, B/C v4 `top3_growth_strength`, order v2 `H3_relative`.
+- Thoroughbred: `thoroughbred-training-state-20261025-v1`, Seoul/Busan `personal_t2_2026`, 136 features. The selected weights are in `production_models/thoroughbred_training_state_20261025_v1/`; use `scripts/predict_thoroughbred_main.py`. Read that bundle's `README.md` for the complete result-free card contract and dated source manifests. A/B/C are marginals, unordered trios, and exact orders from one coherent joint with the frozen set and conditional order temperatures. Its algorithm is `trio_set_within_set_pl_v1`; never substitute the legacy full-field ordering algorithm. This profile is valid for2026 and meet1/3 only.
+- The retained Thoroughbred rollback profile is `thoroughbred-main-20260919-v1`: A v5 `rolling_all`, B/C v4 `top3_growth_strength`, order v2 `H3_relative`. The legacy `build_current_prediction_bundles.py` refuses to run under a different active Thoroughbred profile.
 - Jeju native: frozen `HY_R_FORM` bundle and `scripts/predict_jeju_live_hy_r_form.py`.
 
 Future candidates replace these only through an explicit verified registry promotion.

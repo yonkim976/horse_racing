@@ -1,0 +1,46 @@
+{
+  "active_profile": "jeju-hy-r-form-20260919-v1",
+  "champion_id": "HY_R_FORM",
+  "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+  "components": {
+    "A_B_C": {
+      "artifact": "HY_R_FORM_model",
+      "candidate": "HY_R_FORM",
+      "model_version": "frozen_2026_HY_R_FORM",
+      "order_score": "order_score",
+      "set_score": "rank_score"
+    }
+  },
+  "domain": "jeju",
+  "ok": true,
+  "probability_contract": "jeju_hy_r_form_runner_v1",
+  "registry_path": "config/prediction_model_registry.json",
+  "registry_sha256": "8b2037420fe888a7c17af27de83da81cc52e1bcba7a69dd6f3054a673726f71e",
+  "verified_artifacts": [
+    {
+      "name": "HY_R_FORM_model",
+      "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    {
+      "name": "reference_inference",
+      "path": "scripts/predict_jeju_live_hy_r_form.py",
+      "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+    },
+    {
+      "name": "baseline_verification",
+      "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+      "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+    },
+    {
+      "name": "latest_challenger_decision",
+      "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+      "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+    },
+    {
+      "name": "latest_challenger_verification",
+      "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+      "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+    }
+  ]
+}

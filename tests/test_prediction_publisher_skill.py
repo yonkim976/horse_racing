@@ -117,9 +117,13 @@ def test_skill_publisher_appends_and_reads_back_bundle(tmp_path: Path) -> None:
 
     registry_path = Path("config/prediction_model_registry.json")
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
-    profile = registry["profiles"]["thoroughbred-main-20260919-v1"]
-    artifact_hash = profile["artifacts"]["A_model"]["sha256"]
-    metadata_hash = profile["artifacts"]["A_metadata"]["sha256"]
+    active = registry["domains"]["thoroughbred"]["active_profile"]
+    profile = registry["profiles"][active]
+    component = profile["components"]["A"]
+    artifact_name = component.get("artifact") or component["artifact_by_meet"]["1"]
+    metadata_name = component.get("metadata") or component["metadata_by_meet"]["1"]
+    artifact_hash = profile["artifacts"][artifact_name]["sha256"]
+    metadata_hash = profile["artifacts"][metadata_name]["sha256"]
     metadata = {
         "schema_version": 1,
         "domain": "thoroughbred",

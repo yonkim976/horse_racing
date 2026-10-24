@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "snapshot_name": "frozen_research_inputs_20261025",
+  "assets": {
+    "core_database": {
+      "path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+      "sha256": "0b0d4e3bcbb1128ee71c0a6b481eec03109768521de7a5744325e8b161e93bbf",
+      "bytes": 2781360128
+    },
+    "dataset_database": {
+      "path": "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb",
+      "sha256": "e0d0e9a651990524f568eee4bc3c6c9ae36853703e839ae97c71d1c20f827a44",
+      "bytes": 552611840
+    },
+    "section_history": {
+      "path": "thoroughbred/research/20261009_section_style_finish_v1/outputs/history_observations.parquet",
+      "sha256": "3228240fb76fd58c66a3d7f2116acca52988358d02575373b06851192799c335",
+      "bytes": 8838911
+    },
+    "role_history": {
+      "path": "thoroughbred/research/20261009_gate_front_late_v1/outputs/history_events.parquet",
+      "sha256": "cb42ba38ca2f001ee4971aa253b6946d56248a34077a7f410173f0da81b932df",
+      "bytes": 15759118
+    },
+    "profile_records": {
+      "path": "thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/records_month_gate19.parquet",
+      "sha256": "7d23b8f5c322f350157dbe6271b76d932dbdc678208425fd894c3d5e081c9716",
+      "bytes": 2453565
+    }
+  },
+  "history_end": "2026-09-20",
+  "training_source_end": "2026-09-28",
+  "historical_publication_times_certified": false,
+  "refresh_policy": "New dated input manifests may replace data snapshots through --sources; never mutate model/calibration assets."
+}

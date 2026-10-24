@@ -1,0 +1,34 @@
+{
+  "selected_model": "personal_t2",
+  "year": 2026,
+  "model_copies": {
+    "production_models/thoroughbred_training_state_20261025_v1/meet_1_model.txt": {
+      "source": "thoroughbred/research/20261024_training_state_v1/outputs/models/personal_t2_1_2026/model.txt",
+      "sha256": "3899b7e03f1d147afbf7a7024af7c5d1a3f8ec21fbfc2ba6e3504596aeedce13"
+    },
+    "production_models/thoroughbred_training_state_20261025_v1/meet_1_metadata.json": {
+      "source": "thoroughbred/research/20261024_training_state_v1/outputs/models/personal_t2_1_2026/metadata.json",
+      "sha256": "d3bd3fbfefb034a89fc666cfe388d2a2c0daefd51502af0700e18f37d827df58"
+    },
+    "production_models/thoroughbred_training_state_20261025_v1/meet_3_model.txt": {
+      "source": "thoroughbred/research/20261024_training_state_v1/outputs/models/personal_t2_3_2026/model.txt",
+      "sha256": "80736b1dd57d53be3fc81b3669dd6604d1f5ae9e83735db0bf88e6688feab99b"
+    },
+    "production_models/thoroughbred_training_state_20261025_v1/meet_3_metadata.json": {
+      "source": "thoroughbred/research/20261024_training_state_v1/outputs/models/personal_t2_3_2026/metadata.json",
+      "sha256": "ac0e54f7e1de093ccb5e5ce1583437c93c3cd46c847404a3a41d1a841e57f5d4"
+    }
+  },
+  "math_sources": {
+    "thoroughbred/research/20261022_dynamic_race_model_v1/state.py": "6f7147499645e183a08a10bd394bdb37766cb61a8d36309ffb22bc47affc85d9",
+    "thoroughbred/research/20261009_section_style_finish_v1/run.py": "d0a13690c1d6e5639ccbce04454aca8290e6fee1ee4aed03abb8c83022e9bcb6",
+    "thoroughbred/research/20261009_gate_front_late_v1/run.py": "4e89eafe8483c924f1cbb8a62418db79ecb0a2a71263483013b71ee305556e38",
+    "thoroughbred/research/20261008_profile_environment_ablation_v1/run.py": "71ac9584e932c093d0af4e1c5b36478b7ac9a3beaf250a93f4cdc7f52aefc8a6",
+    "thoroughbred/research/20261024_training_state_v1/build_features.py": "1f0e9e9d26479d548dae5d88da95acbb4efb5177622b5fec308bab20a09dd015",
+    "thoroughbred/research/20261022_probability_comparison_v1/probability.py": "3ae44c502c3df0cb178264845e2c65601b8400126d1a86346761e25a6ad6ffbb"
+  },
+  "generated_math_sha256": "0a7cdbd01b71a3d81caa1da2048ee258a00316b37400937d1af7989011344098",
+  "new_training_fits": 0,
+  "module_reference_adaptation": "S.values -> history_values (alias of pure values);S.average -> average;avoids original module dependency and local dict shadowing",
+  "formatting": "Pure math mechanically extracted, module aliases adapted, formatted byruff; parity checked against frozen inputs."
+}

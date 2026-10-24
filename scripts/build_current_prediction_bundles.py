@@ -126,6 +126,15 @@ def main():
     p.add_argument("--prepared-seoul-features", type=Path)
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
+    # This legacy builder hardcodes old A/BC/WIN assets. It must never label
+    # those scores as a different active champion after a registry promotion.
+    current_registry = json.loads((ROOT / "config/prediction_model_registry.json").read_text())
+    active_thoroughbred = current_registry["domains"]["thoroughbred"]["active_profile"]
+    if active_thoroughbred != "thoroughbred-main-20260919-v1":
+        raise ValueError(
+            "This legacy builder is incompatible with the active Thoroughbred profile; "
+            "use scripts/predict_thoroughbred_main.py with its result-free card contract"
+        )
     a.output = a.output.resolve()
     day = datetime.strptime(a.date, "%Y%m%d").date().isoformat()
     if a.output.exists():

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "model_profile": "thoroughbred-training-state-20261025-v1",
+  "model_spec_sha256": "ae90ccb0e8a1144c9250af5f7065e817e1b027650817f86d2e87efe1c9f61496",
+  "registry_sha256": "8b2037420fe888a7c17af27de83da81cc52e1bcba7a69dd6f3054a673726f71e",
+  "generated_at_utc": "2026-10-24T17:32:25.825275+00:00",
+  "completed_at_utc": "2026-10-24T17:32:26.802736+00:00",
+  "card_sha256": "02a1412e769e9efd5dea822cfc59a833839f167b8117fc98093dc1eb18cf3c40",
+  "source_card_observed_at_utc": null,
+  "prediction_stage": "retrospective_dry_run",
+  "source_metadata": {
+    "dry_run": true,
+    "prepared_fixture": true
+  },
+  "checks": {
+    "max_shap_additivity_error": 9.325873406851315e-15,
+    "runners": 432,
+    "races": 40
+  },
+  "dry_run": true,
+  "preview": false,
+  "canonical_db_identity_map_supplied": false,
+  "database_writes": 0,
+  "network_calls": 0,
+  "probability_contract": "thoroughbred_training_state_joint_v1",
+  "combination_algorithm_version": "trio_set_within_set_pl_v1",
+  "files": {
+    "runner_predictions.parquet": "b603b40cb1f10f98ff0bf77cf352abebbef28cf1ba2dd971e56f2f5d183dfa56",
+    "prepared_features.parquet": "02a1412e769e9efd5dea822cfc59a833839f167b8117fc98093dc1eb18cf3c40",
+    "runner_explanations.json": "b8aa823fc357b5c5a40a219a4f19fe078ce9985c9607777133157dc1ef2e69ec",
+    "recommendations.json": "210326159c248ad7414cc37f04ab8d374a109be806395c40dd6ed5f1d047a21f"
+  }
+}

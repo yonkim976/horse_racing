@@ -1,0 +1,169 @@
+{
+  "active_profile": "thoroughbred-training-state-20261025-v1",
+  "champion_id": "personal_t2_2026_seoul_busan_20261025",
+  "combination_algorithm_version": "trio_set_within_set_pl_v1",
+  "components": {
+    "A": {
+      "artifact_by_meet": {
+        "1": "meet1_model",
+        "3": "meet3_model"
+      },
+      "calibration": "frozen2025_set_and_conditional_order_temperatures",
+      "candidate": "personal_t2",
+      "metadata_by_meet": {
+        "1": "meet1_metadata",
+        "3": "meet3_metadata"
+      },
+      "model_version": "personal_t2_2026",
+      "role": "runner_marginals",
+      "shared_coherent_joint": true
+    },
+    "B": {
+      "artifact_by_meet": {
+        "1": "meet1_model",
+        "3": "meet3_model"
+      },
+      "calibration": "frozen2025_set_and_conditional_order_temperatures",
+      "candidate": "personal_t2",
+      "metadata_by_meet": {
+        "1": "meet1_metadata",
+        "3": "meet3_metadata"
+      },
+      "model_version": "personal_t2_2026",
+      "role": "unordered_trio",
+      "shared_coherent_joint": true
+    },
+    "C": {
+      "artifact_by_meet": {
+        "1": "meet1_model",
+        "3": "meet3_model"
+      },
+      "calibration": "frozen2025_set_and_conditional_order_temperatures",
+      "candidate": "personal_t2",
+      "metadata_by_meet": {
+        "1": "meet1_metadata",
+        "3": "meet3_metadata"
+      },
+      "model_version": "personal_t2_2026",
+      "role": "exact_order",
+      "shared_coherent_joint": true
+    }
+  },
+  "domain": "thoroughbred",
+  "ok": true,
+  "probability_contract": "thoroughbred_training_state_joint_v1",
+  "registry_path": "config/prediction_model_registry.json",
+  "registry_sha256": "8b2037420fe888a7c17af27de83da81cc52e1bcba7a69dd6f3054a673726f71e",
+  "verified_artifacts": [
+    {
+      "name": "meet1_model",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/meet_1_model.txt",
+      "sha256": "3899b7e03f1d147afbf7a7024af7c5d1a3f8ec21fbfc2ba6e3504596aeedce13"
+    },
+    {
+      "name": "meet1_metadata",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/meet_1_metadata.json",
+      "sha256": "d3bd3fbfefb034a89fc666cfe388d2a2c0daefd51502af0700e18f37d827df58"
+    },
+    {
+      "name": "meet3_model",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/meet_3_model.txt",
+      "sha256": "80736b1dd57d53be3fc81b3669dd6604d1f5ae9e83735db0bf88e6688feab99b"
+    },
+    {
+      "name": "meet3_metadata",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/meet_3_metadata.json",
+      "sha256": "ac0e54f7e1de093ccb5e5ce1583437c93c3cd46c847404a3a41d1a841e57f5d4"
+    },
+    {
+      "name": "deployment_spec",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/model_spec.json",
+      "sha256": "ae90ccb0e8a1144c9250af5f7065e817e1b027650817f86d2e87efe1c9f61496"
+    },
+    {
+      "name": "feature_contract",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/feature_contract.json",
+      "sha256": "597c3befb01d60f8720f56659dcfb04945053a2f7e23e34effa69d19b869a3af"
+    },
+    {
+      "name": "feature_labels",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/feature_labels.json",
+      "sha256": "ec2ccbfe6ac7e69a3944abd67553718abc9d581df7ad866bb9d5062e5edb342d"
+    },
+    {
+      "name": "feature_builder",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/features.py",
+      "sha256": "01b0620a3dd71e45d4441b73375e8b57ff25b76ae74b9543df9b5ec0257d9449"
+    },
+    {
+      "name": "feature_math",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/feature_math.py",
+      "sha256": "0a7cdbd01b71a3d81caa1da2048ee258a00316b37400937d1af7989011344098"
+    },
+    {
+      "name": "training_daily_query",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/daily_sql.sql",
+      "sha256": "42d00fd1631c3cbe7c24c6688b48927e5ec78337e3a7161606bbee4d4e858e5a"
+    },
+    {
+      "name": "training_window_query",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/window_sql.sql",
+      "sha256": "8541dd04833b8b89ba0ad9dc2e69c49b0ba76ed0f4b454b7dc51bd4ec4bd07ba"
+    },
+    {
+      "name": "probability_math",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/probability.py",
+      "sha256": "3ae44c502c3df0cb178264845e2c65601b8400126d1a86346761e25a6ad6ffbb"
+    },
+    {
+      "name": "inference_engine",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/inference.py",
+      "sha256": "3d19c7ee03bac754944ad439d424b84c15981751f36bcc9744633247b0fc3628"
+    },
+    {
+      "name": "reference_inference",
+      "path": "scripts/predict_thoroughbred_main.py",
+      "sha256": "ebeaa26bd93f667ef59e16848f82ac1eb3c91f25fe9b886b691d2dedd106e501"
+    },
+    {
+      "name": "source_reference_manifest",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/source_manifest.json",
+      "sha256": "d51dbd24e87e34536515ae6820bd6a895ac65f77a048fea091fdaec8ed6aaf65"
+    },
+    {
+      "name": "asset_provenance",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/asset_provenance.json",
+      "sha256": "4d018e69e9bdd8216a7f811f89a1b809ff1bd70b19aa18a8f5d4eec9602aee2d"
+    },
+    {
+      "name": "selection_decision",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/decision.json",
+      "sha256": "20af88747d0acaf955cd98f9550dc948e4386e08db697177129d72454477d101"
+    },
+    {
+      "name": "release_verification",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/verification/technical_verification.json",
+      "sha256": "d3dba45a1abb2551bef6d28ff0657105687b361700da6c6eb01ce28988337aed"
+    },
+    {
+      "name": "release_verifier",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/verify_release.py",
+      "sha256": "f17c9348bb28c1c9a8bf4eaf4a038ed560c50fd7c07936b7fb5653c69b7fed87"
+    },
+    {
+      "name": "fixture_manifest",
+      "path": "production_models/thoroughbred_training_state_20261025_v1/fixtures/manifest.json",
+      "sha256": "fe60038a3b870b8bd507f5fd7aa3ffdc3b3445634e809ce73442a7ea4389369b"
+    },
+    {
+      "name": "comparative_results",
+      "path": "thoroughbred/research/20261025_operating_training_comparison_v1/outputs/results.json",
+      "sha256": "94213559d89fbf16cd7981c57f36490f036661fc80a8839f0a3149852e591873"
+    },
+    {
+      "name": "comparative_verification",
+      "path": "thoroughbred/research/20261025_operating_training_comparison_v1/outputs/verification.json",
+      "sha256": "8b051f08a72957fa7be700094b975006674cb969a657547bea9662468730c8f8"
+    }
+  ]
+}
