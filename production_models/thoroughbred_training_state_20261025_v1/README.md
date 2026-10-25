@@ -74,8 +74,8 @@
 
 문제가발견되면`config/prediction_model_registry.json`의Thoroughbred active_profile을`thoroughbred-main-20260919-v1`로되돌리고resolver를확인한다. 이전프로필의모델/게이트는변경하지않았다. 과거예측은수정하지않고새run으로남긴다. [이전등록부](previous_registry.json)를보존했다.
 
-[지속 개선 절차](../../docs/THOROUGHBRED_MODEL_IMPROVEMENT_2026-10-25.md)와[기록](IMPROVEMENT_LOG.md)에따라매주월요일오전10시한국시간이대화에서새자료/사전평가/후보실험을진행한다. 의미있는변화만알리고새후보를자동승격하지않는다.
+[지속 개선 절차](../../docs/THOROUGHBRED_MODEL_IMPROVEMENT_2026-10-25.md)와 [기록](IMPROVEMENT_LOG.md)에 따라 이 채팅의 지속 목표로 새 가설과 실험을 이어간다. 새 후보를 자동 승격하지 않는다.
 
-주간 작업은 이 대화에 연결된 활성 heartbeat로 등록했다. [등록 정보](automation.json). 모델 교체 커밋은 `git log -- production_models/thoroughbred_training_state_20261025_v1 config/prediction_model_registry.json`으로 확인할 수 있다.
+처음 등록했던 주간 heartbeat는 같은 날 사용자의 후속 요청으로 삭제했다. 현재는 예약 없이 이 채팅에서 연속 연구한다. [예약 삭제 상태](automation.json). 모델 교체 커밋은 `git log -- production_models/thoroughbred_training_state_20261025_v1 config/prediction_model_registry.json`으로 확인할 수 있다.
 
 [용량명세](artifact_inventory.json)는모델2개·코드·fixture·검증·보고서를자기포함집계한다. 기존DB/전체이력은참조하며복제하지않았다.
