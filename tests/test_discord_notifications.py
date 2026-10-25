@@ -134,11 +134,62 @@ def test_summary_and_partial_failure_are_explicit():
     assert "일부 실패" in discord.format_training_summary(data)
 
 
+def test_hill_notification_separates_measurements_from_preserved_source_versions():
+    data = summary()
+    data["changes"]["hill"].update(
+        stored_versions=182, measured_records=171, metadata_versions_excluded=11
+    )
+    content = discord.format_training_summary(data)
+    assert "언덕 조회: 중복 제외 171건 · 원본 이력 182행" in content
+    assert "메타정보 추가 버전 11행 제외" in content
+    assert len(content) < 2000
+
+
+def test_training_failure_identifies_date_region_kind_without_secret_text():
+    data = summary()
+    data["failures"] = 1
+    data["results"].append(
+        dict(
+            status="failed",
+            day="20261002",
+            meet=2,
+            kind="daily",
+            error_type="KraApiTransientError",
+            error_message=TEST_TOKEN,
+        )
+    )
+    content = discord.format_training_summary(data)
+    assert "실패 상세: 2026-10-02 제주 일반조교 / KraApiTransientError" in content
+    assert TEST_TOKEN not in content
+    assert len(content) <= 2000
+
+
+def test_training_many_failure_details_are_bounded_and_sanitized():
+    data = summary()
+    data["failures"] = 50
+    data["results"] = [
+        dict(
+            status="failed",
+            day=TEST_TOKEN,
+            meet=999,
+            kind=TEST_TOKEN,
+            error_type="https://secret.invalid/" + TEST_TOKEN,
+        )
+    ] * 50
+    content = discord.format_training_summary(data)
+    assert "추가 실패 44건" in content
+    assert TEST_TOKEN not in content
+    assert "UnknownError" in content
+    assert len(content) <= 2000
+
+
 def test_notification_failure_does_not_raise_or_log_token(monkeypatch):
     emit = Mock()
     monkeypatch.setattr(discord, "send_discord", Mock(side_effect=RuntimeError(TEST_TOKEN)))
     discord.notify_training(WEBHOOK, emit=emit, summary=summary())
-    emit.assert_called_once_with("discord_failed", error_type="RuntimeError")
+    emit.assert_called_once_with(
+        "discord_failed", error_type="RuntimeError", error_reason="unclassified", retryable=False
+    )
     assert TEST_TOKEN not in str(emit.call_args)
 
 
@@ -255,4 +306,6 @@ def test_weekly_notification_failure_is_nonfatal(monkeypatch):
     monkeypatch.setattr(discord, "send_discord", Mock(side_effect=RuntimeError(TEST_TOKEN)))
     emit = Mock()
     discord.notify_weekly(WEBHOOK, emit=emit, summary={"status": "failed"})
-    emit.assert_called_once_with("discord_failed", error_type="RuntimeError")
+    emit.assert_called_once_with(
+        "discord_failed", error_type="RuntimeError", error_reason="unclassified", retryable=False
+    )

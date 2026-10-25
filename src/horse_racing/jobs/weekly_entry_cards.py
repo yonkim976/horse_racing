@@ -45,6 +45,12 @@ from horse_racing.services.race_day import ingest_race_schedule
 from horse_racing.services.raw_store import store_kra_page
 
 KST = ZoneInfo("Asia/Seoul")
+
+
+class CardNotPublished(ValueError):
+    """A complete, empty source response is not a collector failure."""
+
+
 LOCK_KEY = int.from_bytes(
     hashlib.sha256(b"horse-racing-weekly-card-v1").digest()[:8],
     "big",
@@ -136,7 +142,7 @@ def require_complete_pages(pages: list[FetchedPage], actual: int) -> None:
 
 def validate_card(card: Card) -> None:
     if not card.plans or not card.entries or not card.gates:
-        raise ValueError("Card not yet published")
+        raise CardNotPublished("Card not yet published")
     for items in (card.plans, card.entries, card.gates):
         if any(x.race_date != card.day for x in items):
             raise ValueError("Unexpected source date")
@@ -203,7 +209,7 @@ def fetch_window(client: KraApiClient, days: list[date], meets: list[int]):
             cards.append(card)
             emit("source_validated", day=label, meet=meet, races=len(plans), runners=len(entries))
     if not cards:
-        raise ValueError("No published race cards in the requested window")
+        raise CardNotPublished("No published race cards in the requested window")
     return replay, cards
 
 
@@ -297,8 +303,10 @@ def archive_scans(session: Session, replay: Replay, run_id: int, raw_dir: Path) 
     session.commit()
 
 
-def execute(project_ref: str, *, as_of: date, force: bool, dry_run: bool) -> int:
-    settings = get_settings()
+def execute(
+    project_ref: str, *, as_of: date, force: bool, dry_run: bool, settings_override=None
+) -> int:
+    settings = settings_override or get_settings()
     require_target(settings.database_url, project_ref)
     anchor, days = card_window(as_of)
     emit("window", anchor=anchor, days=days, meets=[1, 2, 3, 4], dry_run=dry_run)
@@ -458,6 +466,16 @@ def execute(project_ref: str, *, as_of: date, force: bool, dry_run: bool) -> int
             finally:
                 lock.execute(text("SELECT pg_advisory_unlock(:key)"), {"key": LOCK_KEY})
                 lock.commit()
+    except CardNotPublished:
+        emit("publication_pending", database_writes=False)
+        notification = {
+            "status": "no_published_plan",
+            "window_start": str(days[0]),
+            "window_end": str(days[-1]),
+            "races": 0,
+            "runners": 0,
+        }
+        return 0
     except Exception as exc:
         if run_id is not None:
             with Session(engine) as session:

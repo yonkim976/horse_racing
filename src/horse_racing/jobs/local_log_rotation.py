@@ -1,4 +1,4 @@
-"""Archive then copytruncate ONLY six collector logs; no DB, secrets or network access."""
+"""Archive then copytruncate allowlisted collector logs; no DB, secrets or network access."""
 
 from __future__ import annotations
 
@@ -21,11 +21,22 @@ LOG_DIR = Path.home() / "Library/Logs/horse-racing"
 LOCK_PATH = ROOT / "data/state/local-race-day.lock"
 LOG_NAMES = tuple(
     f"{stem}{suffix}"
-    for stem in ("local-live-race-day", "local-closing-dividends", "local-post-race-repair")
+    for stem in (
+        "local-live-race-day",
+        "local-closing-dividends",
+        "local-post-race-repair",
+        "local-catalog-cards",
+        "local-catalog-medical",
+        "local-catalog-profiles",
+        "local-catalog-trials",
+        "local-catalog-canonical",
+        "local-recovery",
+    )
     for suffix in (".log", ".err.log")
 )
 ARCHIVE_PATTERN = re.compile(
-    r"^(" + "|".join(re.escape(name) for name in LOG_NAMES)
+    r"^("
+    + "|".join(re.escape(name) for name in LOG_NAMES)
     + r")\.(\d{8}T\d{6}Z)\.[0-9a-f]{32}\.gz$"
 )
 
@@ -97,7 +108,8 @@ def archive_log(path: Path, archive_dir: Path, now: datetime) -> dict:
             result.update(archive=archive.name, sha256=digest.hexdigest())
             current = path.stat(follow_symlinks=False)
             if signature(before) != signature(os.fstat(source.fileno())) or (
-                current.st_dev, current.st_ino
+                current.st_dev,
+                current.st_ino,
             ) != (before.st_dev, before.st_ino):
                 return dict(result, status="changed_preserved")
             # Keep the inode: launchd's existing output descriptors stay valid.
@@ -121,8 +133,10 @@ def prune_archives(archive_dir: Path, now: datetime) -> list[str]:
             continue
         info = path.stat(follow_symlinks=False)
         if (
-            created < cutoff and stat.S_ISREG(info.st_mode)
-            and info.st_uid == os.getuid() and info.st_nlink == 1
+            created < cutoff
+            and stat.S_ISREG(info.st_mode)
+            and info.st_uid == os.getuid()
+            and info.st_nlink == 1
         ):
             path.unlink()
             removed.append(path.name)
@@ -173,7 +187,8 @@ def execute(*, apply=False, log_dir=LOG_DIR, lock_path=LOCK_PATH, now=None) -> d
                 summary["logs"].append(archive_log(log_dir / name, archive_dir, now))
             summary["removed_archives"] = prune_archives(archive_dir, now)
             summary["status"] = (
-                "partial" if any(r["status"] == "changed_preserved" for r in summary["logs"])
+                "partial"
+                if any(r["status"] == "changed_preserved" for r in summary["logs"])
                 else "completed"
             )
         except Exception as error:

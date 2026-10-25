@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import re
 import time
 from collections.abc import Iterator, Mapping
 from dataclasses import dataclass
@@ -54,6 +55,34 @@ JUDGE_REPORT_OPERATION = "JudgeReport"
 class KraApiError(RuntimeError):
     """Raised when the KRA gateway returns an invalid or unsuccessful response."""
 
+    def __init__(self, message, *, reason="api_error", result_code=None, http_status=None):
+        super().__init__(message)
+        self.reason = reason
+        self.result_code = (
+            str(result_code) if re.fullmatch(r"[0-9]{2,4}", str(result_code or "")) else None
+        )
+        self.http_status = http_status if isinstance(http_status, int) else None
+
+    def safe_details(self):
+        # Remote messages, URLs, query strings and exception causes are never emitted.
+        allowed = {
+            "api_error",
+            "api_network",
+            "api_http",
+            "api_gateway",
+            "api_bad_json",
+            "api_bad_shape",
+            "api_authentication",
+            "api_quota",
+            "api_no_data",
+        }
+        result = {"error_reason": self.reason if self.reason in allowed else "api_error"}
+        if self.result_code is not None:
+            result["api_result_code"] = self.result_code
+        if self.http_status is not None and 100 <= self.http_status <= 599:
+            result["http_status"] = self.http_status
+        return result
+
 
 class KraApiTransientError(KraApiError):
     """Raised for retryable transport and server failures."""
@@ -61,6 +90,25 @@ class KraApiTransientError(KraApiError):
 
 class KraApiRateLimitError(KraApiTransientError):
     """Raised when the public data gateway daily quota is exhausted."""
+
+
+def gateway_error(result_code, http_status):
+    """Standard data.go.kr gateway codes; never retain its free-form message."""
+    reason, error_type = "api_error", KraApiError
+    if result_code in {"01", "02", "04", "05"}:
+        reason, error_type = "api_gateway", KraApiTransientError
+    elif result_code == "22":
+        reason, error_type = "api_quota", KraApiRateLimitError
+    elif result_code in {"20", "30", "31", "32"}:
+        reason = "api_authentication"
+    elif result_code == "03":
+        reason = "api_no_data"
+    return error_type(
+        "KRA API가 오류 응답을 반환했습니다.",
+        reason=reason,
+        result_code=result_code,
+        http_status=http_status,
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -233,32 +281,61 @@ class KraApiClient:
         try:
             response = self._client.get(endpoint.lstrip("/"), params=request_params)
         except httpx.TransportError as exc:
-            raise KraApiTransientError("KRA API 네트워크 연결에 실패했습니다.") from exc
+            raise KraApiTransientError(
+                "KRA API 네트워크 연결에 실패했습니다.", reason="api_network"
+            ) from exc
         retrieved_at_ms = _now_ms()
 
         if response.status_code == 429:
             raise KraApiRateLimitError(
-                "KRA API 호출 제한에 도달했습니다. 잠시 후 재시도합니다."
+                "KRA API 호출 제한에 도달했습니다. 잠시 후 재시도합니다.",
+                reason="api_quota",
+                http_status=429,
             )
         if response.status_code >= 500:
-            raise KraApiTransientError(f"KRA API 서버 오류: HTTP {response.status_code}")
+            raise KraApiTransientError(
+                f"KRA API 서버 오류: HTTP {response.status_code}",
+                reason="api_gateway",
+                http_status=response.status_code,
+            )
         try:
             response.raise_for_status()
         except httpx.HTTPStatusError as exc:
-            raise KraApiError(f"KRA API 요청 실패: HTTP {response.status_code}") from exc
+            raise KraApiError(
+                f"KRA API 요청 실패: HTTP {response.status_code}",
+                reason="api_http",
+                http_status=response.status_code,
+            ) from exc
 
         try:
             payload = response.json()
         except ValueError as exc:
-            raise KraApiError("KRA API가 JSON이 아닌 응답을 반환했습니다.") from exc
+            # The gateway can return its XML error envelope even for _type=json.
+            # Inspect a bounded envelope without expanding XML/entities or logging it.
+            envelope = response.content[:16_384].decode("utf-8", errors="replace")
+            if "<OpenAPI_ServiceResponse" in envelope and "<cmmMsgHeader" in envelope:
+                code = re.search(
+                    r"<returnReasonCode>\s*([0-9]{2,4})\s*</returnReasonCode>", envelope
+                )
+                if code:
+                    raise gateway_error(code.group(1), response.status_code) from exc
+            # GET-only transport response; bounded client retries are safe, unlike DB writes.
+            raise KraApiTransientError(
+                "KRA API가 JSON이 아닌 응답을 반환했습니다.",
+                reason="api_bad_json",
+                http_status=response.status_code,
+            ) from exc
         if not isinstance(payload, dict):
-            raise KraApiError("KRA API 최상위 응답이 JSON 객체가 아닙니다.")
+            raise KraApiError(
+                "KRA API 최상위 응답이 JSON 객체가 아닙니다.",
+                reason="api_bad_shape",
+                http_status=response.status_code,
+            )
 
         header = _response_header(payload)
         result_code = str(header.get("resultCode", ""))
         if result_code not in {"00", "0000"}:
-            result_message = str(header.get("resultMsg", "알 수 없는 오류"))
-            raise KraApiError(f"KRA API 오류 {result_code}: {result_message}")
+            raise gateway_error(result_code, response.status_code)
 
         redacted_url = str(httpx.URL(str(response.request.url).split("?")[0], params=public_params))
         return FetchedPage(

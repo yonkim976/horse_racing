@@ -7,7 +7,7 @@ from sqlalchemy import select
 from test_race_day import api_payload, migrated_session
 from test_race_supplemental import start_training_payload
 
-from horse_racing.collectors.kra_api import KraApiClient
+from horse_racing.collectors.kra_api import KraApiClient, KraApiError
 from horse_racing.db.models import HorseStartTraining
 from horse_racing.parsers.race_supplemental import StartTrainingItem
 from horse_racing.services.race_supplemental import _write_start_training, ingest_start_training
@@ -206,7 +206,7 @@ def test_failed_second_page_never_replaces_current_snapshot(tmp_path: Path):
     ):
         _write_start_training(session, [item, item], 1)
         session.commit()
-        with pytest.raises(Exception, match="INVALID"):
+        with pytest.raises(KraApiError) as failure:
             ingest_start_training(
                 session,
                 client,
@@ -215,6 +215,8 @@ def test_failed_second_page_never_replaces_current_snapshot(tmp_path: Path):
                 raw_data_dir=tmp_path / "raw",
                 page_size=1,
             )
+        assert failure.value.safe_details()["api_result_code"] == "10"
+        assert "INVALID" not in str(failure.value)
         assert len(session.scalars(select(HorseStartTraining)).all()) == 2
 
 

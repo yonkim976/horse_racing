@@ -483,6 +483,34 @@ def _write_medical(
     items: list[HorseMedicalItem],
     observed_at_ms: int,
 ) -> int:
+    if session.get_bind().dialect.name == "postgresql":
+        for meet, day in sorted({(item.meet_code, item.clinic_date) for item in items}):
+            session.execute(
+                text("SELECT pg_advisory_xact_lock(:namespace, :scope)"),
+                {"namespace": 160107, "scope": meet * 100_000_000 + int(day.strftime("%Y%m%d"))},
+            )
+    horses = _history_horses(session, items)
+    horse_ids = sorted({h.id for h in horses.values()})
+    days = {item.clinic_date for item in items}
+    existing_medical: dict[tuple, HorseMedical] = {}
+    for start in range(0, len(horse_ids), 500):
+        for row in session.scalars(
+            select(HorseMedical)
+            .where(
+                HorseMedical.horse_id.in_(horse_ids[start : start + 500]),
+                HorseMedical.clinic_date_local.in_(days),
+            )
+            .order_by(HorseMedical.id)
+        ):
+            key = (
+                row.horse_id,
+                row.meet_code,
+                row.clinic_date_local,
+                row.hospital_name,
+                row.diagnosis_1,
+                row.diagnosis_2,
+            )
+            existing_medical.setdefault(key, row)
     names = sorted(
         {
             text.strip()
@@ -514,17 +542,16 @@ def _write_medical(
     written = 0
     records: list[tuple[HorseMedical, HorseMedicalItem]] = []
     for item in items:
-        horse = _upsert_horse(session, item.horse_id, item.horse_name)
-        row = session.scalar(
-            select(HorseMedical).where(
-                HorseMedical.horse_id == horse.id,
-                HorseMedical.meet_code == item.meet_code,
-                HorseMedical.clinic_date_local == item.clinic_date,
-                HorseMedical.hospital_name == item.hospital_name,
-                HorseMedical.diagnosis_1 == item.diagnosis_1,
-                HorseMedical.diagnosis_2 == item.diagnosis_2,
-            )
+        horse = horses[item.horse_id]
+        key = (
+            horse.id,
+            item.meet_code,
+            item.clinic_date,
+            item.hospital_name,
+            item.diagnosis_1,
+            item.diagnosis_2,
         )
+        row = existing_medical.get(key)
         if row is None:
             row = HorseMedical(
                 horse_id=horse.id,
@@ -536,6 +563,7 @@ def _write_medical(
                 observed_at_ms=observed_at_ms,
             )
             session.add(row)
+            existing_medical[key] = row
         row.stable_part = item.stable_part
         row.observed_at_ms = observed_at_ms
         records.append((row, item))
@@ -580,9 +608,43 @@ def _write_profiles(
     *,
     is_active: bool | None,
 ) -> int:
+    horses = _history_horses(session, items)
+    # Resolve each relation once per batch, instead of SQL round trips per horse.
+    for model, attribute, id_field, name_field in (
+        (Trainer, "kra_trainer_id", "trainer_id", "trainer_name"),
+        (Owner, "kra_owner_id", "owner_id", "owner_name"),
+    ):
+        ids = sorted({getattr(item, id_field) for item in items if getattr(item, id_field)})
+        people = {}
+        for start in range(0, len(ids), 500):
+            for person in session.scalars(
+                select(model).where(getattr(model, attribute).in_(ids[start : start + 500]))
+            ):
+                people[getattr(person, attribute)] = person
+        for item in items:
+            kra_id, name = getattr(item, id_field), getattr(item, name_field)
+            if not kra_id:
+                continue
+            person = people.get(kra_id)
+            if person is None:
+                person = model(**{attribute: kra_id, "name_ko": name or kra_id})
+                session.add(person)
+                people[kra_id] = person
+            if name:
+                person.name_ko = name
+    horse_ids = sorted({h.id for h in horses.values()})
+    snapshots = {}
+    for start in range(0, len(horse_ids), 500):
+        for row in session.scalars(
+            select(HorseProfileSnapshot).where(
+                HorseProfileSnapshot.horse_id.in_(horse_ids[start : start + 500]),
+                HorseProfileSnapshot.observed_at_ms == observed_at_ms,
+            )
+        ):
+            snapshots[row.horse_id] = row
     written = 0
     for item in items:
-        horse = _upsert_horse(session, item.horse_id, item.horse_name)
+        horse = horses[item.horse_id]
         horse.name_ko = item.horse_name
         if item.sex:
             horse.sex = item.sex
@@ -610,20 +672,11 @@ def _write_profiles(
             horse.active_status_observed_at_ms = observed_at_ms
             horse.active_status_source = "data.go.kr/B551015/API8_2:act_gubun=y"
 
-        if item.trainer_id:
-            _upsert_person(session, Trainer, "kra_trainer_id", item.trainer_id, item.trainer_name)
-        if item.owner_id:
-            _upsert_person(session, Owner, "kra_owner_id", item.owner_id, item.owner_name)
-
-        row = session.scalar(
-            select(HorseProfileSnapshot).where(
-                HorseProfileSnapshot.horse_id == horse.id,
-                HorseProfileSnapshot.observed_at_ms == observed_at_ms,
-            )
-        )
+        row = snapshots.get(horse.id)
         if row is None:
             row = HorseProfileSnapshot(horse_id=horse.id, observed_at_ms=observed_at_ms)
             session.add(row)
+            snapshots[horse.id] = row
         row.meet_code = item.meet_code
         row.grade = item.grade
         row.rating = item.rating
@@ -664,7 +717,10 @@ def _upsert_person(
 
 def _history_horses(
     session: Session,
-    items: list[HorseRatingItem] | list[HorseTrainingItem],
+    items: list[HorseRatingItem]
+    | list[HorseTrainingItem]
+    | list[HorseMedicalItem]
+    | list[HorseDetailItem],
 ) -> dict[str, Horse]:
     """Resolve a history batch without a network round trip for every runner."""
     horse_ids = sorted({item.horse_id for item in items})

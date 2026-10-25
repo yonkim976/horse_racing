@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy import func, select
+from sqlalchemy import BigInteger, Column, MetaData, Table, case, func, select
 from sqlalchemy.dialects.postgresql import insert as postgresql_insert
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.orm import Session
@@ -30,6 +30,93 @@ from horse_racing.db.models import (
 from horse_racing.parsers.special_training import HillTrainingItem, SwimTrainingItem
 from horse_racing.services.entry_sheet import IngestionSummary
 from horse_racing.services.raw_store import store_kra_xml_page
+
+# Query-only descriptor, intentionally outside Base.metadata: create_all/autogenerate
+# must not create a writable table with the existing database view's name.
+HILL_TRAINING_CURRENT = Table(
+    "horse_hill_training_current",
+    MetaData(),
+    *(Column(c.name, c.type) for c in HorseHillTraining.__table__.columns),
+    Column("metadata_version_count", BigInteger),
+    schema="public",
+)
+
+
+def hill_training_current_query(
+    session: Session, *, start, end, horse_id=None, kra_horse_id_raw=None
+):
+    """Canonical serving query; PostgreSQL reads the private current view directly.
+
+    SQLite test/research databases use the equivalent window query below. Never
+    fall back to raw rows if the PostgreSQL view is absent or access is denied.
+    Filter a horse only AFTER deduplication: metadata versions may be linked later.
+    """
+    dialect = session.get_bind().dialect.name
+    if dialect == "postgresql":
+        current = HILL_TRAINING_CURRENT
+        query = select(current).where(current.c.training_date_local.between(start, end))
+    elif dialect == "sqlite":
+        query = _sqlite_hill_training_current_query(start=start, end=end)
+        current = query.subquery()
+        query = select(current)
+    else:
+        raise ValueError("unsupported_hill_training_read_dialect")
+    if horse_id is not None:
+        query = query.where(current.c.horse_id == horse_id)
+    if kra_horse_id_raw is not None:
+        query = query.where(current.c.kra_horse_id_raw == kra_horse_id_raw)
+    return query
+
+
+def _sqlite_hill_training_current_query(*, start, end):
+    """Equivalent read model for SQLite, without creating or deleting records.
+
+    Require the same horse, sensor identity, farm, date/time AND split records.
+    Different same-second measurements remain separate. Unknown times never merge.
+    Keep this partition in sync with public.horse_hill_training_current.
+    """
+    table = HorseHillTraining.__table__
+    c = table.c
+    partition = [
+        c.kra_horse_id_raw,
+        c.farm_name,
+        c.training_date_local,
+        c.training_time_local,
+        c.tag_id,
+        c.chip_id,
+        c.f1_seconds,
+        c.f2_seconds,
+        c.f3_seconds,
+        c.total_seconds,
+        case((c.training_time_local.is_(None), c.source_row_hash), else_=None),
+    ]
+    ranked = (
+        select(
+            *table.c,
+            func.row_number()
+            .over(partition_by=partition, order_by=(c.observed_at_ms.desc(), c.id.desc()))
+            .label("metadata_version_rank"),
+            func.count().over(partition_by=partition).label("metadata_version_count"),
+        )
+        .where(c.training_date_local.between(start, end))
+        .subquery()
+    )
+    return select(ranked).where(ranked.c.metadata_version_rank == 1)
+
+
+def hill_training_counts(session, *, start, end):
+    current = hill_training_current_query(session, start=start, end=end).subquery()
+    raw = session.scalar(
+        select(func.count())
+        .select_from(HorseHillTraining)
+        .where(HorseHillTraining.training_date_local.between(start, end))
+    )
+    events = session.scalar(select(func.count()).select_from(current))
+    return {
+        "stored_versions": raw,
+        "measured_records": events,
+        "metadata_versions_excluded": raw - events,
+    }
 
 
 def ingest_swim_training_date(

@@ -39,7 +39,12 @@ from horse_racing.parsers.special_training import HillTrainingItem, SwimTraining
 from horse_racing.services.discord_notifications import notify_training
 from horse_racing.services.horse_history import ingest_training
 from horse_racing.services.race_supplemental import ingest_start_training
-from horse_racing.services.special_training import ingest_hill_training, ingest_swim_training_date
+from horse_racing.services.special_training import (
+    hill_training_counts,
+    hill_training_current_query,
+    ingest_hill_training,
+    ingest_swim_training_date,
+)
 from horse_racing.services.start_training_website import ingest_jeju_start_training_website
 from horse_racing.services.training_riders_website import (
     ingest_training_riders,
@@ -110,6 +115,33 @@ class DateCheckedXml:
 def snapshot(session: Session, name: str, start: date, end: date) -> dict:
     model = MODELS[name]
     table = model.__table__
+    if name == "hill":
+        rows = session.execute(
+            hill_training_current_query(session, start=start, end=end)
+        ).mappings()
+        # Hash/row ID include mutable names. Compare stable measured-event keys so
+        # a renamed horse is an existing event's metadata change, not new training.
+        key_fields = (
+            "kra_horse_id_raw",
+            "farm_name",
+            "training_date_local",
+            "training_time_local",
+            "tag_id",
+            "chip_id",
+            "f1_seconds",
+            "f2_seconds",
+            "f3_seconds",
+            "total_seconds",
+        )
+        return {
+            tuple(r[f] for f in key_fields)
+            + (r["source_row_hash"] if r["training_time_local"] is None else None,): tuple(
+                (c.name, r[c.name])
+                for c in table.columns
+                if c.name not in OBSERVATION_ONLY | {"source_row_hash"}
+            )
+            for r in rows
+        }
     rows = session.execute(
         select(table).where(model.training_date_local.between(start, end))
     ).mappings()
@@ -173,31 +205,19 @@ def run_tasks(session: Session, api, xml, website, *, days: list[date], raw_dir:
                 day=label,
                 meet=meet,
             )
-            if meet != 2:
-                task(
-                    "starting",
-                    lambda label=label, meet=meet: ingest_start_training(
-                        session,
-                        api,
-                        training_date=label,
-                        meet=meet,
-                        raw_data_dir=raw_dir,
-                    ),
-                    day=label,
+            task(
+                "starting",
+                lambda label=label, meet=meet: ingest_start_training(
+                    session,
+                    api,
+                    training_date=label,
                     meet=meet,
-                )
-        task(
-            "starting",
-            lambda label=label: ingest_jeju_start_training_website(
-                session,
-                website,
-                training_date=label,
-                raw_data_dir=raw_dir,
-            ),
-            day=label,
-            meet=2,
-            source="kra_website",
-        )
+                    raw_data_dir=raw_dir,
+                ),
+                day=label,
+                meet=meet,
+                source="api22",
+            )
         task(
             "swimming",
             lambda label=label: ingest_swim_training_date(
@@ -327,6 +347,7 @@ def collect_window(session, settings, days, raw_dir):
         name: max((dict(values)["training_date_local"] for values in rows.values()), default=None)
         for name, rows in after.items()
     }
+    diffs["hill"].update(hill_training_counts(session, start=days[0], end=days[-1]))
     return results, diffs, latest
 
 

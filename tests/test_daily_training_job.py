@@ -61,7 +61,7 @@ def test_rider_refresh_failure_keeps_other_horses_running(tmp_path, monkeypatch,
     assert rows[1]["processed"] == 2
 
 
-def test_worker_routes_jeju_to_website_and_all_dates_once(tmp_path, monkeypatch):
+def test_worker_routes_all_meets_to_api22_and_all_dates_once(tmp_path, monkeypatch):
     calls = []
     for name in (
         "ingest_training",
@@ -80,8 +80,10 @@ def test_worker_routes_jeju_to_website_and_all_dates_once(tmp_path, monkeypatch)
     results = job.run_tasks(Mock(), Mock(), Mock(), Mock(), days=days, raw_dir=tmp_path)
     assert len(calls) == len(results) == 50
     starts = [kwargs for kind, kwargs in calls if kind == "ingest_start_training"]
-    assert {r["meet"] for r in starts} == {1, 3}
-    assert len(starts) == 14
+    assert {r["meet"] for r in starts} == {1, 2, 3}
+    assert len(starts) == 21
+    assert not any(kind == "ingest_jeju_start_training_website" for kind, _ in calls)
+    assert all(r["source"] == "api22" for r in results if r["kind"] == "starting")
     assert {
         kwargs["training_date"] for kind, kwargs in calls if kind != "ingest_hill_training"
     } == {day.strftime("%Y%m%d") for day in days}

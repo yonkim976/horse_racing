@@ -1177,6 +1177,60 @@ class RaceStewardReport(Base):
     )
 
 
+class HorseStewardPhrase(Base):
+    """Literal KRA horse-specific wording and its independently observed lineage."""
+
+    __tablename__ = "horse_steward_phrases"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    horse_id: Mapped[int] = mapped_column(ForeignKey("horses.id", ondelete="RESTRICT"), nullable=False)
+    race_id: Mapped[int] = mapped_column(ForeignKey("races.id", ondelete="RESTRICT"), nullable=False)
+    race_entry_id: Mapped[int | None] = mapped_column(ForeignKey("race_entries.id", ondelete="RESTRICT"))
+    race_steward_report_id: Mapped[int | None] = mapped_column(
+        ForeignKey("race_steward_reports.id", ondelete="RESTRICT")
+    )
+    historical_program: Mapped[int] = mapped_column(Integer, nullable=False)
+    phrase_text: Mapped[str] = mapped_column(Text, nullable=False)
+    phrase_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    text_basis: Mapped[str] = mapped_column(String(30), nullable=False, default="official_website")
+    website_text_verified: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    entry_link_status: Mapped[str] = mapped_column(String(30), nullable=False)
+    provenance_json: Mapped[str] = mapped_column(Text, nullable=False)
+    source_dataset_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    source_dataset_path: Mapped[str] = mapped_column(Text, nullable=False)
+    first_observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    last_observed_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    source_published_at_ms: Mapped[int | None] = mapped_column(BigInteger)
+    historical_publication_time_verified: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    ingested_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("horse_id", "race_id", "phrase_sha256", name="uq_horse_steward_phrases_content"),
+        CheckConstraint("historical_program > 0", name="positive_steward_program"),
+        CheckConstraint("length(trim(phrase_text)) > 0", name="nonempty_steward_phrase"),
+        CheckConstraint("text_basis = 'official_website'", name="official_steward_wording"),
+        CheckConstraint("website_text_verified", name="verified_steward_wording"),
+        CheckConstraint(
+            "(entry_link_status = 'matched' AND race_entry_id IS NOT NULL) OR "
+            "(entry_link_status = 'entry_missing' AND race_entry_id IS NULL)",
+            name="steward_entry_link_status",
+        ),
+        CheckConstraint(
+            "first_observed_at_ms > 0 AND last_observed_at_ms >= first_observed_at_ms "
+            "AND ingested_at_ms >= last_observed_at_ms", name="steward_observation_times",
+        ),
+        CheckConstraint(
+            "(NOT historical_publication_time_verified AND source_published_at_ms IS NULL) OR "
+            "(historical_publication_time_verified AND source_published_at_ms IS NOT NULL AND source_published_at_ms > 0 "
+            "AND source_published_at_ms <= first_observed_at_ms)", name="steward_publication_evidence",
+        ),
+        Index("ix_horse_steward_phrases_race", "race_id"),
+        Index("ix_horse_steward_phrases_entry", "race_entry_id"),
+        Index("ix_horse_steward_phrases_report", "race_steward_report_id"),
+        Index("ix_horse_steward_phrases_observed", "first_observed_at_ms"),
+    )
+
+
 class RacePassingSummary(Base):
     __tablename__ = "race_passing_summaries"
 
@@ -1249,7 +1303,7 @@ class RacePointSourceBatch(Base):
     loaded_at_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
 
     __table_args__ = (
-        UniqueConstraint("meet_code", "race_year", name="uq_race_point_source_batches_meet_year"),
+        Index("ix_race_point_source_batches_meet_year", "meet_code", "race_year"),
         CheckConstraint("length(source_sha256) = 64", name="source_sha256_length"),
         CheckConstraint("meet_code BETWEEN 1 AND 4", name="meet_code_range"),
         CheckConstraint("race_year BETWEEN 2000 AND 2100", name="race_year_range"),

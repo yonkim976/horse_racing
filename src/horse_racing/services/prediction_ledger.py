@@ -510,10 +510,22 @@ def publish_predictions(
             selected,
             publication_context.domain,
         )
-        explanation_rows = _canonical_explanation_rows(
-            explanations,
-            set(int(value) for value in selected["race_entry_id"].to_list()),
+        omit_explanations = all(
+            (component.parameters or {}).get("explanation_policy")
+            == "omitted_by_user_request"
+            for component in model_components
         )
+        if omit_explanations:
+            if not explanations.is_empty():
+                raise PredictionLedgerError("설명 생략 발행에는 설명 행이 없어야 합니다.")
+            # The explicit policy is part of every component and the immutable
+            # content hash. All probability/detail/lineage checks still apply.
+            explanation_rows = []
+        else:
+            explanation_rows = _canonical_explanation_rows(
+                explanations,
+                set(int(value) for value in selected["race_entry_id"].to_list()),
+            )
         content_hash = _publication_content_hash(
             selected,
             publication_context,

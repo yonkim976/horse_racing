@@ -1,0 +1,259 @@
+{
+  "release_date_kst": "2026-10-14",
+  "service": "mapilog",
+  "project": "mapilog-509017",
+  "region": "asia-northeast1",
+  "revision": "mapilog-seo-20261014-01a1350f",
+  "traffic_percent": 100,
+  "previous_revision": "mapilog-gtm-61ef791",
+  "image": "asia-northeast1-docker.pkg.dev/mapilog-509017/mapilog/mapilog@sha256:bfdeaddf162debe6eb6d1a1451f16d867ca87e894851d8d166309ad4e6e4dc78",
+  "build_id": "00080347-eba1-411c-8234-c747ffdab861",
+  "source_manifest": {
+    "base_image": "asia-northeast1-docker.pkg.dev/mapilog-509017/mapilog/mapilog@sha256:d16a54f9cd5cee534bae1c5c912c08c6b51361742a6928051e4ce03a94972c79",
+    "image_tag": "asia-northeast1-docker.pkg.dev/mapilog-509017/mapilog/mapilog:seo-20261014-01a1350f",
+    "files": [
+      {
+        "path": "src/horse_racing/web/app.py",
+        "sha256": "66d9f6fc6090bd0b951d76577e3c79cb2e8167c924842abd894a3a20bd9fbca1"
+      },
+      {
+        "path": "src/horse_racing/web/request_policy.py",
+        "sha256": "b83410dab7a49a83e3a891affc4ccf39e52ef8d60baab5bc91069e0719bcb57d"
+      },
+      {
+        "path": "src/horse_racing/web/static/js/course-view.js",
+        "sha256": "d291fe9b671762fd2b7cfd16f34bba8955a512f498f5d5d377c0350796ffe410"
+      },
+      {
+        "path": "src/horse_racing/web/templates/mobile/base.html",
+        "sha256": "ba6b390e4e88cbe4f010dcfbf3bc920c4c860d0ca2c66cead35b08da51c7968c"
+      },
+      {
+        "path": "src/horse_racing/web/templates/course_map_page.html",
+        "sha256": "009f3a1e02e5a90c9ea436edde29a665d1c6137d051984f29066dbaacc437e1a"
+      },
+      {
+        "path": "src/horse_racing/web/templates/distance_page.html",
+        "sha256": "7b86e147ccce9aa7f737bb3a63389cfb58e20501dcdf142cc98791edf8f64b7c"
+      },
+      {
+        "path": "src/horse_racing/web/templates/entity_detail.html",
+        "sha256": "ea1fedf2a32f58039924f630b88140f2795d5d2a7d1dd475479c36b5ba700841"
+      },
+      {
+        "path": "src/horse_racing/web/templates/race_detail.html",
+        "sha256": "8de254e2989c3495b15594ead4f7036941c4426ce2a95d46f1f5a49dbeddb5cb"
+      },
+      {
+        "path": "src/horse_racing/web/templates/running_trial_detail.html",
+        "sha256": "eb0d61fcf16726dda4a39c957d2d4a6594cf989b69a9d72dc5fbebe91d4b0258"
+      },
+      {
+        "path": "src/horse_racing/web/templates/base.html",
+        "sha256": "0428a4bf0370527c6ab81e99459252b8318560761782776ae73bfd2412f15806"
+      },
+      {
+        "path": "src/horse_racing/web/seo.py",
+        "sha256": "b0ed970038ff37de9ccd71dc944a8ea7413978f714f51daf65e0d0d179ca8626"
+      },
+      {
+        "path": "src/horse_racing/web/sitemaps.py",
+        "sha256": "58441c024269255dbf3f9ad0d967b8a4439038acea441beb59ebb097acf96fbf"
+      },
+      {
+        "path": "src/horse_racing/web/static/css/seo-summary.css",
+        "sha256": "a173e63758bedc956957ef57d52329d171e853053b42a4e78183d94ed1a682b3"
+      },
+      {
+        "path": "src/horse_racing/web/templates/_seo_head.html",
+        "sha256": "8e4ce7a458e7ed0c5b783d542a6279ca939c00feccb7748850440337acc9ba36"
+      }
+    ]
+  },
+  "isolated_source_tests_passed": 91,
+  "production_data_smoke": {
+    "checks": [
+      {
+        "bytes": 15,
+        "path": "/health",
+        "status": 200
+      },
+      {
+        "bytes": 18,
+        "path": "/health/ready",
+        "status": 200
+      },
+      {
+        "bytes": 14224,
+        "path": "/guide",
+        "status": 200
+      },
+      {
+        "bytes": 0,
+        "path": "/guide",
+        "status": 403
+      },
+      {
+        "bytes": 366,
+        "path": "/robots.txt",
+        "status": 200
+      },
+      {
+        "bytes": 53723,
+        "path": "/",
+        "status": 200
+      },
+      {
+        "bytes": 53723,
+        "path": "/?utm_source=release-validation",
+        "status": 200
+      },
+      {
+        "bytes": 141007,
+        "path": "/races/55198",
+        "status": 200
+      },
+      {
+        "bytes": 16250,
+        "path": "/horses/0061195",
+        "status": 200
+      },
+      {
+        "bytes": 44471,
+        "path": "/racecourses/seoul/distances/1200",
+        "status": 200
+      },
+      {
+        "bytes": 30317,
+        "path": "/analysis?date=2026-10-11",
+        "status": 200
+      },
+      {
+        "bytes": 9965,
+        "path": "/sitemap-index.xml",
+        "status": 200
+      },
+      {
+        "bytes": 2417,
+        "path": "/sitemaps/distances.xml",
+        "status": 200
+      },
+      {
+        "bytes": 51001,
+        "path": "/sitemaps/races/0.xml",
+        "status": 200
+      },
+      {
+        "bytes": 60001,
+        "path": "/sitemaps/running-trials/0.xml",
+        "status": 200
+      },
+      {
+        "bytes": 56108,
+        "path": "/sitemaps/horses/0.xml",
+        "status": 200
+      },
+      {
+        "bytes": 40466,
+        "path": "/sitemaps/jockeys/0.xml",
+        "status": 200
+      },
+      {
+        "bytes": 52519,
+        "path": "/sitemaps/trainers/0.xml",
+        "status": 200
+      },
+      {
+        "bytes": 61741,
+        "path": "/sitemaps/owners/0.xml",
+        "status": 200
+      }
+    ],
+    "seo_release_smoke": "passed"
+  },
+  "public_smoke": {
+    "status": "passed",
+    "sitemap_partitions": 137,
+    "checks": [
+      {
+        "path": "/robots.txt",
+        "status": 200,
+        "bytes": 366
+      },
+      {
+        "path": "/sitemap-index.xml",
+        "status": 200,
+        "bytes": 9965
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 54446
+      },
+      {
+        "path": "/?utm_source=release-validation",
+        "status": 200,
+        "bytes": 54446
+      },
+      {
+        "path": "/racecourses/seoul/distances/1200",
+        "status": 200,
+        "bytes": 45196
+      },
+      {
+        "path": "/horses/0061195",
+        "status": 200,
+        "bytes": 16977
+      },
+      {
+        "path": "/races/55198",
+        "status": 200,
+        "bytes": 141742
+      },
+      {
+        "path": "/sitemaps/distances.xml",
+        "status": 200,
+        "bytes": 2417
+      },
+      {
+        "path": "/sitemaps/races/0.xml",
+        "status": 200,
+        "bytes": 51001
+      },
+      {
+        "path": "/sitemaps/horses/0.xml",
+        "status": 200,
+        "bytes": 56108
+      },
+      {
+        "path": "/guide",
+        "status": 200,
+        "bytes": 14949
+      }
+    ],
+    "training_bot_status": 403
+  },
+  "service_after": {
+    "status": {
+      "latestReadyRevisionName": "mapilog-seo-20261014-01a1350f",
+      "traffic": [
+        {
+          "percent": 100,
+          "revisionName": "mapilog-seo-20261014-01a1350f"
+        }
+      ]
+    }
+  },
+  "google_search_console": {
+    "property": "sc-domain:mapilog.xyz",
+    "sitemap": "https://mapilog.xyz/sitemap-index.xml",
+    "status": "success",
+    "submitted_kst": "2026-10-14",
+    "discovered_pages_at_verification": 0
+  },
+  "excluded_by_user": [
+    "Naver Search Advisor",
+    "Bing Webmaster Tools"
+  ],
+  "rollback_command": "gcloud run services update-traffic mapilog --project=mapilog-509017 --region=asia-northeast1 --to-revisions=mapilog-gtm-61ef791=100 --quiet"
+}

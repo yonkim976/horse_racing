@@ -1,0 +1,8 @@
+steps:
+  - name: gcr.io/cloud-builders/docker@sha256:001fb4a870a84485cf198c80002f7af42f6456f2dbc261d70a0b5f0111470df4
+    args: [build, -t, '${_IMAGE}', .]
+images: ['${_IMAGE}']
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_MEDIUM
+timeout: 600s

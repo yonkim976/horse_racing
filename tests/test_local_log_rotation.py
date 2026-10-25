@@ -16,7 +16,7 @@ def test_dry_run_no_filesystem_writes(tmp_path):
     target = tmp_path / "missing"
     result = logs.execute(log_dir=target, lock_path=tmp_path / "lock", now=NOW)
     assert result["status"] == "planned"
-    assert len(result["log_names"]) == 6
+    assert len(result["log_names"]) == 18
     assert not target.exists()
     assert not (tmp_path / "lock").exists()
 
@@ -36,15 +36,16 @@ def test_archive_verify_truncate_preserves_inode_and_open_writer(tmp_path):
         existing_writer.write(b"next collection\n")
         existing_writer.flush()
     assert original.read_bytes() == b"next collection\n"
-    assert len(list((directory / "archives").glob("*.gz"))) == 3
+    assert len(list((directory / "archives").glob("*.gz"))) == len(logs.LOG_NAMES) // 2
     for archive in (directory / "archives").iterdir():
         assert gzip.decompress(archive.read_bytes()) == b"official history\n"
         assert archive.stat().st_mode & 0o777 == 0o600
     assert directory.stat().st_mode & 0o777 == 0o700
     before = original.read_bytes()
-    assert logs.execute(
-        apply=True, log_dir=directory, lock_path=tmp_path / "lock", now=NOW
-    )["status"] == "skipped_already_rotated_today"
+    assert (
+        logs.execute(apply=True, log_dir=directory, lock_path=tmp_path / "lock", now=NOW)["status"]
+        == "skipped_already_rotated_today"
+    )
     assert original.read_bytes() == before
 
 

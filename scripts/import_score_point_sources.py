@@ -66,8 +66,8 @@ def load_local(
         section_count, group_count, has_source_field = source_metadata(source)
     existing = target.execute(
         """SELECT id,source_sha256,section_row_count,passing_group_row_count
-           FROM race_point_source_batches WHERE meet_code=? AND race_year=?""",
-        (MEET_CODES[meet], year),
+           FROM race_point_source_batches WHERE source_file=?""",
+        (source_file,),
     ).fetchone()
     if existing:
         batch_id, prior_digest, prior_sections, prior_groups = existing
@@ -183,8 +183,8 @@ def load_postgres(
         section_count, group_count, has_source_field = source_metadata(source)
         existing = target.execute(
             """SELECT id,source_sha256,section_row_count,passing_group_row_count
-               FROM public.race_point_source_batches WHERE meet_code=%s AND race_year=%s""",
-            (MEET_CODES[meet], year),
+               FROM public.race_point_source_batches WHERE source_file=%s""",
+            (source_file,),
         ).fetchone()
         if existing:
             batch_id, prior_digest, prior_sections, prior_groups = existing

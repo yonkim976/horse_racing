@@ -163,6 +163,46 @@ def test_parse_dacom11_report() -> None:
     assert winner.prize_money_krw == 24_750_000
 
 
+def test_blank_rank_keeps_stopped_runner_without_inventing_finish():
+    stopped = REPORT.replace("  2    4", "       4").replace(
+        "1:01.4  2½", "     0 주행중지"
+    )
+    race = parse_dacom11_report(stopped.encode("cp949"))[0]
+    assert len(race.entries) == 2
+    runner = next(e for e in race.entries if e.horse_number == 4)
+    assert runner.horse_name == "테스트투"
+    assert runner.finish_rank_raw == "" and runner.finish_position is None
+    assert runner.body_weight_kg == 487 and runner.body_weight_change_kg == 7
+    assert runner.finish_time_ms is None
+    assert "주행중지" in runner.margin_text
+    assert runner.s1f_ms == 14100 and runner.g3f_ms == 36000
+    assert race.entries[0].finish_position == 1
+
+
+def test_busan_blank_closing_cells_do_not_shift_s1f_into_g3f():
+    entries = parse_dacom11_report(REPORT.encode("cp949"))[0].entries
+    _parse_section_table([
+        "순위 마번 G-3F S-1F    400      400     400     400     G-2F    G-1F    단승식 연승식",
+        "-" * 97,
+        "       4        0:14.8          0:26.6  0:24.1  0:26.0                    18.3    2.8",
+        "-" * 97,
+    ], entries)
+    runner = next(e for e in entries if e.horse_number == 4)
+    assert runner.s1f_ms == 14800
+    assert runner.g3f_ms is None and runner.g1f_ms is None
+    assert runner.win_odds == 18.3 and runner.place_odds == 2.8
+
+
+def test_stopped_busan_body_preserves_all_seven_passing_points():
+    report = REPORT.replace("  2    4", "       4").replace(
+        "1:01.4  2½       6-  -  - 6- 6- 5",
+        "     0  주행중지 10-  - 9- 8- 7- 4- 4",
+    )
+    entry = parse_dacom11_report(report.encode("cp949"))[0].entries[1]
+    assert entry.passing_order_raw == "10-  - 9- 8- 7- 4- 4"
+    assert entry.margin_text == "0  주행중지" and entry.finish_time_ms is None
+
+
 def test_parse_dacom11_jeju_layout() -> None:
     race = parse_dacom11_report(JEJU_REPORT.encode("cp949"))[0]
 

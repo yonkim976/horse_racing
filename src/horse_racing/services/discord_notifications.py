@@ -1,4 +1,4 @@
-"""Opt-in Discord notifications; no database writes or automatic retries.
+"""Opt-in Discord notifications; bounded retries only when definitely not sent.
 
 Configure HORSE_RACING_DISCORD_WEBHOOK_URL through a secret environment variable.
 Local development may use the ignored .env.discord file instead.
@@ -7,6 +7,7 @@ Local development may use the ignored .env.discord file instead.
 from __future__ import annotations
 
 import re
+import time
 from collections.abc import Callable
 from datetime import datetime
 from urllib.parse import urlsplit
@@ -16,10 +17,36 @@ import httpx
 from pydantic import SecretStr
 
 KINDS = {"daily": "일반조교", "starting": "출발조교", "swimming": "수영조교", "hill": "언덕조교"}
+TRAINING_REGIONS = {1: "서울", 2: "제주", 3: "부경"}
 
 
 class DiscordNotificationError(RuntimeError):
     """Sanitized error: never includes a webhook URL or a response body."""
+
+    def __init__(self, reason: str):
+        super().__init__(reason)
+        self.reason = reason
+        self.retryable = reason in {"connect_failed_not_sent", "http_status_429"}
+
+
+def notification_failure(exc):
+    """Log only our own fixed reasons, never arbitrary exception messages."""
+    reason = "unclassified"
+    if isinstance(exc, DiscordNotificationError):
+        allowed = {
+            "invalid_webhook_configuration",
+            "invalid_message_length",
+            "connect_failed_not_sent",
+            "transport_error_delivery_unknown",
+            "invalid_confirmation_delivery_unknown",
+        }
+        if exc.reason in allowed or re.fullmatch(r"http_status_[0-9]{3}", exc.reason):
+            reason = exc.reason
+    return {
+        "error_type": type(exc).__name__,
+        "error_reason": reason,
+        "retryable": isinstance(exc, DiscordNotificationError) and exc.retryable,
+    }
 
 
 def _validate_webhook(url: str) -> None:
@@ -45,7 +72,7 @@ def send_discord(
     *,
     transport: httpx.BaseTransport | None = None,
 ) -> str:
-    """Send once and require confirmation; reject redirects and sanitize errors.
+    """Require confirmation; retry only failures known not to have sent a message.
 
     Do not retry ambiguous transport failures: Discord may already have saved the message.
     """
@@ -55,11 +82,18 @@ def send_discord(
         raise DiscordNotificationError("invalid_message_length")
     try:
         with httpx.Client(timeout=15, follow_redirects=False, transport=transport) as client:
-            response = client.post(
-                url,
-                params={"wait": "true"},
-                json={"content": content, "allowed_mentions": {"parse": []}},
-            )
+            for attempt in range(3):
+                try:
+                    response = client.post(
+                        url,
+                        params={"wait": "true"},
+                        json={"content": content, "allowed_mentions": {"parse": []}},
+                    )
+                    break
+                except (httpx.ConnectError, httpx.ConnectTimeout, httpx.PoolTimeout):
+                    if attempt == 2:
+                        raise DiscordNotificationError("connect_failed_not_sent") from None
+                    time.sleep(2 if attempt == 0 else 5)
     except httpx.HTTPError:
         raise DiscordNotificationError("transport_error_delivery_unknown") from None
     if response.status_code != 200:
@@ -96,6 +130,24 @@ def format_training_summary(summary: dict) -> str:
             f"유지 {int(diff['unchanged'])} / 최신 스냅샷 제외 "
             f"{int(diff['removed_from_latest_snapshot'])} · 범위 내 최신일 {latest}"
         )
+        if kind == "hill" and "measured_records" in diff:
+            lines.append(
+                f"언덕 조회: 중복 제외 {int(diff['measured_records'])}건 · "
+                f"원본 이력 {int(diff['stored_versions'])}행 · "
+                f"메타정보 추가 버전 {int(diff['metadata_versions_excluded'])}행 제외"
+            )
+    failed_tasks = [row for row in results if row["status"] == "failed"]
+    for row in failed_tasks[:6]:
+        kind = KINDS.get(row.get("kind"), "조교 종류 미상")
+        region = TRAINING_REGIONS.get(row.get("meet"), "전체 지역")
+        day = str(row.get("day", ""))
+        day = f"{day[:4]}-{day[4:6]}-{day[6:]}" if re.fullmatch(r"\d{8}", day) else "범위 작업"
+        error_type = str(row.get("error_type", "UnknownError"))
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,79}", error_type):
+            error_type = "UnknownError"
+        lines.append(f"실패 상세: {day} {region} {kind} / {error_type}")
+    if len(failed_tasks) > 6:
+        lines.append(f"추가 실패 {len(failed_tasks) - 6}건은 실행 로그에서 확인하세요.")
     lines += [
         f"소요: {float(summary['elapsed_seconds']):.1f}초",
         "빈 응답은 기존 기록을 삭제하지 않습니다. "
@@ -132,7 +184,7 @@ def notify_training(
         emit("discord_sent", message_id=message_id)
     except Exception as exc:
         # Never log exc/request/response/URL: even transport exceptions contain the token.
-        emit("discord_failed", error_type=type(exc).__name__)
+        emit("discord_failed", **notification_failure(exc))
 
 
 def notify_weekly(webhook: SecretStr | None, *, emit: Callable, summary: dict) -> None:
@@ -179,4 +231,4 @@ def notify_weekly(webhook: SecretStr | None, *, emit: Callable, summary: dict) -
         message_id = send_discord(webhook, "\n".join(content))
         emit("discord_sent", message_id=message_id)
     except Exception as exc:
-        emit("discord_failed", error_type=type(exc).__name__)
+        emit("discord_failed", **notification_failure(exc))

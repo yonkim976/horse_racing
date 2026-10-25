@@ -21,10 +21,16 @@ from horse_racing.collectors.kra_api import FINAL_DIVIDEND_ENDPOINT, FINAL_DIVID
 from horse_racing.db.engine import create_engine_for_url
 from horse_racing.db.models import IngestionRun, SourceDocument
 from horse_racing.jobs import local_race_day as live
+from horse_racing.jobs.local_log_rotation import open_regular
+from horse_racing.jobs.local_resilience import (
+    connect_local_database,
+    release_database_locks,
+    safe_failure,
+)
 from horse_racing.jobs.weekly_entry_cards import KST, emit, require_complete_pages
 from horse_racing.parsers.race_day import FinalDividendItem, parse_items
 from horse_racing.services import closing_dividends as dividends
-from horse_racing.services.discord_notifications import send_discord
+from horse_racing.services.discord_notifications import notification_failure, send_discord
 from horse_racing.services.live_race_day import (
     apply_items,
     entry_index,
@@ -37,6 +43,26 @@ from horse_racing.services.raw_store import store_kra_page
 
 ROOT = live.ROOT
 STATE_PATH = ROOT / "data/state/local-post-race.json"
+REPAIR_STATUS_PATH = ROOT / "data/state/local-post-race-repair-status.json"
+
+
+def write_execution_state(path, state, mode):
+    live.write_state(path, state)
+    if mode == "repair":
+        # Frequent dividend ticks must not erase a failed daily repair or its alert.
+        live.write_state(
+            REPAIR_STATUS_PATH,
+            {
+                k: state[k]
+                for k in (
+                    "last_summary",
+                    "last_failure",
+                    "last_notification_summary",
+                    "notification",
+                )
+                if k in state
+            },
+        )
 
 
 def plan(*, mode, end, now, lookback):
@@ -309,6 +335,7 @@ def collect(session, client, *, days, mode, now, state, state_path, raw_dir):
                         "meet": meet,
                         "stage": kind,
                         "type": type(exc).__name__,
+                        **safe_failure(exc),
                     }
                     errors.append(error)
                     emit("post_race_stage_failed", **error)
@@ -361,7 +388,7 @@ def notify(settings, summary, *, scheduled):
         and summary["mode"] == "dividends"
         and not (inserted or updated or summary["errors"])
     ):
-        return
+        return {"status": "skipped"}
     content = (
         f"경마 사후 수집 {summary['mode']} · {summary['status']}\n"
         f"{summary['start']}~{summary['end']}\n"
@@ -369,11 +396,18 @@ def notify(settings, summary, *, scheduled):
         f"미완료 {len(summary['pending'])}건 / 오류 {len(summary['errors'])}건\n"
         f"실행 {summary['run_id']} · {summary['elapsed_seconds']}초"
     )
+    for error in summary["errors"][:4]:
+        content += (
+            f"\n오류: {error.get('error_type', error.get('type', 'UnknownError'))}"
+            f" / {error.get('error_reason', 'unclassified')}"
+        )
     try:
         message_id = send_discord(settings.discord_webhook_url, content)
         emit("post_race_discord_sent", message_id=message_id)
+        return {"status": "delivered", "message_id": message_id}
     except Exception as exc:
-        emit("post_race_discord_failed", error_type=type(exc).__name__)
+        emit("post_race_discord_failed", **notification_failure(exc))
+        return {"status": "failed", **notification_failure(exc)}
 
 
 def execute(
@@ -401,9 +435,11 @@ def execute(
         emit("post_race_failed", error_type="local_disk_below_2GiB_guard")
         return 1
     state_path.parent.mkdir(parents=True, exist_ok=True)
+    live.STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     # Share the live worker's local and DB locks: never race result/odds updates.
-    with live.STATE_PATH.with_suffix(".lock").open("a") as local_lock:
-        os.chmod(local_lock.name, 0o600)
+    with os.fdopen(
+        open_regular(live.STATE_PATH.with_suffix(".lock"), os.O_CREAT | os.O_RDWR), "a"
+    ) as local_lock:
         try:
             fcntl.flock(local_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
@@ -413,6 +449,7 @@ def execute(
         if state.get("day") != str(now.date()):
             state["day"], state["counts"] = str(now.date()), {}
         settings = None
+        phase = "settings"
         try:
             settings = live.load_settings()
             raw_dir = settings.raw_data_dir
@@ -420,7 +457,8 @@ def execute(
                 raw_dir = ROOT / raw_dir
             engine = create_engine_for_url(settings.database_url)
             try:
-                with engine.connect() as lock:
+                phase = "connect"
+                with connect_local_database(engine, emit) as lock:
                     acquired = []
                     try:
                         for key in (live.LOCK_KEY, dividends.BACKFILL_LOCK):
@@ -432,6 +470,7 @@ def execute(
                                 emit("post_race_skipped_concurrent_database")
                                 return 0
                             acquired.append(key)
+                        phase = "work"
                         with Session(engine, expire_on_commit=False) as session:
                             if mode == "dividends" and scheduled:
                                 races = load_races(session, now.date())
@@ -457,34 +496,45 @@ def execute(
                                     raw_dir=raw_dir,
                                 )
                     finally:
-                        for key in reversed(acquired):
-                            lock.execute(text("SELECT pg_advisory_unlock(:key)"), {"key": key})
-                            lock.commit()
+                        release_database_locks(lock, acquired, emit)
             finally:
                 engine.dispose()
             state["last_summary"] = summary
-            live.write_state(state_path, state)
+            state.pop("last_failure", None)
+            state.pop("last_notification_summary", None)
+            state["notification"] = {"status": "sending"}
+            write_execution_state(state_path, state, mode)
             emit("post_race_summary", **summary)
-            notify(settings, summary, scheduled=scheduled)
+            state["notification"] = notify(settings, summary, scheduled=scheduled)
+            write_execution_state(state_path, state, mode)
             return 1 if summary["errors"] else 0
         except Exception as exc:
-            emit("post_race_failed", error_type=type(exc).__name__)
+            failure = {
+                "mode": mode,
+                "observed_at": now.isoformat(),
+                "through": str(days[-1]),
+                "failure_phase": phase,
+                **safe_failure(exc),
+            }
+            state["last_failure"] = failure
+            emit("post_race_failed", **failure)
+            failure_summary = {
+                "mode": mode,
+                "status": "failed",
+                "start": str(days[0]),
+                "end": str(days[-1]),
+                "run_id": None,
+                "elapsed_seconds": 0,
+                "observations": [],
+                "errors": [safe_failure(exc)],
+                "pending": [],
+            }
+            state["last_notification_summary"] = failure_summary
+            state["notification"] = {"status": "sending"}
+            write_execution_state(state_path, state, mode)
             if settings is not None:
-                notify(
-                    settings,
-                    {
-                        "mode": mode,
-                        "status": "failed",
-                        "start": str(days[0]),
-                        "end": str(days[-1]),
-                        "run_id": None,
-                        "elapsed_seconds": 0,
-                        "observations": [],
-                        "errors": [{"type": type(exc).__name__}],
-                        "pending": [],
-                    },
-                    scheduled=scheduled,
-                )
+                state["notification"] = notify(settings, failure_summary, scheduled=scheduled)
+            write_execution_state(state_path, state, mode)
             return 1
 
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from datetime import date
 from pathlib import Path
 
@@ -7,7 +8,7 @@ import polars as pl
 import pytest
 from alembic import command
 from alembic.config import Config
-from sqlalchemy import delete, select, update
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.exc import DatabaseError
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -366,6 +367,47 @@ def test_enriched_publication_is_saved_in_one_immutable_run(tmp_path: Path) -> N
                 .where(ModelPredictionExplanation.id == 1)
                 .values(readable_feature_name="tampered")
             )
+
+
+@pytest.mark.parametrize("omit,with_explanations,allowed", [
+    (True, False, True), (True, True, False), (False, False, False),
+])
+def test_numeric_publication_requires_explicit_hashed_policy(
+    tmp_path: Path, omit: bool, with_explanations: bool, allowed: bool,
+) -> None:
+    factory = _factory(tmp_path)
+    parameters = {"explanation_policy": "omitted_by_user_request"} if omit else {}
+    with factory() as session:
+        kwargs = dict(
+            metadata=_metadata(), feature_cutoff_at_ms=PUBLISHED_AT - 60_000,
+            published_at_ms=PUBLISHED_AT,
+            publication_context=PredictionPublicationContext(
+                domain="thoroughbred", prediction_stage="initial_card",
+                registry_sha256="c" * 64, input_card_sha256="d" * 64,
+                source_card_at_ms=PUBLISHED_AT - 120_000,
+                history_cutoff_date=date(2033, 5, 19), data_availability_status="complete",
+                probability_contract="thoroughbred_abc_runner_v1",
+                combination_algorithm_version="top3_set_joint_v1",
+            ),
+            model_components=(PredictionComponentMetadata(
+                component="A", model_version="v5_rolling_all", candidate_name="current_A",
+                artifact_sha256="e" * 64, parameters=parameters,
+            ),),
+            runner_details=_runner_details(),
+            explanations=_explanations() if with_explanations else pl.DataFrame(),
+        )
+        if not allowed:
+            with pytest.raises(PredictionLedgerError):
+                publish_predictions(session, _predictions(), **kwargs)
+            assert session.scalar(select(func.count(PredictionRun.id))) == 0
+        else:
+            result = publish_predictions(session, _predictions(), **kwargs)
+            assert verify_prediction_hash(session, result.public_id)
+            assert session.scalar(select(func.count(ModelPrediction.id))) == 6
+            assert session.scalar(select(func.count(ModelPredictionExplanation.id))) == 0
+            component = session.scalar(select(PredictionModelComponent))
+            assert json.loads(component.parameters_json) == parameters
+            assert result.publication_content_sha256 is not None
 
 
 def test_pre_race_update_appends_to_live_initial_card_lineage(tmp_path: Path) -> None:

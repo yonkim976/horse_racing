@@ -46,6 +46,7 @@ def ingest_running_trials(
     end_date: date,
     meets: list[int],
     raw_data_dir: Path,
+    official_identity: dict | None = None,
 ) -> RunningTrialIngestionSummary:
     started_at_ms = _now_ms()
     run = IngestionRun(
@@ -63,9 +64,7 @@ def ingest_running_trials(
     written_count = 0
     linked_count = 0
     unresolved_count = 0
-    horse_candidates_by_name = _horse_candidates_by_name(
-        session.scalars(select(Horse)).all()
-    )
+    horse_candidates_by_name = _horse_candidates_by_name(session.scalars(select(Horse)).all())
     jockey_by_name = _unique_name_map(session.scalars(select(Jockey)).all())
     trainer_by_name = _unique_name_map(session.scalars(select(Trainer)).all())
 
@@ -114,6 +113,7 @@ def ingest_running_trials(
                         horse_candidates_by_name=horse_candidates_by_name,
                         jockey_by_name=jockey_by_name,
                         trainer_by_name=trainer_by_name,
+                        official_identity=official_identity,
                     )
                     trial_count += 1
                     fetched_count += len(trial_data.results)
@@ -165,6 +165,7 @@ def _write_trial(
     horse_candidates_by_name: dict[str, list[Horse]],
     jockey_by_name: dict[str, Jockey],
     trainer_by_name: dict[str, Trainer],
+    official_identity: dict | None = None,
 ) -> tuple[RunningTrial, int, int, int]:
     trial = session.scalar(
         select(RunningTrial).where(
@@ -218,16 +219,21 @@ def _write_trial(
                 observed_at_ms=observed_at_ms,
             )
             session.add(result)
+        ids = None
+        if official_identity is not None:
+            ids = official_identity[
+                (meet, data.trial_date, data.trial_race_number, item.horse_number)
+            ]
         _assign_result(
             result,
             item,
-            horse_id=horse.id if horse else None,
-            jockey_id=jockey.id if jockey else None,
-            trainer_id=trainer.id if trainer else None,
+            horse_id=ids[0] if ids else horse.id if horse else None,
+            jockey_id=ids[1] if ids else jockey.id if jockey else None,
+            trainer_id=ids[2] if ids else trainer.id if trainer else None,
             observed_at_ms=observed_at_ms,
         )
         written += 1
-        if horse is None:
+        if horse is None and ids is None:
             unresolved += 1
         else:
             linked += 1

@@ -25,7 +25,7 @@ _BODY = re.compile(
     r"^(?P<body>\d+)(?:(?:\(\s*(?P<change>[+-]?\d+)\))|(?P<bare_change>[+-]\d+))?\s*"
     r"(?P<time>\d+:\d{2}\.\d)?\s*(?P<tail>.*)$"
 )
-_PASSING = re.compile(r"(?:^|\s{2,})(?P<passing>(?:[\d^]*\s*-\s*){5}[\d^]+)$")
+_PASSING = re.compile(r"(?:^|\s)(?P<passing>(?:[\d^]*\s*-\s*){5,6}[\d^]+)$")
 
 
 @dataclass(slots=True)
@@ -155,10 +155,12 @@ def _parse_entry_table(lines: list[str]) -> list[Dacom11Entry]:
     entries: list[Dacom11Entry] = []
     for line in _table_rows(lines, header_index):
         prefix = _display_slice(line, 0, name_data_start)
-        prefix_match = re.match(r"^\s*(?P<rank>\S+)\s+(?P<number>\d+)", prefix)
+        # DNF/scratched runners can have a blank rank, but still have a horse
+        # number. Keep the blank rank; do not invent an official status code.
+        prefix_match = re.fullmatch(r"\s*(?:(?P<rank>\S+)\s+)?(?P<number>\d+)\s*", prefix)
         if prefix_match is None:
             continue
-        finish_raw = prefix_match.group("rank")
+        finish_raw = prefix_match.group("rank") or ""
         horse_number = prefix_match.group("number")
         horse_name = _display_slice(line, name_data_start, origin_start).strip()
         horse_attributes = _display_slice(line, origin_start, jockey_start).split()
@@ -206,7 +208,7 @@ def _parse_body_table(lines: list[str], entries: list[Dacom11Entry]) -> None:
         return
     by_number = {entry.horse_number: entry for entry in entries}
     for line in _table_rows(lines, header_index):
-        prefix = re.match(r"^\s*\S+\s+(?P<number>\d+)\s{2,}(?P<rest>.+)$", line)
+        prefix = re.match(r"^\s*(?:\S+\s+)?(?P<number>\d+)\s{2,}(?P<rest>.+)$", line)
         if prefix is None:
             continue
         entry = by_number.get(int(prefix.group("number")))
@@ -263,12 +265,33 @@ def _parse_section_table(lines: list[str], entries: list[Dacom11Entry]) -> None:
     seoul_fixed = lines[header_index].strip() == (
         "순위 마번    G-3Ｆ   S-1F  １코너  ２코너  ３코너  ４코너    G-1F  단승식 연승식"
     )
+    busan_fixed = lines[header_index].strip() == (
+        "순위 마번 G-3F S-1F    400      400     400     400     G-2F    G-1F    단승식 연승식"
+    )
     for line in _table_rows(lines, header_index):
-        prefix_match = re.match(r"^\s*\S+\s+(?P<number>\d+)\s+(?P<values>.+)$", line)
+        prefix_match = re.match(r"^\s*(?:\S+\s+)?(?P<number>\d+)\s+(?P<values>.+)$", line)
         if prefix_match is None:
             continue
         entry = by_number.get(int(prefix_match.group("number")))
         if entry is None:
+            continue
+        if busan_fixed:
+            # A DNF can have S1F/early splits but blank closing times. Splitting
+            # on whitespace would shift S1F into G3F and invent late records.
+            times = {}
+            for code, start, end in (("G3F", 9, 15), ("S1F", 15, 23), ("G1F", 63, 71)):
+                value = line[start:end].strip()
+                if not value or set(value) == {"#"}:
+                    times[code] = None
+                elif re.fullmatch(r"(?:\d+:)?\d+\.\d+", value):
+                    times[code] = _section_time_ms(value) or None
+                else:
+                    raise KraTextError(f"부산 구간 고정폭 형식 불일치: {value!r}")
+            entry.g3f_ms, entry.s1f_ms, entry.g1f_ms = (
+                times["G3F"], times["S1F"], times["G1F"]
+            )
+            entry.win_odds = _float_or_none(line[71:79].strip())
+            entry.place_odds = _float_or_none(line[79:].strip())
             continue
         if seoul_fixed:
             times = {}
