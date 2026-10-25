@@ -1,0 +1,3182 @@
+{
+  "checked_at": "2026-10-14T16:18:39.329280+09:00",
+  "mode": "duplicate_data_read_only; only authorized design temporary directory deleted",
+  "design_cleanup": {
+    "path": ".superdesign/tmp",
+    "files_removed": 199,
+    "allocated_MiB": 93.89,
+    "runtime_references": "none found outside ignored temporary directory",
+    "open_file_matches": 0,
+    "design_settings_preserved": true
+  },
+  "scope": {
+    "minimum_file_bytes": 1048576,
+    "excluded": [
+      ".git",
+      ".venv",
+      "__pycache__",
+      "databases",
+      "database WAL/SHM"
+    ],
+    "reference_scan_max_text_bytes": 8388608,
+    "text_files_scanned": 27595,
+    "large_text_files_not_scanned": 126,
+    "database_internal_artifact_references_checked": false
+  },
+  "duplicate_groups": 307,
+  "extra_copies": 335,
+  "duplicate_extra_bytes": 986627103,
+  "classification_summary": {
+    "research_or_other_dependency_review_required": {
+      "groups": 32,
+      "extra_MiB": 232.65
+    },
+    "historical_audit_or_snapshot_preserve": {
+      "groups": 11,
+      "extra_MiB": 99.31
+    },
+    "raw_observation_or_source_preserve": {
+      "groups": 262,
+      "extra_MiB": 584.96
+    },
+    "contains_conditional_candidate": {
+      "groups": 2,
+      "extra_MiB": 24.01
+    }
+  },
+  "conditional_candidates": [
+    {
+      "candidate": "thoroughbred/research/20261003_trial_time_baselines/outputs_initial/official_plan_2026.pdf",
+      "retain": "thoroughbred/research/20261003_trial_time_baselines/outputs/official_plan_2026.pdf",
+      "bytes": 6355608,
+      "sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+      "status": "conditional_candidate_not_deleted",
+      "reference_hits": [],
+      "condition": "Retain canonical outputs copy; check unscanned large manifests and any database artifact-path references before deletion. No code changes were made."
+    },
+    {
+      "candidate": "thoroughbred/research/20261003_trial_time_baselines/outputs_initial/participants.parquet",
+      "retain": "thoroughbred/research/20261003_trial_time_baselines/outputs/participants.parquet",
+      "bytes": 12463757,
+      "sha256": "e90e5b2c4bd9c686140220099705da40337284ca2a5ce145bee77b1e1e40fc6b",
+      "status": "conditional_candidate_not_deleted",
+      "reference_hits": [],
+      "condition": "Retain canonical outputs copy; check unscanned large manifests and any database artifact-path references before deletion. No code changes were made."
+    }
+  ],
+  "preservation_evidence": [
+    {
+      "path": "thoroughbred/research/20261004_pace_finish_stack_v1/run.py",
+      "reason": "Reads raw_features.parquet and parent outputs/features.parquet; verify.py also directly reads raw_features.parquet."
+    },
+    {
+      "path": "thoroughbred/research/20261004_pace_objectives_v4/README.md:80",
+      "reason": "Explicitly preserves outputs_before_nullable_fix as repair audit evidence."
+    },
+    {
+      "path": "jeju/AGENTS.md:21",
+      "reason": "Identical training observations are not automatically duplicate events; preserve original artifacts."
+    }
+  ],
+  "groups": [
+    {
+      "sha256": "f655e8a339d32522b09291812859b2bf23082910a4e4e3a025ee24031a2731db",
+      "each_bytes": 95088536,
+      "extra_copy_bytes": 95088536,
+      "paths": [
+        "thoroughbred/research/20261004_pace_finish_stack_v1/outputs/raw_features.parquet",
+        "thoroughbred/research/20261004_pace_context_v5/outputs/features.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "5c44f68e57ae51dde405178e26fe55882f47fdb3a0e8f3f89a490ccf132e0af8",
+      "each_bytes": 61295655,
+      "extra_copy_bytes": 61295655,
+      "paths": [
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs_before_nullable_fix/features.parquet",
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs/features.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "2e79d5caeb8441584e56b3bf89e478c53e31ac0bfbc94c59934e678d7e3e2870",
+      "each_bytes": 10799753,
+      "extra_copy_bytes": 32399259,
+      "paths": [
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R3_corrected_records.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R1_corrected_records.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R2_corrected_records.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R0_corrected_records.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "a276ccba6940a0b16253471776467a3460e9a44d228260343a576641fd36037d",
+      "each_bytes": 16419164,
+      "extra_copy_bytes": 16419164,
+      "paths": [
+        "data/research/seoul_api4_3_sections_20260926/sections/2023/page_0001.json",
+        "data/research/seoul_api4_3_sections_20260925/raw/2023/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "38cba8a3744b5d49f8395597ab50c23d1e690c95adb2fc4979b029c1071b188c",
+      "each_bytes": 15989566,
+      "extra_copy_bytes": 15989566,
+      "paths": [
+        "data/research/seoul_api4_3_sections_20260926/sections/2025/page_0001.json",
+        "data/research/seoul_api4_3_sections_20260925/raw/2025/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "91ad0c766a03a92b764edea2647696e2f488615b251082f2331c7c09ee9c3eff",
+      "each_bytes": 15940974,
+      "extra_copy_bytes": 15940974,
+      "paths": [
+        "data/research/seoul_api4_3_sections_20260926/sections/2024/page_0001.json",
+        "data/research/seoul_api4_3_sections_20260925/raw/2024/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2147aa34162b8232f27684ae661a27ee6baf47107ed4b0357c18a47855c0cec3",
+      "each_bytes": 6827288,
+      "extra_copy_bytes": 13654576,
+      "paths": [
+        "jeju/research/20261008_record_normalization_pairs_v2/pair_source_lineage.csv",
+        "jeju/research/20261008_record_normalization_pairs_v3/pair_source_lineage.csv",
+        "jeju/research/20261008_record_normalization_pairs_v1/pair_source_lineage.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "17cbbc94ae6ce6456f53b6ac7dd1244569775d0eb1d08db4f63325d2b43607be",
+      "each_bytes": 4364074,
+      "extra_copy_bytes": 13092222,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2026/01/01/year_2026/run_19595/page_0001_1790837219841_17cbbc94ae6c.xml",
+        "data/raw/kra/horse_swim_training/2026/01/01/year_2026/run_19604/page_0001_1790866998639_17cbbc94ae6c.xml",
+        "data/raw/kra/horse_swim_training/2026/01/01/year_2026/run_19454/page_0001_1790837231101_17cbbc94ae6c.xml",
+        "data/raw/kra/horse_swim_training/2026/01/01/year_2026/run_19787/page_0001_1790867047629_17cbbc94ae6c.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9b0c46fee39dcd2f76d9b1ab46724af22572da1b6e0ab4a6f251278ae40b719d",
+      "each_bytes": 6355608,
+      "extra_copy_bytes": 12711216,
+      "paths": [
+        "thoroughbred/research/20261003_trial_time_baselines/outputs_initial/official_plan_2026.pdf",
+        "thoroughbred/research/20261003_trial_time_baselines/outputs/official_plan_2026.pdf",
+        "thoroughbred/research/20261001_yeongnam_trial_venue_recheck_v2/raceplan2026_20260516.pdf"
+      ],
+      "classification": "contains_conditional_candidate"
+    },
+    {
+      "sha256": "e90e5b2c4bd9c686140220099705da40337284ca2a5ce145bee77b1e1e40fc6b",
+      "each_bytes": 12463757,
+      "extra_copy_bytes": 12463757,
+      "paths": [
+        "thoroughbred/research/20261003_trial_time_baselines/outputs_initial/participants.parquet",
+        "thoroughbred/research/20261003_trial_time_baselines/outputs/participants.parquet"
+      ],
+      "classification": "contains_conditional_candidate"
+    },
+    {
+      "sha256": "3e50d00f19a3dad08c0a6638868cbb19a7dc3d81e7712a2bb7977dcc507b0b22",
+      "each_bytes": 12372130,
+      "extra_copy_bytes": 12372130,
+      "paths": [
+        "data/research/seoul_api4_3_sections_20260926/sections/2026/page_0001.json",
+        "data/research/seoul_api4_3_sections_20260925/raw/2026/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3dc30c15cb4cfbc263fd33056a93af94711aa60f56f9d42c3d746d00c28424e8",
+      "each_bytes": 11587131,
+      "extra_copy_bytes": 11587131,
+      "paths": [
+        "jeju/research/20261011_stable_rider_switch_v1/supplement01/additional_models.json",
+        "jeju/research/20261011_stable_rider_switch_v1/supplement02/additional_models.json"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "420ee1972dd8abc8ca56e1ebe764efc6c9fcb49c7a73feb60362002751973158",
+      "each_bytes": 1936454,
+      "extra_copy_bytes": 9682270,
+      "paths": [
+        "data/raw/kra/horse_hill_training/2026/09/23/area_1/run_16581/page_0001_1790155489856_420ee1972dd8.xml",
+        "data/raw/kra/horse_hill_training/2026/09/23/area_1/run_16580/page_0001_1790155316532_420ee1972dd8.xml",
+        "data/raw/kra/horse_hill_training/2026/09/23/area_1/run_16579/page_0001_1790155240716_420ee1972dd8.xml",
+        "data/raw/kra/horse_hill_training/2026/09/23/area_1/run_16677/page_0001_1790170193987_420ee1972dd8.xml",
+        "data/raw/kra/horse_hill_training/2026/09/23/area_2/run_16581/page_0001_1790155497369_420ee1972dd8.xml",
+        "data/raw/kra/horse_hill_training/2026/09/23/area_2/run_16677/page_0001_1790170200453_420ee1972dd8.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e800b19f9067a42cd6b8cfdb23ad3751cd1c8359685078eed1ef7fbe6d3e88b4",
+      "each_bytes": 9179788,
+      "extra_copy_bytes": 9179788,
+      "paths": [
+        "thoroughbred/research/20261001_nonexecution_subtype_review_v2/raw/root_official_yearbook/2015_masa_yearbook.pdf",
+        "thoroughbred/research/20261001_official_closure_completion_v2/raw/kra/2015_masa_yearbook.pdf"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "75e7a7043788aaf94c86e1a8fd243f9ac58744320fbc685ff282f8992d3134f8",
+      "each_bytes": 8887675,
+      "extra_copy_bytes": 8887675,
+      "paths": [
+        "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/api_result_rows_2026_through_20260919.jsonl",
+        "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T131508.171935Z/rank_prefix_candidate_results_2026_through_20260919.jsonl"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b7532130467da8181946a0003df212c2926caeb4b066da52c05254f29b48fd0f",
+      "each_bytes": 4394526,
+      "extra_copy_bytes": 8789052,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2008/01/01/year_2008/run_16585/page_0001_1790156017897_b7532130467d.xml",
+        "data/raw/kra/horse_swim_training/2008/01/01/year_2008/run_16584/page_0001_1790155711529_b7532130467d.xml",
+        "data/raw/kra/horse_swim_training/2008/01/01/year_2008/run_16676/page_0001_1790170063888_b7532130467d.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "55c4a5557740677be506e933a25e248f8ceae2f1fa36792cffb38ea35ff06260",
+      "each_bytes": 8036016,
+      "extra_copy_bytes": 8036016,
+      "paths": [
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs_before_nullable_fix/history.parquet",
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs/history.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "6563dd1cbee3795a772fe056e19804c2db98e121af4c530ac81e5bbf608fcbad",
+      "each_bytes": 7957351,
+      "extra_copy_bytes": 7957351,
+      "paths": [
+        "jeju/research/20261008_body_change_optimum_sex_v1/source_lineage.csv",
+        "jeju/research/20261008_body_change_optimum_sex_v2/source_lineage.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006",
+      "each_bytes": 7917615,
+      "extra_copy_bytes": 7917615,
+      "paths": [
+        "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+        "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T131508.171935Z/source_pages/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "5dd8687d2113e7d0329f9fab48238f1bbd2808ceabc4aedfae3debdf93993699",
+      "each_bytes": 3915425,
+      "extra_copy_bytes": 7830850,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2006/01/01/year_2006/run_16585/page_0001_1790156003662_5dd8687d2113.xml",
+        "data/raw/kra/horse_swim_training/2006/01/01/year_2006/run_16584/page_0001_1790155699269_5dd8687d2113.xml",
+        "data/raw/kra/horse_swim_training/2006/01/01/year_2006/run_16676/page_0001_1790170056588_5dd8687d2113.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6b76e23074838c4014c04891d2a2c5ba1592b54f2eac9ceb06b2b2df4489ffbb",
+      "each_bytes": 7611040,
+      "extra_copy_bytes": 7611040,
+      "paths": [
+        "jeju/research/20261008_gate_region_pace_prediction_v2/features01/history_lineage.csv",
+        "jeju/research/20261008_pace_position_prediction_v1/features01/history_lineage.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "885be93577f73de34c541041c861be2d570e73d1b54922c40bb28cdf466258cd",
+      "each_bytes": 3777252,
+      "extra_copy_bytes": 7554504,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2007/01/01/year_2007/run_16585/page_0001_1790156010214_885be93577f7.xml",
+        "data/raw/kra/horse_swim_training/2007/01/01/year_2007/run_16584/page_0001_1790155705479_885be93577f7.xml",
+        "data/raw/kra/horse_swim_training/2007/01/01/year_2007/run_16676/page_0001_1790170060176_885be93577f7.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+      "each_bytes": 7453522,
+      "extra_copy_bytes": 7453522,
+      "paths": [
+        "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+        "jeju/research/20261008_horse_profile_baseline_v1/outputs/source_snapshot.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "d7aaea53633425b585bbf017a2840e96d8a5c8978960a614a3b3fd5aa3913efd",
+      "each_bytes": 7392695,
+      "extra_copy_bytes": 7392695,
+      "paths": [
+        "thoroughbred/research/20261003_pace_jockey_v3/outputs_before_threshold_fix/pair_states.parquet",
+        "thoroughbred/research/20261003_pace_jockey_v3/outputs/pair_states.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "94121be06d163029ed9a880d68ebca95067253e3923cb35b13bc02bc9bd8d9ea",
+      "each_bytes": 6853227,
+      "extra_copy_bytes": 6853227,
+      "paths": [
+        "thoroughbred/research/20261003_pace_jockey_v3/outputs_before_threshold_fix/external_expectations.parquet",
+        "thoroughbred/research/20261003_pace_jockey_v3/outputs/external_expectations.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "ba3d4f1ce7020934c23b3c5f77468f3e9fa496c19f4456f2bd55f051a853e6a7",
+      "each_bytes": 6841216,
+      "extra_copy_bytes": 6841216,
+      "paths": [
+        "production_models/20261004/thoroughbred/models/order/model.txt",
+        "data/research/thoroughbred_win_research_20260918_v2/models/2026/H3_relative/model.txt"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "5db97d6a8f1cb888657de2bed9eec0eb74781878e9c031ee60278d2d93aa5033",
+      "each_bytes": 3136451,
+      "extra_copy_bytes": 6272902,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2005/01/01/year_2005/run_16585/page_0001_1790155998351_5db97d6a8f1c.xml",
+        "data/raw/kra/horse_swim_training/2005/01/01/year_2005/run_16584/page_0001_1790155694329_5db97d6a8f1c.xml",
+        "data/raw/kra/horse_swim_training/2005/01/01/year_2005/run_16676/page_0001_1790170053065_5db97d6a8f1c.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d31204e25ee207a319a52aee59c06564aa7cbf96a62158c23e1c342474b02ac9",
+      "each_bytes": 6138951,
+      "extra_copy_bytes": 6138951,
+      "paths": [
+        "thoroughbred/research/20261003_gate_s1f_cost/outputs_incomplete_absorption/runners.parquet",
+        "thoroughbred/research/20261003_gate_s1f_cost/outputs/runners.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "eea43889aa04bcaf8a24f275f52328cdaa65c0b0d16c3c0a8e94e842c0aaffb2",
+      "each_bytes": 1883730,
+      "extra_copy_bytes": 5651190,
+      "paths": [
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R1_runner_predictions.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R2_runner_predictions.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R3_runner_predictions.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/R0_runner_predictions.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "5387f2358cee0650763d62fa43d26eb32b356d59efede3e19674b9aa3abb46e6",
+      "each_bytes": 1808769,
+      "extra_copy_bytes": 5426307,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2004/01/01/year_2004/run_16585/page_0001_1790155994714_5387f2358cee.xml",
+        "data/raw/kra/horse_swim_training/2004/01/01/year_2004/run_16584/page_0001_1790155690820_5387f2358cee.xml",
+        "data/raw/kra/horse_swim_training/2004/01/01/year_2004/run_16583/page_0001_1790155598624_5387f2358cee.xml",
+        "data/raw/kra/horse_swim_training/2004/01/01/year_2004/run_16676/page_0001_1790170050769_5387f2358cee.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a81852a14454fada52c26c1eb17e8c5f5d8eb839fd80c0a77104161f06a6b20e",
+      "each_bytes": 5120632,
+      "extra_copy_bytes": 5120632,
+      "paths": [
+        "thoroughbred/research/20261002_gate_lateral_bias/outputs_initial/runners.parquet",
+        "thoroughbred/research/20261002_gate_lateral_bias/outputs/runners.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "c982cf84050c7e4f75c820c50c6ddc19d913bea86f9f2344765d0bdd771b9268",
+      "each_bytes": 1642100,
+      "extra_copy_bytes": 4926300,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2001/01/01/year_2001/run_16585/page_0001_1790155986811_c982cf84050c.xml",
+        "data/raw/kra/horse_swim_training/2001/01/01/year_2001/run_16584/page_0001_1790155682651_c982cf84050c.xml",
+        "data/raw/kra/horse_swim_training/2001/01/01/year_2001/run_16583/page_0001_1790155590906_c982cf84050c.xml",
+        "data/raw/kra/horse_swim_training/2001/01/01/year_2001/run_16676/page_0001_1790170045276_c982cf84050c.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a8a2944d4c23bd9ae77bfd1dcbf7422ce50032a85bcb937cb644b17177f01003",
+      "each_bytes": 4787233,
+      "extra_copy_bytes": 4787233,
+      "paths": [
+        "data/experiments/walk_forward/f57f612c-23e8-4e84-aeb7-70a00e0d4972/predictions.parquet",
+        "data/experiments/walk_forward/b8225f44-9e35-4061-938e-e238c8938c5c/predictions.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "89f2ec518f58937d46e31158ed2e580440b3718fdbd6f39288562b9a0a91d99f",
+      "each_bytes": 1562824,
+      "extra_copy_bytes": 4688472,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2003/01/01/year_2003/run_16585/page_0001_1790155991878_89f2ec518f58.xml",
+        "data/raw/kra/horse_swim_training/2003/01/01/year_2003/run_16584/page_0001_1790155687882_89f2ec518f58.xml",
+        "data/raw/kra/horse_swim_training/2003/01/01/year_2003/run_16583/page_0001_1790155595940_89f2ec518f58.xml",
+        "data/raw/kra/horse_swim_training/2003/01/01/year_2003/run_16676/page_0001_1790170048930_89f2ec518f58.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "8ab818504363516ae2b39df26a3e9b38989aed55a7034d75dc2cb0461b36df40",
+      "each_bytes": 4422925,
+      "extra_copy_bytes": 4422925,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2025/01/01/year_2025/run_16585/page_0001_1790156202414_8ab818504363.xml",
+        "data/raw/kra/horse_swim_training/2025/01/01/year_2025/run_16676/page_0001_1790170181000_8ab818504363.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0de167bdf34d1e18a31d5980df4b3c240332cb181d7666677427297617b5a19b",
+      "each_bytes": 4422474,
+      "extra_copy_bytes": 4422474,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2023/01/01/year_2023/run_16585/page_0001_1790156183564_0de167bdf34d.xml",
+        "data/raw/kra/horse_swim_training/2023/01/01/year_2023/run_16676/page_0001_1790170167346_0de167bdf34d.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2230b99488da988fa510c2fdf4a51fe458e8978f26bd4573f3b6269a2419210c",
+      "each_bytes": 4422213,
+      "extra_copy_bytes": 4422213,
+      "paths": [
+        "jeju/research/20261009_time_benchmarks_outliers_v1/population_ledger.csv",
+        "jeju/research/20261009_time_benchmarks_outliers_v1/reviewed_run02/population_ledger.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "56152a1b843915cbbd0ae77e2c717af3906f7bb58645036d39fa432a6b166d71",
+      "each_bytes": 4420830,
+      "extra_copy_bytes": 4420830,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2024/01/01/year_2024/run_16585/page_0001_1790156192920_56152a1b8439.xml",
+        "data/raw/kra/horse_swim_training/2024/01/01/year_2024/run_16676/page_0001_1790170173847_56152a1b8439.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "758b1bc8f282b4f828fe573eca46ce7b9edbb54d844e897b394127a5e7d70d4f",
+      "each_bytes": 4414485,
+      "extra_copy_bytes": 4414485,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2018/01/01/year_2018/run_16585/page_0001_1790156123910_758b1bc8f282.xml",
+        "data/raw/kra/horse_swim_training/2018/01/01/year_2018/run_16676/page_0001_1790170129543_758b1bc8f282.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b2165f6ef11bcb840584c3cc3ee13dd67693544cef53acd360c476b6c8b5d213",
+      "each_bytes": 4414386,
+      "extra_copy_bytes": 4414386,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2021/01/01/year_2021/run_16585/page_0001_1790156159026_b2165f6ef11b.xml",
+        "data/raw/kra/horse_swim_training/2021/01/01/year_2021/run_16676/page_0001_1790170152224_b2165f6ef11b.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a072b11e7d1500c323b9cb196d7173e95d7683522054579aa1fbe41c08da2c42",
+      "each_bytes": 4414366,
+      "extra_copy_bytes": 4414366,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2022/01/01/year_2022/run_16585/page_0001_1790156172925_a072b11e7d15.xml",
+        "data/raw/kra/horse_swim_training/2022/01/01/year_2022/run_16676/page_0001_1790170160566_a072b11e7d15.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "daf4135d91d044d68cb93996d58f357bbad2df5e12566e46ed60b36f6ebaf2c1",
+      "each_bytes": 4412692,
+      "extra_copy_bytes": 4412692,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2017/01/01/year_2017/run_16585/page_0001_1790156109210_daf4135d91d0.xml",
+        "data/raw/kra/horse_swim_training/2017/01/01/year_2017/run_16676/page_0001_1790170121406_daf4135d91d0.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "eceb95938e7822162ca9a13989772ca54a62def3b1d41f47effd69711d5c0b2c",
+      "each_bytes": 4411547,
+      "extra_copy_bytes": 4411547,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2019/01/01/year_2019/run_16585/page_0001_1790156136197_eceb95938e78.xml",
+        "data/raw/kra/horse_swim_training/2019/01/01/year_2019/run_16676/page_0001_1790170137459_eceb95938e78.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2ba0ca5f147f106802a333b3e22882b27ed2959e7fffcbb7aef5b4bbb1ad18f0",
+      "each_bytes": 4408610,
+      "extra_copy_bytes": 4408610,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2014/01/01/year_2014/run_16585/page_0001_1790156078877_2ba0ca5f147f.xml",
+        "data/raw/kra/horse_swim_training/2014/01/01/year_2014/run_16676/page_0001_1790170102329_2ba0ca5f147f.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a3e0f67f745e3f83eec2cba33ac8f4f188d0807c0797e1d9b3b06048011a6d78",
+      "each_bytes": 4408067,
+      "extra_copy_bytes": 4408067,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2013/01/01/year_2013/run_16585/page_0001_1790156068355_a3e0f67f745e.xml",
+        "data/raw/kra/horse_swim_training/2013/01/01/year_2013/run_16676/page_0001_1790170094821_a3e0f67f745e.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "079462baa6ce030c11e7c0fe3ceba25e55c0ef816d0559b4f841d6b62707b474",
+      "each_bytes": 4407026,
+      "extra_copy_bytes": 4407026,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2016/01/01/year_2016/run_16585/page_0001_1790156099469_079462baa6ce.xml",
+        "data/raw/kra/horse_swim_training/2016/01/01/year_2016/run_16676/page_0001_1790170115084_079462baa6ce.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "97833c67822876d5f968dd83da87f4f44370236aa15dce890e3917ab37aff715",
+      "each_bytes": 4406818,
+      "extra_copy_bytes": 4406818,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2020/01/01/year_2020/run_16585/page_0001_1790156147438_97833c678228.xml",
+        "data/raw/kra/horse_swim_training/2020/01/01/year_2020/run_16676/page_0001_1790170144355_97833c678228.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d3d46a7c6cafe26194c6351c04eb98681c7be4996a7eab539c1dd00bb62ac2b9",
+      "each_bytes": 4406473,
+      "extra_copy_bytes": 4406473,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2015/01/01/year_2015/run_16585/page_0001_1790156088916_d3d46a7c6caf.xml",
+        "data/raw/kra/horse_swim_training/2015/01/01/year_2015/run_16676/page_0001_1790170108729_d3d46a7c6caf.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ef0786143fc72967da5574f31b1f4bd52f95e62666a74d4a8480bacdaa430a62",
+      "each_bytes": 4405873,
+      "extra_copy_bytes": 4405873,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2011/01/01/year_2011/run_16585/page_0001_1790156046854_ef0786143fc7.xml",
+        "data/raw/kra/horse_swim_training/2011/01/01/year_2011/run_16676/page_0001_1790170081565_ef0786143fc7.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d3ed8e7bfe9e2d620d45790e0ec455429a14eda46646de2fd3f932429d123107",
+      "each_bytes": 4400969,
+      "extra_copy_bytes": 4400969,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2012/01/01/year_2012/run_16585/page_0001_1790156057626_d3ed8e7bfe9e.xml",
+        "data/raw/kra/horse_swim_training/2012/01/01/year_2012/run_16676/page_0001_1790170088165_d3ed8e7bfe9e.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "50f5e7fe4f292cef5694830fb788e37ca5a201f73b643feeb45b4fcfb93f764e",
+      "each_bytes": 4399657,
+      "extra_copy_bytes": 4399657,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2010/01/01/year_2010/run_16585/page_0001_1790156037502_50f5e7fe4f29.xml",
+        "data/raw/kra/horse_swim_training/2010/01/01/year_2010/run_16676/page_0001_1790170075709_50f5e7fe4f29.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "507dc97fe20e4cc5b4a3ba0e3232083391d6d814b7150a2370c120fa4a50417d",
+      "each_bytes": 4397463,
+      "extra_copy_bytes": 4397463,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2009/01/01/year_2009/run_16585/page_0001_1790156027409_507dc97fe20e.xml",
+        "data/raw/kra/horse_swim_training/2009/01/01/year_2009/run_16676/page_0001_1790170069244_507dc97fe20e.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "74c4e3c23797755308588a578d4dff0fa15b6c6f4bfb13014d6ae99ff0bac254",
+      "each_bytes": 4322165,
+      "extra_copy_bytes": 4322165,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2026/01/01/year_2026/run_16582/page_0001_1790155552958_74c4e3c23797.xml",
+        "data/raw/kra/horse_swim_training/2026/01/01/year_2026/run_16676/page_0001_1790170186138_74c4e3c23797.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0526ffc3d03bdb0cfff235fa400a42f6fd6af68143594250a23cb68451760b18",
+      "each_bytes": 4076151,
+      "extra_copy_bytes": 4076151,
+      "paths": [
+        "jeju/predictions/publication_20261010_initial_0230/inputs/history_results.parquet",
+        "jeju/predictions/reforecast_20261009_latest_1216/inputs/history_results.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "eb6f4fea4ce1c53e7657da661e837a23412e33b369738506f62061aefad492f0",
+      "each_bytes": 3631950,
+      "extra_copy_bytes": 3631950,
+      "paths": [
+        "jeju/research/20261008_body_change_optimum_sex_v1/reported_change_chronology_audit.csv",
+        "jeju/research/20261008_body_change_optimum_sex_v2/reported_change_chronology_audit.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "b0ed5179eac5d5101f2b6753135a343f7a0ee207c975eee22aeb6813222106da",
+      "each_bytes": 3484873,
+      "extra_copy_bytes": 3484873,
+      "paths": [
+        "thoroughbred/research/20261003_sectional_pace_moisture/outputs_initial/scored_recent.parquet",
+        "thoroughbred/research/20261003_sectional_pace_moisture/outputs_before_missing_moisture/scored_recent.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "ce2ee65dd4ce1a23327a2e742880a9e384ba844583a4e8ba4a7512de59590f97",
+      "each_bytes": 1157947,
+      "extra_copy_bytes": 3473841,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2002/01/01/year_2002/run_16585/page_0001_1790155989444_ce2ee65dd4ce.xml",
+        "data/raw/kra/horse_swim_training/2002/01/01/year_2002/run_16584/page_0001_1790155685492_ce2ee65dd4ce.xml",
+        "data/raw/kra/horse_swim_training/2002/01/01/year_2002/run_16583/page_0001_1790155593656_ce2ee65dd4ce.xml",
+        "data/raw/kra/horse_swim_training/2002/01/01/year_2002/run_16676/page_0001_1790170047051_ce2ee65dd4ce.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6f6540d4786ada0c0e288ff5defc0d4c665cc796a025a074f19f3d4fe218f12f",
+      "each_bytes": 3333847,
+      "extra_copy_bytes": 3333847,
+      "paths": [
+        "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/features.parquet",
+        "jeju/research/20261008_horse_profile_baseline_v1/outputs/features.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "e6e708e651531894c33f3d4ac7b9a3a794300414129c8db3c169e2f442e709f9",
+      "each_bytes": 3232894,
+      "extra_copy_bytes": 3232894,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2021/01/01/year_2021/run_16585/page_0002_1790156167184_e6e708e65153.xml",
+        "data/raw/kra/horse_swim_training/2021/01/01/year_2021/run_16676/page_0002_1790170156690_e6e708e65153.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "dd208102aceb5c127c85c52cd4b71f3f3ed4937940c6959e211c72c29ca2e68b",
+      "each_bytes": 3132578,
+      "extra_copy_bytes": 3132578,
+      "paths": [
+        "thoroughbred/research/20261001_remaining_closure_cancel_v3/covid_2020_2021/raw/nabo_2021_public_institutions_analysis.pdf",
+        "thoroughbred/research/20261001_remaining_closure_cancel_v3/root_official_evidence/nabo_2021_public_institutions_analysis.pdf"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "da37e2b0d60d410e0163f93e0ca09e9b982fb2c13751d55855e59d01060b3e39",
+      "each_bytes": 3049130,
+      "extra_copy_bytes": 3049130,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2017/01/01/year_2017/run_16585/page_0002_1790156118179_da37e2b0d60d.xml",
+        "data/raw/kra/horse_swim_training/2017/01/01/year_2017/run_16676/page_0002_1790170125700_da37e2b0d60d.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0f224bb478681690860429a5663c96495d46498a8252efaa4567f53ab42bfb29",
+      "each_bytes": 3021456,
+      "extra_copy_bytes": 3021456,
+      "paths": [
+        "jeju/predictions/publication_20261010_initial_0230/inputs/context_history.parquet",
+        "jeju/predictions/reforecast_20261009_latest_1216/inputs/context_history.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "ec911d2658d3b0f4c5f336b90ac08ae50a236f6ecb269b7d14d158fb3cc86bf5",
+      "each_bytes": 1334034,
+      "extra_copy_bytes": 2668068,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw_probes/daily_training/201609/20260929T154304.153351Z/page_0001_numOfRows_20000.json",
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201609/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201609/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "1416f0ab1f8cda96522dbd13cd45b1eab419e2d1d68ecdea688d787f587e938a",
+      "each_bytes": 2598195,
+      "extra_copy_bytes": 2598195,
+      "paths": [
+        "thoroughbred/research/20261003_pace_jockey_v3/outputs_before_threshold_fix/jockey_states.parquet",
+        "thoroughbred/research/20261003_pace_jockey_v3/outputs/jockey_states.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "3327c82e45e83ba6629312fe5786770bc902fa19c8056f41f883331e42d96e56",
+      "each_bytes": 1297979,
+      "extra_copy_bytes": 2595958,
+      "paths": [
+        "data/research/dividend_backfill_20261002_verified/2026-10-02_3_p1_3327c82e45e8.raw.json",
+        "data/research/dividend_backfill_20261002_verified/month_scope_3_202610_p1_3327c82e45e8.raw.json",
+        "data/raw/kra/post_race_dividends/2026/10/02/meet_3/run_20323/page_0001_1790959294301_3327c82e45e8.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3eb6a9ded88ddec8e9a6d49133465b8efd71952f9d918b5b8a8785b08ca4c966",
+      "each_bytes": 2591472,
+      "extra_copy_bytes": 2591472,
+      "paths": [
+        "thoroughbred/research/20261003_sectional_pace_moisture/outputs_initial/population.parquet",
+        "thoroughbred/research/20261003_sectional_pace_moisture/outputs_before_missing_moisture/population.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "c20b8eaa5b32317c27eca67c5c1b758c7c34ef0355ac941d4e793f2bca927f4c",
+      "each_bytes": 2569193,
+      "extra_copy_bytes": 2569193,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2018/01/01/year_2018/run_16585/page_0002_1790156130961_c20b8eaa5b32.xml",
+        "data/raw/kra/horse_swim_training/2018/01/01/year_2018/run_16676/page_0002_1790170133832_c20b8eaa5b32.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "37a9567e87b91e3d3bc8b8bfafa1fdab2853239aac422734259b5f893b231440",
+      "each_bytes": 2562317,
+      "extra_copy_bytes": 2562317,
+      "paths": [
+        "jeju/research/20261009_finish_history_ablation_v1/outputs/runner_predictions_canonical.parquet",
+        "jeju/research/20261009_finish_history_ablation_v1/outputs/runner_predictions.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "26314e01d7845e273ff85d795ff8e58cc6c20d30787ae3c8b0bbff60d242cbf7",
+      "each_bytes": 1246761,
+      "extra_copy_bytes": 2493522,
+      "paths": [
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/dev_0_0_0_runner_predictions.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/dev_0_0_50_runner_predictions.csv",
+        "jeju/research/20261007_environment_correction_pilot_v1/comparison_01/dev_0_0_25_runner_predictions.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "a4d1db274daa7d49b36e811295761058e0f79362624572e4c3dd10ef423b72fb",
+      "each_bytes": 2465818,
+      "extra_copy_bytes": 2465818,
+      "paths": [
+        "jeju/research/20261008_body_change_optimum_sex_v1/pair_lineage.csv",
+        "jeju/research/20261008_body_change_optimum_sex_v2/pair_lineage.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "ac3cbf4ef9b689bded26bc737cc070018bbc023450ecf37414f47106632562c5",
+      "each_bytes": 2422451,
+      "extra_copy_bytes": 2422451,
+      "paths": [
+        "thoroughbred/research/20261003_trial_time_baselines/outputs_initial/quality_ledger.csv",
+        "thoroughbred/research/20261003_trial_time_baselines/outputs/quality_ledger.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "8284b0729b1d7c97d733f33025f5dc9cf6216b4870f250d8e6a1123642d57a98",
+      "each_bytes": 1166988,
+      "extra_copy_bytes": 2333976,
+      "paths": [
+        "data/experiments/walk_forward/b3eed694-89a1-4bcf-ac8c-9677760c1448/predictions.parquet",
+        "data/experiments/walk_forward/cb41e446-208d-4c5b-95b9-b1fe4957a79c/predictions.parquet",
+        "data/experiments/walk_forward/fe529a2a-999d-4567-8709-0861c0ab2941/predictions.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "6dad0a74c82f4711198ac1bd98e1227f0bd1171a9b775cde05597f58a0ca25ad",
+      "each_bytes": 2201854,
+      "extra_copy_bytes": 2201854,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202408/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202408/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c85cf5faaea23e24d015a4b91ede863d96702a78222e882dae51465f1e5b6a5b",
+      "each_bytes": 2188827,
+      "extra_copy_bytes": 2188827,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2020/01/01/year_2020/run_16585/page_0002_1790156154295_c85cf5faaea2.xml",
+        "data/raw/kra/horse_swim_training/2020/01/01/year_2020/run_16676/page_0002_1790170148812_c85cf5faaea2.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "77f7bc9e4db8011e923f492e2c12266278784b56c69cacb85745fed22ff5e9a2",
+      "each_bytes": 2166446,
+      "extra_copy_bytes": 2166446,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202508/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202508/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "08e73fa307d45d201d228c39d88d60cccaf8d52b884081e1f0bdccd9f7e85690",
+      "each_bytes": 2165721,
+      "extra_copy_bytes": 2165721,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202511/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202511/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e8b62d5a11673cd187587d057a58f496192bdd6f4c3d8334841a01f2e7b459da",
+      "each_bytes": 2152154,
+      "extra_copy_bytes": 2152154,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202601/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202601/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cf260b0cfb855aed96f9bce03295156962412fa53f83d34cb8507743aeb74166",
+      "each_bytes": 2125268,
+      "extra_copy_bytes": 2125268,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202512/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202512/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0ef527da6767ae18afd9ae88dfbd5f0e39c4c8c216d79537caa767aaec0083f5",
+      "each_bytes": 2118408,
+      "extra_copy_bytes": 2118408,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202403/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202403/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6054fabd43df31e0a942edf58881289fb0ce65ba92ff01ac3f277164f32c8bf9",
+      "each_bytes": 2109377,
+      "extra_copy_bytes": 2109377,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202604/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202604/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9c08c63e892194a92837d4a30f11c569a9c2d783aa03933f706b9ed42e536645",
+      "each_bytes": 2069560,
+      "extra_copy_bytes": 2069560,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202503/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202503/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "5f614c787c10c65b8ab232011641f621db231c1cea2bd1fc70eea981458a37f9",
+      "each_bytes": 2058770,
+      "extra_copy_bytes": 2058770,
+      "paths": [
+        "thoroughbred/research/20261001_closure_gap_followup_v4/year_2021/raw/2021_racing_detailed_plan_user.pdf",
+        "thoroughbred/research/20261001_closure_gap_followup_v4/user_2021_plan/2021_racing_detailed_plan_user.pdf"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "be2bca817914dfffa129972a57e581cde551dc74e95d4fb7f05e5aef382dffa9",
+      "each_bytes": 2048912,
+      "extra_copy_bytes": 2048912,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202311/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202311/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "33b60945b271a90d48e8d5bb186e69feed13ab43f54d5b25fbc7de6fc0d0caca",
+      "each_bytes": 2040886,
+      "extra_copy_bytes": 2040886,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202504/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202504/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "8919f3951af881161c9065911e7e6cd4dcc97ca7eb7b7c232c62643032d4fa08",
+      "each_bytes": 2037958,
+      "extra_copy_bytes": 2037958,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202603/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202603/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "30da42e17db9d6123887a1427666bb41ef7a92841169208d924fee981e1aae9c",
+      "each_bytes": 2032054,
+      "extra_copy_bytes": 2032054,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202502/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202502/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "1e4157fc698d2c9db635327d298287c83ee268d65fa1674cdeff5caa86c64492",
+      "each_bytes": 2031634,
+      "extra_copy_bytes": 2031634,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202303/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202303/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c980e905d79faa7ba58a8c5f5305bd240c47f33805596a3e95af2e276a51d02c",
+      "each_bytes": 2020817,
+      "extra_copy_bytes": 2020817,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202605/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202605/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "efec8cbec63f7f6aee29dec4c1f0feb6e999a174278e707b383f1dd3bde88232",
+      "each_bytes": 2015326,
+      "extra_copy_bytes": 2015326,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202505/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202505/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c3c06ae50e77e59533120f327124d3d4fd6743ef259a009ea595342bd2436248",
+      "each_bytes": 2011918,
+      "extra_copy_bytes": 2011918,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202506/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202506/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "902f536b3f8a5884c80fbfbafbd3172f80b818f5675a2cef5e28f5e27fbefe92",
+      "each_bytes": 2005213,
+      "extra_copy_bytes": 2005213,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202411/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202411/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c7652dbbafee98b7aae0d36ea60f48f9e28bc665926c725e5c61679aa74d8d2d",
+      "each_bytes": 2004721,
+      "extra_copy_bytes": 2004721,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202302/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202302/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a2d4bb7bd31b662a0262bc40128ba600daceb9b3beeff0d03a69a9da98db8c65",
+      "each_bytes": 2000909,
+      "extra_copy_bytes": 2000909,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202401/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202401/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "464faac059eb88776a268c0aa01cc9d9cb8114c911c3f81340f5d54cdb653a30",
+      "each_bytes": 1998236,
+      "extra_copy_bytes": 1998236,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202412/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202412/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d55fd67a4c6d7f6d98b261f4b8bbc405fb92de7cef3405fb931bc04b3529c813",
+      "each_bytes": 1995000,
+      "extra_copy_bytes": 1995000,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202608/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202608/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "30cd87e4d0dd0fa16ea192bd7a90f1b93e1c4b345c754c79ffc29f4daa8f415e",
+      "each_bytes": 1993760,
+      "extra_copy_bytes": 1993760,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202406/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202406/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cfe0bcf9ce5716764e8542a79087efccf2e2c6dd1d76e2dec545f2ecdb2850fb",
+      "each_bytes": 1978822,
+      "extra_copy_bytes": 1978822,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202405/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202405/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d30137dbe9b52de60112d4df2eba2745a2d8b943401af1bdb8ebf36f1b70842b",
+      "each_bytes": 1963362,
+      "extra_copy_bytes": 1963362,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202312/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202312/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "157390daa5d23d09312012a94d956d58a38f92478f71bcab39961aaa12b6eca2",
+      "each_bytes": 1963053,
+      "extra_copy_bytes": 1963053,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202007/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202007/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "99dccfb3fb8aaea0aa52be784fecad75b815cd1c8fb3c6d40917f8efaf5f2478",
+      "each_bytes": 1956918,
+      "extra_copy_bytes": 1956918,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202304/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202304/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "abfc0b9df9fa47ed61c251ba694fcacb2fbdc8328527b927caa4181440a4fab1",
+      "each_bytes": 1953864,
+      "extra_copy_bytes": 1953864,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202211/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202211/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d8eaa489caab818773ae241f52e7fc2b364eefa66e5ae20b846903c2046738d9",
+      "each_bytes": 1944908,
+      "extra_copy_bytes": 1944908,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202210/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202210/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c86b4da740605a70e72c2158bbba6bd078b217d73e5700d099a5d195b0d4f6c1",
+      "each_bytes": 1930676,
+      "extra_copy_bytes": 1930676,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2013/01/01/year_2013/run_16585/page_0002_1790156074800_c86b4da74060.xml",
+        "data/raw/kra/horse_swim_training/2013/01/01/year_2013/run_16676/page_0002_1790170099093_c86b4da74060.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "15ff9213f0725b3e7178d551bb9c1cb8224a88dcd0d721ab10fe1d5ae5327838",
+      "each_bytes": 1917753,
+      "extra_copy_bytes": 1917753,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202509/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202509/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b744b0ff3a266a3ce7d4b46f944adbe6b944c890b4142a0ef963b3ab2276feac",
+      "each_bytes": 1903697,
+      "extra_copy_bytes": 1903697,
+      "paths": [
+        "thoroughbred/research/20261004_pace_distance_grade_diagnostic/outputs_before_title_fix/race_diagnostics.parquet",
+        "thoroughbred/research/20261004_pace_distance_grade_diagnostic/outputs/race_diagnostics.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "b47bcc8fbfdacafde6f3ba6757038ed4fefbd00c8f89c3b4aa6ec39dfcbbf355",
+      "each_bytes": 1898349,
+      "extra_copy_bytes": 1898349,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202404/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202404/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6b78d4bf8b19873c91cfdf62e85b11fd9996f50a188f06fb6ffd3408c9c33afe",
+      "each_bytes": 1891826,
+      "extra_copy_bytes": 1891826,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202409/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202409/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c6698a349009607951b29a2a8c2417ad411d906c9c6ec326362416f9df32c741",
+      "each_bytes": 1889557,
+      "extra_copy_bytes": 1889557,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2022/01/01/year_2022/run_16585/page_0002_1790156179533_c6698a349009.xml",
+        "data/raw/kra/horse_swim_training/2022/01/01/year_2022/run_16676/page_0002_1790170164531_c6698a349009.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c0ffc73340f708a9b925f2a834e093ac428f44f46f7398dfab34f0a93d018f29",
+      "each_bytes": 1876986,
+      "extra_copy_bytes": 1876986,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201903/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201903/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "da82eaf9d04abae9690cf63f8614c9832323dfc926fd7d965f6f299bcb606412",
+      "each_bytes": 1875106,
+      "extra_copy_bytes": 1875106,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202602/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202602/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e93f8f74153c5d962ceb268a856feda4c67231f437f061c0be0ddb8289dca7e2",
+      "each_bytes": 1872846,
+      "extra_copy_bytes": 1872846,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202507/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202507/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "76e621aa1c1a106d8980ad4137ddcca7824c2a544b97f740605e56572e4e0156",
+      "each_bytes": 1866261,
+      "extra_copy_bytes": 1866261,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202410/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202410/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "45ce8d8bbba0c3ce233f5f4f8e1a6344f6ae4c39e017e5705725edf89078839f",
+      "each_bytes": 1858562,
+      "extra_copy_bytes": 1858562,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201510/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201510/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "68166129f5cc27353ee602f35a811ccc1bbb64884117777d09812c98eb94447c",
+      "each_bytes": 1857763,
+      "extra_copy_bytes": 1857763,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202310/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202310/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9f41423549bd014243d4ba76c70ef65b646b8ee78bcde974e6b81b66c1479db3",
+      "each_bytes": 1853193,
+      "extra_copy_bytes": 1853193,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202501/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202501/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d5d917b068c324a47244932dbaad53fc2284b4d9fe39ea3a4450aa85597c68c3",
+      "each_bytes": 1842773,
+      "extra_copy_bytes": 1842773,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201910/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201910/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3afef109e8ecb52b48b9e7d3955caf56841d21d12f5c1d0b20b4e4e228846b40",
+      "each_bytes": 1842488,
+      "extra_copy_bytes": 1842488,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201901/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201901/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c8cbcb97d027bb95e37ffea63896ab35f19d8918ab08c4b4b4378d32aaaaf3f9",
+      "each_bytes": 1838155,
+      "extra_copy_bytes": 1838155,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202107/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202107/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "197b63f24ea605a00b7932351e0dcd88beceb391f8c44fa48e0f99b4e4f1f7e0",
+      "each_bytes": 1833976,
+      "extra_copy_bytes": 1833976,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201810/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201810/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a897c647294fc149950054f74762763fc1b8d323a3032eae08b581584ea5dfb0",
+      "each_bytes": 1829083,
+      "extra_copy_bytes": 1829083,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201912/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201912/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "5bd7f9ace4b9bd6e0d91a5f89118d22bbc1e984eeea67057510706de99e81745",
+      "each_bytes": 1826740,
+      "extra_copy_bytes": 1826740,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202204/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202204/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a75a6f3834aa640fbae9c340b1e16bfea04eaebc014083f8c67d9d8d93ad4255",
+      "each_bytes": 1819837,
+      "extra_copy_bytes": 1819837,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202407/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202407/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2e1fbe879ea68b89438e038e680ff39c4bce4846b25161299fa369f58de8c17c",
+      "each_bytes": 1819636,
+      "extra_copy_bytes": 1819636,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202607/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202607/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "1091cb5a3df124839ad5816c93969efc41fd5145d7a5a07b71a0886407c66bbd",
+      "each_bytes": 1819568,
+      "extra_copy_bytes": 1819568,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201711/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201711/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "651e554a7f259bfb99fb7acab34eac6e0c604fd90bad434df0d622334fb2eb61",
+      "each_bytes": 1814798,
+      "extra_copy_bytes": 1814798,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202006/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202006/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "bd746e9ef4e62cec3ee5ba453e641483454350c79838af9bdb66ddee5f9692f2",
+      "each_bytes": 1811244,
+      "extra_copy_bytes": 1811244,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201911/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201911/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3b92009879b307daacf3ab30771c04292669809f49b71f36fa5078da3c992502",
+      "each_bytes": 1804298,
+      "extra_copy_bytes": 1804298,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202203/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202203/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3d318f9e7e5e219ce78bed8843f08b101f8bddd1b3de4afa20d4b2c15da0fa8b",
+      "each_bytes": 1803606,
+      "extra_copy_bytes": 1803606,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201811/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201811/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d1ee2874bdf9fffb8a02311f956c215f15da8e5278db7cd57f961338e99a05af",
+      "each_bytes": 1802946,
+      "extra_copy_bytes": 1802946,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202202/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202202/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cdb3bb1b91928a4cbab7ad1a3cdf41abddc03915c59ec8b2ebb86f07a6ea6cfe",
+      "each_bytes": 1794537,
+      "extra_copy_bytes": 1794537,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202308/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202308/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "53590c96726abe784571f32cd67d62e54d6d565547c32ce375d0959e15f3683d",
+      "each_bytes": 1785315,
+      "extra_copy_bytes": 1785315,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201611/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201611/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+      "each_bytes": 1784897,
+      "extra_copy_bytes": 1784897,
+      "paths": [
+        "jeju/research/20261010_joint_relationship_review_v1/outputs/postfit_independent_validation/independent_runner_marginals.csv",
+        "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "4e49828b4a84ead2c705687b4f7c2ce9934fc42676eee974d9aaada2392d900c",
+      "each_bytes": 1781959,
+      "extra_copy_bytes": 1781959,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202606/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202606/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cf9f8d089991c6de1b8719fad4f94477972177f469d0d0b739c5a52d4075f4d4",
+      "each_bytes": 1781667,
+      "extra_copy_bytes": 1781667,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201906/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201906/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d7477454ba6aa90fb1ee16627f73b743a697cd412b0d5b95b2136089f4aa9a13",
+      "each_bytes": 1777766,
+      "extra_copy_bytes": 1777766,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202301/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202301/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "05acfa26109078d714b3bc70af6387016d722feb837980038fd041dae3ad02f4",
+      "each_bytes": 1774781,
+      "extra_copy_bytes": 1774781,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202111/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202111/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0fa83d9f43855d15e813d9634efe8fce6278035cced321f376c43f6c495ee58f",
+      "each_bytes": 1773427,
+      "extra_copy_bytes": 1773427,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2019/01/01/year_2019/run_16585/page_0002_1790156143129_0fa83d9f4385.xml",
+        "data/raw/kra/horse_swim_training/2019/01/01/year_2019/run_16676/page_0002_1790170141386_0fa83d9f4385.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "233ae589c59cc3a5511b52847d7f608c217b5d44b68c002c728ff961c9cb9ead",
+      "each_bytes": 1766592,
+      "extra_copy_bytes": 1766592,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201904/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201904/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cf73c816026bc85cee708c46d7ee332d6000250e26843dfd0b2c60fe30ed465b",
+      "each_bytes": 1756898,
+      "extra_copy_bytes": 1756898,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202008/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202008/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d174d38d72ee9118824899f466caf5715a3ba715cef2575a8b5d35f9212b679d",
+      "each_bytes": 1755323,
+      "extra_copy_bytes": 1755323,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202209/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202209/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ca2333a3d269618446dca1de2bf7fed2287d11cee726c940912cef8113357e9e",
+      "each_bytes": 1754839,
+      "extra_copy_bytes": 1754839,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202306/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202306/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "df8989dafba10f3f7d98d4e4141c70d983cb7ad255d9a315d16b23e950ddf711",
+      "each_bytes": 1754431,
+      "extra_copy_bytes": 1754431,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201410/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201410/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d63eab6424867b5f33d0502eef24122901dd8e769abedf1de641120fde5ae328",
+      "each_bytes": 1735828,
+      "extra_copy_bytes": 1735828,
+      "paths": [
+        "thoroughbred/research/20261002_steward_reports_v1/source/raw/api215_judge_report/year=2025/meet=1/page-0001.json",
+        "thoroughbred/research/20261002_report_passing_precheck_v1/api_probe/raw/judge_report/2025/meet_1.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "17abe03911d2d6eedd00189095bd42047af62be270f01934d17fea19d1aae724",
+      "each_bytes": 1734036,
+      "extra_copy_bytes": 1734036,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202212/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202212/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2052946916ad43137950b20d3b4f26ab235686db21a0586d962cf46c7a3a0218",
+      "each_bytes": 1732347,
+      "extra_copy_bytes": 1732347,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201203/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201203/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c77606ad6a5c87abed6d9cb35dbb5bdfd537a7bc27c1ba7d3c6a71e97a599193",
+      "each_bytes": 1731181,
+      "extra_copy_bytes": 1731181,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201905/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201905/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "974261fe3a0e66f1c05c708eb9fb619d9df4066dcfc7249c3e3d471441cec393",
+      "each_bytes": 1724926,
+      "extra_copy_bytes": 1724926,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201803/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201803/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "7359ced0358e88c3d599bedc3510dc1577b2177d2151273e779b7c90b1444aaf",
+      "each_bytes": 1723642,
+      "extra_copy_bytes": 1723642,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201703/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201703/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ea0893114d7083865658306b4258e62842cac5361631f3c9ce7475dd8ceb692b",
+      "each_bytes": 1715568,
+      "extra_copy_bytes": 1715568,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202110/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202110/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "eff26cd2386ee9e12f97e7b2db158ef2a299a86f098ff8c1a4e52f4edfbdf710",
+      "each_bytes": 1714774,
+      "extra_copy_bytes": 1714774,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202402/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202402/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9e16cc473ad9bb59b076e0c392839eaedba4f2ea0095ecb56fe22b53c6fa60f5",
+      "each_bytes": 1714065,
+      "extra_copy_bytes": 1714065,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2011/01/01/year_2011/run_16585/page_0002_1790156053599_9e16cc473ad9.xml",
+        "data/raw/kra/horse_swim_training/2011/01/01/year_2011/run_16676/page_0002_1790170085326_9e16cc473ad9.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d96618faa19a10def687db51e695ccb3ae52d16de8a7a5e79cae5cb6dbf78937",
+      "each_bytes": 1708945,
+      "extra_copy_bytes": 1708945,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201806/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201806/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "7bf350e5163b096480a7644a379ff8a0ba7536161e5aadfe8670b5ed7ee581f0",
+      "each_bytes": 1704579,
+      "extra_copy_bytes": 1704579,
+      "paths": [
+        "thoroughbred/research/20261002_moisture_robust_grade/outputs/baseline/frozen_effects.parquet",
+        "thoroughbred/research/20261002_moisture_distance_retrain/outputs/quality_filtered/frozen_effects.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "42a3b1d5a394d073cdda5035d547253c94b0df007fe4c2419eb65c03f62a8eb3",
+      "each_bytes": 1704281,
+      "extra_copy_bytes": 1704281,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202208/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202208/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b26c6d49ac159f81eb1a9544a9de551dba31294997ac733d0ec948f9a4629541",
+      "each_bytes": 1701346,
+      "extra_copy_bytes": 1701346,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201702/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201702/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d0a0378742845d207de9f26e9c4e35ed0d077f1ff5a1e9134ff7cff6a1d1bcc4",
+      "each_bytes": 1699222,
+      "extra_copy_bytes": 1699222,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201411/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201411/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "4d5e208d9c90ab88be9d7e1a377e6babd65a2e9c596c7ef92bdff65e07bbee92",
+      "each_bytes": 1696585,
+      "extra_copy_bytes": 1696585,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201706/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201706/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "56b1995d595a029b32868073a93e80a0fa6615a3c06aca9b32d8b0b3bbeb3258",
+      "each_bytes": 1692601,
+      "extra_copy_bytes": 1692601,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201808/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201808/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c3fe12220ddc460f266251d0a51c34c4ae995a25d95bbde5c9fa524eda0762c7",
+      "each_bytes": 1686332,
+      "extra_copy_bytes": 1686332,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201403/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201403/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "8e2e1d411a87839d0b6560d292793e5055fa746aae55f28fb0bccaf711dcd96e",
+      "each_bytes": 1682348,
+      "extra_copy_bytes": 1682348,
+      "paths": [
+        "production_models/20261004/thoroughbred/models/A/top3.txt",
+        "data/research/thoroughbred_offline_20260918_v5/windows/models/2026H2/rolling_all/top3.txt"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "0cddd7c463072ece7776235d64b8d8b51dc748b9475e06d4161f1df33cef7f84",
+      "each_bytes": 1672335,
+      "extra_copy_bytes": 1672335,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201210/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201210/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "79a3058691bc59f45806cad2513364d7a992958bd2118b4e73b7c1678ec67528",
+      "each_bytes": 1671261,
+      "extra_copy_bytes": 1671261,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201301/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201301/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ac603f231e74f14ff075efb895571558f8e6935b243246e93491de7828051f83",
+      "each_bytes": 1669072,
+      "extra_copy_bytes": 1669072,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201805/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201805/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ad75e0e4fb1409030c4e205880ccf3accf01b1dd63959cb6dd5f891077f2ee9d",
+      "each_bytes": 1663542,
+      "extra_copy_bytes": 1663542,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201603/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201603/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b374fa4d89e9b7a0fad33386576b6df1af2b48e56931909a17e03a8ed3d7cdf5",
+      "each_bytes": 1659805,
+      "extra_copy_bytes": 1659805,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202309/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202309/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "f4f1dea7b19f0cb07cf939455f119e55d7046107b40145dca75377fcac435ab9",
+      "each_bytes": 1657332,
+      "extra_copy_bytes": 1657332,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201908/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201908/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6ab5aa07931e10138fdd86b4b81c84d667e6d6a3530b947d443fb5908b2824f1",
+      "each_bytes": 1656647,
+      "extra_copy_bytes": 1656647,
+      "paths": [
+        "thoroughbred/research/20261012_planned_trainer_jockey_pair_effects/outputs/cohort_membership.parquet",
+        "thoroughbred/research/20261012_historical_planned_pair_switch_race/outputs/cohort_membership.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "53dae8fe8cc17b3ff2413e2de9b828a5adde73bef7f0d8da245f2a5daa980c93",
+      "each_bytes": 1655777,
+      "extra_copy_bytes": 1655777,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201501/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201501/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0734d39cf3bd8a531a16b41d4232fb0b5d01ec3538e3a4df17c56ac5a3c8ac91",
+      "each_bytes": 1652782,
+      "extra_copy_bytes": 1652782,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201405/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201405/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6b6497129587cb1fd3a70b2eee703a95905ed5e25287e3a3e440317cb35748c1",
+      "each_bytes": 1649286,
+      "extra_copy_bytes": 1649286,
+      "paths": [
+        "production_models/20261004/thoroughbred/models/BC/top3.txt",
+        "data/research/thoroughbred_followup_20260918_v4/model/models/2026/top3_growth_strength/top3.txt"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "46fcc87ca81d8ecc727efe69c91ae1b75f2f44b4441c88c0cce08bf164822c89",
+      "each_bytes": 1648682,
+      "extra_copy_bytes": 1648682,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202305/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202305/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "73d642e3dfc2385f45e217e915c204500bbacfab007119a8dc6bb60de5974533",
+      "each_bytes": 1648567,
+      "extra_copy_bytes": 1648567,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201303/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201303/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "1e513c6193f3abb62309e348106883d457fef825042dda808257e0b72ebc0909",
+      "each_bytes": 1645768,
+      "extra_copy_bytes": 1645768,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202307/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202307/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9ef3d24e59a0f26814c6035db35d1ba49fd5e7369ec49baf24e1dd13abc7bcb0",
+      "each_bytes": 1638842,
+      "extra_copy_bytes": 1638842,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2012/01/01/year_2012/run_16585/page_0002_1790156064542_9ef3d24e59a0.xml",
+        "data/raw/kra/horse_swim_training/2012/01/01/year_2012/run_16676/page_0002_1790170092067_9ef3d24e59a0.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2fee0112f5dfc8047769fa2d14b20794a6aa456ca9b76aa4d149275f16d6c9c5",
+      "each_bytes": 1635253,
+      "extra_copy_bytes": 1635253,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202201/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202201/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "27033b6d1edccb37742cc19aedc43e05109a9709bc8d878aa361fc443a1a3aa1",
+      "each_bytes": 1632505,
+      "extra_copy_bytes": 1632505,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201001/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201001/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e9bf069a5fb0ec35692a4706e6610151c807cc374f680737b26c5429f04b5928",
+      "each_bytes": 1630734,
+      "extra_copy_bytes": 1630734,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201110/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201110/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "27b898d50e92185a214c0632954e38c934e6b273cf5f0f5cc08b50332a5621dc",
+      "each_bytes": 1628747,
+      "extra_copy_bytes": 1628747,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200911/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200911/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "382fc9f94f9a8ab86f71e1827b251b5c6517c0cd01e5444b83dfdee7d14bd821",
+      "each_bytes": 1628119,
+      "extra_copy_bytes": 1628119,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202001/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202001/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b5cb27a77e5cf90298ec52e887841abda6a3eb969050e7a1f207efa6a7646c49",
+      "each_bytes": 1627257,
+      "extra_copy_bytes": 1627257,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201607/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201607/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0220ab4095023a135c645038b5eaef618c19f0eae3fb853652dbb0f711240500",
+      "each_bytes": 1622546,
+      "extra_copy_bytes": 1622546,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201202/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201202/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c42bf262a25b8449a4f1a306d1d4160fbbbcd29a923feed58a5593e0ce23b6ec",
+      "each_bytes": 1619344,
+      "extra_copy_bytes": 1619344,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201010/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201010/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e64f2374dd6b69315a31199a30d22092177491be6605001caa2763b18f17a3f0",
+      "each_bytes": 1617831,
+      "extra_copy_bytes": 1617831,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202002/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202002/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "aa8e08d0ecda2914a552e77c362101f8588386f8b609bc3d7b857a755b3ac15c",
+      "each_bytes": 1614633,
+      "extra_copy_bytes": 1614633,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201108/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201108/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "13603662d452d4bfa12f06a54c3183c34f7731b8157af5fd954c32fd63bade05",
+      "each_bytes": 1614157,
+      "extra_copy_bytes": 1614157,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201511/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201511/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b3bc93e45ac61b0a0a6658a302f78895a62a4c64f42b4dba6650e145a617ab70",
+      "each_bytes": 1613497,
+      "extra_copy_bytes": 1613497,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201507/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201507/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "406b6a3c08cf0a5be39b8c766ae5bfe3af6dd119b7f8ec1578adb7172d8db002",
+      "each_bytes": 1605204,
+      "extra_copy_bytes": 1605204,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201704/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201704/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "fe5bc4c74a284ab5edb2b83277cd20e1d03472be555048355ac9729a183a835d",
+      "each_bytes": 1603051,
+      "extra_copy_bytes": 1603051,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201709/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201709/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a73e824b1057c956891b5406d0e0397c953596ac1e814124e81481c743db77b6",
+      "each_bytes": 1599326,
+      "extra_copy_bytes": 1599326,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2015/01/01/year_2015/run_16585/page_0002_1790156095618_a73e824b1057.xml",
+        "data/raw/kra/horse_swim_training/2015/01/01/year_2015/run_16676/page_0002_1790170112414_a73e824b1057.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d7c9d50e4dfdf8bd52c92c2c94361c26cdeeeff9d1108d6b1b30973246dd7786",
+      "each_bytes": 1599151,
+      "extra_copy_bytes": 1599151,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201211/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201211/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cd36f26983115570aae9fb865773b8834a9bb07a2f7b92fb35917165e982208e",
+      "each_bytes": 1593973,
+      "extra_copy_bytes": 1593973,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202101/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202101/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "dbbc130a3607088eee09aafb214ae62534dfa8782aa8a433e1632a6a4946589c",
+      "each_bytes": 1592835,
+      "extra_copy_bytes": 1592835,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201612/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201612/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3f9946e37ef300001a3ff6121e0671746d7dfd5d8d0f7aa9284ab03a0f20c8f7",
+      "each_bytes": 1591413,
+      "extra_copy_bytes": 1591413,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201804/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201804/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9e0f6d1a0067cbb38161645c7758b687a9b9c176df43f7c441faa8848b396e6b",
+      "each_bytes": 1590287,
+      "extra_copy_bytes": 1590287,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201504/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201504/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ce8913805c9a17465b620a280267e5d371c19a894d82ae91032bf85a1b462e3b",
+      "each_bytes": 1588244,
+      "extra_copy_bytes": 1588244,
+      "paths": [
+        "thoroughbred/research/20261002_steward_reports_v1/source/raw/api215_judge_report/year=2024/meet=1/page-0001.json",
+        "thoroughbred/research/20261002_report_passing_precheck_v1/api_probe/raw/followup_midyears/judge_report/2024/meet_1.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6f2c3c0df5d49c894a5e22f1c5dd0f278365cd242cb9ebeca342615b27f466c3",
+      "each_bytes": 1585989,
+      "extra_copy_bytes": 1585989,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201712/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201712/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "281750b0d836d9e668582fa1feaa9ce7e35dd58e658289a2cfdf11ce013d172b",
+      "each_bytes": 1584939,
+      "extra_copy_bytes": 1584939,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201306/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201306/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "55d08117bc16f53376bb2369b99ceaca1b09b45a5c59b1c80271c7fc53e7890a",
+      "each_bytes": 1584406,
+      "extra_copy_bytes": 1584406,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201404/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201404/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6d4dcfff0483bf9ee95a00e6b4592890400f4c60dde38df96ee251b5efb88352",
+      "each_bytes": 1582950,
+      "extra_copy_bytes": 1582950,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201503/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201503/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c44cb77becdd6458bb3bc65b1ac2239b03568e938663715770c0bb242367ce52",
+      "each_bytes": 1581098,
+      "extra_copy_bytes": 1581098,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200903/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200903/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "873d837e43d3100249e4308224fcbffd0f331519dcc0cb19d95a91d1143da034",
+      "each_bytes": 1579640,
+      "extra_copy_bytes": 1579640,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200910/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200910/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "8968b05cae44bc6fd1ef43ab57841b82da680cc5b7d95b04ad9c234002e3688b",
+      "each_bytes": 1574828,
+      "extra_copy_bytes": 1574828,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201406/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201406/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a9fe79503797562c2c51c419535fddc38996c350e9dc6cfaf8a7d8a42b0a98ee",
+      "each_bytes": 1573022,
+      "extra_copy_bytes": 1573022,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201407/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201407/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "8618f903d4b3266ad5d4a923c3c18aa127604c5dad689de0ae3a680cb411168b",
+      "each_bytes": 1571606,
+      "extra_copy_bytes": 1571606,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201705/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201705/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "9a8546ccebfa202ce83f5a1bdc51e2f376efc317867f1044e7101f8e2f9e315a",
+      "each_bytes": 1570436,
+      "extra_copy_bytes": 1570436,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201605/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201605/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ee5e5fc15b91eb82aa50787f8b3efdc150224a8d485c1213c2c302c05c5d3970",
+      "each_bytes": 1568297,
+      "extra_copy_bytes": 1568297,
+      "paths": [
+        "data/experiments/calibration/b6eb02fd-6e58-4fe5-b713-0f213df56276/predictions.parquet",
+        "data/experiments/calibration/1f7596e7-5000-40f3-a413-e98585cca9b9/predictions.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "b730a71fd08248f16d41abaf91d61da84876c4395dcd07f70da6a8ac0cd43614",
+      "each_bytes": 1566328,
+      "extra_copy_bytes": 1566328,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201707/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201707/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "df1b1d1e443a6b0bb761ed60b8f9c38ad9b075fbc2e358192c19c65be98d4e6b",
+      "each_bytes": 1559038,
+      "extra_copy_bytes": 1559038,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201602/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201602/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c403ea53cf60ac4eb468ccb1909e59e20928e313de7fb9b468485c040f4be41d",
+      "each_bytes": 1555321,
+      "extra_copy_bytes": 1555321,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200905/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200905/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0da357cd1d242c37881ac264778db612d4ec21e550d9cf607ee6c11939db0302",
+      "each_bytes": 1554767,
+      "extra_copy_bytes": 1554767,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201206/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201206/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6dc9f6e41c6907f3df53a89fb86899b0cc8514311a1340025b6f29a1d9905ddb",
+      "each_bytes": 1544825,
+      "extra_copy_bytes": 1544825,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201011/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201011/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0d2943cdba18fc74ee29ee2c8c87779d4c2345cbf0ec24fde43dca26829331d9",
+      "each_bytes": 1543203,
+      "extra_copy_bytes": 1543203,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201505/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201505/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "4d8c67654a6f37a0ef113e96cad65040dac70d6e9e9287d61497a4f8ab3b921f",
+      "each_bytes": 1538543,
+      "extra_copy_bytes": 1538543,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202510/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202510/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "db279694f4c8aba7ce704f5b9ba3ca3cb0ca3a905fcdc2088faa34e0118c957b",
+      "each_bytes": 1532365,
+      "extra_copy_bytes": 1532365,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201606/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201606/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ca330c47430e44b4d36cbe1be329c663dfa88e707bae02e04b27bd2fa52a03cd",
+      "each_bytes": 1532196,
+      "extra_copy_bytes": 1532196,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201004/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201004/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c920fbbc34166ab206b292ecd5dfb7eba71a41e9b74ee857024551257651fd8e",
+      "each_bytes": 1531620,
+      "extra_copy_bytes": 1531620,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201601/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201601/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2155d64580c63be9cb854921236e0503f4d386ee74937063b1b8a537ceabef01",
+      "each_bytes": 1526220,
+      "extra_copy_bytes": 1526220,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201812/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201812/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "36734089341abceaa41b716f5c71d0960b2eb3a5e6085e42b3c979c8f778f2a4",
+      "each_bytes": 1524044,
+      "extra_copy_bytes": 1524044,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201312/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201312/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3b37987e94697fa5dabe36396766cd18fdda1800c6560598db2d82de25ccc5fb",
+      "each_bytes": 1519609,
+      "extra_copy_bytes": 1519609,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200904/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200904/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "61fc8a7ad7273cd8a714dea972ce9147dcce9b07dd13cf79fd9b68eaa30098a6",
+      "each_bytes": 1517163,
+      "extra_copy_bytes": 1517163,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201710/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201710/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "4776dc49c636790461ddd546a2182be3b808ecedfc4851220508dd6788513392",
+      "each_bytes": 1515746,
+      "extra_copy_bytes": 1515746,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201005/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201005/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6fcf188dd5aa225446078c027a823907b964fb1c9eb9d14126c32bf8d9a0773f",
+      "each_bytes": 1515479,
+      "extra_copy_bytes": 1515479,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201304/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201304/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "026f2bdce8a1febe64e1d1140ddf681451144d8fcbdd02ddec7d5bde5fd3f364",
+      "each_bytes": 1513740,
+      "extra_copy_bytes": 1513740,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201101/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201101/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cf0691decf85b962f3a7aceefc2510f1876409c89e620db1f7f7608c379d8208",
+      "each_bytes": 1513283,
+      "extra_copy_bytes": 1513283,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201305/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201305/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "a01bbaaf77a44382e5b62eca372d92bc2bd0296032da53934d283460fe8ebdc9",
+      "each_bytes": 1508751,
+      "extra_copy_bytes": 1508751,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201610/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201610/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "177e33e7f59f79648c4f19c03dd0e7b381dbc2214217adbfc2c41b91845696f6",
+      "each_bytes": 1508092,
+      "extra_copy_bytes": 1508092,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202005/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202005/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "58fc4681b5520086e583b08834d39c786d6a93b0393172ee272ebee0b0817b2f",
+      "each_bytes": 1502882,
+      "extra_copy_bytes": 1502882,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201902/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201902/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c050adc573d67204ed288915bb96cd1cb717705fea39e6521ce215136c05c957",
+      "each_bytes": 1501562,
+      "extra_copy_bytes": 1501562,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201604/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201604/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c85c86b079d70e5160cb06d140a3810a3173dd8e1c49460e6e4ee7d2204f9d09",
+      "each_bytes": 1499553,
+      "extra_copy_bytes": 1499553,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201205/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201205/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "df05e37ab22d02d9774bd0efacd280f3b9fa57779809d8bc9f77060f3b1cd66a",
+      "each_bytes": 1496255,
+      "extra_copy_bytes": 1496255,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200902/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200902/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6f6cb974c97812cba156f6bb24b9f23fb8efa8d57780e976db26636f0833f631",
+      "each_bytes": 1496042,
+      "extra_copy_bytes": 1496042,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201003/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201003/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c76980874d76afb01db040c5ffcc1b5f77daa48cb21a6fdd9b3ab7d06ab81647",
+      "each_bytes": 1493464,
+      "extra_copy_bytes": 1493464,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202112/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202112/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "1711a2948b7cc8df7e3c9674c4a12d7e8d502daa2890680b7eff545541c51282",
+      "each_bytes": 1491133,
+      "extra_copy_bytes": 1491133,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202104/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202104/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "619144febfbb1179a80ea967f3645be1534b9b1f894caf97c24f940c218e0e68",
+      "each_bytes": 1484705,
+      "extra_copy_bytes": 1484705,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201105/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201105/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "97c008638a8ac278daa9eae92b5a0d73a271fc978ece796ef076add9e34e1acf",
+      "each_bytes": 1480037,
+      "extra_copy_bytes": 1480037,
+      "paths": [
+        "thoroughbred/research/20261002_steward_reports_v1/source/raw/api215_judge_report/year=2025/meet=3/page-0001.json",
+        "thoroughbred/research/20261002_report_passing_precheck_v1/api_probe/raw/judge_report/2025/meet_3.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "7d835c7521ac0564651920b8081f569085fe27bc4ab76e8b7249a80a1b83561d",
+      "each_bytes": 1473999,
+      "extra_copy_bytes": 1473999,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201104/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201104/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "56853b5e9855cee2ed4323d494ea98d2d3fb94f3d5c37d72993124a2c1eabede",
+      "each_bytes": 1473216,
+      "extra_copy_bytes": 1473216,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201801/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201801/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "68a17bb4a04396bbbe4b8768c3a2a67548bed97cb335d22337a127011e5ae850",
+      "each_bytes": 1469294,
+      "extra_copy_bytes": 1469294,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201106/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201106/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "14d852e2f11ccf14929f2233dd10807378d1758eb4fd16238ba280a14053029c",
+      "each_bytes": 1460485,
+      "extra_copy_bytes": 1460485,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201401/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201401/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d9638890f57ba9d7580ed2ef5e7a9b752bb95788091516cf985a925176afc75d",
+      "each_bytes": 1459992,
+      "extra_copy_bytes": 1459992,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202103/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202103/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6e3c595f7a0405fbcf472e4a8580104a88f0ae1c48f35d769620bd152a16865b",
+      "each_bytes": 1459001,
+      "extra_copy_bytes": 1459001,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201201/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201201/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "1434aa7046dec42560b99628baa3d66e3677ace7afa0cd773ce9e1a11b12b28b",
+      "each_bytes": 1456025,
+      "extra_copy_bytes": 1456025,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200906/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200906/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6409054edf86f102bb3989a4397542ee1247cd66556a9280d35844f34ec17fb1",
+      "each_bytes": 1454914,
+      "extra_copy_bytes": 1454914,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201409/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201409/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "76dbd0a483379fbd1801e36fb074995b8f645789fc6a3e267e34b8238bb76d4b",
+      "each_bytes": 1448575,
+      "extra_copy_bytes": 1448575,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201008/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201008/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "73c859bac00a827050c744fac8502ee57e1a75789d56dda458a20fb1465460fe",
+      "each_bytes": 1445843,
+      "extra_copy_bytes": 1445843,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202011/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202011/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e6f470cafb9aa5eb9c4858e0eac2810fcfc378c91c86afeb5c069b286ac9c954",
+      "each_bytes": 1445406,
+      "extra_copy_bytes": 1445406,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201111/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201111/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cce482b2975e8e7e69aa6957612af7fc208e7161c4b73b77d2fd80fed2e21d87",
+      "each_bytes": 1439620,
+      "extra_copy_bytes": 1439620,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201907/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201907/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "e96e176dbe44a589391f34d3aa5b23a505636de9b48943ba368d9a39d53fe3b9",
+      "each_bytes": 1434702,
+      "extra_copy_bytes": 1434702,
+      "paths": [
+        "jeju/research/20261009_recent_years_october_v1/year_month_cells.csv",
+        "jeju/research/20261009_recent_years_october_v1/run02/year_month_cells.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "4b0f6af2e5dd7654b34ccae7ea75174bfb8dcde2cebaff2bd223f79341831423",
+      "each_bytes": 1430551,
+      "extra_copy_bytes": 1430551,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201204/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201204/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "5cc0fa268323bebf4b87c33ef4d534ca17133b3be099465a33718f9d7b1ef615",
+      "each_bytes": 1427440,
+      "extra_copy_bytes": 1427440,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201408/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201408/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "f23a953d0b77caea28c2af925dd0659d50da4e3e1ad1c265c954cce15a646146",
+      "each_bytes": 1423668,
+      "extra_copy_bytes": 1423668,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201708/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201708/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "7418e66c4005fe95da97c0751d13ed03f212dfb5600305807d9365aef947998c",
+      "each_bytes": 1422713,
+      "extra_copy_bytes": 1422713,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201103/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201103/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "554a05c616e9e2f324884878ee5e56e336dec61282668ac14e134485d55b5579",
+      "each_bytes": 1422592,
+      "extra_copy_bytes": 1422592,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201807/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201807/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c3b9a05aef6bd27de10e7ad373fa777112d8474245176bc18cc3c5d311b460e8",
+      "each_bytes": 1421745,
+      "extra_copy_bytes": 1421745,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201508/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201508/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "4432c011bf530c9fc915792b9c9c61fb43f7e419c508a0b79a113dd228c4f5e9",
+      "each_bytes": 1419684,
+      "extra_copy_bytes": 1419684,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201509/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201509/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "73120838bae04fe013d443058ededc2c5d0e71b24d2c0821f2b9fdb6587b9430",
+      "each_bytes": 1419460,
+      "extra_copy_bytes": 1419460,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201909/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201909/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "4983e1a2f922364ebfd5da44198e805add79419cba37b9e533d583116359d6f6",
+      "each_bytes": 1413657,
+      "extra_copy_bytes": 1413657,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201412/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201412/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "658bff10a03391029b3cd4e9b0687b6345d2a12d5ba1ef29697f6c887057190f",
+      "each_bytes": 1406441,
+      "extra_copy_bytes": 1406441,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201809/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201809/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "fb4c39ed2d9461aebdce055c914070e2dbae43bd2f19143377721505ff78302b",
+      "each_bytes": 1405999,
+      "extra_copy_bytes": 1405999,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200908/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200908/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "47cc3b1e686cc97db9bbb363e3143125d46115bcdc1c1c7183955d3174ce7f8a",
+      "each_bytes": 1405062,
+      "extra_copy_bytes": 1405062,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200811/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200811/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "cb156f3d70b9f526a54138fc91a0ee2171a6bd2755ded5e61855ff3a7f65dda1",
+      "each_bytes": 1401876,
+      "extra_copy_bytes": 1401876,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201802/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201802/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "2651b4f217f2a8314bdf8d1a0bbb4dec1044b17058ddf2628881497cf2c3a8f1",
+      "each_bytes": 1398614,
+      "extra_copy_bytes": 1398614,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201701/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201701/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "866d52ed4fbd1eec4b975cffcaa1542344e98a5d7bbf95fc3b177ab4e437554e",
+      "each_bytes": 1391647,
+      "extra_copy_bytes": 1391647,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201208/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201208/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "39549642ba223c41cd31b6a1f5c0bd708bf5b60f9e2e032eee3ab897be52529f",
+      "each_bytes": 1386100,
+      "extra_copy_bytes": 1386100,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201102/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201102/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3ad7f89d11bd16ad8fe32ca459a85f1621cccd20d85633753052c281bdfd2ea3",
+      "each_bytes": 1384947,
+      "extra_copy_bytes": 1384947,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202010/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202010/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "976f21d307f2cbd3bef7aafe4abcc66697f42c0436e8769944515137d1a78271",
+      "each_bytes": 1361395,
+      "extra_copy_bytes": 1361395,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201109/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201109/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c8a88f1e76798b015f6ed550769f9eaa6b0ee3e588c5df9c40453cbfc9528bac",
+      "each_bytes": 1359625,
+      "extra_copy_bytes": 1359625,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202106/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202106/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b81b30498aad813fb298c53d9b18c7054889edd8d56cfbb49f4d08022c43232e",
+      "each_bytes": 1357418,
+      "extra_copy_bytes": 1357418,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202108/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202108/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "31b879236cbb00c49dac1bdeb1fcbe2b9c938ef45d14f5ada71c2a564c5a97b5",
+      "each_bytes": 1356132,
+      "extra_copy_bytes": 1356132,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200909/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200909/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b1ecc5a6c487c0d96a3fa9abfd09ca214ba470e4d0cd93af6896c90e574fe3fb",
+      "each_bytes": 1355920,
+      "extra_copy_bytes": 1355920,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201608/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201608/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d7b830f26b619a3dea062d652a8f190479d04847118552ee7a3d952443e7c4c0",
+      "each_bytes": 1353642,
+      "extra_copy_bytes": 1353642,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201212/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201212/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0f0f1f2ee0690a47e19c5e2ad5f9401154c5a482300d73e8353c46ef22620476",
+      "each_bytes": 1352570,
+      "extra_copy_bytes": 1352570,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202109/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202109/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "19b854027baa81fd72c9901db22b31d6b5a868ba3ef3f0e816250d7a722d81c4",
+      "each_bytes": 1346136,
+      "extra_copy_bytes": 1346136,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202206/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202206/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d947c63f72c98e16051cedf2f4139fff5245cc76ff269cdebca3d1a1b7a11a45",
+      "each_bytes": 1345554,
+      "extra_copy_bytes": 1345554,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200808/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200808/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0c051e4e382a46617ac3e27ff281f1f4df2ce249ff0b63b237881bac9bddf9a2",
+      "each_bytes": 1340751,
+      "extra_copy_bytes": 1340751,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201006/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201006/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d124cce328857787f18a17ce97c608d79ebe39fca229c09b60ce1e107eaea18d",
+      "each_bytes": 1334026,
+      "extra_copy_bytes": 1334026,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2009/01/01/year_2009/run_16585/page_0002_1790156033802_d124cce32885.xml",
+        "data/raw/kra/horse_swim_training/2009/01/01/year_2009/run_16676/page_0002_1790170073033_d124cce32885.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "360d951cc47ce4273dc3b4e23bf9d49e918e00dc67747fe04f03d51df52acbe2",
+      "each_bytes": 1333089,
+      "extra_copy_bytes": 1333089,
+      "paths": [
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs_before_nullable_fix/trial_history.parquet",
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs/trial_history.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "a495c819dfb4e9d7ca8cd50bbe7111702a772f89eec1aa57b2e7b1de4a953640",
+      "each_bytes": 1310904,
+      "extra_copy_bytes": 1310904,
+      "paths": [
+        "thoroughbred/research/20261002_steward_reports_v1/source/raw/api215_judge_report/year=2026/meet=1/page-0001.json",
+        "thoroughbred/research/20261002_report_passing_precheck_v1/api_probe/raw/judge_report/2026/meet_1.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "c6e29d50c73fad5bed3820ac671ce7f99f44d92b00407dc4063a5af46adf9efd",
+      "each_bytes": 1307245,
+      "extra_copy_bytes": 1307245,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201302/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201302/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "b3cf3e103accbcfdcc3da45ba103162e522922ff891fcc17e92438353e64801e",
+      "each_bytes": 1302954,
+      "extra_copy_bytes": 1302954,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200810/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200810/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "050f7c607f6cd7afb7e57890175bd9140429f9ca71e7bf70f34ed0afb8d90eb2",
+      "each_bytes": 1301239,
+      "extra_copy_bytes": 1301239,
+      "paths": [
+        "data/research/daily_training_recheck_20261008_1791451765889281000/before.json",
+        "data/research/daily_training_recheck_20261008_1791451765889281000/after.json"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "eadcaee23719f24c680a312529208cf381ead4b76fdb9a7edbd2e1106f07acb0",
+      "each_bytes": 1296626,
+      "extra_copy_bytes": 1296626,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201207/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201207/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "463fa543c7d1cc49dbf6d9edfc2028362072d50acb3ce80c1da3e42ee628f988",
+      "each_bytes": 1290774,
+      "extra_copy_bytes": 1290774,
+      "paths": [
+        "thoroughbred/research/20261002_steward_reports_v1/source/raw/api215_judge_report/year=2024/meet=3/page-0001.json",
+        "thoroughbred/research/20261002_report_passing_precheck_v1/api_probe/raw/followup_midyears/judge_report/2024/meet_3.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "99cfab6b7c468d2ab8d23bdf40d14cc5436d621f802c5a78cd956a042b18a9c6",
+      "each_bytes": 1283926,
+      "extra_copy_bytes": 1283926,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201009/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201009/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "3538abf6778b887fbaf5e0326a1698a6a80d30dfd17c01a933f5f7d09f9ab981",
+      "each_bytes": 1281510,
+      "extra_copy_bytes": 1281510,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201209/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201209/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ca98ec8dd846803791d3815c25924cf3bada9d0ff72ae63ee4c3a244a02cbc81",
+      "each_bytes": 1281469,
+      "extra_copy_bytes": 1281469,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200805/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200805/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "722984717d726b3e84cc4d0b9654e27a80906e2cce9194eb96cba4904dc352ff",
+      "each_bytes": 1278787,
+      "extra_copy_bytes": 1278787,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201502/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201502/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "818272a99ed204d22d772e8241ccac3b89bf50e268c3dab741e722416dc65142",
+      "each_bytes": 1277904,
+      "extra_copy_bytes": 1277904,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202105/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202105/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "541cc3a82ea8e9af53eeb1b5a176685b936696bae7f7ea172da298b63923d378",
+      "each_bytes": 1276941,
+      "extra_copy_bytes": 1276941,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200907/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200907/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0c2d002fe815cdeffe730155ccd6c381554845993cf3bd689f73e6468b4a9524",
+      "each_bytes": 1272893,
+      "extra_copy_bytes": 1272893,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200711/20260929T154605.136030Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200711/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ee5a765c82624aa1cfe96e68a26ec944fba8f13175277265d69856c8e6ea35ac",
+      "each_bytes": 1244923,
+      "extra_copy_bytes": 1244923,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202207/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202207/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "170783bb8065ac9ef314e5046ea6a4a44e179312d286782183de50dcd59f4e74",
+      "each_bytes": 1233983,
+      "extra_copy_bytes": 1233983,
+      "paths": [
+        "docs/research_archive/source/thoroughbred_three_targets_20260918_v3/selected_historical_choices.csv",
+        "data/research/thoroughbred_three_targets_20260918_v3/selected_historical_choices.csv"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "16fc300a7fe9174339bf7e92a4b0ec116b00de1b230669d2c6a9f4b9905b5e50",
+      "each_bytes": 1200805,
+      "extra_copy_bytes": 1200805,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201002/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201002/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "90d0525ef3bdc92f5011061cfe9826da6206b0f26e2cbc5d9ce4d507b46e7c3b",
+      "each_bytes": 1193677,
+      "extra_copy_bytes": 1193677,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/201107/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/201107/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "80b237a4951ac9415aadc8e1b675fbbfe688565f72db33c69c5be4468b400465",
+      "each_bytes": 1192588,
+      "extra_copy_bytes": 1192588,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200806/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200806/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "894792242b5fa478424fd6e619a50ce6c396623dd73e9a767dafa6cf29494443",
+      "each_bytes": 1189200,
+      "extra_copy_bytes": 1189200,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202205/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202205/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "89d22f6603719d6a894ac94bb3043ede01bbfc4e22d078489abce6516baa3fba",
+      "each_bytes": 1187999,
+      "extra_copy_bytes": 1187999,
+      "paths": [
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs_before_nullable_fix/trials.parquet",
+        "thoroughbred/research/20261004_pace_objectives_v4/outputs/trials.parquet"
+      ],
+      "classification": "historical_audit_or_snapshot_preserve"
+    },
+    {
+      "sha256": "9852b47f59233c3362fd72cb202da53a95339b86c251bac73750d490faef39ed",
+      "each_bytes": 1166950,
+      "extra_copy_bytes": 1166950,
+      "paths": [
+        "data/experiments/walk_forward/7b7ab71c-c59e-40f5-a536-7b6c0e408611/predictions.parquet",
+        "data/experiments/walk_forward/fc00c191-c69b-44dc-bc41-e912b0c9402e/predictions.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "3460fff0d97c8f64b19fc698b2431c1455098d3aed5556de5eaa54b4d1893534",
+      "each_bytes": 1166885,
+      "extra_copy_bytes": 1166885,
+      "paths": [
+        "data/experiments/walk_forward/edaa0806-d82d-4b3d-8df2-ee2e6525947d/predictions.parquet",
+        "data/experiments/walk_forward/9d42ad87-7e74-42e0-8bb2-144af91a7691/predictions.parquet"
+      ],
+      "classification": "research_or_other_dependency_review_required"
+    },
+    {
+      "sha256": "17739825a44873e8100508545a1b207bb3c0a7232e50296f9c753b275176028e",
+      "each_bytes": 1158752,
+      "extra_copy_bytes": 1158752,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200912/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200912/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "32c6e2ef78120c499421e29c2a17fe0ee41d67ba167090ab0753ae1fb6936234",
+      "each_bytes": 1134792,
+      "extra_copy_bytes": 1134792,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200804/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200804/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "16819179caaa3d00b0971f6cee69aaf043bd78e1ae8d00f94657deb5569dbf4e",
+      "each_bytes": 1130381,
+      "extra_copy_bytes": 1130381,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202102/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202102/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "d037883584e61dbd43fdece443f988e1efe8f751c49c22051788989f1576a656",
+      "each_bytes": 1121710,
+      "extra_copy_bytes": 1121710,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/200803/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/200803/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "4477b7e99ea310f8d6f1149c19b1b04a81341aa91fa72290d4b208a3393c1a82",
+      "each_bytes": 1108188,
+      "extra_copy_bytes": 1108188,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202004/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202004/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "ec28067f26347c435533bcffc0613eab0f7a4f4cd6e385f08ae970550fcdf39e",
+      "each_bytes": 1085307,
+      "extra_copy_bytes": 1085307,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202003/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202003/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "6eb5ea48c2481db3534823ce4d8f93d430909496ffd86d205ce6d2c25b47c641",
+      "each_bytes": 1067464,
+      "extra_copy_bytes": 1067464,
+      "paths": [
+        "data/raw/kra/horse_swim_training/2014/01/01/year_2014/run_16585/page_0002_1790156085488_6eb5ea48c248.xml",
+        "data/raw/kra/horse_swim_training/2014/01/01/year_2014/run_16676/page_0002_1790170106187_6eb5ea48c248.xml"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    },
+    {
+      "sha256": "0e60a5b6eb03a4da995a4c880247126001a34088a4fa8f37f0e3fd61ee5af2a4",
+      "each_bytes": 1048679,
+      "extra_copy_bytes": 1048679,
+      "paths": [
+        "jeju/research/20260929_api_monthly_history/raw/daily_training/202012/20260929T154650.696781Z/page_0001.json",
+        "data/raw/kra_api_monthly/horse_training/meet_2/202012/page_0001.json"
+      ],
+      "classification": "raw_observation_or_source_preserve"
+    }
+  ],
+  "duplicate_files_deleted": 0
+}

@@ -1,0 +1,117 @@
+{
+  "checked_at_kst": "2026-10-12T16:05:52.135902+09:00",
+  "mode": "read_only_no_deletions",
+  "disk_free_bytes": 32472326144,
+  "project_allocated_bytes_observed": 32616034304,
+  "git_allocated_bytes_observed": 174346240,
+  "old_git_temporary_directories_found": 0,
+  "git_garbage_bytes": 0,
+  "first_priority_cache_candidates": [
+    {
+      "name": "Chrome browser cache",
+      "paths": [
+        "/Users/kimyongjin/Library/Caches/Google/Chrome"
+      ],
+      "allocated_bytes": 3434328064,
+      "condition": "Close the corresponding app; remove cache/log contents only, preserving profiles, history and persistent storage."
+    },
+    {
+      "name": "pip/npm/Homebrew download caches",
+      "paths": [
+        "/Users/kimyongjin/Library/Caches/pip",
+        "/Users/kimyongjin/.npm/_cacache",
+        "/Users/kimyongjin/Library/Caches/Homebrew"
+      ],
+      "allocated_bytes": 3105812480,
+      "condition": "Close the corresponding app; remove cache/log contents only, preserving profiles, history and persistent storage."
+    },
+    {
+      "name": "Cursor regenerable caches and logs",
+      "paths": [
+        "/Users/kimyongjin/Library/Application Support/Cursor/CachedData",
+        "/Users/kimyongjin/Library/Application Support/Cursor/CachedExtensionVSIXs",
+        "/Users/kimyongjin/Library/Application Support/Cursor/Cache",
+        "/Users/kimyongjin/Library/Application Support/Cursor/logs"
+      ],
+      "allocated_bytes": 1860665344,
+      "condition": "Close the corresponding app; remove cache/log contents only, preserving profiles, history and persistent storage."
+    },
+    {
+      "name": "Notion basic cache only",
+      "paths": [
+        "/Users/kimyongjin/Library/Application Support/Notion/Partitions/notion/Cache",
+        "/Users/kimyongjin/Library/Application Support/Notion/Partitions/notion/Code Cache"
+      ],
+      "allocated_bytes": 1714606080,
+      "condition": "Close the corresponding app; remove cache/log contents only, preserving profiles, history and persistent storage."
+    },
+    {
+      "name": "Discord browser cache",
+      "paths": [
+        "/Users/kimyongjin/Library/Application Support/discord/Cache"
+      ],
+      "allocated_bytes": 823681024,
+      "condition": "Close the corresponding app; remove cache/log contents only, preserving profiles, history and persistent storage."
+    }
+  ],
+  "first_priority_cache_candidate_total_bytes": 10939092992,
+  "conditional_large_candidates": [
+    {
+      "path": "/Users/kimyongjin/Library/Application Support/Claude/vm_bundles/claudevm.bundle",
+      "allocated_bytes": 12097253376,
+      "reason": "Large VM root filesystem plus compressed image. Determine whether the environment and local work are still needed."
+    },
+    {
+      "path": "/Users/kimyongjin/Library/Application Support/Cursor/User/globalStorage/anysphere.cursor-agent-worker/agent-cli/.local/share/cursor-agent/versions",
+      "allocated_bytes": 4296437760,
+      "reason": "Many agent versions. Verify the current/in-use version before removing older versions; retain globalStorage state databases."
+    },
+    {
+      "path": "/Users/kimyongjin/.local/share/cursor-agent/versions",
+      "allocated_bytes": 1196240896,
+      "reason": "Additional agent versions; verify active version before cleanup."
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/fintor_front/.agent/worktrees",
+      "allocated_bytes": 4696805376,
+      "reason": "Inspect worktree ownership, uncommitted files and task status before archive/removal."
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/xml_data_parsing/archive/2026-05-21_pre_source_split_cleanup",
+      "allocated_bytes": 3837337600,
+      "reason": "Historical project archive. Confirm retained source or external backup and need for old contents."
+    },
+    {
+      "path": "/Users/kimyongjin/Library/Caches/datalab/models",
+      "allocated_bytes": 3447525376,
+      "reason": "OCR/layout model cache. Removal requires redownloading models for future OCR use."
+    },
+    {
+      "path": "/Users/kimyongjin/.cache/codex-runtimes/codex-runtime-install-xgd0FI",
+      "allocated_bytes": 1965281280,
+      "reason": "Runtime installation staging directory. Check for an active installer and successful installed runtime before removal."
+    },
+    {
+      "path": "/Users/kimyongjin/Library/Application Support/Notion/Partitions/notion/Service Worker/CacheStorage",
+      "allocated_bytes": 2997669888,
+      "reason": "May include offline document resources; verify synchronization and offline needs before removal."
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/research",
+      "subset": "outputs_before_* directories",
+      "allocated_bytes": 253452288,
+      "reason": "Four saved pre-fix output directories. Preserve conclusions and verify later outputs supersede them before deletion."
+    }
+  ],
+  "retain": [
+    "Current operating and breed-specific DBs, active model artifacts, feature/history inputs and source data",
+    "Cursor state.vscdb and current conversation state",
+    "Codex sessions, thread_history DB and active runtime",
+    "Recent research inputs, quality decisions and original collection manifests"
+  ],
+  "limits": [
+    "Some macOS privacy-protected folders and Trash were inaccessible. This is not a complete byte accounting of all used space.",
+    "Folder sizes are observed filesystem allocation, not guaranteed reclaimable bytes; hard links and APFS sharing can reduce actual recovery.",
+    "No active-process checks, model inference, cloud access or deletion were performed."
+  ]
+}

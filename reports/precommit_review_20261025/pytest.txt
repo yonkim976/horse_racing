@@ -1,0 +1,22 @@
+........................................................................ [ 17%]
+........................................................................ [ 34%]
+........................................................................ [ 51%]
+........................................................................ [ 68%]
+........................................................................ [ 85%]
+...........................................................              [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/kimyongjin/Desktop/horse_racing/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_jockey_affiliation_collection.py: 240 warnings
+  /Users/kimyongjin/Desktop/horse_racing/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py:949: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.executemany(statement, parameters)
+
+tests/test_operations_dashboard.py::test_hill_queries_only_current_view
+tests/test_operations_dashboard.py::test_hill_queries_only_current_view
+  /Users/kimyongjin/Desktop/horse_racing/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py:952: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+419 passed, 243 warnings in 46.18s

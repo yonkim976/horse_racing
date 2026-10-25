@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "projectId": "54d3a0e7-1f39-40c6-a56a-5d1a86cd661d",
+  "canvas": "https://superdesign.dev/teams/860f4440-c381-4e56-8b7f-1a499cd61c72/projects/54d3a0e7-1f39-40c6-a56a-5d1a86cd661d",
+  "brandAssets": {
+    "logo": {
+      "symbol": {
+        "assetKey": "src-horse_racing-web-static-images-brand-mapilog-symbol-color.svg",
+        "url": "https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/projects/54d3a0e7-1f39-40c6-a56a-5d1a86cd661d/brand-assets/src-horse_racing-web-static-images-brand-mapilog-symbol-color.svg/mapilog-symbol-color.svg"
+      },
+      "wordmark": {
+        "assetKey": "src-horse_racing-web-static-images-brand-mapilog-wordmark-color.svg",
+        "url": "https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/projects/54d3a0e7-1f39-40c6-a56a-5d1a86cd661d/brand-assets/src-horse_racing-web-static-images-brand-mapilog-wordmark-color.svg/mapilog-wordmark-color.svg"
+      }
+    }
+  },
+  "targets": {
+    "/analysis:desktop": {
+      "baselineDraftId": "f1988376-3d8f-46bf-b064-d6215c75b863",
+      "activeDraftId": "1743d630-3532-4c2d-8635-34dcfed70fef",
+      "selectedDirection": "A 분석 시트 (user selected 2026-09-25)",
+      "device": "desktop",
+      "model": "gemini-3.1-pro",
+      "branches": [
+        {
+          "draftId": "1743d630-3532-4c2d-8635-34dcfed70fef",
+          "description": "Direction A 분석 시트 (spreadsheet grid + mark column + right dossier drawer + bottom 내 분석 bar) — SELECTED"
+        },
+        {
+          "draftId": "a1713323-82bb-4cf9-8650-a588d1ad92b9",
+          "description": "Direction B 경주 보드 (race rail + summary cards + runner card grid + compare/memo column); incomplete render; not selected"
+        }
+      ],
+      "components": [],
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        "src/horse_racing/web/templates/base.html",
+        "src/horse_racing/web/templates/analysis.html",
+        "src/horse_racing/web/templates/_analysis_pace.html",
+        "src/horse_racing/web/static/css/race-analysis.css",
+        "src/horse_racing/web/static/css/analysis-pace.css",
+        "src/horse_racing/web/static/css/dashboard.css:1:360",
+        "src/horse_racing/web/static/css/dashboard.css:1329:1400"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "ead9c5d4697267efe43d8704e6ffb90020730d660bfe59c7bd5124d7ae9a82f7",
+        "src/horse_racing/web/templates/base.html": "9c9c86671bf775341396f6ecb397ca224323dfcbad540a60af78ff2149026a86",
+        "src/horse_racing/web/templates/analysis.html": "a4c6bf1e364591f91697016d3e92da1e4e1695e233f316e59831eda40760674d",
+        "src/horse_racing/web/templates/_analysis_pace.html": "35d591352ddb8f9110eccfbdb3011c6331d3e0360e7150dae0ce80963211281a",
+        "src/horse_racing/web/static/css/race-analysis.css": "df21194ae2b16de610556b1ce6af7f667f84c5916404b6c1fb4ac6932b97c7cb",
+        "src/horse_racing/web/static/css/analysis-pace.css": "476fecdcd8c2c7d9f40dec5d8e9e21c3f8915ead77379974b417cb0fca8fbf28",
+        "src/horse_racing/web/static/css/dashboard.css": "34b07e31d813e6e67631428282e26fe7479017ba725effa5422944a086065016"
+      }
+    },
+    "/:desktop": {
+      "targetKind": "existing-ui",
+      "device": "desktop",
+      "note": "No reproduction draft: generation credits ran out; drafts authored directly and imported. Current UI reference screenshot on canvas.",
+      "referenceIds": [
+        "fb3ed8bf-46ed-4586-b395-e621934099ed",
+        "src-horse_racing-web-static-images-brand-mapilog-symbol-color.svg",
+        "src-horse_racing-web-static-images-brand-mapilog-wordmark-color.svg"
+      ],
+      "activeDraftId": "29f37626-7d5c-4bb5-a0e7-ed13ad9351c9",
+      "drafts": {
+        "29f37626-7d5c-4bb5-a0e7-ed13ad9351c9": {
+          "title": "경주 탭 · 출마표 (경주 전)",
+          "visualDirection": "A안 톤: race rail + light race header + 4 insight cards + 출마표 grid with marks/form/condition",
+          "state": "pre-race",
+          "currentVersion": 1
+        },
+        "9a6bbd93-287d-4544-979d-4da39522862f": {
+          "title": "경주 탭 · 결과·기록표 (경주 후)",
+          "visualDirection": "same shell; result cards + pace bump chart + 결과·기록표 grid with passing-position trails and heat-shaded sections",
+          "state": "post-race",
+          "currentVersion": 1
+        }
+      },
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        "src/horse_racing/web/templates/base.html",
+        "src/horse_racing/web/templates/dashboard.html",
+        "src/horse_racing/web/templates/_macros.html",
+        "src/horse_racing/web/static/css/dashboard.css:1:536",
+        "src/horse_racing/web/static/css/dashboard.css:793:1423",
+        "src/horse_racing/web/static/css/dashboard.css:1719:1834"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "ead9c5d4697267efe43d8704e6ffb90020730d660bfe59c7bd5124d7ae9a82f7",
+        "src/horse_racing/web/templates/base.html": "9c9c86671bf775341396f6ecb397ca224323dfcbad540a60af78ff2149026a86",
+        "src/horse_racing/web/templates/dashboard.html": "fd8b48c278f095e314777a2ccbf233e486af98d8ee021a7f015c4165f94b4449",
+        "src/horse_racing/web/templates/_macros.html": "f8dfcf26587705c9d447360863758ceaa32e173590a139065d6d29bdf70048e6",
+        "src/horse_racing/web/static/css/dashboard.css": "34b07e31d813e6e67631428282e26fe7479017ba725effa5422944a086065016"
+      },
+      "updatedAt": "2026-09-25T21:40:00+09:00"
+    }
+  }
+}

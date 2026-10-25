@@ -1,0 +1,28 @@
+{
+  "receipt": "reports/storage_review_20261017/db_copy_deletion_receipt.json",
+  "status": "completed",
+  "deleted_db_paths": [
+    "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261017_before_rider_role_supplement/thoroughbred_core.duckdb",
+    "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261017_before_incremental_refresh/thoroughbred_core.duckdb",
+    "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261017_before_rider_display/thoroughbred_core.duckdb",
+    "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261015_before_daily_training_rider_links/thoroughbred_core.duckdb",
+    "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups/20261015_before_event_name_31/thoroughbred_core.duckdb",
+    "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_types/staging.sqlite3",
+    "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_types/before_types.sqlite3",
+    "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_identity/root/staging_rider_identity.sqlite3",
+    "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_identity/root/before_rider_identity.sqlite3",
+    "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_training_rider_website_completion/before_website_completion.sqlite3",
+    "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3"
+  ],
+  "retained": [
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_older_training_rider_completion/before_older_completion.sqlite3",
+      "reason": "Ongoing older-training completion task and preservation verification depend on this baseline"
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/refresh/runs/20261017_full_20261016/staged_core.duckdb",
+      "reason": "Refresh run report is dry_run_passed with active_database_written=false; pending staged data retained"
+    }
+  ],
+  "effect": "Authorized deletion of historical DB copies; existing comparison scripts that require a deleted baseline can no longer reproduce their full database comparison. Original data, applied DB, scripts and verification results are preserved."
+}

@@ -1,0 +1,56 @@
+{
+  "checked_at_kst": "2026-10-17T19:09:39.311871+09:00",
+  "mode": "read_only_no_deletions",
+  "free_bytes_now": 31038017536,
+  "free_bytes_after_oct12_cleanup": 67961745408,
+  "project_allocated_bytes_observed": 67618316288,
+  "project_allocated_bytes_oct12": 32688394240,
+  "git_allocated_bytes_observed": 322478080,
+  "git_temp_candidates_found": 0,
+  "project_breakdown": {
+    "jeju": 22575869952,
+    "jeju_research": 20488593408,
+    "thoroughbred": 28193611776,
+    "root_data": 15406288896
+  },
+  "large_subsets": [
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/backups",
+      "database_count": 5,
+      "database_allocated_bytes": 13730377728,
+      "role": "Before-change full core DB backups from October 15-17 tasks"
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research",
+      "database_count": 7,
+      "database_allocated_bytes": 13081288704,
+      "role": "Before-change, staging and baseline DB copies; subset of Jeju research total"
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/refresh/runs",
+      "allocated_bytes": 3163828224,
+      "staged_database_bytes": 2825662464,
+      "role": "Refresh run outputs, including staged_core.duckdb"
+    },
+    {
+      "path": "/Users/kimyongjin/Library/Caches/com.openai.codex/org.sparkle-project.Sparkle/Installation",
+      "allocated_bytes": 1774092288,
+      "role": "App updater installation cache; active use not checked"
+    },
+    {
+      "path": "/Users/kimyongjin/Library/Caches/Google/Chrome",
+      "allocated_bytes": 1648078848,
+      "role": "Regrown browser resource cache"
+    }
+  ],
+  "not_reappeared": [
+    "Claude local VM bundle",
+    "datalab OCR model cache"
+  ],
+  "limits": [
+    "Some macOS privacy-protected folders could not be scanned.",
+    "Folder allocations are not guaranteed reclaimable physical space, including APFS sharing.",
+    "Active research includes ongoing October 17 collection; no backup or research artifact deletion authorized or performed.",
+    "Sizes vary slightly during ongoing collection."
+  ]
+}
