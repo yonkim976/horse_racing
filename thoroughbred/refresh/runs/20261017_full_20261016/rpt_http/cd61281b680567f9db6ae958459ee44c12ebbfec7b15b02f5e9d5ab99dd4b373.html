@@ -1,0 +1,773 @@
+
+
+
+
+
+<!doctype html>
+<!--141210--><html  lang="ko"><!--//141210-->
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta charset="euc-kr" />
+  <title>Text 자료_자료실_서울경마</title>
+  <meta name="description" content="" />
+  <link rel="shortcut icon" href="/images/letsrunico.ico"/>
+  <link rel="stylesheet" type="text/css" href="/css/common.css?v=20260321090000"/>
+  <link rel="stylesheet" type="text/css" href="/css/sub.css" />
+  <link rel="stylesheet" type="text/css" href="/css/sub_blue.css" />
+  <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="/js/common.js?after"></script>
+  <script type="text/javascript" src="/js/jquery.extend.js"></script>
+  <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+ </head>
+
+<body>
+
+    <p id="skipNavi">
+        <a href="#contents">컨텐츠로 가기</a>
+        <a href="#gnb">전체메뉴로 가기</a>
+        <a href="#lnb">상세메뉴로 가기</a>        
+        <a href="#footer">사이트 정보로가기</a>
+    </p>
+
+    <div id="wrap">
+        <!--header-->
+                
+
+
+
+
+<div id="header">
+	<!--공통 유틸-->
+	<div class="utilmenu">
+		<!--141023-->
+		<dl>
+			<dt class="haze">경마사이트링크</dt>
+			<dd>
+				<a
+					href="https://www.kra.co.kr/"
+					target="comp" title="새창열림"><img
+					src="/images/common/menuUtil11.png"
+					alt="기업정보" /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://park.kra.co.kr/"
+					target="park" title="새창열림"><img
+					src="/images/common/menuUtil21.png"
+					alt="렛츠런파크" /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://derbyon.kra.co.kr/"
+					target="mato" title="새창열림"><img
+					src="/images/common/menuUtil41.png"
+					alt="마권구매안내" /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://cc.kra.co.kr/"
+					target="ccc" title="새창열림"><img
+					src="/images/common/menuUtil51.png"
+					alt="렛츠런CCC." /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://studbook.kra.co.kr/sso/index.jsp" 
+					target="stud" title="새창열림"><img
+					src="/images/common/menuUtil61.png"
+					alt="말혈통" /></a>
+			</dd>
+			<dd>
+				<a
+					href="http://ebid.kra.co.kr/"
+					target="ebid" title="새창열림"><img
+					src="/images/common/menuUtil71.png"
+					alt="전자입찰" /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://recruit.kra.co.kr/"
+					target="recruit" title="새창열림"><img
+					src="/images/common/menuUtil91.png"
+					alt="채용정보" /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://www.horsepia.com/"
+					target="horsepia" title="새창열림"><img
+					src="/images/common/menuUtil101.png"
+					alt="호스피아" /></a>
+			</dd>
+			<dd>
+				<a
+					href="https://todayrace.kra.co.kr/"
+					target="todayRace" title="새창열림"><img
+					src="/images/common/menuUtil111.png"
+					alt="e오늘의경주" /></a>
+			</dd>
+		</dl>
+		<!--//141023-->
+
+		<div>
+			<p>
+				
+				<script type="text/javascript">
+                    document.domain ='kra.co.kr';
+                    var resultArr = new Array();
+
+                    //var returnUrl = window.location.href;
+
+                    resultArr.push('<a href="/SSOlogin.do?returnurl=https://race.kra.co.kr/seoulMain.do">로그인</a>');
+                    resultArr.push('<a href="https://www.kra.co.kr/memb/joinGuide.do">회원가입</a>');
+                    resultArr.push('<a href="https://www.kra.co.kr/memb/pwFind.do">ID, PW 분실</a>');
+                    /*
+                    var msg = "금일 10시~12시에 시스템 작업으로 현재 회원가입 및 로그인이\n불가합니다.(비밀번호변경 및 찾기, 회원탈퇴 포함)\n고객님께 깊은 양해의 말씀을 드립니다.";
+                    resultArr.push('<a href="#" onclick="javascript:alert(msg);return false;">로그인</a>');
+                  	resultArr.push('<a href="#" onclick="javascript:alert(msg);return false;">회원가입</a>');
+                    resultArr.push('<a href="#" onclick="javascript:alert(msg);return false;">ID, PW 분실</a>');
+                    */
+					//쿠키방식 -> 세션방식
+					//var obj = $.cookie('RACE_GUBUN');
+					//if(obj == "01")
+					if("" != "")
+					{
+						resultArr = new Array();
+						resultArr.push('<a target="_parent" href="https://ssodmz.kra.co.kr:443/pmi-logout-url.jsp?pmi-logout-url=https://ssodmz.kra.co.kr:443/pmi-logout.jsp&returl=https://race.kra.co.kr/seoulMain.do">로그아웃</a>');
+						resultArr.push('<a target="_parent" href="https://www.kra.co.kr/mypage/reqStat.do?menuId=smypg_smypg01">마이페이지</a>');
+					}
+					document.write(resultArr.join(''));
+				</script>
+				
+			</p>
+
+			<dl id="englishUrl" class="language">
+				<dt class="goto">
+					<a href="#raceEnglish" onclick="return false" title="언어선택">English</a>
+				</dt>
+				<dd class="goList"  id="raceEnglish">
+					<ul>
+						<li><a
+							href="http://www.kra.co.kr/globalEn/"
+							target="_blank" title="기업정보 영문 사이트 새창열림">EN_company</a></li>
+						<li><a
+							href="/globalEn/main.do"
+							target="_blank" title="경마정보 영문 사이트 새창열림">EN_racing</a></li>
+						<li><a
+							href="https://studbook.kra.co.kr/neweng/main.jsp"
+							target="_blank" title="말혈통 영문 사이트 새창열림">EN_studbook</a></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<!--//공통 유틸-->
+  <div class="mt">
+	
+		
+ 
+		
+		
+			<h1 class="logo">
+				<a href="/seoulMain.do"><img
+					src="/images/common/logo_letsRun.png"
+					alt="KRA 한국마사회 경마정보" /></a>
+			</h1>
+		
+	
+
+	<ul id="gnb">
+		<li><a href="/seoulMain.do"><img
+				src="/images/common/menuGnb1.png"
+				alt="서울경마" /></a>
+			<ul>
+				<li><a
+					href="/cancelTicket/notice.do?Act=01&Sub=1&meet=1">공지사항</a></li>
+				<li><a
+					href="/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=1">출전정보</a></li>
+				<li><a
+					href="/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=1">경마속보</a></li>
+				<li><a
+					href="/raceScore/ScoretableScoreList.do?Act=04&Sub=1&meet=1">경주성적</a></li>
+				<li><a
+					href="/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=1">대상특별경주</a></li>
+				<li><a
+					href="/raceguide/RaceRefereeCompositionService.do?Act=06&Sub=2&meet=1">심판정보</a></li>
+				<li><a
+					href="/startingData/raceImplementSystem.do?Act=07&Sub=10&meet=1">출발정보</a></li>
+				<li><a
+					href="/racehorse/ProfileHorsenameKinds.do?Act=08&Sub=1&meet=1">경주마정보</a></li>
+				<li><a
+					href="/jockey/ProfileJockeyListActive.do?Act=09&Sub=1&meet=1">기수정보</a></li>
+				<li><a
+					href="/trainer/profileTrainerList.do?Act=10&Sub=1&meet=1">조교사정보</a></li>
+				<li><a
+					href="/owner/HorseOwnerRegister.do?Act=11&Sub=1&meet=1&step=1">마주정보</a></li>
+				<li><a
+					href="/dbdata/textData.do?Act=12&Sub=1&meet=1">자료실</a></li>
+				<li><a
+					href="/raceoper/RaceoperView.do?Act=13&Sub=1&meet=1">경마시행정보</a></li>
+				<!--li>
+					<a href="/KHC/KHCView.do?Act=14&Sub=1&meet=1">KHC</a>
+				</li-->
+			</ul></li>
+		<li><a href="/busanMain.do"><img
+				src="/images/common/menuGnb12.png"
+				alt="영남경마" /></a>
+			<ul>
+				<li><a
+					href="/cancelTicket/notice.do?Act=01&Sub=1&meet=3">공지사항</a></li>
+				<li><a
+					href="/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=3">출전정보</a></li>
+				<li><a
+					href="/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=3">경마속보</a></li>
+				<li><a
+					href="/raceScore/ScoretableScoreList.do?Act=04&Sub=1&meet=3">경주성적</a></li>
+				<li><a
+					href="/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=3">대상특별경주</a></li>
+				<li><a
+					href="/raceguide/RaceRefereeCompositionService.do?Act=06&Sub=2&meet=3">심판정보</a></li>
+				<li><a
+					href="/startingData/raceImplementSystem.do?Act=07&Sub=10&meet=3">출발정보</a></li>
+				<li><a
+					href="/racehorse/ProfileHorsenameKinds.do?Act=08&Sub=1&meet=3">경주마정보</a></li>
+				<li><a
+					href="/jockey/ProfileJockeyListActive.do?Act=09&Sub=1&meet=3">기수정보</a></li>
+				<li><a
+					href="/trainer/profileTrainerList.do?Act=10&Sub=1&meet=3">조교사정보</a></li>
+				<li><a
+					href="/owner/HorseOwnerRegister.do?Act=11&Sub=1&meet=3&step=1">마주정보</a></li>
+				<li><a
+					href="/dbdata/textData.do?Act=12&Sub=1&meet=3">자료실</a></li>
+				<li><a
+					href="/raceoper/RaceoperView.do?Act=13&Sub=1&meet=3">경마시행정보</a></li>
+				<!--li>
+					<a href="/KHC/KHCView.do?Act=14&Sub=1&meet=3">KHC</a>
+				</li-->
+			</ul></li>
+		<li><a href="/jejuMain.do"><img
+				src="/images/common/menuGnb2.png"
+				alt="제주경마" /></a>
+			<ul>
+				<li><a
+						href="/cancelTicket/notice.do?Act=01&Sub=1&meet=2">공지사항</a></li>
+				<li><a
+						href="/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=2">출전정보</a></li>
+				<li><a
+						href="/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=2">경마속보</a></li>
+				<li><a
+						href="/raceScore/ScoretableScoreList.do?Act=04&Sub=1&meet=2">경주성적</a></li>
+				<li><a
+						href="/raceScore/ObjtRaceRaceList.do?Act=05&Sub=1&meet=2">대상특별경주</a></li>
+				<li><a
+						href="/raceguide/RaceRefereeCompositionService.do?Act=06&Sub=2&meet=2">심판정보</a></li>
+				<li><a
+						href="/startingData/raceImplementSystem.do?Act=07&Sub=8&meet=2">출발정보</a></li>
+				<li><a
+						href="/racehorse/ProfileHorsenameKinds.do?Act=08&Sub=1&meet=2">경주마정보</a></li>
+				<li><a
+						href="/jockey/ProfileJockeyListActive.do?Act=09&Sub=1&meet=2">기수정보</a></li>
+				<li><a
+						href="/trainer/profileTrainerList.do?Act=10&Sub=1&meet=2">조교사정보</a></li>
+				<li><a
+						href="/owner/HorseOwnerRegister.do?Act=11&Sub=1&meet=2&step=1">마주정보</a></li>
+				<li><a
+						href="/dbdata/textData.do?Act=12&Sub=1&meet=2">자료실</a></li>
+				<li><a
+						href="/raceoper/RaceoperView.do?Act=13&Sub=1&meet=2">경마시행정보</a></li>
+				<li><a
+						href="/racehorse/jejuHorseIntro.do?Act=14&Sub=1&meet=2">혈통정보</a></li>
+			</ul></li>
+		<li><a
+			href="/thisweekrace/ThisWeekDetailInfoList.do"><img
+				src="/images/common/menuGnb4.png"
+				alt="금주의경마" /></a>
+			<ul style="width: 785px;left: 175px;">
+				<li><a
+					href="/thisweekrace/ThisWeekDetailInfoList.do">출전정보</a></li>
+				<li><a
+					href="/thisweekrace/ThisWeekBaljuTime.do">출발시간</a></li>
+				<li><a
+					href="/thisweekrace/ThisWeekChulmapyoChange.do">출전표변경</a></li>
+				<li><a href="/thisweekrace/ThisWeekWeight.do">출전마체중</a></li>
+				<li><a
+					href="/thisweekrace/ThisWeekScoretableDailyScoretable.do">요약성적표</a></li>
+				<li><a href="/thisweekrace/MediaChulmapyo.do">언론사용출전표</a></li>
+			</ul></li>
+		<li><a href="/raceguide/RaceInternetService.do"><img
+				src="/images/common/menuGnb5.png"
+				alt="경마가이드" /></a>
+			<ul style="width: 700px;left: 320px;">
+				<li><a
+					href="/raceguide/RaceInternetService.do">경마정보 이용안내</a></li>
+				<li><a
+					href="/raceguide/RaceTutorialContents.do">초보자가이드</a></li>
+				<li><a
+					href="/raceguide/RaceCommonSenseService.do">경마사전</a></li>
+				<!--li><a
+					href="/raceguide/RaceMediaCenterUseService.do">미디어센터</a></li-->
+				<li><a href="/raceguide/RaceHonorInformation.do">경마 영예의 전당</a></li>
+			</ul></li>
+		<li><a href="https://www.kra.co.kr/opinion/opinionMain.do" target="comp"  title="새창열림"><img
+				src="/images/common/menuGnb11.png"
+				alt="경마고객의소리"></a>
+			<ul style="width: 490px;left: 460px">
+				<li><a href="https://www.kra.co.kr/opinion/opinionMain.do" target="comp" title="새창열림">나의의견제기</a></li>
+				<li><a href="https://www.kra.co.kr/opinion/opinionMyMain.do" target="comp" title="새창열림">나의의견보기</a></li>
+				<li><a href="https://www.kra.co.kr/opinion/otherOpinionList.do" target="comp" title="새창열림">다른의견보기</a></li>
+			</ul></li>
+		<li>
+			<a href="/movie/MovieBoard.do?Act=01&Sub=1"><img src="/images/common/menuGnb10.png" alt="경마방송" /></a>
+			<ul style="width: 410px;left: 550px;">
+				<li><a href="/movie/MovieBoard.do?Act=01&Sub=1">공지사항</a></li>
+				<li><a href="/movie/MovieBoard.do?Act=02&Sub=2">프로그램</a></li>
+				<li><a href="/movie/MovieBoard.do?Act=03&Sub=3">인터뷰</a></li>
+				<li><a href="/movie/SNSMovie.do?Act=04&Sub=4">경마방송 SNS</a></li>
+				<!--li><a href="/movie/MovieBoard.do?Act=04&Sub=4">미디어데이</a></li-->
+				<!--li><a href="/movie/MovieBoard.do?Act=05&Sub=5">홍보동영상</a></li-->
+				<!--li><a href="/movie/MovieBoard.do?Act=04&Sub=6">경마테마뮤직</a></li-->
+			</ul>
+		</li>
+	</ul>
+
+	<!--fieldset>
+		<legend class="haze">통합검색</legend>
+		<div>
+			<form action="" name="totalsearch" method="post" onsubmit="goSearch(); return false;">
+				<label for="kwd" class="hidden">검색어</label>
+				<input type="text" id="kwd" name="kwd" value="" title="검색어" />
+				<button title="검색결과 새창으로"><span class="haze">검색</span></button>
+			</form>
+		</div>
+	</fieldset-->
+
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".totMenu_").each(function() {
+			$(this).popup({
+				url : "/totalMenu.do"
+			});
+		});
+
+	});
+
+	function goPage(url){
+		//var obj = $.cookie('RACE_GUBUN');
+        //if(obj == "01"){
+        if("" != ""){
+       		location.href = ""+url+"";
+    	}else{
+			alert("로그인 후 이용가능 합니다.");
+			location.href = "/SSOlogin.do?returnurl="+url+"";
+    	}
+	}
+
+	function goSearch(){
+		var str_url = "http://www.kra.co.kr/search/search.jsp?kwd="+document.totalsearch.kwd.value;
+		var searhWin = window.open(str_url, "totalsearch", "resizable=yes, scrollbars=yes, width=1000, height=800");
+		searhWin.focus();
+	}
+</script>
+
+        <!--//header-->
+
+        <!--container-->
+        <div id="container">
+            <!--lnb-->
+            
+ 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--
+        
+        -->
+        
+              <dl id="lnb">
+                <dt>
+                    <img src="/images/lnb/menu_lnb1.png" alt="서울경마" /><img src="/images/lnb/menu_lnb12.png" alt="자료실" />
+                </dt>
+                <dd>
+                    <ul>
+                        <li id="lnb1"><a href="/dbdata/textData.do?Act=12&Sub=1&meet=1">Text 자료</a></li>
+                        <li id="lnb2"><a href="/dbdata/renewDBDate.do?Act=12&Sub=2&meet=1">자료갱신주기</a></li>
+                        <li id="lnb3"><a href="/dbdata/viewBoard.do?Act=12&Sub=3&meet=1">경마전문지 게시판</a></li>
+                        <li id="lnb4"><a href="javascript:goPage('/story/bookExpectInput.do?Act=12&Sub=4');">경마전문지 예상마 입력</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        
+        
+        <!-- 2024.03.03 KHC 메뉴 삭제(I-434691)
+        
+        -->
+
+<script type="text/javascript">
+
+$(function(){
+	var $lnb = $("#lnb");
+  	var Sub = "1";
+    if($lnb.length > 0 && Sub){
+    	var $Sub = $lnb.find("#lnb"+Sub).addClass("on");
+    	$Sub = $Sub.closest("ul").closest("li:eq(0)");
+    	if($Sub.length > 0){
+    		$Sub.addClass("on");
+    	}
+    }
+
+    activeTopMenu('0',12-1);
+});
+
+
+var imgOn = function($this){
+
+	var imgSrc = $(">img", $this).attr("src");
+	var imgBar = imgSrc.split("_");
+	var imgPng = imgBar[0].split(".png");
+	//$("img", $this).attr("src", $("img", $this).attr("src").replace(".png", "_on.png"));
+	//alert(imgPng[0]);
+	$("img", $this).attr("src", imgPng[0]+"_on.png");
+}
+
+function activeTopMenu(idx,Sub){
+	imgOn($("#gnb > li:eq("+idx+") > a"));
+
+	//서브 액티브
+	$("#gnb > li:eq("+idx+")").addClass("on");
+	$("#gnb > li:eq("+idx+") > ul > li:eq("+Sub+") > a").attr("style","color:#de1829; text-decoration:underline;");
+	navigation.gnb();
+}
+
+</script>
+
+            <!--//lnb-->
+
+            <!--contents-->
+            
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var site_flag = "";
+    if(site_flag!="company"){
+        if(""=="false" && ""=="false"){
+            alert('본 자료는 등록된 전용회원만 열람가능합니다.');
+            history.back();
+            return;
+        }
+    }
+});
+
+var event_  ={
+        pagingOption : false,
+        pageAction : function(){
+            if(!event_.pagingOption){
+                $("form[name=listForm]").find("[name=pageIndex]").val(1).end().submit();
+            }
+
+            return true;
+        },
+        // 매김 페이지 링크 기능
+        listLink : function(PAGENO) {
+            event_.pagingOption = true;
+            $("form[name=listForm]").find("[name=pageIndex]").val(PAGENO).end().submit();
+        }
+    };
+
+
+function dataViewFile(fn,meet){
+    document.listForm.fn.value = fn;
+    document.listForm.action = "/dbdata/dataViewFile.do";
+    document.listForm.submit();
+}
+
+function goSearch(){
+    document.listForm.fileSearchName.value = $("#fileSearchName").val();
+    document.listForm.pageIndex.value = 1;
+    document.listForm.submit();
+}
+
+
+
+</script>
+    
+    
+    
+        
+            
+            
+        
+        
+        
+    
+
+    <div id="contents">
+        <h1><img src="/images/tit/t_seoul_12_1.png" alt="Text 자료" /></h1>
+        <p class="crumbs"><img src="/images/sub/ico_home.png" alt="홈" /><img src="/images/sub/bu_gt_gray.png" alt="&gt;" />
+        서울경마
+        <img src="/images/sub/bu_gt_gray.png" alt="&gt;" />자료실<img src="/images/sub/bu_gt_gray.png" alt="&gt;" /><em>Text 자료</em></p>
+        <div class="txt1">
+            <p>DB자료실 -
+                
+                    서울
+                    
+                    
+                 - 寃쎈??깆???? </p>
+        </div>
+        <form id="inputVo" name="listForm" action="textDataList.do" method="post" onsubmit="return event_.pageAction(); return false;">
+            <input type="hidden" name="Act" value="12">
+            <input type="hidden" name="Sub" value="1">
+            <input type="hidden" name="meet" value="1" />
+
+            <input type="hidden" name="loginAuth" value="">
+            <input type="hidden" name="dbFlag" value="">
+            <input type="hidden" name="dbFlag3" value="" />
+
+           <input type="hidden" name="fn" />
+            <input type="hidden" name="fileSearchName" value="" />
+            <input id="fileType" name="fileType" type="hidden" value="dacom11"/>
+            <input id="codeName" name="codeName" type="hidden" value="寃쎈??깆????"/>
+            <input id="siteFlag" name="siteFlag" type="hidden" value=""/>
+        <div class="tableType2">
+            <table>
+            <caption>자료실 파일목록을 파일명, 사이즈 순으로 제공하는 표</caption>
+            <colgroup>
+               <col span="4" width="25%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">파일명</th>
+                    <th scope="col">사이즈</th>
+                    <th scope="col">파일명</th>
+                    <th scope="col">사이즈</th>
+                  </tr>
+            </thead>
+            <tbody>
+                
+                    
+                    
+                        
+                            <tr>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20261011dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20261011dacom11.rpt','1'); return false;">20261011dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    84.8K
+                                </td>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20261010dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20261010dacom11.rpt','1'); return false;">20261010dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    69.0K
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20261005dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20261005dacom11.rpt','1'); return false;">20261005dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    77.2K
+                                </td>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20261004dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20261004dacom11.rpt','1'); return false;">20261004dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    84.3K
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20261003dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20261003dacom11.rpt','1'); return false;">20261003dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    76.9K
+                                </td>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20260920dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20260920dacom11.rpt','1'); return false;">20260920dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    84.8K
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20260919dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20260919dacom11.rpt','1'); return false;">20260919dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    77.5K
+                                </td>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20260913dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20260913dacom11.rpt','1'); return false;">20260913dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    83.8K
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20260912dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20260912dacom11.rpt','1'); return false;">20260912dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    75.9K
+                                </td>
+                                <td>
+                                    <a href="/dbdata/fileDownLoad.do?fn=chollian/seoul/jungbo/rcresult/20260906dacom11.rpt&meet=1" onclick="javascript:dataViewFile('chollian/seoul/jungbo/rcresult/20260906dacom11.rpt','1'); return false;">20260906dacom11.rpt</a>
+                                </td>
+                                <td>
+                                    77.0K
+                                </td>
+                            </tr>
+                        
+                    
+                
+                </tbody>
+             </table>
+        </div>
+        <div class="paging">
+        <a href="?pageIndex=1" onclick="event_.listLink(1);return false; " class="prev2"><span class="haze">맨처음</span></a><a href="?pageIndex=1" onclick="event_.listLink(1);return false; " class="prev"><span class="haze">이전</span></a><a href="#" class="on">1</a><a href="?pageIndex=2" onclick="event_.listLink(2);return false; ">2</a><a href="?pageIndex=3" onclick="event_.listLink(3);return false; ">3</a><a href="?pageIndex=4" onclick="event_.listLink(4);return false; ">4</a><a href="?pageIndex=5" onclick="event_.listLink(5);return false; ">5</a><a href="?pageIndex=6" onclick="event_.listLink(6);return false; ">6</a><a href="?pageIndex=7" onclick="event_.listLink(7);return false; ">7</a><a href="?pageIndex=8" onclick="event_.listLink(8);return false; ">8</a><a href="?pageIndex=9" onclick="event_.listLink(9);return false; ">9</a><a href="?pageIndex=10" onclick="event_.listLink(10);return false; ">10</a><a href="?pageIndex=11" onclick="event_.listLink(11);return false; " class="next"><span class="haze">다음</span></a><a href="?pageIndex=219" onclick="event_.listLink(219);return false; " class="next2"><span class="haze">맨끝</span></a>
+
+        <input id="pageIndex" name="pageIndex" type="hidden" value="1"/>
+        </div>
+        </form>
+
+        <div class="boardInfo">
+            <fieldset>
+                 <label for="sel_search" class="haze">검색기준 선택</label>
+                 <select name="sel_search"  id="sel_search" size="1" title="검색기준 선택">
+                     <option value="title" selected="selected">파일명</option>
+                 </select>
+                 <label for="fileSearchName" class="haze">검색어 입력</label>
+                 <input type="text" name="fileSearchName" id="fileSearchName" value=""/><button class="btnType4" onclick="javascript:goSearch();"><span>검색</span></button>
+            </fieldset>
+        </div>
+        
+        <div class="marginT15 textRight" style="font-weight: bold; color: red;">
+            ※ 정부 공공데이터 포털(DATA.GO.KR)을 이용하시면 다양한 데이터를 오픈API로 제공받을 수 있습니다.
+            <div class="marginT5">
+                <a href="https://www.kra.co.kr/in/pu/01/inpu0101.do?menuId=skr01_skr014" target="_blank" title="한국마사회 공공데이터 안내 팝업 열기"><img src="/images/sub/lnk_data_inform1.jpg" alt="한국마사회 공공데이터 안내 바로가기" /></a>&nbsp;&nbsp;
+                <a href="https://www.data.go.kr" target="_blank" title="정보공개데이터포털 팝업 열기"><img src="/images/sub/lnk_data_inform2.jpg" alt="정보공개데이터포털 바로가기" /></a>
+            </div>
+        </div>
+
+    </div>
+
+            <!--//contents-->
+        </div>
+        <!--//container-->
+</div><!--//wrap-->
+
+
+
+
+<div id="footer">
+<div class="inner">
+	<dl class="prize">
+		<dt class="haze">수상내역</dt>
+		<dd class="first"><img src="/images/common/prize/img_prize01.png" alt="국민권익위 종합청렴도 부패방지분야 국무총리상 표창 (2026)" /></dd>
+		<dd><img src="/images/common/prize/img_prize02.png" alt="재정경제부 공공기관 투자집행 우수기관 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize03.png" alt="과학기술정보통신부 대한민국 소통 어워즈 동영상 부문 대상 수상 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize04.png" alt="교육부 공정채용 우수기업 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize05.png" alt="헹정안전부 복합재난훈련 우수기관 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize06.png" alt="농림축산식품부 정보보안 및 개인정보보호 강화 유공 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize07.png" alt="농림축산식품부 재난 및 안전관리 유공 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize08.png" alt="보건복지부 지역사회공헌부문 우수기관 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize09.png" alt="고용노동부 사회적기업 협업 우수기관 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize10.png" alt="중소벤처기업부 상생협력 유공 장관상 표창 (2025)" /></dd>
+		<dd><img src="/images/common/prize/img_prize11.png" alt="국가정보원 사이버공격 실전 방어훈련 A등급 (2025)" /></dd>
+	</dl>
+
+	<ul>
+	<li><a href="https://www.kra.co.kr/board/op/smypg06.do?menuId=smypg_smypg06" target="_blank" title="새창열림">이용약관</a></li>
+	<li><a href="https://www.kra.co.kr/etc/personPolicy.do" target="_blank" title="새창열림"><span>개인정보처리방침</span></a></li>
+	<li><a href="https://www.kra.co.kr/board/co/skr0672.do?menuId=skr06_skr067_skr0672" target="_blank" title="새창열림"><span>사규&amp;사규 제,개정 예고</span></a></li>
+	<li><a href="https://www.kra.co.kr/voc/voiceMain.do?menuId=skr03_skr038" target="_blank" title="새창열림">고객의 소리</a></li>
+	<li><a href="https://www.kra.co.kr/op/vm/de/il/01/opvmdeil0101.do?menuId=skr0383_skr03836" target="_blank" title="새창열림">경마불법행위신고</a></li>
+	<li><a href="https://www.kra.co.kr/op/vm/de/de/opvmdede01.do?menuId=skr0383" target="_blank" title="새창열림">부패행위신고</a></li>
+	<li><a href="http://www.kra.co.kr/ratesLogin.do" target="_blank" title="새창열림">금리제안</a></li>
+	<li><a href="https://www.kra.co.kr/my/vi/etvi01.do?menuId=smypg_smypg09" target="_blank" title="새창열림">뷰어다운로드</a></li>
+	<!-- <li class="today_weather"><a href="http://www.kma.go.kr/weather/main.jsp" target="_blank" title="새창열림">오늘의 날씨</a></li> -->
+	</ul>
+
+	<dl class="familyBox">
+		<dt>약도/교통안내 :  </dt>
+		<dd>
+            <a href="https://www.kra.co.kr/voc/park/transInfo1.do?menuId=skr0385_skr03851_skr038511" target="_blank" title="새창열림">렛츠런파크 서울</a> /
+            <a href="https://www.kra.co.kr/voc/park/transInfo3.do?menuId=skr0385_skr03851_skr038513" target="_blank" title="새창열림">렛츠런파크 부산경남</a> /
+            <a href="https://www.kra.co.kr/voc/park/transInfo2.do?menuId=skr0385_skr03851_skr038512" target="_blank" title="새창열림">렛츠런파크 제주</a> /
+            <a href="https://www.kra.co.kr/voc/pasture/selectBranchList.do?menuId=skr0385_skr03853" target="_blank" title="새창열림">지사/센터</a>
+        </dd>
+		<dt class="goto"><a href="#familySite">패밀리 사이트 바로가기</a></dt>
+		<dd id="familySite" class="goList">
+			<ul>
+               <li><a href="https://www.kra.co.kr/" target="_blank" title="새창열림">기업정보</a></li>
+               <li><a href="/seoulMain.do" target="_blank" title="새창열림">경마정보</a></li>
+               <li><a href="https://park.kra.co.kr/" target="_blank" title="새창열림">렛츠런파크</a></li>
+               <li><a href="https://derbyon.kra.co.kr/" target="mato" title="새창열림">마권구매안내</a></li>
+               <li><a href="https://studbook.kra.co.kr/sso/index.jsp" target="_blank" title="새창열림">말혈통</a></li>
+               <li><a href="http://ebid.kra.co.kr/" target="_blank" title="새창열림">전자입찰</a></li>
+			   <li><a href="https://www.horsepia.com/" target="_blank" title="새창열림">호스피아</a></li>
+			   <li><a href="https://todayrace.kra.co.kr/" target="_blank" title="새창열림">e오늘의경주</a></li>
+			</ul>
+		</dd>
+		<dt  class="goto case"><a href="#relatedSite">유관단체 사이트 바로가기</a></dt>
+		<dd id="relatedSite" class="goList">
+			<ul>
+				<li><a href="http://www.lrf.or.kr/" target="_blank" title="새창열림">렛츠런재단</a></li>
+				<li><a href="http://www.rhof.or.kr/" target="_blank" title="새창열림">농어촌 희망재단</a></li>
+				<li><a href="http://www.sroa.or.kr/" target="_blank" title="새창열림">서울마주협회</a></li>
+				<li><a href="http://www.ktba.co.kr/" target="_blank" title="새창열림">한국경주마생산자협회</a></li>
+				<!-- li><a href="http://www.jockey.or.kr/" target="_blank" title="새창열림">한국경마기수협회</a></li -->
+			</ul>
+		</dd>
+	</dl>
+
+    
+	<address>경기도 과천시 경마공원대로 107 우편번호 : 13822 대표전화 : <em>1566-3333</em>ARS경마정보 : <em>1566-9977</em></address>
+    
+    
+    
+
+	<p>본 웹사이트는 익스플로러 <span>/</span> 크롬 <span>/</span> 파이어폭스 1024*768 화면해상도에 최적화되어 있습니다.</p>
+	<div class="footer_info">
+		<span>Copyright 2014 KRA Corporation All Rights Reserved. </span>
+		<a href="mailto:kra@kra.co.kr" class="email">
+			<img src="/images/common/ico_mail.png" alt="e-mail:kra@kra.co.kr 로 이메일 보내기">
+		</a>
+		<span>매주 월·화요일 휴무,</span>
+		<ul class="footer_ect">
+			<li class="today_weather"><a href="http://www.kma.go.kr/weather/main.jsp" target="_blank" title="새창열림"><span>오늘의 날씨</span></a></li>
+			<li class="social_naver"><a href="http://blog.naver.com/letsrun2014" target="_blank" title="새창열림"><img src="/images/common/ico_social.png" alt="네이버" /></a></li>
+			<li class="social_facebook"><a href="https://www.facebook.com/letsrunpark" target="_blank" title="새창열림"><img src="/images/common/ico_social.png" alt="페이스북" /></a></li>
+		</ul>
+	</div>
+	<!--div style="position:absolute;right:300px;top:140px;">
+		<a href="http://www.webwatch.or.kr/Situation/WA_Situation.html?MenuCD=110" target="_blank" title="새창열림">
+			<img src="/images/common/wa.png" border="0" style="width:90px;" alt="과학기술정보통신부 WEB ACCESSIBILITY 마크(웹 접근성 품질인증 마크)" title="국가 공인 인증기관 : 웹와치" />
+		</a>
+	</div-->
+	<div style="position:absolute;right:195px;top:140px;">
+		<img src="/images/common/ISMS_Mark.png" border="0" style="width:90px;" alt="한국마사회 온라인 발매 및 대외서비스 운영 ISMS인증마크: 2025.06.18 ~ 2028.06.17" title="한국마사회 온라인 발매 및 대외서비스 운영 ISMS인증마크: 2025.06.18 ~ 2028.06.17" />
+	</div>
+</div>
+</div>
+
+</body>
+</html>
