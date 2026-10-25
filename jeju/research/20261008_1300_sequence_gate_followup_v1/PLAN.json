@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-08",
+  "user_correction": "제주 1300은 2c 지나고 s1f 야 그리고 곡선 시작",
+  "measurement_sequence_contract": ["start", "2C", "S1F"],
+  "provenance": "direct user statement; adopted as this research contract, not represented as an independently verified official specification",
+  "correction": "A 2C time smaller than S1F does not justify holding all 1300m early observations under the corrected sequence. Prior immutable results remain unchanged and excluded1300; future early analysis may use quality-selected1300 observations under this contract.",
+  "scope": "Existing immutable quality snapshots only; no database or network access, no model refit",
+  "population": "1300m, normal complete races, exactly10 starters and numbers1..10; source2017..2026-09-19, actual dates derived from records",
+  "groups": {"inner": [1,2,3], "middle": [4,5,6,7], "outer": [8,9,10]},
+  "new_exploratory_endpoints": ["2C firstpack", "2C first2packs", "S1F firstpack", "S1F first2packs"],
+  "estimand": "Observed inner1to3 minus outer8to10 event rate, equal-race average; no ability adjustment or causal interpretation",
+  "uncertainty": "10000 race-date cluster bootstrap percentile intervals, seed20261008; two-sided date-cluster normal p, BH over4 new contrasts, all descriptive exploratory",
+  "subperiods": "All available, and individual years; annual raw counts only, no supported annual-effect or reversal declaration",
+  "existing_final_outcomes": "Reproduce raw Top3 from source and quote the already completed latest same-horse/same-race/history/year/moisture-adjusted contrast and time contrast without re-estimation",
+  "limits": "47 exact10 races expected, 63 all-field races expected; pack membership is observed, within-pack order is not individual placing; paths, physical lanes and curve path distance are not observed",
+  "verification": "Full roster and quality-state checks, source hashes preserved, source Top3 counts match saved gate table; independent membership check using rank-range endpoints derived directly from packs"
+}

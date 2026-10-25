@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "review_scope": "independent math, feature support/identifiability, fit/selection/report code, locked choice replay, and approved outcome replay",
+  "owned_path_only": "jeju/research/20261025_top5_direct_learning_review_v1",
+  "evaluation_label_access": {
+    "choice_stage_outcome_labels_read": false,
+    "outcome_stage_labels_read_after_root_approval": true,
+    "outcome_label_column": "y",
+    "outcome_allowlist": [
+      "api_record_id",
+      "race_id",
+      "race_date",
+      "year",
+      "distance_m",
+      "horse_id",
+      "horse_number",
+      "field_n",
+      "variant",
+      "score",
+      "y"
+    ]
+  },
+  "frozen_sources": {
+    "baseline_runner_predictions.parquet": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1",
+    "features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "bootstrap_schedule.npy": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "bootstrap_receipt.json": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "primary_date_inventory": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84"
+  },
+  "main_study_locks": {
+    "PLAN.md": "c5683a8716e62094a7856cadfd44119dfac3c6ac3edd9f08652a951e42297012",
+    "SOURCE_AUDIT.md": "c70596688c22c97deb7fa48cba21ef6e5442ea29e1901f790277c1f03fbe3fbd",
+    "fit_selector.py": "257542455ad60ba8299f0952ee3976cc1a6916a432b3a1ecdbbf9420241e94a3",
+    "select_sets.py": "574de788e1f8e4a31c10354cf804bc83f99618c521dad6823a6fe13fa961361f",
+    "report_outcomes.py": "5d48a2430c1ad6a24ded4f861da64f64b7b5b669139b61e2acf57f07662fb608",
+    "FIT_RECEIPT.json": "f69de2ad555718ae5fa12c7b9c6773a9ad208e8a809f449369749cf4f2a912bd",
+    "ROOT_SELECTION_APPROVAL.json": "40da6086c084bee2f37580620c482f7c0b7ab5041c40c5263dbf87bc8657474f",
+    "candidate_choices.jsonl": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+    "CHOICES_RECEIPT.json": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754",
+    "ROOT_OUTCOME_APPROVAL.json": "62e15353b2ddb3687b1d59b7c580b0b20ae14856e53e8dc35b040fb266ed3ea9",
+    "outcomes.json": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d",
+    "race_outcomes.jsonl": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f",
+    "OUTCOME_RECEIPT.json": "47e0dcb9317d0def945c209be402e5d7fc9e7a437e2ff50c509a166ceb6cb5a6"
+  },
+  "fit_models": {
+    "model_2024.json": "bc0d5db4783fddf05f39cf780f9afcd597af641ccc314d4760d9404a4048a016",
+    "model_2025.json": "e2007d50b7db7a7860642f3f3f476aaedfb203eb56696fda3a7355acf14172a3",
+    "model_2026.json": "ad1ac0c14010024c82ee1a6a5ffdb73552bd930bc54b531da041e7d57d4fa44f"
+  },
+  "review_artifacts": {
+    "README.md": "0301cb4cd2d888ae4796e70275fe406a1be1f189058fffe822c161ac51732721",
+    "INDEPENDENT_DESIGN_REVIEW.md": "9e3d9f9b3e673cec066258ddc34ca013aa309cdc8d555f68de5cebd0605e3e2d",
+    "FEATURE_SUPPORT_IDENTIFIABILITY_AUDIT.json": "016228767f6dbd37c20bca05190880fcb294a2f665d38f7209f88b691af7b42e",
+    "FIT_CODE_REVIEW.md": "5e5c2dbffd225ae80118086d0d2fcf7acf88cad0c3c5840227dca1bd974accdd",
+    "STAGE_CODE_REVIEW.md": "70ef0739153efd5c7927d7c47e7a08375db376fa5390c295e64cdb5cf8e85e9f",
+    "verify_locked_choices.py": "350a7c490e64c964015e01d13960e16db8d6eebe45a92686152426910f91e453",
+    "REPLAYED_LOCKED_CHOICES.jsonl": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+    "REPLAYED_CHOICES_RECEIPT.json": "03e0401eca3bc43bdc6b16b87185459ffa37e1c8027187ea464d67eb910fad0a",
+    "verify_locked_outcomes.py": "63377836941da5ae2d681b34fd62c910e4fa5bce8a622e46034c184d34fc6f83",
+    "REPLAYED_OUTCOME_METRICS.json": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d",
+    "REPLAYED_LOCKED_RACE_OUTCOMES.jsonl": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f",
+    "REPLAYED_OUTCOME_RECEIPT.json": "3a73316a644126e473f00d63e0633ad7cd3564288dfdd4cb716be4c8f7f8949e"
+  },
+  "choice_replay": {
+    "status": "PASS",
+    "races": 1779,
+    "primary_races": 1503,
+    "five_sets_enumerated": 411084,
+    "exact_saved_choices": 1779,
+    "zero_beta_baseline_identity": 1779,
+    "row_reversal_identity": 1779,
+    "additive_runner_utility_identity": 1779,
+    "primary_changed_choices": 254,
+    "full_changed_choices": 304
+  },
+  "outcome_replay": {
+    "status": "PASS",
+    "runner_rows": 17412,
+    "races": 1779,
+    "primary_races": 1503,
+    "primary_dates": 269,
+    "exact_main_race_ledger_rows": 1779,
+    "all_summary_groups_match_main": true,
+    "bootstrap_replicates": 2000,
+    "primary_success_gate_passed": false
+  },
+  "outcome_summary": {
+    "primary": {
+      "selector_hits": 435,
+      "baseline_hits": 439,
+      "selector_rate": 0.2894211576846307,
+      "baseline_rate": 0.29208250166334,
+      "difference": -0.0026613439787092482,
+      "difference_percentage_points": -0.2661343978709248,
+      "selector_only_caught": 31,
+      "baseline_only_lost": 35,
+      "selector_missed_top3_count_0_1_2_3": {
+        "0": 435,
+        "1": 768,
+        "2": 272,
+        "3": 28
+      },
+      "baseline_missed_top3_count_0_1_2_3": {
+        "0": 439,
+        "1": 759,
+        "2": 279,
+        "3": 26
+      }
+    },
+    "full": {
+      "selector_hits": 520,
+      "baseline_hits": 519,
+      "selector_rate": 0.2922990444069702,
+      "baseline_rate": 0.2917369308600337,
+      "difference": 0.0005621135469364812,
+      "difference_percentage_points": 0.056211354693648116,
+      "selector_only_caught": 38,
+      "baseline_only_lost": 37,
+      "selector_missed_top3_count_0_1_2_3": {
+        "0": 520,
+        "1": 901,
+        "2": 328,
+        "3": 30
+      },
+      "baseline_missed_top3_count_0_1_2_3": {
+        "0": 519,
+        "1": 900,
+        "2": 331,
+        "3": 29
+      }
+    },
+    "primary_date_bootstrap_95ci_rate_units": [
+      -0.01343341952546293,
+      0.007752692064066596
+    ]
+  }
+}

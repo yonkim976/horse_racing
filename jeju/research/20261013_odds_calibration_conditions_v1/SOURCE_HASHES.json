@@ -1,0 +1,110 @@
+{
+  "study": "20261013_odds_calibration_conditions_v1",
+  "scope": "local read-only post-race diagnostics; source and output hashes verified; manifest hash excludes itself",
+  "inputs": {
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": {
+      "sha256": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+      "bytes": 17016851
+    },
+    "jeju/research/20261013_postrace_ev_exploration_v1/race_rows.csv": {
+      "sha256": "4fc2e924dcf4f987c22962977d42dd83a786bebc2f70606bc565bd97d2869198",
+      "bytes": 894704
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "bytes": 5476534
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet": {
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+      "bytes": 97876
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet": {
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+      "bytes": 71793
+    },
+    "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy": {
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+      "bytes": 2152128
+    }
+  },
+  "upstream_evidence_hashes": {
+    "pair_receipt": {
+      "path": "jeju/research/20261012_pair_jockey_id_v1/outputs/PREDICTION_RECEIPT.json",
+      "sha256": "410bd6aa1df6c7ddb10306d20f14fa217e3903a21837b598db19ebc690485090"
+    },
+    "pair_manifest": {
+      "path": "jeju/research/20261012_pair_jockey_id_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "ca96125db23159e2dbbd16551e7da54d89a15f992f6c5e893665fabea4f2c545"
+    },
+    "pair_policy_source": {
+      "path": "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_report.py",
+      "sha256": "c0941e029c15eb2686ca12656a4d53bab2da1db2e1b78b68e97abe69993b52db"
+    },
+    "postrace_source_hashes": {
+      "path": "jeju/research/20261013_postrace_ev_exploration_v1/SOURCE_HASHES.json",
+      "sha256": "a6fcdd4ec8a28de0d2b513d068b0b40187da66dc02a15c36c4f81ae548801cc0"
+    },
+    "postrace_root_review": {
+      "path": "jeju/research/20261013_postrace_ev_exploration_v1/ROOT_REVIEW.json",
+      "sha256": "1b8f3d722897aa304e39d41883ba390a6e79de6381e53e552783e4026cf57f2b"
+    },
+    "postrace_report": {
+      "path": "jeju/research/20261013_postrace_ev_exploration_v1/REPORT.json",
+      "sha256": "4f5f104e2ba09aa8743e6fbf316c6145382968ed4d476bf2dc51198257fe9c9f"
+    },
+    "style_artifact_manifest": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e"
+    },
+    "style_final_verification": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/final_verification.json",
+      "sha256": "bf47d289557cc6cebd0b8344c4b7d7b6fcde20cab3aa112c956e0b8f8696581c"
+    },
+    "date_schedule_receipt": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+      "sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e"
+    }
+  },
+  "upstream_review": {
+    "status": "PASS",
+    "actual_prepurchase_strategy_validated": false,
+    "profitability_confirmed": false
+  },
+  "read_only": {
+    "network": false,
+    "database": false,
+    "model_fit": false,
+    "recalibration": false,
+    "reprediction": false
+  },
+  "outputs_sha256": {
+    "pair_context.csv": "2200e2ceb7e7febe1e77fc055134f3f0a3b4f15bfce6a53ee6edad861b6d71ee",
+    "odds_calibration.csv": "7c35f7002761a9aefe8d08b7edb71302ca674d81ad06cbf9f3836adf0a56accd",
+    "probability_odds_cells.csv": "5bcca7ee3a7806e6dfc811c4f38327d51a7cc76773174f1c2aaa3ba4b5867d43",
+    "condition_calibration.csv": "67ec7bb89f2bf64a363086e67be8fa8f7f52eba26f6f34ec56b2ccb3f59fe086",
+    "condition_odds_cells.csv": "a9605ef4acae44d89a459d302d8b2041487fce185117fb8c6735c13b383b44cc",
+    "selected_group_diagnostics.csv": "b6115c405c56818c7d6a89333ed02f2589c46319d70817800ddb80ac61482019",
+    "REPORT.json": "179a8235f7e40c3622bd513ef4842fcd336e1908413a485c76e48ad063b85710",
+    "README.md": "b4480bbd9853e7395a85a1ec4cc822962d07c3ea8468446f06958f17a95aeb55",
+    "PLAN.md": "b460882dcd2a43299364a1c37a5d3fd7dfab6bbe6ad891c9b51169f638252b3b",
+    "analyze.py": "7874017444569cc78357c30470dd6b3f4f79456554997b607489a2bce06e2f11"
+  },
+  "output_bytes": {
+    "pair_context.csv": 1553789,
+    "odds_calibration.csv": 11649,
+    "probability_odds_cells.csv": 36476,
+    "condition_calibration.csv": 73645,
+    "condition_odds_cells.csv": 291478,
+    "selected_group_diagnostics.csv": 32815,
+    "REPORT.json": 30297,
+    "README.md": 4859
+  },
+  "row_counts": {
+    "pair_context.csv": 2284,
+    "odds_calibration.csv": 36,
+    "probability_odds_cells.csv": 136,
+    "condition_calibration.csv": 222,
+    "condition_odds_cells.csv": 1065,
+    "selected_group_diagnostics.csv": 108
+  }
+}

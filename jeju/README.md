@@ -6,6 +6,8 @@
 
 ## 먼저 읽을 문서
 
+새 분석의 핵심 결과와 최신 버전은 [제주마 연구 결과 모음](research/conclusions/README.md)에서 확인한다. 앞으로 완료한 연구는 [연구 결과 관리 기준](research/RESEARCH_PUBLICATION_POLICY.md)에 따라 날짜별 원본과 주제별 결론을 함께 관리한다.
+
 현재 수집·적재·보류 상태와 과거 검증 문서는 [통합 점검 문서함](review_documents/README.md)에서 확인한다. 과거 보고서의 미완료 표시는 작성 당시의 상태이며 최신 상태표와 적용 원장을 우선한다.
 
 1. [작업 규칙](AGENTS.md)
@@ -31,6 +33,7 @@
 | `data/fixtures/` | 해시가 고정된 재현 입력 카드 링크 |
 | `predictions/` | 매 실행별 새 재현 결과 |
 | `research/` | 앞으로 시작할 새 분석 질문·코드·결과 |
+| `research/conclusions/` | 주제별 연구 결론, 최신 버전 목록과 원 보고서 연결 |
 | `docs/` | 제주 목표, 데이터 계획, 입력 감사와 원천 안내 |
 | `review_documents/` | 수집·적재·검증 문서 사본, 최신 상태표와 재점검 목록 |
 | `maintenance/cleanup_20260928/` | 이번 별도 정리 작업의 삭제·보존 근거 |
@@ -54,6 +57,10 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python jeju/cli.py replay --output jeju/pred
 
 ### 조교 자료 사용 기준
 
+기승자 종류·기수 이름을 분석할 때는 [종류 저장·집계](research/20261015_training_rider_types/README.md)와 `daily_training_rider_types_analysis_2026`를 사용한다. 확인되지 않은 종류는 미분류이고 `jockey_name`은 기수에만 제공한다. 다른 종류의 이름은 새 분석용 인물 변수에 넣지 않는다.
+
+사번별 실명 참조를 추적할 때는 [사번·실명 연결과 미연결 검토](research/20261015_training_rider_identity/README.md) 및 `daily_training_riders_analysis_2026`에서 조회한다. 사번 기준 참조명과 홈페이지 동일 조교행에서 직접 확인한 이름을 구분하고, 미연결은 NULL로 유지한다.
+
 일별조교는 [API18 적재·전수 검증](research/20261001_daily_training_api_load/README.md), 출발조교는 [홈페이지 기준 적재·전수 검증](research/20261001_starting_training_website_load/README.md)을 완료했다. 분석 조회는 각각 `daily_training_api_rows_analysis_2026`, `starting_training_website_rows_analysis_2026`이다. 새 모델 입력에는 자동 반영하지 않았다. 사용 전 [조교 API 입력 기준](docs/JEJU_TRAINING_API_INPUT_CONTRACT_2026-10-01.md)을 따른다. 횟수 항목의 전 기간 0값과 초기 시간값 공백을 실제 미조교로 입력하지 않고, 말 ID·날짜만으로 출발조교를 중복 제거하지 않는다. 원문과 감사 산출물은 보존한다.
 
 ### 이름·나이의 기본 조회 기준 (2026-10-01 사용자 지정)
@@ -71,3 +78,7 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python jeju/cli.py replay --output jeju/pred
 - 새 연구는 우승축·말별 우승/Top2/Top3·정확한 2/3착·조건부 동반 후보·승식 조합 확률을 목표 문서에 따라 정의하고 평가한다. 기존 A/B/C는 HY_R_FORM 비교 지표로 보존한다.
 - 과거 2024~2026 기간을 반복해서 사용한 결과는 후향 개발 분석으로 표시한다. 날짜나 분할을 바꿔도 새 독립 검증이 되지 않는다.
 - 새 피처나 모델은 감사·시간 검증을 거쳐 연구 후보로 보고한다. 운영 모델 승격은 명시적 등록 절차를 따른다.
+
+
+<!-- axis_companion_pairs_v1_20261009 -->
+[축 고정·동반 두 마리 연구](research/20261009_axis_companion_pairs_v1/README.md): R1의 기존 축+상대4두6개 17.88% → 상대6두 점수합6개 19.39% → 조건부 구간/전개6개 21.59%다. 조건부 학습+구간/전개 입력 묶음의 개선 신호가 있다. 같은467경주의 새 방식 22.70%는 운영 HY_R_FORM 30.84%보다 낮아 운영 교체 근거는 아니다. 운영 미반영.

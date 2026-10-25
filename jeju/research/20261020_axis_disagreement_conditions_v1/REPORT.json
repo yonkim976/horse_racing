@@ -1,0 +1,239 @@
+{
+  "status": "PASS",
+  "scope": {
+    "unique_favorite_races": 1477,
+    "disagreements": 678,
+    "same_pick_background": 799,
+    "tied_minimum_odds_races_excluded": 26,
+    "dates": [
+      "2024-01-05",
+      "2026-09-19"
+    ],
+    "distances_m": [
+      900,
+      1000,
+      1110,
+      1200
+    ]
+  },
+  "four_outcomes_678": {
+    "model_only": 126,
+    "market_only": 248,
+    "both": 173,
+    "neither": 131
+  },
+  "xor_exclusive_races": 374,
+  "top3_marginals_678": {
+    "model_axis": 0.4410029498525074,
+    "market_favorite": 0.6209439528023599,
+    "model_minus_market": -0.17994100294985255
+  },
+  "top3_marginals_1477": {
+    "model_axis": 0.5754908598510494,
+    "market_favorite": 0.6580907244414353,
+    "model_minus_market": -0.08259986459038593
+  },
+  "uncertainty": {
+    "overall_paired_hit_difference": -0.17994100294985252,
+    "unit": "model-axis hit minus market-favorite hit, among 678 disagreement races",
+    "race_date_clusters": 255,
+    "method": "percentile cluster bootstrap resampling race dates with replacement",
+    "replicates": 2000,
+    "seed": 20261020,
+    "ci95_low": -0.23238380809595202,
+    "ci95_high": -0.1290753379492252,
+    "condition_summary": "Wilson 95% intervals for each marginal hit rate; paired Wald 95% intervals for within-group difference; sparse flags retained"
+  },
+  "model_topk_pool_diagnostic": [
+    {
+      "population": "all_disagreements_678",
+      "model_top_k": 1,
+      "race_n": 678,
+      "races_with_any_actual_top3_in_model_top_k": 299,
+      "candidate_pool_coverage_rate": 0.4410029498525074,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "all_disagreements_678",
+      "model_top_k": 3,
+      "race_n": 678,
+      "races_with_any_actual_top3_in_model_top_k": 613,
+      "candidate_pool_coverage_rate": 0.9041297935103245,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "all_disagreements_678",
+      "model_top_k": 5,
+      "race_n": 678,
+      "races_with_any_actual_top3_in_model_top_k": 668,
+      "candidate_pool_coverage_rate": 0.9852507374631269,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_model_only",
+      "model_top_k": 1,
+      "race_n": 126,
+      "races_with_any_actual_top3_in_model_top_k": 126,
+      "candidate_pool_coverage_rate": 1.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_model_only",
+      "model_top_k": 3,
+      "race_n": 126,
+      "races_with_any_actual_top3_in_model_top_k": 126,
+      "candidate_pool_coverage_rate": 1.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_model_only",
+      "model_top_k": 5,
+      "race_n": 126,
+      "races_with_any_actual_top3_in_model_top_k": 126,
+      "candidate_pool_coverage_rate": 1.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_market_only",
+      "model_top_k": 1,
+      "race_n": 248,
+      "races_with_any_actual_top3_in_model_top_k": 0,
+      "candidate_pool_coverage_rate": 0.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_market_only",
+      "model_top_k": 3,
+      "race_n": 248,
+      "races_with_any_actual_top3_in_model_top_k": 218,
+      "candidate_pool_coverage_rate": 0.8790322580645161,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_market_only",
+      "model_top_k": 5,
+      "race_n": 248,
+      "races_with_any_actual_top3_in_model_top_k": 245,
+      "candidate_pool_coverage_rate": 0.9879032258064516,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_both",
+      "model_top_k": 1,
+      "race_n": 173,
+      "races_with_any_actual_top3_in_model_top_k": 173,
+      "candidate_pool_coverage_rate": 1.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_both",
+      "model_top_k": 3,
+      "race_n": 173,
+      "races_with_any_actual_top3_in_model_top_k": 173,
+      "candidate_pool_coverage_rate": 1.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_both",
+      "model_top_k": 5,
+      "race_n": 173,
+      "races_with_any_actual_top3_in_model_top_k": 173,
+      "candidate_pool_coverage_rate": 1.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_neither",
+      "model_top_k": 1,
+      "race_n": 131,
+      "races_with_any_actual_top3_in_model_top_k": 0,
+      "candidate_pool_coverage_rate": 0.0,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_neither",
+      "model_top_k": 3,
+      "race_n": 131,
+      "races_with_any_actual_top3_in_model_top_k": 96,
+      "candidate_pool_coverage_rate": 0.732824427480916,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    },
+    {
+      "population": "case_neither",
+      "model_top_k": 5,
+      "race_n": 131,
+      "races_with_any_actual_top3_in_model_top_k": 124,
+      "candidate_pool_coverage_rate": 0.9465648854961832,
+      "interpretation": "retrospective_hindsight_candidate_pool_coverage_only"
+    }
+  ],
+  "favorite_no_same_distance_valid_time_in_disagreements": {
+    "n": 158,
+    "also_same_starts_zero": 158,
+    "saved_observed_starts_zero": 34,
+    "other_distance_history_only": 124
+  },
+  "year_outcomes_678": {
+    "2024": {
+      "model_only": 40,
+      "market_only": 78,
+      "both": 58,
+      "neither": 57
+    },
+    "2025": {
+      "model_only": 50,
+      "market_only": 102,
+      "both": 57,
+      "neither": 40
+    },
+    "2026": {
+      "model_only": 36,
+      "market_only": 68,
+      "both": 58,
+      "neither": 34
+    }
+  },
+  "distance_outcomes_678": {
+    "900": {
+      "model_only": 19,
+      "market_only": 48,
+      "both": 38,
+      "neither": 19
+    },
+    "1000": {
+      "model_only": 45,
+      "market_only": 88,
+      "both": 64,
+      "neither": 37
+    },
+    "1110": {
+      "model_only": 42,
+      "market_only": 76,
+      "both": 46,
+      "neither": 46
+    },
+    "1200": {
+      "model_only": 20,
+      "market_only": 36,
+      "both": 25,
+      "neither": 29
+    }
+  },
+  "validation": {
+    "frozen_f1_ledger_rows_linked_to_baseline": 14714,
+    "axis_feature_rows": 1503,
+    "unique_favorite_feature_rows": 1477,
+    "root_case_flag_agreement_unique_favorites": 1477,
+    "root_case_label_agreement_unique_favorites": 1477,
+    "root_selected_id_agreements": 2954,
+    "baseline_probability_label_matches": true,
+    "odds_snapshot_matches_frozen_ledger": true,
+    "source_hashes_checked_before_and_after": true
+  },
+  "interpretation_limits": [
+    "Retrospective association only; no causal claim, model fitting, threshold search, or independent future validation.",
+    "Final win odds and axis odds rank are post-race explanatory fields with publication time unverified; not predictive input or purchase strategy.",
+    "2026 is partial through 2026-09-19; all reviewed periods are previously seen development data.",
+    "Grade comparisons are descriptive and confounded by distance/field composition; use distance_grade cells and sparse flags.",
+    "previous_top3 is based on an individual prior finish position and does not require whole-race completeness; previous_result_status is separate."
+  ]
+}

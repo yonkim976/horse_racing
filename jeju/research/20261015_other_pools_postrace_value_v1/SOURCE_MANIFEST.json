@@ -1,0 +1,222 @@
+{
+  "status": "PASS",
+  "source_sha256": {
+    "registry": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "hy_model": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+    "hy_distribution_function": "61409385b5748d2df6a34fcd4eca5bd453669c0421c024f34e55aca216050aa7",
+    "hy_saved_predictions": "3fe93854bab4f6772a944db3a57f91a6ee6ab67469948d2df42a06314ccd4e31",
+    "hy_frozen_scores": "0f5f74df38960fd556b314753612bed2373380b4e01657c0ec8ba4f841d6b66e",
+    "native_races": "f55e2fc5708612c2fb696db107a18bdabeda0a8d55f95992fe1f7b4c6dac8533",
+    "native_entries": "cd3f6f248c4087c96fb012820c0d8b92fb2ab9a20cd3e1fba476bec5494a35a0",
+    "prior_cohort": "4f87d05e0f7e2db48f1029dbf1fc78c393ba3804eb20ccb8d28cf6e20e73983f",
+    "source_preflight": "c6b6b20cdb6bb4ae6f3cfac63402dc53a5b7262b53fa356618bffd83df89554f",
+    "candidate_quotes": "96c6a2536520ca3ea33f6b255b04501972aef4f837c3ac694d1563a8148bce50",
+    "official_runner_results": "4ae6133d9d537f9ca6b351ed909a945b88a428cb4babcdf15659e266a68f2df6",
+    "research_tla_probabilities": "7c7bafcb315a9f9595e06aa1ee12ca0affbcf3abcc13426e90e079261d29b382",
+    "research_tla_receipt": "d29cc55d7d8c39e9301b20196b3033f503ccdeadc85a5ef9b25300e45d533c9a",
+    "bootstrap_schedule": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "bootstrap_receipt": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "frozen_plan": "43a1ffed99e6e1ec6b1006905886b85a2c97bd2055eafc2799298e0f9aca4d51",
+    "analysis_code": "bf4a4dfaa8aad0fc4e1b7dd7805936128a824f986a8af7a6a271e63c7f6af518"
+  },
+  "registry_resolver": {
+    "active_profile": "jeju-hy-r-form-20260919-v1",
+    "champion_id": "HY_R_FORM",
+    "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+    "components": {
+      "A_B_C": {
+        "artifact": "HY_R_FORM_model",
+        "candidate": "HY_R_FORM",
+        "model_version": "frozen_2026_HY_R_FORM",
+        "order_score": "order_score",
+        "set_score": "rank_score"
+      }
+    },
+    "domain": "jeju",
+    "ok": true,
+    "probability_contract": "jeju_hy_r_form_runner_v1",
+    "registry_path": "config/prediction_model_registry.json",
+    "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "verified_artifacts": [
+      {
+        "name": "HY_R_FORM_model",
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+        "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+      },
+      {
+        "name": "reference_inference",
+        "path": "scripts/predict_jeju_live_hy_r_form.py",
+        "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+      },
+      {
+        "name": "baseline_verification",
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+        "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+      },
+      {
+        "name": "latest_challenger_decision",
+        "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+        "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+      },
+      {
+        "name": "latest_challenger_verification",
+        "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+        "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+      }
+    ]
+  },
+  "source_coverage": {
+    "status": "PASS",
+    "phase": "source_only_preflight_before_probability_returns",
+    "cohort": {
+      "races": 467,
+      "dates": 70,
+      "start": "2026-01-02",
+      "end": "2026-09-12",
+      "runner_rows": 4475,
+      "race_ids_sha256": "9937c651c25163fd8e01e1a3f329dd85d585ebc006a378c74722e47d4e4e0182"
+    },
+    "pool_definitions": {
+      "WIN": "first-place horse, single selection",
+      "QNL": "official first and second horses, unordered pair",
+      "EXA": "official first then second, ordered pair",
+      "TLA": "official Top3 set, unordered triple",
+      "TRI": "official first, second, third in exact order"
+    },
+    "expected_candidate_rows_467": {
+      "WIN": 4475,
+      "QNL": 19388,
+      "EXA": 38776,
+      "TLA": 50017,
+      "TRI": 300102
+    },
+    "source_quote_rows_467": {
+      "WIN": 4475,
+      "QNL": 19388,
+      "EXA": 38776,
+      "TLA": 50017,
+      "TRI": 300102
+    },
+    "candidate_keys_missing": {
+      "WIN": 0,
+      "QNL": 0,
+      "EXA": 0,
+      "TLA": 0,
+      "TRI": 0
+    },
+    "candidate_keys_extra": {
+      "WIN": 0,
+      "QNL": 0,
+      "EXA": 0,
+      "TLA": 0,
+      "TRI": 0
+    },
+    "invalid_quotes_by_pool": {
+      "WIN": 0,
+      "QNL": 0,
+      "EXA": 0,
+      "TLA": 0,
+      "TRI": 15343
+    },
+    "sentinel_quotes_by_pool": {
+      "WIN": 0,
+      "QNL": 0,
+      "EXA": 0,
+      "TLA": 0,
+      "TRI": 15343
+    },
+    "tri": {
+      "incomplete_races": 245,
+      "complete_price_races": 222,
+      "universal_scope_races": 222,
+      "expected_candidate_rows_in_universal_scope": {
+        "WIN": 2031,
+        "QNL": 8413,
+        "EXA": 16826,
+        "TLA": 20797,
+        "TRI": 124782
+      },
+      "valid_quote_rows_in_universal_scope": {
+        "WIN": 2031,
+        "QNL": 8413,
+        "EXA": 16826,
+        "TLA": 20797,
+        "TRI": 124782
+      }
+    },
+    "all_other_pools": {
+      "complete_price_races": 467,
+      "expected_candidate_rows": {
+        "WIN": 4475,
+        "QNL": 19388,
+        "EXA": 38776,
+        "TLA": 50017
+      }
+    },
+    "official_audit": {
+      "races": 467,
+      "official_runner_rows": 4475,
+      "operating_runner_rows": 4475,
+      "exactly_one_each_finish_1_2_3": true,
+      "dead_heat_top3_races": 0,
+      "rosters_and_horse_ids_match": true,
+      "scratch_dq_incomplete_races": 0
+    },
+    "api301": {
+      "api301_registry_rows_for_target_days": 610,
+      "duplicate_registry_alias_rows_collapsed": 15,
+      "complete_runs": 119,
+      "complete_days": 70,
+      "selected_pages": 242,
+      "selected_unique_page_hashes": 242,
+      "page_index_sha256": "aedd0a8d5600764ca740633f8caa6f3bf04876d653175b15399c2e76a37ef6ce",
+      "source_page_hashes_match_index_and_files": true,
+      "latest_complete_run_matches_20261014_source_page_index": true,
+      "winner_only_reference_used_for_loser_quotes": false,
+      "price_timing": "archived final post-race API301 odds; official publication timestamp unavailable"
+    },
+    "source_hashes": {
+      "prior_cohort": "4f87d05e0f7e2db48f1029dbf1fc78c393ba3804eb20ccb8d28cf6e20e73983f",
+      "prior_source_manifest": "62a26c020296b290380134efca3b99bc592e777f5c874d61d1cadd5af9ed83f5",
+      "official_runner_results": "4ae6133d9d537f9ca6b351ed909a945b88a428cb4babcdf15659e266a68f2df6",
+      "source_page_index": "aedd0a8d5600764ca740633f8caa6f3bf04876d653175b15399c2e76a37ef6ce",
+      "api301_archive_helper": "0481c19a7e01f530d70a50bbe546e3f5a3d712615903b6b4f146d77099638cec",
+      "candidate_quotes_output": "96c6a2536520ca3ea33f6b255b04501972aef4f837c3ac694d1563a8148bce50",
+      "source_page_index_output": "761ff9c60de7e9f51e811a106b3f996410c9cbbfa82ad1e8e5b20778c6f5746f",
+      "pool_source_cohort_output": "f0c782ffd1f58475aed4922d9c42bf338b9eff8281dd314960d95d98ba279386",
+      "source_exclusions_output": "cd48b73779a95f220db1408210f15d2dfce26060a9590bcd040ab7418bec0aee"
+    },
+    "read_only": {
+      "db_mode": "ro via existing archive helper",
+      "network": false,
+      "training_or_calibration": false,
+      "operating_artifacts_modified": false
+    }
+  },
+  "fixed_scopes": {
+    "per_pool_primary": {
+      "WIN": 467,
+      "QNL": 467,
+      "EXA": 467,
+      "TLA": 467,
+      "TRI": 222
+    },
+    "universal_222": {
+      "WIN": 222,
+      "QNL": 222,
+      "EXA": 222,
+      "TLA": 222,
+      "TRI": 222
+    }
+  },
+  "research_support": {
+    "TLA": "F1_STYLE6 native exact unordered Top3 set_probability",
+    "other_pools": "no retained genuine native matching research event probabilities"
+  },
+  "pre_outcome_policy_decision_sha256": "fd950ffcc4bf70b7e35dced045aa79afa523d1942f86143ad4d36a9135d76f79",
+  "pre_outcome_choices_created_before_label_join": true,
+  "network": false,
+  "training_fits": 0,
+  "calibration_fits": 0,
+  "old_study_or_operating_artifact_modified": false
+}

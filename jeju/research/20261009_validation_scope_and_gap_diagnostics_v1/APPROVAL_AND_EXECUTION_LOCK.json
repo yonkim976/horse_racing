@@ -1,0 +1,54 @@
+{
+  "approval_status": "approved_for_fixed_one_way_cell_aggregation",
+  "approval_authority": "root",
+  "approval_recorded_at_utc": "2026-10-09T03:48:29Z",
+  "approval_scope": {
+    "condition": "existing S1 first_return_91_plus versus general",
+    "model_variant": "saved F1 predictions only",
+    "periods": [
+      "2024_2025",
+      "2026_partial"
+    ],
+    "stratification": "one axis at a time: exact distance, observed_starts 0/1_4/5_plus, previous_top3 top3/not_top3/unknown",
+    "metrics": "mean y-minus-p_top3 residual, pointwise date-cluster bootstrap residual CI, stored runner-level Brier mean, and support counts",
+    "bootstrap": {
+      "clusters": "race_date",
+      "repetitions": 2000,
+      "seed": 20261009,
+      "interval": "pointwise 95 percent percentile",
+      "minimum_days_for_ci": 10,
+      "otherwise": "CI NA"
+    },
+    "excluded": [
+      "cross-tabulations",
+      "threshold search",
+      "new model fitting",
+      "calibration",
+      "fixed score or operational changes"
+    ]
+  },
+  "plan": {
+    "path": "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/PLAN_approved_original.md",
+    "bytes": 4837,
+    "sha256": "47d37c7eea51fd973439cf3ab2380d54ca8f78265b05dc85f90f91507ae8e943",
+    "role": "exact pre-analysis approved execution-plan snapshot; hash reconstructed and asserted"
+  },
+  "scope_neutral_correction": "Before successful computation, the coverage-only frozen S1 label was verified and corrected from second_after_return to second_after_return_le90; root approved the correction. The comparison groups and metrics were unchanged.",
+  "preflight_stop_preserved": "Initial execution stopped before writing any result because the input contained the exact S1 label second_after_return_le90. No residual or loss values were computed in that stopped attempt.",
+  "input_lock": "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/input_lock.json",
+  "post_execution_current_plan": {
+    "path": "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/PLAN.md",
+    "bytes": 5179,
+    "sha256": "871fd49fd785e5ff8f39d0e75433019a9947ea37a489a8d81805c7b18a8e9eab",
+    "root_approved": true,
+    "approval_authority": "root",
+    "analysis_unchanged": true,
+    "scope": "future validation protocol wording only; no change to executed cells, inputs, metrics, or results",
+    "clarification": "separates historical-feature cutoff at KST T-2 inclusive from the pre-fixed prediction-generation timestamp and the lineup/condition snapshot available then; does not require lineup acquisition at T-2"
+  },
+  "original_plan_snapshot_restoration": {
+    "method": "reconstruct the one replaced protocol paragraph from the preserved prior text and assert against the pre-edit approval hash and byte count",
+    "sha256_asserted": true,
+    "bytes_asserted": true
+  }
+}

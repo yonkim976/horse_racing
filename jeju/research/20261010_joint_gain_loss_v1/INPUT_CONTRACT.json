@@ -1,0 +1,120 @@
+{
+  "contract_version": 1,
+  "analysis_status": "fixed retrospective analysis plan; outcomes not opened when this contract was written",
+  "fixed_cohort": {
+    "races": 1779,
+    "runner_rows": 17412,
+    "race_days": 269,
+    "start_date": "2024-01-05",
+    "end_date": "2026-09-19",
+    "partial_year_2026": true,
+    "evaluation_period_reused_in_prior_development": true
+  },
+  "input_files": [
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "d0d1a749afb6a6f894de1bb4263c9d67dd1e3b2d1a35bf1b5fd38d8948c656b0",
+      "role": "authoritative source artifact manifest"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/fit_parameters.json",
+      "sha256": "ff96e32cc4e0c991ac1326ef111a785b0e4f11b49daedc9f584be00dfe72eaeb",
+      "role": "fixed fold beta, normalization, and temperature parameters"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/race_metrics.csv",
+      "sha256": "89820acf0dfafc749f394cf9e74a3b58a5ec890e2c746f890ad257eaf32ff115",
+      "role": "saved race-level baseline and candidate outcomes"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv",
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+      "role": "saved runner-level probabilities and labels"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/all_triples.parquet",
+      "sha256": "13409e65353c0cb6dab14df97317cce24de913056ae464ee3524520759de681c",
+      "rows": 402808,
+      "columns": [
+        "race_id", "race_date", "evaluation_year", "distance_m", "arm",
+        "triple_index", "triple_numbers", "baseline_score_energy",
+        "relationship_energy", "total_energy", "temperature", "probability",
+        "is_true_set", "canonical_rank"
+      ],
+      "role": "complete saved triple distributions for both arms"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "rows": 52155,
+      "required_columns": [
+        "api_record_id", "race_id", "race_date", "year", "horse_id",
+        "horse_number", "finish_position", "distance_m", "grade_raw",
+        "history_cutoff", "latest_history_date", "observed_starts",
+        "days_since_start", "same_distance_last5_top3_rate",
+        "same_distance_last5_actual_n", "same_distance_last5_normal_n",
+        "hist_s1f_relpos_mean5", "hist_s1f_relpos_n",
+        "hist_s1f_to_c4_forward_mean5", "hist_s1f_to_c4_pair_n",
+        "hist_c4_to_g1f_forward_mean5", "hist_c4_to_g1f_pair_n"
+      ],
+      "role": "saved runner history, pre-race feature, and race descriptors"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet",
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60",
+      "rows": 6329,
+      "columns": ["api_record_id", "score"],
+      "role": "saved 2024 evaluation score keyed by api_record_id"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet",
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+      "rows": 6410,
+      "columns": ["api_record_id", "score"],
+      "role": "saved 2025 evaluation score keyed by api_record_id"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet",
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+      "rows": 4673,
+      "columns": ["api_record_id", "score"],
+      "role": "saved partial-2026 evaluation score keyed by api_record_id"
+    }
+  ],
+  "csv_column_contracts": {
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/race_metrics.csv": [
+      "race_id", "race_date", "evaluation_year", "distance_m", "runner_rows",
+      "triple_count", "baseline_hit6", "candidate_hit6",
+      "baseline_joint_true_set_nll", "candidate_joint_true_set_nll",
+      "baseline_joint_brier", "candidate_joint_brier", "baseline_six_mass",
+      "candidate_six_mass", "baseline_six_tickets", "candidate_six_tickets",
+      "delta_hit6", "delta_joint_true_set_nll"
+    ],
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv": [
+      "api_record_id", "race_id", "race_date", "evaluation_year", "horse_number",
+      "y_top3", "baseline_joint_marginal", "candidate_joint_marginal",
+      "saved_f1_style6_p_top3", "saved_y_top3"
+    ]
+  },
+  "fit_parameter_json_structure": {
+    "top_level_keys": [
+      "folds", "pair_features", "source_hashes_before_fit",
+      "source_hashes_after_fit", "source_hashes_unchanged_after_fit"
+    ],
+    "required_per_fold_fields": [
+      "evaluation_year", "beta", "pair_rms", "runner_scaler",
+      "baseline_tau", "candidate_tau"
+    ],
+    "pair_features_count": 11,
+    "folds": [2024, 2025, 2026]
+  },
+  "joins_and_units": {
+    "runner_scores_to_features": "one-to-one api_record_id within evaluation year",
+    "triples_to_race": "race_id plus arm; triple_numbers is canonical sorted horse-number key",
+    "actual_top3_set": "the three runners with finish_position <= 3 in each complete race",
+    "race_date_cluster": "normalized YYYY-MM-DD; all races on a date stay together in bootstrap",
+    "energy_margin": "rank-6 total_energy minus rank-7 total_energy, saved model energy units",
+    "probability_margin": "rank-6 probability minus rank-7 probability"
+  },
+  "prohibited_inputs": ["database", "network", "newly collected sources", "newly fitted model parameters"]
+}

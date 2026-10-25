@@ -1,0 +1,264 @@
+{
+  "passed": true,
+  "model_files_replayed": 6,
+  "raw_predictions_replayed": 73314,
+  "calibrations": [
+    {
+      "arm": "S",
+      "year": 2024,
+      "temperature": 1.2839358195588775,
+      "gradient": -1.7278695550790384e-08
+    },
+    {
+      "arm": "S",
+      "year": 2025,
+      "temperature": 1.323027519896799,
+      "gradient": -3.85571429026728e-08
+    },
+    {
+      "arm": "S",
+      "year": 2026,
+      "temperature": 1.165540100038154,
+      "gradient": 1.7403501010346294e-08
+    },
+    {
+      "arm": "G",
+      "year": 2024,
+      "temperature": 1.257908075627786,
+      "gradient": -3.58313501556761e-08
+    },
+    {
+      "arm": "G",
+      "year": 2025,
+      "temperature": 1.2941632381671215,
+      "gradient": -1.589439656186209e-08
+    },
+    {
+      "arm": "G",
+      "year": 2026,
+      "temperature": 1.1656271003705545,
+      "gradient": 3.6331120277455556e-08
+    }
+  ],
+  "ordered_triples_reconstructed": 2416848,
+  "metric_rows_checked": 24834,
+  "marginal_rows_checked": 34824,
+  "pair_rows_checked": 14232,
+  "reliability_rows_checked": 896,
+  "tri_bootstrap_draws": 2000,
+  "tri_nll": {
+    "S_mean": 6.00158034775801,
+    "G_mean": 5.991434632017138,
+    "difference": -0.010145715740871402,
+    "ci95": [
+      -0.021116300185868818,
+      0.0008274163363531113
+    ]
+  },
+  "tri_brier": {
+    "S_mean": 0.9957699711562416,
+    "G_mean": 0.995724688260529,
+    "difference": -4.5282895712674344e-05,
+    "ci95": [
+      -0.00015428206744872558,
+      6.797781103176086e-05
+    ]
+  },
+  "win_nll": {
+    "S_mean": 2.0337630261537827,
+    "G_mean": 2.025203050018779,
+    "difference": -0.008559976135003783,
+    "ci95": [
+      -0.015366524503008176,
+      -0.0017030745544332963
+    ]
+  },
+  "win_brier": {
+    "S_mean": 0.8360376290753657,
+    "G_mean": 0.8340455696348211,
+    "difference": -0.001992059440544527,
+    "ci95": [
+      -0.003923102165778174,
+      -3.3289512506073393e-05
+    ]
+  },
+  "research_gate_pass": false,
+  "axis_top3": {
+    "S_mean": 0.5868465430016864,
+    "G_mean": 0.5930297920179877,
+    "difference": 0.006183249016301293,
+    "ci95": [
+      -0.006788101604278075,
+      0.019329895367440265
+    ]
+  },
+  "pair_top3_tickets": {
+    "QNL": {
+      "S_mean": 0.2776840921866217,
+      "G_mean": 0.28274311410905,
+      "difference": 0.00505902192242833,
+      "ci95": [
+        -0.007415964348136397,
+        0.01688286160406445
+      ]
+    },
+    "QPL": {
+      "S_mean": 0.48622821810005623,
+      "G_mean": 0.4985947161326588,
+      "difference": 0.012366498032602586,
+      "ci95": [
+        -0.0016902123803770707,
+        0.02580302579824751
+      ]
+    }
+  },
+  "maximum_errors": {
+    "raw_model_replay": 0.0,
+    "temperature_objective": 6.217248937900877e-15,
+    "temperature_bound_objective": 1.3322676295501878e-14,
+    "pool_nll": 1.7763568394002505e-15,
+    "pool_brier": 7.771561172376096e-16,
+    "selection_probability": 2.3314683517128287e-15,
+    "runner_marginals": 9.992007221626409e-16,
+    "pair_count_distribution": 1.887379141862766e-15,
+    "pair_union": 6.661338147750939e-16,
+    "reliability": 9.992007221626409e-16,
+    "tri_bootstrap": 7.28583859910259e-17,
+    "summary_nll": 8.881784197001252e-16,
+    "summary_brier": 1.3877787807814457e-17,
+    "summary_denominator": 0.0
+  },
+  "input_sha256": "312163188d05823f5bd4fd60112bf2568b74b397b6bb889c340132e55119b0e7",
+  "verifier_sha256": "4e1a972880411110b8d781c58c73e4325e4719ac36803a5626fc5a3567ab65fc",
+  "candidate_added_feature_usage": [
+    {
+      "year": 2024,
+      "feature": "pace_own_early_tendency",
+      "split_count": 71,
+      "gain": 83.63250467181206
+    },
+    {
+      "year": 2024,
+      "feature": "pace_own_label_support_fraction_max10",
+      "split_count": 17,
+      "gain": 14.351164996623993
+    },
+    {
+      "year": 2024,
+      "feature": "pace_inner_interaction",
+      "split_count": 175,
+      "gain": 187.63601219654083
+    },
+    {
+      "year": 2024,
+      "feature": "pace_outer_interaction",
+      "split_count": 104,
+      "gain": 165.81299021840096
+    },
+    {
+      "year": 2024,
+      "feature": "pace_adjacent_inner_interaction",
+      "split_count": 20,
+      "gain": 14.099145948886871
+    },
+    {
+      "year": 2024,
+      "feature": "pace_adjacent_outer_interaction",
+      "split_count": 19,
+      "gain": 14.432224839925766
+    },
+    {
+      "year": 2024,
+      "feature": "pace_opponent_observed_fraction",
+      "split_count": 13,
+      "gain": 11.581221163272858
+    },
+    {
+      "year": 2025,
+      "feature": "pace_own_early_tendency",
+      "split_count": 70,
+      "gain": 92.90864562988281
+    },
+    {
+      "year": 2025,
+      "feature": "pace_own_label_support_fraction_max10",
+      "split_count": 13,
+      "gain": 14.323195934295654
+    },
+    {
+      "year": 2025,
+      "feature": "pace_inner_interaction",
+      "split_count": 158,
+      "gain": 190.6674199104309
+    },
+    {
+      "year": 2025,
+      "feature": "pace_outer_interaction",
+      "split_count": 110,
+      "gain": 169.84664684534073
+    },
+    {
+      "year": 2025,
+      "feature": "pace_adjacent_inner_interaction",
+      "split_count": 19,
+      "gain": 14.853182882070541
+    },
+    {
+      "year": 2025,
+      "feature": "pace_adjacent_outer_interaction",
+      "split_count": 29,
+      "gain": 21.36141300201416
+    },
+    {
+      "year": 2025,
+      "feature": "pace_opponent_observed_fraction",
+      "split_count": 3,
+      "gain": 2.39042991399765
+    },
+    {
+      "year": 2026,
+      "feature": "pace_own_early_tendency",
+      "split_count": 61,
+      "gain": 91.95248517394066
+    },
+    {
+      "year": 2026,
+      "feature": "pace_own_label_support_fraction_max10",
+      "split_count": 19,
+      "gain": 21.389232128858566
+    },
+    {
+      "year": 2026,
+      "feature": "pace_inner_interaction",
+      "split_count": 142,
+      "gain": 197.58952963352203
+    },
+    {
+      "year": 2026,
+      "feature": "pace_outer_interaction",
+      "split_count": 103,
+      "gain": 192.20592433214188
+    },
+    {
+      "year": 2026,
+      "feature": "pace_adjacent_inner_interaction",
+      "split_count": 17,
+      "gain": 13.475066065788269
+    },
+    {
+      "year": 2026,
+      "feature": "pace_adjacent_outer_interaction",
+      "split_count": 26,
+      "gain": 19.273076057434082
+    },
+    {
+      "year": 2026,
+      "feature": "pace_opponent_observed_fraction",
+      "split_count": 5,
+      "gain": 4.645604968070984
+    }
+  ],
+  "experiment_module_imported": false,
+  "models_refitted": false,
+  "protected_prior_files_unchanged": true
+}

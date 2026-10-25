@@ -1,0 +1,1029 @@
+{
+  "baseline_database": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3",
+  "checks": [
+    {
+      "detail": [
+        "ok"
+      ],
+      "name": "sqlite_integrity_check",
+      "ok": true
+    },
+    {
+      "detail": {
+        "sample": [],
+        "violations": 0
+      },
+      "name": "foreign_key_check",
+      "ok": true
+    },
+    {
+      "detail": {
+        "changed_existing_objects": 0,
+        "sample": {}
+      },
+      "name": "baseline_schema_preserved",
+      "ok": true
+    },
+    {
+      "detail": [],
+      "name": "current_views_present",
+      "ok": true
+    },
+    {
+      "detail": {
+        "views_with_cutoff_literal": []
+      },
+      "name": "current_view_definitions_unbounded_by_fixed_cutoff",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 4751,
+        "null_key_rows": 0,
+        "rows": 4751
+      },
+      "name": "current_key_unique:horse_profile_refresh_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 92908,
+        "null_key_rows": 0,
+        "rows": 92908
+      },
+      "name": "current_key_unique:race_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 15831,
+        "null_key_rows": 0,
+        "rows": 15831
+      },
+      "name": "current_key_unique:trial_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 912913,
+        "null_key_rows": 0,
+        "rows": 912913
+      },
+      "name": "current_key_unique:daily_training_api_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 912913,
+        "null_key_rows": 0,
+        "rows": 912913
+      },
+      "name": "current_key_unique:daily_training_riders_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 912913,
+        "null_key_rows": 0,
+        "rows": 912913
+      },
+      "name": "current_key_unique:training_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 191357,
+        "null_key_rows": 0,
+        "rows": 191357
+      },
+      "name": "current_key_unique:starting_training_website_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 191357,
+        "null_key_rows": 0,
+        "rows": 191357
+      },
+      "name": "current_key_unique:starting_training_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 12254,
+        "null_key_rows": 0,
+        "rows": 12254
+      },
+      "name": "current_key_unique:medical_api_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 12254,
+        "null_key_rows": 0,
+        "rows": 12254
+      },
+      "name": "current_key_unique:medical_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 10706,
+        "null_key_rows": 0,
+        "rows": 10706
+      },
+      "name": "current_key_unique:starting_exam_api_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 10706,
+        "null_key_rows": 0,
+        "rows": 10706
+      },
+      "name": "current_key_unique:exam_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 92908,
+        "null_key_rows": 0,
+        "rows": 92908
+      },
+      "name": "current_key_unique:sections_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 740,
+        "null_key_rows": 0,
+        "rows": 740
+      },
+      "name": "current_key_unique:starting_training_api_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "distinct_keys": 64,
+        "null_key_rows": 0,
+        "rows": 64
+      },
+      "name": "current_key_unique:api6_section_records_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "missing_payload_or_provenance_rows": 0,
+        "source_table_rows": 740,
+        "view_rows": 740
+      },
+      "name": "raw_payload_provenance_join:starting_training_api_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "missing_payload_or_provenance_rows": 0,
+        "source_table_rows": 64,
+        "view_rows": 64
+      },
+      "name": "raw_payload_provenance_join:api6_section_records_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "actual_bounds": {
+          "api6_section_records_current": {
+            "max_date": "2026-10-16",
+            "min_date": "2026-09-17",
+            "rows": 64,
+            "rows_after_2026_09_19": 42
+          },
+          "daily_training_api_rows_current": {
+            "distinct_keys": 912913,
+            "max_date": "2026-10-15",
+            "min_date": "2007-10-01",
+            "null_key_rows": 0,
+            "rows": 912913,
+            "rows_after_2026_09_19": 5361
+          },
+          "daily_training_riders_current": {
+            "distinct_keys": 912913,
+            "max_date": "2026-10-15",
+            "min_date": "2007-10-01",
+            "null_key_rows": 0,
+            "rows": 912913,
+            "rows_after_2026_09_19": 5361
+          },
+          "exam_current": {
+            "distinct_keys": 10706,
+            "max_date": "2026-10-15",
+            "min_date": "2002-06-07",
+            "null_key_rows": 0,
+            "rows": 10706,
+            "rows_after_2026_09_19": 86
+          },
+          "horse_profile_refresh_current": {
+            "distinct_keys": 4751,
+            "max_date": "2026-10-17",
+            "min_date": "2026-09-30",
+            "null_key_rows": 0,
+            "rows": 4751,
+            "rows_after_2026_09_19": 4751
+          },
+          "medical_api_rows_current": {
+            "distinct_keys": 12254,
+            "max_date": "2026-10-15",
+            "min_date": "2008-04-02",
+            "null_key_rows": 0,
+            "rows": 12254,
+            "rows_after_2026_09_19": 263
+          },
+          "medical_current": {
+            "distinct_keys": 12254,
+            "max_date": "2026-10-15",
+            "min_date": "2008-04-02",
+            "null_key_rows": 0,
+            "rows": 12254,
+            "rows_after_2026_09_19": 263
+          },
+          "race_current": {
+            "distinct_keys": 92908,
+            "max_date": "2026-10-16",
+            "min_date": "2002-07-06",
+            "null_key_rows": 0,
+            "rows": 92908,
+            "rows_after_2026_09_19": 395
+          },
+          "sections_current": {
+            "distinct_keys": 92908,
+            "excluded_horse_rows": 0,
+            "kwanghae_null_guard_rows": 1,
+            "kwanghae_rows": 1,
+            "max_date": "2026-10-16",
+            "min_date": "2002-07-06",
+            "null_key_rows": 0,
+            "rows": 92908,
+            "rows_after_2026_09_19": 395
+          },
+          "starting_exam_api_rows_current": {
+            "distinct_keys": 10706,
+            "max_date": "2026-10-15",
+            "min_date": "2002-06-07",
+            "null_key_rows": 0,
+            "rows": 10706,
+            "rows_after_2026_09_19": 86
+          },
+          "starting_training_api_current": {
+            "distinct_keys": 740,
+            "max_date": "2026-10-15",
+            "min_date": "2026-09-13",
+            "null_key_rows": 0,
+            "rows": 740,
+            "rows_after_2026_09_19": 595
+          },
+          "starting_training_current": {
+            "distinct_keys": 191357,
+            "max_date": "2026-10-15",
+            "min_date": "2007-10-17",
+            "null_key_rows": 0,
+            "rows": 191357,
+            "rows_after_2026_09_19": 567
+          },
+          "starting_training_website_rows_current": {
+            "distinct_keys": 191357,
+            "max_date": "2026-10-15",
+            "min_date": "2007-10-17",
+            "null_key_rows": 0,
+            "rows": 191357,
+            "rows_after_2026_09_19": 567
+          },
+          "training_current": {
+            "distinct_keys": 912913,
+            "max_date": "2026-10-15",
+            "min_date": "2007-10-01",
+            "null_key_rows": 0,
+            "rows": 912913,
+            "rows_after_2026_09_19": 5361
+          },
+          "trial_current": {
+            "distinct_keys": 15831,
+            "max_date": "2026-10-15",
+            "min_date": "2002-06-12",
+            "null_key_rows": 0,
+            "rows": 15831,
+            "rows_after_2026_09_19": 95
+          }
+        },
+        "manifest_current_view_entries": [
+          "api6_section_records_current",
+          "exam_current",
+          "horse_profile_refresh_current",
+          "medical_current",
+          "race_current",
+          "sections_current",
+          "starting_training_api_current",
+          "starting_training_current",
+          "training_current",
+          "trial_current"
+        ],
+        "matched_views": {
+          "api6_section_records_current": {
+            "actual": {
+              "max_date": "2026-10-16",
+              "min_date": "2026-09-17",
+              "rows": 64,
+              "rows_after_2026_09_19": 42
+            },
+            "expected": {
+              "first": "2026-09-17",
+              "latest": "2026-10-16",
+              "rows": 64
+            },
+            "matches": true
+          },
+          "exam_current": {
+            "actual": {
+              "distinct_keys": 10706,
+              "max_date": "2026-10-15",
+              "min_date": "2002-06-07",
+              "null_key_rows": 0,
+              "rows": 10706,
+              "rows_after_2026_09_19": 86
+            },
+            "expected": {
+              "first": "2002-06-07",
+              "latest": "2026-10-15",
+              "rows": 10706
+            },
+            "matches": true
+          },
+          "horse_profile_refresh_current": {
+            "actual": {
+              "distinct_keys": 4751,
+              "max_date": "2026-10-17",
+              "min_date": "2026-09-30",
+              "null_key_rows": 0,
+              "rows": 4751,
+              "rows_after_2026_09_19": 4751
+            },
+            "expected": {
+              "first": "2026-09-30",
+              "latest": "2026-10-17",
+              "rows": 4751
+            },
+            "matches": true
+          },
+          "medical_current": {
+            "actual": {
+              "distinct_keys": 12254,
+              "max_date": "2026-10-15",
+              "min_date": "2008-04-02",
+              "null_key_rows": 0,
+              "rows": 12254,
+              "rows_after_2026_09_19": 263
+            },
+            "expected": {
+              "first": "2008-04-02",
+              "latest": "2026-10-15",
+              "rows": 12254
+            },
+            "matches": true
+          },
+          "race_current": {
+            "actual": {
+              "distinct_keys": 92908,
+              "max_date": "2026-10-16",
+              "min_date": "2002-07-06",
+              "null_key_rows": 0,
+              "rows": 92908,
+              "rows_after_2026_09_19": 395
+            },
+            "expected": {
+              "first": "2002-07-06",
+              "latest": "2026-10-16",
+              "rows": 92908
+            },
+            "matches": true
+          },
+          "sections_current": {
+            "actual": {
+              "distinct_keys": 92908,
+              "excluded_horse_rows": 0,
+              "kwanghae_null_guard_rows": 1,
+              "kwanghae_rows": 1,
+              "max_date": "2026-10-16",
+              "min_date": "2002-07-06",
+              "null_key_rows": 0,
+              "rows": 92908,
+              "rows_after_2026_09_19": 395
+            },
+            "expected": {
+              "first": "2002-07-06",
+              "latest": "2026-10-16",
+              "rows": 92908
+            },
+            "matches": true
+          },
+          "starting_training_api_current": {
+            "actual": {
+              "distinct_keys": 740,
+              "max_date": "2026-10-15",
+              "min_date": "2026-09-13",
+              "null_key_rows": 0,
+              "rows": 740,
+              "rows_after_2026_09_19": 595
+            },
+            "expected": {
+              "first": "2026-09-13",
+              "latest": "2026-10-15",
+              "rows": 740
+            },
+            "matches": true
+          },
+          "starting_training_current": {
+            "actual": {
+              "distinct_keys": 191357,
+              "max_date": "2026-10-15",
+              "min_date": "2007-10-17",
+              "null_key_rows": 0,
+              "rows": 191357,
+              "rows_after_2026_09_19": 567
+            },
+            "expected": {
+              "first": "2007-10-17",
+              "latest": "2026-10-15",
+              "rows": 191357
+            },
+            "matches": true
+          },
+          "training_current": {
+            "actual": {
+              "distinct_keys": 912913,
+              "max_date": "2026-10-15",
+              "min_date": "2007-10-01",
+              "null_key_rows": 0,
+              "rows": 912913,
+              "rows_after_2026_09_19": 5361
+            },
+            "expected": {
+              "first": "2007-10-01",
+              "latest": "2026-10-15",
+              "rows": 912913
+            },
+            "matches": true
+          },
+          "trial_current": {
+            "actual": {
+              "distinct_keys": 15831,
+              "max_date": "2026-10-15",
+              "min_date": "2002-06-12",
+              "null_key_rows": 0,
+              "rows": 15831,
+              "rows_after_2026_09_19": 95
+            },
+            "expected": {
+              "first": "2002-06-12",
+              "latest": "2026-10-15",
+              "rows": 15831
+            },
+            "matches": true
+          }
+        },
+        "missing_current_view_entries": [
+          "daily_training_api_rows_current",
+          "daily_training_riders_current",
+          "medical_api_rows_current",
+          "starting_exam_api_rows_current",
+          "starting_training_website_rows_current"
+        ]
+      },
+      "name": "current_view_date_bounds_match_manifest",
+      "ok": false
+    },
+    {
+      "detail": {
+        "current_rows": 912913,
+        "legacy_rows": 907552
+      },
+      "name": "current_scope_superset:daily_training_api_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "current_rows": 191357,
+        "legacy_rows": 190790
+      },
+      "name": "current_scope_superset:starting_training_website_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "current_rows": 12254,
+        "legacy_rows": 11991
+      },
+      "name": "current_scope_superset:medical_api_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "current_rows": 10706,
+        "legacy_rows": 10620
+      },
+      "name": "current_scope_superset:starting_exam_api_rows_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "mismatches": 0
+      },
+      "name": "fixed_2026_age_policy:horse_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "mismatches": 0
+      },
+      "name": "fixed_2026_age_policy:race_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "mismatches": 0
+      },
+      "name": "fixed_2026_age_policy:trial_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "daily_training_api_rows_current": 0,
+        "daily_training_riders_current": 0,
+        "exam_current": 0,
+        "horse_current": 0,
+        "horse_profile_refresh_current": 0,
+        "medical_api_rows_current": 0,
+        "medical_current": 0,
+        "race_current": 0,
+        "sections_current": 0,
+        "starting_exam_api_rows_current": 0,
+        "starting_training_api_current": 0,
+        "starting_training_current": 0,
+        "starting_training_website_rows_current": 0,
+        "training_current": 0,
+        "trial_current": 0
+      },
+      "name": "excluded_horse_not_reimported",
+      "ok": true
+    },
+    {
+      "detail": {
+        "group_hold_nonnull_values": 0,
+        "group_source_sha_mismatch_rows": 0,
+        "order_hold_nonnull_values": 0,
+        "order_source_sha_mismatch_rows": 0,
+        "unresolved_group_points": 20,
+        "unresolved_order_fields": 70,
+        "website_corrected_order_fields": 14
+      },
+      "name": "section_order_review_policy",
+      "ok": true
+    },
+    {
+      "detail": {
+        "group_hold_nonnull_values": 0,
+        "group_source_sha_mismatch_rows": 0,
+        "order_hold_nonnull_values": 0,
+        "order_source_sha_mismatch_rows": 0,
+        "unresolved_group_points": 20,
+        "unresolved_order_fields": 70,
+        "website_corrected_order_fields": 14
+      },
+      "name": "section_group_review_policy",
+      "ok": true
+    },
+    {
+      "detail": {
+        "expected_order_and_group_reviews": 90,
+        "rows": 90
+      },
+      "name": "section_conflict_review_ledger",
+      "ok": true
+    },
+    {
+      "detail": {
+        "matching_rows": 1,
+        "null_with_anomaly_status_rows": 1
+      },
+      "name": "kwanghae_cheongmyeong_g1f_remains_null",
+      "ok": true
+    },
+    {
+      "detail": {
+        "race_rows": 92908,
+        "sections_rows": 92908
+      },
+      "name": "sections_current_matches_race_current",
+      "ok": true
+    },
+    {
+      "detail": {
+        "baseline": {
+          "rows": 90,
+          "sha256": "8782c173a054ae1da6e421e6be00c7d9ffd0169f59729e6aa739abde7e4240eb"
+        },
+        "refresh": {
+          "rows": 90,
+          "sha256": "8782c173a054ae1da6e421e6be00c7d9ffd0169f59729e6aa739abde7e4240eb"
+        }
+      },
+      "name": "review_table_preserved:section_internal_conflict_reviews",
+      "ok": true
+    },
+    {
+      "detail": {
+        "baseline": {
+          "rows": 14,
+          "sha256": "27bca3a16f70dd393a07e939b8c022732fbae8a045214860e7bd32c0ee143334"
+        },
+        "refresh": {
+          "rows": 14,
+          "sha256": "27bca3a16f70dd393a07e939b8c022732fbae8a045214860e7bd32c0ee143334"
+        }
+      },
+      "name": "review_table_preserved:race_section_order_reviews",
+      "ok": true
+    },
+    {
+      "detail": {
+        "baseline": {
+          "rows": 4,
+          "sha256": "84de6f22d0dad1c0ece0bb88624966222585428dd1bf829d633d85c9634d9f4c"
+        },
+        "refresh": {
+          "rows": 4,
+          "sha256": "84de6f22d0dad1c0ece0bb88624966222585428dd1bf829d633d85c9634d9f4c"
+        }
+      },
+      "name": "review_table_preserved:race_section_time_reviews",
+      "ok": true
+    },
+    {
+      "detail": {
+        "api303_corner_rank_rows": {
+          "actual_after_rows": 19975,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 19933,
+          "baseline_manifest_rows": 19933,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 19975,
+          "expected_before_rows": 19933,
+          "inserted_rows": 42
+        },
+        "daily_training_api_rows": {
+          "actual_after_rows": 912913,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 908316,
+          "baseline_manifest_rows": 908316,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 912913,
+          "expected_before_rows": 908316,
+          "inserted_rows": 4597
+        },
+        "horse_profile_observations": {
+          "actual_after_rows": 4791,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 4718,
+          "baseline_manifest_rows": 4718,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 4791,
+          "expected_before_rows": 4718,
+          "inserted_rows": 73
+        },
+        "medical_api_rows": {
+          "actual_after_rows": 12254,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 12030,
+          "baseline_manifest_rows": 12030,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 12254,
+          "expected_before_rows": 12030,
+          "inserted_rows": 224
+        },
+        "race_result_rows": {
+          "actual_after_rows": 191999,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 191604,
+          "baseline_manifest_rows": 191604,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 191999,
+          "expected_before_rows": 191604,
+          "inserted_rows": 395
+        },
+        "refresh_section_records": {
+          "actual_after_rows": 64,
+          "after_matches_manifest": true,
+          "expected_after_rows": 64
+        },
+        "refresh_starting_training_api": {
+          "actual_after_rows": 740,
+          "after_matches_manifest": true,
+          "expected_after_rows": 740
+        },
+        "running_trial_rows": {
+          "actual_after_rows": 34470,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 34375,
+          "baseline_manifest_rows": 34375,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 34470,
+          "expected_before_rows": 34375,
+          "inserted_rows": 95
+        },
+        "starting_exam_api_rows": {
+          "actual_after_rows": 10706,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 10664,
+          "baseline_manifest_rows": 10664,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 10706,
+          "expected_before_rows": 10664,
+          "inserted_rows": 42
+        },
+        "website_training_artifacts": {
+          "actual_after_rows": 2536,
+          "after_matches_manifest": true,
+          "baseline_actual_rows": 2529,
+          "baseline_manifest_rows": 2529,
+          "before_matches_baseline_manifest": true,
+          "expected_after_rows": 2536,
+          "expected_before_rows": 2529,
+          "inserted_rows": 7
+        }
+      },
+      "name": "manifest_table_counts",
+      "ok": true
+    },
+    {
+      "detail": {
+        "actual": [
+          "api6_section_records_current",
+          "daily_training_api_rows_current",
+          "daily_training_riders_current",
+          "exam_current",
+          "horse_current",
+          "horse_profile_refresh_current",
+          "jeju_race_candidate_passing_with_corner_rank_current",
+          "jeju_race_population_candidate_passing_orders_current",
+          "jeju_race_section_order_quality_current",
+          "jeju_race_section_order_quality_values_current",
+          "jeju_race_section_order_values_current",
+          "jeju_race_section_orders_current",
+          "jeju_race_section_time_values_current",
+          "jeju_race_section_times_current",
+          "medical_api_rows_current",
+          "medical_current",
+          "race_current",
+          "sections_current",
+          "starting_exam_api_rows_current",
+          "starting_training_api_current",
+          "starting_training_current",
+          "starting_training_website_rows_current",
+          "training_current",
+          "trial_current"
+        ],
+        "expected": [
+          "api6_section_records_current",
+          "daily_training_api_rows_current",
+          "daily_training_riders_current",
+          "exam_current",
+          "horse_current",
+          "horse_profile_refresh_current",
+          "medical_api_rows_current",
+          "medical_current",
+          "race_current",
+          "sections_current",
+          "starting_exam_api_rows_current",
+          "starting_training_api_current",
+          "starting_training_current",
+          "starting_training_website_rows_current",
+          "training_current",
+          "trial_current"
+        ]
+      },
+      "name": "current_scope_metadata_explicit",
+      "ok": true
+    }
+  ],
+  "current_view_date_bounds": {
+    "api6_section_records_current": {
+      "max_date": "2026-10-16",
+      "min_date": "2026-09-17",
+      "rows": 64,
+      "rows_after_2026_09_19": 42
+    },
+    "daily_training_api_rows_current": {
+      "distinct_keys": 912913,
+      "max_date": "2026-10-15",
+      "min_date": "2007-10-01",
+      "null_key_rows": 0,
+      "rows": 912913,
+      "rows_after_2026_09_19": 5361
+    },
+    "daily_training_riders_current": {
+      "distinct_keys": 912913,
+      "max_date": "2026-10-15",
+      "min_date": "2007-10-01",
+      "null_key_rows": 0,
+      "rows": 912913,
+      "rows_after_2026_09_19": 5361
+    },
+    "exam_current": {
+      "distinct_keys": 10706,
+      "max_date": "2026-10-15",
+      "min_date": "2002-06-07",
+      "null_key_rows": 0,
+      "rows": 10706,
+      "rows_after_2026_09_19": 86
+    },
+    "horse_profile_refresh_current": {
+      "distinct_keys": 4751,
+      "max_date": "2026-10-17",
+      "min_date": "2026-09-30",
+      "null_key_rows": 0,
+      "rows": 4751,
+      "rows_after_2026_09_19": 4751
+    },
+    "medical_api_rows_current": {
+      "distinct_keys": 12254,
+      "max_date": "2026-10-15",
+      "min_date": "2008-04-02",
+      "null_key_rows": 0,
+      "rows": 12254,
+      "rows_after_2026_09_19": 263
+    },
+    "medical_current": {
+      "distinct_keys": 12254,
+      "max_date": "2026-10-15",
+      "min_date": "2008-04-02",
+      "null_key_rows": 0,
+      "rows": 12254,
+      "rows_after_2026_09_19": 263
+    },
+    "race_current": {
+      "distinct_keys": 92908,
+      "max_date": "2026-10-16",
+      "min_date": "2002-07-06",
+      "null_key_rows": 0,
+      "rows": 92908,
+      "rows_after_2026_09_19": 395
+    },
+    "sections_current": {
+      "distinct_keys": 92908,
+      "excluded_horse_rows": 0,
+      "kwanghae_null_guard_rows": 1,
+      "kwanghae_rows": 1,
+      "max_date": "2026-10-16",
+      "min_date": "2002-07-06",
+      "null_key_rows": 0,
+      "rows": 92908,
+      "rows_after_2026_09_19": 395
+    },
+    "starting_exam_api_rows_current": {
+      "distinct_keys": 10706,
+      "max_date": "2026-10-15",
+      "min_date": "2002-06-07",
+      "null_key_rows": 0,
+      "rows": 10706,
+      "rows_after_2026_09_19": 86
+    },
+    "starting_training_api_current": {
+      "distinct_keys": 740,
+      "max_date": "2026-10-15",
+      "min_date": "2026-09-13",
+      "null_key_rows": 0,
+      "rows": 740,
+      "rows_after_2026_09_19": 595
+    },
+    "starting_training_current": {
+      "distinct_keys": 191357,
+      "max_date": "2026-10-15",
+      "min_date": "2007-10-17",
+      "null_key_rows": 0,
+      "rows": 191357,
+      "rows_after_2026_09_19": 567
+    },
+    "starting_training_website_rows_current": {
+      "distinct_keys": 191357,
+      "max_date": "2026-10-15",
+      "min_date": "2007-10-17",
+      "null_key_rows": 0,
+      "rows": 191357,
+      "rows_after_2026_09_19": 567
+    },
+    "training_current": {
+      "distinct_keys": 912913,
+      "max_date": "2026-10-15",
+      "min_date": "2007-10-01",
+      "null_key_rows": 0,
+      "rows": 912913,
+      "rows_after_2026_09_19": 5361
+    },
+    "trial_current": {
+      "distinct_keys": 15831,
+      "max_date": "2026-10-15",
+      "min_date": "2002-06-12",
+      "null_key_rows": 0,
+      "rows": 15831,
+      "rows_after_2026_09_19": 95
+    }
+  },
+  "current_view_keys": {
+    "api6_section_records_current": {
+      "distinct_keys": 64,
+      "null_key_rows": 0,
+      "rows": 64
+    },
+    "daily_training_api_rows_current": {
+      "distinct_keys": 912913,
+      "null_key_rows": 0,
+      "rows": 912913
+    },
+    "daily_training_riders_current": {
+      "distinct_keys": 912913,
+      "null_key_rows": 0,
+      "rows": 912913
+    },
+    "exam_current": {
+      "distinct_keys": 10706,
+      "null_key_rows": 0,
+      "rows": 10706
+    },
+    "horse_profile_refresh_current": {
+      "distinct_keys": 4751,
+      "null_key_rows": 0,
+      "rows": 4751
+    },
+    "medical_api_rows_current": {
+      "distinct_keys": 12254,
+      "null_key_rows": 0,
+      "rows": 12254
+    },
+    "medical_current": {
+      "distinct_keys": 12254,
+      "null_key_rows": 0,
+      "rows": 12254
+    },
+    "race_current": {
+      "distinct_keys": 92908,
+      "null_key_rows": 0,
+      "rows": 92908
+    },
+    "sections_current": {
+      "distinct_keys": 92908,
+      "null_key_rows": 0,
+      "rows": 92908
+    },
+    "starting_exam_api_rows_current": {
+      "distinct_keys": 10706,
+      "null_key_rows": 0,
+      "rows": 10706
+    },
+    "starting_training_api_current": {
+      "distinct_keys": 740,
+      "null_key_rows": 0,
+      "rows": 740
+    },
+    "starting_training_current": {
+      "distinct_keys": 191357,
+      "null_key_rows": 0,
+      "rows": 191357
+    },
+    "starting_training_website_rows_current": {
+      "distinct_keys": 191357,
+      "null_key_rows": 0,
+      "rows": 191357
+    },
+    "training_current": {
+      "distinct_keys": 912913,
+      "null_key_rows": 0,
+      "rows": 912913
+    },
+    "trial_current": {
+      "distinct_keys": 15831,
+      "null_key_rows": 0,
+      "rows": 15831
+    }
+  },
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "failure_count": 1,
+  "ok": false,
+  "refresh_manifest": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_core_refresh/manual_applied/application_manifest.json",
+  "section_policy": {
+    "group_hold_nonnull_values": 0,
+    "group_source_sha_mismatch_rows": 0,
+    "order_hold_nonnull_values": 0,
+    "order_source_sha_mismatch_rows": 0,
+    "unresolved_group_points": 20,
+    "unresolved_order_fields": 70,
+    "website_corrected_order_fields": 14
+  }
+}

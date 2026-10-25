@@ -1,0 +1,85 @@
+{
+  "elapsed_seconds": 43.091,
+  "eval_cohort": {
+    "dates": 269,
+    "races": 1779,
+    "runners": 17412,
+    "years": {
+      "2024": 637,
+      "2025": 654,
+      "2026": 488
+    }
+  },
+  "evaluation_key_receipt": {
+    "hash_encoding": "UTF-8 compact JSON array per row, rows sorted by first key column, LF after each row",
+    "race_key_columns": [
+      "race_id",
+      "race_date",
+      "race_distance_m",
+      "field_n"
+    ],
+    "race_key_sha256": "621c4bafb77190cb6f8a16a02d6c2171defb88f96085d9863ee7b36969f7cd36",
+    "reference_path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/features.parquet",
+    "reference_sha256": "6f6540d4786ada0c0e288ff5defc0d4c665cc796a025a074f19f3d4fe218f12f",
+    "runner_key_columns": [
+      "api_record_id",
+      "race_id",
+      "race_date",
+      "horse_id",
+      "horse_number"
+    ],
+    "runner_key_sha256": "69041e66991355aba534740eee770c29f05c4e32d52d4c02d287fcb26537a0b5"
+  },
+  "feature_counts": {
+    "A": 27,
+    "race_Z": 8,
+    "runner_phase": 35
+  },
+  "observation_roster_review": {
+    "keys": [
+      "api_record_id",
+      "race_id",
+      "race_date",
+      "horse_id",
+      "race_distance_m",
+      "horse_number",
+      "finish_position"
+    ],
+    "races": 5693,
+    "rows": 56618,
+    "source_roster_match": true,
+    "status": "PASS"
+  },
+  "phase_label_reconstruction": {
+    "existing_engineered_features_read": false,
+    "history_source_label_reconstruction": {
+      "early_known_rows": 56392,
+      "races_checked": 5693,
+      "recovery_known_rows": 56381,
+      "rows_checked": 56618,
+      "z_known_races": 5671
+    },
+    "independent_label_reconstruction": "PASS against label-only y_s1f, y_last200_recovery, y_count",
+    "phase_history_roster": {
+      "races": 5693,
+      "rows": 56618
+    },
+    "strict_label_support": {
+      "early_known_rows": 52095,
+      "early_unknown_rows": 60,
+      "recovery_known_rows": 52116,
+      "recovery_unknown_rows": 39,
+      "z_known_races": 5200
+    },
+    "strict_target": {
+      "races": 5206,
+      "rows": 52155
+    }
+  },
+  "status": "PASS",
+  "strict_cohort": {
+    "races": 5206,
+    "runners": 52155
+  },
+  "training_or_evaluation_performed": false
+}

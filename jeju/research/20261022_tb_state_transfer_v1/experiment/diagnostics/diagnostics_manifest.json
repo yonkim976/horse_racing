@@ -1,0 +1,30 @@
+{
+  "artifact": {
+    "bytes": 11185,
+    "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/diagnostics/win_axis_year_distance_gain_loss.parquet",
+    "rows": 72,
+    "sha256": "55650e2b8ed6cad822a4fa9ae6e2cfad8b56fab4987d6fbb41b314a74ada3b34"
+  },
+  "created_at_utc": "2026-10-22T08:12:07.967561+00:00",
+  "grouping": "all, evaluation year, exact race distance; arm hit counts/rates and paired hit-only gains/losses/both-hit/both-miss counts",
+  "purpose": "post-run fixed-ledger descriptive WIN-axis year/distance and paired gain/loss diagnostics; no refit or probability recomputation",
+  "race_counts_by_distance": {
+    "1000m": 508,
+    "1110m": 482,
+    "1200m": 262,
+    "1300m": 63,
+    "1400m": 52,
+    "1610m": 9,
+    "800m": 152,
+    "900m": 251
+  },
+  "result_scope": "descriptive only; the development evaluation is reused and is not independent validation",
+  "source_hashes": {
+    "f1_features_sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "fit_run_receipt_sha256": "fb70195287f1bc56c0c9fbe19acc6b7ec08b01a42a7a336da1b0a0c9f4b3bbe2",
+    "report_sha256": "87db9b1256d1c5bbffea4ee5e5378050827ad634d9fa43253d7b84ec42e9d861",
+    "win_axis_ledger_sha256": "ccce48ac981230de12ac7096627d95169e6040f114ea7bcf527fe16929d90d0a"
+  },
+  "study": "20261022_tb_state_transfer_v1",
+  "tie_policy": "the already frozen 1e-12 probability tolerance and horse-number lexicographic selection in the sealed axis ledger"
+}

@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "scope": "Independent calculation/source review, not confirmed improvement",
+  "report_sha256": "536190541fc7537d8504129b2fa8be6455ea5890ad92d6452db500abdffc8f4b",
+  "report_receipt_sha256": "e18a8f31d09c62b03587730c7ac933f5b830b63f96ad5dd829a8f165f3dbe85c",
+  "checked_races": 1779,
+  "checked_pair_rows": 76848,
+  "summary_rows_verified": 22,
+  "changed_races_verified": 4,
+  "bootstrap_rows_verified": 242,
+  "bootstrap_bounds_verified": 484,
+  "odds_bins_verified": 5,
+  "fixed_probability_gate_passed": false,
+  "selection_improvement_confirmed": false,
+  "all_pair_guardrail_passed": true,
+  "old_hits": 438,
+  "new_hits": 439,
+  "overall_independent_ci": [
+    {
+      "comparison": "reliability_selected_vs_jockey_id",
+      "metric": "hit_rate_difference",
+      "estimate": 0.0005621135469364812,
+      "ci_low": -0.0011428734787225353,
+      "ci_high": 0.0027762739835893637
+    },
+    {
+      "comparison": "reliability_selected_vs_raw_top2",
+      "metric": "hit_rate_difference",
+      "estimate": 0.005621135469364812,
+      "ci_low": -0.0005760701248390289,
+      "ci_high": 0.011925381561654687
+    },
+    {
+      "comparison": "reliability_selected_vs_jockey_basic",
+      "metric": "hit_rate_difference",
+      "estimate": 0.005621135469364812,
+      "ci_low": 0.0016129161331626127,
+      "ci_high": 0.010181428095317444
+    },
+    {
+      "comparison": "candidate_fixed_calibrated_vs_baseline_fixed",
+      "metric": "brier_difference",
+      "estimate": -1.8435588074317672e-05,
+      "ci_low": -5.035684165493579e-05,
+      "ci_high": 1.1700550299650832e-05
+    },
+    {
+      "comparison": "candidate_fixed_calibrated_vs_baseline_fixed",
+      "metric": "log_loss_difference",
+      "estimate": -4.788232074700395e-05,
+      "ci_low": -0.0001372846533166204,
+      "ci_high": 3.6752931189826165e-05
+    },
+    {
+      "comparison": "candidate_fixed_raw_vs_baseline_fixed",
+      "metric": "brier_difference",
+      "estimate": 0.00011720536903857916,
+      "ci_low": -0.0008949519561306711,
+      "ci_high": 0.001147468285895107
+    },
+    {
+      "comparison": "candidate_fixed_raw_vs_baseline_fixed",
+      "metric": "log_loss_difference",
+      "estimate": 0.00023571911338237118,
+      "ci_low": -0.0021488975309893335,
+      "ci_high": 0.002666316479984936
+    },
+    {
+      "comparison": "candidate_all_pair_calibrated_vs_baseline",
+      "metric": "brier_difference",
+      "estimate": -1.9969155873438037e-06,
+      "ci_low": -3.5224597311531434e-06,
+      "ci_high": -5.155295164449288e-07
+    },
+    {
+      "comparison": "candidate_all_pair_calibrated_vs_baseline",
+      "metric": "log_loss_difference",
+      "estimate": -1.3614318006375072e-05,
+      "ci_low": -2.2511045290192514e-05,
+      "ci_high": -5.3267003445250085e-06
+    },
+    {
+      "comparison": "candidate_all_pair_raw_vs_baseline",
+      "metric": "brier_difference",
+      "estimate": -5.093298920063041e-06,
+      "ci_low": -4.030816109341127e-05,
+      "ci_high": 3.023082381685702e-05
+    },
+    {
+      "comparison": "candidate_all_pair_raw_vs_baseline",
+      "metric": "log_loss_difference",
+      "estimate": -4.809074084527807e-05,
+      "ci_low": -0.0002028416869024421,
+      "ci_high": 0.00010724612099792172
+    }
+  ],
+  "reviewer_refits": 0,
+  "horse_scores_unchanged": true,
+  "operating_model_or_DB_changed": false,
+  "reviewed_output_sha256": {
+    "README.md": "da63cd87a28b6199ce2740db6a5d364a8383979f2c98c5eb5b9dbfa8e9e79d9f",
+    "ARTIFACT_MANIFEST.json": "2195023a25a4d7e2e6fbe8a0a0ba311df00cc9c1f3b51b304e72db66d8d4e859",
+    "outputs/REPORT.json": "536190541fc7537d8504129b2fa8be6455ea5890ad92d6452db500abdffc8f4b",
+    "outputs/REPORT_RECEIPT.json": "e18a8f31d09c62b03587730c7ac933f5b830b63f96ad5dd829a8f165f3dbe85c",
+    "outputs/report/posthoc_odds_calibration.csv": "32379738015b78d4570d432ba961e965fb8063cfbc6c3e27a1a92bd55009e7e7",
+    "outputs/report/summary.csv": "3802621c0958298b777f7dc103578a1d861004d26c05c98691bc75fdfb931024",
+    "outputs/report/paired_race_metrics.csv": "a0fa4a911a83001112850878d45625a1cadf7c6d90057ae8a2edf6d4151c5670",
+    "outputs/report/bootstrap_ci.csv": "f8ad6fe86af9e83df28f8c19139da500282b82345222ae1309b7f9984c601090",
+    "outputs/report/changed_selections.csv": "f848434be99294e955cfff65e91e8ff0a8877a9d88550a9f54c08fc73e37a20e",
+    "outputs/report/subgroup_summary.csv": "45eb0f8ef6adf4d3d2eabe2f26dcb0b3983ca5e3622202a8cdbe06c5f43fe29e"
+  }
+}

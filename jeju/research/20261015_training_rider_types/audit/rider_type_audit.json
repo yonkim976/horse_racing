@@ -1,0 +1,357 @@
+{
+  "audit_name": "jeju_daily_training_rider_type_independent_audit",
+  "generated_at_utc": "2026-10-15T05:53:50Z",
+  "database": {
+    "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+    "open_mode": "mode=ro",
+    "query_only": true,
+    "sha256_before": {
+      "main": "15aec455204f50b2b318c0fc368353f5a9b74619db5ad66216336e30812bfb61",
+      "-wal": null
+    },
+    "sha256_after": {
+      "main": "15aec455204f50b2b318c0fc368353f5a9b74619db5ad66216336e30812bfb61",
+      "-wal": null
+    },
+    "unchanged_during_audit": true
+  },
+  "scope_policy": {
+    "all_stored_rows": "all 908,316 API18 horse-linked daily training rows, including after the race analysis cutoff",
+    "analysis_through_2026_09_19": "training_date <= 2026-09-19, as the current race analysis cap",
+    "2017_onward_analysis_scope": "2017-01-01 through 2026-09-19 inclusive",
+    "2017_onward_all_stored": "2017-01-01 through the last stored API18 training date, including after-cap rows",
+    "type_values": [
+      "기수",
+      "조교사",
+      "조교보",
+      "조교승인",
+      "기수후보생",
+      "주로조교",
+      "교육생",
+      "기수트랙라이더",
+      "미분류"
+    ],
+    "known_api_value_policy": "Keep the five exact non-dash prGubun_raw values as their own type.",
+    "dash_supplement_policy": "Only the existing same-event training_rider_website_observations row may supplement API '-'. A plain person name means 기수 per the official legend; 관=주로조교, 조=조교사, 생=교육생, name(트)=기수트랙라이더. 외 or absent/unrecognized evidence stays 미분류.",
+    "conflict_policy": "If direct API type and explicit same-event page type differ, effective type is 미분류 with api_website_type_conflict status.",
+    "staff_reference_policy": "Never use current or other-date employee-name/ID role references to backfill API '-'.",
+    "name_display_policy": "Expose a person name only for type 기수. For every other type, expose type/category only; 미분류 exposes neither a type assertion nor a person name."
+  },
+  "stored_official_pages": {
+    "page_count": 32,
+    "page_horse_ids": [
+      "3016266",
+      "3016827",
+      "3017791",
+      "3018117",
+      "3018377",
+      "3018571",
+      "3018901",
+      "3101705",
+      "3102589",
+      "3102840",
+      "3103257",
+      "3103288",
+      "3103530",
+      "3103619",
+      "3103643",
+      "3103947",
+      "3104068",
+      "3104105",
+      "3104161",
+      "3104299",
+      "3104301",
+      "3104610",
+      "3104696",
+      "3104703",
+      "3105286",
+      "3107341",
+      "3107592",
+      "3107612",
+      "3108145",
+      "3108190",
+      "3108232",
+      "3108669"
+    ],
+    "pages_sha256_by_horse_id": {
+      "3016266": "8c287af1ff642ef0840b9b62b2b559940eace90f81b7fbc6899a2156022f5555",
+      "3016827": "8dc6babb0307e76c83fee832d54652836d8f347b050c0946297c3eb3f56a8e43",
+      "3017791": "7b09107a8a33952defc5a3e0ac9700d6a79beacf42d425487c55618b8ab86a06",
+      "3018117": "c4cbbd50934b6227398805c5a3420d5e27605066f522c2317439cf742c7332d7",
+      "3018377": "5d8b050a78dae44ff2c6c9b6cd97cc2f3deb912c7f665d536182cb2d9179ccc5",
+      "3018571": "f206d953ce41ec1e66308df9bdf30c9c2ade00592560012fd0302146d1fe5266",
+      "3018901": "d736e2c5deb5a22dd02027b558c3c5892b273b3db46fc8db8297690d0af4347d",
+      "3101705": "197479e5231fb7c41b559267cedb8c257fe59a2652b40055d0b9b4ed7ebb32c5",
+      "3102589": "467b4f2b8bb38e9cf5a6cc15bf1749996f2230f251b58a4846b023dd2ed88145",
+      "3102840": "270d598a4f437d53058c0ca4a2a652a6df5da931f24de91e8cb2106815b6b08f",
+      "3103257": "a7925dc3bd0ce053f58ffe63d3dd52d71f10894edceea96a88a544bd89030ca9",
+      "3103288": "6c46c6889b9f9b6b0b9df1242f87c8553eece4ca931ca98463522af1436bd1f5",
+      "3103530": "9898e2ce1872039f3013bc6515451bc44ea0d0120c36881c20a3fc01187af151",
+      "3103619": "e15058bf25873c3877b637e25fccf6743c4a67c1b3708a96d2546c1cba77a8a6",
+      "3103643": "486428b71f985670fbde3cdbcc8062d02eca2b857cd37579f7f3bb7cc3d12fe3",
+      "3103947": "a18e0d0ab35b5114cb04e486fe3583d8380707814661d924fcb92949d9e115a5",
+      "3104068": "f0ae31c43221a295f48e47f5c35f47430a180f0ae85d4786fa5a81d90968d347",
+      "3104105": "1e3c6c2b0d6cd3a32c34c8c4acbc637c1af61e5889a0f2c773f71934f88eb48e",
+      "3104161": "5be1ff41c1a96e5c1609c5a33571871b3a9db56f2e77e854e8b34fe22cf02adc",
+      "3104299": "60dbb765907aa63b72d1e60a94990849b3e16df045bb9c95044ed3bd73a6dbda",
+      "3104301": "fc69efc6a5fa50b0e1f84aaa9cf3aed3e1152c49fdb746f764938f1617244f08",
+      "3104610": "353b28d6f2d0d62150a35f90a950184a08f745f3295df4922b7a4d52a3691ee6",
+      "3104696": "5fc51534d0c7847059b971846b51f855bafcc8e749db3d386f938df4ac4b9fa0",
+      "3104703": "f85856e12f7f0004e78591ba54a01385fc2112dbda1d9179f6817f7f3ca2d908",
+      "3105286": "f3ad84fbd0babdd56d6effba22231c34e31cac62a38fb5bdd91d2f05fe34f827",
+      "3107341": "e6cab592f9a45b370118fc7150442fecd3d75da2337d5b6d1a071abb252218f4",
+      "3107592": "179d26f7e56d084da8371776aac04a2093d448fcae30d746c71dc23f231897b9",
+      "3107612": "dd8deadc84214d8649211451b7a9924f7b17555b5acedaa79db959791219902a",
+      "3108145": "ae1fe078d0f03540490118c5c5666aba540fd0d5b036cfce173988f2be128b9a",
+      "3108190": "67a8f101e52fc8dae688a4374cf2c92bda15a5c7d4a8e35d574eca8a21d06aac",
+      "3108232": "2b5b107cef8b2628ec3f703036983ce2942612d225215de310d35bf3087dd663",
+      "3108669": "ac0f76bf24a85457bb534aaeb5948cc2d54a10f3a0cda0b6ceafd62cea2043f6"
+    },
+    "legend_counts": {
+      "이름:기수명, 조:조교사, 관:주로조교, 생:교육생, 이름(트):기수트랙라이더": 32
+    },
+    "independent_evidence_page_count": 32,
+    "stored_named_and_external_observation_counts": {
+      "named_exact_event_rows": 1259,
+      "external_unresolved_exact_event_rows": 23
+    }
+  },
+  "classification": {
+    "daily_training_api_rows": 908316,
+    "daily_training_api_rows_analysis_2026": 907389,
+    "raw_prGubun_counts": {
+      "-": 300111,
+      "기수": 315601,
+      "기수후보생": 1696,
+      "조교보": 71889,
+      "조교사": 111648,
+      "조교승인": 107371
+    },
+    "type_counts_by_scope": {
+      "all_stored_rows": {
+        "predicate": "all daily_training_api_rows",
+        "row_count": 908316,
+        "rows_by_type": {
+          "기수": 315601,
+          "조교사": 111648,
+          "조교보": 71889,
+          "조교승인": 107371,
+          "기수후보생": 1696,
+          "주로조교": 1236,
+          "교육생": 0,
+          "기수트랙라이더": 0,
+          "미분류": 298875
+        },
+        "rows_by_classification_status": {
+          "api_role_dash_without_same_event_website_type": 298852,
+          "api_role_explicit": 608205,
+          "website_external_marker_semantics_unresolved": 23,
+          "website_same_event_explicit_role_suffix": 1236
+        }
+      },
+      "analysis_through_2026_09_19": {
+        "predicate": "training_date <= 2026-09-19",
+        "inclusive_end_date": "2026-09-19",
+        "row_count": 907389,
+        "rows_by_type": {
+          "기수": 315295,
+          "조교사": 111527,
+          "조교보": 71889,
+          "조교승인": 107371,
+          "기수후보생": 1696,
+          "주로조교": 1185,
+          "교육생": 0,
+          "기수트랙라이더": 0,
+          "미분류": 298426
+        },
+        "rows_by_classification_status": {
+          "api_role_dash_without_same_event_website_type": 298405,
+          "api_role_explicit": 607778,
+          "website_external_marker_semantics_unresolved": 21,
+          "website_same_event_explicit_role_suffix": 1185
+        }
+      },
+      "2017_onward_analysis_scope": {
+        "predicate": "2017-01-01 <= training_date <= 2026-09-19",
+        "inclusive_start_date": "2017-01-01",
+        "inclusive_end_date": "2026-09-19",
+        "row_count": 661808,
+        "rows_by_type": {
+          "기수": 258070,
+          "조교사": 91267,
+          "조교보": 43022,
+          "조교승인": 79488,
+          "기수후보생": 558,
+          "주로조교": 1185,
+          "교육생": 0,
+          "기수트랙라이더": 0,
+          "미분류": 188218
+        },
+        "rows_by_classification_status": {
+          "api_role_dash_without_same_event_website_type": 188197,
+          "api_role_explicit": 472405,
+          "website_external_marker_semantics_unresolved": 21,
+          "website_same_event_explicit_role_suffix": 1185
+        }
+      },
+      "2017_onward_all_stored": {
+        "predicate": "2017-01-01 <= training_date <= max stored training_date",
+        "inclusive_start_date": "2017-01-01",
+        "row_count": 662735,
+        "rows_by_type": {
+          "기수": 258376,
+          "조교사": 91388,
+          "조교보": 43022,
+          "조교승인": 79488,
+          "기수후보생": 558,
+          "주로조교": 1236,
+          "교육생": 0,
+          "기수트랙라이더": 0,
+          "미분류": 188667
+        },
+        "rows_by_classification_status": {
+          "api_role_dash_without_same_event_website_type": 188644,
+          "api_role_explicit": 472832,
+          "website_external_marker_semantics_unresolved": 23,
+          "website_same_event_explicit_role_suffix": 1236
+        }
+      }
+    },
+    "website_observation_count": 1259,
+    "website_observation_api_category_counts": {
+      "-": 1259
+    },
+    "website_observation_rows_by_marker": {
+      "(관)": 1236,
+      "외": 23
+    },
+    "website_observation_rows_by_supplemented_type": {
+      "기수": 0,
+      "조교사": 0,
+      "조교보": 0,
+      "조교승인": 0,
+      "기수후보생": 0,
+      "주로조교": 1236,
+      "교육생": 0,
+      "기수트랙라이더": 0,
+      "미분류": 23
+    },
+    "website_observation_source_page_count": 31,
+    "website_observation_source_sha256_by_path": {
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3016266.html": "8c287af1ff642ef0840b9b62b2b559940eace90f81b7fbc6899a2156022f5555",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3017791.html": "7b09107a8a33952defc5a3e0ac9700d6a79beacf42d425487c55618b8ab86a06",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3018117.html": "c4cbbd50934b6227398805c5a3420d5e27605066f522c2317439cf742c7332d7",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3018377.html": "5d8b050a78dae44ff2c6c9b6cd97cc2f3deb912c7f665d536182cb2d9179ccc5",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3018571.html": "f206d953ce41ec1e66308df9bdf30c9c2ade00592560012fd0302146d1fe5266",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3018901.html": "d736e2c5deb5a22dd02027b558c3c5892b273b3db46fc8db8297690d0af4347d",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3101705.html": "197479e5231fb7c41b559267cedb8c257fe59a2652b40055d0b9b4ed7ebb32c5",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3102589.html": "467b4f2b8bb38e9cf5a6cc15bf1749996f2230f251b58a4846b023dd2ed88145",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3102840.html": "270d598a4f437d53058c0ca4a2a652a6df5da931f24de91e8cb2106815b6b08f",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3103257.html": "a7925dc3bd0ce053f58ffe63d3dd52d71f10894edceea96a88a544bd89030ca9",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3103288.html": "6c46c6889b9f9b6b0b9df1242f87c8553eece4ca931ca98463522af1436bd1f5",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3103530.html": "9898e2ce1872039f3013bc6515451bc44ea0d0120c36881c20a3fc01187af151",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3103619.html": "e15058bf25873c3877b637e25fccf6743c4a67c1b3708a96d2546c1cba77a8a6",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3103643.html": "486428b71f985670fbde3cdbcc8062d02eca2b857cd37579f7f3bb7cc3d12fe3",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3103947.html": "a18e0d0ab35b5114cb04e486fe3583d8380707814661d924fcb92949d9e115a5",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104068.html": "f0ae31c43221a295f48e47f5c35f47430a180f0ae85d4786fa5a81d90968d347",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104105.html": "1e3c6c2b0d6cd3a32c34c8c4acbc637c1af61e5889a0f2c773f71934f88eb48e",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104161.html": "5be1ff41c1a96e5c1609c5a33571871b3a9db56f2e77e854e8b34fe22cf02adc",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104299.html": "60dbb765907aa63b72d1e60a94990849b3e16df045bb9c95044ed3bd73a6dbda",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104301.html": "fc69efc6a5fa50b0e1f84aaa9cf3aed3e1152c49fdb746f764938f1617244f08",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104610.html": "353b28d6f2d0d62150a35f90a950184a08f745f3295df4922b7a4d52a3691ee6",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104696.html": "5fc51534d0c7847059b971846b51f855bafcc8e749db3d386f938df4ac4b9fa0",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3104703.html": "f85856e12f7f0004e78591ba54a01385fc2112dbda1d9179f6817f7f3ca2d908",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3105286.html": "f3ad84fbd0babdd56d6effba22231c34e31cac62a38fb5bdd91d2f05fe34f827",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3107341.html": "e6cab592f9a45b370118fc7150442fecd3d75da2337d5b6d1a071abb252218f4",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3107592.html": "179d26f7e56d084da8371776aac04a2093d448fcae30d746c71dc23f231897b9",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3107612.html": "dd8deadc84214d8649211451b7a9924f7b17555b5acedaa79db959791219902a",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3108145.html": "ae1fe078d0f03540490118c5c5666aba540fd0d5b036cfce173988f2be128b9a",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3108190.html": "67a8f101e52fc8dae688a4374cf2c92bda15a5c7d4a8e35d574eca8a21d06aac",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3108232.html": "2b5b107cef8b2628ec3f703036983ce2942612d225215de310d35bf3087dd663",
+      "jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3108669.html": "ac0f76bf24a85457bb534aaeb5948cc2d54a10f3a0cda0b6ceafd62cea2043f6"
+    },
+    "api_website_type_conflict_rows": [],
+    "unclassified_reasons_by_scope": {
+      "all_stored_rows": {
+        "api_role_dash_without_same_event_website_type": 298852,
+        "website_external_marker_semantics_unresolved": 23
+      },
+      "analysis_through_2026_09_19": {
+        "api_role_dash_without_same_event_website_type": 298405,
+        "website_external_marker_semantics_unresolved": 21
+      },
+      "2017_onward_analysis_scope": {
+        "api_role_dash_without_same_event_website_type": 188197,
+        "website_external_marker_semantics_unresolved": 21
+      },
+      "2017_onward_all_stored": {
+        "api_role_dash_without_same_event_website_type": 188644,
+        "website_external_marker_semantics_unresolved": 23
+      }
+    }
+  },
+  "independent_32_page_review": {
+    "method": "independent standard-library HTMLParser; exact horse ID + date + start minute + end minute + API duration seconds; no page fetches",
+    "page_scope": {
+      "window_start_inclusive": "2026-04-15",
+      "window_end_inclusive": "2026-09-28",
+      "page_count": 32,
+      "parsed_html_training_row_count": 1861,
+      "api_candidate_rows_with_valid_times": 1725
+    },
+    "official_legend_counts": {
+      "이름:기수명, 조:조교사, 관:주로조교, 생:교육생, 이름(트):기수트랙라이더": 32
+    },
+    "parsed_website_rows_by_marker": {
+      "(관)": 1354,
+      "역할표식_이름없음_조": 130,
+      "외": 31,
+      "표식없는이름": 346
+    },
+    "parsed_website_rows_by_page_type": {
+      "기수": 346,
+      "조교사": 130,
+      "조교보": 0,
+      "조교승인": 0,
+      "기수후보생": 0,
+      "주로조교": 1354,
+      "교육생": 0,
+      "기수트랙라이더": 0,
+      "미분류": 31
+    },
+    "exact_event_matching": {
+      "unique_one_to_one_event_count": 1691,
+      "api_categories_in_unique_matches": {
+        "-": 1259,
+        "기수": 311,
+        "조교사": 121
+      },
+      "ambiguous_exact_event_key_count": 0,
+      "ambiguous_exact_event_keys": [],
+      "website_rows_without_api_exact_event_candidate": 170
+    },
+    "api_known_jockey_marker_review": {
+      "candidate_api_jockey_rows_in_32_horses_and_window": 317,
+      "unique_exact_matches": 311,
+      "without_unique_exact_match": 6,
+      "page_label_review_counts": {
+        "explicit_unmarked_jockey_name": 311,
+        "no_unique_exact_same_event_page_match": 6
+      },
+      "page_marks_track_rider_but_api_says_jockey_count": 0,
+      "track_rider_conflict_examples": []
+    },
+    "all_known_api_type_conflicts_in_unique_matches": {
+      "conflict_count": 0,
+      "counts_by_api_vs_website_type": {},
+      "api_categories_with_conflict": {},
+      "examples": []
+    },
+    "interpretation_limit": "The 32 pages were used only for independent audit. Their additional parsed rows were not inserted into the observation table or used to supplement type counts."
+  },
+  "limitations": [
+    "The website observation table is the existing 1,259 exact-event set (1,236 named and 23 '외'); this audit does not add or backfill observations.",
+    "The raw HTML pages show recent 2026-04-15 through 2026-09-28 training rows only; they provide no basis to extend website confirmation into older dates.",
+    "The API event date is not a proven public timestamp. Type review does not certify when the page/API became public."
+  ]
+}

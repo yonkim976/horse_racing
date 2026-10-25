@@ -1,0 +1,44 @@
+{
+  "contract_version": 1,
+  "status": "fixed retrospective reporting correction and descriptive cross-tabs; prior outcomes already inspected",
+  "analysis_plan": "FOLLOWUP_ADDENDUM_PLAN.md",
+  "write_scope": "outputs_followup_addendum/ only; preserve all core and first-supplemental artifacts",
+  "inputs": [
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/outputs/race_ledger_1779.csv",
+      "sha256": "a32c10fe84af887ec8f258a252815b5e2303d7458a5086e6bef12f80c82f7f26",
+      "rows": 1779,
+      "role": "fixed race outcome and year/distance strata"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/outputs_supplemental/race_context_vectors.csv",
+      "sha256": "34caff2c75ccb0fd2b61fb22a4698157d02d787b123aa72d8b540b33c86bb3fd",
+      "rows": 1779,
+      "role": "one-row-per-race source-defined moisture band"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/outputs_supplemental/actual_top3_context_84_races.csv",
+      "sha256": "c266cd22614fce461ce16410da417ac2fcc1682234e5e4bbe1eef079b83fffab",
+      "rows": 252,
+      "role": "exact actual Top3 runner rows from the 84 gained/lost races"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "a051458bf4b06c87b4d3a8a377c4eb06c0b6aa6f0a0c231e90b208e8d14d697f",
+      "role": "final manifest for the separately contracted context extract"
+    }
+  ],
+  "fixed_levels": {
+    "evaluation_year": [2024, 2025, 2026],
+    "distance_m": [800, 900, 1000, 1110, 1200, 1300, 1400, 1610],
+    "moisture_band": ["건조", "양호", "다습", "포화", "불량"],
+    "outcome_groups_for_corrected_top3_summary": ["all_discordant_84", "gained", "lost"]
+  },
+  "denominator": "All strata use the fixed 1,779-race cohort as share denominator; subgroup rates use that cell's races. Actual Top3 context summary is explicitly scoped to 84 gained/lost races and uses race as the summary unit.",
+  "prohibited": [
+    "threshold or condition selection based on cross-tab outcome",
+    "calling retrospective cross-tabs confirmation or validation",
+    "overwriting original supplemental/core outputs",
+    "interpreting same-event context as verified prediction-time input"
+  ]
+}

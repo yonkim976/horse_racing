@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "status": "pre-analysis contract; no outcome analysis performed",
+  "cohort": {
+    "races": 1779,
+    "runner_rows_per_variant": 17412,
+    "race_days": 269,
+    "years": [2024, 2025, 2026],
+    "partial_year_through": "2026-09-19",
+    "comparison": ["F1", "F1_STYLE6"],
+    "paired_key": ["race_id", "api_record_id", "horse_id"]
+  },
+  "inputs": [
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_{year}/evaluation_scores.parquet",
+      "schema": {"api_record_id": "int64", "score": "float64"},
+      "meaning": "saved candidate raw score; one row per evaluated runner"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_{year}/meta.json",
+      "fields": ["evaluation_year", "tau", "evaluation_scores_sha256", "model_sha256"],
+      "meaning": "saved candidate year and positive temperature; never refit or optimize"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/f1_reproduced_runner_predictions.parquet",
+      "schema": {
+        "api_record_id": "int64",
+        "race_id": "string",
+        "race_date": "string",
+        "year": "int64",
+        "horse_id": "string",
+        "horse_number": "int64",
+        "score": "float64",
+        "p_top3": "float64",
+        "y": "int64"
+      },
+      "meaning": "locked F1 exact replay; baseline raw score, roster, outcome label and marginal probability"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/report/canonical_six_combinations.csv",
+      "schema": {
+        "race_id": "string",
+        "variant": "string",
+        "selection_rank": "int64",
+        "numbers": "comma-separated horse numbers",
+        "probability": "float64",
+        "hit": "int64"
+      },
+      "meaning": "saved parity reference; 21,348 rows total, 10,674 per variant"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json and outputs/prepared_lock.json",
+      "meaning": "frozen source references, report/replay artifacts, protected inputs and hash lineage"
+    }
+  ],
+  "probability_contract": {
+    "event": "unordered exact Top3 horse set",
+    "triple_energy": "source evaluator's full-precision sorted-score row sum",
+    "joint_probability": "softmax(triple_energy / saved_positive_tau) over all C(field_n, 3) triples",
+    "top3_marginal": "sum of joint probabilities over triples containing the runner",
+    "raw_score_cross_model_scale_comparison": false,
+    "canonical_six": "stable descending triple energy; preserve horse-number combination enumeration as exact tie-break"
+  },
+  "fixed_diagnostics": {
+    "top_k": [1, 3, 6, 10, 20],
+    "temperature_values": ["saved per-year tau", 1.0],
+    "six_mass_bins": {
+      "edges": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+      "intervals": "left-closed/right-open, except final bin includes 1.0"
+    },
+    "strata": ["overall", "year", "existing fixed distance"],
+    "date_bootstrap": {"resamples": 2000, "seed": 20261008, "reset_seed_per_metric": true},
+    "ticket_change": ["unchanged-or-changed", "overlap 0..6", "symmetric-difference count"],
+    "ticket_outcome": ["hit_both", "F1_only", "STYLE6_only", "neither"],
+    "model_specific_selected_six_horse_union_decomposition": {
+      "union_definition": "U6_v is the horse-ID union within the six selected triples of variant v; F1 and STYLE6 unions are computed separately",
+      "states": ["hit", "allocation_miss", "union_miss"],
+      "partition_checks": ["race_count = hit + allocation_miss + union_miss", "all3inU6_v = hit + allocation_miss"],
+      "interpretation": "U6_v is derived from the model's selected six and is not an independently fixed candidate pool; preserve its members and overlap but do not infer cause from union misses"
+    }
+  },
+  "planned_outputs": [
+    {"name": "all_triples.parquet", "grain": "race x variant x unordered triple", "fields": ["race_id", "variant", "triple_horse_ids", "triple_numbers", "triple_energy", "joint_probability_saved_tau", "joint_probability_tau1", "stable_rank", "rank_after_saved_tau", "rank_after_tau1", "exact_energy_tie_size", "is_truth"]},
+    {"name": "race_diagnostics.parquet", "grain": "race x variant", "fields": ["race_id", "race_date", "year", "distance_m", "field_n", "saved_tau", "true_triple_rank", "true_rank_after_saved_tau", "true_rank_after_tau1", "hit_at_k", "joint_true_nll_saved_tau", "full_joint_brier_saved_tau", "top3_marginal_log_loss_saved_tau", "top3_marginal_brier_saved_tau", "joint_true_nll_tau1", "full_joint_brier_tau1", "top3_marginal_log_loss_tau1", "top3_marginal_brier_tau1", "six_mass_saved_tau", "six_hit", "exact_tie_counts", "scaled_tau_rank_mismatch_n", "scaled_tau_top6_mismatch", "tau1_rank_mismatch_n", "tau1_top6_mismatch", "p_top3_saved_tau_score_order_violations", "p_top3_tau1_score_order_violations"]},
+    {"name": "ticket_and_union_decomposition.csv", "grain": "race x variant", "fields": ["variant", "ticket_overlap_n", "ticket_symmetric_difference_n", "changed", "hit_both_or_only_or_neither", "own_six_horse_union_n", "own_six_horse_union_ids", "other_union_overlap_n", "own_only_union_horse_ids", "other_only_union_horse_ids", "union_state"]},
+    {"name": "paired_date_bootstrap.csv", "grain": "metric x temperature basis x overall/year/distance", "fields": ["metric", "temperature_basis", "group", "value", "delta_STYLE6_minus_F1", "ci95_low", "ci95_high", "races", "race_days", "resamples", "seed"]},
+    {"name": "six_mass_reliability.csv", "grain": "variant x fixed probability bin", "fields": ["variant", "bin_left", "bin_right", "races", "race_days", "mean_predicted_mass", "observed_hit_rate"]},
+    {"name": "runner_loss_contributions.csv", "grain": "ticket-change x outcome group x variant", "fields": ["ticket_changed", "outcome_group", "variant", "race_equal_loss_contribution", "runner_rows", "races", "race_days"]},
+    {"name": "ticket_change_loss_cross.csv", "grain": "ticket-change x loss metric", "fields": ["ticket_changed", "metric", "races", "improved_races", "worsened_races", "unchanged_races", "mean_delta_STYLE6_minus_F1"]}
+  ],
+  "prohibited": ["new fit", "tau optimization", "new selection rule", "external data collection", "database or registry writes", "central conclusion updates"]
+}

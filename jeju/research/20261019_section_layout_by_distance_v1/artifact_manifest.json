@@ -1,0 +1,102 @@
+{
+  "manifest_status": "read_only_research_artifact_manifest",
+  "scope": {
+    "frozen_roster_snapshot": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+    "frozen_roster_rows": 92513,
+    "frozen_roster_snapshot_sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+    "meet_code": 2,
+    "race_date_min_inclusive": "2017-01-01",
+    "race_date_max_inclusive": "2026-09-19",
+    "distance_m": [
+      400,
+      800,
+      900,
+      1000,
+      1110,
+      1200,
+      1300,
+      1400,
+      1610
+    ],
+    "starter_rule": "finish_position 1..89 or 91/92, inherited from 20261017 five-section study",
+    "scoped_candidate_rows": 59042,
+    "scoped_started_rows": 57876,
+    "scoped_started_races": 5828,
+    "excluded_project_horse_rows_in_scope": 0,
+    "date_range_of_started_rows": [
+      "2017-01-13",
+      "2026-09-19"
+    ]
+  },
+  "database_guard": {
+    "uri_mode": "ro",
+    "sqlite_query_only": true,
+    "connection_local_temp_id_table_only": true,
+    "main_database_mutations": false,
+    "data_version_start": 1,
+    "data_version_end": 1,
+    "whole_database_hash_claimed_unchanged": false,
+    "quality_time_view": "jeju_race_section_time_values",
+    "quality_time_view_sql_sha256": "a813166113a2f570f8ea1e9d539e44b6797ab8502cc694d50da68e4760700d47",
+    "record_scoped_source_fingerprints": {
+      "400": {
+        "scoped_started_source_rows": 1258,
+        "api_record_id_plus_quality_time_row_hash_sha256": "c08ca59466ba7ad5490dc2a9b21f4f10ad6ca30f86801889011acbc6442abca1"
+      },
+      "800": {
+        "scoped_started_source_rows": 13813,
+        "api_record_id_plus_quality_time_row_hash_sha256": "2420097c5071a7ba1dd72d598f4c20022b4e659a4544ca1da46d1333e929af6b"
+      },
+      "900": {
+        "scoped_started_source_rows": 9718,
+        "api_record_id_plus_quality_time_row_hash_sha256": "56d5fa4dce9bba96c282a22f9c6ef6cfe19312565e49ef2d0149dd601e07c5df"
+      },
+      "1000": {
+        "scoped_started_source_rows": 15505,
+        "api_record_id_plus_quality_time_row_hash_sha256": "d3cd345b328e81415e2c9e90babc8787dad6addb619b18291c8fa2b798945d79"
+      },
+      "1110": {
+        "scoped_started_source_rows": 10703,
+        "api_record_id_plus_quality_time_row_hash_sha256": "b41f4ff778ef30b2bc640d1cb47db45c5567823b0eec111f6ce3095d8f2f1c5d"
+      },
+      "1200": {
+        "scoped_started_source_rows": 5178,
+        "api_record_id_plus_quality_time_row_hash_sha256": "84a7ad18b8f78ef693d05cfbd1183a11ffd0d6ca21f4ede6eac5a2205dca9fbe"
+      },
+      "1300": {
+        "scoped_started_source_rows": 666,
+        "api_record_id_plus_quality_time_row_hash_sha256": "4affe846cc01cb960e729f7a571b8e778515eaf38b2346497ea1f86e5991bd6c"
+      },
+      "1400": {
+        "scoped_started_source_rows": 951,
+        "api_record_id_plus_quality_time_row_hash_sha256": "7413d5c886521408695efd0b004aee782c78890634e43e5cfda9544661126213"
+      },
+      "1610": {
+        "scoped_started_source_rows": 84,
+        "api_record_id_plus_quality_time_row_hash_sha256": "05e8396dedc1fbfe81bf43778801230441e7eee82c38dee60f42e824f23aa605"
+      },
+      "all_distances": {
+        "scoped_started_source_rows": 57876,
+        "api_record_id_plus_quality_time_row_hash_sha256": "84c01de96e0fa015222adc03f4a76ba12c38fd214114869b2d56c773bef7c4a3"
+      }
+    }
+  },
+  "input_files": {
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": {
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    }
+  },
+  "artifact_sha256": {
+    "README.md": "2d66086c6e7ad83185ab9d11648edf31c35738fb78e4eb19fd4a75d07c479f2e",
+    "audit_source.py": "de39201f6d6052544b4a3a4c6e98c8f49b26cafe8d598f84a0c41ba2cd5f2521",
+    "source_audit.json": "c9bd14dc460b263ae70a065e7f29bb1c12fecd1b2c268099fe496e5d67b31184",
+    "distance_counts.csv": "f678d78be10eea7d868a3babee929fbd309cab4a1417695babcde238c638b920",
+    "time_coverage.csv": "aee659cd4ae292c570f312a6447af070128bc5a65dc4349f1d66928028943ac8",
+    "time_status_counts.csv": "078bf2c1efa217bd83577f41ae5a268549cdaf734b40bc8becf18cc1dd0a8b40",
+    "endpoint_relations.csv": "ca149d120a9e1c843d1dff898570208005f5bd608137e2111359d3f7b01729a9",
+    "c3_g3f_crossing_consistency.csv": "f40b0e51e79c292dc90c7469450e69225012d6fd18e5ffced81ad7a7610e5ddf",
+    "chronology_summary.csv": "13aa476e435cea78ee072cd6cd017a0b881eff13c695cb767ea07e629ee78fd2",
+    "proposed_distance_profiles.csv": "1bb07d3dd9aeab7266494dd7778b7ba1b82fe52d85e240b8a893e294e278f66f"
+  },
+  "whole_database_hash_claimed_unchanged": false
+}

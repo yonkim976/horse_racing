@@ -1,0 +1,192 @@
+{
+  "status": "PASS",
+  "study": "20261012_pair_jockey_id_v1",
+  "scope": "independent label-free source join, frozen H1/H2/evaluation roster, H1 categorical moments, and unknown-ID semantics",
+  "finish_labels_read": false,
+  "performance_metrics_computed": false,
+  "fit_or_optimizer_invoked": false,
+  "network_or_database_access": false,
+  "joined_event_rows_2019_2026": 42690,
+  "source_key_join": {
+    "unique_feature_api_keys": 42690,
+    "official_event_jockey_missing": 0,
+    "race_horse_date_mismatches": 0
+  },
+  "evaluation_pair_roster": {
+    "status": "PASS",
+    "rows_read": 76848,
+    "unique_pairs": 76848,
+    "expected_unordered_pairs": 76848,
+    "exact_key_set_match": true,
+    "year_counts": {
+      "2024": {
+        "races": 637,
+        "pairs": 28309
+      },
+      "2025": {
+        "races": 654,
+        "pairs": 28308
+      },
+      "2026": {
+        "races": 488,
+        "pairs": 20231
+      }
+    }
+  },
+  "candidate_preflight_hashes_independently_verified": 17,
+  "frozen_21_moment_reference_check": {
+    "status": "PASS",
+    "scope": "read-only standardization blocks only; coefficient/objective/calibration fields were not inspected",
+    "folds": [
+      {
+        "evaluation_year": 2024,
+        "old20_exactly_equal_to_expanded_reference": true,
+        "old20_count": 20,
+        "saved_rolling_moment_present": true
+      },
+      {
+        "evaluation_year": 2025,
+        "old20_exactly_equal_to_expanded_reference": true,
+        "old20_count": 20,
+        "saved_rolling_moment_present": true
+      },
+      {
+        "evaluation_year": 2026,
+        "old20_exactly_equal_to_expanded_reference": true,
+        "old20_count": 20,
+        "saved_rolling_moment_present": true
+      }
+    ]
+  },
+  "folds": {
+    "2024": {
+      "h1_rows": 21861,
+      "h1_races": 2147,
+      "h2_rows": 3327,
+      "h2_races": 336,
+      "evaluation_rows": 6329,
+      "evaluation_races": 637,
+      "vocabulary_count": 39,
+      "minimum_starts_per_id": 52,
+      "maximum_starts_per_id": 1295,
+      "h2_unknown_rows": 0,
+      "evaluation_unknown_rows": 0,
+      "independent_vs_candidate_mu_max_abs": 2.1788126858268697e-15,
+      "independent_vs_candidate_sigma_max_abs": 5.440092820663267e-15,
+      "pi_sum": 0.9999999999999948,
+      "sigma_min": 0.0697378406712224,
+      "sigma_max": 0.3230120016000018,
+      "degenerate_id_count": 0,
+      "unknown_and_effect_coding": {
+        "status": "PASS",
+        "known_unknown_effect_check_pairs": 39,
+        "known_known_effect_check_pairs": 780,
+        "unknown_unknown_basis_exactly_zero": true,
+        "pair_basis_symmetric": true,
+        "weighted_centered_effect_mean": -1.6566609195578508e-16
+      }
+    },
+    "2025": {
+      "h1_rows": 28522,
+      "h1_races": 2818,
+      "h2_rows": 3085,
+      "h2_races": 311,
+      "evaluation_rows": 6410,
+      "evaluation_races": 654,
+      "vocabulary_count": 39,
+      "minimum_starts_per_id": 52,
+      "maximum_starts_per_id": 1768,
+      "h2_unknown_rows": 0,
+      "evaluation_unknown_rows": 0,
+      "independent_vs_candidate_mu_max_abs": 3.4416913763379853e-15,
+      "independent_vs_candidate_sigma_max_abs": 1.1546319456101628e-14,
+      "pi_sum": 0.9999999999999866,
+      "sigma_min": 0.060907084859909096,
+      "sigma_max": 0.3296298525570063,
+      "degenerate_id_count": 0,
+      "unknown_and_effect_coding": {
+        "status": "PASS",
+        "known_unknown_effect_check_pairs": 39,
+        "known_known_effect_check_pairs": 780,
+        "unknown_unknown_basis_exactly_zero": true,
+        "pair_basis_symmetric": true,
+        "weighted_centered_effect_mean": 1.2130867057397188e-16
+      }
+    },
+    "2026": {
+      "h1_rows": 34845,
+      "h1_races": 3458,
+      "h2_rows": 3172,
+      "h2_races": 325,
+      "evaluation_rows": 4673,
+      "evaluation_races": 488,
+      "vocabulary_count": 39,
+      "minimum_starts_per_id": 52,
+      "maximum_starts_per_id": 2114,
+      "h2_unknown_rows": 0,
+      "evaluation_unknown_rows": 0,
+      "independent_vs_candidate_mu_max_abs": 3.802513859341161e-15,
+      "independent_vs_candidate_sigma_max_abs": 1.0755285551056204e-14,
+      "pi_sum": 0.9999999999999815,
+      "sigma_min": 0.05500168152141901,
+      "sigma_max": 0.326927201920371,
+      "degenerate_id_count": 0,
+      "unknown_and_effect_coding": {
+        "status": "PASS",
+        "known_unknown_effect_check_pairs": 39,
+        "known_known_effect_check_pairs": 780,
+        "unknown_unknown_basis_exactly_zero": true,
+        "pair_basis_symmetric": true,
+        "weighted_centered_effect_mean": 6.141734256587261e-16
+      }
+    }
+  },
+  "input_hashes": {
+    "jeju/research/20261009_jockey_effects_v1/input01/source_manifest.json": {
+      "sha256": "68e38ee6b2ec32040fa6a8a8fdce4039ece3f25e0869004d910c92a288f50bdc",
+      "bytes": 1636
+    },
+    "jeju/research/20261009_jockey_effects_v1/input01/starts.csv": {
+      "sha256": "78800c5c91219d58855ce046e39ead6a87729a49c8ba0d58ca9f78765921801a",
+      "bytes": 58848806
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "bytes": 5476534
+    },
+    "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy": {
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+      "bytes": 2152128
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/outputs/FIT.json": {
+      "sha256": "c52db2c6f136bf7ef95d0d0489c368b6131cb054a2a7c97f6d9d6f3675433f9f",
+      "bytes": 25497
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/outputs/FIT_RECEIPT.json": {
+      "sha256": "852bb66d855fa08fe016e3023410913f445105a952b460e78341aafd3d929990",
+      "bytes": 949
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/outputs/evaluation_pair_predictions.parquet": {
+      "sha256": "21571f2473709351c93454f188a3a3491947cae632aabcde4767ccdc0b3cbbe6",
+      "bytes": 13579792
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/PLAN.md": {
+      "sha256": "643d3d8e497d787c0fed8f65a6b0178c723b012d2432689fa560341fa3b898f2",
+      "bytes": 4546
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/SOURCE_PREFLIGHT.json": {
+      "sha256": "be743852ee0a5fd8c4a2b5fdae93c90b8bfcec0f2263fdbeae5d763b48276675",
+      "bytes": 11322
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_basis.py": {
+      "sha256": "0b5f18e49ba0e4671a18cf972924d05c698fd507e7401ad7341877f61efaf3ef",
+      "bytes": 5462
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/source_preflight.py": {
+      "sha256": "518a14c154007d1604fb043130efdf9df1e0c1b79877b6f3c3086742da880b5b",
+      "bytes": 9027
+    }
+  },
+  "source_assumption": "cached event jockey ID is an historical event snapshot; publication/change timestamp is unavailable",
+  "review_script_sha256": "b80451410d4a2f515de94dcb26aac0c9265345a5b810fe232f4b10c82b85263e"
+}

@@ -1,0 +1,50 @@
+{
+  "study": "20261011_pair_top3_oos_expansion_review_v1",
+  "status": "complete",
+  "reviewed_study": "20261011_pair_top3_oos_expansion_v1",
+  "review_scope": "independent historical model replay, saved fit moments/objective gradients, all-pair prediction/selector preservation, and exact frozen date-bootstrap/report reproduction; no training or optimization",
+  "reviewed_study_manifest": {
+    "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/ARTIFACT_MANIFEST.json",
+    "sha256": "1bcd480c93e0f5803f85b37a59bca99d67344b50061dc521fc94d0fd813b0fc1"
+  },
+  "artifacts": [
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_review_v1/README.md",
+      "sha256": "69b94aff7a08c0def55daddb2cc01af9eae6a41e7f67e77749d0a8c8cbfe7273",
+      "bytes": 910
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_review_v1/independent_verify.py",
+      "sha256": "9e23321f2a5a4076625901910dc2dffa3daea0b15f3f048409f985722d2f3f33",
+      "bytes": 31797
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_review_v1/INDEPENDENT_REVIEW_RECEIPT.json",
+      "sha256": "e19f2ac7490091d6a389eac344c05e97eecbf34cbda58edbce25a7fd81a5b19c",
+      "bytes": 9191
+    }
+  ],
+  "external_pins": {
+    "independent_reference": {
+      "path": "jeju/research/20261011_pair_top3_direct_review_v1/independent_reference.py",
+      "sha256": "e998ee92c07d116f5f4c343b5bacd193592b4c21e1aa4bffeea04440f0683849"
+    },
+    "prior_direct_pair_predictions": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/evaluation_pair_predictions.parquet",
+      "sha256": "a8db4d50646b01e009acdf33cfa458840e804a7fb4c26b6387939e12dabbbfa8"
+    },
+    "prior_direct_bootstrap_schedule": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd"
+    },
+    "expanded_report": {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/REPORT.json",
+      "sha256": "ba059c579f47554b4944f64269278b27fa1f1c60322a93f57e4cdb883fa39b71"
+    },
+    "expanded_pair_predictions": {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/evaluation_pair_predictions.parquet",
+      "sha256": "f983d9c5dfa7c4d1129b407d5a3e367dc38e193c0c8fdbbaeff34d86b31af499"
+    }
+  },
+  "manifest_self_hash_excluded": true
+}

@@ -1,0 +1,29 @@
+{
+  "timestamp_utc": "2026-10-21T22:53:12.076234+00:00",
+  "storage_budget_bytes": 300000000,
+  "initial_disk_free_bytes": 30358315008,
+  "sources": [
+    {
+      "path": "config/prediction_model_registry.json",
+      "size_bytes": 7291,
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+    },
+    {
+      "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+      "size_bytes": 638955,
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    {
+      "path": "scripts/predict_jeju_live_hy_r_form.py",
+      "size_bytes": 27278,
+      "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+    }
+  ],
+  "roles": {
+    "asset_audit": "GPT-6 Luna xhigh; assets_audit/",
+    "rules_contract": "GPT-6 Luna xhigh; rules_contract/",
+    "baseline_experiment": "GPT-6 Luna xhigh; experiment/",
+    "supervisor": "main; supervisor/ and root report"
+  },
+  "no_database_access_needed": true
+}

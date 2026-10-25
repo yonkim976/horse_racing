@@ -1,0 +1,13 @@
+{
+  "source": "raw_pair_body_changes.csv",
+  "right_closed": false,
+  "unit": "kg measured later minus earlier exact-distance body",
+  "intervals": {
+    "loss10plus": "delta < -10",
+    "loss3toUnder10": "-10 <= delta < -3",
+    "stableUnder3": "-3 <= delta < 3",
+    "gain3toUnder10": "3 <= delta < 10",
+    "gain10plus": "10 <= delta"
+  },
+  "note": "Labels are retained as source codes; use exact intervals above at boundaries. No raw group statistics are used as adjusted causal effects."
+}

@@ -1,0 +1,105 @@
+{
+  "changed_ledger_replay": {
+    "primary_both_miss_union_missed_top3_runner_count": 155,
+    "primary_both_miss_with_union_complete_but_no_full_five_set": 14,
+    "primary_both_miss_with_union_miss_races": 129,
+    "primary_caught_single_swap_races": 30,
+    "primary_changed_outcome_counts": {
+      "both_hit": 45,
+      "both_miss": 143,
+      "caught": 31,
+      "lost": 35
+    },
+    "primary_lost_single_swap_races": 35
+  },
+  "independent_checks": {
+    "T_minus_2_all_rows": true,
+    "all_304_head_and_prior_energies_reconstructed": true,
+    "all_changed_runner_profiles_match_frozen_features": true,
+    "all_condition_cell_counts_rates_and_bootstrap_intervals_match": true,
+    "boundary_time_style_summary_matches_primary_only": true,
+    "choices_match_baseline_rank_and_outcome_ledger": true,
+    "complete_rank_1_to_N_and_exactly_three_top3_per_race": true,
+    "excluded_horse_absent": true,
+    "feature_join_1_to_1": true,
+    "max_energy_decomposition_residual": 8.049116928532385e-16,
+    "max_saved_selector_energy_error": 5.329070518200751e-15,
+    "no_latest_history_after_cutoff": true,
+    "y_matches_finish_position_le3": true
+  },
+  "main_analysis_code_sha256": "08aab8da5889527efeda0c92176b078be29d869dc33abaed97e2771ff266990b",
+  "main_output_bytes_excluding_receipt": 1053496,
+  "main_storage_cap_bytes": 10485760,
+  "owned_path": "jeju/research/20261025_top5_direct_gain_loss_review_v1",
+  "posthoc_support4_overlap": {
+    "condition_cells_with_lower_ci_above_zero": 0,
+    "condition_cells_with_upper_ci_below_zero": 2,
+    "interpretation": "both adverse support cells refer to the same four posthoc-selected races; neither is a validated switching rule",
+    "shared_race_ids": [
+      "2024-06-07_2_3",
+      "2024-06-08_2_4",
+      "2025-02-08_2_2",
+      "2025-08-08_2_7"
+    ],
+    "support4_lost_races_overlap": true
+  },
+  "primary_changed_outcomes": {
+    "both_miss_with_at_least_one_actual_top3_outside_both_sets": 129,
+    "caught": 31,
+    "changed_both_hit": 45,
+    "changed_both_miss": 143,
+    "lost": 35
+  },
+  "review_scope": "independent source, roster, labels, choices, condition cells, time/style profiles, changed runners, and exact energy decomposition replay",
+  "row_counts": {
+    "changed_race_ledger_rows": 304,
+    "changed_runner_ledger_rows": 614,
+    "condition_cells_replayed": 65,
+    "continuous_gap_summary_rows": 10,
+    "energy_decomposition_rows": 304,
+    "evaluation_runner_rows": 17412,
+    "primary_boundary_form_groups": 16,
+    "primary_race_ledger_rows": 1503,
+    "races_full": 1779,
+    "races_full_outcomes": {
+      "both_hit": 482,
+      "both_miss": 1222,
+      "caught": 38,
+      "lost": 37
+    },
+    "races_primary": 1503,
+    "races_primary_outcomes": {
+      "both_hit": 404,
+      "both_miss": 1033,
+      "caught": 31,
+      "lost": 35
+    }
+  },
+  "source_and_static_review": {
+    "ast_parse": "PASS",
+    "code_sha256": "08aab8da5889527efeda0c92176b078be29d869dc33abaed97e2771ff266990b",
+    "database_network_subprocess_imports": {
+      "httpx": false,
+      "os.system": false,
+      "requests.": false,
+      "sqlite3": false,
+      "subprocess": false,
+      "supabase": false
+    }
+  },
+  "source_hashes": {
+    "baseline": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1",
+    "choice_receipt": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754",
+    "choices": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+    "features": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "main_manifest": "29cb6310bbecf79245b69ddc43521d01257b80a99f802e48840742a0752dc8e5",
+    "outcomes": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d",
+    "plan": "cc0a1019d034287e10d74ea8fbb6a0288e79342a4d0d86fa1d2bc971c13ac5fa",
+    "race_outcomes": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f",
+    "root_plan_review": "56c6f646f05f25bf786676bcabc6e57a908d0a31bd4092ee7aac7ccb8bc3a2a4",
+    "schedule": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "schedule_receipt": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "source_correction": "dfa60f6e7ced44f6c565be406a6cbd5e6784da74c5752d9dada608c7e8bd648d"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,201 @@
+{
+  "status": "PASS",
+  "scope": "Label-free raw histories and H1-only new-basis moment reference",
+  "labels_read": false,
+  "optimizers_or_performance_metrics_run": false,
+  "raw_feature_order": [
+    "log_min_observed_starts",
+    "log_min_same_valid_times",
+    "min_valid_n5",
+    "max_cv5_both_observed",
+    "cv5_missing_runner_count",
+    "max_log_same_start_gap_both_observed",
+    "same_start_gap_missing_runner_count"
+  ],
+  "missing_numeric_policy": "H1 observed-weight mean imputation; scale variance includes missing rows as centered zero",
+  "folds": {
+    "2024": {
+      "h1_races": 2147,
+      "h1_pairs": 101158,
+      "h2_races": 336,
+      "evaluation_races": 637,
+      "h1_first": "2019-01-11",
+      "h1_last": "2023-06-24",
+      "h2_first": "2023-07-01",
+      "h2_last": "2023-12-30",
+      "new_basis_moments": {
+        "log_min_observed_starts": {
+          "mean": 2.3577398112196626,
+          "scale_after_H1_mean_imputation": 1.1352575882593063,
+          "valid_weight": 1.0,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "log_min_same_valid_times": {
+          "mean": 1.285020107188616,
+          "scale_after_H1_mean_imputation": 0.9171991557632047,
+          "valid_weight": 1.0,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "min_valid_n5": {
+          "mean": 2.689796349693877,
+          "scale_after_H1_mean_imputation": 2.000129056524778,
+          "valid_weight": 1.0,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "max_cv5_both_observed": {
+          "mean": 0.021141722185776653,
+          "scale_after_H1_mean_imputation": 0.006927276459865753,
+          "valid_weight": 0.5103512385766694,
+          "missing_rows": 48364,
+          "degenerate": false
+        },
+        "cv5_missing_runner_count": {
+          "mean": 0.650356580747832,
+          "scale_after_H1_mean_imputation": 0.7408161291945597,
+          "valid_weight": 1.0,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "max_log_same_start_gap_both_observed": {
+          "mean": 4.037686726641145,
+          "scale_after_H1_mean_imputation": 0.8944946747826829,
+          "valid_weight": 0.7900752846491086,
+          "missing_rows": 20649,
+          "degenerate": false
+        },
+        "same_start_gap_missing_runner_count": {
+          "mean": 0.2490779313322391,
+          "scale_after_H1_mean_imputation": 0.5151160523786754,
+          "valid_weight": 1.0,
+          "missing_rows": 0,
+          "degenerate": false
+        }
+      }
+    },
+    "2025": {
+      "h1_races": 2818,
+      "h1_pairs": 130929,
+      "h2_races": 311,
+      "evaluation_races": 654,
+      "h1_first": "2019-01-11",
+      "h1_last": "2024-06-29",
+      "h2_first": "2024-07-05",
+      "h2_last": "2024-12-28",
+      "new_basis_moments": {
+        "log_min_observed_starts": {
+          "mean": 2.366611663620231,
+          "scale_after_H1_mean_imputation": 1.1235909353872655,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "log_min_same_valid_times": {
+          "mean": 1.2590970359764753,
+          "scale_after_H1_mean_imputation": 0.9069689357078541,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "min_valid_n5": {
+          "mean": 2.6439191338587955,
+          "scale_after_H1_mean_imputation": 1.9941085299905874,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "max_cv5_both_observed": {
+          "mean": 0.02157664453364921,
+          "scale_after_H1_mean_imputation": 0.007556305954453024,
+          "valid_weight": 0.5007498987094444,
+          "missing_rows": 64169,
+          "degenerate": false
+        },
+        "cv5_missing_runner_count": {
+          "mean": 0.6578144550820179,
+          "scale_after_H1_mean_imputation": 0.736358136608878,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "max_log_same_start_gap_both_observed": {
+          "mean": 4.0151899088926495,
+          "scale_after_H1_mean_imputation": 0.8758047085705847,
+          "valid_weight": 0.7851764649670965,
+          "missing_rows": 27538,
+          "degenerate": false
+        },
+        "same_start_gap_missing_runner_count": {
+          "mean": 0.25125711170778486,
+          "scale_after_H1_mean_imputation": 0.5108758448721261,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        }
+      }
+    },
+    "2026": {
+      "h1_races": 3458,
+      "h1_pairs": 159060,
+      "h2_races": 325,
+      "evaluation_races": 488,
+      "h1_first": "2019-01-11",
+      "h1_last": "2025-06-28",
+      "h2_first": "2025-07-04",
+      "h2_last": "2025-12-27",
+      "new_basis_moments": {
+        "log_min_observed_starts": {
+          "mean": 2.3642994398196144,
+          "scale_after_H1_mean_imputation": 1.1158932978283704,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "log_min_same_valid_times": {
+          "mean": 1.249499006764043,
+          "scale_after_H1_mean_imputation": 0.9099286119970331,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "min_valid_n5": {
+          "mean": 2.6248156541100136,
+          "scale_after_H1_mean_imputation": 2.002429272591092,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "max_cv5_both_observed": {
+          "mean": 0.021428832061359263,
+          "scale_after_H1_mean_imputation": 0.007366215181314572,
+          "valid_weight": 0.49655793567013917,
+          "missing_rows": 78956,
+          "degenerate": false
+        },
+        "cv5_missing_runner_count": {
+          "mean": 0.6653666284233187,
+          "scale_after_H1_mean_imputation": 0.7392584165167185,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        },
+        "max_log_same_start_gap_both_observed": {
+          "mean": 4.018962571429411,
+          "scale_after_H1_mean_imputation": 0.874072094522986,
+          "valid_weight": 0.7791131607933225,
+          "missing_rows": 34575,
+          "degenerate": false
+        },
+        "same_start_gap_missing_runner_count": {
+          "mean": 0.2577110361523338,
+          "scale_after_H1_mean_imputation": 0.5147275511267486,
+          "valid_weight": 0.9999999999999998,
+          "missing_rows": 0,
+          "degenerate": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "scope": "read-only H1 feature exact-duplicate check; no optimization, target labels, predictions, or performance metrics generated",
+  "target_finish_labels_read": false,
+  "historical_finish_results_read_for_input_features": true,
+  "pair_roster_rule": "all unordered horse-number pairs within the exact frozen H1 race roster; same calendar split and 2-day purge",
+  "input_feature_columns": [
+    "previous_rider_retained_count",
+    "previous_rider_unknown_count",
+    "rider365_delta_sum",
+    "rider365_current_support_log1p_sum",
+    "rider365_previous_support_log1p_sum",
+    "rider365_delta_unavailable_count",
+    "horse_current_rider_rides_log1p_sum",
+    "horse_current_rider_recency_log1p_sum",
+    "horse_current_rider_first_observed_pair_count",
+    "horse_current_rider_history_unavailable_count"
+  ],
+  "source_hashes": {
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_runner_features.parquet": "239dc061436f9750fcb30db4e5aebdbbc919be4a4fa24df345a982cfe94da9ed",
+    "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_prefit_receipt.json": "a5dd5bca55d1af50785865302ca1d149db522d00bb28ea52e41c5c2a4c1269dd",
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/FIT.json": "39d18ff0f842eb379b280190c96104d0216a8a1a774d2df4d32425795f26dea8"
+  },
+  "folds": {
+    "2024": {
+      "h1_races": 2147,
+      "h1_pair_rows": 101158,
+      "finite_values": true,
+      "exact_duplicate_column_pairs": [
+        {
+          "left": "previous_rider_unknown_count",
+          "right": "horse_current_rider_history_unavailable_count"
+        }
+      ]
+    },
+    "2025": {
+      "h1_races": 2818,
+      "h1_pair_rows": 130929,
+      "finite_values": true,
+      "exact_duplicate_column_pairs": [
+        {
+          "left": "previous_rider_unknown_count",
+          "right": "horse_current_rider_history_unavailable_count"
+        }
+      ]
+    },
+    "2026": {
+      "h1_races": 3458,
+      "h1_pair_rows": 159060,
+      "finite_values": true,
+      "exact_duplicate_column_pairs": [
+        {
+          "left": "previous_rider_unknown_count",
+          "right": "horse_current_rider_history_unavailable_count"
+        }
+      ]
+    }
+  },
+  "exact_duplicate_column_pairs_across_all_h1_folds": [
+    {
+      "left": "previous_rider_unknown_count",
+      "right": "horse_current_rider_history_unavailable_count"
+    }
+  ],
+  "exact_duplicate_removal_rule_recommendation": "retain all ten raw columns in the source audit; in each fold's H1 fit matrix keep the first feature in fixed column order among exact duplicate columns and record the dropped column; standardize and fit only retained columns",
+  "artifact_paths": {
+    "receipt": "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_h1_duplicate_receipt.json"
+  }
+}

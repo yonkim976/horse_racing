@@ -1,0 +1,9 @@
+{
+  "stage": "final_verification",
+  "initial_verifier_preserved": "verify.py",
+  "fixed_verifier": "verify_v2.py",
+  "reason": "Python 3.12 built-in sum uses improved float summation; differs from frozen NumPy sorted-three-term reduction by up to 4.44e-16 in observed example, changing ticket rank at near ties. Separate verifier now explicitly applies left-associated additions to the same sorted three terms.",
+  "example_race": "2024-02-17_2_6",
+  "model_or_predictions_changed": false,
+  "metric_estimation_changed": false
+}

@@ -1,0 +1,424 @@
+{
+  "status": "PASS",
+  "study": "20261015_pair_riding_conditions_v1",
+  "generated_at": "2026-10-15T17:22:25+09:00",
+  "decision": "improvement not established; retain as unadopted research candidate",
+  "evaluation_races": 1779,
+  "evaluation_dates": 269,
+  "root_metrics_review": {
+    "path": "jeju/research/20261015_pair_riding_conditions_v1/ROOT_METRICS_REVIEW.json",
+    "sha256": "948db497b551792eacb9642dd0421311516a6e7b050eb1c1b248434b947ea31b",
+    "status": "PASS",
+    "scope": "Independent saved-prediction calculation, not improvement confirmation"
+  },
+  "document_correction": {
+    "receipt_path": "DOCUMENT_CORRECTION_RECEIPT.json",
+    "receipt_sha256": "b9dd53209a432c93466bc0d27787d560ecdc0faf9eca08671398b3ee0af98ffd",
+    "snapshot_directory": "review_snapshots/pre_document_fix",
+    "previous_documents": {
+      "README.md": {
+        "snapshot_path": "review_snapshots/pre_document_fix/README.md",
+        "sha256": "22a2771c7ca2befbba1ca704bf63e90debaa0f7a9d010e949918b3e8a86a70a5",
+        "bytes": 12439
+      },
+      "outputs/REPORT.json": {
+        "snapshot_path": "review_snapshots/pre_document_fix/REPORT.json",
+        "sha256": "c698b523ae160201c5a57a6f8c3ae4e226b0a2a470651b14ebeafdfd9cc1fc33",
+        "bytes": 26698
+      },
+      "ARTIFACT_MANIFEST.json": {
+        "snapshot_path": "review_snapshots/pre_document_fix/ARTIFACT_MANIFEST.json",
+        "sha256": "c8a9b5e7e7c2b18cb5c288ac7944b45f9f3b03e4e3d8fd16d85366cd60bcac43",
+        "bytes": 14198
+      }
+    },
+    "corrections": [
+      "Align the first README comparison table's six data values with six explicit headers.",
+      "Replace '새 목표는' with '평가 목표는' to clarify that the evaluation objective remains unchanged.",
+      "Describe the paired date bootstrap as resampling race days with all races on each sampled day grouped together.",
+      "Display coverage hit-rate confidence intervals as percentages without positive signs; retain percentage-point units for difference intervals."
+    ],
+    "model_refit_performed": false,
+    "prediction_rerun_performed": false,
+    "metric_values_changed": false
+  },
+  "report_artifacts": {
+    "outputs/REPORT.json": {
+      "sha256": "d465392bfedf1162950ca41e5bb3bb667fcd46167dcc0e93ac5a15d02d1c5884",
+      "bytes": 28266
+    },
+    "outputs/report/paired_race_metrics.csv": {
+      "sha256": "973af581f7a8cf59b10e1827f70b7df4c3efeacf9734b457b8ed30ae06597ed1",
+      "bytes": 290632
+    },
+    "outputs/report/changed_selections.csv": {
+      "sha256": "949354a93a79d8112b5d1320a867ce0874ea66f1db1cfb3249c24642b520afe0",
+      "bytes": 4020
+    }
+  },
+  "local_artifacts": [
+    {
+      "path": "DOCUMENT_CORRECTION_RECEIPT.json",
+      "sha256": "b9dd53209a432c93466bc0d27787d560ecdc0faf9eca08671398b3ee0af98ffd",
+      "bytes": 1718
+    },
+    {
+      "path": "PLAN.md",
+      "sha256": "14288c75982be30d01fd246617ef5f57044375413c6b83bf4dacc4a00e2c20a0",
+      "bytes": 9658
+    },
+    {
+      "path": "README.md",
+      "sha256": "dfb0f0c8353aefe520be95830f2a0b4b64f2858375c69ff8b768292f9538a9f4",
+      "bytes": 12651
+    },
+    {
+      "path": "ROOT_METRICS_REVIEW.json",
+      "sha256": "948db497b551792eacb9642dd0421311516a6e7b050eb1c1b248434b947ea31b",
+      "bytes": 1940
+    },
+    {
+      "path": "ROOT_PRESERVATION_REVIEW.json",
+      "sha256": "e1e706efec4fca7f5984d002aac85cc4149aff372dabdba0e99f4f240b300407",
+      "bytes": 2694
+    },
+    {
+      "path": "ROOT_PROTECTED_INPUTS.json",
+      "sha256": "082ce5bab719d10e9120cbc5db6add624851aa9a79f8ad25bb5ceb0bbbab52ae",
+      "bytes": 817
+    },
+    {
+      "path": "ROOT_SOURCE_REVIEW.json",
+      "sha256": "a1192143051bddad7be04c81516a3c4b24341530eb37a13e80607af843d8be9e",
+      "bytes": 1270
+    },
+    {
+      "path": "SOURCE_AUDIT.md",
+      "sha256": "e4aa2df2d386b1113e6cb1378321bc07177e28390068be4efd5fdb5db387948c",
+      "bytes": 5441
+    },
+    {
+      "path": "SOURCE_HASHES.json",
+      "sha256": "b9775349df553f88f2122e6a3b63028e62e6bbd28af8d645653da0a58ae1a78a",
+      "bytes": 6485
+    },
+    {
+      "path": "audit/independent_evaluation_pair_features.parquet",
+      "sha256": "03c99a662efcc265f9ae044a551b5602d103a66a991cc30480e368c0af035106",
+      "bytes": 1167804
+    },
+    {
+      "path": "audit/independent_h1_duplicate_audit.py",
+      "sha256": "370c02898551686b1b7d7293c00ed1d19d632c85ab4e78eb887f9f7415f789d6",
+      "bytes": 11290
+    },
+    {
+      "path": "audit/independent_h1_duplicate_receipt.json",
+      "sha256": "40a4a8f1ef554d4273708604085a3d01480d4d36f5a9538dc89506e1bcf6afdf",
+      "bytes": 2958
+    },
+    {
+      "path": "audit/independent_prefit_audit.py",
+      "sha256": "b24af4cada9da66b75095789abeed2e2c2e1578a98b8ec63dbd444cfc1c1c1f3",
+      "bytes": 34894
+    },
+    {
+      "path": "audit/independent_prefit_receipt.json",
+      "sha256": "a5dd5bca55d1af50785865302ca1d149db522d00bb28ea52e41c5c2a4c1269dd",
+      "bytes": 6928
+    },
+    {
+      "path": "audit/independent_runner_basis_comparison.py",
+      "sha256": "8da0ed976dd348e092e39a5c3bbfb2d21f99226e145c22a9d3a12564f90adce8",
+      "bytes": 14442
+    },
+    {
+      "path": "audit/independent_runner_basis_comparison_receipt.json",
+      "sha256": "9bb3942b8a754be12b4d2f3841386b71a42b031f75f95c9af4e13b738d75e78b",
+      "bytes": 8587
+    },
+    {
+      "path": "audit/independent_runner_basis_comparison_superseded_draft.json",
+      "sha256": "012ca109fd1f947a4ac868b2db3361fbffb4c9eb8d12998a3af3175f2d035c25",
+      "bytes": 7497
+    },
+    {
+      "path": "audit/independent_runner_features.parquet",
+      "sha256": "239dc061436f9750fcb30db4e5aebdbbc919be4a4fa24df345a982cfe94da9ed",
+      "bytes": 2495118
+    },
+    {
+      "path": "outputs/APPROVAL.json",
+      "sha256": "f21e823d30150b9fc975d7285c6126a3a96edd32a48a0785d1a60aec5ddd67b9",
+      "bytes": 1911
+    },
+    {
+      "path": "outputs/DESIGN_DRY_RUN.json",
+      "sha256": "43026ff6723c292656a14270eb231577c2dac1fcec8628a4a40891528f3c2e03",
+      "bytes": 17450
+    },
+    {
+      "path": "outputs/FEATURE_PREFLIGHT.json",
+      "sha256": "2aaaeaed171bf9068c3d5c6ebe9336b0edaf196c8ecbd1c35f94cce86f287e95",
+      "bytes": 7242
+    },
+    {
+      "path": "outputs/FIT.json",
+      "sha256": "99c546bfdbba3eb26b9d00f4ea37e71a665167cf67e3d98bef1e925d0b3afda4",
+      "bytes": 122460
+    },
+    {
+      "path": "outputs/FIT_RECEIPT.json",
+      "sha256": "27eb3d8af587d6380f8073267a85582361b6b506d0a8581ef5ccc7cbfa0a6e86",
+      "bytes": 574
+    },
+    {
+      "path": "outputs/PREDICTION_RECEIPT.json",
+      "sha256": "50778b6c507c2bd0ae7a4ec651a7c77ec0987662a508d39b425e1d3a0597ac8e",
+      "bytes": 3444
+    },
+    {
+      "path": "outputs/REPORT.json",
+      "sha256": "d465392bfedf1162950ca41e5bb3bb667fcd46167dcc0e93ac5a15d02d1c5884",
+      "bytes": 28266
+    },
+    {
+      "path": "outputs/SOURCE_CACHE_RECEIPT.json",
+      "sha256": "2e25146330b65f2c967dbd7c3898d34882e5400a6dd43a76fe93ddf4ddda1386",
+      "bytes": 1497
+    },
+    {
+      "path": "outputs/evaluation_pair_predictions.parquet",
+      "sha256": "c50f7cdd762cc4ed36e50b97bd4d6d979be408c7477f0c747c917e120cde9ced",
+      "bytes": 19330139
+    },
+    {
+      "path": "outputs/report/changed_selections.csv",
+      "sha256": "949354a93a79d8112b5d1320a867ce0874ea66f1db1cfb3249c24642b520afe0",
+      "bytes": 4020
+    },
+    {
+      "path": "outputs/report/paired_race_metrics.csv",
+      "sha256": "973af581f7a8cf59b10e1827f70b7df4c3efeacf9734b457b8ed30ae06597ed1",
+      "bytes": 290632
+    },
+    {
+      "path": "outputs/riding_conditions_runner_basis.parquet",
+      "sha256": "e6d3e09ccf1ac25c3699929242d5fec6c1b992862dacf64c9d118bc7dbfa112c",
+      "bytes": 1509567
+    },
+    {
+      "path": "outputs/source_started_event_rider.parquet",
+      "sha256": "d397002ebc4c80489d57b780fc8f349696d9a97e2b35d20d29d8158d6b3c86d7",
+      "bytes": 953076
+    },
+    {
+      "path": "outputs_prefit_v2/DESIGN_DRY_RUN.json",
+      "sha256": "275cfe097dcc6086112debea0533bf79be071adbe850a6a5de2206c7528ffbba",
+      "bytes": 17450
+    },
+    {
+      "path": "outputs_prefit_v2/FEATURE_PREFLIGHT.json",
+      "sha256": "afd8ec079b75a1f4100d4144750aca0e3facaab3e689d2b30aae8fd020a84577",
+      "bytes": 7242
+    },
+    {
+      "path": "outputs_prefit_v2/NEW_CANDIDATE_FIRST60_RECONCILIATION.json",
+      "sha256": "251d610c8a38c45dd10a8750181d751c95ac49ac78bc0b1a7c398ec3fe1a7d18",
+      "bytes": 2748
+    },
+    {
+      "path": "outputs_prefit_v2/SAVED_ID_RECONCILIATION.json",
+      "sha256": "9afaab631f2a1d4578c0c354b2df8ba3010e4ca89a510f55f2782b869bc236f7",
+      "bytes": 2815
+    },
+    {
+      "path": "outputs_prefit_v2/riding_conditions_runner_basis.parquet",
+      "sha256": "e6d3e09ccf1ac25c3699929242d5fec6c1b992862dacf64c9d118bc7dbfa112c",
+      "bytes": 1509567
+    },
+    {
+      "path": "pair_riding_conditions_fit.py",
+      "sha256": "60e681765b636ff6955492ce2c4c19665ed58763ffff6c9b170c2dac1d6548fd",
+      "bytes": 25691
+    },
+    {
+      "path": "pair_riding_conditions_predict.py",
+      "sha256": "0ee5e2d43122c1e3540e65880c5796441f179387d87799b32762f3aaa4f31700",
+      "bytes": 36741
+    },
+    {
+      "path": "prepare.py",
+      "sha256": "a345e94b54ac0fc3615df3736da2c8f8180f546346bd3704b7018040e8826079",
+      "bytes": 36677
+    },
+    {
+      "path": "reconcile_frozen_id_predictions.py",
+      "sha256": "fa5995d5bd84d61eb134e95aa5fcddb666e03148d0e6167f8a5c8bf60eb186a5",
+      "bytes": 9365
+    },
+    {
+      "path": "review_snapshots/pre_document_fix/ARTIFACT_MANIFEST.json",
+      "sha256": "c8a9b5e7e7c2b18cb5c288ac7944b45f9f3b03e4e3d8fd16d85366cd60bcac43",
+      "bytes": 14198
+    },
+    {
+      "path": "review_snapshots/pre_document_fix/README.md",
+      "sha256": "22a2771c7ca2befbba1ca704bf63e90debaa0f7a9d010e949918b3e8a86a70a5",
+      "bytes": 12439
+    },
+    {
+      "path": "review_snapshots/pre_document_fix/REPORT.json",
+      "sha256": "c698b523ae160201c5a57a6f8c3ae4e226b0a2a470651b14ebeafdfd9cc1fc33",
+      "bytes": 26698
+    },
+    {
+      "path": "riding_conditions_basis.py",
+      "sha256": "50978e033d99255dedfc6491f860b8a35859c82b4efaed948e9375a0f0450cfc",
+      "bytes": 6828
+    },
+    {
+      "path": "riding_conditions_report.py",
+      "sha256": "caf7cb3e5fdd8ea86b61f33d40f26bc7710512bcaae8d70dc6d4388ac728eebc",
+      "bytes": 83848
+    },
+    {
+      "path": "root_metrics_verify.py",
+      "sha256": "ce5ad02014be41fab233790c35548ed18fc696976c0ffefc60cf7850f9728ac3",
+      "bytes": 7183
+    }
+  ],
+  "external_sources": {
+    "jeju/data/horse_exclusions.json": {
+      "sha256": "5a88a0f19880a5b19ed7bfdec5a2465cb6652cff4b91c5cbe255fff377bcf84a",
+      "bytes": 349
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "sha256": "c52d2ab941ec9b53829891b59db660fbd789cd5e5e27192f9401c1f1f83d158d",
+      "bytes": 1912885248
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/PREPARATION_RETRY.json": {
+      "sha256": "451ef6d97c594992ef39da12c134fb30f36989c342026a1d1ba54927ee1160ea",
+      "bytes": 383
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": {
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+      "bytes": 7453522
+    },
+    "jeju/research/20261009_jockey_effects_v1/input01/source_manifest.json": {
+      "sha256": "68e38ee6b2ec32040fa6a8a8fdce4039ece3f25e0869004d910c92a288f50bdc",
+      "bytes": 1636
+    },
+    "jeju/research/20261009_jockey_effects_v1/input01/starts.csv": {
+      "sha256": "78800c5c91219d58855ce046e39ead6a87729a49c8ba0d58ca9f78765921801a",
+      "bytes": 58848806
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "bytes": 5476534
+    },
+    "jeju/research/20261011_pair_top3_direct_v1/core.py": {
+      "sha256": "0a51495c6c1d08f65e1400a6d47c7710d3b32806f678a6bbefe2fab3a8e2de1e",
+      "bytes": 18071
+    },
+    "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy": {
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+      "bytes": 2152128
+    },
+    "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/HISTORICAL_SOURCE_LOCK.json": {
+      "sha256": "7fedbf42cefdec60cc581502784414bc9b03c70403b1b36c9682e65c800dbd87",
+      "bytes": 2845
+    },
+    "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/evaluation_pair_predictions.parquet": {
+      "sha256": "f983d9c5dfa7c4d1129b407d5a3e367dc38e193c0c8fdbbaeff34d86b31af499",
+      "bytes": 8727487
+    },
+    "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/expanded_h1_fit.json": {
+      "sha256": "3a42446feb21aeaf156e59dd24238ce3ea9f9af137d48665c61393571a3774c7",
+      "bytes": 37082
+    },
+    "jeju/research/20261011_pair_top3_oos_expansion_v1/pair_fit.py": {
+      "sha256": "5187288115621e6affc5079d4c24a6a35a9563385d7b336e958f179484fa3e16",
+      "bytes": 19306
+    },
+    "jeju/research/20261011_pair_top3_oos_expansion_v1/pair_predict.py": {
+      "sha256": "69b19509552f4c12db9191b30dd8c5f6fc623cbed3f3265ba466b805c0614f75",
+      "bytes": 19219
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/jockey_input.py": {
+      "sha256": "480bc13a42c73d9a5190fb33446bfae6ad74489e146825a1cf4e158ed0658c75",
+      "bytes": 11398
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/outputs/FIT.json": {
+      "sha256": "c52db2c6f136bf7ef95d0d0489c368b6131cb054a2a7c97f6d9d6f3675433f9f",
+      "bytes": 25497
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/outputs/PREDICTION_RECEIPT.json": {
+      "sha256": "bfdfaa210973ace2b6f3f1d503af277d2a39190b28b66ab9c451b23e1bc1be1d",
+      "bytes": 3127
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/outputs/evaluation_pair_predictions.parquet": {
+      "sha256": "21571f2473709351c93454f188a3a3491947cae632aabcde4767ccdc0b3cbbe6",
+      "bytes": 13579792
+    },
+    "jeju/research/20261012_pair_jockey_basic_v1/pair_jockey_fit.py": {
+      "sha256": "2e58ee467bcd573a37cf0780773d940bbc38e1b793e359248dec26242f82741f",
+      "bytes": 22427
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/PLAN.md": {
+      "sha256": "643d3d8e497d787c0fed8f65a6b0178c723b012d2432689fa560341fa3b898f2",
+      "bytes": 4546
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/APPROVAL.json": {
+      "sha256": "d866de93716e9030acd7213a7bd6551d6a7d7182d2ffc0eecfd5ec868bc0bbf9",
+      "bytes": 1215
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/FIT.json": {
+      "sha256": "39d18ff0f842eb379b280190c96104d0216a8a1a774d2df4d32425795f26dea8",
+      "bytes": 93261
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/FIT_RECEIPT.json": {
+      "sha256": "f80c7bafebcc0d0e29ccaf7f0702c208bac83bfac959cafe8f5a3daae17cb74b",
+      "bytes": 847
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/PREDICTION_RECEIPT.json": {
+      "sha256": "410bd6aa1df6c7ddb10306d20f14fa217e3903a21837b598db19ebc690485090",
+      "bytes": 3048
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/REPORT.json": {
+      "sha256": "674670f32a1993e4d79ee853b0ff205eab3bbb723b3fd3795429bbbe73fc45e2",
+      "bytes": 37056
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/SOURCE_PREFLIGHT.json": {
+      "sha256": "be743852ee0a5fd8c4a2b5fdae93c90b8bfcec0f2263fdbeae5d763b48276675",
+      "bytes": 11322
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": {
+      "sha256": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+      "bytes": 17016851
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_basis.py": {
+      "sha256": "0b5f18e49ba0e4671a18cf972924d05c698fd507e7401ad7341877f61efaf3ef",
+      "bytes": 5462
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_fit.py": {
+      "sha256": "0f89d71fdcbe6bf7e1bbf35af26e6fb68dfc247110b558082e355f3726b7c6d7",
+      "bytes": 21987
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_predict.py": {
+      "sha256": "71a4a4beee822ab103aa0c0af5e95b13675a49e8defb00368f97b04d05c4b517",
+      "bytes": 18863
+    },
+    "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_report.py": {
+      "sha256": "c0941e029c15eb2686ca12656a4d53bab2da1db2e1b78b68e97abe69993b52db",
+      "bytes": 28319
+    }
+  },
+  "runtime_dependencies": {
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1"
+  },
+  "manifest_self_hash_excluded": true
+}

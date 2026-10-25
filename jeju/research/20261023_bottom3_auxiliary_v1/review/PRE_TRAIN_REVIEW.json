@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "review_type": "pre_train_design_and_static_code_review",
+  "passed": true,
+  "execution_approved_by_this_review": false,
+  "candidate_gate_pass": null,
+  "recommendation": "No blocking design or static-code issue found. Supervisor may consider a separate hash-bound one-run approval after verifying the same frozen hashes.",
+  "study": "jeju/research/20261023_bottom3_auxiliary_v1",
+  "hashes": {
+    "contract_sha256": "ff6e3af2d454cd30edb56df1251700320b01de3478939c98199e0886bf22f084",
+    "session_start_sha256": "c7cd21d7300e0d3b4b070c51a10ca058bbb3214b73df6cc959b2cbff15c64bbe",
+    "plan_sha256": "2a613ba594dac2ef4d9622357a04b96b8b634bee0f70bbb2098791f4be6948fb",
+    "engine_sha256": "92a4b41a6493cf88cf8d17e592f98ed75f0fb9fd446f28564774a35a6d608df0",
+    "test_sha256": "ce4f1d19c8322b635ae76aeabdd9ce1d8fcf3abba7b36bcdad5d3b9bdfe3846e",
+    "code_bundle_sha256": "c55e4cf66c346cea92b23bc13bdbb82f4993ae169055157f99056ca286f4bd2b",
+    "source_preflight_sha256": "cb116d123e99e82780b10a94a5052e4457098409ce52fb332c648b8fedab7cdd",
+    "source_audit_sha256": "a69bc897e896427e38e2e61ce3470c909cea10c2a3dbfa7bab5c19b9b50c6137"
+  },
+  "checks": {
+    "source_audit_status": "PASS_SOURCE_AUDIT_ONLY",
+    "source_preflight_status": "PASS_STRUCTURAL_ONLY_NO_BOTTOM3_PROBABILITIES_OR_METRICS",
+    "saved_fresh_preflight_comparison": "PASS; independently rebuilt structural object equals saved receipt after removing created_at_utc only",
+    "preflight_serialization_keys": ["2024", "2025", "2026"],
+    "preflight_serialization_blocker_fixed": true,
+    "synthetic_test_count_reported": 9,
+    "engine_synthetic_check_count_reported": 7,
+    "supervisor_independent_synthetic_verification": "PASS, 4 synthetic rosters; no real performance metrics",
+    "normal_complete_exact_rank_cohort": {
+      "rows": 52155,
+      "races": 5206,
+      "bottom3_labels": 15618,
+      "minimum_field_size": 7,
+      "maximum_field_size": 13
+    },
+    "evaluation_cohort": {
+      "runners": 17412,
+      "races": 1779,
+      "dates": 269,
+      "bottom3_labels": 5337,
+      "races_by_year": {
+        "2024": 637,
+        "2025": 654,
+        "2026": 488
+      }
+    },
+    "no_real_fit_or_bottom3_outcome_metrics_computed": true,
+    "no_database_access_or_existing_asset_mutation_reported": true
+  },
+  "review_findings": [
+    "Bottom3 labels are exactly ranks N-2 through N on complete normal finishes, with exactly three positives per race.",
+    "Both arms use the exact unordered size-three distribution normalized over all C(N,3) subsets; runner marginals sum to three.",
+    "L is the negative saved S raw score reference, not a Bottom3-trained model; B changes only the target while retaining the frozen 40 S features, category vocabulary, split schedule, weights, and hyperparameters.",
+    "Annual calibration and evaluation use provider-year roles and exact roster keys; B uses Y-1 calibration and Y evaluation after training/refit only through Y-2.",
+    "Prediction and exclusion gates are separately specified; the exclusion gate is point-estimate protection, not statistical noninferiority or practical authorization.",
+    "Evaluation reuses 2024-2026 retrospective data and does not support independent future-validation, market, 7-wager, or operational claims."
+  ],
+  "limitations": [
+    "Cohort excludes DNF, ties, cancellation, and incomplete/non-normal finishes; results would apply only to the defined complete normal-finish cohort.",
+    "Actual source-information publication times and purchase-time availability are not established.",
+    "This review does not compute the model outcomes, confirm candidate gates, or authorize execution."
+  ],
+  "review_revision": {
+    "status": "UPDATED_AFTER_SERIALIZATION_GATE_FIX",
+    "earlier_review_code_bundle_sha256": "471d96810bf227a877285934501184644c5ff1e1e2f169099c08cd5d2408b6d2",
+    "earlier_source_preflight_sha256": "a76641d41f98e6a2ec27e76cb17ef1a1fd818934e8bf43abe701af3d16e149c8",
+    "blocker": "saved JSON vocabulary year keys were strings while freshly built structural object used integers, defeating direct equality",
+    "resolution": "fresh structural vocabulary keys are stringified before serialization; timestamp-excluded saved/fresh full-object equality independently rechecked",
+    "rechecked_engine_sha256": "92a4b41a6493cf88cf8d17e592f98ed75f0fb9fd446f28564774a35a6d608df0",
+    "rechecked_source_preflight_sha256": "cb116d123e99e82780b10a94a5052e4457098409ce52fb332c648b8fedab7cdd"
+  }
+}

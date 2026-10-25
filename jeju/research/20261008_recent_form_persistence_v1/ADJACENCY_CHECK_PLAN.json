@@ -1,0 +1,9 @@
+{
+  "fixed_before_adjacency_subset_results": true,
+  "known_main_results": "2024-2025 recent records improve absolute-time error1000/1110/1200; body addition not corroborated. Race-centered improvements much smaller. Main good-versus-poor follow-up associations observed. No adjacency subset effects inspected.",
+  "reason": "Main feature latest same-distance history is not always the immediately preceding career start. User asks whether form continues to the next race; distinguish immediate observed next start.",
+  "subset": "Among unchanged main prediction rows, require latest prior exact-distance historyID equals immediately preceding observed resultID for thishorse in complete preserved quality extraction, earlierdate<targetdate, <=Tminus2, and gap7-60days. This is consecutive in observed result source, not proof of complete official career history.",
+  "comparisons": "Reuse four frozen year/distance model predictions without refit; main B-versus-A and D-versus-B MAE on matched subset, equal race weights. Prior fast<=-.5 and slow>=+.5 response contrast in next race relative A error. Race centering retains full original eligible evaluation race, not singleton subset centering.",
+  "minimum": "Distance/period>=100subsetrows,20dates,30horses; each fast/slow group>=30 for contrast. Date+horse covariance, BH across distances byperiod/contrast.",
+  "limits": "Retrospective secondary audit triggered by estimand clarification, not independent validation. No revised features, thresholds or model hyperparameters. No claim of physical health persistence."
+}

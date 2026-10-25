@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "scope": "root-approved one-axis-at-a-time descriptive S1/F1 residual diagnostic",
+  "preserved_preflight_stop": {
+    "occurred": true,
+    "stage": "frozen category validation before residual or loss aggregation and before result writes",
+    "reason": "actual coverage-only S1 category is second_after_return_le90",
+    "resolution": "root-approved label correction; comparison groups and metrics unchanged"
+  },
+  "output_review_correction": {
+    "occurred": true,
+    "reason": "manual review caught a duplicate unknown level in the first generated stratum table",
+    "resolution": "deduplicated the fixed level list and regenerated the table; this verification describes the corrected outputs"
+  },
+  "new_model_fits": 0,
+  "period_rows": {
+    "2024_2025": 12739,
+    "2026_partial": 4673
+  },
+  "period_races": {
+    "2024_2025": 1291,
+    "2026_partial": 488
+  },
+  "all_prediction_ids_unique": true,
+  "condition_join_one_to_one": true,
+  "all_frozen_recent_rows_have_F1": true,
+  "label_and_identity_match": true,
+  "stored_brier_formula_match": true,
+  "probability_sum3_max_abs_error": 2.6645352591003757e-15,
+  "S1_groups_in_coverage": [
+    "all_F1_evaluation_rows",
+    "first_return_91_plus",
+    "general",
+    "second_after_return_le90",
+    "unknown"
+  ],
+  "stratification_axes": [
+    "distance_m",
+    "observed_starts",
+    "previous_top3"
+  ],
+  "bootstrap": {
+    "cluster": "race_date",
+    "repetitions": 2000,
+    "seed": 20261009,
+    "percentiles": [
+      2.5,
+      97.5
+    ],
+    "minimum_distinct_days": 10,
+    "small_cell_policy": "point estimates and support retained; CI NA below minimum days",
+    "multiple_comparison_adjustment": "none"
+  },
+  "support_flags": {
+    "n_rows_lt": 100,
+    "n_races_lt": 50
+  },
+  "fixed_cell_count": 56,
+  "cell_keys_unique": true,
+  "overall_S1_reproduction_check_only": [
+    {
+      "period": "2024_2025",
+      "S1_group": "first_return_91_plus",
+      "n_F1_distance_cells": 1211,
+      "existing_n_F1": 1211,
+      "distance_weighted_residual": 0.04096581375620747,
+      "existing_residual": 0.0409658137562074,
+      "matches_existing_table": true
+    },
+    {
+      "period": "2024_2025",
+      "S1_group": "general",
+      "n_F1_distance_cells": 9674,
+      "existing_n_F1": 9674,
+      "distance_weighted_residual": -0.008414094028111543,
+      "existing_residual": -0.0084140940281115,
+      "matches_existing_table": true
+    },
+    {
+      "period": "2026_partial",
+      "S1_group": "first_return_91_plus",
+      "n_F1_distance_cells": 519,
+      "existing_n_F1": 519,
+      "distance_weighted_residual": 0.04973836139402161,
+      "existing_residual": 0.0497383613940216,
+      "matches_existing_table": true
+    },
+    {
+      "period": "2026_partial",
+      "S1_group": "general",
+      "n_F1_distance_cells": 3362,
+      "existing_n_F1": 3362,
+      "distance_weighted_residual": -0.004922385806270074,
+      "existing_residual": -0.00492238580627,
+      "matches_existing_table": true
+    }
+  ],
+  "source_lock_verified_before_and_after": true,
+  "source_lock_entries_checked": 35,
+  "strata_rows": 56,
+  "coverage_rows": 10,
+  "plan_sha256": "47d37c7eea51fd973439cf3ab2380d54ca8f78265b05dc85f90f91507ae8e943",
+  "analysis_script_sha256": "9893724031f34fd9898c0dbcd3e2866c52e421d2c29e274a9a456c24e75f9222",
+  "input_lock_sha256": "c4d88e19c16efc7966e6d81d07368d030f15f10f5f5c83db669f875e6d1d81ab",
+  "output_version_history": {
+    "v1_superseded": {
+      "path": "F1_gap_residual_by_stratum_v1_superseded.csv",
+      "reconstructed_from_deterministic_fixed_inputs": true,
+      "bytes": 8324,
+      "sha256": "1355d5a88c4dbd7cb5d455ade695f91011ac0f1babba7030f78cc42f05634664",
+      "matches_first_generated_artifact_hash": true,
+      "reason_superseded": "duplicate unknown previous_top3 rows; the first summary had 60 rows instead of the fixed 56"
+    },
+    "v2_final": {
+      "path": "F1_gap_residual_by_stratum_v2.csv",
+      "unique_cell_keys": true
+    },
+    "generic_current_path_is_v2": true
+  },
+  "output_files": {
+    "F1_gap_residual_by_stratum_v1_superseded.csv": {
+      "bytes": 8324,
+      "sha256": "1355d5a88c4dbd7cb5d455ade695f91011ac0f1babba7030f78cc42f05634664"
+    },
+    "F1_gap_residual_by_stratum_v2.csv": {
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    "F1_gap_residual_by_stratum.csv": {
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    "F1_gap_group_coverage.csv": {
+      "bytes": 500,
+      "sha256": "8d0a26734073da0a902667c931188da9d745bd94e4fa20c3efc13bcd8cb02f8d"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "run_id": "20261018_oct17_sections_website_distance",
+  "status": "applied_verified",
+  "scope": "narrow_oct17_section_append_and_six_website_distance_reviews",
+  "start": "2026-10-17",
+  "end": "2026-10-17",
+  "plan": "jeju/research/20261018_oct17_section_load/plan.json",
+  "plan_sha256": "ace8dd18f105bce3c6c92103805609c6805e56344bc748b056098cf69ce49978",
+  "database_sha256_before": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f",
+  "database_sha256_after": "940feb05de4b385e4e44c624644b955dc72b29852102a07a218a8786d6958f29",
+  "backup": "jeju/research/20261018_oct17_section_load/before_section_load.sqlite3",
+  "backup_sha256": "57399c5818caf4db5f46fc069e8cfab5fad380abbc7c64b340360d8cc54c801f",
+  "summary": {
+    "corner_rank": {
+      "raw_rows": 7,
+      "inserted": 7
+    },
+    "section_records": {
+      "raw_rows": 7,
+      "inserted": 7
+    }
+  },
+  "checks": {
+    "refresh_section_records": 7,
+    "api303_corner_rank_rows": 7,
+    "reviewed_points": [
+      {
+        "furlong_index": 1,
+        "api_distance_m_raw": 100,
+        "distance_m": 110,
+        "distance_status": "website_corrected"
+      },
+      {
+        "furlong_index": 2,
+        "api_distance_m_raw": 300,
+        "distance_m": 310,
+        "distance_status": "website_corrected"
+      },
+      {
+        "furlong_index": 3,
+        "api_distance_m_raw": 500,
+        "distance_m": 510,
+        "distance_status": "website_corrected"
+      },
+      {
+        "furlong_index": 4,
+        "api_distance_m_raw": 700,
+        "distance_m": 710,
+        "distance_status": "website_corrected"
+      },
+      {
+        "furlong_index": 5,
+        "api_distance_m_raw": 900,
+        "distance_m": 910,
+        "distance_status": "website_corrected"
+      },
+      {
+        "furlong_index": 6,
+        "api_distance_m_raw": 1100,
+        "distance_m": 1110,
+        "distance_status": "website_corrected"
+      }
+    ]
+  },
+  "prior_refresh_pointer": {
+    "latest_run_id": "20261017T220226_4747d5bd",
+    "application_manifest": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/application_manifest.json",
+    "sha256": "a2ab4e02d59cbea427f8dff5bb1ea6a79fbcb613895ab8b22714d77ef901a2f9",
+    "database_sha256": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f"
+  },
+  "completed_at_utc": "2026-10-17T19:20:28.424444+00:00"
+}

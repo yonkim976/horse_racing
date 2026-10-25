@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "scope": "documentation corrections only; no model fit, prediction, or performance-metric change",
+  "snapshot_directory": "review_snapshots/pre_document_fix",
+  "snapshotted_before_renderer_or_document_edits": true,
+  "previous_prediction_sha256": "c50f7cdd762cc4ed36e50b97bd4d6d979be408c7477f0c747c917e120cde9ced",
+  "root_metrics_review_sha256": "948db497b551792eacb9642dd0421311516a6e7b050eb1c1b248434b947ea31b",
+  "previous_documents": {
+    "README.md": {
+      "snapshot_path": "review_snapshots/pre_document_fix/README.md",
+      "sha256": "22a2771c7ca2befbba1ca704bf63e90debaa0f7a9d010e949918b3e8a86a70a5",
+      "bytes": 12439
+    },
+    "outputs/REPORT.json": {
+      "snapshot_path": "review_snapshots/pre_document_fix/REPORT.json",
+      "sha256": "c698b523ae160201c5a57a6f8c3ae4e226b0a2a470651b14ebeafdfd9cc1fc33",
+      "bytes": 26698
+    },
+    "ARTIFACT_MANIFEST.json": {
+      "snapshot_path": "review_snapshots/pre_document_fix/ARTIFACT_MANIFEST.json",
+      "sha256": "c8a9b5e7e7c2b18cb5c288ac7944b45f9f3b03e4e3d8fd16d85366cd60bcac43",
+      "bytes": 14198
+    }
+  },
+  "corrections": [
+    "Align the first README comparison table's six data values with six explicit headers.",
+    "Replace '새 목표는' with '평가 목표는' to clarify that the evaluation objective remains unchanged.",
+    "Describe the paired date bootstrap as resampling race days with all races on each sampled day grouped together.",
+    "Display coverage hit-rate confidence intervals as percentages without positive signs; retain percentage-point units for difference intervals."
+  ],
+  "model_refit_performed": false,
+  "prediction_rerun_performed": false,
+  "metric_values_changed": false
+}

@@ -1,0 +1,234 @@
+{
+  "audit": "Jeju API18 daily training rider employee-ID identity audit",
+  "daily_training": {
+    "category_summary": [
+      {
+        "distinct_nonmissing_prNo_raw_values": 157,
+        "identity_mapping_status_counts": {
+          "no_mapping_dash": 1,
+          "role_unspecified_jockey_identity_candidate_review": 43,
+          "role_unspecified_trainer_identity_candidate_review": 21,
+          "unresolved_role_unspecified_no_official_id_match": 93
+        },
+        "prGubun_raw": "-",
+        "prNo_state_row_counts": {
+          "dash": 43408,
+          "identifier": 256703
+        },
+        "safe_rider_mapped_rows": 0,
+        "training_rows": 300111
+      },
+      {
+        "distinct_nonmissing_prNo_raw_values": 52,
+        "identity_mapping_status_counts": {
+          "no_mapping_dash": 1,
+          "safe_exact_jockey_id_name_match": 52
+        },
+        "prGubun_raw": "기수",
+        "prNo_state_row_counts": {
+          "dash": 2,
+          "identifier": 315599
+        },
+        "safe_rider_mapped_rows": 315599,
+        "training_rows": 315601
+      },
+      {
+        "distinct_nonmissing_prNo_raw_values": 1,
+        "identity_mapping_status_counts": {
+          "jockey_id_match_candidate_category_review": 1,
+          "no_mapping_dash": 1
+        },
+        "prGubun_raw": "기수후보생",
+        "prNo_state_row_counts": {
+          "dash": 1695,
+          "identifier": 1
+        },
+        "safe_rider_mapped_rows": 0,
+        "training_rows": 1696
+      },
+      {
+        "distinct_nonmissing_prNo_raw_values": 21,
+        "identity_mapping_status_counts": {
+          "no_mapping_dash": 1,
+          "unresolved_non_jockey_id_not_in_official_jockey_trainer_tables": 21
+        },
+        "prGubun_raw": "조교보",
+        "prNo_state_row_counts": {
+          "dash": 24269,
+          "identifier": 47620
+        },
+        "safe_rider_mapped_rows": 0,
+        "training_rows": 71889
+      },
+      {
+        "distinct_nonmissing_prNo_raw_values": 26,
+        "identity_mapping_status_counts": {
+          "trainer_id_name_match_not_rider": 26
+        },
+        "prGubun_raw": "조교사",
+        "prNo_state_row_counts": {
+          "identifier": 111648
+        },
+        "safe_rider_mapped_rows": 0,
+        "training_rows": 111648
+      },
+      {
+        "distinct_nonmissing_prNo_raw_values": 41,
+        "identity_mapping_status_counts": {
+          "no_mapping_dash": 1,
+          "unresolved_non_jockey_id_not_in_official_jockey_trainer_tables": 41
+        },
+        "prGubun_raw": "조교승인",
+        "prNo_state_row_counts": {
+          "dash": 22791,
+          "identifier": 84580
+        },
+        "safe_rider_mapped_rows": 0,
+        "training_rows": 107371
+      }
+    ],
+    "prGubun_category_count": 6,
+    "prNo_raw_nonmissing_identifier_rows": 816151,
+    "prNo_raw_state_row_counts": {
+      "dash": 92165,
+      "identifier": 816151
+    },
+    "raw_identifier_definition": "non-NULL, nonempty, not Unicode-whitespace-only, not exact dash marker, and not exact '0'; stored raw strings are unchanged",
+    "row_count": 908316
+  },
+  "database": {
+    "main_file_sha256_after": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+    "main_file_sha256_before": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+    "main_file_unchanged": true,
+    "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+    "pragma_query_only": true,
+    "size_bytes": 1793323008,
+    "sqlite_open_mode": "mode=ro",
+    "table_counts": {
+      "daily_training_api_rows": 908316,
+      "race_result_rows": 191604,
+      "running_trial_rows": 34375,
+      "starting_training_website_rows_latest": 190842
+    }
+  },
+  "generated_at_utc": "2026-10-14T15:40:18+00:00",
+  "mapping_summary": {
+    "candidate_only_id_count": 1,
+    "never_map": [
+      "prGubun_raw='조교사' to jockey_id: exact IDs identify trainer_id and trName_raw is a trainer name",
+      "prGubun_raw='조교승인' or '조교보' without direct official role evidence",
+      "prGubun_raw='-' or NULL as an automatic rider role",
+      "prNo_raw NULL, empty, whitespace-only, dash marker, or '0'",
+      "any ID inferred from names, whitespace normalization, or numeric/prefix transformation"
+    ],
+    "review_employee_id_group_count": 220,
+    "safe_rider_id_count": 52,
+    "safe_rider_training_rows": 315599,
+    "safe_rule": "Only exact prGubun_raw='기수' rows whose raw prNo_raw exactly matches one official jockey_id with one raw and one whitespace-collapsed name are auto-mappable. Official jockey and trainer valid-ID namespaces must be disjoint."
+  },
+  "notes": [
+    "The output is a read-only research audit, not a DB update or model-input adoption.",
+    "`prGubun_raw` and `prNo_raw` remain authoritative raw fields; leading zeroes are preserved by exact TEXT comparisons.",
+    "Starting-training names are auxiliary same-horse/same-date sets; repeated rows are all retained in row counts and unique raw name sets, and are never used to infer employee IDs."
+  ],
+  "official_identity_evidence": {
+    "api307": "not present as a normalized table or api_records record_type in this DB snapshot; current-name refresh should retain the official-ID evidence and raw historical variants separately",
+    "fields": {
+      "jockey": [
+        "jockey_id",
+        "jockey_name"
+      ],
+      "trainer": [
+        "trainer_id",
+        "trainer_name"
+      ]
+    },
+    "name_normalization": "whitespace was removed only for conflict diagnostics; all raw names are preserved and no normalized name is used as an ID key",
+    "summary": {
+      "name_audit_by_role": {
+        "jockey": {
+          "id_with_multiple_raw_names": 0,
+          "id_with_multiple_whitespace_collapsed_names": 0,
+          "id_with_race_trial_raw_name_mismatch": 0,
+          "id_with_race_trial_whitespace_collapsed_name_mismatch": 0,
+          "id_with_whitespace_only_name_variants": 0,
+          "normalized_name_shared_by_multiple_ids": 0,
+          "valid_id_count": 76
+        },
+        "trainer": {
+          "id_with_multiple_raw_names": 0,
+          "id_with_multiple_whitespace_collapsed_names": 0,
+          "id_with_race_trial_raw_name_mismatch": 0,
+          "id_with_race_trial_whitespace_collapsed_name_mismatch": 0,
+          "id_with_whitespace_only_name_variants": 0,
+          "normalized_name_shared_by_multiple_ids": 0,
+          "valid_id_count": 36
+        }
+      },
+      "normalized_name_id_collisions": [],
+      "source_id_rows": {
+        "race_result_rows.jockey_id": 191604,
+        "race_result_rows.trainer_id": 191604,
+        "running_trial_rows.jockey_id": 34375,
+        "running_trial_rows.trainer_id": 34375
+      },
+      "source_id_state_rows": {
+        "race_result_rows.jockey_id": {
+          "identifier": 191604
+        },
+        "race_result_rows.trainer_id": {
+          "identifier": 191600,
+          "null": 4
+        },
+        "running_trial_rows.jockey_id": {
+          "identifier": 34361,
+          "null": 14
+        },
+        "running_trial_rows.trainer_id": {
+          "dash": 6,
+          "identifier": 34369
+        }
+      },
+      "valid_id_count_by_role_and_source": {
+        "jockey": {
+          "race_result_rows": 73,
+          "running_trial_rows": 76
+        },
+        "trainer": {
+          "race_result_rows": 35,
+          "running_trial_rows": 36
+        }
+      },
+      "valid_id_union_count_by_role": {
+        "jockey": 76,
+        "trainer": 36
+      },
+      "valid_jockey_trainer_id_overlap_count": 0,
+      "valid_jockey_trainer_id_overlap_values": []
+    },
+    "tables": [
+      "race_result_rows",
+      "running_trial_rows"
+    ]
+  },
+  "website_crosscheck": {
+    "daily_training_rows_compared_by_category": {
+      "기수": {
+        "candidate_in_multi_name_website_set": 267,
+        "candidate_is_only_usable_website_name": 63797,
+        "no_same_horse_date_website_rows": 241367,
+        "website_names_present_without_match": 10140,
+        "website_rows_without_usable_rider_name": 28
+      },
+      "기수후보생": {
+        "no_same_horse_date_website_rows": 1
+      }
+    },
+    "detail_rows_written": 74232,
+    "horse_date_groups_with_multiple_distinct_raw_rider_values": 2351,
+    "horse_date_groups_with_multiple_rows": 5835,
+    "latest_view_horse_date_group_count": 185007,
+    "latest_view_row_count": 190842,
+    "name_match_direction": "official ID-derived candidate name compared to all website rider_raw values as a set; website names never infer employee IDs"
+  }
+}

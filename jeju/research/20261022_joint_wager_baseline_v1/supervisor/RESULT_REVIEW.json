@@ -1,0 +1,1530 @@
+{
+  "passed": true,
+  "calibration_races": 2492,
+  "evaluation_races": 1779,
+  "evaluated_metric_rows": 24834,
+  "runner_marginal_rows": 34824,
+  "ordered_triples_recomputed": 2416848,
+  "primary_gate_pass": true,
+  "calibration_derivatives": {
+    "nll": 6.093911799377322,
+    "gradient_inverse_t": -2.7957108357256357e-08,
+    "hessian_inverse_t": 1.373706674073855
+  },
+  "primary_ci95": [
+    -0.02694333653424679,
+    -0.009295792925365889
+  ],
+  "synthetic": {
+    "uniform_5_7_8_10": true,
+    "shift_invariance": true,
+    "incidence_and_probability_sums": true
+  },
+  "max_absolute_errors": {
+    "calibration_nll": 0.0,
+    "runner_marginals": 9.992007221626409e-16,
+    "race_nll": 3.1086244689504383e-15,
+    "race_brier": 1.1102230246251565e-15,
+    "realized_probability_mean": 7.771561172376096e-16,
+    "realized_nll_mean": 2.886579864025407e-15,
+    "selected_probability": 3.552713678800501e-15,
+    "realized_probabilities": 3.552713678800501e-15,
+    "selection_rounding_tie_probability": 4.440892098500626e-16,
+    "reliability_bin": 8.326672684688674e-16,
+    "summary_nll_brier": 8.881784197001252e-16,
+    "primary_bootstrap_ci": 3.469446951953614e-17,
+    "primary_point": 0.0,
+    "pool_point_differences": 1.734723475976807e-17
+  },
+  "check_counts": {
+    "calibration_nll": 1,
+    "runner_marginals": 34824,
+    "race_nll": 24834,
+    "race_brier": 24834,
+    "realized_probability_mean": 24834,
+    "realized_nll_mean": 24834,
+    "selected_probability": 24834,
+    "realized_probabilities": 24834,
+    "selection_rounding_tie_probability": 106,
+    "reliability_bin": 152,
+    "summary_nll_brier": 56,
+    "primary_bootstrap_ci": 1,
+    "primary_point": 1,
+    "pool_point_differences": 14
+  },
+  "choice_rounding_ties": [
+    {
+      "pool": "TLA",
+      "race_id": "2024-01-12_2_2",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        3,
+        6
+      ],
+      "saved": [
+        3,
+        6,
+        7
+      ]
+    },
+    {
+      "pool": "PLC",
+      "race_id": "2024-02-16_2_3",
+      "arm": "T1",
+      "independent": [
+        7
+      ],
+      "saved": [
+        10
+      ]
+    },
+    {
+      "pool": "PLC",
+      "race_id": "2024-02-23_2_2",
+      "arm": "TEMP",
+      "independent": [
+        10
+      ],
+      "saved": [
+        5
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2024-02-23_2_2",
+      "arm": "TEMP",
+      "independent": [
+        5,
+        9
+      ],
+      "saved": [
+        5,
+        8
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2024-03-08_2_2",
+      "arm": "T1",
+      "independent": [
+        4,
+        7
+      ],
+      "saved": [
+        4,
+        8
+      ]
+    },
+    {
+      "pool": "PLC",
+      "race_id": "2024-03-08_2_2",
+      "arm": "TEMP",
+      "independent": [
+        9
+      ],
+      "saved": [
+        4
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2024-03-08_2_2",
+      "arm": "TEMP",
+      "independent": [
+        5,
+        7
+      ],
+      "saved": [
+        4,
+        7
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2024-03-15_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        9
+      ],
+      "saved": [
+        9,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-03-15_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        9,
+        10
+      ],
+      "saved": [
+        1,
+        2,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-03-29_2_1",
+      "arm": "T1",
+      "independent": [
+        2,
+        4,
+        9
+      ],
+      "saved": [
+        4,
+        8,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-03-29_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        4,
+        9
+      ],
+      "saved": [
+        4,
+        8,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-05-17_2_2",
+      "arm": "T1",
+      "independent": [
+        1,
+        3,
+        6
+      ],
+      "saved": [
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-05-17_2_2",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        3,
+        6
+      ],
+      "saved": [
+        3,
+        6,
+        7
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-06-01_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        3,
+        7
+      ],
+      "saved": [
+        3,
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-06-07_2_1",
+      "arm": "T1",
+      "independent": [
+        7,
+        9,
+        10
+      ],
+      "saved": [
+        1,
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-06-15_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        5,
+        8
+      ],
+      "saved": [
+        1,
+        3,
+        5
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-06-28_2_2",
+      "arm": "T1",
+      "independent": [
+        1,
+        2,
+        4
+      ],
+      "saved": [
+        2,
+        4,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-07-06_2_1",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        6,
+        7
+      ],
+      "saved": [
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-09-06_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        2,
+        4
+      ],
+      "saved": [
+        2,
+        4,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-09-27_2_1",
+      "arm": "T1",
+      "independent": [
+        6,
+        9,
+        10
+      ],
+      "saved": [
+        1,
+        6,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-10-04_2_1",
+      "arm": "T1",
+      "independent": [
+        7,
+        9,
+        10
+      ],
+      "saved": [
+        4,
+        7,
+        9
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2024-10-11_2_1",
+      "arm": "T1",
+      "independent": [
+        6,
+        8
+      ],
+      "saved": [
+        3,
+        8
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2024-10-18_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        10
+      ],
+      "saved": [
+        1,
+        5
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2024-10-18_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        5
+      ],
+      "saved": [
+        1,
+        10
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2024-11-01_2_2",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        6
+      ],
+      "saved": [
+        1,
+        4
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-12-07_2_1",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        8,
+        9
+      ],
+      "saved": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-12-27_2_1",
+      "arm": "T1",
+      "independent": [
+        6,
+        7,
+        9
+      ],
+      "saved": [
+        4,
+        6,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2024-12-27_2_1",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        6,
+        9
+      ],
+      "saved": [
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-01-10_2_1",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        5,
+        7
+      ],
+      "saved": [
+        2,
+        4,
+        5
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-01-11_2_1",
+      "arm": "T1",
+      "independent": [
+        3,
+        4,
+        9
+      ],
+      "saved": [
+        4,
+        7,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-01-11_2_1",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        4,
+        9
+      ],
+      "saved": [
+        4,
+        7,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-01-24_2_1",
+      "arm": "T1",
+      "independent": [
+        2,
+        8,
+        9
+      ],
+      "saved": [
+        2,
+        3,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-01-24_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        2,
+        8
+      ],
+      "saved": [
+        2,
+        8,
+        9
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-02-14_2_1",
+      "arm": "T1",
+      "independent": [
+        8,
+        9
+      ],
+      "saved": [
+        2,
+        8
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-02-14_2_1",
+      "arm": "T1",
+      "independent": [
+        6,
+        8
+      ],
+      "saved": [
+        2,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-02-14_2_1",
+      "arm": "T1",
+      "independent": [
+        8,
+        9,
+        10
+      ],
+      "saved": [
+        2,
+        4,
+        8
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-02-14_2_1",
+      "arm": "TEMP",
+      "independent": [
+        8,
+        9
+      ],
+      "saved": [
+        2,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-02-14_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        8,
+        9
+      ],
+      "saved": [
+        2,
+        4,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-02-21_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        2,
+        9
+      ],
+      "saved": [
+        2,
+        3,
+        9
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-03-01_2_1",
+      "arm": "T1",
+      "independent": [
+        2,
+        5
+      ],
+      "saved": [
+        5,
+        7
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2025-03-01_2_1",
+      "arm": "T1",
+      "independent": [
+        5,
+        10
+      ],
+      "saved": [
+        5,
+        2
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-03-01_2_1",
+      "arm": "TEMP",
+      "independent": [
+        5,
+        7
+      ],
+      "saved": [
+        5,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-03-01_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        5
+      ],
+      "saved": [
+        5,
+        7
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-03-01_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        5,
+        7
+      ],
+      "saved": [
+        2,
+        4,
+        5
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-03-07_2_1",
+      "arm": "T1",
+      "independent": [
+        3,
+        6
+      ],
+      "saved": [
+        6,
+        7
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-03-14_2_1",
+      "arm": "TEMP",
+      "independent": [
+        8,
+        9,
+        10
+      ],
+      "saved": [
+        1,
+        8,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-04-04_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        8
+      ],
+      "saved": [
+        2,
+        4
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-04-05_2_1",
+      "arm": "T1",
+      "independent": [
+        9,
+        10
+      ],
+      "saved": [
+        4,
+        10
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2025-04-05_2_1",
+      "arm": "T1",
+      "independent": [
+        10,
+        4
+      ],
+      "saved": [
+        10,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-05-23_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        4,
+        5
+      ],
+      "saved": [
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-05-23_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        4,
+        5
+      ],
+      "saved": [
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-06-13_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        3,
+        8
+      ],
+      "saved": [
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-07-05_2_1",
+      "arm": "T1",
+      "independent": [
+        4,
+        7
+      ],
+      "saved": [
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2025-07-05_2_1",
+      "arm": "T1",
+      "independent": [
+        7,
+        10
+      ],
+      "saved": [
+        7,
+        4
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-07-25_2_1",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        6,
+        7
+      ],
+      "saved": [
+        2,
+        4,
+        6
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-08-08_2_1",
+      "arm": "T1",
+      "independent": [
+        5,
+        8
+      ],
+      "saved": [
+        5,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-08-08_2_1",
+      "arm": "TEMP",
+      "independent": [
+        5,
+        8
+      ],
+      "saved": [
+        3,
+        5
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-09-12_2_1",
+      "arm": "T1",
+      "independent": [
+        2,
+        6
+      ],
+      "saved": [
+        6,
+        7
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-09-12_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        6
+      ],
+      "saved": [
+        4,
+        6
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-09-12_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        6,
+        7
+      ],
+      "saved": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-09-19_2_1",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        4,
+        5
+      ],
+      "saved": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-10-24_2_1",
+      "arm": "T1",
+      "independent": [
+        4,
+        6,
+        7
+      ],
+      "saved": [
+        1,
+        4,
+        6
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-10-24_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        4,
+        6
+      ],
+      "saved": [
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-10-25_2_1",
+      "arm": "T1",
+      "independent": [
+        2,
+        4
+      ],
+      "saved": [
+        4,
+        10
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2025-10-25_2_1",
+      "arm": "T1",
+      "independent": [
+        4,
+        2
+      ],
+      "saved": [
+        4,
+        10
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-10-25_2_1",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        10
+      ],
+      "saved": [
+        2,
+        4
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2025-10-25_2_1",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        10
+      ],
+      "saved": [
+        4,
+        2
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-11-21_2_1",
+      "arm": "T1",
+      "independent": [
+        5,
+        7
+      ],
+      "saved": [
+        3,
+        5
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2025-12-19_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        9,
+        10
+      ],
+      "saved": [
+        1,
+        2,
+        9
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2025-12-19_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        9
+      ],
+      "saved": [
+        9,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2025-12-19_2_1",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        9
+      ],
+      "saved": [
+        9,
+        10
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-01-16_2_2",
+      "arm": "T1",
+      "independent": [
+        3,
+        4
+      ],
+      "saved": [
+        1,
+        3
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-01-16_2_2",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        3
+      ],
+      "saved": [
+        3,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-01-17_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        7,
+        10
+      ],
+      "saved": [
+        7,
+        8,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-01-17_2_1",
+      "arm": "TEMP",
+      "independent": [
+        7,
+        8,
+        10
+      ],
+      "saved": [
+        1,
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-01-23_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        3,
+        7
+      ],
+      "saved": [
+        3,
+        7,
+        9
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-03-02_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        2,
+        7
+      ],
+      "saved": [
+        1,
+        7,
+        8
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-03-02_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        7
+      ],
+      "saved": [
+        1,
+        7
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-04-10_2_1",
+      "arm": "T1",
+      "independent": [
+        3,
+        4,
+        7
+      ],
+      "saved": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-04-10_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        3,
+        4
+      ],
+      "saved": [
+        3,
+        4,
+        7
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-04-17_2_1",
+      "arm": "T1",
+      "independent": [
+        3,
+        4,
+        6
+      ],
+      "saved": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-04-17_2_1",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        4,
+        6
+      ],
+      "saved": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-05-29_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        8
+      ],
+      "saved": [
+        1,
+        2
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2026-05-29_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        1
+      ],
+      "saved": [
+        2,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-05-29_2_2",
+      "arm": "T1",
+      "independent": [
+        1,
+        3,
+        6
+      ],
+      "saved": [
+        1,
+        6,
+        8
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-06-05_2_1",
+      "arm": "T1",
+      "independent": [
+        3,
+        4,
+        5
+      ],
+      "saved": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-07-17_2_1",
+      "arm": "T1",
+      "independent": [
+        2,
+        6,
+        9
+      ],
+      "saved": [
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-07-17_2_2",
+      "arm": "T1",
+      "independent": [
+        8,
+        10
+      ],
+      "saved": [
+        2,
+        10
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-07-17_2_2",
+      "arm": "TEMP",
+      "independent": [
+        4,
+        10
+      ],
+      "saved": [
+        2,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-07-17_2_2",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        10
+      ],
+      "saved": [
+        8,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-07-18_2_1",
+      "arm": "T1",
+      "independent": [
+        3,
+        7
+      ],
+      "saved": [
+        5,
+        7
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-07-18_2_1",
+      "arm": "TEMP",
+      "independent": [
+        5,
+        7
+      ],
+      "saved": [
+        6,
+        7
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-07-24_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        4
+      ],
+      "saved": [
+        1,
+        7
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-07-24_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        7
+      ],
+      "saved": [
+        1,
+        4
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2026-07-24_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        4
+      ],
+      "saved": [
+        1,
+        7
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-08-08_2_1",
+      "arm": "T1",
+      "independent": [
+        1,
+        7
+      ],
+      "saved": [
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-08-08_2_1",
+      "arm": "TEMP",
+      "independent": [
+        1,
+        7
+      ],
+      "saved": [
+        7,
+        10
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-08-22_2_1",
+      "arm": "T1",
+      "independent": [
+        9,
+        10
+      ],
+      "saved": [
+        2,
+        10
+      ]
+    },
+    {
+      "pool": "QPL",
+      "race_id": "2026-08-22_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        10
+      ],
+      "saved": [
+        9,
+        10
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2026-08-22_2_1",
+      "arm": "TEMP",
+      "independent": [
+        10,
+        9
+      ],
+      "saved": [
+        10,
+        2
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-09-17_2_2",
+      "arm": "T1",
+      "independent": [
+        2,
+        3
+      ],
+      "saved": [
+        3,
+        10
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2026-09-17_2_2",
+      "arm": "T1",
+      "independent": [
+        3,
+        8
+      ],
+      "saved": [
+        3,
+        10
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-09-17_2_2",
+      "arm": "T1",
+      "independent": [
+        2,
+        3,
+        4
+      ],
+      "saved": [
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "pool": "QNL",
+      "race_id": "2026-09-17_2_2",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        4
+      ],
+      "saved": [
+        2,
+        3
+      ]
+    },
+    {
+      "pool": "EXA",
+      "race_id": "2026-09-17_2_2",
+      "arm": "TEMP",
+      "independent": [
+        3,
+        6
+      ],
+      "saved": [
+        3,
+        2
+      ]
+    },
+    {
+      "pool": "TLA",
+      "race_id": "2026-09-19_2_1",
+      "arm": "TEMP",
+      "independent": [
+        2,
+        3,
+        5
+      ],
+      "saved": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "experiment_code_imported": false,
+  "model_refit_performed": false,
+  "original_source_and_protected_production_hashes_unchanged": true
+}

@@ -1,0 +1,125 @@
+{
+  "status": "independent_saved_f1_replay_passed",
+  "fit_or_refit_count": 0,
+  "temperature_optimization_count": 0,
+  "models_reloaded": 3,
+  "evaluation_rows": 17412,
+  "evaluation_races": 1779,
+  "evaluation_days": 269,
+  "six_combination_rows": 10674,
+  "all_saved_runner_scores_probabilities_losses_match_atol_1e-12": true,
+  "all_saved_race_metrics_match_atol_1e-12": true,
+  "all_saved_canonical_six_combinations_and_probabilities_match_atol_1e-12": true,
+  "probability_sums": {
+    "joint_distribution_equals_one": true,
+    "runner_top3_marginals_equal_three": true
+  },
+  "calibration_raw_scores_match_saved_atol_1e-12": {
+    "2024": {
+      "rows": 6506,
+      "saved_score_match_atol_1e-12": true,
+      "tau_fixed_from_saved_meta": 1.0146528611027281
+    },
+    "2025": {
+      "rows": 6329,
+      "saved_score_match_atol_1e-12": true,
+      "tau_fixed_from_saved_meta": 1.0950570725726967
+    },
+    "2026": {
+      "rows": 6410,
+      "saved_score_match_atol_1e-12": true,
+      "tau_fixed_from_saved_meta": 0.9864064099027149
+    }
+  },
+  "model_replay": {
+    "2024": {
+      "model_sha256": "f2373c48e0a6d415e64f577dc64c14d12d71f9b97ea5d3a0c78853f12870eb5d",
+      "meta_sha256": "937df06c1c9ed61b8b380bcbb3c0db33b5efd1b197f0c262ceab19c162c63970",
+      "trees": 92,
+      "model_loaded_iteration": 92,
+      "input_feature_count": 24,
+      "test_rows_scored": 6329,
+      "test_races_scored": 637,
+      "tau_fixed_from_saved_meta": 1.0146528611027281
+    },
+    "2025": {
+      "model_sha256": "b66ece1487c86ad1cd05aabed7f3781d84e89c24e6a3ebcb010f38b811009b9d",
+      "meta_sha256": "6be12814c61da778077c2706712171db55b878e2b917f63608af1dfa81e09272",
+      "trees": 200,
+      "model_loaded_iteration": 200,
+      "input_feature_count": 24,
+      "test_rows_scored": 6410,
+      "test_races_scored": 654,
+      "tau_fixed_from_saved_meta": 1.0950570725726967
+    },
+    "2026": {
+      "model_sha256": "15654e60d6736aabc0ec0af60cbdf4478c05b8fb6227d826dd8aff0ef1f347a4",
+      "meta_sha256": "ae5d32feb5fdfe3145851dee335bbf9bdbfb9073b9f541c678c90f89245e3189",
+      "trees": 200,
+      "model_loaded_iteration": 200,
+      "input_feature_count": 24,
+      "test_rows_scored": 4673,
+      "test_races_scored": 488,
+      "tau_fixed_from_saved_meta": 0.9864064099027149
+    }
+  },
+  "protected_current_vs_locked": {
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+      "sha_reused_from_f1_lock_without_rehash": true
+    },
+    "config/prediction_model_registry.json": {
+      "bytes": 7291,
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "matches_f1_lock": true
+    },
+    "jeju/models/current/metadata.json": {
+      "bytes": 1818,
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870",
+      "matches_f1_lock": true
+    },
+    "jeju/models/current/HY_R_FORM.pkl": {
+      "bytes": 638955,
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+      "matches_f1_lock": true
+    }
+  },
+  "source_hashes": {
+    "features.parquet": {
+      "bytes": 5043713,
+      "sha256": "1b28a8392a1447e693fed5988db74f13b5f8622adcb5d5c22143aea701502534"
+    },
+    "runner_predictions.parquet": {
+      "bytes": 2562317,
+      "sha256": "37a9567e87b91e3d3bc8b8bfafa1fdab2853239aac422734259b5f893b231440"
+    },
+    "race_metrics.csv": {
+      "bytes": 1150841,
+      "sha256": "afd4b96ef3048a59e95c4267f86bbcaaf915ad364ca1e895829327b9140e3473"
+    },
+    "six_combinations.csv": {
+      "bytes": 1606055,
+      "sha256": "e2310f0a643897136e898d43677b77c62660fbe49f47d29d3b95a1c104b92d68"
+    }
+  },
+  "metric_direction": "No candidate-versus-F1 difference is computed in this baseline replay.",
+  "limitations": [
+    "Replay checks existing fixed F1 outputs; it does not validate new style-history feature construction or candidate performance.",
+    "The preserved SQLite SHA is reused from the existing F1 lock after checking file size; this replay did not query or rehash the full database."
+  ],
+  "replay_outputs": {
+    "runner_predictions.parquet": {
+      "bytes": 923468,
+      "sha256": "2aad6a04f7b17a75049a8b115531ea9d27e3ce604a5ac5b41a2a405149e6c683"
+    },
+    "race_metrics.csv": {
+      "bytes": 383856,
+      "sha256": "89e783d9c2022cf7a91f7effc39a359ebcf755541c8d33073c0ce795e3341c07"
+    },
+    "six_combinations.csv": {
+      "bytes": 540693,
+      "sha256": "f2661e7e3d50becd4aee8e01574dd247bf9dfca8fbee1b0a89e900ec5433dbba"
+    }
+  }
+}

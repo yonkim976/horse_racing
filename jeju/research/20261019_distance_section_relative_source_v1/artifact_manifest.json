@@ -1,0 +1,109 @@
+{
+  "manifest_status": "frozen_read_only_distance_section_source_snapshot",
+  "audit_json": "source_audit.json",
+  "audit_json_sha256": "318081dfb79f578f081e98d8622c39f865cb46a96f6fe81df68ef52cecc2992a",
+  "inputs": {
+    "features.parquet": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "historical_lineage.parquet": {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/historical_lineage.parquet",
+      "bytes": 2835001,
+      "sha256": "11665999d7adaa02d7cb9d1a1560ae2e68f6d03224cce688d8c34d40f8fcc955"
+    },
+    "source_snapshot.parquet": {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    }
+  },
+  "outputs": {
+    "target_f1_style6_features.parquet": {
+      "rows": 52155,
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "target_distance_roster.parquet": {
+      "rows": 38193,
+      "bytes": 796734,
+      "sha256": "65b9ecefd33cab1d6091ffdc00d75eb34abbd4124425dd54a9c014606b02952a"
+    },
+    "target_last5_lineage.parquet": {
+      "rows": 135855,
+      "bytes": 1733030,
+      "sha256": "a8afccbdd1ce399de7896ce659f97352c887495ddb074d8bbfe927546b7f631e"
+    },
+    "benchmark_reference_roster.parquet": {
+      "rows": 55860,
+      "bytes": 4775223,
+      "sha256": "50317f16a0f47ef821e8764a9c19c11d86134712265fcd1e69bd95dcaf0717d4"
+    },
+    "candidate_race_roster_reconciliation.parquet": {
+      "rows": 5668,
+      "bytes": 73339,
+      "sha256": "677cad83ef0913247628f74a016a97885a246973e5d73b2e879895fdc8d87911"
+    },
+    "mask_only_current_db_rows.parquet": {
+      "rows": 54,
+      "bytes": 10416,
+      "sha256": "8f6c6b4a29072135d8a97e153ff6195352465d3a779abaeecb4f7ed121cd4370"
+    },
+    "api4_quality_source_snapshot.parquet": {
+      "rows": 55860,
+      "bytes": 13391527,
+      "sha256": "de14b7e906ae3ee1a62695383b46e9ebcb3deccd15ec519a7ef6f641a391e739"
+    },
+    "source_race_point_quality_masks.parquet": {
+      "rows": 22672,
+      "bytes": 2501072,
+      "sha256": "0f0f6271fc9b1a7c4c314eb2df3b22ee7f611cdf461ed13b5def85ea19f603a4"
+    },
+    "source_point_order_status_evidence.parquet": {
+      "rows": 224884,
+      "bytes": 5281873,
+      "sha256": "eddee20f8e420f0a169304df3a867943d784a09ffbc9692572862f49cf6b7b1d"
+    },
+    "source_point_group_status_evidence.parquet": {
+      "rows": 22672,
+      "bytes": 997353,
+      "sha256": "8d2eefc411848797d791bf5a4801f7d1ef749b1d860f6cb359648e3c520757ec"
+    },
+    "reference_section_intervals.parquet": {
+      "rows": 55860,
+      "bytes": 1511356,
+      "sha256": "e85aee2062f2c01ee0b4475664fd44b55ba59651123425b168a6142ad33e5276"
+    },
+    "reference_race_segment_medians.parquet": {
+      "rows": 28340,
+      "bytes": 137535,
+      "sha256": "b1937448af8052bd68c72a8b2eb7c85cf02a8f6f9f41b0a47533cb357c95d35b"
+    },
+    "source_event_benchmark_stats.parquet": {
+      "rows": 21770,
+      "bytes": 307452,
+      "sha256": "535aa9be72fcb74cb2de8bf3bca195c18fb0ae2f92fbe0693e257c27826c2086"
+    },
+    "target_last5_relative_history.parquet": {
+      "rows": 679275,
+      "bytes": 8965097,
+      "sha256": "aec315a0133803dab0aedf1ddfa1cb6363d379eb56a97096d7a51c97b686b659"
+    },
+    "source_fingerprint_before_after.parquet": {
+      "rows": 70237,
+      "bytes": 22746393,
+      "sha256": "5c8cd9deb54065a6651e06616d4f631798defb37f2a4cc07573b81ead6904ba4"
+    },
+    "section_time_reviews.parquet": {
+      "rows": 3,
+      "bytes": 11406,
+      "sha256": "782286fc93fb6c8069eedddea26742741174147c59d11b9ad86b2ffd528e794f"
+    },
+    "nominal_segment_contract.csv": {
+      "rows": 20,
+      "bytes": 1532,
+      "sha256": "72486305951d832afd9e965674da87877f89fb4357e2b0b9b2768fa9d7cf4d06"
+    }
+  }
+}

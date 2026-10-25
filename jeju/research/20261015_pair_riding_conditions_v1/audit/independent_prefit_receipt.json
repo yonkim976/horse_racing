@@ -1,0 +1,130 @@
+{
+  "status": "PASS",
+  "scope": "independent read-only source join and candidate input feature calculation; no fit/prediction",
+  "fit_or_prediction_work": false,
+  "database_write": false,
+  "database_connection": {
+    "uri_mode_ro": true,
+    "pragma_query_only": true,
+    "query": "parameterized api_record_id batches; SELECT from race_result_rows only"
+  },
+  "source_hashes": {
+    "jeju/data/jeju_native_core.sqlite3": "c52d2ab941ec9b53829891b59db660fbd789cd5e5e27192f9401c1f1f83d158d",
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+    "jeju/research/20261009_jockey_effects_v1/input01/starts.csv": "78800c5c91219d58855ce046e39ead6a87729a49c8ba0d58ca9f78765921801a",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "jeju/research/20261010_style_history_source_audit_v1/source_audit.json": "eebdd15a1c0d61b0dab21c65f9f93d6dc9074859d3123b1951e58e3dea608029"
+  },
+  "database_sha256_from_upstream_read_only_audit": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+  "snapshot": {
+    "rows": 92513,
+    "started_rows": 90428,
+    "started_definition": "finish_position 1..89 or 91 or 92",
+    "cached_started_flag_mismatch_rows": 0,
+    "all_row_date_min": "2002-07-06",
+    "all_row_date_max": "2026-09-19",
+    "started_date_min": "2002-07-14",
+    "started_date_max": "2026-09-19",
+    "started_2017_plus": 57876,
+    "started_pre_2017": 32552,
+    "jockey_id_column_in_snapshot": false,
+    "full_finish_position_column_read": true,
+    "finish_position_usage": "recompute started membership for source history; selected historical starts also supply Top3 outcomes for rider365 residuals; each target feature history is cutoff at T-2",
+    "target_finish_position_used_as_feature": false
+  },
+  "event_jockey_join": {
+    "snapshot_started_rows": 90428,
+    "joined_rows": 90428,
+    "missing_rows": 0,
+    "duplicate_database_api_ids": 0,
+    "core_key_mismatches": {
+      "race_date": 0,
+      "meet_code": 0,
+      "race_number": 0,
+      "horse_number": 0,
+      "horse_id": 0,
+      "race_distance_m": 0,
+      "finish_position": 0,
+      "race_id_derived": 0
+    },
+    "jockey_id_missing": 0,
+    "jockey_id_non_six_digit": 0,
+    "jockey_id_unique_values": 70,
+    "sentinel_candidate_counts": {
+      "000000": 0,
+      "999999": 0
+    },
+    "all_repeated_digit_id_counts": {},
+    "unknown_id_policy": "missing, 000000 and 999999 treated unknown in independent features; both candidate sentinel values reported explicitly",
+    "selected_starts_rows": 52155,
+    "selected_starts_to_official_event_id_mismatches": 0
+  },
+  "horse_day_diagnostic": {
+    "horse_day_groups": 90428,
+    "groups_with_multiple_started_events": 0,
+    "rows_in_multiple_event_groups": 0,
+    "multiple_event_race_ids": 0
+  },
+  "feature_recalculation": {
+    "target_source": "frozen STYLE feature keys for 2019–2026; target finish_position column not requested from that table",
+    "history_source": "all 90,428 started source_snapshot rows joined to official race_result_rows.jockey_id",
+    "prior_start_rule": "latest unique started event for the horse with race_date <= target_date-2 calendar days; same-day ties marked ambiguous and not arbitrarily resolved",
+    "rider365_rule": "selected 52,155-start cache; (T-2-365 days, T-2], field-relative Top3 residual/(n+20); unavailable if either rider ID is invalid or either n=0",
+    "experience_rule": "all started source history through T-2 for same horse and current valid event rider; recency is T-2 minus last matching started date",
+    "row_metrics": {
+      "unique_target_runners_2019_2026": 42690,
+      "evaluation_target_runners_2024_2026": 17412,
+      "evaluation_target_races": 1779,
+      "evaluation_target_dates": 269,
+      "evaluation_tminus1_started_rows": 0,
+      "evaluation_tminus1_extra_started_events": 0,
+      "evaluation_tminus1_rows_within_asof_t2_roster": 0,
+      "evaluation_asof_t2_previous_differs_from_actual_previous": 0,
+      "evaluation_full_previous_id_mismatches_vs_frozen_feature": 0,
+      "evaluation_selected_prev_differs_from_full_prev": 1304,
+      "evaluation_selected_prev_missing_but_full_prev_present": 108,
+      "evaluation_previous_asof_t2_unavailable": 661,
+      "evaluation_actual_previous_ambiguous_same_day": 0,
+      "evaluation_asof_t2_previous_ambiguous_same_day": 0,
+      "evaluation_current_event_jockey_invalid_or_sentinel": 0,
+      "evaluation_previous_rider_unknown": 661,
+      "evaluation_rider365_delta_unavailable": 664,
+      "evaluation_horse_current_rider_history_unavailable": 661,
+      "evaluation_horse_current_rider_first_observed": 3803,
+      "evaluation_horse_current_rider_repeat_observed": 12948,
+      "evaluation_max_horse_current_rider_past_started_n": 81,
+      "evaluation_recency_min_days_asof_t2": 9,
+      "evaluation_recency_max_days_asof_t2": 5751
+    },
+    "evaluation_pair_rows": 76848,
+    "evaluation_pair_columns": [
+      "previous_rider_retained_count",
+      "previous_rider_unknown_count",
+      "rider365_delta_sum",
+      "rider365_current_support_log1p_sum",
+      "rider365_previous_support_log1p_sum",
+      "rider365_delta_unavailable_count",
+      "horse_current_rider_rides_log1p_sum",
+      "horse_current_rider_recency_log1p_sum",
+      "horse_current_rider_first_observed_pair_count",
+      "horse_current_rider_history_unavailable_count"
+    ],
+    "evaluation_pair_nonfinite_values": 0,
+    "historical_finish_results_read_for_input_features": true,
+    "target_outcome_used_as_feature": false
+  },
+  "artifact_paths": {
+    "independent_runner_features": "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_runner_features.parquet",
+    "independent_evaluation_pair_features": "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_evaluation_pair_features.parquet"
+  },
+  "artifact_sha256": {
+    "independent_runner_features": "239dc061436f9750fcb30db4e5aebdbbc919be4a4fa24df345a982cfe94da9ed",
+    "independent_evaluation_pair_features": "03c99a662efcc265f9ae044a551b5602d103a66a991cc30480e368c0af035106"
+  },
+  "target_finish_labels_read_from_frozen_feature_roster": false,
+  "historical_finish_results_read_for_input_features": true,
+  "historical_result_usage": "started membership is recomputed from the full source finish_position field; selected prior starts supply Top3 residual outcomes; target histories are cutoff at T-2 and target outcomes do not enter their own features",
+  "target_outcome_used_as_feature": false,
+  "audit_code_sha256": "b24af4cada9da66b75095789abeed2e2c2e1578a98b8ec63dbd444cfc1c1c1f3"
+}

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "baseline_columns_preserved": 54,
+  "candidate_columns": 58,
+  "folds": [
+    {
+      "year": 2024,
+      "pairs": 28309,
+      "races": 637,
+      "max_absolute_prediction_errors": {
+        "reliability_candidate_eta": 8.881784197001252e-16,
+        "reliability_candidate_raw_probability": 1.1102230246251565e-16,
+        "reliability_candidate_calibrated_probability": 8.326672684688674e-17
+      },
+      "all_selections_match": true
+    },
+    {
+      "year": 2025,
+      "pairs": 28308,
+      "races": 654,
+      "max_absolute_prediction_errors": {
+        "reliability_candidate_eta": 8.881784197001252e-16,
+        "reliability_candidate_raw_probability": 8.326672684688674e-17,
+        "reliability_candidate_calibrated_probability": 1.1102230246251565e-16
+      },
+      "all_selections_match": true
+    },
+    {
+      "year": 2026,
+      "pairs": 20231,
+      "races": 488,
+      "max_absolute_prediction_errors": {
+        "reliability_candidate_eta": 8.881784197001252e-16,
+        "reliability_candidate_raw_probability": 1.1102230246251565e-16,
+        "reliability_candidate_calibrated_probability": 1.1102230246251565e-16
+      },
+      "all_selections_match": true
+    }
+  ],
+  "source_of_summary_48_column_misstatement": "Actual immutable SHA-pinned comparator has 54 columns; code and receipt preserve all 54.",
+  "prediction_sha256": "aedff449db5976784f2890ff255f9aa62e26c1c88bef2fbe244b67cab9ae0718",
+  "prediction_receipt_sha256": "06cdd88e2d37c81239bd7d982ac557eb2df72e535c5a0be1066fdbdaa42fccf6",
+  "reviewer_optimizer_runs": 0,
+  "own_raw7_reconstruction": true,
+  "fixed_horse_scores_preserved": true
+}

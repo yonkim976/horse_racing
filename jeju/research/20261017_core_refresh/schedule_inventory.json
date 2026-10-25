@@ -1,0 +1,217 @@
+{
+  "checked_kst_date": "2026-10-17",
+  "codex_automation_directory_exists": true,
+  "existing_horse_racing_launch_agents": [
+    {
+      "name": "com.horse-racing.live-race-day.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_race_day",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": null,
+      "interval": 120
+    },
+    {
+      "name": "com.horse-racing.catalog-trials.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_catalog",
+        "--mode",
+        "trials",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": [
+        {
+          "Hour": 15,
+          "Minute": 10,
+          "Weekday": 4
+        },
+        {
+          "Hour": 19,
+          "Minute": 10,
+          "Weekday": 4
+        },
+        {
+          "Hour": 9,
+          "Minute": 10,
+          "Weekday": 5
+        }
+      ],
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.local-recovery.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_recovery",
+        "--apply"
+      ],
+      "calendar": null,
+      "interval": 300
+    },
+    {
+      "name": "com.horse-racing.post-race-repair.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_post_race",
+        "--mode",
+        "repair",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": [
+        {
+          "Hour": 9,
+          "Minute": 0
+        },
+        {
+          "Hour": 20,
+          "Minute": 30
+        }
+      ],
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.catalog-cards.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_catalog",
+        "--mode",
+        "cards",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": [
+        {
+          "Hour": 15,
+          "Minute": 10,
+          "Weekday": 3
+        },
+        {
+          "Hour": 16,
+          "Minute": 10,
+          "Weekday": 3
+        }
+      ],
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.catalog-medical.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_catalog",
+        "--mode",
+        "medical",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": [
+        {
+          "Hour": 18,
+          "Minute": 10
+        }
+      ],
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.catalog-profiles.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_catalog",
+        "--mode",
+        "profiles",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": [
+        {
+          "Hour": 17,
+          "Minute": 40,
+          "Weekday": 3
+        },
+        {
+          "Hour": 18,
+          "Minute": 40
+        }
+      ],
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.odds-probe-20261009.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_odds_probe",
+        "--date",
+        "2026-10-09",
+        "--apply",
+        "--watch"
+      ],
+      "calendar": null,
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.log-rotation.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_log_rotation",
+        "--apply"
+      ],
+      "calendar": {
+        "Hour": 3,
+        "Minute": 0
+      },
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.catalog-canonical.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_catalog",
+        "--mode",
+        "canonical",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": [
+        {
+          "Hour": 21,
+          "Minute": 0
+        },
+        {
+          "Hour": 9,
+          "Minute": 15
+        }
+      ],
+      "interval": null
+    },
+    {
+      "name": "com.horse-racing.closing-dividends.plist",
+      "program_arguments": [
+        "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+        "-m",
+        "horse_racing.jobs.local_post_race",
+        "--mode",
+        "dividends",
+        "--apply",
+        "--scheduled"
+      ],
+      "calendar": null,
+      "interval": 900
+    }
+  ],
+  "matching_jeju_research_db_jobs": [],
+  "crontab_read": "no_entries_returned"
+}

@@ -1,0 +1,7 @@
+{
+  "status": "failed_verification_tolerance",
+  "source": "verify.py",
+  "source_sha256": "346df5b4712645cbf0385227c6e2bf57bcc7f64f5de6129e0a6e2840a5ab7cd9",
+  "message": "CSV round-trip mean near zero: 2.819966e-15 versus 2.842171e-15, absolute difference2.22044605e-17. Default atol0 too strict. Analysis outputs unchanged.",
+  "repair": "verify_v2.py uses atol1e-12 for saved mean arithmetic and low_memory=False for mixed optional boolean columns."
+}

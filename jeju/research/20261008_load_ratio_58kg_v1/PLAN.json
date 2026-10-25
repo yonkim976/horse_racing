@@ -1,0 +1,18 @@
+{
+  "question": "Does the same 58kg load impose different time cost on a small versus above-average body-mass horse?",
+  "prior_results_already_seen": "Weight study v2 body-by-burden interaction was not significant after BH; new conditional contrast and pair modifier plan fixed before their estimation. Retrospective follow-up, not independent validation.",
+  "period": ["2017-01-01", "2026-09-19"],
+  "distances": [800,900,1000,1110,1200,1300,1400,1610],
+  "examples_body_kg": [240,250,278,280,300,320],
+  "exact_load_kg": 58,
+  "reference_load_kg": 55,
+  "contrast": "Difference between conditional time cost of 55 to 58kg at 250kg versus 300kg body mass; positive means larger cost at 250kg. Does not compare total ability or predict absolute times between two horses.",
+  "raw58": "Actual carried weight exactly58, body bands under260,260to279,280to299,300plus. Counts, horses, mean/median within-race median-relative time; descriptive only. No pooled absolute time across distances.",
+  "row": "Reuse full-period weight v2 race+horse FE interaction models and covariance; 3*(burden coefficient + ((body-278)/10)*burden_body coefficient). Small-minus-large difference is -15*interaction coefficient.",
+  "pair": "Reuse same-ID/exact-distance/year/grade 7-60-day pairs and nuisance controls. Add mean endpoint body/10 and its square to nuisance, and unpenalized positive-change-by-body and negative-change-by-body interactions. Increase and decrease base slopes remain unpenalized. 250/300kg are mean endpoint body values, distinct from current body in row model.",
+  "pair_periods": {"full":[2017,2026],"confirmation":[2024,2025],"2026partial":[2026,2026]},
+  "pair_sensitivity": "Full-period same band/month and body change <=5kg",
+  "support": "Pair model >=100 pairs, >=30 horses, >=30 later dates and >20 residual df; both-example support counts body240-260 versus290-310, burden55 and58, and horses observed at both loads are explicitly shown. No unsupported inference made precise by ratios.",
+  "uncertainty": "Reuse conservative date+horse clustered covariance and t df; pair earlier-endpoint date limitation persists. BH across all supported distances and both time targets for small-minus-large contrast, separately by family/period/variant.",
+  "nonclaims": ["Ratio alone is not a physiological penalty", "No equivalence test or same-impact conclusion", "No causal body-size comparison", "No fixed ratio penalty or per-kg correction", "No independent future validation or operational writes"]
+}

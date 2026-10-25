@@ -1,0 +1,90 @@
+gui/501/com.horse-racing.jeju-research-refresh = {
+	active count = 0
+	path = /Users/kimyongjin/Library/LaunchAgents/com.horse-racing.jeju-research-refresh.plist
+	type = LaunchAgent
+	state = not running
+
+	program = /Users/kimyongjin/Desktop/horse_racing/.venv/bin/python
+	arguments = {
+		/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python
+		-u
+		-m
+		jeju.refresh.launchd_runner
+	}
+
+	working directory = /Users/kimyongjin/Desktop/horse_racing
+
+	stdout path = /Users/kimyongjin/Library/Logs/horse-racing/jeju-research-refresh.out.log
+	stderr path = /Users/kimyongjin/Library/Logs/horse-racing/jeju-research-refresh.err.log
+	inherited environment = {
+		SSH_AUTH_SOCK => /var/run/com.apple.launchd.bUPUDIAVPu/Listeners
+	}
+
+	default environment = {
+		PATH => /usr/bin:/bin:/usr/sbin:/sbin
+	}
+
+	environment = {
+		OSLogRateLimit => 64
+		PYTHONUNBUFFERED => 1
+		PATH => /usr/bin:/bin:/usr/sbin:/sbin
+		XPC_SERVICE_NAME => com.horse-racing.jeju-research-refresh
+	}
+
+	domain = gui/501 [100023]
+	asid = 100023
+	minimum runtime = 10
+	exit timeout = 5
+	runs = 1
+	last exit code = 0
+
+	event triggers = {
+		com.horse-racing.jeju-research-refresh.268435487 => {
+			keepalive = 0
+			service = com.horse-racing.jeju-research-refresh
+			stream = com.apple.launchd.calendarinterval
+			monitor = com.apple.UserEventAgent-Aqua
+			descriptor = {
+				"Minute" => 0
+				"Hour" => 22
+			}
+		}
+	}
+
+	event channels = {
+		"com.apple.launchd.calendarinterval" = {
+			port = 0x126ec7
+			active = 0
+			managed = 1
+			reset = 0
+			hide = 0
+			watching = 1
+		}
+	}
+
+	resource coalition = {
+		ID = 79963
+		type = resource
+		state = active
+		active count = 1
+		name = com.horse-racing.jeju-research-refresh
+	}
+
+	jetsam coalition = {
+		ID = 79964
+		type = jetsam
+		state = active
+		active count = 1
+		name = com.horse-racing.jeju-research-refresh
+	}
+
+	spawn type = daemon (3)
+	jetsam priority = 40
+	jetsam memory limit (active) = (unlimited)
+	jetsam memory limit (inactive) = (unlimited)
+	jetsamproperties category = daemon
+	jetsam thread limit = 32
+	cpumon = default
+
+	properties = inferred program
+}

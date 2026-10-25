@@ -1,0 +1,183 @@
+{
+  "status": "PASS",
+  "delegated_model": "gpt-6-luna",
+  "delegated_reasoning_effort": "xhigh",
+  "current_model": "F1_STYLE6",
+  "unique_favorite_races": 1477,
+  "disagreement_races": 678,
+  "case_counts": {
+    "model_only": 126,
+    "favorite_only": 248,
+    "both": 173,
+    "neither": 131
+  },
+  "database_opened": false,
+  "models_fitted": 0,
+  "worker_checks": {
+    "passed": true,
+    "paired_races": 1477,
+    "verified_frozen_feature_cells": 129976,
+    "feature_columns": [
+      "axis_horse_id",
+      "axis_horse_number",
+      "axis_finish_position",
+      "axis_grade_raw",
+      "axis_history_cutoff",
+      "axis_latest_history_date",
+      "axis_observed_starts",
+      "axis_days_since_start",
+      "axis_previous_age",
+      "axis_previous_sex",
+      "axis_same_starts",
+      "axis_same_valid_times",
+      "axis_days_since_same",
+      "axis_last_time_s",
+      "axis_mean5_s",
+      "axis_valid_n5",
+      "axis_mean3_s",
+      "axis_valid_n3",
+      "axis_best5_s",
+      "axis_fast2mean5_s",
+      "axis_std5_s",
+      "axis_previous3_mean_s",
+      "axis_previous3_valid_n",
+      "axis_trend_s",
+      "axis_opp_mean5_valid_n",
+      "axis_opp_mean5_valid_fraction",
+      "axis_opp_mean5_median_s",
+      "axis_mean5_minus_opp_mean_s",
+      "axis_mean5_minus_opp_median_s",
+      "axis_mean5_minus_opp_fast2mean_s",
+      "axis_opp_mean5_faster_n",
+      "axis_mean5_rank_fraction",
+      "axis_previous_finish_relative_rank",
+      "axis_previous_top3",
+      "axis_previous_result_status",
+      "axis_same_distance_last5_top3_rate",
+      "axis_same_distance_last5_actual_n",
+      "axis_same_distance_last5_normal_n",
+      "axis_hist_s1f_relpos_n",
+      "axis_hist_s1f_to_c4_pair_n",
+      "axis_hist_c4_to_g1f_pair_n",
+      "axis_hist_s1f_relpos_mean5",
+      "axis_hist_s1f_to_c4_forward_mean5",
+      "axis_hist_c4_to_g1f_forward_mean5",
+      "favorite_horse_id",
+      "favorite_horse_number",
+      "favorite_finish_position",
+      "favorite_grade_raw",
+      "favorite_history_cutoff",
+      "favorite_latest_history_date",
+      "favorite_observed_starts",
+      "favorite_days_since_start",
+      "favorite_previous_age",
+      "favorite_previous_sex",
+      "favorite_same_starts",
+      "favorite_same_valid_times",
+      "favorite_days_since_same",
+      "favorite_last_time_s",
+      "favorite_mean5_s",
+      "favorite_valid_n5",
+      "favorite_mean3_s",
+      "favorite_valid_n3",
+      "favorite_best5_s",
+      "favorite_fast2mean5_s",
+      "favorite_std5_s",
+      "favorite_previous3_mean_s",
+      "favorite_previous3_valid_n",
+      "favorite_trend_s",
+      "favorite_opp_mean5_valid_n",
+      "favorite_opp_mean5_valid_fraction",
+      "favorite_opp_mean5_median_s",
+      "favorite_mean5_minus_opp_mean_s",
+      "favorite_mean5_minus_opp_median_s",
+      "favorite_mean5_minus_opp_fast2mean_s",
+      "favorite_opp_mean5_faster_n",
+      "favorite_mean5_rank_fraction",
+      "favorite_previous_finish_relative_rank",
+      "favorite_previous_top3",
+      "favorite_previous_result_status",
+      "favorite_same_distance_last5_top3_rate",
+      "favorite_same_distance_last5_actual_n",
+      "favorite_same_distance_last5_normal_n",
+      "favorite_hist_s1f_relpos_n",
+      "favorite_hist_s1f_to_c4_pair_n",
+      "favorite_hist_c4_to_g1f_pair_n",
+      "favorite_hist_s1f_relpos_mean5",
+      "favorite_hist_s1f_to_c4_forward_mean5",
+      "favorite_hist_c4_to_g1f_forward_mean5"
+    ],
+    "independent_bin_columns": 10,
+    "condition_summary_rows_checked": 1311,
+    "numeric_distribution_rows_checked": 224,
+    "candidate_pool_summary_rows_checked": 15,
+    "worker_artifact_hashes_checked": 14,
+    "worker_manifest_sha256": "4ff5ecf8af3bdcfa798ec0b6cdc14d7f46546eed58ee1c85b1c16665d7ffd2b9",
+    "database_opened": false,
+    "models_fitted": 0
+  },
+  "verified_external_manifests": [
+    {
+      "path": "jeju/research/20261020_axis_disagreement_conditions_v1/OUTPUT_MANIFEST.json",
+      "sha256": "4ff5ecf8af3bdcfa798ec0b6cdc14d7f46546eed58ee1c85b1c16665d7ffd2b9",
+      "verified_artifacts": 14
+    },
+    {
+      "path": "jeju/research/20261020_axis_disagreement_review_v1/REVIEW_MANIFEST.json",
+      "sha256": "4b06ba6e30e8c8e33d2a4283de841c2811c7bc6e925e013ff8f91c2cf06c62e0",
+      "verified_artifacts": 3
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "README.md",
+      "size_bytes": 9290,
+      "sha256": "ae10acbce5fd43f64c03d2d3b3ef9c7bfa8a3b076a124636c2df95edbdb247c0"
+    },
+    {
+      "path": "ROOT_ADDITIONAL_DIAGNOSTICS.json",
+      "size_bytes": 3612,
+      "sha256": "a3d2978b617850d2b64a90740c23e603734207a7b65a267da4dc70784f5c1a30"
+    },
+    {
+      "path": "ROOT_CONDITION_SUMMARY.csv",
+      "size_bytes": 21415,
+      "sha256": "27b1609c6a5e7f3c7f0d73cfbdec6603ad7a2c19a4e8f4e596af1cc89666b895"
+    },
+    {
+      "path": "ROOT_MARKET_ONLY_POOL.csv",
+      "size_bytes": 6008,
+      "sha256": "d0a9a01905412cae1b1f35facb66c96155bbaf11d9ab5aaff79844c1ba1d68a2"
+    },
+    {
+      "path": "ROOT_PAIR_FEATURES.parquet",
+      "size_bytes": 320006,
+      "sha256": "625db0521c6f2d976f5813ea28fc866f730fa1c194636858996e40d09c3763cb"
+    },
+    {
+      "path": "ROOT_PRELIMINARY_REVIEW.json",
+      "size_bytes": 878,
+      "sha256": "bc7fd319b6a2a3e3b6926f15ac948d860df1aec6255b7ab9a2d4d520b003e3f1"
+    },
+    {
+      "path": "ROOT_WORKER_CROSSCHECK.json",
+      "size_bytes": 3252,
+      "sha256": "b394ae21651daac38377338cf14b2a7fd76f1ca466e274810b2f798e7f5c374a"
+    },
+    {
+      "path": "crosscheck_worker.py",
+      "size_bytes": 8407,
+      "sha256": "900ee88041b6105e8f913905d635434f5fcc968b8e4aa8e9d12aff1976b3367b"
+    },
+    {
+      "path": "independent_conditions.py",
+      "size_bytes": 6397,
+      "sha256": "9243f7d95fc731622f4cf1920a2411573368112b1782f1fc656524a31df6ae5c"
+    },
+    {
+      "path": "independent_pool_diagnostics.py",
+      "size_bytes": 4550,
+      "sha256": "0162985425b21c1ffb199985bbd5875729679850032b14bda5d256b0bbbcfb3e"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "scope": "fit_evaluate",
+  "permitted_runs": 1,
+  "candidate": "S40_vs_G47",
+  "final_models": 3,
+  "lightgbm_train_calls": 6,
+  "temperature_optimizations": 3,
+  "approved_at_utc": "2026-10-24T16:52:35.861006+00:00",
+  "hashes": {
+    "audit_features_sha256": "312163188d05823f5bd4fd60112bf2568b74b397b6bb889c340132e55119b0e7",
+    "bootstrap_receipt_sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "bootstrap_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "code_bundle_sha256": "03725a8d47eec2443ead33b431b52621c764c064f513ae6ff4ef239f61df6eec",
+    "design_contract_sha256": "9d0b5517dd05fef2ea7090bfaf564d571642f5a2316f54e830885e3db9e0c5ee",
+    "math_engine_sha256": "706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c",
+    "plan_sha256": "7f2553ace6e2ce0ea7e60818a4124cf9c5cdb3899aa4d2c038e8876764db8f56",
+    "rules_sha256": "20cd4b17274018a36efbb1b0cea64eb5d5c9809ed5f3481bea59c734f99fee83",
+    "s40_assets": {
+      "axis_sha256": "ccce48ac981230de12ac7096627d95169e6040f114ea7bcf527fe16929d90d0a",
+      "marginals_sha256": "8d5c1de77fca4ea555f92c88b894ad89cf07ccf0f8b8a156ef50e38979ed6d4d",
+      "metrics_sha256": "ce503ae93d6afe8d167e430cb6556428caa0e7100b72465799a734e3fba83001",
+      "models": {
+        "2024": {
+          "best_iteration": 322,
+          "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/models/S_2024.txt",
+          "sha256": "e98b94f523f0a9e60d7cdc1ccbc9ed728e8fda1518810e4481e8dfb41ad002d6",
+          "temperature": 1.2839358195588775
+        },
+        "2025": {
+          "best_iteration": 254,
+          "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/models/S_2025.txt",
+          "sha256": "e9c3427168f34d4e3341d02ac4d600ebfdab37161ebe61ea4438c9c7c3944640",
+          "temperature": 1.323027519896799
+        },
+        "2026": {
+          "best_iteration": 205,
+          "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/models/S_2026.txt",
+          "sha256": "579773fd77f60f9a609db1c222790c491e1181890c9eba09d94c7e4ddc7bc913",
+          "temperature": 1.165540100038154
+        }
+      },
+      "pair_diagnostics_sha256": "e47d67518cb6b86745ed14c853be98fe87fa3ccafc39049dd546cb608aff652f",
+      "parameters_sha256": "46fda546b2a537373291c83190ef7c6f00ffda94fccebcf9090c6f01dfc9c23e",
+      "quarantine_sha256": "990445b5917efe024787d2f9e2c97ce8341475b32769c1044ec38e782ba3d456",
+      "receipt_sha256": "fb70195287f1bc56c0c9fbe19acc6b7ec08b01a42a7a336da1b0a0c9f4b3bbe2",
+      "scores_sha256": "fe08bdf93b07f8a180ad02416cbbc1488db282c761564b67b886114ece56f6e9",
+      "sealed_s_experiment_tree_sha256": "09d5c686a54b4ca9df7cc3ab7d33154c268218bbffd24baa0743d43f7211827d",
+      "selections_sha256": "abc8cf48d0e489124043864f071697f253a61444900c2d731f61d66fe203f82d"
+    },
+    "s40_experiment_tree_sha256": "09d5c686a54b4ca9df7cc3ab7d33154c268218bbffd24baa0743d43f7211827d",
+    "s40_features_sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "s40_state_features_sha256": "ac956c959ce853aa129c738113c598d4ecc968d88dc1306c0f5fa5f4712a78e7",
+    "s40_state_lineage_sha256": "62c4c0896b3a0a4c44b64e56f53ad1ad1b862953c6ded618892e1861624f5dd0",
+    "source_contract_sha256": "12ff491c2c157cba13ac12e0e3660403c8236fb1736408e72d8009ee281ddb0e",
+    "preflight_sha256": "3e0dc6b09793c7f3ad943dd342bfacb7f54493044648d38db84ac7a199ac530a"
+  },
+  "supervisor_additional_pins": {
+    "input_verification_sha256": "e4cdc8832fbb856de9a4c9ce4275d46b043a99acc9365f3d3af9aa92a0d29b92",
+    "reviewer_pre_train_sha256": "1802cf7207c084d1590dc065f39e79d08edd26fb3635ed373b24ae96334aba35",
+    "supervisor_review_sha256": "0994805faa77a28b22c70f9e7746fe9815fc2b36839026c4c087610cda6f97bd",
+    "session_start_sha256": "a4eb8a10e8df7952cd033a8e61afadd577e059d5f13c09329d44e7101eefb231",
+    "protected_files": 495
+  },
+  "first_publication_time_verified": false,
+  "physical_gate_mapping_verified": false,
+  "production_promotion_authorized": false
+}

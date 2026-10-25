@@ -1,0 +1,919 @@
+{
+  "status": "PASS",
+  "study": "20261013_odds_calibration_conditions_v1",
+  "scope": "fixed pair event probability calibration conditioned on validated final QPL quote and frozen pre-race history fields",
+  "interpretation": {
+    "final_quote": "post-race condition only; no pre-race price, executable strategy, causal effect, profitability validation, or independent validation claim",
+    "calibration_gap": "positive means mean probability exceeds empirical hit rate; negative means it is below",
+    "log_loss": "probabilities clipped to [1e-15, 1 - 1e-15] for calculation",
+    "qpl_event": "both selected horses finish in official Top 3; pair probability remains a QPL event probability",
+    "conditions": "eight fixed exploratory condition families; not causal attribution; multiple condition views share the same repeated evaluation period",
+    "field_n": "complete evaluated field size; its prediction-time public availability timestamp is unresolved",
+    "front_history": "historic relative-position overlap only; not a claim that a horse led the current race",
+    "score_gap": "raw F1_STYLE6 output score units, not seconds or probability"
+  },
+  "cohort": {
+    "years": {
+      "2025": 654,
+      "2026_partial": 488
+    },
+    "races_per_selector": {
+      "2025": 654,
+      "2026_partial": 488,
+      "total": 1142
+    },
+    "selectors": {
+      "jockey_id_candidate": {
+        "flag": "selected_jockey_id_candidate",
+        "p_col": "jockey_id_candidate_calibrated_probability",
+        "race_selector": "jockey_id_candidate",
+        "role": "primary"
+      },
+      "jockey_basic_candidate": {
+        "flag": "selected_jockey_basic_candidate",
+        "p_col": "candidate_calibrated_probability",
+        "race_selector": "jockey_basic_candidate",
+        "role": "comparator"
+      }
+    },
+    "context_rows": 2284,
+    "total_unique_races": 1142
+  },
+  "source_validation": {
+    "invalid_price_rows_by_selector": {
+      "jockey_basic_candidate": 0,
+      "jockey_id_candidate": 0
+    },
+    "price_rows_after_validity_filter": 2284,
+    "score_rows": 11083,
+    "feature_rows_2025_2026": 11083,
+    "feature_races_2025_2026": 1142,
+    "feature_pair_runner_matches": 4568,
+    "selected_rows": 2284,
+    "selected_races_per_policy": {
+      "jockey_basic_candidate": 1142,
+      "jockey_id_candidate": 1142
+    },
+    "odds_min": 1.0,
+    "odds_max": 57.4,
+    "probability_min": 0.07849561271915538,
+    "probability_max": 0.6900805273226699,
+    "history_cutoff_rule": "race_date minus two calendar days; verified for every joined 2025/2026 runner row",
+    "latest_history_date_rule": "no observed latest_history_date is after history_cutoff; verified for every 2025/2026 frozen feature row",
+    "horse_number_mapping": "pair horse_i/horse_j program numbers joined to frozen features by race_id + horse_number, then score by api_record_id",
+    "selected_runner_field_missing_counts": {
+      "observed_starts": 0,
+      "same_valid_times": 0,
+      "days_since_start": 92,
+      "hist_s1f_relpos_mean5": 1124,
+      "latest_history_date": 92
+    },
+    "hashes": {
+      "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": {
+        "sha256": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+        "bytes": 17016851
+      },
+      "jeju/research/20261013_postrace_ev_exploration_v1/race_rows.csv": {
+        "sha256": "4fc2e924dcf4f987c22962977d42dd83a786bebc2f70606bc565bd97d2869198",
+        "bytes": 894704
+      },
+      "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+        "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+        "bytes": 5476534
+      },
+      "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet": {
+        "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+        "bytes": 97876
+      },
+      "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet": {
+        "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+        "bytes": 71793
+      },
+      "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy": {
+        "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+        "bytes": 2152128
+      }
+    },
+    "upstream_evidence_hashes": {
+      "pair_receipt": {
+        "path": "jeju/research/20261012_pair_jockey_id_v1/outputs/PREDICTION_RECEIPT.json",
+        "sha256": "410bd6aa1df6c7ddb10306d20f14fa217e3903a21837b598db19ebc690485090"
+      },
+      "pair_manifest": {
+        "path": "jeju/research/20261012_pair_jockey_id_v1/ARTIFACT_MANIFEST.json",
+        "sha256": "ca96125db23159e2dbbd16551e7da54d89a15f992f6c5e893665fabea4f2c545"
+      },
+      "pair_policy_source": {
+        "path": "jeju/research/20261012_pair_jockey_id_v1/pair_jockey_id_report.py",
+        "sha256": "c0941e029c15eb2686ca12656a4d53bab2da1db2e1b78b68e97abe69993b52db"
+      },
+      "postrace_source_hashes": {
+        "path": "jeju/research/20261013_postrace_ev_exploration_v1/SOURCE_HASHES.json",
+        "sha256": "a6fcdd4ec8a28de0d2b513d068b0b40187da66dc02a15c36c4f81ae548801cc0"
+      },
+      "postrace_root_review": {
+        "path": "jeju/research/20261013_postrace_ev_exploration_v1/ROOT_REVIEW.json",
+        "sha256": "1b8f3d722897aa304e39d41883ba390a6e79de6381e53e552783e4026cf57f2b"
+      },
+      "postrace_report": {
+        "path": "jeju/research/20261013_postrace_ev_exploration_v1/REPORT.json",
+        "sha256": "4f5f104e2ba09aa8743e6fbf316c6145382968ed4d476bf2dc51198257fe9c9f"
+      },
+      "style_artifact_manifest": {
+        "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+        "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e"
+      },
+      "style_final_verification": {
+        "path": "jeju/research/20261010_style_history_ablation_v1/outputs/final_verification.json",
+        "sha256": "bf47d289557cc6cebd0b8344c4b7d7b6fcde20cab3aa112c956e0b8f8696581c"
+      },
+      "date_schedule_receipt": {
+        "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+        "sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e"
+      }
+    },
+    "price_review_status": "PASS",
+    "price_review_selector_rows": 2284,
+    "network": false,
+    "database_read_or_write": false,
+    "model_fit_refit_recalibration_or_reprediction": false
+  },
+  "bootstrap": {
+    "schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "schedule_shape": [
+      2000,
+      269
+    ],
+    "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+    "date_inventory_count": 269,
+    "date_min": "2024-01-05",
+    "date_max": "2026-09-19",
+    "method": "fixed whole-period date draws; period and condition masks applied within each stored draw; percentile 95% CI; zero-denominator repetitions omitted and counted"
+  },
+  "overall_calibration_all_prices": {
+    "jockey_id_candidate": {
+      "n": 1142,
+      "hits": 283,
+      "p_mean": 0.2422790585116934,
+      "hit_rate_pct": 24.78108581436077,
+      "gap_pp": -0.5531799631914303,
+      "gap_ci95_low_pp": -2.812031132896302,
+      "gap_ci95_high_pp": 1.6923654212647308,
+      "o_e_ratio": 1.0228323474009509,
+      "brier": 0.1792462062446531,
+      "log_loss": 0.5408208318636681
+    },
+    "jockey_basic_candidate": {
+      "n": 1142,
+      "hits": 276,
+      "p_mean": 0.24044367605029024,
+      "hit_rate_pct": 24.168126094570926,
+      "gap_pp": -0.12375848954190305,
+      "gap_ci95_low_pp": -2.275828046184759,
+      "gap_ci95_high_pp": 2.027131993213082,
+      "o_e_ratio": 1.0051470885645593,
+      "brier": 0.17563247936809556,
+      "log_loss": 0.5322573062220534
+    }
+  },
+  "primary_current_all_odds_rows": [
+    {
+      "odds_band": "all",
+      "n": 1142,
+      "hits": 283,
+      "p_mean": 0.2422790585116934,
+      "hit_rate_pct": 24.78108581436077,
+      "gap_pp": -0.5531799631914303,
+      "gap_ci95_low_pp": -2.812031132896302,
+      "gap_ci95_high_pp": 1.6923654212647308,
+      "o_e_ratio": 1.0228323474009509,
+      "brier": 0.1792462062446531,
+      "log_loss": 0.5408208318636681,
+      "both_top3": 283,
+      "exactly_one_top3": 648,
+      "neither_top3": 211,
+      "bootstrap_zero_denominator_replicates": 0
+    },
+    {
+      "odds_band": "[1,2)",
+      "n": 197,
+      "hits": 105,
+      "p_mean": 0.31364783093370335,
+      "hit_rate_pct": 53.299492385786806,
+      "gap_pp": -21.93470929241647,
+      "gap_ci95_low_pp": -29.310931115173805,
+      "gap_ci95_high_pp": -14.828370742223031,
+      "o_e_ratio": 1.6993419730376798,
+      "brier": 0.30270196527676263,
+      "log_loss": 0.8142271618589403,
+      "both_top3": 105,
+      "exactly_one_top3": 77,
+      "neither_top3": 15,
+      "bootstrap_zero_denominator_replicates": 0
+    },
+    {
+      "odds_band": "[2,3)",
+      "n": 329,
+      "hits": 87,
+      "p_mean": 0.2622264224492193,
+      "hit_rate_pct": 26.443768996960486,
+      "gap_pp": -0.22112675203855847,
+      "gap_ci95_low_pp": -5.077697315408695,
+      "gap_ci95_high_pp": 4.344776450867843,
+      "o_e_ratio": 1.008432664793014,
+      "brier": 0.1999271400593107,
+      "log_loss": 0.5923024393175578,
+      "both_top3": 87,
+      "exactly_one_top3": 199,
+      "neither_top3": 43,
+      "bootstrap_zero_denominator_replicates": 0
+    },
+    {
+      "odds_band": "[3,5)",
+      "n": 320,
+      "hits": 64,
+      "p_mean": 0.22697903154543536,
+      "hit_rate_pct": 20.0,
+      "gap_pp": 2.697903154543535,
+      "gap_ci95_low_pp": -1.7075909754492429,
+      "gap_ci95_high_pp": 7.002089330038378,
+      "o_e_ratio": 0.8811386613038973,
+      "brier": 0.16444209024719847,
+      "log_loss": 0.5128952319779103,
+      "both_top3": 64,
+      "exactly_one_top3": 194,
+      "neither_top3": 62,
+      "bootstrap_zero_denominator_replicates": 0
+    },
+    {
+      "odds_band": "[5,10)",
+      "n": 228,
+      "hits": 27,
+      "p_mean": 0.19517865690237574,
+      "hit_rate_pct": 11.842105263157894,
+      "gap_pp": 7.6757604270796795,
+      "gap_ci95_low_pp": 3.5166927595167308,
+      "gap_ci95_high_pp": 11.708059538568483,
+      "o_e_ratio": 0.6067315684563332,
+      "brier": 0.10783445268209911,
+      "log_loss": 0.37513215045897874,
+      "both_top3": 27,
+      "exactly_one_top3": 138,
+      "neither_top3": 63,
+      "bootstrap_zero_denominator_replicates": 0
+    },
+    {
+      "odds_band": "[10,inf)",
+      "n": 68,
+      "hits": 0,
+      "p_mean": 0.16893448929912025,
+      "hit_rate_pct": 0.0,
+      "gap_pp": 16.893448929912026,
+      "gap_ci95_low_pp": 15.79551109565078,
+      "gap_ci95_high_pp": 18.045024663184982,
+      "o_e_ratio": 0.0,
+      "brier": 0.030634223554945356,
+      "log_loss": 0.18662547101533444,
+      "both_top3": 0,
+      "exactly_one_top3": 40,
+      "neither_top3": 28,
+      "bootstrap_zero_denominator_replicates": 0
+    }
+  ],
+  "current_odds_by_period": [
+    {
+      "period": "all",
+      "odds_band": "[1,2)",
+      "n": 197,
+      "hits": 105,
+      "p_mean": 0.31364783093370335,
+      "hit_rate_pct": 53.299492385786806,
+      "gap_pp": -21.93470929241647,
+      "gap_ci95_low_pp": -29.310931115173805,
+      "gap_ci95_high_pp": -14.828370742223031,
+      "o_e_ratio": 1.6993419730376798
+    },
+    {
+      "period": "all",
+      "odds_band": "[2,3)",
+      "n": 329,
+      "hits": 87,
+      "p_mean": 0.2622264224492193,
+      "hit_rate_pct": 26.443768996960486,
+      "gap_pp": -0.22112675203855847,
+      "gap_ci95_low_pp": -5.077697315408695,
+      "gap_ci95_high_pp": 4.344776450867843,
+      "o_e_ratio": 1.008432664793014
+    },
+    {
+      "period": "all",
+      "odds_band": "[3,5)",
+      "n": 320,
+      "hits": 64,
+      "p_mean": 0.22697903154543536,
+      "hit_rate_pct": 20.0,
+      "gap_pp": 2.697903154543535,
+      "gap_ci95_low_pp": -1.7075909754492429,
+      "gap_ci95_high_pp": 7.002089330038378,
+      "o_e_ratio": 0.8811386613038973
+    },
+    {
+      "period": "all",
+      "odds_band": "[5,10)",
+      "n": 228,
+      "hits": 27,
+      "p_mean": 0.19517865690237574,
+      "hit_rate_pct": 11.842105263157894,
+      "gap_pp": 7.6757604270796795,
+      "gap_ci95_low_pp": 3.5166927595167308,
+      "gap_ci95_high_pp": 11.708059538568483,
+      "o_e_ratio": 0.6067315684563332
+    },
+    {
+      "period": "all",
+      "odds_band": "[10,inf)",
+      "n": 68,
+      "hits": 0,
+      "p_mean": 0.16893448929912025,
+      "hit_rate_pct": 0.0,
+      "gap_pp": 16.893448929912026,
+      "gap_ci95_low_pp": 15.79551109565078,
+      "gap_ci95_high_pp": 18.045024663184982,
+      "o_e_ratio": 0.0
+    },
+    {
+      "period": "2025",
+      "odds_band": "[1,2)",
+      "n": 92,
+      "hits": 52,
+      "p_mean": 0.27648402774203096,
+      "hit_rate_pct": 56.52173913043478,
+      "gap_pp": -28.873336356231682,
+      "gap_ci95_low_pp": -39.63906425689788,
+      "gap_ci95_high_pp": -18.462017175917364,
+      "o_e_ratio": 2.044303954627408
+    },
+    {
+      "period": "2025",
+      "odds_band": "[2,3)",
+      "n": 192,
+      "hits": 52,
+      "p_mean": 0.2501875640941514,
+      "hit_rate_pct": 27.083333333333332,
+      "gap_pp": -2.0645769239181933,
+      "gap_ci95_low_pp": -8.212746349516307,
+      "gap_ci95_high_pp": 3.5874709707842145,
+      "o_e_ratio": 1.0825211649265367
+    },
+    {
+      "period": "2025",
+      "odds_band": "[3,5)",
+      "n": 185,
+      "hits": 38,
+      "p_mean": 0.20759830437118834,
+      "hit_rate_pct": 20.54054054054054,
+      "gap_pp": 0.21928989657829245,
+      "gap_ci95_low_pp": -6.029362877780754,
+      "gap_ci95_high_pp": 6.2545169329865375,
+      "o_e_ratio": 0.9894368165846769
+    },
+    {
+      "period": "2025",
+      "odds_band": "[5,10)",
+      "n": 142,
+      "hits": 15,
+      "p_mean": 0.19193881963617124,
+      "hit_rate_pct": 10.56338028169014,
+      "gap_pp": 8.630501681926983,
+      "gap_ci95_low_pp": 3.7395169321995483,
+      "gap_ci95_high_pp": 13.280843459105895,
+      "o_e_ratio": 0.55035142456922
+    },
+    {
+      "period": "2025",
+      "odds_band": "[10,inf)",
+      "n": 43,
+      "hits": 0,
+      "p_mean": 0.16034946508659437,
+      "hit_rate_pct": 0.0,
+      "gap_pp": 16.034946508659438,
+      "gap_ci95_low_pp": 14.740839842027787,
+      "gap_ci95_high_pp": 17.36718355138331,
+      "o_e_ratio": 0.0
+    },
+    {
+      "period": "2026_partial",
+      "odds_band": "[1,2)",
+      "n": 105,
+      "hits": 53,
+      "p_mean": 0.34621040134926395,
+      "hit_rate_pct": 50.476190476190474,
+      "gap_pp": -15.855150341264078,
+      "gap_ci95_low_pp": -24.988495903258045,
+      "gap_ci95_high_pp": -6.360139454823572,
+      "o_e_ratio": 1.457962853786969
+    },
+    {
+      "period": "2026_partial",
+      "odds_band": "[2,3)",
+      "n": 137,
+      "hits": 35,
+      "p_mean": 0.27909839912201523,
+      "hit_rate_pct": 25.547445255474454,
+      "gap_pp": 2.3623946567270684,
+      "gap_ci95_low_pp": -4.7770532532103624,
+      "gap_ci95_high_pp": 9.512918040441413,
+      "o_e_ratio": 0.9153562089872723
+    },
+    {
+      "period": "2026_partial",
+      "odds_band": "[3,5)",
+      "n": 135,
+      "hits": 26,
+      "p_mean": 0.2535378058212554,
+      "hit_rate_pct": 19.25925925925926,
+      "gap_pp": 6.094521322866281,
+      "gap_ci95_low_pp": -0.1774209086507459,
+      "gap_ci95_high_pp": 12.16973434432453,
+      "o_e_ratio": 0.7596208067224922
+    },
+    {
+      "period": "2026_partial",
+      "odds_band": "[5,10)",
+      "n": 86,
+      "hits": 12,
+      "p_mean": 0.20052815564424825,
+      "hit_rate_pct": 13.953488372093023,
+      "gap_pp": 6.099327192331802,
+      "gap_ci95_low_pp": -1.7419781420844602,
+      "gap_ci95_high_pp": 12.945607551364619,
+      "o_e_ratio": 0.6958368677587371
+    },
+    {
+      "period": "2026_partial",
+      "odds_band": "[10,inf)",
+      "n": 25,
+      "hits": 0,
+      "p_mean": 0.18370073094466474,
+      "hit_rate_pct": 0.0,
+      "gap_pp": 18.370073094466473,
+      "gap_ci95_low_pp": 16.410873176003875,
+      "gap_ci95_high_pp": 20.66977479903147,
+      "o_e_ratio": 0.0
+    }
+  ],
+  "pair_outcome_current_overall": {
+    "n": 1142,
+    "hits": 283,
+    "p_mean": 0.2422790585116934,
+    "hit_rate_pct": 24.78108581436077,
+    "gap_pp": -0.5531799631914303,
+    "gap_ci95_low_pp": -2.812031132896302,
+    "gap_ci95_high_pp": 1.6923654212647308,
+    "o_e_ratio": 1.0228323474009509,
+    "brier": 0.1792462062446531,
+    "log_loss": 0.5408208318636681
+  },
+  "previously_seen_ev_group_current": [
+    {
+      "group_id": "posthoc_score_ge_0",
+      "n": 326,
+      "hits": 39,
+      "p_mean": 0.23506585226470408,
+      "hit_rate_pct": 11.96319018404908,
+      "gap_pp": 11.543395042421329,
+      "gap_ci95_low_pp": 7.929105136669382,
+      "gap_ci95_high_pp": 15.008251709561375,
+      "previously_explored_exactly": true
+    },
+    {
+      "group_id": "p_ge_030_and_score_ge_010",
+      "n": 52,
+      "hits": 15,
+      "p_mean": 0.37108222814637243,
+      "hit_rate_pct": 28.846153846153843,
+      "gap_pp": 8.2620689684834,
+      "gap_ci95_low_pp": -4.396270762971361,
+      "gap_ci95_high_pp": 20.44106245977073,
+      "previously_explored_exactly": true
+    },
+    {
+      "group_id": "p_ge_030_and_score_ge_020",
+      "n": 39,
+      "hits": 11,
+      "p_mean": 0.36378368630060437,
+      "hit_rate_pct": 28.205128205128204,
+      "gap_pp": 8.173240424932231,
+      "gap_ci95_low_pp": -7.804236274523714,
+      "gap_ci95_high_pp": 23.310093989774597,
+      "previously_explored_exactly": true
+    }
+  ],
+  "condition_examples_current_descriptive": [
+    {
+      "family": "grade_raw",
+      "value": "제2등급",
+      "period_rows": [
+        {
+          "condition_family": "grade_raw",
+          "condition_value": "제2등급",
+          "period": "all",
+          "n": 74,
+          "hits": 28,
+          "p_mean": 0.23397242763579268,
+          "hit_rate_pct": 37.83783783783784,
+          "gap_pp": -14.440595074258573,
+          "gap_ci95_low_pp": -25.37444828206469,
+          "gap_ci95_high_pp": -3.383964073252352
+        },
+        {
+          "condition_family": "grade_raw",
+          "condition_value": "제2등급",
+          "period": "2025",
+          "n": 47,
+          "hits": 17,
+          "p_mean": 0.2230516527822355,
+          "hit_rate_pct": 36.17021276595745,
+          "gap_pp": -13.8650474877339,
+          "gap_ci95_low_pp": -28.21663534238431,
+          "gap_ci95_high_pp": 0.1336607184503183
+        },
+        {
+          "condition_family": "grade_raw",
+          "condition_value": "제2등급",
+          "period": "2026_partial",
+          "n": 27,
+          "hits": 11,
+          "p_mean": 0.2529826653438367,
+          "hit_rate_pct": 40.74074074074074,
+          "gap_pp": -15.44247420635707,
+          "gap_ci95_low_pp": -33.43500138302256,
+          "gap_ci95_high_pp": 0.6683510126885946
+        }
+      ]
+    },
+    {
+      "family": "distance",
+      "value": "1300",
+      "period_rows": [
+        {
+          "condition_family": "distance",
+          "condition_value": "1300",
+          "period": "all",
+          "n": 55,
+          "hits": 18,
+          "p_mean": 0.20584484072217357,
+          "hit_rate_pct": 32.72727272727273,
+          "gap_pp": -12.14278865505537,
+          "gap_ci95_low_pp": -24.82696537041374,
+          "gap_ci95_high_pp": -0.3081276448718548
+        },
+        {
+          "condition_family": "distance",
+          "condition_value": "1300",
+          "period": "2025",
+          "n": 35,
+          "hits": 13,
+          "p_mean": 0.21854211343648522,
+          "hit_rate_pct": 37.142857142857146,
+          "gap_pp": -15.288645799208622,
+          "gap_ci95_low_pp": -31.943801660425734,
+          "gap_ci95_high_pp": 0.4602386234712986
+        },
+        {
+          "condition_family": "distance",
+          "condition_value": "1300",
+          "period": "2026_partial",
+          "n": 20,
+          "hits": 5,
+          "p_mean": 0.1836246134721282,
+          "hit_rate_pct": 25.0,
+          "gap_pp": -6.637538652787181,
+          "gap_ci95_low_pp": -26.67463619808102,
+          "gap_ci95_high_pp": 9.836808229399246
+        }
+      ]
+    },
+    {
+      "family": "min_observed_starts",
+      "value": "3-9",
+      "period_rows": [
+        {
+          "condition_family": "min_observed_starts",
+          "condition_value": "3-9",
+          "period": "all",
+          "n": 528,
+          "hits": 116,
+          "p_mean": 0.25128423625821955,
+          "hit_rate_pct": 21.96969696969697,
+          "gap_pp": 3.1587266561249856,
+          "gap_ci95_low_pp": -0.3624047886779788,
+          "gap_ci95_high_pp": 6.573167747335161
+        },
+        {
+          "condition_family": "min_observed_starts",
+          "condition_value": "3-9",
+          "period": "2025",
+          "n": 304,
+          "hits": 60,
+          "p_mean": 0.2264496146006192,
+          "hit_rate_pct": 19.736842105263158,
+          "gap_pp": 2.9081193547987603,
+          "gap_ci95_low_pp": -1.559991907771761,
+          "gap_ci95_high_pp": 6.919739416776537
+        },
+        {
+          "condition_family": "min_observed_starts",
+          "condition_value": "3-9",
+          "period": "2026_partial",
+          "n": 224,
+          "hits": 56,
+          "p_mean": 0.2849883656506772,
+          "hit_rate_pct": 25.0,
+          "gap_pp": 3.49883656506772,
+          "gap_ci95_low_pp": -2.5193513646167545,
+          "gap_ci95_high_pp": 8.999437199342545
+        }
+      ]
+    },
+    {
+      "family": "distance",
+      "value": "1610",
+      "period_rows": [
+        {
+          "condition_family": "distance",
+          "condition_value": "1610",
+          "period": "all",
+          "n": 9,
+          "hits": 0,
+          "p_mean": 0.20237729860286302,
+          "hit_rate_pct": 0.0,
+          "gap_pp": 20.2377298602863,
+          "gap_ci95_low_pp": 14.42155721516395,
+          "gap_ci95_high_pp": 26.58805082293015
+        },
+        {
+          "condition_family": "distance",
+          "condition_value": "1610",
+          "period": "2025",
+          "n": 3,
+          "hits": 0,
+          "p_mean": 0.18308164648293815,
+          "hit_rate_pct": 0.0,
+          "gap_pp": 18.308164648293815,
+          "gap_ci95_low_pp": 9.379558862899529,
+          "gap_ci95_high_pp": 24.79804050089076
+        },
+        {
+          "condition_family": "distance",
+          "condition_value": "1610",
+          "period": "2026_partial",
+          "n": 6,
+          "hits": 0,
+          "p_mean": 0.21202512466282544,
+          "hit_rate_pct": 0.0,
+          "gap_pp": 21.202512466282545,
+          "gap_ci95_low_pp": 14.23727791939576,
+          "gap_ci95_high_pp": 30.336049114971182
+        }
+      ]
+    }
+  ],
+  "zero_event_bootstrap_limitations": [
+    "The current [10,inf) quote stratum has 0 observed hits in 68 pairs. A nonparametric date bootstrap resamples those same zero observed hits and cannot create an unobserved success; its gap interval therefore reflects variation in resampled n and mean p, not a confidence interval that resolves the true rare-event rate.",
+    "The 9-pair 1610m condition also has 0 observed hits. Its bootstrap interval is particularly unsuitable as a causal or filter rule.",
+    "Zero observed hits do not mean the event probability is zero. Individual misses are not confirmed model errors."
+  ],
+  "current_supported_condition_high_gap_descriptive": [
+    {
+      "condition_family": "min_observed_starts",
+      "condition_value": "3-9",
+      "n": 528,
+      "hits": 116,
+      "p_mean": 0.25128423625821955,
+      "hit_rate_pct": 21.96969696969697,
+      "gap_pp": 3.1587266561249856,
+      "gap_ci95_low_pp": -0.3624047886779788,
+      "gap_ci95_high_pp": 6.573167747335161
+    },
+    {
+      "condition_family": "distance",
+      "condition_value": "1000",
+      "n": 338,
+      "hits": 75,
+      "p_mean": 0.24865622932305717,
+      "hit_rate_pct": 22.189349112426036,
+      "gap_pp": 2.676273819879682,
+      "gap_ci95_low_pp": -1.6933965786423302,
+      "gap_ci95_high_pp": 6.809930032470526
+    },
+    {
+      "condition_family": "grade_raw",
+      "condition_value": "제5등급",
+      "n": 386,
+      "hits": 85,
+      "p_mean": 0.24637972536266833,
+      "hit_rate_pct": 22.020725388601036,
+      "gap_pp": 2.617247147665797,
+      "gap_ci95_low_pp": -1.2854191582571144,
+      "gap_ci95_high_pp": 6.6653221722695
+    },
+    {
+      "condition_family": "field_n",
+      "condition_value": "<=8",
+      "n": 104,
+      "hits": 30,
+      "p_mean": 0.31205910554552935,
+      "hit_rate_pct": 28.846153846153843,
+      "gap_pp": 2.3597567083990914,
+      "gap_ci95_low_pp": -6.466890506643863,
+      "gap_ci95_high_pp": 9.934444886928079
+    },
+    {
+      "condition_family": "grade_raw",
+      "condition_value": "제4등급",
+      "n": 271,
+      "hits": 62,
+      "p_mean": 0.24517696502560263,
+      "hit_rate_pct": 22.878228782287824,
+      "gap_pp": 1.6394677202724388,
+      "gap_ci95_low_pp": -3.2277634126376347,
+      "gap_ci95_high_pp": 6.715726437073344
+    },
+    {
+      "condition_family": "front_history_overlap",
+      "condition_value": "observed_other",
+      "n": 514,
+      "hits": 118,
+      "p_mean": 0.24499617340144944,
+      "hit_rate_pct": 22.957198443579767,
+      "gap_pp": 1.5424188965651786,
+      "gap_ci95_low_pp": -1.8460702743968866,
+      "gap_ci95_high_pp": 5.03199191894787
+    },
+    {
+      "condition_family": "max_days_since_start",
+      "condition_value": "36-60",
+      "n": 118,
+      "hits": 25,
+      "p_mean": 0.22709959128373167,
+      "hit_rate_pct": 21.1864406779661,
+      "gap_pp": 1.523518450407066,
+      "gap_ci95_low_pp": -6.078886052194112,
+      "gap_ci95_high_pp": 8.605300900591137
+    },
+    {
+      "condition_family": "f1_score_gap",
+      "condition_value": "[0,.5)",
+      "n": 736,
+      "hits": 160,
+      "p_mean": 0.2311528940588487,
+      "hit_rate_pct": 21.73913043478261,
+      "gap_pp": 1.376158971102262,
+      "gap_ci95_low_pp": -1.3863549999072815,
+      "gap_ci95_high_pp": 4.151185841687045
+    },
+    {
+      "condition_family": "min_same_valid_times",
+      "condition_value": "1-2",
+      "n": 453,
+      "hits": 114,
+      "p_mean": 0.2645573893865221,
+      "hit_rate_pct": 25.165562913907287,
+      "gap_pp": 1.2901760247449268,
+      "gap_ci95_low_pp": -2.800126622011454,
+      "gap_ci95_high_pp": 5.119359697224385
+    },
+    {
+      "condition_family": "max_days_since_start",
+      "condition_value": "<=14",
+      "n": 101,
+      "hits": 24,
+      "p_mean": 0.24702754711461977,
+      "hit_rate_pct": 23.762376237623762,
+      "gap_pp": 0.9403784738382159,
+      "gap_ci95_low_pp": -7.417199023801801,
+      "gap_ci95_high_pp": 8.907534660143355
+    }
+  ],
+  "current_supported_condition_low_gap_descriptive": [
+    {
+      "condition_family": "grade_raw",
+      "condition_value": "제2등급",
+      "n": 74,
+      "hits": 28,
+      "p_mean": 0.23397242763579268,
+      "hit_rate_pct": 37.83783783783784,
+      "gap_pp": -14.440595074258573,
+      "gap_ci95_low_pp": -25.37444828206469,
+      "gap_ci95_high_pp": -3.383964073252352
+    },
+    {
+      "condition_family": "distance",
+      "condition_value": "1300",
+      "n": 55,
+      "hits": 18,
+      "p_mean": 0.20584484072217357,
+      "hit_rate_pct": 32.72727272727273,
+      "gap_pp": -12.14278865505537,
+      "gap_ci95_low_pp": -24.82696537041374,
+      "gap_ci95_high_pp": -0.3081276448718548
+    },
+    {
+      "condition_family": "distance",
+      "condition_value": "1200",
+      "n": 159,
+      "hits": 45,
+      "p_mean": 0.22954997887668366,
+      "hit_rate_pct": 28.30188679245283,
+      "gap_pp": -5.346888904784464,
+      "gap_ci95_low_pp": -12.859924456619554,
+      "gap_ci95_high_pp": 1.4566903525605868
+    },
+    {
+      "condition_family": "f1_score_gap",
+      "condition_value": "[.5,1)",
+      "n": 280,
+      "hits": 86,
+      "p_mean": 0.25691530452034467,
+      "hit_rate_pct": 30.714285714285715,
+      "gap_pp": -5.022755262251249,
+      "gap_ci95_low_pp": -10.329725941352345,
+      "gap_ci95_high_pp": 0.08516399914084453
+    },
+    {
+      "condition_family": "grade_raw",
+      "condition_value": "제3등급",
+      "n": 150,
+      "hits": 41,
+      "p_mean": 0.23120076275925033,
+      "hit_rate_pct": 27.333333333333332,
+      "gap_pp": -4.213257057408298,
+      "gap_ci95_low_pp": -11.364480691487115,
+      "gap_ci95_high_pp": 2.2058422435348914
+    },
+    {
+      "condition_family": "min_observed_starts",
+      "condition_value": "1-2",
+      "n": 250,
+      "hits": 81,
+      "p_mean": 0.2830903281702161,
+      "hit_rate_pct": 32.4,
+      "gap_pp": -4.090967182978389,
+      "gap_ci95_low_pp": -10.315666023788518,
+      "gap_ci95_high_pp": 1.7996689419681569
+    },
+    {
+      "condition_family": "field_n",
+      "condition_value": "9",
+      "n": 97,
+      "hits": 28,
+      "p_mean": 0.2510703721523629,
+      "hit_rate_pct": 28.865979381443296,
+      "gap_pp": -3.7589421662070075,
+      "gap_ci95_low_pp": -12.75316953331235,
+      "gap_ci95_high_pp": 4.612268860969412
+    },
+    {
+      "condition_family": "front_history_overlap",
+      "condition_value": "both_low",
+      "n": 154,
+      "hits": 44,
+      "p_mean": 0.2527568085075305,
+      "hit_rate_pct": 28.57142857142857,
+      "gap_pp": -3.295747720675518,
+      "gap_ci95_low_pp": -11.055387329655034,
+      "gap_ci95_high_pp": 3.934134417611273
+    },
+    {
+      "condition_family": "min_observed_starts",
+      "condition_value": "10+",
+      "n": 320,
+      "hits": 75,
+      "p_mean": 0.20380547913647717,
+      "hit_rate_pct": 23.4375,
+      "gap_pp": -3.0569520863522825,
+      "gap_ci95_low_pp": -7.441409165811232,
+      "gap_ci95_high_pp": 1.3624296114331407
+    },
+    {
+      "condition_family": "max_days_since_start",
+      "condition_value": "61+",
+      "n": 247,
+      "hits": 70,
+      "p_mean": 0.25499558842219244,
+      "hit_rate_pct": 28.34008097165992,
+      "gap_pp": -2.840522129440676,
+      "gap_ci95_low_pp": -8.461937456144076,
+      "gap_ci95_high_pp": 2.4516864992857363
+    }
+  ],
+  "output_rows": {
+    "pair_context.csv": 2284,
+    "odds_calibration.csv": 36,
+    "probability_odds_cells.csv": 136,
+    "condition_calibration.csv": 222,
+    "condition_odds_cells.csv": 1065,
+    "selected_group_diagnostics.csv": 108
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "scope": "This study folder and immutable review references; ARTIFACT_MANIFEST.json excludes its own hash.",
+  "study": "20261010_joint_relationship_v1",
+  "status": "Frozen retrospective study; C independent preflight and post-fit verification PASS; root final review PASS; prespecified performance gate FAIL.",
+  "decision": {
+    "research_signal_gate_passed": false,
+    "operational_promotion": false,
+    "preserve_existing_f1_style6_horse_model_and_saved_outputs": true,
+    "primary_hit6_ci_lower": -0.0011365423098913664,
+    "primary_joint_nll_ci_upper": 0.006277195351270995,
+    "interpretation": "Verification PASS confirms independent reconstruction and provenance; it does not imply a performance-gate PASS."
+  },
+  "cohort": {
+    "start_date": "2024-01-05",
+    "end_date": "2026-09-19",
+    "races": 1779,
+    "runner_rows": 17412,
+    "race_days": 269,
+    "partial_year_2026": true,
+    "prior_development_reuse": true
+  },
+  "model_execution": {
+    "fit_parameters_sha256": "ff96e32cc4e0c991ac1326ef111a785b0e4f11b49daedc9f584be00dfe72eaeb",
+    "base_model_fit_or_reload": false,
+    "h1_coefficient_fit_folds": 3,
+    "h1_coefficient_optimizer_calls": 3,
+    "h2_temperature_optimizer_calls": 6,
+    "outcome_metrics_computed_at_fit_stage": false,
+    "report_metrics_computed_after_fit": true,
+    "source_hashes_unchanged_before_and_after_fit": true
+  },
+  "locked_inputs": {
+    "source_lock_path": "outputs/source_lock.json",
+    "source_lock_sha256": "4e5acda8590e8ab415be45333a8bd26f8894a390f411b33ce669e439d565fb61",
+    "locked_source_count": 39,
+    "locked_source_hashes_unchanged_after_c_and_root_review": true
+  },
+  "independent_review_receipts": [
+    {
+      "path": "jeju/research/20261010_joint_relationship_review_v1/outputs/independent_preflight_final.json",
+      "bytes": 9701,
+      "sha256": "8d2b7ad7d32fe31685906c5197ec486e9e0cc64200e08947b39d0e613436afde",
+      "review": "C independent outcome-free structural preflight",
+      "status": "PASS",
+      "mode": "independent outcome-free structural verification",
+      "reviewer_code": {
+        "path": "jeju/research/20261010_joint_relationship_review_v1/final_independent_preflight.py",
+        "sha256": "ba66fd5915a4f8a341e650a92b4990a63fd0a41dcd64b6cd20efbfb91e4088cc"
+      }
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_review_v1/outputs/postfit_independent_validation/independent_postfit_validation.json",
+      "bytes": 49380,
+      "sha256": "276e94432acd34205c8005bfee5e0c4516353d6cac43406aa83c17de57f223bc",
+      "review": "C independent raw-source post-fit reconstruction",
+      "status": "PASS",
+      "mode": "independent post-fit reconstruction; no refit or temperature search",
+      "locked_source_count": 39,
+      "locked_sources_unchanged": true,
+      "refit_or_temperature_search": false,
+      "reviewer_code": {
+        "path": "jeju/research/20261010_joint_relationship_review_v1/postfit_independent_validation.py",
+        "bytes": 76993,
+        "sha256": "6e5035b70079b4c3d753047c880cca482abe1063c561aeb929a86ddda10c6531"
+      }
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_review_v1/outputs/initial_preflight.json",
+      "bytes": 21213,
+      "sha256": "e6cfc37a8170bc9eaa36a7aae44c2cd2819d309359e21c67b1ae78258799262c",
+      "review": "C frozen initial outcome-free preflight",
+      "status": "PASS"
+    }
+  ],
+  "root_final_review": {
+    "path": "jeju/research/20261010_joint_relationship_v1/outputs/root_final_review.json",
+    "sha256": "b91048fbd50a91a6e1c685aff7118e03f7d54b9511b34eed991c26a931ec76ee",
+    "status": "PASS",
+    "performance_gate_passed": false,
+    "locked_sources_verified": 39,
+    "locked_sources_unchanged": true,
+    "decision": "Preserve candidate as retrospective failed-gate experiment; retain existing horse evaluation/research baseline; no operational promotion"
+  },
+  "files": {
+    "PLAN.md": {
+      "bytes": 14361,
+      "sha256": "e0a34c6962112d88bfec7e645efbd8e4ea69bf4aada088f580e1188bac1207f3"
+    },
+    "README.md": {
+      "bytes": 3905,
+      "sha256": "d82a710d9f2d3b6ad87e83651fdc8f5f192a5408d6c169c98be7be9af75a7605"
+    },
+    "RESULTS_AND_LIMITATIONS.md": {
+      "bytes": 15471,
+      "sha256": "2ce5677434390542d6adf7eba3114328c6d5068e5a8620fc543f80d364f821e7"
+    },
+    "SOURCE_AVAILABILITY.md": {
+      "bytes": 5680,
+      "sha256": "32dd5c93f7cf11e033ae7bbc2b6677dff5981bbac6097520ecdd1327512ee608"
+    },
+    "accept_c_preflight.py": {
+      "bytes": 2527,
+      "sha256": "bdb01cb4299335976281137a525cb772d818ff1037530d11385405607e32f2af"
+    },
+    "finalize_report.py": {
+      "bytes": 1004,
+      "sha256": "510dd29d08e3231becded1be3f0bd7d7574e16a45451c694c10e67511d4b2ff8"
+    },
+    "fit.py": {
+      "bytes": 15235,
+      "sha256": "446e056401abe5fecc632e8d98afae1b8f5449a178309dccab0ccb9b7317acb4"
+    },
+    "joint_model.py": {
+      "bytes": 30933,
+      "sha256": "cdb1115dfe797aad0bc71be25a21215909166eb1b644244e8d460f7e3da1cb92"
+    },
+    "outputs/a_verification_receipt.json": {
+      "bytes": 2696,
+      "sha256": "a0f87d1ec7e8a16aa8c48fcae7c47de14b171711455fd575605c4b8059da3346"
+    },
+    "outputs/c_preflight_acceptance.json": {
+      "bytes": 747,
+      "sha256": "597ddbcbf595b28b95fadc47a6bd0ff321809c2502805bd2991bbbb5281a431f"
+    },
+    "outputs/fit_fold_2024.json": {
+      "bytes": 4125,
+      "sha256": "2ce5025954635c6a0ab84d59620804211e86af5297d32c6f31c804a300458f5f"
+    },
+    "outputs/fit_fold_2024_beta.json": {
+      "bytes": 3709,
+      "sha256": "55bbba9e4cf59a4aa03fe0f7107758cd0002f62394eaf3433ff985895a03b0a2"
+    },
+    "outputs/fit_fold_2025.json": {
+      "bytes": 4123,
+      "sha256": "3797a34725797916e5aac1dcfb6957fd04f3300a67c8465b25ec96617daac205"
+    },
+    "outputs/fit_fold_2025_beta.json": {
+      "bytes": 3706,
+      "sha256": "cb20677aa7d15a3c5770d18377b440a4b453a66955cddd3c88738a06762e6f78"
+    },
+    "outputs/fit_fold_2026.json": {
+      "bytes": 4136,
+      "sha256": "31d2351d9447ba404a3f4b53b67e97318191ead1514ee51692401ea8c4c64612"
+    },
+    "outputs/fit_fold_2026_beta.json": {
+      "bytes": 3719,
+      "sha256": "9e6d51e3f4e12f9feccd40c709d7bdfc547133414872be439c72aadf00a3e68a"
+    },
+    "outputs/fit_parameters.json": {
+      "bytes": 27463,
+      "sha256": "ff96e32cc4e0c991ac1326ef111a785b0e4f11b49daedc9f584be00dfe72eaeb"
+    },
+    "outputs/fit_receipt.json": {
+      "bytes": 1977,
+      "sha256": "8470f4d5848e12824511e3a6b03b2f481f760dcb7c433b59624894a8482b61dc"
+    },
+    "outputs/independent_preflight_receipt.json": {
+      "bytes": 9701,
+      "sha256": "8d2b7ad7d32fe31685906c5197ec486e9e0cc64200e08947b39d0e613436afde"
+    },
+    "outputs/preflight_receipt.json": {
+      "bytes": 869345,
+      "sha256": "4fdaa44bcb0a440201ce3ac6d3c67ee3ae4009cc07e34b39fe6124ddee450e3e"
+    },
+    "outputs/report/all_triples.parquet": {
+      "bytes": 10000041,
+      "sha256": "13409e65353c0cb6dab14df97317cce24de913056ae464ee3524520759de681c"
+    },
+    "outputs/report/baseline_six_mass_reliability.csv": {
+      "bytes": 382,
+      "sha256": "9b770a3c615eb696c33f1b6c09f98ef23f5f917c301d14c962bce88fa76a0e1a"
+    },
+    "outputs/report/candidate_six_mass_reliability.csv": {
+      "bytes": 394,
+      "sha256": "9e064868df3c7788fbba217c34514386c321c3c759e5638f291664e0df9c1aca"
+    },
+    "outputs/report/race_metrics.csv": {
+      "bytes": 536786,
+      "sha256": "89820acf0dfafc749f394cf9e74a3b58a5ec890e2c746f890ad257eaf32ff115"
+    },
+    "outputs/report/report_metrics.json": {
+      "bytes": 19736,
+      "sha256": "20d3115e2428594f28831b58bd2773c25ce9b723c8181155b91e11648d4b6cef"
+    },
+    "outputs/report/report_receipt.json": {
+      "bytes": 1150,
+      "sha256": "5720519b0d8860f5652650b4d2ee3b6f8444a6c6f01421395cd51f4a0251fae4"
+    },
+    "outputs/report/runner_marginals.csv": {
+      "bytes": 1784897,
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09"
+    },
+    "outputs/root_final_review.json": {
+      "bytes": 1217,
+      "sha256": "b91048fbd50a91a6e1c685aff7118e03f7d54b9511b34eed991c26a931ec76ee"
+    },
+    "outputs/root_fit_approval.json": {
+      "bytes": 1285,
+      "sha256": "419c0cb0ed6c6e6cf1c08a2d0f5838a3cf507fb14e323731bcd6c12d06a02785"
+    },
+    "outputs/root_report_spot_checks.json": {
+      "bytes": 1000,
+      "sha256": "72386b8065c06376858f894e3f23df579654fef5daaa46c543311a7281ecec1a"
+    },
+    "outputs/source_lock.json": {
+      "bytes": 44484,
+      "sha256": "4e5acda8590e8ab415be45333a8bd26f8894a390f411b33ce669e439d565fb61"
+    },
+    "preflight.py": {
+      "bytes": 18138,
+      "sha256": "f197ab3546ca98337e669014ba2759b90b6dc7b5c16cf1fb82a1290954994d66"
+    },
+    "report.py": {
+      "bytes": 21173,
+      "sha256": "eb7ec7a1075e452c3a091d273a274e3f5f41414f0aaa00d5d795bfee6ed9f832"
+    },
+    "verify.py": {
+      "bytes": 16173,
+      "sha256": "961e630c745c4da541f184c2886d54ee417a6df257906184db8a83a5e6c687ca"
+    }
+  },
+  "interpretation_limits": [
+    "Retrospective repeated historical development cohort; no independent future holdout.",
+    "Normal-complete post-hoc rosters; historical public prediction timestamps were not reconstructed.",
+    "Historical style observations are surrogate relationship inputs, not a direct prediction of current-race running positions.",
+    "Hit@6 primary confidence interval crosses zero and exact-set joint NLL guardrail fails.",
+    "No operational promotion or change to the existing F1_STYLE6 horse model, saved outputs, database, or registry.",
+    "Verification PASS is separate from and does not override the performance gate FAIL."
+  ]
+}

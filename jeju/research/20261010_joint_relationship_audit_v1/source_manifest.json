@@ -1,0 +1,86 @@
+{
+  "study": "20261010_joint_relationship_audit_v1",
+  "status": "read-only design audit; no outcome experiment performed",
+  "checked_at": "2026-10-10",
+  "hash_policy": "small referenced files and calibration/OOF parquet assets were hashed from current bytes; large upstream source caches and database were not rehashed; existing source locks remain authoritative for those assets",
+  "sources": {
+    "jeju/AGENTS.md": "8f765820ea187e85aabe53f079400f4553bccb4c32a66e67bd17e47d192dd094",
+    "jeju/docs/RESTART_PLAN_20260928.md": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848",
+    "jeju/review_documents/README.md": "3db59f4dd11baafd7fe4672931d3610213a9afd7bbc5d074078794126ffa9a04",
+    "jeju/research/RESEARCH_PUBLICATION_POLICY.md": "01f6743d697cd23b4b711f62a947ef567001162a10afc9b3c3a5beaa6308997b",
+    "/Users/kimyongjin/.codex/skills/code-security/SKILL.md": "b461c67676aeb505a8cd3816d58769d91f3d126f7aaa3f25cb35b6dde0691737",
+    "jeju/research/20261010_probability_combo_gap_design_audit_v1/REVIEW_MEMO.md": "e9ec5039ee948eb79dd1220f4c955af3ad15158183799bef8b90726e3a54773c",
+    "jeju/research/20261010_probability_combo_gap_v1/README.md": "0c2fdeec7b719f5136575ba00ea34afc1a73718685a571a19ea779cb4db7e2fe",
+    "jeju/research/20261010_style_history_ablation_v1/CONTRACT.md": "c10aac8f6faa6e841afd9ef829bfa0b29ada2dceabcbb5405fdfad9c12536bf9",
+    "jeju/research/20261010_style_history_ablation_v1/IMPLEMENTATION_PLAN.md": "256b587649df0e7afe5170488b8d6f031b255a24bf1b8843ff7fee2e99aa84c3",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/prepared_lock.json": "f110b33b0442e519fd3f9852098aa847af90d2228af674c39db4914142675e24",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/source_audit_reference.json": "8bc61badf6913b3e23ef01607511b574f6216c93d476125c3d033fede4e6d857",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/calibration_scores.parquet": "360cc559b1ab19cde177e0bb23206fd36f123b707714fbcb63547fdb9bed05b2",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/calibration_scores.parquet": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/calibration_scores.parquet": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8",
+    "jeju/research/20261009_axis_companion_pairs_v1/PLAN.md": "2de1c839b666d357a7bdfd8e12b0305aaeed8dc08e7ea991c3c43177e553e639",
+    "jeju/research/20261009_axis_companion_pairs_v1/config.json": "6675d4c338ca08cde9c088a4cd7aff904a51cc31c7a8d53062dc147c95c01a69",
+    "jeju/research/20261009_axis_companion_pairs_v1/outputs/oof_runners.parquet": "a3ffd8a798ad5c4a85adb17c5a83aad9cd18a23b2650313834067bbc8a2bf0a1",
+    "jeju/research/20261009_axis_companion_pairs_v1/outputs/source_lock.json": "89df37d49131153afa047128b807c7ae85c5bc7b39a2576e9620b8fec3ddc56a"
+  },
+  "implementation_plan_review_snapshot": {
+    "jeju/research/20261010_joint_relationship_v1/PLAN.md": {
+      "sha256": "dbdbd9d1b28ea5d176450b9dfc44c7e63478cbe834dbbb13b89792714dfe7db4",
+      "status": "first draft reviewed before root requested amendments"
+    },
+    "jeju/research/20261010_joint_relationship_v1/PLAN.md_after_requested_amendments": {
+      "sha256": "01d81246c3dbb07e4d3302f366d49cda4b31d3db9d553a3892dd2bc016f4829c",
+      "status": "revised draft reviewed; formal source lock not yet declared"
+    },
+    "jeju/research/20261010_joint_relationship_v1/SOURCE_AVAILABILITY.md": {
+      "sha256": "32dd5c93f7cf11e033ae7bbc2b6677dff5981bbac6097520ecdd1327512ee608",
+      "status": "read-only asset survey reviewed"
+    }
+  },
+  "code_review_snapshot": {
+    "jeju/research/20261010_joint_relationship_v1/joint_model.py": {
+      "sha256": "e1ccc7e34a092b4bdccb321accfd8fa0fe4f6682d0e1419ea28f56707284f742",
+      "status": "read-only static review; before reviewed preflight fixes; not executed"
+    },
+    "jeju/research/20261010_joint_relationship_v1/preflight.py": {
+      "sha256": "60484c541d9596e822600e24a3fab357cc653549af1ecb41566e30474c13c3d0",
+      "status": "read-only static review; three preflight fixes sent to implementation agent; not executed"
+    }
+  },
+  "upstream_large_assets": {
+    "jeju/research/20261010_style_history_source_audit_v1/api4_full_started_point_quality_cache.parquet": {
+      "sha256": "1f651353323e47bf8feb189f321a97c150c9ccc487c52a5ea478b00dd7e643b2",
+      "hash_basis": "declared by jeju/research/20261010_style_history_ablation_v1/outputs/source_audit_reference.json; not rehashed"
+    },
+    "jeju/research/20261010_style_history_source_audit_v1/actual_slot_point_eligibility.parquet": {
+      "sha256": "c7847bcf93dc342080b22808c83b5e727b11ab54d269191a0c498a135f4cd470",
+      "hash_basis": "declared by jeju/research/20261010_style_history_ablation_v1/outputs/source_audit_reference.json; not rehashed"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": {
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+      "hash_basis": "declared by jeju/research/20261010_style_history_ablation_v1/outputs/prepared_lock.json; not rehashed"
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+      "hash_basis": "declared by protected manifest in jeju/research/20261010_style_history_ablation_v1/outputs/prepared_lock.json; database not opened"
+    }
+  },
+  "asset_observations": {
+    "F1_STYLE6_calibration_scores": {
+      "2024_eval_model": {"rows": 6506, "races": 657, "refit_max": "2022-12-24", "calibration_year": 2023},
+      "2025_eval_model": {"rows": 6329, "races": 637, "refit_max": "2023-12-30", "calibration_year": 2024},
+      "2026_eval_model": {"rows": 6410, "races": 654, "refit_max": "2024-12-28", "calibration_year": 2025}
+    },
+    "existing_OOF_not_directly_substitutable": {
+      "path": "jeju/research/20261009_axis_companion_pairs_v1/outputs/oof_runners.parquet",
+      "rows": 36800,
+      "years": [2020, 2021, 2022, 2023],
+      "base_model": "R1_21",
+      "use": "temporal OOF design precedent; not F1_STYLE6 score source"
+    },
+    "calibration_score_schema": ["api_record_id:int64", "score:float64"],
+    "database_accessed": false,
+    "training_run": false,
+    "outcome_metric_calculation": false
+  }
+}

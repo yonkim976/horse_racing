@@ -1,0 +1,44 @@
+{
+  "reviewed_at": "2026-10-22",
+  "status": "PASS_PREFIT_REVIEW",
+  "fit_approved_by_reviewer": false,
+  "models_fit": false,
+  "real_outcome_metrics_computed": false,
+  "synthetic_fit_calls": 0,
+  "synthetic_actual_probabilities_or_outcomes": false,
+  "hashes": {
+    "state_transfer_py": "963b2bcb574f3d49e539ae4e944a8a2f8f9bd769568d83018c2dcbcd2fa0623c",
+    "test_state_transfer_py": "3769231f0e724cd0eeebb79964a5a34ac791e88cdf41e411c46ed2194d086bcf",
+    "code_bundle_sha256": "dd04eb410f32733bebcd95bec87f10066a5b869ef56e621459b32b828d21b47b",
+    "source_preflight_sha256": "3dc10aea8b1ce689be536cb2cbc5a7d8d80d8e03313982d8998f9d7a704eb270",
+    "input_manifest_sha256": "7561d6f91d5a1a5059add0741d912e33896b04810a19dd1dab955b0ebd229f5e",
+    "state_features_sha256": "ac956c959ce853aa129c738113c598d4ecc968d88dc1306c0f5fa5f4712a78e7",
+    "state_lineage_sha256": "62c4c0896b3a0a4c44b64e56f53ad1ad1b862953c6ded618892e1861624f5dd0"
+  },
+  "source_preflight": {
+    "status": "PASS_STRUCTURAL_PREFLIGHT_NO_FIT_OR_METRICS",
+    "hash_matches_current_code_bundle": true,
+    "fitted": false,
+    "probabilities_computed": false,
+    "outcome_metrics_computed": false
+  },
+  "checks": {
+    "input_artifact_hash_bytes_rows_schema": "PASS",
+    "state_and_lineage_parquet_zstd": "PASS",
+    "pinned_source_hash_and_bytes": "PASS",
+    "supervisor_all_row_state_replay": "PASS",
+    "supervisor_target_lineage_asof_join": "PASS",
+    "supervisor_read_only_roster_match": "PASS",
+    "synthetic_safeguards": "PASS",
+    "approval_preflight_self_hash_cycle": "RESOLVED_IN_FROZEN_CODE"
+  },
+  "synthetic_check_count": 9,
+  "remaining_interpretation_limits": [
+    "Publication timestamp and contemporaneous roster availability are unverified; T-2 is event-date based.",
+    "Target roster is retrospective; this is not proof of live pre-race availability.",
+    "History only includes normal complete exact-rank races with N>=4 and does not model non-finish risk.",
+    "State standard-deviation features are approximate filter covariance summaries, not calibrated posterior uncertainty.",
+    "2024-2026 are reused development evaluations, not independent future validation."
+  ],
+  "required_before_single_run": "Supervisor must issue a one-run approval receipt bound to this code bundle, preflight receipt, inputs and reference assets. Any hash change invalidates this review."
+}

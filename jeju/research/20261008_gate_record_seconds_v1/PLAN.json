@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-08",
+  "fixed_before_new_effect_calculation": true,
+  "objective": "Gate-specific seconds adjustment for reference-condition record display, not Top3 or forecast accuracy. Prior gate time associations already known; retrospective corroboration.",
+  "source": "Preserved quality-view extraction, official horse ID, exact-distance T-minus-2 last-five history; no new external collection or DB writes.",
+  "distances": [800,900,1000,1110,1200,1300,1400,1610],
+  "period": "2017-01-01 through2026-09-19, partial2026. Exclude400m current analysis.",
+  "population": "Normal complete results positive final times, exactly10 runners numbered1..10; no time-based outcome deletion. Other field sizes support only, not extrapolated.",
+  "reference": "Uniform mean of10 number effects zero separately per distance; adjustment=-effect. Number proxy for physical gate; actual running path not measured.",
+  "primary": "Distance-specific same-race and same-horse fixed effects jointly absorbed by exact sparse projection. Standardized prior last-five mean/last exact-distance time, log observed distance starts/all starts/rest gap, event raw age/age squared, carried weight and missing indicators, sex contrasts. Ridgealpha1 on nuisance only, no penalty on9 gate dummies. Gate reference10, reported effects mean-centered over1..10. Train-only preprocessing for each period. No same-race postrace intermediates as covariates.",
+  "periods": {"full":[2017,2026],"past":[2017,2023],"confirmation":[2024,2025],"recent":[2024,2026],"2026partial":[2026,2026]},
+  "sensitivity": "Full/recent race-only same nuisance; full/recent race+horse with no historical record covariates (other weight/age/experience/gap controls retained). No favorable-specification selection.",
+  "support": "Estimate>=30 races20dates, residual degrees of freedom>20 and9gate directions identifiable after fixed effects. Candidate corroboration full>=100races40dates2years and confirmation>=100races40dates2years; sparse distances retain NULL/status. Full and recent overlap and are not independent evidence.",
+  "inference": "Date and horse clustered sandwich with absorbed FE rank degrees-of-freedom adjustment; combined conservative covariance=date covariance+horse covariance (overlapping intersection not subtracted). t critical with min date/horse clusters minus1. Both component intervals preserved. BH separate number family and3pairwise lateral contrasts family, each period/variant. Same horse repeated cluster, still assumptions on long-period form and cross-horse/date dependence.",
+  "validation": "Freeze2017..2023 gate vector, evaluate fixed rates0,25,50,75,100% against independently fitted2024..2025 residual gate vector. RMS across10 gate effects is condition-bias proxy, not true counterfactual error. Draw2000 normal approximations from held gate covariance with fixed past vector; compare RMS changes. No rate selected or operational adoption.2026 separate if support, otherwise NULL.",
+  "candidate": "Display100% fitted adjustment and uncertainty as descriptive only. Cell corroborated only if full/confirmation have same sign, both BH q<.05, support passes, all four full/recent sensitivity point signs agree with primary full and recent. Even corroborated cells not automatically fixed-rate adopted. All cells including rejected retained; no arbitrary small-step addition derived from Top3 percentage points.",
+  "verification": "Input and DB hashes; exclusion policy; source keys; last-five exact horse/distance T-minus-2; FE rank/projection orthogonality; gate meanzero; independent augmented sparse least squares; covariance and interval arithmetic; historical features unchanged; all outputs with sizes. New study and Jeju summaries only."
+}

@@ -1,0 +1,284 @@
+{
+  "audit_name": "fresh_period_source_freeze_v1",
+  "source_period": {
+    "requested_start": "2026-09-20",
+    "requested_end": "2026-10-17",
+    "observed_raw_dates": [
+      "2026-10-02",
+      "2026-10-03",
+      "2026-10-05",
+      "2026-10-09",
+      "2026-10-10",
+      "2026-10-16",
+      "2026-10-17"
+    ],
+    "latest_raw_race_date": "2026-10-17",
+    "baseline_cutoff": "2026-09-19"
+  },
+  "snapshot_contract": {
+    "sqlite_mode": "mode=ro",
+    "query_only": true,
+    "explicit_transaction": true,
+    "whole_database_hash_used": false,
+    "database_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+    "cutoff": "target race date minus two calendar days, inclusive; event/public-availability timestamp not established"
+  },
+  "frozen_inputs": {
+    "baseline_source_snapshot": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+    "baseline_source_snapshot_sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+    "baseline_rows": 92513,
+    "baseline_schema": [
+      "api_record_id",
+      "race_date",
+      "meet_code",
+      "race_number",
+      "horse_id",
+      "horse_name",
+      "horse_number",
+      "race_distance_m",
+      "rank_class_raw",
+      "finish_position",
+      "finish_time_seconds",
+      "carried_weight_kg",
+      "track_raw",
+      "age_at_race_raw",
+      "sex_at_race_raw",
+      "api4_3_payload_sha256",
+      "race_id",
+      "year",
+      "started",
+      "valid_time"
+    ],
+    "baseline_max_race_date": "2026-09-19",
+    "old_full_point_cache": "jeju/research/20261010_style_history_source_audit_v1/api4_full_started_point_quality_cache.parquet",
+    "old_full_point_cache_sha256": "1f651353323e47bf8feb189f321a97c150c9ccc487c52a5ea478b00dd7e643b2"
+  },
+  "target_population_contract": {
+    "distances_m": [
+      800,
+      900,
+      1000,
+      1110,
+      1200,
+      1300,
+      1400,
+      1610
+    ],
+    "n_min": 6,
+    "all_normal_positive_finish_time": true,
+    "ranks_exact_1_to_N": true,
+    "full_raw_roster_required": true,
+    "unique_horse_ids_and_positive_unique_horse_numbers": true,
+    "constant_distance_and_raw_grade": true,
+    "history_started_codes": "1..89 or 91/92",
+    "valid_time": "finish position 1..89 and finite positive full race time"
+  },
+  "api4_point_contract": {
+    "fields": {
+      "S1F": "sjS1fOrd",
+      "4C": "sj_4cOrd",
+      "G1F": "sjG1fOrd"
+    },
+    "accepted_individual_statuses": [
+      "api_positive_unreviewed",
+      "website_corrected"
+    ],
+    "api303_accepted_group_statuses": [
+      "api_group_unavailable",
+      "api_group_unreviewed"
+    ],
+    "point_gate": "full started API4 roster exact integer 1..N permutation and explicit API303 status allowlist; absent/NULL/unknown fails closed",
+    "fresh_history_point_rows_only": false,
+    "missing_frozen_cache_rule": "for every actual last-five same-distance source ID absent from the frozen point cache, query its exact full started source race roster and selected API4/API303 quality rows; older cache is reused without global rebuild",
+    "quality_view_definitions_sha256": {
+      "jeju_race_analysis_2026": "64e75249ae5737f9aaef939428c334c19be96d66f09d48ee76bbc4f322af9e93",
+      "jeju_race_postrace_sections_2026": "88c58aaf08e1f2657098a7410f4a158698e10bf853678e746a212d63d6944947",
+      "jeju_race_postrace_sections_reviewed_2026": "ec647bb3aa3ad52245bbb45ea90efcb1bb893e18b1441145f11bfe54eb582445",
+      "jeju_race_postrace_sections_quality_2026": "3a8613957e1893731ced8ce3bd896260b58a011e74da1c74d8f9d61a638f36b0",
+      "jeju_race_section_order_values": "003765085174cb1626e373818578198504e79bd09e197473083f902e88b31ee4",
+      "jeju_race_section_order_quality_values": "2adc9a200be2fbf3a9b504d788fbc0576f55f0c7bbfb0a4ecf3187d178df4ca4",
+      "jeju_race_section_group_quality_values": "63eef9903e6b0bf6e49dadfb0e4583efc4c7d89788603b140dff34494eb25994"
+    }
+  },
+  "api20_contract": {
+    "source": "API20 ridingTestResult_1",
+    "event_key": [
+      "trial_date",
+      "meet_code",
+      "trial_number"
+    ],
+    "explicit_jeju_peer_scope": "meet_code=2, raw meet=제주, raw majong=제주, breed_assessment=api_native_label",
+    "row_candidate_rule": "finite positive rcTime, integer ord 1..89, passFlag in locked source allowlist",
+    "latest_three_slots_keep_invalid_rows": true,
+    "rcDist_raw_converted_or_inferred": false,
+    "horse_exclusion_3005648": "never reimported"
+  },
+  "population_counts": {
+    "fresh_raw_rows": 464,
+    "observed_dates": 7,
+    "raw_races": 49,
+    "eligible_races": 45,
+    "eligible_runner_rows": 426,
+    "eligible_by_date": [
+      {
+        "race_date": "2026-10-02",
+        "races": 7,
+        "rows": 68
+      },
+      {
+        "race_date": "2026-10-03",
+        "races": 6,
+        "rows": 58
+      },
+      {
+        "race_date": "2026-10-05",
+        "races": 6,
+        "rows": 55
+      },
+      {
+        "race_date": "2026-10-09",
+        "races": 6,
+        "rows": 51
+      },
+      {
+        "race_date": "2026-10-10",
+        "races": 6,
+        "rows": 57
+      },
+      {
+        "race_date": "2026-10-16",
+        "races": 7,
+        "rows": 68
+      },
+      {
+        "race_date": "2026-10-17",
+        "races": 7,
+        "rows": 69
+      }
+    ],
+    "cold_rows": 14,
+    "cold_unique_horses": 14,
+    "cold_by_date": [
+      {
+        "race_date": "2026-10-02",
+        "runners": 1,
+        "horses": 1
+      },
+      {
+        "race_date": "2026-10-03",
+        "runners": 2,
+        "horses": 2
+      },
+      {
+        "race_date": "2026-10-05",
+        "runners": 3,
+        "horses": 3
+      },
+      {
+        "race_date": "2026-10-09",
+        "runners": 2,
+        "horses": 2
+      },
+      {
+        "race_date": "2026-10-10",
+        "runners": 2,
+        "horses": 2
+      },
+      {
+        "race_date": "2026-10-17",
+        "runners": 4,
+        "horses": 4
+      }
+    ],
+    "cold_dates_K": 6,
+    "fresh_postsep19_history_races_used": 20,
+    "selected_same_distance_slots": 1319,
+    "selected_unique_source_api4_ids": 1209,
+    "selected_ids_in_frozen_old_point_cache": 1004,
+    "selected_ids_missing_old_point_cache": 205,
+    "missingcache_source_races_fullroster_queried": 66,
+    "missingcache_source_starter_rows_queried": 581,
+    "missingcache_source_race_point_eligible_points": 197,
+    "actual_slot_point_eligibility_rows": 1319,
+    "fresh_history_model_schema_rows": 298
+  },
+  "history_reconciliation": {
+    "current_db_vs_frozen_sep19_old_rows_clean": false,
+    "pre_sep20_rows_missing_from_snapshot_n": 0,
+    "frozen_rows_missing_from_current_n": 0,
+    "overlap_field_diff_rows_n": 8220,
+    "all_target_history_link_rows": 10263,
+    "current_pre_cutoff_started_n": 10035,
+    "scope_delta_started_n": 0,
+    "source_parity_note": "Current DB source rows dated <=2026-09-19 are compared only with the preserved frozen source snapshot; rows dated >=2026-09-20 are separately labeled warm-up."
+  },
+  "api20_counts": {
+    "cold_target_link_rows": 21,
+    "cold_target_horses_with_api20_rows": 14,
+    "linked_event_keys": 14,
+    "linked_full_explicit_jeju_peer_rows": 121,
+    "rcDist_absent_in_peer_rows": 121,
+    "trial_collection_timestamps": [
+      "2026-09-29T13:26:44.936000+00:00",
+      "2026-10-16T11:24:55.606000+00:00"
+    ]
+  },
+  "scoped_fingerprints": {
+    "extracted_row_counts": {
+      "fresh_api4": 464,
+      "target_history_api4": 8518,
+      "cold_api20_target_rows": 21,
+      "cold_api20_full_peer_rows": 121,
+      "fresh_history_order_quality": 1743,
+      "fresh_history_quality_contract_view": 587
+    },
+    "extracted_rows_sha256": {
+      "fresh_api4": "b09fe7589cb8512efc8572f96a4da8fba91333094bc98c0ec925d16d6b11b447",
+      "target_history_api4": "464a974ade89953e73e27a1c0f6ace8cb5f169c39763eef715ac94e8b23307b6",
+      "cold_api20_target_rows": "3c0e9eda425d9f1f1e706bc526e2b7c687608fb9b15965af3cf9991c4801fab8",
+      "cold_api20_full_peer_rows": "91e947970c416ef1d39376de100cb04b0c0ee5550329b3439d14bd473e536278",
+      "fresh_history_order_quality": "ee174f2fa3fef64625c9f9b09c0380b394b066674aaaf3a91d93b48ebc55a58f",
+      "fresh_history_quality_contract_view": "41ed3009aecc598de83d405a1d5ea8101bcdf32513eebf1a991b0d246cc10354"
+    },
+    "after_reopen_raw_lineage_sha256": {
+      "fresh_api4": "b09fe7589cb8512efc8572f96a4da8fba91333094bc98c0ec925d16d6b11b447",
+      "target_history_api4": "464a974ade89953e73e27a1c0f6ace8cb5f169c39763eef715ac94e8b23307b6",
+      "cold_api20_target_rows": "3c0e9eda425d9f1f1e706bc526e2b7c687608fb9b15965af3cf9991c4801fab8",
+      "cold_api20_full_peer_rows": "91e947970c416ef1d39376de100cb04b0c0ee5550329b3439d14bd473e536278",
+      "fresh_history_order_quality": "ee174f2fa3fef64625c9f9b09c0380b394b066674aaaf3a91d93b48ebc55a58f",
+      "fresh_history_quality_contract_view": "41ed3009aecc598de83d405a1d5ea8101bcdf32513eebf1a991b0d246cc10354"
+    },
+    "after_reopen_raw_lineage_scope": "selected API record IDs and their immutable payload/page lineage columns only; not a database-wide guard"
+  },
+  "output_sha256": {
+    "actual_slot_point_eligibility_fresh_targets.parquet": "1012d2f2db8430ce5ddfa8ebab406e8a00857a288d6abd2796299bc3e776e273",
+    "api20_cold_target_trial_rows.parquet": "ad2c8c1971911027ee402bd477cb752f0f9bc910d6ca9ec8340ddaaf9df31ad6",
+    "api20_linked_full_peer_event_rows.parquet": "9ab64bd4f23e975af8a7912cf08626c91036172930bc03ce51aa0f75fa87e2b7",
+    "api20_target_trial_source_rows_all.parquet": "4d55a4a11b40976f1765a41f09540f925655b9eb815bdd802e9a548240deaa9f",
+    "api303_group_status_by_starter.parquet": "2d407db0a035cc14efa3a1632703ceccf05352d6b22e7b9f52c620b42dc6347f",
+    "api4_selected_point_quality.parquet": "3dd49df2d5eaa9c2612342b97d2a71b70e5f4d3a23aa6bd5e6f4d29e23fa934e",
+    "cold_target_roster.parquet": "9f7ef23adce891453d01e2f2e1014e576bfebaf3a63acf9ef1139a269bb6132a",
+    "eligible_target_roster.parquet": "5d5f81350237fddbf38c5d9e505dba99652dfae2cae4f4b5306cb8e573b38cce",
+    "fresh_history_source_rows_20col.parquet": "1572293267e317e3069f942e2286a9fe67f7c8808edff3600fe9086e8d6d59f7",
+    "fresh_raw_race_rows.parquet": "3b0d977d3d38189c1f45792e2ec8cdd2166912b27b15b3e3bb25b81c3d7ed87a",
+    "fresh_target_last5_same_distance_slots.parquet": "997cbbd4aea4bc37b6b9a501e9e279baa2ff598b48ffb80253ee8e9a8cf81781",
+    "presep20_source_scope_diffs.parquet": "71dc49d1e1c531f4e464d3f8ffdd77a45f318b5d53711e43d1bd1c991760c31f",
+    "quality_view_definitions.json": "eeb0332415b10dce9b18d7619f8b75e4985876bd688ef2e39dc32d22241912e8",
+    "race_eligibility_ledger.parquet": "5c58cf15d15b180f32e36b89601d5812dc554b4687dbee2feab527de8e003de3",
+    "selected_history_missingcache_full_race_rows.parquet": "4b5c7d2b0f7491ada80adbf83f176eb69cc4d766e854c0e1d7d9a095ee986a90",
+    "selected_history_missingcache_full_started_rosters.parquet": "56ca277cc9da8d1a232dd1d2ebe39e3d2efa4b65f4f4850af5970eb39934b57d",
+    "source_artifacts.json": "865d2bbdde2f2af80dbabea71900c25868578e96e30d96618585e2f4b8f06443",
+    "source_scope_id_reconciliation.json": "70963470293000eacad57dadf05cdfddac174b8a657822a2eb5aa9947860bb98",
+    "style6_source_point_gate_audit.parquet": "ef52b4af56dfff1d5a8081f16ce1a3252f256b2a5573ec9bf9202824b841ef5b",
+    "target_history_reconciliation.parquet": "e5f8eba0fb9126c1e3add815d661390206d633b4a2a52c95e425203874bfd3b9",
+    "target_history_through_tminus2.parquet": "f6e34731d4eb44b8fbc7452e7e6d11a25cc69e75500ee13cec933b0656961bdd"
+  },
+  "prohibitions_checked": {
+    "no_model_fit": true,
+    "no_prediction_scoring": true,
+    "no_outcome_metrics": true,
+    "database_write": false,
+    "operating_registry_write": false,
+    "old_research_folder_write": false
+  }
+}

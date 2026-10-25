@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "fit_evaluate",
+  "permitted_runs": 1,
+  "candidate": "TB_STATE_TRANSFER_C_S",
+  "final_models": 6,
+  "lightgbm_train_calls": 12,
+  "temperature_optimizations": 6,
+  "approved_at_utc": "2026-10-22T08:07:51.628893+00:00",
+  "hashes": {
+    "bootstrap_receipt_sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "bootstrap_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "code_bundle_sha256": "dd04eb410f32733bebcd95bec87f10066a5b869ef56e621459b32b828d21b47b",
+    "design_contract_sha256": "7dc4b4f861e91e080a238e7ad85475fb50a9a5fa695896f554b131c9a6540092",
+    "f1_features_sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "input_manifest_sha256": "7561d6f91d5a1a5059add0741d912e33896b04810a19dd1dab955b0ebd229f5e",
+    "plan_sha256": "ebd4d14b4e2e0a5c52d19c5426eaff77bfc956eab44d4c603e8329fe8bbea518",
+    "reference_assets_sha256": "5bbbea9db37ab2bbdf0168b9903fffcbb0eaca9c9024de0ac3e910192a2fc0c2",
+    "reference_engine_sha256": "706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c",
+    "reference_metrics_sha256": "8e8bdf9597b0b3251f9faff3a58e369e14734a27e06d12f18fc8f6ab688c3f7a",
+    "reference_parameters_sha256": "28da20c16c65450c024b07a4a12b916e88eaf8b9d16b8fdc66e1a6e582934dff",
+    "rules_contract_sha256": "20cd4b17274018a36efbb1b0cea64eb5d5c9809ed5f3481bea59c734f99fee83",
+    "source_manifest_sha256": "810e4043e5f3bf3e15b5131f17afc5dcb4067ba6b353f488508f16df04d3f445",
+    "state_features_sha256": "ac956c959ce853aa129c738113c598d4ecc968d88dc1306c0f5fa5f4712a78e7",
+    "state_lineage_sha256": "62c4c0896b3a0a4c44b64e56f53ad1ad1b862953c6ded618892e1861624f5dd0",
+    "source_preflight_sha256": "3dc10aea8b1ce689be536cb2cbc5a7d8d80d8e03313982d8998f9d7a704eb270"
+  },
+  "independent_input_checks": {
+    "STATE_VERIFICATION.json": "6bd4672c9ee68a430cdf107ccdad34cad064df31498877abd4bdf61a114bc16f",
+    "LINEAGE_VERIFICATION.json": "4944860cabb749bfd953dda83a2c358c535e27f582d4f4efb1d06ff9355b02d2",
+    "ROSTER_VERIFICATION.json": "ee7d0ad8addd9d0e7f84dfcdbfb1cc854d1a945530623866b158378466c7bb9b"
+  },
+  "prefit_review_sha256": "6b7f46be871b1dbf40f941e25bb4ffe024194cb45ef26735219a2ade04c873cf",
+  "supervisor_review": "Reviewed chronological folds, fixed 30/40 inputs, common GBM settings and weights, prior-year scalar calibration, full PL event aggregation, paired-date bootstrap and sealed decision gates. No observed candidate outcomes. Corrected prefit runtime and integrity issues only.",
+  "constraints": [
+    "One frozen C/S training comparison only; no result-driven tuning",
+    "No production change, no source/DB/old-study writes",
+    "100000000 bytes new-study budget",
+    "Reused development evaluation; no future or market-edge claim"
+  ],
+  "pair_bootstrap_verification": "Root independent verifier computes fixed-ledger QNL/QPL k1/k3 paired-date intervals; no additional selection rule."
+}

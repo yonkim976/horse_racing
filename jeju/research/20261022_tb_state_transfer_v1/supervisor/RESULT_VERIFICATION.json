@@ -1,0 +1,164 @@
+{
+  "passed": true,
+  "model_files_replayed": 6,
+  "raw_prediction_values_replayed": 73314,
+  "calibrations_verified": 9,
+  "calibration_checks": [
+    {
+      "arm": "C",
+      "year": 2024,
+      "temperature": 1.2483802362976764,
+      "gradient_inverse_T": -3.3270754404176887e-08
+    },
+    {
+      "arm": "C",
+      "year": 2025,
+      "temperature": 1.2856448275304055,
+      "gradient_inverse_T": 3.519796431780604e-08
+    },
+    {
+      "arm": "C",
+      "year": 2026,
+      "temperature": 1.1239752114634673,
+      "gradient_inverse_T": -3.0321874166970024e-08
+    },
+    {
+      "arm": "S",
+      "year": 2024,
+      "temperature": 1.2839358195588775,
+      "gradient_inverse_T": -1.7278695550790384e-08
+    },
+    {
+      "arm": "S",
+      "year": 2025,
+      "temperature": 1.323027519896799,
+      "gradient_inverse_T": -3.85571429026728e-08
+    },
+    {
+      "arm": "S",
+      "year": 2026,
+      "temperature": 1.165540100038154,
+      "gradient_inverse_T": 1.7403501010346294e-08
+    },
+    {
+      "arm": "R",
+      "year": 2024,
+      "temperature": 1.2378241690081193,
+      "gradient_inverse_T": 3.389590407136944e-08
+    },
+    {
+      "arm": "R",
+      "year": 2025,
+      "temperature": 1.2652561077417601,
+      "gradient_inverse_T": 1.7453942653205187e-08
+    },
+    {
+      "arm": "R",
+      "year": 2026,
+      "temperature": 1.11598418811972,
+      "gradient_inverse_T": -2.980501167990931e-08
+    }
+  ],
+  "evaluation_races": 1779,
+  "metric_rows_checked": 37251,
+  "selection_rows_checked": 37251,
+  "marginal_rows_checked": 52236,
+  "ordered_triples_reconstructed": 3625272,
+  "pair_selection_count_distributions_checked": 21348,
+  "reliability_rows_checked": 1344,
+  "bootstrap_TRI_draws_compared": 6000,
+  "axis_comparisons": [
+    {
+      "comparison": "C_minus_R",
+      "left_hits": 1026,
+      "right_hits": 1023,
+      "difference": 0.0016863406408094434,
+      "ci95": [
+        -0.004476902120669197,
+        0.008051060055970038
+      ],
+      "relative_change": 0.0029325513196480912,
+      "relative_ci95": [
+        -0.007759456838021372,
+        0.014214331898631643
+      ]
+    },
+    {
+      "comparison": "S_minus_C",
+      "left_hits": 1044,
+      "right_hits": 1026,
+      "difference": 0.01011804384485666,
+      "ci95": [
+        -0.009135272590749692,
+        0.0294297331260658
+      ],
+      "relative_change": 0.01754385964912286,
+      "relative_ci95": [
+        -0.015445856528155204,
+        0.05189165016322851
+      ]
+    },
+    {
+      "comparison": "S_minus_R",
+      "left_hits": 1044,
+      "right_hits": 1023,
+      "difference": 0.011804384485666104,
+      "ci95": [
+        -0.0072789373308113844,
+        0.03046047098402018
+      ],
+      "relative_change": 0.02052785923753664,
+      "relative_ci95": [
+        -0.01237094769620182,
+        0.05405612456174243
+      ]
+    }
+  ],
+  "gates": {
+    "C_minus_R": false,
+    "S_minus_C": true,
+    "S_minus_R": true
+  },
+  "overall_gate_pass": true,
+  "maximum_errors": {
+    "model_raw_replay": 0.0,
+    "C_S_calibration_nll": 6.217248937900877e-15,
+    "R_calibration_nll": 6.217248937900877e-15,
+    "seven_pool_logloss": 3.552713678800501e-15,
+    "seven_pool_brier": 1.3322676295501878e-15,
+    "selected_probability": 2.3314683517128287e-15,
+    "all_marginals": 1.2212453270876722e-15,
+    "axis_probability": 8.881784197001252e-16,
+    "pair_selected_probs": 4.440892098500626e-16,
+    "pair_count_distribution": 2.7755575615628914e-15,
+    "pair_union": 6.661338147750939e-16,
+    "pair_expected_hits": 7.771561172376096e-16,
+    "reliability_bins": 1.1102230246251565e-15,
+    "bootstrap_draws": 9.020562075079397e-17,
+    "bootstrap_CI": 4.7704895589362195e-17,
+    "axis_bootstrap_CI": 0.0,
+    "aggregate_race_count": 0.0,
+    "aggregate_nll": 0.0,
+    "aggregate_brier": 1.1102230246251565e-16
+  },
+  "protected_files_unchanged": [
+    "config/prediction_model_registry.json",
+    "jeju/models/current/HY_R_FORM.pkl",
+    "jeju/research/20261022_joint_wager_baseline_v1/FINAL_MANIFEST.json",
+    "jeju/research/20261022_rank_stage_temperature_v1/FINAL_MANIFEST.json",
+    "jeju/research/20261022_dynamic_ability_pace_v1/FINAL_MANIFEST.json",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/README.md",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/PLAN.md",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/state.py",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/train_models.py",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/joint.py",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/common.py",
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/artifact_inventory.json"
+  ],
+  "fit_receipt_sha256": "fb70195287f1bc56c0c9fbe19acc6b7ec08b01a42a7a336da1b0a0c9f4b3bbe2",
+  "verifier_sha256": "d67870c7c728026015d3bdcfb3b1ef2e1c48455694de5eff360f97342ebcfbc4",
+  "math_reference_sha256": "fc60a9fdf8d128de9a558195026b468962ddf96565e4245c3e846f6c0aba81f6",
+  "experiment_module_imported": false,
+  "models_refitted": false,
+  "bootstrap_scope": "fixed predictions; fit uncertainty excluded; reused development data"
+}

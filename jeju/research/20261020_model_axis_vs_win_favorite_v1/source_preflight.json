@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "study": "20261020_model_axis_vs_win_favorite_v1",
+  "frozen_prediction_rows": 14714,
+  "frozen_prediction_races": 1503,
+  "primary_prediction_rows": 14714,
+  "primary_prediction_races": 1503,
+  "date_window": [
+    "2024-01-01",
+    "2026-09-19"
+  ],
+  "distance_m": [
+    900,
+    1000,
+    1110,
+    1200
+  ],
+  "baseline_sha256": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1",
+  "candidate_sha256": "23f7d0209b39a7d5fbeaf75302c7e9b0b9b34b42988b52c8bfadfdc78a90430d",
+  "api4_source_snapshot_sha256": "de14b7e906ae3ee1a62695383b46e9ebcb3deccd15ec519a7ef6f641a391e739",
+  "source_join": "api4 race_result_rows and api_records via api_record_id; payload_json.winOdds",
+  "db_mode": "SQLite URI mode=ro; PRAGMA query_only=ON; explicit read transaction",
+  "joined_prediction_rows": 14714,
+  "payload_hash_matches_frozen_api4_snapshot": 14714,
+  "invalid_win_odds_rows": 0,
+  "win_odds_json_type_counts": {
+    "integer": 1468,
+    "real": 13246
+  },
+  "races_with_complete_fullfield_prices": 1503,
+  "field_rows_match_frozen_prediction_field_n": true,
+  "y_matches_official_finish_position_top3": true,
+  "min_win_odds": "1",
+  "max_win_odds": "195.6",
+  "api4_snapshot_sha256": "de14b7e906ae3ee1a62695383b46e9ebcb3deccd15ec519a7ef6f641a391e739",
+  "price_validity": "JSON integer/real, finite, positive; reject missing, zero, nonnumeric, and 9999.9; no value substitution"
+}

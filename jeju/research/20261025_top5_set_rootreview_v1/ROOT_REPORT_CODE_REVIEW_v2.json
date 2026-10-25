@@ -1,0 +1,25 @@
+{
+  "approved": true,
+  "approved_by": "root",
+  "scope": "outcome_report_code",
+  "execution_approved": true,
+  "report_code_sha256": "3d39be089cce838a3f7993cb494b69d76fed1524dbbdc52e159dbaed8c8088d9",
+  "selector_code_sha256": "9bbd0556236dde13697f62dec70e7a81928bab1f57de0ab267008b429e94c4e2",
+  "selection_receipt_sha256": "28711efecfece9da8dbf79639f2dd55223335cc67453273aa46a7efe6a55f2e6",
+  "selection_artifact_sha256": "1f3d40769939b82afe4f6278f92bf5f13af85329355a4a03ddc036391d55322d",
+  "plan_sha256": "f615bd488eb16f754f139da2406c9938b1a740401423776227e8841b589a0ee2",
+  "choice_independent_audit_sha256": "fc995f8b687b74f08ae5c80f5b456aaa8f04fe33a2b71e23af2cb0be961b26e6",
+  "checks": [
+    "locked choices verified before labels",
+    "each race exactly three y=1 horse IDs",
+    "same races/IDs/cohort in both arms",
+    "all-three event is capture==3",
+    "paired race-date bootstrap fixed schedule and linear quantiles",
+    "success requires positive delta AND positive CI lower",
+    "no extra model fit/parameter/threshold tuning"
+  ],
+  "root_independent_outcome_code_sha256": "514932d56ee3482f597453ab88993c539d4fff1ba88347df7d78ab1a09cc7277",
+  "supersedes": "ROOT_REPORT_CODE_REVIEW.json",
+  "revision_reason": "static y normalization, simpler duplicate-key check, selected ID subset validation, v2 approval path; selector unchanged",
+  "reviewed_static_fixes_no_choice_rule_change": true
+}

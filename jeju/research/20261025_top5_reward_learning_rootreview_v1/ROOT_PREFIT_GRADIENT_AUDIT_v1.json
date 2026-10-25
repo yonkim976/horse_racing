@@ -1,0 +1,15 @@
+{
+  "passed": false,
+  "main_fit_code_sha256": "808e0cde0e04a6046bc4345cb0072b28c6d3d3eb10f364125e129315500b4f8a",
+  "synthetic_only": true,
+  "new_fits": 0,
+  "race_Pgood": [
+    0.1896700267064325,
+    0.08110069203535523,
+    0.04894131002419017
+  ],
+  "objective_value_error": 0.0,
+  "gradient_error_vs_independent_formula": 0.12503606385115162,
+  "gradient_error_vs_finite_difference": 0.12503606392920924,
+  "finding": "Grouped helper returns a single aggregated expectation vector, but new gradient multiplies it by each race Pgood. Per-race expectations must be computed before Pgood weighting."
+}

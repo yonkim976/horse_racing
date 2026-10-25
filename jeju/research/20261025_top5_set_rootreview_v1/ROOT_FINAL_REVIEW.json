@@ -1,0 +1,109 @@
+{
+  "status": "COMPLETE_COMPUTATION_VALIDATED_CANDIDATE_HELD",
+  "computation_passed": true,
+  "performance_gate_passed": false,
+  "decision": "Keep frozen F1_STYLE6 score Top5; do not adopt frozen joint-Q max-coverage selector.",
+  "executor_model": "gpt-6-luna",
+  "executor_reasoning_effort": "xhigh",
+  "supervision": "root design/code review, independent Q reconstruction, original-label count and CI reconstruction, three-way reconciliation",
+  "base_horse_evaluation_changed": false,
+  "new_model_fits": 0,
+  "candidate_is_new_selection_rule_over_previously_fitted_held_relation_distribution": true,
+  "period": [
+    "2024-01-05",
+    "2026-09-19"
+  ],
+  "partial_2026": true,
+  "primary_distances_m": [
+    900,
+    1000,
+    1110,
+    1200
+  ],
+  "primary": {
+    "races": 1503,
+    "baseline_hits": 439,
+    "candidate_hits": 415,
+    "delta_pp": -1.5968063872255487,
+    "date_ci95_pp": [
+      -2.8038789735254586,
+      -0.4024010102139967
+    ],
+    "newly_covered": 27,
+    "lost": 51,
+    "changed_sets": 331
+  },
+  "secondary_full": {
+    "races": 1779,
+    "baseline_hits": 519,
+    "candidate_hits": 500,
+    "delta_pp": -1.0680157391793141,
+    "date_ci95_pp": [
+      -2.177584851632464,
+      0.0
+    ],
+    "newly_covered": 36,
+    "lost": 55,
+    "changed_sets": 386
+  },
+  "checks": {
+    "all_402808_probabilities_reconstructed_max_error": 0.0,
+    "all_1779_set_choices_independently_reproduced": true,
+    "unary_negative_control_1779_equal_raw_score_top5": true,
+    "main_review_root_counts_and_primary_CI_agree": true,
+    "individual_race_outcomes_1779_crosschecked": true,
+    "reviewer_aggregate_subgroup_comparisons": 494,
+    "protected_operating_files_unchanged": true,
+    "database_opened": false,
+    "historical_data_reused_no_independent_future_holdout": true
+  },
+  "disclosures": [
+    "Reviewer schema inspection exposed three y/logloss/brier rows before choice lock; not aggregated or used to change policy. Main selector and root Q reconstruction did not read labels.",
+    "Initial report approval was superseded by v2 after concurrent static validation edits; hash guards blocked unapproved main report execution. Selector/parameters and outcome criterion never changed.",
+    "Small generated Python cache is retained in locked main manifest (28,752 bytes); no source parquet/model/database was copied."
+  ],
+  "next_research_hypothesis": "Keep horse scores fixed and study a dedicated five-set selection learner aimed at the single missed Top3 horse; no such new model has been trained or validated here.",
+  "next_research_is_result_not_proven_improvement": true,
+  "evidence": {
+    "jeju/research/20261025_top5_set_selection_v1/FINAL_MANIFEST.json": {
+      "sha256": "c61886eeadc1ee107b8120394097e4c862cc0338cd62e541d64672ab76affc8c",
+      "bytes": 7746
+    },
+    "jeju/research/20261025_top5_set_rootreview_v1/ROOT_Q_RECONSTRUCTION.json": {
+      "sha256": "f50e75f1815793fd4874bc36f38f80d64c4fd0192da2e89fb144b9ae7bae627a",
+      "bytes": 1020
+    },
+    "jeju/research/20261025_top5_set_rootreview_v1/ROOT_SELECTION_CODE_REVIEW.json": {
+      "sha256": "a4c9276d72b567146c10f4da98eaf2b70ed8a488901d3eb0617bc09521803f19",
+      "bytes": 1061
+    },
+    "jeju/research/20261025_top5_set_rootreview_v1/ROOT_REPORT_CODE_REVIEW_v2.json": {
+      "sha256": "9f5d8865fd8f252557787263509f123aadf1e38819824839f70a16e029bf0de0",
+      "bytes": 1414
+    },
+    "jeju/research/20261025_top5_set_rootreview_v1/ROOT_OUTCOME_RECOMPUTATION.json": {
+      "sha256": "75f1e7b4ca0b434b55f9b78a8c2f6d58202cd39c8e1dc5e994ec2f8410386223",
+      "bytes": 10834
+    },
+    "jeju/research/20261025_top5_set_rootreview_v1/THREE_WAY_RECONCILIATION.json": {
+      "sha256": "f81c007b741a04f063ca9f50233a7aa2890ae934f6a846ffa0e996a8815ba2af",
+      "bytes": 667
+    },
+    "jeju/research/20261025_top5_set_rootreview_v1/ROOT_MANIFEST_AND_PROTECTED_AUDIT.json": {
+      "sha256": "51d3f3f5f9971e6d04c5618dff8208ffe741d9db9ae1395c5ef64619d793d040",
+      "bytes": 755
+    },
+    "jeju/research/20261025_top5_set_review_v1/INDEPENDENT_CHOICE_AUDIT.json": {
+      "sha256": "fc995f8b687b74f08ae5c80f5b456aaa8f04fe33a2b71e23af2cb0be961b26e6",
+      "bytes": 993
+    },
+    "jeju/research/20261025_top5_set_review_v1/INDEPENDENT_OUTCOME_AUDIT.json": {
+      "sha256": "3b1e1c3e8b5c6e1919a166274a8daaf45e43c2ce01287b58bc181389adb8b73a",
+      "bytes": 33103
+    },
+    "jeju/research/20261025_top5_set_review_v1/OUTCOME_RECONCILIATION.json": {
+      "sha256": "3acb9b1e086363a6bf893871ae02e158fdb1df70eb625a8588a27ec1f1678527",
+      "bytes": 1420
+    }
+  }
+}

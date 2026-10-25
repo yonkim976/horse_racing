@@ -1,0 +1,27 @@
+{
+  "database_sha256": "53c42e9a7944da7d05b9f5bc56bc2defcdaa110704d92bd3b785df9e50527f96",
+  "current_classification_guard_report": {
+    "path": "jeju/research/20261017_training_rider_unclassified/guard_view_audit.json",
+    "sha256": "b5b40a5080aa18d142177b18ec686fc56fcdf87780ccf688a1c7e8ef7f2815a9"
+  },
+  "current_database_refresh_verification": {
+    "path": "jeju/research/20261017_core_refresh/verification/production_verification_completed.json",
+    "sha256": "3fa12badfeaa8b2218fe121146b897b2e908ec05562e2d1b4d6b8a44b522d3be",
+    "overall_ok": false,
+    "known_manifest_bytes_only_failure_retained": [
+      {
+        "detail": {
+          "actual_bytes": 1929641984,
+          "database_sha256_still_matches": true,
+          "difference_bytes": 24576,
+          "expected_bytes": 1929617408
+        },
+        "name": "database_bytes_after_matches_final_manifest",
+        "ok": false
+      }
+    ]
+  },
+  "current_analysis_view_rows": 907552,
+  "fixed_race_cohort_upper": "2026-09-19",
+  "newer_training_rows_after_race_upper_excluded": true
+}

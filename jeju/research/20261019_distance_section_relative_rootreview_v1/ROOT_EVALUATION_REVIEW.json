@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "runner_rows_checked": 17412,
+  "race_rows_checked": 1779,
+  "canonical_max6_rows_checked": 10674,
+  "prediction_errors": {
+    "runner.score": 0.0,
+    "runner.p_top3": 0.0,
+    "runner.log_loss": 0.0,
+    "runner.brier": 0.0,
+    "race.log_loss": 0.0,
+    "race.brier": 0.0,
+    "race.trio_nll": 0.0,
+    "race.six_combo_mass": 0.0,
+    "ticket.probability": 0.0
+  },
+  "primary_bootstrap_draws_checked": 4000,
+  "primary": {
+    "log_loss": {
+      "baseline": 0.5689268769203226,
+      "candidate": 0.5688217082067982,
+      "delta": -0.00010516871352431971,
+      "ci95": [
+        -0.0011770671518883257,
+        0.0008861666670023738
+      ],
+      "bootstrap_max_abs_error": 0.0
+    },
+    "brier": {
+      "baseline": 0.19264292386739426,
+      "candidate": 0.1926067858539281,
+      "delta": -3.6138013466159474e-05,
+      "ci95": [
+        -0.0005042244718507137,
+        0.0003975258937511079
+      ],
+      "bootstrap_max_abs_error": 0.0
+    }
+  },
+  "primary_gate_passed": false,
+  "by_distance": {
+    "900": {
+      "races": 251,
+      "baseline_six_hits": 65,
+      "candidate_six_hits": 62,
+      "log_loss_delta": 0.00045354587260869057,
+      "brier_delta": 0.00020222989550359324
+    },
+    "1000": {
+      "races": 508,
+      "baseline_six_hits": 116,
+      "candidate_six_hits": 108,
+      "log_loss_delta": -0.0001803416547359979,
+      "brier_delta": -6.402590331824682e-05
+    },
+    "1110": {
+      "races": 482,
+      "baseline_six_hits": 104,
+      "candidate_six_hits": 111,
+      "log_loss_delta": -0.0007848475740545391,
+      "brier_delta": -0.0002725287532898458
+    },
+    "1200": {
+      "races": 262,
+      "baseline_six_hits": 61,
+      "candidate_six_hits": 69,
+      "log_loss_delta": 0.0007557309192684769,
+      "brier_delta": 0.00022446137389441051
+    }
+  },
+  "primary_baseline_six_hits": 346,
+  "primary_candidate_six_hits": 350,
+  "database_opened": false,
+  "models_fitted": 0
+}

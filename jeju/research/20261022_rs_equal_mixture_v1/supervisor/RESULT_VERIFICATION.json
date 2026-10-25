@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "races": 1779,
+  "runners_per_arm": 17412,
+  "arms": [
+    "R",
+    "S",
+    "E"
+  ],
+  "ordered_triples_reconstructed": 3625272,
+  "metric_and_selection_rows_each": 37251,
+  "marginal_rows": 52236,
+  "pair_count_PMFs": 21348,
+  "reliability_E_rows": 448,
+  "all_loss_axis_pair_bootstrap_draws_compared": 76000,
+  "TRI_bootstrap_draws_compared": 4000,
+  "gate_decisions": {
+    "E_minus_S": false,
+    "E_minus_R": true
+  },
+  "overall_gate_pass": false,
+  "axis_comparisons": [
+    {
+      "comparison": "E_minus_S",
+      "left_hits": 1027,
+      "right_hits": 1044,
+      "difference": -0.00955593029792018,
+      "ci95": [
+        -0.02285738188192176,
+        0.003968479437229435
+      ],
+      "relative_change": -0.016283524904214586,
+      "relative_ci95": [
+        -0.0383904125817424,
+        0.006844993300762329
+      ]
+    },
+    {
+      "comparison": "E_minus_R",
+      "left_hits": 1027,
+      "right_hits": 1023,
+      "difference": 0.0022484541877459247,
+      "ci95": [
+        -0.012325102686814636,
+        0.017408408792096496
+      ],
+      "relative_change": 0.003910068426197455,
+      "relative_ci95": [
+        -0.021259521402089702,
+        0.030725014098535307
+      ]
+    }
+  ],
+  "maximum_errors": {
+    "all_pool_logloss": 3.552713678800501e-15,
+    "all_pool_brier": 1.3322676295501878e-15,
+    "selected_prob": 3.3306690738754696e-15,
+    "runner_marginals": 1.9984014443252818e-15,
+    "axis_probability": 1.4988010832439613e-15,
+    "pair_ticket_probs": 6.106226635438361e-16,
+    "pair_count_pmf": 1.9984014443252818e-15,
+    "pair_union": 6.661338147750939e-16,
+    "pair_expected_count": 7.771561172376096e-16,
+    "real_rank_linearity": 7.771561172376096e-16,
+    "real_event_linearity": 3.1086244689504383e-15,
+    "exact_Brier_mixture_identity": 8.881784197001252e-16,
+    "reliability": 1.2212453270876722e-15,
+    "bootstrap_draws": 6.938893903907228e-17,
+    "TRI_bootstrap_CI": 3.122502256758253e-17,
+    "reported_TRI_delta": 1.3877787807814457e-17,
+    "reported_gate_point": 1.734723475976807e-17,
+    "reported_gate_CI": 3.382710778154774e-17,
+    "summary_E": 4.440892098500626e-16,
+    "summary_reference": 1.7763568394002505e-15,
+    "summary_delta": 1.457167719820518e-15,
+    "pair_summary": 0.0
+  },
+  "protected_pins_unchanged": 6,
+  "verifier_sha256": "e011764f9b90256fee525f15dedec3032d2b0172c08c759dc86003ba8f4ef9a8",
+  "math_reference_sha256": "fc60a9fdf8d128de9a558195026b468962ddf96565e4245c3e846f6c0aba81f6",
+  "experiment_module_imported": false,
+  "new_fit_or_calibration": false,
+  "bootstrap_scope": "fixed predictions on reused development period; no fitting uncertainty"
+}

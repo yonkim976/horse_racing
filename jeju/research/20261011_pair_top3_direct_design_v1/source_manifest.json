@@ -1,0 +1,107 @@
+{
+  "study": "20261011_pair_top3_direct_design_v1",
+  "status": "read-only independent source/design review; no fitting or outcome calculation",
+  "execution_authority": {
+    "plan": "jeju/research/20261011_pair_top3_direct_v1/PLAN.md",
+    "input_contract": "jeju/research/20261011_pair_top3_direct_v1/INPUT_CONTRACT.md",
+    "review_folder_is_authoritative_for_execution": false
+  },
+  "created_at": "2026-10-11",
+  "scope": {
+    "database_accessed": false,
+    "network_accessed": false,
+    "model_fit_performed": false,
+    "new_outcome_metrics_computed": false,
+    "operational_artifacts_modified": false,
+    "evaluation_cohort": "2024-01-05 through 2026-09-19; 1,779 races, 17,412 runners, 269 race dates; 2026 partial",
+    "target": "unordered pair-in-Top3 event probability, P(i and j both finish in Top3)",
+    "probability_semantics": "direct binary pair probabilities; fitted predictions do not guarantee racewise pair-probability sum 3 or define a full Top3 distribution",
+    "excluded_objectives": ["exact Top2 / ordered finish", "pair plus third horse", "combination ticket probability"]
+  },
+  "sources": {
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "role": "runner roster, race/date, pair labels, F1_STYLE6 style-history inputs",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "rows": 52155,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/calibration_scores.parquet": {
+      "role": "raw OOS scores for 2023 H1 pair fit and H2 pair calibration in evaluation fold 2024",
+      "sha256": "360cc559b1ab19cde177e0bb23206fd36f123b707714fbcb63547fdb9bed05b2",
+      "rows": 6506,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet": {
+      "role": "raw OOS scores for 2024 evaluation in fold 2024",
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60",
+      "rows": 6329,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/calibration_scores.parquet": {
+      "role": "raw OOS scores for 2024 H1 pair fit and H2 pair calibration in evaluation fold 2025",
+      "sha256": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755",
+      "rows": 6329,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet": {
+      "role": "raw OOS scores for 2025 evaluation in fold 2025",
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+      "rows": 6410,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/calibration_scores.parquet": {
+      "role": "raw OOS scores for 2025 H1 pair fit and H2 pair calibration in evaluation fold 2026",
+      "sha256": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8",
+      "rows": 6410,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet": {
+      "role": "raw OOS scores for 2026 evaluation in fold 2026",
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+      "rows": 4673,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/all_triples.parquet": {
+      "role": "fixed comparison pair event probabilities derived from matched_baseline and candidate unordered Top3 distributions",
+      "sha256": "13409e65353c0cb6dab14df97317cce24de913056ae464ee3524520759de681c",
+      "rows": 402808,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv": {
+      "role": "fixed Top3-marginal pair comparison and saved-label cross-check",
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+      "hash_verified": true
+    }
+  },
+  "time_audit": {
+    "split": "calendar H1 Jan-Jun / H2 Jul-Dec in Y-1; purge H1 through two days before first H2 race; require H2 end at least two days before first evaluation race",
+    "folds": {
+      "2024": {
+        "h1_after_purge": {"rows": 3089, "races": 312, "dates": 47, "first": "2023-01-06", "last": "2023-06-24"},
+        "h2": {"rows": 3327, "races": 336, "dates": 50, "first": "2023-07-01", "last": "2023-12-30"},
+        "evaluation": {"rows": 6329, "races": 637, "dates": 98, "first": "2024-01-05", "last": "2024-12-28"},
+        "saved_refit_max": "2022-12-24"
+      },
+      "2025": {
+        "h1_after_purge": {"rows": 3244, "races": 326, "dates": 50, "first": "2024-01-05", "last": "2024-06-29"},
+        "h2": {"rows": 3085, "races": 311, "dates": 48, "first": "2024-07-05", "last": "2024-12-28"},
+        "evaluation": {"rows": 6410, "races": 654, "dates": 98, "first": "2025-01-03", "last": "2025-12-27"},
+        "saved_refit_max": "2023-12-30"
+      },
+      "2026": {
+        "h1_after_purge": {"rows": 3238, "races": 329, "dates": 50, "first": "2025-01-03", "last": "2025-06-28"},
+        "h2": {"rows": 3172, "races": 325, "dates": 48, "first": "2025-07-04", "last": "2025-12-27"},
+        "evaluation": {"rows": 4673, "races": 488, "dates": 73, "first": "2026-01-02", "last": "2026-09-19"},
+        "saved_refit_max": "2024-12-28"
+      }
+    },
+    "source_joins_one_to_one": true,
+    "missing_feature_rows": 0,
+    "outcome_metrics_computed": false
+  },
+  "warnings": [
+    "Prior joint_relationship candidate missed both registered performance gates; its outputs are exploratory comparisons.",
+    "Evaluation dates and labels have been reused in prior research; this is not independent future validation.",
+    "No historical public release-time reconstruction is available."
+  ]
+}

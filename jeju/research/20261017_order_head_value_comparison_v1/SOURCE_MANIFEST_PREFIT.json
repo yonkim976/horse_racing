@@ -1,0 +1,145 @@
+{
+  "status": "FROZEN_PRE_SELECTION",
+  "study": "20261017_order_head_value_comparison_v1",
+  "frozen_plan_sha256": "43917a7440c80717214b152419be77afcc9c4303e290e7d8e0802d2c2de203a4",
+  "source_scope": "read-only inputs pinned before quote-based policy selection; all prior research and operating artifacts remain unchanged",
+  "fixed_models": {
+    "operating": "HY_R_FORM",
+    "conditional_order": "F1_STYLE6_COND_ORDER_V1",
+    "fixed_score_control": "F1_STYLE6_FIXED_SCORE_PL_CONTROL"
+  },
+  "sealed_preexisting_references": {
+    "previous_other_pool_source_manifest": {
+      "path": "jeju/research/20261015_other_pools_postrace_value_v1/SOURCE_MANIFEST.json",
+      "sha256": "9531cc71a5abf429bc3a24fbe63b2eba4b08d91bc479be95267f22aafd153fe3"
+    },
+    "previous_other_pool_plan": {
+      "path": "jeju/research/20261015_other_pools_postrace_value_v1/PLAN.md",
+      "sha256": "43a1ffed99e6e1ec6b1006905886b85a2c97bd2055eafc2799298e0f9aca4d51"
+    },
+    "registry_resolution": {
+      "active_profile": "jeju-hy-r-form-20260919-v1",
+      "champion_id": "HY_R_FORM",
+      "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "hy_model_sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+      "hy_distribution_source_sha256": "61409385b5748d2df6a34fcd4eca5bd453669c0421c024f34e55aca216050aa7"
+    }
+  },
+  "pinned_inputs": {
+    "active_registry": {
+      "path": "config/prediction_model_registry.json",
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+    },
+    "current_hy_model": {
+      "path": "jeju/models/current/HY_R_FORM.pkl",
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    "hy_distribution_function": {
+      "path": "src/horse_racing/analysis/jeju_hybrid_evaluation.py",
+      "sha256": "61409385b5748d2df6a34fcd4eca5bd453669c0421c024f34e55aca216050aa7"
+    },
+    "fixed_common_cohort": {
+      "path": "jeju/research/20261015_operating_postrace_value_comparison_v1/cohort.csv",
+      "sha256": "4f87d05e0f7e2db48f1029dbf1fc78c393ba3804eb20ccb8d28cf6e20e73983f"
+    },
+    "operating_native_event_probabilities_and_event_keys": {
+      "path": "jeju/research/20261015_other_pools_postrace_value_v1/candidate_rows.csv",
+      "sha256": "74f35fbf3fe18fb29a6942b89a8d06c89e5aa7a3f6ba69c5c8471ebba7068682",
+      "read_columns": [
+        "race_id",
+        "race_date",
+        "pool",
+        "model",
+        "selection_key",
+        "field_n",
+        "horse_no_1",
+        "horse_no_2",
+        "horse_no_3",
+        "p"
+      ],
+      "excluded_columns": [
+        "raw_odds",
+        "quote",
+        "ev",
+        "quote_status",
+        "hit"
+      ]
+    },
+    "complete_raw_candidate_quotes": {
+      "path": "jeju/research/20261015_other_pools_postrace_value_v1/candidate_quotes.csv",
+      "sha256": "96c6a2536520ca3ea33f6b255b04501972aef4f837c3ac694d1563a8148bce50"
+    },
+    "candidate_quote_source_preflight": {
+      "path": "jeju/research/20261015_other_pools_postrace_value_v1/SOURCE_PREFLIGHT.json",
+      "sha256": "c6b6b20cdb6bb4ae6f3cfac63402dc53a5b7262b53fa356618bffd83df89554f"
+    },
+    "canonical_f1_style6_tla_probabilities_for_invariance_diagnostic": {
+      "path": "jeju/research/20261015_research_other_pool_support_v1/tla_set_probabilities.parquet",
+      "sha256": "7c7bafcb315a9f9595e06aa1ee12ca0affbcf3abcc13426e90e079261d29b382",
+      "probability_column": "set_probability",
+      "role": "canonical exact set probabilities for head/control TLA tie-safe invariance diagnostic only"
+    },
+    "fixed_tri_whole_race_exclusions": {
+      "path": "jeju/research/20261015_other_pools_postrace_value_v1/source_exclusions.csv",
+      "sha256": "cd48b73779a95f220db1408210f15d2dfce26060a9590bcd040ab7418bec0aee"
+    },
+    "official_runner_results": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/OFFICIAL_RUNNER_RESULTS.csv",
+      "sha256": "4ae6133d9d537f9ca6b351ed909a945b88a428cb4babcdf15659e266a68f2df6"
+    },
+    "fixed_2000_by_269_bootstrap_schedule": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd"
+    },
+    "bootstrap_schedule_receipt": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+      "sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+      "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84"
+    },
+    "source_for_original_269_date_order": {
+      "path": "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet",
+      "sha256": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+      "read_columns": [
+        "race_date"
+      ]
+    },
+    "conditional_order_frozen_design": {
+      "path": "jeju/research/20261017_conditional_order_head_v1/PLAN.md",
+      "sha256": "b5aeebeaadfd73e73e2d8bf97eb79a6bcaa82e0e5492f78cf0fe1aa52da02a80"
+    },
+    "conditional_order_input_contract": {
+      "path": "jeju/research/20261017_conditional_order_head_v1/INPUT_CONTRACT.md",
+      "sha256": "4baf862c8a9c9a3f8643e76231f993174653fc48a29167c3b282558f0ca7276c"
+    },
+    "conditional_order_pre_fit_source_lock": {
+      "path": "jeju/research/20261017_conditional_order_head_v1/outputs/PREFIT_SOURCE_LOCK.json",
+      "sha256": "7285382f2731c59db3684f76dfa72682c0153663ece55426e3a1960c18c72d94"
+    },
+    "conditional_order_pre_fit_preflight": {
+      "path": "jeju/research/20261017_conditional_order_head_v1/outputs/SOURCE_PREFLIGHT.json",
+      "sha256": "352980cf94b6d59825690418129d6bc0cc566aa4fc6841904a1fa4a9dd9d69fb"
+    }
+  },
+  "frozen_before_selection": {
+    "primary_race_cohort": 467,
+    "pool_price_complete_races": {
+      "WIN": 467,
+      "QNL": 467,
+      "EXA": 467,
+      "TRI": 222
+    },
+    "tla_diagnostic_price_complete_races": 467,
+    "universal_scope_races": 222,
+    "tri_sentinel_excluded_races": 245,
+    "fixed_policy_count": 10,
+    "ticket_stake_krw": 1000,
+    "bootstrap_draws": 2000,
+    "bootstrap_dates_per_draw": 269,
+    "network_calls": 0,
+    "database_queries": 0,
+    "model_fits": 0,
+    "calibration_fits": 0
+  },
+  "conditional_order_prediction_and_approval": "pending immutable post-fit artifacts; analysis.py refuses to start without both fixed receipt paths and matching hashes",
+  "evaluator_code_sha256": "959365043dad6f27f8e3844aa97f8f7daacd65a150c1f7625946f73fb74290b8"
+}

@@ -1,0 +1,299 @@
+{
+  "study": "20261014_pool_dividend_minimum_v1",
+  "status": "PASS",
+  "scope": {
+    "eligible_races": 1237,
+    "race_year_counts": {
+      "2025": 707,
+      "2026": 530
+    },
+    "winning_quotes": 13560,
+    "race_pool_rows": 8659,
+    "period_denominators": {
+      "all": 1237,
+      "2025": 707,
+      "2026": 530
+    }
+  },
+  "method": {
+    "categories": "low <5; middle 5<=x<20; high >=20",
+    "PLC_QPL": "minimum actual winning quote per race",
+    "other_pools": "singleton actual winning quote; classification unchanged",
+    "old_category": "maximum quote per race, matching v1"
+  },
+  "checks": {
+    "all_races_have_seven_pools": true,
+    "pool_quote_counts_complete": true,
+    "source_min_max_and_quote_counts_match": true,
+    "low_min_lt5_identity": true,
+    "high_all_min_ge20_identity": true,
+    "identity_checks": [
+      {
+        "period": "all",
+        "pool": "WIN",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 722
+      },
+      {
+        "period": "all",
+        "pool": "WIN",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 76
+      },
+      {
+        "period": "all",
+        "pool": "PLC",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 1237
+      },
+      {
+        "period": "all",
+        "pool": "PLC",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 0
+      },
+      {
+        "period": "all",
+        "pool": "QNL",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 223
+      },
+      {
+        "period": "all",
+        "pool": "QNL",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 417
+      },
+      {
+        "period": "all",
+        "pool": "QPL",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 932
+      },
+      {
+        "period": "all",
+        "pool": "QPL",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 11
+      },
+      {
+        "period": "all",
+        "pool": "EXA",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 65
+      },
+      {
+        "period": "all",
+        "pool": "EXA",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 662
+      },
+      {
+        "period": "all",
+        "pool": "TLA",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 45
+      },
+      {
+        "period": "all",
+        "pool": "TLA",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 761
+      },
+      {
+        "period": "all",
+        "pool": "TRI",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 0
+      },
+      {
+        "period": "all",
+        "pool": "TRI",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 1176
+      },
+      {
+        "period": "2025",
+        "pool": "WIN",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 419
+      },
+      {
+        "period": "2025",
+        "pool": "WIN",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 36
+      },
+      {
+        "period": "2025",
+        "pool": "PLC",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 707
+      },
+      {
+        "period": "2025",
+        "pool": "PLC",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 0
+      },
+      {
+        "period": "2025",
+        "pool": "QNL",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 107
+      },
+      {
+        "period": "2025",
+        "pool": "QNL",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 242
+      },
+      {
+        "period": "2025",
+        "pool": "QPL",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 538
+      },
+      {
+        "period": "2025",
+        "pool": "QPL",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 6
+      },
+      {
+        "period": "2025",
+        "pool": "EXA",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 28
+      },
+      {
+        "period": "2025",
+        "pool": "EXA",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 382
+      },
+      {
+        "period": "2025",
+        "pool": "TLA",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 20
+      },
+      {
+        "period": "2025",
+        "pool": "TLA",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 443
+      },
+      {
+        "period": "2025",
+        "pool": "TRI",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 0
+      },
+      {
+        "period": "2025",
+        "pool": "TRI",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 674
+      },
+      {
+        "period": "2026",
+        "pool": "WIN",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 303
+      },
+      {
+        "period": "2026",
+        "pool": "WIN",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 40
+      },
+      {
+        "period": "2026",
+        "pool": "PLC",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 530
+      },
+      {
+        "period": "2026",
+        "pool": "PLC",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 0
+      },
+      {
+        "period": "2026",
+        "pool": "QNL",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 116
+      },
+      {
+        "period": "2026",
+        "pool": "QNL",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 175
+      },
+      {
+        "period": "2026",
+        "pool": "QPL",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 394
+      },
+      {
+        "period": "2026",
+        "pool": "QPL",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 5
+      },
+      {
+        "period": "2026",
+        "pool": "EXA",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 37
+      },
+      {
+        "period": "2026",
+        "pool": "EXA",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 280
+      },
+      {
+        "period": "2026",
+        "pool": "TLA",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 25
+      },
+      {
+        "period": "2026",
+        "pool": "TLA",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 318
+      },
+      {
+        "period": "2026",
+        "pool": "TRI",
+        "identity": "min_lt5_equals_source_low_any_lt5",
+        "count": 0
+      },
+      {
+        "period": "2026",
+        "pool": "TRI",
+        "identity": "min_ge20_equals_source_high_all_min_ge20",
+        "count": 502
+      }
+    ],
+    "no_database_or_network_access": true
+  },
+  "input_sha256": {
+    "winning_quotes.csv": "6a208e23ebe175ea20f7a9bfcc86f24245e5dfc675eba0cec22be93eb1dcdca4",
+    "SOURCE_HASHES.json": "b385ded73f751678e207ef04c0fedd366895812819835e8a7e628a55b61131fc",
+    "ROOT_FINAL_REVIEW.json": "2d254793bbe5d0b919dfd4f408e3e1380f824cac148a30333deff2da773495c8",
+    "race_pool_summary.csv": "878c43fb8c98defd9499d364afd4417614341ca38f7b719ae8d1269c893cf022",
+    "analyze_minimum.py": "dbe34d53f7fc63dfd10c17fb47701ba825d452a97a418090511a2e743e21d1a3"
+  },
+  "output_sha256": {
+    "race_classification.csv": "5e0082cfce00ccc17f6a729b5424046ee54715993565241ce6c1248813c67a42",
+    "summary.csv": "519cc7342a7e2f86bca733738396cd2228aba132945be73676d2fe88d089434b",
+    "oldmax_to_newmin_crosswalk.csv": "fb65677640920b6467c588b05e4b39a2183f52a9cc0cde8bdcbdcafa8df94b4d",
+    "analyze_minimum.py": "dbe34d53f7fc63dfd10c17fb47701ba825d452a97a418090511a2e743e21d1a3"
+  }
+}

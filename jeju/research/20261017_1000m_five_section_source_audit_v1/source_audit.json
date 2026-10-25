@@ -1,0 +1,726 @@
+{
+  "audit_status": "read_only_source_snapshot_complete",
+  "database_access": {
+    "uri_mode": "ro",
+    "sqlite_query_only": true,
+    "quality_view_scan_count": 1,
+    "quality_view": "jeju_race_postrace_sections_quality_2026",
+    "quality_view_sql_sha256": "3a8613957e1893731ced8ce3bd896260b58a011e74da1c74d8f9d61a638f36b0",
+    "snapshot_data_version": 1,
+    "full_source_race_order_and_group_status_queries_in_same_snapshot": true,
+    "whole_database_hash_claimed_unchanged": false,
+    "api4_source_rows_before_after_fingerprints_equal": true,
+    "record_type_artifact_payload_page_sha_and_path_equal_before_after": true,
+    "api4_quality_view_fingerprint_matches_before_and_after": true
+  },
+  "source_contract": {
+    "target_roster_source": "jeju/research/20261009_finish_history_ablation_v1/outputs/features.parquet",
+    "saved_last5_lineage_source": "jeju/research/20261009_finish_history_ablation_v1/outputs/historical_lineage.parquet",
+    "started_valid_time_source": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+    "target_distance_m": 1000,
+    "target_race_date_max_inclusive": "2026-09-19",
+    "excluded_horse_id": "3005648",
+    "history_slots": "the exact saved `last5_same_source_ids` list; no new history selection",
+    "time_source": "quality-selected API4 individual-horse section fields; API6 not used",
+    "api4_times": [
+      "S1F",
+      "C3",
+      "C4",
+      "G3F",
+      "G1F",
+      "finish_time_seconds"
+    ],
+    "point_quality": "full-roster order/group-quality values for S1F, C3, C4, G1F from the same read transaction; one bad, NULL, unknown, or incomplete race-point status blocks that entire point for every horse",
+    "segment_formulas": {
+      "seg_0_200": "s1f",
+      "seg_200_to_c3_approx400": "c3_minus_s1f",
+      "seg_c3_approx400_to_c4_approx600": "c4_minus_c3",
+      "seg_c4_approx600_to_800": "finish_minus_g1f_minus_c4",
+      "seg_800_to_1000": "g1f"
+    },
+    "point_order_status_allowlist": [
+      "api_positive_unreviewed",
+      "api_source_changed_since_conflict_review",
+      "api_source_changed_since_review",
+      "api_unavailable_or_nonpositive_or_sentinel",
+      "internal_conflict_review_not_applied",
+      "unresolved_official_internal_conflict",
+      "website_corrected",
+      "website_review_not_applied"
+    ],
+    "point_group_status_allowlist": [
+      "api_group_unavailable",
+      "api_group_unreviewed",
+      "api_source_changed_since_conflict_review",
+      "internal_conflict_review_not_applied",
+      "unresolved_official_internal_conflict"
+    ],
+    "point_mask_rule": "Full source race-point: exact API4 order-status api_record_id set and horse_id/horse_number must match the current race_result_rows started roster, independently reconciled to the baseline candidate snapshot; quality-view-selected API303 ID must be consistent across all started runners and have exactly one selected point row whose payload/artifact/page fingerprint and group status match the quality-view attachment. NULL/unrecognized status or conflict/not_applied/source_changed token fails closed. Explicit known unavailable statuses are recognized domain values; each time endpoint separately requires positive time plus an allowed time status.",
+    "time_status_allowed": [
+      "api_positive_unreviewed",
+      "website_corrected"
+    ],
+    "f1s_feature_validity_rule": "every historical section contribution requires baseline valid_time=True; preserve but do not impute/backfill invalid slots",
+    "finish_time_endpoint_requires": "positive finish time; feature contribution additionally requires baseline valid_time=True",
+    "g3f_identity_diagnostic": "finish_time_seconds - C3 - G3F, reported separately; positive field statuses, valid_time, and full-race C3 clear mask; absolute tolerance 0.15 seconds; never an extra segment",
+    "distance_labels": "official glossary describes 3C/4C as approximately 600m/400m remaining; middle interval labels retain approximate notation"
+  },
+  "counts": {
+    "target_rows": 14457,
+    "target_races": 1424,
+    "target_race_date_min": "2017-01-14",
+    "target_race_date_max": "2026-09-19",
+    "target_rows_by_year": {
+      "2017": {
+        "rows": 580,
+        "races": 51
+      },
+      "2018": {
+        "rows": 926,
+        "races": 91
+      },
+      "2019": {
+        "rows": 1467,
+        "races": 140
+      },
+      "2020": {
+        "rows": 932,
+        "races": 92
+      },
+      "2021": {
+        "rows": 1444,
+        "races": 139
+      },
+      "2022": {
+        "rows": 2049,
+        "races": 196
+      },
+      "2023": {
+        "rows": 2046,
+        "races": 207
+      },
+      "2024": {
+        "rows": 1694,
+        "races": 170
+      },
+      "2025": {
+        "rows": 1947,
+        "races": 196
+      },
+      "2026": {
+        "rows": 1372,
+        "races": 142
+      }
+    },
+    "exact_last5_slots": 53828,
+    "targets_with_last5_slots": 13060,
+    "distinct_history_source_ids": 14193,
+    "history_source_race_date_min": "2011-05-27",
+    "history_source_race_date_max": "2026-09-05",
+    "source_rows_baseline_valid_time_false": 3,
+    "source_rows_baseline_started_false": 0,
+    "source_rows_with_nonpositive_or_unusable_field_time": {
+      "s1f": 1,
+      "c3": 1,
+      "c4": 2,
+      "g3f": 2,
+      "g1f": 2
+    },
+    "referenced_source_races": 1607,
+    "source_race_roster_reconciliation": {
+      "baseline_full_candidate_rows": 16348,
+      "current_db_full_candidate_rows": 16348,
+      "baseline_full_started_rows": 16247,
+      "current_db_full_started_rows": 16247,
+      "races_with_exact_candidate_api_id_set_match": 1607,
+      "races_with_exact_started_api_id_horse_id_horse_number_match": 1607,
+      "starter_definition": "finish_position 1..89 or 91/92, inherited F1 source audit; other codes not reclassified",
+      "all_candidate_ids_match": true,
+      "all_started_ids_match": true
+    },
+    "full_racepoint_masks": {
+      "s1f": {
+        "race_points_total": 1607,
+        "race_points_clear": 1604,
+        "race_points_blocked": 3,
+        "full_roster_order_coverage_complete": 1607,
+        "order_started_id_sets_exact": 1607,
+        "order_started_horse_identity_exact": 1607,
+        "group_status_coverage_present": 1607,
+        "group_selected_source_fingerprint_matches_quality_view": 1607,
+        "group_quality_status_matches_quality_view": 1607,
+        "api303_selection_consistent_across_started_roster": 1607
+      },
+      "c3": {
+        "race_points_total": 1607,
+        "race_points_clear": 1607,
+        "race_points_blocked": 0,
+        "full_roster_order_coverage_complete": 1607,
+        "order_started_id_sets_exact": 1607,
+        "order_started_horse_identity_exact": 1607,
+        "group_status_coverage_present": 1607,
+        "group_selected_source_fingerprint_matches_quality_view": 1607,
+        "group_quality_status_matches_quality_view": 1607,
+        "api303_selection_consistent_across_started_roster": 1607
+      },
+      "c4": {
+        "race_points_total": 1607,
+        "race_points_clear": 1606,
+        "race_points_blocked": 1,
+        "full_roster_order_coverage_complete": 1607,
+        "order_started_id_sets_exact": 1607,
+        "order_started_horse_identity_exact": 1607,
+        "group_status_coverage_present": 1607,
+        "group_selected_source_fingerprint_matches_quality_view": 1607,
+        "group_quality_status_matches_quality_view": 1607,
+        "api303_selection_consistent_across_started_roster": 1607
+      },
+      "g1f": {
+        "race_points_total": 1607,
+        "race_points_clear": 1606,
+        "race_points_blocked": 1,
+        "full_roster_order_coverage_complete": 1607,
+        "order_started_id_sets_exact": 1607,
+        "order_started_horse_identity_exact": 1607,
+        "group_status_coverage_present": 1607,
+        "group_selected_source_fingerprint_matches_quality_view": 1607,
+        "group_quality_status_matches_quality_view": 1607,
+        "api303_selection_consistent_across_started_roster": 1607
+      }
+    },
+    "g3f_identity_diagnostic_slots": 53815,
+    "g3f_identity_within_0_15s_n": 53815,
+    "g3f_identity_abs_residual_max_s": 7.105427357601002e-15,
+    "slots_all_five_measurements_monotone_n": 53678,
+    "slots_all_five_features_eligible_and_monotone_n": 53673,
+    "segment_availability": {
+      "seg_0_200": {
+        "formula": "s1f",
+        "last5_lineage_slots": 53828,
+        "slots_with_positive_endpoint_times_and_usable_status_n": 53823,
+        "slots_with_full_race_point_masks_and_positive_delta_n": 53751,
+        "slots_with_f1s_valid_time_and_feature_eligible_n": 53743,
+        "targets_with_one_or_more_feature_eligible_slots_n": 13060,
+        "targets_with_five_feature_eligible_slots_n": 8628
+      },
+      "seg_200_to_c3_approx400": {
+        "formula": "c3_minus_s1f",
+        "last5_lineage_slots": 53828,
+        "slots_with_positive_endpoint_times_and_usable_status_n": 53823,
+        "slots_with_full_race_point_masks_and_positive_delta_n": 53751,
+        "slots_with_f1s_valid_time_and_feature_eligible_n": 53743,
+        "targets_with_one_or_more_feature_eligible_slots_n": 13060,
+        "targets_with_five_feature_eligible_slots_n": 8628
+      },
+      "seg_c3_approx400_to_c4_approx600": {
+        "formula": "c4_minus_c3",
+        "last5_lineage_slots": 53828,
+        "slots_with_positive_endpoint_times_and_usable_status_n": 53820,
+        "slots_with_full_race_point_masks_and_positive_delta_n": 53786,
+        "slots_with_f1s_valid_time_and_feature_eligible_n": 53781,
+        "targets_with_one_or_more_feature_eligible_slots_n": 13057,
+        "targets_with_five_feature_eligible_slots_n": 8668
+      },
+      "seg_c4_approx600_to_800": {
+        "formula": "finish_minus_g1f_minus_c4",
+        "last5_lineage_slots": 53828,
+        "slots_with_positive_endpoint_times_and_usable_status_n": 53820,
+        "slots_with_full_race_point_masks_and_positive_delta_n": 53750,
+        "slots_with_f1s_valid_time_and_feature_eligible_n": 53745,
+        "targets_with_one_or_more_feature_eligible_slots_n": 13056,
+        "targets_with_five_feature_eligible_slots_n": 8638
+      },
+      "seg_800_to_1000": {
+        "formula": "g1f",
+        "last5_lineage_slots": 53828,
+        "slots_with_positive_endpoint_times_and_usable_status_n": 53820,
+        "slots_with_full_race_point_masks_and_positive_delta_n": 53784,
+        "slots_with_f1s_valid_time_and_feature_eligible_n": 53779,
+        "targets_with_one_or_more_feature_eligible_slots_n": 13059,
+        "targets_with_five_feature_eligible_slots_n": 8657
+      }
+    },
+    "status_domains": {
+      "s1f_time_status": {
+        "api_positive_unreviewed": 16351,
+        "api_unavailable_or_nonpositive": 1
+      },
+      "c3_time_status": {
+        "api_positive_unreviewed": 16351,
+        "api_unavailable_or_nonpositive": 1
+      },
+      "c4_time_status": {
+        "api_positive_unreviewed": 16350,
+        "api_unavailable_or_nonpositive": 2
+      },
+      "g3f_time_status": {
+        "api_positive_unreviewed": 16350,
+        "api_unavailable_or_nonpositive": 2
+      },
+      "g1f_time_status": {
+        "api_positive_unreviewed": 16350,
+        "api_unavailable_or_nonpositive": 2
+      },
+      "s1f_order_status": {
+        "api_positive_unreviewed": 16345,
+        "unresolved_official_internal_conflict": 6,
+        "api_unavailable_or_nonpositive_or_sentinel": 1
+      },
+      "c3_order_status": {
+        "api_positive_unreviewed": 16351,
+        "api_unavailable_or_nonpositive_or_sentinel": 1
+      },
+      "c4_order_status": {
+        "api_positive_unreviewed": 16348,
+        "api_unavailable_or_nonpositive_or_sentinel": 2,
+        "unresolved_official_internal_conflict": 2
+      },
+      "g1f_order_status": {
+        "api_positive_unreviewed": 16344,
+        "unresolved_official_internal_conflict": 6,
+        "api_unavailable_or_nonpositive_or_sentinel": 2
+      },
+      "s1f_group_status": {
+        "api_group_unreviewed": 16322,
+        "unresolved_official_internal_conflict": 30
+      },
+      "c3_group_status": {
+        "api_group_unreviewed": 16352
+      },
+      "c4_group_status": {
+        "api_group_unreviewed": 16342,
+        "unresolved_official_internal_conflict": 10
+      },
+      "g1f_group_status": {
+        "api_group_unreviewed": 16342,
+        "unresolved_official_internal_conflict": 10
+      }
+    },
+    "full_roster_status_domains": {
+      "individual_order": {
+        "api_positive_unreviewed": 64968,
+        "unresolved_official_internal_conflict": 14,
+        "api_unavailable_or_nonpositive_or_sentinel": 6
+      },
+      "race_group": {
+        "api_group_unreviewed": 6423,
+        "unresolved_official_internal_conflict": 5
+      }
+    },
+    "source_fingerprint_before_after_equal_rows": 16453,
+    "source_fingerprint_rows": 16453,
+    "quality_snapshot_unique_records_target_history_or_started_roster": 16352,
+    "five_segment_additive_identity": {
+      "rows_with_all_five_finite_raw_intervals_and_finish_time": 53820,
+      "all_within_1e-10_seconds": true,
+      "max_abs_sum_minus_finish_seconds": 1.4210854715202004e-14
+    }
+  },
+  "outputs": {
+    "target_1000m_roster.parquet": {
+      "rows": 14457,
+      "bytes": 306783,
+      "sha256": "fe745c9138576deacc072e32a18db45a11640bf3923a28d11d54f7621967a6b3"
+    },
+    "target_last5_lineage.parquet": {
+      "rows": 53828,
+      "bytes": 660149,
+      "sha256": "29267e1a2858f81aba240b004542e5a4ed3be0dfa152a38771625f320011b009"
+    },
+    "api4_quality_source_snapshot.parquet": {
+      "rows": 16352,
+      "bytes": 3980506,
+      "sha256": "c4fe7d4e7738b7f9d7a1f53c3eedcb28ed44b9f5013f6f767b415674683aafba"
+    },
+    "target_last5_section_intervals.parquet": {
+      "rows": 53828,
+      "bytes": 2964248,
+      "sha256": "875a3d311370995ac6d7dabf9c0df57cb7e1172982b689f1ec7f946b78725156"
+    },
+    "source_race_point_quality_masks.parquet": {
+      "rows": 6428,
+      "bytes": 718929,
+      "sha256": "028c2d6a1799928fd29df30369be471bd02a9e36c09a10f5948e258c595c2db8"
+    },
+    "source_point_order_status_evidence.parquet": {
+      "rows": 65392,
+      "bytes": 1451038,
+      "sha256": "eedd0c7f0cf221f5cce08b703f145fb7a9cf30a25543056dc8bee0c59493f08d"
+    },
+    "source_point_group_status_evidence.parquet": {
+      "rows": 6428,
+      "bytes": 291866,
+      "sha256": "53df6eb928b0dd6e38e784962d7949157a90f979f2e496d752bf8f556f2a1381"
+    },
+    "source_fingerprint_before_after.parquet": {
+      "rows": 16453,
+      "bytes": 5668615,
+      "sha256": "72605bb3bc594ef77141103643628065706aa7e5004971dc14d7776564845049"
+    },
+    "section_time_reviews.parquet": {
+      "rows": 0,
+      "bytes": 7283,
+      "sha256": "c86187ac6a83220c1756d6000e54455fa51b073c63d8661159aeb169411db035"
+    }
+  },
+  "inputs": {
+    "saved_f1_target_features_parquet": {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/features.parquet",
+      "bytes": 5043713,
+      "sha256": "1b28a8392a1447e693fed5988db74f13b5f8622adcb5d5c22143aea701502534"
+    },
+    "saved_f1_historical_lineage_parquet": {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/historical_lineage.parquet",
+      "bytes": 2835001,
+      "sha256": "11665999d7adaa02d7cb9d1a1560ae2e68f6d03224cce688d8c34d40f8fcc955"
+    },
+    "baseline_api4_source_snapshot_parquet": {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    }
+  },
+  "extractor_code": {
+    "path": "jeju/research/20261017_1000m_five_section_source_audit_v1/extract_source_audit.py",
+    "bytes": 55898,
+    "sha256": "8ca3df112dbd7939449042b3193d869077e054ec56c2c1d6932157f92d7291fc"
+  },
+  "output_schemas": {
+    "target_1000m_roster.parquet": {
+      "rows": 14457,
+      "columns": [
+        "api_record_id",
+        "race_id",
+        "race_date",
+        "year",
+        "horse_id",
+        "horse_number",
+        "finish_position",
+        "distance_m",
+        "history_cutoff",
+        "last5_same_source_ids",
+        "source_row_role"
+      ]
+    },
+    "target_last5_lineage.parquet": {
+      "rows": 53828,
+      "columns": [
+        "target_api_record_id",
+        "slot_oldest_to_newest",
+        "source_api_record_id",
+        "source_race_id",
+        "source_race_date",
+        "target_cutoff",
+        "target_horse_id",
+        "source_horse_id",
+        "target_distance_m",
+        "source_distance_m",
+        "source_started",
+        "starter_n",
+        "event_rank_sequence_complete",
+        "duplicate_horse_in_source_event",
+        "raw_finish_position",
+        "valid_individual_rank",
+        "individual_top3"
+      ]
+    },
+    "api4_quality_source_snapshot.parquet": {
+      "rows": 16352,
+      "columns": [
+        "source_row_role",
+        "api_record_id",
+        "race_date",
+        "meet_code",
+        "race_number",
+        "horse_number",
+        "horse_id",
+        "horse_name",
+        "race_distance_m",
+        "finish_position",
+        "finish_status_raw",
+        "finish_time_seconds",
+        "api4_3_sjS1fOrd_raw",
+        "api4_3_sjS1fOrd_json_type",
+        "api4_3_sj_3cOrd_raw",
+        "api4_3_sj_3cOrd_json_type",
+        "api4_3_sj_4cOrd_raw",
+        "api4_3_sj_4cOrd_json_type",
+        "api4_3_sjG1fOrd_raw",
+        "api4_3_sjG1fOrd_json_type",
+        "api4_3_payload_sha256",
+        "api4_3_source_artifact_id",
+        "api4_3_source_page_sha256",
+        "api4_3_source_page_path",
+        "api303_api_record_id",
+        "api303_payload_sha256",
+        "api303_source_artifact_id",
+        "api303_source_page_sha256",
+        "api303_source_page_path",
+        "s1f_time_seconds",
+        "s1f_time_status",
+        "c3_time_seconds",
+        "c3_time_status",
+        "c4_time_seconds",
+        "c4_time_status",
+        "g3f_time_seconds",
+        "g3f_time_status",
+        "g1f_time_seconds",
+        "g1f_time_status",
+        "section_time_website_correction_count",
+        "section_time_review_required_count",
+        "section_order_website_correction_count",
+        "section_order_review_required_count",
+        "section_internal_conflict_order_count",
+        "section_internal_conflict_group_count",
+        "s1f_order",
+        "s1f_order_status",
+        "s1f_group",
+        "s1f_group_status",
+        "c3_order",
+        "c3_order_status",
+        "c3_group",
+        "c3_group_status",
+        "c4_order",
+        "c4_order_status",
+        "c4_group",
+        "c4_group_status",
+        "g1f_order",
+        "g1f_order_status",
+        "g1f_group",
+        "g1f_group_status",
+        "race_id",
+        "race_distance_m_baseline",
+        "started",
+        "valid_time",
+        "api4_3_payload_sha256_baseline",
+        "finish_time_seconds_baseline",
+        "s1f_time_selected_positive",
+        "c3_time_selected_positive",
+        "c4_time_selected_positive",
+        "g3f_time_selected_positive",
+        "g1f_time_selected_positive",
+        "finish_time_positive",
+        "finish_time_valid_baseline",
+        "finish_time_feature_endpoint_eligible",
+        "source_row_fingerprint_sha256"
+      ]
+    },
+    "target_last5_section_intervals.parquet": {
+      "rows": 53828,
+      "columns": [
+        "target_api_record_id",
+        "slot_oldest_to_newest",
+        "source_api_record_id",
+        "source_race_id",
+        "source_race_date",
+        "target_cutoff",
+        "target_horse_id",
+        "source_horse_id",
+        "target_distance_m",
+        "source_distance_m",
+        "source_started",
+        "starter_n",
+        "event_rank_sequence_complete",
+        "duplicate_horse_in_source_event",
+        "raw_finish_position",
+        "valid_individual_rank",
+        "individual_top3",
+        "quality_source_race_id",
+        "api4_3_payload_sha256",
+        "api4_3_source_artifact_id",
+        "api4_3_source_page_sha256",
+        "api4_3_source_page_path",
+        "api303_api_record_id",
+        "api303_payload_sha256",
+        "api303_source_artifact_id",
+        "api303_source_page_sha256",
+        "api303_source_page_path",
+        "started",
+        "valid_time",
+        "finish_time_seconds",
+        "s1f_time_seconds",
+        "s1f_time_status",
+        "c3_time_seconds",
+        "c3_time_status",
+        "c4_time_seconds",
+        "c4_time_status",
+        "g3f_time_seconds",
+        "g3f_time_status",
+        "g1f_time_seconds",
+        "g1f_time_status",
+        "s1f_order_status",
+        "s1f_group_status",
+        "c3_order_status",
+        "c3_group_status",
+        "c4_order_status",
+        "c4_group_status",
+        "g1f_order_status",
+        "g1f_group_status",
+        "s1f_time_selected_positive",
+        "c3_time_selected_positive",
+        "c4_time_selected_positive",
+        "g3f_time_selected_positive",
+        "g1f_time_selected_positive",
+        "finish_time_positive",
+        "finish_time_valid_baseline",
+        "c3_point_clear_full_race",
+        "c4_point_clear_full_race",
+        "g1f_point_clear_full_race",
+        "s1f_point_clear_full_race",
+        "full_race_point_mask_match",
+        "seg_0_200_raw_delta_seconds",
+        "seg_0_200_endpoint_measurement_eligible",
+        "seg_0_200_point_quality_clear",
+        "seg_0_200_quality_eligible",
+        "seg_0_200_feature_eligible",
+        "seg_0_200_feature_seconds",
+        "seg_200_to_c3_approx400_raw_delta_seconds",
+        "seg_200_to_c3_approx400_endpoint_measurement_eligible",
+        "seg_200_to_c3_approx400_point_quality_clear",
+        "seg_200_to_c3_approx400_quality_eligible",
+        "seg_200_to_c3_approx400_feature_eligible",
+        "seg_200_to_c3_approx400_feature_seconds",
+        "seg_c3_approx400_to_c4_approx600_raw_delta_seconds",
+        "seg_c3_approx400_to_c4_approx600_endpoint_measurement_eligible",
+        "seg_c3_approx400_to_c4_approx600_point_quality_clear",
+        "seg_c3_approx400_to_c4_approx600_quality_eligible",
+        "seg_c3_approx400_to_c4_approx600_feature_eligible",
+        "seg_c3_approx400_to_c4_approx600_feature_seconds",
+        "seg_c4_approx600_to_800_raw_delta_seconds",
+        "seg_c4_approx600_to_800_endpoint_measurement_eligible",
+        "seg_c4_approx600_to_800_point_quality_clear",
+        "seg_c4_approx600_to_800_quality_eligible",
+        "seg_c4_approx600_to_800_feature_eligible",
+        "seg_c4_approx600_to_800_feature_seconds",
+        "seg_800_to_1000_raw_delta_seconds",
+        "seg_800_to_1000_endpoint_measurement_eligible",
+        "seg_800_to_1000_point_quality_clear",
+        "seg_800_to_1000_quality_eligible",
+        "seg_800_to_1000_feature_eligible",
+        "seg_800_to_1000_feature_seconds",
+        "g3f_identity_residual_finish_minus_c3_minus_g3f",
+        "g3f_identity_diagnostic_eligible",
+        "g3f_identity_within_0_15s",
+        "five_sections_measurement_monotone",
+        "five_sections_feature_eligible_and_monotone"
+      ]
+    },
+    "source_race_point_quality_masks.parquet": {
+      "rows": 6428,
+      "columns": [
+        "race_id",
+        "point",
+        "race_date",
+        "expected_full_roster_runner_rows",
+        "observed_order_status_rows",
+        "expected_started_api_record_ids_sha256",
+        "observed_order_api_record_ids_sha256",
+        "order_status_coverage_complete",
+        "order_started_api_id_set_exact",
+        "order_started_horse_identity_exact",
+        "order_status_missing_or_unknown_or_hold_n",
+        "order_status_values",
+        "group_status_rows",
+        "api303_selected_record_id",
+        "api303_selection_consistent_across_started_roster",
+        "api303_selected_id_null_runner_n",
+        "api303_distinct_selected_ids_n",
+        "group_selected_record_status_rows",
+        "group_status_coverage_present",
+        "group_status_missing_or_unknown_or_hold_n",
+        "group_status_values",
+        "group_selected_source_fingerprint_matches_quality_view",
+        "group_quality_status_matches_quality_view",
+        "point_clear_full_race",
+        "race_point_status_mask_sha256"
+      ]
+    },
+    "source_point_order_status_evidence.parquet": {
+      "rows": 65392,
+      "columns": [
+        "api_record_id",
+        "race_date",
+        "meet_code",
+        "race_number",
+        "horse_number",
+        "horse_id",
+        "field_name",
+        "quality_order_value",
+        "quality_order_status",
+        "api_payload_sha256",
+        "api_source_artifact_id",
+        "api_source_page_sha256",
+        "api_source_page_path",
+        "race_id",
+        "is_started_roster_member"
+      ]
+    },
+    "source_point_group_status_evidence.parquet": {
+      "rows": 6428,
+      "columns": [
+        "api_record_id",
+        "source_artifact_id",
+        "record_type",
+        "race_date",
+        "meet_code",
+        "race_number",
+        "point",
+        "group_status",
+        "group_value",
+        "payload_sha256",
+        "source_page_sha256",
+        "source_page_path",
+        "race_id",
+        "api303_selected_record_id",
+        "is_started_roster_selected_api303_record"
+      ]
+    },
+    "source_fingerprint_before_after.parquet": {
+      "rows": 16453,
+      "columns": [
+        "api_record_id",
+        "before_source_artifact_id",
+        "before_record_type",
+        "before_payload_sha256",
+        "before_source_page_sha256",
+        "before_source_page_path",
+        "before_source_row_fingerprint_sha256",
+        "after_source_artifact_id",
+        "after_record_type",
+        "after_payload_sha256",
+        "after_source_page_sha256",
+        "after_source_page_path",
+        "after_source_row_fingerprint_sha256",
+        "api4_3_payload_sha256",
+        "api4_3_source_artifact_id",
+        "api4_3_source_page_sha256",
+        "api4_3_source_page_path",
+        "before_after_fingerprint_equal",
+        "source_record_type_equal_before_after",
+        "source_page_path_equal_before_after",
+        "source_artifact_equal_before_after",
+        "quality_view_source_fingerprint_matches_before",
+        "quality_view_source_fingerprint_matches_after"
+      ]
+    },
+    "section_time_reviews.parquet": {
+      "rows": 0,
+      "columns": [
+        "api_record_id",
+        "field_name",
+        "review_status",
+        "api_seconds_at_review",
+        "api_payload_sha256_at_review",
+        "website_display",
+        "website_seconds",
+        "effective_seconds",
+        "website_url",
+        "checked_date_kst",
+        "evidence_relative_path",
+        "evidence_sha256",
+        "decision_reason",
+        "applied_at_utc"
+      ]
+    }
+  }
+}

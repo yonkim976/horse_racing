@@ -1,0 +1,122 @@
+{
+  "disclosure": "Reviewer previously saw three first-race y/log_loss/brier values during a schema read; they were not aggregated or used to choose or alter rules. This is repeatedly inspected historical development data, not a fresh holdout.",
+  "manifest_self_hash": "omitted; hash this file externally if needed",
+  "manifest_type": "INDEPENDENT_REVIEW_MANIFEST",
+  "owned_files": [
+    {
+      "bytes": 3899,
+      "path": "jeju/research/20261025_top5_set_review_v1/README.md",
+      "sha256": "22b5d819d9aad142790e282cf376df1a299bde21b8342785f5c1517372d46655"
+    },
+    {
+      "bytes": 9817,
+      "path": "jeju/research/20261025_top5_set_review_v1/PREOUTCOME_REVIEW.md",
+      "sha256": "ee60226b5ecb2b4b7914eafa8f3542f019e9386b324bf755c2ef7f9a0cfb0d8c"
+    },
+    {
+      "bytes": 3557,
+      "path": "jeju/research/20261025_top5_set_review_v1/INITIAL_CODE_REVIEW.md",
+      "sha256": "dc423ae89f686c593301d609b2a49569eaae5427f69f2135c4de4ea9cfa5b252"
+    },
+    {
+      "bytes": 2806,
+      "path": "jeju/research/20261025_top5_set_review_v1/CHOICE_AUDIT.md",
+      "sha256": "0ec2424947c1c907fc88302b866ca04595bec31afcf482a921d2712bd9aac9bb"
+    },
+    {
+      "bytes": 13613,
+      "path": "jeju/research/20261025_top5_set_review_v1/verify_choices.py",
+      "sha256": "3021e97cb919bd60af8495060cdf9a4747ce31e598a7472b4041c300fe535986"
+    },
+    {
+      "bytes": 993,
+      "path": "jeju/research/20261025_top5_set_review_v1/INDEPENDENT_CHOICE_AUDIT.json",
+      "sha256": "fc995f8b687b74f08ae5c80f5b456aaa8f04fe33a2b71e23af2cb0be961b26e6"
+    },
+    {
+      "bytes": 20264,
+      "path": "jeju/research/20261025_top5_set_review_v1/verify_outcomes.py",
+      "sha256": "d6fa3dcef2ea89adf0349a7f793f5532bc5e1cd84b7de995ab4e1b7edd9c463e"
+    },
+    {
+      "bytes": 33103,
+      "path": "jeju/research/20261025_top5_set_review_v1/INDEPENDENT_OUTCOME_AUDIT.json",
+      "sha256": "3b1e1c3e8b5c6e1919a166274a8daaf45e43c2ce01287b58bc181389adb8b73a"
+    },
+    {
+      "bytes": 12784,
+      "path": "jeju/research/20261025_top5_set_review_v1/reconcile_outcomes.py",
+      "sha256": "859f7e44b381a9dd94c778c46936235e4448d5e442ec099efc90595cb629c7d3"
+    },
+    {
+      "bytes": 1420,
+      "path": "jeju/research/20261025_top5_set_review_v1/OUTCOME_RECONCILIATION.json",
+      "sha256": "3acb9b1e086363a6bf893871ae02e158fdb1df70eb625a8588a27ec1f1678527"
+    }
+  ],
+  "owned_files_total_bytes_excluding_manifest": 102256,
+  "primary_result": {
+    "baseline_all_three_hits": 439,
+    "candidate_all_three_hits": 415,
+    "cohort_races": 1503,
+    "date_bootstrap_95ci_percentage_points": [
+      -2.8038789735254586,
+      -0.4024010102139967
+    ],
+    "date_bootstrap_95ci_rate": [
+      -0.028038789735254588,
+      -0.004024010102139967
+    ],
+    "delta_percentage_points": -1.5968063872255487,
+    "delta_rate": -0.015968063872255488,
+    "gate_passed": false
+  },
+  "status": "COMPLETE_INDEPENDENT_REVIEW",
+  "storage_budget_target_bytes": 20000000,
+  "study": "20261025_top5_set_review_v1",
+  "upstream_artifacts": {
+    "locked_selections": {
+      "path": "jeju/research/20261025_top5_set_selection_v1/outputs/selections.jsonl",
+      "sha256": "1f3d40769939b82afe4f6278f92bf5f13af85329355a4a03ddc036391d55322d"
+    },
+    "main_final_manifest": {
+      "path": "jeju/research/20261025_top5_set_selection_v1/FINAL_MANIFEST.json",
+      "sha256": "c61886eeadc1ee107b8120394097e4c862cc0338cd62e541d64672ab76affc8c"
+    },
+    "main_metrics": {
+      "path": "jeju/research/20261025_top5_set_selection_v1/outputs/metrics.json",
+      "sha256": "a27abed8b865fe0ba50c0898033d6e390a58310979c9c22e48f0485004ab25b1"
+    },
+    "main_report_receipt": {
+      "path": "jeju/research/20261025_top5_set_selection_v1/outputs/report_receipt.json",
+      "sha256": "ba874a628c6d6c0cd3115b41943369267425d0cabb283ccee54f1a138c1e7628"
+    },
+    "root_outcome_recomputation": {
+      "path": "jeju/research/20261025_top5_set_rootreview_v1/ROOT_OUTCOME_RECOMPUTATION.json",
+      "sha256": "75f1e7b4ca0b434b55f9b78a8c2f6d58202cd39c8e1dc5e994ec2f8410386223"
+    },
+    "root_q_reconstruction": {
+      "path": "jeju/research/20261025_top5_set_rootreview_v1/ROOT_Q_RECONSTRUCTION.json",
+      "sha256": "f50e75f1815793fd4874bc36f38f80d64c4fd0192da2e89fb144b9ae7bae627a"
+    },
+    "root_report_code_review_v2": {
+      "path": "jeju/research/20261025_top5_set_rootreview_v1/ROOT_REPORT_CODE_REVIEW_v2.json",
+      "sha256": "9f5d8865fd8f252557787263509f123aadf1e38819824839f70a16e029bf0de0"
+    },
+    "root_three_way_reconciliation": {
+      "path": "jeju/research/20261025_top5_set_rootreview_v1/THREE_WAY_RECONCILIATION.json",
+      "sha256": "f81c007b741a04f063ca9f50233a7aa2890ae934f6a846ffa0e996a8815ba2af"
+    },
+    "selection_receipt": {
+      "path": "jeju/research/20261025_top5_set_selection_v1/outputs/selection_receipt.json",
+      "sha256": "28711efecfece9da8dbf79639f2dd55223335cc67453273aa46a7efe6a55f2e6"
+    }
+  },
+  "verification": {
+    "choices": "PASS exhaustive C(N,5) replay for all 1,779 races; matched-unary negative control all races; no outcomes read",
+    "outcomes": "PASS independent raw-y recomputation after choice hash and root v2 approval checks",
+    "per_race_reconciliation": "PASS all 1,779 main outcome rows matched to raw y and locked selection IDs",
+    "root_three_way": "PASS three implementations, 35 checks",
+    "summary_reconciliation": "PASS primary/full and all subgroup summaries matched main; primary counts, rates, CI, gate matched root independent receipt"
+  }
+}

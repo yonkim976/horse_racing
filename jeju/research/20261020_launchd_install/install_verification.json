@@ -1,0 +1,49 @@
+{
+  "installed_at_utc": "2026-10-20T07:00:56.211652+00:00",
+  "label": "com.horse-racing.jeju-research-refresh",
+  "target": "gui/501/com.horse-racing.jeju-research-refresh",
+  "plist_path": "/Users/kimyongjin/Library/LaunchAgents/com.horse-racing.jeju-research-refresh.plist",
+  "plist_sha256": "bb32e1e532b8b75366a772ffd9645faf2e6dbb9ce4ab4e93e3b45234060f9dd1",
+  "plist_mode": "0o600",
+  "configuration": {
+    "EnvironmentVariables": {
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "PYTHONUNBUFFERED": "1"
+    },
+    "KeepAlive": false,
+    "Label": "com.horse-racing.jeju-research-refresh",
+    "ProgramArguments": [
+      "/Users/kimyongjin/Desktop/horse_racing/.venv/bin/python",
+      "-u",
+      "-m",
+      "jeju.refresh.launchd_runner"
+    ],
+    "RunAtLoad": false,
+    "StandardErrorPath": "/Users/kimyongjin/Library/Logs/horse-racing/jeju-research-refresh.err.log",
+    "StandardOutPath": "/Users/kimyongjin/Library/Logs/horse-racing/jeju-research-refresh.out.log",
+    "StartCalendarInterval": {
+      "Hour": 22,
+      "Minute": 0
+    },
+    "WorkingDirectory": "/Users/kimyongjin/Desktop/horse_racing"
+  },
+  "plutil_lint": "passed",
+  "launchd_registered": true,
+  "same_installed_service_kickstarted": true,
+  "other_launchagents_unchanged": 15,
+  "codex_automation_removed": true,
+  "tests": {
+    "excluded_horse_table_cases": 6,
+    "busy_or_missing_receipt_preserves_success_cases": 3
+  },
+  "core_code_change": {
+    "before_sha256": "a9f622117bf24d48f38fb362933a668b2e0a4e4377c736b056d01f38f8cae0a6",
+    "after_sha256": "e03cde8cb628a9c9f8ec14f9afbdabeb2f6e6bcb4aa9e1f2ff45433986ddae0a",
+    "reason": "Moved successful return outside exclusion loop so all six active tables are checked."
+  },
+  "code_sha256": {
+    "jeju/refresh/launchd.py": "5fc5564b1284288fdb0b38493b4744f5ca472f6e8e69c0a4924cbe3ad9417cac",
+    "jeju/refresh/launchd_runner.py": "7b553a4943062af69340345c9d4785af753c756eb4c537d3247688c6d99b8294",
+    "jeju/scripts/verify_refresh_application.py": "eaf18dbea55fb58cb16caa3d8e421ec36f1a008ee2be3ea0e26d8d827d410791"
+  }
+}

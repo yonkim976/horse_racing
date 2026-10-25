@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "reviewer": "root",
+  "workers": "GPT-6 Luna xhigh",
+  "scope": "Existing frozen q selection policies; no new fit, DB or operational change",
+  "cohort": {
+    "races": 1779,
+    "runner_starts": 17412,
+    "dates": 269,
+    "period": [
+      "2024-01-05",
+      "2026-09-19"
+    ],
+    "partial_2026": true
+  },
+  "reviewed": [
+    {
+      "path": "jeju/research/20261010_pair_axis_v1/README.md",
+      "bytes": 7628,
+      "sha256": "5c737060cd6c46d52f95cdb930e99b35fd0754645b714ac10ceb8c8363bf7a04"
+    },
+    {
+      "path": "jeju/research/20261010_pair_axis_v1/analyze.py",
+      "bytes": 52065,
+      "sha256": "0001a88d0a4e68e175b5973b52d3adcf183dbd48c701c9f3539ed1088995b8b3"
+    },
+    {
+      "path": "jeju/research/20261010_pair_axis_review_v1/outputs/independent_validation_receipt.json",
+      "bytes": 23942,
+      "sha256": "9fce11f05e57cc75aa6c7be679ea706783cf3145fce2007e5f6c6ee4b780720e"
+    },
+    {
+      "path": "jeju/research/20261010_pair_axis_review_v1/outputs/supplemental_fixed_cutoff_receipt.json",
+      "bytes": 4446,
+      "sha256": "4697afc1294c46b29d5e29b5c5ae93c10228f4ae6354a20067109c27bc9a8b38"
+    }
+  ],
+  "root_checks": [
+    "Source-q independent spotchecks reproduced full-cohort axis and ticket counts",
+    "Fixed .6/.8 subsets reproduced independently from per-race metrics",
+    "Same-budget comparisons, conditional denominators and confidence coverage reviewed",
+    "Four primary date-cluster intervals include zero; improvement not established"
+  ],
+  "interpretation": [
+    "Two-axis success around 24% is the main pair bottleneck",
+    "Single-axis .8 subset has only about 3% coverage; its tickets equal unrestricted tickets",
+    "Unordered Top3 q does not identify exact Top2 or win probabilities",
+    "Repeated historical development cohort; no independent future validation",
+    "Dedicated axis or conditional-companion learning remains an untested next hypothesis"
+  ]
+}

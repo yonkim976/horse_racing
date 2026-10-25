@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "checks": {
+    "database_unchanged": true,
+    "all_references_and_jeju_models_unchanged": true,
+    "contract_lock_valid": true,
+    "all_history_lists_are_exact_T_minus_2_recent5": true,
+    "history_target_rows_checked": 59042,
+    "synthetic_T_minus_2_included_T_minus_1_excluded": true,
+    "same_day_target_outcomes_and_track_do_not_change_features": true,
+    "coefficient_train_end_precedes_record": true,
+    "initial_2019_2020_not_backfilled": true,
+    "number_effects_average_zero": true,
+    "no_unvalidated_number_seconds_applied": true,
+    "serialized_inference_matches_all_predictions": true,
+    "forecast_train_calibration_evaluation_order": true,
+    "identical_evaluation_population_all_variants": true,
+    "probabilities_sum_three_and_valid_top3_labels": true,
+    "losses_and_correction_arithmetic": true,
+    "unsupported_effects_null_application_zero": true,
+    "selected_zero_variants_exactly_equal_R0": true
+  },
+  "versions": {
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.0"
+  },
+  "database_sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+  "code_sha256": "b1aae44d297401b52054e17e90fb62995342ed35c487739193ad3ab463d1e8e1",
+  "independence": "separate arithmetic/inference implementation by same agent; no independent reviewer or future sample"
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "study": "20261025_top5_reward_learning_v1",
+  "review_path": "jeju/research/20261025_top5_reward_learning_review_v1",
+  "review_status": "complete",
+  "publication_conclusion": "do_not_promote; retain existing model/selection practice",
+  "scope": {
+    "owned_output_directory_only": true,
+    "main_study_modified": false,
+    "database_or_production_model_modified": false,
+    "feature_parquet_or_candidate_set_matrix_copied": false,
+    "evaluation_outcomes_used_for_fit_or_choice": false,
+    "evaluation_outcomes_opened_after_approval_for_audit": true
+  },
+  "review_checks": {
+    "independent_objective_derivation_and_synthetic_gradient": "PASS",
+    "actual_corrected_objective_gradient_finite_difference": "PASS",
+    "three_fold_fit_receipt_scaler_objective_gradient_replay": "PASS",
+    "all_1779_locked_choices_independent_label_free_replay": "PASS",
+    "post_approval_three_arm_outcome_and_13_reconciliations": "PASS",
+    "primary_promotion_gate": "FAIL; both reward comparisons negative and both 95% intervals include zero",
+    "initial_static_fit_review": "WITHDRAWN; root detected a per-race gradient aggregation defect before fit; corrected source was rechecked and used"
+  },
+  "locked_main_artifacts": {
+    "main_final_manifest": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/FINAL_MANIFEST.json",
+      "sha256": "f2cb43ec002078f29d3140c58e7a02fa013087b880e3ec9e50ad9cddbd5acc9c"
+    },
+    "fit_selector": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/fit_selector.py",
+      "sha256": "043c669ad6f8d7a9d66bb5846002758385c3e0811e7e6720727b2e5c1e9b85dc"
+    },
+    "select_sets": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/select_sets.py",
+      "sha256": "332304c499615288b37d9bc485f45f926931dedaf35d8242a4823e14fc616d54"
+    },
+    "report_outcomes": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/report_outcomes.py",
+      "sha256": "4c787aceb33afb8c926ad8c7a95d64d1f2a63011fa8d0a2072b992ef89c9311a"
+    },
+    "fit_receipt": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/FIT_RECEIPT.json",
+      "sha256": "5e193b1cfa382e61f87933b9072454ae402ab47cc542598fc174abdb3f1ed24d"
+    },
+    "choice_receipt": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/CHOICES_RECEIPT.json",
+      "sha256": "14d129b4936ff163eaec24ddcd2da5ac79d182b8abf121b88b23d1ceb39ccc71"
+    },
+    "locked_choices": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/candidate_choices.jsonl",
+      "sha256": "7a5bc0b10d03bf4b32446edbcd4e65e9d90079a720e39906addef719806b14ad"
+    },
+    "root_outcome_approval": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/ROOT_OUTCOME_APPROVAL.json",
+      "sha256": "41fecca1e039e216f2c2be9bd3cc94a26167196bd26b321fb6e55adb12dac68b"
+    },
+    "outcome_receipt": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/OUTCOME_RECEIPT.json",
+      "sha256": "18b3e7b0d146e60fa89f22d9e0f2244bbe75462789643cc32faf926fb28ade09"
+    },
+    "locked_outcomes": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/outcomes.json",
+      "sha256": "0b975808fb9ec1792cb82ee19e9232fd0bda78a4f31a5d72e109738fcd9ba3e7"
+    },
+    "race_outcomes": {
+      "path": "jeju/research/20261025_top5_reward_learning_v1/outputs/race_outcomes.jsonl",
+      "sha256": "bd5836b6369d411e5e89b78554a043f20bc00b23ac0717d1493dfa515776531b"
+    }
+  },
+  "source_data_hashes": {
+    "baseline_predictions_parquet": {
+      "path": "jeju/research/20261019_distance_section_relative_evaluation_v1/outputs/baseline_runner_predictions.parquet",
+      "sha256": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1"
+    },
+    "feature_parquet": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "date_bootstrap_schedule": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd"
+    },
+    "bootstrap_schedule_metadata": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+      "sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+      "declared_date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84"
+    }
+  },
+  "primary_result": {
+    "races": 1503,
+    "all_three_hits": {
+      "raw": 439,
+      "partial_nll": 435,
+      "reward": 434
+    },
+    "reward_minus_raw_pp": -0.332667997338656,
+    "reward_minus_raw_ci95_pp": [
+      -1.6459112411,
+      1.0467122306
+    ],
+    "reward_minus_partial_nll_pp": -0.0665335994677312,
+    "reward_minus_partial_nll_ci95_pp": [
+      -1.3184568723,
+      1.1356045424
+    ]
+  },
+  "files": [
+    {
+      "path": "ACTUAL_FIT_GRADIENT_AUDIT.json",
+      "sha256": "7f7614ae61c173451bbafde349103df2598532fc3540756a39e6e560c825b552",
+      "bytes": 712
+    },
+    {
+      "path": "FIT_CODE_REVIEW.md",
+      "sha256": "c57fcae1d2cbb7b6bae622d975a55d9d49a4d6dedfe72379c14e4a2c02132c78",
+      "bytes": 6076
+    },
+    {
+      "path": "INDEPENDENT_CHOICE_AUDIT.json",
+      "sha256": "f54b12e2717910529c6f52a03d62117abdafb51c539af920df135b763fc5a397",
+      "bytes": 2707
+    },
+    {
+      "path": "INDEPENDENT_MATH_REVIEW.md",
+      "sha256": "8caf6f44c1c06d104535a4d288524280387e32da368f6211a98dcf7dc405f102",
+      "bytes": 4045
+    },
+    {
+      "path": "INDEPENDENT_OUTCOME_AUDIT.json",
+      "sha256": "702b7c5fa2790aeb95c2752a3fa14da9d9eff1252f12090d70fa1d12068d9e49",
+      "bytes": 57465
+    },
+    {
+      "path": "OUTCOME_CODE_REVIEW.md",
+      "sha256": "2bf01642676a0e3e755ce1cbcb4327fbc5b40db8584fcc18a99adbe392cc8e19",
+      "bytes": 3390
+    },
+    {
+      "path": "README.md",
+      "sha256": "5bd67e4c2b7cc51d9d1859fa4ac907daf2908ad5f2ef6e0618431f54ad1c7f22",
+      "bytes": 6163
+    },
+    {
+      "path": "README_KO.md",
+      "sha256": "6c88fe239a5af7a139ded272a71e1ac5aab9f810d65b39c4e8cef850a8eb4282",
+      "bytes": 5946
+    },
+    {
+      "path": "RECOMPUTED_FIT_AUDIT.json",
+      "sha256": "0d62dbe26d31e48a15275185f384b75cd07498e595c8a19bb703c30dd36d83c1",
+      "bytes": 5631
+    },
+    {
+      "path": "SELECTION_CODE_REVIEW.md",
+      "sha256": "b4a97a415ff09780adebe3d93fa731498b492d6bdcfd9150fcdef444e43a29ed",
+      "bytes": 3058
+    },
+    {
+      "path": "check_actual_fit_gradient.py",
+      "sha256": "df38a4f95715a085222d706c83f26fc1582d033b803cb8f1da15164072bf4d54",
+      "bytes": 5401
+    },
+    {
+      "path": "check_reward_objective.py",
+      "sha256": "afaddd21947243472cc967980196732a11b02635d81c449dd836e3e7fe0d217c",
+      "bytes": 5230
+    },
+    {
+      "path": "recompute_fit_receipt.py",
+      "sha256": "84972652bfd8176e6712ba0be6395c2249731b97d8829f712eb31be987acf815",
+      "bytes": 18811
+    },
+    {
+      "path": "verify_locked_choices.py",
+      "sha256": "35d919e24ecff5633c1e3a04ad90c7b4399f2a290cbcbb3ae46913aa868c23aa",
+      "bytes": 20365
+    },
+    {
+      "path": "verify_locked_outcomes.py",
+      "sha256": "ef81bc72f2a930875b17a3e825a6943a7ef17e54cda514190c3f4262bc0b3936",
+      "bytes": 29808
+    }
+  ],
+  "total_review_file_bytes_excluding_this_manifest": 174808
+}

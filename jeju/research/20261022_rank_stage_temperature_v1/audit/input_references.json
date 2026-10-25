@@ -1,0 +1,387 @@
+{
+  "audit_date": "2026-10-22",
+  "scope": "Read-only review of prior summaries, plans, and focused code for probability-improvement options. No fitting, prediction, outcome metric computation, large parquet opening, database access, or external data collection.",
+  "source_contract": {
+    "authoritative_prior_manifest": {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/assets_audit/assets_manifest.json",
+      "sha256": "ea2d2b0363539f3b7b0b88c3b2254c14f04095715ac1f137f71beba77a9a36a3",
+      "bytes": 19107
+    },
+    "columns": [
+      {
+        "name": "api_record_id",
+        "dtype": "int64",
+        "role": "join key"
+      },
+      {
+        "name": "score",
+        "dtype": "float64",
+        "role": "raw F1_STYLE6 score before temperature"
+      }
+    ],
+    "raw_oos_available": {
+      "label_years": "2019-2025",
+      "rows": 38017,
+      "races": 3783,
+      "assets": [
+        {
+          "label_year": 2019,
+          "provider_fold_year": 2020,
+          "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2020/calibration_scores.parquet",
+          "sha256": "277595cfe5d9976d24a8dc1c0c0e302a9fd58e467046e337a9af13d3c7287cdc",
+          "bytes": 89958,
+          "rows": 5890,
+          "races": 576,
+          "refit_max": "2018-12-29",
+          "tau": null,
+          "temperature_optimizations": 0,
+          "score_semantics": "raw_score_before_temperature"
+        },
+        {
+          "label_year": 2020,
+          "provider_fold_year": 2021,
+          "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2021/calibration_scores.parquet",
+          "sha256": "ca2254c97e54a102954f706433864be8e5715d142ebf8237610311e4cbaa4c50",
+          "bytes": 49844,
+          "rows": 3290,
+          "races": 329,
+          "refit_max": "2019-12-28",
+          "tau": null,
+          "temperature_optimizations": 0,
+          "score_semantics": "raw_score_before_temperature"
+        },
+        {
+          "label_year": 2021,
+          "provider_fold_year": 2022,
+          "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2022/calibration_scores.parquet",
+          "sha256": "3665e2039946362b97fe4fa72e50d2e13c8fb3b77f9f71225a9ae9d5c4b84ee9",
+          "bytes": 66682,
+          "rows": 4331,
+          "races": 418,
+          "refit_max": "2020-12-20",
+          "tau": null,
+          "temperature_optimizations": 0,
+          "score_semantics": "raw_score_before_temperature"
+        },
+        {
+          "label_year": 2022,
+          "provider_fold_year": 2023,
+          "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2023/calibration_scores.parquet",
+          "sha256": "35c38b4acf6a5ca3236c41a85ba851577ab3053e92abb741a1e135f68942aa71",
+          "bytes": 80528,
+          "rows": 5261,
+          "races": 512,
+          "refit_max": "2021-12-25",
+          "tau": null,
+          "temperature_optimizations": 0,
+          "score_semantics": "raw_score_before_temperature"
+        },
+        {
+          "label_year": 2023,
+          "provider_fold_year": 2024,
+          "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/calibration_scores.parquet",
+          "sha256": "360cc559b1ab19cde177e0bb23206fd36f123b707714fbcb63547fdb9bed05b2",
+          "bytes": 99057,
+          "rows": 6506,
+          "races": 657,
+          "refit_max": "2022-12-24",
+          "tau": 1.1006448744136295,
+          "temperature_optimizations": 1,
+          "score_semantics": "raw_score_before_temperature"
+        },
+        {
+          "label_year": 2024,
+          "provider_fold_year": 2025,
+          "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/calibration_scores.parquet",
+          "sha256": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755",
+          "bytes": 96795,
+          "rows": 6329,
+          "races": 637,
+          "refit_max": "2023-12-30",
+          "tau": 1.1156577765075688,
+          "temperature_optimizations": 1,
+          "score_semantics": "raw_score_before_temperature"
+        },
+        {
+          "label_year": 2025,
+          "provider_fold_year": 2026,
+          "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/calibration_scores.parquet",
+          "sha256": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8",
+          "bytes": 97900,
+          "rows": 6410,
+          "races": 654,
+          "refit_max": "2024-12-28",
+          "tau": 0.9719459584109199,
+          "temperature_optimizations": 1,
+          "score_semantics": "raw_score_before_temperature"
+        }
+      ]
+    },
+    "fit_candidate_required_years": {
+      "label_years": "2019-2023",
+      "races": 2492,
+      "rows": 25278
+    },
+    "evaluation_available": {
+      "period": "2024-01-05..2026-09-19",
+      "races": 1779,
+      "rows": 17412,
+      "assets": [
+        {
+          "evaluation_year": 2024,
+          "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet",
+          "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60",
+          "bytes": 96811,
+          "rows": 6329,
+          "races": 637,
+          "use": "frozen comparator only; evaluation dates/labels are repeated development material"
+        },
+        {
+          "evaluation_year": 2025,
+          "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet",
+          "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+          "bytes": 97876,
+          "rows": 6410,
+          "races": 654,
+          "use": "frozen comparator only; evaluation dates/labels are repeated development material"
+        },
+        {
+          "evaluation_year": 2026,
+          "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet",
+          "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+          "bytes": 71793,
+          "rows": 4673,
+          "races": 488,
+          "use": "frozen comparator only; 2026 is partial through 2026-09-19"
+        }
+      ]
+    },
+    "frozen_feature_reference_only": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "bytes": 5476534,
+      "rows": 52155,
+      "races": 5206,
+      "date_range": [
+        "2017-01-13",
+        "2026-09-19"
+      ],
+      "note": "F1_STYLE6 frozen feature table; contains labels/context, not raw model score. Existing manifest is the hash source."
+    },
+    "contract_change_needed": false,
+    "contract_note": "Stage-specific temperatures use the same raw score, frozen race grouping, and existing finish_position labels; do not consume provider tau/calibrated probabilities. Feature file and score parquet contents were not opened during this audit; references/hashes are reused from the prior audited manifest.",
+    "field_size_support_reference": {
+      "minimum_observed_field_n": 7,
+      "under_8_races_by_year": {
+        "2017": 23,
+        "2018": 20,
+        "2019": 0,
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 4,
+        "2026": 32
+      },
+      "2025_small_fields": {
+        "races": 4,
+        "field_n": 7,
+        "rows": 28
+      },
+      "2026_small_fields": {
+        "races": 32,
+        "field_n": 7,
+        "rows": 224
+      }
+    }
+  },
+  "prior_result_facts": {
+    "full_field_PL_common_temperature": {
+      "temperature": 1.1837152381349905,
+      "fit_period_races": 2492,
+      "evaluation_races": 1779,
+      "tri_delta_nll": -0.0182671075,
+      "tri_delta_nll_date_bootstrap_95": [
+        -0.0269433365,
+        -0.0092957929
+      ],
+      "tri_delta_brier": -0.0001214193,
+      "win_delta_nll": 0.003477,
+      "tri_delta_brier_2025": 6.4e-05,
+      "tri_delta_brier_2026_partial": 3.2e-05
+    },
+    "conditional_order_head": {
+      "conditional_nll_control": 1.834,
+      "conditional_nll_candidate": 1.7419,
+      "same_HY_2026_common_races": 467,
+      "candidate_minus_HY_nll_WIN_QNL_EXA_TRI": [
+        0.13,
+        0.1558,
+        0.1767,
+        0.1813
+      ],
+      "fit_design": "10 beta coefficients plus one order temperature per each of three annual folds; native set q fixed"
+    },
+    "relationship_set_energy": {
+      "pair_features_per_fold": 11,
+      "evaluation_races": 1779,
+      "candidate_minus_control_true_set_nll": 0.000634733,
+      "six_pick_hit_control_candidate": [
+        407,
+        423
+      ],
+      "gate_passed": false
+    },
+    "direct_pair": {
+      "candidate_hits": 427,
+      "raw_score_top2_hits": 429,
+      "races": 1779,
+      "gate_passed": false,
+      "joint_probability_guarantee": false
+    }
+  },
+  "prior_method_references": [
+    {
+      "path": "jeju/AGENTS.md",
+      "sha256": "9a768824a74dce74c70d9cd93722e5d8dc0b41d0785ab67db3673c472c978a57",
+      "bytes": 26604
+    },
+    {
+      "path": "jeju/docs/RESTART_PLAN_20260928.md",
+      "sha256": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848",
+      "bytes": 6426
+    },
+    {
+      "path": "jeju/docs/JEJU_PREDICTION_OBJECTIVES_2026-09-28.md",
+      "sha256": "429427c8e41181c1daab83c75f586138a5188d30218051c2acde493814d53217",
+      "bytes": 8113
+    },
+    {
+      "path": "jeju/review_documents/README.md",
+      "sha256": "e8b01c4d02b7d6ead52c0d215af9120994e1ef6d35934bb1669e493c3dd96890",
+      "bytes": 5849
+    },
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/README.md",
+      "sha256": "8beee62d23cb97e64be933ced73a81d42e6f3176b202e29253725ef02c9f5200",
+      "bytes": 17716
+    },
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/supervisor/DESIGN_DECISION.md",
+      "sha256": "3b6f6afa4f3b6fe6a31204733e01b584a476b7f57d9d3fdfbfe50049603933e4",
+      "bytes": 5917
+    },
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/experiment/PLAN.md",
+      "sha256": "818e8a268d2955890f7185157f9503ffc4c24df035839354bc74f5804a71fe62",
+      "bytes": 10960
+    },
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/experiment/baseline.py",
+      "sha256": "c7c6fb27ac43bdf4eba952a30ecdb957f4c1c19575bd856e50eba9b87455a6c7",
+      "bytes": 51176
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/FINAL_RESULTS.md",
+      "sha256": "00507fdf1fff74e19498b605501a4d9351c37928f30afb4c6e96761631895607",
+      "bytes": 5193
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e",
+      "bytes": 31038
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/run.py",
+      "sha256": "313ccf5ea1c48911787749e4db16d93f47cbb07a16136601236b58a48199c396",
+      "bytes": 9936
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/README.md",
+      "sha256": "2e83b97184ed8ba03a9bd244a638b83ddc575594ad271b22b19cd06c4ccdf133",
+      "bytes": 6917
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/PLAN.md",
+      "sha256": "b5aeebeaadfd73e73e2d8bf97eb79a6bcaa82e0e5492f78cf0fe1aa52da02a80",
+      "bytes": 8902
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/order_head_core.py",
+      "sha256": "4538145db59e819bc749eca187f150a58b57084e95b73c73f4fdb3c5f2b53f50",
+      "bytes": 11004
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/fit_predict.py",
+      "sha256": "4c5c451bd1264f33c1725d3121b4ee1832bd9588ee8608559904f0e7ef80ba1c",
+      "bytes": 36289
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/metrics.py",
+      "sha256": "29f451cb23f6fa657108cf25d5d5bd1aa065d44161c535a5c4b5d347ee0dace3",
+      "bytes": 46437
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/README.md",
+      "sha256": "d82a710d9f2d3b6ad87e83651fdc8f5f192a5408d6c169c98be7be9af75a7605",
+      "bytes": 3905
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/RESULTS_AND_LIMITATIONS.md",
+      "sha256": "2ce5677434390542d6adf7eba3114328c6d5068e5a8620fc543f80d364f821e7",
+      "bytes": 15471
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/PLAN.md",
+      "sha256": "e0a34c6962112d88bfec7e645efbd8e4ea69bf4aada088f580e1188bac1207f3",
+      "bytes": 14361
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/joint_model.py",
+      "sha256": "cdb1115dfe797aad0bc71be25a21215909166eb1b644244e8d460f7e3da1cb92",
+      "bytes": 30933
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/README.md",
+      "sha256": "8e1d5d525d33bd3e9f773985c9bf28844d608ef213da5161f9e008b1d2192901",
+      "bytes": 5050
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/PLAN.md",
+      "sha256": "6368e06b9dc22d1254c77e0e634fa0c0229f2a1821038f6345d8fb42fd8e8129",
+      "bytes": 11139
+    }
+  ],
+  "reviewed_method_search": {
+    "directories": [
+      "jeju/research/20261010_style_history_ablation_v1",
+      "jeju/research/20261010_joint_relationship_v1",
+      "jeju/research/20261011_pair_top3_oos_expansion_v1",
+      "jeju/research/20261017_conditional_order_head_v1",
+      "jeju/research/20261022_joint_wager_baseline_v1"
+    ],
+    "terms": [
+      "stage-specific",
+      "position-specific",
+      "rank-specific",
+      "stage_temperature",
+      "temperature_by_stage",
+      "first/second/third temperature",
+      "order_temperature"
+    ],
+    "finding": "No separate full-field T1/T2/T3 fit or report was found in the reviewed study code/docs. Existing constructs are shared full-field T, fixed native set q with conditional order head, and pairwise set-energy adjustments. This finding is limited to the listed studies, not a claim about every source file in the repository."
+  },
+  "design_issue": {
+    "three_temperature_scope": "identified only for full-field sequential PL where stage 3 risk set contains every starter except the first two; current field-size support is at least 7",
+    "fixed_top3_conditional_order": "after first and second within a fixed 3-runner set, third runner is deterministic, so a separate T3 there is unidentifiable",
+    "reported_to_supervisor": true
+  },
+  "audit_artifact": {
+    "readme": {
+      "path": "jeju/research/20261022_rank_stage_temperature_v1/audit/README.md",
+      "sha256": "f137bf0906c7d90da3cbd81f9bd7f4979fa67403de6ff2e7c40561c17017fd8d",
+      "bytes": 9126
+    }
+  }
+}

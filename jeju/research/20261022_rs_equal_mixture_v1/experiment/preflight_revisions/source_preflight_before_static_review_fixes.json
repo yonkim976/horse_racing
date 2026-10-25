@@ -1,0 +1,200 @@
+{
+  "bootstrap": {
+    "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+    "dtype": "int32",
+    "receipt_sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "shape": [
+      2000,
+      269
+    ]
+  },
+  "code_bundle_sha256": "e5ba9d95d9d888be3d281d8972b3e86ad0055b7cc4f2af1cc9125b5bb6a6600b",
+  "cohort": {
+    "R_S_reference_pair_diagnostic_rows": {
+      "R": 7116,
+      "S": 7116
+    },
+    "R_S_reference_pool_keys_equal": true,
+    "R_S_reference_runner_keys_equal": true,
+    "dates": 269,
+    "plc_unknown_actual_5_to_7": 36,
+    "plc_usable": 1743,
+    "pool_denominators": {
+      "EXA": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779,
+      "WIN": 1779
+    },
+    "race_key_sha256": "1278782771a10e26f72d266e6452b1f1c0f02b504636ea04b5f0d591444b005b",
+    "races": 1779,
+    "runner_key_sha256": "d520f5c34601a7199a8cda8b0f5c8b5a671d9786ff30e10958a5388abd2d91c3",
+    "runners": 17412,
+    "score_join_keys_equal_f1": true,
+    "year_races": {
+      "2024": 637,
+      "2025": 654,
+      "2026": 488
+    }
+  },
+  "contract_sha256": "e3cd97f4c2081e23dc077bf20641e5012e39ece3a396b11fd6838bef971e13a8",
+  "created_at_utc": "2026-10-22T11:42:33.914632+00:00",
+  "engine_sha256": "5608d56256c0d3052d7c985c8f6f5160f55bc018c20878b46b6b24d2c1df86f8",
+  "guard": {
+    "E_distribution_constructed": false,
+    "E_probabilities_or_losses_computed": false,
+    "database_opened": false,
+    "models_or_inputs_copied": false
+  },
+  "inputs": {
+    "F1_EVAL_2024": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet",
+      "provider_temperature": 1.2378241690081193,
+      "rows": 6329,
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60"
+    },
+    "F1_EVAL_2025": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet",
+      "provider_temperature": 1.2652561077417601,
+      "rows": 6410,
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12"
+    },
+    "F1_EVAL_2026": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet",
+      "provider_temperature": 1.11598418811972,
+      "rows": 4673,
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a"
+    }
+  },
+  "plan_sha256": "bfdd70da6c9edc3bb028ca9dffe9aa7fae6903733dd7e52780169cb6ddf3d7f1",
+  "rules": {
+    "plc_split": {
+      "5_to_7": "Top2",
+      "8_or_more": "Top3"
+    },
+    "sha256": "20cd4b17274018a36efbb1b0cea64eb5d5c9809ed5f3481bea59c734f99fee83"
+  },
+  "score_role_contract": {
+    "R": "raw F1_STYLE6 evaluation_scores.score; temperature from dynamic_ability_pace_v1 R_reference_fits",
+    "R_temperatures": {
+      "2024": 1.2378241690081193,
+      "2025": 1.2652561077417601,
+      "2026": 1.11598418811972
+    },
+    "S": "candidate_oos_scores score filtered arm=S,role=evaluation; temperature from TB state-transfer S model metadata",
+    "S_temperatures": {
+      "2024": 1.2839358195588775,
+      "2025": 1.323027519896799,
+      "2026": 1.165540100038154
+    },
+    "same_year_recalibration": false
+  },
+  "source_hashes": {
+    "BOOTSTRAP_RECEIPT": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+      "sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e"
+    },
+    "BOOTSTRAP_SCHEDULE": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd"
+    },
+    "DESIGN_CONTRACT": {
+      "path": "jeju/research/20261022_rs_equal_mixture_v1/supervisor/DESIGN_CONTRACT.md",
+      "sha256": "e3cd97f4c2081e23dc077bf20641e5012e39ece3a396b11fd6838bef971e13a8"
+    },
+    "F1_ARTIFACT_MANIFEST": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e"
+    },
+    "F1_EVAL_2024": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet",
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60"
+    },
+    "F1_EVAL_2025": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet",
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12"
+    },
+    "F1_EVAL_2026": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet",
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a"
+    },
+    "F1_FEATURES": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "MATH_ENGINE": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/experiment/dynamic_ability_pace.py",
+      "sha256": "706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c"
+    },
+    "RULES_CONTRACT": {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/rules_contract/rules_contract.json",
+      "sha256": "20cd4b17274018a36efbb1b0cea64eb5d5c9809ed5f3481bea59c734f99fee83"
+    },
+    "R_FINAL_MANIFEST": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/FINAL_MANIFEST.json",
+      "sha256": "33b3af723dc9f9ddb0dc1435e151f91e77513d04e998a128cad7fbc58a2ad312"
+    },
+    "R_PARAMETERS": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/experiment/outputs/parameters.json",
+      "sha256": "28da20c16c65450c024b07a4a12b916e88eaf8b9d16b8fdc66e1a6e582934dff"
+    },
+    "R_REFERENCE_AXIS": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/experiment/outputs/win_axis_ledger.parquet",
+      "sha256": "b99b491970c661d15c66120c583cda1c98b14a1d51ddde79c82e5cba8102671d"
+    },
+    "R_REFERENCE_MARGINALS": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/experiment/outputs/evaluation_runner_marginals.parquet",
+      "sha256": "93c025a0e6d89ab97ac1d7d8e718156128c2052cd9d31cc0c7153e2df40a80aa"
+    },
+    "R_REFERENCE_METRICS": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/experiment/outputs/race_pool_metrics.parquet",
+      "sha256": "8e8bdf9597b0b3251f9faff3a58e369e14734a27e06d12f18fc8f6ab688c3f7a"
+    },
+    "R_REFERENCE_SELECTIONS": {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/experiment/outputs/selected_ticket_ledger.parquet",
+      "sha256": "f67f2076a996f5e420324868ff4d3af165eaa7b31851e2ad94e42a6b50f3a79c"
+    },
+    "S_ENGINE": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/state_transfer.py",
+      "sha256": "963b2bcb574f3d49e539ae4e944a8a2f8f9bd769568d83018c2dcbcd2fa0623c"
+    },
+    "S_FINAL_MANIFEST": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/FINAL_MANIFEST.json",
+      "sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a"
+    },
+    "S_OOS_SCORES": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/candidate_oos_scores.parquet",
+      "sha256": "fe08bdf93b07f8a180ad02416cbbc1488db282c761564b67b886114ece56f6e9"
+    },
+    "S_PAIR_DIAGNOSTICS": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/pair_selection_diagnostics.parquet",
+      "sha256": "e47d67518cb6b86745ed14c853be98fe87fa3ccafc39049dd546cb608aff652f"
+    },
+    "S_PARAMETERS": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/parameters.json",
+      "sha256": "46fda546b2a537373291c83190ef7c6f00ffda94fccebcf9090c6f01dfc9c23e"
+    },
+    "S_REFERENCE_AXIS": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/win_axis_ledger.parquet",
+      "sha256": "ccce48ac981230de12ac7096627d95169e6040f114ea7bcf527fe16929d90d0a"
+    },
+    "S_REFERENCE_MARGINALS": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/evaluation_runner_marginals.parquet",
+      "sha256": "8d5c1de77fca4ea555f92c88b894ad89cf07ccf0f8b8a156ef50e38979ed6d4d"
+    },
+    "S_REFERENCE_METRICS": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/race_pool_metrics.parquet",
+      "sha256": "ce503ae93d6afe8d167e430cb6556428caa0e7100b72465799a734e3fba83001"
+    },
+    "S_REFERENCE_SELECTIONS": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/selected_ticket_ledger.parquet",
+      "sha256": "abc8cf48d0e489124043864f071697f253a61444900c2d731f61d66fe203f82d"
+    }
+  },
+  "status": "PASS_STRUCTURE_ONLY_NO_E_DISTRIBUTION_OR_METRICS",
+  "study": "jeju/research/20261022_rs_equal_mixture_v1",
+  "test_sha256": "25e36a4e9c54e008c8b9aa5b7900fb6fb3061833f6a1e46627ab14ec717974bf"
+}

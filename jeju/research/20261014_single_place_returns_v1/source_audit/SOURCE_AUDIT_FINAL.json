@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "study": "20261014_single_place_returns_v1",
+  "audit_scope": "stored API301 PLC source completeness, official runner identity, and Top2/Top3 label eligibility only",
+  "source_selection": {
+    "latest_complete_run_selected_by_date_meet": true,
+    "page_index_sha256": "81eacac6f3a19855ba681c9737fe23d42772b6dfa54daa1c79074715f3215706",
+    "page_index_rows": 506,
+    "page_manifest_sha256": "3bbd2024f1ddb9e604175ba48c694af2162a41fd9df4d345b127cb9bc4eeb682",
+    "page_hashes_checked": 506,
+    "all_source_page_hashes_match_files": true,
+    "selection_method_ref": "jeju/research/20261013_postrace_ev_exploration_v1/REPORT.json price_audit.method"
+  },
+  "source_coverage": {
+    "priced_races": 1142,
+    "priced_runner_rows": 11083,
+    "quote_coverage_within_price_supported_model_cohort": 1.0,
+    "all_quotes_match_saved_raw_and_root_reference": true,
+    "quote_key_unique": true,
+    "special_value_counts": {
+      "zero": 0,
+      "9999_9": 0,
+      "null_non_numeric": 0
+    },
+    "root_source_review_status": "PASS",
+    "root_source_review_sha256": "8d6c35c5e3aff56825a5ad0eed94bfac44622b98448ee35b44f492de3534738b"
+  },
+  "official_join": {
+    "official_result_races": 1779,
+    "official_result_runner_rows": 17412,
+    "join_key": "race_id + horse_number",
+    "verified_official_key": "kra_horse_id",
+    "all_price_rows_join_official_id_and_result": true,
+    "model_field_size_equals_official_field_size": true,
+    "official_roster_review_status": "PASS",
+    "official_review_sha256": "eda599dc6243ff7db310b1855a434aac26e22456873e9b9befc2722d34364913",
+    "scratch_dq_dead_heat_incomplete_rosters": 0
+  },
+  "place_rule": {
+    "rule": "field_size >= 8: Top3; field_size <= 7: Top2",
+    "each_supported_race_has_exactly_rule_count_qualifiers": true,
+    "races_with_7_or_fewer_runners": 36,
+    "races_with_8_or_more_runners": 1106,
+    "dead_heat_settlement_contract": "not exercised by cohort"
+  },
+  "row_integrity": {
+    "source_quote_rows": 11083,
+    "unique_race_horse_number": 11083,
+    "unique_race_kra_horse_id": 11083,
+    "duplicate_race_horse_number_rows": 0,
+    "identical_raw_rows_dropped": false,
+    "noncohort_source_matches_preserved": 1089
+  },
+  "return_contract": {
+    "source_is_winner_only_paid_payout": false,
+    "quotes_present_for_losers": true,
+    "nonqualifier_gross_return": "zero",
+    "price_unit": "raw decimal gross return multiplier per stake unit; no transformation",
+    "dead_heat_or_refund_contract": "unverified; no tied finish in this fixed cohort"
+  },
+  "prohibited_metrics": {
+    "probabilities_computed": false,
+    "performance_computed": false,
+    "ROI_computed": false,
+    "outcomes_or_metrics_computed": false
+  },
+  "artifacts": {
+    "PLC_PRICE_ROWS.csv": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/PLC_PRICE_ROWS.csv",
+      "sha256": "257326a9788a88f3fc6f8462c03af1f11b6b4e62e04a4e885d5d812c8bd4e52b",
+      "bytes": 3448648
+    },
+    "OFFICIAL_RUNNER_RESULTS.csv": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/OFFICIAL_RUNNER_RESULTS.csv",
+      "sha256": "4ae6133d9d537f9ca6b351ed909a945b88a428cb4babcdf15659e266a68f2df6",
+      "bytes": 1028975
+    },
+    "SOURCE_INVENTORY.json": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/SOURCE_INVENTORY.json",
+      "sha256": "4c6b5619fe1acbb5a15488c8aa28c03b783ba46df79584f2cdba9c659574eab6",
+      "bytes": 216592
+    },
+    "SOURCE_PAGE_INDEX.csv": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/SOURCE_PAGE_INDEX.csv",
+      "sha256": "81eacac6f3a19855ba681c9737fe23d42772b6dfa54daa1c79074715f3215706",
+      "bytes": 44499
+    },
+    "SOURCE_PAGE_MANIFEST.csv": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/SOURCE_PAGE_MANIFEST.csv",
+      "sha256": "3bbd2024f1ddb9e604175ba48c694af2162a41fd9df4d345b127cb9bc4eeb682",
+      "bytes": 96979
+    },
+    "API301_PLC_EXAMPLES.json": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/API301_PLC_EXAMPLES.json",
+      "sha256": "3d557bdd5d9916bf8da0d4ad2882f6a63eb33065a9525885f6c6e431e65b1bb1",
+      "bytes": 1532
+    },
+    "PLC_NONCOHORT_SOURCE_MATCHES.csv": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/drafts/PLC_NONCOHORT_SOURCE_MATCHES.csv",
+      "sha256": "61b08d09b03bcbf39bb654a743aaafb60f14c7d0bc6f8b0d9d0cb3894b3778ba",
+      "bytes": 296554
+    },
+    "SOURCE_AUDIT.md": {
+      "path": "jeju/research/20261014_single_place_returns_v1/source_audit/SOURCE_AUDIT.md",
+      "sha256": "4f43e0496d26b9bab8f96b9b92712df0ae9b8825fdbbd9e467ca2b34ac19a3b2",
+      "bytes": 6603
+    }
+  },
+  "price_timing": {
+    "official_publication_timestamp_in_api_item": false,
+    "source_retrieved_at_ms": "local collection metadata only",
+    "pre_race_availability_verified": false
+  }
+}

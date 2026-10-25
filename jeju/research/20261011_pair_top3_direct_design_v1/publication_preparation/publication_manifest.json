@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "status": "ready_to_apply",
+  "study_id": "pair_top3_direct_20261011",
+  "publication_date": "2026-10-11",
+  "snapshot": {
+    "label": "preappend_pair_top3_direct_20261011b",
+    "manifest_sha256": "12990e7235708a8ee89d5954181059d379945dcc21a25b266dc1fe6e7264732a"
+  },
+  "study_scopes": [
+    {
+      "key": "A",
+      "root": "jeju/research/20261011_pair_top3_direct_v1",
+      "manifest_path": "jeju/research/20261011_pair_top3_direct_v1/ARTIFACT_MANIFEST.json",
+      "manifest_format": "artifacts",
+      "manifest_sha256": "2050e59e55fea515e1e710efe0e4ac0db2412895ac174f1b7a20d607f6a027b4",
+      "manifest_bytes": 7516
+    },
+    {
+      "key": "B",
+      "root": "jeju/research/20261011_pair_top3_direct_design_v1",
+      "manifest_path": "jeju/research/20261011_pair_top3_direct_design_v1/ARTIFACT_MANIFEST.json",
+      "manifest_format": "local_files",
+      "manifest_sha256": "95b5b0f0e155c1a0f8e811f16dcfdbdbc3ba02b87b5293ef81c28d82342d983f",
+      "manifest_bytes": 2169
+    },
+    {
+      "key": "C",
+      "root": "jeju/research/20261011_pair_top3_direct_review_v1",
+      "manifest_path": "jeju/research/20261011_pair_top3_direct_review_v1/ARTIFACT_MANIFEST.json",
+      "manifest_format": "independent_review_artifacts",
+      "manifest_sha256": "81fdbf145100955dee7d733b547b7906deb3c7871e8e3bcf809bd5f659b53841",
+      "manifest_bytes": 11186
+    }
+  ],
+  "payload": {
+    "path": "jeju/research/20261011_pair_top3_direct_design_v1/publication_preparation/payload/direct_pair_top3_conclusion.md",
+    "sha256": "e9c644539a3992a4624e76e252336b3abab7acc0a4f7f3ae361268f054943c52",
+    "bytes": 2400
+  },
+  "publication": {
+    "topic_id": "pair_top3_direct_20261011",
+    "filename": "22_DIRECT_PAIR_TOP3_MODEL.md",
+    "title": "두 말 동시 Top3 직접 pair 모형 평가",
+    "readme_table_row": "| [두 말 동시 Top3 직접 pair 모형 평가](22_DIRECT_PAIR_TOP3_MODEL.md) | 한 경주에서 두 말이 모두 Top3인 사건의 대칭 직접 pair 모형을 기존 방식과 비교 | 개선 미확인; 독립 재현 PASS; 채택·운영 반영 없음 |",
+    "summary_marker": "<!-- direct_pair_top3_v1_20261011 -->",
+    "readme_summary_block": "<!-- direct_pair_top3_v1_20261011 -->\n[두 말 동시 Top3 직접 pair 모형 평가](22_DIRECT_PAIR_TOP3_MODEL.md): 1,779개 역사 개발 경주에서 직접모형은 426회, raw F1_STYLE6 상위 2두는 429회 적중했다. 차이는 -0.168634%p, 날짜 paired 95% CI [-0.553802, +0.222222]%p로 사전 개선 gate를 통과하지 못해 채택하지 않았다. [A 결과](../20261011_pair_top3_direct_v1/README.md), [C 독립 재현](../20261011_pair_top3_direct_review_v1/README.md). 운영 미반영.",
+    "sources_entry": "- [20261011_pair_top3_direct_v1](../20261011_pair_top3_direct_v1/README.md): 저장 F1_STYLE6 점수와 style 입력으로 학습한 직접 pair 모형을 1,779개 역사 개발 경주에서 비교. [결론](22_DIRECT_PAIR_TOP3_MODEL.md), [독립 재현](../20261011_pair_top3_direct_review_v1/README.md), [설계·원천 감사](../20261011_pair_top3_direct_design_v1/README.md). 개선 gate 실패; 운영 미반영.",
+    "register_record": {
+      "id": "pair_top3_direct_20261011",
+      "title": "두 말 동시 Top3 직접 pair 모형 평가",
+      "conclusion": "22_DIRECT_PAIR_TOP3_MODEL.md",
+      "design_source": "../20261011_pair_top3_direct_design_v1/README.md",
+      "latest_source": "../20261011_pair_top3_direct_v1/README.md",
+      "study_manifest": "../20261011_pair_top3_direct_v1/ARTIFACT_MANIFEST.json",
+      "independent_review": "../20261011_pair_top3_direct_review_v1/README.md",
+      "independent_validation": "../20261011_pair_top3_direct_review_v1/INDEPENDENT_REVIEW_RECEIPT.json",
+      "study_date": "2026-10-11",
+      "publication_date": "2026-10-11",
+      "period_start": "2024-01-05",
+      "period_end": "2026-09-19",
+      "partial_2026": true,
+      "evaluation_races": 1779,
+      "evaluation_runners": 17412,
+      "evaluation_days": 269,
+      "evaluation_unordered_pairs": 76848,
+      "population": "posthoc_normal_complete_full_roster_current_distance_cohort",
+      "primary_comparison": "direct_pair_top3_vs_raw_F1_STYLE6_score_top2; one selected unordered pair per race",
+      "direct_pair_hits": 426,
+      "raw_score_top2_hits": 429,
+      "saved_F1_STYLE6_PTop3_top2_hits": 429,
+      "direct_minus_raw_top2_rate": -0.0016863406408094434,
+      "direct_minus_raw_top2_paired_date_bootstrap_95pct_ci_rate": [
+        -0.005538024496568481,
+        0.0022222222222222222
+      ],
+      "candidate_joint_marginal_top2_hits": 434,
+      "candidate_joint_maximum_pair_hits": 422,
+      "matched_joint_maximum_pair_hits": 429,
+      "performance_improvement_confirmed": false,
+      "independent_calculation_validation": "passed",
+      "independent_future_validation": false,
+      "causal_effect_identified": false,
+      "new_training_calls": 3,
+      "database_query_performed": false,
+      "operationally_applied": false,
+      "status": "retrospective_independent_reproduction_passed_primary_improvement_unconfirmed_no_promotion"
+    },
+    "registry_scope_append": "저장 F1_STYLE6 점수와 style 입력을 활용한 두 말 동시 Top3 직접 pair 모형 평가; 개선 확인·운영 반영 없음",
+    "latest_study": "jeju/research/20261011_pair_top3_direct_v1",
+    "latest_verification": "jeju/research/20261011_pair_top3_direct_review_v1/INDEPENDENT_REVIEW_RECEIPT.json",
+    "latest_status": "retrospective_independent_reproduction_passed_primary_improvement_unconfirmed_no_operational_promotion",
+    "verification_updates": {
+      "direct_pair_top3_independent_reproduction_passed": true,
+      "direct_pair_top3_primary_gate_passed": false,
+      "direct_pair_top3_direct_hits": 426,
+      "direct_pair_top3_raw_top2_hits": 429,
+      "direct_pair_top3_direct_minus_raw_top2_rate": -0.0016863406408094434,
+      "direct_pair_top3_direct_minus_raw_top2_ci95_rate": [
+        -0.005538024496568481,
+        0.0022222222222222222
+      ],
+      "direct_pair_top3_operational_promotion": false,
+      "direct_pair_top3_independent_future_validation": false
+    },
+    "pair_probability_is_full_joint_distribution": false,
+    "ticket_probability_claimed": false,
+    "exact_top2_objective": false
+  },
+  "root_approval": {
+    "approved": true,
+    "approved_study_id": "pair_top3_direct_20261011",
+    "approved_payload_sha256": "e9c644539a3992a4624e76e252336b3abab7acc0a4f7f3ae361268f054943c52",
+    "approved_source_pin_set_sha256": "652f7243ce2b36b1a9fa10ac824f0403e040384d1424631017996d2250707410",
+    "approved_snapshot_manifest_sha256": "12990e7235708a8ee89d5954181059d379945dcc21a25b266dc1fe6e7264732a",
+    "approved_change_set_sha256": "5d502d08ecae8d90758bbfa2a880d02a4ad56c4ac5f32c14fe411101888973e4",
+    "approved_by": "root",
+    "approved_at_utc": "2026-10-10T17:14:51Z"
+  }
+}

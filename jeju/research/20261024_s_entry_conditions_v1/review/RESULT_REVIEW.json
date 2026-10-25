@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "review_type": "independent_post_run_result_review",
+  "passed": true,
+  "status": "PASS_RESULT_REPRODUCIBILITY_RESEARCH_GATE_FAIL",
+  "research_candidate_gate_pass": false,
+  "promotion_or_operational_claim": false,
+  "study": "jeju/research/20261024_s_entry_conditions_v1",
+  "hashes": {
+    "report_sha256": "92d3aaea29dc5eb54eb12fab7af1641cdf9369b22563c70a2cdafae0945ffda5",
+    "fit_run_receipt_sha256": "7f1eea48bff04638be42181e299420e41f6abde5de157c00f1c934449a006b4e",
+    "parameters_sha256": "125fc51f04dedccf79a75d7df3e345a3013bf41235d6e4d299bfd6158a7e2a9f",
+    "race_pool_metrics_sha256": "d1e31f9fb6f76e8d7dd75adfeedf07fa53098bf25a0b93e5eefc1a0dc56574f4",
+    "pool_summary_sha256": "cd947a1b058a2c41a799a9ceecee674eae00085b2a06a84f7e65c6a0a566867b",
+    "pool_year_comparisons_sha256": "6bed15f39aa63f72af7244f0c97dc6c33e066e958f56bdf2aa8870160ebf9cb2",
+    "selected_ticket_ledger_sha256": "1179fa88b6bf279ad5c5ba68f0fb4de7e5b47edcc80dcec265dc615c336fbd45",
+    "pair_selection_bootstrap_summary_sha256": "4669962c938413a5c5cf3b55fc3d43b7d0242e7656646e448bd2a4c85dc585db",
+    "tri_bootstrap_draws_sha256": "3bca01c8176d9d63b7ad7ac78fe4f657a11aa2d807e95ee9672bcb41ec95819b",
+    "supervisor_result_verification_sha256": "99178504ffb3937a9165aed13a22a1aabc6937904f11dc40ee0db94eb4ad05d4",
+    "supervisor_verifier_code_sha256": "b860b19c57c51f5ab2ada35be0d629dbb83e7c0bb0118095860e0fe0dfdc736e"
+  },
+  "run_and_integrity": {
+    "receipt_status": "COMPLETED_RESEARCH_ONLY",
+    "receipt_artifacts_hash_checked": 28,
+    "receipt_missing_or_hash_mismatch": 0,
+    "fit_counts": {
+      "S_fit_calls": 0,
+      "S_temperature_optimizations": 0,
+      "E_final_models": 3,
+      "E_LightGBM_train_calls": 6,
+      "E_PL_temperature_optimizations": 3
+    },
+    "evaluation": {
+      "runners": 17412,
+      "races": 1779,
+      "dates": 269
+    },
+    "denominators_by_pool": {
+      "WIN": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "EXA": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779
+    },
+    "same_race_keys_for_E_and_S_in_every_pool": true,
+    "S_replay_max_abs_error": 0.0,
+    "root_independent_result_verification_passed": true,
+    "root_verification_scope": "6 model files and 73,314 raw predictions replayed; 2,416,848 ordered triples reconstructed; 24,834 pool metrics, 34,824 marginals, 14,232 pair diagnostics, 896 reliability rows and 2,000 TRI bootstrap draws checked; prior protected files unchanged"
+  },
+  "primary_gate": {
+    "comparison": "E_minus_S",
+    "TRI_mean_race_nll_delta": -0.010291023517768375,
+    "TRI_nll_ci95": [-0.021106640497595128, 0.0006277093440090378],
+    "TRI_nll_upper_below_zero": false,
+    "TRI_mean_race_brier_delta": -0.000029885964999066443,
+    "TRI_brier_point_rule_pass": true,
+    "WIN_mean_race_nll_delta": -0.008366578161614435,
+    "WIN_nll_point_rule_pass": true,
+    "WIN_mean_race_brier_delta": -0.0016838680513424076,
+    "WIN_brier_point_rule_pass": true,
+    "gate_failure_reason": "TRI NLL bootstrap 95% upper bound is positive (+0.0006277), so the sole primary TRI-NLL criterion fails; the other three point criteria pass.",
+    "overall_gate_pass": false
+  },
+  "seven_pool_results": {
+    "pooled_E_minus_S_deltas_nll_brier": {
+      "WIN": [-0.008367, -0.001684],
+      "PLC": [-0.000863, -0.000300],
+      "QNL": [-0.012211, -0.000754],
+      "EXA": [-0.012733, -0.000435],
+      "QPL": [-0.000327, -0.000030],
+      "TLA": [-0.008569, -0.000111],
+      "TRI": [-0.010291, -0.000030]
+    },
+    "year_pattern": {
+      "2024": "All seven pools improve on NLL and Brier.",
+      "2025": "All seven pools improve on NLL and Brier.",
+      "2026": "All seven pools worsen on NLL and Brier."
+    }
+  },
+  "selection_and_bootstrap": {
+    "date_bootstrap_draws": 2000,
+    "selection_denominator": "Same 1,779 evaluation races for both arms; top-1 and top-3 QNL/QPL choices are paired by race/date.",
+    "top3_hit_any_E_minus_S": {
+      "QNL_delta": -0.0011242270938729624,
+      "QNL_ci95": [-0.013896617274024397, 0.012242967620128253],
+      "QPL_delta": 0.006745362563237774,
+      "QPL_ci95": [-0.010141131050260956, 0.021826785715434293]
+    },
+    "top1_hit_any_ci95": {
+      "QNL": [-0.01249468544136862, 0.00956170883569131],
+      "QPL": [-0.006690278456277479, 0.021385864145699176]
+    },
+    "interpretation": "Top-1/top-3 realized hit-any intervals include zero. Some expected selected-event probability summaries rise, but these are descriptive selection diagnostics, not ROI or independent evidence of model superiority.",
+    "win_axis_top3_hit_rate_delta": 0.012366498032602586,
+    "win_axis_ci95": [-0.0005611987895452463, 0.025374417255198334],
+    "win_axis_interval_includes_zero": true
+  },
+  "limitations": [
+    "Pooled small improvements do not meet the preregistered primary gate; 2026 reverses across every pool.",
+    "The study reuses retrospective development-period evaluations and does not establish independent future performance, market value, ROI, contemporaneous publication availability, or production readiness."
+  ]
+}

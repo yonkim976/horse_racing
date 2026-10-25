@@ -1,0 +1,330 @@
+{
+  "manifest_version": 1,
+  "artifact": "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1",
+  "created_date": "2026-10-09",
+  "freeze_status": "frozen after independent B v2 reaggregation passed",
+  "self_excluded_from_file_inventory": true,
+  "files": [
+    {
+      "path": "APPROVAL_AND_EXECUTION_LOCK.json",
+      "role": "original plan approval and separately root-approved current protocol plan lock",
+      "bytes": 2846,
+      "sha256": "d7ae088641cf98d8b72e6eee76fe1fce846e55565921a2c2d7af6f0285739167"
+    },
+    {
+      "path": "F1_gap_group_coverage.csv",
+      "role": "period and frozen S1 group denominator coverage",
+      "bytes": 500,
+      "sha256": "8d0a26734073da0a902667c931188da9d745bd94e4fa20c3efc13bcd8cb02f8d"
+    },
+    {
+      "path": "F1_gap_residual_by_stratum.csv",
+      "role": "generic current output path, byte-identical to final v2",
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    {
+      "path": "F1_gap_residual_by_stratum_v1_superseded.csv",
+      "role": "first generated 60-row duplicate-key artifact restored to its recorded hash and superseded",
+      "bytes": 8324,
+      "sha256": "1355d5a88c4dbd7cb5d455ade695f91011ac0f1babba7030f78cc42f05634664"
+    },
+    {
+      "path": "F1_gap_residual_by_stratum_v2.csv",
+      "role": "authoritative corrected 56-cell output with unique keys",
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    {
+      "path": "PLAN.md",
+      "role": "current plan with root-approved post-execution future-validation protocol clarification",
+      "bytes": 5179,
+      "sha256": "871fd49fd785e5ff8f39d0e75433019a9947ea37a489a8d81805c7b18a8e9eab"
+    },
+    {
+      "path": "PLAN_approved_original.md",
+      "role": "exact pre-analysis approved execution-plan snapshot, 4,837 bytes and original SHA asserted",
+      "bytes": 4837,
+      "sha256": "47d37c7eea51fd973439cf3ab2380d54ca8f78265b05dc85f90f91507ae8e943"
+    },
+    {
+      "path": "README.md",
+      "role": "human-readable period audit, results, limitations, and independent review summary",
+      "bytes": 8469,
+      "sha256": "125332c2f8d68c7a70a38cb1ec0920008eaf9facee941d5708392c057c732b34"
+    },
+    {
+      "path": "diagnose.py",
+      "role": "fixed one-way descriptive residual diagnostic and verification code",
+      "bytes": 19755,
+      "sha256": "9893724031f34fd9898c0dbcd3e2866c52e421d2c29e274a9a456c24e75f9222"
+    },
+    {
+      "path": "input_lock.json",
+      "role": "read-only database label-period audit and frozen upstream input references",
+      "bytes": 3820,
+      "sha256": "c4d88e19c16efc7966e6d81d07368d030f15f10f5f5c83db669f875e6d1d81ab"
+    },
+    {
+      "path": "verification.json",
+      "role": "local data, input-lock, output, and computation verification receipt",
+      "bytes": 4671,
+      "sha256": "7d9e9b96a5fa57cf6b6b658e57f2e013468d48ecdd2a3033d92bba7de7d06535"
+    }
+  ],
+  "local_file_count": 11,
+  "local_total_bytes": 74173,
+  "source_locks": [
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/source_lock.json",
+      "bytes": 2890,
+      "sha256": "0a8db26e7691422de2e36f540469ce6859962b5127e3b7d5346a5b618bcc7a6d",
+      "entries": 17,
+      "entries_total": 17
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/source_lock.json",
+      "bytes": 3039,
+      "sha256": "abb855c259b11a8946528ee736370848a28300432d10b3cbcbb8dd33f9c9b2b2",
+      "entries": 16,
+      "entries_total": 16
+    }
+  ],
+  "locked_inputs": [
+    {
+      "path": "config/prediction_model_registry.json",
+      "bytes": 7291,
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+    },
+    {
+      "path": "jeju/AGENTS.md",
+      "bytes": 19967,
+      "sha256": "8f765820ea187e85aabe53f079400f4553bccb4c32a66e67bd17e47d192dd094"
+    },
+    {
+      "path": "jeju/data/jeju_native_core.sqlite3",
+      "bytes": 1793323008,
+      "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e"
+    },
+    {
+      "path": "jeju/docs/RESTART_PLAN_20260928.md",
+      "bytes": 6426,
+      "sha256": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848"
+    },
+    {
+      "path": "jeju/docs/SOURCE_CATALOG.md",
+      "bytes": 6305,
+      "sha256": "b5f509a2b60935f0851ee36499851d72758dc69229f42b0e9fb9892df35d0b50"
+    },
+    {
+      "path": "jeju/models/current/HY_R_FORM.pkl",
+      "bytes": 638955,
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    },
+    {
+      "path": "jeju/research/20261008_recent_form_persistence_v1/candidate_event_date_coverage.csv",
+      "bytes": 761,
+      "sha256": "3700e08017d5791ad800eadc616a4beea60c98bdfec92b384d915bfc0fa0fd0b"
+    },
+    {
+      "path": "jeju/research/20261009_field_relative_ability_v1/CONTRACT.md",
+      "bytes": 7692,
+      "sha256": "9a76596314019d9f480e22c6c2dd795540e05d4194a672cd6c51b09fbb971386"
+    },
+    {
+      "path": "jeju/research/20261009_field_relative_ability_v1/outputs/features.parquet",
+      "bytes": 4915860,
+      "sha256": "91494da664508c71f006b277efb8e153aed6f5e422575a575cd5919f2fd0dc0c"
+    },
+    {
+      "path": "jeju/research/20261009_field_relative_ability_v1/outputs/final_verification.json",
+      "bytes": 392,
+      "sha256": "138b7d4829b579f19922074df0d6fb7dd4f6617447234972682b99ab7a9fb034"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/F1_2024/meta.json",
+      "bytes": 2940,
+      "sha256": "937df06c1c9ed61b8b380bcbb3c0db33b5efd1b197f0c262ceab19c162c63970"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/F1_2025/meta.json",
+      "bytes": 2973,
+      "sha256": "6be12814c61da778077c2706712171db55b878e2b917f63608af1dfa81e09272"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/F1_2026/meta.json",
+      "bytes": 2974,
+      "sha256": "ae5d32feb5fdfe3145851dee335bbf9bdbfb9073b9f541c678c90f89245e3189"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/runner_predictions.parquet",
+      "bytes": 2562317,
+      "sha256": "37a9567e87b91e3d3bc8b8bfafa1fdab2853239aac422734259b5f893b231440"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/training_completion.json",
+      "bytes": 5925,
+      "sha256": "ae25a2acc5536a129e3d9a44d1a7a5f448672f506d29e6a77cac7c9682b0d0d9"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/PLAN.md",
+      "bytes": 19276,
+      "sha256": "e287d4e939f9c7ec2d84d30f52869f70ba51fac62ea0aacc1320bb361e9e53fa"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/SUPPLEMENT_PLAN.md",
+      "bytes": 4506,
+      "sha256": "f6185ef821926d4f3a6dc3fb232fddba651e175d9296e0a36fe2b52436010229"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/audit.py",
+      "bytes": 32021,
+      "sha256": "858c8302ebeaf921246d65b8e8659b1f15c4cc06fc87621597277844236fd23c"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/condition_features.parquet",
+      "bytes": 7396282,
+      "sha256": "418bb9651ab9b3f408939e821fb2adb69f57ef950db8eabeb3a98ff273b06aea"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/condition_statistics.csv",
+      "bytes": 179017,
+      "sha256": "35b3f7989d97890a4df83cfa09a8aba7f435a06308ea6c08474c608a4ada5f23"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/date_bootstrap_intervals.csv",
+      "bytes": 42363,
+      "sha256": "620834a73f292028a82ee302411539371a01f83ac05c4d3cb23d6dac657a1f2c"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/preflight.json",
+      "bytes": 3704,
+      "sha256": "eca37a6fc67cc7b3857c8dff83499e2a3a89fa20704a9e894f762e16f8bae67e"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/source_lock.json",
+      "bytes": 2890,
+      "sha256": "0a8db26e7691422de2e36f540469ce6859962b5127e3b7d5346a5b618bcc7a6d"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/verification.json",
+      "bytes": 602,
+      "sha256": "ad1ad668deffef1665d62d0587d0cc8bf1731aec6eb07c740d1a3cc24818c8b6"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/supplement_f1.py",
+      "bytes": 20944,
+      "sha256": "02da654c857bc223b97f2fd5fb237a3dc900f1b60748a5531221e124cece8249"
+    },
+    {
+      "path": "jeju/research/20261009_top3_condition_profiles_v1/CONTRACT.md",
+      "bytes": 6739,
+      "sha256": "3cb4825abdaa69cec4cdbf416064708609b6218a7a26ae500ebae60afbaf5fb6"
+    },
+    {
+      "path": "jeju/research/20261009_top3_condition_profiles_v1/outputs/condition_features.parquet",
+      "bytes": 5732653,
+      "sha256": "4569fa494be980c82a967649f48541a5d6acaa93b5c844897f20a7daedb8f3c9"
+    },
+    {
+      "path": "jeju/research/20261009_top3_condition_profiles_v1/outputs/independent_verification.json",
+      "bytes": 429,
+      "sha256": "cb3012d720c252966e6297b95c47462894a5206f227f17cf309b4ad33807a15a"
+    },
+    {
+      "path": "jeju/research/RESEARCH_PUBLICATION_POLICY.md",
+      "bytes": 2955,
+      "sha256": "01f6743d697cd23b4b711f62a947ef567001162a10afc9b3c3a5beaa6308997b"
+    }
+  ],
+  "additional_reference_files": [
+    {
+      "path": "jeju/AGENTS.md",
+      "bytes": 19967,
+      "sha256": "8f765820ea187e85aabe53f079400f4553bccb4c32a66e67bd17e47d192dd094"
+    },
+    {
+      "path": "jeju/docs/RESTART_PLAN_20260928.md",
+      "bytes": 6426,
+      "sha256": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848"
+    },
+    {
+      "path": "jeju/research/20261008_research_synthesis_v1/README.md",
+      "bytes": 12841,
+      "sha256": "f8b405e5e1d6a426c344f1b9d3d5855cf7183682aae366f73085ae1bbd1da7fa"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/CONTRACT.md",
+      "bytes": 11388,
+      "sha256": "c91dfd087d6e5d88279b9af4dd11fdc2182d0d4208e983619d4e61bba90c8524"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/run.py",
+      "bytes": 23939,
+      "sha256": "7b4e064e8f102c9280fff6b21c61ce6f2fd36db091fff2c6d5030231f8ff7aa8"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/F1_condition_statistics.csv",
+      "bytes": 58476,
+      "sha256": "817bccd33809fec3f9e5a41255c0b07d3054f186d59034f57ebba718b0f7157a"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/supplement_verification.json",
+      "bytes": 1633,
+      "sha256": "0b61b9b3aed715e2e91ff85be928031371e755771379bc890e537a559c2f6192"
+    },
+    {
+      "path": "jeju/research/RESEARCH_PUBLICATION_POLICY.md",
+      "bytes": 2955,
+      "sha256": "01f6743d697cd23b4b711f62a947ef567001162a10afc9b3c3a5beaa6308997b"
+    },
+    {
+      "path": "jeju/research/conclusions/research_register.json",
+      "bytes": 32820,
+      "sha256": "bc34a5ec10ba25f3fa251f9c7e60f3982f8923e93c979dbce496b3a7591fb8e1"
+    }
+  ],
+  "external_independent_receipts": [
+    {
+      "path": "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_reaggregation.json",
+      "bytes": 13697,
+      "sha256": "34a4c21302427f5d700f40c70b9c36364066eb5d5ba65c9ce38e440a51d4fe03",
+      "passed": true,
+      "validation": "independent 56-cell and 10-row coverage reaggregation, including date-cluster bootstrap, plan hash separation, controls, and superseded-v1 history",
+      "outputs": [
+        {
+          "path": "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_outputs/independent_b_v2_56_cells.csv",
+          "bytes": 7886,
+          "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+        },
+        {
+          "path": "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_outputs/independent_b_v2_coverage.csv",
+          "bytes": 500,
+          "sha256": "8d0a26734073da0a902667c931188da9d745bd94e4fa20c3efc13bcd8cb02f8d"
+        }
+      ],
+      "reviewer_db_digest_note": "Reviewer did not rehash the large reused DB; this final local manifest pass rehashed all locked inputs, including the DB, against input_lock.json."
+    }
+  ],
+  "external_receipt_total_bytes": 22083,
+  "important_provenance": {
+    "root_execution_approval_utc": "2026-10-09T03:48:29Z",
+    "approved_original_plan_snapshot_sha256": "47d37c7eea51fd973439cf3ab2380d54ca8f78265b05dc85f90f91507ae8e943",
+    "approved_original_plan_snapshot_bytes": 4837,
+    "post_execution_current_plan_sha256": "871fd49fd785e5ff8f39d0e75433019a9947ea37a489a8d81805c7b18a8e9eab",
+    "post_execution_current_plan_root_approved": true,
+    "analysis_unchanged": true,
+    "source_lock_entry_count": 33,
+    "source_lock_files_count": 2,
+    "source_lock_entries_checked_including_lock_files": 35,
+    "unique_direct_locked_inputs": 30,
+    "new_model_fits": 0,
+    "v1_restored_from_deterministic_inputs_and_original_hash_matched": true,
+    "generic_current_path_is_v2": true
+  }
+}

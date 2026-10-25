@@ -1,0 +1,57 @@
+{
+  "study": "20261010_pair_axis_design_v1",
+  "status": "read-only design and source audit; no fitting or outcome analysis",
+  "created_at": "2026-10-10",
+  "scope": {
+    "database_accessed": false,
+    "network_accessed": false,
+    "model_fit_performed": false,
+    "new_outcome_metrics_computed": false,
+    "operational_artifacts_modified": false,
+    "evaluation_cohort": "2024-01-05 through 2026-09-19, 1,779 races, 17,412 runner rows, 269 race dates; 2026 partial",
+    "evaluation_target": "unordered exact Top3 set; pair event means both horses are members of actual Top3",
+    "candidate_policy": "select argmax pair-in-Top3 probability, then top K conditional completion probabilities for K=3,4,6",
+    "warnings": [
+      "The unordered Top3 set distribution does not identify exact Top2 or ordered finish probabilities.",
+      "The source cohort has been reused in historical development research and is not independent confirmation.",
+      "The joint relationship candidate failed its two pre-registered research gates.",
+      "The cohort uses complete normal finishes; do not extend automatically to ties, scratches, disqualifications, or non-finishes."
+    ]
+  },
+  "sources": {
+    "jeju/research/20261010_joint_relationship_v1/ARTIFACT_MANIFEST.json": {
+      "role": "immutable source manifest",
+      "sha256": "d0d1a749afb6a6f894de1bb4263c9d67dd1e3b2d1a35bf1b5fd38d8948c656b0",
+      "hash_verified": true
+    },
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/all_triples.parquet": {
+      "role": "saved unordered exact-Top3 joint probabilities for matched_baseline and candidate arms",
+      "sha256": "13409e65353c0cb6dab14df97317cce24de913056ae464ee3524520759de681c",
+      "rows": 402808,
+      "hash_verified": true
+    },
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv": {
+      "role": "saved runner Top3 marginals and actual Top3 labels; no exact-rank probabilities",
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+      "hash_verified": true
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "role": "frozen runner features and actual finish_position label keyed by api_record_id",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "rows": 52155,
+      "hash_verified": true
+    }
+  },
+  "definitions": {
+    "pair_top3_probability": "P(i,j both Top3) = sum over k distinct from i,j of q({i,j,k})",
+    "conditional_completion_probability": "P(k is remaining Top3 horse | i,j both Top3) = q({i,j,k}) / P(i,j both Top3)",
+    "pair_miss": "actual Top3 does not contain the selected pair",
+    "completion_miss": "actual Top3 contains the selected pair but its third horse is outside the fixed K completion candidates",
+    "hit": "actual unordered Top3 equals one of the K selected triples"
+  },
+  "tie_policy_proposal": {
+    "pair": "ascending horse-number tuple",
+    "completion_candidates": "ascending horse number",
+    "confidence_bins": "five equal-width bins over [0,1], fixed before outcome tabulation; always show bin counts"
+  }
+}

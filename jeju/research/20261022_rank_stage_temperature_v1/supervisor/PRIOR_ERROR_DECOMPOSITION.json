@@ -1,0 +1,25 @@
+{
+  "source_path": "jeju/research/20261022_joint_wager_baseline_v1/experiment/outputs/pool_summary.parquet",
+  "source_sha256": "36e9e4cc992eee24b88cabf7e34efe1475774d2d46e56819ef56bd542b8b5623",
+  "period": "Already evaluated 2024–2026-09-19 development data; not fresh holdout",
+  "races": 1779,
+  "derivation": "chain rule: WIN_NLL, EXA_NLL−WIN_NLL, TRI_NLL−EXA_NLL. These are conditional-stage losses, not marginal exact-place losses.",
+  "stages": {
+    "T1": {
+      "first": 2.0504195901737883,
+      "second_given_first": 2.022273301714493,
+      "third_given_first_second": 1.9906481924838788
+    },
+    "TEMP": {
+      "first": 2.0538968312092813,
+      "second_given_first": 2.016939165995707,
+      "third_given_first_second": 1.9742379796289526
+    }
+  },
+  "common_T_minus_raw_T1": {
+    "first": 0.0034772410354930727,
+    "second_given_first": -0.005334135718785937,
+    "third_given_first_second": -0.016410212854926165
+  },
+  "hypothesis_only": "A single common temperature imposes different calibration tradeoffs at each sequential stage; rank-specific temperatures may reduce this conflict. No candidate temperature or new outcome has yet been computed."
+}

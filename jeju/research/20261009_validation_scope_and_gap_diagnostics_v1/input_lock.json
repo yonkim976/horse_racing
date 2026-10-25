@@ -1,0 +1,95 @@
+{
+  "status": "preparation_only_no_new_residual_or_loss_calculation",
+  "as_of_date": "2026-10-09",
+  "database": {
+    "path": "jeju/data/jeju_native_core.sqlite3",
+    "bytes": 1793323008,
+    "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+    "open": "SQLite URI mode=ro; PRAGMA query_only=ON returned 1",
+    "label_support": {
+      "race_result_rows": {
+        "min_race_date": "2002-01-12",
+        "max_race_date": "2026-09-19",
+        "rows": 191604
+      },
+      "jeju_race_analysis_2026": {
+        "min_race_date": "2002-07-06",
+        "max_race_date": "2026-09-19",
+        "rows": 92513
+      }
+    },
+    "later_event_dates_not_race_labels": {
+      "daily_training_api_rows_max_training_date": "2026-09-28",
+      "starting_exam_api_rows_max_exam_date": "2026-09-30",
+      "starting_training_website_rows_latest_max_training_date": "2026-09-27",
+      "running_trial_rows_max_trial_date": "2026-09-16"
+    }
+  },
+  "period_use_evidence": {
+    "jeju_research_publication_policy": "representative research period starts 2017-01-01 and ends at held-data cap 2026-09-19",
+    "research_register": "17 topics; multiple topics explicitly use 2017-01-01 or 2017-01-13 through 2026-09-19",
+    "restart_plan": "records the 2026-01-02 through 2026-09-12 operating evaluation (510 races) as already inspected",
+    "limitation": "local records cannot prove or disprove analysis or outcome exposure in other sessions"
+  },
+  "upstream_locks": [
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs/source_lock.json",
+      "bytes": 2890,
+      "sha256": "0a8db26e7691422de2e36f540469ce6859962b5127e3b7d5346a5b618bcc7a6d",
+      "entries_verified_current_size_and_sha256": 17,
+      "entries_total": 17
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/source_lock.json",
+      "bytes": 3039,
+      "sha256": "abb855c259b11a8946528ee736370848a28300432d10b3cbcbb8dd33f9c9b2b2",
+      "entries_verified_current_size_and_sha256": 16,
+      "entries_total": 16
+    }
+  ],
+  "additional_reference_files": [
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/F1_condition_statistics.csv",
+      "bytes": 58476,
+      "sha256": "817bccd33809fec3f9e5a41255c0b07d3054f186d59034f57ebba718b0f7157a"
+    },
+    {
+      "path": "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/supplement_verification.json",
+      "bytes": 1633,
+      "sha256": "0b61b9b3aed715e2e91ff85be928031371e755771379bc890e537a559c2f6192"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/CONTRACT.md",
+      "bytes": 11388,
+      "sha256": "c91dfd087d6e5d88279b9af4dd11fdc2182d0d4208e983619d4e61bba90c8524"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/run.py",
+      "bytes": 23939,
+      "sha256": "7b4e064e8f102c9280fff6b21c61ce6f2fd36db091fff2c6d5030231f8ff7aa8"
+    }
+  ],
+  "existing_f1_supplement_receipt": {
+    "passed": true,
+    "f1_rows": 17412,
+    "f1_races": 1779,
+    "period_rows": {
+      "2024_2025": 12739,
+      "2026_partial": 4673
+    },
+    "id_join_one_to_one": true,
+    "label_identity_matches": true,
+    "race_probability_sum3": true,
+    "supplement_model_training_count": 0
+  },
+  "planned_new_analysis": {
+    "comparison": "existing S1 first_return_91_plus versus general; F1 saved predictions only",
+    "periods": ["2024_2025", "2026_partial"],
+    "one_axis_at_a_time": {
+      "distance_m": [800, 900, 1000, 1110, 1200, 1300, 1400, 1610],
+      "observed_starts_bucket": ["0", "1_4", "5_plus"],
+      "previous_top3": ["top3", "not_top3", "unknown"]
+    },
+    "approval": "root approval of PLAN.md and fixed cell definitions required before residual or Brier aggregation"
+  }
+}

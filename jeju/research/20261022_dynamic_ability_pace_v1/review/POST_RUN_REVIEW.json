@@ -1,0 +1,115 @@
+{
+  "status": "PASS_POST_RUN_REPORT_AUDIT",
+  "recommendation": "HOLD_NO_ADOPTION",
+  "scope": "Read-only audit of saved execution receipt, report, and ledgers; no model fitting or joint-Q replay.",
+  "execution": {
+    "receipt_status": "COMPLETED_ONE_APPROVED_FIT_EVALUATE_RUN",
+    "receipt_sha256": "77d8fc33d09b4a7ebd4d773ce9519e2ab5bc7a47a71bd618bb605f6de9339e6a",
+    "report_sha256": "a24f5d7a8178260974b8955860b8b57a662d4b34a1713d3f553695e057f3ee15",
+    "approval_and_frozen_hashes_match": true,
+    "artifact_inventory": {
+      "listed_artifacts": 55,
+      "all_paths_sizes_and_sha256_match": true,
+      "study_bytes_including_receipt": 30882487,
+      "under_100mb_limit": true,
+      "frozen_inputs_and_source_hashes_match": true
+    },
+    "fit_counts": {
+      "A_lightgbm": 8,
+      "phase_lightgbm": 24,
+      "gamma_vectors": 3,
+      "scalar_temperatures": 38,
+      "all_lightgbm": 32
+    }
+  },
+  "report_and_ledgers": {
+    "report_status": "EVALUATED_RESEARCH_ONLY",
+    "race_denominators_by_pool": {
+      "WIN": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "EXA": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779
+    },
+    "annual_full_pool_races_2024_2025_2026": [637, 654, 488],
+    "annual_plc_races_2024_2025_2026": [637, 650, 456],
+    "annual_cohort_counts_identical_across_arms": true,
+    "selection_rows": 37251,
+    "one_selection_per_eligible_pool_race_arm": true,
+    "reliability_groups": 84,
+    "reliability_bins_per_group": 16,
+    "reliability_ticket_counts_reconcile_to_pool_summaries": true,
+    "plc_unknown_opening_quarantine": {
+      "races": 36,
+      "pool_only": "PLC",
+      "reason": "opening_field_unknown_actual_5_to_7"
+    },
+    "race_contract_ledger_rows": 12453,
+    "official_pool_offering_and_settlement_verified": false
+  },
+  "gate_result": {
+    "comparison_gates": {
+      "A_minus_R": {
+        "tri_nll_ci95": [-0.03759246130703541, 0.02445626001033578],
+        "tri_brier_delta": -0.00021294095067900376,
+        "win_point_protection_pass": true,
+        "comparison_gate_pass": false
+      },
+      "B_minus_A": {
+        "tri_nll_ci95": [-0.004340997780997889, 0.0058216315691271255],
+        "tri_brier_delta": -0.000066546636495617,
+        "win_point_protection_pass": true,
+        "comparison_gate_pass": false
+      },
+      "B_minus_R": {
+        "tri_nll_ci95": [-0.038235540099752455, 0.026167725819413543],
+        "tri_brier_delta": -0.00027948758717517434,
+        "win_point_protection_pass": true,
+        "comparison_gate_pass": false
+      }
+    },
+    "all_three_tri_nll_upper_bounds_above_zero": true,
+    "overall_B_candidate_gate_pass": false,
+    "statistical_noninferiority_claimed": false
+  },
+  "auxiliary_axis": {
+    "top3_hits_R_A_B": [1023, 1033, 1029],
+    "relative_10_percent_count_threshold": 1126,
+    "threshold_met": false,
+    "date_paired_absolute_hit_rate_ci95": {
+      "A_minus_R": [-0.016741619787365814, 0.027685183407873765],
+      "B_minus_A": [-0.01181135613960417, 0.007222222222222222],
+      "B_minus_R": [-0.019786029626888652, 0.025959734396528975]
+    }
+  },
+  "phase_diagnostics": {
+    "rows": 27,
+    "heads": ["early", "recovery", "Z"],
+    "periods": ["ALL", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"],
+    "interpretation": "Known-label OOS forecast diagnostics only; descriptive, not causal and not a pool gate."
+  },
+  "independent_supervisor_verification": {
+    "path": "supervisor/RESULT_VERIFICATION.json",
+    "sha256": "7a0387581c5c6713277d19c2e06fd0ddff18bc9f96227082a3baefbe3aad80a4",
+    "passed": true,
+    "models_refitted": false,
+    "saved_metric_and_bootstrap_replay_max_error": 3.552713678800501e-15,
+    "protected_files_reported_unchanged": [
+      "config/prediction_model_registry.json",
+      "jeju/models/current/HY_R_FORM.pkl",
+      "jeju/research/20261022_joint_wager_baseline_v1/FINAL_MANIFEST.json",
+      "jeju/research/20261022_rank_stage_temperature_v1/FINAL_MANIFEST.json",
+      "jeju/research/20261021_phase_pace_prediction_v1/artifact_manifest.json"
+    ]
+  },
+  "limits": [
+    "The study conditions on the final recorded starter roster; source publication timestamps are unavailable despite the T−2 event-date cutoff.",
+    "2024–2026 are reused development data, not an untouched holdout.",
+    "Date bootstrap holds fitted parameters fixed and excludes fit uncertainty.",
+    "Historical race-status, pool offering, and settlement are not reconstructed; structural event labels do not establish actual market availability.",
+    "PLC opening N is unknown for 36 actual 5–7-runner races; actual N>=8 uses the inherited no-post-opening-additions lower-bound assumption.",
+    "No prospective wager strategy or ROI conclusion is supported."
+  ]
+}

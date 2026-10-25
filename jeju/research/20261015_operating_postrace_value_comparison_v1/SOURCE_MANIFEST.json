@@ -1,0 +1,98 @@
+{
+  "status": "PASS",
+  "source_sha256": {
+    "registry": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "current_hy_model": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+    "resolver": "c381f403cae54119f35e4f0559ab5ac71077ac73d444706c070109fe16c24f1c",
+    "hy_distribution_source": "61409385b5748d2df6a34fcd4eca5bd453669c0421c024f34e55aca216050aa7",
+    "hy_evaluation_manifest": "580669a209c8846794c3c068c055df8f7a025ee86735b924e204869bc47aaed0",
+    "hy_split_dates": "fc0f29066b6a9127d79d6233fb57e4adb0366e051b399d283b9c26569361fba6",
+    "hy_protocol": "286584f375b86f4304b9bb537e0a0d7f10d1ca5a495baaca06090d88a421eb76",
+    "hy_saved_predictions": "3fe93854bab4f6772a944db3a57f91a6ee6ab67469948d2df42a06314ccd4e31",
+    "hy_frozen_scores": "0f5f74df38960fd556b314753612bed2373380b4e01657c0ec8ba4f841d6b66e",
+    "native_races": "f55e2fc5708612c2fb696db107a18bdabeda0a8d55f95992fe1f7b4c6dac8533",
+    "native_entries": "cd3f6f248c4087c96fb012820c0d8b92fb2ab9a20cd3e1fba476bec5494a35a0",
+    "prior_common_alignment": "cc3b5bcee560c621ebb4c6763a70bcaca09a27a22cad1704c7adb8f108f68732",
+    "prior_common_runner_predictions": "45249e4e70c0f738dae2cbd392a848bff65a751c693a64f976d88f4a07873613",
+    "pair_research_predictions": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "pair_primary_plan": "d76a827edede41d87842c2bec5fb27c1ec0a9f6aeddbd35ef32defbbb62afe16",
+    "pair_price_reference": "1e5a158910f856aba29461767a8241e8305ac8c13298db5e0c22ceee5c63371f",
+    "pair_source_review": "e6437455a06d2eb1f85cc80014c2c9c5ed4ce7a2d4422d4a29ade55d7877f182",
+    "pair_source_census": "ebed8eeca1fbe57181f39c8efab9571c644be7b47f61c3c807942b555165bc54",
+    "plc_research_predictions": "706bca01e5f5e780a8ffbe9e2ad4553fea9e3d76df097b4c9648d7aabac44e56",
+    "plc_prior_plan": "f6485aac47eae9a895e1b601d2e4b2b1ed4a4b8566bd3622fd75c70869c4ebca",
+    "plc_source_rows": "257326a9788a88f3fc6f8462c03af1f11b6b4e62e04a4e885d5d812c8bd4e52b",
+    "official_result_rows": "4ae6133d9d537f9ca6b351ed909a945b88a428cb4babcdf15659e266a68f2df6",
+    "plc_source_audit": "10967bdca3609aa1f535be1815b5281c6e8f53e367f5bdc32c030e59fd589880",
+    "plc_source_review": "8d6c35c5e3aff56825a5ad0eed94bfac44622b98448ee35b44f492de3534738b",
+    "official_source_review": "eda599dc6243ff7db310b1855a434aac26e22456873e9b9befc2722d34364913",
+    "plc_quote_reference": "f21068f583ada9dd24287a43ed5dc28acd50cde87725163e92336b2015266f96",
+    "bootstrap_schedule": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "bootstrap_receipt": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "frozen_plan": "ecf9114502251cb4047bf5da14c5fea9103f983ffc461c1a357128b7298a4364",
+    "analysis_code": "cb483100124ffe6fe85554ddbe14044f87378c0710591a5dbe6bc4f3d8a5a2f2"
+  },
+  "registry_resolver": {
+    "active_profile": "jeju-hy-r-form-20260919-v1",
+    "champion_id": "HY_R_FORM",
+    "combination_algorithm_version": "jeju_hybrid_distribution_v1",
+    "components": {
+      "A_B_C": {
+        "artifact": "HY_R_FORM_model",
+        "candidate": "HY_R_FORM",
+        "model_version": "frozen_2026_HY_R_FORM",
+        "order_score": "order_score",
+        "set_score": "rank_score"
+      }
+    },
+    "domain": "jeju",
+    "ok": true,
+    "probability_contract": "jeju_hy_r_form_runner_v1",
+    "registry_path": "config/prediction_model_registry.json",
+    "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "verified_artifacts": [
+      {
+        "name": "HY_R_FORM_model",
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+        "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+      },
+      {
+        "name": "reference_inference",
+        "path": "scripts/predict_jeju_live_hy_r_form.py",
+        "sha256": "5e198cd04fd9dfc0fc46d75f9de2099f200f82b2401e281b33a481f25f8c3aa0"
+      },
+      {
+        "name": "baseline_verification",
+        "path": "data/research/jeju_native_transition_holdout_v13_20260916/verification.json",
+        "sha256": "23564d8adf7bfcabfc84a53616eb1738abe57d056c16938ae7e0997c96b02f53"
+      },
+      {
+        "name": "latest_challenger_decision",
+        "path": "data/research/jeju_accuracy_candidates_20260919/decision.json",
+        "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d"
+      },
+      {
+        "name": "latest_challenger_verification",
+        "path": "data/research/jeju_accuracy_candidates_20260919/verification.json",
+        "sha256": "16fd3b5bbe231ea7b957e4120e80a0877e3f4e3ab9a9872350bbdde73a4ee518"
+      }
+    ]
+  },
+  "output_rows": {
+    "cohort.csv": 531,
+    "qpl_pair_rows.csv": 38776,
+    "qpl_selected_rows.csv": 12142,
+    "qpl_strategy_summary.csv": 26,
+    "qpl_rank_calibration.csv": 10,
+    "qpl_selection_rank_distribution.csv": 145,
+    "qpl_bootstrap_ci.csv": 26,
+    "qpl_paired_differences.csv": 13,
+    "plc_runner_rows.csv": 8516,
+    "plc_selected_rows.csv": 6976,
+    "plc_strategy_summary.csv": 16,
+    "plc_rank_calibration.csv": 10,
+    "plc_selection_rank_distribution.csv": 49,
+    "plc_bootstrap_ci.csv": 16,
+    "plc_paired_differences.csv": 8
+  }
+}

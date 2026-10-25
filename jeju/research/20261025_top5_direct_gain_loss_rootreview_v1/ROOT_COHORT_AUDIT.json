@@ -1,0 +1,129 @@
+{
+  "passed": true,
+  "cohorts": {
+    "primary": {
+      "races": 1503,
+      "changed": 254,
+      "caught": 31,
+      "lost": 35,
+      "both_hit": 404,
+      "both_miss": 1033
+    },
+    "full": {
+      "races": 1779,
+      "changed": 304,
+      "caught": 38,
+      "lost": 37,
+      "both_hit": 482,
+      "both_miss": 1222
+    }
+  },
+  "primary_discordant_ids": {
+    "caught": [
+      "2024-01-12_2_4",
+      "2024-01-13_2_2",
+      "2024-01-26_2_8",
+      "2024-02-02_2_7",
+      "2024-02-17_2_1",
+      "2024-03-01_2_6",
+      "2024-05-17_2_5",
+      "2024-06-21_2_5",
+      "2024-08-16_2_5",
+      "2024-09-06_2_8",
+      "2024-11-01_2_7",
+      "2025-01-03_2_5",
+      "2025-03-08_2_1",
+      "2025-04-04_2_3",
+      "2025-04-26_2_4",
+      "2025-04-26_2_6",
+      "2025-06-20_2_6",
+      "2025-08-09_2_4",
+      "2025-08-22_2_6",
+      "2025-09-20_2_7",
+      "2025-11-21_2_7",
+      "2025-12-05_2_6",
+      "2026-01-02_2_3",
+      "2026-01-24_2_1",
+      "2026-02-14_2_5",
+      "2026-03-14_2_3",
+      "2026-06-05_2_8",
+      "2026-06-13_2_4",
+      "2026-06-20_2_3",
+      "2026-06-26_2_7",
+      "2026-09-19_2_3"
+    ],
+    "lost": [
+      "2024-01-05_2_3",
+      "2024-02-02_2_8",
+      "2024-03-22_2_3",
+      "2024-03-29_2_7",
+      "2024-04-05_2_8",
+      "2024-04-19_2_7",
+      "2024-04-27_2_2",
+      "2024-06-07_2_3",
+      "2024-06-08_2_2",
+      "2024-06-08_2_4",
+      "2024-06-15_2_3",
+      "2024-07-20_2_3",
+      "2024-08-10_2_2",
+      "2024-08-17_2_5",
+      "2024-08-31_2_1",
+      "2024-10-04_2_5",
+      "2024-11-29_2_8",
+      "2024-12-20_2_4",
+      "2025-02-08_2_2",
+      "2025-04-04_2_2",
+      "2025-04-19_2_4",
+      "2025-04-26_2_5",
+      "2025-07-26_2_3",
+      "2025-08-08_2_7",
+      "2025-12-05_2_4",
+      "2025-12-19_2_7",
+      "2026-01-17_2_1",
+      "2026-01-30_2_7",
+      "2026-02-13_2_6",
+      "2026-03-06_2_3",
+      "2026-04-03_2_1",
+      "2026-06-26_2_1",
+      "2026-08-22_2_1",
+      "2026-08-22_2_4",
+      "2026-08-22_2_5"
+    ]
+  },
+  "posthoc_outcome_selected_groups": true,
+  "new_fit_calls": 0,
+  "database_opened": false,
+  "source_hashes": {
+    "jeju/research/20261025_top5_direct_learning_v1/FINAL_MANIFEST.json": "29cb6310bbecf79245b69ddc43521d01257b80a99f802e48840742a0752dc8e5",
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/candidate_choices.jsonl": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/race_outcomes.jsonl": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f",
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/outcomes.json": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d",
+    "jeju/research/20261019_distance_section_relative_evaluation_v1/outputs/baseline_runner_predictions.parquet": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/model_2024.json": "bc0d5db4783fddf05f39cf780f9afcd597af641ccc314d4760d9404a4048a016",
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/model_2025.json": "e2007d50b7db7a7860642f3f3f476aaedfb203eb56696fda3a7355acf14172a3",
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/model_2026.json": "ad1ac0c14010024c82ee1a6a5ffdb73552bd930bc54b531da041e7d57d4fa44f"
+  },
+  "protected_before": {
+    "config/prediction_model_registry.json": {
+      "sha256": "8b2037420fe888a7c17af27de83da81cc52e1bcba7a69dd6f3054a673726f71e",
+      "bytes": 15546
+    },
+    "jeju/models/current/metadata.json": {
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870",
+      "bytes": 1818
+    },
+    "jeju/models/current/HY_R_FORM.pkl": {
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+      "bytes": 638955
+    },
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/FINAL_MANIFEST.json": {
+      "sha256": "2255001de60d001dec3688aca72d9ecdd9ae8ac465f4135d640396126d333dc7",
+      "bytes": 3257
+    },
+    "jeju/research/20261025_top5_direct_learning_review_v1/FINAL_REVIEW_MANIFEST.json": {
+      "sha256": "b01cd3664dd751fc3a23c741193fcef5c70157eb80c9dcef4af7fa9b83b9d4c5",
+      "bytes": 5934
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "passed": false,
+  "refresh_command_exit_code": 0,
+  "refresh_status": "applied_verified",
+  "run_id": "20261017T220226_4747d5bd",
+  "database_sha256": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f",
+  "receipt_and_sidecar_sha_verified": true,
+  "fixed_baseline_pair_sha_verified": false,
+  "fixed_baseline_database_missing": true,
+  "fixed_baseline_expected_sha256": "1de4756d4cb8824706d803097fc5b99c93c4324524fcef0a6db77bcc4fa87035",
+  "rolling_backup_sha_verified": true,
+  "existing_views_preserved": 61,
+  "existing_rows_every_column_preserved": {
+    "daily_training_rider_type_assignments": 912913,
+    "race_section_time_reviews": 4,
+    "race_section_order_reviews": 14,
+    "section_internal_conflict_reviews": 90,
+    "race_result_rows": 191999,
+    "running_trial_rows": 34470,
+    "daily_training_api_rows": 912913,
+    "medical_api_rows": 12254,
+    "starting_exam_api_rows": 10706,
+    "api_records": 282178
+  },
+  "excluded_horse_counts": {
+    "race_result_rows": 0,
+    "running_trial_rows": 0,
+    "daily_training_api_rows": 0,
+    "medical_api_rows": 0,
+    "starting_exam_api_rows": 0,
+    "horse_profile_observations": 0
+  },
+  "raw_pages_sha_verified": 144,
+  "source_gaps": [
+    {
+      "family": "corner_rank",
+      "date": "20261017",
+      "row_count": 0
+    },
+    {
+      "family": "section_records",
+      "date": "20261017",
+      "row_count": 0
+    }
+  ],
+  "new_race_date_20261017": {
+    "rows": 69,
+    "races": 7
+  },
+  "runner_integrity_check": "ok",
+  "runner_foreign_key_errors": 0,
+  "current_views": {
+    "daily_training_api_rows_current": {
+      "rows": 913228,
+      "first": "2007-10-01",
+      "latest": "2026-10-16"
+    },
+    "daily_training_riders_current": {
+      "rows": 913228,
+      "first": "2007-10-01",
+      "latest": "2026-10-16"
+    },
+    "medical_api_rows_current": {
+      "rows": 12274,
+      "first": "2008-04-02",
+      "latest": "2026-10-16"
+    },
+    "starting_exam_api_rows_current": {
+      "rows": 10706,
+      "first": "2002-06-07",
+      "latest": "2026-10-15"
+    },
+    "starting_training_website_rows_current": {
+      "rows": 191357,
+      "first": "2007-10-17",
+      "latest": "2026-10-15"
+    },
+    "horse_profile_refresh_current": {
+      "rows": 4752,
+      "first": "2026-09-30",
+      "latest": "2026-10-17"
+    },
+    "race_current": {
+      "rows": 92977,
+      "first": "2002-07-06",
+      "latest": "2026-10-17"
+    },
+    "trial_current": {
+      "rows": 15831,
+      "first": "2002-06-12",
+      "latest": "2026-10-15"
+    },
+    "training_current": {
+      "rows": 913228,
+      "first": "2007-10-01",
+      "latest": "2026-10-16"
+    },
+    "starting_training_current": {
+      "rows": 191357,
+      "first": "2007-10-17",
+      "latest": "2026-10-15"
+    },
+    "medical_current": {
+      "rows": 12274,
+      "first": "2008-04-02",
+      "latest": "2026-10-16"
+    },
+    "exam_current": {
+      "rows": 10706,
+      "first": "2002-06-07",
+      "latest": "2026-10-15"
+    },
+    "sections_current": {
+      "rows": 92977,
+      "first": "2002-07-06",
+      "latest": "2026-10-17"
+    },
+    "starting_training_api_current": {
+      "rows": 740,
+      "first": "2026-09-13",
+      "latest": "2026-10-15"
+    },
+    "api6_section_records_current": {
+      "rows": 64,
+      "first": "2026-09-17",
+      "latest": "2026-10-16"
+    }
+  },
+  "requested_readme_missing": true,
+  "initial_post_verification_error": "FileNotFoundError: fixed baseline database missing; no DB writes by verifier"
+}

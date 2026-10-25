@@ -1,0 +1,847 @@
+{
+  "study": "20261014_pool_dividend_frequency_v1",
+  "status": "native_result_followup_no_dividend_histograms",
+  "preliminary_source_preflight_sha256": "9e2ec9c79981bc4a62fc4e46d0f607f1b3f815c18f3b9eed13890ae8e01223f3",
+  "population_classification": {
+    "candidate_races_stored_as_completed": 1274,
+    "unique_top3_and_all_seven_pool_keys_covered": 1237,
+    "top3_tie_races_excluded": 10,
+    "no_top3_rank_and_no_tie_races_excluded": 27,
+    "native_result_match_for_all_27_missing_races": true,
+    "interpretation": "The shared results and native API4 result rows provide no valid unique 1st/2nd/3rd for these races. Raw 99 is the repository's documented race-cancelled/RACE_VOID code; raw 0 remains an unclassified no-rank outcome. Neither is reconstructed into a winning podium."
+  },
+  "raw_rank_status_patterns": {
+    "races_with_all_raw_ord_99": 24,
+    "races_with_all_raw_ord_0": 2,
+    "races_by_complete_raw_ord_pattern": [
+      {
+        "raw_ord_counts": {
+          "0": 8
+        },
+        "races": 1
+      },
+      {
+        "raw_ord_counts": {
+          "0": 12
+        },
+        "races": 1
+      },
+      {
+        "raw_ord_counts": {
+          "94": 1,
+          "99": 9
+        },
+        "races": 1
+      },
+      {
+        "raw_ord_counts": {
+          "99": 8
+        },
+        "races": 1
+      },
+      {
+        "raw_ord_counts": {
+          "99": 9
+        },
+        "races": 1
+      },
+      {
+        "raw_ord_counts": {
+          "99": 10
+        },
+        "races": 22
+      }
+    ],
+    "race_cancelled_code_reference": "src/horse_racing/web/formatting.py SPECIAL_FINISH_LABELS[99] and src/horse_racing/analysis/pre_race_field_contract.py SPECIAL_OUTCOMES[(99, '경주취소')]"
+  },
+  "source_artifacts": [
+    {
+      "source_artifact_id": 24,
+      "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+      "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+      "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+    },
+    {
+      "source_artifact_id": 25,
+      "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+      "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+      "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+    }
+  ],
+  "missing_rank_races": [
+    {
+      "race_date": "2025-05-03",
+      "race_number": 4,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2025-05-03",
+      "race_number": 5,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2025-05-03",
+      "race_number": 6,
+      "shared_entry_rows": 8,
+      "native_result_rows": 8,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 8
+      },
+      "native_finish_status_raw_counts": {
+        "99": 8
+      },
+      "native_finish_position_counts": {
+        "99": 8
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 8
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2025-05-09",
+      "race_number": 7,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2025-05-24",
+      "race_number": 2,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "94": 1,
+        "99": 9
+      },
+      "native_finish_status_raw_counts": {
+        "94": 1,
+        "99": 9
+      },
+      "native_finish_position_counts": {
+        "94": 1,
+        "99": 9
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2025-12-13",
+      "race_number": 6,
+      "shared_entry_rows": 12,
+      "native_result_rows": 12,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "0": 12
+      },
+      "native_finish_status_raw_counts": {
+        "0": 12
+      },
+      "native_finish_position_counts": {
+        "0": 12
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 12
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2025-12-20",
+      "race_number": 6,
+      "shared_entry_rows": 8,
+      "native_result_rows": 8,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "0": 8
+      },
+      "native_finish_status_raw_counts": {
+        "0": 8
+      },
+      "native_finish_position_counts": {
+        "0": 8
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 8
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 24,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_api4_3_history_backfill/attempts/20260929T132522.134266Z/2025/source_pages/page_0001.json",
+          "sha256": "11808f40ee5e4d599bd94a0bad5841032159a281733322f6686705333bbf628b"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 1,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 2,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 3,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 4,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 5,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 6,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 7,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-20",
+      "race_number": 8,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-21",
+      "race_number": 1,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-21",
+      "race_number": 2,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-21",
+      "race_number": 3,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-21",
+      "race_number": 4,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-21",
+      "race_number": 5,
+      "shared_entry_rows": 9,
+      "native_result_rows": 9,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 9
+      },
+      "native_finish_status_raw_counts": {
+        "99": 9
+      },
+      "native_finish_position_counts": {
+        "99": 9
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 9
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-03-21",
+      "race_number": 6,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-04-04",
+      "race_number": 1,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-04-04",
+      "race_number": 2,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-04-04",
+      "race_number": 3,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-04-04",
+      "race_number": 4,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-04-04",
+      "race_number": 5,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    },
+    {
+      "race_date": "2026-04-04",
+      "race_number": 6,
+      "shared_entry_rows": 10,
+      "native_result_rows": 10,
+      "exact_horse_number_and_id_keyset_matches_shared_entries": true,
+      "raw_official_ord_counts": {
+        "99": 10
+      },
+      "native_finish_status_raw_counts": {
+        "99": 10
+      },
+      "native_finish_position_counts": {
+        "99": 10
+      },
+      "raw_result_time_positive_rows": 0,
+      "breed_assessment_counts": {
+        "program_rule_candidate": 10
+      },
+      "source_artifacts": [
+        {
+          "source_artifact_id": 25,
+          "endpoint": "https://apis.data.go.kr/B551015/API4_3/raceResult_3",
+          "raw_relative_path": "jeju/research/20260929_core_collection_inventory/raw/2026/attempts/20260929T132618.518555Z/source_pages/page_0001.json",
+          "sha256": "8f60ee195eff36cb2f4bd0620fd4db0e30ac2b17618c0b7bbfc1b144a2eb4006"
+        }
+      ]
+    }
+  ],
+  "read_only": {
+    "shared_db_uri_mode": "ro",
+    "native_db_uri_mode": "ro",
+    "query_only": true,
+    "cached_raw_file_sha256_checked": true,
+    "network": false,
+    "database_writes": false,
+    "payout_amounts_or_histograms_computed": false
+  },
+  "input_sha256": {
+    "shared_db_file": "ae7ed3a9e04955684ed7ec489d1682920eac30bdee66c7fbc41156501a3b98bf",
+    "native_db_file": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+    "formatting_source": "db108bc46654e6257a44b6f0fae4bc91587ce929015ee06309ecf32914e042cf",
+    "field_contract_source": "7a2014ddfdcab2ce48d28e79ed5748cfb5d9f75824e5f1b2c773eb301b710e9a"
+  }
+}

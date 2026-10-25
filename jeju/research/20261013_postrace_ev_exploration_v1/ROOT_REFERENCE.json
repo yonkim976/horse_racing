@@ -1,0 +1,2100 @@
+{
+  "input_sha256": {
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "jeju/research/20261013_pair_qpl_roi_v1/race_returns.csv": "8e1b1a2485d6c625445315bd856d7988fa9da54e3de0bd10b2dac02086179afa",
+    "jeju/research/20261013_prepurchase_ev_audit_v1/SOURCE_PAGE_INDEX.json": "1dac9ab751fe0be8ad4da2e139f862500ea68f3a23ab290def9b42f3dfda6fb0",
+    "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd"
+  },
+  "source_pages_verified": 889,
+  "unique_pairs_verified": 1179,
+  "summary": [
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "all_purchase",
+      "scope": "all",
+      "n_races": 1142,
+      "hits": 283,
+      "hit_rate_pct": 24.78108581436077,
+      "mean_p": 0.2422790585116934,
+      "mean_quote": 4.334063047285464,
+      "median_quote": 3.1,
+      "mean_score": -0.07574714217197256,
+      "mean_paid_odds_on_hit": 2.743462897526501,
+      "stake_krw": 11420000,
+      "return_krw": 7764000,
+      "net_krw": -3656000,
+      "net_roi_pct": -32.01401050788091,
+      "ci_hit_rate_pct": [
+        22.517557796813115,
+        27.078447632473665
+      ],
+      "ci_net_roi_pct": [
+        -39.89859673037243,
+        -23.752648701496565
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -32.743207712532865,
+      "drop_top3_roi_pct": -34.0649692712906,
+      "drop_top5_roi_pct": -35.35620052770449
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "all_purchase",
+      "scope": "2025",
+      "n_races": 654,
+      "hits": 157,
+      "hit_rate_pct": 24.00611620795107,
+      "mean_p": 0.22328527301846118,
+      "mean_quote": 4.429510703363914,
+      "median_quote": 3.2,
+      "mean_score": -0.11197510656097402,
+      "mean_paid_odds_on_hit": 2.75859872611465,
+      "stake_krw": 6540000,
+      "return_krw": 4331000,
+      "net_krw": -2209000,
+      "net_roi_pct": -33.776758409785934,
+      "ci_hit_rate_pct": [
+        21.06917038744059,
+        27.12853812853813
+      ],
+      "ci_net_roi_pct": [
+        -43.98623507228158,
+        -23.171652514369267
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -34.90045941807044,
+      "drop_top3_roi_pct": -36.85099846390168,
+      "drop_top5_roi_pct": -38.428351309707246
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "all_purchase",
+      "scope": "2026",
+      "n_races": 488,
+      "hits": 126,
+      "hit_rate_pct": 25.81967213114754,
+      "mean_p": 0.2677338448079513,
+      "mean_quote": 4.206147540983606,
+      "median_quote": 3.0,
+      "mean_score": -0.027195730880154995,
+      "mean_paid_odds_on_hit": 2.7246031746031747,
+      "stake_krw": 4880000,
+      "return_krw": 3433000,
+      "net_krw": -1447000,
+      "net_roi_pct": -29.651639344262293,
+      "ci_hit_rate_pct": [
+        22.26882549894958,
+        29.338842975206614
+      ],
+      "ci_net_roi_pct": [
+        -41.4664608979327,
+        -16.36888248905255
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -31.355236139630392,
+      "drop_top3_roi_pct": -34.453608247422686,
+      "drop_top5_roi_pct": -37.432712215320905
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30",
+      "scope": "all",
+      "n_races": 252,
+      "hits": 99,
+      "hit_rate_pct": 39.285714285714285,
+      "mean_p": 0.37017418236496547,
+      "mean_quote": 2.471428571428571,
+      "median_quote": 2.1,
+      "mean_score": -0.10691571051965044,
+      "mean_paid_odds_on_hit": 2.194949494949495,
+      "stake_krw": 2520000,
+      "return_krw": 2173000,
+      "net_krw": -347000,
+      "net_roi_pct": -13.769841269841265,
+      "ci_hit_rate_pct": [
+        33.33333333333333,
+        45.48617637844611
+      ],
+      "ci_net_roi_pct": [
+        -29.688625938281906,
+        2.8775695834091186
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -17.011952191235057,
+      "drop_top3_roi_pct": -20.80321285140563,
+      "drop_top5_roi_pct": -23.562753036437243
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30",
+      "scope": "2025",
+      "n_races": 82,
+      "hits": 37,
+      "hit_rate_pct": 45.1219512195122,
+      "mean_p": 0.36588369163784057,
+      "mean_quote": 2.3536585365853657,
+      "median_quote": 2.05,
+      "mean_score": -0.14977939756007522,
+      "mean_paid_odds_on_hit": 2.0945945945945947,
+      "stake_krw": 820000,
+      "return_krw": 775000,
+      "net_krw": -45000,
+      "net_roi_pct": -5.487804878048785,
+      "ci_hit_rate_pct": [
+        33.33333333333333,
+        57.14285714285714
+      ],
+      "ci_net_roi_pct": [
+        -34.133254049156186,
+        24.20427754435106
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -11.481481481481481,
+      "drop_top3_roi_pct": -21.012658227848103,
+      "drop_top5_roi_pct": -25.844155844155846
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30",
+      "scope": "2026",
+      "n_races": 170,
+      "hits": 62,
+      "hit_rate_pct": 36.470588235294116,
+      "mean_p": 0.37224371318628446,
+      "mean_quote": 2.5282352941176467,
+      "median_quote": 2.2,
+      "mean_score": -0.08624028500603378,
+      "mean_paid_odds_on_hit": 2.254838709677419,
+      "stake_krw": 1700000,
+      "return_krw": 1398000,
+      "net_krw": -302000,
+      "net_roi_pct": -17.76470588235294,
+      "ci_hit_rate_pct": [
+        29.83307864111908,
+        43.24362283631946
+      ],
+      "ci_net_roi_pct": [
+        -36.484097476401466,
+        2.4880145278450154
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -22.60355029585799,
+      "drop_top3_roi_pct": -26.7065868263473,
+      "drop_top5_roi_pct": -30.48484848484848
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_40",
+      "scope": "all",
+      "n_races": 61,
+      "hits": 26,
+      "hit_rate_pct": 42.622950819672134,
+      "mean_p": 0.46139634478213415,
+      "mean_quote": 1.972131147540983,
+      "median_quote": 1.8,
+      "mean_score": -0.1003589595881716,
+      "mean_paid_odds_on_hit": 1.8461538461538463,
+      "stake_krw": 610000,
+      "return_krw": 480000,
+      "net_krw": -130000,
+      "net_roi_pct": -21.311475409836067,
+      "ci_hit_rate_pct": [
+        31.25,
+        55.55555555555556
+      ],
+      "ci_net_roi_pct": [
+        -45.578125,
+        9.290750915750877
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -28.833333333333332,
+      "drop_top3_roi_pct": -35.51724137931035,
+      "drop_top5_roi_pct": -41.25
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_40",
+      "scope": "2025",
+      "n_races": 18,
+      "hits": 8,
+      "hit_rate_pct": 44.44444444444444,
+      "mean_p": 0.45234579360324,
+      "mean_quote": 2.2,
+      "median_quote": 2.0,
+      "mean_score": -0.0285179538633919,
+      "mean_paid_odds_on_hit": 2.35,
+      "stake_krw": 180000,
+      "return_krw": 188000,
+      "net_krw": 8000,
+      "net_roi_pct": 4.444444444444451,
+      "ci_hit_rate_pct": [
+        18.181818181818183,
+        71.42857142857143
+      ],
+      "ci_net_roi_pct": [
+        -65.90716911764706,
+        80.63210227272722
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -20.588235294117652,
+      "drop_top3_roi_pct": -45.333333333333336,
+      "drop_top5_roi_pct": -67.6923076923077
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_40",
+      "scope": "2026",
+      "n_races": 43,
+      "hits": 18,
+      "hit_rate_pct": 41.86046511627907,
+      "mean_p": 0.4651849476012062,
+      "mean_quote": 1.8767441860465113,
+      "median_quote": 1.7,
+      "mean_score": -0.13043193872877706,
+      "mean_paid_odds_on_hit": 1.6222222222222225,
+      "stake_krw": 430000,
+      "return_krw": 292000,
+      "net_krw": -138000,
+      "net_roi_pct": -32.09302325581396,
+      "ci_hit_rate_pct": [
+        27.500000000000004,
+        56.759406465288805
+      ],
+      "ci_net_roi_pct": [
+        -55.23949579831933,
+        -8.218055555555576
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -35.952380952380956,
+      "drop_top3_roi_pct": -42.75,
+      "drop_top5_roi_pct": -48.68421052631579
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.00",
+      "scope": "all",
+      "n_races": 326,
+      "hits": 39,
+      "hit_rate_pct": 11.963190184049079,
+      "mean_p": 0.23506585226470408,
+      "mean_quote": 8.056134969325154,
+      "median_quote": 6.4,
+      "mean_score": 0.6459950865245363,
+      "mean_paid_odds_on_hit": 5.1128205128205115,
+      "stake_krw": 3260000,
+      "return_krw": 1994000,
+      "net_krw": -1266000,
+      "net_roi_pct": -38.83435582822086,
+      "ci_hit_rate_pct": [
+        8.239500548095368,
+        15.774201127819547
+      ],
+      "ci_net_roi_pct": [
+        -57.94751289515347,
+        -18.35269851116627
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -41.41538461538462,
+      "drop_top3_roi_pct": -46.13003095975232,
+      "drop_top5_roi_pct": -50.77881619937694
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.00",
+      "scope": "2025",
+      "n_races": 172,
+      "hits": 15,
+      "hit_rate_pct": 8.720930232558139,
+      "mean_p": 0.21312137330243944,
+      "mean_quote": 8.553488372093023,
+      "median_quote": 7.0,
+      "mean_score": 0.631412012432366,
+      "mean_paid_odds_on_hit": 4.973333333333333,
+      "stake_krw": 1720000,
+      "return_krw": 746000,
+      "net_krw": -974000,
+      "net_roi_pct": -56.62790697674418,
+      "ci_hit_rate_pct": [
+        4.0229163056662625,
+        13.736263736263737
+      ],
+      "ci_net_roi_pct": [
+        -79.87608869148825,
+        -31.98406140924959
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -61.05263157894737,
+      "drop_top3_roi_pct": -67.6923076923077,
+      "drop_top5_roi_pct": -73.89221556886227
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.00",
+      "scope": "2026",
+      "n_races": 154,
+      "hits": 24,
+      "hit_rate_pct": 15.584415584415584,
+      "mean_p": 0.25957527032645433,
+      "mean_quote": 7.50064935064935,
+      "median_quote": 6.0,
+      "mean_score": 0.662282675770337,
+      "mean_paid_odds_on_hit": 5.2,
+      "stake_krw": 1540000,
+      "return_krw": 1248000,
+      "net_krw": -292000,
+      "net_roi_pct": -18.961038961038955,
+      "ci_hit_rate_pct": [
+        10.369731800766283,
+        21.388315441783647
+      ],
+      "ci_net_roi_pct": [
+        -48.631270978862375,
+        14.305281135049912
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -24.31372549019608,
+      "drop_top3_roi_pct": -34.17218543046358,
+      "drop_top5_roi_pct": -43.8255033557047
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.05",
+      "scope": "all",
+      "n_races": 292,
+      "hits": 35,
+      "hit_rate_pct": 11.986301369863014,
+      "mean_p": 0.2341363537088203,
+      "mean_quote": 8.427397260273974,
+      "median_quote": 6.75,
+      "mean_score": 0.7183303856991439,
+      "mean_paid_odds_on_hit": 5.265714285714284,
+      "stake_krw": 2920000,
+      "return_krw": 1843000,
+      "net_krw": -1077000,
+      "net_roi_pct": -36.88356164383562,
+      "ci_hit_rate_pct": [
+        8.147624656458579,
+        15.92671394799054
+      ],
+      "ci_net_roi_pct": [
+        -57.28298425538061,
+        -13.776732039026312
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -39.75945017182131,
+      "drop_top3_roi_pct": -45.017301038062286,
+      "drop_top5_roi_pct": -50.20905923344947
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.05",
+      "scope": "2025",
+      "n_races": 157,
+      "hits": 13,
+      "hit_rate_pct": 8.280254777070065,
+      "mean_p": 0.20990237306061113,
+      "mean_quote": 8.899363057324841,
+      "median_quote": 7.1,
+      "mean_score": 0.6893377625170409,
+      "mean_paid_odds_on_hit": 5.138461538461538,
+      "stake_krw": 1570000,
+      "return_krw": 668000,
+      "net_krw": -902000,
+      "net_roi_pct": -57.452229299363054,
+      "ci_hit_rate_pct": [
+        3.550190943807965,
+        13.333333333333334
+      ],
+      "ci_net_roi_pct": [
+        -81.66796875,
+        -29.998493975903624
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -62.30769230769231,
+      "drop_top3_roi_pct": -69.61038961038962,
+      "drop_top5_roi_pct": -76.44736842105263
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.05",
+      "scope": "2026",
+      "n_races": 135,
+      "hits": 22,
+      "hit_rate_pct": 16.296296296296298,
+      "mean_p": 0.2623195756478488,
+      "mean_quote": 7.878518518518519,
+      "median_quote": 6.1,
+      "mean_score": 0.752047732659071,
+      "mean_paid_odds_on_hit": 5.340909090909092,
+      "stake_krw": 1350000,
+      "return_krw": 1175000,
+      "net_krw": -175000,
+      "net_roi_pct": -12.962962962962965,
+      "ci_hit_rate_pct": [
+        10.637827151195632,
+        22.89156626506024
+      ],
+      "ci_net_roi_pct": [
+        -45.81588205729603,
+        24.869177132009302
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -19.02985074626866,
+      "drop_top3_roi_pct": -30.227272727272727,
+      "drop_top5_roi_pct": -41.230769230769226
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.10",
+      "scope": "all",
+      "n_races": 267,
+      "hits": 32,
+      "hit_rate_pct": 11.985018726591761,
+      "mean_p": 0.2323413030118909,
+      "mean_quote": 8.784269662921348,
+      "median_quote": 7.0,
+      "mean_score": 0.7787776805065224,
+      "mean_paid_odds_on_hit": 5.362500000000001,
+      "stake_krw": 2670000,
+      "return_krw": 1716000,
+      "net_krw": -954000,
+      "net_roi_pct": -35.73033707865169,
+      "ci_hit_rate_pct": [
+        7.941795518016484,
+        16.350472304288495
+      ],
+      "ci_net_roi_pct": [
+        -58.27418582375478,
+        -10.221709407094712
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -38.872180451127825,
+      "drop_top3_roi_pct": -44.62121212121212,
+      "drop_top5_roi_pct": -50.30534351145038
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.10",
+      "scope": "2025",
+      "n_races": 142,
+      "hits": 12,
+      "hit_rate_pct": 8.450704225352112,
+      "mean_p": 0.2076460682042393,
+      "mean_quote": 9.305633802816901,
+      "median_quote": 7.3,
+      "mean_score": 0.7544445415820494,
+      "mean_paid_odds_on_hit": 5.25,
+      "stake_krw": 1420000,
+      "return_krw": 630000,
+      "net_krw": -790000,
+      "net_roi_pct": -55.6338028169014,
+      "ci_hit_rate_pct": [
+        3.4475390509873267,
+        14.0139828821656
+      ],
+      "ci_net_roi_pct": [
+        -82.62145222327342,
+        -25.84612612612618
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -60.99290780141844,
+      "drop_top3_roi_pct": -69.06474820143885,
+      "drop_top5_roi_pct": -76.64233576642336
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.10",
+      "scope": "2026",
+      "n_races": 125,
+      "hits": 20,
+      "hit_rate_pct": 16.0,
+      "mean_p": 0.26039508975338316,
+      "mean_quote": 8.192000000000002,
+      "median_quote": 6.3,
+      "mean_score": 0.8064201263247236,
+      "mean_paid_odds_on_hit": 5.43,
+      "stake_krw": 1250000,
+      "return_krw": 1086000,
+      "net_krw": -164000,
+      "net_roi_pct": -13.119999999999997,
+      "ci_hit_rate_pct": [
+        10.14359792580774,
+        23.00916788692939
+      ],
+      "ci_net_roi_pct": [
+        -47.694444444444436,
+        27.22335434173659
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -19.67741935483871,
+      "drop_top3_roi_pct": -31.803278688524593,
+      "drop_top5_roi_pct": -43.75
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.20",
+      "scope": "all",
+      "n_races": 217,
+      "hits": 23,
+      "hit_rate_pct": 10.599078341013826,
+      "mean_p": 0.22813076461042858,
+      "mean_quote": 9.60967741935484,
+      "median_quote": 7.6,
+      "mean_score": 0.9252255348881706,
+      "mean_paid_odds_on_hit": 5.799999999999999,
+      "stake_krw": 2170000,
+      "return_krw": 1334000,
+      "net_krw": -836000,
+      "net_roi_pct": -38.52534562211981,
+      "ci_hit_rate_pct": [
+        6.219460558072575,
+        15.180463075060521
+      ],
+      "ci_net_roi_pct": [
+        -63.93058236808236,
+        -10.278466526797645
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -42.407407407407405,
+      "drop_top3_roi_pct": -49.532710280373834,
+      "drop_top5_roi_pct": -56.60377358490566
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.20",
+      "scope": "2025",
+      "n_races": 115,
+      "hits": 7,
+      "hit_rate_pct": 6.086956521739131,
+      "mean_p": 0.20879268118064243,
+      "mean_quote": 10.079999999999998,
+      "median_quote": 8.0,
+      "mean_score": 0.8972695889138808,
+      "mean_paid_odds_on_hit": 5.6,
+      "stake_krw": 1150000,
+      "return_krw": 392000,
+      "net_krw": -758000,
+      "net_roi_pct": -65.91304347826087,
+      "ci_hit_rate_pct": [
+        1.0198979591836734,
+        12.096774193548388
+      ],
+      "ci_net_roi_pct": [
+        -93.34126984126983,
+        -32.39799528301889
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -72.63157894736842,
+      "drop_top3_roi_pct": -82.23214285714285,
+      "drop_top5_roi_pct": -91.63636363636364
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.20",
+      "scope": "2026",
+      "n_races": 102,
+      "hits": 16,
+      "hit_rate_pct": 15.686274509803921,
+      "mean_p": 0.24993350573224646,
+      "mean_quote": 9.079411764705883,
+      "median_quote": 7.1,
+      "mean_score": 0.956744493584674,
+      "mean_paid_odds_on_hit": 5.8875,
+      "stake_krw": 1020000,
+      "return_krw": 942000,
+      "net_krw": -78000,
+      "net_roi_pct": -7.647058823529407,
+      "ci_hit_rate_pct": [
+        9.301726204747064,
+        23.457105064247916
+      ],
+      "ci_net_roi_pct": [
+        -46.374812030075184,
+        39.77050856120623
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -15.643564356435647,
+      "drop_top3_roi_pct": -30.5050505050505,
+      "drop_top5_roi_pct": -45.25773195876288
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.50",
+      "scope": "all",
+      "n_races": 124,
+      "hits": 10,
+      "hit_rate_pct": 8.064516129032258,
+      "mean_p": 0.22113270178865058,
+      "mean_quote": 12.15241935483871,
+      "median_quote": 10.0,
+      "mean_score": 1.3702263706672762,
+      "mean_paid_odds_on_hit": 6.7700000000000005,
+      "stake_krw": 1240000,
+      "return_krw": 677000,
+      "net_krw": -563000,
+      "net_roi_pct": -45.40322580645161,
+      "ci_hit_rate_pct": [
+        3.7037037037037033,
+        13.386002530933633
+      ],
+      "ci_net_roi_pct": [
+        -75.56407377504162,
+        -9.060296474358983
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -52.27642276422764,
+      "drop_top3_roi_pct": -64.87603305785123,
+      "drop_top5_roi_pct": -76.9747899159664
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.50",
+      "scope": "2025",
+      "n_races": 68,
+      "hits": 4,
+      "hit_rate_pct": 5.882352941176471,
+      "mean_p": 0.20617284999912822,
+      "mean_quote": 12.358823529411765,
+      "median_quote": 10.899999999999999,
+      "mean_score": 1.2924870247150348,
+      "mean_paid_odds_on_hit": 6.15,
+      "stake_krw": 680000,
+      "return_krw": 246000,
+      "net_krw": -434000,
+      "net_roi_pct": -63.8235294117647,
+      "ci_hit_rate_pct": [
+        1.2341915085817525,
+        12.676615247037779
+      ],
+      "ci_net_roi_pct": [
+        -93.20987654320987,
+        -21.043787878788002
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -75.22388059701493,
+      "drop_top3_roi_pct": -91.84615384615384,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_0.50",
+      "scope": "2026",
+      "n_races": 56,
+      "hits": 6,
+      "hit_rate_pct": 10.714285714285714,
+      "mean_p": 0.2392982361044991,
+      "mean_quote": 11.901785714285714,
+      "median_quote": 9.25,
+      "mean_score": 1.464624147894998,
+      "mean_paid_odds_on_hit": 7.183333333333333,
+      "stake_krw": 560000,
+      "return_krw": 431000,
+      "net_krw": -129000,
+      "net_roi_pct": -23.03571428571428,
+      "ci_hit_rate_pct": [
+        3.7037037037037033,
+        19.565217391304348
+      ],
+      "ci_net_roi_pct": [
+        -74.30587121212122,
+        42.14363354037267
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -38.0,
+      "drop_top3_roi_pct": -65.66037735849058,
+      "drop_top5_roi_pct": -92.3529411764706
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_1.00",
+      "scope": "all",
+      "n_races": 59,
+      "hits": 3,
+      "hit_rate_pct": 5.084745762711864,
+      "mean_p": 0.21011343689545503,
+      "mean_quote": 16.498305084745763,
+      "median_quote": 14.9,
+      "mean_score": 2.0873740806103203,
+      "mean_paid_odds_on_hit": 6.7,
+      "stake_krw": 590000,
+      "return_krw": 201000,
+      "net_krw": -389000,
+      "net_roi_pct": -65.9322033898305,
+      "ci_hit_rate_pct": [
+        0.0,
+        11.538461538461538
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        -22.608823529411797
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -80.86206896551724,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_1.00",
+      "scope": "2025",
+      "n_races": 32,
+      "hits": 2,
+      "hit_rate_pct": 6.25,
+      "mean_p": 0.20022633712504345,
+      "mean_quote": 16.346875,
+      "median_quote": 16.15,
+      "mean_score": 1.9341480959547839,
+      "mean_paid_odds_on_hit": 5.55,
+      "stake_krw": 320000,
+      "return_krw": 111000,
+      "net_krw": -209000,
+      "net_roi_pct": -65.3125,
+      "ci_hit_rate_pct": [
+        0.0,
+        16.666666666666664
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        -6.904556650246304
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -82.90322580645162,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "ev_ge_1.00",
+      "scope": "2026",
+      "n_races": 27,
+      "hits": 1,
+      "hit_rate_pct": 3.7037037037037037,
+      "mean_p": 0.22183148106779468,
+      "mean_quote": 16.677777777777777,
+      "median_quote": 14.3,
+      "mean_score": 2.268975247609474,
+      "mean_paid_odds_on_hit": 9.0,
+      "stake_krw": 270000,
+      "return_krw": 90000,
+      "net_krw": -180000,
+      "net_roi_pct": -66.66666666666667,
+      "ci_hit_rate_pct": [
+        0.0,
+        12.0
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        8.000000000000007
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -100.0,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.00",
+      "scope": "all",
+      "n_races": 66,
+      "hits": 17,
+      "hit_rate_pct": 25.757575757575758,
+      "mean_p": 0.3717673254134281,
+      "mean_quote": 3.913636363636364,
+      "median_quote": 3.7,
+      "mean_score": 0.41266769676486237,
+      "mean_paid_odds_on_hit": 3.9647058823529413,
+      "stake_krw": 660000,
+      "return_krw": 674000,
+      "net_krw": 14000,
+      "net_roi_pct": 2.1212121212121238,
+      "ci_hit_rate_pct": [
+        15.0,
+        36.666666666666664
+      ],
+      "ci_net_roi_pct": [
+        -42.54878246753246,
+        48.138221153846075
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -10.153846153846157,
+      "drop_top3_roi_pct": -24.92063492063492,
+      "drop_top5_roi_pct": -36.22950819672132
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.00",
+      "scope": "2025",
+      "n_races": 18,
+      "hits": 5,
+      "hit_rate_pct": 27.77777777777778,
+      "mean_p": 0.37484040541087243,
+      "mean_quote": 3.816666666666667,
+      "median_quote": 3.9,
+      "mean_score": 0.40281896968753167,
+      "mean_paid_odds_on_hit": 4.08,
+      "stake_krw": 180000,
+      "return_krw": 204000,
+      "net_krw": 24000,
+      "net_roi_pct": 13.33333333333333,
+      "ci_hit_rate_pct": [
+        0.0,
+        53.333333333333336
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        124.13970588235283
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -14.117647058823534,
+      "drop_top3_roi_pct": -64.66666666666667,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.00",
+      "scope": "2026",
+      "n_races": 48,
+      "hits": 12,
+      "hit_rate_pct": 25.0,
+      "mean_p": 0.37061492041438643,
+      "mean_quote": 3.9499999999999997,
+      "median_quote": 3.7,
+      "mean_score": 0.4163609694188614,
+      "mean_paid_odds_on_hit": 3.916666666666668,
+      "stake_krw": 480000,
+      "return_krw": 470000,
+      "net_krw": -10000,
+      "net_roi_pct": -2.083333333333337,
+      "ci_hit_rate_pct": [
+        13.953488372093023,
+        36.84496567505719
+      ],
+      "ci_net_roi_pct": [
+        -48.159829721362236,
+        50.751658163265304
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -19.14893617021277,
+      "drop_top3_roi_pct": -34.22222222222222,
+      "drop_top5_roi_pct": -49.06976744186047
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.10",
+      "scope": "all",
+      "n_races": 52,
+      "hits": 15,
+      "hit_rate_pct": 28.846153846153847,
+      "mean_p": 0.37108222814637243,
+      "mean_quote": 4.203846153846154,
+      "median_quote": 3.9,
+      "mean_score": 0.5126480070033848,
+      "mean_paid_odds_on_hit": 4.166666666666668,
+      "stake_krw": 520000,
+      "return_krw": 625000,
+      "net_krw": 105000,
+      "net_roi_pct": 20.192307692307686,
+      "ci_hit_rate_pct": [
+        17.24003232758621,
+        41.509433962264154
+      ],
+      "ci_net_roi_pct": [
+        -33.11583261432269,
+        79.08009893455096
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": 4.90196078431373,
+      "drop_top3_roi_pct": -13.469387755102035,
+      "drop_top5_roi_pct": -27.6595744680851
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.10",
+      "scope": "2025",
+      "n_races": 12,
+      "hits": 4,
+      "hit_rate_pct": 33.333333333333336,
+      "mean_p": 0.36114219284657206,
+      "mean_quote": 4.425,
+      "median_quote": 4.300000000000001,
+      "mean_score": 0.5865330343737174,
+      "mean_paid_odds_on_hit": 4.45,
+      "stake_krw": 120000,
+      "return_krw": 178000,
+      "net_krw": 58000,
+      "net_roi_pct": 48.33333333333334,
+      "ci_hit_rate_pct": [
+        0.0,
+        63.63636363636363
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        195.04166666666646
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": 9.090909090909083,
+      "drop_top3_roi_pct": -70.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.10",
+      "scope": "2026",
+      "n_races": 40,
+      "hits": 11,
+      "hit_rate_pct": 27.5,
+      "mean_p": 0.37406423873631256,
+      "mean_quote": 4.1375,
+      "median_quote": 3.8,
+      "mean_score": 0.4904824987922849,
+      "mean_paid_odds_on_hit": 4.063636363636364,
+      "stake_krw": 400000,
+      "return_krw": 447000,
+      "net_krw": 47000,
+      "net_roi_pct": 11.749999999999993,
+      "ci_hit_rate_pct": [
+        15.0,
+        41.38141295206054
+      ],
+      "ci_net_roi_pct": [
+        -43.777927927927934,
+        76.37845849802365
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -8.461538461538465,
+      "drop_top3_roi_pct": -26.216216216216214,
+      "drop_top5_roi_pct": -43.99999999999999
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.20",
+      "scope": "all",
+      "n_races": 39,
+      "hits": 11,
+      "hit_rate_pct": 28.205128205128204,
+      "mean_p": 0.36378368630060437,
+      "mean_quote": 4.592307692307692,
+      "median_quote": 4.2,
+      "mean_score": 0.6397757306054873,
+      "mean_paid_odds_on_hit": 4.518181818181819,
+      "stake_krw": 390000,
+      "return_krw": 497000,
+      "net_krw": 107000,
+      "net_roi_pct": 27.435897435897427,
+      "ci_hit_rate_pct": [
+        12.82051282051282,
+        44.44444444444444
+      ],
+      "ci_net_roi_pct": [
+        -43.229166666666664,
+        105.53470961887473
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": 7.105263157894748,
+      "drop_top3_roi_pct": -17.777777777777782,
+      "drop_top5_roi_pct": -37.64705882352941
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.20",
+      "scope": "2025",
+      "n_races": 11,
+      "hits": 3,
+      "hit_rate_pct": 27.272727272727273,
+      "mean_p": 0.35470347807673774,
+      "mean_quote": 4.581818181818182,
+      "median_quote": 4.4,
+      "mean_score": 0.6247347875577077,
+      "mean_paid_odds_on_hit": 5.033333333333334,
+      "stake_krw": 110000,
+      "return_krw": 151000,
+      "net_krw": 41000,
+      "net_roi_pct": 37.27272727272728,
+      "ci_hit_rate_pct": [
+        0.0,
+        58.333333333333336
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        198.57142857142858
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -6.999999999999995,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_id_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.20",
+      "scope": "2026",
+      "n_races": 28,
+      "hits": 8,
+      "hit_rate_pct": 28.571428571428573,
+      "mean_p": 0.36735091095998057,
+      "mean_quote": 4.596428571428571,
+      "median_quote": 4.0,
+      "mean_score": 0.6456846725171149,
+      "mean_paid_odds_on_hit": 4.325,
+      "stake_krw": 280000,
+      "return_krw": 346000,
+      "net_krw": 66000,
+      "net_roi_pct": 23.571428571428577,
+      "ci_hit_rate_pct": [
+        11.535714285714286,
+        47.82608695652174
+      ],
+      "ci_net_roi_pct": [
+        -56.925925925925924,
+        117.22270114942526
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -5.185185185185182,
+      "drop_top3_roi_pct": -31.200000000000006,
+      "drop_top5_roi_pct": -58.69565217391304
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "all_purchase",
+      "scope": "all",
+      "n_races": 1142,
+      "hits": 276,
+      "hit_rate_pct": 24.16812609457093,
+      "mean_p": 0.24044367605029024,
+      "mean_quote": 4.362784588441331,
+      "median_quote": 3.1,
+      "mean_score": -0.07547426096239919,
+      "mean_paid_odds_on_hit": 2.7434782608695656,
+      "stake_krw": 11420000,
+      "return_krw": 7572000,
+      "net_krw": -3848000,
+      "net_roi_pct": -33.695271453590195,
+      "ci_hit_rate_pct": [
+        21.98156798800564,
+        26.43104990050127
+      ],
+      "ci_net_roi_pct": [
+        -41.31321413457469,
+        -25.907337239891934
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -34.42594215600351,
+      "drop_top3_roi_pct": -35.75065847234416,
+      "drop_top5_roi_pct": -37.04485488126649
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "all_purchase",
+      "scope": "2025",
+      "n_races": 654,
+      "hits": 150,
+      "hit_rate_pct": 22.93577981651376,
+      "mean_p": 0.22204406494695178,
+      "mean_quote": 4.513455657492355,
+      "median_quote": 3.2,
+      "mean_score": -0.10264273762222319,
+      "mean_paid_odds_on_hit": 2.759333333333333,
+      "stake_krw": 6540000,
+      "return_krw": 4139000,
+      "net_krw": -2401000,
+      "net_roi_pct": -36.7125382262997,
+      "ci_hit_rate_pct": [
+        20.115525386871262,
+        25.93751274469821
+      ],
+      "ci_net_roi_pct": [
+        -46.36968429078381,
+        -26.76863304768298
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -37.840735068912714,
+      "drop_top3_roi_pct": -39.80030721966206,
+      "drop_top5_roi_pct": -41.355932203389834
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "all_purchase",
+      "scope": "2026",
+      "n_races": 488,
+      "hits": 126,
+      "hit_rate_pct": 25.81967213114754,
+      "mean_p": 0.26510217125845276,
+      "mean_quote": 4.160860655737705,
+      "median_quote": 3.0,
+      "mean_score": -0.03906404838960224,
+      "mean_paid_odds_on_hit": 2.7246031746031747,
+      "stake_krw": 4880000,
+      "return_krw": 3433000,
+      "net_krw": -1447000,
+      "net_roi_pct": -29.651639344262293,
+      "ci_hit_rate_pct": [
+        22.26882549894958,
+        29.338842975206614
+      ],
+      "ci_net_roi_pct": [
+        -41.4664608979327,
+        -16.36888248905255
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -31.355236139630392,
+      "drop_top3_roi_pct": -34.453608247422686,
+      "drop_top5_roi_pct": -37.432712215320905
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30",
+      "scope": "all",
+      "n_races": 240,
+      "hits": 92,
+      "hit_rate_pct": 38.333333333333336,
+      "mean_p": 0.37024897943998075,
+      "mean_quote": 2.4695833333333335,
+      "median_quote": 2.1,
+      "mean_score": -0.10709133617363466,
+      "mean_paid_odds_on_hit": 2.176086956521739,
+      "stake_krw": 2400000,
+      "return_krw": 2002000,
+      "net_krw": -398000,
+      "net_roi_pct": -16.58333333333334,
+      "ci_hit_rate_pct": [
+        32.352628285356694,
+        44.48952136987242
+      ],
+      "ci_net_roi_pct": [
+        -33.28812408015397,
+        0.39517514014451
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -19.999999999999996,
+      "drop_top3_roi_pct": -24.008438818565402,
+      "drop_top5_roi_pct": -26.93617021276595
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30",
+      "scope": "2025",
+      "n_races": 79,
+      "hits": 34,
+      "hit_rate_pct": 43.037974683544306,
+      "mean_p": 0.3660472492820928,
+      "mean_quote": 2.3594936708860756,
+      "median_quote": 2.0,
+      "mean_score": -0.14699602401966436,
+      "mean_paid_odds_on_hit": 2.085294117647059,
+      "stake_krw": 790000,
+      "return_krw": 709000,
+      "net_krw": -81000,
+      "net_roi_pct": -10.253164556962025,
+      "ci_hit_rate_pct": [
+        31.25,
+        55.29569327731092
+      ],
+      "ci_net_roi_pct": [
+        -39.39974067844127,
+        20.868160774410747
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -16.538461538461537,
+      "drop_top3_roi_pct": -26.57894736842106,
+      "drop_top5_roi_pct": -31.756756756756754
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30",
+      "scope": "2026",
+      "n_races": 161,
+      "hits": 58,
+      "hit_rate_pct": 36.024844720496894,
+      "mean_p": 0.3723106979646587,
+      "mean_quote": 2.5236024844720495,
+      "median_quote": 2.1,
+      "mean_score": -0.0875107750566387,
+      "mean_paid_odds_on_hit": 2.2293103448275864,
+      "stake_krw": 1610000,
+      "return_krw": 1293000,
+      "net_krw": -317000,
+      "net_roi_pct": -19.68944099378882,
+      "ci_hit_rate_pct": [
+        29.479616671737148,
+        43.00621075386884
+      ],
+      "ci_net_roi_pct": [
+        -38.455425935973956,
+        0.6176940639269338
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -24.812500000000004,
+      "drop_top3_roi_pct": -29.17721518987342,
+      "drop_top5_roi_pct": -33.20512820512821
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_40",
+      "scope": "all",
+      "n_races": 56,
+      "hits": 25,
+      "hit_rate_pct": 44.642857142857146,
+      "mean_p": 0.46268114456839704,
+      "mean_quote": 1.9589285714285716,
+      "median_quote": 1.8,
+      "mean_score": -0.10358756942654894,
+      "mean_paid_odds_on_hit": 1.8159999999999998,
+      "stake_krw": 560000,
+      "return_krw": 454000,
+      "net_krw": -106000,
+      "net_roi_pct": -18.928571428571427,
+      "ci_hit_rate_pct": [
+        33.33333333333333,
+        57.35528785982477
+      ],
+      "ci_net_roi_pct": [
+        -43.15069444444444,
+        9.717391304347789
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -27.090909090909086,
+      "drop_top3_roi_pct": -33.77358490566038,
+      "drop_top5_roi_pct": -39.411764705882355
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_40",
+      "scope": "2025",
+      "n_races": 16,
+      "hits": 7,
+      "hit_rate_pct": 43.75,
+      "mean_p": 0.4564589132255251,
+      "mean_quote": 2.1875,
+      "median_quote": 2.0,
+      "mean_score": -0.02599437733734234,
+      "mean_paid_odds_on_hit": 2.314285714285714,
+      "stake_krw": 160000,
+      "return_krw": 162000,
+      "net_krw": 2000,
+      "net_roi_pct": 1.2499999999999956,
+      "ci_hit_rate_pct": [
+        18.75,
+        71.42857142857143
+      ],
+      "ci_net_roi_pct": [
+        -66.43452380952381,
+        85.45568181818182
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -27.333333333333332,
+      "drop_top3_roi_pct": -52.3076923076923,
+      "drop_top5_roi_pct": -77.27272727272727
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_40",
+      "scope": "2026",
+      "n_races": 40,
+      "hits": 18,
+      "hit_rate_pct": 45.0,
+      "mean_p": 0.46517003710554583,
+      "mean_quote": 1.8675000000000002,
+      "median_quote": 1.7,
+      "mean_score": -0.1346248462622316,
+      "mean_paid_odds_on_hit": 1.6222222222222225,
+      "stake_krw": 400000,
+      "return_krw": 292000,
+      "net_krw": -108000,
+      "net_roi_pct": -27.0,
+      "ci_hit_rate_pct": [
+        30.431488801054023,
+        60.0
+      ],
+      "ci_net_roi_pct": [
+        -50.51428571428571,
+        -1.6659090909091
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -31.025641025641026,
+      "drop_top3_roi_pct": -38.108108108108105,
+      "drop_top5_roi_pct": -44.285714285714285
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.00",
+      "scope": "all",
+      "n_races": 328,
+      "hits": 38,
+      "hit_rate_pct": 11.585365853658537,
+      "mean_p": 0.23121531751702173,
+      "mean_quote": 8.080792682926829,
+      "median_quote": 6.4,
+      "mean_score": 0.6376917150420116,
+      "mean_paid_odds_on_hit": 5.186842105263156,
+      "stake_krw": 3280000,
+      "return_krw": 1971000,
+      "net_krw": -1309000,
+      "net_roi_pct": -39.90853658536585,
+      "ci_hit_rate_pct": [
+        8.038289475099205,
+        15.205447830101564
+      ],
+      "ci_net_roi_pct": [
+        -58.7864431834438,
+        -19.4803963685311
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -42.47706422018349,
+      "drop_top3_roi_pct": -47.16923076923077,
+      "drop_top5_roi_pct": -51.795665634674926
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.00",
+      "scope": "2025",
+      "n_races": 177,
+      "hits": 15,
+      "hit_rate_pct": 8.474576271186441,
+      "mean_p": 0.21001688622162193,
+      "mean_quote": 8.696045197740112,
+      "median_quote": 7.0,
+      "mean_score": 0.637314592531658,
+      "mean_paid_odds_on_hit": 4.973333333333333,
+      "stake_krw": 1770000,
+      "return_krw": 746000,
+      "net_krw": -1024000,
+      "net_roi_pct": -57.85310734463277,
+      "ci_hit_rate_pct": [
+        3.954246810131404,
+        13.260689110851041
+      ],
+      "ci_net_roi_pct": [
+        -80.3590909090909,
+        -32.87119843031963
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -62.15909090909091,
+      "drop_top3_roi_pct": -68.62068965517241,
+      "drop_top5_roi_pct": -74.65116279069768
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.00",
+      "scope": "2026",
+      "n_races": 151,
+      "hits": 23,
+      "hit_rate_pct": 15.2317880794702,
+      "mean_p": 0.2560638098301724,
+      "mean_quote": 7.359602649006623,
+      "median_quote": 6.0,
+      "mean_score": 0.6381337725541478,
+      "mean_paid_odds_on_hit": 5.32608695652174,
+      "stake_krw": 1510000,
+      "return_krw": 1225000,
+      "net_krw": -285000,
+      "net_roi_pct": -18.87417218543046,
+      "ci_hit_rate_pct": [
+        10.190211982484078,
+        20.880018674136316
+      ],
+      "ci_net_roi_pct": [
+        -48.3448097779308,
+        15.033688019644153
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -24.33333333333333,
+      "drop_top3_roi_pct": -34.39189189189189,
+      "drop_top5_roi_pct": -44.24657534246575
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.05",
+      "scope": "all",
+      "n_races": 298,
+      "hits": 35,
+      "hit_rate_pct": 11.74496644295302,
+      "mean_p": 0.23108938887306993,
+      "mean_quote": 8.395973154362416,
+      "median_quote": 6.9,
+      "mean_score": 0.6992825913650892,
+      "mean_paid_odds_on_hit": 5.308571428571427,
+      "stake_krw": 2980000,
+      "return_krw": 1858000,
+      "net_krw": -1122000,
+      "net_roi_pct": -37.651006711409394,
+      "ci_hit_rate_pct": [
+        7.926500263204071,
+        15.878530832276317
+      ],
+      "ci_net_roi_pct": [
+        -58.66694628130685,
+        -15.634621212121221
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -40.47138047138047,
+      "drop_top3_roi_pct": -45.6271186440678,
+      "drop_top5_roi_pct": -50.71672354948805
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.05",
+      "scope": "2025",
+      "n_races": 164,
+      "hits": 14,
+      "hit_rate_pct": 8.536585365853659,
+      "mean_p": 0.20709723137896935,
+      "mean_quote": 8.997560975609755,
+      "median_quote": 7.2,
+      "mean_score": 0.6856452744346919,
+      "mean_paid_odds_on_hit": 5.142857142857143,
+      "stake_krw": 1640000,
+      "return_krw": 720000,
+      "net_krw": -920000,
+      "net_roi_pct": -56.09756097560976,
+      "ci_hit_rate_pct": [
+        4.026749209287973,
+        13.422818791946309
+      ],
+      "ci_net_roi_pct": [
+        -79.60986132511556,
+        -29.696839991545183
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -60.73619631901841,
+      "drop_top3_roi_pct": -67.70186335403727,
+      "drop_top5_roi_pct": -74.21383647798743
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.05",
+      "scope": "2026",
+      "n_races": 134,
+      "hits": 21,
+      "hit_rate_pct": 15.671641791044776,
+      "mean_p": 0.2604529249106259,
+      "mean_quote": 7.659701492537314,
+      "median_quote": 6.2,
+      "mean_score": 0.7159730389515453,
+      "mean_paid_odds_on_hit": 5.419047619047619,
+      "stake_krw": 1340000,
+      "return_krw": 1138000,
+      "net_krw": -202000,
+      "net_roi_pct": -15.074626865671636,
+      "ci_hit_rate_pct": [
+        10.083870757605368,
+        22.501409774436084
+      ],
+      "ci_net_roi_pct": [
+        -48.018423248053395,
+        23.304315476190467
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -21.20300751879699,
+      "drop_top3_roi_pct": -32.51908396946565,
+      "drop_top5_roi_pct": -43.64341085271318
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.10",
+      "scope": "all",
+      "n_races": 275,
+      "hits": 30,
+      "hit_rate_pct": 10.909090909090908,
+      "mean_p": 0.2257074381013816,
+      "mean_quote": 8.750181818181819,
+      "median_quote": 7.0,
+      "mean_score": 0.7515847645686966,
+      "mean_paid_odds_on_hit": 5.493333333333331,
+      "stake_krw": 2750000,
+      "return_krw": 1648000,
+      "net_krw": -1102000,
+      "net_roi_pct": -40.07272727272727,
+      "ci_hit_rate_pct": [
+        7.14210998206814,
+        15.017578074880031
+      ],
+      "ci_net_roi_pct": [
+        -61.50757502885725,
+        -15.955312246553168
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -43.13868613138686,
+      "drop_top3_roi_pct": -48.75000000000001,
+      "drop_top5_roi_pct": -54.2962962962963
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.10",
+      "scope": "2025",
+      "n_races": 153,
+      "hits": 12,
+      "hit_rate_pct": 7.8431372549019605,
+      "mean_p": 0.20496389326142345,
+      "mean_quote": 9.283660130718955,
+      "median_quote": 7.3,
+      "mean_score": 0.7299521895315835,
+      "mean_paid_odds_on_hit": 5.25,
+      "stake_krw": 1530000,
+      "return_krw": 630000,
+      "net_krw": -900000,
+      "net_roi_pct": -58.82352941176471,
+      "ci_hit_rate_pct": [
+        3.174352019288728,
+        12.858294930875568
+      ],
+      "ci_net_roi_pct": [
+        -84.1669776119403,
+        -30.72179458575042
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -63.815789473684205,
+      "drop_top3_roi_pct": -71.33333333333334,
+      "drop_top5_roi_pct": -78.37837837837837
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.10",
+      "scope": "2026",
+      "n_races": 122,
+      "hits": 18,
+      "hit_rate_pct": 14.754098360655737,
+      "mean_p": 0.2517218836793619,
+      "mean_quote": 8.081147540983608,
+      "median_quote": 6.4,
+      "mean_score": 0.7787141414595025,
+      "mean_paid_odds_on_hit": 5.655555555555556,
+      "stake_krw": 1220000,
+      "return_krw": 1018000,
+      "net_krw": -202000,
+      "net_roi_pct": -16.55737704918033,
+      "ci_hit_rate_pct": [
+        9.01639344262295,
+        21.233304794520546
+      ],
+      "ci_net_roi_pct": [
+        -50.194332392093585,
+        24.49918478260867
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -23.30578512396694,
+      "drop_top3_roi_pct": -35.798319327731086,
+      "drop_top5_roi_pct": -48.11965811965811
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.20",
+      "scope": "all",
+      "n_races": 224,
+      "hits": 24,
+      "hit_rate_pct": 10.714285714285714,
+      "mean_p": 0.22708612015307075,
+      "mean_quote": 9.417410714285714,
+      "median_quote": 7.45,
+      "mean_score": 0.8909371521602435,
+      "mean_paid_odds_on_hit": 5.7749999999999995,
+      "stake_krw": 2240000,
+      "return_krw": 1386000,
+      "net_krw": -854000,
+      "net_roi_pct": -38.125,
+      "ci_hit_rate_pct": [
+        6.348847231200172,
+        15.283978129849505
+      ],
+      "ci_net_roi_pct": [
+        -62.808659305335226,
+        -11.171687858900746
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -41.88340807174888,
+      "drop_top3_roi_pct": -48.77828054298643,
+      "drop_top5_roi_pct": -55.61643835616439
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.20",
+      "scope": "2025",
+      "n_races": 122,
+      "hits": 8,
+      "hit_rate_pct": 6.557377049180328,
+      "mean_p": 0.20706289418602525,
+      "mean_quote": 10.052459016393444,
+      "median_quote": 8.0,
+      "mean_score": 0.8800257750775068,
+      "mean_paid_odds_on_hit": 5.55,
+      "stake_krw": 1220000,
+      "return_krw": 444000,
+      "net_krw": -776000,
+      "net_roi_pct": -63.60655737704918,
+      "ci_hit_rate_pct": [
+        1.6260162601626018,
+        12.592592592592592
+      ],
+      "ci_net_roi_pct": [
+        -91.07460399449036,
+        -29.993303571428612
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -69.91735537190083,
+      "drop_top3_roi_pct": -78.90756302521008,
+      "drop_top5_roi_pct": -87.6923076923077
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.20",
+      "scope": "2026",
+      "n_races": 102,
+      "hits": 16,
+      "hit_rate_pct": 15.686274509803921,
+      "mean_p": 0.2510354688587526,
+      "mean_quote": 8.657843137254902,
+      "median_quote": 7.0,
+      "mean_score": 0.9039880149454775,
+      "mean_paid_odds_on_hit": 5.8875,
+      "stake_krw": 1020000,
+      "return_krw": 942000,
+      "net_krw": -78000,
+      "net_roi_pct": -7.647058823529407,
+      "ci_hit_rate_pct": [
+        9.258547008547009,
+        23.405883630047757
+      ],
+      "ci_net_roi_pct": [
+        -46.088008415147264,
+        37.093408517792106
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -15.643564356435647,
+      "drop_top3_roi_pct": -30.5050505050505,
+      "drop_top5_roi_pct": -45.25773195876288
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.50",
+      "scope": "all",
+      "n_races": 128,
+      "hits": 10,
+      "hit_rate_pct": 7.8125,
+      "mean_p": 0.21844837768504616,
+      "mean_quote": 11.88203125,
+      "median_quote": 10.0,
+      "mean_score": 1.3119298060394415,
+      "mean_paid_odds_on_hit": 6.7700000000000005,
+      "stake_krw": 1280000,
+      "return_krw": 677000,
+      "net_krw": -603000,
+      "net_roi_pct": -47.109375,
+      "ci_hit_rate_pct": [
+        3.6218944099378882,
+        12.711864406779661
+      ],
+      "ci_net_roi_pct": [
+        -76.61424731182795,
+        -12.370910788213331
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -53.77952755905512,
+      "drop_top3_roi_pct": -65.99999999999999,
+      "drop_top5_roi_pct": -77.72357723577235
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.50",
+      "scope": "2025",
+      "n_races": 72,
+      "hits": 4,
+      "hit_rate_pct": 5.555555555555555,
+      "mean_p": 0.20237388701367665,
+      "mean_quote": 12.390277777777778,
+      "median_quote": 11.350000000000001,
+      "mean_score": 1.2653358635653618,
+      "mean_paid_odds_on_hit": 6.15,
+      "stake_krw": 720000,
+      "return_krw": 246000,
+      "net_krw": -474000,
+      "net_roi_pct": -65.83333333333333,
+      "ci_hit_rate_pct": [
+        1.1764705882352942,
+        12.07027168234064
+      ],
+      "ci_net_roi_pct": [
+        -93.53853217749044,
+        -25.08413314274046
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -76.61971830985915,
+      "drop_top3_roi_pct": -92.31884057971016,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_0.50",
+      "scope": "2026",
+      "n_races": 56,
+      "hits": 6,
+      "hit_rate_pct": 10.714285714285714,
+      "mean_p": 0.239115579976807,
+      "mean_quote": 11.228571428571428,
+      "median_quote": 9.25,
+      "mean_score": 1.371836303506116,
+      "mean_paid_odds_on_hit": 7.183333333333333,
+      "stake_krw": 560000,
+      "return_krw": 431000,
+      "net_krw": -129000,
+      "net_roi_pct": -23.03571428571428,
+      "ci_hit_rate_pct": [
+        3.7735849056603774,
+        19.118429286608254
+      ],
+      "ci_net_roi_pct": [
+        -73.1377840909091,
+        37.9588068181818
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -38.0,
+      "drop_top3_roi_pct": -65.66037735849058,
+      "drop_top5_roi_pct": -92.3529411764706
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_1.00",
+      "scope": "all",
+      "n_races": 62,
+      "hits": 3,
+      "hit_rate_pct": 4.838709677419355,
+      "mean_p": 0.20892060750173677,
+      "mean_quote": 15.695161290322579,
+      "median_quote": 14.8,
+      "mean_score": 1.9573788227137745,
+      "mean_paid_odds_on_hit": 6.7,
+      "stake_krw": 620000,
+      "return_krw": 201000,
+      "net_krw": -419000,
+      "net_roi_pct": -67.58064516129032,
+      "ci_hit_rate_pct": [
+        0.0,
+        10.771084337349388
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        -26.89970657276996
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -81.8032786885246,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_1.00",
+      "scope": "2025",
+      "n_races": 35,
+      "hits": 2,
+      "hit_rate_pct": 5.714285714285714,
+      "mean_p": 0.19513482834076412,
+      "mean_quote": 16.097142857142856,
+      "median_quote": 15.8,
+      "mean_score": 1.8476169735719261,
+      "mean_paid_odds_on_hit": 5.55,
+      "stake_krw": 350000,
+      "return_krw": 111000,
+      "net_krw": -239000,
+      "net_roi_pct": -68.28571428571428,
+      "ci_hit_rate_pct": [
+        0.0,
+        15.625
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        -14.612903225806468
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -84.41176470588235,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "ev_ge_1.00",
+      "scope": "2026",
+      "n_races": 27,
+      "hits": 1,
+      "hit_rate_pct": 3.7037037037037037,
+      "mean_p": 0.22679106196966428,
+      "mean_quote": 15.174074074074074,
+      "median_quote": 14.3,
+      "mean_score": 2.099662701230986,
+      "mean_paid_odds_on_hit": 9.0,
+      "stake_krw": 270000,
+      "return_krw": 90000,
+      "net_krw": -180000,
+      "net_roi_pct": -66.66666666666667,
+      "ci_hit_rate_pct": [
+        0.0,
+        12.0
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        8.000000000000007
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -100.0,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.00",
+      "scope": "all",
+      "n_races": 61,
+      "hits": 16,
+      "hit_rate_pct": 26.229508196721312,
+      "mean_p": 0.37101571655605614,
+      "mean_quote": 4.00655737704918,
+      "median_quote": 3.8,
+      "mean_score": 0.4419782159728806,
+      "mean_paid_odds_on_hit": 4.0687500000000005,
+      "stake_krw": 610000,
+      "return_krw": 651000,
+      "net_krw": 41000,
+      "net_roi_pct": 6.721311475409841,
+      "ci_hit_rate_pct": [
+        15.0,
+        37.31809701492535
+      ],
+      "ci_net_roi_pct": [
+        -41.31080163043478,
+        58.649557010785806
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -6.499999999999995,
+      "drop_top3_roi_pct": -22.413793103448278,
+      "drop_top5_roi_pct": -34.64285714285714
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.00",
+      "scope": "2025",
+      "n_races": 17,
+      "hits": 5,
+      "hit_rate_pct": 29.41176470588235,
+      "mean_p": 0.37414796579661697,
+      "mean_quote": 3.8823529411764706,
+      "median_quote": 3.9,
+      "mean_score": 0.4237131028888524,
+      "mean_paid_odds_on_hit": 4.08,
+      "stake_krw": 170000,
+      "return_krw": 204000,
+      "net_krw": 34000,
+      "net_roi_pct": 19.999999999999996,
+      "ci_hit_rate_pct": [
+        0.0,
+        54.54545454545454
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        129.42647058823522
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -8.750000000000002,
+      "drop_top3_roi_pct": -62.142857142857146,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.00",
+      "scope": "2026",
+      "n_races": 44,
+      "hits": 11,
+      "hit_rate_pct": 25.0,
+      "mean_p": 0.3698055293494758,
+      "mean_quote": 4.054545454545454,
+      "median_quote": 3.75,
+      "mean_score": 0.4490351914826187,
+      "mean_paid_odds_on_hit": 4.063636363636364,
+      "stake_krw": 440000,
+      "return_krw": 447000,
+      "net_krw": 7000,
+      "net_roi_pct": 1.5909090909090873,
+      "ci_hit_rate_pct": [
+        13.333333333333334,
+        37.83783783783784
+      ],
+      "ci_net_roi_pct": [
+        -49.80994897959183,
+        62.984014502307126
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -16.97674418604651,
+      "drop_top3_roi_pct": -33.41463414634146,
+      "drop_top5_roi_pct": -49.743589743589745
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.10",
+      "scope": "all",
+      "n_races": 47,
+      "hits": 13,
+      "hit_rate_pct": 27.659574468085108,
+      "mean_p": 0.36307329210366746,
+      "mean_quote": 4.376595744680851,
+      "median_quote": 3.9,
+      "mean_score": 0.5551013323312861,
+      "mean_paid_odds_on_hit": 4.284615384615385,
+      "stake_krw": 470000,
+      "return_krw": 557000,
+      "net_krw": 87000,
+      "net_roi_pct": 18.51063829787234,
+      "ci_hit_rate_pct": [
+        14.631929046563192,
+        41.03448275862064
+      ],
+      "ci_net_roi_pct": [
+        -42.368993135011436,
+        81.6218423344947
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": 1.521739130434785,
+      "drop_top3_roi_pct": -19.090909090909093,
+      "drop_top5_roi_pct": -35.238095238095234
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.10",
+      "scope": "2025",
+      "n_races": 12,
+      "hits": 4,
+      "hit_rate_pct": 33.333333333333336,
+      "mean_p": 0.3606409892262678,
+      "mean_quote": 4.425,
+      "median_quote": 4.300000000000001,
+      "mean_score": 0.5846891055987692,
+      "mean_paid_odds_on_hit": 4.45,
+      "stake_krw": 120000,
+      "return_krw": 178000,
+      "net_krw": 58000,
+      "net_roi_pct": 48.33333333333334,
+      "ci_hit_rate_pct": [
+        0.0,
+        63.63636363636363
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        195.04166666666646
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": 9.090909090909083,
+      "drop_top3_roi_pct": -70.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.10",
+      "scope": "2026",
+      "n_races": 35,
+      "hits": 9,
+      "hit_rate_pct": 25.714285714285715,
+      "mean_p": 0.36390722451877594,
+      "mean_quote": 4.36,
+      "median_quote": 3.9,
+      "mean_score": 0.544956952925292,
+      "mean_paid_odds_on_hit": 4.211111111111112,
+      "stake_krw": 350000,
+      "return_krw": 379000,
+      "net_krw": 29000,
+      "net_roi_pct": 8.285714285714295,
+      "ci_hit_rate_pct": [
+        11.11111111111111,
+        40.74074074074074
+      ],
+      "ci_net_roi_pct": [
+        -54.64887873754153,
+        81.66874999999999
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -15.000000000000002,
+      "drop_top3_roi_pct": -35.9375,
+      "drop_top5_roi_pct": -57.33333333333333
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.20",
+      "scope": "all",
+      "n_races": 40,
+      "hits": 11,
+      "hit_rate_pct": 27.5,
+      "mean_p": 0.36104678401873497,
+      "mean_quote": 4.590000000000001,
+      "median_quote": 4.2,
+      "mean_score": 0.6283945351462183,
+      "mean_paid_odds_on_hit": 4.518181818181819,
+      "stake_krw": 400000,
+      "return_krw": 497000,
+      "net_krw": 97000,
+      "net_roi_pct": 24.249999999999993,
+      "ci_hit_rate_pct": [
+        12.5,
+        43.24324324324324
+      ],
+      "ci_net_roi_pct": [
+        -44.62837837837838,
+        99.1947535771065
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": 4.358974358974366,
+      "drop_top3_roi_pct": -19.999999999999996,
+      "drop_top5_roi_pct": -39.42857142857142
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.20",
+      "scope": "2025",
+      "n_races": 11,
+      "hits": 3,
+      "hit_rate_pct": 27.272727272727273,
+      "mean_p": 0.35441468021145456,
+      "mean_quote": 4.581818181818182,
+      "median_quote": 4.4,
+      "mean_score": 0.6234197471394869,
+      "mean_paid_odds_on_hit": 5.033333333333334,
+      "stake_krw": 110000,
+      "return_krw": 151000,
+      "net_krw": 41000,
+      "net_roi_pct": 37.27272727272728,
+      "ci_hit_rate_pct": [
+        0.0,
+        58.333333333333336
+      ],
+      "ci_net_roi_pct": [
+        -100.0,
+        198.57142857142858
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -6.999999999999995,
+      "drop_top3_roi_pct": -100.0,
+      "drop_top5_roi_pct": -100.0
+    },
+    {
+      "selector": "jockey_basic_candidate",
+      "condition": "p_ge_0_30_ev_ge_0.20",
+      "scope": "2026",
+      "n_races": 29,
+      "hits": 8,
+      "hit_rate_pct": 27.586206896551722,
+      "mean_p": 0.3635624096008069,
+      "mean_quote": 4.593103448275862,
+      "median_quote": 4.1,
+      "mean_score": 0.6302815237004961,
+      "mean_paid_odds_on_hit": 4.325,
+      "stake_krw": 290000,
+      "return_krw": 346000,
+      "net_krw": 56000,
+      "net_roi_pct": 19.3103448275862,
+      "ci_hit_rate_pct": [
+        11.103603603603604,
+        46.42857142857143
+      ],
+      "ci_net_roi_pct": [
+        -58.00535714285715,
+        108.90036231884052
+      ],
+      "empty_draws_dropped": 0,
+      "drop_top1_roi_pct": -8.571428571428575,
+      "drop_top3_roi_pct": -33.84615384615385,
+      "drop_top5_roi_pct": -60.41666666666667
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "contract_version": 1,
+  "status": "fixed retrospective descriptive addendum; core outcomes already observed; not a preregistration or confirmatory validation",
+  "write_scope": "jeju/research/20261010_joint_gain_loss_v1/outputs_supplemental/ only; INPUT_CONTRACT.json and outputs/ are frozen",
+  "analysis_plan": "SUPPLEMENTAL_CONTEXT_PLAN.md",
+  "inputs": [
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/runner_context.csv",
+      "sha256": "8dfbef38f04c52962efee8275cca48ae8f6fa14e59d7816ed50f0b4344642468",
+      "rows": 17412,
+      "key": "unique api_record_id; race_id is checked after the join",
+      "role": "same-event result-side explanatory context; not validated at prediction publication time"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/CONDITION_AVAILABILITY_AUDIT.md",
+      "sha256": "42bbb7a31dcee14ac8b6abdb9e6bfaf1ffafafdd2af91161baa89dd4d03921ba",
+      "role": "source lineage, key/range audit, band meaning and availability limitations"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv",
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+      "role": "fixed target runner keys and saved top-three labels"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "rows": 52155,
+      "required_columns": [
+        "api_record_id", "race_id", "race_date", "finish_position", "same_starts", "same_valid_times",
+        "same_distance_last5_actual_n", "same_distance_last5_normal_n"
+      ],
+      "role": "saved historical feature extension and actual top-three membership"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/outputs/race_ledger_1779.csv",
+      "sha256": "verified at run time and recorded in supplemental_receipt.json",
+      "rows": 1779,
+      "role": "frozen core race outcomes and gain/loss partition"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/outputs/analysis_receipt.json",
+      "sha256": "verified at run time and recorded in supplemental_receipt.json",
+      "role": "core analysis metadata and immutable output inventory"
+    }
+  ],
+  "join_contract": {
+    "runner_context_to_runner_marginals": "one-to-one unique api_record_id; exact 17412/17412 keys and race_id parity",
+    "runner_context_to_features": "one-to-one on target api_record_id; race_id/date parity; only target subset is required",
+    "race_context": "one row per race_id, requiring one constant moisture and band per race",
+    "actual_top3": "finish_position <= 3 from the saved feature parquet; exactly 3 runners per target race"
+  },
+  "fixed_definitions": {
+    "band_order": ["건조", "양호", "다습", "포화", "불량"],
+    "race_roster_aggregation": "within each race compute mean and population standard deviation (ddof=0) over observed runners for body_kg, carried_weight_kg, and per-runner carried_weight_kg/body_kg; record nonmissing count and missing fraction for each",
+    "outcome_summary_unit": "race-level vectors; one race contributes once, never one independent observation per runner",
+    "paired_date_interval": "2,000 cluster bootstrap draws, resample race_date clusters with replacement and retain all subgroup races per sampled date; numpy default_rng seed 20261008; pointwise 2.5/97.5 percentiles",
+    "lifetime_history": "same_starts and same_valid_times are lifetime same-distance counts; they are distinct from bounded latest-five-slot same_distance_last5_actual_n and same_distance_last5_normal_n",
+    "ratio": "per-runner carried_weight_kg divided by body_kg, then summarized by race mean and population SD"
+  },
+  "prohibited": [
+    "model fitting, score/threshold/coefficient changes, production changes, database/network reads",
+    "per-jockey subgroup or rule exploration",
+    "joining by horse number, name, or jockey id",
+    "claiming same-event context is verified prediction-time data",
+    "zero-filling missing context or treating runners as independent race-level replicates",
+    "using outcome-defined groups to choose bands, thresholds, or deployable rules"
+  ]
+}

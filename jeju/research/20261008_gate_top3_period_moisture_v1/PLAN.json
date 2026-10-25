@@ -1,0 +1,22 @@
+{
+  "question": "Observed Top3 rates by gate, temporal inner/outer reversals accounting for moisture",
+  "fixed_before_new_outcome_estimation": true,
+  "period": ["2017-01-01", "2026-09-19"],
+  "partial_year": 2026,
+  "distances": [800, 900, 1000, 1110, 1200, 1300, 1400, 1610],
+  "population": "preserved quality extraction, strict normal complete races, exactly ten starters numbered 1 through 10",
+  "target": "finish_position <= 3; observed association, not a causal effect or time adjustment",
+  "groups": {"inner": [1,2,3], "middle": [4,5,6,7], "outer": [8,9,10]},
+  "bands": ["건조", "양호", "다습", "포화", "불량"],
+  "moisture_percent": {"건조": [1,5], "양호": [6,9], "다습": [10,14], "포화": [15,19], "불량": [20,100]},
+  "primary": "Linear probability model with race and horse fixed effects; inner/outer indicators plus year-by-lateral and moisture-band-by-lateral additive interactions; middle reference. Historical exact-distance last-five time features, counts, gaps, event-age, weight, sex nuisance controls reused from preserved design. Nuisance ridge penalty 1; lateral and interactions unpenalized.",
+  "standardization": "Each distance's full-period moisture race weights applied to every year; each distance's full-period year weights applied to every band. Requires additive year/moisture interactions; not a saturated three-way model.",
+  "uncertainty": "Date-cluster covariance plus horse-cluster covariance without intersection subtraction, absorbed fixed-effect degrees of freedom, t critical value using smaller cluster count",
+  "minimum_report_support": {"races": 30, "dates": 20},
+  "basic_support": {"races": 100, "dates": 40},
+  "sensitivity": ["race_only", "no_history"],
+  "three_way_check": "Separate race+horse FE inner/outer group fits within each fixed era and moisture band, provided >=30 races and >=20 dates. Eras 2017-2020, 2021-2023, 2024-2026partial. Same nuisance controls; not independent validation.",
+  "multiplicity": "BH separately for overall-distance contrasts, supported standardized annual contrasts, supported standardized band contrasts, supported era-band contrasts, and all supported same-distance year-pair differences; each variant separate family",
+  "reversal": "Earlier and later standardized annual contrasts have opposite signs and both BH q<0.05, all-pairs change BH q<0.05, and annual signs agree in race-only and no-history sensitivities. Raw sign switches separately descriptive.",
+  "nonclaims": ["No causal gate benefit", "No Top3 prediction validation", "No future independent validation", "No conversion from percentage points to seconds", "No operational or database writes"]
+}

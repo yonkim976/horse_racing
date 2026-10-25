@@ -1,0 +1,262 @@
+{
+  "builder": {
+    "bytes": 34250,
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/audit/build_inputs.py",
+    "sha256": "3ce7e1dd72faed8179af47b6c6e98c538da7cbe0f287e280871dbb986313f960"
+  },
+  "feature_columns": [
+    "pace_own_early_tendency",
+    "pace_own_label_support_fraction_max10",
+    "pace_inner_interaction",
+    "pace_outer_interaction",
+    "pace_adjacent_inner_interaction",
+    "pace_adjacent_outer_interaction",
+    "pace_opponent_observed_fraction"
+  ],
+  "input_artifact": {
+    "bytes": 5168573,
+    "compression": "zstd",
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/audit/gate_pace_features.parquet",
+    "races": 5206,
+    "rows": 52155,
+    "sha256": "312163188d05823f5bd4fd60112bf2568b74b397b6bb889c340132e55119b0e7"
+  },
+  "limitations": [
+    {
+      "detail": "T-2 is an event-date cutoff; source publication/first-availability timestamps are unverified.",
+      "id": "event_time_only"
+    },
+    {
+      "detail": "Historical S1F first-pack indicator is not solo-leader, physical contest, or an individual tactical running-style label.",
+      "id": "first_pack_semantics"
+    },
+    {
+      "detail": "n=0 q=1/3 is prior shrinkage with zero observed-label support; it does not mean no prior starts or a late-running horse.",
+      "id": "no_history"
+    },
+    {
+      "detail": "Historical source starts in 2017; early target windows may be left-truncated.",
+      "id": "left_truncation"
+    },
+    {
+      "detail": "Horse number is used as the contracted ordering axis; mapping to physical starting stalls/track position is unverified.",
+      "id": "gate_mapping"
+    },
+    {
+      "detail": "q and products are covariates for fitting, not calibrated current-race or simultaneous early-pack probabilities.",
+      "id": "not_joint_event_probability"
+    },
+    {
+      "detail": "All 52,155 S40 runner rows/5,206 races are retained; no extra phase-only race/runner enters the peer roster.",
+      "id": "cohort"
+    },
+    {
+      "detail": "No learned phase-model OOS probability, target label, result, market input, fit, or performance calculation was read or used.",
+      "id": "oos_predictions_excluded"
+    }
+  ],
+  "numeric_rules": {
+    "adjacent_number_gap": 1,
+    "cutoff_lag_days": 2,
+    "empty_peer_sum": 0,
+    "feature_formulas": {
+      "pace_adjacent_inner_interaction": "q_i * sum(q_j for same-race S40 rivals with horse_number_j = horse_number_i - 1)",
+      "pace_adjacent_outer_interaction": "q_i * sum(q_j for same-race S40 rivals with horse_number_j = horse_number_i + 1)",
+      "pace_inner_interaction": "q_i * sum(q_j for same-race S40 rivals with horse_number_j < horse_number_i)",
+      "pace_opponent_observed_fraction": "count(other same-race S40 rivals with h10_s1f_0_n > 0) / (field_n - 1)",
+      "pace_outer_interaction": "q_i * sum(q_j for same-race S40 rivals with horse_number_j > horse_number_i)",
+      "pace_own_early_tendency": "q_i",
+      "pace_own_label_support_fraction_max10": "n_i / 10"
+    },
+    "h10_mean_column": "h10_s1f_0_mean",
+    "h10_observation_count_column": "h10_s1f_0_n",
+    "h10_slots_source": "h10_slots",
+    "history_lower_and_cutoff_inclusive": true,
+    "history_same_official_horse_id": true,
+    "history_slot_date_source": "features_and_targets.parquet keyed by h10 API record IDs",
+    "history_slot_ids_source": "history_lineage.h10_ids",
+    "history_slot_order": "oldest-to-newest, preserved from frozen h10 lineage",
+    "lookback_days": 730,
+    "max_history_slots": 10,
+    "peer_order": "ascending horse_number; all peer arrays share identical element order",
+    "peer_roster": "all other runners from the exact frozen S40 race roster; self excluded",
+    "prior_positive": 1,
+    "prior_strength": 3,
+    "q_formula": "(h10_s1f_0_mean * h10_s1f_0_n + 1) / (h10_s1f_0_n + 3); n=0 -> 1/3",
+    "race_number_gaps": "preserved; no compression after scratches"
+  },
+  "passed": true,
+  "source_references": [
+    {
+      "bytes": 9596,
+      "path": "jeju/research/20261025_s_gate_pace_interaction_v1/supervisor/DESIGN_CONTRACT.md",
+      "role": "frozen study contract",
+      "sha256": "9d0b5517dd05fef2ea7090bfaf564d571642f5a2316f54e830885e3db9e0c5ee"
+    },
+    {
+      "bytes": 29012,
+      "path": "jeju/research/20261025_s_gate_pace_interaction_v1/supervisor/SESSION_START.json",
+      "role": "frozen source-tree pins and study budget",
+      "sha256": "a4eb8a10e8df7952cd033a8e61afadd577e059d5f13c09329d44e7101eefb231"
+    },
+    {
+      "bytes": 5476534,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "role": "S40 base roster keys and metadata only",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    {
+      "bytes": 3698878,
+      "path": "jeju/research/20261022_tb_state_transfer_v1/inputs/state_features.parquet",
+      "role": "S40 exact target row-key set only",
+      "sha256": "ac956c959ce853aa129c738113c598d4ecc968d88dc1306c0f5fa5f4712a78e7"
+    },
+    {
+      "bytes": 8245,
+      "path": "jeju/research/20261022_tb_state_transfer_v1/inputs/input_manifest.json",
+      "role": "S40 source/cohort pins",
+      "sha256": "7561d6f91d5a1a5059add0741d912e33896b04810a19dd1dab955b0ebd229f5e"
+    },
+    {
+      "bytes": 25306264,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/features_and_targets.parquet",
+      "role": "phase metadata and historical h10 S1F mean/n/slots only",
+      "sha256": "0dcf70c9cb4822fb3c5198e1a138648062f5d94d1ef9bf712929d40e2a0dca33"
+    },
+    {
+      "bytes": 2822738,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/history_lineage.parquet",
+      "role": "h10 selected prior API IDs and T-2/730-day bounds",
+      "sha256": "1ed5b9432aa8491db6308e06d7a275c6318dafe969e465208980c1aac25e4785"
+    },
+    {
+      "bytes": 12093,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/feature_contract.json",
+      "role": "phase feature and history-window definitions",
+      "sha256": "6026a3d500528ce1598919df0fd97b291b2513784c63b71cc4dba4cdcd200b67"
+    },
+    {
+      "bytes": 407,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/build_verification.json",
+      "role": "existing phase history verification receipt",
+      "sha256": "bda33b4de4f65d6732c0275c771f870eb1ba1d150a02c616dcb55dcfd8dbd682"
+    },
+    {
+      "bytes": 2788,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/source_manifest.json",
+      "role": "phase source provenance",
+      "sha256": "75d7b8ee982b7e85849a7241809a5f6c00e766d116bb1ac97bbf28a63bdd2bfe"
+    },
+    {
+      "bytes": 13426,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/build.py",
+      "role": "existing phase history selection code",
+      "sha256": "0f2e6833f3f78262e072ec76cb021daac2265460a49d899478fe1f9229318624"
+    },
+    {
+      "bytes": 5496,
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/verify_build.py",
+      "role": "existing phase history verification code",
+      "sha256": "522a9328d5940a09153fca0fc558ff02a800c5dba0147336dbf97557bca59aa3"
+    }
+  ],
+  "spec_id": "s_gate_pace_v1_7f",
+  "support": {
+    "all_seven_feature_values_finite": true,
+    "all_target_rows_retained": true,
+    "h10_actual_start_slot_count": {
+      "0": 2493,
+      "1": 2331,
+      "10": 31932,
+      "2": 2226,
+      "3": 2115,
+      "4": 2009,
+      "5": 1947,
+      "6": 1849,
+      "7": 1803,
+      "8": 1760,
+      "9": 1690
+    },
+    "h10_valid_s1f_label_count": {
+      "0": 2511,
+      "1": 2349,
+      "10": 30856,
+      "2": 2237,
+      "3": 2119,
+      "4": 2023,
+      "5": 1949,
+      "6": 1859,
+      "7": 1810,
+      "8": 1795,
+      "9": 2647
+    },
+    "peer_lineage_item_counts": {
+      "adjacent_inner": 46949,
+      "adjacent_outer": 46949,
+      "inner": 237294,
+      "outer": 237294
+    },
+    "rows_with_at_least_three_valid_s1f_labels": 45058,
+    "rows_with_zero_valid_s1f_labels": 2511,
+    "target_races": 5206,
+    "target_rows": 52155,
+    "target_years": {
+      "2017": {
+        "races": 432,
+        "rows": 4354
+      },
+      "2018": {
+        "races": 503,
+        "rows": 5111
+      },
+      "2019": {
+        "races": 576,
+        "rows": 5890
+      },
+      "2020": {
+        "races": 329,
+        "rows": 3290
+      },
+      "2021": {
+        "races": 418,
+        "rows": 4331
+      },
+      "2022": {
+        "races": 512,
+        "rows": 5261
+      },
+      "2023": {
+        "races": 657,
+        "rows": 6506
+      },
+      "2024": {
+        "races": 637,
+        "rows": 6329
+      },
+      "2025": {
+        "races": 654,
+        "rows": 6410
+      },
+      "2026": {
+        "races": 488,
+        "rows": 4673
+      }
+    }
+  },
+  "synthetic_checks": {
+    "bytes": 522,
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/audit/synthetic_checks.json",
+    "sha256": "c9dc1b3aeabbfbcd28abc733ffcdc3ad3064b074c0348c7c57bef2cecb5c646b"
+  },
+  "validation": {
+    "all_s40_race_rosters_and_unique_numbers_checked": true,
+    "fit_or_evaluation_run": false,
+    "history_slot_id_date_horse_window_checked": true,
+    "source_pins_checked_after_build": true,
+    "source_pins_checked_after_output_write": true,
+    "source_pins_checked_before_reads": true,
+    "synthetic_formula_checks_passed": true,
+    "target_api_id_join_exact": true,
+    "target_metadata_join_exact": true
+  }
+}

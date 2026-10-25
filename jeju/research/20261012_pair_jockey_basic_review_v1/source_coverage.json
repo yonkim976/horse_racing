@@ -1,0 +1,191 @@
+{
+  "status": "PASS",
+  "scope": "existing source identity, score-key coverage and complete-roster audit; no new model inputs, fit, predictions or performance metrics",
+  "database_or_network_access": false,
+  "starts": {
+    "rows": 52155,
+    "api_record_id_unique": true,
+    "races": 5206,
+    "race_dates": [
+      "2017-01-13",
+      "2026-09-19"
+    ],
+    "jockey_id_missing": 0,
+    "jockey_id_zero": 0,
+    "jockey_id_format_violations": 0,
+    "result_payload_hash_missing": 0,
+    "excluded_horse_3005648_rows": 0
+  },
+  "feature_identity_join": {
+    "rows": 52155,
+    "api_record_id_one_to_one": true,
+    "feature_event_race_date_horse_mismatches": 0,
+    "history_cutoff_equals_race_date_minus_two_days": true,
+    "latest_history_at_or_before_cutoff": true
+  },
+  "complete_rosters": {
+    "races": 5206,
+    "all_runner_counts_match_field_n": true,
+    "all_finish_ranks_are_1_through_n": true,
+    "all_races_have_exactly_three_top3_labels": true,
+    "non_normal_or_non_finishing_runners_in_this_selected_source": "not represented; denominator is selected complete finishers"
+  },
+  "score_roles": [
+    {
+      "target_year": 2019,
+      "target_role": "calibration",
+      "provider_fold_year": 2020,
+      "provider_role": "calibration",
+      "rows": 5890,
+      "races": 576,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "277595cfe5d9976d24a8dc1c0c0e302a9fd58e467046e337a9af13d3c7287cdc"
+    },
+    {
+      "target_year": 2020,
+      "target_role": "calibration",
+      "provider_fold_year": 2021,
+      "provider_role": "calibration",
+      "rows": 3290,
+      "races": 329,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "ca2254c97e54a102954f706433864be8e5715d142ebf8237610311e4cbaa4c50"
+    },
+    {
+      "target_year": 2021,
+      "target_role": "calibration",
+      "provider_fold_year": 2022,
+      "provider_role": "calibration",
+      "rows": 4331,
+      "races": 418,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "3665e2039946362b97fe4fa72e50d2e13c8fb3b77f9f71225a9ae9d5c4b84ee9"
+    },
+    {
+      "target_year": 2022,
+      "target_role": "calibration",
+      "provider_fold_year": 2023,
+      "provider_role": "calibration",
+      "rows": 5261,
+      "races": 512,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "35c38b4acf6a5ca3236c41a85ba851577ab3053e92abb741a1e135f68942aa71"
+    },
+    {
+      "target_year": 2023,
+      "target_role": "calibration",
+      "provider_fold_year": 2024,
+      "provider_role": "calibration",
+      "rows": 6506,
+      "races": 657,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "360cc559b1ab19cde177e0bb23206fd36f123b707714fbcb63547fdb9bed05b2"
+    },
+    {
+      "target_year": 2024,
+      "target_role": "calibration",
+      "provider_fold_year": 2025,
+      "provider_role": "calibration",
+      "rows": 6329,
+      "races": 637,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755"
+    },
+    {
+      "target_year": 2025,
+      "target_role": "calibration",
+      "provider_fold_year": 2026,
+      "provider_role": "calibration",
+      "rows": 6410,
+      "races": 654,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8"
+    },
+    {
+      "target_year": 2024,
+      "target_role": "evaluation",
+      "provider_fold_year": 2024,
+      "provider_role": "evaluation",
+      "rows": 6329,
+      "races": 637,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60"
+    },
+    {
+      "target_year": 2025,
+      "target_role": "evaluation",
+      "provider_fold_year": 2025,
+      "provider_role": "evaluation",
+      "rows": 6410,
+      "races": 654,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12"
+    },
+    {
+      "target_year": 2026,
+      "target_role": "evaluation",
+      "provider_fold_year": 2026,
+      "provider_role": "evaluation",
+      "rows": 4673,
+      "races": 488,
+      "source_to_event_id_missing": 0,
+      "score_sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a"
+    }
+  ],
+  "rolling_365d_observed_start_support": {
+    "2019": {
+      "target_rows": 5890,
+      "rows_with_zero_observed_eligible_365d_starts": 3,
+      "minimum_observed_eligible_365d_starts": 0,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2020": {
+      "target_rows": 3290,
+      "rows_with_zero_observed_eligible_365d_starts": 12,
+      "minimum_observed_eligible_365d_starts": 0,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2021": {
+      "target_rows": 4331,
+      "rows_with_zero_observed_eligible_365d_starts": 3,
+      "minimum_observed_eligible_365d_starts": 0,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2022": {
+      "target_rows": 5261,
+      "rows_with_zero_observed_eligible_365d_starts": 9,
+      "minimum_observed_eligible_365d_starts": 0,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2023": {
+      "target_rows": 6506,
+      "rows_with_zero_observed_eligible_365d_starts": 1,
+      "minimum_observed_eligible_365d_starts": 0,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2024": {
+      "target_rows": 6329,
+      "rows_with_zero_observed_eligible_365d_starts": 0,
+      "minimum_observed_eligible_365d_starts": 30,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2025": {
+      "target_rows": 6410,
+      "rows_with_zero_observed_eligible_365d_starts": 2,
+      "minimum_observed_eligible_365d_starts": 0,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    },
+    "2026": {
+      "target_rows": 4673,
+      "rows_with_zero_observed_eligible_365d_starts": 0,
+      "minimum_observed_eligible_365d_starts": 25,
+      "interpretation": "N=0 means no prior start in this selected source window; it does not prove the jockey had no actual start"
+    }
+  },
+  "input_hashes": {
+    "jeju/research/20261009_jockey_effects_v1/input01/starts.csv": "78800c5c91219d58855ce046e39ead6a87729a49c8ba0d58ca9f78765921801a",
+    "jeju/research/20261009_jockey_effects_v1/input01/source_manifest.json": "68e38ee6b2ec32040fa6a8a8fdce4039ece3f25e0869004d910c92a288f50bdc",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/evaluation_pair_predictions.parquet": "f983d9c5dfa7c4d1129b407d5a3e367dc38e193c0c8fdbbaeff34d86b31af499"
+  }
+}

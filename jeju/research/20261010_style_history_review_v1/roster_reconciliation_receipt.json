@@ -1,0 +1,85 @@
+{
+  "status": "independent_readonly_full_roster_reconciliation_pass",
+  "performed_on": "2026-10-10",
+  "database_access": {
+    "mode": "ro",
+    "pragma_query_only": true,
+    "queries": "parameterized race-key lookups against race_result_rows",
+    "database_written": false
+  },
+  "method": {
+    "history_reference": "F1 historical_lineage.parquet",
+    "target_reference": "F1 features.parquet",
+    "roster_rule": "all source_snapshot rows whose race_id is among the referenced race keys, then compare against all race_result_rows for those exact race keys",
+    "started_rule": "finish_position 1..89 or 91/92",
+    "row_fields_compared": [
+      "api_record_id",
+      "race_date",
+      "meet_code",
+      "race_number",
+      "horse_id",
+      "horse_number",
+      "race_distance_m",
+      "finish_position"
+    ],
+    "finish_rank_completeness": "N>=2 and no duplicate horse ID and finish ranks form a unique 1..N permutation"
+  },
+  "last5_same_distance_history": {
+    "slots": 178459,
+    "unique_source_api_record_ids": 50491,
+    "referenced_races": 6269,
+    "snapshot_rows": 62709,
+    "full_database_rows": 62709,
+    "snapshot_started_rows": 62248,
+    "full_database_started_rows": 62248,
+    "race_started_N_mismatches": 0,
+    "race_started_id_set_mismatches": 0,
+    "snapshot_rows_match_full_database_fields": true,
+    "full_started_null_counts": {
+      "api_record_id": 0,
+      "horse_id": 0,
+      "horse_number": 0
+    },
+    "full_started_duplicate_counts_by_race": {
+      "api_record_id": 0,
+      "horse_id": 0,
+      "horse_number": 0
+    },
+    "full_finish_rank_complete_races": 6145
+  },
+  "f1_previous_start": {
+    "target_rows_with_previous_start": 50209,
+    "nonnull_previous_finish_relative_rank_target_rows": 49464,
+    "referenced_source_races": 5901,
+    "snapshot_rows": 59089,
+    "full_database_rows": 59089,
+    "snapshot_started_rows": 58648,
+    "full_database_started_rows": 58648,
+    "race_started_N_mismatches": 0,
+    "race_started_id_set_mismatches": 0,
+    "snapshot_rows_match_full_database_fields": true,
+    "nonnull_baseline_rank_exposures_with_full_N_larger": 0,
+    "nonnull_baseline_rank_exposures_with_started_id_set_mismatch": 0,
+    "full_finish_rank_complete_races": 5808
+  },
+  "f1_target_cohort": {
+    "rows": 52155,
+    "races": 5206,
+    "snapshot_rows_for_target_races": 52155,
+    "full_database_rows_for_target_races": 52155,
+    "snapshot_started_rows": 52155,
+    "full_database_started_rows": 52155,
+    "target_field_n_equals_full_started_N_races": 5206,
+    "target_started_id_set_mismatches": 0,
+    "target_ids_missing_from_full_started_roster": 0,
+    "extra_full_started_runners": 0,
+    "extra_full_started_top3_runners": 0,
+    "full_finish_rank_complete_races": 5206,
+    "snapshot_rows_match_full_database_fields": true
+  },
+  "correction": "An initial preliminary comparison incorrectly filtered source_snapshot to the referenced API IDs before counting each race roster. Those partial-ID subset counts and derived conclusions were invalid and are withdrawn. The corrected comparison includes every source_snapshot row for each referenced race_id.",
+  "limitations": [
+    "This verifies roster membership and copied race-result fields for the specified F1 source and target race keys; it does not validate section-order quality sources or candidate style features.",
+    "No candidate model was fit and no existing F1 input, model, registry, or outcome was changed."
+  ]
+}

@@ -1,0 +1,596 @@
+{
+  "date": "2026-10-17",
+  "meet": "Jeju (meet=2)",
+  "purpose": "Narrow current reread of only API6 and API303, following the official homepage check.",
+  "credential_handling": "Loaded through existing settings helper in memory; never printed or stored. Raw pages were checked for direct and URL-encoded secret echo before saving.",
+  "bounds": {
+    "max_concurrent_requests": 2,
+    "per_request_timeout_seconds": 20,
+    "max_response_bytes": 4194304,
+    "max_calls": 2,
+    "retries": 0,
+    "tls_verification": true,
+    "redirects_followed": false
+  },
+  "previous_recheck": {
+    "run_id": "20261017T220226_4747d5bd",
+    "retrieved_at_utc": "2026-10-17T13:02:49.688761+00:00",
+    "section_records_rows": 0,
+    "corner_rank_rows": 0,
+    "source_manifest": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/collection/source_manifest.json",
+    "source_manifest_sha256": "9dc27d3d21f4dc993cd276879f1b0b83d89927b2b2a57429efd358ea601f5f72"
+  },
+  "today": {
+    "retrieved_at_utc": "2026-10-17T19:02:34+00:00",
+    "page_count": 2,
+    "total_rows": 14,
+    "families": [
+      {
+        "family": "corner_rank",
+        "endpoint": "/API303/corner_rank",
+        "operation": "corner_rank",
+        "params": {
+          "meet": 2,
+          "rc_date": "20261017",
+          "_type": "json",
+          "pageNo": 1,
+          "numOfRows": 1000
+        },
+        "collected_at_utc": "2026-10-17T19:02:34+00:00",
+        "timeout_seconds": 20,
+        "response_byte_limit": 4194304,
+        "redirects_followed": false,
+        "tls_certificate_verification": true,
+        "request_attempt_limit": 1,
+        "raw_path": "api_recheck/raw/corner_rank/20261017/page_0001.json",
+        "sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+        "status": "complete",
+        "http_status": 200,
+        "content_type": "application/json;charset=UTF-8",
+        "response_bytes": 2519,
+        "result_code": "00",
+        "total_count": 7,
+        "row_count": 7,
+        "in_scope_rows": 7,
+        "out_of_scope_rows": 0,
+        "record_summaries": [
+          {
+            "race_no": 1,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "-",
+              "corner_3": "5-(3,7,10),(2,4),8-1,(6,9)",
+              "corner_4": "5=(3,7),(2,4,10),8=(1,6)-9",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "5-(10,3,7),(2,4),8-1,(6,9)",
+              "corner_8": "5=3,4,(8,7)-2,(6,10)=9-1",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:50.5",
+            "four_furlong_time_raw": "1:05.0",
+            "tempo_raw": "②"
+          },
+          {
+            "race_no": 2,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "-",
+              "corner_3": "(1,9),2,(6,4,8),10,3,5,7",
+              "corner_4": "(^9,1)-2,8,(4,10),(3,6),5,7",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "(^9,1,2),6,(4,8,10,3),5,7",
+              "corner_8": "9=(1,2,8)-(4,3,10)-(5,7),6",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:48.1",
+            "four_furlong_time_raw": "1:03.1",
+            "tempo_raw": "②"
+          },
+          {
+            "race_no": 3,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "-",
+              "corner_3": "2,(3,6,8),1,(5,10,4),(7,9)",
+              "corner_4": "2,(6,3),1-(4,8),(5,10,7)=9",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "2,(3,6,8),(1,10),5,(4,7,9)",
+              "corner_8": "2,6,4,(1,3),(7,5),8=10-9",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:49.8",
+            "four_furlong_time_raw": "1:05.8",
+            "tempo_raw": "②"
+          },
+          {
+            "race_no": 4,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "-",
+              "corner_3": "2,9=6,(1,8)-(4,3)-(5,7)",
+              "corner_4": "2-9=6,1,8-4,3-(5,7)",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "(^2,9),6,1,8,(3,4),(5,7)",
+              "corner_8": "2-9-6,1-8-(3,4)-5,7",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:49.2",
+            "four_furlong_time_raw": "1:04.4",
+            "tempo_raw": "②"
+          },
+          {
+            "race_no": 5,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "-",
+              "corner_3": "(2,5),(7,1,3),6,(8,4,9)-10",
+              "corner_4": "(2,5)-(3,7,1),6,(4,8),9,10",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "(^2,5,7),(3,6,1),(4,9),8-10",
+              "corner_8": "(2,5)=(3,4),6,(1,9)-(7,8)=10",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:48.3",
+            "four_furlong_time_raw": "1:05.5",
+            "tempo_raw": "②"
+          },
+          {
+            "race_no": 6,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "-",
+              "corner_3": "1-9,(2,5,10)-(4,7),(8,6),3",
+              "corner_4": "1-9-(2,5,10),(4,7),8,(6,3)",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "1,9,(2,5,10),7,(4,6,8),3",
+              "corner_8": "1,9,(4,2,5,7),3,8,(6,10)",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:49.0",
+            "four_furlong_time_raw": "1:07.5",
+            "tempo_raw": "②"
+          },
+          {
+            "race_no": 7,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "corner_groups_raw": {
+              "corner_1": "-",
+              "corner_2": "(5,9)-(10,3,4),(2,1,8),6,7",
+              "corner_3": "9,5-(3,10),(4,6),2,(8,1),7",
+              "corner_4": "9-5,(3,10),(4,6),(2,8,7),1",
+              "corner_5": "X",
+              "corner_6": "X",
+              "corner_7": "9,5-(10,3),4,2,(6,1,8)-7",
+              "corner_8": "9-10,(2,5,3,4,6,8),(1,7)",
+              "corner_9": "X"
+            },
+            "three_furlong_time_raw": "0:48.5",
+            "four_furlong_time_raw": "1:07.7",
+            "tempo_raw": "②"
+          }
+        ]
+      },
+      {
+        "family": "section_records",
+        "endpoint": "/API6_1/raceDetailSectionRecord_1",
+        "operation": "raceDetailSectionRecord_1",
+        "params": {
+          "meet": 2,
+          "rc_date": "20261017",
+          "_type": "json",
+          "pageNo": 1,
+          "numOfRows": 1000
+        },
+        "collected_at_utc": "2026-10-17T19:02:34+00:00",
+        "timeout_seconds": 20,
+        "response_byte_limit": 4194304,
+        "redirects_followed": false,
+        "tls_certificate_verification": true,
+        "request_attempt_limit": 1,
+        "raw_path": "api_recheck/raw/section_records/20261017/page_0001.json",
+        "sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+        "status": "complete",
+        "http_status": 200,
+        "content_type": "application/json;charset=UTF-8",
+        "response_bytes": 5506,
+        "result_code": "00",
+        "total_count": 7,
+        "row_count": 7,
+        "in_scope_rows": 7,
+        "out_of_scope_rows": 0,
+        "record_summaries": [
+          {
+            "race_no": 1,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 900,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 100,
+                "interval_time_raw": 9.3,
+                "cumulative_time_raw": 9.3
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 300,
+                "interval_time_raw": 14.5,
+                "cumulative_time_raw": 23.8
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 500,
+                "interval_time_raw": 15.6,
+                "cumulative_time_raw": 39.4
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 700,
+                "interval_time_raw": 16.5,
+                "cumulative_time_raw": 55.9
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 900,
+                "interval_time_raw": 18.4,
+                "cumulative_time_raw": 74.3
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "5-(10,3,7),(2,4),8-1,(6,9)",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "-",
+              "passrankG4f_3c": "5-(3,7,10),(2,4),8-1,(6,9)",
+              "passrankG3f_4c": "5=(3,7),(2,4,10),8=(1,6)-9",
+              "passrankG2f": 0,
+              "passrankG1f": "5=3,4,(8,7)-2,(6,10)=9-1"
+            }
+          },
+          {
+            "race_no": 2,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 900,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 100,
+                "interval_time_raw": 9.7,
+                "cumulative_time_raw": 9.7
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 300,
+                "interval_time_raw": 15,
+                "cumulative_time_raw": 24.7
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 500,
+                "interval_time_raw": 15.4,
+                "cumulative_time_raw": 40.1
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 700,
+                "interval_time_raw": 16,
+                "cumulative_time_raw": 56.1
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 900,
+                "interval_time_raw": 16.7,
+                "cumulative_time_raw": 72.8
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "(^9,1,2),6,(4,8,10,3),5,7",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "-",
+              "passrankG4f_3c": "(1,9),2,(6,4,8),10,3,5,7",
+              "passrankG3f_4c": "(^9,1)-2,8,(4,10),(3,6),5,7",
+              "passrankG2f": 0,
+              "passrankG1f": "9=(1,2,8)-(4,3,10)-(5,7),6"
+            }
+          },
+          {
+            "race_no": 3,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 1000,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 200,
+                "interval_time_raw": 17.1,
+                "cumulative_time_raw": 17.1
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 400,
+                "interval_time_raw": 16,
+                "cumulative_time_raw": 33.1
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 600,
+                "interval_time_raw": 15.7,
+                "cumulative_time_raw": 48.8
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 800,
+                "interval_time_raw": 16.6,
+                "cumulative_time_raw": 65.4
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 1000,
+                "interval_time_raw": 17.5,
+                "cumulative_time_raw": 82.9
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "2,(3,6,8),(1,10),5,(4,7,9)",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "-",
+              "passrankG4f_3c": "2,(3,6,8),1,(5,10,4),(7,9)",
+              "passrankG3f_4c": "2,(6,3),1-(4,8),(5,10,7)=9",
+              "passrankG2f": 0,
+              "passrankG1f": "2,6,4,(1,3),(7,5),8=10-9"
+            }
+          },
+          {
+            "race_no": 4,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 1000,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 200,
+                "interval_time_raw": 16.7,
+                "cumulative_time_raw": 16.7
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 400,
+                "interval_time_raw": 15.2,
+                "cumulative_time_raw": 31.9
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 600,
+                "interval_time_raw": 15.2,
+                "cumulative_time_raw": 47.1
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 800,
+                "interval_time_raw": 16,
+                "cumulative_time_raw": 63.1
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 1000,
+                "interval_time_raw": 18,
+                "cumulative_time_raw": 81.1
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "(^2,9),6,1,8,(3,4),(5,7)",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "-",
+              "passrankG4f_3c": "2,9=6,(1,8)-(4,3)-(5,7)",
+              "passrankG3f_4c": "2-9=6,1,8-4,3-(5,7)",
+              "passrankG2f": 0,
+              "passrankG1f": "2-9-6,1-8-(3,4)-5,7"
+            }
+          },
+          {
+            "race_no": 5,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 1110,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 100,
+                "interval_time_raw": 10.5,
+                "cumulative_time_raw": 10.5
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 300,
+                "interval_time_raw": 15.5,
+                "cumulative_time_raw": 26
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 500,
+                "interval_time_raw": 17.2,
+                "cumulative_time_raw": 43.2
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 700,
+                "interval_time_raw": 16.5,
+                "cumulative_time_raw": 59.7
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 900,
+                "interval_time_raw": 15.7,
+                "cumulative_time_raw": 75.4
+              },
+              {
+                "furlong_index": 6,
+                "distance_m_raw": 1100,
+                "interval_time_raw": 16.1,
+                "cumulative_time_raw": 91.5
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "(^2,5,7),(3,6,1),(4,9),8-10",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "-",
+              "passrankG4f_3c": "(2,5),(7,1,3),6,(8,4,9)-10",
+              "passrankG3f_4c": "(2,5)-(3,7,1),6,(4,8),9,10",
+              "passrankG2f": 0,
+              "passrankG1f": "(2,5)=(3,4),6,(1,9)-(7,8)=10"
+            }
+          },
+          {
+            "race_no": 6,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 1200,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 200,
+                "interval_time_raw": 17.7,
+                "cumulative_time_raw": 17.7
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 400,
+                "interval_time_raw": 17.1,
+                "cumulative_time_raw": 34.8
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 600,
+                "interval_time_raw": 18.5,
+                "cumulative_time_raw": 53.3
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 800,
+                "interval_time_raw": 15.9,
+                "cumulative_time_raw": 69.2
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 1000,
+                "interval_time_raw": 16.4,
+                "cumulative_time_raw": 85.6
+              },
+              {
+                "furlong_index": 6,
+                "distance_m_raw": 1200,
+                "interval_time_raw": 16.7,
+                "cumulative_time_raw": 102.3
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "1,9,(2,5,10),7,(4,6,8),3",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "-",
+              "passrankG4f_3c": "1-9,(2,5,10)-(4,7),(8,6),3",
+              "passrankG3f_4c": "1-9-(2,5,10),(4,7),8,(6,3)",
+              "passrankG2f": 0,
+              "passrankG1f": "1,9,(4,2,5,7),3,8,(6,10)"
+            }
+          },
+          {
+            "race_no": 7,
+            "date_raw": 20261017,
+            "meet_raw": "제주",
+            "race_distance_m_raw": 1300,
+            "section_points": [
+              {
+                "furlong_index": 1,
+                "distance_m_raw": 100,
+                "interval_time_raw": 9.6,
+                "cumulative_time_raw": 9.6
+              },
+              {
+                "furlong_index": 2,
+                "distance_m_raw": 300,
+                "interval_time_raw": 16.2,
+                "cumulative_time_raw": 25.8
+              },
+              {
+                "furlong_index": 3,
+                "distance_m_raw": 500,
+                "interval_time_raw": 18.4,
+                "cumulative_time_raw": 44.2
+              },
+              {
+                "furlong_index": 4,
+                "distance_m_raw": 700,
+                "interval_time_raw": 19.2,
+                "cumulative_time_raw": 63.4
+              },
+              {
+                "furlong_index": 5,
+                "distance_m_raw": 900,
+                "interval_time_raw": 16.7,
+                "cumulative_time_raw": 80.1
+              },
+              {
+                "furlong_index": 6,
+                "distance_m_raw": 1100,
+                "interval_time_raw": 15.8,
+                "cumulative_time_raw": 95.9
+              },
+              {
+                "furlong_index": 7,
+                "distance_m_raw": 1300,
+                "interval_time_raw": 16,
+                "cumulative_time_raw": 111.9
+              }
+            ],
+            "passing_groups_raw": {
+              "passrankS1f": "9,5-(10,3),4,2,(6,1,8)-7",
+              "passrankG8f_1c": "-",
+              "passrankG6f_2c": "(5,9)-(10,3,4),(2,1,8),6,7",
+              "passrankG4f_3c": "9,5-(3,10),(4,6),2,(8,1),7",
+              "passrankG3f_4c": "9-5,(3,10),(4,6),(2,8,7),1",
+              "passrankG2f": 0,
+              "passrankG1f": "9-10,(2,5,3,4,6,8),(1,7)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "publication_comparison": [
+    {
+      "family": "corner_rank",
+      "previous_rows": 0,
+      "today_rows": 7,
+      "today_status": "complete",
+      "newly_available_since_previous_refresh": true,
+      "continued_zero_row_response": false
+    },
+    {
+      "family": "section_records",
+      "previous_rows": 0,
+      "today_rows": 7,
+      "today_status": "complete",
+      "newly_available_since_previous_refresh": true,
+      "continued_zero_row_response": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "primary": "runner binary Top3 LL and Brier, mean among cold runners inside each race, then equal weight over252cold-containingraces",
+  "cold_rows": 661,
+  "cold_races": 252,
+  "variant_fits": 3,
+  "primary_gate": "bothdelta<0 and at leastone95%fixeddateCIupper<0",
+  "bootstrap": "fixed2000x269all-sorted-evaluationdates; zero cold-date=zero loss sum/count",
+  "baseline_primary": {
+    "log_loss": 0.6299800273912703,
+    "brier": 0.21931281245584663
+  },
+  "secondary_cold_concordance": {
+    "definition": "raw-score cross-label cold pairs within each race; positive\u2212negative score >0:1,=0:.5,<0:0; average pairs then eligible races. Raw score avoids marginal probability summation rounding falsely breaking exact ties.",
+    "eligible_races": 118,
+    "cross_label_pairs": 398,
+    "baseline": 0.5
+  },
+  "postfit_variants_or_hyperparameter_search": false,
+  "first_start_label": "observed_starts0 in frozen baseline, not guaranteed lifetime debut",
+  "production_promotion": false
+}

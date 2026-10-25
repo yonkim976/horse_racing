@@ -1,0 +1,137 @@
+{
+  "audit_status": "complete_read_only_source_layout_inventory",
+  "scope": {
+    "frozen_roster_snapshot": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+    "frozen_roster_rows": 92513,
+    "frozen_roster_snapshot_sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+    "meet_code": 2,
+    "race_date_min_inclusive": "2017-01-01",
+    "race_date_max_inclusive": "2026-09-19",
+    "distance_m": [
+      400,
+      800,
+      900,
+      1000,
+      1110,
+      1200,
+      1300,
+      1400,
+      1610
+    ],
+    "starter_rule": "finish_position 1..89 or 91/92, inherited from 20261017 five-section study",
+    "scoped_candidate_rows": 59042,
+    "scoped_started_rows": 57876,
+    "scoped_started_races": 5828,
+    "excluded_project_horse_rows_in_scope": 0,
+    "date_range_of_started_rows": [
+      "2017-01-13",
+      "2026-09-19"
+    ]
+  },
+  "database_access": {
+    "uri_mode": "ro",
+    "sqlite_query_only": true,
+    "connection_local_temp_id_table_only": true,
+    "main_database_mutations": false,
+    "data_version_start": 1,
+    "data_version_end": 1,
+    "whole_database_hash_claimed_unchanged": false,
+    "quality_time_view": "jeju_race_section_time_values",
+    "quality_time_view_sql_sha256": "a813166113a2f570f8ea1e9d539e44b6797ab8502cc694d50da68e4760700d47",
+    "record_scoped_source_fingerprints": {
+      "400": {
+        "scoped_started_source_rows": 1258,
+        "api_record_id_plus_quality_time_row_hash_sha256": "c08ca59466ba7ad5490dc2a9b21f4f10ad6ca30f86801889011acbc6442abca1"
+      },
+      "800": {
+        "scoped_started_source_rows": 13813,
+        "api_record_id_plus_quality_time_row_hash_sha256": "2420097c5071a7ba1dd72d598f4c20022b4e659a4544ca1da46d1333e929af6b"
+      },
+      "900": {
+        "scoped_started_source_rows": 9718,
+        "api_record_id_plus_quality_time_row_hash_sha256": "56d5fa4dce9bba96c282a22f9c6ef6cfe19312565e49ef2d0149dd601e07c5df"
+      },
+      "1000": {
+        "scoped_started_source_rows": 15505,
+        "api_record_id_plus_quality_time_row_hash_sha256": "d3cd345b328e81415e2c9e90babc8787dad6addb619b18291c8fa2b798945d79"
+      },
+      "1110": {
+        "scoped_started_source_rows": 10703,
+        "api_record_id_plus_quality_time_row_hash_sha256": "b41f4ff778ef30b2bc640d1cb47db45c5567823b0eec111f6ce3095d8f2f1c5d"
+      },
+      "1200": {
+        "scoped_started_source_rows": 5178,
+        "api_record_id_plus_quality_time_row_hash_sha256": "84a7ad18b8f78ef693d05cfbd1183a11ffd0d6ca21f4ede6eac5a2205dca9fbe"
+      },
+      "1300": {
+        "scoped_started_source_rows": 666,
+        "api_record_id_plus_quality_time_row_hash_sha256": "4affe846cc01cb960e729f7a571b8e778515eaf38b2346497ea1f86e5991bd6c"
+      },
+      "1400": {
+        "scoped_started_source_rows": 951,
+        "api_record_id_plus_quality_time_row_hash_sha256": "7413d5c886521408695efd0b004aee782c78890634e43e5cfda9544661126213"
+      },
+      "1610": {
+        "scoped_started_source_rows": 84,
+        "api_record_id_plus_quality_time_row_hash_sha256": "05e8396dedc1fbfe81bf43778801230441e7eee82c38dee60f42e824f23aa605"
+      },
+      "all_distances": {
+        "scoped_started_source_rows": 57876,
+        "api_record_id_plus_quality_time_row_hash_sha256": "84c01de96e0fa015222adc03f4a76ba12c38fd214114869b2d56c773bef7c4a3"
+      }
+    }
+  },
+  "accepted_time_rule": {
+    "selected_time_must_be_positive": true,
+    "accepted_statuses": [
+      "api_positive_unreviewed",
+      "website_corrected"
+    ],
+    "held_statuses": [
+      "api_source_changed_since_review",
+      "unresolved_official_website_anomaly",
+      "website_review_not_applied"
+    ],
+    "model_input_valid_time_filter": "not applied to per-field coverage counts; valid_time is separately reported and used for finish-derived crossing endpoints",
+    "full_race_order_group_point_mask_applied": false,
+    "eligible_as_model_input": false,
+    "explanation": "Descriptive time-only inventory. Race-point order/group conflict masks and the inherited feature eligibility contract were not audited or applied; additional review is required before any time-derived feature use.",
+    "api6_leader_times_used": false
+  },
+  "available_per_horse_api4_time_fields": [
+    "S1F",
+    "1C",
+    "2C",
+    "3C",
+    "4C",
+    "G3F_duration",
+    "G1F_duration"
+  ],
+  "g2f": {
+    "quality_selected_api4_time_field_present": false,
+    "basis": "the current quality-selected jeju_race_section_time_values contract enumerates only S1F, 1C, 2C, 3C, 4C, G3F, and G1F; no G2F time field is exposed"
+  },
+  "endpoint_definitions": {
+    "cumulative_elapsed": [
+      "S1F",
+      "1C",
+      "2C",
+      "3C",
+      "4C"
+    ],
+    "G3F_crossing_elapsed_seconds": "finish_time_seconds - G3F_duration; calculated only for positive valid_time finish endpoints and accepted positive G3F",
+    "G1F_crossing_elapsed_seconds": "finish_time_seconds - G1F_duration; calculated only for positive valid_time finish endpoints and accepted positive G1F",
+    "Finish": "positive finish_time_seconds where frozen baseline valid_time is true",
+    "exact_numeric_duplicate_tolerance_seconds": 1e-08,
+    "rounding_residual_reported_tolerance_seconds": 0.15
+  },
+  "outputs": [
+    "distance_counts.csv",
+    "time_coverage.csv",
+    "time_status_counts.csv",
+    "endpoint_relations.csv",
+    "c3_g3f_crossing_consistency.csv",
+    "chronology_summary.csv",
+    "proposed_distance_profiles.csv"
+  ]
+}

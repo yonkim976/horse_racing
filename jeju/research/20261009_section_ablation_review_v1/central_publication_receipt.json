@@ -1,0 +1,250 @@
+{
+  "status": "passed",
+  "created_date": "2026-10-09",
+  "purpose": "central publication receipt for approved F1 section-time ablation and validation-scope diagnostics",
+  "published_conclusions": [
+    "jeju/research/conclusions/15_SECTION_TIME_ABLATION.md",
+    "jeju/research/conclusions/16_VALIDATION_SCOPE_GAPS.md"
+  ],
+  "central_indexes_updated": [
+    "jeju/research/conclusions/README.md",
+    "jeju/research/conclusions/SOURCES.md",
+    "jeju/research/conclusions/research_register.json"
+  ],
+  "central_file_hashes": {
+    "jeju/research/conclusions/README.md": {
+      "path": "jeju/research/conclusions/README.md",
+      "role": "conclusion_or_management",
+      "sha256": "045b2dd95809f8e4fbb90a34f7d8980013a311127864bfc8b7242ef32fb1207c",
+      "bytes": 9636
+    },
+    "jeju/research/conclusions/SOURCES.md": {
+      "path": "jeju/research/conclusions/SOURCES.md",
+      "role": "conclusion_or_management",
+      "sha256": "500c2b9f732d79c1c6a8ff5fef7dd53e09c8b2d50808dd08aed14815d9cc0da2",
+      "bytes": 14393
+    },
+    "jeju/research/conclusions/research_register.json": {
+      "path": "jeju/research/conclusions/research_register.json",
+      "role": "conclusion_or_management",
+      "sha256": "14d97fd2ae71a283031a2523f1fed4ef522f7d5460468d5c986ff02bc04d313f",
+      "bytes": 34628
+    },
+    "jeju/research/conclusions/15_SECTION_TIME_ABLATION.md": {
+      "path": "jeju/research/conclusions/15_SECTION_TIME_ABLATION.md",
+      "role": "conclusion_or_management",
+      "sha256": "a3f2d97816dffb92a73a117e09418a8bbe19844c460dff273b72075bac9109ea",
+      "bytes": 5611
+    },
+    "jeju/research/conclusions/16_VALIDATION_SCOPE_GAPS.md": {
+      "path": "jeju/research/conclusions/16_VALIDATION_SCOPE_GAPS.md",
+      "role": "conclusion_or_management",
+      "sha256": "b2592d7a6f0677bc68e342c5590350f26c13fbdcf5df16ded2227be3c2cb4d66",
+      "bytes": 4583
+    }
+  },
+  "source_studies": {
+    "jeju/research/20261009_section_time_ablation_v1": {
+      "artifact_manifest_sha256": "1454e9fcaff13583a4a0220fec976843f211b32fb580a4bf45890d6f42956746",
+      "inventory_files_verified": 62,
+      "freeze_status": "frozen",
+      "gate_passed": false,
+      "operationally_applied": false
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1": {
+      "artifact_manifest_sha256": "2493d7f56ad8e06a6fbc908d12679843cf6d24e7610dcb2895d2287cf6637f07",
+      "inventory_files_verified": 11,
+      "freeze_status": "frozen",
+      "independent_reaggregation_receipt_sha256": "34a4c21302427f5d700f40c70b9c36364066eb5d5ba65c9ce38e440a51d4fe03",
+      "new_fits": 0,
+      "independent_holdout": false
+    }
+  },
+  "independent_review": {
+    "row_specific_leakage_invariance_receipt": {
+      "path": "jeju/research/20261009_section_ablation_review_v1/independent_outputs/row_specific_leakage_invariance_receipt.json",
+      "sha256": "a5f5a1110ec077da8d3123b7f5643b5c33b5482654f9646e736a4c11e35b3737",
+      "sample_cases": 7,
+      "scope": "fixed-cohort row-specific perturbation invariance; not proof of ex-ante cohort selection"
+    },
+    "central_links_checked": {
+      "files": [
+        "jeju/research/conclusions/README.md",
+        "jeju/research/conclusions/SOURCES.md",
+        "jeju/research/conclusions/15_SECTION_TIME_ABLATION.md",
+        "jeju/research/conclusions/16_VALIDATION_SCOPE_GAPS.md"
+      ],
+      "links": 103,
+      "missing": 0
+    },
+    "A_readme_links": {
+      "links": 38,
+      "missing": 0
+    },
+    "B_readme_links": {
+      "links": 22,
+      "missing": 0
+    },
+    "A_final_manifest_files_checked": 62,
+    "B_final_manifest_files_checked": 11
+  },
+  "protected_state": {
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+      "unchanged": true
+    },
+    "config/prediction_model_registry.json": {
+      "bytes": 7291,
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+      "unchanged": true
+    },
+    "jeju/models/current/metadata.json": {
+      "bytes": 1818,
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870",
+      "unchanged": true
+    },
+    "jeju/models/current/HY_R_FORM.pkl": {
+      "bytes": 638955,
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+      "unchanged": true
+    }
+  },
+  "prepublication_snapshot": {
+    "snapshot_manifest_path": "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/snapshot_manifest.json",
+    "snapshot_manifest_sha256": "cd7d0b70101cc9ebdce06b91b025caed4f9fc2ad05f5aa009a516435516dfd81",
+    "original_source_manifest_sha256": "6ed733c0f2d0656a6793aad3e5d2996cb0731ac6262713e0db9f263ed0045053",
+    "prior_source_manifest_entries": 950,
+    "existing_numbered_topic_docs_preserved": 17,
+    "protected_topics_12_axis_13_14_preserved": true,
+    "original_17_register_topics_preserved_in_order": true
+  },
+  "source_inventory": {
+    "policy": "preserve the prior 950 inventory rows and hashes; refresh only the three changed central-index rows; append only scoped new/changed study, review, snapshot, and central-publication files. No full legacy source-tree rehash was performed.",
+    "previous_entries_rehashed": false,
+    "previous_entries_refreshed": [
+      "jeju/research/conclusions/README.md",
+      "jeju/research/conclusions/SOURCES.md",
+      "jeju/research/conclusions/research_register.json"
+    ],
+    "new_entry_paths": [
+      "jeju/models/current/metadata.json",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/00_RESEARCH_SYNTHESIS.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/01_GATE_LATERAL.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/02_ENVIRONMENT_CORRECTION.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/03_FOUNDATION.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/04_WEIGHT_SPEED.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/05_RECENT_FORM.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/06_TRAINING_RECORD.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/07_HORSE_PROFILE_BASELINE.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/07_RUNNING_STYLE.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/08_JOCKEY_PROFILE.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/08_TIME_BENCHMARKS.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/09_FIELD_RELATIVE_ABILITY.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/10_OPERATING_MODEL_COMPARISON.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/11_TOP3_CONDITION_PROFILES.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/12_AXIS_COMPANION_PAIRS.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/13_FINISH_HISTORY.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/14_SPECIAL_CONDITIONS.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/README.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/SOURCES.md",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/research_register.json",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/snapshot_manifest.json",
+      "jeju/research/20261009_section_ablation_review_v1/central_publication_before_20261009/source_manifest.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_outputs/independent_b_v2_56_cells.csv",
+      "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_outputs/independent_b_v2_coverage.csv",
+      "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_reaggregation.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_fit_harness_review.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_f1s_finalizer_output_review.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_f1s_saved_model_replay_v2_receipt.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_feature_and_f1_replay_receipt.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_source_availability_receipt.json",
+      "jeju/research/20261009_section_ablation_review_v1/independent_outputs/row_specific_leakage_invariance_receipt.json",
+      "jeju/research/20261009_section_ablation_review_v1/verify_row_specific_leakage_invariance.py",
+      "jeju/research/20261009_section_time_ablation_v1/ARTIFACT_MANIFEST.json",
+      "jeju/research/20261009_section_time_ablation_v1/ARTIFACT_MANIFEST_pre_row_perturbation.json",
+      "jeju/research/20261009_section_time_ablation_v1/CONTRACT.md",
+      "jeju/research/20261009_section_time_ablation_v1/IMPLEMENTATION_PLAN.md",
+      "jeju/research/20261009_section_time_ablation_v1/README.md",
+      "jeju/research/20261009_section_time_ablation_v1/audit_source_availability.py",
+      "jeju/research/20261009_section_time_ablation_v1/build_candidate_features.py",
+      "jeju/research/20261009_section_time_ablation_v1/finalize_saved_f1s_outputs.py",
+      "jeju/research/20261009_section_time_ablation_v1/fit_candidate.py",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2024/calibration_scores.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2024/meta.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2024/top3.txt",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2025/calibration_scores.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2025/meta.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2025/top3.txt",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2026/calibration_scores.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2026/meta.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/F1S_2026/top3.txt",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/after_fit_integrity_check.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/before_fit_integrity_check.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/before_fit_integrity_check_pre_independent_review.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/candidate_feature_preflight.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1_reproduced_race_metrics.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1_reproduced_runner_predictions.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1_reproduced_six_combinations.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1_saved_model_replay.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_calibration_bins.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_gate.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_metrics_by_group.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_operating_common_467_paired_differences.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_operating_common_467_race_metrics.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_operating_common_467_runner_predictions.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_operating_common_467_six_combinations.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_operating_common_467_summary.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_paired_differences.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_paired_differences_by_group.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_race_metrics.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_runner_metrics_by_group.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_runner_paired_differences_by_group.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_runner_predictions.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/f1s_six_combinations.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/features_f1s.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/finalizer_preflight.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_completion.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_completion_pre_execution_audit.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_interruption.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_interruption_pre_attempt3.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_interruption_pre_finalizer_update.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_interruption_pre_retry.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_execution_started.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/fit_runner_preflight.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/postfit_saved_model_integrity_lock.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/postfit_saved_model_integrity_lock_attempt1.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/postfit_saved_model_integrity_lock_attempt2.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/prefit_lock.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/prefit_lock_pre_independent_review.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/source_availability_audit.json",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/source_availability_by_group.csv",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/source_slot_section_times.parquet",
+      "jeju/research/20261009_section_time_ablation_v1/outputs/source_valid_n_distribution.csv",
+      "jeju/research/20261009_section_time_ablation_v1/prepare_fit_lock.py",
+      "jeju/research/20261009_section_time_ablation_v1/replay_saved_f1.py",
+      "jeju/research/20261009_section_time_ablation_v1/verify_fit_lock.py",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/APPROVAL_AND_EXECUTION_LOCK.json",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/ARTIFACT_MANIFEST.json",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_group_coverage.csv",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_residual_by_stratum.csv",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_residual_by_stratum_v1_superseded.csv",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_residual_by_stratum_v2.csv",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/PLAN.md",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/PLAN_approved_original.md",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/README.md",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/diagnose.py",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/input_lock.json",
+      "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/verification.json",
+      "jeju/research/conclusions/15_SECTION_TIME_ABLATION.md",
+      "jeju/research/conclusions/16_VALIDATION_SCOPE_GAPS.md"
+    ],
+    "new_entry_count_excluding_receipt": 110,
+    "manifest_self_hash_in_receipt": false,
+    "manifest_final_sha256": "reported_after_write_to_parent_to_avoid_self-reference"
+  },
+  "interpretation": {
+    "section_time_ablation": "retrospective development comparison on the frozen posthoc complete-finish cohort; date-paired primary gate failed; no operational change",
+    "validation_scope_diagnostics": "existing F1 residual descriptions and label cutoff audit; no new labels or holdout; no causal or additive effect claim"
+  }
+}

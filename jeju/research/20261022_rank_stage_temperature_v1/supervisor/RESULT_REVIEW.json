@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "experiment_module_imported": false,
+  "model_refit_performed": false,
+  "calibration_races": 2492,
+  "evaluation_races": 1779,
+  "ordered_triples_recomputed": 3625272,
+  "candidate_metric_rows": 12417,
+  "candidate_runner_rows": 17412,
+  "selection_rows": 37251,
+  "stage_derivatives": [
+    {
+      "stage": 1,
+      "nll": 2.0264011407680136,
+      "gradient_inverse_t": -1.1101431443993055e-08,
+      "hessian_inverse_t": 0.4726292340133149
+    },
+    {
+      "stage": 2,
+      "nll": 2.0530297472437957,
+      "gradient_inverse_t": 1.0757037738358179e-08,
+      "hessian_inverse_t": 0.4575490010375037
+    },
+    {
+      "stage": 3,
+      "nll": 1.997830470148641,
+      "gradient_inverse_t": -1.5860022463837513e-08,
+      "hessian_inverse_t": 0.42713636386275555
+    }
+  ],
+  "common_stage_derivatives": [
+    {
+      "stage": 1,
+      "nll": 2.0353874938348167,
+      "gradient_inverse_t": -0.09532908198392999,
+      "hessian_inverse_t": 0.5207446728251592
+    },
+    {
+      "stage": 2,
+      "nll": 2.053376602064251,
+      "gradient_inverse_t": 0.01772653054300707,
+      "hessian_inverse_t": 0.4506166184250129
+    },
+    {
+      "stage": 3,
+      "nll": 2.0051477034782557,
+      "gradient_inverse_t": 0.07760252348381459,
+      "hessian_inverse_t": 0.4023453828236829
+    }
+  ],
+  "tri_ci95": [
+    -0.017941942970259552,
+    -0.002373069629157899
+  ],
+  "tri_gate_pass": true,
+  "win_protection_pass": false,
+  "overall_gate_pass": false,
+  "win_minus_raw_nll": 0.00079267115873421,
+  "win_minus_raw_brier": 0.00032199474739998173,
+  "maximum_errors": {
+    "stage_fit_nll": 4.884981308350689e-15,
+    "stage_common_fit_nll": 7.105427357601002e-15,
+    "inverse_temperature_diagnostics": 7.216449660063518e-16,
+    "runner_marginals": 7.771561172376096e-16,
+    "selection_probability": 2.9976021664879227e-15,
+    "maximum_probability": 2.9976021664879227e-15,
+    "realized_probabilities": 2.9976021664879227e-15,
+    "candidate_race_loss": 1.7763568394002505e-15,
+    "realized_probability_mean": 1.1657341758564144e-15,
+    "realized_nll_mean": 4.6629367034256575e-15,
+    "prior_race_loss_reproduction": 3.1086244689504383e-15,
+    "reliability_bin": 9.159339953157541e-16,
+    "pool_comparison": 8.881784197001252e-16,
+    "annual_comparison": 8.881784197001252e-16,
+    "tri_ci": 1.2576745200831851e-17,
+    "tri_point": 8.673617379884035e-18,
+    "tri_brier": 2.0599841277224584e-18,
+    "win_protection": 8.673617379884035e-18
+  },
+  "check_counts": {
+    "stage_fit_nll": 3,
+    "stage_common_fit_nll": 3,
+    "inverse_temperature_diagnostics": 3,
+    "runner_marginals": 17412,
+    "selection_probability": 37251,
+    "maximum_probability": 37251,
+    "realized_probabilities": 37251,
+    "candidate_race_loss": 12417,
+    "realized_probability_mean": 12417,
+    "realized_nll_mean": 12417,
+    "prior_race_loss_reproduction": 24834,
+    "reliability_bin": 73,
+    "pool_comparison": 7,
+    "annual_comparison": 21,
+    "tri_ci": 1,
+    "tri_point": 1,
+    "tri_brier": 1,
+    "win_protection": 1
+  },
+  "synthetic": {
+    "passed": true,
+    "common_temperature_max_error": 2.7755575615628914e-17,
+    "all_pool_and_marginal_sums": true,
+    "shift_invariance": true,
+    "third_stage_does_not_change_first_two_marginals": true,
+    "ordered_preference_can_reverse_within_bounds": true,
+    "ordered_swap_ratio": 1.1581049634355303,
+    "numerical_tie_selection_uses_selected_probability": true
+  },
+  "prior_artifacts_and_source_hashes_unchanged": true
+}

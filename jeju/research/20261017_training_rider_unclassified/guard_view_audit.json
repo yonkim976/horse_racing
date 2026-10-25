@@ -1,0 +1,72 @@
+{
+  "title": "training_current vs daily_training_rider_types 및 assignment guard 대조",
+  "checked_at_kst_date": "2026-10-17",
+  "database": {
+    "path": "jeju/data/jeju_native_core.sqlite3",
+    "sha256": "53c42e9a7944da7d05b9f5bc56bc2defcdaa110704d92bd3b785df9e50527f96",
+    "opened_read_only": true,
+    "sqlite_query_only": true
+  },
+  "effective_views": {
+    "training_current": {
+      "rows": 912913,
+      "date_range": [
+        "2007-10-01",
+        "2026-10-15"
+      ]
+    },
+    "daily_training_rider_types": {
+      "rows": 912913,
+      "date_range": [
+        "2007-10-01",
+        "2026-10-15"
+      ]
+    },
+    "daily_training_rider_types_analysis_2026": {
+      "rows": 907552,
+      "date_range": [
+        "2007-10-01",
+        "2026-09-19"
+      ],
+      "unclassified_rows": 298519
+    }
+  },
+  "current_vs_existing_daily_types": {
+    "joined_row_ids": 912913,
+    "row_ids_missing_from_training_current": 0,
+    "row_ids_missing_from_daily_training_rider_types": 0,
+    "rider_type_value_mismatches": 0,
+    "rider_type_status_mismatches": 0,
+    "result": "행 ID, rider_type, rider_type_status 완전 일치. 두 전체기간 조회 간 차이 없음."
+  },
+  "assignment_guard": {
+    "effective_rows": 912913,
+    "stored_assignment_rows": 912913,
+    "type_review_not_applied": 0,
+    "type_source_fields_changed": 0,
+    "guard_downgraded_assigned_type_to_unclassified": 0,
+    "other_effective_type_mismatches": 0,
+    "checked_source_fields": [
+      "daily_training_api_artifact_id",
+      "prGubun_raw",
+      "prNo_raw",
+      "horse_id",
+      "training_date",
+      "start_time_local",
+      "end_time_local",
+      "duration_seconds"
+    ],
+    "result": "모든 원행에 assignment가 있고, 저장 당시 검토 필드와 현행 원행 값이 일치."
+  },
+  "classification_summary": {
+    "total_rows": 912913,
+    "unclassified_rows": 301368,
+    "unclassified_raw_prGubun_only_dash": true,
+    "unclassified_status_counts": {
+      "unclassified_api_category_missing": 298852,
+      "api_type_not_explicit": 2493,
+      "unclassified_website_label": 23
+    }
+  },
+  "limitations": "읽기 전용 조회·검증. DB와 분류값 변경 없음. 홈페이지에서 새로 확인한 587행은 근거 후보이며 아직 저장 assignment에 적용되지 않음."
+}

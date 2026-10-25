@@ -1,0 +1,218 @@
+{
+  "review_status": "candidate_source_audit_independently_reaggregated_and_matched",
+  "fit_executed": false,
+  "candidate_generation_functions_reused": false,
+  "independent_quality_source_reconstruction_reused": true,
+  "support_table_matches": {
+    "by_group": {
+      "rows": 249,
+      "columns": [
+        "group_kind",
+        "distance_m",
+        "year",
+        "experience_group",
+        "section",
+        "target_rows",
+        "targets_with_any_valid_slot",
+        "eligible_historical_slots",
+        "targets_n_0",
+        "targets_n_1",
+        "targets_n_2",
+        "targets_n_3",
+        "targets_n_4",
+        "targets_n_5"
+      ],
+      "exact_match": true
+    },
+    "valid_n_distribution": {
+      "rows": 2106,
+      "columns": [
+        "year",
+        "distance_m",
+        "experience_group",
+        "section",
+        "valid_n",
+        "target_rows"
+      ],
+      "exact_match": true
+    }
+  },
+  "quality_view_dependency_ddl_sha256_match": {
+    "jeju_race_postrace_sections_2026": "88c58aaf08e1f2657098a7410f4a158698e10bf853678e746a212d63d6944947",
+    "jeju_race_postrace_sections_quality_2026": "3a8613957e1893731ced8ce3bd896260b58a011e74da1c74d8f9d61a638f36b0",
+    "jeju_race_postrace_sections_reviewed_2026": "ec647bb3aa3ad52245bbb45ea90efcb1bb893e18b1441145f11bfe54eb582445",
+    "jeju_race_section_group_quality": "4d493d060c41b348aa2396e75f248139023beec52560ff26035917a82479173b",
+    "jeju_race_section_group_quality_values": "63eef9903e6b0bf6e49dadfb0e4583efc4c7d89788603b140dff34494eb25994",
+    "jeju_race_section_order_quality": "982375bb39d9ff264f8a740ff09bbb344639d087c4a4aa78a7db26f35f7f40c6",
+    "jeju_race_section_order_quality_values": "2adc9a200be2fbf3a9b504d788fbc0576f55f0c7bbfb0a4ecf3187d178df4ca4",
+    "jeju_race_section_time_values": "a813166113a2f570f8ea1e9d539e44b6797ab8502cc694d50da68e4760700d47",
+    "jeju_race_section_times": "3a9988e504ff0dd6f43b9dbe97e6f730de754e0b232cdae3a9daa1b1b1b22a80"
+  },
+  "field_slot_matches": {
+    "s1f": {
+      "actual_slots": {
+        "independent": 178459,
+        "candidate": 178459,
+        "match": true
+      },
+      "eligible_slots": {
+        "independent": 178184,
+        "candidate": 178184,
+        "match": true
+      },
+      "selected_time_slots": {
+        "independent": 178410,
+        "candidate": 178410,
+        "match": true
+      },
+      "invalid_source_time_exclusions": {
+        "independent": 56,
+        "candidate": 56,
+        "match": true
+      },
+      "conflict_time_exclusions": {
+        "independent": 170,
+        "candidate": 170,
+        "match": true
+      }
+    },
+    "g3f": {
+      "actual_slots": {
+        "independent": 178459,
+        "candidate": 178459,
+        "match": true
+      },
+      "eligible_slots": {
+        "independent": 178354,
+        "candidate": 178354,
+        "match": true
+      },
+      "selected_time_slots": {
+        "independent": 178395,
+        "candidate": 178395,
+        "match": true
+      },
+      "invalid_source_time_exclusions": {
+        "independent": 41,
+        "candidate": 41,
+        "match": true
+      },
+      "conflict_time_exclusions": {
+        "independent": 0,
+        "candidate": 0,
+        "match": true
+      }
+    },
+    "g1f": {
+      "actual_slots": {
+        "independent": 178459,
+        "candidate": 178459,
+        "match": true
+      },
+      "eligible_slots": {
+        "independent": 178199,
+        "candidate": 178199,
+        "match": true
+      },
+      "selected_time_slots": {
+        "independent": 178391,
+        "candidate": 178391,
+        "match": true
+      },
+      "invalid_source_time_exclusions": {
+        "independent": 41,
+        "candidate": 41,
+        "match": true
+      },
+      "conflict_time_exclusions": {
+        "independent": 151,
+        "candidate": 151,
+        "match": true
+      }
+    }
+  },
+  "conflict_mask_match": {
+    "exact_race_point_keys": 12,
+    "keys": [
+      {
+        "race_key": "2016-09-23_2_1",
+        "point": "G1F"
+      },
+      {
+        "race_key": "2020-06-25_2_4",
+        "point": "G1F"
+      },
+      {
+        "race_key": "2021-09-03_2_5",
+        "point": "G1F"
+      },
+      {
+        "race_key": "2023-02-11_2_6",
+        "point": "S1F"
+      },
+      {
+        "race_key": "2023-03-25_2_2",
+        "point": "S1F"
+      },
+      {
+        "race_key": "2023-07-21_2_2",
+        "point": "G1F"
+      },
+      {
+        "race_key": "2023-12-01_2_5",
+        "point": "S1F"
+      },
+      {
+        "race_key": "2024-06-22_2_5",
+        "point": "S1F"
+      },
+      {
+        "race_key": "2024-07-26_2_5",
+        "point": "S1F"
+      },
+      {
+        "race_key": "2025-04-18_2_5",
+        "point": "S1F"
+      },
+      {
+        "race_key": "2025-11-01_2_5",
+        "point": "G1F"
+      },
+      {
+        "race_key": "2026-01-17_2_5",
+        "point": "G1F"
+      }
+    ]
+  },
+  "checks": {
+    "independently_reconstructed_support_by_group_exact_match": true,
+    "independently_reconstructed_valid_n_distribution_exact_match": true,
+    "race_section_conflict_keys_exact_match": true,
+    "quality_view_dependency_ddl_sha256_exact_match": true,
+    "all_field_slot_support_counts_match": true,
+    "no_model_scoring_or_fit_or_temperature_or_prediction_metrics": true
+  },
+  "references": {
+    "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_source_availability_receipt.json": {
+      "bytes": 9033,
+      "sha256": "c52a743ec525bc3a2be6431add28b8042489597e606e43fa47afcbc65e1f8573"
+    },
+    "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_target_feature_reconstruction.csv": {
+      "bytes": 4482720,
+      "sha256": "0f39762bd41d06462792eb8643ca1c29e1b0ad29c119ab06d092a1814df3cbcd"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/source_availability_audit.json": {
+      "bytes": 18438,
+      "sha256": "9a6c71b751d5431dcb4e9309a8b505676b0fa6ad2dc0a69fe63c5122e0488e7f"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/source_availability_by_group.csv": {
+      "bytes": 15815,
+      "sha256": "e41c26890591a6bddd8d1b20963444aa7233de14803104d617bb9d751b0ecb8b"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/source_valid_n_distribution.csv": {
+      "bytes": 49912,
+      "sha256": "dfd7a661d097690452c65d1a0ea7ca499c98b75c96ecb238d2c2578ebf27c80d"
+    }
+  },
+  "review_code_sha256": "ccbfce26f2186114207fed43a0407342f95b64b5ab7a66bdf534838c4999e38f"
+}

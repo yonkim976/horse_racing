@@ -1,0 +1,76 @@
+{
+  "audit_date": "2026-10-22",
+  "scope": "read-only metadata and existing audit artifacts; no fitting, prediction, performance computation, source copy, or current database full hash",
+  "sources": [
+    {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+      "bytes": 7453522,
+      "rows": 92513,
+      "races": 9494,
+      "schema_sha256_str": "cbe4f5b247cbd1e4e88771fe0b80994324dd02bbd9632754948115cb019aad95",
+      "key_columns": ["api_record_id", "race_id", "horse_id", "race_date", "horse_number", "race_distance_m", "finish_position", "finish_time_seconds"],
+      "role": "frozen raw historical reference; do not copy"
+    },
+    {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/features.parquet",
+      "sha256": "6f6540d4786ada0c0e288ff5defc0d4c665cc796a025a074f19f3d4fe218f12f",
+      "bytes": 3333847,
+      "rows": 52155,
+      "races": 5206,
+      "schema_sha256_str": "db157dd4c95087fdd361895cd436283d5ea24e31d691adefba70148eff45758e",
+      "role": "reference only; selected normal finisher cohort and old derived features, forbidden as new model inputs"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/observations.parquet",
+      "sha256": "bcf056ea788f2637c17a6b404013a7718fa3ed6f2042f6693cf6f167dfaf83c7",
+      "bytes": 5675665,
+      "rows": 56618,
+      "races": 5693,
+      "columns": 40,
+      "schema_sha256_str": "ebb2ce0da556d0f65cf52918aec7174e6b2c0a06520194f6aa969c4a5944cdfc",
+      "role": "frozen started-runner roster with post-race stage observations and quality statuses"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/features_and_targets.parquet",
+      "sha256": "0dcf70c9cb4822fb3c5198e1a138648062f5d94d1ef9bf712929d40e2a0dca33",
+      "bytes": 25306264,
+      "rows": 56618,
+      "columns": 350,
+      "schema_sha256_str": "9055d4618b1ae7f0a600c37e856a0ef0d47269bc1d097850ae7a4e61e1707f49",
+      "role": "audit reference only; contains outcome labels, diagnostics, and existing engineered features"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/predictions.parquet",
+      "sha256": "cd4f2d578db77cf10a609f0033f84848c8d834390603bfb5e8ee70ddbbf01eee",
+      "bytes": 9923970,
+      "rows": 452664,
+      "columns": 19,
+      "schema_sha256_str": "6b773beabfeca96cab18fb63cefa3550661eb0b03a5a3143bf91c9413ab1c700",
+      "role": "candidate for later pace incremental arm; use only preselected OOS p0-p2 by api_record_id/task/model"
+    }
+  ],
+  "cohorts": {
+    "10_08_2017_plus_candidate_races": 5901,
+    "10_08_complete_normal_unique_rank_races": 5206,
+    "10_08_excluded_from_candidate_races": 695,
+    "10_08_pre_2017_races_inferred_by_range_subtraction": 3593,
+    "10_21_started_roster_races": 5693,
+    "10_21_started_roster_rows": 56618,
+    "10_21_evaluation_races": 1942,
+    "10_21_evaluation_rows": 18861,
+    "joint_evaluation_races": 1779,
+    "joint_evaluation_rows": 17412,
+    "joint_evaluation_dates": 269,
+    "plc_eligible_races": 1743,
+    "plc_unknown_opening_count_races": 36
+  },
+  "boundaries": {
+    "event_date_min": "2017-01-01",
+    "event_date_max": "2026-09-19",
+    "history_cutoff": "race_date minus 2 calendar days, inclusive",
+    "publication_time_verified": false,
+    "same_target_date_cross_race_updates_allowed": false,
+    "same_evaluation_year_future_label_normalization_allowed": false
+  }
+}

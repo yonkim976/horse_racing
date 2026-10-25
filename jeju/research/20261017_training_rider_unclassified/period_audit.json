@@ -1,0 +1,392 @@
+{
+  "title": "제주 일별조교 기승자 미분류 시기 집계",
+  "as_of_kst_date": "2026-10-17",
+  "database": {
+    "path": "jeju/data/jeju_native_core.sqlite3",
+    "sha256": "53c42e9a7944da7d05b9f5bc56bc2defcdaa110704d92bd3b785df9e50527f96",
+    "opened_read_only": true,
+    "effective_view": "training_current",
+    "row_date_range": [
+      "2007-10-01",
+      "2026-10-15"
+    ]
+  },
+  "overall": {
+    "total_rows": 912913,
+    "unclassified_rows": 301368,
+    "unclassified_pct": 33.0117,
+    "unclassified_horses": 3396,
+    "old_report_snapshot_rows_through_2026-09-28": 908316,
+    "rows_added_since_old_report_snapshot": 4597,
+    "unclassified_added_since_old_report_snapshot": 2493
+  },
+  "periods": {
+    "2017_onward": {
+      "range": [
+        "2017-01-01",
+        "2026-10-15"
+      ],
+      "total_rows": 667332,
+      "unclassified_rows": 191160,
+      "unclassified_pct_of_period": 28.6454,
+      "share_of_all_unclassified_pct": 63.4308,
+      "unclassified_horses": 2474,
+      "all_unclassified_time_valid": true
+    },
+    "2022_onward": {
+      "range": [
+        "2022-01-01",
+        "2026-10-15"
+      ],
+      "total_rows": 389581,
+      "unclassified_rows": 187068,
+      "unclassified_pct_of_period": 48.0177,
+      "share_of_all_unclassified_pct": 62.0729,
+      "unclassified_horses": 2126,
+      "all_unclassified_time_valid": true
+    },
+    "2026_ytd": {
+      "range": [
+        "2026-01-01",
+        "2026-10-15"
+      ],
+      "total_rows": 66900,
+      "unclassified_rows": 34256,
+      "unclassified_pct_of_period": 51.2048,
+      "unclassified_horses": 1053,
+      "all_unclassified_time_valid": true
+    },
+    "homepage_six_months_as_of_2026-10-17": {
+      "requested_range": [
+        "2026-04-17",
+        "2026-10-17"
+      ],
+      "observed_db_range": [
+        "2026-04-17",
+        "2026-10-15"
+      ],
+      "total_rows": 40513,
+      "unclassified_rows": 20408,
+      "unclassified_pct_of_period": 50.374,
+      "unclassified_horses": 913,
+      "time_valid_rows": 20408,
+      "all_unclassified_time_valid": true
+    },
+    "six_months_relative_to_latest_db_date": {
+      "requested_range": [
+        "2026-04-15",
+        "2026-10-15"
+      ],
+      "total_rows": 41146,
+      "unclassified_rows": 20771,
+      "unclassified_pct_of_period": 50.4812,
+      "unclassified_horses": 928,
+      "time_valid_rows": 20771,
+      "all_unclassified_time_valid": true
+    },
+    "previous_review_candidate_window": {
+      "range": [
+        "2026-04-15",
+        "2026-09-28"
+      ],
+      "total_rows": 36824,
+      "unclassified_rows": 18435,
+      "unclassified_pct_of_period": 50.0625,
+      "unclassified_horses": 871,
+      "time_valid_rows": 18435,
+      "all_unclassified_time_valid": true
+    },
+    "analysis_view_cutoff": {
+      "range": [
+        "2007-10-01",
+        "2026-09-19"
+      ],
+      "total_rows": 907552,
+      "unclassified_rows": 298519,
+      "unclassified_pct_of_period": 32.8928
+    }
+  },
+  "period_concentration": [
+    {
+      "range": "2007-2012",
+      "unclassified_rows": 108657,
+      "share_of_all_unclassified_pct": 36.0546
+    },
+    {
+      "range": "2013-2021",
+      "unclassified_rows": 5643,
+      "share_of_all_unclassified_pct": 1.8725
+    },
+    {
+      "range": "2022-2026-10-15",
+      "unclassified_rows": 187068,
+      "share_of_all_unclassified_pct": 62.0729
+    }
+  ],
+  "yearly": [
+    {
+      "year": 2007,
+      "total_rows": 3435,
+      "unclassified_rows": 3435,
+      "unclassified_pct_of_year": 100.0,
+      "share_of_all_unclassified_pct": 1.1398
+    },
+    {
+      "year": 2008,
+      "total_rows": 16831,
+      "unclassified_rows": 16831,
+      "unclassified_pct_of_year": 100.0,
+      "share_of_all_unclassified_pct": 5.5849
+    },
+    {
+      "year": 2009,
+      "total_rows": 21590,
+      "unclassified_rows": 21590,
+      "unclassified_pct_of_year": 100.0,
+      "share_of_all_unclassified_pct": 7.164
+    },
+    {
+      "year": 2010,
+      "total_rows": 20590,
+      "unclassified_rows": 20353,
+      "unclassified_pct_of_year": 98.849,
+      "share_of_all_unclassified_pct": 6.7535
+    },
+    {
+      "year": 2011,
+      "total_rows": 21457,
+      "unclassified_rows": 21411,
+      "unclassified_pct_of_year": 99.7856,
+      "share_of_all_unclassified_pct": 7.1046
+    },
+    {
+      "year": 2012,
+      "total_rows": 25037,
+      "unclassified_rows": 25037,
+      "unclassified_pct_of_year": 100.0,
+      "share_of_all_unclassified_pct": 8.3078
+    },
+    {
+      "year": 2013,
+      "total_rows": 27064,
+      "unclassified_rows": 131,
+      "unclassified_pct_of_year": 0.484,
+      "share_of_all_unclassified_pct": 0.0435
+    },
+    {
+      "year": 2014,
+      "total_rows": 31437,
+      "unclassified_rows": 313,
+      "unclassified_pct_of_year": 0.9956,
+      "share_of_all_unclassified_pct": 0.1039
+    },
+    {
+      "year": 2015,
+      "total_rows": 35387,
+      "unclassified_rows": 468,
+      "unclassified_pct_of_year": 1.3225,
+      "share_of_all_unclassified_pct": 0.1553
+    },
+    {
+      "year": 2016,
+      "total_rows": 42753,
+      "unclassified_rows": 639,
+      "unclassified_pct_of_year": 1.4946,
+      "share_of_all_unclassified_pct": 0.212
+    },
+    {
+      "year": 2017,
+      "total_rows": 50635,
+      "unclassified_rows": 1059,
+      "unclassified_pct_of_year": 2.0914,
+      "share_of_all_unclassified_pct": 0.3514
+    },
+    {
+      "year": 2018,
+      "total_rows": 55322,
+      "unclassified_rows": 790,
+      "unclassified_pct_of_year": 1.428,
+      "share_of_all_unclassified_pct": 0.2621
+    },
+    {
+      "year": 2019,
+      "total_rows": 63473,
+      "unclassified_rows": 789,
+      "unclassified_pct_of_year": 1.243,
+      "share_of_all_unclassified_pct": 0.2618
+    },
+    {
+      "year": 2020,
+      "total_rows": 52096,
+      "unclassified_rows": 134,
+      "unclassified_pct_of_year": 0.2572,
+      "share_of_all_unclassified_pct": 0.0445
+    },
+    {
+      "year": 2021,
+      "total_rows": 56225,
+      "unclassified_rows": 1320,
+      "unclassified_pct_of_year": 2.3477,
+      "share_of_all_unclassified_pct": 0.438
+    },
+    {
+      "year": 2022,
+      "total_rows": 65225,
+      "unclassified_rows": 25064,
+      "unclassified_pct_of_year": 38.427,
+      "share_of_all_unclassified_pct": 8.3167
+    },
+    {
+      "year": 2023,
+      "total_rows": 82187,
+      "unclassified_rows": 39466,
+      "unclassified_pct_of_year": 48.0198,
+      "share_of_all_unclassified_pct": 13.0956
+    },
+    {
+      "year": 2024,
+      "total_rows": 87158,
+      "unclassified_rows": 43213,
+      "unclassified_pct_of_year": 49.5801,
+      "share_of_all_unclassified_pct": 14.3389
+    },
+    {
+      "year": 2025,
+      "total_rows": 88111,
+      "unclassified_rows": 45069,
+      "unclassified_pct_of_year": 51.1503,
+      "share_of_all_unclassified_pct": 14.9548
+    },
+    {
+      "year": 2026,
+      "total_rows": 66900,
+      "unclassified_rows": 34256,
+      "unclassified_pct_of_year": 51.2048,
+      "share_of_all_unclassified_pct": 11.3668
+    }
+  ],
+  "raw_prGubun_among_unclassified": {
+    "-": 301368
+  },
+  "employee_number_status_among_unclassified": {
+    "provided": 257960,
+    "missing_marker_dash_or_empty": 43408,
+    "null": 0
+  },
+  "rider_type_status_among_unclassified": {
+    "unclassified_api_category_missing": 298852,
+    "api_type_not_explicit": 2493,
+    "unclassified_website_label": 23
+  },
+  "unclassified_duration_status": {
+    "positive_matches_valid_times": 283340,
+    "raw_zero_unavailable": 18028
+  },
+  "view_comparison": {
+    "training_current_rows": 912913,
+    "daily_training_rider_types_rows": 912913,
+    "matched_row_ids": 912913,
+    "rider_type_mismatches": 0,
+    "status_mismatches": 0,
+    "current_only_ids": 0,
+    "daily_training_rider_types_only_ids": 0,
+    "analysis_2026_rows": 907552,
+    "analysis_2026_unclassified": 298519
+  },
+  "assignment_guard_comparison": {
+    "assignment_rows": 912913,
+    "missing_assignment_rows": 0,
+    "source_fields_changed_rows": 0,
+    "guard_downgraded_to_unclassified": 0,
+    "other_effective_type_changes": 0
+  },
+  "recent_unclassified_recommended_samples": [
+    {
+      "horse_id": "3014265",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 07:39:00",
+      "end_time_local": "2026-10-15 07:46:00",
+      "prNo_raw": "005337"
+    },
+    {
+      "horse_id": "3014773",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:43:00",
+      "end_time_local": "2026-10-15 07:02:00",
+      "prNo_raw": "005030"
+    },
+    {
+      "horse_id": "3014895",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:01:00",
+      "end_time_local": "2026-10-15 06:14:00",
+      "prNo_raw": "005277"
+    },
+    {
+      "horse_id": "3015728",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:49:00",
+      "end_time_local": "2026-10-15 07:08:00",
+      "prNo_raw": "005002"
+    },
+    {
+      "horse_id": "3016953",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:51:00",
+      "end_time_local": "2026-10-15 07:01:00",
+      "prNo_raw": "005312"
+    },
+    {
+      "horse_id": "3017464",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:54:00",
+      "end_time_local": "2026-10-15 07:29:00",
+      "prNo_raw": "005252"
+    },
+    {
+      "horse_id": "3017958",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 08:27:00",
+      "end_time_local": "2026-10-15 08:33:00",
+      "prNo_raw": "005352"
+    },
+    {
+      "horse_id": "3017963",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 07:59:00",
+      "end_time_local": "2026-10-15 08:11:00",
+      "prNo_raw": "005300"
+    },
+    {
+      "horse_id": "3017983",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:03:00",
+      "end_time_local": "2026-10-15 06:15:00",
+      "prNo_raw": "005253"
+    },
+    {
+      "horse_id": "3018073",
+      "training_date": "2026-10-15",
+      "start_time_local": "2026-10-15 06:03:00",
+      "end_time_local": "2026-10-15 06:12:00",
+      "prNo_raw": "005344"
+    }
+  ],
+  "homepage_sample_evidence": {
+    "reviewed_horses": 8,
+    "exact_matching_unclassified_rows": 587,
+    "website_label": "이름(관)",
+    "classification_supported": "주로조교",
+    "overlap_with_existing_sample": 337,
+    "new_rows": 250,
+    "union_rows": 784,
+    "applied_to_db": false,
+    "sample_limit": "선정된 8두 표본으로 전체 최근 6개월 20,408행의 분포를 일반화하지 않음."
+  },
+  "comparison_notes": [
+    "이전 2026-10-15 보고서는 당시 DB의 2026-09-28 종료 범위(908,316행)를 사용했고 현재 DB에는 4,597행이 추가되어 있다.",
+    "training_current와 daily_training_rider_types의 모든 원행 ID, rider_type, rider_type_status가 일치한다. daily_training_rider_types_analysis_2026은 2026-09-19까지의 날짜 절단 조회다.",
+    "prNo_raw 원문 문자열을 보존하며 선행 0을 유지한다. 사번 존재는 역할 확인을 뜻하지 않는다.",
+    "홈페이지의 동일 조교행에서 직접 확인한 표식만 해당 행의 보완 근거로 사용한다. 다른 날짜 이름이나 사번의 현재 직책으로 과거 종류를 소급하지 않는다."
+  ]
+}

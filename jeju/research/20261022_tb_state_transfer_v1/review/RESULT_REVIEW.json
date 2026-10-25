@@ -1,0 +1,102 @@
+{
+  "reviewed_at": "2026-10-22",
+  "status": "PASS_PREDECLARED_RESEARCH_GATE_WITH_LIMITS",
+  "interpretation": "Research-candidate gate passed on reused development evaluations; not independent future validation or production approval.",
+  "fit_run": {
+    "status": "COMPLETED_RESEARCH_ONLY",
+    "models": 6,
+    "lightgbm_train_calls": 12,
+    "temperature_optimizations": 6,
+    "evaluation_races": 1779,
+    "evaluation_runners": 17412,
+    "study_bytes": 15970786,
+    "study_byte_limit": 100000000,
+    "production_changed": false,
+    "database_changed": false,
+    "receipt_sha256": "fb70195287f1bc56c0c9fbe19acc6b7ec08b01a42a7a336da1b0a0c9f4b3bbe2",
+    "root_result_verification_sha256": "51ebda1cf33d96d51b2c97ede9495368398271136d10d8640b0afaa7448b8f42"
+  },
+  "receipt_integrity": {
+    "artifact_hash_and_size_matches": "28/28",
+    "approved_code_input_preflight_hashes_match": true,
+    "root_independent_receipt_hash_match": true,
+    "protected_files_unchanged": true
+  },
+  "gates": {
+    "C_minus_R_diagnostic_gate": false,
+    "S_minus_C": {
+      "pass": true,
+      "tri_nll_difference": -0.04274967134308935,
+      "tri_nll_date_bootstrap_ci95": [-0.062418777471636516, -0.02366067429713212],
+      "tri_brier_difference": -0.0003948224262710873,
+      "win_nll_point_protection": true,
+      "win_brier_point_protection": true
+    },
+    "S_minus_R": {
+      "pass": true,
+      "tri_nll_difference": -0.044051188473884284,
+      "tri_nll_date_bootstrap_ci95": [-0.06363896844072318, -0.024780536906004767],
+      "tri_brier_difference": -0.000398426421936489,
+      "win_nll_point_protection": true,
+      "win_brier_point_protection": true
+    },
+    "statistical_win_noninferiority_claimed": false,
+    "fit_uncertainty_included": false
+  },
+  "win_top3_axis": {
+    "r_hits": 1023,
+    "s_hits": 1044,
+    "races": 1779,
+    "relative_change": 0.02052785923753664,
+    "absolute_hit_rate_difference": 0.011804384485666104,
+    "absolute_difference_ci95": [-0.0072789373308113844, 0.03046047098402018],
+    "relative_change_ci95": [-0.01237094769620182, 0.05405612456174243],
+    "relative_10pct_target_hits": 1126,
+    "target_met": false,
+    "axis_is_primary_gate": false
+  },
+  "all_pool_evidence": {
+    "pool_names": ["WIN", "PLC", "QNL", "EXA", "QPL", "TLA", "TRI"],
+    "race_pool_metric_rows_all_arms": 37251,
+    "selection_rows_all_arms": 37251,
+    "denominators": {
+      "WIN": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "EXA": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779
+    },
+    "yearly_denominators_per_arm": {
+      "general_2024_2025_2026": [637, 654, 488],
+      "plc_2024_2025_2026": [637, 650, 456]
+    },
+    "reliability_groups": 84,
+    "pair_selection_diagnostic_rows": 21348,
+    "unknown_opening_count_plc_quarantine_rows": 36
+  },
+  "root_independent_verification": {
+    "passed": true,
+    "models_replayed": 6,
+    "raw_prediction_values_replayed": 73314,
+    "calibrations_verified": 9,
+    "ordered_triples_reconstructed": 3625272,
+    "bootstrap_tri_draws_compared": 6000,
+    "maximum_seven_pool_nll_error": 3.552713678800501e-15,
+    "maximum_seven_pool_brier_error": 1.3322676295501878e-15,
+    "models_refitted": false,
+    "experiment_module_imported": false
+  },
+  "claim_limits": [
+    "This transfers only the TB 58C rank/distance state core as 10 features; it is not the full TB 29-input pipeline or a neural network.",
+    "The WIN Top3 axis +10% target of 1,126 hits was missed; the S-R date-bootstrap interval includes zero.",
+    "The predeclared gate is TRI proper-loss improvement plus point-estimate WIN proper-loss protection, not a 10% hit-rate gate.",
+    "2024-2026 are reused development evaluations, not independent future validation.",
+    "No market comparison, betting ROI, or actual purchase-strategy performance was evaluated.",
+    "T-2 is based on event date; public timestamp and contemporaneous roster availability remain unverified.",
+    "History is restricted to complete normal exact-rank races and does not model non-finish risk; covariance features are not calibrated posterior uncertainty."
+  ],
+  "reviewer_replayed_models_or_q": false,
+  "reviewer_recomputed_outcome_metrics": false
+}

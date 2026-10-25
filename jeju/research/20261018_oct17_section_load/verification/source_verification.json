@@ -1,0 +1,359 @@
+{
+  "passed": true,
+  "source": {
+    "source_checks_passed": true,
+    "parser": "Python standard-library HTMLParser + json; no network calls",
+    "database_access": "none during source-only phase",
+    "api_sources": {
+      "section_records": {
+        "path": "research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+        "sha256_actual": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+        "sha256_expected": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+        "records": 7,
+        "races": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "corner_rank": {
+        "path": "research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+        "sha256_actual": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+        "sha256_expected": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+        "records": 7,
+        "races": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "website_pages_checked": 7,
+    "official_runner_rows": 69,
+    "api6_section_points": 39,
+    "api6_interval_time_matches": 39,
+    "api6_cumulative_time_matches": 39,
+    "api6_distance_matches": 33,
+    "api6_distance_disagreement_rows": [
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 1,
+        "api_field": "dist_1f",
+        "api_raw": 100,
+        "website_raw": "110"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 2,
+        "api_field": "dist_2f",
+        "api_raw": 300,
+        "website_raw": "310"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 3,
+        "api_field": "dist_3f",
+        "api_raw": 500,
+        "website_raw": "510"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 4,
+        "api_field": "dist_4f",
+        "api_raw": 700,
+        "website_raw": "710"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 5,
+        "api_field": "dist_5f",
+        "api_raw": 900,
+        "website_raw": "910"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 6,
+        "api_field": "dist_6f",
+        "api_raw": 1100,
+        "website_raw": "1110"
+      }
+    ],
+    "group_fields_compared": {
+      "section_records": 42,
+      "corner_rank": 42
+    },
+    "nonempty_group_values_matching": {
+      "section_records": 29,
+      "corner_rank": 29
+    },
+    "races": [
+      {
+        "race_number": 1,
+        "website_sha256_actual": "b609c7e3e107a611282f11a5d32a5255070b02e66ed92a881be454a6e03e839f",
+        "website_sha256_expected": "b609c7e3e107a611282f11a5d32a5255070b02e66ed92a881be454a6e03e839f",
+        "website_runners": 10,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_race_distance_m": 900,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 2,
+        "website_sha256_actual": "e95be063b7f3b89fb76bff01195cff53e89885c88fcdb417b3e7e91e138f45bd",
+        "website_sha256_expected": "e95be063b7f3b89fb76bff01195cff53e89885c88fcdb417b3e7e91e138f45bd",
+        "website_runners": 10,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_race_distance_m": 900,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 3,
+        "website_sha256_actual": "1c863aee859a9ff15c47023ca979ab3f2a55ad7c8c8342d7be93ae3edab2c3ee",
+        "website_sha256_expected": "1c863aee859a9ff15c47023ca979ab3f2a55ad7c8c8342d7be93ae3edab2c3ee",
+        "website_runners": 10,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_race_distance_m": 1000,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 4,
+        "website_sha256_actual": "9355de27247f64c714dad10e7729e78666718107d8fd70801b95505bf28a5bdd",
+        "website_sha256_expected": "9355de27247f64c714dad10e7729e78666718107d8fd70801b95505bf28a5bdd",
+        "website_runners": 9,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_race_distance_m": 1000,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 5,
+        "website_sha256_actual": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+        "website_sha256_expected": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+        "website_runners": 10,
+        "official_sections": 6,
+        "api6_interval_points_match": 6,
+        "api6_cumulative_points_match": 6,
+        "api6_distance_points_match": 0,
+        "official_distances_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "api6_race_distance_m": 1110,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 6,
+        "website_sha256_actual": "71cdf5e00002c5aa3d43967af486fbc9e7947b93dd65b9915e9696c427a26698",
+        "website_sha256_expected": "71cdf5e00002c5aa3d43967af486fbc9e7947b93dd65b9915e9696c427a26698",
+        "website_runners": 10,
+        "official_sections": 6,
+        "api6_interval_points_match": 6,
+        "api6_cumulative_points_match": 6,
+        "api6_distance_points_match": 6,
+        "official_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200
+        ],
+        "api6_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200
+        ],
+        "api6_race_distance_m": 1200,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 7,
+        "website_sha256_actual": "5841cbcb1b99fef4a585e9bd34c31745a36bdce8ffc4b9be6f4977a037dece67",
+        "website_sha256_expected": "5841cbcb1b99fef4a585e9bd34c31745a36bdce8ffc4b9be6f4977a037dece67",
+        "website_runners": 10,
+        "official_sections": 7,
+        "api6_interval_points_match": 7,
+        "api6_cumulative_points_match": 7,
+        "api6_distance_points_match": 7,
+        "official_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100,
+          1300
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100,
+          1300
+        ],
+        "api6_race_distance_m": 1300,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 5
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 5
+          }
+        }
+      }
+    ]
+  }
+}

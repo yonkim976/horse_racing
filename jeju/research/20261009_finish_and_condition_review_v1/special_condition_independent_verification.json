@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "row_level_conditions": {
+    "rows": 52155,
+    "feature_values": 990945,
+    "source_start_links": 50209,
+    "same_distance_windows": 45546,
+    "uncertain_ids": 66
+  },
+  "S2_12_fixed_cell_support": {
+    "prev_same|same_starts_0": 0,
+    "prev_same|same_starts_1_2": 7616,
+    "prev_same|same_starts_3_plus": 24455,
+    "prev_same|same_starts_unknown": 0,
+    "prev_changed|same_starts_0": 4663,
+    "prev_changed|same_starts_1_2": 2941,
+    "prev_changed|same_starts_3_plus": 10534,
+    "prev_changed|same_starts_unknown": 0,
+    "prev_unknown|same_starts_0": 1946,
+    "prev_unknown|same_starts_1_2": 0,
+    "prev_unknown|same_starts_3_plus": 0,
+    "prev_unknown|same_starts_unknown": 0
+  },
+  "condition_statistics_recalculated_rows": 575,
+  "date_intervals_recalculated_rows": 301,
+  "operating_common_races": 467,
+  "operating_common_runner_rows": 4475,
+  "lock_check": {
+    "locked_input_files": 17,
+    "original_output_hashes": {
+      "condition_features.parquet": {
+        "sha256": "418bb9651ab9b3f408939e821fb2adb69f57ef950db8eabeb3a98ff273b06aea",
+        "bytes": 7396282
+      },
+      "condition_statistics.csv": {
+        "sha256": "35b3f7989d97890a4df83cfa09a8aba7f435a06308ea6c08474c608a4ada5f23",
+        "bytes": 179017
+      },
+      "date_bootstrap_intervals.csv": {
+        "sha256": "620834a73f292028a82ee302411539371a01f83ac05c4d3cb23d6dac657a1f2c",
+        "bytes": 42363
+      },
+      "S1_uncertain_nonstart_lineage.csv": {
+        "sha256": "9b32c95db37bfdaa5f64de0dfa945a7b2fa969f5e7c2c823ded0ffacfadb791d",
+        "bytes": 3891
+      },
+      "operating_common467_condition_summary.csv": {
+        "sha256": "49437ea995bdcc221196ee0806525326617082ddb3dac0474f57d6e1f1d69c3b",
+        "bytes": 7135
+      },
+      "verification.json": {
+        "sha256": "ad1ad668deffef1665d62d0587d0cc8bf1731aec6eb07c740d1a3cc24818c8b6",
+        "bytes": 602
+      }
+    },
+    "original_statistics_rows": 575
+  },
+  "candidate_verification_claims_checked": [
+    "passed",
+    "cohort rows",
+    "Top3 sums",
+    "denominator"
+  ],
+  "model_training": 0,
+  "database_changed": false,
+  "production_changed": false,
+  "publication_independent_future_validation": false
+}

@@ -1,0 +1,39 @@
+{
+  "generated_at_utc": "2026-10-14T15:53:12Z",
+  "window_start_inclusive": "2026-04-15",
+  "window_end_inclusive": "2026-09-28",
+  "source_db": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "id_scope_rule": "prGubun_raw='-' and prNo_raw not exactly in archived API307/API308 IDs",
+  "candidate_api18_rows": 19514,
+  "unlinked_employee_id_count": 56,
+  "candidate_horse_count": 851,
+  "selected_page_count": 32,
+  "page_limit": 100,
+  "max_parallel_requests": 3,
+  "timeout_seconds": 20,
+  "ids_with_two_planned_pairs": 55,
+  "ids_with_one_or_more_planned_pairs": 56,
+  "explicit_old_role_scope": [
+    {
+      "category_raw": "조교보",
+      "all_rows": 47620,
+      "all_ids": 21,
+      "first_date": "2016-06-17",
+      "last_date": "2021-12-09",
+      "rows_in_window": 0,
+      "ids_in_window": 0,
+      "decision": "outside_six_month_page_window"
+    },
+    {
+      "category_raw": "조교승인",
+      "all_rows": 84580,
+      "all_ids": 41,
+      "first_date": "2016-06-17",
+      "last_date": "2021-12-09",
+      "rows_in_window": 0,
+      "ids_in_window": 0,
+      "decision": "outside_six_month_page_window"
+    }
+  ],
+  "decision_rule": "Plan is only a candidate. Identity evidence requires exact horse/date/start/end/duration match against page HTML."
+}

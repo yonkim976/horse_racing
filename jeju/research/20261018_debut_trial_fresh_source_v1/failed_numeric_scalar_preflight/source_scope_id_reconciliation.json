@@ -1,0 +1,8 @@
+{
+  "current_old_rows_missing_from_frozen_snapshot_n": 0,
+  "frozen_snapshot_old_rows_missing_from_current_db_n": 0,
+  "old_row_field_differences_n": 8220,
+  "current_old_missing_api_record_ids": [],
+  "frozen_old_missing_api_record_ids": [],
+  "interpretation": "Pre-Sep20 current rows absent from the frozen Sep19 snapshot are preserved as explicit scope deltas and cannot silently count as cold history. Post-Sep19 records are warm-up history, not old-source drift."
+}

@@ -1,0 +1,47 @@
+{
+  "manifest_version": 1,
+  "created_date": "2026-10-10",
+  "scope": "20261010_joint_gain_loss_context_v1 only; no central registry, DB, or existing experiment files changed.",
+  "artifacts": [
+    {
+      "path": "runner_context.csv",
+      "sha256": "8dfbef38f04c52962efee8275cca48ae8f6fa14e59d7816ed50f0b4344642468",
+      "bytes": 4570157,
+      "purpose": "Supplemental exact-key runner context; no outcome labels or prediction scores."
+    },
+    {
+      "path": "CONDITION_AVAILABILITY_AUDIT.md",
+      "sha256": "42bbb7a31dcee14ac8b6abdb9e6bfaf1ffafafdd2af91161baa89dd4d03921ba",
+      "bytes": 10724,
+      "purpose": "Source lineage, field contract, timing limits, and condition-selection/confounding audit."
+    },
+    {
+      "path": "build_runner_context.py",
+      "sha256": "d1176d0474c8a2967a9f7802722db78b2f481efd99a5c8e30f141093225e8e59",
+      "bytes": 18541,
+      "purpose": "Hash-pinned verify-only reconstruction script; writes only with an explicit new-path option."
+    },
+    {
+      "path": "verify_receipt.json",
+      "sha256": "8ea6f99fdea646d42bcaa18022c03029159bca5665940126452ae6b206b35f89",
+      "bytes": 2490,
+      "purpose": "Actual verify-only run receipt, including byte and semantic parity checks."
+    }
+  ],
+  "validation": {
+    "receipt_path": "verify_receipt.json",
+    "receipt_sha256": "8ea6f99fdea646d42bcaa18022c03029159bca5665940126452ae6b206b35f89",
+    "mode": "verify_only",
+    "byte_parity": true,
+    "semantic_parity": true,
+    "target_id_coverage": "17412/17412",
+    "target_race_coverage": "1779/1779",
+    "existing_target_overwrite_guard_test": "pass: explicit --write-new targeting runner_context.csv was refused with FileExistsError; original SHA-256 remained 8dfbef38f04c52962efee8275cca48ae8f6fa14e59d7816ed50f0b4344642468"
+  },
+  "source_inputs": {
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+    "jeju/research/20261008_weight_speed_v2/source_lineage.csv": "95c44c1571f1ca383b57c5b9e98a8d9c1f32ebb1b9d19763db82ff51d3ed6346",
+    "jeju/research/20261007_track_environment_v1/race_support_rows.json": "1a8b202da7024c9d42ac51d688dbbe473ad695bdc5c9011672d3a60b861720c5",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/f1_reproduced_race_metrics.csv": "89e783d9c2022cf7a91f7effc39a359ebcf755541c8d33073c0ce795e3341c07"
+  }
+}

@@ -1,0 +1,701 @@
+{
+  "started_at_utc": "2026-10-24T16:36:42.858716+00:00",
+  "client_date": "2026-10-25",
+  "free_bytes": 38424719360,
+  "prior_studies": [
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1",
+      "bytes": 4700894,
+      "files": 48,
+      "manifest": {
+        "path": "jeju/research/20261022_joint_wager_baseline_v1/FINAL_MANIFEST.json",
+        "bytes": 13682,
+        "sha256": "95872bdb4e3df145092d667e6f383e2c90a5641548bccaba374d6d4ed18d5d77"
+      }
+    },
+    {
+      "path": "jeju/research/20261022_rank_stage_temperature_v1",
+      "bytes": 2964777,
+      "files": 32,
+      "manifest": {
+        "path": "jeju/research/20261022_rank_stage_temperature_v1/FINAL_MANIFEST.json",
+        "bytes": 11078,
+        "sha256": "e588c6d9a27f8a9405a96ddf309a5c8caa6feea92bbd129f7485c4d37047c73b"
+      }
+    },
+    {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1",
+      "bytes": 30931910,
+      "files": 95,
+      "manifest": {
+        "path": "jeju/research/20261022_dynamic_ability_pace_v1/FINAL_MANIFEST.json",
+        "bytes": 23867,
+        "sha256": "33b3af723dc9f9ddb0dc1435e151f91e77513d04e998a128cad7fbc58a2ad312"
+      }
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1",
+      "bytes": 16112327,
+      "files": 67,
+      "manifest": {
+        "path": "jeju/research/20261022_tb_state_transfer_v1/FINAL_MANIFEST.json",
+        "bytes": 64610,
+        "sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a"
+      }
+    },
+    {
+      "path": "jeju/research/20261022_rs_equal_mixture_v1",
+      "bytes": 3089598,
+      "files": 42,
+      "manifest": {
+        "path": "jeju/research/20261022_rs_equal_mixture_v1/FINAL_MANIFEST.json",
+        "bytes": 69399,
+        "sha256": "23609b52d004e365f342279d1a768bd934683c078e5a5ee2b310d72167f3ff04"
+      }
+    },
+    {
+      "path": "jeju/research/20261023_bottom3_auxiliary_v1",
+      "bytes": 2882506,
+      "files": 39,
+      "manifest": {
+        "path": "jeju/research/20261023_bottom3_auxiliary_v1/FINAL_MANIFEST.json",
+        "bytes": 76421,
+        "sha256": "d26ae9cb083a19ab6455c706c3ded8301fd987b7b4742bf6c9642b0f4f5bc412"
+      }
+    },
+    {
+      "path": "jeju/research/20261024_s_entry_conditions_v1",
+      "bytes": 12854954,
+      "files": 54,
+      "manifest": {
+        "path": "jeju/research/20261024_s_entry_conditions_v1/FINAL_MANIFEST.json",
+        "bytes": 14939,
+        "sha256": "c148c8f80d46c7bb60f6867633c78e6b9311e60d4eed16b1d3c99b5b6bdf421a"
+      }
+    }
+  ],
+  "prior_total_bytes": 73536966,
+  "phase_reuse_tree_pins": [
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/PLAN.md",
+      "bytes": 5990,
+      "sha256": "35659b1c1e5422bc5707de3dd777094ab33ccdbc1eb0945a48e5beca0f57a8c6"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/README.md",
+      "bytes": 17221,
+      "sha256": "c4c24110d353f3072e89404aaa969e05c68a04e0d12451cf4ec8028819ae3d9e"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/build.cpython-312.pyc",
+      "bytes": 25468,
+      "sha256": "ec0089f460e8530a4204a355bcc83af36022826911e44f758c9996087527aba2"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/common.cpython-312.pyc",
+      "bytes": 3483,
+      "sha256": "303346c1c524c9a97d850918c2ea0721840126e6813a83b8a0cd835432ac3caf"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/diagnostics.cpython-312.pyc",
+      "bytes": 24918,
+      "sha256": "a9f0bff388fcf447f02f3a6f4d46fb8c6da0531477192a649f141d6e354fef08"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/experiment.cpython-312.pyc",
+      "bytes": 16431,
+      "sha256": "830fdcad4a38ee069227afbaab0313e1ac52decc78dcbb00a6fe142a43b4ae17"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/publish.cpython-312.pyc",
+      "bytes": 13585,
+      "sha256": "b062fa6e30025a9230075f277c3e9bb5045e9ada5c64f8b8b6ebb19b18518830"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/report.cpython-312.pyc",
+      "bytes": 28282,
+      "sha256": "fd236ded3adec34cd5d8400fa433858bc256d8f385db29b75030e614c38bd6f0"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/__pycache__/verify_model.cpython-312.pyc",
+      "bytes": 22180,
+      "sha256": "c4e90e8617fcbd60069296ad55720cc5cd795c96135c2223041370494cf6bb7c"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/artifact_manifest.json",
+      "bytes": 23098,
+      "sha256": "e8b6f5457193f48127f19ff77ba690ce235cd87e55be9c26870751cd5647e40e"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/build.py",
+      "bytes": 13426,
+      "sha256": "0f2e6833f3f78262e072ec76cb021daac2265460a49d899478fe1f9229318624"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/common.py",
+      "bytes": 1482,
+      "sha256": "6ce6ca92cc6075511be757f63c27dfec555d7f9840fa1a6852fd24e238bd3ef4"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/decision.json",
+      "bytes": 776,
+      "sha256": "99b8382e6f1a093e050b869530174d0b35836253ed30728ec63d009ab6c72a33"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/diagnostics.py",
+      "bytes": 12016,
+      "sha256": "3b2d233f6a94df1a4c2c1d4e0c94177ccb3920b1fd56202f893c79acb3613577"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/experiment.py",
+      "bytes": 8208,
+      "sha256": "b5bf51837abdc8cb27ff00d6a69d0602109d116f1eec97c05d9664870ad639aa"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/failed_attempt01/experiment.py",
+      "bytes": 8121,
+      "sha256": "b2d63f11d7836a24f2d4d82761780df9e303c6d12130fabe0b8097422b990c2c"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/failed_attempt01/failure.json",
+      "bytes": 207,
+      "sha256": "d06080a24a657bcb82036f950b71d8ffe25d5b25044a4af6afac7ee46f6a9168"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/failed_attempt02/diagnostics.py",
+      "bytes": 11988,
+      "sha256": "23c904bd268bdcc9a644485d6ea055d22104845ab715b7c98a82f25ef0a11524"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/failed_attempt02/failure.json",
+      "bytes": 229,
+      "sha256": "334dd023e727289b9450b152a5e43605c2056a7fa419dde09973721488d6d45b"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/binary_metrics.csv",
+      "bytes": 9117,
+      "sha256": "d5faf5956e4cae5763b6df28b4fcfa156e7eb004e7560513b6d90423cfda28c5"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/build_receipt.json",
+      "bytes": 242,
+      "sha256": "7928cb3b7873122c52bed57e68e3544aa2338e72d74a75dd80fffe2c77fd4460"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/build_verification.json",
+      "bytes": 407,
+      "sha256": "bda33b4de4f65d6732c0275c771f870eb1ba1d150a02c616dcb55dcfd8dbd682"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/calibration.csv",
+      "bytes": 141269,
+      "sha256": "feee8a822945cc4f78348d38b835f11e5288e0f1ddab9d348fdd211133e4ca6d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/candidate_metrics.csv",
+      "bytes": 51168,
+      "sha256": "ec53b5d89130373f0f4317386614235090c85cb59e4f740ca9c3bcbbeff1239e"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/confusion.csv",
+      "bytes": 13751,
+      "sha256": "8c8b93c654b1079e9503a4f59b0b44b9a5fc2c946d5e00f9a78032a7837cd02c"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/count_metrics.csv",
+      "bytes": 1744,
+      "sha256": "73cae6c0ef0890216852869a8cf5135a319904df1ef020fd57fe2376f9f81feb"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/count_predictions.parquet",
+      "bytes": 82420,
+      "sha256": "7a0faca0a000b7aacc33f89000c4bd513b1998e58fddfb10b4072e2a13d08d33"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/diagnostics_receipt.json",
+      "bytes": 232,
+      "sha256": "0f626acd77b56755fa37b2ad0c54d6919fbaf64f92ebcd2e84ef83385636bc31"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/distance_support.csv",
+      "bytes": 3360,
+      "sha256": "705383a34be5d608e6f6e2ef4a1cd4c00ed0be719f8cd863124b1216f454f97a"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/example_last_race.csv",
+      "bytes": 5448,
+      "sha256": "92dcaad0a2194580d88a7698664472d25f7b49cb7f5dccaed50054d2e4340e11"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/feature_contract.json",
+      "bytes": 12093,
+      "sha256": "6026a3d500528ce1598919df0fd97b291b2513784c63b71cc4dba4cdcd200b67"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/features_and_targets.parquet",
+      "bytes": 25306264,
+      "sha256": "0dcf70c9cb4822fb3c5198e1a138648062f5d94d1ef9bf712929d40e2a0dca33"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/first_pack_candidates.parquet",
+      "bytes": 748095,
+      "sha256": "23e9cafd34e6dfd7c7b2c04792798a90c844fb80eed9241f7c7248f2db6db52f"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/fit_audit.json",
+      "bytes": 325365,
+      "sha256": "bdd896d28f53efb18111c22ebeab56a8470249a1af260d0a87ee314fd9a535fa"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/fit_receipt.json",
+      "bytes": 412,
+      "sha256": "675c0a11579a807b0cf035bea66e97ec09cc288ed43c8c6d1ee7bf8f3d756d4e"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/history_lineage.parquet",
+      "bytes": 2822738,
+      "sha256": "1ed5b9432aa8491db6308e06d7a275c6318dafe969e465208980c1aac25e4785"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/initial_source_check_failure.json",
+      "bytes": 279,
+      "sha256": "50786958f90bd1339265d33c5858f5ce4887f673701532891bb6c7ded4b133a3"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/joint_early_predictions.parquet",
+      "bytes": 1162118,
+      "sha256": "61e37892a3933fa1358c061734c34053de110fe6a6dedecc8c2a612293d8b026"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/latest_prestart_profiles.parquet",
+      "bytes": 618417,
+      "sha256": "afd3dab14c37fefb080b0cd8abbdaf5a6c66509ae72c144234f6900f0d17d894"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/metrics.csv",
+      "bytes": 113219,
+      "sha256": "7b0984155492efd1d6c71c31f09ef051db274c7b4fc3020cb2dadb5772caf0f9"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_c3_F.txt",
+      "bytes": 985518,
+      "sha256": "8b50c2b5636a3ada4c32a13a8e8cdfb2b4092d7b2287ebf1f3f5774776936afe"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_c3_P.txt",
+      "bytes": 981379,
+      "sha256": "55a33ad0b93c96c34447220b1b95341b1e643bbecf57eec34c0ffa435b34ff53"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_c4_F.txt",
+      "bytes": 987127,
+      "sha256": "18e89078c8497cc511e1e4ae93067b92b9f3e5b79215f436766a69d3cbdd0b51"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_c4_P.txt",
+      "bytes": 982746,
+      "sha256": "ec42cf8d6e7538ad66bf9c911006cf37afe591cb257eb1871aa6d9b1f7d78e9d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_count_F.txt",
+      "bytes": 964808,
+      "sha256": "ad54e7e8a15632aa3c5bd60960633283545eafc6fa5a28f0dd5a935f3f7be22b"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_front_fade_F.txt",
+      "bytes": 336649,
+      "sha256": "dc04d59e01db7a62a7c6b4954ff24c54ae05f985ceea7b77afd6a3189e2d7790"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_front_fade_P.txt",
+      "bytes": 333737,
+      "sha256": "77241ba8a8f34358169c6df02d9dee0ed58a5aac22da2d41707c3ca8fe1dd726"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_g1f_F.txt",
+      "bytes": 987624,
+      "sha256": "f41cad89c29a6285aefee227ad54d6900f7e7e6d90cc54273c27d49680ccf0fb"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_g1f_P.txt",
+      "bytes": 982633,
+      "sha256": "878a831451c1af030b21a822832b565e08d92045351b682a438767988fd188c6"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_last200_recovery_F.txt",
+      "bytes": 337148,
+      "sha256": "b4096c107b5cca6dcafbf77c39cdf74a9f585c9705dac72a85338607d4c5e876"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_last200_recovery_P.txt",
+      "bytes": 334074,
+      "sha256": "27179b2eb3eaa734236f2a0dc027c8a1adb82f15b3264ec8abe15a0e0b07eed5"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_late_advance_F.txt",
+      "bytes": 337399,
+      "sha256": "392b8db7e521e3d316a9ea463f0355e8acadc8e2f3a5eed7168ce9957cec6069"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_late_advance_P.txt",
+      "bytes": 334270,
+      "sha256": "51cbf97c8de6e8ee85cccc4052cb6837f3620d3f1f4894c6a0c6e446dea1e13a"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_middle_advance_F.txt",
+      "bytes": 336047,
+      "sha256": "acec87b584a0fd0a90e4746b1ff7905721cc2266578f2e97610006c99f8130ba"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_middle_advance_P.txt",
+      "bytes": 332818,
+      "sha256": "b8351eb8db72280c2cd82c25e72ff49f4e14df836cb0726bf55dd35e6658a2d9"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_s1f_F.txt",
+      "bytes": 987841,
+      "sha256": "9f520f7cabe3545f9a84f3ea6d2fffa01d9980497d4320421c60195aa3fbe36d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2024_s1f_P.txt",
+      "bytes": 983484,
+      "sha256": "1363fa645494398351d1cefd1f1e31d5ed9376786571cf7786e2561c968304a6"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_c3_F.txt",
+      "bytes": 986643,
+      "sha256": "fe62e89f979d4daa84cce3878ced66da4f0d5b212f6aaf03cb6d6003390de5af"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_c3_P.txt",
+      "bytes": 982367,
+      "sha256": "3337cba11a3fabe35a78ada8c261fbb3520b7914ffeaf9ab3e5eb2851d9a8c75"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_c4_F.txt",
+      "bytes": 988354,
+      "sha256": "b5c35f2ae41d5cd82f53163c25acac2422600e68df2346333f365163e279438f"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_c4_P.txt",
+      "bytes": 983670,
+      "sha256": "5879656e57dcc46f74d02988af14dfd5128778d9884182e9d357fd21d0bbcf2e"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_count_F.txt",
+      "bytes": 965683,
+      "sha256": "0e55fe04162ca49233f2ea83565c6976197fb23e40ca6f7e1f9beecf145f20a3"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_front_fade_F.txt",
+      "bytes": 337254,
+      "sha256": "185349f3b4239b9706706c10f481ce2c2b2ba29ae25b1471f0c4af412d83c3e7"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_front_fade_P.txt",
+      "bytes": 334021,
+      "sha256": "42d42c67c0668109d8bf6611d2f650e145a9e55020520f3631b655805f818863"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_g1f_F.txt",
+      "bytes": 988524,
+      "sha256": "45e6342cb465706b8893bb550378e2396cae995ecb19615d98b5c8b06538ed2e"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_g1f_P.txt",
+      "bytes": 983654,
+      "sha256": "9aab09992f5571f43f341e98691a149d1e8338c68af8114b38b5c84fdb58d895"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_last200_recovery_F.txt",
+      "bytes": 337619,
+      "sha256": "65a9e736d78fdb87ec59aa6b9585d8f0ac9dfd0a2ef46de07211e5e7351ff900"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_last200_recovery_P.txt",
+      "bytes": 334396,
+      "sha256": "565188f354d473af9939c456900d3ec64a005dcad0876d70804754075efcec4d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_late_advance_F.txt",
+      "bytes": 338098,
+      "sha256": "a5b0fbcfc95c8f6e2d31ab13e441757ac9a56d7c2766ad9dfc1396127edd7394"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_late_advance_P.txt",
+      "bytes": 334430,
+      "sha256": "2ec14633dd4d45791df91d91034d50d4a2059c1864d10308bb60f7293b64a52c"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_middle_advance_F.txt",
+      "bytes": 336390,
+      "sha256": "3ea61e029346a28e3cf20dc479e94582fdfbdde3ffd4c5fbca49792aafb8057b"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_middle_advance_P.txt",
+      "bytes": 333139,
+      "sha256": "6ca7152cef87aec2926666d964e94aaf5d551c67e2f715b70898855e76bc5628"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_s1f_F.txt",
+      "bytes": 988797,
+      "sha256": "655a7fcf9abefbe8539b55d7b7e66e68f4596dd81891cd9812454edd648c85b1"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2025_s1f_P.txt",
+      "bytes": 984309,
+      "sha256": "a4261222f8976113674c762aa917184df6143dc4b92d0399af740717774ade35"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_c3_F.txt",
+      "bytes": 987816,
+      "sha256": "efb358d1f25b8b1eba68f668d0104a605005be786ae9d562cd67fc78527acc95"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_c3_P.txt",
+      "bytes": 983954,
+      "sha256": "272be927747aa6b170e1b169586e30766e2a7c166e7757eea496458902cd83c5"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_c4_F.txt",
+      "bytes": 989486,
+      "sha256": "a6f0b5168df76cc55ea8751c3a1e7eeda72ce7bcc656dd169e98b50295805c0d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_c4_P.txt",
+      "bytes": 984668,
+      "sha256": "bfddc0174dbadd46436251e498c972d89b8bb12fc106c17b83a5dcd98ae6743b"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_count_F.txt",
+      "bytes": 965586,
+      "sha256": "498605a5b17677eac8a0e15f95a31dd5199b401763e6a9bc95b877e5f3f12485"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_front_fade_F.txt",
+      "bytes": 337531,
+      "sha256": "43399213a4d433b4c22e176188901b602a78a78c131e44c5bb1d9224c7db863d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_front_fade_P.txt",
+      "bytes": 334173,
+      "sha256": "cff6d06c9b48effd61d08898c64ab06462ac72e636ff519da0a1e22a77e16b50"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_g1f_F.txt",
+      "bytes": 988986,
+      "sha256": "cc790e8e0abec2050e5a51f043a4306ca5f0029c6eca07189c595263172f3e43"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_g1f_P.txt",
+      "bytes": 984464,
+      "sha256": "37f5f1c0e4032e2c7e8eaabad85e5cc65364e2ca8c6425ff81580892e811d26d"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_last200_recovery_F.txt",
+      "bytes": 337936,
+      "sha256": "6529802477ad5b11226217162a59347606214411f5851300fa7eb9e59ec3c333"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_last200_recovery_P.txt",
+      "bytes": 334693,
+      "sha256": "94176bed60dbaf7fb01d621c8a553bb935e6c3c4b82a8956b3d467effbe16567"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_late_advance_F.txt",
+      "bytes": 337979,
+      "sha256": "da96bab1a678fa677bb09951c56897f9d73c16008deec4630999aee5344df504"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_late_advance_P.txt",
+      "bytes": 334864,
+      "sha256": "2ace5954ff8f12feb1badccbaf2218934b75ee3a4c077ef6884d04a24372df4f"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_middle_advance_F.txt",
+      "bytes": 336914,
+      "sha256": "fb3c894cae83875a90b9f2aea5d40a43541fddffa11a3ff87158a4d105a601fe"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_middle_advance_P.txt",
+      "bytes": 333649,
+      "sha256": "2387aade774e7956a7545f7f178adc6936e7fd29b364a8ce123cb3fbb6ee3e31"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_s1f_F.txt",
+      "bytes": 989597,
+      "sha256": "b4ff3a90ebac47d85a1ea0cffc49b646221b2c2b0c0086c7c104c75ca19e2ef1"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/models/2026_s1f_P.txt",
+      "bytes": 985662,
+      "sha256": "cefbfc40c235acdbc0f5a03d3bd543b8a4e986afe074fd7dee4a120395cb7ceb"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/observations.parquet",
+      "bytes": 5675665,
+      "sha256": "bcf056ea788f2637c17a6b404013a7718fa3ed6f2042f6693cf6f167dfaf83c7"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/paired_comparisons.csv",
+      "bytes": 9722,
+      "sha256": "60925462a1e8618228738feb2f93a9ce66bfb59aab184a095117dcbcb762c109"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/phase_prediction_comparison.png",
+      "bytes": 141035,
+      "sha256": "2259f0ad016f73183656488fd13b142fbcfc8d8abbb7f55b7cc0667356a685b9"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/predictions.parquet",
+      "bytes": 9923970,
+      "sha256": "cd4f2d578db77cf10a609f0033f84848c8d834390603bfb5e8ee70ddbbf01eee"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/protected_model_paths.json",
+      "bytes": 548,
+      "sha256": "cccc8191afdafefbd549e8e1093a41c5c8ed0cc5ab33a8b7883a4ebcfdd71994"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/race_features.parquet",
+      "bytes": 1023237,
+      "sha256": "27aafe37d1a2567105547739d0de9f2999394151253ebe750f461078a8cbef47"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/race_scores.parquet",
+      "bytes": 960773,
+      "sha256": "95d0530c4c9b8fd5113bd3c6b5c65772acd34d4b724802ede99a51f09e3b7127"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/row_scores.parquet",
+      "bytes": 10158529,
+      "sha256": "4c1ce4c1d09ae0cc15858ef56597ed2079129ca51ac205af871953bb9384a32f"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/source_manifest.json",
+      "bytes": 2788,
+      "sha256": "75d7b8ee982b7e85849a7241809a5f6c00e766d116bb1ac97bbf28a63bdd2bfe"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/target_census.parquet",
+      "bytes": 471402,
+      "sha256": "663ba35f802bf80a66a356f455d2e8c2c9a269776504c20ce013b82e85de6029"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/target_coverage.csv",
+      "bytes": 1469,
+      "sha256": "91589a70a76f5f56dbcc9d263718e6f3b10ff9bf5aed119e2cd41d396403f87c"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/training_input_manifest.json",
+      "bytes": 1326,
+      "sha256": "2d64a107c956ea7563efcec2da85f87f7e2133a44a7005a3cd54387e8fc5b0cf"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/training_input_manifest_v2.json",
+      "bytes": 1326,
+      "sha256": "8e178fbbc23e870d6c842e3a88096219ccd6912c7f6ecab60441f42e17c802b4"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/verification.json",
+      "bytes": 703,
+      "sha256": "2ded5c65a55af005a70157e60a729b94e44803261e894cd987be4757354bdb51"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/outputs/visual_review.json",
+      "bytes": 354,
+      "sha256": "853ed5b82d78b7d058e26469d88592f068cc977f6c1332dc092291d48a193592"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publication_snapshot/07_RUNNING_STYLE.md",
+      "bytes": 22336,
+      "sha256": "706f9a200c29faac061785e41baedde4284971d25b717653680e717c951b0941"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publication_snapshot/README.md",
+      "bytes": 22824,
+      "sha256": "b91afc75cfb7c6fa2ec2fef4530f900bac2a50b8cbc420a7287bd39e5a4110f4"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publication_snapshot/SOURCES.md",
+      "bytes": 32153,
+      "sha256": "367b801c889b42819c0a93f5d28b04584c6bf4242b65ab323cea95b15d325d64"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publication_snapshot/research_register.json",
+      "bytes": 213921,
+      "sha256": "e266b945415fac894e8da1eb96928187e5e5587e5327261b4ddaed482d0d877c"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publication_snapshot/source_manifest.json",
+      "bytes": 618561,
+      "sha256": "c0d3e6fe8fdce468898b90bd6c5422cf5eab0e4a83349e728410ca68481b3e2b"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publication_verification.json",
+      "bytes": 502,
+      "sha256": "bb68a8cd87640489d379f6952f8ce33dca9b675686e65c0391b07f50d441f2d3"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/publish.py",
+      "bytes": 8048,
+      "sha256": "85706f0f9dcd839d64b122fa4bb1a0e2773679cfebfb7b5eeaf0006c023450ef"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/report.py",
+      "bytes": 20241,
+      "sha256": "dda517dc53f97bc871ae52230d999abaa88a81d96dd0a5302939e2dcf6a6bcd8"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/verify_build.py",
+      "bytes": 5496,
+      "sha256": "522a9328d5940a09153fca0fc558ff02a800c5dba0147336dbf97557bca59aa3"
+    },
+    {
+      "path": "jeju/research/20261021_phase_pace_prediction_v1/verify_model.py",
+      "bytes": 10432,
+      "sha256": "6c499fdc67240652dddcf937d6c138651f496773a4738b48e2b2d18c5c50307e"
+    }
+  ],
+  "phase_reuse_existing_bytes": 95593236,
+  "protected_pins": [
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/FINAL_MANIFEST.json",
+      "bytes": 13682,
+      "sha256": "95872bdb4e3df145092d667e6f383e2c90a5641548bccaba374d6d4ed18d5d77"
+    },
+    {
+      "path": "jeju/research/20261022_rank_stage_temperature_v1/FINAL_MANIFEST.json",
+      "bytes": 11078,
+      "sha256": "e588c6d9a27f8a9405a96ddf309a5c8caa6feea92bbd129f7485c4d37047c73b"
+    },
+    {
+      "path": "jeju/research/20261022_dynamic_ability_pace_v1/FINAL_MANIFEST.json",
+      "bytes": 23867,
+      "sha256": "33b3af723dc9f9ddb0dc1435e151f91e77513d04e998a128cad7fbc58a2ad312"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/FINAL_MANIFEST.json",
+      "bytes": 64610,
+      "sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a"
+    },
+    {
+      "path": "jeju/research/20261022_rs_equal_mixture_v1/FINAL_MANIFEST.json",
+      "bytes": 69399,
+      "sha256": "23609b52d004e365f342279d1a768bd934683c078e5a5ee2b310d72167f3ff04"
+    },
+    {
+      "path": "config/prediction_model_registry.json",
+      "bytes": 7291,
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+    },
+    {
+      "path": "jeju/models/current/HY_R_FORM.pkl",
+      "bytes": 638955,
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    }
+  ],
+  "study_budget_bytes": 40000000,
+  "session_budget_bytes": 300000000,
+  "source_copying_authorized": false
+}

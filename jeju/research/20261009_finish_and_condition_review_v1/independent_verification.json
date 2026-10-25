@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "feature_checks": {
+    "rows": 52155,
+    "f1_unobserved": 1946,
+    "f1_incomplete": 745,
+    "f2_slots": 178459,
+    "f2_normal": 178354
+  },
+  "training_artifact_checks": {
+    "candidate_final_models": 6,
+    "stored_r1_models": 3,
+    "candidate_train_calls_from_metadata": 12,
+    "candidate_temperature_optimizations_from_metadata": 6,
+    "completion_script_sha256_verified": true,
+    "per_candidate_model_train_calls_in_source": 2,
+    "per_candidate_model_temperature_calls_in_source": 1
+  },
+  "model_probability_metric_checks": {
+    "models_reloaded_and_scored": 9,
+    "calibration_score_rows_recomputed": 57735,
+    "runner_rows_checked": 52236,
+    "race_metric_rows_checked": 5337,
+    "six_combination_rows_checked": 32022,
+    "r1_replay_original_match": true
+  },
+  "group_and_interval_checks": {
+    "race_group_summaries": 36,
+    "race_paired_bootstrap_rows": 324,
+    "runner_group_summaries": 72,
+    "runner_paired_bootstrap_rows": 144,
+    "calibration_bins": 27
+  },
+  "operating_467_checks": {
+    "operating_common_races": 467,
+    "operating_common_runner_rows_per_variant": 4475,
+    "operating_common_ticket_rows_per_variant": 2802,
+    "operating_race_metric_rows": 1868,
+    "operating_runner_rows": 17900
+  },
+  "sequential_gate_interpretation": {
+    "F1_vs_R1": {
+      "comparison": "F1-R1",
+      "metrics": {
+        "log_loss": {
+          "delta": -0.0110387178028348,
+          "lo": -0.0134099648232551,
+          "hi": -0.0087709704707712
+        },
+        "brier": {
+          "delta": -0.0043284706061484,
+          "lo": -0.0053412155368745,
+          "hi": -0.0033777942069274
+        }
+      },
+      "both_point_estimates_lower": true,
+      "at_least_one_95pct_interval_below_zero": true,
+      "passed": true
+    },
+    "F2_vs_F1": {
+      "comparison": "F2-F1",
+      "metrics": {
+        "log_loss": {
+          "delta": -0.0003007258110591,
+          "lo": -0.0007291073795102,
+          "hi": 0.0001386112277556
+        },
+        "brier": {
+          "delta": -0.0001750778026985,
+          "lo": -0.0003609174723114,
+          "hi": 1.2827180295136162e-05
+        }
+      },
+      "both_point_estimates_lower": true,
+      "at_least_one_95pct_interval_below_zero": false,
+      "passed": false
+    },
+    "F2_sequential_research_candidate": false,
+    "F2_vs_R1_is_auxiliary_only": true,
+    "interpretation": "retrospective research-candidate gate; not independent future validation or operational promotion"
+  },
+  "hash_checks": {
+    "protected_files": 4,
+    "reference_files": 46,
+    "prepared_artifacts": 8,
+    "pre_addendum_contract_locked": 1,
+    "supervisor_addendum_locked": 1
+  },
+  "database_changed": false,
+  "production_changed": false,
+  "evaluation_is_independent_future_validation": false,
+  "candidate_final_verification_present": true
+}

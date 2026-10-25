@@ -1,0 +1,183 @@
+{
+  "review_date": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "scope": "Read-only forensics for jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3",
+  "database_or_existing_backup_modified": false,
+  "conclusion": {
+    "original_file_status": "confirmed_deleted_after_existing",
+    "exact_restore_candidate_found_in_inspected_accessible_locations": false,
+    "exact_restore_candidate_conclusion": "Not found in inspected readable project and mounted-volume paths. Protected locations remain unverified; this is not proof that no protected or remote copy exists.",
+    "replacement_candidate": "jeju/research/20261017_core_refresh/rolling_backups/20261017T220226_4747d5bd/jeju_native_core.sqlite3",
+    "replacement_is_fixed_baseline": false
+  },
+  "deletion_record": {
+    "receipt_path": "reports/storage_review_20261017/db_copy_deletion_receipt.json",
+    "receipt_sha256": "829e4ea13b81d1ac58689e684b54224fcb078f11fe59ea087bb0780220defd1d",
+    "receipt_entry_lines": [145, 153],
+    "receipt_file_sha256_is_hash_of": "The deletion receipt JSON file, not the deleted database.",
+    "started_at_kst": "2026-10-17T19:16:12.728633+09:00",
+    "finished_at_kst": "2026-10-17T19:16:39.989615+09:00",
+    "scope": "Five thoroughbred backup DB files and six completed Jeju backup/staging/baseline DB files only",
+    "deleted_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3",
+    "deleted_logical_bytes": 1912885248,
+    "deleted_allocated_bytes": 1913241600,
+    "deleted_inode": 98979541,
+    "deleted_database_sha256_as_recorded": "1de4756d4cb8824706d803097fc5b99c93c4324524fcef0a6db77bcc4fa87035",
+    "status": "deleted",
+    "exists_after": false,
+    "instruction_or_actor_recorded": false
+  },
+  "supporting_records": {
+    "cleanup_pointer": {
+      "path": "jeju/maintenance/db_copy_cleanup_20261017.json",
+      "sha256": "7e2a2eb0bda3b83f835904cdb052acccc9af9296b757a62348b5127facdc29cc",
+      "target_path_line": 15
+    },
+    "fixed_baseline_pair_manifest": {
+      "path": "jeju/research/20261017_core_refresh/baseline/pair_manifest.json",
+      "file_sha256": "055f270ffbb17121b6f33fa71cc5774a5b9d94975d8485c716cf7e9ec0a8c165",
+      "expected_database_sha256": "1de4756d4cb8824706d803097fc5b99c93c4324524fcef0a6db77bcc4fa87035",
+      "expected_database_bytes": 1912885248
+    },
+    "baseline_directory_observation": {
+      "directory": "jeju/research/20261017_core_refresh/baseline",
+      "database_file_present": false,
+      "remaining_files": [
+        {"name": "baseline_manifest.json", "bytes": 67475, "mtime_kst": "2026-10-17T01:28:35+09:00"},
+        {"name": "jeju_native_core.build_manifest.json", "bytes": 9529, "mtime_kst": "2026-10-17T01:28:31+09:00"},
+        {"name": "pair_manifest.json", "bytes": 442, "mtime_kst": "2026-10-17T02:07:27+09:00"}
+      ],
+      "directory_mtime_kst": "2026-10-17T19:16:40+09:00"
+    },
+    "refresh_code": {
+      "path": "jeju/refresh/run.py",
+      "backup_creation_lines": [30, 39],
+      "rolling_backup_prune_and_frozen_baseline_retention_lines": [108, 115]
+    },
+    "refresh_application_manifest": {
+      "path": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/application_manifest.json",
+      "relevant_lines": [554, 557],
+      "database_bytes_before": 1980116992,
+      "database_bytes_after": 1985990656,
+      "database_sha256_after": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f"
+    },
+    "git_exclusion": {
+      "path": "jeju/.gitignore",
+      "line": 6,
+      "rule": "*.sqlite3",
+      "git_check_ignore_output": "jeju/.gitignore:6:*.sqlite3"
+    },
+    "current_verification": {
+      "path": "jeju/research/20261017_core_refresh/verification/production_verification_final.json",
+      "ok": true,
+      "failure_count": 0,
+      "interpretation": "The baseline was used in a successful verification before its later cleanup deletion."
+    },
+    "canceled_trial_record": {
+      "path": "jeju/research/20261017_core_refresh/manual_run/canceled_trial.json",
+      "status": "canceled_before_production",
+      "frozen_baseline_preserved_at_trial_record_time": true,
+      "interpretation": "This earlier trial record predates the later deletion receipt."
+    }
+  },
+  "searches": [
+    {
+      "command": "find jeju -type f -size 1912885248c -print",
+      "scope": "All files under the Jeju project; exact logical byte size only.",
+      "result": "No paths printed.",
+      "exit_code": 0,
+      "permission_notes": "No error was reported for this project-scoped query."
+    },
+    {
+      "command": "if [ -d /Users/kimyongjin/.Trash ]; then find /Users/kimyongjin/.Trash -type f \\( -size 1912885248c -o -iname '*jeju*native*core*' -o -iname '*20261017*core*' \\) -print; else echo 'Trash directory unavailable'; fi",
+      "scope": "Trash files matching exact size or targeted Jeju/core-refresh names.",
+      "result": "Inspection denied: find: /Users/kimyongjin/.Trash: Operation not permitted.",
+      "exit_code": 1,
+      "permission_notes": "Trash contents were not inspected; no absence claim is made. The parent agent retried this same targeted query with elevated access; macOS again returned Operation not permitted, exit 1. This is an OS permission denial, not an automatic approval rejection."
+    },
+    {
+      "command": "find /Volumes -type f -size 1912885248c -print",
+      "scope": "Files on mounted volumes with the exact logical byte size.",
+      "result": "No paths printed.",
+      "exit_code": 0,
+      "permission_notes": "No permission error was reported in this exact-size query."
+    },
+    {
+      "command": "tmutil listlocalsnapshots /",
+      "scope": "Local snapshots for the root disk.",
+      "result": "Output was 'Snapshots for disk /:' with no snapshot entries.",
+      "exit_code": 0,
+      "permission_notes": "Command completed successfully."
+    },
+    {
+      "command": "tmutil destinationinfo",
+      "scope": "Configured Time Machine destinations.",
+      "result": "tmutil reported: No destinations configured.",
+      "exit_code": null,
+      "permission_notes": "No destination was available for a Time Machine copy search."
+    },
+    {
+      "command": "lsof -nP +L1 2>/dev/null | awk 'index($0,\"jeju_native_core.sqlite3\") || index($0,\"98979541\")' | head -20",
+      "scope": "Open-but-deleted files matching the target filename or recorded inode.",
+      "result": "No matching rows printed.",
+      "exit_code": 0,
+      "permission_notes": "No matching deleted descriptor was found; stderr from lsof was suppressed."
+    },
+    {
+      "command": "find /Users/kimyongjin -type f -size 1912885248c -print 2>/dev/null",
+      "scope": "Exact-size files under the user home directory.",
+      "result": "No stdout paths; command exited nonzero.",
+      "exit_code": 1,
+      "permission_notes": "Stderr was suppressed, so the failing path/reason is unknown. Treat the home-wide search as incomplete and do not infer that inaccessible files contain no candidate."
+    },
+    {
+      "command": "find jeju/research/20261017_core_refresh jeju/research/20261017_older_training_rider_completion jeju/data jeju/maintenance -type f \\( -iname '*.zip' -o -iname '*.tar' -o -iname '*.tgz' -o -iname '*.gz' -o -iname '*.zst' -o -iname '*.bz2' -o -iname '*.xz' -o -iname '*.7z' -o -iname '*.sqlite3' -o -iname '*.db' \\) -print | head -260",
+      "scope": "Named archive/database files in core-refresh, older-completion, Jeju data, and maintenance directories.",
+      "result": "Only the rolling backup, before_older_completion database, and live database were listed; no compressed archive was listed.",
+      "exit_code": null,
+      "permission_notes": "The command used a bounded project path set; it was not a whole-home archive inventory."
+    },
+    {
+      "command": "git check-ignore -v jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3; git ls-files --stage -- jeju/research/20261017_core_refresh/baseline; git log --all --oneline -- jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3 jeju/research/20261017_core_refresh/baseline",
+      "scope": "Git ignore rule, index, and history for the baseline path.",
+      "result": "Ignore rule reported as jeju/.gitignore:6:*.sqlite3; no index or history entries were printed.",
+      "exit_code": null,
+      "permission_notes": "The path is excluded from Git; Git history cannot supply the file."
+    }
+  ],
+  "replacement_candidate_validation": {
+    "path": "jeju/research/20261017_core_refresh/rolling_backups/20261017T220226_4747d5bd/jeju_native_core.sqlite3",
+    "bytes": 1980116992,
+    "sha256_actual_single_pass": "3382a2ed783493b18741482409b1d2c3229af23320b056568e1fe08a3a4fc79d",
+    "sha256_pair_manifest": "3382a2ed783493b18741482409b1d2c3229af23320b056568e1fe08a3a4fc79d",
+    "sha_matches_manifest": true,
+    "sqlite_quick_check": "ok",
+    "quick_check_result_count": 1,
+    "quick_check_elapsed_seconds": 1.3,
+    "captured_at_utc_from_pair_manifest": "2026-10-17T13:02:58.810742+00:00",
+    "source_database_sha256_from_pair_manifest": "9ca0c716fb65c0490f0b03710b118a4af90994b2e79bcf3f52b0bd26afec42cc",
+    "interpretation": "Validated latest pre-refresh backup candidate; database state and size differ from the fixed baseline."
+  },
+  "logical_comparison": {
+    "candidate": "jeju/research/20261017_older_training_rider_completion/before_older_completion.sqlite3",
+    "mode": "SQLite opened with mode=ro; table row counts only",
+    "baseline_manifest_tables_compared": 35,
+    "baseline_tables_missing_from_candidate": 0,
+    "table_row_count_mismatches": 15,
+    "extra_tables_in_candidate": 8,
+    "examples": [
+      {"table": "source_artifacts", "baseline_rows": 4891, "candidate_rows": 5049},
+      {"table": "api_records", "baseline_rows": 273506, "candidate_rows": 282178},
+      {"table": "race_result_rows", "baseline_rows": 191604, "candidate_rows": 191999},
+      {"table": "daily_training_api_rows", "baseline_rows": 908316, "candidate_rows": 912913}
+    ],
+    "interpretation": "Reversing rider-classification updates alone would not restore baseline table contents or counts. No reconstruction was attempted."
+  },
+  "limits": [
+    "The Trash is inaccessible under current permissions.",
+    "The home-wide exact-size search exited 1 with stderr suppressed, so unreadable directories may not have been searched.",
+    "No Codex session logs were searched; the cleanup receipt does not record the execution command or initiator.",
+    "No remote or cloud backup inventory was performed.",
+    "Exact-source recovery is not proven impossible outside the inspected accessible paths."
+  ]
+}

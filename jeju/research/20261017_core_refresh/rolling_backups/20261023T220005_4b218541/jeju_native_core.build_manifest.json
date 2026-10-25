@@ -1,0 +1,280 @@
+{
+  "database": "jeju/data/jeju_native_core.sqlite3",
+  "race_result_rows_all_meet_2": 191786,
+  "race_rows_rank_prefix_je_candidates_not_confirmed": 92414,
+  "running_trial_rows_all_meet_2": 34377,
+  "running_trial_rows_api_majong_jeju": 15738,
+  "quarantined_provenance_issues": 1,
+  "source_artifacts": 80,
+  "api_raw_records": 226163,
+  "coverage_rows": 52,
+  "by_source_year": {
+    "race_results": {
+      "2002": 8545,
+      "2003": 8279,
+      "2004": 8307,
+      "2005": 7705,
+      "2006": 8015,
+      "2007": 8534,
+      "2008": 8543,
+      "2009": 8395,
+      "2010": 8083,
+      "2011": 8063,
+      "2012": 8437,
+      "2013": 8009,
+      "2014": 8079,
+      "2015": 7866,
+      "2016": 8199,
+      "2017": 8067,
+      "2018": 8134,
+      "2019": 8108,
+      "2020": 4619,
+      "2021": 6154,
+      "2022": 7103,
+      "2023": 7086,
+      "2024": 6903,
+      "2025": 7071,
+      "2026": 5482
+    },
+    "running_trials": {
+      "2000": 1279,
+      "2001": 1259,
+      "2002": 1310,
+      "2003": 1157,
+      "2004": 1183,
+      "2005": 1167,
+      "2006": 1212,
+      "2007": 1207,
+      "2008": 1208,
+      "2009": 1215,
+      "2010": 1131,
+      "2011": 1237,
+      "2012": 1315,
+      "2013": 1372,
+      "2014": 1452,
+      "2015": 1486,
+      "2016": 1478,
+      "2017": 1450,
+      "2018": 1378,
+      "2019": 1493,
+      "2020": 1482,
+      "2021": 1085,
+      "2022": 1022,
+      "2023": 1165,
+      "2024": 1224,
+      "2025": 1438,
+      "2026": 972
+    }
+  },
+  "breed_status_counts": {
+    "race_results": {
+      "api_cross_reference_candidate": 66153,
+      "program_rule_candidate": 26542,
+      "unresolved": 99091
+    },
+    "running_trials": {
+      "api_native_label": 15738,
+      "api_non_native_label": 18638,
+      "conflict": 1
+    }
+  },
+  "rank_candidate_api20_cross_reference": {
+    "candidate_definition": "race_result_rows.rank_class_raw starts with 제; this is an API rank-class candidate, not confirmed breed",
+    "candidate_rows": 92414,
+    "candidate_horse_ids": 4006,
+    "disjoint_event_time_categories": {
+      "api20_jeju_observed_on_or_before_race": {
+        "candidate_rows": 92414,
+        "distinct_horse_ids": 4006
+      },
+      "multiple_api20_labels_possible_temporal_or_id_conflict": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      },
+      "api20_jeju_observed_only_after_race": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      },
+      "api20_non_jeju_label_only": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      },
+      "no_same_id_api20_breed_observation": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      }
+    },
+    "overlapping_api20_evidence_counts": {
+      "with_any_api20_jeju_observation_rows": {
+        "candidate_rows": 92414,
+        "distinct_horse_ids": 4006
+      },
+      "with_api20_jeju_observation_on_or_before_rows": {
+        "candidate_rows": 92414,
+        "distinct_horse_ids": 4006
+      },
+      "with_api20_jeju_future_only_rows": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      },
+      "with_api20_non_jeju_observation_rows": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      },
+      "with_api20_jeju_and_non_jeju_observations_rows": {
+        "candidate_rows": 0,
+        "distinct_horse_ids": 0
+      }
+    },
+    "interpretation": "API20 majong is an event-date observation. Observations after a race are not retroactive proof. Multiple labels and non-Jeju labels are review flags; they do not automatically remove a race candidate."
+  },
+  "race_population_candidate_summary": {
+    "rank_prefix_candidate_population": {
+      "rows": 92414,
+      "distinct_horse_ids": 4006,
+      "distinct_races": 9445
+    },
+    "additional_api20_prior_jeju_cross_reference_rows_without_rank_prefix": {
+      "rows": 281,
+      "distinct_horse_ids": 197,
+      "distinct_races": 68
+    },
+    "additional_cross_reference_rows_by_year": {
+      "2002": 21,
+      "2003": 36,
+      "2004": 8,
+      "2006": 26,
+      "2007": 17,
+      "2008": 30,
+      "2009": 57,
+      "2010": 28,
+      "2012": 58
+    },
+    "candidate_view_union": {
+      "rows": 92695,
+      "distinct_horse_ids": 4006,
+      "distinct_races": 9513
+    },
+    "additional_cross_reference_race_population_detail": {
+      "races_with_additional_cross_reference": 68,
+      "all_api4_3_entry_rows_inside_those_races": 609,
+      "races_where_every_api4_3_entry_is_an_additional_cross_reference_candidate": 24,
+      "note": "The added 68 races include mixed/partial entry populations. The 281 added candidate rows do not make all entrants or the full race confirmed Jeju horses."
+    },
+    "api20_event_time_support_for_view": {
+      "candidate_rows_with_same_id_majong_jeju_observed_on_or_before_race": 92695,
+      "distinct_horse_ids": 4006,
+      "candidate_rows_with_non_jeju_api20_observation": 0,
+      "distinct_horse_ids_with_non_jeju_api20_observation": 0,
+      "candidate_rows_with_multiple_api20_labels_for_same_id": 0,
+      "distinct_horse_ids_with_multiple_api20_labels": 0,
+      "note": "API20 observations support cross-reference candidates only. They do not alone prove breed validity for every historical race date."
+    }
+  },
+  "open_provenance_issue_counts": {},
+  "quarantined_issue_counts": {
+    "breed_label_conflict": 1
+  },
+  "created_at_utc": "2026-09-29T14:13:18.940275+00:00",
+  "phase2_or_operational_db_used_as_input": false,
+  "integrity_verification": {
+    "sqlite_integrity_check": "ok",
+    "foreign_key_violation_count": 0,
+    "source_artifact_sha256_checked": 80,
+    "source_artifact_sha256_mismatch_count": 0,
+    "source_artifact_sha256_mismatches": [],
+    "database_sha256": "6196f332981f8fbc5008fe0e538ad75ae0189cf348246e81b6674fd772e408aa"
+  },
+  "medical_api_load_20261002": {
+    "status": "loaded_and_independently_verified",
+    "verified_at_utc": "2026-10-02T05:26:14.659703+00:00",
+    "database": "jeju/data/jeju_native_core.sqlite3",
+    "database_sha256": "b87f2a38690bd9b9f0ed5a0b68a1253736ee477d4261335abd6eb49d8d7c31d5",
+    "before_production_file_sha256": "34dad9cb2e707625c77056518ecb111582189279146bf6b364ad868dc85dce64",
+    "backup_database": "root/before_load.sqlite3",
+    "backup_sha256": "aa79adddb21787e648ee442127ec5e4881087e86e985e9efc359a5806ba06d8f",
+    "backup_build_manifest": "root/before_load.build_manifest.json",
+    "backup_manifest_sha256": "73660086936843318d8d00f17e5909a4cefa83cdff532796f6f2bbcf747e0cbd",
+    "medical_rows": 12030,
+    "medical_horses": 944,
+    "analysis_rows": 11991,
+    "analysis_horses": 939,
+    "analysis_cutoff": "2026-09-19",
+    "raw_after_cutoff": 39,
+    "current_profile_population": 4718,
+    "new_profiles": 81,
+    "existing_tables_preserved": 16,
+    "model_input_adoption": false,
+    "history_completeness": "unconfirmed",
+    "historical_publication_time": "unconfirmed",
+    "txt_medical_rows_loaded": 0,
+    "table_counts": {
+      "schema_metadata": 25,
+      "source_artifacts": 4891,
+      "collection_coverage": 77,
+      "api_records": 273506,
+      "race_result_rows": 191604,
+      "running_trial_rows": 34375,
+      "breed_evidence": 39093,
+      "supplemental_facts": 4,
+      "provenance_issues": 2,
+      "api303_corner_rank_rows": 19933,
+      "horse_profile_observations": 4718,
+      "website_training_artifacts": 2529,
+      "starting_training_website_rows": 295470,
+      "daily_training_api_artifacts": 337,
+      "daily_training_api_rows": 908316,
+      "starting_exam_api_rows": 10664,
+      "medical_api33_source_rows": 3523,
+      "medical_api33_terms": 3511,
+      "medical_phrase_decisions": 5397,
+      "medical_phrase_components": 9113,
+      "medical_explanation_observations": 145,
+      "medical_explanation_terms": 119,
+      "medical_api16_year_coverage": 25,
+      "medical_api16_page_ledger": 32,
+      "medical_api16_load_metadata": 14,
+      "medical_api_rows": 12030,
+      "medical_api_diagnosis_slots": 24060,
+      "medical_dictionary_output_hashes": 6,
+      "medical_dictionary_metadata": 7
+    },
+    "verification_reports": [
+      "root_production_source_verification.json",
+      "root_production_profiles_dictionary_verification.json",
+      "root_production_existing_data_verification.json"
+    ]
+  },
+  "current_table_counts_after_medical_load_20261002": {
+    "schema_metadata": 25,
+    "source_artifacts": 4891,
+    "collection_coverage": 77,
+    "api_records": 273506,
+    "race_result_rows": 191604,
+    "running_trial_rows": 34375,
+    "breed_evidence": 39093,
+    "supplemental_facts": 4,
+    "provenance_issues": 2,
+    "api303_corner_rank_rows": 19933,
+    "horse_profile_observations": 4718,
+    "website_training_artifacts": 2529,
+    "starting_training_website_rows": 295470,
+    "daily_training_api_artifacts": 337,
+    "daily_training_api_rows": 908316,
+    "starting_exam_api_rows": 10664,
+    "medical_api33_source_rows": 3523,
+    "medical_api33_terms": 3511,
+    "medical_phrase_decisions": 5397,
+    "medical_phrase_components": 9113,
+    "medical_explanation_observations": 145,
+    "medical_explanation_terms": 119,
+    "medical_api16_year_coverage": 25,
+    "medical_api16_page_ledger": 32,
+    "medical_api16_load_metadata": 14,
+    "medical_api_rows": 12030,
+    "medical_api_diagnosis_slots": 24060,
+    "medical_dictionary_output_hashes": 6,
+    "medical_dictionary_metadata": 7
+  },
+  "original_build_fields_note": "Original 2026-09-29 build fields are historical; subsequent load sections and current table counts describe the active DB."
+}

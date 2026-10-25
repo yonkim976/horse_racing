@@ -1,0 +1,102 @@
+{
+  "study": "F1 to F1_STYLE6 probability and canonical six gap review",
+  "status": "independent saved-score reconstruction, A-output comparison, and central topic publication complete",
+  "inputs": {
+    "approved_plan_sha256": "09cb2d20554f2f98a7f9aeaef21b722f86e544e46e904d1b7d80278ab086d4d4",
+    "approved_data_contract_sha256": "7ea6ba197c76e1f83dd73e3dc84939704261695733e93b55dfbb45539d3c018d",
+    "prepared_lock_sha256": "f110b33b0442e519fd3f9852098aa847af90d2228af674c39db4914142675e24",
+    "artifact_manifest_sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e"
+  },
+  "review_memo_sha256": "7cf111166b527c2277dec62279cd176d9c9fc1386710cff738231371c9d0fefb",
+  "independent_recompute_sha256": "f4eac40a1f9cabcf8ae4de6cf4829ba8a723c8e3d98644154924c9bc20943fe3",
+  "outputs": {
+    "outputs/all_triples.parquet": {
+      "bytes": 13395134,
+      "sha256": "773fb08662ae9a80f0fcfa5a479d388893ecdcd64850346693941460625c1415"
+    },
+    "outputs/decomposition_summaries.csv": {
+      "bytes": 47577,
+      "sha256": "35d3626e3c4c5b1e7581c830e3f5b75aac84ac1420fdee65d80586471c60a3c4"
+    },
+    "outputs/independent_verification.json": {
+      "bytes": 52896,
+      "sha256": "21097696799f15e1c9ad1eb7256b29ddb8c56ed301d698f7097dc07a3fd42e14"
+    },
+    "outputs/loss_contribution_cross_strata.csv": {
+      "bytes": 294968,
+      "sha256": "757b885a8ba543efe9f545cae21c2d66e95a6bc7b14e39e77d32f766279c3861"
+    },
+    "outputs/loss_vs_ticket_change_cross.csv": {
+      "bytes": 119094,
+      "sha256": "51a62761901d7ca20e8bfe4cd5a94d52a27decfd9c25c605389309db37e1dff6"
+    },
+    "outputs/metric_summaries.csv": {
+      "bytes": 9662,
+      "sha256": "388fcb501c31c72cc07375499508e6549aa12dba427aa8ebdd48524c46fb8eaa"
+    },
+    "outputs/paired_date_bootstrap.csv": {
+      "bytes": 23104,
+      "sha256": "173edf62e75bb179a56a0a7fdd0905177d2a069789f536c00f2f112d46de9ac3"
+    },
+    "outputs/race_diagnostics.parquet": {
+      "bytes": 499467,
+      "sha256": "11a94061dc75d3a64c700171aba08e7377ada42ceb5291bb512c1f998dcc00d4"
+    },
+    "outputs/rank_hit_extra_bootstrap.csv": {
+      "bytes": 2788,
+      "sha256": "a3ae004b31b50919c0b4ef9c1e59f5916419fcc6b703ecd099b18e9ab11908ac"
+    },
+    "outputs/runner_loss_contributions.csv": {
+      "bytes": 1409,
+      "sha256": "c803fda6352da994d348820c6e4e7588a129c3b51736fc49ffb0bec4d99d882b"
+    },
+    "outputs/six_mass_reliability.csv": {
+      "bytes": 988,
+      "sha256": "f9ac917994089e7760a21172dbd9b22a35f656df40691a4532d0429c9c9a017f"
+    },
+    "outputs/ticket_and_union_decomposition.csv": {
+      "bytes": 499371,
+      "sha256": "c16fe72602ea8390ee743a318871cbbb6d1c29cfd4e4821edadff90cd77f7a63"
+    },
+    "outputs/ticket_change_loss_cross.csv": {
+      "bytes": 318,
+      "sha256": "70538bec01b18b48df8d787f68f4317e307e44b8883b15d70a09c9ffac9f4fcf"
+    }
+  },
+  "review_results_sha256": "67af7f5854e4214e2164e80d9683ebe76dbf3c90213dd172dfc4b7c7e41b9cac",
+  "fit_calls": 0,
+  "tau_optimization_calls": 0,
+  "database_queries": 0,
+  "independent_compare_to_A_sha256": "1700a64851669ddb5d0e2e8d02073df62be3fc1e2a6c80ac11db3872a89dd585",
+  "independent_A_comparison_receipt": {
+    "path": "independent_A_comparison_final.json",
+    "sha256": "e34254a30aaafb445de38bf65880b615a504e080f9dd35e5ec5c97de8ddbae45",
+    "note": "Hash-addresses compared A raw artifacts; intentionally excludes A output-manifest hash to avoid a cross-manifest hash cycle."
+  },
+  "pre_freeze_A_comparison_receipt": {
+    "path": "independent_A_comparison_pre_freeze.json",
+    "sha256": "ea2a95b7e7e4fc8e7861862061c6fca4caad56eda277c3270892b1062e8dadb0",
+    "note": "Pre-freeze comparison used the then-current A manifest hash. Superseded by the final raw-artifact comparison receipt."
+  },
+  "execution_history_note": "First attempt partial output directory was removed before receiving the instruction to preserve it; a final full rerun from unchanged locked inputs completed. See outputs/independent_verification.json.",
+  "prepublication_snapshot": {
+    "manifest_path": "prepublication_snapshot/snapshot_manifest.json",
+    "manifest_sha256": "0a3f51aa3fe74a6b4a8daed56ba12a5a514c2530f2914c1e2c4bd4b557f627c4",
+    "central_files_snapshotted": 5,
+    "purpose": "preserve central publication indexes and prior topic 17 before authorized topic 18 update"
+  },
+  "central_publication": {
+    "topic_path": "jeju/research/conclusions/18_PROBABILITY_COMBO_GAP.md",
+    "receipt_path": "central_publication_receipt.json",
+    "receipt_sha256": "a5ea42aa4b9d748c12540c5eb84295e55003960bed6fd2e1c5c409be9080d0e1",
+    "source_manifest_rows_after": 1183,
+    "new_scoped_rows_added": 44,
+    "local_links_checked": 126,
+    "local_link_failures": 0,
+    "source_manifest_self_hash_excluded": true,
+    "receipt_self_hash_excluded": true,
+    "publication_receipt_hash_in_source_manifest": true,
+    "publication_receipt_hash_in_source_manifest_excluded": false,
+    "source_manifest_post_publication_hash_excluded_from_receipt": true
+  }
+}

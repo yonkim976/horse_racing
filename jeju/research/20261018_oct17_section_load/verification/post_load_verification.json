@@ -1,0 +1,599 @@
+{
+  "passed": true,
+  "source": {
+    "source_checks_passed": true,
+    "parser": "Python standard-library HTMLParser + json; no network calls",
+    "database_access": "none during source-only phase",
+    "api_sources": {
+      "section_records": {
+        "path": "research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+        "sha256_actual": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+        "sha256_expected": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+        "records": 7,
+        "races": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "corner_rank": {
+        "path": "research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+        "sha256_actual": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+        "sha256_expected": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+        "records": 7,
+        "races": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "website_pages_checked": 7,
+    "official_runner_rows": 69,
+    "api6_section_points": 39,
+    "api6_interval_time_matches": 39,
+    "api6_cumulative_time_matches": 39,
+    "api6_distance_matches": 33,
+    "api6_distance_disagreement_rows": [
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 1,
+        "api_field": "dist_1f",
+        "api_raw": 100,
+        "website_raw": "110"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 2,
+        "api_field": "dist_2f",
+        "api_raw": 300,
+        "website_raw": "310"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 3,
+        "api_field": "dist_3f",
+        "api_raw": 500,
+        "website_raw": "510"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 4,
+        "api_field": "dist_4f",
+        "api_raw": 700,
+        "website_raw": "710"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 5,
+        "api_field": "dist_5f",
+        "api_raw": 900,
+        "website_raw": "910"
+      },
+      {
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "furlong_index": 6,
+        "api_field": "dist_6f",
+        "api_raw": 1100,
+        "website_raw": "1110"
+      }
+    ],
+    "group_fields_compared": {
+      "section_records": 42,
+      "corner_rank": 42
+    },
+    "nonempty_group_values_matching": {
+      "section_records": 29,
+      "corner_rank": 29
+    },
+    "races": [
+      {
+        "race_number": 1,
+        "website_sha256_actual": "b609c7e3e107a611282f11a5d32a5255070b02e66ed92a881be454a6e03e839f",
+        "website_sha256_expected": "b609c7e3e107a611282f11a5d32a5255070b02e66ed92a881be454a6e03e839f",
+        "website_runners": 10,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_race_distance_m": 900,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 2,
+        "website_sha256_actual": "e95be063b7f3b89fb76bff01195cff53e89885c88fcdb417b3e7e91e138f45bd",
+        "website_sha256_expected": "e95be063b7f3b89fb76bff01195cff53e89885c88fcdb417b3e7e91e138f45bd",
+        "website_runners": 10,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900
+        ],
+        "api6_race_distance_m": 900,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 3,
+        "website_sha256_actual": "1c863aee859a9ff15c47023ca979ab3f2a55ad7c8c8342d7be93ae3edab2c3ee",
+        "website_sha256_expected": "1c863aee859a9ff15c47023ca979ab3f2a55ad7c8c8342d7be93ae3edab2c3ee",
+        "website_runners": 10,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_race_distance_m": 1000,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 4,
+        "website_sha256_actual": "9355de27247f64c714dad10e7729e78666718107d8fd70801b95505bf28a5bdd",
+        "website_sha256_expected": "9355de27247f64c714dad10e7729e78666718107d8fd70801b95505bf28a5bdd",
+        "website_runners": 9,
+        "official_sections": 5,
+        "api6_interval_points_match": 5,
+        "api6_cumulative_points_match": 5,
+        "api6_distance_points_match": 5,
+        "official_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000
+        ],
+        "api6_race_distance_m": 1000,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 5,
+        "website_sha256_actual": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+        "website_sha256_expected": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+        "website_runners": 10,
+        "official_sections": 6,
+        "api6_interval_points_match": 6,
+        "api6_cumulative_points_match": 6,
+        "api6_distance_points_match": 0,
+        "official_distances_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "api6_race_distance_m": 1110,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 6,
+        "website_sha256_actual": "71cdf5e00002c5aa3d43967af486fbc9e7947b93dd65b9915e9696c427a26698",
+        "website_sha256_expected": "71cdf5e00002c5aa3d43967af486fbc9e7947b93dd65b9915e9696c427a26698",
+        "website_runners": 10,
+        "official_sections": 6,
+        "api6_interval_points_match": 6,
+        "api6_cumulative_points_match": 6,
+        "api6_distance_points_match": 6,
+        "official_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200
+        ],
+        "api6_distances_m": [
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200
+        ],
+        "api6_race_distance_m": 1200,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 4
+          }
+        }
+      },
+      {
+        "race_number": 7,
+        "website_sha256_actual": "5841cbcb1b99fef4a585e9bd34c31745a36bdce8ffc4b9be6f4977a037dece67",
+        "website_sha256_expected": "5841cbcb1b99fef4a585e9bd34c31745a36bdce8ffc4b9be6f4977a037dece67",
+        "website_runners": 10,
+        "official_sections": 7,
+        "api6_interval_points_match": 7,
+        "api6_cumulative_points_match": 7,
+        "api6_distance_points_match": 7,
+        "official_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100,
+          1300
+        ],
+        "api6_distances_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100,
+          1300
+        ],
+        "api6_race_distance_m": 1300,
+        "group_checks": {
+          "section_records": {
+            "points_compared": 6,
+            "nonempty_points": 5
+          },
+          "corner_rank": {
+            "points_compared": 6,
+            "nonempty_points": 5
+          }
+        }
+      }
+    ]
+  },
+  "database": {
+    "database_checks_passed": true,
+    "db_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+    "db_open_mode": "mode=ro/query_only",
+    "existing_api4_rows": 69,
+    "official_id_number_finish_matches": 69,
+    "loaded_api6_rows": {
+      "rows": 7,
+      "single_source_artifact_id": 5195,
+      "exact_json_and_page_provenance": [
+        {
+          "race_number": 1,
+          "api_record_id": 285780,
+          "payload_sha256": "5a2c676267cc582fec1376ff453bfbc18c83dbc4367d8bf2ce812ae976d1db0b",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 1
+        },
+        {
+          "race_number": 2,
+          "api_record_id": 285781,
+          "payload_sha256": "ca55f7f49e48060d7300fe321b0a2afd3488891d751f6bfba11ba7f030c7c595",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 2
+        },
+        {
+          "race_number": 3,
+          "api_record_id": 285782,
+          "payload_sha256": "d5a805c1e7f0bb05e69356981052a541f0d95b9924682dda8f5c8a0cf5e5fab6",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 3
+        },
+        {
+          "race_number": 4,
+          "api_record_id": 285783,
+          "payload_sha256": "31e61e594c8a85c8e152e6f1609e1bb1ca5a902278cc246059880a844deb7ee8",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 4
+        },
+        {
+          "race_number": 5,
+          "api_record_id": 285784,
+          "payload_sha256": "e750d9700ddcdb5b3e2575f7c9e1391221cfa89b4f9be8c222b47bdf834aefd9",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 5
+        },
+        {
+          "race_number": 6,
+          "api_record_id": 285785,
+          "payload_sha256": "f19699ff65f75c8aa9a816c07a9caaf262244f7747417085803ca31f5e0608d4",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 6
+        },
+        {
+          "race_number": 7,
+          "api_record_id": 285786,
+          "payload_sha256": "557826d94bfead759cc4d85cb67ff6f0ef767fb746d1502e469984e266777742",
+          "page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+          "record_index": 7
+        }
+      ]
+    },
+    "loaded_api303_rows": {
+      "rows": 7,
+      "single_source_artifact_id": 5194,
+      "exact_json_and_page_provenance": [
+        {
+          "race_number": 1,
+          "api_record_id": 285773,
+          "payload_sha256": "2698df15cb8319da6427010ef9ecaa2f2c85b8cf59d17c9795c79c1513762a53",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 1
+        },
+        {
+          "race_number": 2,
+          "api_record_id": 285774,
+          "payload_sha256": "e667a34039d4f05237583e619fa6ae4e20c76e161adff8418a2b6f709cedc19f",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 2
+        },
+        {
+          "race_number": 3,
+          "api_record_id": 285775,
+          "payload_sha256": "5281f7d96bdf94a5c0493a9b6d7b9e161b03366fd3c02eef5ca3c9aafdbeeddb",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 3
+        },
+        {
+          "race_number": 4,
+          "api_record_id": 285776,
+          "payload_sha256": "7988ec6371573075ebaa8834b823d8c85a144e94c8b1ffbe7fb8797e4d21b140",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 4
+        },
+        {
+          "race_number": 5,
+          "api_record_id": 285777,
+          "payload_sha256": "e29987b9516fc20f8714290db89a16f0a45f8f8a685392e46acebfa995f15548",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 5
+        },
+        {
+          "race_number": 6,
+          "api_record_id": 285778,
+          "payload_sha256": "40dc07717ed630eb4628c4036a87a2e33fe53d0f9f98c6f5d06436af649cc8ad",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 6
+        },
+        {
+          "race_number": 7,
+          "api_record_id": 285779,
+          "payload_sha256": "7a7dade2a1120c4ea367bee9a4f2aa286f8069e67d52853ebae23a6873312728",
+          "page_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+          "raw_relative_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+          "record_index": 7
+        }
+      ]
+    },
+    "application_manifest": {
+      "path": "research/20261018_oct17_section_load/application_manifest.json",
+      "status": "applied_verified",
+      "plan_sha256": "ace8dd18f105bce3c6c92103805609c6805e56344bc748b056098cf69ce49978",
+      "database_sha256_before": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f",
+      "database_sha256_after": "940feb05de4b385e4e44c624644b955dc72b29852102a07a218a8786d6958f29",
+      "inserted_api6_rows": 7,
+      "inserted_api303_rows": 7
+    },
+    "guarded_view": {
+      "name": "api6_section_points_current",
+      "columns": [
+        "api_record_id",
+        "race_date",
+        "meet_code",
+        "race_number",
+        "payload_json",
+        "payload_sha256",
+        "source_artifact_id",
+        "record_index",
+        "collected_at_utc",
+        "artifact_sha256",
+        "raw_relative_path",
+        "furlong_index",
+        "race_distance_m_raw",
+        "api_distance_m_raw",
+        "api_distance_json_type",
+        "interval_time_raw",
+        "interval_time_json_type",
+        "cumulative_time_raw",
+        "cumulative_time_json_type",
+        "website_distance_m",
+        "website_url",
+        "website_relative_path",
+        "website_sha256",
+        "evidence_relative_path",
+        "evidence_sha256",
+        "distance_status",
+        "distance_m",
+        "interval_seconds",
+        "cumulative_seconds"
+      ],
+      "target_rows": 39,
+      "rows_checked_against_api_and_homepage": 39,
+      "r5_reviewed_distance_rows": [
+        {
+          "race_number": 5,
+          "furlong_index": 1,
+          "api_distance_m_raw": 100,
+          "distance_m": 110,
+          "distance_status": "website_corrected",
+          "interval_seconds": 10.5,
+          "cumulative_seconds": 10.5
+        },
+        {
+          "race_number": 5,
+          "furlong_index": 2,
+          "api_distance_m_raw": 300,
+          "distance_m": 310,
+          "distance_status": "website_corrected",
+          "interval_seconds": 15.5,
+          "cumulative_seconds": 26
+        },
+        {
+          "race_number": 5,
+          "furlong_index": 3,
+          "api_distance_m_raw": 500,
+          "distance_m": 510,
+          "distance_status": "website_corrected",
+          "interval_seconds": 17.2,
+          "cumulative_seconds": 43.2
+        },
+        {
+          "race_number": 5,
+          "furlong_index": 4,
+          "api_distance_m_raw": 700,
+          "distance_m": 710,
+          "distance_status": "website_corrected",
+          "interval_seconds": 16.5,
+          "cumulative_seconds": 59.7
+        },
+        {
+          "race_number": 5,
+          "furlong_index": 5,
+          "api_distance_m_raw": 900,
+          "distance_m": 910,
+          "distance_status": "website_corrected",
+          "interval_seconds": 15.7,
+          "cumulative_seconds": 75.4
+        },
+        {
+          "race_number": 5,
+          "furlong_index": 6,
+          "api_distance_m_raw": 1100,
+          "distance_m": 1110,
+          "distance_status": "website_corrected",
+          "interval_seconds": 16.1,
+          "cumulative_seconds": 91.5
+        }
+      ],
+      "other_api_positive_unreviewed_rows": 33,
+      "all_interval_and_cumulative_times_match_homepage": true
+    },
+    "distance_reviews": {
+      "rows": 6,
+      "source_bound_to_api_record_and_page": true,
+      "website_sha256": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+      "evidence_sha256": "92fed5cf0dea518d87d71cd6ffba0e4af09c7753b5641e8967f7530b31052566"
+    }
+  }
+}

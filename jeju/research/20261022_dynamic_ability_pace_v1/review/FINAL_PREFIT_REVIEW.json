@@ -1,0 +1,51 @@
+{
+  "status": "PASS_PREFIT_STATIC_REVIEW",
+  "execution_approval": false,
+  "blocking_findings": [],
+  "scope": "static review; no fit, forecast run, or real-outcome metric calculation",
+  "reviewed_artifacts": {
+    "experiment/dynamic_ability_pace.py": "706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c",
+    "experiment/test_dynamic_ability_pace.py": "9e6089f9c770c253da0d6229769ca48abc7a343bf4bcdd87d4a73cf6acab3ef9",
+    "code_bundle_sha256": "e374a0682a225cdfb06fd079f5e32514f618e3e7276643c88680afc10a131612",
+    "experiment/outputs/source_preflight.json": "1153cbda6b377db7f8c49c0e741122abf3c83d35957742d7161cbae3b695d179",
+    "inputs/input_manifest.json": "f5ad29d2c96cbfbc11c9d5ae9387f4de69bed2de87461b0b86167575b36657c7"
+  },
+  "preflight": {
+    "status": "PASS_STRUCTURAL_PREFLIGHT_NO_FIT_OR_METRICS",
+    "synthetic_check_count": 8,
+    "input_races": 5206,
+    "input_runners": 52155,
+    "evaluation_races": 1779,
+    "evaluation_runners": 17412,
+    "evaluation_dates": 269,
+    "pool_denominators": {
+      "WIN": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "EXA": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779
+    },
+    "PLC_unknown_opening_count_races": 36,
+    "phase_B_available_by_support": true,
+    "fitted": false,
+    "probabilities_computed": false,
+    "outcome_metrics_computed": false
+  },
+  "reviewed_contracts": [
+    "A/phase annual OOS cutoff and calibration boundaries",
+    "B gamma training through Y-2, temperature calibration on Y-1, and target forecast-q mixture",
+    "R same-provider raw-score calibration and exact evaluation-key join",
+    "seven-pool event identities, legal denominators, scoring, and selection ledgers",
+    "paired date-bootstrap gates and fit/evaluation approval guard"
+  ],
+  "nonblocking_limits": [
+    "Historical pool-offering and settlement status is not reconstructed for every race.",
+    "PLC opening N is unknown for actual fields of 5–7; actual N>=8 relies on the inherited no-post-opening-additions lower-bound assumption.",
+    "The study conditions on the final recorded starter roster and reuses 2024–2026 development data.",
+    "The date bootstrap does not include fit uncertainty.",
+    "The penalized gamma-Hessian check is not evidence of unregularized or causal identification."
+  ],
+  "next_gate": "Separate supervisor execution approval is required before fitting."
+}

@@ -1,0 +1,742 @@
+{
+  "status": "PASS_SOURCE_AUDIT_ONLY",
+  "passed": true,
+  "study": "jeju/research/20261023_bottom3_auxiliary_v1",
+  "contract_sha256": "ff6e3af2d454cd30edb56df1251700320b01de3478939c98199e0886bf22f084",
+  "source_references": [
+    {
+      "path": "jeju/research/20261023_bottom3_auxiliary_v1/supervisor/DESIGN_CONTRACT.md",
+      "bytes": 9799,
+      "sha256": "ff6e3af2d454cd30edb56df1251700320b01de3478939c98199e0886bf22f084"
+    },
+    {
+      "path": "jeju/research/20261023_bottom3_auxiliary_v1/supervisor/SESSION_START.json",
+      "bytes": 2271,
+      "sha256": "c7cd21d7300e0d3b4b070c51a10ca058bbb3214b73df6cc959b2cbff15c64bbe"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+      "bytes": 31038,
+      "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/prepared_lock.json",
+      "bytes": 12326,
+      "sha256": "f110b33b0442e519fd3f9852098aa847af90d2228af674c39db4914142675e24"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/meta.json",
+      "bytes": 3719,
+      "sha256": "15acbf959654da82d2240027e7b7d768bb9226af18395dac9ec92a68a4471726"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/meta.json",
+      "bytes": 3735,
+      "sha256": "23c4b0684477f34fbb2e99c22d0037cd903d5459db369f084773ec25c640f4a8"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/meta.json",
+      "bytes": 3770,
+      "sha256": "e9dbfe5226571cb29e34b352a4ad8808a735d70929e66b42efb41b3e807ff06d"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/FINAL_MANIFEST.json",
+      "bytes": 64610,
+      "sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/supervisor/DESIGN_CONTRACT.md",
+      "bytes": 11502,
+      "sha256": "7dc4b4f861e91e080a238e7ad85475fb50a9a5fa695896f554b131c9a6540092"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/inputs/input_manifest.json",
+      "bytes": 8245,
+      "sha256": "7561d6f91d5a1a5059add0741d912e33896b04810a19dd1dab955b0ebd229f5e"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/audit/source_manifest.json",
+      "bytes": 9905,
+      "sha256": "810e4043e5f3bf3e15b5131f17afc5dcb4067ba6b353f488508f16df04d3f445"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/audit/INPUT_REPORT.md",
+      "bytes": 5732,
+      "sha256": "f0f995c021e897ed2e4ecd8e3bc1c4c98974ab27ba7c2af376c470884c3502e0"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/inputs/state_features.parquet",
+      "bytes": 3698878,
+      "sha256": "ac956c959ce853aa129c738113c598d4ecc968d88dc1306c0f5fa5f4712a78e7"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/inputs/state_lineage.parquet",
+      "bytes": 464909,
+      "sha256": "62c4c0896b3a0a4c44b64e56f53ad1ad1b862953c6ded618892e1861624f5dd0"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/supervisor/STATE_VERIFICATION.json",
+      "bytes": 1252,
+      "sha256": "6bd4672c9ee68a430cdf107ccdad34cad064df31498877abd4bdf61a114bc16f"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/supervisor/LINEAGE_VERIFICATION.json",
+      "bytes": 1242,
+      "sha256": "4944860cabb749bfd953dda83a2c358c535e27f582d4f4efb1d06ff9355b02d2"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/supervisor/ROSTER_VERIFICATION.json",
+      "bytes": 978,
+      "sha256": "ee7d0ad8addd9d0e7f84dfcdbfb1cc854d1a945530623866b158378466c7bb9b"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/parameters.json",
+      "bytes": 31798,
+      "sha256": "46fda546b2a537373291c83190ef7c6f00ffda94fccebcf9090c6f01dfc9c23e"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/candidate_oos_scores.parquet",
+      "bytes": 871679,
+      "sha256": "fe08bdf93b07f8a180ad02416cbbc1488db282c761564b67b886114ece56f6e9"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/source_preflight.json",
+      "bytes": 12740,
+      "sha256": "3dc10aea8b1ce689be536cb2cbc5a7d8d80d8e03313982d8998f9d7a704eb270"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/outputs/fit_run_receipt.json",
+      "bytes": 8475,
+      "sha256": "fb70195287f1bc56c0c9fbe19acc6b7ec08b01a42a7a336da1b0a0c9f4b3bbe2"
+    },
+    {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/experiment/state_transfer.py",
+      "bytes": 90034,
+      "sha256": "963b2bcb574f3d49e539ae4e944a8a2f8f9bd769568d83018c2dcbcd2fa0623c"
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+      "bytes": 2152128,
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd"
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+      "bytes": 593,
+      "sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e"
+    },
+    {
+      "path": "jeju/research/20261023_bottom3_auxiliary_v1/audit/source_audit.py",
+      "bytes": 33451,
+      "sha256": "1932d6a633d0ca93ec05dedfbc318b5a5d34343b4d14b664e5f3e0098ff5f525"
+    }
+  ],
+  "source_pin_chain": {
+    "contract": {
+      "path": "jeju/research/20261023_bottom3_auxiliary_v1/supervisor/DESIGN_CONTRACT.md",
+      "bytes": 9799,
+      "sha256": "ff6e3af2d454cd30edb56df1251700320b01de3478939c98199e0886bf22f084"
+    },
+    "session_start": {
+      "path": "jeju/research/20261023_bottom3_auxiliary_v1/supervisor/SESSION_START.json",
+      "bytes": 2271,
+      "sha256": "c7cd21d7300e0d3b4b070c51a10ca058bbb3214b73df6cc959b2cbff15c64bbe"
+    },
+    "f1_artifact_manifest": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+      "bytes": 31038,
+      "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e"
+    },
+    "s_final_manifest": {
+      "path": "jeju/research/20261022_tb_state_transfer_v1/FINAL_MANIFEST.json",
+      "bytes": 64610,
+      "sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a"
+    }
+  },
+  "provider": {
+    "study": "jeju/research/20261022_tb_state_transfer_v1",
+    "arm": "S",
+    "score_filter": {
+      "arm": "S",
+      "role": [
+        "calibration",
+        "evaluation"
+      ],
+      "year": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    "raw_score_only": true,
+    "score_schema": [
+      "arm",
+      "year",
+      "role",
+      "api_record_id",
+      "race_id",
+      "race_date",
+      "horse_number",
+      "field_n",
+      "score"
+    ],
+    "score_rows_by_provider_role": {
+      "2024": {
+        "calibration": {
+          "provider_year": 2024,
+          "calendar_year": 2023,
+          "rows": 6506,
+          "races": 657,
+          "date_min": "2023-01-06",
+          "date_max": "2023-12-30",
+          "all_scores_finite": true,
+          "exact_f1_api_race_date_number_field_match": true,
+          "bottom3_label_support_from_f1": {
+            "rows": 6506,
+            "races": 657,
+            "days": 98,
+            "bottom3_labels": 1971,
+            "date_min": "2023-01-06",
+            "date_max": "2023-12-30"
+          }
+        },
+        "evaluation": {
+          "provider_year": 2024,
+          "calendar_year": 2024,
+          "rows": 6329,
+          "races": 637,
+          "date_min": "2024-01-05",
+          "date_max": "2024-12-28",
+          "all_scores_finite": true,
+          "exact_f1_api_race_date_number_field_match": true,
+          "bottom3_label_support_from_f1": {
+            "rows": 6329,
+            "races": 637,
+            "days": 98,
+            "bottom3_labels": 1911,
+            "date_min": "2024-01-05",
+            "date_max": "2024-12-28"
+          }
+        }
+      },
+      "2025": {
+        "calibration": {
+          "provider_year": 2025,
+          "calendar_year": 2024,
+          "rows": 6329,
+          "races": 637,
+          "date_min": "2024-01-05",
+          "date_max": "2024-12-28",
+          "all_scores_finite": true,
+          "exact_f1_api_race_date_number_field_match": true,
+          "bottom3_label_support_from_f1": {
+            "rows": 6329,
+            "races": 637,
+            "days": 98,
+            "bottom3_labels": 1911,
+            "date_min": "2024-01-05",
+            "date_max": "2024-12-28"
+          }
+        },
+        "evaluation": {
+          "provider_year": 2025,
+          "calendar_year": 2025,
+          "rows": 6410,
+          "races": 654,
+          "date_min": "2025-01-03",
+          "date_max": "2025-12-27",
+          "all_scores_finite": true,
+          "exact_f1_api_race_date_number_field_match": true,
+          "bottom3_label_support_from_f1": {
+            "rows": 6410,
+            "races": 654,
+            "days": 98,
+            "bottom3_labels": 1962,
+            "date_min": "2025-01-03",
+            "date_max": "2025-12-27"
+          }
+        }
+      },
+      "2026": {
+        "calibration": {
+          "provider_year": 2026,
+          "calendar_year": 2025,
+          "rows": 6410,
+          "races": 654,
+          "date_min": "2025-01-03",
+          "date_max": "2025-12-27",
+          "all_scores_finite": true,
+          "exact_f1_api_race_date_number_field_match": true,
+          "bottom3_label_support_from_f1": {
+            "rows": 6410,
+            "races": 654,
+            "days": 98,
+            "bottom3_labels": 1962,
+            "date_min": "2025-01-03",
+            "date_max": "2025-12-27"
+          }
+        },
+        "evaluation": {
+          "provider_year": 2026,
+          "calendar_year": 2026,
+          "rows": 4673,
+          "races": 488,
+          "date_min": "2026-01-02",
+          "date_max": "2026-09-19",
+          "all_scores_finite": true,
+          "exact_f1_api_race_date_number_field_match": true,
+          "bottom3_label_support_from_f1": {
+            "rows": 4673,
+            "races": 488,
+            "days": 73,
+            "bottom3_labels": 1464,
+            "date_min": "2026-01-02",
+            "date_max": "2026-09-19"
+          }
+        }
+      }
+    },
+    "top3_source_objective": "binary Top3; raw score used only as u_L=-score for the pre-existing low-score baseline",
+    "existing_top3_temperature_reused_for_bottom3": false,
+    "S_bottom3_probability_available": false
+  },
+  "feature_contract": {
+    "f1_feature_count": 30,
+    "state_feature_count": 10,
+    "combined_count": 40,
+    "ordered_features": [
+      "distance_m",
+      "grade_raw",
+      "field_n",
+      "observed_starts",
+      "days_since_start",
+      "previous_age",
+      "previous_sex",
+      "same_starts",
+      "same_valid_times",
+      "days_since_same",
+      "last_time_s",
+      "mean5_s",
+      "valid_n5",
+      "opp_mean5_valid_n",
+      "opp_mean5_valid_fraction",
+      "opp_mean5_median_s",
+      "mean5_minus_opp_mean_s",
+      "mean5_minus_opp_median_s",
+      "mean5_minus_opp_fast2mean_s",
+      "opp_mean5_faster_n",
+      "mean5_rank_fraction",
+      "previous_finish_relative_rank",
+      "previous_top3",
+      "previous_result_status",
+      "hist_s1f_relpos_mean5",
+      "hist_s1f_relpos_n",
+      "hist_s1f_to_c4_forward_mean5",
+      "hist_s1f_to_c4_pair_n",
+      "hist_c4_to_g1f_forward_mean5",
+      "hist_c4_to_g1f_pair_n",
+      "state_rank_mean",
+      "state_rank_sd",
+      "state_distance_slope",
+      "state_distance_sd",
+      "state_rank_current",
+      "state_rank_current_sd",
+      "state_rank_n",
+      "state_days_since_rank_observation",
+      "state_rank_current_field_gap",
+      "state_rank_current_field_rank"
+    ],
+    "categorical_columns": [
+      "grade_raw",
+      "previous_sex",
+      "previous_result_status"
+    ],
+    "train_only_vocabularies": {
+      "2024": {
+        "matches_provider_metadata": true,
+        "columns": {
+          "grade_raw": [
+            "제1",
+            "제1등급",
+            "제2등급",
+            "제3등급",
+            "제4등급",
+            "제5등급",
+            "제6등급",
+            "제OPEN",
+            "제오픈"
+          ],
+          "previous_sex": [
+            "거",
+            "수",
+            "암"
+          ],
+          "previous_result_status": [
+            "non_normal_or_incomplete",
+            "normal",
+            "unobserved"
+          ]
+        }
+      },
+      "2025": {
+        "matches_provider_metadata": true,
+        "columns": {
+          "grade_raw": [
+            "제1",
+            "제1등급",
+            "제2등급",
+            "제3등급",
+            "제4등급",
+            "제5등급",
+            "제6등급",
+            "제OPEN",
+            "제오픈"
+          ],
+          "previous_sex": [
+            "거",
+            "수",
+            "암"
+          ],
+          "previous_result_status": [
+            "non_normal_or_incomplete",
+            "normal",
+            "unobserved"
+          ]
+        }
+      },
+      "2026": {
+        "matches_provider_metadata": true,
+        "columns": {
+          "grade_raw": [
+            "제1",
+            "제1등급",
+            "제2등급",
+            "제3등급",
+            "제4등급",
+            "제5등급",
+            "제6등급",
+            "제OPEN",
+            "제오픈"
+          ],
+          "previous_sex": [
+            "거",
+            "수",
+            "암"
+          ],
+          "previous_result_status": [
+            "non_normal_or_incomplete",
+            "normal",
+            "unobserved"
+          ]
+        }
+      }
+    },
+    "provider_LightGBM_settings_match_contract": true,
+    "f1_state_join": {
+      "rows": 52155,
+      "exact_api_record_id_set": true,
+      "race_id_and_date_match": true,
+      "T_minus_2_cutoff_match": true,
+      "state_history_event_not_after_cutoff": true,
+      "state_historydate_missing_rows": 2463,
+      "latest_state_historydate": "2026-09-05",
+      "state_rebuilt": false
+    }
+  },
+  "cohort_and_label_census": {
+    "f1_full_cohort": {
+      "rows": 52155,
+      "races": 5206,
+      "days": 873,
+      "bottom3_labels": 15618,
+      "date_min": "2017-01-13",
+      "date_max": "2026-09-19"
+    },
+    "yearly_target_support": {
+      "2017": {
+        "rows": 4354,
+        "races": 432,
+        "days": 96,
+        "bottom3_labels": 1296,
+        "date_min": "2017-01-13",
+        "date_max": "2017-12-30"
+      },
+      "2018": {
+        "rows": 5111,
+        "races": 503,
+        "days": 96,
+        "bottom3_labels": 1509,
+        "date_min": "2018-01-12",
+        "date_max": "2018-12-29"
+      },
+      "2019": {
+        "rows": 5890,
+        "races": 576,
+        "days": 96,
+        "bottom3_labels": 1728,
+        "date_min": "2019-01-11",
+        "date_max": "2019-12-28"
+      },
+      "2020": {
+        "rows": 3290,
+        "races": 329,
+        "days": 50,
+        "bottom3_labels": 987,
+        "date_min": "2020-01-03",
+        "date_max": "2020-12-20"
+      },
+      "2021": {
+        "rows": 4331,
+        "races": 418,
+        "days": 72,
+        "bottom3_labels": 1254,
+        "date_min": "2021-01-08",
+        "date_max": "2021-12-25"
+      },
+      "2022": {
+        "rows": 5261,
+        "races": 512,
+        "days": 96,
+        "bottom3_labels": 1536,
+        "date_min": "2022-01-07",
+        "date_max": "2022-12-24"
+      },
+      "2023": {
+        "rows": 6506,
+        "races": 657,
+        "days": 98,
+        "bottom3_labels": 1971,
+        "date_min": "2023-01-06",
+        "date_max": "2023-12-30"
+      },
+      "2024": {
+        "rows": 6329,
+        "races": 637,
+        "days": 98,
+        "bottom3_labels": 1911,
+        "date_min": "2024-01-05",
+        "date_max": "2024-12-28"
+      },
+      "2025": {
+        "rows": 6410,
+        "races": 654,
+        "days": 98,
+        "bottom3_labels": 1962,
+        "date_min": "2025-01-03",
+        "date_max": "2025-12-27"
+      },
+      "2026": {
+        "rows": 4673,
+        "races": 488,
+        "days": 73,
+        "bottom3_labels": 1464,
+        "date_min": "2026-01-02",
+        "date_max": "2026-09-19"
+      }
+    },
+    "annual_fit_phase_support": {
+      "2024": {
+        "initial_train": {
+          "rows": 22976,
+          "races": 2258,
+          "days": 410,
+          "bottom3_labels": 6774,
+          "date_min": "2017-01-13",
+          "date_max": "2021-12-25"
+        },
+        "early_stop": {
+          "rows": 5261,
+          "races": 512,
+          "days": 96,
+          "bottom3_labels": 1536,
+          "date_min": "2022-01-07",
+          "date_max": "2022-12-24"
+        },
+        "refit": {
+          "rows": 28237,
+          "races": 2770,
+          "days": 506,
+          "bottom3_labels": 8310,
+          "date_min": "2017-01-13",
+          "date_max": "2022-12-24"
+        },
+        "calibration": {
+          "rows": 6506,
+          "races": 657,
+          "days": 98,
+          "bottom3_labels": 1971,
+          "date_min": "2023-01-06",
+          "date_max": "2023-12-30"
+        },
+        "evaluation": {
+          "rows": 6329,
+          "races": 637,
+          "days": 98,
+          "bottom3_labels": 1911,
+          "date_min": "2024-01-05",
+          "date_max": "2024-12-28"
+        }
+      },
+      "2025": {
+        "initial_train": {
+          "rows": 28237,
+          "races": 2770,
+          "days": 506,
+          "bottom3_labels": 8310,
+          "date_min": "2017-01-13",
+          "date_max": "2022-12-24"
+        },
+        "early_stop": {
+          "rows": 6506,
+          "races": 657,
+          "days": 98,
+          "bottom3_labels": 1971,
+          "date_min": "2023-01-06",
+          "date_max": "2023-12-30"
+        },
+        "refit": {
+          "rows": 34743,
+          "races": 3427,
+          "days": 604,
+          "bottom3_labels": 10281,
+          "date_min": "2017-01-13",
+          "date_max": "2023-12-30"
+        },
+        "calibration": {
+          "rows": 6329,
+          "races": 637,
+          "days": 98,
+          "bottom3_labels": 1911,
+          "date_min": "2024-01-05",
+          "date_max": "2024-12-28"
+        },
+        "evaluation": {
+          "rows": 6410,
+          "races": 654,
+          "days": 98,
+          "bottom3_labels": 1962,
+          "date_min": "2025-01-03",
+          "date_max": "2025-12-27"
+        }
+      },
+      "2026": {
+        "initial_train": {
+          "rows": 34743,
+          "races": 3427,
+          "days": 604,
+          "bottom3_labels": 10281,
+          "date_min": "2017-01-13",
+          "date_max": "2023-12-30"
+        },
+        "early_stop": {
+          "rows": 6329,
+          "races": 637,
+          "days": 98,
+          "bottom3_labels": 1911,
+          "date_min": "2024-01-05",
+          "date_max": "2024-12-28"
+        },
+        "refit": {
+          "rows": 41072,
+          "races": 4064,
+          "days": 702,
+          "bottom3_labels": 12192,
+          "date_min": "2017-01-13",
+          "date_max": "2024-12-28"
+        },
+        "calibration": {
+          "rows": 6410,
+          "races": 654,
+          "days": 98,
+          "bottom3_labels": 1962,
+          "date_min": "2025-01-03",
+          "date_max": "2025-12-27"
+        },
+        "evaluation": {
+          "rows": 4673,
+          "races": 488,
+          "days": 73,
+          "bottom3_labels": 1464,
+          "date_min": "2026-01-02",
+          "date_max": "2026-09-19"
+        }
+      }
+    },
+    "common_evaluation": {
+      "rows": 17412,
+      "races": 1779,
+      "days": 269,
+      "bottom3_labels": 5337,
+      "date_min": "2024-01-05",
+      "date_max": "2026-09-19"
+    },
+    "evaluation_by_year": {
+      "2024": {
+        "rows": 6329,
+        "races": 637,
+        "days": 98,
+        "bottom3_labels": 1911,
+        "date_min": "2024-01-05",
+        "date_max": "2024-12-28"
+      },
+      "2025": {
+        "rows": 6410,
+        "races": 654,
+        "days": 98,
+        "bottom3_labels": 1962,
+        "date_min": "2025-01-03",
+        "date_max": "2025-12-27"
+      },
+      "2026": {
+        "rows": 4673,
+        "races": 488,
+        "days": 73,
+        "bottom3_labels": 1464,
+        "date_min": "2026-01-02",
+        "date_max": "2026-09-19"
+      }
+    },
+    "rank_contract": "each included race has unique exact ranks 1..N, field_n equals roster row count, and exactly 3 labels y=1[finish_position >= field_n-2]",
+    "label_support_only_no_performance_metrics": true
+  },
+  "time_and_selection_limits": {
+    "feature_history_cutoff": "race_date - 2 calendar days, inclusive source event date",
+    "publication_timestamp_verified": false,
+    "actual_pre_race_roster_verified": false,
+    "cohort_conditioning": "retrospective normal-finish complete fields with unique ranks; excludes unobserved/ambiguous finish outcomes",
+    "nonfinish_dnf_dsq_tie_cancellation_labels_inferred": false,
+    "evaluation_period_is_new_holdout": false
+  },
+  "bootstrap_reference": {
+    "schedule_path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+    "receipt_path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+    "schedule_shape": [
+      2000,
+      269
+    ],
+    "date_count": 269,
+    "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+    "schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "copied_or_regenerated": false
+  },
+  "execution_boundary": {
+    "database_access": "none",
+    "model_fit": false,
+    "new_predictions_or_probabilities": false,
+    "score_ranking_or_selection": false,
+    "bottom3_performance_calculated": false,
+    "source_files_copied": false,
+    "outcome_metrics_read": false
+  },
+  "findings": [
+    "S metadata confirms one fixed 40-input provider with F1_STYLE6 30 ordered inputs plus 10 contracted rank/distance state inputs; all three annual category vocabularies match the frozen provider metadata.",
+    "The S provider OOS score table separates provider year and calibration/evaluation role. For each role, S raw scores are finite and exactly cover the corresponding F1 race-year API IDs, race IDs, race dates, horse numbers, and field sizes.",
+    "The frozen F1 result cohort has exact full-field ranks and supports exactly three Bottom3 labels per race: 15,618 potential labels across 5,206 races and 5,337 in the repeated 1,779-race evaluation cohort.",
+    "The frozen S state table joins one-to-one by API record ID; race/date and T-2 cutoff agree and all state history dates are at or before the cutoff. Existing sealed state proofs were referenced; state generation was not rerun.",
+    "The existing 2,000-by-269 paired-date bootstrap schedule is pinned and its date inventory matches the fixed evaluation dates. No model fit or Bottom3 performance was calculated."
+  ]
+}

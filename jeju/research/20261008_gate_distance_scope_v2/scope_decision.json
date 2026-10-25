@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-08",
+  "user_instruction": "2025·2026에 시행되지 않는 거리는 현재 분석 대상에서 제외하고 과거 워밍업으로 구분",
+  "criterion": "Retain distance if at least one source candidate race exists in either 2025 or 2026 through preserved cutoff; absence in both excludes from current target scope. Observed local coverage is not official schedule verification.",
+  "data_cutoff": "2026-09-19",
+  "prior_main_effect_window": "2019-01-01 through 2025-12-31, actual available ten-runner dates differ by distance",
+  "prior_recent_window": "2024-01-01 through 2025-12-31",
+  "prior_partial_window": "2026-01-01 through 2026-09-19",
+  "active_distances_m": [
+    800,
+    900,
+    1000,
+    1110,
+    1200,
+    1300,
+    1400,
+    1610
+  ],
+  "warmup_only_distances_m": [
+    400
+  ],
+  "main_effect_actual_support": [
+    {
+      "distance": "400",
+      "first_date": "",
+      "last_date": "",
+      "ten_runner_races": "0",
+      "status": "not_estimated_insufficient_support"
+    },
+    {
+      "distance": "800",
+      "first_date": "2019-01-11",
+      "last_date": "2025-12-19",
+      "ten_runner_races": "762",
+      "status": "basic_support"
+    },
+    {
+      "distance": "900",
+      "first_date": "2019-01-11",
+      "last_date": "2025-12-26",
+      "ten_runner_races": "508",
+      "status": "basic_support"
+    },
+    {
+      "distance": "1000",
+      "first_date": "2019-01-11",
+      "last_date": "2025-12-27",
+      "ten_runner_races": "920",
+      "status": "basic_support"
+    },
+    {
+      "distance": "1110",
+      "first_date": "2019-01-25",
+      "last_date": "2025-12-27",
+      "ten_runner_races": "574",
+      "status": "basic_support"
+    },
+    {
+      "distance": "1200",
+      "first_date": "2019-01-18",
+      "last_date": "2025-12-27",
+      "ten_runner_races": "246",
+      "status": "basic_support"
+    },
+    {
+      "distance": "1300",
+      "first_date": "2024-05-18",
+      "last_date": "2025-12-27",
+      "ten_runner_races": "32",
+      "status": "limited_sample"
+    },
+    {
+      "distance": "1400",
+      "first_date": "2020-07-25",
+      "last_date": "2025-12-26",
+      "ten_runner_races": "57",
+      "status": "limited_sample"
+    },
+    {
+      "distance": "1610",
+      "first_date": "2025-09-13",
+      "last_date": "2025-09-13",
+      "ten_runner_races": "1",
+      "status": "not_estimated_insufficient_support"
+    }
+  ],
+  "history_policy": "Prior horse histories may precede 2017; usable histories retain the previously preserved T-minus-2 contract. Excluding a current target distance does not delete prior histories or raw records.",
+  "source_sha256": {
+    "jeju/research/20261007_environment_correction_pilot_v1/audit/source_rows.csv": "0d9edfa519d099841df73212a11cb49195174a0b649e2aa38e7dabf5b8144f00",
+    "jeju/research/20261008_gate_all_distances_v1/support.csv": "237ea9c637793f118952fd78b649234ef0f3091b4041a1e6f6af444df6eff707"
+  },
+  "existing_effects_reestimated": false,
+  "reason_no_refit": "400m had no estimate in main, recent, or 2026 families already; removing its separate historical display changes none of those effects or BH families.",
+  "database_and_original_reports_modified": false
+}

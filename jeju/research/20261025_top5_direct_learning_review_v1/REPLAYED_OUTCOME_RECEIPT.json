@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "review": "independent recomputation of the approved retrospective outcome report",
+  "outcome_labels_read": true,
+  "all_metrics_recomputed_independently": true,
+  "plan_sha256": "c5683a8716e62094a7856cadfd44119dfac3c6ac3edd9f08652a951e42297012",
+  "source_audit_sha256": "c70596688c22c97deb7fa48cba21ef6e5442ea29e1901f790277c1f03fbe3fbd",
+  "baseline_source_sha256": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1",
+  "main_report_code_sha256": "5d48a2430c1ad6a24ded4f861da64f64b7b5b669139b61e2acf57f07662fb608",
+  "fit_receipt_sha256": "f69de2ad555718ae5fa12c7b9c6773a9ad208e8a809f449369749cf4f2a912bd",
+  "choices_sha256": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+  "choices_receipt_sha256": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754",
+  "outcome_approval_sha256": "62e15353b2ddb3687b1d59b7c580b0b20ae14856e53e8dc35b040fb266ed3ea9",
+  "main_outcome_receipt_sha256": "47e0dcb9317d0def945c209be402e5d7fc9e7a437e2ff50c509a166ceb6cb5a6",
+  "main_outcomes_sha256": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d",
+  "main_race_outcomes_sha256": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f",
+  "bootstrap_schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+  "bootstrap_date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+  "input_allowlist": [
+    "api_record_id",
+    "race_id",
+    "race_date",
+    "year",
+    "distance_m",
+    "horse_id",
+    "horse_number",
+    "field_n",
+    "variant",
+    "score",
+    "y"
+  ],
+  "counts": {
+    "outcome_runner_rows": 17412,
+    "full_races": 1779,
+    "primary_races": 1503,
+    "primary_dates": 269,
+    "race_rows_exactly_reproduced": 1779
+  },
+  "recomputed_primary": {
+    "races": 1503,
+    "baseline_all_three_hits": 439,
+    "selector_all_three_hits": 435,
+    "baseline_all_three_rate": 0.29208250166334,
+    "selector_all_three_rate": 0.2894211576846307,
+    "selector_minus_baseline_rate": -0.0026613439787092482,
+    "selector_minus_baseline_percentage_points": -0.2661343978709248,
+    "both_hit": 404,
+    "baseline_only_lost": 35,
+    "selector_only_caught": 31,
+    "both_miss": 1033,
+    "selector_captured_top3_count_0_1_2_3": {
+      "0": 28,
+      "1": 272,
+      "2": 768,
+      "3": 435
+    },
+    "baseline_captured_top3_count_0_1_2_3": {
+      "0": 26,
+      "1": 279,
+      "2": 759,
+      "3": 439
+    },
+    "distance_m": [
+      900,
+      1000,
+      1110,
+      1200
+    ]
+  },
+  "recomputed_full": {
+    "races": 1779,
+    "baseline_all_three_hits": 519,
+    "selector_all_three_hits": 520,
+    "baseline_all_three_rate": 0.2917369308600337,
+    "selector_all_three_rate": 0.2922990444069702,
+    "selector_minus_baseline_rate": 0.0005621135469364812,
+    "selector_minus_baseline_percentage_points": 0.056211354693648116,
+    "both_hit": 482,
+    "baseline_only_lost": 37,
+    "selector_only_caught": 38,
+    "both_miss": 1222,
+    "selector_captured_top3_count_0_1_2_3": {
+      "0": 30,
+      "1": 328,
+      "2": 901,
+      "3": 520
+    },
+    "baseline_captured_top3_count_0_1_2_3": {
+      "0": 29,
+      "1": 331,
+      "2": 900,
+      "3": 519
+    }
+  },
+  "recomputed_primary_date_bootstrap_95ci": {
+    "seed": 20261011,
+    "draws": 2000,
+    "date_count": 269,
+    "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+    "schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "cluster": "race_date",
+    "interval_level": 0.95,
+    "quantile_method": "numpy.quantile(method='linear')",
+    "lower": -0.01343341952546293,
+    "upper": 0.007752692064066596,
+    "valid_replicates": 2000,
+    "replicates_with_zero_primary_races": 0
+  },
+  "primary_gate_passed": false,
+  "independent_race_outcomes_sha256": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f",
+  "independent_metrics_sha256": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d"
+}

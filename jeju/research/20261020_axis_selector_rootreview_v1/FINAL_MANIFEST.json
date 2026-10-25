@@ -1,0 +1,138 @@
+{
+  "status": "PASS",
+  "study": "20261020_axis_selector_rootreview_v1",
+  "decision": "retain F1_STYLE6 baseline axis; hold K3 selector",
+  "delegated_model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "selector_fits": 3,
+  "base_fits": 0,
+  "root_fits": 0,
+  "primary": {
+    "races": 1503,
+    "baseline_top3_hits": 861,
+    "selector_top3_hits": 857,
+    "baseline_top3_rate": 0.5728542914171657,
+    "selector_top3_rate": 0.5701929474384564,
+    "selector_minus_baseline": -0.0026613439787092482,
+    "axis_changed_races": 50,
+    "axis_changed_rate": 0.0332667997338656,
+    "new_selector_hits": 13,
+    "lost_baseline_hits": 17,
+    "both_hit": 844,
+    "neither_hit": 629,
+    "outcome_counts": {
+      "both": 844,
+      "baseline_only": 17,
+      "selector_only": 13,
+      "neither": 629
+    }
+  },
+  "all_distances": {
+    "races": 1779,
+    "baseline_top3_hits": 1023,
+    "selector_top3_hits": 1016,
+    "baseline_top3_rate": 0.5750421585160203,
+    "selector_top3_rate": 0.5711073636874648,
+    "selector_minus_baseline": -0.0039347948285553686,
+    "axis_changed_races": 58,
+    "axis_changed_rate": 0.032602585722315905,
+    "new_selector_hits": 14,
+    "lost_baseline_hits": 21,
+    "both_hit": 1002,
+    "neither_hit": 742,
+    "outcome_counts": {
+      "both": 1002,
+      "baseline_only": 21,
+      "selector_only": 14,
+      "neither": 742
+    }
+  },
+  "primary_ci95": [
+    -0.010810810810810811,
+    0.005863575147281905
+  ],
+  "primary_gate_pass": false,
+  "main_manifest": {
+    "path": "jeju/research/20261020_axis_selector_v1/outputs/FINAL_MANIFEST.json",
+    "sha256": "0c243f6bd1032f2ee02faa9a6371c25950067e9c84033ab1910d1870bced2072"
+  },
+  "reviewer_manifest": {
+    "path": "jeju/research/20261020_axis_selector_review_v1/FINAL_MANIFEST.json",
+    "sha256": "c4f2be1f5b181c8458d5a585661125c97c5c96634cd1316c4e0543b98f0c6db1"
+  },
+  "root_artifacts": [
+    {
+      "path": "README.md",
+      "bytes": 6855,
+      "sha256": "adc64e371e98c40b514811cfe7d8f277bfed89a657ddb6aacf4603ac87507d57"
+    },
+    {
+      "path": "ROOT_BASELINE_RACE_LEDGER.parquet",
+      "bytes": 115460,
+      "sha256": "2a99fe74a9706a9ff9a3b2a9fc6d8a3feca79c1614817041b7b9ca3706ba8752"
+    },
+    {
+      "path": "ROOT_BASELINE_RECEIPT.json",
+      "bytes": 689,
+      "sha256": "e0d07650b2c1fee4f60faaf1309c2c3132f19800ff483742f3a3cf49b7db72c0"
+    },
+    {
+      "path": "ROOT_FINAL_ARTIFACT_CHECK.json",
+      "bytes": 300,
+      "sha256": "5d61308bb136bb86c44c5c78f4bb9a0db1b6cd4682a7912a25f775891153dee5"
+    },
+    {
+      "path": "ROOT_FIT_REVIEW.json",
+      "bytes": 775,
+      "sha256": "6de08a6605759036dbe7c89af67becb3570bfed05c8f6da7a268e6ac40bb7929"
+    },
+    {
+      "path": "ROOT_PREFLIGHT_REVIEW.json",
+      "bytes": 2089,
+      "sha256": "e6dfb009d2cfc156414897f3b7458732bfde9dd99e6d1514bb6212fab6f6b5ce"
+    },
+    {
+      "path": "ROOT_REPLAY_RACE_LEDGER.parquet",
+      "bytes": 154595,
+      "sha256": "5348d82177f32cab268eadccf301b8dfeec48212804418c864f66497a7873a5c"
+    },
+    {
+      "path": "ROOT_REPLAY_REVIEW.json",
+      "bytes": 2443,
+      "sha256": "ad12d93684ae40f15a4b2b07b83021b4036b224693104385f545d2457ff12523"
+    },
+    {
+      "path": "ROOT_REVIEWER_HASH_CHECK.json",
+      "bytes": 214,
+      "sha256": "b1dbbf72343b1c63e3c52384085da0fad3c388811dd36f51e35f828c7749a7f1"
+    },
+    {
+      "path": "ROOT_SOURCE_AUDIT.json",
+      "bytes": 8959,
+      "sha256": "46d35f30d5827d84073104d342a0781051a8580495aead6c75f15f7b6914dcf3"
+    },
+    {
+      "path": "audit_sources.py",
+      "bytes": 6109,
+      "sha256": "8fe86a413243c54dfbec359aaa5596b4c93c3484a68604a74c701c9286b47b50"
+    },
+    {
+      "path": "freeze_baseline.py",
+      "bytes": 1862,
+      "sha256": "3a0193cb33227d71e9939f2b4961bca43df8b7d010ba9e4777474a3f2b4e74a6"
+    },
+    {
+      "path": "independent_features.py",
+      "bytes": 4266,
+      "sha256": "7fee4671c8a3b4a931059d6b87ba4c55e3abb56067abd73b12e1376f06635463"
+    },
+    {
+      "path": "replay_selector.py",
+      "bytes": 10771,
+      "sha256": "d3e4182175091108bda5295b4fb0659fd4e2b8085b4e3ed0eb7bc3eacfd10be3"
+    }
+  ],
+  "protected_input_count": 37,
+  "evaluation_period": "2024-01-05 to 2026-09-19; repeated retrospective development data",
+  "database_opened": false
+}

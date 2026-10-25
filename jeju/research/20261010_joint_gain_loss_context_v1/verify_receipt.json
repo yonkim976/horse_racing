@@ -1,0 +1,73 @@
+{
+  "artifact": "20261010_joint_gain_loss_context_v1 runner_context supplement",
+  "script": "jeju/research/20261010_joint_gain_loss_context_v1/build_runner_context.py",
+  "script_sha256": "d1176d0474c8a2967a9f7802722db78b2f481efd99a5c8e30f141093225e8e59",
+  "mode": "verify_only",
+  "output_path": "jeju/research/20261010_joint_gain_loss_context_v1/runner_context.csv",
+  "output_sha256": "8dfbef38f04c52962efee8275cca48ae8f6fa14e59d7816ed50f0b4344642468",
+  "output_bytes": 4570157,
+  "reconstructed_sha256": "8dfbef38f04c52962efee8275cca48ae8f6fa14e59d7816ed50f0b4344642468",
+  "reconstructed_bytes": 4570157,
+  "byte_parity": true,
+  "semantic_parity": true,
+  "input_hashes": {
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+    "jeju/research/20261008_weight_speed_v2/source_lineage.csv": "95c44c1571f1ca383b57c5b9e98a8d9c1f32ebb1b9d19763db82ff51d3ed6346",
+    "jeju/research/20261007_track_environment_v1/race_support_rows.json": "1a8b202da7024c9d42ac51d688dbbe473ad695bdc5c9011672d3a60b861720c5",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/f1_reproduced_race_metrics.csv": "89e783d9c2022cf7a91f7effc39a359ebcf755541c8d33073c0ce795e3341c07"
+  },
+  "checks": {
+    "target_rows": 17412,
+    "target_unique_api_record_ids": 17412,
+    "target_races": 1779,
+    "target_race_dates": 269,
+    "lineage_rows": 52155,
+    "target_id_coverage": "17412/17412",
+    "target_race_coverage": "1779/1779",
+    "target_source_mismatches": {
+      "race_id": 0,
+      "race_date": 0,
+      "evaluation_year": 0,
+      "horse_number": 0
+    },
+    "moisture_band_counts": {
+      "건조": 7614,
+      "다습": 3818,
+      "불량": 1236,
+      "양호": 2937,
+      "포화": 1807
+    },
+    "numeric_ranges_observed": {
+      "body_kg": [
+        209.0,
+        347.0
+      ],
+      "carried_weight_kg": [
+        51.0,
+        65.5
+      ],
+      "moisture": [
+        2.0,
+        20.0
+      ],
+      "race_distance_m": [
+        800.0,
+        1610.0
+      ],
+      "field_n": [
+        7.0,
+        12.0
+      ],
+      "horse_number": [
+        1.0,
+        12.0
+      ]
+    },
+    "race_level_moisture_band_track_consistency": "all 1,779 races constant",
+    "excluded_horse_id": "3005648",
+    "excluded_horse_matches": 0,
+    "labels_or_prediction_scores_in_extract": false,
+    "database_or_network_accessed": false,
+    "model_fitting_executed": false
+  }
+}

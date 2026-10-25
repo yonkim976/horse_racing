@@ -15,6 +15,11 @@
 
 ### 조교 적재 및 입력 기준
 
+- 2026-10-17 과거 미분류의 공식 날짜별 상세 전수 대조와 실제 반영을 완료했다. [최신 적용·검증](research/20261017_older_training_rider_completion/README.md)을 우선한다. 먼저 확인한 609행과 추가 185,819행을 합쳐 주로조교 186,333행·교육생 95행을 보완했다. 남은 과거 미분류는 94,532행, 최근 대상 523행을 포함한 전체 미분류는 95,055행이다. 대상 4,122일은 전부 공식 원문 수집·독립 대조를 통과했고 41개 테이블 보존 검증·재실행 검증을 완료했다. `선·부·감` 미확정 약어·시각 결측·모호한 사건키는 미분류로 유지한다. 웹 교육생과 API 기수후보생을 합치지 않는다. 아래 최근 보완 수치는 그 단계의 스냅샷이다.
+
+- 2026-10-17 사용자 승인으로 최근 6개월 미분류의 홈페이지 보완을 실제 DB에 반영했다. [최신 적용·검증](research/20261017_training_rider_website_completion/README.md)을 먼저 읽는다. 19,885행을 주로조교로 보완해 전체 미분류는 281,483행이며 최근 대상 미분류는 523행이다. 종류는 동일 사건의 공식 홈페이지 범례로 확인한 값이고 API 원문 `-`와 사번·시각은 보존했다. `외`나 대응 행 미확인은 미분류를 유지한다. 사번의 다른 날짜 전체에 직책을 소급하거나 기존 분류기로 홈페이지 보완값을 덮어쓰지 않는다. 최신 전체 조회 `training_current`와 기존 상한의 `daily_training_rider_types_analysis_2026`을 구분한다.
+- 사용자 지정 기승자 종류·기수 이름 분석은 [종류 저장·집계](research/20261015_training_rider_types/README.md) 및 `daily_training_rider_types_analysis_2026`를 사용한다. `rider_type`은 확인된 원문 종류 또는 동일 조교행의 홈페이지 표식만으로 정하고 나머지는 미분류다. 이름 분석 필드 `jockey_name`은 종류=기수일 때만 제공하며 기수 외·미분류는 NULL이다. API `기수후보생`과 웹 `교육생`은 별도 표기를 유지한다. `(관)`은 주로조교이며 관리사 직책으로 자동 분류하지 않는다. 다른 날짜의 이름·현재 직책·사번 접두로 과거 종류를 소급 추정하지 않는다.
+- 사번별 이름 참조를 별도로 추적할 때 [2026-10-15 사번·실명 연결](research/20261015_training_rider_identity/README.md)과 `daily_training_riders_analysis_2026`를 따른다. `rider_name`은 사번별 참조명이고 `rider_name_on_website`·`rider_name_same_event_website_verified`는 이번 홈페이지의 동일 조교행 직접 확인이다. 원문 구분 `-`인 과거 직책을 현재 명부로 소급 확정하지 않는다. 사번 미제공·홈페이지 `외`·미연결 실명은 NULL이며 `trName_raw`를 기승자로 대입하지 않는다. 이 연결을 기존 모델 입력에 자동 반영하지 않는다.
 - 조교 자료를 조회·적재·집계하거나 새 모델 입력으로 사용할 때 [조교 API 자료와 모델 입력 기준](docs/JEJU_TRAINING_API_INPUT_CONTRACT_2026-10-01.md) 및 [원문 중복 감사](research/20261001_training_audit/README.md)를 먼저 읽는다. 출발조교의 홈페이지 기준 적재와 정규 조회는 [적재 보고서](research/20261001_starting_training_website_load/README.md)를 따른다. 출발조교 조회는 `starting_training_website_rows_latest`, 2026년 분석 조회는 `starting_training_website_rows_analysis_2026`을 사용한다. 일별조교 API18도 [적재 보고서](research/20261001_daily_training_api_load/README.md)에 따라 적재·전수 검증을 완료했다. 원행은 `daily_training_api_rows`, 2026년 분석 조회는 `daily_training_api_rows_analysis_2026`이다. 4,545두·908,316행을 저장하며 경주 상한까지 907,389행을 조회한다. 감사 JSONL은 별도 감사 산출물이며 두 종류의 조교 적재 모두 모델 입력 채택을 뜻하지 않는다.
 - 제주 경주장 전체 응답을 공식 말 ID로 보유 제주마에 선별한다. 마명·ID 접두·현재 관계자로 과거 조교를 연결하지 않는다. 형식이 맞지 않는 ID는 확인 전 연결에서 제외한다.
 - 일별조교 `run1Cnt`/`run2Cnt` 전 기간 0값은 실제 횟수 0으로 입력하지 않는다. 초기 `trTerm=0`, 자료 시작 전 결측과 `remark='-'`도 미조교·휴식·양호로 변환하지 않는다. API18 시각은 원문 형식·날짜·기간 차이를 전수 검증했다. 양수·시각 일치 890,288행만 `duration_seconds`로 제공하고 시간 미제공 18,028행은 NULL 상태로 둔다. `trName_raw`는 조교사명, `prNo_raw`는 기승자 사번으로 구분한다. 원문과 공개시각 제한은 유지하며 다른 미검증 필드는 변환·집계 피처에서 제외한다.
@@ -38,6 +43,11 @@
 - 최신 이름과 2026년 고정 나이는 기존 사용자 지정 정책을 따른다. `clinicDate`는 사건 날짜이며 공개시각은 미확정이다. 미래 경주 연결에는 최소 `clinic_date < race_date`와 공개시각 미확정을 적용하고 기존 모델 입력에 자동 반영하지 않는다. 과거 API 0행은 진료가 없었다는 증거가 아니다. 공식 말 ID가 확인되지 않은 제주 TXT는 보완 후보이며 이번 확정 ID 연결 테이블에 편입하지 않았다. 제외 말은 재편입하지 않는다.
 
 ### 구간기록·통과착순·통과조 검증 기준
+
+- S1F 측정거리는 [2026-10-18 공식 제주 용어해설 확인](research/20261018_s1f_measurement_official_review/README.md)을 따른다. **1110m·1610m 경주의 말별 S1F는 출발 후 210m 지점**, 그 외 기본 설명은 200m다. 일반 안내의 ‘최초 200m’만으로 제주 전용 예외를 제거하지 않는다. API6 펄롱타임 표의 첫 110m 구간과 말별 S1F를 동일시하지 않으며 저장된 시간을 거리 비율로 추정 환산하지 않는다. 과거 연구 문서의 ‘S1F 210m 미확정’은 이 후속 공식 확인으로 해소됐다. 코너의 정확한 계측 경계와 API6·말별 기록 대응은 별도 검토 사항이다.
+
+- 2026-10-18 사용자 승인으로 [10월 17일 구간상세·통과조 적재 및 5R 거리 정정](research/20261018_oct17_section_load/README.md)을 실행했다. API6·API303 각 7경주를 추가하고 5R 거리 6칸을 홈페이지 110·310·510·710·910·1110m로 별도 검토 저장했다. 경주거리 자체는 원래 1110m다. API 원문과 `api6_section_records_current`는 그대로이며, 거리 파생값에는 새 **`api6_section_points_current.distance_m`와 `distance_status`**를 함께 사용한다. 검토행 미적용 또는 API payload·페이지 SHA·키·거리 원값 변경 시 알려진 5R 6칸은 NULL로 차단한다. `api6_section_distance_reviews`와 마이그레이션 `data/schema/migrations/20261018_add_api6_section_distance_reviews.sql`을 보존한다. 재구축 시 새 record ID·원문 SHA를 확인해 별도로 재연결하며 이 일회성 적용 계획을 그대로 재사용하지 않는다.
+- [과거 1100/1110 감사](research/20261018_oct17_section_load/history_audit/README.md)에서 실제 1100m 경주는 없고 기존 DB API6 1110m 18경주와 보관 원문 1,259경주 모두 API 거리 칸 100~1100m가 확인됐다. 이번 적재 후 API6는 71경주·1110m 19경주이며 그중 이번 5R만 홈페이지 거리 정정을 갖는다. 나머지 양수 거리는 `api_positive_unreviewed`이며 1110m 전체에 일괄 +10m 보정을 적용하지 않는다. 공식 원문 파일 보관과 DB 정규 적재, API4 실제 경주거리와 API6 구간거리 칸을 구분한다. [앞선 고정 기준 DB·홈페이지 조사](research/20261018_baseline_recovery_review/README.md)는 적재 전 읽기 전용 조사 기록이다.
 
 - 제주 구간 자료를 정규화·적재·집계할 때 [2026-10-02 검증 보고서](research/20261002_section_passing_audit/README.md)를 읽는다. 현재 후보 92,513행·9,494경주와 취소·불성립 147경주를 구분한다. 말별 API4 측정, 경주별 API303 통과조, 경주 전체 API6 시간을 서로 다른 단위로 유지한다.
 - 시간 원문 4건은 아래 홈페이지 대조·후속 적재 기준을 따른다. 남은 항목은 [공식 홈페이지·API 재조회·TXT 보완 검증](research/20261002_section_remaining_review/README.md)을 먼저 읽는다. 최초 통과순위·통과조 후보 27경주 중 6경주는 API303 지점 대응 차이, 2경주는 홈페이지 순위 차이로 설명됐으며 19경주·70관측·20지점은 홈페이지와 TXT에서도 내부 충돌이 남는다. 설명된 8경주는 DB 정정 완료를 뜻하지 않는다. 통과조 괄호 내부 순서를 개별 착순으로 만들지 않는다.
@@ -68,6 +78,10 @@
 5. 과거 기간의 반복 사용을 독립 검증으로 부르지 않는다. 경주일 전체를 시간 순서로 묶고 미래 정보가 입력에 들어가지 않았는지 확인한다.
 
 ## 보존과 실행
+
+- 2026-10-20 사용자 승인으로 제주 연구 DB를 Mac launchd `com.horse-racing.jeju-research-refresh`에 매일 한국시간 22시로 설치하고 실제 실행·독립 검증을 완료했다. [설치·실행 근거](research/20261020_launchd_install/README.md)와 [관리 명령](refresh/LAUNCHD.md)을 따른다. 기존 Codex 예약 `db`는 삭제됐으며 중복 예약을 만들지 않는다. 기본 실행은 `jeju.refresh.run --apply`이고 최근 14일·일요일 60일 재조회, 기존 정정·보류·제외 말 정책을 유지한다. 제외 말 검사는 활성 6개 테이블 전부를 통과해야 한다. 실패·부분 수집은 `launchd_execution_status.json`과 실행 manifest로 확인하고 날짜만으로 완전 수집을 선언하지 않는다.
+
+- 고정 기준 `research/20261017_core_refresh/baseline/jeju_native_core.sqlite3`는 2026-10-17 19:16 저장공간 정리 원장에 삭제로 기록됐다. JSON 기준 manifest는 원본의 기대 해시 기록이며 현재 DB 파일이 존재한다는 근거가 아니다. [복구 검토·정상 롤링 백업](research/20261018_baseline_recovery_review/README.md)을 따른다. 나중 시점 백업을 옛 기준 경로에 넣고 이전 manifest와 같은 원본이라고 표시하지 않는다. 현행 DB와 정상 롤링 백업을 고정 기준 소실과 구분한다.
 
 - 사용자 승인으로 삭제한 말은 `data/horse_exclusions.json`에서 공식 말 ID로 확인한다. `reimport_allowed=false`인 말은 제주 DB 재구축·수집 결과의 편입·분석 후보 생성에서 제외한다. API 원문과 과거 감사·삭제 백업은 증거 보관이며 활성 입력으로 사용하지 않는다. 작은곰(3005648)의 2026-10-02 삭제와 검증은 `maintenance/small_bear_removal_20261002/deletion_receipt.json`을 따른다.
 - 새 문서·코드·결과는 `jeju/` 안에 둔다. 공통 운영 앱, 데이터베이스 스키마, 모델 resolver와 등록부는 이 디렉터리에서 수정하지 않는다.

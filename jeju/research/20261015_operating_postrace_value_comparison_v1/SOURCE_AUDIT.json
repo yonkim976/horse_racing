@@ -1,0 +1,4415 @@
+{
+  "status": "PASS",
+  "comparison_type": "retrospective_final_price_oracle",
+  "operating_model_registry_resolution": {
+    "active_profile": "jeju-hy-r-form-20260919-v1",
+    "champion_id": "HY_R_FORM",
+    "registry_sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "model_artifact": {
+      "name": "HY_R_FORM_model",
+      "path": "data/research/jeju_native_transition_holdout_v13_20260916/bundles/frozen_2026__HY_R_FORM.pkl",
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    }
+  },
+  "temporal_scope": {
+    "operating_fit": {
+      "from": "2018-08-31",
+      "through": "2025-06-28",
+      "races": 3974
+    },
+    "operating_tune": {
+      "from": "2025-07-04",
+      "through": "2025-09-27",
+      "races": 192
+    },
+    "operating_calibration": {
+      "from": "2025-10-02",
+      "through": "2025-12-27",
+      "races": 167
+    },
+    "operating_saved_evaluation": {
+      "from": "2026-01-02",
+      "through": "2026-09-12",
+      "races": 510,
+      "entries": 4852
+    },
+    "current_hy_2025_oos_predictions_available": false,
+    "current_hy_saved_outputs_are_actual_live_published_predictions": false,
+    "2026_is_partial_and_reused_development_data": true,
+    "history_updates_are_sequential_t_minus_2": true
+  },
+  "cohort": {
+    "qpl_common_races": 467,
+    "qpl_common_dates": 70,
+    "qpl_period": [
+      "2026-01-02",
+      "2026-09-12"
+    ],
+    "plc_common_supported_races": 436,
+    "plc_common_dates": 69,
+    "plc_period": [
+      "2026-01-02",
+      "2026-09-11"
+    ],
+    "operating_only_vs_prior_common_cohort": 43,
+    "later_research_only_after_operating_cutoff": 21,
+    "common_races_excluded_from_f1_style6_plc_for_field_n_le_7": 31,
+    "year_2025_comparison": "unavailable: current HY fitted/tuned/calibrated during 2025; no retained year-frozen HY score archive"
+  },
+  "coverage_audit": {
+    "common_race_ids": [
+      "2026-01-02_2_1",
+      "2026-01-02_2_3",
+      "2026-01-02_2_4",
+      "2026-01-02_2_5",
+      "2026-01-02_2_6",
+      "2026-01-02_2_7",
+      "2026-01-03_2_1",
+      "2026-01-03_2_2",
+      "2026-01-03_2_3",
+      "2026-01-03_2_4",
+      "2026-01-03_2_5",
+      "2026-01-03_2_6",
+      "2026-01-09_2_1",
+      "2026-01-09_2_2",
+      "2026-01-09_2_3",
+      "2026-01-09_2_4",
+      "2026-01-09_2_5",
+      "2026-01-09_2_6",
+      "2026-01-09_2_7",
+      "2026-01-10_2_1",
+      "2026-01-10_2_2",
+      "2026-01-10_2_3",
+      "2026-01-10_2_4",
+      "2026-01-10_2_5",
+      "2026-01-10_2_6",
+      "2026-01-16_2_2",
+      "2026-01-16_2_3",
+      "2026-01-16_2_4",
+      "2026-01-16_2_5",
+      "2026-01-16_2_6",
+      "2026-01-16_2_7",
+      "2026-01-17_2_1",
+      "2026-01-17_2_2",
+      "2026-01-17_2_3",
+      "2026-01-17_2_4",
+      "2026-01-17_2_5",
+      "2026-01-17_2_6",
+      "2026-01-23_2_1",
+      "2026-01-23_2_2",
+      "2026-01-23_2_3",
+      "2026-01-23_2_4",
+      "2026-01-23_2_5",
+      "2026-01-23_2_6",
+      "2026-01-23_2_7",
+      "2026-01-24_2_1",
+      "2026-01-24_2_2",
+      "2026-01-24_2_4",
+      "2026-01-24_2_5",
+      "2026-01-24_2_6",
+      "2026-01-30_2_1",
+      "2026-01-30_2_2",
+      "2026-01-30_2_3",
+      "2026-01-30_2_4",
+      "2026-01-30_2_5",
+      "2026-01-30_2_6",
+      "2026-01-30_2_7",
+      "2026-01-31_2_1",
+      "2026-01-31_2_2",
+      "2026-01-31_2_3",
+      "2026-01-31_2_4",
+      "2026-01-31_2_5",
+      "2026-01-31_2_6",
+      "2026-02-06_2_1",
+      "2026-02-06_2_2",
+      "2026-02-06_2_3",
+      "2026-02-06_2_4",
+      "2026-02-06_2_5",
+      "2026-02-06_2_6",
+      "2026-02-06_2_7",
+      "2026-02-07_2_1",
+      "2026-02-07_2_2",
+      "2026-02-07_2_3",
+      "2026-02-07_2_4",
+      "2026-02-07_2_5",
+      "2026-02-07_2_6",
+      "2026-02-13_2_1",
+      "2026-02-13_2_2",
+      "2026-02-13_2_4",
+      "2026-02-13_2_5",
+      "2026-02-13_2_6",
+      "2026-02-13_2_7",
+      "2026-02-14_2_1",
+      "2026-02-14_2_2",
+      "2026-02-14_2_3",
+      "2026-02-14_2_4",
+      "2026-02-14_2_5",
+      "2026-02-14_2_6",
+      "2026-02-27_2_2",
+      "2026-02-27_2_3",
+      "2026-02-27_2_4",
+      "2026-02-27_2_5",
+      "2026-02-27_2_6",
+      "2026-02-28_2_1",
+      "2026-02-28_2_2",
+      "2026-02-28_2_3",
+      "2026-02-28_2_4",
+      "2026-02-28_2_5",
+      "2026-02-28_2_6",
+      "2026-03-02_2_1",
+      "2026-03-02_2_2",
+      "2026-03-02_2_3",
+      "2026-03-02_2_4",
+      "2026-03-02_2_5",
+      "2026-03-02_2_6",
+      "2026-03-02_2_7",
+      "2026-03-06_2_1",
+      "2026-03-06_2_2",
+      "2026-03-06_2_3",
+      "2026-03-06_2_4",
+      "2026-03-06_2_5",
+      "2026-03-06_2_6",
+      "2026-03-06_2_7",
+      "2026-03-06_2_8",
+      "2026-03-07_2_1",
+      "2026-03-07_2_2",
+      "2026-03-07_2_3",
+      "2026-03-07_2_4",
+      "2026-03-07_2_5",
+      "2026-03-07_2_6",
+      "2026-03-13_2_3",
+      "2026-03-14_2_3",
+      "2026-03-27_2_1",
+      "2026-03-27_2_3",
+      "2026-03-27_2_5",
+      "2026-03-27_2_6",
+      "2026-03-27_2_7",
+      "2026-03-27_2_8",
+      "2026-03-28_2_1",
+      "2026-03-28_2_2",
+      "2026-03-28_2_3",
+      "2026-03-28_2_4",
+      "2026-03-28_2_5",
+      "2026-03-28_2_6",
+      "2026-04-03_2_1",
+      "2026-04-03_2_2",
+      "2026-04-03_2_3",
+      "2026-04-03_2_4",
+      "2026-04-03_2_5",
+      "2026-04-03_2_6",
+      "2026-04-03_2_7",
+      "2026-04-03_2_8",
+      "2026-04-10_2_1",
+      "2026-04-10_2_2",
+      "2026-04-10_2_3",
+      "2026-04-10_2_4",
+      "2026-04-10_2_5",
+      "2026-04-10_2_6",
+      "2026-04-10_2_7",
+      "2026-04-10_2_8",
+      "2026-04-11_2_1",
+      "2026-04-11_2_2",
+      "2026-04-11_2_3",
+      "2026-04-11_2_4",
+      "2026-04-11_2_5",
+      "2026-04-11_2_6",
+      "2026-04-17_2_1",
+      "2026-04-17_2_2",
+      "2026-04-17_2_3",
+      "2026-04-17_2_6",
+      "2026-04-17_2_7",
+      "2026-04-17_2_8",
+      "2026-04-18_2_1",
+      "2026-04-18_2_2",
+      "2026-04-18_2_3",
+      "2026-04-18_2_4",
+      "2026-04-18_2_5",
+      "2026-04-18_2_6",
+      "2026-04-24_2_1",
+      "2026-04-24_2_3",
+      "2026-04-24_2_4",
+      "2026-04-24_2_5",
+      "2026-04-24_2_7",
+      "2026-04-24_2_8",
+      "2026-04-25_2_1",
+      "2026-04-25_2_2",
+      "2026-04-25_2_3",
+      "2026-04-25_2_4",
+      "2026-04-25_2_5",
+      "2026-04-25_2_6",
+      "2026-05-01_2_1",
+      "2026-05-01_2_2",
+      "2026-05-01_2_3",
+      "2026-05-01_2_4",
+      "2026-05-01_2_6",
+      "2026-05-01_2_7",
+      "2026-05-01_2_8",
+      "2026-05-01_2_9",
+      "2026-05-02_2_1",
+      "2026-05-02_2_3",
+      "2026-05-02_2_4",
+      "2026-05-02_2_5",
+      "2026-05-02_2_6",
+      "2026-05-02_2_7",
+      "2026-05-08_2_1",
+      "2026-05-08_2_2",
+      "2026-05-08_2_3",
+      "2026-05-08_2_4",
+      "2026-05-08_2_5",
+      "2026-05-08_2_6",
+      "2026-05-08_2_7",
+      "2026-05-08_2_8",
+      "2026-05-08_2_9",
+      "2026-05-09_2_1",
+      "2026-05-09_2_2",
+      "2026-05-09_2_3",
+      "2026-05-09_2_4",
+      "2026-05-09_2_5",
+      "2026-05-09_2_6",
+      "2026-05-09_2_7",
+      "2026-05-15_2_2",
+      "2026-05-15_2_3",
+      "2026-05-15_2_6",
+      "2026-05-15_2_7",
+      "2026-05-15_2_8",
+      "2026-05-15_2_9",
+      "2026-05-16_2_1",
+      "2026-05-16_2_2",
+      "2026-05-16_2_3",
+      "2026-05-16_2_4",
+      "2026-05-16_2_5",
+      "2026-05-16_2_6",
+      "2026-05-22_2_1",
+      "2026-05-22_2_2",
+      "2026-05-22_2_3",
+      "2026-05-22_2_4",
+      "2026-05-22_2_5",
+      "2026-05-22_2_6",
+      "2026-05-22_2_7",
+      "2026-05-22_2_8",
+      "2026-05-22_2_9",
+      "2026-05-23_2_1",
+      "2026-05-23_2_2",
+      "2026-05-23_2_3",
+      "2026-05-23_2_4",
+      "2026-05-23_2_5",
+      "2026-05-23_2_6",
+      "2026-05-23_2_7",
+      "2026-05-29_2_1",
+      "2026-05-29_2_2",
+      "2026-05-29_2_3",
+      "2026-05-29_2_4",
+      "2026-05-29_2_5",
+      "2026-05-29_2_6",
+      "2026-05-29_2_7",
+      "2026-05-29_2_8",
+      "2026-05-29_2_9",
+      "2026-05-30_2_1",
+      "2026-05-30_2_2",
+      "2026-05-30_2_3",
+      "2026-05-30_2_4",
+      "2026-05-30_2_5",
+      "2026-05-30_2_6",
+      "2026-05-30_2_7",
+      "2026-06-05_2_1",
+      "2026-06-05_2_2",
+      "2026-06-05_2_3",
+      "2026-06-05_2_4",
+      "2026-06-05_2_5",
+      "2026-06-05_2_6",
+      "2026-06-05_2_7",
+      "2026-06-05_2_8",
+      "2026-06-05_2_9",
+      "2026-06-06_2_1",
+      "2026-06-06_2_2",
+      "2026-06-06_2_3",
+      "2026-06-06_2_4",
+      "2026-06-06_2_5",
+      "2026-06-06_2_6",
+      "2026-06-06_2_7",
+      "2026-06-12_2_1",
+      "2026-06-12_2_2",
+      "2026-06-12_2_3",
+      "2026-06-12_2_4",
+      "2026-06-12_2_5",
+      "2026-06-12_2_6",
+      "2026-06-12_2_7",
+      "2026-06-12_2_8",
+      "2026-06-12_2_9",
+      "2026-06-13_2_1",
+      "2026-06-13_2_2",
+      "2026-06-13_2_3",
+      "2026-06-13_2_4",
+      "2026-06-13_2_5",
+      "2026-06-13_2_6",
+      "2026-06-13_2_7",
+      "2026-06-19_2_2",
+      "2026-06-19_2_3",
+      "2026-06-19_2_4",
+      "2026-06-19_2_5",
+      "2026-06-19_2_6",
+      "2026-06-19_2_7",
+      "2026-06-19_2_8",
+      "2026-06-19_2_9",
+      "2026-06-20_2_1",
+      "2026-06-20_2_2",
+      "2026-06-20_2_3",
+      "2026-06-20_2_4",
+      "2026-06-20_2_5",
+      "2026-06-20_2_6",
+      "2026-06-20_2_7",
+      "2026-06-26_2_1",
+      "2026-06-26_2_2",
+      "2026-06-26_2_3",
+      "2026-06-26_2_4",
+      "2026-06-26_2_5",
+      "2026-06-26_2_6",
+      "2026-06-26_2_7",
+      "2026-06-26_2_8",
+      "2026-06-26_2_9",
+      "2026-06-27_2_1",
+      "2026-06-27_2_2",
+      "2026-06-27_2_3",
+      "2026-06-27_2_4",
+      "2026-06-27_2_5",
+      "2026-06-27_2_6",
+      "2026-06-27_2_7",
+      "2026-07-03_2_1",
+      "2026-07-03_2_2",
+      "2026-07-03_2_3",
+      "2026-07-03_2_4",
+      "2026-07-03_2_5",
+      "2026-07-03_2_6",
+      "2026-07-03_2_7",
+      "2026-07-03_2_8",
+      "2026-07-04_2_1",
+      "2026-07-04_2_2",
+      "2026-07-04_2_3",
+      "2026-07-04_2_4",
+      "2026-07-04_2_6",
+      "2026-07-04_2_7",
+      "2026-07-10_2_1",
+      "2026-07-10_2_2",
+      "2026-07-10_2_3",
+      "2026-07-10_2_4",
+      "2026-07-10_2_5",
+      "2026-07-10_2_6",
+      "2026-07-10_2_7",
+      "2026-07-10_2_8",
+      "2026-07-11_2_1",
+      "2026-07-11_2_2",
+      "2026-07-11_2_3",
+      "2026-07-11_2_4",
+      "2026-07-11_2_5",
+      "2026-07-11_2_6",
+      "2026-07-11_2_7",
+      "2026-07-17_2_1",
+      "2026-07-17_2_2",
+      "2026-07-17_2_3",
+      "2026-07-17_2_4",
+      "2026-07-17_2_5",
+      "2026-07-17_2_6",
+      "2026-07-17_2_7",
+      "2026-07-17_2_8",
+      "2026-07-18_2_1",
+      "2026-07-18_2_2",
+      "2026-07-18_2_3",
+      "2026-07-18_2_4",
+      "2026-07-18_2_5",
+      "2026-07-18_2_6",
+      "2026-07-18_2_7",
+      "2026-07-24_2_1",
+      "2026-07-24_2_2",
+      "2026-07-24_2_4",
+      "2026-07-24_2_5",
+      "2026-07-24_2_6",
+      "2026-07-24_2_7",
+      "2026-07-24_2_8",
+      "2026-07-25_2_1",
+      "2026-07-25_2_2",
+      "2026-07-25_2_3",
+      "2026-07-25_2_4",
+      "2026-07-25_2_5",
+      "2026-07-25_2_6",
+      "2026-07-25_2_7",
+      "2026-08-07_2_1",
+      "2026-08-07_2_2",
+      "2026-08-07_2_3",
+      "2026-08-07_2_4",
+      "2026-08-07_2_5",
+      "2026-08-07_2_6",
+      "2026-08-08_2_1",
+      "2026-08-08_2_2",
+      "2026-08-08_2_3",
+      "2026-08-08_2_4",
+      "2026-08-08_2_5",
+      "2026-08-08_2_6",
+      "2026-08-08_2_7",
+      "2026-08-14_2_1",
+      "2026-08-14_2_2",
+      "2026-08-14_2_3",
+      "2026-08-14_2_5",
+      "2026-08-14_2_6",
+      "2026-08-14_2_7",
+      "2026-08-14_2_8",
+      "2026-08-15_2_1",
+      "2026-08-15_2_2",
+      "2026-08-15_2_3",
+      "2026-08-15_2_4",
+      "2026-08-15_2_5",
+      "2026-08-15_2_6",
+      "2026-08-15_2_7",
+      "2026-08-17_2_1",
+      "2026-08-17_2_3",
+      "2026-08-17_2_4",
+      "2026-08-17_2_6",
+      "2026-08-21_2_1",
+      "2026-08-21_2_2",
+      "2026-08-21_2_3",
+      "2026-08-21_2_4",
+      "2026-08-21_2_5",
+      "2026-08-21_2_6",
+      "2026-08-21_2_7",
+      "2026-08-21_2_8",
+      "2026-08-22_2_1",
+      "2026-08-22_2_2",
+      "2026-08-22_2_3",
+      "2026-08-22_2_4",
+      "2026-08-22_2_5",
+      "2026-08-22_2_6",
+      "2026-08-22_2_7",
+      "2026-08-28_2_1",
+      "2026-08-28_2_2",
+      "2026-08-28_2_3",
+      "2026-08-28_2_4",
+      "2026-08-28_2_5",
+      "2026-08-28_2_6",
+      "2026-08-28_2_7",
+      "2026-08-29_2_1",
+      "2026-08-29_2_2",
+      "2026-08-29_2_3",
+      "2026-08-29_2_4",
+      "2026-08-29_2_5",
+      "2026-08-29_2_6",
+      "2026-09-04_2_1",
+      "2026-09-04_2_2",
+      "2026-09-04_2_3",
+      "2026-09-04_2_4",
+      "2026-09-04_2_5",
+      "2026-09-04_2_7",
+      "2026-09-04_2_8",
+      "2026-09-05_2_1",
+      "2026-09-05_2_2",
+      "2026-09-05_2_3",
+      "2026-09-05_2_4",
+      "2026-09-05_2_5",
+      "2026-09-05_2_6",
+      "2026-09-10_2_1",
+      "2026-09-10_2_2",
+      "2026-09-10_2_3",
+      "2026-09-10_2_4",
+      "2026-09-10_2_5",
+      "2026-09-10_2_6",
+      "2026-09-10_2_7",
+      "2026-09-10_2_8",
+      "2026-09-11_2_1",
+      "2026-09-11_2_2",
+      "2026-09-11_2_3",
+      "2026-09-11_2_4",
+      "2026-09-11_2_5",
+      "2026-09-11_2_7",
+      "2026-09-12_2_1",
+      "2026-09-12_2_2",
+      "2026-09-12_2_3",
+      "2026-09-12_2_4",
+      "2026-09-12_2_5",
+      "2026-09-12_2_6",
+      "2026-09-12_2_7"
+    ],
+    "native_distribution_by_race": [
+      {
+        "race_id": "2026-01-02_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-02_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-02_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-02_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-02_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-02_2_7",
+        "field_n": 9,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-01-03_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-03_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-03_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-03_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-03_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-03_2_6",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-01-09_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-09_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-09_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-09_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-09_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-09_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-09_2_7",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-01-10_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-10_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-10_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-10_2_4",
+        "field_n": 9,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-01-10_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-10_2_6",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-01-16_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-16_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-16_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-16_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-16_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-16_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-17_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-17_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-17_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-17_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-17_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-17_2_6",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-01-23_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-23_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-23_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-23_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-23_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-23_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-23_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-24_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-24_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-24_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-24_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-24_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-30_2_7",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-01-31_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-31_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-31_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-31_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-31_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-01-31_2_6",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-02-06_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-06_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-06_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-06_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-06_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-06_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-06_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-07_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-07_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-07_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-07_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-07_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-07_2_6",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-02-13_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-13_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999987,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-13_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-13_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-13_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-13_2_7",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-02-14_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-14_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-14_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-14_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-14_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999982,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-14_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-27_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-27_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-27_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-27_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-27_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-28_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-28_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-28_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-28_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-28_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-02-28_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999987,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-02_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-06_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-07_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-07_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-07_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-07_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000018,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-07_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-07_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-13_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-14_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-27_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-27_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-27_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-27_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-27_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-27_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-28_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-28_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-28_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-28_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-28_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999982,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-03-28_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-03_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-10_2_8",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-04-11_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-11_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-11_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-11_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-11_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-11_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-17_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-17_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-17_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-17_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-17_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-17_2_8",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-04-18_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-18_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-18_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-18_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-18_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-18_2_6",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-04-24_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-24_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-24_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-24_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-24_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-24_2_8",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-04-25_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-25_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-25_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-25_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-04-25_2_5",
+        "field_n": 12,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 66
+      },
+      {
+        "race_id": "2026-04-25_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-01_2_9",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-02_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-02_2_3",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-02_2_4",
+        "field_n": 9,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-02_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-02_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-02_2_7",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-08_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-08_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-08_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-08_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-08_2_5",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-08_2_6",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-08_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-08_2_8",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-08_2_9",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-09_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-09_2_2",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-09_2_3",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-09_2_4",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-09_2_5",
+        "field_n": 9,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-09_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-09_2_7",
+        "field_n": 8,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-15_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-15_2_3",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-15_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-15_2_7",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-15_2_8",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-15_2_9",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-16_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-16_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-16_2_3",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.0000000000000013,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-16_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-16_2_5",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-16_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-22_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-22_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-22_2_3",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-22_2_4",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-22_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-22_2_6",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-22_2_7",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-22_2_8",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-22_2_9",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-23_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999996,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-23_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-23_2_3",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-23_2_4",
+        "field_n": 8,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-05-23_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-23_2_6",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-05-23_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-29_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999987,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-29_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-29_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-29_2_4",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-29_2_5",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-29_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-29_2_7",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-29_2_8",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-29_2_9",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-30_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-30_2_2",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-30_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-30_2_4",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-05-30_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-30_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-05-30_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-05_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-05_2_2",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-06-05_2_3",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-06-05_2_4",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-05_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-05_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-05_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-05_2_8",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-05_2_9",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-06-06_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-06_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-06_2_3",
+        "field_n": 9,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-06_2_4",
+        "field_n": 8,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-06-06_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-06_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-06_2_7",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-12_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-12_2_8",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-12_2_9",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-06-13_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-13_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-13_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-13_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-13_2_5",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-13_2_6",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-13_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-19_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-19_2_3",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-06-19_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-19_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-19_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-19_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-19_2_8",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-06-19_2_9",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-20_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.0000000000000013,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-20_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-20_2_3",
+        "field_n": 8,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-06-20_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-20_2_5",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-06-20_2_6",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-06-20_2_7",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-06-26_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-26_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-26_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-26_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-26_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-26_2_6",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999987,
+        "pair_probability_sum": 2.9999999999999987,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-26_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-26_2_8",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999993,
+        "runner_probability_sum": 2.9999999999999982,
+        "pair_probability_sum": 2.9999999999999982,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-06-26_2_9",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-06-27_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-27_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-27_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-27_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-27_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-27_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-06-27_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-03_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-04_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-04_2_2",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-07-04_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-04_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-04_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-04_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_2",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-07-10_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-10_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-11_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-17_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-18_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-18_2_2",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-07-18_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-18_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-18_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-18_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-18_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-24_2_8",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-07-25_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-07_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-07_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-07_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-07_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-07_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-07_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000007,
+        "runner_probability_sum": 3.0000000000000018,
+        "pair_probability_sum": 3.0000000000000013,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-08_2_7",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-14_2_1",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-14_2_2",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-14_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-14_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-14_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-14_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-14_2_8",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-08-15_2_1",
+        "field_n": 9,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-08-15_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-15_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-15_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-15_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.0000000000000013,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-15_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-15_2_7",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-17_2_1",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-08-17_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-17_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000013,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-17_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_6",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-21_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-21_2_8",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-22_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-22_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-22_2_3",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-22_2_4",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-08-22_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-22_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-22_2_7",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-28_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-28_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-28_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-28_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-28_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-28_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-28_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000004,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-29_2_1",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-29_2_2",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-29_2_3",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-08-29_2_4",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-29_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-08-29_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-04_2_1",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-04_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-04_2_3",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-09-04_2_4",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-09-04_2_5",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999998,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-04_2_7",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-04_2_8",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-09-05_2_1",
+        "field_n": 8,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-09-05_2_2",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-05_2_3",
+        "field_n": 10,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-05_2_4",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-05_2_5",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-05_2_6",
+        "field_n": 10,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-10_2_1",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-10_2_2",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999999,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-10_2_3",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-10_2_4",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-09-10_2_5",
+        "field_n": 9,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-09-10_2_6",
+        "field_n": 10,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.999999999999999,
+        "expected_pair_count": 45
+      },
+      {
+        "race_id": "2026-09-10_2_7",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-10_2_8",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-11_2_1",
+        "field_n": 7,
+        "set_probability_sum": 0.9999999999999997,
+        "runner_probability_sum": 2.999999999999999,
+        "pair_probability_sum": 2.9999999999999996,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-11_2_2",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-09-11_2_3",
+        "field_n": 8,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 28
+      },
+      {
+        "race_id": "2026-09-11_2_4",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-11_2_5",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-11_2_7",
+        "field_n": 9,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 36
+      },
+      {
+        "race_id": "2026-09-12_2_1",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-12_2_2",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.0000000000000004,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-12_2_3",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 2.9999999999999996,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-12_2_4",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-12_2_5",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.000000000000001,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-12_2_6",
+        "field_n": 7,
+        "set_probability_sum": 1.0000000000000002,
+        "runner_probability_sum": 3.000000000000001,
+        "pair_probability_sum": 3.0000000000000004,
+        "expected_pair_count": 21
+      },
+      {
+        "race_id": "2026-09-12_2_7",
+        "field_n": 7,
+        "set_probability_sum": 1.0,
+        "runner_probability_sum": 3.0,
+        "pair_probability_sum": 3.0,
+        "expected_pair_count": 21
+      }
+    ],
+    "hy_rows_common": 4475,
+    "hy_unique_common_runners": 4475,
+    "hy_common_dates": [
+      "2026-01-02",
+      "2026-01-03",
+      "2026-01-09",
+      "2026-01-10",
+      "2026-01-16",
+      "2026-01-17",
+      "2026-01-23",
+      "2026-01-24",
+      "2026-01-30",
+      "2026-01-31",
+      "2026-02-06",
+      "2026-02-07",
+      "2026-02-13",
+      "2026-02-14",
+      "2026-02-27",
+      "2026-02-28",
+      "2026-03-02",
+      "2026-03-06",
+      "2026-03-07",
+      "2026-03-13",
+      "2026-03-14",
+      "2026-03-27",
+      "2026-03-28",
+      "2026-04-03",
+      "2026-04-10",
+      "2026-04-11",
+      "2026-04-17",
+      "2026-04-18",
+      "2026-04-24",
+      "2026-04-25",
+      "2026-05-01",
+      "2026-05-02",
+      "2026-05-08",
+      "2026-05-09",
+      "2026-05-15",
+      "2026-05-16",
+      "2026-05-22",
+      "2026-05-23",
+      "2026-05-29",
+      "2026-05-30",
+      "2026-06-05",
+      "2026-06-06",
+      "2026-06-12",
+      "2026-06-13",
+      "2026-06-19",
+      "2026-06-20",
+      "2026-06-26",
+      "2026-06-27",
+      "2026-07-03",
+      "2026-07-04",
+      "2026-07-10",
+      "2026-07-11",
+      "2026-07-17",
+      "2026-07-18",
+      "2026-07-24",
+      "2026-07-25",
+      "2026-08-07",
+      "2026-08-08",
+      "2026-08-14",
+      "2026-08-15",
+      "2026-08-17",
+      "2026-08-21",
+      "2026-08-22",
+      "2026-08-28",
+      "2026-08-29",
+      "2026-09-04",
+      "2026-09-05",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-12"
+    ],
+    "hy_exact_raw_score_tied_races": 0,
+    "alignment_reason_counts": {
+      "matched": 467,
+      "operating_only": 43,
+      "new_only": 21
+    },
+    "alignment_rows": 531,
+    "qpl_races": 467,
+    "qpl_dates": 70,
+    "qpl_pair_rows_per_model": 19388,
+    "qpl_complete_field_pair_roster": true,
+    "qpl_full_price_rows": 19388,
+    "qpl_valid_quote_rows": 19388,
+    "qpl_missing_or_invalid_quotes": 0,
+    "plc_races": 436,
+    "plc_dates": 69,
+    "plc_runner_rows_per_model": 4258,
+    "plc_full_price_rows": 4258,
+    "plc_valid_quote_rows": 4258,
+    "plc_quote_reference_matches": 4258,
+    "plc_unsupported_7_or_fewer_races": 31,
+    "plc_unsupported_7_or_fewer_runners": 217,
+    "plc_supported_cohort_full_roster": true,
+    "official_rows_for_common_races": 4475,
+    "official_races": 467,
+    "races_with_exactly_3_top3_runners": 467,
+    "common_race_dead_heats": 0,
+    "official_roster_rows_checked": 4475,
+    "saved_hy_labels_match_official": true,
+    "research_pair_label_rows_checked": 19388,
+    "research_pair_labels_match_official": true,
+    "prior_qpl_row_labels_match_official": 19388,
+    "plc_selected_rows_joined": 5187
+  },
+  "native_probability_contract": {
+    "qpl_hy": "sum exact native HY Top3-set probability over every set containing both horses",
+    "plc_hy": "native HY runner Top3 marginal from the same saved-score distribution",
+    "set_mass_sum_checked_per_race": true,
+    "runner_top3_mass_sum_checked_per_race": true,
+    "pair_top3_joint_mass_sum_checked_per_race": true,
+    "runner_product_used": false,
+    "single_unordered_top3_set_probability_used_as_pair_probability": false,
+    "operating_exact_raw_score_tied_races": 0
+  },
+  "rules": {
+    "qpl_rule_count": 13,
+    "plc_rule_count": 8,
+    "summary_rows": 42,
+    "max_selected_tickets_per_race": 1,
+    "stake_krw_per_selected_ticket": 1000
+  },
+  "bootstrap": {
+    "schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "draws": 2000,
+    "dates_per_draw": 269,
+    "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+    "all_noneligible_dates_zero_selection": true,
+    "paired_operating_minus_research_intervals": true
+  },
+  "source_review_status": {
+    "qpl_raw_source_review": "PASS",
+    "qpl_full_census": "PASS",
+    "plc_source_audit": "PASS",
+    "plc_direct_quote_review": "PASS",
+    "official_roster_review": "PASS"
+  },
+  "non_actions": {
+    "training": false,
+    "calibration_fit": false,
+    "network": false,
+    "database_write": false,
+    "registry_or_operations_change": false,
+    "old_study_modified": false
+  }
+}

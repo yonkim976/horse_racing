@@ -1,0 +1,373 @@
+{
+  "manifest_status": "FINAL_COMPLETE_NOT_PROMOTED",
+  "study": "20261018_debut_trial_ablation_v1",
+  "created_date": "2026-10-18",
+  "candidate": "F1_STYLE6_DEBUT_TRIAL4",
+  "comparison_baseline": "saved F1_STYLE6 horse-assessment model; exact replay, no refit",
+  "scope": "One approved 34-input candidate; retrospective evaluation; no model promotion.",
+  "fit": {
+    "approved_by": "root",
+    "approval_sha256": "a3bf6c71cc5b834a718f694bd0eb2a22055c47ba36db88047406b559d4919ba6",
+    "candidate_models": 3,
+    "lightgbm_train_calls": 6,
+    "temperature_optimizations": 3,
+    "no_refit_after_fit": true
+  },
+  "evaluation": {
+    "report_receipt_sha256": "922458e0c42c9cf2a41d0eaf9f20a432e65fbcc5c72a42713b445f541a7c5dd3",
+    "summary_sha256": "e602d255c5a8927edfc5dc78fe905893d89ecb06b274341d58a0e45f417fdde2",
+    "primary_gate_passed": true,
+    "primary_metrics": [
+      {
+        "metric": "log_loss",
+        "cold_runner_rows": 661,
+        "cold_races": 252,
+        "race_days_with_cold_runners": 191,
+        "candidate_race_equal": 0.5242025498671642,
+        "baseline_race_equal": 0.6299800273912703,
+        "delta_candidate_minus_baseline": -0.10577747752410616,
+        "paired_date_bootstrap_ci95_low": -0.13351990115227452,
+        "paired_date_bootstrap_ci95_high": -0.07909457142726459,
+        "draws": 2000,
+        "dates_per_draw": 269,
+        "valid_draws": 2000
+      },
+      {
+        "metric": "brier",
+        "cold_runner_rows": 661,
+        "cold_races": 252,
+        "race_days_with_cold_runners": 191,
+        "candidate_race_equal": 0.17334420626290228,
+        "baseline_race_equal": 0.21931281245584666,
+        "delta_candidate_minus_baseline": -0.045968606192944364,
+        "paired_date_bootstrap_ci95_low": -0.05812756782125534,
+        "paired_date_bootstrap_ci95_high": -0.034092691595650024,
+        "draws": 2000,
+        "dates_per_draw": 269,
+        "valid_draws": 2000
+      }
+    ],
+    "cold_raw_score_concordance": {
+      "eligible_races": 118,
+      "cross_label_pairs": 398,
+      "baseline_equal_race_mean": 0.5,
+      "candidate_equal_race_mean": 0.7528282216841539,
+      "delta": 0.25282822168415386,
+      "pairing": "all cold Top3-positive/negative score pairs within each race; average pair scores within race, then races equally",
+      "score": "raw model score; exact raw-score ties earn 0.5",
+      "role": "descriptive secondary, not a gate"
+    },
+    "experienced_score_diagnostic": {
+      "experienced_rows": 16751,
+      "races": 1779,
+      "raw_score_changed_rows": 16751,
+      "raw_score_mean_absolute_change": 0.04509008237734276,
+      "raw_score_max_absolute_change": 0.38379572569540243,
+      "added_features_all_null": true,
+      "interpretation": "Pooled refit can change experienced-runner scores even though added inputs are NULL."
+    },
+    "evaluation_source_lock_sha256": "ac2f454827996b7c05122b1555d58433e08d5127bed6484e0758458450a40767"
+  },
+  "source_and_preflight": {
+    "preflight_sha256": "4baa21790203ce057b88fd274127960b629c3793ce60f570f2270f755f33fbe3",
+    "prepared_lock_sha256": "ad373241121a6717aa02ace75b7834df0d9b84f80ae90adcc2fdf158f5dc987f",
+    "source_audit_manifest_sha256": "2b51b2638823b2c4ff3673b24d9c68ee6d94cc734f75902e1ec8c69adefda7ea",
+    "feature_rows": 52155,
+    "base_inputs_exact_and_in_order": true,
+    "candidate_model_input_count": 34
+  },
+  "fit_error_history": {
+    "failed_evaluation_attempts": 1,
+    "successful_report_runs": 1,
+    "failed_attempt_audit_sha256": "697ae3ee637c5596acda5b044dfbc5497f216d71261683ccf9e52741741d121a",
+    "initial_failed_source_lock_sha256": "fa878e81fd86b52f8a6a676e805bd051397b65caf3c2512654f6194e9a5163ee",
+    "initial_failed_evaluator_sha256": "e4330398cace74e4e1dc3570a018cd5563f9e7a15e7b0863710ea71a988bf6b3",
+    "failed_attempt_metrics_computed_in_memory_but_not_emitted_or_saved": true,
+    "final_correction_scope": "Group diagnostics by the actual shared merge-key columns year and distance_m. No feature, cohort, score, metric, model, parameter, or gate change."
+  },
+  "independent_root_review": {
+    "path": "jeju/research/20261018_debut_trial_rootreview_v1/ROOT_REPORT_REVIEW.json",
+    "sha256": "966214d87394a36d7311f5d21e81c732a678c33d1f9ebf8e7d60ee966d27c71a",
+    "status": "PASS",
+    "protected_artifacts_unchanged": 17,
+    "summary_sha256_verified": "e602d255c5a8927edfc5dc78fe905893d89ecb06b274341d58a0e45f417fdde2"
+  },
+  "independent_root_numeric_review": {
+    "path": "jeju/research/20261018_debut_trial_rootreview_v1/ROOT_REPORT_NUMERIC_ADDENDUM.json",
+    "sha256": "b68a1d4d8540f6b614e60d560ab4d114211d46e04bca89b9764ce86eb43cf144",
+    "status": "PASS",
+    "runner_scope_rows_verified": 20,
+    "race_diagnostic_rows_verified": 144,
+    "primary_bootstrap_values_verified": 4000,
+    "summary_output_hashes_verified": 12
+  },
+  "guardrails": {
+    "production_changed": false,
+    "operating_model_promoted": false,
+    "database_changed": false,
+    "existing_pair_order_heads_refit": false,
+    "variants_or_post_result_tuning": false
+  },
+  "study_code": {
+    "PLAN.md": {
+      "bytes": 9429,
+      "sha256": "69cf517cb1b92e8c9cf57cb3c3ce3684f365c46dcc75d1862347b9207f47b4df"
+    },
+    "CONTRACT.md": {
+      "bytes": 8229,
+      "sha256": "013231e544476f1eaa41edad955b9fc94938565a4bff31930e3418061fc90bcb"
+    },
+    "README.md": {
+      "bytes": 9007,
+      "sha256": "1a27dbfdf99727106508a5bee5ea4d3d4992083eb70171e5366bda1cc188800e"
+    },
+    "feature_core.py": {
+      "bytes": 20154,
+      "sha256": "6f8b847f675c6aae03aa0b49befcebb7155b67620e53801700b85bde0fecad7b"
+    },
+    "prepare_input.py": {
+      "bytes": 25694,
+      "sha256": "15e36e8eef6b967edc03c9743dcf568a84228c6bc29cd3423350a4bc4e541165"
+    },
+    "baseline_replay.py": {
+      "bytes": 10636,
+      "sha256": "c4bfcc96c17e9d4a797dda57d245bed8da743cac10c18b062f1cf1ca24ab7228"
+    },
+    "train_candidate.py": {
+      "bytes": 14465,
+      "sha256": "bb693faaaf7628fb8e4231d87f619bbd2b1547dd20775d7ab2e7df611c947aa3"
+    },
+    "selftest_feature_core.py": {
+      "bytes": 5468,
+      "sha256": "b4dd54f0c17b23591bc691ba674a97eed2c6a4e9bd31aac8bf0124ad57731e2b"
+    },
+    "evaluate_candidate.py": {
+      "bytes": 25580,
+      "sha256": "631468260d3e5df6df81af49e08e459041c93164c41eb8b9ec7b65a841e22696"
+    },
+    "selftest_evaluator.py": {
+      "bytes": 1475,
+      "sha256": "fef5dbb06db4615e1e9b35268e972850ca5f45a9f268c7b6648cc4dc4bd4da5b"
+    },
+    "freeze_evaluation_source.py": {
+      "bytes": 6889,
+      "sha256": "14bc20f51b657e7882ec57f197f553c04178d34770f5ba6342053f9be0c9f474"
+    },
+    "write_final_manifest.py": {
+      "bytes": 7918,
+      "sha256": "1e28b031b5a7d18b901c5a926b76d50e13b9bda0865b3f5482c37f6d87321b68"
+    }
+  },
+  "output_artifacts": [
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2024/calibration_scores.parquet",
+      "bytes": 100281,
+      "sha256": "87db71959a1b1031ee6aee00345c62b78bc50a20e933a3a4ec635015c1ef41da"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2024/evaluation_scores.parquet",
+      "bytes": 97891,
+      "sha256": "aebd56df67b3ab3298af83f37c90a85d5ca80ef0cc18c045bb8fb3896711b405"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2024/meta.json",
+      "bytes": 4355,
+      "sha256": "8a8607be2cd4cf0329e0f083ef7415d7094717883a38aff58b6d18a670383dd3"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2024/top3.txt",
+      "bytes": 362073,
+      "sha256": "c4fd7867ab7be064faaa85b443582c3712a1ec7ff2d01ff477f3a8e327aee65d"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2025/calibration_scores.parquet",
+      "bytes": 97915,
+      "sha256": "b5d700d30810168f030450bb5584824b7681378210d485b8118fdfff9fcf6e19"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2025/evaluation_scores.parquet",
+      "bytes": 99084,
+      "sha256": "7a9c5340ed30ca47fcf2a5f67994654147eb303d546ac28c37658373aa2c89e4"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2025/meta.json",
+      "bytes": 4339,
+      "sha256": "f47ae91fb8754c011f3ed20c612bc542577b4c618ddd2b3f4ab672f6e9323787"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2025/top3.txt",
+      "bytes": 363934,
+      "sha256": "3ac244acb9814ac9aaa1e2327aa9cf09c3224ccc0403643dda9bff08c62d9665"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2026/calibration_scores.parquet",
+      "bytes": 99148,
+      "sha256": "8a60bb9dc7911d68a093095d0fdd49e8beac2d89c892dd05c2236eb73beee139"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2026/evaluation_scores.parquet",
+      "bytes": 72903,
+      "sha256": "f06b33d94dc7b9c06fe0180ec30ff4f23b15c0a6e64623d0f51192ef07246ac0"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2026/meta.json",
+      "bytes": 4363,
+      "sha256": "6dd7b67f3062e4f731c5366aa773ce20234f1b67a9fa34282aa70218b0ab8ee2"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2026/top3.txt",
+      "bytes": 356757,
+      "sha256": "af3de35578ac7bcac6dcc56b818d809877a3f0ec406ffa4ff09ec9120d127051"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/baseline_replay_verification.json",
+      "bytes": 2873,
+      "sha256": "f4ea555d0e02d220a06e89bc0f683c11ea096b3e14b9492d28e2913b75681e2e"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/baseline_replayed_canonical_max6.parquet",
+      "bytes": 133305,
+      "sha256": "f168c90ba3f51e6815bdb42f348671aff84e1f0de83dc78a23f9945b80d1f591"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/baseline_replayed_race_metrics.parquet",
+      "bytes": 100008,
+      "sha256": "c480a3e688822cd898203a6ff6e0972c43f49ad14d92ff9907dc877d1de34c52"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/baseline_replayed_runner_predictions.parquet",
+      "bytes": 877381,
+      "sha256": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/candidate_evaluation_canonical_max6.parquet",
+      "bytes": 136966,
+      "sha256": "746d1d988d33fd4fb20c69262d76c6761f3520af78de6e75c805e82922fd4d1e"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/candidate_evaluation_race_metrics.parquet",
+      "bytes": 100914,
+      "sha256": "c8f2b85ff5091592df2c68e16cc2e5ee8042de300bf09ab6e9a818adc50f24e6"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/candidate_evaluation_runner_predictions.parquet",
+      "bytes": 886468,
+      "sha256": "f78cdaae0f70d420c3bdcc848b001c5b033e09ae1c78d4c781bf853e39910591"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/candidate_scores_fit_stage.parquet",
+      "bytes": 275437,
+      "sha256": "ef573d895808acee312d2b47c678e02e25995fb76921e124ea01f60d52852b6f"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/candidate_training_completion.json",
+      "bytes": 1932,
+      "sha256": "aded64b3f1671378a70193266138818a7ce3a6f457054ebc97ecb4e645ea1e5c"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/cold_primary_bootstrap_draws.parquet",
+      "bytes": 51619,
+      "sha256": "0c6911fb9f3e6a44e23dcc207b64157171265075b23656b2f86f1b54b1adf2a6"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/cold_primary_metrics.parquet",
+      "bytes": 8404,
+      "sha256": "18c81934215a0a3ac56a90a54be3e98d4e1a7f32dd4361ff664ba9bd9c4af06d"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/cold_raw_score_concordance_by_race.parquet",
+      "bytes": 5461,
+      "sha256": "d941de7742c68e190852b5efe2697b8510a7fb1949484b86500cf8e934ccdefd"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/cold_target_trial_feature_slots.parquet",
+      "bytes": 290219,
+      "sha256": "19cea310f18e4bb6dd09f6a30366d7afd0b7dfc34bcbca5b763459f312827da4"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/cold_target_trial_source_lineage.parquet",
+      "bytes": 394783,
+      "sha256": "50a7d171efbad7472c5da0178dc4b5d4a4a73ce7c86ccedbdd143c3db4fb180d"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/cold_trial_signal_support.parquet",
+      "bytes": 3191,
+      "sha256": "d64c0369f0d339fa669c82893ed2ae03ab9f1a1201ac24be090099c997fa1d16"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/evaluation_failed_attempt_audit.json",
+      "bytes": 1261,
+      "sha256": "697ae3ee637c5596acda5b044dfbc5497f216d71261683ccf9e52741741d121a"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/evaluation_report_receipt.json",
+      "bytes": 2984,
+      "sha256": "922458e0c42c9cf2a41d0eaf9f20a432e65fbcc5c72a42713b445f541a7c5dd3"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/evaluation_source_lock.json",
+      "bytes": 17356,
+      "sha256": "ac2f454827996b7c05122b1555d58433e08d5127bed6484e0758458450a40767"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/evaluation_source_lock_failed_attempt.json",
+      "bytes": 16598,
+      "sha256": "fa878e81fd86b52f8a6a676e805bd051397b65caf3c2512654f6194e9a5163ee"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/evaluation_summary.json",
+      "bytes": 6644,
+      "sha256": "e602d255c5a8927edfc5dc78fe905893d89ecb06b274341d58a0e45f417fdde2"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/features_f1_style6_debut_trial4.parquet",
+      "bytes": 5510690,
+      "sha256": "00f283e1e9f2473379705113926ca1bfb193aa6d6f6796623b92cdc28ace3667"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/fit_execution_started.json",
+      "bytes": 509,
+      "sha256": "1f409f86ac90ce38b7dba60b93311057fa25e3ac1ed41d8a30150f89e88e93e5"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/frozen_2026_01_02_jeju1r_example.csv",
+      "bytes": 1976,
+      "sha256": "e547f1e6cd51e0744321e5ad05ce9b0f4d3619505f74d1c19065188b496faae5"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/paired_race_metrics.parquet",
+      "bytes": 108044,
+      "sha256": "8349d535374548f7e87440ce5945129f6c7b6fae8319aee46b04e233b10fdac4"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/paired_runner_metrics.parquet",
+      "bytes": 1563120,
+      "sha256": "5bff937061ba16cdb40c06ed243bce170299febdf2d1cec205481817d9a6d719"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/preflight_verification.json",
+      "bytes": 4821,
+      "sha256": "4baa21790203ce057b88fd274127960b629c3793ce60f570f2270f755f33fbe3"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/prepared_lock.json",
+      "bytes": 9046,
+      "sha256": "ad373241121a6717aa02ace75b7834df0d9b84f80ae90adcc2fdf158f5dc987f"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/race_diagnostic_comparisons.parquet",
+      "bytes": 8331,
+      "sha256": "8e10ca3e682d3be91041324de9b70280419527ba676052c2cfadb91e5521f790"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/root_fit_approval.json",
+      "bytes": 1042,
+      "sha256": "a3bf6c71cc5b834a718f694bd0eb2a22055c47ba36db88047406b559d4919ba6"
+    },
+    {
+      "path": "jeju/research/20261018_debut_trial_ablation_v1/outputs/runner_scope_comparisons.parquet",
+      "bytes": 8660,
+      "sha256": "33cdb2dc75fa38901d29294ac766ddfb4a11180f79350640915c8be324ce4c99"
+    }
+  ]
+}

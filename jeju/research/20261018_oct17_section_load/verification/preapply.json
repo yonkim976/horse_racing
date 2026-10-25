@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "plan_sha256": "ace8dd18f105bce3c6c92103805609c6805e56344bc748b056098cf69ce49978",
+  "loader_sha256": "ec265841ca52009c426c690b168f47f94fdbe273ad34f12cf6978986479db12d",
+  "schema_sql_sha256": "7b456f2eca37ddd65e1f917467c82241abe0c023f768302dbb99386c6530e40b",
+  "migration_path": "jeju/data/schema/migrations/20261018_add_api6_section_distance_reviews.sql",
+  "migration_matches_inline_ddl_and_view": true,
+  "plan_inputs_checked": 14,
+  "plan_inputs_all_sha256_match": true,
+  "api6_raw_source_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+  "api303_raw_source_sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215",
+  "source_verification_report": "jeju/research/20261018_oct17_section_load/verification/source_verification.json",
+  "source_verification_passed": true,
+  "guard_simulation_report": "jeju/research/20261018_oct17_section_load/verification/guard_simulation.json",
+  "guard_simulation_passed": true,
+  "guard_scenarios": [
+    "baseline_source_bound_review",
+    "review_missing_all",
+    "review_missing_index_3",
+    "payload_sha_changed",
+    "page_sha_changed",
+    "key_changed",
+    "rcDist_changed",
+    "raw_distance_changed",
+    "artifact_id_changed"
+  ],
+  "preapply_database_state": {
+    "db_open": "mode=ro/query_only",
+    "journal_mode": "delete",
+    "wal_sidecar_present": false,
+    "shm_sidecar_present": false,
+    "target_counts": {
+      "race_result_rows": 69,
+      "refresh_section_records": 0,
+      "api303_corner_rank_rows": 0
+    },
+    "new_review_table_or_view_preexisting": false,
+    "same_run_id_preexisting": false,
+    "refresh_pointer_matches_plan_snapshot": true,
+    "apply_receipt_preexisting": false,
+    "backup_preexisting": false,
+    "prepared_database_sha256": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f",
+    "apply_rechecks_database_sha_before_write": true
+  },
+  "checked_plan_inputs": [
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_01.html",
+      "sha256": "b609c7e3e107a611282f11a5d32a5255070b02e66ed92a881be454a6e03e839f"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_02.html",
+      "sha256": "e95be063b7f3b89fb76bff01195cff53e89885c88fcdb417b3e7e91e138f45bd"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_03.html",
+      "sha256": "1c863aee859a9ff15c47023ca979ab3f2a55ad7c8c8342d7be93ae3edab2c3ee"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_04.html",
+      "sha256": "9355de27247f64c714dad10e7729e78666718107d8fd70801b95505bf28a5bdd"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_05.html",
+      "sha256": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_06.html",
+      "sha256": "71cdf5e00002c5aa3d43967af486fbc9e7947b93dd65b9915e9696c427a26698"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_07.html",
+      "sha256": "5841cbcb1b99fef4a585e9bd34c31745a36bdce8ffc4b9be6f4977a037dece67"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/corner_rank/20261017/page_0001.json",
+      "sha256": "2c49575bf06a95844134574b64f17fe98ae55fb31519f3734190946ef23d9215"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+      "sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/website_page_evidence.json",
+      "sha256": "0cf1d355b30615bf11bbd2c92c4b5821922c043380c35b394b13d2d60559d1e0"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/root_independent_verification.json",
+      "sha256": "6a709a8e794d5007bee5777f49160c72b18dc4835bbfe128e88d6bc2e047306c"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/root_api_website_comparison.json",
+      "sha256": "92fed5cf0dea518d87d71cd6ffba0e4af09c7753b5641e8967f7530b31052566"
+    },
+    {
+      "path": "jeju/research/20261018_oct17_sections_website_review/api_recheck_summary.json",
+      "sha256": "a8a78b8f08aef5ca25ad7ae4a705065be6928df5f2effaefabb7815bc308a5da"
+    },
+    {
+      "path": "jeju/data/schema/migrations/20261018_add_api6_section_distance_reviews.sql",
+      "sha256": "8fc1a8bfc367a05114b77fa0bea8b503fe62a22f3fe5542da06cfa0ba9002624"
+    }
+  ],
+  "note": "Read-only preflight; shared DB was not changed. Apply must still enforce the prepared database SHA before writing."
+}

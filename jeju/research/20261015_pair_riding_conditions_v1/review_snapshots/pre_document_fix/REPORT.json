@@ -1,0 +1,893 @@
+{
+  "study": "20261015_pair_riding_conditions_v1",
+  "status": "PASS",
+  "evaluation": {
+    "years": [
+      2024,
+      2025,
+      2026
+    ],
+    "races": 1779,
+    "dates": 269,
+    "pair_rows": 76848,
+    "date_min": "2024-01-05",
+    "date_max": "2026-09-19",
+    "year_races": {
+      "2024": 637,
+      "2025": 654,
+      "2026": 488
+    },
+    "date_bootstrap_draws": 2000,
+    "bootstrap_seed": 20261011,
+    "bootstrap_schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "bootstrap_receipt": {
+      "status": "FROZEN_BEFORE_EVALUATION_METRICS",
+      "generator": "numpy.random.default_rng",
+      "bit_generator": "PCG64",
+      "seed": 20261011,
+      "numpy_version": "2.5.2",
+      "draws": 2000,
+      "dates_per_draw": 269,
+      "schedule_shape": [
+        2000,
+        269
+      ],
+      "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+      "date_min": "2024-01-05",
+      "date_max": "2026-09-19",
+      "schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+      "source_features_sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "repeated_development_sample": true,
+    "2026_partial_through": "2026-09-19"
+  },
+  "candidate": {
+    "outcome": "unordered pair both in official Top3",
+    "frozen_horse_scores": "saved F1_STYLE6 runner scores; unchanged",
+    "baseline_pair_model": "saved jockey-ID pair candidate, 20 style bases + rolling365 scalar + 39 H1-only jockey ID effects",
+    "candidate_pair_model": "same 60-column baseline plus riding-condition bundle; one H1 fit and one H2 positive-slope Platt map per fold",
+    "raw_riding_condition_columns": 10,
+    "active_riding_condition_columns_by_fold": {
+      "2024": 69,
+      "2025": 69,
+      "2026": 69
+    },
+    "exact_duplicate_removed": {
+      "horse_current_rider_history_unavailable_count": "previous_rider_unknown_count"
+    },
+    "h1_fit_count": 3,
+    "h2_calibration_count": 3,
+    "fit_receipt_sha256": "27eb3d8af587d6380f8073267a85582361b6b506d0a8581ef5ccc7cbfa0a6e86",
+    "prediction_receipt_sha256": "50778b6c507c2bd0ae7a4ec651a7c77ec0987662a508d39b425e1d3a0597ac8e",
+    "prediction_sha256": "c50f7cdd762cc4ed36e50b97bd4d6d979be408c7477f0c747c917e120cde9ced",
+    "metrics_created_only_after_prediction": true,
+    "payout_or_roi_inputs_used": false
+  },
+  "pre_fit_lineage": {
+    "feature_preflight_sha256": "afd8ec079b75a1f4100d4144750aca0e3facaab3e689d2b30aae8fd020a84577",
+    "design_dry_run_sha256": "275cfe097dcc6086112debea0533bf79be071adbe850a6a5de2206c7528ffbba",
+    "independent_prefit_receipt_sha256": "a5dd5bca55d1af50785865302ca1d149db522d00bb28ea52e41c5c2a4c1269dd",
+    "independent_duplicate_receipt_sha256": "40a4a8f1ef554d4273708604085a3d01480d4d36f5a9538dc89506e1bcf6afdf",
+    "saved_id_reconciliation_sha256": "9afaab631f2a1d4578c0c354b2df8ba3010e4ca89a510f55f2782b869bc236f7",
+    "first60_reconciliation_sha256": "251d610c8a38c45dd10a8750181d751c95ac49ac78bc0b1a7c398ec3fe1a7d18",
+    "runner_basis_sha256": "e6d3e09ccf1ac25c3699929242d5fec6c1b992862dacf64c9d118bc7dbfa112c",
+    "source_hash_inventory_sha256": "b9775349df553f88f2122e6a3b63028e62e6bbd28af8d645653da0a58ae1a78a",
+    "protected_input_lock_sha256": "082ce5bab719d10e9120cbc5db6add624851aa9a79f8ad25bb5ceb0bbbab52ae",
+    "saved_id_baseline_sha256": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "raw_candidate_columns": [
+      "previous_rider_retained_count",
+      "previous_rider_unknown_count",
+      "rider365_delta_sum",
+      "rider365_current_support_log1p_sum",
+      "rider365_previous_support_log1p_sum",
+      "rider365_delta_unavailable_count",
+      "horse_current_rider_rides_log1p_sum",
+      "horse_current_rider_recency_log1p_sum",
+      "horse_current_rider_first_observed_pair_count",
+      "horse_current_rider_history_unavailable_count"
+    ],
+    "active_candidate_columns_by_fold": {
+      "2024": 69,
+      "2025": 69,
+      "2026": 69
+    }
+  },
+  "selection_comparison_to_saved_id": {
+    "races": 1779,
+    "candidate_hits": 437,
+    "baseline_hits": 438,
+    "candidate_hit_rate": 0.24564362001124226,
+    "baseline_hit_rate": 0.24620573355817876,
+    "candidate_minus_baseline": {
+      "estimate": -0.0005621135469364812,
+      "ci_low": -0.0032949834847794605,
+      "ci_high": 0.0017036017113210469,
+      "valid_draws": 2000,
+      "undefined_draws": 0
+    },
+    "changed_pair_races": 22,
+    "wins_on_changed_pairs": 2,
+    "losses_on_changed_pairs": 3,
+    "ties_on_changed_pairs": 17,
+    "unchanged_pair_races": 1757,
+    "secondary_raw_top2_429": {
+      "candidate_hits": 437,
+      "raw_top2_hits": 429,
+      "candidate_minus_raw_top2": {
+        "estimate": 0.004496908375491849,
+        "ci_low": -0.0016760479940476376,
+        "ci_high": 0.010728553563852015,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      },
+      "changed_pair_races": 119,
+      "wins_on_changed_pairs": 19,
+      "losses_on_changed_pairs": 11,
+      "ties_on_changed_pairs": 89
+    }
+  },
+  "probability_comparison": {
+    "fixed_baseline_selected_pair": {
+      "races": 1779,
+      "baseline_brier": 0.17798766697398133,
+      "candidate_brier": 0.17786123658247846,
+      "candidate_minus_baseline_brier": {
+        "estimate": -0.00012643039150287943,
+        "ci_low": -0.00022130171047221505,
+        "ci_high": -3.48309243528441e-05,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      },
+      "baseline_logloss": 0.5381094976556677,
+      "candidate_logloss": 0.5377368898081795,
+      "candidate_minus_baseline_logloss": {
+        "estimate": -0.00037260784748827347,
+        "ci_low": -0.0006102769663452541,
+        "ci_high": -0.00014502312653347005,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    "all_pairs_race_equal": {
+      "races": 1779,
+      "baseline_brier": 0.06286751099364736,
+      "candidate_brier": 0.06284195533869481,
+      "candidate_minus_baseline_brier": {
+        "estimate": -2.555565495254935e-05,
+        "ci_low": -3.221633993120371e-05,
+        "ci_high": -1.8841717286298288e-05,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      },
+      "baseline_logloss": 0.23625050644365117,
+      "candidate_logloss": 0.2360803578313691,
+      "candidate_minus_baseline_logloss": {
+        "estimate": -0.00017014861228207068,
+        "ci_low": -0.0001998936400667503,
+        "ci_high": -0.0001401834175025201,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    "reliability": {
+      "all_pairs_race_equal_weight": {
+        "baseline_id": [
+          {
+            "bin": "[0,.05)",
+            "pairs": 34193,
+            "races": 1765,
+            "predicted": 0.030460415447538337,
+            "observed": 0.030057337915849726
+          },
+          {
+            "bin": "[.05,.10)",
+            "pairs": 27053,
+            "races": 1777,
+            "predicted": 0.07104801698089279,
+            "observed": 0.06997499410934442
+          },
+          {
+            "bin": "[.10,.20)",
+            "pairs": 13242,
+            "races": 1773,
+            "predicted": 0.1348115993038697,
+            "observed": 0.13821973029220658
+          },
+          {
+            "bin": "[.20,.30)",
+            "pairs": 1877,
+            "races": 1034,
+            "predicted": 0.23521956560268203,
+            "observed": 0.22192149503218575
+          },
+          {
+            "bin": "[.30,1]",
+            "pairs": 483,
+            "races": 379,
+            "predicted": 0.3668875411291167,
+            "observed": 0.3796641221374046
+          }
+        ],
+        "candidate": [
+          {
+            "bin": "[0,.05)",
+            "pairs": 34214,
+            "races": 1765,
+            "predicted": 0.030381321815468418,
+            "observed": 0.029916251982262148
+          },
+          {
+            "bin": "[.05,.10)",
+            "pairs": 27016,
+            "races": 1777,
+            "predicted": 0.0710483954426681,
+            "observed": 0.0698264635121336
+          },
+          {
+            "bin": "[.10,.20)",
+            "pairs": 13213,
+            "races": 1773,
+            "predicted": 0.13487525904708184,
+            "observed": 0.13914619957913463
+          },
+          {
+            "bin": "[.20,.30)",
+            "pairs": 1912,
+            "races": 1046,
+            "predicted": 0.2351581874711129,
+            "observed": 0.21773565423949348
+          },
+          {
+            "bin": "[.30,1]",
+            "pairs": 493,
+            "races": 384,
+            "predicted": 0.36773827415586824,
+            "observed": 0.3768766074525989
+          }
+        ]
+      },
+      "selected_pair_cases": {
+        "baseline_id_on_its_selection": [
+          {
+            "bin": "[0,.05)",
+            "pairs": 0,
+            "races": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "bin": "[.05,.10)",
+            "pairs": 6,
+            "races": 6,
+            "predicted": 0.09128390141380201,
+            "observed": 0.0
+          },
+          {
+            "bin": "[.10,.20)",
+            "pairs": 650,
+            "races": 650,
+            "predicted": 0.16602041033945145,
+            "observed": 0.17384615384615384
+          },
+          {
+            "bin": "[.20,.30)",
+            "pairs": 744,
+            "races": 744,
+            "predicted": 0.24275230742153098,
+            "observed": 0.23387096774193547
+          },
+          {
+            "bin": "[.30,1]",
+            "pairs": 379,
+            "races": 379,
+            "predicted": 0.37809552620464437,
+            "observed": 0.39841688654353563
+          }
+        ],
+        "candidate_on_baseline_id_selection": [
+          {
+            "bin": "[0,.05)",
+            "pairs": 0,
+            "races": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "bin": "[.05,.10)",
+            "pairs": 6,
+            "races": 6,
+            "predicted": 0.09236384561346682,
+            "observed": 0.0
+          },
+          {
+            "bin": "[.10,.20)",
+            "pairs": 636,
+            "races": 636,
+            "predicted": 0.16557846617842487,
+            "observed": 0.17452830188679244
+          },
+          {
+            "bin": "[.20,.30)",
+            "pairs": 753,
+            "races": 753,
+            "predicted": 0.2424292850093953,
+            "observed": 0.23107569721115537
+          },
+          {
+            "bin": "[.30,1]",
+            "pairs": 384,
+            "races": 384,
+            "predicted": 0.3793771874092371,
+            "observed": 0.3984375
+          }
+        ],
+        "candidate_on_its_selection": [
+          {
+            "bin": "[0,.05)",
+            "pairs": 0,
+            "races": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "bin": "[.05,.10)",
+            "pairs": 6,
+            "races": 6,
+            "predicted": 0.09236384561346682,
+            "observed": 0.0
+          },
+          {
+            "bin": "[.10,.20)",
+            "pairs": 636,
+            "races": 636,
+            "predicted": 0.16560134414767602,
+            "observed": 0.1761006289308176
+          },
+          {
+            "bin": "[.20,.30)",
+            "pairs": 753,
+            "races": 753,
+            "predicted": 0.24244255625930286,
+            "observed": 0.2297476759628154
+          },
+          {
+            "bin": "[.30,1]",
+            "pairs": 384,
+            "races": 384,
+            "predicted": 0.3793774736749178,
+            "observed": 0.3958333333333333
+          }
+        ]
+      }
+    },
+    "coverage_at_20pct": {
+      "baseline_id_on_its_selection": {
+        "threshold": 0.2,
+        "selected_races": 1779,
+        "covered_races": 1123,
+        "coverage": 0.6312535132096684,
+        "hits": 325,
+        "hit_rate": 0.2894033837934105,
+        "covered_hit_rate_date_ci": {
+          "estimate": 0.2894033837934105,
+          "ci_low": 0.26446259978992004,
+          "ci_high": 0.3147313736718734,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        }
+      },
+      "candidate_on_baseline_selection": {
+        "threshold": 0.2,
+        "selected_races": 1779,
+        "covered_races": 1137,
+        "coverage": 0.6391231028667791,
+        "hits": 327,
+        "hit_rate": 0.287598944591029,
+        "covered_hit_rate_date_ci": {
+          "estimate": 0.287598944591029,
+          "ci_low": 0.26342080037814064,
+          "ci_high": 0.3125547374739863,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        }
+      },
+      "candidate_on_its_selection": {
+        "threshold": 0.2,
+        "selected_races": 1779,
+        "covered_races": 1137,
+        "coverage": 0.6391231028667791,
+        "hits": 325,
+        "hit_rate": 0.2858399296394019,
+        "covered_hit_rate_date_ci": {
+          "estimate": 0.2858399296394019,
+          "ci_low": 0.26175998537851924,
+          "ci_high": 0.31047479137236433,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        }
+      }
+    },
+    "pair_probability_sum_diagnostic": {
+      "baseline_id": {
+        "races": 1779,
+        "mean_signed_sum_minus_3": 0.010604712775513406,
+        "mean_absolute_sum_minus_3": 0.04015823512935971,
+        "p95_absolute_sum_minus_3": 0.10148356100675927
+      },
+      "candidate": {
+        "races": 1779,
+        "mean_signed_sum_minus_3": 0.013176162056845157,
+        "mean_absolute_sum_minus_3": 0.04404403512770222,
+        "p95_absolute_sum_minus_3": 0.11436331180068222
+      }
+    }
+  },
+  "baseline_selected_pair_context": {
+    "previous_rider_status_on_baseline_pair": [
+      {
+        "group": "confirmed switch 0",
+        "races": 905,
+        "dates": 263,
+        "baseline_hits": 226,
+        "candidate_hits": 226,
+        "baseline_rate": 0.24972375690607734,
+        "candidate_rate": 0.24972375690607734,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": -0.003275198654162789,
+          "ci_high": 0.0033003300330033004,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 6,
+        "wins": 1,
+        "losses": 1,
+        "ties": 4,
+        "descriptive_only": false
+      },
+      {
+        "group": "confirmed switch 1",
+        "races": 680,
+        "dates": 256,
+        "baseline_hits": 172,
+        "candidate_hits": 172,
+        "baseline_rate": 0.2529411764705882,
+        "candidate_rate": 0.2529411764705882,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": -0.004366812227074236,
+          "ci_high": 0.004471105723246657,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 15,
+        "wins": 1,
+        "losses": 1,
+        "ties": 13,
+        "descriptive_only": false
+      },
+      {
+        "group": "confirmed switch 2",
+        "races": 143,
+        "dates": 101,
+        "baseline_hits": 27,
+        "candidate_hits": 26,
+        "baseline_rate": 0.1888111888111888,
+        "candidate_rate": 0.18181818181818182,
+        "candidate_minus_baseline": {
+          "estimate": -0.006993006993006993,
+          "ci_low": -0.02290963962364637,
+          "ci_high": 0.0,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 1,
+        "wins": 0,
+        "losses": 1,
+        "ties": 0,
+        "descriptive_only": false
+      },
+      {
+        "group": "unknown 1; confirmed switch 0",
+        "races": 27,
+        "dates": 26,
+        "baseline_hits": 8,
+        "candidate_hits": 8,
+        "baseline_rate": 0.2962962962962963,
+        "candidate_rate": 0.2962962962962963,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      },
+      {
+        "group": "unknown 1; confirmed switch 1",
+        "races": 20,
+        "dates": 20,
+        "baseline_hits": 5,
+        "candidate_hits": 5,
+        "baseline_rate": 0.25,
+        "candidate_rate": 0.25,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      },
+      {
+        "group": "unknown 2; confirmed switch 0",
+        "races": 4,
+        "dates": 4,
+        "baseline_hits": 0,
+        "candidate_hits": 0,
+        "baseline_rate": 0.0,
+        "candidate_rate": 0.0,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 1970,
+          "undefined_draws": 30
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      }
+    ],
+    "current_rider_history_on_baseline_pair": [
+      {
+        "group": "first 0, repeated 0, unknown 2",
+        "races": 4,
+        "dates": 4,
+        "baseline_hits": 0,
+        "candidate_hits": 0,
+        "baseline_rate": 0.0,
+        "candidate_rate": 0.0,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 1970,
+          "undefined_draws": 30
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      },
+      {
+        "group": "first 0, repeated 1, unknown 1",
+        "races": 29,
+        "dates": 28,
+        "baseline_hits": 9,
+        "candidate_hits": 9,
+        "baseline_rate": 0.3103448275862069,
+        "candidate_rate": 0.3103448275862069,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      },
+      {
+        "group": "first 0, repeated 2, unknown 0",
+        "races": 1218,
+        "dates": 269,
+        "baseline_hits": 300,
+        "candidate_hits": 298,
+        "baseline_rate": 0.24630541871921183,
+        "candidate_rate": 0.24466338259441708,
+        "candidate_minus_baseline": {
+          "estimate": -0.0016420361247947454,
+          "ci_low": -0.004979253112033195,
+          "ci_high": 0.001558061667525202,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 14,
+        "wins": 1,
+        "losses": 3,
+        "ties": 10,
+        "descriptive_only": false
+      },
+      {
+        "group": "first 1, repeated 0, unknown 1",
+        "races": 18,
+        "dates": 18,
+        "baseline_hits": 4,
+        "candidate_hits": 4,
+        "baseline_rate": 0.2222222222222222,
+        "candidate_rate": 0.2222222222222222,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      },
+      {
+        "group": "first 1, repeated 1, unknown 0",
+        "races": 454,
+        "dates": 227,
+        "baseline_hits": 118,
+        "candidate_hits": 119,
+        "baseline_rate": 0.2599118942731278,
+        "candidate_rate": 0.2621145374449339,
+        "candidate_minus_baseline": {
+          "estimate": 0.0022026431718061676,
+          "ci_low": 0.0,
+          "ci_high": 0.0069767441860465115,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 8,
+        "wins": 1,
+        "losses": 0,
+        "ties": 7,
+        "descriptive_only": false
+      },
+      {
+        "group": "first 2, repeated 0, unknown 0",
+        "races": 56,
+        "dates": 47,
+        "baseline_hits": 7,
+        "candidate_hits": 7,
+        "baseline_rate": 0.125,
+        "candidate_rate": 0.125,
+        "candidate_minus_baseline": {
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "valid_draws": 2000,
+          "undefined_draws": 0
+        },
+        "changed_pair_races": 0,
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "descriptive_only": true
+      }
+    ]
+  },
+  "selection_by_year": [
+    {
+      "value": 2024,
+      "races": 637,
+      "dates": 98,
+      "baseline_hits": 155,
+      "candidate_hits": 155,
+      "baseline_rate": 0.24332810047095763,
+      "candidate_rate": 0.24332810047095763,
+      "candidate_minus_baseline": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 2025,
+      "races": 654,
+      "dates": 98,
+      "baseline_hits": 157,
+      "candidate_hits": 157,
+      "baseline_rate": 0.2400611620795107,
+      "candidate_rate": 0.2400611620795107,
+      "candidate_minus_baseline": {
+        "estimate": 0.0,
+        "ci_low": -0.006079956870509281,
+        "ci_high": 0.006153846153846154,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 2026,
+      "races": 488,
+      "dates": 73,
+      "baseline_hits": 126,
+      "candidate_hits": 125,
+      "baseline_rate": 0.2581967213114754,
+      "candidate_rate": 0.25614754098360654,
+      "candidate_minus_baseline": {
+        "estimate": -0.0020491803278688526,
+        "ci_low": -0.007079646017699115,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    }
+  ],
+  "selection_by_distance_m": [
+    {
+      "value": 800,
+      "races": 152,
+      "dates": 115,
+      "baseline_hits": 36,
+      "candidate_hits": 37,
+      "baseline_rate": 0.23684210526315788,
+      "candidate_rate": 0.24342105263157895,
+      "candidate_minus_baseline": {
+        "estimate": 0.006578947368421052,
+        "ci_low": 0.0,
+        "ci_high": 0.021432425488180862,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 900,
+      "races": 251,
+      "dates": 186,
+      "baseline_hits": 69,
+      "candidate_hits": 69,
+      "baseline_rate": 0.2749003984063745,
+      "candidate_rate": 0.2749003984063745,
+      "candidate_minus_baseline": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 1000,
+      "races": 508,
+      "dates": 261,
+      "baseline_hits": 117,
+      "candidate_hits": 118,
+      "baseline_rate": 0.23031496062992127,
+      "candidate_rate": 0.23228346456692914,
+      "candidate_minus_baseline": {
+        "estimate": 0.001968503937007874,
+        "ci_low": 0.0,
+        "ci_high": 0.006123076279692201,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 1110,
+      "races": 482,
+      "dates": 262,
+      "baseline_hits": 117,
+      "candidate_hits": 115,
+      "baseline_rate": 0.24273858921161826,
+      "candidate_rate": 0.23858921161825727,
+      "candidate_minus_baseline": {
+        "estimate": -0.004149377593360996,
+        "ci_low": -0.010351966873706004,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 1200,
+      "races": 262,
+      "dates": 213,
+      "baseline_hits": 68,
+      "candidate_hits": 67,
+      "baseline_rate": 0.2595419847328244,
+      "candidate_rate": 0.25572519083969464,
+      "candidate_minus_baseline": {
+        "estimate": -0.003816793893129771,
+        "ci_low": -0.011858883869753435,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 1300,
+      "races": 63,
+      "dates": 62,
+      "baseline_hits": 19,
+      "candidate_hits": 19,
+      "baseline_rate": 0.30158730158730157,
+      "candidate_rate": 0.30158730158730157,
+      "candidate_minus_baseline": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 1400,
+      "races": 52,
+      "dates": 52,
+      "baseline_hits": 12,
+      "candidate_hits": 12,
+      "baseline_rate": 0.23076923076923078,
+      "candidate_rate": 0.23076923076923078,
+      "candidate_minus_baseline": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "valid_draws": 2000,
+        "undefined_draws": 0
+      }
+    },
+    {
+      "value": 1610,
+      "races": 9,
+      "dates": 9,
+      "baseline_hits": 0,
+      "candidate_hits": 0,
+      "baseline_rate": 0.0,
+      "candidate_rate": 0.0,
+      "candidate_minus_baseline": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "valid_draws": 1999,
+        "undefined_draws": 1
+      }
+    }
+  ],
+  "predeclared_gates": {
+    "selection_improvement": {
+      "passed": false,
+      "criterion": "candidate hit-rate lift > 0 and paired date CI lower bound > 0"
+    },
+    "fixed_baseline_pair_probability": {
+      "passed": true,
+      "point_estimates_nonworse": true,
+      "criterion": "both candidate-minus-baseline Brier and log loss <= 0; at least one paired date CI upper bound < 0"
+    },
+    "all_pair_guard": {
+      "passed": true,
+      "criterion": "candidate-minus-baseline race-equal Brier and log loss both <= 0"
+    },
+    "composite_passed": false,
+    "decision": "improvement not established; retain as unadopted research candidate"
+  },
+  "report_artifacts": {
+    "summary_json": "outputs/REPORT.json",
+    "paired_race_metrics_csv": "outputs/report/paired_race_metrics.csv",
+    "changed_selections_csv": "outputs/report/changed_selections.csv",
+    "paired_race_rows": 1779,
+    "changed_selection_rows": 22
+  },
+  "source_limits": {
+    "time_cutoff": "T−2 calendar days inclusive; publication timestamps were unavailable",
+    "full_history": "observed started history, not confirmed lifetime record",
+    "evaluation": "reused retrospective development period; not independent future holdout",
+    "interpretation": "conditional association in the two-horse co-Top3 selection layer; not causal rider ability or exact finishing-order evidence"
+  }
+}

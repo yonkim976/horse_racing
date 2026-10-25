@@ -1,0 +1,81 @@
+{
+  "review_kind": "pre_train_input_and_static_pipeline_review",
+  "passed": true,
+  "status": "PASS_PRE_TRAIN_REVIEW_NO_FIT",
+  "execution_approved_by_this_review": false,
+  "candidate_fit_performed": false,
+  "candidate_probabilities_or_metrics_computed": false,
+  "contract": {
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/supervisor/DESIGN_CONTRACT.md",
+    "sha256": "9d0b5517dd05fef2ea7090bfaf564d571642f5a2316f54e830885e3db9e0c5ee"
+  },
+  "input_artifact": {
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/audit/gate_pace_features.parquet",
+    "bytes": 5168573,
+    "sha256": "312163188d05823f5bd4fd60112bf2568b74b397b6bb889c340132e55119b0e7",
+    "rows": 52155,
+    "races": 5206
+  },
+  "source_contract": {
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/audit/source_contract.json",
+    "sha256": "12ff491c2c157cba13ac12e0e3660403c8236fb1736408e72d8009ee281ddb0e"
+  },
+  "root_input_verification": {
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/supervisor/INPUT_VERIFICATION.json",
+    "sha256": "e4cdc8832fbb856de9a4c9ce4275d46b043a99acc9365f3d3af9aa92a0d29b92",
+    "passed": true,
+    "target_rows": 52155,
+    "target_races": 5206,
+    "past_slots_checked": 403224,
+    "feature_cells_checked": 365085,
+    "maximum_feature_error": 8.881784197001252e-16,
+    "candidate_fit_performed": false
+  },
+  "no_fit_preflight": {
+    "path": "jeju/research/20261025_s_gate_pace_interaction_v1/experiment/outputs/source_preflight.json",
+    "sha256": "3e0dc6b09793c7f3ad943dd342bfacb7f54493044648d38db84ac7a199ac530a",
+    "status": "PASS_STRUCTURAL_PREFLIGHT_NO_FIT_OR_METRICS",
+    "fitted": false,
+    "candidate_probabilities_computed": false,
+    "candidate_outcome_metrics_computed": false,
+    "candidate_temperature_optimized": false,
+    "evaluation_races": 1779,
+    "evaluation_runners": 17412,
+    "evaluation_dates": 269,
+    "pool_denominators": {
+      "WIN": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "EXA": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779
+    },
+    "plc_quarantine_races": 36,
+    "projected_total_study_bytes": 26983089,
+    "study_byte_limit": 40000000
+  },
+  "experiment_code": {
+    "bundle_sha256": "03725a8d47eec2443ead33b431b52621c764c064f513ae6ff4ef239f61df6eec",
+    "pipeline_sha256": "65e8eb8e1fc1de802732722ac3f604e19bffcdfea00dcdd4fa0427b3b2dd9ca8",
+    "input_contract_sha256": "5010a5ac62496d4bff03d97aad95804c0228d884bd77f3523e7cd8d538f424d4",
+    "synthetic_test_sha256": "56eb9ad432b06d9edcd017a2018c613d568d64ee05ff91ef88011dc5d0008f8b"
+  },
+  "baseline_pins": {
+    "s40_final_manifest_sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a",
+    "s40_parameters_sha256": "46fda546b2a537373291c83190ef7c6f00ffda94fccebcf9090c6f01dfc9c23e",
+    "s40_raw_oos_scores_sha256": "fe08bdf93b07f8a180ad02416cbbc1488db282c761564b67b886114ece56f6e9",
+    "reference_math_engine_sha256": "706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c"
+  },
+  "resolved_findings": [
+    "Independent input verification rebuilt the T−730 through T−2 history slots, matched target keys and date32 lineage, and recomputed all seven features over the exact 52,155-row/5,206-race S40 roster.",
+    "Static review found the G47 comparison retains S40 training splits, weighting, categorical vocabulary, baseline scores and temperatures, evaluation cohorts, pool denominators, and paired bootstrap gate. The added candidate uses exactly seven numeric inputs and is the only refit arm: 6 LightGBM calls, 3 final models, and 3 temperature optimizations; S has 0 refits and 0 temperature optimizations.",
+    "The source validator checks the sealed input and formula lineage; score vintage/role keys, PLC quarantine, replay, single-run approval/hash boundary, output isolation, and storage projection are consistent with the frozen contract."
+  ],
+  "known_caveats": [
+    "Historical source publication and revision timestamps remain unverified; T−2 is an event-date cutoff, not proof of pre-race availability.",
+    "The evaluation cohort is retrospective and result-conditioned, and does not establish live availability or independent future validation.",
+    "First-group history and horse-number-side interactions are tendency proxies; they are not calibrated current-race probabilities, verified physical gate positions, or causal effects."
+  ],
+  "execution_boundary": "This review passes only the no-fit pre-train gate. It does not authorize execution; the supervisor must separately issue the hash-bound one-run approval and retain the root pre/post integrity checks."
+}

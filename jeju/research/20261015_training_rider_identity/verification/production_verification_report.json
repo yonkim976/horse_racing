@@ -1,0 +1,1742 @@
+{
+  "generated_at_utc": "2026-10-14T16:00:51.770062+00:00",
+  "baseline": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_identity/root/before_rider_identity.sqlite3",
+  "target": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "sqlite_read_only": true,
+  "existing_schema": {
+    "baseline_object_count": 115,
+    "target_object_count": 120,
+    "missing_existing_objects": [],
+    "changed_existing_objects": [],
+    "added_objects": [
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_training_rider_identity_reviews_1"
+      },
+      {
+        "type": "table",
+        "name": "training_rider_identity_reviews"
+      },
+      {
+        "type": "table",
+        "name": "training_rider_website_observations"
+      },
+      {
+        "type": "view",
+        "name": "daily_training_riders"
+      },
+      {
+        "type": "view",
+        "name": "daily_training_riders_analysis_2026"
+      }
+    ],
+    "status": "unchanged"
+  },
+  "existing_tables": {
+    "api303_corner_rank_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 19933,
+        "columns": [
+          "api_record_id",
+          "race_date",
+          "meet_code",
+          "race_number",
+          "api_meet_raw",
+          "corner_1_raw",
+          "corner_2_raw",
+          "corner_3_raw",
+          "corner_4_raw",
+          "corner_5_raw",
+          "corner_6_raw",
+          "corner_7_raw",
+          "corner_8_raw",
+          "corner_9_raw",
+          "passtime_3f_raw",
+          "passtime_4f_raw",
+          "tempo_raw"
+        ],
+        "rows_sha256_unordered": "c15743bfbdfb3ba6b5d9852ea9a0b58d9bfc1a9dda15e4ed50a3375b4df7384e"
+      },
+      "target": {
+        "row_count": 19933,
+        "columns": [
+          "api_record_id",
+          "race_date",
+          "meet_code",
+          "race_number",
+          "api_meet_raw",
+          "corner_1_raw",
+          "corner_2_raw",
+          "corner_3_raw",
+          "corner_4_raw",
+          "corner_5_raw",
+          "corner_6_raw",
+          "corner_7_raw",
+          "corner_8_raw",
+          "corner_9_raw",
+          "passtime_3f_raw",
+          "passtime_4f_raw",
+          "tempo_raw"
+        ],
+        "rows_sha256_unordered": "c15743bfbdfb3ba6b5d9852ea9a0b58d9bfc1a9dda15e4ed50a3375b4df7384e"
+      }
+    },
+    "api_records": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 273506,
+        "columns": [
+          "api_record_id",
+          "source_artifact_id",
+          "record_index",
+          "record_type",
+          "natural_key",
+          "payload_json",
+          "payload_sha256"
+        ],
+        "rows_sha256_unordered": "1d5c424e227b4a0221d8505fa5ee9af364c1a96626f8062f1605a3c548fc7b36"
+      },
+      "target": {
+        "row_count": 273506,
+        "columns": [
+          "api_record_id",
+          "source_artifact_id",
+          "record_index",
+          "record_type",
+          "natural_key",
+          "payload_json",
+          "payload_sha256"
+        ],
+        "rows_sha256_unordered": "1d5c424e227b4a0221d8505fa5ee9af364c1a96626f8062f1605a3c548fc7b36"
+      }
+    },
+    "breed_evidence": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 39093,
+        "columns": [
+          "breed_evidence_id",
+          "horse_id",
+          "observed_event_date",
+          "breed_label_raw",
+          "evidence_kind",
+          "source_artifact_id",
+          "api_record_id",
+          "timing_basis",
+          "notes"
+        ],
+        "rows_sha256_unordered": "aaa335341655003bc9c79e6ff9b404c6346076124049112af87773513387ac3d"
+      },
+      "target": {
+        "row_count": 39093,
+        "columns": [
+          "breed_evidence_id",
+          "horse_id",
+          "observed_event_date",
+          "breed_label_raw",
+          "evidence_kind",
+          "source_artifact_id",
+          "api_record_id",
+          "timing_basis",
+          "notes"
+        ],
+        "rows_sha256_unordered": "aaa335341655003bc9c79e6ff9b404c6346076124049112af87773513387ac3d"
+      }
+    },
+    "collection_coverage": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 77,
+        "columns": [
+          "coverage_id",
+          "source_family",
+          "operation",
+          "year",
+          "attempt_id",
+          "status",
+          "page_count",
+          "api_total_count",
+          "response_row_count",
+          "first_event_date",
+          "last_event_date",
+          "breed_label_counts_json",
+          "candidate_row_count",
+          "notes",
+          "created_at_utc"
+        ],
+        "rows_sha256_unordered": "7def425265d28f80b48e5bc058901cd71aed53a005efe2b6c2b5a116d6d64289"
+      },
+      "target": {
+        "row_count": 77,
+        "columns": [
+          "coverage_id",
+          "source_family",
+          "operation",
+          "year",
+          "attempt_id",
+          "status",
+          "page_count",
+          "api_total_count",
+          "response_row_count",
+          "first_event_date",
+          "last_event_date",
+          "breed_label_counts_json",
+          "candidate_row_count",
+          "notes",
+          "created_at_utc"
+        ],
+        "rows_sha256_unordered": "7def425265d28f80b48e5bc058901cd71aed53a005efe2b6c2b5a116d6d64289"
+      }
+    },
+    "daily_training_api_artifacts": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 337,
+        "columns": [
+          "daily_training_api_artifact_id",
+          "artifact_key",
+          "source_partition_key",
+          "source_page_kind",
+          "page_no",
+          "source_file_path",
+          "source_sha256",
+          "ledger_sha256",
+          "audit_script_sha256",
+          "audit_summary_sha256",
+          "archive_manifest_path",
+          "archive_manifest_sha256",
+          "profile_snapshot_sha256",
+          "source_url_without_key",
+          "requested_at_ms",
+          "retrieved_at_ms",
+          "status_code",
+          "api_result_code",
+          "raw_item_count",
+          "profile_matched_row_count",
+          "excluded_nonprofile_row_count",
+          "quarantined_invalid_id_count",
+          "id_status_counts_json",
+          "quality_status_counts_json",
+          "event_date_min",
+          "event_date_max",
+          "inserted_at_utc"
+        ],
+        "rows_sha256_unordered": "7c80a924b4e2b0a763f56d3e23acf530cd24453e84a6bd634358d8fefa8353b0"
+      },
+      "target": {
+        "row_count": 337,
+        "columns": [
+          "daily_training_api_artifact_id",
+          "artifact_key",
+          "source_partition_key",
+          "source_page_kind",
+          "page_no",
+          "source_file_path",
+          "source_sha256",
+          "ledger_sha256",
+          "audit_script_sha256",
+          "audit_summary_sha256",
+          "archive_manifest_path",
+          "archive_manifest_sha256",
+          "profile_snapshot_sha256",
+          "source_url_without_key",
+          "requested_at_ms",
+          "retrieved_at_ms",
+          "status_code",
+          "api_result_code",
+          "raw_item_count",
+          "profile_matched_row_count",
+          "excluded_nonprofile_row_count",
+          "quarantined_invalid_id_count",
+          "id_status_counts_json",
+          "quality_status_counts_json",
+          "event_date_min",
+          "event_date_max",
+          "inserted_at_utc"
+        ],
+        "rows_sha256_unordered": "7c80a924b4e2b0a763f56d3e23acf530cd24453e84a6bd634358d8fefa8353b0"
+      }
+    },
+    "daily_training_api_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 908316,
+        "columns": [
+          "daily_training_api_row_id",
+          "daily_training_api_artifact_id",
+          "source_row_index",
+          "hrNo_raw",
+          "hrName_raw",
+          "meet_raw",
+          "trDate_raw",
+          "trTerm_raw",
+          "stTime_raw",
+          "spTime_raw",
+          "run1Cnt_raw",
+          "run2Cnt_raw",
+          "prGubun_raw",
+          "prNo_raw",
+          "part_raw",
+          "partNo_raw",
+          "trName_raw",
+          "chulGubun_raw",
+          "raw_row_json",
+          "horse_id",
+          "horse_profile_observation_id",
+          "profile_match_status",
+          "training_date",
+          "start_time_local",
+          "start_time_status",
+          "end_time_local",
+          "end_time_status",
+          "time_order_status",
+          "duration_seconds",
+          "duration_status",
+          "run1_count",
+          "run1_count_status",
+          "run2_count",
+          "run2_count_status"
+        ],
+        "rows_sha256_unordered": "841d1f72985fb98e32368f593c233ff35ff35232beb634d55c7d83540c69d0bb"
+      },
+      "target": {
+        "row_count": 908316,
+        "columns": [
+          "daily_training_api_row_id",
+          "daily_training_api_artifact_id",
+          "source_row_index",
+          "hrNo_raw",
+          "hrName_raw",
+          "meet_raw",
+          "trDate_raw",
+          "trTerm_raw",
+          "stTime_raw",
+          "spTime_raw",
+          "run1Cnt_raw",
+          "run2Cnt_raw",
+          "prGubun_raw",
+          "prNo_raw",
+          "part_raw",
+          "partNo_raw",
+          "trName_raw",
+          "chulGubun_raw",
+          "raw_row_json",
+          "horse_id",
+          "horse_profile_observation_id",
+          "profile_match_status",
+          "training_date",
+          "start_time_local",
+          "start_time_status",
+          "end_time_local",
+          "end_time_status",
+          "time_order_status",
+          "duration_seconds",
+          "duration_status",
+          "run1_count",
+          "run1_count_status",
+          "run2_count",
+          "run2_count_status"
+        ],
+        "rows_sha256_unordered": "841d1f72985fb98e32368f593c233ff35ff35232beb634d55c7d83540c69d0bb"
+      }
+    },
+    "horse_profile_observations": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 4718,
+        "columns": [
+          "horse_profile_observation_id",
+          "api_record_id",
+          "horse_id",
+          "observed_at_utc",
+          "observed_kst_date",
+          "horse_name_raw",
+          "birth_date_raw",
+          "age_raw",
+          "breed_label_raw",
+          "sex_raw",
+          "color_raw",
+          "production_country_raw"
+        ],
+        "rows_sha256_unordered": "6530f0a04ae18c9da62fe5b4136bfe92ba2500c9703ab039c39356557c8c2560"
+      },
+      "target": {
+        "row_count": 4718,
+        "columns": [
+          "horse_profile_observation_id",
+          "api_record_id",
+          "horse_id",
+          "observed_at_utc",
+          "observed_kst_date",
+          "horse_name_raw",
+          "birth_date_raw",
+          "age_raw",
+          "breed_label_raw",
+          "sex_raw",
+          "color_raw",
+          "production_country_raw"
+        ],
+        "rows_sha256_unordered": "6530f0a04ae18c9da62fe5b4136bfe92ba2500c9703ab039c39356557c8c2560"
+      }
+    },
+    "medical_api16_load_metadata": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 14,
+        "columns": [
+          "metadata_key",
+          "metadata_value"
+        ],
+        "rows_sha256_unordered": "21f85a8060914a762cacc21a6f88990973f46a90b5ba5a2346dc4f6ef0260b5f"
+      },
+      "target": {
+        "row_count": 14,
+        "columns": [
+          "metadata_key",
+          "metadata_value"
+        ],
+        "rows_sha256_unordered": "21f85a8060914a762cacc21a6f88990973f46a90b5ba5a2346dc4f6ef0260b5f"
+      }
+    },
+    "medical_api16_page_ledger": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 32,
+        "columns": [
+          "source_artifact_id",
+          "year",
+          "page_no",
+          "source_row_count",
+          "response_sha256",
+          "response_bytes",
+          "page_manifest_json"
+        ],
+        "rows_sha256_unordered": "a41118e931a15e190ba65f012b6df3d5878acd0715aff2b7b6ab941507240700"
+      },
+      "target": {
+        "row_count": 32,
+        "columns": [
+          "source_artifact_id",
+          "year",
+          "page_no",
+          "source_row_count",
+          "response_sha256",
+          "response_bytes",
+          "page_manifest_json"
+        ],
+        "rows_sha256_unordered": "a41118e931a15e190ba65f012b6df3d5878acd0715aff2b7b6ab941507240700"
+      }
+    },
+    "medical_api16_year_coverage": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 25,
+        "columns": [
+          "year",
+          "status",
+          "actual_page_count",
+          "actual_total_rows",
+          "rows_matching_requested_year",
+          "rows_after_cutoff",
+          "rows_with_unparseable_date",
+          "date_min_raw",
+          "date_max_raw",
+          "positive_data_evidence",
+          "year_manifest_sha256",
+          "year_manifest_json",
+          "coverage_interpretation"
+        ],
+        "rows_sha256_unordered": "e4da8e1566409e5c3f499370a0f7c0a5d9371da4b314f45629f1ab42d51eeff3"
+      },
+      "target": {
+        "row_count": 25,
+        "columns": [
+          "year",
+          "status",
+          "actual_page_count",
+          "actual_total_rows",
+          "rows_matching_requested_year",
+          "rows_after_cutoff",
+          "rows_with_unparseable_date",
+          "date_min_raw",
+          "date_max_raw",
+          "positive_data_evidence",
+          "year_manifest_sha256",
+          "year_manifest_json",
+          "coverage_interpretation"
+        ],
+        "rows_sha256_unordered": "e4da8e1566409e5c3f499370a0f7c0a5d9371da4b314f45629f1ab42d51eeff3"
+      }
+    },
+    "medical_api33_source_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 3523,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "source_row_id",
+          "page_no",
+          "page_row_no",
+          "ill_name",
+          "ill_eng_name",
+          "ill_desc",
+          "source_url",
+          "fetched_at_kst",
+          "source_json_path",
+          "source_json_sha256",
+          "source_xml_path",
+          "source_xml_sha256",
+          "source_record_sha256",
+          "source_record_json"
+        ],
+        "rows_sha256_unordered": "f6dc48b4db0014e68779dbd4c80bec612e6ba3bd43e1b5fc1840fe122538381c"
+      },
+      "target": {
+        "row_count": 3523,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "source_row_id",
+          "page_no",
+          "page_row_no",
+          "ill_name",
+          "ill_eng_name",
+          "ill_desc",
+          "source_url",
+          "fetched_at_kst",
+          "source_json_path",
+          "source_json_sha256",
+          "source_xml_path",
+          "source_xml_sha256",
+          "source_record_sha256",
+          "source_record_json"
+        ],
+        "rows_sha256_unordered": "f6dc48b4db0014e68779dbd4c80bec612e6ba3bd43e1b5fc1840fe122538381c"
+      }
+    },
+    "medical_api33_terms": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 3511,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "api33_tuple_sha256",
+          "ill_name",
+          "ill_eng_name",
+          "ill_desc",
+          "first_source_row_id",
+          "source_row_ids_json",
+          "source_duplicate_count",
+          "deduplication_rule"
+        ],
+        "rows_sha256_unordered": "12018e55db3717e0650b26147a088f38e5cf8819e6e706631cb16f0bc01e7b68"
+      },
+      "target": {
+        "row_count": 3511,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "api33_tuple_sha256",
+          "ill_name",
+          "ill_eng_name",
+          "ill_desc",
+          "first_source_row_id",
+          "source_row_ids_json",
+          "source_duplicate_count",
+          "deduplication_rule"
+        ],
+        "rows_sha256_unordered": "12018e55db3717e0650b26147a088f38e5cf8819e6e706631cb16f0bc01e7b68"
+      }
+    },
+    "medical_api_diagnosis_slots": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 24060,
+        "columns": [
+          "medical_api_diagnosis_slot_id",
+          "medical_api_row_id",
+          "api_record_id",
+          "source_artifact_id",
+          "source_row_no",
+          "horse_id",
+          "clinic_date",
+          "source_slot_ordinal",
+          "source_slot_kind",
+          "raw_diagnosis_text",
+          "normalized_diagnosis_text",
+          "raw_text_sha256"
+        ],
+        "rows_sha256_unordered": "08b64d0e2369e6968f0a7866565d40c4e142025a3259c46016a261c7e9cf06fe"
+      },
+      "target": {
+        "row_count": 24060,
+        "columns": [
+          "medical_api_diagnosis_slot_id",
+          "medical_api_row_id",
+          "api_record_id",
+          "source_artifact_id",
+          "source_row_no",
+          "horse_id",
+          "clinic_date",
+          "source_slot_ordinal",
+          "source_slot_kind",
+          "raw_diagnosis_text",
+          "normalized_diagnosis_text",
+          "raw_text_sha256"
+        ],
+        "rows_sha256_unordered": "08b64d0e2369e6968f0a7866565d40c4e142025a3259c46016a261c7e9cf06fe"
+      }
+    },
+    "medical_api_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 12030,
+        "columns": [
+          "medical_api_row_id",
+          "api_record_id",
+          "source_artifact_id",
+          "source_row_no",
+          "clinic_date",
+          "horse_id",
+          "meet_raw",
+          "clinic_date_raw",
+          "hr_name_raw",
+          "hr_no_raw",
+          "hospi_name_raw",
+          "ill_name1_raw",
+          "ill_name2_raw",
+          "part_raw",
+          "raw_key_presence_json",
+          "raw_key_absence_json",
+          "raw_field_types_json"
+        ],
+        "rows_sha256_unordered": "b32d026768aba76bd042858a2079699eacaa849084127aa1b040e128c2735168"
+      },
+      "target": {
+        "row_count": 12030,
+        "columns": [
+          "medical_api_row_id",
+          "api_record_id",
+          "source_artifact_id",
+          "source_row_no",
+          "clinic_date",
+          "horse_id",
+          "meet_raw",
+          "clinic_date_raw",
+          "hr_name_raw",
+          "hr_no_raw",
+          "hospi_name_raw",
+          "ill_name1_raw",
+          "ill_name2_raw",
+          "part_raw",
+          "raw_key_presence_json",
+          "raw_key_absence_json",
+          "raw_field_types_json"
+        ],
+        "rows_sha256_unordered": "b32d026768aba76bd042858a2079699eacaa849084127aa1b040e128c2735168"
+      }
+    },
+    "medical_dictionary_metadata": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 7,
+        "columns": [
+          "metadata_key",
+          "metadata_value"
+        ],
+        "rows_sha256_unordered": "17165432ed9cca22d0910e25e373172dfccf85bfbda67d92e41df6b5a673892f"
+      },
+      "target": {
+        "row_count": 7,
+        "columns": [
+          "metadata_key",
+          "metadata_value"
+        ],
+        "rows_sha256_unordered": "17165432ed9cca22d0910e25e373172dfccf85bfbda67d92e41df6b5a673892f"
+      }
+    },
+    "medical_dictionary_output_hashes": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 6,
+        "columns": [
+          "file_name",
+          "sha256",
+          "response_bytes",
+          "row_count",
+          "column_schema_json"
+        ],
+        "rows_sha256_unordered": "dd9313fad573f456fb91539d38bb9fb6605f7096757fd0e73aa9283dbbe3bb3f"
+      },
+      "target": {
+        "row_count": 6,
+        "columns": [
+          "file_name",
+          "sha256",
+          "response_bytes",
+          "row_count",
+          "column_schema_json"
+        ],
+        "rows_sha256_unordered": "dd9313fad573f456fb91539d38bb9fb6605f7096757fd0e73aa9283dbbe3bb3f"
+      }
+    },
+    "medical_explanation_observations": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 145,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "explanation_observation_id",
+          "source_kind",
+          "source_title",
+          "source_english_name",
+          "description_text",
+          "description_present",
+          "exact_explanation_tuple_sha256",
+          "description_text_sha256",
+          "raw_capture_text",
+          "source_url",
+          "source_file",
+          "source_file_sha256",
+          "source_row_ordinal",
+          "source_subrow_ordinal",
+          "source_row_sha256",
+          "source_record_json",
+          "collected_at_kst",
+          "source_publication_at_kst",
+          "source_meet",
+          "source_meet_name",
+          "horse_name",
+          "horse_id",
+          "event_date_local",
+          "event_dates_json",
+          "hospital_name",
+          "source_observation_count",
+          "capture_status",
+          "parser_status",
+          "api33_title_exact_match",
+          "api33_english_exact_match"
+        ],
+        "rows_sha256_unordered": "06eb31aece77a12722b6d53d77a998cd1cafdcf64020875375d46e30b3618206"
+      },
+      "target": {
+        "row_count": 145,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "explanation_observation_id",
+          "source_kind",
+          "source_title",
+          "source_english_name",
+          "description_text",
+          "description_present",
+          "exact_explanation_tuple_sha256",
+          "description_text_sha256",
+          "raw_capture_text",
+          "source_url",
+          "source_file",
+          "source_file_sha256",
+          "source_row_ordinal",
+          "source_subrow_ordinal",
+          "source_row_sha256",
+          "source_record_json",
+          "collected_at_kst",
+          "source_publication_at_kst",
+          "source_meet",
+          "source_meet_name",
+          "horse_name",
+          "horse_id",
+          "event_date_local",
+          "event_dates_json",
+          "hospital_name",
+          "source_observation_count",
+          "capture_status",
+          "parser_status",
+          "api33_title_exact_match",
+          "api33_english_exact_match"
+        ],
+        "rows_sha256_unordered": "06eb31aece77a12722b6d53d77a998cd1cafdcf64020875375d46e30b3618206"
+      }
+    },
+    "medical_explanation_terms": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 119,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "exact_explanation_tuple_sha256",
+          "source_title",
+          "source_english_name",
+          "description_text",
+          "description_present",
+          "source_observation_count",
+          "source_kinds_json",
+          "source_meets_json",
+          "source_observation_ids_json",
+          "source_files_json",
+          "description_text_sha256"
+        ],
+        "rows_sha256_unordered": "28895a91331c04b78003fcc652ab7edf8cc2f5924bc28f1aa91802371e8752b2"
+      },
+      "target": {
+        "row_count": 119,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "exact_explanation_tuple_sha256",
+          "source_title",
+          "source_english_name",
+          "description_text",
+          "description_present",
+          "source_observation_count",
+          "source_kinds_json",
+          "source_meets_json",
+          "source_observation_ids_json",
+          "source_files_json",
+          "description_text_sha256"
+        ],
+        "rows_sha256_unordered": "28895a91331c04b78003fcc652ab7edf8cc2f5924bc28f1aa91802371e8752b2"
+      }
+    },
+    "medical_phrase_components": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 9113,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "raw_text_sha256",
+          "raw_text",
+          "reviewed_target_ordinal",
+          "target_ill_name",
+          "target_order_semantics",
+          "review_decision",
+          "review_status",
+          "contextual_evidence_required",
+          "mapping_rule_scope",
+          "prefix_rule_reusable",
+          "event_link_policy",
+          "evidence_note",
+          "source_review_file",
+          "source_review_sha256"
+        ],
+        "rows_sha256_unordered": "801a846957411074ce5d27b78b2442a8437568b15e5454e5e4d88a6f5d727c2b"
+      },
+      "target": {
+        "row_count": 9113,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "raw_text_sha256",
+          "raw_text",
+          "reviewed_target_ordinal",
+          "target_ill_name",
+          "target_order_semantics",
+          "review_decision",
+          "review_status",
+          "contextual_evidence_required",
+          "mapping_rule_scope",
+          "prefix_rule_reusable",
+          "event_link_policy",
+          "evidence_note",
+          "source_review_file",
+          "source_review_sha256"
+        ],
+        "rows_sha256_unordered": "801a846957411074ce5d27b78b2442a8437568b15e5454e5e4d88a6f5d727c2b"
+      }
+    },
+    "medical_phrase_decisions": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 5397,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "raw_text_sha256",
+          "raw_text",
+          "review_decision",
+          "review_status",
+          "original_match_status",
+          "mapped_kra_titles_raw",
+          "reviewed_target_count",
+          "description_status_in_review",
+          "description_sources_by_title_json",
+          "evidence_note",
+          "contextual_evidence_required",
+          "mapping_rule_scope",
+          "prefix_rule_reusable",
+          "event_link_policy",
+          "source_review_file",
+          "source_review_sha256"
+        ],
+        "rows_sha256_unordered": "006fcaeafc5195ff881bd03c66a18b3b074748766132d3ae81c7c09d6167de3f"
+      },
+      "target": {
+        "row_count": 5397,
+        "columns": [
+          "dictionary_row_no",
+          "source_row_json",
+          "raw_text_sha256",
+          "raw_text",
+          "review_decision",
+          "review_status",
+          "original_match_status",
+          "mapped_kra_titles_raw",
+          "reviewed_target_count",
+          "description_status_in_review",
+          "description_sources_by_title_json",
+          "evidence_note",
+          "contextual_evidence_required",
+          "mapping_rule_scope",
+          "prefix_rule_reusable",
+          "event_link_policy",
+          "source_review_file",
+          "source_review_sha256"
+        ],
+        "rows_sha256_unordered": "006fcaeafc5195ff881bd03c66a18b3b074748766132d3ae81c7c09d6167de3f"
+      }
+    },
+    "provenance_issues": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 2,
+        "columns": [
+          "provenance_issue_id",
+          "issue_type",
+          "severity",
+          "status",
+          "entity_type",
+          "entity_key",
+          "api_record_id",
+          "supplemental_artifact_id",
+          "api_value_json",
+          "supplemental_value_json",
+          "summary",
+          "detail_json",
+          "created_at_utc"
+        ],
+        "rows_sha256_unordered": "f3d1e3dfd05515baed8525f50b2bbec77dbc4d701ca6d242cd32247280adb948"
+      },
+      "target": {
+        "row_count": 2,
+        "columns": [
+          "provenance_issue_id",
+          "issue_type",
+          "severity",
+          "status",
+          "entity_type",
+          "entity_key",
+          "api_record_id",
+          "supplemental_artifact_id",
+          "api_value_json",
+          "supplemental_value_json",
+          "summary",
+          "detail_json",
+          "created_at_utc"
+        ],
+        "rows_sha256_unordered": "f3d1e3dfd05515baed8525f50b2bbec77dbc4d701ca6d242cd32247280adb948"
+      }
+    },
+    "race_result_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 191604,
+        "columns": [
+          "api_record_id",
+          "race_date",
+          "meet_code",
+          "race_number",
+          "horse_number",
+          "horse_id",
+          "horse_name",
+          "race_distance_m",
+          "rank_class_raw",
+          "race_name_raw",
+          "finish_position",
+          "finish_status_raw",
+          "finish_time_seconds",
+          "carried_weight_kg",
+          "body_weight_raw",
+          "jockey_id",
+          "jockey_name",
+          "trainer_id",
+          "trainer_name",
+          "owner_id",
+          "owner_name",
+          "track_raw",
+          "weather_raw",
+          "breed_label_raw",
+          "breed_assessment",
+          "breed_assessment_note"
+        ],
+        "rows_sha256_unordered": "fb0d9f941fdaad50221faa2888f7b5e83c56e1d4c34162075d8ad4413ca79c01"
+      },
+      "target": {
+        "row_count": 191604,
+        "columns": [
+          "api_record_id",
+          "race_date",
+          "meet_code",
+          "race_number",
+          "horse_number",
+          "horse_id",
+          "horse_name",
+          "race_distance_m",
+          "rank_class_raw",
+          "race_name_raw",
+          "finish_position",
+          "finish_status_raw",
+          "finish_time_seconds",
+          "carried_weight_kg",
+          "body_weight_raw",
+          "jockey_id",
+          "jockey_name",
+          "trainer_id",
+          "trainer_name",
+          "owner_id",
+          "owner_name",
+          "track_raw",
+          "weather_raw",
+          "breed_label_raw",
+          "breed_assessment",
+          "breed_assessment_note"
+        ],
+        "rows_sha256_unordered": "fb0d9f941fdaad50221faa2888f7b5e83c56e1d4c34162075d8ad4413ca79c01"
+      }
+    },
+    "race_section_order_reviews": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 14,
+        "columns": [
+          "api_record_id",
+          "field_name",
+          "review_status",
+          "api_order_at_review",
+          "api_payload_sha256_at_review",
+          "website_order",
+          "effective_order",
+          "website_url",
+          "checked_date_kst",
+          "evidence_relative_path",
+          "evidence_sha256",
+          "reason",
+          "applied_at"
+        ],
+        "rows_sha256_unordered": "025eb1ef6bebd811a5bff4ed808ea617cf4f2ae2b0463ffc869054328daa013b"
+      },
+      "target": {
+        "row_count": 14,
+        "columns": [
+          "api_record_id",
+          "field_name",
+          "review_status",
+          "api_order_at_review",
+          "api_payload_sha256_at_review",
+          "website_order",
+          "effective_order",
+          "website_url",
+          "checked_date_kst",
+          "evidence_relative_path",
+          "evidence_sha256",
+          "reason",
+          "applied_at"
+        ],
+        "rows_sha256_unordered": "025eb1ef6bebd811a5bff4ed808ea617cf4f2ae2b0463ffc869054328daa013b"
+      }
+    },
+    "race_section_time_reviews": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 4,
+        "columns": [
+          "api_record_id",
+          "field_name",
+          "review_status",
+          "api_seconds_at_review",
+          "api_payload_sha256_at_review",
+          "website_display",
+          "website_seconds",
+          "effective_seconds",
+          "website_url",
+          "checked_date_kst",
+          "evidence_relative_path",
+          "evidence_sha256",
+          "decision_reason",
+          "applied_at_utc"
+        ],
+        "rows_sha256_unordered": "687c53d926546204b814e5856983121ba0d225338f086a6c13733e85f697c5ba"
+      },
+      "target": {
+        "row_count": 4,
+        "columns": [
+          "api_record_id",
+          "field_name",
+          "review_status",
+          "api_seconds_at_review",
+          "api_payload_sha256_at_review",
+          "website_display",
+          "website_seconds",
+          "effective_seconds",
+          "website_url",
+          "checked_date_kst",
+          "evidence_relative_path",
+          "evidence_sha256",
+          "decision_reason",
+          "applied_at_utc"
+        ],
+        "rows_sha256_unordered": "687c53d926546204b814e5856983121ba0d225338f086a6c13733e85f697c5ba"
+      }
+    },
+    "running_trial_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 34375,
+        "columns": [
+          "api_record_id",
+          "trial_date",
+          "meet_code",
+          "trial_number",
+          "horse_number",
+          "horse_id",
+          "horse_name",
+          "finish_position",
+          "finish_status_raw",
+          "finish_time_seconds",
+          "body_weight_kg",
+          "carried_weight_base_kg",
+          "jockey_overweight_kg",
+          "jockey_id",
+          "jockey_name",
+          "trainer_id",
+          "trainer_name",
+          "pass_flag_raw",
+          "failure_reason_raw",
+          "inspection_reason_raw",
+          "section_times_json",
+          "breed_label_raw",
+          "breed_assessment",
+          "breed_assessment_note"
+        ],
+        "rows_sha256_unordered": "3a5f7abfad10e9db89c40a7f56a109071e3eea8555a3c7811c49c7d08c59aac3"
+      },
+      "target": {
+        "row_count": 34375,
+        "columns": [
+          "api_record_id",
+          "trial_date",
+          "meet_code",
+          "trial_number",
+          "horse_number",
+          "horse_id",
+          "horse_name",
+          "finish_position",
+          "finish_status_raw",
+          "finish_time_seconds",
+          "body_weight_kg",
+          "carried_weight_base_kg",
+          "jockey_overweight_kg",
+          "jockey_id",
+          "jockey_name",
+          "trainer_id",
+          "trainer_name",
+          "pass_flag_raw",
+          "failure_reason_raw",
+          "inspection_reason_raw",
+          "section_times_json",
+          "breed_label_raw",
+          "breed_assessment",
+          "breed_assessment_note"
+        ],
+        "rows_sha256_unordered": "3a5f7abfad10e9db89c40a7f56a109071e3eea8555a3c7811c49c7d08c59aac3"
+      }
+    },
+    "schema_metadata": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 25,
+        "columns": [
+          "key",
+          "value"
+        ],
+        "rows_sha256_unordered": "33b8026d4480a07a7e90f36d7fd0754fe9b210dc0f9db7c35d3bc982895af2a8"
+      },
+      "target": {
+        "row_count": 25,
+        "columns": [
+          "key",
+          "value"
+        ],
+        "rows_sha256_unordered": "33b8026d4480a07a7e90f36d7fd0754fe9b210dc0f9db7c35d3bc982895af2a8"
+      }
+    },
+    "section_internal_conflict_reviews": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 90,
+        "columns": [
+          "api_record_id",
+          "field_name",
+          "source_kind",
+          "raw_value_json_at_review",
+          "api_payload_sha256_at_review",
+          "website_url",
+          "review_status",
+          "evidence_relative_path",
+          "evidence_sha256",
+          "reviewed_at_utc"
+        ],
+        "rows_sha256_unordered": "34feced86c59807e043dcf590759b5e608f678a9f3a06bf383ab6f321ce4b0e2"
+      },
+      "target": {
+        "row_count": 90,
+        "columns": [
+          "api_record_id",
+          "field_name",
+          "source_kind",
+          "raw_value_json_at_review",
+          "api_payload_sha256_at_review",
+          "website_url",
+          "review_status",
+          "evidence_relative_path",
+          "evidence_sha256",
+          "reviewed_at_utc"
+        ],
+        "rows_sha256_unordered": "34feced86c59807e043dcf590759b5e608f678a9f3a06bf383ab6f321ce4b0e2"
+      }
+    },
+    "source_artifacts": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 4891,
+        "columns": [
+          "source_artifact_id",
+          "source_family",
+          "source_role",
+          "public_dataset_id",
+          "dataset_name",
+          "endpoint",
+          "operation",
+          "attempt_id",
+          "request_params_json",
+          "source_url_without_key",
+          "collected_at_utc",
+          "http_status_code",
+          "content_type",
+          "raw_relative_path",
+          "response_bytes",
+          "sha256",
+          "parser_version",
+          "created_at_utc"
+        ],
+        "rows_sha256_unordered": "39745d345943004209c2b9a7147eebd6f68b3ee73c1541510a315717d58e594e"
+      },
+      "target": {
+        "row_count": 4891,
+        "columns": [
+          "source_artifact_id",
+          "source_family",
+          "source_role",
+          "public_dataset_id",
+          "dataset_name",
+          "endpoint",
+          "operation",
+          "attempt_id",
+          "request_params_json",
+          "source_url_without_key",
+          "collected_at_utc",
+          "http_status_code",
+          "content_type",
+          "raw_relative_path",
+          "response_bytes",
+          "sha256",
+          "parser_version",
+          "created_at_utc"
+        ],
+        "rows_sha256_unordered": "39745d345943004209c2b9a7147eebd6f68b3ee73c1541510a315717d58e594e"
+      }
+    },
+    "sqlite_stat1": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 13,
+        "columns": [
+          "tbl",
+          "idx",
+          "stat"
+        ],
+        "rows_sha256_unordered": "0bbf76f691b2a60f5adea69e1a211f053d55ea63c8bcfc12eaefbaeb95c81cc2"
+      },
+      "target": {
+        "row_count": 13,
+        "columns": [
+          "tbl",
+          "idx",
+          "stat"
+        ],
+        "rows_sha256_unordered": "0bbf76f691b2a60f5adea69e1a211f053d55ea63c8bcfc12eaefbaeb95c81cc2"
+      }
+    },
+    "sqlite_stat4": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 0,
+        "columns": [
+          "tbl",
+          "idx",
+          "neq",
+          "nlt",
+          "ndlt",
+          "sample"
+        ],
+        "rows_sha256_unordered": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "target": {
+        "row_count": 0,
+        "columns": [
+          "tbl",
+          "idx",
+          "neq",
+          "nlt",
+          "ndlt",
+          "sample"
+        ],
+        "rows_sha256_unordered": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "starting_exam_api_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 10664,
+        "columns": [
+          "starting_exam_api_row_id",
+          "api_record_id",
+          "source_artifact_id",
+          "source_row_no",
+          "event_key",
+          "exam_date",
+          "horse_id",
+          "meet_raw",
+          "train_date_raw",
+          "day_serial_raw",
+          "train_no_raw",
+          "chul_no_raw",
+          "hr_name_raw",
+          "hr_no_raw",
+          "name_raw",
+          "sex_raw",
+          "age_raw",
+          "rider_raw",
+          "tr_name_raw",
+          "tr_no_raw",
+          "trainer_id_normalized",
+          "ow_name_raw",
+          "ow_no_raw",
+          "pass_flag_raw",
+          "judgment_label_normalized",
+          "judgment_status",
+          "reason_raw",
+          "nopass_reason_raw",
+          "raw_key_presence_json",
+          "raw_key_absence_json"
+        ],
+        "rows_sha256_unordered": "331c55261b5a7c3120ae1e0f8e30d89bbfbbf1a2897d62c16b9489793478dd42"
+      },
+      "target": {
+        "row_count": 10664,
+        "columns": [
+          "starting_exam_api_row_id",
+          "api_record_id",
+          "source_artifact_id",
+          "source_row_no",
+          "event_key",
+          "exam_date",
+          "horse_id",
+          "meet_raw",
+          "train_date_raw",
+          "day_serial_raw",
+          "train_no_raw",
+          "chul_no_raw",
+          "hr_name_raw",
+          "hr_no_raw",
+          "name_raw",
+          "sex_raw",
+          "age_raw",
+          "rider_raw",
+          "tr_name_raw",
+          "tr_no_raw",
+          "trainer_id_normalized",
+          "ow_name_raw",
+          "ow_no_raw",
+          "pass_flag_raw",
+          "judgment_label_normalized",
+          "judgment_status",
+          "reason_raw",
+          "nopass_reason_raw",
+          "raw_key_presence_json",
+          "raw_key_absence_json"
+        ],
+        "rows_sha256_unordered": "331c55261b5a7c3120ae1e0f8e30d89bbfbbf1a2897d62c16b9489793478dd42"
+      }
+    },
+    "starting_training_website_rows": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 295470,
+        "columns": [
+          "starting_training_website_row_id",
+          "website_artifact_id",
+          "source_row_no",
+          "affiliation_raw",
+          "trainer_no_raw",
+          "horse_name_raw",
+          "rider_raw",
+          "location_raw",
+          "note_raw",
+          "horse_id_raw",
+          "horse_id",
+          "horse_profile_observation_id",
+          "matching_status",
+          "api_evidence_json",
+          "raw_row_json"
+        ],
+        "rows_sha256_unordered": "a9dbaef57ccc60f013d1d651729870adc34ee008cc9515d3c12fbaa6c6c78bb9"
+      },
+      "target": {
+        "row_count": 295470,
+        "columns": [
+          "starting_training_website_row_id",
+          "website_artifact_id",
+          "source_row_no",
+          "affiliation_raw",
+          "trainer_no_raw",
+          "horse_name_raw",
+          "rider_raw",
+          "location_raw",
+          "note_raw",
+          "horse_id_raw",
+          "horse_id",
+          "horse_profile_observation_id",
+          "matching_status",
+          "api_evidence_json",
+          "raw_row_json"
+        ],
+        "rows_sha256_unordered": "a9dbaef57ccc60f013d1d651729870adc34ee008cc9515d3c12fbaa6c6c78bb9"
+      }
+    },
+    "supplemental_facts": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 4,
+        "columns": [
+          "supplemental_fact_id",
+          "entity_type",
+          "entity_key",
+          "field_name",
+          "value_json",
+          "source_artifact_id",
+          "source_line",
+          "api_field_state",
+          "notes"
+        ],
+        "rows_sha256_unordered": "21d473b913efa8ea87eb076826eec494bc0b64412116b08dd9b1342ed06f92c5"
+      },
+      "target": {
+        "row_count": 4,
+        "columns": [
+          "supplemental_fact_id",
+          "entity_type",
+          "entity_key",
+          "field_name",
+          "value_json",
+          "source_artifact_id",
+          "source_line",
+          "api_field_state",
+          "notes"
+        ],
+        "rows_sha256_unordered": "21d473b913efa8ea87eb076826eec494bc0b64412116b08dd9b1342ed06f92c5"
+      }
+    },
+    "website_training_artifacts": {
+      "status": "unchanged",
+      "baseline": {
+        "row_count": 2529,
+        "columns": [
+          "website_artifact_id",
+          "artifact_key",
+          "training_date",
+          "requested_at_utc",
+          "collection_directory",
+          "source_url",
+          "html_sha256",
+          "status",
+          "http_status",
+          "content_type",
+          "html_relative_path",
+          "html_bytes",
+          "manifest_sha256",
+          "row_count",
+          "inserted_at_utc"
+        ],
+        "rows_sha256_unordered": "98c5e23ac51bb3210f13d93ee25a15dbe5e3ea4f4d10dbcadb0f4b0b0ae52983"
+      },
+      "target": {
+        "row_count": 2529,
+        "columns": [
+          "website_artifact_id",
+          "artifact_key",
+          "training_date",
+          "requested_at_utc",
+          "collection_directory",
+          "source_url",
+          "html_sha256",
+          "status",
+          "http_status",
+          "content_type",
+          "html_relative_path",
+          "html_bytes",
+          "manifest_sha256",
+          "row_count",
+          "inserted_at_utc"
+        ],
+        "rows_sha256_unordered": "98c5e23ac51bb3210f13d93ee25a15dbe5e3ea4f4d10dbcadb0f4b0b0ae52983"
+      }
+    }
+  },
+  "baseline_source_aggregates": {
+    "daily_training_api_rows": 908316,
+    "daily_training_api_rows_analysis_2026": 907389,
+    "rows_without_employee_number": 92165,
+    "rows_with_null_role_or_number": 0,
+    "rows_by_raw_role": {
+      "-": 300111,
+      "기수": 315601,
+      "기수후보생": 1696,
+      "조교보": 71889,
+      "조교사": 111648,
+      "조교승인": 107371
+    },
+    "missing_number_rows_by_raw_role": {
+      "-": 43408,
+      "기수": 2,
+      "기수후보생": 1695,
+      "조교보": 24269,
+      "조교승인": 22791
+    },
+    "status": "ok"
+  },
+  "official_api307_meet_2_roster": {
+    "path": "data/research/jockey_roster_20261008/api_2.json",
+    "sha256": "d95066e2a573fd44b049e28a3f3bc3358d49b69a3fb58dd734ca741c649997c2",
+    "observed_at": "2026-10-08T21:44:26.652857+09:00",
+    "api_total_count": 92,
+    "valid_six_digit_jockey_ids": 92,
+    "distinct_jockey_ids": 92,
+    "distinct_id_name_pairs": 92,
+    "expected_jeju_jockey_count": 92,
+    "status": "ok"
+  },
+  "new_object_checks": {
+    "daily_training_riders": {
+      "expected_type": "view",
+      "actual_type": "view",
+      "status": "ok",
+      "row_count": 908316,
+      "expected_row_count": 908316
+    },
+    "daily_training_riders_analysis_2026": {
+      "expected_type": "view",
+      "actual_type": "view",
+      "status": "ok",
+      "row_count": 907389,
+      "expected_row_count": 907389
+    },
+    "training_rider_identity_reviews": {
+      "expected_type": "table",
+      "actual_type": "table",
+      "status": "ok"
+    },
+    "training_rider_website_observations": {
+      "expected_type": "table",
+      "actual_type": "table",
+      "status": "ok"
+    },
+    "training_rider_identity_reviews_integrity": {
+      "review_rows": 303,
+      "source_role_number_groups": 303,
+      "invalid_review_keys": 0,
+      "missing_number_rows_with_name": 0,
+      "status": "ok"
+    },
+    "daily_training_riders_raw_preservation": {
+      "row_count": 908316,
+      "distinct_source_row_ids": 908316,
+      "duplicate_source_row_ids": 0,
+      "missing_source_rows": 0,
+      "changed_raw_role_number_trainer_or_json_rows": 0,
+      "changed_leading_zero_preserving_employee_numbers": 0,
+      "changed_reference_person_kinds": 0,
+      "view_rider_names_not_equal_to_exact_role_number_review": 0,
+      "missing_number_rows_with_name": 0,
+      "status": "ok"
+    },
+    "daily_training_riders_analysis_2026_raw_preservation": {
+      "row_count": 907389,
+      "distinct_source_row_ids": 907389,
+      "duplicate_source_row_ids": 0,
+      "missing_source_rows": 0,
+      "changed_raw_role_number_trainer_or_json_rows": 0,
+      "changed_leading_zero_preserving_employee_numbers": 0,
+      "changed_reference_person_kinds": 0,
+      "view_rider_names_not_equal_to_exact_role_number_review": 0,
+      "missing_number_rows_with_name": 0,
+      "status": "ok"
+    }
+  },
+  "official_website_event_evidence": {
+    "ledger_pages": 32,
+    "ledger_evidence_rows": 1259,
+    "ledger_unresolved_index_rows": 23,
+    "unique_api18_event_rows": 1259,
+    "personless_raw_marker_rows": 23,
+    "event_rows_with_person_name": 1236,
+    "stored_observation_rows": 1259,
+    "raw_html_pages_rechecked": 31,
+    "personless_observation_reasons": [
+      "official page cell has no person name; raw marker preserved without interpretation"
+    ],
+    "views": {
+      "daily_training_riders": {
+        "rows": 908316,
+        "website_verified_rows": 1236,
+        "expected_website_verified_rows": 1236,
+        "event_flag_mismatches": 0,
+        "website_name_value_mismatches": 0,
+        "status": "ok",
+        "personless_marker_mismatches": 0
+      },
+      "daily_training_riders_analysis_2026": {
+        "rows": 907389,
+        "website_verified_rows": 1185,
+        "expected_website_verified_rows": 1185,
+        "event_flag_mismatches": 0,
+        "website_name_value_mismatches": 0,
+        "status": "ok",
+        "personless_marker_mismatches": 0
+      }
+    },
+    "status": "ok"
+  },
+  "identity_reference_checks": {
+    "raw_role_number_groups": 303,
+    "review_rows": 303,
+    "duplicate_review_keys": 0,
+    "missing_review_groups": [],
+    "extra_review_groups": [],
+    "group_count_or_date_mismatches": [],
+    "official_api4_api20_identity_sources": {
+      "distinct_jockey_id_name_pairs": 76,
+      "distinct_jockey_ids": 76,
+      "distinct_trainer_id_name_pairs": 35,
+      "distinct_trainer_ids": 35,
+      "verified_api4_api20_witness_pairs": 111,
+      "verified_endpoints": [
+        "https://apis.data.go.kr/B551015/API20_1/ridingTestResult_1",
+        "https://apis.data.go.kr/B551015/API4_3/raceResult_3"
+      ],
+      "malformed_or_missing_witnesses": [],
+      "status": "ok"
+    },
+    "website_named_employee_ids": 50,
+    "website_named_events": 1236,
+    "website_personless_events": 23,
+    "website_personless_employee_ids": [
+      "006045",
+      "006077",
+      "006078",
+      "006079",
+      "006080"
+    ],
+    "api307_all_meet_roster": {
+      "1": {
+        "ids": 469,
+        "id_name_pairs": 469
+      },
+      "2": {
+        "ids": 92,
+        "id_name_pairs": 92
+      },
+      "3": {
+        "ids": 132,
+        "id_name_pairs": 132
+      }
+    },
+    "website_personless_observation_rows_loaded": 23,
+    "named_training_rows_from_review_groups": 743584,
+    "unresolved_training_rows_from_review_groups": 164732,
+    "review_group_status_counts": {
+      "matched_employee_number_website_reference": {
+        "groups": 84,
+        "training_rows": 249518
+      },
+      "matched_id_role_not_provided": {
+        "groups": 64,
+        "training_rows": 66818
+      },
+      "matched_jockey_id": {
+        "groups": 52,
+        "training_rows": 315599
+      },
+      "matched_jockey_id_candidate_role": {
+        "groups": 1,
+        "training_rows": 1
+      },
+      "matched_trainer_id": {
+        "groups": 26,
+        "training_rows": 111648
+      },
+      "missing_employee_number": {
+        "groups": 5,
+        "training_rows": 92165
+      },
+      "unresolved_employee_number": {
+        "groups": 66,
+        "training_rows": 71748
+      },
+      "website_person_name_not_provided": {
+        "groups": 5,
+        "training_rows": 819
+      }
+    },
+    "unresolved_groups_with_empty_evidence_json": 76,
+    "identity_or_evidence_mismatches": [],
+    "evidence_mentions_trainer_name_field": [],
+    "status": "ok"
+  },
+  "unresolved_reason_artifact_checks": {
+    "path": "jeju/research/20261015_training_rider_identity/audit/results/unresolved_employee_ids.csv",
+    "csv_review_rows": 220,
+    "unresolved_valid_employee_groups": 71,
+    "unresolved_groups_covered_by_csv": 71,
+    "missing_csv_reason_groups": [],
+    "groups_without_status_reason": [],
+    "invalid_reason_json_fields": [],
+    "training_row_count_mismatches": [],
+    "duplicate_csv_role_number_keys": 0,
+    "status": "ok"
+  },
+  "status": "ok",
+  "failures": {
+    "changed_or_missing_existing_tables": [],
+    "changed_or_missing_existing_schema_objects": [],
+    "failed_new_object_checks": [],
+    "official_website_event_evidence": null,
+    "identity_reference_checks": null,
+    "unresolved_reason_artifact_checks": null
+  }
+}

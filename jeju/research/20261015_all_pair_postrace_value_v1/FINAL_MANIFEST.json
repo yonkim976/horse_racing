@@ -1,0 +1,54 @@
+{
+  "status": "FINAL_SEAL_PASS",
+  "purpose": "Final artifact hashes and independent root receipt, sealed separately so REPORT.json remains frozen.",
+  "inherited_source_manifest": {
+    "path": "SOURCE_MANIFEST.json",
+    "sha256": "2021dab5e06ff9408d21267197ce80b5c2ef37bca26ec7e651ea1574b839052d",
+    "original_output_hashes_preserved_as_run": true
+  },
+  "frozen_report": {
+    "path": "REPORT.json",
+    "sha256": "bc9839698a06e805ad54936639976a61e6c1f933feaddf5beff60e47039d4570",
+    "matches_independent_receipt": true
+  },
+  "independent_verification": {
+    "path": "ROOT_VERIFICATION_RECEIPT.v3.json",
+    "sha256": "432b984b0393e400fed60a964db7fd5bd07ad89e646d6c4a722b21c1190d1d07",
+    "status": "PASS",
+    "summary_rows_verified": 78,
+    "selected_tickets_verified": 20209,
+    "confidence_bounds_verified": 312,
+    "comparison_tolerance": 1e-08,
+    "receipt_report_sha256": "bc9839698a06e805ad54936639976a61e6c1f933feaddf5beff60e47039d4570"
+  },
+  "outputs_sha256": {
+    "PLAN.md": "d76a827edede41d87842c2bec5fb27c1ec0a9f6aeddbd35ef32defbbb62afe16",
+    "analysis.py": "bff659f4f71ad09254797267e6d386b0f428d019b4b365fadb1e800de9dfb967",
+    "README.md": "9311966630be2bd5726b462066c75a600b2955914d46cefc797c112c2b1ab930",
+    "REPORT.json": "bc9839698a06e805ad54936639976a61e6c1f933feaddf5beff60e47039d4570",
+    "SOURCE_CENSUS.json": "ebed8eeca1fbe57181f39c8efab9571c644be7b47f61c3c807942b555165bc54",
+    "SOURCE_PAGE_INDEX.csv": "219809c3819592a5c3376baa2dc2e3490da52abcbb3ad5b0e4fb9f73054d5ed4",
+    "pair_rows.csv": "6bee498ca0ff80bc43959ef524a4a974e61fb46717a9a7fb9afb4da8f2071855",
+    "selection_rows.csv": "5975f178288a91abfa348f9d826e3539c4598b3d55713f36610b531aed1395f3",
+    "summary.csv": "3028ca67458822c9d00b05af869886060fb50cc7396ae21c9ce141da23190267",
+    "bootstrap_ci.csv": "457ad02a99d6a038b32afbbb9175abc7ec340e0c35495d21c09ae611a06cf160",
+    "rank_calibration.csv": "e0ad8c2918fdb2530c5363047703522c62757c3759bce7994ddb7fb42d430cf2",
+    "selection_rank_distribution.csv": "abcda8d21ca811e51cf6ad7b2e8d7ac675da6d06478dd30d8782725a593859cd",
+    "cases.csv": "9c3cd9f63cc9ce9a7c3bc321e116016c67f0151f16513f92a1f75a16d73fecbf",
+    "ROOT_VERIFICATION_RECEIPT.v3.json": "432b984b0393e400fed60a964db7fd5bd07ad89e646d6c4a722b21c1190d1d07"
+  },
+  "read_only_scope": {
+    "sqlite_uri_mode": "ro",
+    "sqlite_query_only": true,
+    "new_network_requests": false,
+    "model_fit_or_refit": false,
+    "database_writes": false,
+    "operations_changes": false
+  },
+  "source_metadata_export_policy": {
+    "source_urls_exported": false,
+    "request_parameters_exported": false,
+    "credentials_exported": false,
+    "page_hashes_preserved": true
+  }
+}

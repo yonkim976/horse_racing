@@ -1,0 +1,502 @@
+{
+  "manifest_version": 1,
+  "artifact_id": "20261010_joint_gain_loss_v1",
+  "status": "final retrospective no-fit analysis; root supervisory PASS; C independent review PASS",
+  "scope": {
+    "analysis_folder": "jeju/research/20261010_joint_gain_loss_v1",
+    "local_inventory": "Every regular file recursively under this folder except ARTIFACT_MANIFEST.json itself; self hash is the delivery-record hash.",
+    "method": "Fixed saved predictions/features; no new fit, threshold tuning, or rule optimization; no database/network access.",
+    "cohort": {
+      "races": 1779,
+      "runner_rows": 17412,
+      "race_dates": 269,
+      "date_start": "2024-01-05",
+      "date_end": "2026-09-19",
+      "partial_2026": true
+    },
+    "outcomes": {
+      "both_hit": 373,
+      "both_miss": 1322,
+      "gained": 50,
+      "lost": 34,
+      "selection_changed": 1077,
+      "selection_unchanged": 702
+    }
+  },
+  "local_files": [
+    {
+      "path": "ANALYSIS_PLAN.md",
+      "bytes": 10196,
+      "sha256": "e05ebf82624a0a8dc3d4f990e7bbe55d38f1498d23720682a8f5e9cce88e8153",
+      "status": "analysis_documentation",
+      "description": "Plan or interpretive documentation for retrospective analysis."
+    },
+    {
+      "path": "FOLLOWUP_ADDENDUM_CONTRACT.json",
+      "bytes": 2243,
+      "sha256": "35324efe563d98cf2c8afc85b8ff45c7a01be2221f0d9e0d0ccc0acc8ec53f1e",
+      "status": "contract_or_receipt",
+      "description": "Analysis contract, integrity record, or verification receipt."
+    },
+    {
+      "path": "FOLLOWUP_ADDENDUM_PLAN.md",
+      "bytes": 2370,
+      "sha256": "d149350739b990376dba99666850c795d97585c6c233d3d0e4606ca0595e438d",
+      "status": "analysis_documentation",
+      "description": "Plan or interpretive documentation for retrospective analysis."
+    },
+    {
+      "path": "HELPER_INTEGRITY_AUDIT.json",
+      "bytes": 1034,
+      "sha256": "bc057f0fc03fed964358878168f60880cf7f7edec0d9fa59e6c78bc47ae62d6f",
+      "status": "contract_or_receipt",
+      "description": "Analysis contract, integrity record, or verification receipt."
+    },
+    {
+      "path": "INPUT_CONTRACT.json",
+      "bytes": 5771,
+      "sha256": "f4e3226904039ad80ab5fec025119b8a08e630c29c436f7c01d637765807ff78",
+      "status": "contract_or_receipt",
+      "description": "Analysis contract, integrity record, or verification receipt."
+    },
+    {
+      "path": "README.md",
+      "bytes": 16998,
+      "sha256": "2de760d1ad805a2955a5af882ceaec1ba5e0cb258a6c6f0479fd14c4f2e8129a",
+      "status": "authoritative",
+      "description": "Root-approved Korean retrospective report; links the corrected v2 Top3 summary."
+    },
+    {
+      "path": "ROOT_SUPERVISORY_REVIEW.json",
+      "bytes": 3883,
+      "sha256": "82c9bac1c3af52ec0b7074b28a3ebbaa72b797124b0e724e13e9e50b7b721529",
+      "status": "independent_supervisory_pass",
+      "description": "Root supervisory PASS; not operational approval."
+    },
+    {
+      "path": "SAVED_HISTORY_EXTENSION_CONTRACT.json",
+      "bytes": 1363,
+      "sha256": "fb1a33bc321affd4157459b3a59324f32ecc7044a7b1e80cc43c51391a1a092e",
+      "status": "corrected_current_contract",
+      "description": "Clarifies available past query-range counts; not a lifetime census."
+    },
+    {
+      "path": "SUPPLEMENTAL_CONTEXT_CONTRACT.json",
+      "bytes": 4387,
+      "sha256": "0f707e1b861980fb9518d8ec1f46effa2540ae27f8380dac977daf6fffcd1b77",
+      "status": "corrected_current_contract",
+      "description": "Clarifies same-event context availability and timing limits."
+    },
+    {
+      "path": "SUPPLEMENTAL_CONTEXT_PLAN.md",
+      "bytes": 5059,
+      "sha256": "559f123b0a5585113765ed0ee45dd7607f7758a7b1e9a529f952401c82e3896e",
+      "status": "analysis_documentation",
+      "description": "Plan or interpretive documentation for retrospective analysis."
+    },
+    {
+      "path": "add_top3_summary_feature_labels.py",
+      "bytes": 4445,
+      "sha256": "2bffde761837d2849d477c9ef5f5ceb8539a1780552920e75b54b00267bad783",
+      "status": "analysis_or_validation_code",
+      "description": "Scoped no-fit analysis, audit, or correction code; not an operational model."
+    },
+    {
+      "path": "analyze_followup_addendum.py",
+      "bytes": 11011,
+      "sha256": "d19cc3736f6bfb2fb90b46d86c9d1427a0e4243331f580f80e7584b33a00b0e1",
+      "status": "analysis_or_validation_code",
+      "description": "Scoped no-fit analysis, audit, or correction code; not an operational model."
+    },
+    {
+      "path": "analyze_joint_gain_loss.py",
+      "bytes": 56016,
+      "sha256": "ce19da41133a9b346e47e5e2b3ef1ca9f8b81c04de1899c495aed61bf3d0cd7c",
+      "status": "analysis_or_validation_code",
+      "description": "Scoped no-fit analysis, audit, or correction code; not an operational model."
+    },
+    {
+      "path": "analyze_supplemental_context.py",
+      "bytes": 19076,
+      "sha256": "b152955466aa2293de83bfe540828827d592cdaf143f4f5071df4ebdbdf606e0",
+      "status": "analysis_or_validation_code",
+      "description": "Scoped no-fit analysis, audit, or correction code; not an operational model."
+    },
+    {
+      "path": "contracts_as_run/SAVED_HISTORY_EXTENSION_CONTRACT.json",
+      "bytes": 1127,
+      "sha256": "31f9382d9ed2be331de02d4a20db341f939a1c737683237ddfbce5dd426325bf",
+      "status": "preserved_as_run_contract",
+      "description": "Exact original contract bytes used in the supplemental run."
+    },
+    {
+      "path": "contracts_as_run/SUPPLEMENTAL_CONTEXT_CONTRACT.json",
+      "bytes": 4282,
+      "sha256": "0f612469b9ddbc8e3a33b4b94e7ea611f8b43cf5607fdae5c32cda89f8f81052",
+      "status": "preserved_as_run_contract",
+      "description": "Exact original contract bytes used in the supplemental run."
+    },
+    {
+      "path": "correct_history_scope_label.py",
+      "bytes": 4969,
+      "sha256": "65e732cebe51359579e14dd7d0d2ff4ccb2e4ac3fb54aff4ba068908b5f91e84",
+      "status": "analysis_or_validation_code",
+      "description": "Scoped no-fit analysis, audit, or correction code; not an operational model."
+    },
+    {
+      "path": "outputs/analysis_receipt.json",
+      "bytes": 6582,
+      "sha256": "207831dd0a253c516d86a45925c90c077533fbe94607c60128dc566660ed80f9",
+      "status": "frozen_core_receipt",
+      "description": "Core no-fit analysis receipt; 9 sources and 13 outputs verified."
+    },
+    {
+      "path": "outputs/beta_decomposition_by_outcome.csv",
+      "bytes": 5479,
+      "sha256": "33ac98734cfa23824d9cc4bd847bd23a6ece9b0086f62f6d20b8eccf25b6d6c0",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/beta_group_decomposition_by_outcome.csv",
+      "bytes": 1556,
+      "sha256": "67f345ecf6902af8a9b642f5e521a0c061d252dca25a8c3616ddd5e1781a2b6b",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/condition_summary.csv",
+      "bytes": 5217,
+      "sha256": "0a20c7877994e2f09af4f5765abae2e32a96da3b8e56797b53f8df0879592b8c",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/continuous_features_by_outcome.csv",
+      "bytes": 22629,
+      "sha256": "f9970429223f25182f3c840ae313bd914bda4fb8835c432811ee9cf9f07bb5c0",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/feature_missingness_by_outcome.csv",
+      "bytes": 2420,
+      "sha256": "10297fbfc9b08eed1aaeda2cd4b35f881bc5d035a11194b6503de598fa1b788f",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/gain_loss_84.csv",
+      "bytes": 120165,
+      "sha256": "85235e87f39aeb935cb180adfa85d957af495c8778457bc7341d7866f15d563f",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/history_timing_audit.json",
+      "bytes": 499,
+      "sha256": "2b546a7d50ea0fa6ec3d9b577daa784bcabbb4e40873b490fb25f0e99478f77c",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/mechanical_cases.csv",
+      "bytes": 2192,
+      "sha256": "d7e3877be026d49f1af343e49f8c168db321fac139cca3fb23bdb847b2f3d331",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/race_ledger_1779.csv",
+      "bytes": 2447792,
+      "sha256": "a32c10fe84af887ec8f258a252815b5e2303d7458a5086e6bef12f80c82f7f26",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/selected_ticket_changes.csv",
+      "bytes": 270312,
+      "sha256": "5f2932c7366d8d5cf7726aa93772419355c0f8f93be02131aa3fcab0b9766b3b",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/selection_boundary_detail_1779.csv",
+      "bytes": 845689,
+      "sha256": "bb91fc6b280b91fbb5d012eed791c9931ac426679238dd99e4f95c9d4098ed65",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/true_set_beta_contributions.csv",
+      "bytes": 2869943,
+      "sha256": "acff8241ea420597f36cf6020c7d528f6d3760b6d61ce9ff94b7c428e0d7cb17",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs/true_set_boundary_competitor_1779.csv",
+      "bytes": 637870,
+      "sha256": "c1ac2313bc050cac88152543af15c6fcc56d158890283c8ffe60dcf2bf54963f",
+      "status": "frozen_core_output",
+      "description": "Frozen output from fixed retrospective no-fit analysis; independently verified."
+    },
+    {
+      "path": "outputs_followup_addendum/actual_top3_context_summary_corrected.csv",
+      "bytes": 2695,
+      "sha256": "dc2db01105a1d58d79037caaef3337e4761fcd0568381ff3edebdb11957b908d",
+      "status": "superseded_preserved_for_audit",
+      "description": "Corrected scope but lacked feature identifiers; see v2."
+    },
+    {
+      "path": "outputs_followup_addendum/actual_top3_context_summary_corrected_v2.csv",
+      "bytes": 3445,
+      "sha256": "835fdbcdf2b41ede4ea53a167fd79654a11684549081b6a1121ac5bee37ac651",
+      "status": "authoritative_corrected_summary",
+      "description": "Feature- and unit-labeled summary for all discordant 84, gained 50, and lost 34 races."
+    },
+    {
+      "path": "outputs_followup_addendum/followup_receipt.json",
+      "bytes": 2370,
+      "sha256": "67c32ca8ad9a8433cb982369a8e3942096112cd4c89bc038d2f0596044e83b29",
+      "status": "frozen_addendum_receipt",
+      "description": "Fixed descriptive cross-tab receipt; intermediate summary superseded by v2."
+    },
+    {
+      "path": "outputs_followup_addendum/history_scope_correction_receipt.json",
+      "bytes": 1924,
+      "sha256": "b17ced5496988748736c6d506745e41e4a9485ccd958cd9482c366ea8c1c5efc",
+      "status": "correction_receipt",
+      "description": "Maps the archived as-run wording to the corrected available-range interpretation."
+    },
+    {
+      "path": "outputs_followup_addendum/same_distance_support_available_range_corrected.csv",
+      "bytes": 8155,
+      "sha256": "bfde4b01cde4b502d4760d53d3e083c9cc7e53e5fdf0135b4cfb8815af5d9781",
+      "status": "authoritative_corrected_summary",
+      "description": "Same-distance support over available past query range; distinct from last-five-slot support."
+    },
+    {
+      "path": "outputs_followup_addendum/top3_summary_feature_label_correction_receipt.json",
+      "bytes": 1751,
+      "sha256": "490151c18f81f4e6047073dc5ff1d24a7431d2a28e0d52f69759a65072788789",
+      "status": "correction_receipt",
+      "description": "Records v2 feature/unit labeling and supersession of the unlabeled intermediate."
+    },
+    {
+      "path": "outputs_followup_addendum/year_distance_condition_summary.csv",
+      "bytes": 2936,
+      "sha256": "9d33eb40efcd21a2af9e31bd3f805eec794943f5b67feb5569f44f0e03d885d9",
+      "status": "followup_output_or_receipt",
+      "description": "Follow-up correction or fixed descriptive cross-tab artifact."
+    },
+    {
+      "path": "outputs_followup_addendum/year_moisture_band_condition_summary.csv",
+      "bytes": 2192,
+      "sha256": "8baf7dfa746f950aad5b5660718df3389878cbbf435c96bdf3fb130252dce397",
+      "status": "followup_output_or_receipt",
+      "description": "Follow-up correction or fixed descriptive cross-tab artifact."
+    },
+    {
+      "path": "outputs_supplemental/actual_top3_context_84_races.csv",
+      "bytes": 19028,
+      "sha256": "c266cd22614fce461ce16410da417ac2fcc1682234e5e4bbe1eef079b83fffab",
+      "status": "preserved_supplemental_output",
+      "description": "As-run retrospective output; scope and timing limits are documented."
+    },
+    {
+      "path": "outputs_supplemental/actual_top3_context_summary.csv",
+      "bytes": 3689,
+      "sha256": "c05a11a6c8c1077fff45cc83fc711748aab491356cee3d1f48ea13ea7f2ccb79",
+      "status": "superseded_preserved_for_audit",
+      "description": "Incorrect all_1779 label for an 84-race discordant subset; see corrected v2."
+    },
+    {
+      "path": "outputs_supplemental/lifetime_same_distance_support.csv",
+      "bytes": 4420,
+      "sha256": "d2e6a08e6cb186ae335c0d46556feb90313167b161fbffa164baea382452cfe4",
+      "status": "superseded_label_preserved_for_audit",
+      "description": "As-run filename overstates source coverage; use available-range correction."
+    },
+    {
+      "path": "outputs_supplemental/moisture_band_condition_summary.csv",
+      "bytes": 1196,
+      "sha256": "bc7c972ccd95d3c8755495a26a34ef282a5b4aed1bf323f42301ff725847e5f5",
+      "status": "preserved_supplemental_output",
+      "description": "As-run retrospective output; scope and timing limits are documented."
+    },
+    {
+      "path": "outputs_supplemental/race_context_by_outcome.csv",
+      "bytes": 3827,
+      "sha256": "ff293b2941770ab3b82d6299ee0e81ae81268449ad922b557ba63a606db8d513",
+      "status": "preserved_supplemental_output",
+      "description": "As-run retrospective output; scope and timing limits are documented."
+    },
+    {
+      "path": "outputs_supplemental/race_context_vectors.csv",
+      "bytes": 337260,
+      "sha256": "34caff2c75ccb0fd2b61fb22a4698157d02d787b123aa72d8b540b33c86bb3fd",
+      "status": "preserved_supplemental_output",
+      "description": "As-run retrospective output; scope and timing limits are documented."
+    },
+    {
+      "path": "outputs_supplemental/supplemental_receipt.json",
+      "bytes": 2987,
+      "sha256": "641591c7818dab6700402294a0c132ac5e02f8c3e4357a127069ef475b569ba5",
+      "status": "frozen_as_run_receipt",
+      "description": "Supplemental as-run receipt; original contracts are archived in contracts_as_run/."
+    },
+    {
+      "path": "verify_imported_helper.py",
+      "bytes": 2617,
+      "sha256": "afcb3a9ea349fa6b730696e9d575c083a3ddb6209978e94e7695f48bfeb500a6",
+      "status": "analysis_or_validation_code",
+      "description": "Scoped no-fit analysis, audit, or correction code; not an operational model."
+    }
+  ],
+  "external_references": [
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/ARTIFACT_MANIFEST.json",
+      "bytes": 9613,
+      "sha256": "d0d1a749afb6a6f894de1bb4263c9d67dd1e3b2d1a35bf1b5fd38d8948c656b0",
+      "role": "primary saved-model source manifest"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/fit_parameters.json",
+      "bytes": 27463,
+      "sha256": "ff96e32cc4e0c991ac1326ef111a785b0e4f11b49daedc9f584be00dfe72eaeb",
+      "role": "fixed saved fold parameters; no fitting run"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/race_metrics.csv",
+      "bytes": 536786,
+      "sha256": "89820acf0dfafc749f394cf9e74a3b58a5ec890e2c746f890ad257eaf32ff115",
+      "role": "saved race outcomes"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/runner_marginals.csv",
+      "bytes": 1784897,
+      "sha256": "0e6a01607164a7cb54fbbb5fb445e975ea9fbadad21d4e7a842adfc915616a09",
+      "role": "saved runner probabilities/labels and context-join source"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/outputs/report/all_triples.parquet",
+      "bytes": 10000041,
+      "sha256": "13409e65353c0cb6dab14df97317cce24de913056ae464ee3524520759de681c",
+      "role": "saved complete triple distributions"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "role": "saved runner history/features"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet",
+      "bytes": 96811,
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60",
+      "role": "saved 2024 evaluation scores"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet",
+      "bytes": 97876,
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+      "role": "saved 2025 evaluation scores"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet",
+      "bytes": 71793,
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+      "role": "saved partial-2026 evaluation scores"
+    },
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/joint_model.py",
+      "bytes": 30933,
+      "sha256": "cdb1115dfe797aad0bc71be25a21215909166eb1b644244e8d460f7e3da1cb92",
+      "role": "current helper verified against primary manifest; post-run audit does not claim pre-run verification"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/runner_context.csv",
+      "bytes": 4570157,
+      "sha256": "8dfbef38f04c52962efee8275cca48ae8f6fa14e59d7816ed50f0b4344642468",
+      "role": "supplemental result-side runner context; publication timing unverified"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/CONDITION_AVAILABILITY_AUDIT.md",
+      "bytes": 10724,
+      "sha256": "42bbb7a31dcee14ac8b6abdb9e6bfaf1ffafafdd2af91161baa89dd4d03921ba",
+      "role": "context availability and timing audit"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/ARTIFACT_MANIFEST.json",
+      "bytes": 2418,
+      "sha256": "a051458bf4b06c87b4d3a8a377c4eb06c0b6aa6f0a0c231e90b208e8d14d697f",
+      "role": "frozen supplemental context manifest"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/verify_receipt.json",
+      "bytes": 2490,
+      "sha256": "8ea6f99fdea646d42bcaa18022c03029159bca5665940126452ae6b206b35f89",
+      "role": "context source/key verification receipt"
+    },
+    {
+      "path": "jeju/research/20261008_weight_speed_v2/source_lineage.csv",
+      "bytes": 15281661,
+      "sha256": "95c44c1571f1ca383b57c5b9e98a8d9c1f32ebb1b9d19763db82ff51d3ed6346",
+      "role": "runner-context source lineage"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_review_v1/outputs/independent_analysis_output_receipt.json",
+      "bytes": 5730,
+      "sha256": "dcd4af69388e211dc5742b9178827aac1dafea6bdd996638597e3d389f032285",
+      "role": "C independent core reconstruction/output verification PASS"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_review_v1/outputs/independent_supplemental_verification_receipt.json",
+      "bytes": 3020,
+      "sha256": "c1746292bcbc6bdb9003ed4375dfe73e390bff5cdaa68d41a7f6e907e17c2403",
+      "role": "C final independent supplemental/addendum/README verification PASS"
+    }
+  ],
+  "authoritative_artifacts": {
+    "report": "README.md",
+    "core_receipt": "outputs/analysis_receipt.json",
+    "corrected_top3_summary": "outputs_followup_addendum/actual_top3_context_summary_corrected_v2.csv",
+    "top3_correction_receipt": "outputs_followup_addendum/top3_summary_feature_label_correction_receipt.json",
+    "available_range_history_table": "outputs_followup_addendum/same_distance_support_available_range_corrected.csv",
+    "history_scope_correction_receipt": "outputs_followup_addendum/history_scope_correction_receipt.json",
+    "exact_as_run_contract_archive": "contracts_as_run/",
+    "supervisory_review": "ROOT_SUPERVISORY_REVIEW.json",
+    "C_final_receipt": "../20261010_joint_gain_loss_review_v1/outputs/independent_supplemental_verification_receipt.json",
+    "B_context_manifest": "../20261010_joint_gain_loss_context_v1/ARTIFACT_MANIFEST.json"
+  },
+  "supersession_map": [
+    {
+      "superseded": "outputs_supplemental/actual_top3_context_summary.csv",
+      "replacement": "outputs_followup_addendum/actual_top3_context_summary_corrected_v2.csv",
+      "reason": "all_1779 label incorrectly described the discordant 84-race subset and empty outcome rows were included"
+    },
+    {
+      "superseded": "outputs_followup_addendum/actual_top3_context_summary_corrected.csv",
+      "replacement": "outputs_followup_addendum/actual_top3_context_summary_corrected_v2.csv",
+      "reason": "intermediate corrected scope omitted feature identifiers"
+    },
+    {
+      "superseded": "outputs_supplemental/lifetime_same_distance_support.csv",
+      "replacement": "outputs_followup_addendum/same_distance_support_available_range_corrected.csv",
+      "reason": "lifetime wording overstated saved-source coverage"
+    },
+    {
+      "superseded": "as-run supplemental contracts (exact bytes in contracts_as_run/)",
+      "replacement": "current clarified contract files at artifact root",
+      "reason": "preserve what was run while documenting the available-history-range and result-side context limits"
+    }
+  ],
+  "limitations": [
+    "Evaluation cohort reused from prior development; retrospective descriptive analysis, not confirmatory or fresh preregistration.",
+    "Same-event body mass, carried weight, and moisture are result-side context; publication timing is unverified and they are not validated pre-race predictors.",
+    "Annual folds use different fitted relationship parameters and temperatures, so year changes cannot be attributed solely to season or distance composition.",
+    "Thin strata, pointwise intervals, and correlated relationship terms limit interpretation; decompositions are algebraic, not causal.",
+    "No deployable condition or threshold was selected; next steps are hypotheses for controlled training and untouched-time validation."
+  ]
+}

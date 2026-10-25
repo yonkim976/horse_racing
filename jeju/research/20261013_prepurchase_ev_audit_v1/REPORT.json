@@ -1,0 +1,296 @@
+{
+  "objective": "Audit documented pre-purchase QPL quote availability for a frozen selected-pair prediction file.",
+  "method": "Read-only shared SQLite plus direct SHA-verified local API301 raw response pages for every target prediction date and Jeju meet.",
+  "prediction": {
+    "sha256": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "all_selected_races": 1779,
+    "all_selected_by_year": {
+      "2024": 637,
+      "2025": 654,
+      "2026": 488
+    },
+    "target_races": 1142,
+    "target_by_year": {
+      "2025": 654,
+      "2026": 488
+    },
+    "target_first_date": "2025-01-03",
+    "target_last_date": "2026-09-19",
+    "probability_column": "jockey_id_candidate_calibrated_probability",
+    "probability_event": "selected pair jointly finishes in the official Top3 (QPL event)"
+  },
+  "scope": {
+    "start": "2025-01-01",
+    "end": "2026-09-19",
+    "meet": 2,
+    "races": 1142,
+    "races_by_year": {
+      "2025": 654,
+      "2026": 488
+    },
+    "fixed_cutoff": "scheduled_at_ms - 300000 (T-5 minutes)"
+  },
+  "eligibility": {
+    "source_record_date_meet_race_and_pool_must_match": true,
+    "selected_pair_must_match_exactly": true,
+    "request_and_retrieval_must_both_precede_cutoff": true,
+    "raw_payload_sha256_must_match_registry": true,
+    "ordinary_positive_odds_required": true,
+    "local_clock_independently_verified": false,
+    "actual_start_at_ms_is_audit_only": true
+  },
+  "shared_db_scope": {
+    "qpl_jeju": {
+      "bet_type": "QPL",
+      "kra_meet_code": 2,
+      "row_count": 53063,
+      "race_count": 1267,
+      "first_race_date": "2025-01-03",
+      "last_race_date": "2026-10-02",
+      "distinct_observed_times": 174,
+      "first_observed_ms": 1787315191466,
+      "last_observed_ms": 1790952260610,
+      "rows_before_t5": 7,
+      "rows_missing_schedule": 0,
+      "rows_missing_actual_start": 53063,
+      "first_observed_utc": "2026-08-21T12:26:31.466+00:00",
+      "last_observed_utc": "2026-10-02T14:44:20.610+00:00"
+    },
+    "target_qpl_snapshot_rows": 48539,
+    "target_qpl_races_with_any_snapshot": 1142,
+    "target_predictions_with_exact_pair_snapshot": 1142,
+    "target_predictions_with_exact_pair_snapshot_before_cutoff": 0,
+    "target_predictions_missing_scheduled_start": 0,
+    "target_predictions_missing_actual_start": 1142
+  },
+  "raw_source_inventory": {
+    "endpoint": "/API301/Dividend_rate_total",
+    "operation": "Dividend_rate_total",
+    "scope": "API301 pages registered for every target prediction date and Jeju meet",
+    "pages_for_target_dates": 889,
+    "distinct_days": 171,
+    "distinct_runs": 225,
+    "all_page_hashes_verified": true,
+    "verified_pages": 889,
+    "target_dates_without_registry_pages": [],
+    "retrieved_first_utc": "2026-08-21T11:18:34.147+00:00",
+    "retrieved_last_utc": "2026-10-02T15:11:27.030+00:00",
+    "request_first_utc": "2026-08-21T11:18:30.615+00:00",
+    "request_last_utc": "2026-10-02T15:11:26.197+00:00",
+    "target_selected_pairs_with_raw_ordinary_positive_item_before_cutoff": 2,
+    "target_selected_pairs_with_any_raw_exact_pair_item_before_cutoff": 4,
+    "exact_pair_raw_items_before_cutoff_but_invalid_or_exceptional": 2,
+    "api301_raw_exact_pair_candidate_occurrences": 4,
+    "api301_raw_exact_pair_ordinary_positive_occurrences": 2,
+    "api301_raw_exact_pair_exceptional_value_occurrences": 2,
+    "api301_raw_exact_pair_value_counts": {
+      "1.0": 2,
+      "9999.9": 2
+    },
+    "api301_raw_candidates_with_after_cutoff_source_version": 4,
+    "api301_raw_candidates_with_after_cutoff_value_change": 4,
+    "conditional_ev_proxy_by_threshold": {
+      "0.0": 0,
+      "0.05": 0,
+      "0.1": 0,
+      "0.2": 0
+    }
+  },
+  "all_db_prestart_exception": {
+    "shared_qpl_rows_before_scheduled_t5": 7,
+    "races_with_shared_qpl_rows_before_scheduled_t5": 1,
+    "details": [
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "1-7",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      },
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "2-7",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      },
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "3-7",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      },
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "4-7",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      },
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "5-7",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      },
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "6-7",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      },
+      {
+        "race_db_id": 28814,
+        "race_id": "2026-09-05_2_7",
+        "selection_key": "7-8",
+        "selected_pair_contains_scratched_runner": true,
+        "selected_scratched_horse_numbers": [
+          7
+        ],
+        "selected_scratched_runner_finish_positions": [
+          94
+        ],
+        "observed_at_ms": 1788583357712,
+        "observed_at_utc": "2026-09-05T04:42:37.712+00:00",
+        "scheduled_at_ms": 1788597900000,
+        "scheduled_at_utc": "2026-09-05T08:45:00.000+00:00",
+        "actual_start_missing": true,
+        "in_fixed_prediction_roster": false,
+        "odds_value_reported": false
+      }
+    ],
+    "interpretation": "Timestamp lead is a source/clock candidate only. Every listed selection must be checked against runners, raw API301 page and the fixed prediction roster; this is not a model quote or return table."
+  },
+  "separate_live_probe": {
+    "exists": true,
+    "scope_date": "2026-10-09",
+    "model_roster_overlap": 0,
+    "by_meet": [
+      {
+        "meet": 2,
+        "observation_rows": 42,
+        "pre_positive": 0,
+        "pre_empty": 38,
+        "post_positive": 4,
+        "post_positive_value_rows": 1903
+      },
+      {
+        "meet": 3,
+        "observation_rows": 39,
+        "pre_positive": 0,
+        "pre_empty": 32,
+        "post_positive": 4,
+        "post_positive_value_rows": 4941
+      }
+    ],
+    "request_attempts_reported": 203,
+    "races_reported": 16,
+    "meet2_races_reported": 7
+  },
+  "observed_time_lag_latest_raw_pair_to_cutoff_ms": {
+    "count": 1142,
+    "min": 1149260610,
+    "median": 24220988519,
+    "max": 51451917965,
+    "notes": "This compares local source retrieval times with scheduled cutoffs; it is not an actual-start or server-clock validation."
+  },
+  "decision": {
+    "verified_pre_purchase_selected_pair_quotes": 0,
+    "raw_pre_cutoff_exact_pair_candidates": 4,
+    "ordinary_positive_raw_candidates_with_conditional_ev_proxy": 2,
+    "exceptional_value_candidates_excluded_from_ev": 2,
+    "ev_threshold_backtest_created": false,
+    "roi_or_confidence_interval_created": false,
+    "reason": "Four exact selected-pair values were recorded in hash-verified API301 responses before cutoff, all on 2026-09-05: two values are 1.0 and two are 9999.9. The 1.0 values have negative conditional display-price proxies because both frozen probabilities are below 1.0; neither passes any fixed EV threshold. The 9999.9 values are unusual and excluded from EV because their official meaning and bettability are unverified. None of the four is counted as a verified public executable quote because the collector clock and bettable display were not independently established."
+  },
+  "limitations": [
+    "SQLite races.actual_start_at_ms is absent for the target QPL rows; scheduled start is used only to define the fixed audit cutoff.",
+    "The source registry requested/retrieved timestamps are local collector timestamps; no independent clock offset record is available.",
+    "The exact raw API301 page and local retrieval time establish a pre-cutoff source candidate. They do not establish whether the displayed value was publicly visible, current, or executable at the purchase cutoff. Four raw candidates occur across four races on one date, which is not a representative backtest sample.",
+    "For the four raw candidates, later exact-pair API301 responses are inventoried by count and whether the returned value changed, without using later prices to select or score bets. Pari-mutuel prices can change before sale close; p times an earlier displayed value minus one is only a conditional proxy under the assumption that the eventual dividend matched that display.",
+    "The frozen prediction artifact has no verifiable per-race publication timestamp in this audit.",
+    "The theoretical required-odds CSV is derived from frozen p only; it contains no observed odds, EV classification, return, ROI, or oracle payout."
+  ],
+  "read_only": {
+    "sqlite_uri_mode": "ro",
+    "query_only": true,
+    "network": false,
+    "db_writes": false,
+    "model_fit_or_refit": false
+  }
+}

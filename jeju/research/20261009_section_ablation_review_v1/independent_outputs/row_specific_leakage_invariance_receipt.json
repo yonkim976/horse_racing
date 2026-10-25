@@ -1,0 +1,873 @@
+{
+  "status": "PASS",
+  "purpose": "independent row-specific leakage invariance check; no fit or tau optimization",
+  "database_access": {
+    "uri_mode": "ro",
+    "query_only": true,
+    "writes": 0
+  },
+  "counterfactual_scope": {
+    "row_specific": true,
+    "cohort_interpretation": "sampled leakage probes from the already frozen F1 evaluation cohort; this is not proof of ex ante cohort selection or future input availability",
+    "perturbation_ids_per_case": "the selected target row, plus exactly one explicit later source row only in the T-2 case",
+    "mutations_in_memory_only": true,
+    "all_future_sources_mutated_together": false,
+    "mutated_fields": [
+      "target finish_position (flipped across the top3 boundary)",
+      "finish_time_seconds=1000000",
+      "valid_time toggled",
+      "quality-selected S1F/G3F/G1F time rows=1000000 when present",
+      "matching source-slot section values=1000000 when present"
+    ]
+  },
+  "data_shape": {
+    "F1_rows": 52155,
+    "F1S_rows": 52155,
+    "actual_slots": 178459,
+    "evaluation_cases": 7
+  },
+  "model_contracts": {
+    "2024": {
+      "F1_features": [
+        "distance_m",
+        "grade_raw",
+        "field_n",
+        "observed_starts",
+        "days_since_start",
+        "previous_age",
+        "previous_sex",
+        "same_starts",
+        "same_valid_times",
+        "days_since_same",
+        "last_time_s",
+        "mean5_s",
+        "valid_n5",
+        "opp_mean5_valid_n",
+        "opp_mean5_valid_fraction",
+        "opp_mean5_median_s",
+        "mean5_minus_opp_mean_s",
+        "mean5_minus_opp_median_s",
+        "mean5_minus_opp_fast2mean_s",
+        "opp_mean5_faster_n",
+        "mean5_rank_fraction",
+        "previous_finish_relative_rank",
+        "previous_top3",
+        "previous_result_status"
+      ],
+      "F1S_features": [
+        "distance_m",
+        "grade_raw",
+        "field_n",
+        "observed_starts",
+        "days_since_start",
+        "previous_age",
+        "previous_sex",
+        "same_starts",
+        "same_valid_times",
+        "days_since_same",
+        "last_time_s",
+        "mean5_s",
+        "valid_n5",
+        "opp_mean5_valid_n",
+        "opp_mean5_valid_fraction",
+        "opp_mean5_median_s",
+        "mean5_minus_opp_mean_s",
+        "mean5_minus_opp_median_s",
+        "mean5_minus_opp_fast2mean_s",
+        "opp_mean5_faster_n",
+        "mean5_rank_fraction",
+        "previous_finish_relative_rank",
+        "previous_top3",
+        "previous_result_status",
+        "history_s1f_mean5_seconds",
+        "history_s1f_valid_n",
+        "history_g3f_mean5_seconds",
+        "history_g3f_valid_n",
+        "history_g1f_mean5_seconds",
+        "history_g1f_valid_n"
+      ],
+      "F1_model_sha256": "f2373c48e0a6d415e64f577dc64c14d12d71f9b97ea5d3a0c78853f12870eb5d",
+      "F1S_model_sha256": "e37eb03528148c083264c2cacddf661e1eed49c63d4f3a27666f99bfe52eebb2",
+      "F1S_meta_sha256": "d546f73474b143a9ddee4b61b78c9fb02acbb5e3dc2e72086d58b483c403064c"
+    },
+    "2025": {
+      "F1_features": [
+        "distance_m",
+        "grade_raw",
+        "field_n",
+        "observed_starts",
+        "days_since_start",
+        "previous_age",
+        "previous_sex",
+        "same_starts",
+        "same_valid_times",
+        "days_since_same",
+        "last_time_s",
+        "mean5_s",
+        "valid_n5",
+        "opp_mean5_valid_n",
+        "opp_mean5_valid_fraction",
+        "opp_mean5_median_s",
+        "mean5_minus_opp_mean_s",
+        "mean5_minus_opp_median_s",
+        "mean5_minus_opp_fast2mean_s",
+        "opp_mean5_faster_n",
+        "mean5_rank_fraction",
+        "previous_finish_relative_rank",
+        "previous_top3",
+        "previous_result_status"
+      ],
+      "F1S_features": [
+        "distance_m",
+        "grade_raw",
+        "field_n",
+        "observed_starts",
+        "days_since_start",
+        "previous_age",
+        "previous_sex",
+        "same_starts",
+        "same_valid_times",
+        "days_since_same",
+        "last_time_s",
+        "mean5_s",
+        "valid_n5",
+        "opp_mean5_valid_n",
+        "opp_mean5_valid_fraction",
+        "opp_mean5_median_s",
+        "mean5_minus_opp_mean_s",
+        "mean5_minus_opp_median_s",
+        "mean5_minus_opp_fast2mean_s",
+        "opp_mean5_faster_n",
+        "mean5_rank_fraction",
+        "previous_finish_relative_rank",
+        "previous_top3",
+        "previous_result_status",
+        "history_s1f_mean5_seconds",
+        "history_s1f_valid_n",
+        "history_g3f_mean5_seconds",
+        "history_g3f_valid_n",
+        "history_g1f_mean5_seconds",
+        "history_g1f_valid_n"
+      ],
+      "F1_model_sha256": "b66ece1487c86ad1cd05aabed7f3781d84e89c24e6a3ebcb010f38b811009b9d",
+      "F1S_model_sha256": "721bd81fb2246abf5af612f2d4d009cbbc11cb2aa0bdb020430b98a4bda0e35f",
+      "F1S_meta_sha256": "d6842c5b961bdb70d2a767ebbb53848448b0222c83f239fbe4040770daee427d"
+    },
+    "2026": {
+      "F1_features": [
+        "distance_m",
+        "grade_raw",
+        "field_n",
+        "observed_starts",
+        "days_since_start",
+        "previous_age",
+        "previous_sex",
+        "same_starts",
+        "same_valid_times",
+        "days_since_same",
+        "last_time_s",
+        "mean5_s",
+        "valid_n5",
+        "opp_mean5_valid_n",
+        "opp_mean5_valid_fraction",
+        "opp_mean5_median_s",
+        "mean5_minus_opp_mean_s",
+        "mean5_minus_opp_median_s",
+        "mean5_minus_opp_fast2mean_s",
+        "opp_mean5_faster_n",
+        "mean5_rank_fraction",
+        "previous_finish_relative_rank",
+        "previous_top3",
+        "previous_result_status"
+      ],
+      "F1S_features": [
+        "distance_m",
+        "grade_raw",
+        "field_n",
+        "observed_starts",
+        "days_since_start",
+        "previous_age",
+        "previous_sex",
+        "same_starts",
+        "same_valid_times",
+        "days_since_same",
+        "last_time_s",
+        "mean5_s",
+        "valid_n5",
+        "opp_mean5_valid_n",
+        "opp_mean5_valid_fraction",
+        "opp_mean5_median_s",
+        "mean5_minus_opp_mean_s",
+        "mean5_minus_opp_median_s",
+        "mean5_minus_opp_fast2mean_s",
+        "opp_mean5_faster_n",
+        "mean5_rank_fraction",
+        "previous_finish_relative_rank",
+        "previous_top3",
+        "previous_result_status",
+        "history_s1f_mean5_seconds",
+        "history_s1f_valid_n",
+        "history_g3f_mean5_seconds",
+        "history_g3f_valid_n",
+        "history_g1f_mean5_seconds",
+        "history_g1f_valid_n"
+      ],
+      "F1_model_sha256": "15654e60d6736aabc0ec0af60cbdf4478c05b8fb6227d826dd8aff0ef1f347a4",
+      "F1S_model_sha256": "b57e53a560190a26fe6729e4c1958d4f568b8c6f6919d35f287793339c2e0db9",
+      "F1S_meta_sha256": "a84bff631a3161282e118f7765950077d78b436d6b8258d97527ed726aed13d8"
+    }
+  },
+  "conflict_source_counts_by_target_distance": {
+    "s1f": {
+      "900": 22,
+      "1000": 35,
+      "1200": 39
+    },
+    "g1f": {
+      "800": 1,
+      "1200": 67
+    }
+  },
+  "1300m_note": "1300m is represented by a separate target sample; no S1F/G1F conflict-masked evaluation history slot in this audited cohort has target distance 1300m.",
+  "results": [
+    {
+      "case": "s1f_n0",
+      "target_api_record_id": 179154,
+      "race_id": "2024-01-05_2_1",
+      "year": 2024,
+      "distance_m": 800,
+      "target_history": {
+        "history_slots": 0,
+        "included_source_ids": [],
+        "all_f1_lineage_rows": 0,
+        "all_f1_lineage_kinds": [],
+        "all_f1_lineage_source_ids": [],
+        "all_f1_lineage_max_source_date": null,
+        "post_cutoff_same_horse_distance_rows": 1,
+        "post_cutoff_source_ids": [
+          179154
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": null,
+        "history_s1f_valid_n": 0,
+        "history_g3f_mean5_seconds": null,
+        "history_g3f_valid_n": 0,
+        "history_g1f_mean5_seconds": null,
+        "history_g1f_valid_n": 0
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": null,
+        "history_s1f_valid_n": 0,
+        "history_g3f_mean5_seconds": null,
+        "history_g3f_valid_n": 0,
+        "history_g1f_mean5_seconds": null,
+        "history_g1f_valid_n": 0
+      },
+      "target_outcome_before": 1,
+      "target_outcome_after": 99,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 3,
+      "selected_section_rows_extreme_after": 3,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        179154
+      ],
+      "changed_source_slot_rows_not_for_target": 0,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.7606600133545378,
+          "target_p_top3_before": 0.32088294093452996
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.7107291786173429,
+          "target_p_top3_before": 0.32839366667950254
+        }
+      }
+    },
+    {
+      "case": "s1f_partial_n2",
+      "target_api_record_id": 179157,
+      "race_id": "2024-01-05_2_1",
+      "year": 2024,
+      "distance_m": 800,
+      "target_history": {
+        "history_slots": 2,
+        "included_source_ids": [
+          165577,
+          166355
+        ],
+        "all_f1_lineage_rows": 3,
+        "all_f1_lineage_kinds": [
+          "last5_same_distance_start",
+          "previous_start"
+        ],
+        "all_f1_lineage_source_ids": [
+          165577,
+          166355
+        ],
+        "all_f1_lineage_max_source_date": "2023-12-15",
+        "post_cutoff_same_horse_distance_rows": 3,
+        "post_cutoff_source_ids": [
+          178457,
+          178750,
+          179157
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": 18.0,
+        "history_s1f_valid_n": 2,
+        "history_g3f_mean5_seconds": 49.099999999999994,
+        "history_g3f_valid_n": 2,
+        "history_g1f_mean5_seconds": 17.15,
+        "history_g1f_valid_n": 2
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": 18.0,
+        "history_s1f_valid_n": 2,
+        "history_g3f_mean5_seconds": 49.099999999999994,
+        "history_g3f_valid_n": 2,
+        "history_g1f_mean5_seconds": 17.15,
+        "history_g1f_valid_n": 2
+      },
+      "target_outcome_before": 4,
+      "target_outcome_after": 1,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 3,
+      "selected_section_rows_extreme_after": 3,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        179157
+      ],
+      "changed_source_slot_rows_not_for_target": 2,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": 1.277165370986309,
+          "target_p_top3_before": 0.8220657195048314
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": 1.629531149895783,
+          "target_p_top3_before": 0.8558727040238975
+        }
+      }
+    },
+    {
+      "case": "s1f_n5",
+      "target_api_record_id": 179159,
+      "race_id": "2024-01-05_2_1",
+      "year": 2024,
+      "distance_m": 800,
+      "target_history": {
+        "history_slots": 5,
+        "included_source_ids": [
+          165368,
+          165837,
+          167134,
+          167577,
+          167963
+        ],
+        "all_f1_lineage_rows": 6,
+        "all_f1_lineage_kinds": [
+          "last5_same_distance_start",
+          "previous_start"
+        ],
+        "all_f1_lineage_source_ids": [
+          165368,
+          165837,
+          167134,
+          167577,
+          167963
+        ],
+        "all_f1_lineage_max_source_date": "2023-12-23",
+        "post_cutoff_same_horse_distance_rows": 4,
+        "post_cutoff_source_ids": [
+          177348,
+          178474,
+          178890,
+          179159
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": 18.479999999999997,
+        "history_s1f_valid_n": 5,
+        "history_g3f_mean5_seconds": 52.1,
+        "history_g3f_valid_n": 5,
+        "history_g1f_mean5_seconds": 18.92,
+        "history_g1f_valid_n": 5
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": 18.479999999999997,
+        "history_s1f_valid_n": 5,
+        "history_g3f_mean5_seconds": 52.1,
+        "history_g3f_valid_n": 5,
+        "history_g1f_mean5_seconds": 18.92,
+        "history_g1f_valid_n": 5
+      },
+      "target_outcome_before": 6,
+      "target_outcome_after": 1,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 3,
+      "selected_section_rows_extreme_after": 3,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        179159
+      ],
+      "changed_source_slot_rows_not_for_target": 3,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -1.2502376377880347,
+          "target_p_top3_before": 0.21495449879928813
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -1.6456953680739952,
+          "target_p_top3_before": 0.15444414119770108
+        }
+      }
+    },
+    {
+      "case": "target_distance_1300",
+      "target_api_record_id": 176638,
+      "race_id": "2024-05-18_2_6",
+      "year": 2024,
+      "distance_m": 1300,
+      "target_history": {
+        "history_slots": 0,
+        "included_source_ids": [],
+        "all_f1_lineage_rows": 1,
+        "all_f1_lineage_kinds": [
+          "previous_start"
+        ],
+        "all_f1_lineage_source_ids": [
+          177055
+        ],
+        "all_f1_lineage_max_source_date": "2024-04-27",
+        "post_cutoff_same_horse_distance_rows": 3,
+        "post_cutoff_source_ids": [
+          172929,
+          176638,
+          187820
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": null,
+        "history_s1f_valid_n": 0,
+        "history_g3f_mean5_seconds": null,
+        "history_g3f_valid_n": 0,
+        "history_g1f_mean5_seconds": null,
+        "history_g1f_valid_n": 0
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": null,
+        "history_s1f_valid_n": 0,
+        "history_g3f_mean5_seconds": null,
+        "history_g3f_valid_n": 0,
+        "history_g1f_mean5_seconds": null,
+        "history_g1f_valid_n": 0
+      },
+      "target_outcome_before": 1,
+      "target_outcome_after": 99,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 3,
+      "selected_section_rows_extreme_after": 3,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        176638
+      ],
+      "changed_source_slot_rows_not_for_target": 2,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.4372398141736396,
+          "target_p_top3_before": 0.4280208004835482
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.472990774780441,
+          "target_p_top3_before": 0.42708332433927915
+        }
+      }
+    },
+    {
+      "case": "s1f_conflict_source",
+      "target_api_record_id": 179196,
+      "race_id": "2024-01-05_2_5",
+      "year": 2024,
+      "distance_m": 1000,
+      "target_history": {
+        "history_slots": 5,
+        "included_source_ids": [
+          165876,
+          166267,
+          168190,
+          170041,
+          171764
+        ],
+        "all_f1_lineage_rows": 6,
+        "all_f1_lineage_kinds": [
+          "last5_same_distance_start",
+          "previous_start"
+        ],
+        "all_f1_lineage_source_ids": [
+          165541,
+          165876,
+          166267,
+          168190,
+          170041,
+          171764
+        ],
+        "all_f1_lineage_max_source_date": "2023-12-16",
+        "post_cutoff_same_horse_distance_rows": 4,
+        "post_cutoff_source_ids": [
+          175435,
+          175713,
+          176832,
+          179196
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": 18.375,
+        "history_s1f_valid_n": 4,
+        "history_g3f_mean5_seconds": 49.8,
+        "history_g3f_valid_n": 5,
+        "history_g1f_mean5_seconds": 17.52,
+        "history_g1f_valid_n": 5
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": 18.375,
+        "history_s1f_valid_n": 4,
+        "history_g3f_mean5_seconds": 49.8,
+        "history_g3f_valid_n": 5,
+        "history_g1f_mean5_seconds": 17.52,
+        "history_g1f_valid_n": 5
+      },
+      "target_outcome_before": 3,
+      "target_outcome_after": 99,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 3,
+      "selected_section_rows_extreme_after": 3,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        179196
+      ],
+      "changed_source_slot_rows_not_for_target": 2,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.525681974359892,
+          "target_p_top3_before": 0.335544685531475
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.6917458066971036,
+          "target_p_top3_before": 0.3052312666935551
+        }
+      }
+    },
+    {
+      "case": "g1f_conflict_source",
+      "target_api_record_id": 178335,
+      "race_id": "2024-02-23_2_2",
+      "year": 2024,
+      "distance_m": 800,
+      "target_history": {
+        "history_slots": 4,
+        "included_source_ids": [
+          167893,
+          168343,
+          168804,
+          169272
+        ],
+        "all_f1_lineage_rows": 5,
+        "all_f1_lineage_kinds": [
+          "last5_same_distance_start",
+          "previous_start"
+        ],
+        "all_f1_lineage_source_ids": [
+          167893,
+          168343,
+          168804,
+          169272
+        ],
+        "all_f1_lineage_max_source_date": "2023-08-12",
+        "post_cutoff_same_horse_distance_rows": 1,
+        "post_cutoff_source_ids": [
+          178335
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": 18.049999999999997,
+        "history_s1f_valid_n": 4,
+        "history_g3f_mean5_seconds": 52.349999999999994,
+        "history_g3f_valid_n": 4,
+        "history_g1f_mean5_seconds": 18.366666666666667,
+        "history_g1f_valid_n": 3
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": 18.049999999999997,
+        "history_s1f_valid_n": 4,
+        "history_g3f_mean5_seconds": 52.349999999999994,
+        "history_g3f_valid_n": 4,
+        "history_g1f_mean5_seconds": 18.366666666666667,
+        "history_g1f_valid_n": 3
+      },
+      "target_outcome_before": 10,
+      "target_outcome_after": 1,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 3,
+      "selected_section_rows_extreme_after": 3,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        178335
+      ],
+      "changed_source_slot_rows_not_for_target": 0,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -1.2445079272052646,
+          "target_p_top3_before": 0.2415157485199267
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -1.1620947786940439,
+          "target_p_top3_before": 0.2519380748341734
+        }
+      }
+    },
+    {
+      "case": "t_minus_2_excluded_later_same_horse_start",
+      "target_api_record_id": 179155,
+      "race_id": "2024-01-05_2_1",
+      "year": 2024,
+      "distance_m": 800,
+      "target_history": {
+        "history_slots": 0,
+        "included_source_ids": [],
+        "all_f1_lineage_rows": 0,
+        "all_f1_lineage_kinds": [],
+        "all_f1_lineage_source_ids": [],
+        "all_f1_lineage_max_source_date": null,
+        "post_cutoff_same_horse_distance_rows": 3,
+        "post_cutoff_source_ids": [
+          177488,
+          177759,
+          179155
+        ],
+        "no_post_cutoff_source_in_lineage": true,
+        "no_post_cutoff_source_in_full_f1_lineage": true,
+        "current_target_id_absent_from_full_f1_lineage": true,
+        "current_target_row_is_after_cutoff": true
+      },
+      "target_history_features_before": {
+        "history_s1f_mean5_seconds": null,
+        "history_s1f_valid_n": 0,
+        "history_g3f_mean5_seconds": null,
+        "history_g3f_valid_n": 0,
+        "history_g1f_mean5_seconds": null,
+        "history_g1f_valid_n": 0
+      },
+      "target_history_features_after": {
+        "history_s1f_mean5_seconds": null,
+        "history_s1f_valid_n": 0,
+        "history_g3f_mean5_seconds": null,
+        "history_g3f_valid_n": 0,
+        "history_g1f_mean5_seconds": null,
+        "history_g1f_valid_n": 0
+      },
+      "target_outcome_before": 2,
+      "target_outcome_after": 99,
+      "target_full_time_after_seconds": 1000000.0,
+      "selected_section_rows_for_perturbed_ids": 6,
+      "selected_section_rows_extreme_after": 6,
+      "selected_section_values_all_extreme": true,
+      "changed_source_ids": [
+        177759,
+        179155
+      ],
+      "changed_source_slot_rows_not_for_target": 3,
+      "source_slot_section_values_all_extreme": true,
+      "target_source_ids_absent_from_own_history": true,
+      "model_predictions": {
+        "F1": {
+          "model_feature_columns": 24,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.7606600133545378,
+          "target_p_top3_before": 0.3208829409345299
+        },
+        "F1S": {
+          "model_feature_columns": 30,
+          "input_matrix_identical": true,
+          "raw_score_max_abs_delta": 0.0,
+          "p_top3_max_abs_delta": 0.0,
+          "six_sets_identical": true,
+          "target_raw_score_before": -0.7107291786173429,
+          "target_p_top3_before": 0.3283936666795025
+        }
+      }
+    }
+  ],
+  "checks": {
+    "target outcome/full time/validity/section time perturbations_do_not_change_24_or_30_inputs": true,
+    "target raw_scores_and_top3_probabilities_exactly_invariant": true,
+    "24_and_30_column_model_matrices_exactly_invariant": true,
+    "target_race_six_sets_exactly_invariant": true,
+    "current_target_id_absent_from_own_same_distance_history": true,
+    "all_selected_same_horse_distance_history_on_or_before_t_minus_2": true,
+    "one_later_same_horse_distance_start_after_t_minus_2_is_not_selected": true,
+    "independent_reaggregation_of_candidate_fields_passed": true,
+    "selected_quality_section_time_counterfactuals_applied": true,
+    "source_slot_section_time_counterfactuals_applied_when_rows_exist": true,
+    "fit_calls": 0,
+    "temperature_optimizations": 0
+  },
+  "source_references": {
+    "jeju/research/20261009_section_time_ablation_v1/CONTRACT.md": {
+      "bytes": 7812,
+      "sha256": "839e97adfaf8ea84ccd44d1046368da16c3a9f4b16866b22efe52e303b615ea9"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/README.md": {
+      "bytes": 15367,
+      "sha256": "2da145a99559e7b5b1fbd203573b47d8ef0e8078fce9212d6615e921c5ce8a57"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/build_candidate_features.py": {
+      "bytes": 10183,
+      "sha256": "e2670c015b2d3d7a95f915a6ded67e5bfe712268351b09f1981d5202c6983458"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/fit_candidate.py": {
+      "bytes": 30544,
+      "sha256": "8587ff6b232ec1353b05803ba4bce05aafc2ec97871a22cde888aaf6bf657fe8"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/finalize_saved_f1s_outputs.py": {
+      "bytes": 15779,
+      "sha256": "a30c4c3eab2b47fc4fdf8829cb4612c0ca7607c7209802d9704004e3aaabd496"
+    },
+    "jeju/research/20261009_section_ablation_review_v1/verify_row_specific_leakage_invariance.py": {
+      "bytes": 27027,
+      "sha256": "b7a1e33ba05f795fa69e14c3ab016a6c8769b673e795ae64eeefeb2d3549f202"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/features_f1s.parquet": {
+      "bytes": 5313838,
+      "sha256": "14714aefb08735fb637fb3c044c52a9f456b5c7781a0806a29213e6bb4f2deb1"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/source_slot_section_times.parquet": {
+      "bytes": 2268765,
+      "sha256": "93b3c6077c84ad44303769443ece62c75feae8715fb588e03f76630caf82fa24"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/features.parquet": {
+      "bytes": 5043713,
+      "sha256": "1b28a8392a1447e693fed5988db74f13b5f8622adcb5d5c22143aea701502534"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/historical_lineage.parquet": {
+      "bytes": 2835001,
+      "sha256": "11665999d7adaa02d7cb9d1a1560ae2e68f6d03224cce688d8c34d40f8fcc955"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": {
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/prefit_lock.json": {
+      "bytes": 22972,
+      "sha256": "88178156f209caf365a2e29312513646deb0b4af41f18fc7c4cd539b88bf1cf0"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/postfit_saved_model_integrity_lock.json": {
+      "bytes": 2008,
+      "sha256": "52f0fc42c743218a00a18df49411b5bf2827f5e20100de000f5b9ec4ddc79218"
+    }
+  }
+}

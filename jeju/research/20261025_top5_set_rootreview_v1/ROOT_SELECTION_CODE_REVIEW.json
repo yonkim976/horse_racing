@@ -1,0 +1,29 @@
+{
+  "approved": true,
+  "approved_by": "root",
+  "scope": "selection_only_zero_fit_frozen_Q_all_C_N_5",
+  "selector_path": "jeju/research/20261025_top5_set_selection_v1/select_sets.py",
+  "selector_sha256": "9bbd0556236dde13697f62dec70e7a81928bab1f57de0ab267008b429e94c4e2",
+  "plan_at_review_sha256": "62b8af459ff43371a20c9fcc78a3a3a61893bc1ff1d9f7ad907a3d57762988f6",
+  "root_q_receipt_sha256": "f50e75f1815793fd4874bc36f38f80d64c4fd0192da2e89fb144b9ae7bae627a",
+  "rules": {
+    "q_tie_tolerance": 1e-12,
+    "tie": "maximum overlap with baseline top5 then lex horse-number tuple",
+    "baseline": "score descending horse_number ascending",
+    "primary_distances": [
+      900,
+      1000,
+      1110,
+      1200
+    ]
+  },
+  "report_execution_approved": false,
+  "code_review_findings_resolved": [
+    "outcome columns not read in selector",
+    "complete triple distributions checked",
+    "exact full 5set enumeration",
+    "Q reconstruction receipt source chain pinned",
+    "matched unary negative control",
+    "small source RAM use documented"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "races": 7066,
+  "rows": 69752,
+  "parameterized_batches": 36,
+  "full_roster_exact": true,
+  "query_policy": "mode=ro; query_only=ON; single BEGIN read transaction; no exports",
+  "compared_fields": [
+    "api_record_id",
+    "horse_id",
+    "horse_number",
+    "race_distance_m",
+    "finish_position",
+    "finish_time_seconds"
+  ],
+  "db_path": "jeju/data/jeju_native_core.sqlite3",
+  "db_bytes": 2021183488,
+  "db_sha256": "fb0fe3d5ec4d496ab98a1d945ed23591deef53c708fdf38c478c0aae332e5582",
+  "db_metadata_before_after_equal": true,
+  "db_sidecars": {
+    "-wal": {
+      "exists": false,
+      "bytes": 0
+    },
+    "-shm": {
+      "exists": false,
+      "bytes": 0
+    }
+  },
+  "source_sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403",
+  "ledger_sha256": "0aeef4ba4e5c072d19993d4286023c68ee06fabaaf6b29fa651ffad95ee1b3ef",
+  "verification_code_sha256": "745f070ee370892b7613ff707a0aa73cdef4ccf1d769be89020ff5316e0f893e"
+}

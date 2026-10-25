@@ -1,0 +1,136 @@
+{
+  "passed": true,
+  "model_files_replayed": 6,
+  "raw_predictions_replayed": 73314,
+  "calibrations": [
+    {
+      "arm": "S",
+      "year": 2024,
+      "temperature": 1.2839358195588775,
+      "gradient": -1.7278695550790384e-08
+    },
+    {
+      "arm": "S",
+      "year": 2025,
+      "temperature": 1.323027519896799,
+      "gradient": -3.85571429026728e-08
+    },
+    {
+      "arm": "S",
+      "year": 2026,
+      "temperature": 1.165540100038154,
+      "gradient": 1.7403501010346294e-08
+    },
+    {
+      "arm": "E",
+      "year": 2024,
+      "temperature": 1.2821564323454997,
+      "gradient": -5.4266943489687194e-08
+    },
+    {
+      "arm": "E",
+      "year": 2025,
+      "temperature": 1.292171390225043,
+      "gradient": 4.580774843735893e-08
+    },
+    {
+      "arm": "E",
+      "year": 2026,
+      "temperature": 1.178929739246139,
+      "gradient": -6.926890902018856e-09
+    }
+  ],
+  "ordered_triples_reconstructed": 2416848,
+  "metric_rows_checked": 24834,
+  "marginal_rows_checked": 34824,
+  "pair_rows_checked": 14232,
+  "reliability_rows_checked": 896,
+  "tri_bootstrap_draws": 2000,
+  "tri_nll": {
+    "S_mean": 6.00158034775801,
+    "E_mean": 5.991289324240242,
+    "difference": -0.01029102351776838,
+    "ci95": [
+      -0.02110664049759515,
+      0.0006277093440090393
+    ]
+  },
+  "tri_brier": {
+    "S_mean": 0.9957699711562416,
+    "E_mean": 0.9957400851912425,
+    "difference": -2.9885964999064695e-05,
+    "ci95": [
+      -0.0001293155679949368,
+      7.959047682379041e-05
+    ]
+  },
+  "win_nll": {
+    "S_mean": 2.0337630261537827,
+    "E_mean": 2.0253964479921684,
+    "difference": -0.008366578161614421,
+    "ci95": [
+      -0.014821448579888288,
+      -0.0012861107615341142
+    ]
+  },
+  "win_brier": {
+    "S_mean": 0.8360376290753657,
+    "E_mean": 0.8343537610240233,
+    "difference": -0.0016838680513424017,
+    "ci95": [
+      -0.0034359697827302223,
+      0.00026680480232379187
+    ]
+  },
+  "research_gate_pass": false,
+  "axis_top3": {
+    "S_mean": 0.5868465430016864,
+    "E_mean": 0.599213041034289,
+    "difference": 0.012366498032602586,
+    "ci95": [
+      -0.0005611987895452463,
+      0.025374417255198334
+    ]
+  },
+  "pair_top3_tickets": {
+    "QNL": {
+      "S_mean": 0.2776840921866217,
+      "E_mean": 0.2765598650927487,
+      "difference": -0.0011242270938729624,
+      "ci95": [
+        -0.013896617274024397,
+        0.012242967620128253
+      ]
+    },
+    "QPL": {
+      "S_mean": 0.48622821810005623,
+      "E_mean": 0.492973580663294,
+      "difference": 0.006745362563237774,
+      "ci95": [
+        -0.010141131050260956,
+        0.021826785715434293
+      ]
+    }
+  },
+  "maximum_errors": {
+    "raw_model_replay": 0.0,
+    "temperature_objective": 6.217248937900877e-15,
+    "temperature_bound_objective": 7.105427357601002e-15,
+    "pool_nll": 1.7763568394002505e-15,
+    "pool_brier": 7.771561172376096e-16,
+    "selection_probability": 2.3314683517128287e-15,
+    "runner_marginals": 9.992007221626409e-16,
+    "pair_count_distribution": 1.887379141862766e-15,
+    "pair_union": 6.661338147750939e-16,
+    "reliability": 1.1102230246251565e-15,
+    "tri_bootstrap": 6.765421556309548e-17,
+    "summary_nll": 8.881784197001252e-16,
+    "summary_brier": 2.220446049250313e-16,
+    "summary_denominator": 0.0
+  },
+  "input_sha256": "a1bc9e6b07ab28f384b2c0c104222a5cb297235e4dda645b9c08a376d27e0f72",
+  "verifier_sha256": "b860b19c57c51f5ab2ada35be0d629dbb83e7c0bb0118095860e0fe0dfdc736e",
+  "experiment_module_imported": false,
+  "models_refitted": false,
+  "protected_prior_files_unchanged": true
+}

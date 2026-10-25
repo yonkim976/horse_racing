@@ -1,0 +1,62 @@
+# Frozen experiment contract — fresh history scorer and shared early-pack mixture
+
+2026-10-22. This replaces the four-linear-state/residual proposal in `experiment/DRAFT_DESIGN.md`. It is fixed before any new fit or evaluation. Source/input construction and synthetic checks are authorized now; fitted models require a separate supervisor receipt bound to code and input hashes. No user confirmation is required for this internal review gate.
+
+## Question, interpretation, ownership
+
+Two comparisons, with no result-dependent tuning: A versus reference R tests a newly trained horse scorer; B versus frozen A tests integration over a forecast shared early-pack scenario. R is F1_STYLE6 raw score with prior-year temperature, never a candidate feature. The new scorer starts from history, not old fitted coefficients. This is a minimal implementation of the new direction, not a complete Bayesian ability filter or a physical simulation. Historical variation/support features do not constitute posterior uncertainty propagation. The pack-count scenario is an observed group definition, not a causal measurement of pace pressure.
+
+All arms condition on the final recorded starter roster and normal, complete, unique finishing ranks. Event dates obey T−2, but publication timestamps and the forecast-time roster are unavailable: this is a retrospective conditional ranking experiment. The 2024–2026-09-19 period is reused development data. No market-return or new-holdout claim is permitted.
+
+Ownership: asset_audit owns `audit/` and `inputs/`; baseline_experiment owns `experiment/`; rules_contract owns `review/`; supervisor owns `supervisor/` and the final root report. Existing studies and databases are read-only. Do not create copied sources, new DBs, or full joint-distribution files.
+
+## Inputs and deterministic history
+
+Read the frozen 10/08 source snapshot and 10/21 quality-selected observations by path/hash. Reconstruct/verify the existing normal-complete cohort of 5,206 races / 52,155 rows and require exact evaluation keys for 1,779 races / 17,412 rows. Phase inputs may use the wider 5,693-race / 56,618-row observation roster. Existing engineered F1/phase feature matrices are not model inputs. Their ID/label columns may be read only for audit. Excluded horse IDs remain excluded. Current age, finishing result, actual phase, dividends, popularity and favorite ID cannot enter a target race's features.
+
+For each target runner, use same-horse observations dated from 2017-01-01, within the preceding 730 calendar days, and at most T−2 inclusive. Weight by `w=2**(-age_days/365)`. No same-day/next-day update. Four historical channels:
+
+1. `rank`: `normal_quantile(1-(rank-.5)/N)` from a complete normal unique-rank historical race.
+2. `margin`: `log(median(finish_time)/finish_time_i)` only from a complete normal historical race with all N positive finite finish times; dimensionless within-race relative time, not physical ability or a cross-distance seconds conversion.
+3. `early`: indicator of membership in the S1F first group. Use the frozen quality contract: allowed group status, parsed groups, exact roster equality; no within-pack invented order.
+4. `recovery`: existing audited G1F-to-finish improvement of at least two places. Require usable group and independently usable official rank; unknown is missing, never false.
+
+For each channel preserve six features: all-distance shrunk mean; exact-distance deviation from that all-distance mean; all-distance sum of weights; exact-distance sum of weights; all-distance weighted variance; days since the last valid observation. All-distance mean is `(3*prior+sum(w*x))/(3+sum(w))`, with fixed prior 0 for rank/margin and .5 for early/recovery. If no valid observations, mean, deviation, variance and age are NaN, with support zero. Exact-distance mean is `(3*global_mean+sum_same(w*x))/(3+sum_same(w))`; deviation is exact mean minus global mean, hence zero for no same-distance evidence only when global evidence exists. Variance is the population weighted variance `sum(w*(x-unshrunk_weighted_mean)**2)/sum(w)` and is NaN with fewer than two observations. Counts/support distinguish inferred shrinkage from observed values. Save maximum history date and no-history/left-censoring diagnostics outside the feature allowlist. These 24 features plus exact distance, field size, and gate `(horse_number-1)/(field_n-1)` are A's exact 27 inputs. They describe history and recorded roster; no new information class is added after fitting.
+
+Phase-head inputs are the same 27 inputs plus six race summaries: mean, maximum, and count-known of historical early mean; mean, maximum, and count-known of historical recovery mean. Runner phase heads additionally receive within-race difference from the mean for early and recovery (35 inputs total). Race scenario head receives those six summaries plus distance and field size (8 inputs). Missing means/maxima remain NaN; count-known zero is actual support. These summaries use forecast features only.
+
+## A: fresh scorer, common distribution
+
+Train a LightGBM scorer from scratch using the exact ordered-top-three PL negative log likelihood. At actual stage k=1,2,3, the denominator includes every starter except the actual earlier finishers; use the exact gradient and diagonal Hessian, with numerical Hessian floor 1e-6. The LightGBM callback uses the SUM of equal-weight race losses (one full Top3 loss per race), so `lambda_l2=10` has its usual summed-objective scale; reported losses and numerical helper checks may use the race mean. Apply the Hessian floor after conversion to the summed scale. Do not pass race-mean gradients to LightGBM with unchanged L2, which would unintentionally multiply the relative penalty by the number of races. This scaling clarification was made in pre-fit code review, before any fitted output. Test derivatives against finite differences before fitting. Fixed settings: 180 trees, 15 leaves, learning rate .04, min_data_in_leaf 100, lambda_l2 10, max_bin 63, deterministic true, force_col_wise true, 2 threads, seed 20261022; no bagging, feature sampling, early stopping or search. No fitted imputation; LightGBM handles NaN. Save text models and the exact objective/parameters.
+
+For distinct i,j,k, `Q_A=PL(s_A/T_A)` with full-field sequential denominators. R uses the same distribution and one scalar temperature. This isolates the new horse scorer from the joint-distribution change in B.
+
+## Annual folds and calibration
+
+Annual vintages c=2019,...,2026: fit A and phase models on outcomes dated through December 31 of c−2; calibrate on year c−1; forecast c (c=2026 ends September 19). Historical features may update during a forecast year only with T−2 past observations; fitted parameters do not. Fit each A temperature by full-field joint Top3 NLL on its own preceding-year predictions, bounded [.35,4]. R temperatures use saved raw OOS scores on the corresponding previous year, never provider probabilities or target-year labels.
+
+R is intentionally a new annually calibrated F1_STYLE6 reference, using the same calibration-year rule as A. It is not the preceding study's fixed COMMON T=1.1837152381349905, and its losses must not be substituted for or labeled as that earlier result. For each Y, use F1_STYLE6_Y's calibration_scores and evaluation_scores with their same provider (fit through Y−2). The source audit must verify provider cutoffs and exact keys. Annual calibration is fixed here before any new outcome evaluation, not chosen from competing R definitions after results.
+
+Phase labels: runner early binary, runner recovery binary, race scenario Z=1 if S1F first pack contains at least two runners, otherwise Z=0. All three phase heads' training and calibration target rows are restricted to the same 5,206-race normal-complete cohort as A/B; the wider observation roster supplies valid past history only. Thus the scenario forecast and conditional experts target the same retrospective selected population. Unknown labels are excluded from that head's fit, not filled. Each head is fixed LightGBM binary with the same 180-tree parameters (ordinary binary objective); runner loss weights give each labeled race total weight one. Race head has one row per race. Minimum support per head and fold: training at least 50 positives and 50 negatives, calibration at least 10 each. If insufficient, stop B and report unavailable; never substitute later or in-sample predictions. Fit one logit-temperature per head on c−1, bounded [.35,4], race-equal binary loss; save clipping epsilon 1e-12 as numerical protection. Phase-head accuracy and count calibration are separate diagnostics.
+
+## B: two-scenario joint mixture
+
+For final evaluation vintage Y=2024,2025,2026, fit B only on annual OOS outputs for c=2019,...,Y−2. Both A score and all phase probabilities for every training row must be from its own prior-only annual vintage. Let a_i=s_A_i/T_A(c), l_i=p_early_i−race_mean(p_early), h_i=p_recovery_i−race_mean(p_recovery). Define utilities
+
+`u_i(z)=a_i+gamma0*l_i+gamma1*h_i+z*(gamma2*l_i+gamma3*h_i)`.
+
+Fit exactly four gamma coefficients using the observed training Z in the conditional full-field Top3 NLL, plus `0.5 * .01 * sum(gamma**2)` on the race-mean loss. No Z-conditioned prediction branching is allowed. Missing training Z excludes the entire B training race with a recorded reason. Use zero initialization, deterministic L-BFGS with convergence/finite checks; no alternative restarts or penalties selected by results.
+
+At prediction, integrate `Q_B=(1-q_r)*PL(u(0)/T_B)+q_r*PL(u(1)/T_B)`, where q_r is the separately forecast probability of Z=1. This is one shared race scenario; do not multiply independent runner phase probabilities. The actual target-race Z is a label for diagnostics only. Calibrate T_B on annual c=Y−1 OOS inputs with gamma frozen, bounded [.35,4], using mixture joint Top3 NLL. Those inputs' A/phase fits use ≤Y−3 and calibrations Y−2. Evaluate on annual c=Y outputs. Save vintage provenance; do not mix in-sample and OOS A offsets. A is frozen for B and remains a separately evaluated arm.
+
+## Evaluation and gates
+
+Reuse the sealed 10/22 joint-wager event contract, official-rule references, eligibility, bin boundaries, stable ticket tie rule (absolute 1e-12, then horse-number lexicographic order), and 2,000-by-269 date bootstrap schedule: `jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy`, SHA256 `d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd`. All six non-PLC pools have 1,779 races; PLC has 1,743, with 36 actual-seven-runner races quarantined for unknown sales-opening N. Stream complete Q and verify all sum/marginal identities for each arm. Do not persist full permutations or renormalize selected tickets.
+
+Prespecified ordered comparisons: A−R, then B−A; report B−R as a required overall guard. Each comparison's probability gate requires TRI NLL paired 95% upper bound <0, TRI Brier point difference ≤0, and WIN NLL/Brier point differences ≤0. B must pass both B−A and B−R to be called an improving research candidate. These are point WIN protections, not statistical noninferiority. Gate status remains research-only on reused data.
+
+Report all seven pool proper losses, fixed-bin reliability, years, denominators, one-max-probability-ticket selection at identical coverage/budget, and the win-probability-maximizing horse's Top3 hit rate (auxiliary axis). Ten percent means relative axis improvement, with absolute counts and date-paired uncertainty; supplied F1 benchmark 1023/1779 implies at least 1126 hits. Reproduce R's actual count rather than assuming equality; any discrepancy must be explained, not silently adjusted. A point estimate exceeding 10% does not establish a true 10% advantage; a claim at that level requires an uncertainty interval and untouched future evaluation. No abstention, ticket expansion or result-selected subgroups.
+
+## Storage and execution
+
+Target this study below 100,000,000 bytes; entire session limit 300,000,000, prior completed studies 7,665,671 bytes. Keep only compact compressed feature/OOF/score/metric/selection ledgers, models, parameters, source/code hashes and verification. Input builder may create its contracted compact feature table after source/synthetic checks; no fits until supervisor review. Existing files, DB, registry and HY_R_FORM remain unchanged. No external data acquisition. A failed gate ends the experiment without tuning a second candidate on these results.

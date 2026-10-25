@@ -1,0 +1,206 @@
+{
+  "review_status": "independent_fit_code_review_pass",
+  "reviewer": "section_review",
+  "fit_or_scoring_executed": false,
+  "new_model_fit_count": 0,
+  "new_temperature_optimization_count": 0,
+  "candidate_fit_code": {
+    "path": "jeju/research/20261009_section_time_ablation_v1/fit_candidate.py",
+    "bytes": 30544,
+    "sha256": "8587ff6b232ec1353b05803ba4bce05aafc2ec97871a22cde888aaf6bf657fe8",
+    "preflight_locked_code_sha256_matches": true,
+    "prefit_lock_code_reference_matches": true
+  },
+  "candidate_lock_and_before_fit": {
+    "prefit_lock": {
+      "path": "jeju/research/20261009_section_time_ablation_v1/outputs/prefit_lock.json",
+      "bytes": 21424,
+      "sha256": "962a400a198f3c112eb359fa1501c1e1efbf82dc4cd701612bfe0fdcf08d71c8"
+    },
+    "before_fit_check": {
+      "path": "jeju/research/20261009_section_time_ablation_v1/outputs/before_fit_integrity_check.json",
+      "bytes": 431,
+      "sha256": "a9046012449f629d81c1ed97e6e471a87fac752290b1c7dc3f4a342f2417ef53"
+    },
+    "before_fit_passed": true,
+    "scoped_reference_count": 71,
+    "protected_state_hashes_verified": {
+      "jeju/data/jeju_native_core.sqlite3": {
+        "bytes": 1793323008,
+        "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e"
+      },
+      "config/prediction_model_registry.json": {
+        "bytes": 7291,
+        "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+      },
+      "jeju/models/current/metadata.json": {
+        "bytes": 1818,
+        "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870"
+      },
+      "jeju/models/current/HY_R_FORM.pkl": {
+        "bytes": 638955,
+        "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+      }
+    },
+    "fit_authorization_conditions_still_pending_until_candidate_lock_refresh": {
+      "root_conditional_fit_authorization_recorded": true,
+      "fit_runner_code_locked": true,
+      "independent_fit_code_review_passed": false,
+      "before_fit_check_passed": false
+    }
+  },
+  "independent_evidence": {
+    "source_review_receipt": {
+      "path": "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_source_availability_receipt.json",
+      "bytes": 9033,
+      "sha256": "c52a743ec525bc3a2be6431add28b8042489597e606e43fa47afcbc65e1f8573"
+    },
+    "feature_and_saved_f1_replay_receipt": {
+      "path": "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_feature_and_f1_replay_receipt.json",
+      "bytes": 10512,
+      "sha256": "5672be19ba070475c10da2fced44f06886b524d69ad8bdfb6135f80941e9b3e1"
+    },
+    "candidate_preflight": {
+      "path": "jeju/research/20261009_section_time_ablation_v1/outputs/fit_runner_preflight.json",
+      "bytes": 3564,
+      "sha256": "8e1fe7c334ed6fc22f4e5d2b843de01f20b6b6403535216f3649cab8b93f50e2"
+    }
+  },
+  "reference_f1_procedure": {
+    "parameter_match_to_original_baseline": true,
+    "race_equal_weight_max_deviation": 0.0,
+    "training_call_count_in_reviewed_year_function": 2,
+    "year_count": 3,
+    "total_expected_lightgbm_train_calls": 6,
+    "temperature_calls_per_year": 1,
+    "total_expected_temperature_optimizations": 3,
+    "calibration_and_evaluation_functions_match_frozen_f1": true,
+    "saved_f1_tree_counts_by_year": {
+      "2024": 92,
+      "2025": 200,
+      "2026": 200
+    },
+    "yearly_splits_and_vocab_and_weight_checks": {
+      "2024": {
+        "initial_train_years": [
+          2017,
+          2021
+        ],
+        "initial_train_rows": 22976,
+        "initial_train_races": 2258,
+        "early_stopping_year": 2022,
+        "early_stopping_rows": 5261,
+        "early_stopping_races": 512,
+        "refit_through_year": 2022,
+        "refit_rows": 28237,
+        "refit_races": 2770,
+        "calibration_year": 2023,
+        "calibration_rows": 6506,
+        "calibration_races": 657,
+        "evaluation_rows": 6329,
+        "evaluation_races": 637,
+        "frozen_f1_tree_count": 92,
+        "race_weight_sums": {
+          "initial_train": {
+            "races": 2258,
+            "max_abs_error_from_one": 0.0
+          },
+          "refit_train_valid": {
+            "races": 2770,
+            "max_abs_error_from_one": 0.0
+          }
+        },
+        "initial_train_vocabulary_exactly_matches_saved_f1": true,
+        "same_params_and_seed_as_saved_f1": true
+      },
+      "2025": {
+        "initial_train_years": [
+          2017,
+          2022
+        ],
+        "initial_train_rows": 28237,
+        "initial_train_races": 2770,
+        "early_stopping_year": 2023,
+        "early_stopping_rows": 6506,
+        "early_stopping_races": 657,
+        "refit_through_year": 2023,
+        "refit_rows": 34743,
+        "refit_races": 3427,
+        "calibration_year": 2024,
+        "calibration_rows": 6329,
+        "calibration_races": 637,
+        "evaluation_rows": 6410,
+        "evaluation_races": 654,
+        "frozen_f1_tree_count": 200,
+        "race_weight_sums": {
+          "initial_train": {
+            "races": 2770,
+            "max_abs_error_from_one": 0.0
+          },
+          "refit_train_valid": {
+            "races": 3427,
+            "max_abs_error_from_one": 0.0
+          }
+        },
+        "initial_train_vocabulary_exactly_matches_saved_f1": true,
+        "same_params_and_seed_as_saved_f1": true
+      },
+      "2026": {
+        "initial_train_years": [
+          2017,
+          2023
+        ],
+        "initial_train_rows": 34743,
+        "initial_train_races": 3427,
+        "early_stopping_year": 2024,
+        "early_stopping_rows": 6329,
+        "early_stopping_races": 637,
+        "refit_through_year": 2024,
+        "refit_rows": 41072,
+        "refit_races": 4064,
+        "calibration_year": 2025,
+        "calibration_rows": 6410,
+        "calibration_races": 654,
+        "evaluation_rows": 4673,
+        "evaluation_races": 488,
+        "frozen_f1_tree_count": 200,
+        "race_weight_sums": {
+          "initial_train": {
+            "races": 3427,
+            "max_abs_error_from_one": 0.0
+          },
+          "refit_train_valid": {
+            "races": 4064,
+            "max_abs_error_from_one": 0.0
+          }
+        },
+        "initial_train_vocabulary_exactly_matches_saved_f1": true,
+        "same_params_and_seed_as_saved_f1": true
+      }
+    },
+    "bootstrap_date_clusters_repetitions_seed": {
+      "cluster": "race_date",
+      "repetitions": 2000,
+      "seed": 20261008
+    },
+    "feature_matrix_exactly_f1_24_plus_fixed_6": true,
+    "f1_original_columns_and_values_unchanged": true,
+    "candidate_feature_rows": 52155,
+    "candidate_feature_races": 5206
+  },
+  "static_fit_scope_checks": {
+    "exactly_two_lgb_train_calls_in_one_year_fit_function": true,
+    "no_other_lgb_train_calls_in_module": true,
+    "one_temperature_call_and_one_f1_evaluator_call_per_year": true,
+    "preflight_has_no_fit_score_temperature_or_metric_call": true,
+    "explicit_root_approved_fit_gate_present": true,
+    "only_three_fixed_evaluation_years": [
+      2024,
+      2025,
+      2026
+    ],
+    "no_additional_feature_search_or_followup_fit_in_lock": true,
+    "reviewed_inputs_and_protected_files_still_match_prefit_lock": true
+  },
+  "review_code_sha256": "a08b9132b657046b42012e13a6c74ca3e75453af0261f84d66949913fa76ac42"
+}

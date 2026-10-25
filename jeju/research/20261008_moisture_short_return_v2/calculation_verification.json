@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "reviewer": "same_agent_independent_arithmetic_and_general_optimizer",
+  "official_endpoints_reconstructed": true,
+  "date_linear_interpolation_cancels_linear_trend": true,
+  "excluded_horses_absent": true,
+  "unchanged_conditions_get_zero_environment_adjustment": true,
+  "all_held_predictions_recalculated": true,
+  "all_saved_coefficient_intervals_recalculated": true,
+  "convex_optimizer_crosscheck": [
+    {
+      "design": "pair",
+      "distance": 1000,
+      "prediction_max_difference_s": 1.6202248848185208e-08,
+      "gradient_max": 2.066680160339729e-13
+    },
+    {
+      "design": "pair",
+      "distance": 1110,
+      "prediction_max_difference_s": 4.376612851974773e-11,
+      "gradient_max": 2.731599668681639e-13
+    },
+    {
+      "design": "return",
+      "distance": 1000,
+      "prediction_max_difference_s": 3.774161740360678e-09,
+      "gradient_max": 4.951594689828198e-14
+    },
+    {
+      "design": "return",
+      "distance": 1110,
+      "prediction_max_difference_s": 1.4465447390442016e-09,
+      "gradient_max": 4.028721800608537e-14
+    }
+  ],
+  "source_and_database_hashes_unchanged": true,
+  "intervals": "1000 fixed-prediction block resamples, conditional on fixed coefficients and support groups"
+}

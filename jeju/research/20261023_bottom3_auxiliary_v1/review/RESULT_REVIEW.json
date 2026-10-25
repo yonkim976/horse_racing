@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "review_type": "post_run_result_receipt_claim_audit",
+  "passed": true,
+  "review_status": "REPORT_RECEIPT_AND_INDEPENDENT_VERIFICATION_CONSISTENT",
+  "study": "jeju/research/20261023_bottom3_auxiliary_v1",
+  "candidate_gate": {
+    "prediction_research_candidate_gate_pass": true,
+    "exclusion_auxiliary_candidate_gate_pass": false,
+    "interpretation": "Bottom3 probability research follow-up only; no Top3 exclusion use or operational adoption"
+  },
+  "hashes": {
+    "contract_sha256": "ff6e3af2d454cd30edb56df1251700320b01de3478939c98199e0886bf22f084",
+    "code_bundle_sha256": "c55e4cf66c346cea92b23bc13bdbb82f4993ae169055157f99056ca286f4bd2b",
+    "engine_sha256": "92a4b41a6493cf88cf8d17e592f98ed75f0fb9fd446f28564774a35a6d608df0",
+    "source_preflight_sha256": "cb116d123e99e82780b10a94a5052e4457098409ce52fb332c648b8fedab7cdd",
+    "source_audit_sha256": "a69bc897e896427e38e2e61ce3470c909cea10c2a3dbfa7bab5c19b9b50c6137",
+    "execution_approval_sha256": "d3a00e1e92cd2380f78ab4d3d94412606dce1cb04fd43724570e8b271d4467cc",
+    "fit_run_receipt_sha256": "0b06a5b2ebff4a7fe98a494fb90fcd3f3027cb552ccdfeac23eff4e1a5c39494",
+    "summary_sha256": "8a5fc344f20e3a503caef5c409aa022283a012ba1c86135fccc3858f88875310",
+    "result_verification_sha256": "6be4cb318fa40414cec10e5aafcda3dd5dcd300fa9e40ac57a6aa27ac65af363",
+    "execution_claim_sha256": "01778099132564f3ddc4dba84ccc2e2999e793442615e3af2a96ea02ca077625"
+  },
+  "execution": {
+    "status": "COMPLETED_RESEARCH_ONLY",
+    "run_count": 1,
+    "lightgbm_train_calls": 6,
+    "temperature_fits": 6,
+    "receipt_approval_hash_matches_approval_file": true,
+    "verifier_approval_hash_matches_receipt": true,
+    "summary_and_receipt_gate_values_match": true,
+    "receipt_artifact_count": 11,
+    "receipt_artifact_missing": [],
+    "receipt_artifact_hash_or_size_mismatch": [],
+    "study_bytes_before_receipt": 2766679,
+    "study_byte_cap": 30000000
+  },
+  "denominators": {
+    "full_normal_complete_cohort_runners": 52155,
+    "full_normal_complete_cohort_races": 5206,
+    "full_cohort_bottom3_labels": 15618,
+    "evaluation_races_per_arm": 1779,
+    "evaluation_runners_per_arm": 17412,
+    "evaluation_dates": 269,
+    "evaluation_bottom3_labels_per_arm": 5337,
+    "evaluation_races_by_year": {
+      "2024": 637,
+      "2025": 654,
+      "2026": 488
+    }
+  },
+  "independent_verification": {
+    "passed": true,
+    "raw_model_replays": 12,
+    "temperature_checks": 6,
+    "bottom3_subset_events_reconstructed": 402808,
+    "race_metric_rows_verified": 3558,
+    "runner_marginals_verified": 34824,
+    "reliability_rows_verified": 256,
+    "bootstrap_draws_verified": 24000,
+    "model_fit_calls": 0,
+    "temperature_optimization_calls": 0
+  },
+  "metrics": {
+    "B_minus_L": {
+      "bottom3_set_nll": {
+        "difference": -0.06033562378460644,
+        "date_bootstrap_95_ci": [-0.08304309011289349, -0.03907220604945955]
+      },
+      "bottom3_set_brier_sum": -0.001576319661967696,
+      "runner_binary_logloss_mean": -0.0066592377372236555,
+      "runner_binary_brier_mean": -0.0028000116043231382,
+      "bottom3_captured_count_per_race": {
+        "L": 1.3827993254637436,
+        "B": 1.403035413153457,
+        "difference": 0.02023608768971341,
+        "date_bootstrap_95_ci": [-0.008586270621999029, 0.04812602339529424]
+      },
+      "exact_bottom3_set_match": {
+        "L_count": 83,
+        "B_count": 86,
+        "races": 1779
+      },
+      "any_top3_excluded": {
+        "L_count": 756,
+        "B_count": 849,
+        "races": 1779,
+        "difference": 0.052276559865092775,
+        "date_bootstrap_95_ci": [0.032240125547375494, 0.07171095403816692]
+      },
+      "winner_excluded": {
+        "L_count": 229,
+        "B_count": 300,
+        "races": 1779,
+        "difference": 0.039910061832490185,
+        "date_bootstrap_95_ci": [0.025654913727944977, 0.05461677788776624]
+      }
+    }
+  },
+  "gate_logic_review": {
+    "prediction_gate": {
+      "passed": true,
+      "set_nll_bootstrap_upper_lt_zero": true,
+      "set_brier_difference_le_zero": true,
+      "runner_logloss_difference_le_zero": true,
+      "runner_brier_difference_le_zero": true
+    },
+    "exclusion_gate": {
+      "passed": false,
+      "requires_prediction_gate": true,
+      "any_top3_excluded_difference_le_zero": false,
+      "winner_excluded_difference_le_zero": false,
+      "statistical_noninferiority_claimed": false
+    }
+  },
+  "claim_limits": [
+    "The 2024-2026 evaluation window was reused retrospective development data, not independent future validation.",
+    "The target cohort contains only complete normal finishes with exact ranks 1..N; it excludes DNF, ties, cancellations, and incomplete fields.",
+    "Actual information publication and purchase-time availability were not established.",
+    "No market ROI, wagering, 7-wager probability, operational exclusion, or production-promotion result was evaluated.",
+    "Passing the prediction research gate does not override the failed exclusion auxiliary gate; no safe practical exclusion or statistical noninferiority conclusion follows."
+  ],
+  "recommendation": "Retain B only as a Bottom3 probability research follow-up. Do not use the result to exclude runners, alter 7-wager predictions, or change the operational model."
+}

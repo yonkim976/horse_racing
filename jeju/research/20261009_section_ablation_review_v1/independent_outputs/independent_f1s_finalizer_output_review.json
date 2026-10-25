@@ -1,0 +1,187 @@
+{
+  "review_status": "F1S_recovery_outputs_independently_reconciled",
+  "review_code_sha256": "20e9bb870e6d84df2397b894aaab8ea9f9c64def3f18d8f6550d85623f36dbfc",
+  "candidate_functions_reused": false,
+  "new_fit_or_temperature_optimization": false,
+  "interruption_preserved": "KeyError observed_starts from duplicate context merge; original fit_candidate.py preserved unchanged",
+  "model_hashes_verified_against_previously_independent_replay": {
+    "2024": {
+      "top3.txt": {
+        "bytes": 275631,
+        "sha256": "e37eb03528148c083264c2cacddf661e1eed49c63d4f3a27666f99bfe52eebb2"
+      },
+      "meta.json": {
+        "bytes": 3476,
+        "sha256": "d546f73474b143a9ddee4b61b78c9fb02acbb5e3dc2e72086d58b483c403064c"
+      },
+      "calibration_scores.parquet": {
+        "bytes": 99129,
+        "sha256": "106c042d644e0d4b8573dea877a9d17fb8d46bd7719e835dfe12804ac5c66b87"
+      }
+    },
+    "2025": {
+      "top3.txt": {
+        "bytes": 364119,
+        "sha256": "721bd81fb2246abf5af612f2d4d009cbbc11cb2aa0bdb020430b98a4bda0e35f"
+      },
+      "meta.json": {
+        "bytes": 3470,
+        "sha256": "d6842c5b961bdb70d2a767ebbb53848448b0222c83f239fbe4040770daee427d"
+      },
+      "calibration_scores.parquet": {
+        "bytes": 96795,
+        "sha256": "8d39cd23328e25ad1bd1cfc2e3633776282b346b1a5f0efca08506168e608eb8"
+      }
+    },
+    "2026": {
+      "top3.txt": {
+        "bytes": 363234,
+        "sha256": "b57e53a560190a26fe6729e4c1958d4f568b8c6f6919d35f287793339c2e0db9"
+      },
+      "meta.json": {
+        "bytes": 3469,
+        "sha256": "a84bff631a3161282e118f7765950077d78b436d6b8258d97527ed726aed13d8"
+      },
+      "calibration_scores.parquet": {
+        "bytes": 97940,
+        "sha256": "7c84b2e19515dfd4067d803c69b83a6d30e7972b2457ac07fa5e86b0efc8cb9d"
+      }
+    }
+  },
+  "runner_match": {
+    "rows": 17412,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "race_match": {
+    "rows": 1779,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "six_set_match": {
+    "rows": 10674,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "paired_race_metrics_match": {
+    "rows": 9,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "race_group_metrics_match": {
+    "rows": 24,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "race_group_paired_differences_match": {
+    "rows": 108,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "runner_group_metrics_match": {
+    "rows": 72,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "runner_group_paired_differences_match": {
+    "rows": 72,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "calibration_bins_match": {
+    "rows": 19,
+    "keys_exact": true,
+    "numeric_atol": 1e-12
+  },
+  "primary_losses_and_gate": {
+    "metrics": {
+      "log_loss": {
+        "candidate_race_equal_mean": 0.5687323784378885,
+        "f1_race_equal_mean": 0.5694686283276811,
+        "delta": -0.0007362498897924871,
+        "ci95_lo": -0.001945995681872263,
+        "ci95_hi": 0.0004450661696359513,
+        "races": 1779,
+        "days": 269
+      },
+      "brier": {
+        "candidate_race_equal_mean": 0.19239286549076595,
+        "f1_race_equal_mean": 0.19272424809552346,
+        "delta": -0.00033138260475755016,
+        "ci95_lo": -0.0008545579334392577,
+        "ci95_hi": 0.0001761265461199796,
+        "races": 1779,
+        "days": 269
+      }
+    },
+    "retention_candidate_gate_passed": false,
+    "candidate_gate_artifact_matches": true
+  },
+  "operating_common_467": {
+    "common_races": 467,
+    "candidate_runner_rows": 4475,
+    "race_rows_per_variant": 467,
+    "runner_rows_per_variant": 4475,
+    "race_metrics_match": {
+      "rows": 1401,
+      "keys_exact": true,
+      "numeric_atol": 1e-12
+    },
+    "runner_predictions_match": {
+      "rows": 13425,
+      "keys_exact": true,
+      "numeric_atol": 1e-12
+    },
+    "six_sets_match": {
+      "rows": 8406,
+      "keys_exact": true,
+      "numeric_atol": 1e-12
+    },
+    "summary_match": {
+      "rows": 3,
+      "keys_exact": true,
+      "numeric_atol": 1e-12
+    },
+    "paired_date_ci_match": {
+      "rows": 14,
+      "keys_exact": true,
+      "numeric_atol": 1e-12
+    }
+  },
+  "checks": {
+    "saved_model_meta_calibration_hashes_unchanged": true,
+    "finalizer_outputs_match_completion_sha256": true,
+    "independent_runner_probabilities_and_losses_match": true,
+    "independent_race_metrics_match": true,
+    "independent_six_sets_match": true,
+    "all_primary_and_race_metric_date_bootstraps_match": true,
+    "all_year_distance_race_group_tables_match": true,
+    "all_runner_experience_group_tables_match": true,
+    "all_calibration_bins_match": true,
+    "operating_common_467_race_runner_set_summary_and_ci_match": true,
+    "operating_common_scope_is_467_races_4475_runners": true,
+    "independently_recomputed_retention_gate_is_false": true
+  },
+  "candidate_reference_hashes": {
+    "fit_execution_completion": {
+      "bytes": 5121,
+      "sha256": "0ed02be842b096de1addeea9b0ec34607d33fd24a7baa580b5d8de5233dc4ef9"
+    },
+    "postfit_saved_model_integrity_lock": {
+      "bytes": 2008,
+      "sha256": "52f0fc42c743218a00a18df49411b5bf2827f5e20100de000f5b9ec4ddc79218"
+    },
+    "finalizer_preflight": {
+      "bytes": 1102,
+      "sha256": "66c25a395fce18bb8a10d08f575a4c67b682d07b6f654e984ee551f8a0fb6abf"
+    },
+    "finalizer_code": {
+      "bytes": 15779,
+      "sha256": "a30c4c3eab2b47fc4fdf8829cb4612c0ca7607c7209802d9704004e3aaabd496"
+    },
+    "prefit_lock": {
+      "bytes": 22972,
+      "sha256": "88178156f209caf365a2e29312513646deb0b4af41f18fc7c4cd539b88bf1cf0"
+    }
+  }
+}

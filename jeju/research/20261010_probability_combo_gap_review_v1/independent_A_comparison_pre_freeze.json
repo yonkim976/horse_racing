@@ -1,0 +1,167 @@
+{
+  "passed": true,
+  "independent_recomputation": "saved raw score + own full-triple implementation; no A helper imported",
+  "comparison_tolerance": 1e-12,
+  "A_outputs_manifest_sha256": "5abba02035d09ce13f754d8c30ccad257cd99b69efea72b3318b1506713600fb",
+  "checks": {
+    "all_triples": {
+      "rows": 402808,
+      "max_abs_difference": {
+        "triple_horse_ids": 0.0,
+        "triple_numbers": 0.0,
+        "triple_energy": 0.0,
+        "joint_probability_saved_tau": 0.0,
+        "joint_probability_tau1": 0.0,
+        "rank_after_saved_tau": 0.0,
+        "rank_after_tau1": 0.0,
+        "exact_energy_tie_size": 0.0,
+        "is_truth": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "race_diagnostics": {
+      "rows": 3558,
+      "max_abs_difference": {
+        "race_date": 0.0,
+        "year": 0.0,
+        "distance_m": 0.0,
+        "field_n": 0.0,
+        "saved_tau": 0.0,
+        "true_triple_rank": 0.0,
+        "true_rank_after_saved_tau": 0.0,
+        "true_rank_after_tau1": 0.0,
+        "hit_at_1": 0.0,
+        "hit_at_3": 0.0,
+        "hit_at_6": 0.0,
+        "hit_at_10": 0.0,
+        "hit_at_20": 0.0,
+        "joint_true_nll_saved_tau": 0.0,
+        "full_joint_brier_saved_tau": 0.0,
+        "top3_marginal_log_loss_saved_tau": 0.0,
+        "top3_marginal_brier_saved_tau": 0.0,
+        "joint_true_nll_tau1": 0.0,
+        "full_joint_brier_tau1": 0.0,
+        "top3_marginal_log_loss_tau1": 0.0,
+        "top3_marginal_brier_tau1": 0.0,
+        "six_mass_saved_tau": 0.0,
+        "six_mass_tau1": 0.0,
+        "scaled_tau_rank_mismatch_n": 0.0,
+        "scaled_tau_top6_mismatch": 0.0,
+        "tau1_rank_mismatch_n": 0.0,
+        "tau1_top6_mismatch": 0.0,
+        "p_top3_saved_tau_score_order_violations": 0.0,
+        "p_top3_tau1_score_order_violations": 0.0,
+        "true_triple_tie_size": 0.0,
+        "exact_energy_tie_groups": 0.0,
+        "tied_triple_rows": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "exact_tie_count_summary": {
+      "rows": 3558,
+      "max_abs_difference": {
+        "exact_tie_groups_n": 0.0,
+        "exact_tied_triples_n": 0.0,
+        "exact_tie_pairs_n": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "paired_date_bootstrap": {
+      "rows": 180,
+      "max_abs_difference": {
+        "delta_STYLE6_minus_F1": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0,
+        "races": 0.0,
+        "race_days": 0.0,
+        "resamples": 0.0,
+        "seed": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "runner_loss_contributions": {
+      "rows": 16,
+      "max_abs_difference": {
+        "race_equal_loss_contribution": 1.1102230246251565e-16,
+        "runner_rows": 0.0,
+        "races": 0.0,
+        "race_days": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "ticket_change_loss_cross": {
+      "rows": 4,
+      "max_abs_difference": {
+        "races": 0.0,
+        "improved_races": 0.0,
+        "worsened_races": 0.0,
+        "unchanged_races": 0.0,
+        "mean_delta_STYLE6_minus_F1": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "six_mass_reliability": {
+      "rows": 20,
+      "max_abs_difference": {
+        "races": 0.0,
+        "race_days": 0.0,
+        "mean_predicted_mass": 0.0,
+        "observed_hit_rate": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "ticket_u6_decomposition": {
+      "rows": 3558,
+      "max_abs_difference": {
+        "race_date": 0.0,
+        "year": 0.0,
+        "distance_m": 0.0,
+        "six_hit": 0.0,
+        "ticket_overlap_n": 0.0,
+        "ticket_symmetric_difference_n": 0.0,
+        "changed": 0.0,
+        "hit_both_or_only_or_neither": 0.0,
+        "own_six_horse_union_n": 0.0,
+        "own_six_horse_union_ids": 0.0,
+        "other_union_overlap_n": 0.0,
+        "own_only_union_horse_ids": 0.0,
+        "other_only_union_horse_ids": 0.0,
+        "all3in_own_union": 0.0,
+        "union_state": 0.0
+      },
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    "year_gained_lost_hits": {
+      "counts_by_year": {
+        "2024": {
+          "hit_both": 122,
+          "F1_only": 15,
+          "STYLE6_only": 28,
+          "neither": 472
+        },
+        "2025": {
+          "hit_both": 123,
+          "F1_only": 17,
+          "STYLE6_only": 15,
+          "neither": 499
+        },
+        "2026": {
+          "hit_both": 109,
+          "F1_only": 11,
+          "STYLE6_only": 10,
+          "neither": 358
+        }
+      },
+      "README_claims_verified": true
+    }
+  },
+  "interpretation_boundary": "Parity validates output reproduction; U6 is variant-specific endogenous selected-ticket union and its decomposition is descriptive, not causal."
+}

@@ -1,0 +1,40 @@
+{
+  "fixed_before_effect_calculation": true,
+  "date": "2026-10-08",
+  "objective": "함수율·월의 기준 조건 환산 기록. Top3·승식·ROI를 평가하지 않는다.",
+  "distances_m": [
+    1000,
+    1110
+  ],
+  "cutoff": "2026-09-19",
+  "source": "Preserved quality-view source_rows.csv; complete normal results, all field sizes. No DB writes.",
+  "pair_population": "Adjacent retained complete-normal races of same official horse ID and exact distance; both in same calendar year>=2017; 7<=gap_days<=90. Source observed starts remains observation count, not lifetime career. No finish-time truncation.",
+  "response": "Later minus earlier raw finish time, in seconds. Horse-level fixed ability cancels by differencing; evolving ability not assumed constant.",
+  "model": "Separate distance Huber IRLS ridge alpha1. Joint differences of moisture-band dummies (dry reference) and annual first/second sin/cos; nuisance: gap_days, later-minus-earlier carried weight, event age, age squared, log observed starts, field_n, race_number, grade and sex dummies. Train-only scaling, race-equal fitting weights by later race. No past-time covariate in primary pair model.",
+  "rates": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "candidate_method": "Train full joint model before each held year. For each of25 fixed moisture/month rate combinations scale those joint environment effects and refit nuisance coefficients on the same past training pairs. Compare later-minus-earlier observed time against nuisance change plus scaled environment difference.",
+  "development_years": [
+    2022,
+    2023
+  ],
+  "confirmation_years": [
+    2024,
+    2025
+  ],
+  "partial_sensitivity_year": 2026,
+  "latest_descriptive_fit": "2017 through2026-09-19, distinct from historical rolling fits; not used to score prior years.",
+  "primary_metric": "Ending-race-equal mean absolute pair difference error(seconds). Secondary RMSE, band-changing vs same-band pairs, monthly residual disparity, raw corrected pair differences and condition support. These are observational consistency proxies, not true counterfactual error.",
+  "selection": "Per distance choose lowest development MAE; among candidates within paired12-week-block oneSE of best choose minimum sum of rates, then lower moisture then month. Compare chosen vs zero with1000block resamples; if95%upper>=0 or RMSE worsens use zero as selected fallback. Freeze before confirmation.",
+  "confirmation_gate": "2024+25 MAE difference95%upper<0, each2024/2025 mean nonworse, and2026partial direction nonworse for provisional research reference. No operational adoption; if unmet retain fitted descriptive candidates labeled insufficient validation.",
+  "uncertainty": "1000 fixed-prediction paired12-week block resamples. Latest coefficients100 full model refit12-week-block bootstraps and100 horse cluster refits; rate fixed. Conditional on pair construction, model specification and selection; 12week blocks use endingdate, cross-boundary priorrace dependence remains. Huber scale recomputed from each bootstrap initial OLS training residual then fixed within IRLS.",
+  "sensitivity": "Primary Huber; OLS ridge; pair gaps<=45 and<=60; modern2019+ training for rolling frozen selected rates. Preserve all results, no best-sensitivity selection.",
+  "support": "Each moisture anddry>=40 unique endpoint races30 dates2years for display; month>=20 races15dates2years. Unsupported cells NULL. Reference dry0 is definition, not proven absence. Sum effect intervals from joint bootstrap, never add marginal endpoints.",
+  "artifacts": "Code, plan, input hashes, all pair endpoint IDs/SHA, fold models and predictions, candidates, locked selection, confirmation/annual/condition diagnostics, latest moisture/month/joint reference tables and real-record examples with uncertainty, report, verification. DB and previous studies unchanged.",
+  "numerical_repair": "v1 adaptive MAD per IRLS iteration did not converge for1110m. Preserve v1 as numerical diagnostic, not final research. v2 fixes Huber scale at weighted MAD of initial training OLS residual, making IRLS a fixed convex objective; max500iterations; same samples, periods, candidates, selection rules. Repair chosen for convergence, not favorable results."
+}

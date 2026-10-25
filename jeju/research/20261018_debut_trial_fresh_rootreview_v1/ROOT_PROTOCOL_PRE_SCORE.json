@@ -1,0 +1,63 @@
+{
+  "status": "LOCKED_BEFORE_FRESH_MODEL_PREDICTIONS",
+  "window_start": "2026-09-20",
+  "window_end": "2026-10-17",
+  "available_dates": [
+    "2026-10-02",
+    "2026-10-03",
+    "2026-10-05",
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-16",
+    "2026-10-17"
+  ],
+  "primary_cold_dates": [
+    "2026-10-02",
+    "2026-10-03",
+    "2026-10-05",
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-17"
+  ],
+  "rows": 426,
+  "races": 45,
+  "cold_rows": 14,
+  "cold_races": 6,
+  "cold_distance_m": [
+    900
+  ],
+  "primary": "cold runner binary Top3 LL/Brier; within race cold mean, then equal race mean",
+  "difference": "candidate minus baseline",
+  "uncertainty": {
+    "draws": 20000,
+    "seed": 20261018,
+    "method": "resample unique observed cold-containing dates with replacement; ratio of summed cold-race losses/counts",
+    "few_date_exploratory_if_below": 5
+  },
+  "models": {
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/top3.txt": "732911138e2bb495ea48a49b3f736a7dbd5b28f5b0b441ae20d6a61d19fb7e40",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/meta.json": "e9dbfe5226571cb29e34b352a4ad8808a735d70929e66b42efb41b3e807ff06d",
+    "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2026/top3.txt": "af3de35578ac7bcac6dcc56b818d809877a3f0ec406ffa4ff09ec9120d127051",
+    "jeju/research/20261018_debut_trial_ablation_v1/outputs/F1_STYLE6_DEBUT_TRIAL4_2026/meta.json": "6dd7b67f3062e4f731c5366aa773ce20234f1b67a9fa34282aa70218b0ab8ee2"
+  },
+  "sources": {
+    "ROOT_TARGET_ROSTER.parquet": "8675ef9500316fd109d889f4dc8ce8a9011693531c37e963d158e9bceb85f9c5",
+    "ROOT_FRESH_STYLE_LINEAGE.parquet": "f9e636f06c29523ac6d8ec9eeeb6ac604b9fc65d4342af50ef5f803869efe50d",
+    "ROOT_COLD_TARGETS.parquet": "00f66c9dc79c74f05e9d3a5bbe94299ab7201d29402295c2389b455dbd9e68c5",
+    "ROOT_API20_FULL_SOURCE_ROWS.parquet": "e142e1cffdba57635a6928102dfd23ac06c65b19d31ca5d3183caa8d4d456e94",
+    "ROOT_EXTRA_SELECTED_GROUPS.parquet": "e7cf77756313b9a3a1d9e007d85790c425683cf941cb13923ea25f8e64bd6eab",
+    "ROOT_EXTRA_SELECTED_ORDERS.parquet": "0d63e20bbe209c6f2ad9b06032e97b810eea071df960d0a1743a8544358746fb",
+    "ROOT_REBUILT_OLD_2026.parquet": "dd455c0d4d9d1cc90676a0cf2e98dcc3bb9bbb0f369301e55badba9ccc808569",
+    "ROOT_FRESH_TRIAL_SLOTS.parquet": "47a91aa219bfccd525bc602f0dec00337361570e78c1a7dc2449227a7ed10826",
+    "ROOT_EXTRA_FULL_POINT_CACHE.parquet": "c1d4502b1f62f6d01d8775859fc22a40411789b54989fec9c0d7aca87f9fccea",
+    "ROOT_FRESH_BASE30.parquet": "bcbe377cb14dd526674f43ec82d0088bb817c95b23e58d60bbc6a646c05fb1b0",
+    "ROOT_RAW_NEW_ROWS.parquet": "8e00161ce58210ff601a2a212f39c38296686f1eb3ce6b632cd0a83cd11676e1",
+    "ROOT_FRESH_TRIAL4.parquet": "8a54a4bb331e49707ffb5e00fbe27d872878bce98f0d1daf6d5c98161a5a4b7c",
+    "ROOT_TARGET_STYLE_SLOTS.parquet": "bd0d7a930967726ed6b8d32f6602c651ae1246cdb92e91ff9ff9cbde6dada4cb"
+  },
+  "prior_evaluation_end": "2026-09-19",
+  "new_training_calls": 0,
+  "new_temperature_optimizations": 0,
+  "no_automatic_promotion": true,
+  "public_availability_at_Tminus2_unverified": true
+}

@@ -1,0 +1,411 @@
+{
+  "audit_status": "completed_source_definition_and_slot_support_only",
+  "passed": true,
+  "fit_or_prediction_work": false,
+  "db_write": false,
+  "uri_mode_ro_and_query_only": true,
+  "f1_population": {
+    "target_rows": 52155,
+    "target_races": 5206,
+    "evaluation_rows_2024_2026": 17412,
+    "evaluation_races_2024_2026": 1779,
+    "source_snapshot_rows": 92513,
+    "source_snapshot_rows_in_referenced_history_races": 62709,
+    "source_snapshot_started_rows_in_referenced_history_races": 62248,
+    "full_race_result_started_rows_in_referenced_history_races": 62248,
+    "actual_same_distance_last5_slots": 178459,
+    "distinct_slot_source_api_ids": 50491,
+    "distinct_slot_source_races": 6269,
+    "target_last5_slot_order_matches_saved_ids": true,
+    "source_horse_distance_started_and_t_minus_2_checks": true,
+    "n_started_source": "Full exact-key race_result_rows count using inherited finish_position 1..89 or 91/92 started rule; no reclassification of other codes. Candidate source_snapshot N is not reused for normalization.",
+    "full_roster_reconciliation": {
+      "referenced_races": 6269,
+      "full_race_result_rows": 62709,
+      "full_race_result_started_rows": 62248,
+      "snapshot_rows_in_referenced_races": 62709,
+      "snapshot_started_rows_in_referenced_races": 62248,
+      "races_where_snapshot_started_n_differs_from_full": 0,
+      "races_where_snapshot_started_n_is_smaller": 0,
+      "sum_full_minus_snapshot_started_n": 0,
+      "max_full_minus_snapshot_started_n": 0,
+      "full_started_null_api_id": 0,
+      "full_started_null_horse_id": 0,
+      "full_started_null_horse_number": 0,
+      "full_started_duplicate_api_id_rows": 0,
+      "full_started_duplicate_horse_id_rows": 0,
+      "full_started_duplicate_horse_number_rows": 0,
+      "snapshot_common_rows_exactly_match_full_base": true
+    }
+  },
+  "candidate_6_field_definition": {
+    "point_validity": "Keep API4 order validity and API303 group status as separate gates. Pure API4 permutation requires the full exact-key race_result_rows started ID set to have accepted API4 status in {api_positive_unreviewed, website_corrected}, integer order 1..N, and exact set 1..N without duplicate horse IDs/ranks; N is the full started roster. Race-point eligibility additionally requires API303 status api_group_unreviewed or api_group_unavailable. Missing/other group status holds the point. normalized_rank requires both gates; slot contribution additionally requires source_snapshot.valid_time=True.",
+    "source_valid_time_gate": "Each actual source slot contributes to any mean+n only when its inherited source_snapshot.valid_time is True. Invalid source time NULLs that slot's three values and never causes older-slot backfill; actual slot count stays fixed.",
+    "normalized_rank": "r=(order-1)/(N-1); 0=front, 1=back; only when N>=2 and both the full API4 permutation and API303 group status gates pass.",
+    "concept_1": {
+      "mean": "mean S1F r over valid exact-distance last-five actual source slots",
+      "n": "number of those slots, 0..5; mean NULL if n=0"
+    },
+    "concept_2": {
+      "mean": "mean of S1F r - 4C r on same source slots where both full point permutations pass",
+      "n": "paired slots, 0..5; positive means relative rank moved forward by 4C; mean NULL if n=0"
+    },
+    "concept_3": {
+      "mean": "mean of 4C r - G1F r on same source slots where both full point permutations pass",
+      "n": "paired slots, 0..5; positive means relative rank moved forward by G1F; mean NULL if n=0"
+    },
+    "feature_mapping": {
+      "hist_s1f_relpos_mean5": "mean of slot-cache s1f_r over s1f_final_point_eligible slots",
+      "hist_s1f_relpos_n": "count of those same source slots; 0..5; mean NULL at n=0",
+      "hist_s1f_to_c4_forward_mean5": "mean of s1f_r - c4_r over s1f_to_c4_pair_eligible slots",
+      "hist_s1f_to_c4_pair_n": "count of those same-slot eligible S1F/4C pairs; 0..5; mean NULL at n=0",
+      "hist_c4_to_g1f_forward_mean5": "mean of c4_r - g1f_r over c4_to_g1f_pair_eligible slots",
+      "hist_c4_to_g1f_pair_n": "count of those same-slot eligible 4C/G1F pairs; 0..5; mean NULL at n=0"
+    },
+    "field_count_columns": [
+      "hist_s1f_relpos_mean5",
+      "hist_s1f_relpos_n",
+      "hist_s1f_to_c4_forward_mean5",
+      "hist_s1f_to_c4_pair_n",
+      "hist_c4_to_g1f_forward_mean5",
+      "hist_c4_to_g1f_pair_n"
+    ],
+    "group_data_role": "API303 interval source is reported separately for coverage/discordance; it never restores API4 intra-group order and never fills an API4 missing/conflict value.",
+    "rank_order_relation_sign": "larger r is farther back; transition change is earlier r minus later r, so positive is relative advance",
+    "no_finish_position_in_candidate_fields": true
+  },
+  "quality_view_chain": {
+    "quality_view": "jeju_race_postrace_sections_quality_2026",
+    "quality_view_joins_order_aggregate_by_api4_record": true,
+    "quality_view_joins_group_aggregate_by_api303_record": true,
+    "order_aggregate_reads_order_quality_values": true,
+    "group_aggregate_reads_group_quality_values": true,
+    "order_fields": {
+      "S1F": "sjS1fOrd",
+      "4C": "sj_4cOrd",
+      "G1F": "sjG1fOrd"
+    },
+    "api303_point_to_field": {
+      "S1F": "corner_7",
+      "1C": "corner_1",
+      "2C": "corner_2",
+      "3C": "corner_3",
+      "4C": "corner_4",
+      "G1F": "corner_8"
+    },
+    "quality_view_dependency_ddl_sha256": {
+      "jeju_race_section_order_values": "003765085174cb1626e373818578198504e79bd09e197473083f902e88b31ee4",
+      "jeju_race_section_order_quality_values": "2adc9a200be2fbf3a9b504d788fbc0576f55f0c7bbfb0a4ecf3187d178df4ca4",
+      "jeju_race_section_order_quality": "982375bb39d9ff264f8a740ff09bbb344639d087c4a4aa78a7db26f35f7f40c6",
+      "jeju_race_section_group_quality_values": "63eef9903e6b0bf6e49dadfb0e4583efc4c7d89788603b140dff34494eb25994",
+      "jeju_race_section_group_quality": "4d493d060c41b348aa2396e75f248139023beec52560ff26035917a82479173b",
+      "jeju_race_section_time_values": "a813166113a2f570f8ea1e9d539e44b6797ab8502cc694d50da68e4760700d47",
+      "jeju_race_postrace_sections_2026": "88c58aaf08e1f2657098a7410f4a158698e10bf853678e746a212d63d6944947",
+      "jeju_race_postrace_sections_reviewed_2026": "ec647bb3aa3ad52245bbb45ea90efcb1bb893e18b1441145f11bfe54eb582445",
+      "jeju_race_postrace_sections_quality_2026": "3a8613957e1893731ced8ce3bd896260b58a011e74da1c74d8f9d61a638f36b0"
+    },
+    "ddl_matches_locked_section_time_audit": true,
+    "api4_order_status_counts_referenced_started_runners": {
+      "4C": {
+        "api_positive_unreviewed": 62208,
+        "api_unavailable_or_nonpositive_or_sentinel": 22,
+        "unresolved_official_internal_conflict": 18
+      },
+      "G1F": {
+        "api_positive_unreviewed": 62196,
+        "unresolved_official_internal_conflict": 23,
+        "api_unavailable_or_nonpositive_or_sentinel": 22,
+        "website_corrected": 7
+      },
+      "S1F": {
+        "api_positive_unreviewed": 62207,
+        "api_unavailable_or_nonpositive_or_sentinel": 20,
+        "unresolved_official_internal_conflict": 14,
+        "website_corrected": 7
+      }
+    },
+    "api4_order_status_counts_actual_slots_weighted": {
+      "4C": {
+        "api_positive_unreviewed": 178327,
+        "unresolved_official_internal_conflict": 75,
+        "api_unavailable_or_nonpositive_or_sentinel": 57
+      },
+      "G1F": {
+        "api_positive_unreviewed": 178308,
+        "unresolved_official_internal_conflict": 77,
+        "api_unavailable_or_nonpositive_or_sentinel": 57,
+        "website_corrected": 17
+      },
+      "S1F": {
+        "api_positive_unreviewed": 178340,
+        "api_unavailable_or_nonpositive_or_sentinel": 49,
+        "unresolved_official_internal_conflict": 43,
+        "website_corrected": 27
+      }
+    },
+    "api303_group_status_counts_referenced_races": {
+      "4C": {
+        "api_group_unreviewed": 6264,
+        "unresolved_official_internal_conflict": 5
+      },
+      "G1F": {
+        "api_group_unreviewed": 6263,
+        "unresolved_official_internal_conflict": 6
+      },
+      "S1F": {
+        "api_group_unreviewed": 6263,
+        "unresolved_official_internal_conflict": 6
+      }
+    },
+    "quality_status_counts_full_domain_from_existing_locked_receipt": {
+      "time_status": {
+        "api_positive_unreviewed": 436954,
+        "api_unavailable_or_nonpositive": 210633,
+        "unresolved_official_website_anomaly": 1,
+        "website_corrected": 3
+      },
+      "order_status": {
+        "api_positive_unreviewed": 351241,
+        "api_unavailable_or_nonpositive_or_sentinel": 203753,
+        "unresolved_official_internal_conflict": 70,
+        "website_corrected": 14
+      },
+      "group_status": {
+        "api_group_unavailable": 40863,
+        "api_group_unreviewed": 78715,
+        "unresolved_official_internal_conflict": 20
+      }
+    },
+    "global_unresolved_record_counts_from_prior_quality_audit": {
+      "api4_individual_order": 70,
+      "api303_group_points": 20
+    },
+    "global_order_unresolved_preserved_by_quality_status_null_contract": true,
+    "api303_unavailable_is_distinct_from_internal_conflict": true,
+    "known_time_review_cases_reconfirmed": {
+      "178142:jeS1fTime": {
+        "time_seconds": 20.0,
+        "time_status": "website_corrected"
+      },
+      "180747:jeS1fTime": {
+        "time_seconds": 17.8,
+        "time_status": "website_corrected"
+      },
+      "190686:jeG1fTime": {
+        "time_seconds": 16.0,
+        "time_status": "website_corrected"
+      },
+      "191451:jeG1fTime": {
+        "time_seconds": null,
+        "time_status": "unresolved_official_website_anomaly"
+      }
+    }
+  },
+  "chronology_and_distance": {
+    "point_sequence_for_candidate": "S1F order -> 4C order -> G1F order, each by labeled point, using only same-race same-horse pairs.",
+    "1300m_user_contract": "start -> 2C -> S1F is preserved; S1F is after 2C for this contract and is not a first-corner/pre-2C location.",
+    "source_sequence_evidence": "Prior passing-group research used S1F-before-4C and 4C-before-G1F as descriptive point sequences; current section-time contract distinguishes S1F/C1-C4 elapsed point times from G3F/G1F closing-section durations. This audit checks selected S1F < selected 4C and selected 4C < (finish-G1F) by exact source distance. The latter is an estimated start-of-final-1F elapsed checkpoint used only as a temporal consistency proxy. These checks do not prove physical geometry. The older 1300m S1F/2C hold predates the current user-defined start->2C->S1F contract and is not copied as a new hold.",
+    "s1f_universal_distance_assumption": "none; S1F is the source point label, not assumed to be 200m or 210m.",
+    "distance_specific_point_semantics_in_quality_ddl": "not encoded; DDL exposes point fields but no physical-distance crosswalk. The candidate is relative order at the named source points, and support is reported by exact distance.",
+    "4c_to_g1f_interpretation": "late relative-position change between labeled points; not final advance, speed, acceleration, or fitness cause.",
+    "api303_parentheses": "members of one unordered group share an inclusive rank interval based on counts of preceding group members; no within-group member order is assigned.",
+    "point_support_by_distance_and_year_file": "point_support_by_distance.csv",
+    "target_window_support_by_distance_and_year_file": "support_by_distance_year.csv",
+    "api303_support_by_distance_file": "api303_group_support_by_distance.csv",
+    "quality_time_consistency_by_distance_file": "point_time_chronology_by_distance.csv",
+    "time_consistency_not_feature_or_source_gate": true
+  },
+  "source_slot_quality": {
+    "order_valid_status_allowlist": [
+      "api_positive_unreviewed",
+      "website_corrected"
+    ],
+    "invalid_fail_closed_statuses": [
+      "api_source_changed_since_conflict_review",
+      "api_source_changed_since_review",
+      "api_unavailable_or_nonpositive_or_sentinel",
+      "internal_conflict_review_not_applied",
+      "unresolved_official_internal_conflict",
+      "website_review_not_applied"
+    ],
+    "group_status_source_domain": [
+      "api_group_unavailable",
+      "api_group_unreviewed",
+      "api_source_changed_since_conflict_review",
+      "internal_conflict_review_not_applied",
+      "unresolved_official_internal_conflict"
+    ],
+    "group_status_candidate_allowlist": [
+      "api_group_unreviewed",
+      "api_group_unavailable"
+    ],
+    "api_group_unavailable_distinct_from_conflict": true,
+    "api_group_unreviewed_is_not_official_website_confirmation": true,
+    "api303_parser_is_diagnostic_only": true,
+    "unknown_status_domain": {
+      "api4_order": [],
+      "api303_group": []
+    },
+    "quality_order_value_range": "integer 1..N_started, not finish rank and not bracket order from API303",
+    "api4_order_permutation_valid_races_by_point": {
+      "4C": 6242,
+      "G1F": 6241,
+      "S1F": 6243
+    },
+    "race_point_eligible_races_by_point": {
+      "4C": 6242,
+      "G1F": 6241,
+      "S1F": 6243
+    },
+    "api4_api303_interval_mismatch_count_by_point": {},
+    "api4_api303_interval_mismatch_rows_are_diagnostic_only": true,
+    "same_distance_slots_kept_when_any_point_missing": true,
+    "window_slot_n_backfill": false
+  },
+  "input_hashes": {
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/features.parquet": {
+      "bytes": 5043713,
+      "sha256": "1b28a8392a1447e693fed5988db74f13b5f8622adcb5d5c22143aea701502534"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/historical_lineage.parquet": {
+      "bytes": 2835001,
+      "sha256": "11665999d7adaa02d7cb9d1a1560ae2e68f6d03224cce688d8c34d40f8fcc955"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": {
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/prepared_lock.json": {
+      "bytes": 12132,
+      "sha256": "4609c6f40418aaffd833e05c49843357f5ffcdd4b8393bb1da22ec035d3b4378"
+    },
+    "jeju/research/20261009_section_ablation_review_v1/independent_outputs/independent_source_availability_receipt.json": {
+      "bytes": 9033,
+      "sha256": "c52a743ec525bc3a2be6431add28b8042489597e606e43fa47afcbc65e1f8573"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/CONTRACT.md": {
+      "bytes": 11388,
+      "sha256": "c91dfd087d6e5d88279b9af4dd11fdc2182d0d4208e983619d4e61bba90c8524"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/prepare.py": {
+      "bytes": 19208,
+      "sha256": "dbfe79bd6bc6339f9d029f06437ea05cca69ddb80cdac812d4c318eeab216a40"
+    },
+    "jeju/research/20261010_style_history_source_audit_v1/audit_source_definitions.py": {
+      "bytes": 66642,
+      "sha256": "357407743cc54e91aedbab692d5a6f4debfbeb66db49b33405cfd0c697e7ac2a"
+    },
+    "jeju/AGENTS.md": {
+      "bytes": 19967,
+      "sha256": "8f765820ea187e85aabe53f079400f4553bccb4c32a66e67bd17e47d192dd094"
+    },
+    "jeju/docs/RESTART_PLAN_20260928.md": {
+      "bytes": 6426,
+      "sha256": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848"
+    },
+    "jeju/research/RESEARCH_PUBLICATION_POLICY.md": {
+      "bytes": 2955,
+      "sha256": "01f6743d697cd23b4b711f62a947ef567001162a10afc9b3c3a5beaa6308997b"
+    },
+    "jeju/research/20261008_passing_group_running_style_v1/PLAN.md": {
+      "bytes": 5651,
+      "sha256": "761f49cae7898d457354d2495e8a7fcc5aa8b8abb92371c7ae6f6e08d958f171"
+    },
+    "jeju/research/20261002_section_passing_audit/README.md": {
+      "bytes": 12312,
+      "sha256": "b90608be046ec313d3fb6068fcfcec6ebc901737e3d9024e4ac9653f4608dcff"
+    },
+    "jeju/research/20261008_passing_group_running_style_v1/run01/runner_position_intervals.csv": {
+      "bytes": 8870901,
+      "sha256": "14b0662b46e3584e0e65bce316a7d22618f20b5a5333b24392dbdca99d9e93db"
+    },
+    "jeju/research/20261008_passing_group_running_style_v1/run01/race_point_audit.csv": {
+      "bytes": 3739396,
+      "sha256": "0251e2ed7a29d421ad5cdf5964100d6d752aa8e530540910b572e07b1a31729b"
+    },
+    "config/prediction_model_registry.json": {
+      "bytes": 7291,
+      "sha256": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b"
+    },
+    "jeju/models/current/HY_R_FORM.pkl": {
+      "bytes": 638955,
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+    },
+    "jeju/models/current/metadata.json": {
+      "bytes": 1818,
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870"
+    },
+    "jeju/data/jeju_native_core.sqlite3": {
+      "bytes": 1793323008,
+      "sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+      "sha_rehashed": true,
+      "matches_existing_locks": true
+    }
+  },
+  "artifacts": {
+    "api4_full_started_point_quality_cache.parquet": {
+      "bytes": 1165147,
+      "sha256": "1f651353323e47bf8feb189f321a97c150c9ccc487c52a5ea478b00dd7e643b2"
+    },
+    "actual_slot_point_eligibility.parquet": {
+      "bytes": 3207888,
+      "sha256": "c7847bcf93dc342080b22808c83b5e727b11ab54d269191a0c498a135f4cd470"
+    },
+    "support_by_distance_year.csv": {
+      "bytes": 8024,
+      "sha256": "7f37f5697d17c8d5096bec031b2fd9960de40ef5ae9151d56f887e4db4612bbc"
+    },
+    "point_support_by_distance.csv": {
+      "bytes": 1089,
+      "sha256": "0c8ff58da34d0c5deae61ccdd54498cf1fd29c284ced2d463375d4f069423434"
+    },
+    "api303_group_support_by_distance.csv": {
+      "bytes": 2629,
+      "sha256": "6beab385dd00e5b895b15b64a37f74caa198577f604c9dc44d4d6850fe8e16c4"
+    },
+    "cross_source_interval_examples.csv": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "full_roster_reconciliation_by_race.csv": {
+      "bytes": 1270361,
+      "sha256": "5e3be85d40c30e4b27461a072df6ef44f65548099c061aad5e8424a8d7de44ec"
+    },
+    "race_point_quality_support.csv": {
+      "bytes": 2225745,
+      "sha256": "83c6b9c0bd567f3bd9a8c4d4407d7420b5d7ba98fa688b88d8f87a0dead5b84c"
+    },
+    "point_time_chronology_by_distance.csv": {
+      "bytes": 651,
+      "sha256": "31a9822a5ab10fbb1ac834b1cfc0b6562ac19a24c715517b572a8145457e747a"
+    }
+  },
+  "cache_paths": {
+    "full_started_point_quality": "api4_full_started_point_quality_cache.parquet",
+    "actual_slot_eligibility": "actual_slot_point_eligibility.parquet"
+  },
+  "cache_rows": {
+    "full_started_point_quality": 186744,
+    "actual_slot_eligibility": 178459
+  },
+  "source_status_policy": {
+    "api4_order_allowed": [
+      "api_positive_unreviewed",
+      "website_corrected"
+    ],
+    "api303_group_status_allowed": [
+      "api_group_unreviewed",
+      "api_group_unavailable"
+    ],
+    "api_group_unavailable_is_not_conflict": true,
+    "api_group_unreviewed_is_not_official_website_confirmation": true,
+    "api303_parser_is_diagnostic_only": true,
+    "missing_or_conflict_group_status_holds_point": true
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "pandas": "3.0.5",
+    "numpy": "2.5.2",
+    "sqlite_query_only": 1
+  }
+}

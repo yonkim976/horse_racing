@@ -1,0 +1,17 @@
+{
+  "fixed_before_new_outcome_estimates": true,
+  "question": "Typical body-mass change magnitude and whether above-typical gain/loss is followed by unchanged, improved, or worsened times.",
+  "period": ["2017-01-01", "2026-09-19"],
+  "partial_2026": true,
+  "source": "Immutable weight_speed_v2 52,155 starts and27,230 samehorse/exactdistance/originalgrade/year7-60day pairs. Endpoint measured body difference, not printed previous-start delta. Official IDs; excludedhorse policy; local read-only sources only.",
+  "typical_definition": "Absolute kg change, not signed mean. Primary personal typical=mean(abs(delta)) of latest up-to10 eligible earlier pair endpoints for same horse across exact-distance pair types, endpointdate<=currentdate-2days; minimum5 histories. Save exact prior IDs. No full-career future information. Report population/dist/period signed mean, absolute mean/median/quantiles separately as retrospective descriptive reference.",
+  "primary_groups": "zero delta separate reference; gain_within:0<delta<=personalmean; gain_above:delta>personalmean; loss_within:0<-delta<=personalmean; loss_above:-delta>personalmean. Current pair not in its own history.",
+  "variants": "primary all periods; full large_threshold=personalmean+personalSD(ddof1), same_distance_baseline=latest10 past eligible pairs samehorse+distance(min5), stable_conditions=samemonth/moistureband/absburdenchange<=1kg. Keep all variants and support, no outcome-driven threshold tuning.",
+  "periods": {"full":[2017,2026],"past":[2017,2023],"confirmation":[2024,2025],"2026partial":[2026,2026]},
+  "outcomes": "Raw time difference and race-median-relative time difference(seconds; positive=worse). Descriptive faster<-0.5s/similarabs<=0.5s/slower>0.5s, exact0 also shown; secondary1s band. Individual variability and group-average contrasts are distinct.",
+  "adjusted_model": "Unpenalized four signed group dummies and intercept, zerochange reference. Nuisance standardized ridge1: burden increase/decrease,previousburden,previousbody/10 andsquare,loggap,eventage,priorrelative time/finish/history,fieldchange,personal absolute-change mean andSD,historycount,moistureband/gate differences,twoannualharmonics,year-grade. Two outputs labeled raw_delta_s/relative_delta_s before inference; no log/speed conversion. Main contrasts gainabove-minus-gainwithin and lossabove-minus-losswithin; also above-minus-zero retained.",
+  "support": "Atleast100pairs/30dates/30horses;zero>=30 and each of4groups>=30;residualdf>20. Small distances retained descriptive but not treated as supported.",
+  "uncertainty": "Conservative date+horse covariance without intersection subtraction,t smallerclusterdf. Date cluster laterendpoint only. Pointwise95CI; BH across supported distances and both outcomes perperiod/variant/contrast.",
+  "similarity": "Non-significance is not equivalence. Conservative group-mean practical-equivalence flag only when whole95CI is within[-0.5,+0.5]seconds; no inference of individual record unchanged. Flag is research comparison margin, not validated sporting/measurement tolerance.",
+  "limitations": "Body measured on current race is retrospective, not pre-race validated input. Eligible history not fullcareer/actualnextstart; prior10 changes mayoverlap and varyinterval/distance; selection/growth/fitness remain. Reused periods not independent holdout. No fixed correction, body-management recommendation, optimum or operational change."
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "source": "jeju_starting_training_homepage",
+  "created_at_utc": "2026-10-16T16:48:11.013728+00:00",
+  "requested_range": {
+    "start": "20260913",
+    "end": "20261016",
+    "calendar_dates": 34
+  },
+  "collection_status": "probe_unavailable",
+  "probe_gate": {
+    "passed": false,
+    "probe_dates": [
+      "2026-09-13",
+      "2026-10-16"
+    ],
+    "results": [
+      {
+        "date": "2026-09-13",
+        "status": "redirect_blocked",
+        "http_status": 302,
+        "rows_count": 0,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "redirect_blocked"
+          }
+        ]
+      },
+      {
+        "date": "2026-10-16",
+        "status": "redirect_blocked",
+        "http_status": 302,
+        "rows_count": 0,
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "redirect_blocked"
+          }
+        ]
+      }
+    ]
+  },
+  "limits": {
+    "max_concurrent_requests": 2,
+    "max_request_attempts": 300,
+    "request_attempts_used": 2,
+    "max_attempts_per_date": 3,
+    "response_byte_limit": 4194304,
+    "tls_certificate_verification": true,
+    "redirects_followed": false
+  },
+  "status_counts": {},
+  "dates": []
+}

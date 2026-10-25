@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "scope": "fit_evaluate_only",
+  "reviewer": "root supervisor",
+  "reviewed_at": "2026-10-21T23:15:19.016809+00:00",
+  "plan_sha256": "818e8a268d2955890f7185157f9503ffc4c24df035839354bc74f5804a71fe62",
+  "code_sha256": "c7c6fb27ac43bdf4eba952a30ecdb957f4c1c19575bd856e50eba9b87455a6c7",
+  "source_preflight_sha256": "10c5a75c79055da3e5c9278ab23dd3a75bfbd6a8fd64121a3dbff315d8754494",
+  "asset_manifest_sha256": "ea2d2b0363539f3b7b0b88c3b2254c14f04095715ac1f137f71beba77a9a36a3",
+  "rules_contract_sha256": "20cd4b17274018a36efbb1b0cea64eb5d5c9809ed5f3481bea59c734f99fee83",
+  "approval_basis": [
+    "SOURCE_REVIEW.json independent raw-score/key/T-2 proof",
+    "CODE_REVIEW.md six issues resolved before fit",
+    "Independent math_reference.py synthetic checks",
+    "Worker synthetic and current structural preflight PASS",
+    "Full race/pool contract ledger checked"
+  ],
+  "permitted_fit_calls": 1,
+  "permitted_new_parameters": 1,
+  "horse_scorer_retraining": false,
+  "production_promotion": false,
+  "evaluation_status": "repeated retrospective development; not independent holdout",
+  "maximum_study_bytes": 300000000,
+  "execution_attempt": 2,
+  "prior_attempt": "serialization failure in first race PLC; fitted scalar lost with process; no outcome report saved or inspected",
+  "repair": "cast numpy integer ticket numbers to Python int for JSON serialization",
+  "comparison_conditions_changed": false,
+  "total_temperature_optimization_invocations_authorized": 2,
+  "total_successful_evaluations_authorized": 1,
+  "recovery_only": true
+}

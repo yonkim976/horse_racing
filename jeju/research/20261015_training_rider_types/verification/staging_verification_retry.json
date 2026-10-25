@@ -1,0 +1,105 @@
+{
+  "verification": "jeju_daily_training_rider_type_independent_verification",
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_types/staging.sqlite3",
+  "read_only": true,
+  "query_only": true,
+  "database_file_sha256_before_after": {
+    "before": {
+      "db": "01d48d1d8c61bc5d0c701be8c9a59890b7ae81936559b28c147555a865b61cdf",
+      "wal": null
+    },
+    "after": {
+      "db": "01d48d1d8c61bc5d0c701be8c9a59890b7ae81936559b28c147555a865b61cdf",
+      "wal": null
+    }
+  },
+  "source_rows": 908316,
+  "assignments": 908316,
+  "analysis_view_rows": 907389,
+  "raw_api_category_counts": {
+    "-": 300111,
+    "기수": 315601,
+    "기수후보생": 1696,
+    "조교보": 71889,
+    "조교사": 111648,
+    "조교승인": 107371
+  },
+  "same_event_website_review": {
+    "page_count": 32,
+    "parsed_training_rows": 1861,
+    "same_event_matches": 0,
+    "page_types": {},
+    "raw_labels": {},
+    "bare_name_labels": {},
+    "unrecognized_bare_labels": {},
+    "ambiguous_exact_keys": [],
+    "roster_names_count_union": 767,
+    "roster_meets": {
+      "1": {
+        "rows": 614,
+        "totalCount": 614
+      },
+      "2": {
+        "rows": 92,
+        "totalCount": 92
+      },
+      "3": {
+        "rows": 132,
+        "totalCount": 132
+      }
+    },
+    "manifest_sha256": "5a8f74e65476338d18ab30609ad1e131b32f92215fcc54de99fcce12eb438ca8"
+  },
+  "type_counts_all": {
+    "기수": 315601,
+    "조교사": 111648,
+    "조교보": 71889,
+    "조교승인": 107371,
+    "기수후보생": 1696,
+    "주로조교": 0,
+    "교육생": 0,
+    "기수트랙라이더": 0,
+    "미분류": 300111
+  },
+  "type_counts_analysis_2026": {
+    "기수": 315295,
+    "조교사": 111527,
+    "조교보": 71889,
+    "조교승인": 107371,
+    "기수후보생": 1696,
+    "주로조교": 1185,
+    "교육생": 0,
+    "기수트랙라이더": 0,
+    "미분류": 298426
+  },
+  "type_status_counts": {
+    "api_category_observed": 608205,
+    "unclassified_api_category_missing": 298852,
+    "unclassified_website_label": 23,
+    "website_same_event_type": 1236
+  },
+  "jockey_name_checks": {
+    "non_jockey_nonnull": 0,
+    "unclassified_nonnull": 0,
+    "unresolved_jockey_names": 2,
+    "bad_permitted_name_source": 0
+  },
+  "baseline_comparison": {
+    "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261015_training_rider_types/before_types.sqlite3",
+    "old_schema_differences": [],
+    "new_schema_objects": [
+      "daily_training_rider_type_assignments",
+      "daily_training_rider_type_values",
+      "daily_training_rider_types",
+      "daily_training_rider_types_analysis_2026"
+    ],
+    "full_table_comparison": false,
+    "old_table_results": {}
+  },
+  "failures": [
+    "same-event page type counts differ: {}",
+    "classification/evidence mismatches: [{'id': 868304, 'web_actual': ('기수', '강수한', '강수한', 'jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3018377.html', '5d8b050a78dae44ff2c6c9b6cd97cc2f3deb912c7f665d536182cb2d9179ccc5'), 'web_expected': (None, None, None, None, None)}, {'id': 868347, 'actual': ['주로조교', 'website_same_event_type'], 'expected': ['미분류', 'unclassified_api_category_missing'], 'api': '-', 'web': None}, {'id': 868347, 'web_actual': ('주로조교', '김현수(관)', None, 'jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3018117.html', 'c4cbbd50934b6227398805c5a3420d5e27605066f522c2317439cf742c7332d7'), 'web_expected': (None, None, None, None, None)}, {'id': 868352, 'actual': ['주로조교', 'website_same_event_type'], 'expected': ['미분류', 'unclassified_api_category_missing'], 'api': '-', 'web': None}, {'id': 868352, 'web_actual': ('주로조교', '장수만(관)', None, 'jeju/research/20261015_training_rider_identity/source_review/raw_html/kra_profileTrainState_hrNo_3016266.html', '8c287af1ff642ef0840b9b62b2b559940eace90f81b7fbc6899a2156022f5555'), 'web_expected': (None, None, None, None, None)}]",
+    "all-row type totals differ: {'미분류': 300111, '기수후보생': 1696, '조교보': 71889, '기수': 315601, '조교승인': 107371, '조교사': 111648}"
+  ],
+  "passed": false
+}

@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "scope": "read-only independent reload/replay of frozen F1 and F1_STYLE6; no training or tau optimization",
+  "models_reloaded": 6,
+  "candidate_fit_calls": 0,
+  "tau_optimizer_calls": 0,
+  "candidate_eval_rows": 17412,
+  "races": 1779,
+  "race_days": 269,
+  "canonical_six_rows": 10674,
+  "model_score_parity": {
+    "2024": {
+      "candidate_model_sha256": "6ab3c54f55f925336256d1e3e8680087993ba377b2863b367b505fda3b281be5",
+      "baseline_model_sha256": "f2373c48e0a6d415e64f577dc64c14d12d71f9b97ea5d3a0c78853f12870eb5d",
+      "candidate_trees": 196,
+      "baseline_trees": 92,
+      "candidate_fixed_tau": 1.1006448744136295,
+      "baseline_fixed_tau": 1.0146528611027281,
+      "candidate_calibration_rows": 6506,
+      "baseline_calibration_rows": 6506,
+      "candidate_eval_rows": 6329,
+      "baseline_eval_rows": 6329,
+      "candidate_cal_raw_score_match_atol_1e-12": true,
+      "baseline_cal_raw_score_match_atol_1e-12": true,
+      "candidate_eval_raw_score_match_atol_1e-12": true,
+      "baseline_eval_raw_score_match_atol_1e-12": true
+    },
+    "2025": {
+      "candidate_model_sha256": "0853e411bac3ea0424fd3d9332a9e2b9ffc0b83eab9fbde7316ddd3a35dde5c4",
+      "baseline_model_sha256": "b66ece1487c86ad1cd05aabed7f3781d84e89c24e6a3ebcb010f38b811009b9d",
+      "candidate_trees": 199,
+      "baseline_trees": 200,
+      "candidate_fixed_tau": 1.1156577765075688,
+      "baseline_fixed_tau": 1.0950570725726967,
+      "candidate_calibration_rows": 6329,
+      "baseline_calibration_rows": 6329,
+      "candidate_eval_rows": 6410,
+      "baseline_eval_rows": 6410,
+      "candidate_cal_raw_score_match_atol_1e-12": true,
+      "baseline_cal_raw_score_match_atol_1e-12": true,
+      "candidate_eval_raw_score_match_atol_1e-12": true,
+      "baseline_eval_raw_score_match_atol_1e-12": true
+    },
+    "2026": {
+      "candidate_model_sha256": "732911138e2bb495ea48a49b3f736a7dbd5b28f5b0b441ae20d6a61d19fb7e40",
+      "baseline_model_sha256": "15654e60d6736aabc0ec0af60cbdf4478c05b8fb6227d826dd8aff0ef1f347a4",
+      "candidate_trees": 186,
+      "baseline_trees": 200,
+      "candidate_fixed_tau": 0.9719459584109199,
+      "baseline_fixed_tau": 0.9864064099027149,
+      "candidate_calibration_rows": 6410,
+      "baseline_calibration_rows": 6410,
+      "candidate_eval_rows": 4673,
+      "baseline_eval_rows": 4673,
+      "candidate_cal_raw_score_match_atol_1e-12": true,
+      "baseline_cal_raw_score_match_atol_1e-12": true,
+      "candidate_eval_raw_score_match_atol_1e-12": true,
+      "baseline_eval_raw_score_match_atol_1e-12": true
+    }
+  },
+  "fixed_tau_calibration_objectives": {
+    "2024": {
+      "candidate_fixed_tau_joint_nll": 4.3297054155222146,
+      "baseline_fixed_tau_joint_nll": 4.370940807559069,
+      "tau_optimizer_calls": 0
+    },
+    "2025": {
+      "candidate_fixed_tau_joint_nll": 4.336890993963473,
+      "baseline_fixed_tau_joint_nll": 4.3244238111260005,
+      "tau_optimizer_calls": 0
+    },
+    "2026": {
+      "candidate_fixed_tau_joint_nll": 4.262130618225354,
+      "baseline_fixed_tau_joint_nll": 4.277115343227272,
+      "tau_optimizer_calls": 0
+    }
+  },
+  "report_outputs_recomputed_from_saved_models": true,
+  "full_joint_probability_sum_one_checked": true,
+  "runner_top3_marginal_sum_three_checked": true,
+  "top6_probability_mass_compared_to_six_combo_mass_not_one": true,
+  "race_log_loss_brier_top5_sixsets_recomputed": true,
+  "paired_date_bootstrap": {
+    "resamples": 2000,
+    "seed_reset_for_each_metric_group": 20261008,
+    "all_saved_rows_match_atol_1e-12": true,
+    "primary_gate_passed": true,
+    "primary_points": [
+      {
+        "metric": "log_loss",
+        "delta_candidate_minus_f1": -0.0013091350099930822,
+        "ci95_low": -0.002244761669478439,
+        "ci95_high": -0.0003556823008912114
+      },
+      {
+        "metric": "brier",
+        "delta_candidate_minus_f1": -0.0004683842559382625,
+        "ci95_low": -0.0008485216142838644,
+        "ci95_high": -8.892703231961282e-05
+      }
+    ]
+  },
+  "conditional_loss_rows_recomputed_and_matched": 78,
+  "operating_common_467_recomputed_and_matched": [
+    {
+      "variant": "HY_R_FORM",
+      "races": 467,
+      "log_loss": 0.5554172057054122,
+      "brier": 0.18764490784909071,
+      "pick_hit": 0.6102783725910065,
+      "top5_capture": 0.7501784439685938,
+      "six_combo_hit": 0.3083511777301927
+    },
+    {
+      "variant": "F1",
+      "races": 467,
+      "log_loss": 0.573442171199299,
+      "brier": 0.19493991438868147,
+      "pick_hit": 0.582441113490364,
+      "top5_capture": 0.6952177016416845,
+      "six_combo_hit": 0.24411134903640258
+    },
+    {
+      "variant": "F1_STYLE6",
+      "races": 467,
+      "log_loss": 0.5727113370133592,
+      "brier": 0.19472009537108753,
+      "pick_hit": 0.576017130620985,
+      "top5_capture": 0.6966452533904354,
+      "six_combo_hit": 0.24197002141327623
+    }
+  ],
+  "operating_467_paired_rows_recomputed_and_matched": 10,
+  "operating_probability_semantics": "HY native PL; F1/F1_STYLE6 additive canonical six-set probabilities",
+  "row_specific_perturbations": {
+    "rows": 7,
+    "all_24_and_30_input_matrices_unchanged": true,
+    "all_raw_scores_and_probabilities_unchanged": true,
+    "canonical_top_six_unchanged": true,
+    "current_target_history_ids_reselected_before_and_after_from_started_snapshot": true,
+    "current_section_quality_rows_mutated_in_memory_but_not_consumed_by_fixed_cache_builder": true,
+    "source_slots_exact_t_minus_2_count": 0,
+    "scope_limit": "seven specified current target rows and the frozen source-window/slot consumer in a fixed cohort; does not prove every raw-source-to-cohort regeneration path; later target rows may legitimately change when an earlier event is altered"
+  },
+  "database_access": "SQLite mode=ro and PRAGMA query_only=ON; seven parameterized target IDs only",
+  "database_or_production_changed": false,
+  "output_hashes": {
+    "style6_target_row_perturbations.csv": {
+      "bytes": 1915,
+      "sha256": "1c2f011b5389e9e95a9154309ae169d34bdcb696d9ebc46eff7aab997e6ca76d"
+    },
+    "style6_independent_paired_ci.csv": {
+      "bytes": 7753,
+      "sha256": "04e0ce1809b5a48000f30750b21461fd7d703a258228687b934a98f29a98731a"
+    },
+    "style6_independent_conditional_losses.csv": {
+      "bytes": 10492,
+      "sha256": "f572e2401e9ee15c82d519501e331e3436245973d7d8387efdf9a5e0f0efe50d"
+    },
+    "style6_independent_operating_467.csv": {
+      "bytes": 387,
+      "sha256": "afec0db0ba0c076dee2db19372734a4a1690461e235855f86d89f85baa8ae874"
+    },
+    "style6_independent_operating_467_paired.csv": {
+      "bytes": 1665,
+      "sha256": "82399c35cb9455a207fdbd4a00ee3ff74b8c9135825c0fa2dd6727fb9c15357c"
+    }
+  }
+}

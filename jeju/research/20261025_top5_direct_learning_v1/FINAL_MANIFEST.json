@@ -1,0 +1,148 @@
+{
+  "status": "COMPLETE_RETROSPECTIVE_DEVELOPMENT_COMPARISON",
+  "study": "20261025_top5_direct_learning_v1",
+  "study_date": "2026-10-25",
+  "objective": "Keep F1_STYLE6 and its raw runner scores unchanged; train a dedicated selector to choose exactly five runners and target inclusion of all actual Top3 horses.",
+  "decision": {
+    "primary_gate_passed": false,
+    "result": "No improvement signal over frozen raw-score Top5 on the primary cohort.",
+    "operational_promotion": false,
+    "registry_or_database_changed": false,
+    "baseline_raw_score_or_model_changed": false
+  },
+  "scope": {
+    "primary_distances_m": [900, 1000, 1110, 1200],
+    "primary_races": 1503,
+    "full_races": 1779,
+    "race_dates": 269,
+    "date_range": ["2024-01-05", "2026-09-19"],
+    "evaluation_interpretation": "Repeated-use historical development sample, not a fresh or future holdout."
+  },
+  "frozen_sources": {
+    "runner_features": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "evaluation_raw_score_and_roster": {
+      "path": "jeju/research/20261019_distance_section_relative_evaluation_v1/outputs/baseline_runner_predictions.parquet",
+      "sha256": "c3fc8a2bf10d3fa1678ab2c3c3209089021f51f6d0bf500fc2db6006fda13c1"
+    },
+    "date_bootstrap_schedule": {
+      "path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy",
+      "sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+      "receipt_path": "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json",
+      "receipt_sha256": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+      "seed": 20261011,
+      "draws": 2000,
+      "dates_per_draw": 269,
+      "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+      "quantile_method": "numpy.quantile(method='linear')"
+    },
+    "historical_oos_score_providers": [
+      {"label_year": 2019, "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2020/calibration_scores.parquet", "sha256": "277595cfe5d9976d24a8dc1c0c0e302a9fd58e467046e337a9af13d3c7287cdc", "refit_max": "2018-12-29"},
+      {"label_year": 2020, "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2021/calibration_scores.parquet", "sha256": "ca2254c97e54a102954f706433864be8e5715d142ebf8237610311e4cbaa4c50", "refit_max": "2019-12-28"},
+      {"label_year": 2021, "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2022/calibration_scores.parquet", "sha256": "3665e2039946362b97fe4fa72e50d2e13c8fb3b77f9f71225a9ae9d5c4b84ee9", "refit_max": "2020-12-20"},
+      {"label_year": 2022, "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2023/calibration_scores.parquet", "sha256": "35c38b4acf6a5ca3236c41a85ba851577ab3053e92abb741a1e135f68942aa71", "refit_max": "2021-12-25"},
+      {"label_year": 2023, "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/calibration_scores.parquet", "sha256": "360cc559b1ab19e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f", "refit_max": "2022-12-24"},
+      {"label_year": 2024, "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/calibration_scores.parquet", "sha256": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755", "refit_max": "2023-12-30"},
+      {"label_year": 2025, "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/calibration_scores.parquet", "sha256": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8", "refit_max": "2024-12-28"}
+    ]
+  },
+  "fit_contract": {
+    "objective_id": "partial_event_gibbs_nll_additive_selection_head_v1",
+    "set_size": 5,
+    "positive_set": "The selected five-set contains all three actual Top3 runners.",
+    "score_prior": "Sum of within-race ddof=0 standardized F1_STYLE6 raw scores, fixed coefficient 1; zero standard deviation maps all scores to zero.",
+    "feature_aggregation": "Sum of 11 standardized existing F1_STYLE6 runner inputs across the five selected runners.",
+    "scaler": "Equal weight per training runner row; training-fold only; ddof=0; valid training values determine mean/scale; missing inputs are imputed at the training mean after fitting.",
+    "regularization_lambda": 1.0,
+    "optimizer": "One float64 SciPy L-BFGS-B fit per evaluation year, zero start, maxiter=1000, ftol=1e-12, gtol=1e-8; no retries or search.",
+    "interpretation_limit": "The positive-set Gibbs mass is a stochastic training surrogate, not the deterministic argmax coverage probability and not a calibrated probability.",
+    "label_contract": "Each training fit reads only labels from 2019 through evaluation_year-1, then verifies complete ranks 1..N and exactly three Top3 labels per race.",
+    "fit_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -B jeju/research/20261025_top5_direct_learning_v1/fit_selector.py",
+    "fit_approval_sha256": "05d8d809c6f23f7e2c92a646e6a65b493dbe7de724f02b2ce1562f5a0425a15f"
+  },
+  "folds": {
+    "2024": {"training_label_years": [2019, 2020, 2021, 2022, 2023], "training_rows": 25278, "training_races": 2492, "candidate_sets": 769121, "iterations": 9, "objective_value": 2.1235333738738964, "gradient_max_abs": 1.0100049802758138e-7, "model_sha256": "bc0d5db4783fddf05f39cf780f9afcd597af641ccc314d4760d9404a4048a016"},
+    "2025": {"training_label_years": [2019, 2020, 2021, 2022, 2023, 2024], "training_rows": 31607, "training_races": 3129, "candidate_sets": 925207, "iterations": 10, "objective_value": 2.1164498879921845, "gradient_max_abs": 1.2725548470884918e-8, "model_sha256": "e2007d50b7db7a7860642f3f3f476aaedfb203eb56696fda3a7355acf14172a3"},
+    "2026": {"training_label_years": [2019, 2020, 2021, 2022, 2023, 2024, 2025], "training_rows": 38017, "training_races": 3783, "candidate_sets": 1076359, "iterations": 9, "objective_value": 2.095386325898087, "gradient_max_abs": 6.146591803590784e-8, "model_sha256": "ad1ac0c14010024c82ee1a6a5ffdb73552bd930bc54b531da041e7d57d4fa44f"}
+  },
+  "selection": {
+    "candidate_sets_enumerated": 411084,
+    "candidate_races": 1779,
+    "primary_changed_sets": 254,
+    "full_changed_sets": 304,
+    "zero_beta_matches_raw_score_top5_all_races": true,
+    "choices_sha256": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+    "choices_receipt_sha256": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754"
+  },
+  "outcomes": {
+    "primary": {
+      "baseline_hits": 439,
+      "selector_hits": 435,
+      "baseline_rate": 0.29208250166334,
+      "selector_rate": 0.2894211576846307,
+      "delta_percentage_points": -0.2661343978709248,
+      "paired_date_bootstrap_ci95_percentage_points": [-1.343341952546293, 0.7752692064066596],
+      "selector_only_caught": 31,
+      "baseline_only_lost": 35,
+      "gate_passed": false
+    },
+    "full": {
+      "baseline_hits": 519,
+      "selector_hits": 520,
+      "baseline_rate": 0.2917369308600337,
+      "selector_rate": 0.2922990444069702,
+      "delta_percentage_points": 0.056211354693648116,
+      "paired_date_bootstrap_ci95_percentage_points_from_independent_root_recomputation": [-0.9034827065517602, 1.0089827569295462],
+      "selector_only_caught": 38,
+      "baseline_only_lost": 37
+    },
+    "root_independent_outcome_recomputation": {
+      "path": "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_OUTCOME_RECOMPUTATION.json",
+      "sha256": "c8d4e0c142136e20db2f83ab0e816646bc12e05629aac340e424c4a008dcd17e",
+      "three_way_reconciliation_path": "jeju/research/20261025_top5_direct_learning_rootreview_v1/THREE_WAY_RECONCILIATION.json",
+      "three_way_reconciliation_sha256": "4d657e9f19c74353f90ad91195b46ea4d91cf0a09e0cd75868a9b6baacc80e6b",
+      "independent_main_and_subgroup_metrics_match": true
+    }
+  },
+  "root_independent_controls": {
+    "source_audit": {"path": "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_SOURCE_AUDIT.json", "sha256": "b263703aae9e7d5eca2bda394d4c20de67144bcaf78e959f5add9efffc8310f8"},
+    "objective_controls": {"path": "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_OBJECTIVE_CONTROLS.json", "sha256": "3a6322a7e64306ce6d0191bb03df941861809b6396f0343cf5940c63e70c47c6"},
+    "fit_code_controls": {"path": "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_FIT_CODE_CONTROLS.json", "sha256": "6de19fb8daf4935a1d4c79fb33af4a74a7d9659a98b14f6b12cb09efbeca6421"},
+    "fitted_model_audit": {"path": "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_FITTED_MODEL_AUDIT.json", "sha256": "d27083e4a09b8a755382a8c97ae55a601bca4f5458052d1a2d2124e838ff978b"}
+  },
+  "protected_assets_unchanged": {
+    "config/prediction_model_registry.json": "8b2037420fe888a7c17af27de83da81cc52e1bcba7a69dd6f3054a673726f71e",
+    "jeju/models/current/metadata.json": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870",
+    "jeju/models/current/HY_R_FORM.pkl": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706"
+  },
+  "study_storage": {
+    "generated_files_before_manifest": 19,
+    "bytes_before_readme_and_manifest": 1605663,
+    "bytes_excluding_final_manifest_including_readme": 1611356,
+    "project_new_storage_hard_cap_bytes": 300000000,
+    "full_sources_or_candidate_tables_copied": false
+  },
+  "artifacts": {
+    "README.md": {"bytes": 5693, "sha256": "ce879609dceb40e849ccf2dd3833be46f7f9f1c5949b4213ea8e91670a964b1e"},
+    "PLAN.md": {"bytes": 10125, "sha256": "c5683a8716e62094a7856cadfd44119dfac3c6ac3edd9f08652a951e42297012"},
+    "SOURCE_AUDIT.md": {"bytes": 6106, "sha256": "c70596688c22c97deb7fa48cba21ef6e5442ea29e1901f790277c1f03fbe3fbd"},
+    "fit_selector.py": {"bytes": 35706, "sha256": "257542455ad60ba8299f0952ee3976cc1a6916a432b3a1ecdbbf9420241e94a3"},
+    "select_sets.py": {"bytes": 16745, "sha256": "574de788e1f8e4a31c10354cf804bc83f99618c521dad6823a6fe13fa961361f"},
+    "report_outcomes.py": {"bytes": 19327, "sha256": "5d48a2430c1ad6a24ded4f861da64f64b7b5b669139b61e2acf57f07662fb608"},
+    "outputs/LABEL_PREFLIGHT.json": {"bytes": 14940, "sha256": "4475c8f7c9059135ee13de1cf186a505d4280d9913ddb6543fda7b26ce14d262"},
+    "outputs/model_2024.json": {"bytes": 5914, "sha256": "bc0d5db4783fddf05f39cf780f9afcd597af641ccc314d4760d9404a4048a016"},
+    "outputs/model_2025.json": {"bytes": 6420, "sha256": "e2007d50b7db7a7860642f3f3f476aaedfb203eb56696fda3a7355acf14172a3"},
+    "outputs/model_2026.json": {"bytes": 6938, "sha256": "ad1ac0c14010024c82ee1a6a5ffdb73552bd930bc54b531da041e7d57d4fa44f"},
+    "outputs/FIT_RECEIPT.json": {"bytes": 29543, "sha256": "f69de2ad555718ae5fa12c7b9c6773a9ad208e8a809f449369749cf4f2a912bd"},
+    "outputs/candidate_choices.jsonl": {"bytes": 839642, "sha256": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545"},
+    "outputs/CHOICES_RECEIPT.json": {"bytes": 2503, "sha256": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754"},
+    "outputs/outcomes.json": {"bytes": 17612, "sha256": "669fcf5067c029ab1d0b3c4c00ce1dd1b8bbe9f0d03d43a4fc18c7aaf2c9888d"},
+    "outputs/race_outcomes.jsonl": {"bytes": 589405, "sha256": "e6d12fb52d01a15b2144a5ff4282ac337cedd13f764f4eb19895dc48b24c7e3f"},
+    "outputs/OUTCOME_RECEIPT.json": {"bytes": 1379, "sha256": "47e0dcb9317d0def945c209be402e5d7fc9e7a437e2ff50c509a166ceb6cb5a6"},
+    "outputs/ROOT_FIT_APPROVAL.json": {"bytes": 1213, "sha256": "05d8d809c6f23f7e2c92a646e6a65b493dbe7de724f02b2ce1562f5a0425a15f"},
+    "outputs/ROOT_SELECTION_APPROVAL.json": {"bytes": 1096, "sha256": "40da6086c084bee2f37580620c482f7c0b7ab5041c40c5263dbf87bc8657474f"},
+    "outputs/ROOT_OUTCOME_APPROVAL.json": {"bytes": 1049, "sha256": "62e15353b2ddb3687b1d59b7c580b0b20ae14856e53e8dc35b040fb266ed3ea9"}
+  }
+}

@@ -1,0 +1,29 @@
+# Frozen implementation plan
+
+This plan implements the supervisor-owned [`DESIGN_CONTRACT.md`](../supervisor/DESIGN_CONTRACT.md). The older [`DRAFT_DESIGN.md`](DRAFT_DESIGN.md) is superseded and must not guide code or execution. No model fitting, calibration, probability generation, or outcome evaluation is authorized until a PASS receipt binds the current code and inputs.
+
+## Data and leakage boundary
+
+Use only the compact audited inputs `inputs/model_inputs.parquet`, `inputs/race_inputs.parquet`, and `inputs/history_lineage.parquet`. The lineage table is validation-only and is never supplied to a model. Verify their hashes against `input_manifest.json`, source audit SHA, exact ordered feature lists, strict normal-complete cohort, runner/race key joins, and the immutable ID/label-only evaluation reference before any fit. Feature histories use same-horse observations from 2017-01-01 through target date T−2 inclusive, with a 730-calendar-day lower bound. Do not open a database or read existing engineered feature values as model inputs.
+
+Every annual vintage `c=2019,…,2026` fits on outcome years `<=c−2`, calibrates once on `c−1`, then predicts `c`. Annual OOS A and phase outputs are the only inputs to B. For each evaluation year `Y=2024,2025,2026`, B coefficients train only on annual OOS vintages `2019,…,Y−2`; B temperature calibrates on vintage `Y−1` with gamma frozen. R uses only raw `F1_STYLE6_Y` calibration/evaluation score files from the same provider and fits its temperature on the preceding year. Never use provider probabilities, fitted tau, same-year labels for calibration, or in-sample A/phase outputs.
+
+## Fixed models and objective
+
+A is a fresh 27-feature LightGBM utility scorer trained on exact full-field sequential ordered-Top3 Plackett–Luce NLL. At stages 1, 2, and 3, normalize over all remaining starters after removing actual earlier finishers. The reporting helper returns race-mean loss and derivatives. The LightGBM callback sums one equal-weight race loss per race, multiplying helper gradients and diagonal Hessians by race count, then applying the `1e−6` Hessian floor. This keeps fixed `lambda_l2=10` on summed-loss scale. Fixed parameters are 180 rounds, 15 leaves, learning rate `.04`, `min_data_in_leaf=100`, `lambda_l2=10`, `max_bin=63`, deterministic/column-wise, 2 threads, seed `20261022`, no bagging, feature sampling, early stopping, search, or fitted imputation.
+
+Three fixed binary LightGBM heads forecast runner early membership, runner recovery, and race-level early-pack size `Z`. All are trained/calibrated on the same strict target cohort. Runner losses have total weight one per labeled race; race-head losses are race-equal. Use one bounded `[.35,4]` logit temperature per head, race-equal calibration NLL, and clipping epsilon `1e−12`. Require at least 50/50 positive/negative training and 10/10 calibration labels per head/fold; otherwise stop B without substitution.
+
+B fits four unbounded coefficients from zero initialization with deterministic L-BFGS: conditional full-field Top-3 PL NLL on observed Z plus `.5*.01*sum(gamma**2)` on race-mean loss. Its two scenario utilities are `u_i(z)=a_i+gamma0*l_i+gamma1*h_i+z*(gamma2*l_i+gamma3*h_i)`, where `a=s_A/T_A`, and `l,h` are centered early/recovery probabilities. Integrate a shared race scenario with `Q_B=(1-q_r)PL(u(0)/T_B)+q_r PL(u(1)/T_B)`. Fit one bounded `[.35,4]` mixture temperature on vintage `Y−1` with gamma frozen. No full ordered Q is persisted.
+
+## Evaluation and fixed gates
+
+Evaluate arms A, B, and R on the exact 1,779-race / 17,412-runner / 269-date repeated development cohort through 2026-09-19. Apply the frozen legal event-space contract to all seven pools; PLC includes only 1,743 races and quarantines the 36 actual-seven-runner races because sales-opening N is unknown. Persist compact race-pool metrics, selected-ticket ledgers, runner marginals, reliability aggregates, annual OOS scores, model text, and fit parameters; stream ordered triples only to accumulate normalized event maps and verify probability identities.
+
+Primary paired comparisons are A−R, B−A, and B−R. TRI NLL uses the frozen 2,000-by-269 date bootstrap; the gate requires its 95% upper bound `<0`, TRI sum-Brier difference `<=0`, and WIN NLL/Brier point differences `<=0`. B is an improving research candidate only if it passes both B−A and B−R. Report each pool and year separately, ticket-selection diagnostics, and the win-probability-maximizing runner's Top-3 hit count/rate with paired date uncertainty; a point estimate alone does not establish a 10% effect. The stable selection rule is identical across arms: include tickets with `p >= max(p)-1e−12`, then choose the lexicographically smallest horse-number key; save the probability of the selected ticket itself. This tolerance affects selection only, never probability maps, likelihoods, or normalization.
+
+The evaluation years have been reused in earlier development and are not a fresh holdout. Results are research evidence only, not proof of live availability, market return, causal pace effects, or a production/native-q replacement. Any failed gate ends this candidate; do not tune or add a second candidate on these results.
+
+## Execution gate and storage
+
+Run synthetic tests and structural source preflight before approval. The only real execution entry is `--run`; it fails closed unless `supervisor/DYNAMIC_ABILITY_PACE_EXECUTION_APPROVAL.json` has `status=PASS`, `scope=fit_evaluate`, and `permitted_runs=1`, and its hashes match this plan, both code files, the input manifest and Parquet files, source/rules/design/reference manifests, the exact preflight receipt, and the frozen bootstrap. Claim the one run exclusively before any fitting; do not rerun after a partial/failed claim. Never overwrite outputs. Stay below 100,000,000 bytes for the new study and the 300,000,000-byte session artifact cap.

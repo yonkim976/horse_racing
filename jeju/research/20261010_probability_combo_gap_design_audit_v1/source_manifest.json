@@ -1,0 +1,65 @@
+{
+  "audit": "20261010_probability_combo_gap_design_audit_v1",
+  "created_on": "2026-10-10",
+  "purpose": "Read-only source, probability-structure, and study-design audit before any combo-gap outcome calculation.",
+  "outcome_metrics_computed": false,
+  "db_opened_or_queried": false,
+  "model_fit_or_tau_optimization_run": false,
+  "external_collection_performed": false,
+  "sha256_policy": {
+    "current_file_hashes": "Current bytes were hashed for the listed small documents, code, metadata, and saved score artifacts.",
+    "existing_lock_hashes": "Large source caches and protected DB files use hashes recorded by the pre-existing source locks; they were not rehashed in this audit.",
+    "scope": "Hashes establish file identity only. They do not revalidate historical publication times, outcome labels, model quality, or the entire DB."
+  },
+  "evaluated_source_cohort": {
+    "years": "2024-2026-09-19",
+    "races": 1779,
+    "runner_rows": 17412,
+    "race_days": 269,
+    "selection": "Post-race normal-complete/full-roster cohort as described in the existing style-history contract and report.",
+    "independent_future_holdout": false,
+    "historical_entry_publication_time_reconstructed": false
+  },
+  "temperature_by_evaluation_year": {
+    "F1": {"2024": 1.0146528611027281, "2025": 1.0950570725726967, "2026": 0.9864064099027149},
+    "F1_STYLE6": {"2024": 1.1006448744136295, "2025": 1.1156577765075688, "2026": 0.9719459584109199}
+  },
+  "sources": [
+    {"path": "jeju/AGENTS.md", "use": "Project scope, read-only DB and data/time policies.", "bytes": 19967, "sha256": "8f765820ea187e85aabe53f079400f4553bccb4c32a66e67bd17e47d192dd094", "hash_basis": "current bytes"},
+    {"path": "jeju/docs/RESTART_PLAN_20260928.md", "use": "Research order, time-split and retrospective-evidence boundaries.", "bytes": 6426, "sha256": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848", "hash_basis": "current bytes; also declared by prepared_lock"},
+    {"path": "jeju/docs/JEJU_PREDICTION_OBJECTIVES_2026-09-28.md", "use": "Target definitions for runner probabilities, joint outcomes, combos, and fixed ticket counts.", "bytes": 8113, "sha256": "429427c8e41181c1daab83c75f586138a5188d30218051c2acde493814d53217", "hash_basis": "current bytes"},
+    {"path": "jeju/review_documents/README.md", "use": "Review-copy limitations and current-source navigation.", "bytes": 1181, "sha256": "3db59f4dd11baafd7fe4672931d3610213a9afd7bbc5d074078794126ffa9a04", "hash_basis": "current bytes"},
+    {"path": "jeju/research/conclusions/12_AXIS_COMPANION_PAIRS.md", "use": "Central conclusion for the fixed-axis conditional pair study.", "bytes": 1493, "sha256": "a856291d3a92e2cd1a824add2d2c01bc9a52b6011f36078e05716bde9e1d7808", "hash_basis": "current bytes"},
+    {"path": "jeju/research/conclusions/17_STYLE_HISTORY_ABLATION.md", "use": "Central conclusion for STYLE6 and native PL versus additive set comparisons.", "bytes": 7001, "sha256": "fa48bff22da3a52003f81382a1ae452c6f715724dd1b607ae63aeef492f4afd4", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/FINAL_RESULTS.md", "use": "Existing outcome results and stated limits; read without recomputing metrics.", "bytes": 5193, "sha256": "00507fdf1fff74e19498b605501a4d9351c37928f30afb4c6e96761631895607", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/CONTRACT.md", "use": "Frozen cohort, score, calibration, fold, and policy contracts.", "bytes": 10477, "sha256": "c10aac8f6faa6e841afd9ef829bfa0b29ada2dceabcbb5405fdfad9c12536bf9", "hash_basis": "current bytes; also declared by prepared_lock"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/run.py", "use": "Candidate raw-score prediction and approved-fit gate.", "bytes": 9936, "sha256": "313ccf5ea1c48911787749e4db16d93f47cbb07a16136601236b58a48199c396", "hash_basis": "current bytes; matches prepared_lock reference"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/report.py", "use": "Saved-score conversion to F1 set-model predictions and report path.", "bytes": 21293, "sha256": "3c90a13a2906ae3eb0ad0fe489da5c68197141375fb07343155818632f101da6", "hash_basis": "current bytes; matches prepared_lock reference"},
+    {"path": "jeju/research/20261008_horse_profile_baseline_v1/run.py", "use": "F1 set energy, positive temperature calibration, inclusion marginal, and canonical ticket ordering.", "bytes": 23021, "sha256": "40fcb2875c06beedd56044f8fe94cdedf6fc0e2c2db38a87a326234999255e68", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261009_finish_history_ablation_v1/prepare.py", "use": "Frozen F1/F1_STYLE6 evaluation roster and history-lineage construction path.", "bytes": 19208, "sha256": "dbfe79bd6bc6339f9d029f06437ea05cca69ddb80cdac812d4c318eeab216a40", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/f1_reproduced_runner_predictions.parquet", "use": "Saved F1 raw scores and calibrated pTop3 for the 17,412-runner replay cohort.", "bytes": 876146, "sha256": "04fc9f9a5ce45e8aee76028f10663d6d3c69646e120627f8fca3d545be49914f", "hash_basis": "current bytes; matches prepared_lock artifact"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet", "use": "Saved 2024 raw scores; 6,329 runners and 637 races per existing metadata.", "bytes": 96811, "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60", "hash_basis": "current bytes; matches matching meta evaluation_scores_sha256"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet", "use": "Saved 2025 raw scores; 6,410 runners and 654 races per existing metadata.", "bytes": 97876, "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12", "hash_basis": "current bytes; matches matching meta evaluation_scores_sha256"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet", "use": "Saved 2026-01-02 to 2026-09-19 raw scores; 4,673 runners and 488 races per existing metadata.", "bytes": 71793, "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a", "hash_basis": "current bytes; matches matching meta evaluation_scores_sha256"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/meta.json", "use": "F1_STYLE6 2024 model/calibration metadata; tau=1.1006448744136295.", "bytes": 3719, "sha256": "15acbf959654da82d2240027e7b7d768bb9226af18395dac9ec92a68a4471726", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/meta.json", "use": "F1_STYLE6 2025 model/calibration metadata; tau=1.1156577765075688.", "bytes": 3735, "sha256": "23c4b0684477f34fbb2e99c22d0037cd903d5459db369f084773ec25c640f4a8", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/meta.json", "use": "F1_STYLE6 2026 model/calibration metadata; tau=0.9719459584109199.", "bytes": 3770, "sha256": "e9dbfe5226571cb29e34b352a4ad8808a735d70929e66b42efb41b3e807ff06d", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261009_finish_history_ablation_v1/outputs/F1_2024/meta.json", "use": "F1 2024 calibration metadata; tau=1.0146528611027281.", "bytes": 2940, "sha256": "937df06c1c9ed61b8b380bcbb3c0db33b5efd1b197f0c262ceab19c162c63970", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261009_finish_history_ablation_v1/outputs/F1_2025/meta.json", "use": "F1 2025 calibration metadata; tau=1.0950570725726967.", "bytes": 2973, "sha256": "6be12814c61da778077c2706712171db55b878e2b917f63608af1dfa81e09272", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261009_finish_history_ablation_v1/outputs/F1_2026/meta.json", "use": "F1 2026 calibration metadata; tau=0.9864064099027149.", "bytes": 2974, "sha256": "ae5d32feb5fdfe3145851dee335bbf9bdbfb9073b9f541c678c90f89245e3189", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/prepared_lock.json", "use": "Existing replay/preparation lock; declares 58 references, 4 protected paths, and prepared artifacts.", "bytes": 12326, "sha256": "f110b33b0442e519fd3f9852098aa847af90d2228af674c39db4914142675e24", "hash_basis": "current bytes; lock contents read"},
+    {"path": "jeju/research/20261010_style_history_ablation_v1/outputs/source_audit_reference.json", "use": "Existing source-audit/cache link and fixed source cohort support; 178,459 history slots.", "bytes": 2548, "sha256": "8bc61badf6913b3e23ef01607511b574f6216c93d476125c3d033fede4e6d857", "hash_basis": "current bytes; matches prepared_lock artifact"},
+    {"path": "jeju/research/20261010_style_history_source_audit_v1/source_audit.json", "use": "Declared source-level roster/status audit reference.", "sha256": "eebdd15a1c0d61b0dab21c65f9f93d6dc9074859d3123b1951e58e3dea608029", "hash_basis": "existing source_audit_reference/prepared_lock; not rehashed"},
+    {"path": "jeju/research/20261010_style_history_source_audit_v1/api4_full_started_point_quality_cache.parquet", "use": "Existing source-audit full-started point-quality cache.", "sha256": "1f651353323e47bf8feb189f321a97c150c9ccc487c52a5ea478b00dd7e643b2", "hash_basis": "existing source_audit_reference/prepared_lock; not rehashed"},
+    {"path": "jeju/research/20261010_style_history_source_audit_v1/actual_slot_point_eligibility.parquet", "use": "Existing source-audit actual-slot eligibility cache; 178,459 rows.", "sha256": "c7847bcf93dc342080b22808c83b5e727b11ab54d269191a0c498a135f4cd470", "hash_basis": "existing source_audit_reference/prepared_lock; not rehashed"},
+    {"path": "jeju/research/20261009_axis_companion_pairs_v1/README.md", "use": "Existing fixed-axis conditional-pair results and candidate coverage limits.", "bytes": 9076, "sha256": "515481e867edac008b314c77d50d7e6b0554324a47b79be287e985f0e8874952", "hash_basis": "current bytes"},
+    {"path": "jeju/research/20261009_axis_companion_pairs_v1/PLAN.md", "use": "Existing pair target, temporal split, ticket budget, and comparison contract.", "bytes": 3338, "sha256": "2de1c839b666d357a7bdfd8e12b0305aaeed8dc08e7ea991c3c43177e553e639", "hash_basis": "current bytes; also declared by source_lock"},
+    {"path": "jeju/research/20261009_axis_companion_pairs_v1/run.py", "use": "Existing conditional pair model and six-ticket construction.", "bytes": 35962, "sha256": "6874e7e3c44aab8d385ae9cd775b5a8e4957105c953a8d920c92683082c43ffd", "hash_basis": "current bytes; matches source_lock"},
+    {"path": "jeju/research/20261009_axis_companion_pairs_v1/outputs/source_lock.json", "use": "Existing lock over model, input, output, and protected-path references.", "bytes": 3473, "sha256": "89df37d49131153afa047128b807c7ae85c5bc7b39a2576e9620b8fec3ddc56a", "hash_basis": "current bytes; lock contents read"}
+  ],
+  "existing_lock_notes": [
+    "style-history prepared_lock declares source_audit.json SHA eebdd15a..., full-started point cache SHA 1f651353..., and actual-slot eligibility cache SHA c7847bcf...; current cache bytes were not rehashed.",
+    "axis-companion source_lock declares hashes for its code, R1 outputs, operational comparison outputs, feature sources, exclusions, and registry; this audit rehashed the lock and selected small references only.",
+    "No database file hash was calculated in this audit."
+  ]
+}

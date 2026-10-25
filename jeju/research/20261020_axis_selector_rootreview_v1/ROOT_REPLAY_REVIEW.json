@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "models_independently_checked": [
+    {
+      "year": 2024,
+      "training_candidates": 7476,
+      "training_races": 2492,
+      "informative_races": 2106,
+      "pairs": 4212,
+      "replayed_eval_candidates": 1911,
+      "objective": 0.6552519498150952,
+      "max_abs_gradient": 2.233673179335982e-07
+    },
+    {
+      "year": 2025,
+      "training_candidates": 9387,
+      "training_races": 3129,
+      "informative_races": 2645,
+      "pairs": 5290,
+      "replayed_eval_candidates": 1962,
+      "objective": 0.6578953408563846,
+      "max_abs_gradient": 3.786481395096075e-08
+    },
+    {
+      "year": 2026,
+      "training_candidates": 11349,
+      "training_races": 3783,
+      "informative_races": 3205,
+      "pairs": 6410,
+      "replayed_eval_candidates": 1464,
+      "objective": 0.6612982532951333,
+      "max_abs_gradient": 1.47971399661051e-07
+    }
+  ],
+  "candidate_predictions_checked": 5337,
+  "race_choices_checked": 1779,
+  "maximum_utility_difference": 0.0,
+  "bootstrap_draws_checked": 2000,
+  "primary": {
+    "races": 1503,
+    "baseline_top3_hits": 861,
+    "selector_top3_hits": 857,
+    "baseline_top3_rate": 0.5728542914171657,
+    "selector_top3_rate": 0.5701929474384564,
+    "selector_minus_baseline": -0.0026613439787092482,
+    "axis_changed_races": 50,
+    "axis_changed_rate": 0.0332667997338656,
+    "new_selector_hits": 13,
+    "lost_baseline_hits": 17,
+    "both_hit": 844,
+    "neither_hit": 629,
+    "outcome_counts": {
+      "both": 844,
+      "baseline_only": 17,
+      "selector_only": 13,
+      "neither": 629
+    }
+  },
+  "all_distances": {
+    "races": 1779,
+    "baseline_top3_hits": 1023,
+    "selector_top3_hits": 1016,
+    "baseline_top3_rate": 0.5750421585160203,
+    "selector_top3_rate": 0.5711073636874648,
+    "selector_minus_baseline": -0.0039347948285553686,
+    "axis_changed_races": 58,
+    "axis_changed_rate": 0.032602585722315905,
+    "new_selector_hits": 14,
+    "lost_baseline_hits": 21,
+    "both_hit": 1002,
+    "neither_hit": 742,
+    "outcome_counts": {
+      "both": 1002,
+      "baseline_only": 21,
+      "selector_only": 14,
+      "neither": 742
+    }
+  },
+  "primary_ci95": [
+    -0.010810810810810811,
+    0.005863575147281905
+  ],
+  "primary_gate_pass": false,
+  "source_hashes_unchanged": 37,
+  "fit_receipt_sha256": "a9289b9029bd968e1ae9f556911a2cb79eaef4e314c7f3e75fd79d88cb67fa24",
+  "root_models_fitted": 0,
+  "database_opened": false
+}

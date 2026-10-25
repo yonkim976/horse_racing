@@ -1,0 +1,23 @@
+{
+  "fixed_before_new_outcome_estimation": true,
+  "questions": ["Correlation of horse body mass and actual carried weight", "Within-horse association of increased carried weight with time and average speed"],
+  "period": ["2017-01-01", "2026-09-19"],
+  "distances": [800,900,1000,1110,1200,1300,1400,1610],
+  "population": "Preserved quality extraction, strict complete normal races, all available field sizes; carry/body positive. Prior gate findings retain exact-ten restriction.",
+  "body_parser": "Anchored leading positive number followed by optional single parentheses; bracket content preserved separately and not assumed to be previous exact-distance change. Compute body changes from matched actual masses.",
+  "sources": "Quality CSV target times/ranks/conditions; read-only race_result_rows for body_weight_raw and jockey_id by exact api_record_id, verify actual carried weight agrees with quality extraction. Current race body mass is a retrospective explanatory variable, not presumed T-2 available.",
+  "descriptive": "Pearson and Spearman per distance and pooled, between-horse mean, within-horse centered, within-race centered and race+horse residualized Pearson; body-mass load percentage; no causal interpretation. Horse-cluster bootstrap 1000 for raw Pearson.",
+  "row_primary": "Per exact distance: race+horse fixed effects, unpenalized carried kg and body/10kg; nuisance recent exact-distance last-five time mean/last, last exact-distance finish fraction, log counts/gaps, event age, age squared, body squared, sex, all gate indicators. Standardize nuisance; ridge 1 only nuisance. Targets seconds and 100*log(time). Race FE absorbs shared moisture/month/grade/pace levels, not heterogeneous effects.",
+  "row_sensitivity": ["race_only", "no_history", "exact_ten", "burden_by_centered_body_interaction"],
+  "row_periods": {"full": [2017,2026], "past": [2017,2023], "confirmation": [2024,2025], "2026partial": [2026,2026]},
+  "row_minimum": {"races":30,"dates":20,"horses":30,"residual_df":20},
+  "pairs": "Adjacent eligible same official horse/exact-distance starts, 7-60 days, same year and original grade. Adjacent among eligible strict normal rows, not necessarily adjacent career starts. Endpoint IDs retained. Body differences computed from endpoints.",
+  "pair_primary": "OLS difference of seconds and 100*log(time); unpenalized positive kg change and negative kg change as separate slopes. Nuisance body change/10, previous burden, log gap, age, previous relative time and finish fraction, previous historical mean, change field size, gate dummy differences, moisture-band differences, continuous annual sine/cosine differences (two harmonics), year-by-original-grade dummies. Standardized nuisance ridge 1. Conservative date+horse cluster covariance, horse cluster covers both endpoints and overlapping pairs; date cluster uses later endpoint only, omitted earlier-date correlation limitation reported.",
+  "pair_sensitivity": ["without_previous_performance_controls", "same_band_same_month_body_change_at_most5kg", "same_jockey"],
+  "pair_periods": {"full": [2017,2026], "confirmation": [2024,2025], "2026partial": [2026,2026]},
+  "pair_minimum": {"pairs":100,"horses":30,"dates":30,"residual_df":20},
+  "uncertainty": "Date cluster covariance + horse cluster covariance without intersection subtraction; absorbed FE rank for row model; t with smaller cluster count. Pair date endpoint caveat explicit. Raw body/burden correlation bootstrap by horse.",
+  "multiplicity": "BH across supported distances, both targets, separately by model family/period/variant/exposure. Interaction tests separately. Descriptive correlations not significance screened.",
+  "interpretation": "Positive seconds/kg is slowing association. Average speed is distance/time, not tracked instantaneous speed. Log-time coefficient b implies 100*(exp(-b/100)-1) percent speed change per kg, with transformed intervals. No fixed per-kg correction adopted.",
+  "nonclaims": ["No causal handicap experiment", "No proof of pure physical weight effect", "No body-mass optimum", "No future independent validation", "No Top3 objective", "No DB, model registry or operational writes"]
+}

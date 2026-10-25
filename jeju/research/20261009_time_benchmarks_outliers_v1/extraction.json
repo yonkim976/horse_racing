@@ -1,0 +1,12 @@
+{
+  "db_path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "db_sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+  "source_view": "jeju_race_postrace_sections_quality_2026",
+  "sql": "SELECT api_record_id,race_date,meet_code,race_number,horse_number,horse_id,horse_name,race_distance_m,rank_class_raw,finish_position,finish_status_raw,finish_time_seconds,track_raw,weather_raw,breed_label_raw,breed_assessment,api4_3_payload_sha256,api4_3_source_artifact_id,s1f_time_seconds,s1f_time_status,c1_time_seconds,c1_time_status,c2_time_seconds,c2_time_status,c3_time_seconds,c3_time_status,c4_time_seconds,c4_time_status,g3f_time_seconds,g3f_time_status,g1f_time_seconds,g1f_time_status,c1_order_status,c2_order_status,c3_order_status,c4_order_status,s1f_order_status,g1f_order_status FROM jeju_race_postrace_sections_quality_2026 WHERE race_date BETWEEN ? AND ?",
+  "params": [
+    "2017-01-01",
+    "2026-09-19"
+  ],
+  "rows": 59042,
+  "snapshot_sha256": "223d87582901c4a48008cdabe0edab23b5942c01248991ce074bc51a88a8b740"
+}

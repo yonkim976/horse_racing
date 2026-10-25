@@ -1,0 +1,451 @@
+{
+  "audit_date": "2026-10-22",
+  "scope": "Read-only asset, timing, source-cohort, and implementation audit for the Jeju joint-wager baseline. No fitting or experiment execution.",
+  "created_artifacts": [
+    "jeju/research/20261022_joint_wager_baseline_v1/assets_audit/README.md",
+    "jeju/research/20261022_joint_wager_baseline_v1/assets_audit/assets_manifest.json"
+  ],
+  "raw_oos_score_contract": {
+    "columns": [
+      {
+        "name": "api_record_id",
+        "dtype": "int64",
+        "purpose": "join key only"
+      },
+      {
+        "name": "score",
+        "dtype": "float64",
+        "purpose": "finite F1_STYLE6 raw score before temperature transform"
+      }
+    ],
+    "label_years": "2019-2025 inclusive",
+    "total_rows": 38017,
+    "total_races": 3783,
+    "join_check": "Each score file joined one-to-one to all feature rows for its target year; missing and extra keys were both zero.",
+    "temperature_rule": "Consume score as saved. Folds 2024-2026 fit tau on the same-year calibration labels, so using their calibrated probabilities or tau-applied scores for those label years would leak same-year calibration information.",
+    "date_rule": "For every target race, provider metadata refit_max <= race_date - 2 days. This checks stored date cutoffs only; original publication timestamps were not available."
+  },
+  "raw_oos_score_assets": [
+    {
+      "label_year": 2019,
+      "provider_fold_year": 2020,
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2020/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2020/meta.json",
+      "rows": 5890,
+      "races": 576,
+      "date_range": [
+        "2019-01-11",
+        "2019-12-28"
+      ],
+      "refit_max": "2018-12-29",
+      "minimum_race_date_minus_refit_days": 13,
+      "tau": null,
+      "temperature_optimizations": 0,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "277595cfe5d9976d24a8dc1c0c0e302a9fd58e467046e337a9af13d3c7287cdc",
+      "bytes": 89958
+    },
+    {
+      "label_year": 2020,
+      "provider_fold_year": 2021,
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2021/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2021/meta.json",
+      "rows": 3290,
+      "races": 329,
+      "date_range": [
+        "2020-01-03",
+        "2020-12-20"
+      ],
+      "refit_max": "2019-12-28",
+      "minimum_race_date_minus_refit_days": 6,
+      "tau": null,
+      "temperature_optimizations": 0,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "ca2254c97e54a102954f706433864be8e5715d142ebf8237610311e4cbaa4c50",
+      "bytes": 49844
+    },
+    {
+      "label_year": 2021,
+      "provider_fold_year": 2022,
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2022/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2022/meta.json",
+      "rows": 4331,
+      "races": 418,
+      "date_range": [
+        "2021-01-08",
+        "2021-12-25"
+      ],
+      "refit_max": "2020-12-20",
+      "minimum_race_date_minus_refit_days": 19,
+      "tau": null,
+      "temperature_optimizations": 0,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "3665e2039946362b97fe4fa72e50d2e13c8fb3b77f9f71225a9ae9d5c4b84ee9",
+      "bytes": 66682
+    },
+    {
+      "label_year": 2022,
+      "provider_fold_year": 2023,
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2023/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261011_pair_top3_oos_expansion_v1/outputs/F1_STYLE6_2023/meta.json",
+      "rows": 5261,
+      "races": 512,
+      "date_range": [
+        "2022-01-07",
+        "2022-12-24"
+      ],
+      "refit_max": "2021-12-25",
+      "minimum_race_date_minus_refit_days": 13,
+      "tau": null,
+      "temperature_optimizations": 0,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "35c38b4acf6a5ca3236c41a85ba851577ab3053e92abb741a1e135f68942aa71",
+      "bytes": 80528
+    },
+    {
+      "label_year": 2023,
+      "provider_fold_year": 2024,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/meta.json",
+      "rows": 6506,
+      "races": 657,
+      "date_range": [
+        "2023-01-06",
+        "2023-12-30"
+      ],
+      "refit_max": "2022-12-24",
+      "minimum_race_date_minus_refit_days": 13,
+      "tau": 1.1006448744136295,
+      "temperature_optimizations": 1,
+      "tau_fit_on_same_label_year": true,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "360cc559b1ab19cde177e0bb23206fd36f123b707714fbcb63547fdb9bed05b2",
+      "bytes": 99057
+    },
+    {
+      "label_year": 2024,
+      "provider_fold_year": 2025,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/meta.json",
+      "rows": 6329,
+      "races": 637,
+      "date_range": [
+        "2024-01-05",
+        "2024-12-28"
+      ],
+      "refit_max": "2023-12-30",
+      "minimum_race_date_minus_refit_days": 6,
+      "tau": 1.1156577765075688,
+      "temperature_optimizations": 1,
+      "tau_fit_on_same_label_year": true,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755",
+      "bytes": 96795
+    },
+    {
+      "label_year": 2025,
+      "provider_fold_year": 2026,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/calibration_scores.parquet",
+      "provider_meta_path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/meta.json",
+      "rows": 6410,
+      "races": 654,
+      "date_range": [
+        "2025-01-03",
+        "2025-12-27"
+      ],
+      "refit_max": "2024-12-28",
+      "minimum_race_date_minus_refit_days": 6,
+      "tau": 0.9719459584109199,
+      "temperature_optimizations": 1,
+      "tau_fit_on_same_label_year": true,
+      "score_semantics": "raw_score_before_temperature",
+      "sha256": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8",
+      "bytes": 97900
+    }
+  ],
+  "evaluation_score_assets": [
+    {
+      "evaluation_year": 2024,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet",
+      "rows": 6329,
+      "races": 637,
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60",
+      "bytes": 96811,
+      "use": "frozen comparator only; evaluation dates/labels are repeated development material"
+    },
+    {
+      "evaluation_year": 2025,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet",
+      "rows": 6410,
+      "races": 654,
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12",
+      "bytes": 97876,
+      "use": "frozen comparator only; evaluation dates/labels are repeated development material"
+    },
+    {
+      "evaluation_year": 2026,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet",
+      "rows": 4673,
+      "races": 488,
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a",
+      "bytes": 71793,
+      "use": "frozen comparator only; 2026 is partial through 2026-09-19"
+    }
+  ],
+  "source_and_cohort_references": [
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "rows": 52155,
+      "races": 5206,
+      "date_range": [
+        "2017-01-13",
+        "2026-09-19"
+      ],
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "bytes": 5476534,
+      "note": "F1_STYLE6 frozen feature table; contains labels/context, not raw model score. Existing manifest is the hash source."
+    },
+    {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/race_inclusion_ledger.csv",
+      "rows": 5901,
+      "included_races": 5206,
+      "excluded_races": 695,
+      "date_range": [
+        "2017-01-13",
+        "2026-09-19"
+      ],
+      "sha256": "959274837a1eafe627851b505e271402b5c969f2aa31d7195824dc0112f28eb5",
+      "bytes": 423625,
+      "note": "Existing per-race inclusion/exclusion ledger referenced read-only; no duplicate copy was made."
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/source_audit_summary.json",
+      "rows": 1,
+      "source_rows": 92513,
+      "source_races": 9494,
+      "source_started_rows": 90428,
+      "source_started_races": 9347,
+      "source_normal_complete_races": 9027,
+      "source_incomplete_started_races": 320,
+      "source_zero_started_races": 147,
+      "source_n1_races": 32,
+      "sha256": "8e3a144f23e2f6cd7e912bd2d59e6466b68d36cd6aaf2b27bfa000eb41bd7226",
+      "bytes": 1224,
+      "note": "Derived source audit summary; not a database copy or database hash."
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/source_race_quality.parquet",
+      "races": 9494,
+      "sha256": "d8658bdeb3f7988ad594855b17839b7d16a5cec719e179688f19b9eee3fc1828",
+      "bytes": 113667,
+      "note": "Derived race-quality table; used read-only for duplicate-rank and incomplete-sequence counts."
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "1bcd480c93e0f5803f85b37a59bca99d67344b50061dc521fc94d0fd813b0fc1",
+      "bytes": 16700,
+      "note": "Authoritative existing pinned hashes for historical 2019-2022 raw score files and provider metadata; no score files copied."
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "6afc0e8f73ec086052fad4cde4d7edcd62fdf1bbc782108da89732dc3a5b4a4e",
+      "bytes": 31038,
+      "note": "Authoritative existing pinned hashes for 2023-2025 raw scores, 2024-2026 evaluation scores, and frozen feature table; no assets copied."
+    }
+  ],
+  "source_cohort_counts": {
+    "all_source_snapshot": {
+      "rows": 92513,
+      "races": 9494
+    },
+    "pre_2017_outside_current_baseline_window": {
+      "races": 3593,
+      "status": "inferred from ledger date range and subtraction; not separately matched against a complete raw-source date inventory in this audit",
+      "calculation": "9494 source races - 5901 race-ledger rows from 2017 onward"
+    },
+    "2017_onward_baseline_candidates": {
+      "races": 5901,
+      "included_normal_complete_model_cohort": 5206,
+      "excluded": 695
+    },
+    "excluded_reason_exclusive_counts": {
+      "non_normal_or_nonpositive_time_and_rank_sequence_incomplete_or_nonunique": 501,
+      "outside_current_distances_only": 126,
+      "rank_sequence_incomplete_or_nonunique_only": 59,
+      "outside_current_distances_plus_non_normal_or_nonpositive_time_and_incomplete_ranks": 9
+    },
+    "excluded_reason_flag_counts_overlap": {
+      "outside_current_distances": 135,
+      "non_normal_or_nonpositive_time": 510,
+      "ranks_not_complete_unique_1_to_N": 569,
+      "fewer_than_6": 0,
+      "partial_vs_stored_result": 0,
+      "duplicate_horse": 0,
+      "invalid_or_duplicate_number": 0,
+      "within_race_condition_conflict": 0
+    },
+    "included_distance_race_counts": {
+      "800": 1258,
+      "900": 890,
+      "1000": 1424,
+      "1110": 988,
+      "1200": 486,
+      "1300": 63,
+      "1400": 88,
+      "1610": 9
+    },
+    "incomplete_started_source_races": {
+      "all_years": 320,
+      "2017_onward_quality_ledger": 86
+    },
+    "duplicate_rank_source_races": {
+      "all_years": 113,
+      "2017_onward_quality_ledger": 63
+    },
+    "raw_finish_code_counts_all_years": {
+      "91": 163,
+      "92": 55,
+      "0": 20,
+      "93": 18,
+      "94": 313,
+      "95": 367,
+      "98": 10,
+      "99": 1357
+    },
+    "cancel_or_scratch_status_semantics": "Not confirmed from raw status codes. Existing contract treats raw 0,93,94,95,98,99 as not started and 91,92 as started but not valid 1..N ranks; no official cancel/withdrawal mapping or settlement contract was found.",
+    "dead_heat_semantics": "Not confirmed. Duplicate rank is a quality failure, not an official dead-heat classification; no tie settlement rule was found.",
+    "label_scope": "Strict normal-complete unique 1..N ranks; DNF/DSQ-like statuses and incomplete/duplicate ranks are not mapped to an ordinal loss class."
+  },
+  "field_size_support": {
+    "minimum_observed_field_n": 7,
+    "under_8_races_by_year": {
+      "2017": 23,
+      "2018": 20,
+      "2019": 0,
+      "2020": 0,
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 4,
+      "2026": 32
+    },
+    "2025_small_fields": {
+      "races": 4,
+      "field_n": 7,
+      "rows": 28
+    },
+    "2026_small_fields": {
+      "races": 32,
+      "field_n": 7,
+      "rows": 224
+    }
+  },
+  "timing_and_reuse": {
+    "feature_history_cutoff": "race_date - 2 days for all 52155 rows; no latest_history_date after cutoff; 1946 latest_history_date values are missing.",
+    "publication_time_limit": "Stored dates/cutoffs do not establish when source outcomes or features were first publicly available.",
+    "evaluation_cohort": {
+      "races": 1779,
+      "rows": 17412,
+      "dates": 269,
+      "period": "2024-01-05..2026-09-19",
+      "status": "Repeated development cohort; 2026 is partial, not a fresh holdout."
+    },
+    "2017_2018_oos_limit": "Frozen feature rows exist, but the locked F1_STYLE6 recipe has no OOS raw score provider for 2017-2018; 2019 is the earliest recipe-valid score year.",
+    "database_handling": "No database read or hash was performed for this audit."
+  },
+  "code_evidence": [
+    {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/run.py",
+      "lines": "80-102",
+      "evidence": "started/valid_time definitions and population eligibility/exclusion rules"
+    },
+    {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/prepare.py",
+      "lines": "82-118, 309-325",
+      "evidence": "race quality completeness and frozen input cohort shape/identity assertions"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/run.py",
+      "lines": "129-141",
+      "evidence": "calibration/evaluation predictions emitted with raw_score=True; tau is separate"
+    },
+    {
+      "path": "jeju/research/20261010_style_history_ablation_v1/report.py",
+      "lines": "288-296",
+      "evidence": "stored tau is applied by evaluator after raw scores are loaded"
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/PLAN.md",
+      "lines": "13-35, 37-47",
+      "evidence": "single calibration-score provider by label year, T-2 provider boundary, no 2017-2018 OOS score, and repeated evaluation warning"
+    },
+    {
+      "path": "src/horse_racing/analysis/jeju_hybrid_evaluation.py",
+      "lines": "23-56",
+      "evidence": "production ordered top-three distribution P(set)*P(order|set), normalized over all three-subsets and six orders"
+    },
+    {
+      "path": "scripts/predict_jeju_live_hy_r_form.py",
+      "lines": "475-510, 560-584",
+      "evidence": "live path computes Q internally but emits a selected set/order and runner Top3 rows rather than exhaustive Q rows"
+    },
+    {
+      "path": "scripts/build_current_prediction_bundles.py",
+      "lines": "336-376",
+      "evidence": "native Jeju output stores per-runner WIN/Top2/Top3 marginals from the joint distribution"
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/fit_predict.py",
+      "lines": "504-564",
+      "evidence": "research ordered Q construction and mass/q-recovery checks"
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/metrics.py",
+      "lines": "177-205",
+      "evidence": "truth uses unique normal ordered Top3 and maps event pools"
+    }
+  ],
+  "study_status_references": [
+    {
+      "path": "jeju/research/20261010_joint_relationship_v1/README.md",
+      "status": "unordered exact-Top3-set distribution; both preregistered gates failed; not an ordered Q or production model"
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/README.md",
+      "status": "post-hoc 84 gained/lost diagnostics; 407 to 423 set hits but paired CI crosses zero; no stable pre-race condition"
+    },
+    {
+      "path": "jeju/research/20261011_pair_top3_oos_expansion_v1/README.md",
+      "status": "direct pair selection 427/1779 vs raw-score Top2 429/1779; primary gate failed; pair scores are not a coherent joint distribution"
+    },
+    {
+      "path": "jeju/research/20261017_conditional_order_head_v1/README.md",
+      "status": "conditional-order NLL gate passed, but 2026 same-cohort HY NLL/Brier were better for WIN/QNL/EXA/TRI; no production promotion"
+    },
+    {
+      "path": "jeju/research/20261019_distance_section_relative_evaluation_v1/README.md",
+      "status": "distance-section candidate gate failed; existing F1_STYLE6 retained"
+    },
+    {
+      "path": "jeju/research/20261020_axis_selector_v1/README.md",
+      "status": "axis selector did not improve 1503-race primary result; held"
+    },
+    {
+      "path": "jeju/research/20261020_axis_disagreement_conditions_v1/README.md",
+      "status": "favorite ID is selected using post-race final odds; this is descriptive and not a pre-race rule"
+    },
+    {
+      "path": "config/prediction_model_registry.json",
+      "status": "production registry source; read-only; production model hash and registry state were already captured by supervisor"
+    }
+  ],
+  "minimum_comparison_recommendation": "Align with supervisor DESIGN_DECISION.md: compare the single full-support Plackett-Luce ordered-top-three distribution Q_T(i,j,k) built from F1_STYLE6 raw scores at T=1 versus one positive scalar T fitted by race-equal exact 1->2->3 joint NLL on 2019-2023 OOS raw scores. Keep the same saved score vintage in both arms; do not apply calibration tau fitted on the same label year. Evaluate the fixed 2024-2026-09-19 cohort as repeated development data and derive each locked wager event probability by summing this same Q. The current primary comparison is T=1 vs fitted T, not HY_R_FORM. Existing HY_R_FORM evidence is the 2026 common 467-race comparison only (no 2025 comparison), so treat it as prior context or a separate future question. Do not use odds/ROI or add relationship/order heads to this minimum comparison.",
+  "audit_artifacts": [
+    {
+      "path": "jeju/research/20261022_joint_wager_baseline_v1/assets_audit/README.md",
+      "sha256": "5073312c45e2015b1a4fd723cab364696eda12f69d9b3ce0f414189c97a0b696",
+      "bytes": 9309
+    }
+  ]
+}

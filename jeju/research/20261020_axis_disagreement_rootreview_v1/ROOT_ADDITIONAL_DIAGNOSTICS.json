@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "sources": {
+    "jeju/research/20261020_axis_disagreement_rootreview_v1/ROOT_PAIR_FEATURES.parquet": "625db0521c6f2d976f5813ea28fc866f730fa1c194636858996e40d09c3763cb",
+    "jeju/research/20261019_distance_section_relative_evaluation_v1/outputs/baseline_runner_predictions.parquet": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+  },
+  "favorite_valid_n5_zero": [
+    {
+      "history_group": "no_observed_start",
+      "period": "all",
+      "n": 34,
+      "cases": {
+        "favourite_only_hit": 19,
+        "both_hit": 9,
+        "model_only_hit": 4,
+        "neither_hit": 2
+      }
+    },
+    {
+      "history_group": "no_observed_start",
+      "period": "2024-25",
+      "n": 13,
+      "cases": {
+        "favourite_only_hit": 8,
+        "both_hit": 4,
+        "model_only_hit": 1
+      }
+    },
+    {
+      "history_group": "no_observed_start",
+      "period": "2026",
+      "n": 21,
+      "cases": {
+        "favourite_only_hit": 11,
+        "both_hit": 5,
+        "model_only_hit": 3,
+        "neither_hit": 2
+      }
+    },
+    {
+      "history_group": "other_distance_history_only",
+      "period": "all",
+      "n": 124,
+      "cases": {
+        "both_hit": 42,
+        "favourite_only_hit": 39,
+        "model_only_hit": 27,
+        "neither_hit": 16
+      }
+    },
+    {
+      "history_group": "other_distance_history_only",
+      "period": "2024-25",
+      "n": 94,
+      "cases": {
+        "favourite_only_hit": 35,
+        "both_hit": 27,
+        "model_only_hit": 21,
+        "neither_hit": 11
+      }
+    },
+    {
+      "history_group": "other_distance_history_only",
+      "period": "2026",
+      "n": 30,
+      "cases": {
+        "both_hit": 15,
+        "model_only_hit": 6,
+        "neither_hit": 5,
+        "favourite_only_hit": 4
+      }
+    }
+  ],
+  "market_only_candidate_pool": [
+    {
+      "period": "all",
+      "n": 248,
+      "top3_contains_any_actual_top3": 218,
+      "top5_contains_any_actual_top3": 245,
+      "top5_contains_all_actual_top3": 52,
+      "top3_actual_count_distribution": {
+        "0": 30,
+        "1": 149,
+        "2": 69
+      }
+    },
+    {
+      "period": "2024-25",
+      "n": 180,
+      "top3_contains_any_actual_top3": 161,
+      "top5_contains_any_actual_top3": 179,
+      "top5_contains_all_actual_top3": 37,
+      "top3_actual_count_distribution": {
+        "0": 19,
+        "1": 114,
+        "2": 47
+      }
+    },
+    {
+      "period": "2026",
+      "n": 68,
+      "top3_contains_any_actual_top3": 57,
+      "top5_contains_any_actual_top3": 66,
+      "top5_contains_all_actual_top3": 15,
+      "top3_actual_count_distribution": {
+        "0": 11,
+        "1": 35,
+        "2": 22
+      }
+    }
+  ],
+  "conditional_model_minus_favorite_top3": {
+    "races": 678,
+    "dates": 255,
+    "point": -0.17994100294985252,
+    "date_cluster_bootstrap_percentile95": [
+      -0.23248882265275708,
+      -0.12801853764362783
+    ],
+    "seed": 20261020,
+    "replicates": 5000
+  },
+  "limitations": [
+    "Pool coverage is hindsight oracle availability, not reranker accuracy.",
+    "All periods were previously examined; no fresh validation.",
+    "Final favorite identity is unavailable as a pre-race input in this project.",
+    "Zero observed starts is a frozen-history definition, not a proven lifetime debut.",
+    "Conditional uncertainty does not establish causal feature effects or subgroup rules."
+  ],
+  "database_opened": false,
+  "models_fitted": 0
+}

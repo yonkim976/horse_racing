@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-07",
+  "stage": "first_foundation_deliverable_complete_no_training",
+  "primary_target": "top3_binary",
+  "canonical_reproduction_audit": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/reproduction_check/source_audit.json",
+  "original_audit_note": "Original query manifest precedes addition of display age to query; identical card and inventory contents confirmed by reproduction.",
+  "read_only_reference_files": [
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/AGENTS.md",
+      "sha256": "8f765820ea187e85aabe53f079400f4553bccb4c32a66e67bd17e47d192dd094",
+      "size_bytes": 19967
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/docs/RESTART_PLAN_20260928.md",
+      "sha256": "834190c608ebc87f8b2ac5467430390b85610663b01c88d345b592328023c848",
+      "size_bytes": 6426
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/models/current/HY_R_FORM.pkl",
+      "sha256": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+      "size_bytes": 638955
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/models/current/metadata.json",
+      "sha256": "9b3948e6b71a3b6675cb68ab09281b2dfa469ee9b60a563358eced3d799cf870",
+      "size_bytes": 1818
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_native_top3_dataset_v1_20260915_r2/state_metadata.json",
+      "sha256": "93fb67b7b48d120721a579b73a044e1cf5e65359d16a2c79e16c252f07d16b14",
+      "size_bytes": 44181
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_native_transition_holdout_v13_20260916/report.md",
+      "sha256": "bfbe21f26665efa50b48455ba64066005d69bd3c151b70eb40846124fca0d151",
+      "size_bytes": 8931
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_native_transition_holdout_v13_20260916/split_dates.json",
+      "sha256": "fc0f29066b6a9127d79d6233fb57e4adb0366e051b399d283b9c26569361fba6",
+      "size_bytes": 437
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_accuracy_candidates_20260919/decision.json",
+      "sha256": "4a10496885b974985c147e33ccd3fd50962e3e18d64e5e00996073cfc7fa3f7d",
+      "size_bytes": 540
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_observed_elo_20260922/decision.json",
+      "sha256": "da6d628988311e1930da2f7a4a32d3a8bdf9fd2359aa7e04fa5ac1246632fee7",
+      "size_bytes": 128
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_trial_relative_20260922/decision.json",
+      "sha256": "da6d628988311e1930da2f7a4a32d3a8bdf9fd2359aa7e04fa5ac1246632fee7",
+      "size_bytes": 128
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/data/research/jeju_trial_gate_20260928/decision.json",
+      "sha256": "3b1b854eb6e1abd0634cd5568428302a2256faa8ca10d5c6caef2b68e294b828",
+      "size_bytes": 250
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/src/horse_racing/analysis/jeju_native_top3_states.py",
+      "sha256": "c35df0c266f1bc6ed39f7f71caf513094aa63a9128358a488e7f81117ff156bc",
+      "size_bytes": 44292
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/horse_exclusions.json",
+      "sha256": "5a88a0f19880a5b19ed7bfdec5a2465cb6652cff4b91c5cbe255fff377bcf84a",
+      "size_bytes": 349
+    }
+  ],
+  "reproduction_equal_jsons": [
+    "example_scorecards.json",
+    "provisional_label_scope.json",
+    "field_inventory.json",
+    "distance_inventory.json",
+    "trial_inventory.json",
+    "verification.json",
+    "api6_distance_grids.json"
+  ],
+  "additional_checks": [
+    "all Markdown local links exist",
+    "all metric source IDs and support counts match history lineage",
+    "all lineage dates <= cutoff",
+    "all 92513 raw G3F order fields zero",
+    "operating model checksum matches inspected reference"
+  ],
+  "outputs": [
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/EXAMPLE_SCORECARDS.md",
+      "sha256": "0f2aaf401d030e0eaae9743568f5fa34d7c1c1e61c895efd93bb38498dc059eb",
+      "size_bytes": 8675
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/EXPERIMENT_PROTOCOL.md",
+      "sha256": "81a87de0f0c794621632c1a435c008f82e83fd89c56d33fd14c04df1c7594794",
+      "size_bytes": 10794
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/README.md",
+      "sha256": "9c632a9bf9f319c91ef7e81f394f79469acd5e92c29c463fa071c2aa2bd5e094",
+      "size_bytes": 9007
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/SCORECARD_SPEC.md",
+      "sha256": "b26b0136f41ffad10d0e65575e699b91c1a26264b327758f8223076fa47b9ef8",
+      "size_bytes": 7536
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/SOURCE_CONTRACT.md",
+      "sha256": "2ff32636fd629ba94352d36fd571a4d02e28fb70401c419b0d2381c9ce4d30d5",
+      "size_bytes": 13194
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/api6_distance_grids.json",
+      "sha256": "a78ff0b960559d614d10e55878c1fa1bdd4473e0e6530e0b6df799430a21634e",
+      "size_bytes": 2704
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/audit_conditions.py",
+      "sha256": "f9331e37820458d0920c5308bd3800c209e4dd16771cefc72da53695b59b990d",
+      "size_bytes": 2162
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/build_foundation.py",
+      "sha256": "bb19f9580189b431f955883d1c207d1031c83201ce54624a0da9dc32f436e362",
+      "size_bytes": 24528
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/condition_inventory.json",
+      "sha256": "90f41953b98cda67546a45cd43e159d246a8922500881690c8a31f8f38549bd7",
+      "size_bytes": 16413
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/distance_inventory.json",
+      "sha256": "49a4289cd53e1e4288d18ba957d0ee9611d74ca4051b73934618bc96af10b93b",
+      "size_bytes": 12843
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/example_scorecards.json",
+      "sha256": "9c46e7b9e26225a0fff5473eaba1f8c2117b960a9fff9f1b8da7b7326af8bcce",
+      "size_bytes": 227612
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/field_inventory.json",
+      "sha256": "4e069f0980e27b451dadddffb39582184e217f7c3a1440c23a2a781992cdfc72",
+      "size_bytes": 35816
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/provisional_label_scope.json",
+      "sha256": "b38428262ab528d9167aadc43b4d9ed31d239c063a82041113bccf30944ce8f1",
+      "size_bytes": 495
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/render_reports.py",
+      "sha256": "6d2adc7ae248d51b1d1d9f87c6082d1d82895331ccdd5b6e082135d4f996180e",
+      "size_bytes": 16752
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/source_audit.json",
+      "sha256": "5c70b0b011d67a669ae19a720f9beede6929b9e7e7f180cb61e33fc1bde96da4",
+      "size_bytes": 9431
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/trial_inventory.json",
+      "sha256": "dcd320cdb547cda98f46b474b0b5b1593a0b922dcb9ca80bd8f05679e4d99695",
+      "size_bytes": 2033
+    },
+    {
+      "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261007_foundation_v1/verification.json",
+      "sha256": "99b73beaf019d19e5f6deee67cd29f35379949437285d3e8677ee6344e8ddbb6",
+      "size_bytes": 379
+    }
+  ]
+}

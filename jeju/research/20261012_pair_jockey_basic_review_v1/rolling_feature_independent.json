@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "scope": "independent rolling-feature calculation only; no model fit, pair prediction or candidate outcome metric",
+  "source_hashes": {
+    "jeju/research/20261009_jockey_effects_v1/input01/starts.csv": "78800c5c91219d58855ce046e39ead6a87729a49c8ba0d58ca9f78765921801a",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+    "jeju/research/20261012_pair_jockey_basic_v1/jockey_input.py": "480bc13a42c73d9a5190fb33446bfae6ad74489e146825a1cf4e158ed0658c75"
+  },
+  "target_rows": 42690,
+  "api_record_id_join_missing": 0,
+  "same_event_jockey_id_missing": 0,
+  "n_exact": true,
+  "top3_count_exact": true,
+  "max_expected_sum_abs_error": 1.9554136088117957e-11,
+  "max_adjusted_rate_abs_error": 4.1647241211251185e-14,
+  "numeric_tolerance": {
+    "expected_sum": 1e-09,
+    "adjusted_rate": 1e-11
+  },
+  "max_history_date_at_or_before_T_minus_2": true,
+  "zero_history_neutral": true,
+  "oldest_h1_window": {
+    "race_date": "2019-01-11",
+    "cutoff": "2019-01-09",
+    "open_lower_bound": "2018-01-09",
+    "first_included_date": "2018-01-10",
+    "source_first_date": "2017-01-13",
+    "window_source_coverage_sufficient": true
+  },
+  "rows_by_target_year": {
+    "2019": {
+      "rows": 5890,
+      "zero_observed_history_rows": 3,
+      "max_expected_sum_abs_error": 2.7995383788947947e-12,
+      "max_adjusted_rate_abs_error": 8.430756093247282e-15
+    },
+    "2020": {
+      "rows": 3290,
+      "zero_observed_history_rows": 12,
+      "max_expected_sum_abs_error": 2.8563817977556027e-12,
+      "max_adjusted_rate_abs_error": 9.783840404509192e-15
+    },
+    "2021": {
+      "rows": 4331,
+      "zero_observed_history_rows": 3,
+      "max_expected_sum_abs_error": 1.9895196601282805e-12,
+      "max_adjusted_rate_abs_error": 9.249545573908335e-15
+    },
+    "2022": {
+      "rows": 5261,
+      "zero_observed_history_rows": 9,
+      "max_expected_sum_abs_error": 2.5011104298755527e-12,
+      "max_adjusted_rate_abs_error": 9.3119956190435e-15
+    },
+    "2023": {
+      "rows": 6506,
+      "zero_observed_history_rows": 1,
+      "max_expected_sum_abs_error": 1.2647660696529783e-11,
+      "max_adjusted_rate_abs_error": 2.7020052861814747e-14
+    },
+    "2024": {
+      "rows": 6329,
+      "zero_observed_history_rows": 0,
+      "max_expected_sum_abs_error": 1.9554136088117957e-11,
+      "max_adjusted_rate_abs_error": 4.1647241211251185e-14
+    },
+    "2025": {
+      "rows": 6410,
+      "zero_observed_history_rows": 2,
+      "max_expected_sum_abs_error": 1.779199010343291e-11,
+      "max_adjusted_rate_abs_error": 4.141131881851834e-14
+    },
+    "2026": {
+      "rows": 4673,
+      "zero_observed_history_rows": 0,
+      "max_expected_sum_abs_error": 1.674038685450796e-11,
+      "max_adjusted_rate_abs_error": 3.683164884193957e-14
+    }
+  },
+  "definition": "C=T-2 calendar days; history dates (C-365 days,C]; n/S/E from selected complete-finisher starts; d=(S-E)/(n+20), with n=0 -> d=0"
+}

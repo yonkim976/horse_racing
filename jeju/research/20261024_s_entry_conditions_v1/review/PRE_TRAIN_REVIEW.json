@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "review_type": "pre_train_design_and_static_code_review",
+  "passed": true,
+  "status": "PASS_PRE_TRAIN_REVIEW_NO_FIT",
+  "execution_approved_by_this_review": false,
+  "candidate_gate_pass": null,
+  "study": "jeju/research/20261024_s_entry_conditions_v1",
+  "hashes": {
+    "input_parquet_sha256": "a1bc9e6b07ab28f384b2c0c104222a5cb297235e4dda645b9c08a376d27e0f72",
+    "source_contract_sha256": "a6404068bffa91b9c6f0ab680e1a5f44c09078f229e3d37a481326bf49e98ad4",
+    "source_audit_sha256": "92fbbe514426fe3624a9fc916075ec345bc74ab623537c4b7d0d8c5edaa2414d",
+    "source_preflight_sha256": "82d3b32887c041cd6a160daf45e4acabc84ad2354f23f617cc7ed1b26fe33fb3",
+    "code_bundle_sha256": "18b220687a83f98787c7d2e4efb0628102b778e9205afa2a9062b7a3c325a6b0",
+    "pipeline_sha256": "cac83b7e4cbde4b3f8106deb89efdf00bace7d148f271ff9bc7bacb02784c3b9",
+    "input_validator_sha256": "540d1233371cf7a5a9f6e8c9dc55643d261fea7a8e3ff2ba85f44295be042dde",
+    "synthetic_test_sha256": "24b8dd87e6db4954be068a14793d36cf52c7974dcee33c6e8498766df20ad282",
+    "plan_sha256": "847443203365bdcaa65704727f8eff777d0d52c32162c5df3323c870e35bef02",
+    "design_contract_sha256": "27ab81163a2b88e68b0743d13fadeb4ca60afefc1700238faac48f719d18b5a9",
+    "root_input_verification_sha256": "a6a310c79b6da6a88368988517bac3d30d85a4f5b9b8b9f712791c5e2a3c90ec",
+    "root_session_start_sha256": "ed30ecb7ab4775568aa205948b1d35edf554fcfab35f1ec70ce980247091e772",
+    "sealed_s40_manifest_sha256": "86d0153e287f877add1b10c3172471cf5c3aac9f251890423cd7d97f75abba3a",
+    "reference_engine_sha256": "706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c",
+    "protected_prior_manifest_sha256": "33b3af723dc9f9ddb0dc1435e151f91e77513d04e998a128cad7fbc58a2ad312"
+  },
+  "input_verification": {
+    "passed": true,
+    "target_rows": 52155,
+    "target_races": 5206,
+    "declaration_documents_hashed": 449,
+    "declaration_rows_directly_checked": 51917,
+    "single_star_exact_matches_checked": 135,
+    "full_roster_fraction_races_checked": 5181,
+    "prior_asof_rows_checked": 52155,
+    "prior_observed_rows": 50203,
+    "source_truncated_target_rows": 198,
+    "database_sha256": "0f2871c2a8f931bb968d8bf7086c27f0644c0ef7332b41b7a1bd85ff637c638f",
+    "database_mode": "ro/query_only",
+    "source_build_module_imported": false,
+    "first_publication_time_verified": false
+  },
+  "checks": {
+    "structural_preflight_status": "PASS_STRUCTURAL_PREFLIGHT_NO_FIT_OR_METRICS",
+    "preflight_fit_or_candidate_metrics": false,
+    "audit_validator_actual_artifact": "PASS; 52,155 rows / 5,206 races; current burden 51,917; prior actual burden 50,203; burden delta 49,988; confirmed full-card rows 51,917; exact target/declaration and target/full-card-max disagreements 0",
+    "candidate_features": "exactly three audited numeric inputs added to frozen S40: current declared burden, change from latest eligible prior actual burden, and declared horse number fraction",
+    "denominator_and_prior_rules": "number fraction uses exact confirmed full-card declaration maximum matching S40 roster, not partial H3 maximum; prior uses latest valid actual-result burden for same official horse ID at race date <= target date minus two calendar days; absent prior has null value and null lineage",
+    "source_availability": "declaration date assumption is explicit; publication_time_status=assumed_from_declaration_date_publication_unverified and pre_race_availability_verified=false",
+    "model_comparison": "same S40 target, split schedule, training-only categorical vocabulary, seed, weights and hyperparameters; score ledger distinguishes model vintage, calibration role/race date and evaluation race year",
+    "fit_budget": "S40 is reused without fit or temperature optimization (0 new calls); E has 3 final vintage models, 6 LightGBM train calls and 3 PL temperature fits. Historical S-only creation was 3 models / 6 train calls / 3 temperature fits; earlier combined C+S study totals are not this run's budget.",
+    "baseline_replay": "sealed S40 scores and temperatures are reused; exact S replay checks are specified before comparing E",
+    "evaluation_and_denominators": "17,412 runners / 1,779 races / 269 dates; WIN/QNL/EXA/QPL/TLA/TRI denominators 1,779 each; PLC 1,743 after 36 actual-seven-runner quarantines",
+    "storage_and_write_boundary": "conservative projection 27,087,541 of 40,000,000 bytes; exclusive-create outputs under experiment only; database, production, source, audit and sealed-study writes are outside the run boundary",
+    "external_engine_integrity": "root independently matched actual PL engine SHA to expected 706b2e94a6b311e5bd9b3706da7df4f6a08117e917d22171fbde63a4d1a3210c; root preservation gate reports PASS for 325 protected files / 60,682,012 prior-study bytes and will recheck before and after execution",
+    "synthetic_and_static_checks": "synthetic contract cases and AST/syntax checks PASS; no source rows, candidate fit, candidate probabilities, temperature optimization or performance metrics were computed by this review"
+  },
+  "resolved_findings": [
+    "Score-ledger year is model vintage; calibration year is the preceding year and is separately tied to calibration role/race date; event year remains attached to evaluation races and fit metadata follows the frozen schema.",
+    "Unconfirmed full-card rows explicitly retain source status unconfirmed while denominator, maxima and source document proof remain null; the validator accepts that frozen source-contract state without rebuilding the audit artifact.",
+    "Exact full-card maximum equality and all-null prior identity/date/source lineage when prior burden is absent are asserted, with negative synthetic cases."
+  ],
+  "limitations": [
+    "Actual first-publication and revision times are unverified; date-based T-2 availability is an assumption, so this is not evidence of contemporaneous purchase-time availability.",
+    "The target roster is the existing result-based S40 cohort; retrospective 2024-2026 evaluation is not an independent future test and does not establish market value, ROI, live use or promotion readiness.",
+    "This review passes design, frozen-input validation and static/preflight gates only. Separate supervisor hash-bound execution approval remains required; this review does not approve fitting or establish candidate performance."
+  ]
+}

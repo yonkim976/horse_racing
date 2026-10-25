@@ -1,0 +1,3154 @@
+{
+  "allowed_current_marker_rule": "exactly one leading U+2605 STAR followed by the official name; no other normalization; marker meaning not inferred",
+  "feature_columns": [
+    "current_declared_burden_kg",
+    "burden_change_vs_last_valid_kg",
+    "horse_number_fraction"
+  ],
+  "fit_or_evaluation_run": false,
+  "full_card_roster_reason_counts": {
+    "exact_full_card_official_roster_match": 5181,
+    "official_roster_id_name_or_distance_mismatch": 25
+  },
+  "generator_execution": {
+    "builder_sha256_after_diagnostic_correction": "4ae19e5d53230e70c8fabc37e922582cb7b95f26c1f90bb91100fce4ae3819c3",
+    "exit_reason": "All artifacts were written; final diagnostic stdout JSON serialization failed because a Counter used tuple keys.",
+    "initial_process_exit_status": 1,
+    "input_artifact_generation_completed": true,
+    "parquet_regenerated_after_change": false,
+    "postwrite_code_change": "Only converts tuple keys to strings for the final diagnostic print and documents the post-write exit issue; no input-generation or feature logic changed.",
+    "training_or_evaluation_run": false
+  },
+  "input_artifact": {
+    "bytes": 4942596,
+    "path": "jeju/research/20261024_s_entry_conditions_v1/audit/entry_condition_inputs.parquet",
+    "sha256": "a1bc9e6b07ab28f384b2c0c104222a5cb297235e4dda645b9c08a376d27e0f72",
+    "sha256_method": "streamed_actual_file"
+  },
+  "input_schema_columns": [
+    "api_record_id",
+    "race_id",
+    "race_date",
+    "horse_id",
+    "horse_number",
+    "field_n",
+    "current_declared_burden_kg",
+    "burden_change_vs_last_valid_kg",
+    "horse_number_fraction",
+    "entry_id",
+    "event_number",
+    "source_event_number",
+    "target_distance_m",
+    "target_horse_name",
+    "declared_horse_number",
+    "max_declared_horse_number",
+    "max_full_card_declared_horse_number",
+    "full_card_roster_confirmed",
+    "full_card_roster_status",
+    "full_card_roster_reason",
+    "max_declared_horse_number_source_document_id",
+    "max_declared_horse_number_source_file_date",
+    "max_declared_horse_number_source_document_sha256",
+    "max_declared_horse_number_source_status",
+    "source_document_id",
+    "source_file_date",
+    "source_document_sha256",
+    "source_retrieved_at_ms",
+    "source_line_number",
+    "source_line_sha256",
+    "source_raw_horse_name",
+    "source_type",
+    "publication_time_status",
+    "pre_race_availability_verified",
+    "pre_race_availability_assumption",
+    "current_source_status",
+    "burden_status",
+    "number_status",
+    "latest_prior_burden_kg",
+    "latest_prior_race_date",
+    "latest_prior_race_id",
+    "latest_prior_horse_id",
+    "latest_prior_source_row_id",
+    "latest_prior_source_row_sha256",
+    "latest_prior_source_artifact_id",
+    "latest_prior_source_artifact_path",
+    "latest_prior_source_artifact_sha256",
+    "latest_prior_source_line_number",
+    "latest_prior_start_class",
+    "latest_prior_status",
+    "prior_source_snapshot_complete",
+    "latest_prior_cutoff",
+    "latest_prior_fallback_after_ambiguous_special",
+    "latest_prior_eligibility_rule"
+  ],
+  "new_source_copy_created": false,
+  "official_roster_query": {
+    "date_count": 873,
+    "query_batches": 5,
+    "sql": "SELECT v.event_date,v.event_number,v.distance_m,v.population_status,\n                     e.id AS entry_id,e.horse_number,e.horse_name,e.hr_no,e.identity_status,\n                     e.finish_position,e.finish_time_ms,e.record_status\n              FROM event v JOIN entry e ON e.event_id=v.id\n              WHERE v.event_type='race' AND v.meet=2 AND v.event_date IN (<parameterized IN list>)"
+  },
+  "passed": true,
+  "readonly_sqlite": {
+    "database_bytes": 1535651840,
+    "database_sha256_streamed": "0f2871c2a8f931bb968d8bf7086c27f0644c0ef7332b41b7a1bd85ff637c638f",
+    "mode": "ro",
+    "query_only": true,
+    "snapshot_event_end": "2026-09-12"
+  },
+  "source_contract_path": "jeju/research/20261024_s_entry_conditions_v1/audit/source_contract.json",
+  "source_contract_sha256": "a6404068bffa91b9c6f0ab680e1a5f44c09078f229e3d37a481326bf49e98ad4",
+  "source_query": {
+    "canonical_jsonl_sha256": "8cb0595213f5901a1a92f236789f3aab723d16d028965a5f261d46333c0164e7",
+    "eligibility_counts": {
+      "actual_positive_time_observation": 18,
+      "ambiguous_special_nonpositive_time": 24,
+      "normal_completed": 65038,
+      "not_eligible_actual_start": 482
+    },
+    "query_rows": 65562,
+    "query_sql": "SELECT e.id AS entry_id,e.event_id,e.horse_number,e.horse_name,e.hr_no AS horse_id,\n                       e.finish_position,e.finish_time_ms,e.record_status,e.identity_status,\n                       v.event_date,v.event_number,v.distance_m,v.population_status,\n                       s.id AS source_row_id,s.source_artifact_id,s.line_number,s.row_sha256,\n                       s.normalized_json,a.path AS source_artifact_path,a.sha256 AS source_artifact_sha256,\n                       CAST(json_extract(s.normalized_json,'$.wgBudam') AS REAL) AS burden_kg\n                FROM entry e JOIN event v ON e.event_id=v.id\n                JOIN source_row s ON s.id=e.source_row_id\n                JOIN source_artifact a ON a.id=s.source_artifact_id\n                WHERE v.event_type='race' AND v.meet=2 AND v.population_status='confirmed_native_normal_race'\n                  AND e.identity_status='official_race_ids_linked' AND e.hr_no IN (<bound-parameter-batch>)\n                  AND e.finish_position IS NOT NULL\n                ORDER BY v.event_date,v.event_number,e.horse_number,s.id",
+    "query_sql_sha256": "c7becffe1c8e39b557761ccf8e0bf9b9a04c5324417fe559ac0b4aa9468d24fa",
+    "source_artifact_files": [
+      {
+        "database_sha256": "cb7fdc383d987eec2fcf7e8867f8be711d1e89d4972e2a4503944d6f9bfa4793",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2008.jsonl"
+      },
+      {
+        "database_sha256": "f6cda1d9239ea248d0aa85033417c4f01fe24b5c9383f25ac084f6019cfe88b4",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2009.jsonl"
+      },
+      {
+        "database_sha256": "314e9ece0eeafe105a1b71ce58adcb9a77fc9b399eb8aac41a1547e001796c78",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2010.jsonl"
+      },
+      {
+        "database_sha256": "d03288d133e857a37b150eb9904f12563e8f360aad40aae7c318ace0b6bc2e77",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2011.jsonl"
+      },
+      {
+        "database_sha256": "960d3982927601b190746b4130afe0737b371b4850e1f33648b88a397fa31076",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2012.jsonl"
+      },
+      {
+        "database_sha256": "200b65a34fed7828c93d1313bdc2ba6e9639116cd7a63ebe2c2a2396809e2f0c",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2013.jsonl"
+      },
+      {
+        "database_sha256": "59c8f10927f0df1a7b0b9696d547358ffc9754d3b01b704d8724cff688112a3d",
+        "file_present": true,
+        "path": "data/raw/jeju_native_results/native_results_2014.jsonl"
+      },
+      {
+        "database_sha256": "806b4f8ae53be97eadc33f5fec25a8df5efbb9314307dfa9c0c8b88c65477c57",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2015.jsonl"
+      },
+      {
+        "database_sha256": "7b0a4ef4818ec90522228f3962fdc6168d2b5fa40fcf345941bf74a0984ca306",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2016.jsonl"
+      },
+      {
+        "database_sha256": "d4abc735229ba7878f7b7aac2c6e6f55fc6dc182ea58a499eedad66a208421ff",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2017.jsonl"
+      },
+      {
+        "database_sha256": "4a22aaeccef91ee939554b5ef037cc81ce2063da950ec251f22c7bd241f38aeb",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2018.jsonl"
+      },
+      {
+        "database_sha256": "c620c308314942200d5e7736cd597f0bbdab902405465985111eb5a82ad9e53c",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2019.jsonl"
+      },
+      {
+        "database_sha256": "7699df0c8d32c67c0b68371210ad49652c9f0229bce5d9766914731f26b1e789",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2020.jsonl"
+      },
+      {
+        "database_sha256": "e085010a42bcddfabb4fedde36e11ac8003ad31b47d2172a874f152a52eeeabb",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2021.jsonl"
+      },
+      {
+        "database_sha256": "e1f52ac1cd36b5e12064cee5f676ae6ee2a5109de39f2c8ce9454b9b4b1d60b6",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2022.jsonl"
+      },
+      {
+        "database_sha256": "154608729d792349138b89f968ce55fa4b9442abffa9cd7abb473d9df98e6fce",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2023.jsonl"
+      },
+      {
+        "database_sha256": "35dfb049c3827b241e619cc789b1f4bbf810e339a7e7bf790ddc23cec9bfd39d",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2024.jsonl"
+      },
+      {
+        "database_sha256": "34a047ad7c1c992a4e8ab44ff188a45fc525b360508705aab067d7f82f6f4074",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2025.jsonl"
+      },
+      {
+        "database_sha256": "714492389c7b5e6efc05bd927d8f2065238b96751e46ea0b617c34c3e9e4cfa1",
+        "file_present": false,
+        "note": "Native source payload rows remain in the pinned read-only SQLite source; raw artifact file was not available and was not copied.",
+        "path": "data/research/jeju_race_time_official_ids_20260914/official_native_results_2026.jsonl"
+      }
+    ],
+    "special_rows": 42
+  },
+  "source_references": [
+    {
+      "bytes": 5476534,
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 3441543,
+      "path": "data/research/jeju_native_top3_dataset_v1_20260915_r2/entries.parquet",
+      "sha256": "cd3f6f248c4087c96fb012820c0d8b92fb2ab9a20cd3e1fba476bec5494a35a0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 5037404,
+      "path": "data/research/jeju_native_h3_features_v1_20260916/features.parquet",
+      "sha256": "d9775035446c0d6c2d81fdcbca206bbb2de0efbd7d511e0f24a7d3b3c1f65ebf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 3189293,
+      "path": "data/research/jeju_native_h3_features_v1_20260916/lineage.parquet",
+      "sha256": "ed2750850cd7c4c0a92271ee0eb3b2e64dc09b322027b10c0b81e6a8dc18ada7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 369762,
+      "path": "data/research/jeju_native_h3_features_v1_20260916/source_documents.json",
+      "sha256": "eb48d13bb816b648cb6e4b34ce3dab7f790710607651d4c0cb417e766a783810",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 1150,
+      "path": "data/research/jeju_native_text_phase2_db_20260915/manifest.json",
+      "sha256": "eed8c40b1099bfb49af49c3864220835faa9ec72cb5abd804f1ee909bc2da63e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 7665,
+      "path": "jeju/research/20261024_s_entry_conditions_v1/supervisor/DESIGN_CONTRACT.md",
+      "sha256": "27ab81163a2b88e68b0743d13fadeb4ca60afefc1700238faac48f719d18b5a9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 6552,
+      "path": "src/horse_racing/analysis/jeju_h3_features.py",
+      "sha256": "a276d14e04be17ad31573cc7e36cc223f37cf119380b7b1041da9c89a8d29ed1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 26696,
+      "path": "src/horse_racing/analysis/jeju_native_top3_dataset.py",
+      "sha256": "e7c79dd673617b2fb1f67a70095336c6ab8b938155fb6a29114c7e1f4c924082",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63219,
+      "path": "jeju/research/20261024_s_entry_conditions_v1/audit/build_audit_inputs.py",
+      "sha256": "4ae19e5d53230e70c8fabc37e922582cb7b95f26c1f90bb91100fce4ae3819c3",
+      "sha256_method": "current_source_after_postwrite_diagnostic_only_correction"
+    },
+    {
+      "bytes": 1535651840,
+      "path": "data/research/jeju_native_text_phase2_db_20260915/jeju_native_text_phase2.sqlite3",
+      "sha256": "0f2871c2a8f931bb968d8bf7086c27f0644c0ef7332b41b7a1bd85ff637c638f",
+      "sha256_method": "streamed_actual_file_verified_against_manifest"
+    },
+    {
+      "bytes": 49918,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=01/day=11/20170111dacom01.rpt",
+      "sha256": "1a322922400ad5f1799016ad4a6b1fca6ce1129b058bf3fe0a3e6630c180f80e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50600,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=01/day=18/20170118dacom01.rpt",
+      "sha256": "8b056bbda1519b5a1c79bad2e881fa9ac5f637cbc6acc14919c81ca9e62d6b6b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50259,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=02/day=01/20170201dacom01.rpt",
+      "sha256": "87fb43bb8a30953a73f2616f62930cbf9cc64d4d06814aa1929bda42cc237488",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49403,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=02/day=08/20170208dacom01.rpt",
+      "sha256": "f165491a8b470025d350e169b01fccff2640afe2d06df8559d0a57cfeca7cdb8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48891,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=02/day=15/20170215dacom01.rpt",
+      "sha256": "eccafffb5d80abc45dce99187e322d8a1225894b6efb5490282a706d7409f5f3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49918,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=02/day=22/20170222dacom01.rpt",
+      "sha256": "f591b86f458672397b079b470d4df325bcd231a040d614503658f9bebcd33c37",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49403,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=03/day=01/20170301dacom01.rpt",
+      "sha256": "65caf0cd75c239558591d581da00e45d84d5a1b73831e24d9810277197cca5e6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47523,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=03/day=08/20170308dacom01.rpt",
+      "sha256": "5abb949aea48a6bdce370563ba6dc7251cf3bb8cdf9c7d9c11defc37b5f0d992",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50259,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=03/day=15/20170315dacom01.rpt",
+      "sha256": "319ce4b316c5d3f9313df511d88ea3de7e38eea7d07ec9ce1503e4359c71041b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47693,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=03/day=22/20170322dacom01.rpt",
+      "sha256": "c7d8e5a7acb30540eb57c5295a0f377f09902f9f45cc517ed6144542c8f0b2cf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46801,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=03/day=29/20170329dacom01.rpt",
+      "sha256": "b72d1e5b50196565a60251da1018f1acd3f6b3bab7b009e81d12756273c5602c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46459,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=04/day=05/20170405dacom01.rpt",
+      "sha256": "7e186a2c9b5dc053cf3083b67d1edc771ff970d228d187226d03b7c0218d0ee4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46459,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=04/day=12/20170412dacom01.rpt",
+      "sha256": "40d6f294507106aa82493839cc0ef4a1cee7a3661eeec4795648776a922cb307",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46801,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=04/day=19/20170419dacom01.rpt",
+      "sha256": "a314be498ad6472eea42e9fe846415893c4b1a540b415a205bb296613ef70661",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45947,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=04/day=26/20170426dacom01.rpt",
+      "sha256": "96a2d756ba7516925617689f26986240a89b4b287278d0676e14dda2f7d0aa5f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45776,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=05/day=03/20170503dacom01.rpt",
+      "sha256": "043f67746ecc8c2e678e7db37b2005e52f4db6e20f25091cdec60ad376e22421",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46807,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=05/day=10/20170510dacom01.rpt",
+      "sha256": "ee9018e2fa99a861c43dd405801b6f4665472713a1c003e13f4de0671db75174",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46631,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=05/day=17/20170517dacom01.rpt",
+      "sha256": "79341a238fb323d1901d51b90707fa1a43105d2453f752292202e89d1fb4ecab",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46289,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=05/day=24/20170524dacom01.rpt",
+      "sha256": "6ccc46aa2b24164048c3595e75651f06dc869ee2f7e5ad9cc95aa2251254b900",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45791,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=05/day=31/20170531dacom01.rpt",
+      "sha256": "efa40da3429f2122dcba7ec19952ff47dc76d4cb27fb395581dc5ffbbd39312f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45775,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=06/day=07/20170607dacom01.rpt",
+      "sha256": "4d6a9970e01963ec3a8078d701a73c39be23c3fa4a9899a9db8178f9b7fa9a8a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44750,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=06/day=14/20170614dacom01.rpt",
+      "sha256": "8f855e5d12d1e402bd789651f864e92f7401a9401896e8d73db705c7a83c0c0b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46459,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=06/day=21/20170621dacom01.rpt",
+      "sha256": "dcaca4d77831db601865e113915aa71ebeced15e20e355eac5484a8dd4c972b6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45604,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=06/day=28/20170628dacom01.rpt",
+      "sha256": "76e08dd44c333f8b75faf94576db3cd9e1f577eda4cb0061832a2635261843ea",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 34170,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=07/day=05/20170705dacom01.rpt",
+      "sha256": "55266004536a4acd4369db156169bcd5c22912b72158e77a397a2bb79511c97d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45946,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=07/day=12/20170712dacom01.rpt",
+      "sha256": "08644d992ef5bcff1718008f5a369a6e419fe365a587c59a59d8e427ab23310f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43381,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=07/day=19/20170719dacom01.rpt",
+      "sha256": "602f7a7c950640cb3bfa024c63dbc6022472ead357bf7b2c6a5b04b15b5f1b68",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52213,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=07/day=26/20170726dacom01.rpt",
+      "sha256": "f29daba35d699f11ea14c98bf2336b550e446a636bccdf6ddd8715babf105f12",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 59827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=08/day=02/20170802dacom01.rpt",
+      "sha256": "1e5d1378d94da811e29c912b6760aa43f6697b8740ae655bf1a1c134cc7d030a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=08/day=16/20170816dacom01.rpt",
+      "sha256": "1ce7438aea27f3a567bda99d99f11d8bc044b9716838dca55b906d6c2074d580",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46459,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=08/day=23/20170823dacom01.rpt",
+      "sha256": "083c3f55b9879bcefe817249a27def29b85681fd12601fd7482a2d609484eac9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45099,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=08/day=30/20170830dacom01.rpt",
+      "sha256": "5c111f51d479353b24f6c80ee6d9e187fcd8ac21281083957841d4d4fe74ea3f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45632,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=09/day=06/20170906dacom01.rpt",
+      "sha256": "c87ee6d66d90e631247ef1adaf4e506e9f77e6afbf14fa45ed454498ea307835",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44940,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=09/day=13/20170913dacom01.rpt",
+      "sha256": "a52276ffbbc03100909fb89c3bdea39e513f8e5031432167aa90a5ff354f344e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47163,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=09/day=20/20170920dacom01.rpt",
+      "sha256": "6a769a6c9133cf532ce56cab27860b80433279b84b65fffeb95f5056eda7f29a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47196,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=09/day=27/20170927dacom01.rpt",
+      "sha256": "913886f1696add5b27d1929faf60613e6840098ba2143710701f1cef379cb73f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=10/day=11/20171011dacom01.rpt",
+      "sha256": "55956265b4b1a2be7390042408ee917b5f36f9b4e995801799815938bb3abf01",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46498,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=10/day=18/20171018dacom01.rpt",
+      "sha256": "021a8358638651c2da3e0fa53e68a64333275787dfb60cbffeaeb8b4a04ea9ab",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42831,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=10/day=25/20171025dacom01.rpt",
+      "sha256": "ecc8c0b49d70da3efeb7be4b83ee4c54635279be97b8e480180216ac6450303e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42562,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=11/day=01/20171101dacom01.rpt",
+      "sha256": "f0b297dbf3fda9867889e647293f8b5e2cd21876f44b987222d2088f2d02df7b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46292,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=11/day=08/20171108dacom01.rpt",
+      "sha256": "e1d9571868452985f851aa4719b6d033e14058779d3dcddbc0013ba9fe76ec80",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46471,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=11/day=15/20171115dacom01.rpt",
+      "sha256": "dcee1b5f5b932ec69be70022a9c315e3abd2989d08a006255cc26e68f08cd3c3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45946,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=11/day=22/20171122dacom01.rpt",
+      "sha256": "1d7c422dc1933cdbe87aeb33f9b1bad4fa2246422585ab4673268bdb6ecb0070",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48340,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=11/day=29/20171129dacom01.rpt",
+      "sha256": "547665cd47180430ac5d89bfe3ccd0a78c74190731701735cb991cc5d64b83c5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45604,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=12/day=06/20171206dacom01.rpt",
+      "sha256": "726ef8f89ff83fa7d8101d0a11a903a62c36569e466e3d5476a7dde4ceddaa2d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 53581,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=12/day=13/20171213dacom01.rpt",
+      "sha256": "4e11031080f37301e64c3b328e09514b5adc4a150c0ed0784a04ea0c0e8a3acd",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=12/day=20/20171220dacom01.rpt",
+      "sha256": "8b2405133ba09a8073a3ad86b11ca747d8f1e2feee6c16279c2e161371fb864b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55633,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2017/month=12/day=27/20171227dacom01.rpt",
+      "sha256": "af53640bde87cdc5b90eff1e24ec954a9d317672a056aba4461957518f0a0d7d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50602,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=01/day=10/20180110dacom01.rpt",
+      "sha256": "a7ee0b98c66f2aa68c949c6d6c82ca498acde98b3d4c94fa5c810daefffa1bd5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47998,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=01/day=17/20180117dacom01.rpt",
+      "sha256": "9b2b320cd3ff248b49a3adb6fe4208bce1a7d683b32e40f162622977c28895cb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46801,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=01/day=24/20180124dacom01.rpt",
+      "sha256": "6673045959f1ba0ee04f650ac6524f3c49f1139c9b329408c5abca611814e30d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46459,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=01/day=31/20180131dacom01.rpt",
+      "sha256": "4850d15d7967e49a0b9f72fbadb4e84404730a56c11a518a80cb4d3198074061",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51113,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=02/day=07/20180207dacom01.rpt",
+      "sha256": "a4f15284056cbf28ceb4c994052e83855531a4a47eff038c5254919b32faf36e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52139,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=02/day=21/20180221dacom01.rpt",
+      "sha256": "7c880c5e32759f630c44b65ab0e8d47329a5a01ab0a507187b07f102bfb7777e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=02/day=28/20180228dacom01.rpt",
+      "sha256": "6d246732e077dcaeb4b197ad5ad07490de031998fab997e1541e9cbb27a4fcd6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48527,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=03/day=07/20180307dacom01.rpt",
+      "sha256": "33821587aeb54b8cfe5175db1df29800d8207676f443068696af02302b44616f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47998,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=03/day=14/20180314dacom01.rpt",
+      "sha256": "3818ff296bdf6d9e0d1487e409c473475dca2dc431a8011529ef52e8200661bc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=03/day=21/20180321dacom01.rpt",
+      "sha256": "853278bc755f74721df822072c1b2f38f360130a30fd4e147e93cb664d52fe8b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46801,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=03/day=28/20180328dacom01.rpt",
+      "sha256": "59ce221e7c27bf0c100a39acecc668ed43eadb3c89de99c9d4d8f45ee9b634c3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44199,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=04/day=04/20180404dacom01.rpt",
+      "sha256": "24eb1fbddfee7d7e31bdd1286c6ccb8351e235d39f47c313d33ee40b19a9e06d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45567,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=04/day=11/20180411dacom01.rpt",
+      "sha256": "ceb5a930e91c60722dd98fa482efcc5a34c20d0d0f1f8886b0da74f0c5c7f8b1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45396,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=04/day=18/20180418dacom01.rpt",
+      "sha256": "583fa102560149cf8d6af882cc0e19b5085c1663326d83e560c598595ecd28b4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44883,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=04/day=25/20180425dacom01.rpt",
+      "sha256": "efe96c8f997ab8fd275180135d029a687ff573e93c8e816be2af2acdc03c3ae2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47827,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=05/day=02/20180502dacom01.rpt",
+      "sha256": "42115fe531ce7bbfa19d6b8c9b1843603936b3fb4f7da8e0e981f89b6cb0ed07",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46978,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=05/day=09/20180509dacom01.rpt",
+      "sha256": "1ec7b608a11976b3a1429b76a18d2b3b370afc908c63e7033df609e1cbe2367d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48853,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=05/day=16/20180516dacom01.rpt",
+      "sha256": "572c735ab79b873771622365ba1a76b09b528d1cebad4dfb3d8022ea6eb19ae1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48720,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=05/day=23/20180523dacom01.rpt",
+      "sha256": "6584c4a92f5e217f282e038195b6b21f5134baf749adbd2896705a1cb016c150",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44578,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=05/day=30/20180530dacom01.rpt",
+      "sha256": "c47bf5b5ecaaedd62b1f74f1d7771a51f140321578cf8332d4099a4b9a6b7540",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46459,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=06/day=06/20180606dacom01.rpt",
+      "sha256": "d858541344ba9042a7f7cae6e8ab33471302d9554a2356c4c5c9917754669620",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43894,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=06/day=13/20180613dacom01.rpt",
+      "sha256": "159951ddfca35d790385da85d094a4d0bd9e5d82a61fc1403e7cd720d132e006",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46630,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=06/day=20/20180620dacom01.rpt",
+      "sha256": "4ef519b885822e237687c3cf218ebe4816e331561352c391440c1f4f9060d7f8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43002,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=06/day=27/20180627dacom01.rpt",
+      "sha256": "c76858236af7444828332c22835947f350a82bc9e932e82978e134f284833f9f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43002,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=07/day=04/20180704dacom01.rpt",
+      "sha256": "811feffb9f452f91010213fbcff4b0836c1da7534ad8483cb042a3917fe6dc9b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44199,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=07/day=11/20180711dacom01.rpt",
+      "sha256": "74b7be064a82dad8fe776c4cc799fdffb89748718a32109cddec2253cb7cb4e1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46799,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=07/day=18/20180718dacom01.rpt",
+      "sha256": "8c760c739eabecd8821530dea4470fcbeed70be7187531832792081854977ad7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 62751,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=08/day=01/20180801dacom01.rpt",
+      "sha256": "99903a4103c4eed1159207c7e29d68bf86c8014f4b9ec13d8d32938937e6dfa2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 54319,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=08/day=08/20180808dacom01.rpt",
+      "sha256": "7e487b119cdb0b180f102b6b78ba65cbf29304cc99968fbd22745109a2b082ec",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44100,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=08/day=15/20180815dacom01.rpt",
+      "sha256": "b3eb5d9d80932ae3165175d002e294c11fee0e39c8244f954ca7091e2a7cdc29",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44458,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=08/day=22/20180822dacom01.rpt",
+      "sha256": "f9825c3fc8d3e3246c8d800b2201bbcea99f4b28d79c698828ff37896c0299af",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51644,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=08/day=29/20180829dacom01.rpt",
+      "sha256": "c904a8cdc1ab2c3481c8b0c0c507225c26131db311306ed5c86a5d77b538f2e6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51638,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=09/day=05/20180905dacom01.rpt",
+      "sha256": "d1bf4bca73ab359706641963caa7afd2122f5276e0d829da4b770791ca9459dd",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 54520,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=09/day=12/20180912dacom01.rpt",
+      "sha256": "1f4c56851d60fe64fd200bb30f0f69790395f15351c7d5f40f1f33f97d943f57",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48575,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=09/day=26/20180926dacom01.rpt",
+      "sha256": "476190baace773463b6976c4ea22cb3fa0f9e8ed49c211fb33d0597017d91df8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47191,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=10/day=03/20181003dacom01.rpt",
+      "sha256": "cfd4039c1d40b9896bbd6ebb65ce24761df3329ea3d88614d84b069ffc137587",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50385,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=10/day=10/20181010dacom01.rpt",
+      "sha256": "95ef3f9e58b2bbdaa11a337a424e9d7e5d9e3b6d1fbf38ff0ae4a632f0ff71ac",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47761,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=10/day=17/20181017dacom01.rpt",
+      "sha256": "d9561c2da837cf9a8aeaa5f7833d693456c1a49bd442b0d336469b162af44f3c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48756,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=10/day=24/20181024dacom01.rpt",
+      "sha256": "a1470d7808886f11ee80e06d2832686ff365684e03f076245d0cb75cd927c217",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51245,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=10/day=31/20181031dacom01.rpt",
+      "sha256": "597e42ad2b061baf5bc920a7f3cf4dd380a1f3732328c5d729f9033d6a6e7be2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52425,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=11/day=07/20181107dacom01.rpt",
+      "sha256": "3c5436458e8df2d26afc237dfcba1bf08fba11357d0c0d964e6b130f26d7eda2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50634,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=11/day=14/20181114dacom01.rpt",
+      "sha256": "84f546099670002104aa66c541a8a8e8b115662aa5cd32b7e5449ad50aa910e4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51828,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=11/day=21/20181121dacom01.rpt",
+      "sha256": "5229e1b084e491de2c6586de2406339408f97aac23625d29c8d232c5f9a3326d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51627,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=11/day=28/20181128dacom01.rpt",
+      "sha256": "8fe26d60d6cbdba2205119fabca6e6ee62baa4f7d338b547bf17f28327cd0443",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51032,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=12/day=05/20181205dacom01.rpt",
+      "sha256": "a6eeafa8ba6bd2553fed2a511c05262a48abf6a74fb89d4fa5ca0663690d9b52",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51244,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=12/day=12/20181212dacom01.rpt",
+      "sha256": "13cd63b656b636c8105f4d02ad2918568b64bf1756a3595cd727303beb8780fc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 62849,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=12/day=19/20181219dacom01.rpt",
+      "sha256": "f4f320d48768687247689ec1e13d541e7eaec480b1689151d1cb4e921d72a9a2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63034,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2018/month=12/day=26/20181226dacom01.rpt",
+      "sha256": "16bcd54fe751765025518e18d00db17e8ba53ad4f1a33a452f202227107b7cf2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55894,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=01/day=09/20190109dacom01.rpt",
+      "sha256": "ed0127b2890577ef0b3f56ceed414b4b4c4bf2793a6e52681dbad0b18b977cb2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55099,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=01/day=16/20190116dacom01.rpt",
+      "sha256": "1dae965e79d2327873efd00d63163ef8f69fb8c1d79333c74516a7c76b327e22",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55696,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=01/day=23/20190123dacom01.rpt",
+      "sha256": "590e040b6121cb80764bbf67a55ab13be9cf1be4e8f82c27f068434224543d81",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55497,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=01/day=30/20190130dacom01.rpt",
+      "sha256": "3f08f4a4f6ca8c7694af021f498721612e7195ff28c3e2c3998a427fdc62317b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55497,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=02/day=13/20190213dacom01.rpt",
+      "sha256": "afd3ac2d7970a80cb19b6fc9ba54224a6b15b094e5872dad17a205024a001e8d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 56293,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=02/day=20/20190220dacom01.rpt",
+      "sha256": "74260216bd6a1cd49c62cbe4630c71ac09e8b0649c88b646a1514962d06b8395",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49751,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=02/day=27/20190227dacom01.rpt",
+      "sha256": "fe1b2bbe3bb604f3d94f862bc53f16956bd70e6b595a683187e86e8d56dd0cdd",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49751,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=03/day=06/20190306dacom01.rpt",
+      "sha256": "b1eeb921d511f7de86f15367f78f5c3ffb93c6f49a9b139f49f6cb347ef8a8b6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50746,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=03/day=13/20190313dacom01.rpt",
+      "sha256": "a8594122bef34c6410383dc63fec47a74e497d3a690248789639d064aa254a03",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50945,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=03/day=20/20190320dacom01.rpt",
+      "sha256": "421cd45bc685988e9b223be2ee98bf8d0fb1c385a2b004e4b6651919868a2e30",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48954,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=03/day=27/20190327dacom01.rpt",
+      "sha256": "6a1a56fe8e6767ebc677f6367953a41291dec44fa02309ec4173bfa1897cc66f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49552,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=04/day=03/20190403dacom01.rpt",
+      "sha256": "1f6f4d82a430778155bfaf25eef1bde7b80c04114a1325b2e47b82f8e05ff5b7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50347,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=04/day=10/20190410dacom01.rpt",
+      "sha256": "696ee6e088332f148784c63fd090fd1aab2f88d3dc0086d01e96c10787f70e21",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51144,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=04/day=17/20190417dacom01.rpt",
+      "sha256": "aa67f9408a314accfa561ae6dcb528363d115be4a580fa31624235501bd284ff",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50367,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=04/day=24/20190424dacom01.rpt",
+      "sha256": "e37a55cf52d38a14b01f3c96db980e8a88078aff65330a4520a6bfbca8f0cd55",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52624,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=05/day=01/20190501dacom01.rpt",
+      "sha256": "7259fdefe9288ece7dcf53c52f2b293a44900cee5e61c783dfe53bce4b949c5d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52823,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=05/day=08/20190508dacom01.rpt",
+      "sha256": "f0bbe6ace1c016d408ad66e5a4fd71456cebb0c6a2c4f8916aa97977b558354f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50241,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=05/day=15/20190515dacom01.rpt",
+      "sha256": "2848ac5bab418306c66d82c6bc9604f593492515dc078ca5e0cc018c02d684fe",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52235,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=05/day=22/20190522dacom01.rpt",
+      "sha256": "788b9e42f9264aa30f2103158b8da4a8b4fbcc28ab7e3eddd8bf3027df146f60",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52225,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=05/day=29/20190529dacom01.rpt",
+      "sha256": "53b133bdfa01e0150b217ffd380745c948a0f622f4dbeedbc1d73f9d318d3b7a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49950,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=06/day=05/20190605dacom01.rpt",
+      "sha256": "871b2fd83b48c0c9644c755c0aea617bb5b156f15f0ea8dd2ce062e80349e3df",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49556,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=06/day=12/20190612dacom01.rpt",
+      "sha256": "61344bce21ce9c2786d22f968f5f8b11f673ab31befec0ef86ab044372b993ef",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50347,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=06/day=19/20190619dacom01.rpt",
+      "sha256": "2ccce011486d89368b7016e77906481955a067bda9f9ef5e906e068613c72d2b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49552,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=06/day=26/20190626dacom01.rpt",
+      "sha256": "b74fa35b8598960172d440e7c1d0b4d0f9e4384a4c813f47c94523cc8fc2a297",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49851,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=07/day=03/20190703dacom01.rpt",
+      "sha256": "5e66c2e90578664f1f947c0305a71f0ac95c09f94046b9b9bc7d3d7c86970631",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51433,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=07/day=10/20190710dacom01.rpt",
+      "sha256": "ddfa322d0389a26c527e0e3b498a80f53ec17cc6d2495c3b6ecc7db58848ea1c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52225,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=07/day=17/20190717dacom01.rpt",
+      "sha256": "7eb52157760271351c90b8798f016dbce9a784d3717684e37ae5e273a8f67156",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 68586,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=07/day=31/20190731dacom01.rpt",
+      "sha256": "128088a4b5a8705725de845aeeae6e8c9a1fc59a0043969b4a03a3d7d237139b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 61044,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=08/day=07/20190807dacom01.rpt",
+      "sha256": "e26f810898c95042b0ad6596db8923c64bbf7756fbbdaa95e782b6d95ea14d2b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48557,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=08/day=14/20190814dacom01.rpt",
+      "sha256": "7cdb2042302d266a34e1f3c69c41421d1a6154799487f6315c77751acc05b6bf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48358,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=08/day=21/20190821dacom01.rpt",
+      "sha256": "ec4733ff4609073ffdf8c99e4fb7c0a4818c148cd5e94769c0699ed8f6c5bc11",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48756,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=08/day=28/20190828dacom01.rpt",
+      "sha256": "39df8d96c1151c8dab124acbe8a66d3bc0ec8f66e20d8b7e503e4eb40b52a389",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 53425,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=09/day=04/20190904dacom01.rpt",
+      "sha256": "69762c5a2af73ef745402a730cb10d3a9cc3022a7be1677a8d289b3fa8dd94f6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 53420,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=09/day=18/20190918dacom01.rpt",
+      "sha256": "974d6b3796ec22e4519b438269cb182f3c76854437ddfdf128090c7f767a4fd9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 53619,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=09/day=25/20190925dacom01.rpt",
+      "sha256": "752d735fe3d6fb19baf08f3b54d9403d1a618f3245b419aaba0bdfa253aaf8a7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48358,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=10/day=02/20191002dacom01.rpt",
+      "sha256": "ee4b89bec4b9b3e66a4987a18dcbcd778222bce11bf4384e4fd2d37d9ae90660",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49194,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=10/day=09/20191009dacom01.rpt",
+      "sha256": "ee64186472eadbd96d8ffe959a6abdc0a17b0a451d3fbac6398b73a3c4e1be3f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48566,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=10/day=16/20191016dacom01.rpt",
+      "sha256": "5aedbef57f890b7ebbeaab952990042747a9445eaf856a5d4e4187f4b9d66844",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49154,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=10/day=23/20191023dacom01.rpt",
+      "sha256": "beeb4795a5d46c361770c4f64386438d19be97346dfb08b44a36d3b0e37b7c9b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48358,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=10/day=30/20191030dacom01.rpt",
+      "sha256": "da5eee669057b53693213bd8f91739e7ddd7c361fc2d23b8ea09bb85a9d9b938",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47959,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=11/day=06/20191106dacom01.rpt",
+      "sha256": "8ba462bf010c80315f2d1a1ac6252a3128d51a3d08b5e2843d56be2ac19a97d3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46388,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=11/day=13/20191113dacom01.rpt",
+      "sha256": "9a1c89cc75278b0b471b7da6d34710fe32e5afd2630b6072caf8ff9698f6f0ce",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48557,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=11/day=20/20191120dacom01.rpt",
+      "sha256": "2d92895baa33cce03a55521ce415ffc52c18bd1f5f40d3d4862e3b7becbbf5cf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49352,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=11/day=27/20191127dacom01.rpt",
+      "sha256": "5a527748db47e6cc14a6d9856842669b44a8a00d70d949d2e315c5b747e48a88",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49154,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=12/day=04/20191204dacom01.rpt",
+      "sha256": "959901456d57c99c89358fd609af219966404711325341d78b863443ae8212b5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52234,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=12/day=11/20191211dacom01.rpt",
+      "sha256": "320627b3ba177da8e5ee53ae486288a0afe470c5851503280350f27c3a4d18d4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 55135,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=12/day=18/20191218dacom01.rpt",
+      "sha256": "5b4ef001b8054602871466e816e274dff430940bf1545f88d118b3ad9473a83b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 61243,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2019/month=12/day=25/20191225dacom01.rpt",
+      "sha256": "ffbc44a2ab666618502fdc94802b6002d017a8889d34d75abadb1c04c70e9cf8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47959,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=01/day=01/20200101dacom01.rpt",
+      "sha256": "4b5d928da51a5feb7105a0f89264ebd23bb71a84b0fcb2964099ebf0ad753e82",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48159,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=01/day=08/20200108dacom01.rpt",
+      "sha256": "7ec830cc1e3a78c3ec8fda69417497b16c4c872399e997a7a6d2e6444d488c6c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 54701,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=01/day=15/20200115dacom01.rpt",
+      "sha256": "68bd5448dc299adafa92e1a1fb3af9898530421d09dae34b1728a715018bde3c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49154,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=01/day=29/20200129dacom01.rpt",
+      "sha256": "dd96f17b0b6903623db2638a72d0008a74b007535d5a86a426a271b8319c4dde",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49154,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=02/day=05/20200205dacom01.rpt",
+      "sha256": "eafbd68adf4ac5a7eaa7c46c555939ebc87660b07b9812e2488fdd2d71fd6b77",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48358,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=02/day=12/20200212dacom01.rpt",
+      "sha256": "91534a621b351ac42d7d85f6281c6220dff1edd72e41707d74ee191e95273e99",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47960,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=02/day=19/20200219dacom01.rpt",
+      "sha256": "547fde1f01a0b1c680e0770bbe876f41ab53792b63f69e6a90c283c97d584c82",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 20911,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=06/day=17/20200617dacom01.rpt",
+      "sha256": "ead625cd5239863a7ec128470f13993aa48a5cba79ecd58309a0f591b28d178e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63319,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=06/day=23/20200623dacom01.rpt",
+      "sha256": "79f2cc568692db6dfb985598e46b04efd21a6627aa3e6c08ee08de4b3ddbc604",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 64115,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=06/day=30/20200630dacom01.rpt",
+      "sha256": "500c23670a7dc9ecea57bb3e51dbbb439d79fa70ea2da4fe40a4069e90ff26b1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63518,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=07/day=07/20200707dacom01.rpt",
+      "sha256": "f94b9af21845a4b3345133c45fdb2139862ebb41f4d9bdc813c02eca0b67ac1d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 61931,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=07/day=14/20200714dacom01.rpt",
+      "sha256": "df8f0b501522add83d4618ff5d968a2d937bc137754a447889801b4c2ee3b446",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63120,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=07/day=21/20200721dacom01.rpt",
+      "sha256": "b8a9aaa41e3f0f8eeb3cae40736b7820af94d26632cb4504c23cd398f918496b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 62723,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=07/day=28/20200728dacom01.rpt",
+      "sha256": "7825ef685a3ff322f390a38015794ca1f11ae516ab0582be34edd223ecf9c3c0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 64315,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=08/day=04/20200804dacom01.rpt",
+      "sha256": "feee58edac4e55f9af2f764670e302cbf8ea03e498acbfa5b7675b85a4d1f861",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63717,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=08/day=11/20200811dacom01.rpt",
+      "sha256": "a50b870756720834336afe67802c0abbe729c44118d904986212a0671b550bb2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 63320,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=08/day=18/20200818dacom01.rpt",
+      "sha256": "882a60f36453f984bd5cdb285cb9c47f0e15a1f8e29540e33d126d17a5887ae6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 64116,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=08/day=25/20200825dacom01.rpt",
+      "sha256": "1f4aaaeb185fc7354854fb05a94f7d75d00693a9f22f596312d3ad61622a2ae0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 30722,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=10/day=14/20201014dacom01.rpt",
+      "sha256": "614783f2d85489bb5838c2a0614ae7990ce9e2b6c87abd2685033875f5fc4ae9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 30722,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=10/day=21/20201021dacom01.rpt",
+      "sha256": "7affd301ca7dd94b8727f770b0911483ff8888e7dfd8310832600c5c027a1a49",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 30722,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=10/day=28/20201028dacom01.rpt",
+      "sha256": "40ef7e1c9f620201d8fb00a3e1d00c313a3fb19f156ce9fb4b9823fdb9699680",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 51343,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=11/day=04/20201104dacom01.rpt",
+      "sha256": "ef180168f05b0b817409b7676b8c00e7d79e726e8467c3d5471118d654e751e7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50561,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=11/day=11/20201111dacom01.rpt",
+      "sha256": "8d6259fe7cad345e560407ebac3d6c1dacd7d2738e116b784f01c17deeee0dd9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 50745,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=11/day=18/20201118dacom01.rpt",
+      "sha256": "753dadf4ee6af0e9f43f0768277160c3c483f387947bd97cf49481b47f3300e3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32314,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=11/day=25/20201125dacom01.rpt",
+      "sha256": "77f3a4b9a7553df724cefa8b6711658b007f1e68a96099734a9ee78a1f26a121",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36866,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=12/day=02/20201202dacom01.rpt",
+      "sha256": "5d4bb0bae50204d175348a662cf368030474b65a673245a985becf86d460bdec",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36885,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=12/day=10/20201210dacom01.rpt",
+      "sha256": "d9a81f064b1ad3948884d1b93b25c196364b5799adc36cd2108c645440245dba",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 73133,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2020/month=12/day=17/20201217dacom01.rpt",
+      "sha256": "f882f787cd01f62216d5b507da0907887cc8b3f1ab47ae0ed500ef126f4c1ba7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 31319,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=01/day=06/20210106dacom01.rpt",
+      "sha256": "9931f84759b2405f05744398531ebd81888e0236e40eca3a414ae70aa9e525bc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32712,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=01/day=13/20210113dacom01.rpt",
+      "sha256": "377c4ddecc3b7993879934802b72ff949e7287356a32db513fdd3c1c3f1e0e7e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32712,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=01/day=20/20210120dacom01.rpt",
+      "sha256": "f1c51bdfb5b1c0a6b6219f101cc138ad41e35d8da59a0ae3c6dfeaca41a5546b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32513,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=01/day=27/20210127dacom01.rpt",
+      "sha256": "4ddec49ba9ff048d3eab93412595fdb084a7c61d6f98d18c38cbde63f4ceeb37",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 35187,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=02/day=03/20210203dacom01.rpt",
+      "sha256": "ecdf69dbb24274580ab2cc4460f9489c69e50ef9c7299af3ba132488698c141e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32115,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=02/day=17/20210217dacom01.rpt",
+      "sha256": "543d8d167692b33727b8cd749dba530f1afa7d32c67a0512563cdfc219901727",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32712,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=02/day=24/20210224dacom01.rpt",
+      "sha256": "d08449094bcf4f465a4344a0745bcdfd9723e599d3a00ba211b89ca129723b8e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 31916,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=03/day=03/20210303dacom01.rpt",
+      "sha256": "b560ff747efe2a3eb727af88a9862ca4b24862a052b16a177aac93294458cdc6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 32712,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=03/day=10/20210310dacom01.rpt",
+      "sha256": "2f6e8af59870e85179b17cfbc9a79654e20ca89975da2c9fffcce7132541a6aa",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 35386,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=03/day=17/20210317dacom01.rpt",
+      "sha256": "07496bc337017353b52ed4849af89695ae96fac70fd2dee677beba1667b61979",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 35585,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=03/day=24/20210324dacom01.rpt",
+      "sha256": "2e26a8f5b9c36acdd45ec67e39efc0af5926c6030171edbe5cd3f8bc7af93802",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 40535,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=03/day=31/20210331dacom01.rpt",
+      "sha256": "ea4586b7d838e541101c60a1e481fd4f6aad5972f6d9c7b40c60e5314264cc4a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37861,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=04/day=07/20210407dacom01.rpt",
+      "sha256": "5d47e273e771ab3017b14008d0c49a7e96f727cedd48e584d95b6547e7e4e763",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38259,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=04/day=14/20210414dacom01.rpt",
+      "sha256": "e1c53c9eb272654382d724cc9dff426cdc14bc6def4c54d70835d138e8e65212",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38458,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=04/day=21/20210421dacom01.rpt",
+      "sha256": "53bce700609e92dc3ad9db6d8708cc2a3bbdcd35ef3cb1052c99d1c0bb96ef97",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38060,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=04/day=28/20210428dacom01.rpt",
+      "sha256": "bde510c3ed0964b3e65415bdf2ab2a0bd720b0571b2301efa64472bf2c844a9d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37861,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=05/day=05/20210505dacom01.rpt",
+      "sha256": "f9307995875a003d50290d4799433551964cfb5988946bfd3d4cb3904cf705ff",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38259,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=05/day=12/20210512dacom01.rpt",
+      "sha256": "b34782986e0a3bf20ea7d93cd4638b7e8f657cb848f075ce1c2e544e2e2c3ce7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38856,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=05/day=19/20210519dacom01.rpt",
+      "sha256": "59e3b7f7be90cbb23ce2397189399a44846ac789085a9c83638b0f9dc7806b5d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37264,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=05/day=26/20210526dacom01.rpt",
+      "sha256": "2aeaf3dd6fe0b406ed6557720c18a83c4b896df58a616467404de2e32aebfb07",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38458,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=06/day=02/20210602dacom01.rpt",
+      "sha256": "3325fc62eef14f224d18ad20433fdecf2c861c99b5955883129b80b1f9273c0a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38060,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=06/day=09/20210609dacom01.rpt",
+      "sha256": "5b59a72734777bba9a1ab7b36406e8e18d9e5cf5d109db70f9875ce695400f18",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36866,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=06/day=16/20210616dacom01.rpt",
+      "sha256": "8333cc764846b3fa799bc41cd70251ff5a8b1e25f2137a4ed25c6a25992181eb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39055,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=06/day=23/20210623dacom01.rpt",
+      "sha256": "9fa54705ef9d36842561db34df15ff95fb29cb49d3c5b4493c5dc71e69d89c72",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36468,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=06/day=30/20210630dacom01.rpt",
+      "sha256": "3070aa29bef2a559db280da4e9bbc239715fd793e7300f31b7f6174571bbec23",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43209,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=07/day=07/20210707dacom01.rpt",
+      "sha256": "6893a353ffc33a5752f105ef9630c9cfa3132070b2561d86d9b483a3938bbb28",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36866,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=07/day=14/20210714dacom01.rpt",
+      "sha256": "86ce0d16b3115633958189808bad509b0fde92ab6df4c0421be5315cdcf6aed6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38060,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=07/day=21/20210721dacom01.rpt",
+      "sha256": "d671c01df6c860074d3a8fcfaefb44432013062ea6fce28996c951b9f2d01de2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 67188,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=07/day=28/20210728dacom01.rpt",
+      "sha256": "86996fb3727549236350507411a1960e334d70a110f713353f6bee43aaca397d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 52425,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=08/day=04/20210804dacom01.rpt",
+      "sha256": "e56198b6317b015cfefd84568f330a044336a96216e32c44e3e0d65547f7e185",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36866,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=08/day=18/20210818dacom01.rpt",
+      "sha256": "b523902dabb44d1bbd04b15bd1e2d730f84e5e6aab215748062b4dac878435ac",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37662,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=08/day=25/20210825dacom01.rpt",
+      "sha256": "170ab31386fefbc5550c49350621cea2e2b064265d4535a820b434255be5fea5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37462,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=09/day=01/20210901dacom01.rpt",
+      "sha256": "27118dc36e2c1d69ebcf739b81af0944cb8d9f4dcdd442d3d4ad4ff533456612",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 40734,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=09/day=08/20210908dacom01.rpt",
+      "sha256": "f77d00413820662c56f56ea49a81f67f99635a9b8bdead9a1847bca95e749ef5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 41530,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=09/day=15/20210915dacom01.rpt",
+      "sha256": "266f164f66528939af9d26590f1c89bca3b97a078f6d8b9e1252f69f8fd6cd13",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 40933,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=09/day=29/20210929dacom01.rpt",
+      "sha256": "2ee16b3636913c9e4973ac2f53b100a0b5b9d186006d6686eeb7fff53e6aa639",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 40535,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=10/day=06/20211006dacom01.rpt",
+      "sha256": "f00a0bea490c0df6b8975111fdccb24de1566ce41ef569b3366586bec356cf22",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 40137,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=10/day=13/20211013dacom01.rpt",
+      "sha256": "f8d27f8cc51936fade2fa31d5fd8ac1cf34c81a55ec28522d99923d3441af4ec",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37692,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=10/day=20/20211020dacom01.rpt",
+      "sha256": "e8d4e1aa338c0226b453f54880a5be34910f2b6f9740682d1f1784a3d83c2d8f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 37264,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=10/day=27/20211027dacom01.rpt",
+      "sha256": "924731180e26bb47119265a572389c12b71d20a2a71e08cb9b7073e84b214027",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43009,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=11/day=03/20211103dacom01.rpt",
+      "sha256": "c1707dcb0d06f5405b92a29f9cdb8a2d83e1d7c1c9c407225d7147f25a86668a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42015,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=11/day=10/20211110dacom01.rpt",
+      "sha256": "86944396a69c872c37ea6db77de639ba89ee0387d2021d0a7c9c356b85b5ae2f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43218,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=11/day=17/20211117dacom01.rpt",
+      "sha256": "f8a9059e6def20687dce7143cb87b9eb4b7bc452ba4f3818b4ed52faf1a29748",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=11/day=24/20211124dacom01.rpt",
+      "sha256": "51ac9e17a86b231c3ebfc1d1024ece80d463865b9d6ffe686e2239df66e4cfc5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 41816,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=12/day=01/20211201dacom01.rpt",
+      "sha256": "05fa4bdb25063b55d5fdd9582ad886362434f2bba95b84657f6e97fb9b777fde",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42020,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=12/day=08/20211208dacom01.rpt",
+      "sha256": "3e1b4e9589ce2f3a0105ccc0115440d785e22c5726f1795265cb668f1aff888a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43408,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=12/day=15/20211215dacom01.rpt",
+      "sha256": "91a138be779d9e6c9be0f281aa9ae00fb5237708a2bf0f75cc26347d4e168ce1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43408,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2021/month=12/day=22/20211222dacom01.rpt",
+      "sha256": "a23ba0e4aca90b8cd66d70049dad1beb96118e846e462731c87eb7fc7c019501",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=01/day=05/20220105dacom01.rpt",
+      "sha256": "03a4ebbd52c1e9fcfbef2164340ce947d5eb12adff126fb0780ca1aec3158079",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=01/day=12/20220112dacom01.rpt",
+      "sha256": "e6b9a6d0343dd308ed86282bfb7233139b494077bd15875b233596f043dbf9c1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=01/day=19/20220119dacom01.rpt",
+      "sha256": "3b12a38b3b988b6de8dcb636fbdcfaa442ca510f12ae12081a6767847032a648",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=01/day=26/20220126dacom01.rpt",
+      "sha256": "8ea883b8bbb576683c297e2f0e3c6a42028e01633b85a8ed86d18385131dc204",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42810,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=02/day=09/20220209dacom01.rpt",
+      "sha256": "84502029a448d6ae190300d1a5f81cf54ff46f93e1a0adcb4347a29c3415ab4b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=02/day=16/20220216dacom01.rpt",
+      "sha256": "235e8eb3fef1e60d8ee3f5b03969dfe63c614038ced8c94e609e5f75a589738b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48357,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=02/day=23/20220223dacom01.rpt",
+      "sha256": "11d0ca8d2b40863b82bb54ccf13ec798a39d0414c6753f5f2390aea2f034d188",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=03/day=02/20220302dacom01.rpt",
+      "sha256": "a107cdac3836ea2c7e14c26b9d0d9716f5e6521c68c72df1226c136e773a0e2b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=03/day=09/20220309dacom01.rpt",
+      "sha256": "c4b429e8246a00505c12a38a01dc177c92a61d5f67f712ecee260c8ddbce607c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=03/day=16/20220316dacom01.rpt",
+      "sha256": "2777dd2d8f45ce86ee7a23cb7dd98d4037d45714ad08a405986fc90054bb8b18",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43209,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=03/day=23/20220323dacom01.rpt",
+      "sha256": "8368ce3d27498c320324ea7553d067b891c80631c150106e5560801fa4b19204",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43209,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=03/day=30/20220330dacom01.rpt",
+      "sha256": "e6a9daef692334df405eeea67671319c4573801fe30277b0bb3276907e6dc97b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=04/day=06/20220406dacom01.rpt",
+      "sha256": "6b593caf19e02cb35d2102f896a5d2be7559ec566f5233c7705367637e11ee6c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42015,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=04/day=13/20220413dacom01.rpt",
+      "sha256": "9d2f81e9bfdbc44e2161f6d3236d143d86766247ba2fb95e90c490b0706d984d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42413,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=04/day=20/20220420dacom01.rpt",
+      "sha256": "eb3d59370cbad9fb9ce9f3a1d8fd46dabd1eb6e096e33cd49c627bec377d7981",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=04/day=27/20220427dacom01.rpt",
+      "sha256": "9d066404bfa5d9da70ba50f39e01852f62009c9ae2a9de260fccff6086b570b8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43210,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=05/day=04/20220504dacom01.rpt",
+      "sha256": "0fcde7d42fb3e8a9b42444ba29ec5c1ba42a4002640e82fcd5e660adcf5f6b86",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42412,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=05/day=11/20220511dacom01.rpt",
+      "sha256": "0047e770e4a4c15601d4e69ed24c372f1e10e08c082f8c31ead6edc2ad1752c6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42015,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=05/day=18/20220518dacom01.rpt",
+      "sha256": "7c1e811213971222e896d86bf697acfd55d77d3b89ddfed07f8c42b1c0e7cf8e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=05/day=25/20220525dacom01.rpt",
+      "sha256": "012da66181c0d63814f04a0057cc1d1269d722c1939c49e5133b4cca813d01f9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=06/day=01/20220601dacom01.rpt",
+      "sha256": "ad4561b6646decb29007a50164aedb58fcded863792a6f761ee3dc8a9613c3ca",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43805,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=06/day=08/20220608dacom01.rpt",
+      "sha256": "adaa0b904d4f1d9892e6bda7463f11a811a61a6105c3475a6a2c22fb18c4ed50",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=06/day=15/20220615dacom01.rpt",
+      "sha256": "be5a4bc1efe112ac9df43f591111227258b36608113d25a8c5cf784c04c4ba96",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43408,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=06/day=22/20220622dacom01.rpt",
+      "sha256": "a80623ccf3501ae315a5858dcb8222afc5fe6723a660feb37ed1c98203529a28",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=06/day=29/20220629dacom01.rpt",
+      "sha256": "e5e3b92da8e1c2d259c7e3c74ae453e187818f531e2421369bfe1ddd373303ed",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44203,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=07/day=06/20220706dacom01.rpt",
+      "sha256": "5487c0601352a3fb5ec5e168c0f65655ba6f96471388e204728c3e68b256fddb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=07/day=13/20220713dacom01.rpt",
+      "sha256": "1239507d89ae03b92929a1f11b85171f3c03c0ad6859353939ba386476ea3544",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44005,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=07/day=20/20220720dacom01.rpt",
+      "sha256": "da623a79fc4d6c0ee3f75b49680f3008a648bb62d2b35855b0b74ab66a96df9f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 67586,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=08/day=03/20220803dacom01.rpt",
+      "sha256": "a50125da1245dd94adea2e43e82883cdd7631213ea68c6147d7cd3f31394aa0c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 60248,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=08/day=10/20220810dacom01.rpt",
+      "sha256": "de2621771b6507735bab3fe25fff3645a9b8ce20c794717f28e43cfe3bfe18d1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=08/day=17/20220817dacom01.rpt",
+      "sha256": "0967a8f5c0d49cdfac13b2e9d73246127d2fb9eff36f52a4240e44d837a52a4f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43606,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=08/day=24/20220824dacom01.rpt",
+      "sha256": "8bfdc5b3a252fa10620fb5f1e226de2f4ed966ad11cbf7c9462feb10545933cb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44204,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=08/day=31/20220831dacom01.rpt",
+      "sha256": "6867cb284e6f0f7a52102374d0393bbf38621c479d235372da3a8e21e28519df",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46679,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=09/day=14/20220914dacom01.rpt",
+      "sha256": "7bed23d1359685dd1826b97fbbdee5cb35056249ac610060f0c35597eb0bb1d2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47077,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=09/day=21/20220921dacom01.rpt",
+      "sha256": "ae0c8a12351f951ce83ad418d6e8307178ce8d17b8d7383fa9bd46f0b1b136aa",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46280,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=09/day=28/20220928dacom01.rpt",
+      "sha256": "4cf71b46edbbfd98cade71852868eb7282e77ee0e7f8b7291bed2c644696cf16",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48882,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=10/day=05/20221005dacom01.rpt",
+      "sha256": "1b1f30129ecf1c020d358112a8f4dea6674a692a1953d4091c19486494195dc7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49067,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=10/day=12/20221012dacom01.rpt",
+      "sha256": "bb33f15bf2ff361f8720299357229f0279d514c528a2e5c058610db7934fae00",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48271,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=10/day=19/20221019dacom01.rpt",
+      "sha256": "57964aa4f8c138dfdf39fd2281efd477fe2955fc051a13ded0c8190b0db13a53",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48668,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=10/day=26/20221026dacom01.rpt",
+      "sha256": "73c3c4c67f0df19aa36362d7a3d5dc848b69e1630c4c619eec26eb5a41ead821",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48678,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=11/day=02/20221102dacom01.rpt",
+      "sha256": "95b267762a342d1fcc5a65410e26c0de23ca12aa01e0764dbae622c9421fe2d1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45000,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=11/day=09/20221109dacom01.rpt",
+      "sha256": "034f34b24165400b2745badf2c9ef4d935321015465968bc20eeb9e5079456d8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44806,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=11/day=16/20221116dacom01.rpt",
+      "sha256": "5cd1686d562fef4cbf33ff33bd5f9078f7fe0be660aeb1dc83dbcfb8d8d56bcb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45199,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=11/day=23/20221123dacom01.rpt",
+      "sha256": "3b567ef37e1eb64c0a950c805c08e092d3881f42c9b4a01d72a19cbc16935ad8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44801,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=11/day=30/20221130dacom01.rpt",
+      "sha256": "b56b2edbeef21c3a852f497f84703a63fc7d90763ab3a62e25abca8be3c8c33f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44999,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=12/day=07/20221207dacom01.rpt",
+      "sha256": "1a05f96382a0295b706ad99e62fa930ad0d134584ab695e61b61283722f697a2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45796,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=12/day=14/20221214dacom01.rpt",
+      "sha256": "b2e6dc93ff1eb65bddf07271bd02a2f66086be137c9dfda06b378f27a31c4b4f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45796,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2022/month=12/day=21/20221221dacom01.rpt",
+      "sha256": "13b00a05591e5e74aa0dabf8598851c66bc2cf11d9a73d63e6a56741fa2bfe03",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46280,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=01/day=04/20230104dacom01.rpt",
+      "sha256": "d2820553d91c7d778e39e15cbfc1d9b43dfc97199f789235e807eb66c52709bb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=01/day=11/20230111dacom01.rpt",
+      "sha256": "d87fc87d2e62f51614ae680deb75cbfd496ee68fb85550284b3cfdcad27f9ace",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=01/day=25/20230125dacom01.rpt",
+      "sha256": "a7145f07c3246473a7be422424fb6384091c9b3dc39300144a2efaba2778bb37",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=02/day=01/20230201dacom01.rpt",
+      "sha256": "f075e1ec0bbf418107608ec74d0b45850d071533a873026ff98011181767c390",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=02/day=08/20230208dacom01.rpt",
+      "sha256": "ec04eb9191f29e0e7fa12d3612a1f6a7023be64d5784a9013e3e1dac73d492bc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=02/day=15/20230215dacom01.rpt",
+      "sha256": "00613f68a139ab582b491fa87e2bb8fe83b4be9d252aa9623084efff43a4dc2b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43009,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=02/day=22/20230222dacom01.rpt",
+      "sha256": "eb7b781df61a25be9455ebceeafb668b305fc15183b23c03815c65aced444ea8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=03/day=01/20230301dacom01.rpt",
+      "sha256": "12b2f42378b8b3f1fbd446b7151dc2b43bc87d070be9ef7442f3aff3d85c39b5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=03/day=08/20230308dacom01.rpt",
+      "sha256": "8df16a9bec97bf8552e95029efbc211c18089bc663b057722c45e3b451679eb0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=03/day=15/20230315dacom01.rpt",
+      "sha256": "b30f85351f1265ea59c852e5f05678b6010ef887d3af5f66ecba2b9bdd946753",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42213,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=03/day=22/20230322dacom01.rpt",
+      "sha256": "ebf6702ba623c5b63e55185af245ca2b2eba0373eceda5aecc12ffbba13e8e3d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=03/day=29/20230329dacom01.rpt",
+      "sha256": "23e87d6187c8e64a729d15753ec21de4bf9314d57ebb918bf8d68ef1a4ed40df",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=04/day=05/20230405dacom01.rpt",
+      "sha256": "603498b40f164d22a1212b299a10af3704bc3d87f0f7c84ef80ac0725452051e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=04/day=12/20230412dacom01.rpt",
+      "sha256": "ff764b85d699892da53ba871c3fe299c7161c05f30f928714c94f2b52b2012f0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=04/day=19/20230419dacom01.rpt",
+      "sha256": "9d8dcf9f3d3781a3004925e0bc1cfb31166deace0780ec0682e5fcb85efe6c1e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43210,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=04/day=26/20230426dacom01.rpt",
+      "sha256": "c06d460b1be8dd8680436078c7cfdfda2dd4397a14ecc5f660a4f38f3c76ae04",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=05/day=03/20230503dacom01.rpt",
+      "sha256": "23e53d2f9877780691c44fb4fabcc010c14f9b84c0ed8ea4ee5073d3911e2fee",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=05/day=10/20230510dacom01.rpt",
+      "sha256": "27e76eae8af4cd06b17d95739654c9eb446c54730c7197e02234028dbf0f5f2b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42611,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=05/day=17/20230517dacom01.rpt",
+      "sha256": "1751e85b885da525b38fafaab05a3b57189efb8e08c98674c22c18c25ffefc8b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=05/day=24/20230524dacom01.rpt",
+      "sha256": "993136defd1d77ee153796f1365c1847d7e066797a2c48cd83202387c4c3c453",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48159,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=05/day=31/20230531dacom01.rpt",
+      "sha256": "fcf43193b7a12137089d604de07ff84db26304b02fe8e09e9e2a066e0308e463",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48357,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=06/day=07/20230607dacom01.rpt",
+      "sha256": "811d56be8dafa47194fc468d9ebfec330e0a27ab4252a6636a256e1d6dc047a3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47562,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=06/day=14/20230614dacom01.rpt",
+      "sha256": "de55447c7229d215339c99f6a6211d66f0ef7a7124c88f95ce82c7b7dce06da6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48358,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=06/day=21/20230621dacom01.rpt",
+      "sha256": "7d7aaa5a120c22dd31aa8e5ce1c2c5c00e0421857db071bb83f336b5b0b8ebfd",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48756,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=06/day=28/20230628dacom01.rpt",
+      "sha256": "a2a0f31f7efa3cf5e60fe678958605eeb35a5b4d3cadb7a397af3998c21d4493",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47362,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=07/day=05/20230705dacom01.rpt",
+      "sha256": "8e0877c277a59de005d26c01d4fb84e98e9164d944f64264c4c247c5ab9a5a11",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48557,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=07/day=12/20230712dacom01.rpt",
+      "sha256": "0a81e4e1ad1f833780895ff5a6333fb2c0a8e5a4a9e761232b33fe9f3cc8e952",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48955,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=07/day=19/20230719dacom01.rpt",
+      "sha256": "2198bd6b45662d9a9b72327416996cc045c72be4a3adbaf89011703b3bee307c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 64514,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=07/day=26/20230726dacom01.rpt",
+      "sha256": "e2aa611dd5e2e5b662fb2086473200338c3cc0638fa52ed7fe5fdff4d7cba2b9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 49154,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=08/day=09/20230809dacom01.rpt",
+      "sha256": "db2f8fddcb026fccf96ede724757cde9be31c00e1729435772de3b08635fb921",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48956,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=08/day=16/20230816dacom01.rpt",
+      "sha256": "faf56c26fb87561f53e5d5a7c422cb82c291c04c23d2bc0ced6f65897a95d64e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48556,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=08/day=23/20230823dacom01.rpt",
+      "sha256": "9cb561ac33406877c88234e24098c66ebe6bc1c1f517d40761de6d7974bc975e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=08/day=30/20230830dacom01.rpt",
+      "sha256": "070663a500dc8f83fc70b2e42f85f6db404030000d9dd8d18329f79ff8fbc2eb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45485,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=09/day=06/20230906dacom01.rpt",
+      "sha256": "054f1e0442d0e8f89c067c5346d8c022aedf44179c794034b8bcdc6ddc6fc785",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45693,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=09/day=13/20230913dacom01.rpt",
+      "sha256": "4735d2957cce3ca55c30c562bba3e3bfb2992feae0747f22256047fb77ace2ed",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 33794,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=09/day=20/20230920dacom01.rpt",
+      "sha256": "8c3b94a177109052dc038c4387728dd02e042dfbfd4a7067dfb5dd253f39afb5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 64116,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=10/day=04/20231004dacom01.rpt",
+      "sha256": "0c75c2aba102bdd5c9822468528517d12e56fefd54d0de0e36c6e94aa742f7c3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39158,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=10/day=11/20231011dacom01.rpt",
+      "sha256": "7265822726f5d6529b6dce37eff1fc0b92586c0c0eedf6d1dbe614bb93efa342",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=10/day=18/20231018dacom01.rpt",
+      "sha256": "79b6bd04faf7e72aa99fea12d7c1cea027309c9f28f8c84f2a57e63df2fb55db",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39937,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=10/day=25/20231025dacom01.rpt",
+      "sha256": "1dd2574bcd02c9c6c8f154ddea9b5828c0bde1fcd494727fb1499f12121195b4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=11/day=01/20231101dacom01.rpt",
+      "sha256": "9842de590dc7fd5a5787517efe56b3c9946089fd94e71d69c35d8097ce086583",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39545,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=11/day=08/20231108dacom01.rpt",
+      "sha256": "316246c0cf52d0864d39f1ec4e76e5657c3d81838f913130081ec13cfa84ad5c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=11/day=15/20231115dacom01.rpt",
+      "sha256": "585b0862c5c6a01d9e45a8cdba7e32dd65238063a8bbc539f4d576621d12699b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=11/day=22/20231122dacom01.rpt",
+      "sha256": "4bc1f8f5c7eafab9bc94f7272027949f9bb96fd2a307b7694e0a538bf66cf7a4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=11/day=29/20231129dacom01.rpt",
+      "sha256": "c0612a6a686b265b69b7d3fb863bbf9eee031b3d426df59d3fa878f775e1d13d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39937,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=12/day=06/20231206dacom01.rpt",
+      "sha256": "4bbe179bbf7cafdffe335a972c4c2982d49ea8ce9116ea7ebb0ea2811371a509",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=12/day=13/20231213dacom01.rpt",
+      "sha256": "3c9d22cf50313da37cb1b2320a9242121673ec41dc460eb11f3f70b51367b493",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=12/day=20/20231220dacom01.rpt",
+      "sha256": "014ea05e24b82c83aa0385de204bcbf4be1d2211d2be286d805469e1164e52f3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 36866,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2023/month=12/day=27/20231227dacom01.rpt",
+      "sha256": "7d684990e8faafc227a8ff09cb6e54241cf94e8793ef943751aaf956c1f66ab1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=01/day=03/20240103dacom01.rpt",
+      "sha256": "bdd2286e0b6a255f5c8392bca65105cf33c7ccd8894c337b5f718277b82bf735",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=01/day=10/20240110dacom01.rpt",
+      "sha256": "1cae8144c7f8f78c4a9121a94af2cb7c00a14bc3fd8f392a85c20eb7369b677b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=01/day=17/20240117dacom01.rpt",
+      "sha256": "9e522c12befedf722b02a35af1adc1bde62ec158b198959415088e0fdce87d69",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=01/day=24/20240124dacom01.rpt",
+      "sha256": "b76a9cfcd38379aae6cabb3e3380aae89636e5f6eccd689b279d123d66348dd1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=01/day=31/20240131dacom01.rpt",
+      "sha256": "3a6673d21bb13e6624c3d24f99356f691e54a2efd9c278de7b06b53c95aaf61e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=02/day=14/20240214dacom01.rpt",
+      "sha256": "72feabc7311f2fd44cb09948191da9ccab50a3ab066d1239046d8118da4fc642",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=02/day=21/20240221dacom01.rpt",
+      "sha256": "b42a74590ea039daa0520d1553b4cc25fc2f4c41059a75b9b6cd7bf10dfada34",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=02/day=28/20240228dacom01.rpt",
+      "sha256": "f2f7603d8219395f9e89fb42fb91e4144bc395406b0a96c0798d4722884a0678",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=03/day=06/20240306dacom01.rpt",
+      "sha256": "7fd851e9f8d930e41a55e55bb82ecb463825b4197ee91708e0b3d4147925d1f6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=03/day=13/20240313dacom01.rpt",
+      "sha256": "459039f55ccfbf9783ded3fee71496ec8269846b59d11f622bf85639b1cb9287",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43009,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=03/day=20/20240320dacom01.rpt",
+      "sha256": "7e02dedf3df6c1a5df92f5fc505866c96d2b49f9ad16395ab750660f0c518eae",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=03/day=27/20240327dacom01.rpt",
+      "sha256": "b4f0c9bd408fa4f77a4c11c2e83782089088fb80da63295441f743de3f70cc14",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=04/day=03/20240403dacom01.rpt",
+      "sha256": "de845e8ac130801e0d11d0a39e7f0c6ddc293931b8bc6c54e2a672cdc770b934",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=04/day=10/20240410dacom01.rpt",
+      "sha256": "d64dac0e857c2b1da4c1ebb3a0ab1ba608d9af2386e8078037ce32574e608c2d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42214,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=04/day=17/20240417dacom01.rpt",
+      "sha256": "70b988ac5bbf3f49c7e4e4b01043700259d2246589ce609b1ffee59e553c691b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=04/day=24/20240424dacom01.rpt",
+      "sha256": "23dc9c0ab73ed83721f07cb3a2396f6694ebc549b5a46def4004b55323b92155",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=05/day=01/20240501dacom01.rpt",
+      "sha256": "1d056d02f886d89fbd89fd866106698a7da21015b7bc24c36383f097b0591239",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42611,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=05/day=08/20240508dacom01.rpt",
+      "sha256": "d9397c874417d03dcbb4d035600c33edb2f0c073beed0d7e6e711ae91e855549",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42413,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=05/day=15/20240515dacom01.rpt",
+      "sha256": "39225a8e503d110eedb4db98c878de8d65face90f33cdda264c6175d341ef496",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=05/day=22/20240522dacom01.rpt",
+      "sha256": "4dfd17b8c8f3dde3fd0202abb9549cdad461fbbd21b656e131b7a2c589b52eb9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=05/day=29/20240529dacom01.rpt",
+      "sha256": "3b3c1556699484d1cc15c32dd7697b24d309bad483acdfd58936f868ef26a5cb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=06/day=05/20240605dacom01.rpt",
+      "sha256": "9aa538333fed4ae845fab9364862887222595936f08af94566dd6ad15e94346f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=06/day=12/20240612dacom01.rpt",
+      "sha256": "640ad3c8b89e225d678a90b4dc5fb6856662210c7595e8e03e47d4c1e14385dc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=06/day=19/20240619dacom01.rpt",
+      "sha256": "e53d989548e962b438ef19aeb2e20b1fd213aed76d0e5612f18dc94a30656ade",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=06/day=26/20240626dacom01.rpt",
+      "sha256": "22adddfeb6560e8bd29d3dd4e5faa7deae8201cc08252f6662eddbf00aea9333",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=07/day=03/20240703dacom01.rpt",
+      "sha256": "2996497de05af3b8a6f0a867dfb1c5cccda326ed256cf37fbdde1e357c4ba2a1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42213,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=07/day=10/20240710dacom01.rpt",
+      "sha256": "46007d0d82e17353c1c53a3aa0f37eb25377a93ac06208db601ef0224718c9bd",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39739,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=07/day=17/20240717dacom01.rpt",
+      "sha256": "b8df7754c66b2d07fa8778526dfb472d70289159dea5b675c4d761d5e92c8cda",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 61453,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=07/day=24/20240724dacom01.rpt",
+      "sha256": "5c90fb5e8b463742c942b036f3cdccdd6f1993404ce5a9c09a99de27539e8ce2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 61442,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=08/day=07/20240807dacom01.rpt",
+      "sha256": "739d26b917967bd6951317f4307d408468fd63a16670c820aeb67cd8819081f0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39749,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=08/day=14/20240814dacom01.rpt",
+      "sha256": "88d17fb3c42927e0c28d82599c81af285dc953d90d0dbc07a1c7b43977fefae0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42015,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=08/day=21/20240821dacom01.rpt",
+      "sha256": "822b5b473004db61408e76c8c2232150c2af38e5ea345095712267fac866c2bf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=08/day=28/20240828dacom01.rpt",
+      "sha256": "a6b1a275bc89e9fde06092ccbadf287c6b47f91e1ba0d14fe07e6cf409f8aa37",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=09/day=04/20240904dacom01.rpt",
+      "sha256": "45acde8c7f2ca45956bf55060d2d7d8dc9ec86226f8fd9f95ebc1b420067f0a0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43019,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=09/day=11/20240911dacom01.rpt",
+      "sha256": "405bf60af170b14e321d61085d22502bfe120bd7074c096dfccb33cb11f644e4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=09/day=25/20240925dacom01.rpt",
+      "sha256": "03d826b7d742b8b2a5836ddddab3245eefee277589aaba45948e1b7b406cd6a4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=10/day=02/20241002dacom01.rpt",
+      "sha256": "70641c350cc86c1fa3e5d44b3e49921e0242a490d2a581a409cd35e1d2c574b0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=10/day=09/20241009dacom01.rpt",
+      "sha256": "7f8690a245eaad70d22e9dec8dfbfe7b6c77414393e90c4008e93ee3bd6e7e5c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=10/day=16/20241016dacom01.rpt",
+      "sha256": "ce85326a27b05423a58cf297ccd9ad32a30be52804cd2d449ff79d0f710c0d16",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42434,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=10/day=23/20241023dacom01.rpt",
+      "sha256": "456b908936d651c866efdbafb948d43ce5065a97651ef03b4d4ee610593e076d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42214,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=10/day=30/20241030dacom01.rpt",
+      "sha256": "41ad5849786d4b5bd5b3d9dc35233812b32e0358da831dcc3cdc3807ee625bc7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 41816,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=11/day=06/20241106dacom01.rpt",
+      "sha256": "8532d96860d36871ebb5bfba7359113a4e7e8d91427c0b4fe0b7ad803ef56173",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42418,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=11/day=13/20241113dacom01.rpt",
+      "sha256": "fd792ad2dfb5b90ddd06ec8c14a4cd26bd3064add87a59a55ce95809d4cbd9ec",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=11/day=20/20241120dacom01.rpt",
+      "sha256": "1fe79b69fe8122201fc37405b635382d8355956addc7c36494f4bc37e09252b9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=11/day=27/20241127dacom01.rpt",
+      "sha256": "780db609861931552f2290ac79b04d318d9221af339c1861c297c83953dff69f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=12/day=04/20241204dacom01.rpt",
+      "sha256": "f2f8036d3f8be03fe196fecbe5810678fd419b779968c0699c72cef81cc095b6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43009,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=12/day=11/20241211dacom01.rpt",
+      "sha256": "4c3f97a9736910288e616c012cd781bfa119baafd131911f29e17a85e99ee28c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=12/day=18/20241218dacom01.rpt",
+      "sha256": "caac0ef5243d27f56c7218fce3d854b318c074a3ae330becf6cd2757f47f2e34",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2024/month=12/day=25/20241225dacom01.rpt",
+      "sha256": "a36f57011c062e15513ef0b8d5e03651283b1dd8f569cf40d1247d6470fb3573",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39344,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=01/day=01/20250101dacom01.rpt",
+      "sha256": "46cba6af5959750780ff21ad322eea279f1f8180e23ac391f69dfc0e0cadf4cc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39540,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=01/day=08/20250108dacom01.rpt",
+      "sha256": "0f7c6611e4c256c68fc7578d85569409049288282ab36a4c5fd26f738fdac9e0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39540,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=01/day=15/20250115dacom01.rpt",
+      "sha256": "4126e307b6252d297e60c5b4f1280c64ade2cf5ae75419f278f0a56bf00e2e73",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=01/day=22/20250122dacom01.rpt",
+      "sha256": "951247560729cd41893a4cab4d8b7fbaeb390a1d9f181333954314d3b80a3f24",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=02/day=05/20250205dacom01.rpt",
+      "sha256": "c47cc296c34d4ec234d95519861263907fbf7a6e810dca12f54f69ea43add993",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39540,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=02/day=12/20250212dacom01.rpt",
+      "sha256": "66cbf17f3e02613ae0b4eed70b3425806fe8badc50db6492e7e58a6d726bd8f4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 38943,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=02/day=19/20250219dacom01.rpt",
+      "sha256": "ea6815cd2097c655aedb398087c6b528c85e196a3ffe33081041e6d0fb1e4c3d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=02/day=26/20250226dacom01.rpt",
+      "sha256": "5e1c2406b1dfb23c1b632443ba3db7e830186bcd3528cdc905ba913a15263907",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45286,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=03/day=05/20250305dacom01.rpt",
+      "sha256": "deb5dd9ccd9333f9ded6a8a7ed8065a275084ede56ba68499d90092983da8fd6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=03/day=12/20250312dacom01.rpt",
+      "sha256": "d49a123709c2e86e37aefd6bc0f3df70f794aa34ecc519974022c1c2bdd6e996",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45285,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=03/day=19/20250319dacom01.rpt",
+      "sha256": "1a72e3d9d2be0bf203ce4c017f68de3e0f80eb806014ad67c4a57fcd617243c4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45883,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=03/day=26/20250326dacom01.rpt",
+      "sha256": "d502dc65518c5c4361a028967ddbc0bd569b009a39bbf1203ad8f4913535c899",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45485,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=04/day=02/20250402dacom01.rpt",
+      "sha256": "65e650f31677ba437c91edb596b3bc22e1c9035e17647a60ea9e3b88402331a1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45087,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=04/day=09/20250409dacom01.rpt",
+      "sha256": "1b5c3cf45b8c3d46ef0f4c6776d48bf5b8d3152fb161d1c196b5700a36248abe",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=04/day=16/20250416dacom01.rpt",
+      "sha256": "01b4fff27a8a2323688759883ebb5e976ae295d43de72e36509dae9b675171b2",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=04/day=23/20250423dacom01.rpt",
+      "sha256": "78169916da7fa15ecd14f80a1779d64a769c18e33c445d0c5c93148a28a90629",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45286,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=04/day=30/20250430dacom01.rpt",
+      "sha256": "a7707660f8b9fe61041345d307af46a4736533055b475027a2a17b782fcad7e0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46084,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=05/day=07/20250507dacom01.rpt",
+      "sha256": "76ed38f60967e2c9d2472e1fcec2f1ee764125b75e54e7a238d14c88ccc5ca35",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45090,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=05/day=14/20250514dacom01.rpt",
+      "sha256": "d6cb71c7a5c3e524a1961df2bb393f0619312b5bf37d840e5223591e15a44feb",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45687,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=05/day=21/20250521dacom01.rpt",
+      "sha256": "42d98d56e6a703c799b985c03c5ff2cb67da7e5dc1e25ecc80bb76666d3b5d18",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=05/day=28/20250528dacom01.rpt",
+      "sha256": "4a0e1e2d7aa0fdee04178b9cc3bc913461c041e43e233ab066170d6a119d2094",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45883,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=06/day=04/20250604dacom01.rpt",
+      "sha256": "bcdc7e3574e0ce88f2656e0838fe76f5b2ca6cca51b764770b2eed89fa77ef07",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45087,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=06/day=11/20250611dacom01.rpt",
+      "sha256": "72f706686e471066298a10e59465cb6043dd3c7afdd807c9778bbff60877501e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=06/day=18/20250618dacom01.rpt",
+      "sha256": "485d71682fd4075bd84c4a2f718eb1b6f260755aaaa776e254ae4fe745982dd9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45286,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=06/day=25/20250625dacom01.rpt",
+      "sha256": "9dff9beda7e6237ffa481f4c5f8d314d1731d864960b4e2ac8aac14f1b25eb13",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44490,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=07/day=02/20250702dacom01.rpt",
+      "sha256": "2d9f2c44d2a06c8e5a4671f843ad6d94b7147613a9c656c523c530f280bea9f9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=07/day=09/20250709dacom01.rpt",
+      "sha256": "8feed656f7d9d901174090e9ada8f84659290ed1230ab7b9ef7c348fbd74b008",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44887,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=07/day=16/20250716dacom01.rpt",
+      "sha256": "e98a0a1af6e2220b0a4ee0fd44e2d8a905f38385b05ecc00aa99b1a860085083",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 57176,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=07/day=23/20250723dacom01.rpt",
+      "sha256": "4bde06f4e0801977260a5463221059d6df5ae2d4fa9fecd547709c0170799b30",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 56584,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=08/day=06/20250806dacom01.rpt",
+      "sha256": "c995592335117ce6fcea536eeaee108126165880ed77c643e036289d2d990042",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43701,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=08/day=13/20250813dacom01.rpt",
+      "sha256": "02ac3046b5eb6b5338d6e97c80df0faa85fce673ab5da898db34894de52fc9fe",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44294,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=08/day=20/20250820dacom01.rpt",
+      "sha256": "609cd32c3faf8241bacb916394df593c5314e8a0a5a91b7cc09154e1b908d61d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47960,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=08/day=27/20250827dacom01.rpt",
+      "sha256": "a30950f781dd7c55329423bb51e2acad4a2827d26a8c3e0a9c1ecfa56fd9a83b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=09/day=03/20250903dacom01.rpt",
+      "sha256": "6fba67c8a5d828958ae284a7b2ba2e3700ccc4107fa6e4c1bbd429bad35d8370",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47571,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=09/day=10/20250910dacom01.rpt",
+      "sha256": "a19b058bafaeede63154c51aa2920d40952da186918a1ea8f2d979e2a8e0e976",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47573,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=09/day=17/20250917dacom01.rpt",
+      "sha256": "8f8e11fb4b1fa2ff418cdc9170e2814ea0d48b446a8e77732b42c032d68b71a9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48557,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=09/day=24/20250924dacom01.rpt",
+      "sha256": "0adea611cf5d4df4cf737a45054097471082e2672398803c3e6904da09fefc0c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45883,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=09/day=29/20250929dacom01.rpt",
+      "sha256": "9a98a1f6adb45d78764e1a857ec96d8f87a4cbba6ed3609024d458b58a753188",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=10/day=15/20251015dacom01.rpt",
+      "sha256": "5a8e6acfe842caeee280aeb0681b5b81e829c2c34d9bdcd9eb934bc1fde834fc",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42637,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=10/day=22/20251022dacom01.rpt",
+      "sha256": "014a00288642d0de6fe22930e271d8874a4e9189570403b78a150eec13661b09",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=10/day=29/20251029dacom01.rpt",
+      "sha256": "400000547df1e06f69b959602da833e5dabfd615125df536dbdf4ef07e1432b6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43014,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=11/day=05/20251105dacom01.rpt",
+      "sha256": "fadeef3351e5ea843a1fb391a4db36ee23da0b5d1678080715ae401b55895171",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42617,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=11/day=12/20251112dacom01.rpt",
+      "sha256": "f50213fa348483b10e38792f4b50baf8dc8220db89198c578b715ee913195956",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=11/day=19/20251119dacom01.rpt",
+      "sha256": "cc419788a7d39ced5bc354968a771b52afcaae330a13636b81bcd91b8ce11dd1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=11/day=26/20251126dacom01.rpt",
+      "sha256": "da7495ab5a9ed47e72ceb5a5a7d749e5a42671693fd44b12e4b8d139011eb775",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=12/day=03/20251203dacom01.rpt",
+      "sha256": "c36fa0c7104d50ef1c953ea14241755787faa98c75d63027ff680f98cba8039a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43407,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=12/day=10/20251210dacom01.rpt",
+      "sha256": "e1b2d0940c8fcf2cde5bbac16d50f68c652bdea70a8a1f404fd8cc76923c75fa",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42413,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=12/day=17/20251217dacom01.rpt",
+      "sha256": "7f1e359334f0c31e51ab3b5a2757b4c155b6e136daac2a1a215b4b0593648fe7",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43407,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=12/day=24/20251224dacom01.rpt",
+      "sha256": "139af41783ddcbc5b66c8e6b43a49c819bf85fcd361fec7d410752f647d572aa",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39143,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2025/month=12/day=31/20251231dacom01.rpt",
+      "sha256": "17403ea0d7c23a99f6f4979dd793a5ddab0f58565b22452203fc6caf3043d24c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39341,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=01/day=07/20260107dacom01.rpt",
+      "sha256": "8a006a54fc2a99300150c459d2d21e7c6e05fdc66e3ebfd3abc668cf43fc13cf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39341,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=01/day=14/20260114dacom01.rpt",
+      "sha256": "68dcfde8597f517e1cbb42acd93d779380f2f634bd77aa76bc8ee29be5f61ac4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39938,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=01/day=21/20260121dacom01.rpt",
+      "sha256": "72117d63bacac4c6e3ce5bfc93a3208252d4160ee4716759483af69db0996d2b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39142,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=01/day=28/20260128dacom01.rpt",
+      "sha256": "048613c2caa64f199770ea751db777f3e326c69ca3fb5c761293286d8e99b914",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39739,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=02/day=04/20260204dacom01.rpt",
+      "sha256": "cb9501d02d557802fd33b055a11ea71411943499d7dc12d00e6976196fa03ec6",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 39739,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=02/day=11/20260211dacom01.rpt",
+      "sha256": "1e5d9f7b7ad8efc6a9a53d589924dd4445d3a04a9b7f9b7c15292694fd4a94a1",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 61442,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=02/day=25/20260225dacom01.rpt",
+      "sha256": "a9a4ae6d227fb97c5436aa88d84edd8e4b4533022ecfc94c974e5d52a3d964f3",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=03/day=04/20260304dacom01.rpt",
+      "sha256": "e520c3113c269b4069edfa35818762adad8901cbf60b6101abd0fb6dc1f9d77c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42811,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=03/day=11/20260311dacom01.rpt",
+      "sha256": "95d6c0a0aad8ba980f1cdf0e25c7164b89544289a556199c85c22162b417ffee",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43010,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=03/day=25/20260325dacom01.rpt",
+      "sha256": "79df1ebda86b7c642e7ccbd0b32b062713b08cf325d6c203d628378e0a721f3f",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43026,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=04/day=01/20260401dacom01.rpt",
+      "sha256": "ce13fb0e2b17219c12ec53cffbbc73cd97ca74171c3ea5a2db5629ba1a7368f5",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 42612,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=04/day=08/20260408dacom01.rpt",
+      "sha256": "59306daa15bb8dc731ecb8fe7f69a39dcd6e4e156043cfb2adc0976430612bce",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 41816,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=04/day=15/20260415dacom01.rpt",
+      "sha256": "9edd1b709a09ab199dbbb7aed7d459934b5dbc37bbca67149f1ae6d8ebf06d2e",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 43009,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=04/day=22/20260422dacom01.rpt",
+      "sha256": "f575236031e571b352eb57f65c1e1273bca58a616b341ce3556154b32db51909",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47761,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=04/day=29/20260429dacom01.rpt",
+      "sha256": "a9ec1c35df3eff54953f48cd4a9f4615378cad2dde86a3d196f0aa26d252b7f4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46169,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=05/day=06/20260506dacom01.rpt",
+      "sha256": "c124d51f0efe533f249c2113809abd322a171e035b80cd2b5e344d4b947515f9",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46766,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=05/day=13/20260513dacom01.rpt",
+      "sha256": "7e1f2679663206fb11e4db40dce04acf33f93065415e952e687c4020659a930b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45773,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=05/day=20/20260520dacom01.rpt",
+      "sha256": "99f7e4715f864671f27fef61830b72dda9f2a674aec474ffffa22b8998743ca0",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48159,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=05/day=27/20260527dacom01.rpt",
+      "sha256": "7466e5e2188ef43118d74411bb93174b0b8f7d837bc9306c1449f9dcb3427e5d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46766,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=06/day=03/20260603dacom01.rpt",
+      "sha256": "07e3b474bec83fc56fc2a18ae418b57ae602f2ef7fc1a0cafd8f9b1740c998ca",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 47960,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=06/day=10/20260610dacom01.rpt",
+      "sha256": "7bd57c912d7cfcdfbe5962d7c22a317cb6d46c61c9f84c0036356d0f329c072b",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45771,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=06/day=17/20260617dacom01.rpt",
+      "sha256": "0e0bc489f5a2b3a8ebbbed390dc759fb42f50e8fdb5dfd06bca639018b2c7d32",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 48358,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=06/day=24/20260624dacom01.rpt",
+      "sha256": "226c2c7c84241e54159183ebdbc098cdf9f82cc0bc9ab5a656029995c808738a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45883,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=07/day=01/20260701dacom01.rpt",
+      "sha256": "34ba5203a368643e1d3a219823782438d49bfd94a2c63f8f5c7be87308a7cc49",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45684,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=07/day=08/20260708dacom01.rpt",
+      "sha256": "73776d6f0931ea9bcf3f84abcb7f7634d70dcc761f92c811508f33fdc8dfdcd4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45882,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=07/day=15/20260715dacom01.rpt",
+      "sha256": "778782f079714657ed79eab7558ca211452139aba2c8a5db0b043293027d9ebf",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 46082,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=07/day=22/20260722dacom01.rpt",
+      "sha256": "785125a34662c1b20c13c3a3df7c9b37e37a9b87a63a939d6f28a4415e652ac8",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45883,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=08/day=05/20260805dacom01.rpt",
+      "sha256": "35d01a2d9e4abe0fbe6417ca0cc6c18ddd79a266334f9f37ba6c7abad39aee4d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 62723,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=08/day=12/20260812dacom01.rpt",
+      "sha256": "b6f7a6959e679d27ebdbd5e5efb511c000e0efbb982256e57352548aacd5bf1c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44689,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=08/day=19/20260819dacom01.rpt",
+      "sha256": "582a7dcc1cbf5fa3f7864960ca0d2fccd744e3102b91c2d8f92cbc82260be366",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 45705,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=08/day=26/20260826dacom01.rpt",
+      "sha256": "b72d30f4894639b5311b7caa1cb8095c3026cc17afc1db0084899445275cc02d",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 44366,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=09/day=02/20260902dacom01.rpt",
+      "sha256": "5490706527c2728591956013410e426221f7e908f6496ffe57338414bf6c323a",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 57283,
+      "path": "data/raw/kra_text/dacom01/meet=2/year=2026/month=09/day=07/20260907dacom01.rpt",
+      "sha256": "28b60713bf7ddff3f2efb0f39a783dca94e21434a27b4d5e524661e31194cbe4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 3567296,
+      "path": "data/raw/jeju_native_results/native_results_2008.jsonl",
+      "sha256": "cb7fdc383d987eec2fcf7e8867f8be711d1e89d4972e2a4503944d6f9bfa4793",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 4227132,
+      "path": "data/raw/jeju_native_results/native_results_2009.jsonl",
+      "sha256": "f6cda1d9239ea248d0aa85033417c4f01fe24b5c9383f25ac084f6019cfe88b4",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 4108686,
+      "path": "data/raw/jeju_native_results/native_results_2010.jsonl",
+      "sha256": "314e9ece0eeafe105a1b71ce58adcb9a77fc9b399eb8aac41a1547e001796c78",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 4269583,
+      "path": "data/raw/jeju_native_results/native_results_2011.jsonl",
+      "sha256": "d03288d133e857a37b150eb9904f12563e8f360aad40aae7c318ace0b6bc2e77",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 4709772,
+      "path": "data/raw/jeju_native_results/native_results_2012.jsonl",
+      "sha256": "960d3982927601b190746b4130afe0737b371b4850e1f33648b88a397fa31076",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 5059473,
+      "path": "data/raw/jeju_native_results/native_results_2013.jsonl",
+      "sha256": "200b65a34fed7828c93d1313bdc2ba6e9639116cd7a63ebe2c2a2396809e2f0c",
+      "sha256_method": "streamed_actual_file"
+    },
+    {
+      "bytes": 5737930,
+      "path": "data/raw/jeju_native_results/native_results_2014.jsonl",
+      "sha256": "59c8f10927f0df1a7b0b9696d547358ffc9754d3b01b704d8724cff688112a3d",
+      "sha256_method": "streamed_actual_file"
+    }
+  ],
+  "special_prior_evidence": {
+    "ambiguous_nonpositive_rows": 24,
+    "codes": {
+      "91": 18,
+      "92": 24
+    },
+    "eligible_positive_time_rows": 18,
+    "rows": 42,
+    "rows_with_partial_section_time": 6,
+    "sample_path": "jeju/research/20261024_s_entry_conditions_v1/audit/special_prior_evidence.json"
+  },
+  "status": "SOURCE_AUDIT_PASS_PENDING_SUPERVISOR_REVIEW",
+  "support": {
+    "ambiguous_special_source_rows": 24,
+    "current_burden_missing_rows": 238,
+    "current_burden_nonmissing_rows": 51917,
+    "event_2019_conflict_null_rows": 40,
+    "full_card_roster_confirmed_races": 5181,
+    "full_card_roster_unconfirmed_races": 25,
+    "number_fraction_nonmissing_rows": 51917,
+    "prior_actual_delta_nonmissing_rows": 49988,
+    "prior_actual_nohistory_rows": 1952,
+    "prior_actual_nonmissing_rows": 50203,
+    "prior_fallback_rows_after_ambiguous_special": 15,
+    "prior_snapshot_truncated_rows": 198,
+    "star_marker_supplement_rows": 135,
+    "tail_after_2026_09_12_rows": 198,
+    "target_races": 5206,
+    "target_rows": 52155
+  },
+  "support_by_target_year": {
+    "2017": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 4354,
+      "delta_nonmissing": 4227,
+      "number_fraction_nonmissing": 4354,
+      "prior_actual_nonmissing": 4227,
+      "races": 432,
+      "target_rows": 4354
+    },
+    "2018": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 5111,
+      "delta_nonmissing": 5060,
+      "number_fraction_nonmissing": 5111,
+      "prior_actual_nonmissing": 5060,
+      "races": 503,
+      "target_rows": 5111
+    },
+    "2019": {
+      "current_burden_missing": 40,
+      "current_burden_nonmissing": 5850,
+      "delta_nonmissing": 5619,
+      "number_fraction_nonmissing": 5850,
+      "prior_actual_nonmissing": 5646,
+      "races": 576,
+      "target_rows": 5890
+    },
+    "2020": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 3290,
+      "delta_nonmissing": 3104,
+      "number_fraction_nonmissing": 3290,
+      "prior_actual_nonmissing": 3104,
+      "races": 329,
+      "target_rows": 3290
+    },
+    "2021": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 4331,
+      "delta_nonmissing": 4145,
+      "number_fraction_nonmissing": 4331,
+      "prior_actual_nonmissing": 4145,
+      "races": 418,
+      "target_rows": 4331
+    },
+    "2022": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 5261,
+      "delta_nonmissing": 5042,
+      "number_fraction_nonmissing": 5261,
+      "prior_actual_nonmissing": 5042,
+      "races": 512,
+      "target_rows": 5261
+    },
+    "2023": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 6506,
+      "delta_nonmissing": 6228,
+      "number_fraction_nonmissing": 6506,
+      "prior_actual_nonmissing": 6228,
+      "races": 657,
+      "target_rows": 6506
+    },
+    "2024": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 6329,
+      "delta_nonmissing": 6105,
+      "number_fraction_nonmissing": 6329,
+      "prior_actual_nonmissing": 6105,
+      "races": 637,
+      "target_rows": 6329
+    },
+    "2025": {
+      "current_burden_missing": 0,
+      "current_burden_nonmissing": 6410,
+      "delta_nonmissing": 6164,
+      "number_fraction_nonmissing": 6410,
+      "prior_actual_nonmissing": 6164,
+      "races": 654,
+      "target_rows": 6410
+    },
+    "2026": {
+      "current_burden_missing": 198,
+      "current_burden_nonmissing": 4475,
+      "delta_nonmissing": 4294,
+      "number_fraction_nonmissing": 4475,
+      "prior_actual_nonmissing": 4482,
+      "races": 488,
+      "target_rows": 4673
+    }
+  },
+  "target_labels_read": false,
+  "unresolved_limits": [
+    "Dacom01 file_date<=T-2 is a date-based availability assumption; original publication/revision timestamp was not recovered.",
+    "The 2019 40-row identity/name-conflict cohort and 2026-09-17..19 198-row source tail remain NULL.",
+    "The 24 ord=92 special rows with no positive official finish time are unknown and excluded from prior eligibility; this is not a declaration that they did not start."
+  ]
+}

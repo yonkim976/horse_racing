@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "status": "PASS_RESULT_REPRODUCTION_AND_CONTRACT_REVIEW",
+  "review_scope": "saved-output, fit-budget, denominator, selection-summary, primary-gate, hash, and independent-replay review",
+  "research_candidate_gate_pass": false,
+  "candidate_promoted": false,
+  "hashes": {
+    "root_result_verification_sha256": "cfeff065a359d629f86eec7ef9d96eff82a567df1673c71201c20aca0ab756d0",
+    "root_result_verifier_sha256": "4e1a972880411110b8d781c58c73e4325e4719ac36803a5626fc5a3567ab65fc",
+    "fit_run_receipt_sha256": "7a803d51b830337841532c8ac411448923623605a2f34339ad8fcdaeb379209b",
+    "parameters_sha256": "e0fb15df40d84f4176f6754f8f187f31bfe95449b74bb3832190e0055a9e7316",
+    "report_sha256": "1281e404ede21cda3a684c6ab436a8b1c7da95968857767a05bb6ce884c626c5",
+    "candidate_oos_scores_sha256": "393cecbd1d45383167259446358dca4facbebec0f5ee87aea8e11ad4b1fc7fc6",
+    "fit_checkpoint_sha256": "0bae6e09dc5f5edfb696a27cd8736f5098db38d16dd8174787c1e87197bdd524"
+  },
+  "run_contract": {
+    "receipt_status": "COMPLETED_RESEARCH_ONLY",
+    "database_changed": false,
+    "production_changed": false,
+    "candidate_lightgbm_train_calls": 6,
+    "candidate_final_models": 3,
+    "candidate_pl_temperature_optimizations": 3,
+    "s40_fit_calls": 0,
+    "s40_temperature_optimizations": 0,
+    "evaluation_races": 1779,
+    "evaluation_runners": 17412,
+    "evaluation_dates": 269,
+    "pool_denominators_per_arm": {
+      "WIN": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "EXA": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779
+    },
+    "plc_quarantine_races": 36,
+    "study_bytes_after_receipt": 12384117
+  },
+  "output_integrity": {
+    "run_receipt_artifacts": 28,
+    "current_file_hash_or_size_mismatches": 0,
+    "root_protected_prior_files": 495,
+    "root_protected_prior_files_unchanged": true,
+    "s40_replay_max_abs_error": 0.0
+  },
+  "independent_reproduction": {
+    "passed": true,
+    "model_files_replayed": 6,
+    "raw_predictions_replayed": 73314,
+    "ordered_top3_triples_reconstructed": 2416848,
+    "pool_metric_rows_checked": 24834,
+    "runner_marginal_rows_checked": 34824,
+    "pair_selection_rows_checked": 14232,
+    "reliability_rows_checked": 896,
+    "paired_bootstrap_draws_checked": 2000,
+    "max_abs_errors": {
+      "raw_model_replay": 0.0,
+      "temperature_objective": 6.217248937900877e-15,
+      "temperature_bound_objective": 1.3322676295501878e-14,
+      "pool_nll": 1.7763568394002505e-15,
+      "pool_brier": 7.771561172376096e-16,
+      "selection_probability": 2.3314683517128287e-15,
+      "runner_marginals": 9.992007221626409e-16,
+      "pair_count_distribution": 1.887379141862766e-15,
+      "pair_union": 6.661338147750939e-16,
+      "reliability": 9.992007221626409e-16,
+      "tri_bootstrap": 7.28583859910259e-17,
+      "summary_denominator": 0.0
+    }
+  },
+  "primary_gate": {
+    "tri_mean_race_nll_delta_g_minus_s": -0.010145715740871412,
+    "tri_nll_paired_date_bootstrap_ci95": [
+      -0.0211163001858688,
+      0.0008274163363530827
+    ],
+    "tri_mean_race_brier_delta_g_minus_s": -4.528289571267535e-05,
+    "tri_condition_pass": false,
+    "win_nll_point_protection_pass": true,
+    "win_brier_point_protection_pass": true,
+    "win_nll_delta": -0.008559976135003788,
+    "win_brier_delta": -0.001992059440544526,
+    "combined_research_gate_pass": false,
+    "failure_reason": "TRI NLL CI upper bound is positive, so the predeclared confidence-bound condition fails despite favorable pooled means and TRI Brier.",
+    "tri_brier_paired_date_bootstrap_ci95": [
+      -0.00015428206744872558,
+      6.797781103176086e-05
+    ],
+    "win_nll_paired_date_bootstrap_ci95": [
+      -0.015366524503008176,
+      -0.0017030745544332963
+    ],
+    "win_brier_paired_date_bootstrap_ci95": [
+      -0.003923102165778174,
+      -3.3289512506073393e-05
+    ],
+    "win_both_date_ci_upper_bounds_below_zero": true
+  },
+  "pooled_pool_metric_deltas_g_minus_s": {
+    "WIN": {
+      "nll": -0.00856,
+      "brier": -0.001992
+    },
+    "PLC": {
+      "nll": -0.000863,
+      "brier": -0.000322
+    },
+    "QNL": {
+      "nll": -0.009278,
+      "brier": -0.000759
+    },
+    "EXA": {
+      "nll": -0.009986,
+      "brier": -0.000489
+    },
+    "QPL": {
+      "nll": -0.000312,
+      "brier": -4.8e-05
+    },
+    "TLA": {
+      "nll": -0.008557,
+      "brier": -0.000172
+    },
+    "TRI": {
+      "nll": -0.010146,
+      "brier": -4.5e-05
+    }
+  },
+  "year_pattern": {
+    "WIN_QNL_EXA": "NLL and Brier improve in each of 2024, 2025, and 2026.",
+    "PLC": "Both metrics worsen slightly in 2025 and 2026.",
+    "QPL": "NLL worsens in 2025 and is near-flat/slightly worse in 2026; Brier worsens in 2025 and improves slightly in 2026.",
+    "TLA": "Brier worsens in 2025; remaining annual changes are small.",
+    "TRI": "NLL improves in all three years; Brier worsens slightly in 2025 and improves in 2024 and 2026."
+  },
+  "selection_summaries": {
+    "win_axis_top3_hit_count_s_to_g": [
+      1044,
+      1055
+    ],
+    "win_axis_top3_hit_rate_delta": 0.006183249016301293,
+    "win_axis_paired_date_bootstrap_ci95": [
+      -0.006788101604278075,
+      0.019329895367440265
+    ],
+    "qnl_top1_hit_any_delta_ci95": [
+      -0.012533645126218098,
+      0.007959976740327702
+    ],
+    "qnl_top3_hit_any_delta_ci95": [
+      -0.007415964348136397,
+      0.01688286160406445
+    ],
+    "qpl_top1_hit_any_delta_ci95": [
+      -0.005634200684331981,
+      0.020797836596838672
+    ],
+    "qpl_top3_hit_any_delta_ci95": [
+      -0.0016902123803770707,
+      0.02580302579824751
+    ],
+    "all_listed_selection_cis_include_zero": true
+  },
+  "interpretation_limits": [
+    "The report is a repeated-development-evaluation comparison; fit uncertainty is not included and it is not independent future validation.",
+    "Favorable pooled point estimates and selection summaries do not override the failed primary research gate.",
+    "Historical publication availability remains unverified; the reviewed results do not establish operational pre-race availability."
+  ]
+}

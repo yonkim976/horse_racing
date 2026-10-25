@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "jeju_joint_wager_baseline_rules_20261022",
+  "reviewed_at": "2026-10-22",
+  "timezone": "Asia/Seoul",
+  "purpose": "Define structural event labels from ordered joint top-three probabilities Q(i,j,k), record applicable official rules and unresolved historical evidence.",
+  "not_an_authorization_for": [
+    "new model training",
+    "model promotion",
+    "production prediction replacement",
+    "historical wager availability or payout reconstruction without race-level evidence",
+    "actual pre-purchase strategy ROI claims"
+  ],
+  "primary_rule": {
+    "name": "한국마사회법 시행규칙 제4조",
+    "effective_from": "2024-06-21",
+    "promulgation": "농림축산식품부령 제661호 (2024-06-18, 일부개정)",
+    "direct_article_url": "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lspttninfSeq=122175",
+    "whole_current_rule_url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=263295",
+    "accessed_at": "2026-10-22",
+    "article_4_minimum_starters": {
+      "WIN": 2,
+      "QNL": 3,
+      "EXA": 3,
+      "TLA": 4,
+      "TRI": 4,
+      "PLC": 5,
+      "QPL": 5
+    },
+    "plc_field_split": {
+      "field_count_basis": "number of starters when ticket sales begin",
+      "5_to_7": "Top2",
+      "8_or_more": "Top3",
+      "below_5": "PLC cannot be run under the statutory minimum",
+      "actual_starter_lower_bound": "If actual starters are a subset of the sales-opening roster, N_actual >= 8 implies N_at_open >= 8; store as an inference, never as an observed opening count."
+    }
+  },
+  "event_space": {
+    "race_condition": "Valid structural race with distinct horses occupying confirmed places 1, 2, and 3; ties and unresolved/cancelled races are outside the strict Q contract.",
+    "q_definition": "Q_r(i,j,k) = P(place1=i, place2=j, place3=k), for distinct i,j,k in the forecast roster.",
+    "q_invariants": [
+      "Q >= 0",
+      "sum over all ordered distinct triples Q = 1",
+      "sum_i P1(i) = 1",
+      "sum_i PTop2(i) = 2",
+      "sum_i PTop3(i) = 3",
+      "P1(i) <= PTop2(i) <= PTop3(i)"
+    ],
+    "pools": [
+      {
+        "code": "WIN",
+        "name_ko": "단승",
+        "ticket_key": "horse i",
+        "event": "i is first",
+        "probability": "P1(i)",
+        "eligible_minimum_starters": 2,
+        "event_space": "categorical_single_winner"
+      },
+      {
+        "code": "PLC",
+        "name_ko": "연승",
+        "ticket_key": "horse i",
+        "event": "i is Top2 if sales-opening roster has 5-7 horses; i is Top3 if it has at least 8",
+        "probability": "PTop2(i) or PTop3(i), determined only from observed N_at_open or explicit actual-starter lower-bound inference",
+        "eligible_minimum_starters": 5,
+        "event_space": "multiple_winners_binary_ticket_events",
+        "unknown_rule": "If N_at_open is absent and N_actual < 8, event label and forecast target are unknown; exclude PLC only from this race's PLC denominator."
+      },
+      {
+        "code": "QNL",
+        "name_ko": "복승",
+        "ticket_key": "unordered pair {i,j}",
+        "event": "i and j occupy places 1 and 2 in either order",
+        "probability": "sum_k [Q(i,j,k) + Q(j,i,k)]",
+        "eligible_minimum_starters": 3,
+        "event_space": "categorical_single_winner"
+      },
+      {
+        "code": "QPL",
+        "name_ko": "복연승",
+        "ticket_key": "unordered pair {i,j}",
+        "event": "i and j are both in places 1-3, in any order",
+        "probability": "sum over k distinct from i,j of TLA({i,j,k}), equivalently all six Q orders for each such k",
+        "eligible_minimum_starters": 5,
+        "event_space": "multiple_winners_binary_ticket_events"
+      },
+      {
+        "code": "EXA",
+        "name_ko": "쌍승",
+        "ticket_key": "ordered pair (i,j)",
+        "event": "i is first and j is second",
+        "probability": "sum_k Q(i,j,k)",
+        "eligible_minimum_starters": 3,
+        "event_space": "categorical_single_winner"
+      },
+      {
+        "code": "TLA",
+        "name_ko": "삼복승",
+        "ticket_key": "unordered triple {i,j,k}",
+        "event": "i,j,k occupy places 1-3 in any order",
+        "probability": "sum of the six Q permutations",
+        "eligible_minimum_starters": 4,
+        "event_space": "categorical_single_winner"
+      },
+      {
+        "code": "TRI",
+        "name_ko": "삼쌍승",
+        "ticket_key": "ordered triple (i,j,k)",
+        "event": "i is first, j second, and k third",
+        "probability": "Q(i,j,k)",
+        "eligible_minimum_starters": 4,
+        "event_space": "categorical_single_winner"
+      }
+    ],
+    "pool_mass_checks": {
+      "WIN_ticket_sum": 1,
+      "QNL_ticket_sum": 1,
+      "EXA_ticket_sum": 1,
+      "TLA_ticket_sum": 1,
+      "TRI_ticket_sum": 1,
+      "PLC_ticket_sum": "2 for Top2; 3 for Top3",
+      "QPL_ticket_sum": 3,
+      "warning": "PLC and QPL tickets overlap and can win simultaneously. Their event-probability sums are not 1 and must not be normalized into a single-winner categorical distribution."
+    }
+  },
+  "scoring_contract": {
+    "single_winner_pools": ["WIN", "QNL", "EXA", "TLA", "TRI"],
+    "single_winner_metrics": {
+      "nll": "-log(p_of_actual_ticket)",
+      "brier": "sum over all tickets (p_ticket - one_hot_actual_ticket)^2"
+    },
+    "multiple_winner_pools": ["PLC", "QPL"],
+    "multiple_winner_metrics": {
+      "ticket_log_loss": "- [y log(p) + (1-y) log(1-p)]",
+      "ticket_brier": "(p-y)^2",
+      "aggregation": "mean over eligible tickets within each race, then equal weight over races"
+    },
+    "q_metrics": ["ordered-triple categorical NLL", "ordered-triple one-hot sum Brier"],
+    "boundary_probability_policy": "Fix clipping/handling before viewing evaluation results.",
+    "comparison_note": "Do not interpret PLC/QPL ticket events as independent; do not rank pools by raw loss magnitude across different event spaces."
+  },
+  "settlement_and_exceptions": {
+    "statute": {
+      "law_url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=265371",
+      "effective_from": "2025-01-31",
+      "law_number": "법률 제20434호",
+      "article_8": "Pays winning tickets; if no winning ticket, refund applies. In multi-winner methods, a share with no matching ticket is distributed to other winning tickets under the statute.",
+      "article_10": "Race/ticket invalidation and refund cases include no-contest, impossible pool after scratch/exclusion, no winner for the pool, and tickets containing nonstarters."
+    },
+    "dead_heat": {
+      "rule": "Rules §5 and its annex divide ordinary payout fund across tied winning horses and winning ticket units; PLC and QPL use separate rank-position/combination allocation tables, with analogous treatment for unlisted cases.",
+      "annex_url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=140301657&gubun=",
+      "model_scope": "Exclude tied Top3 from strict Q event evaluation and retain a dead_heat ledger code; do not infer payout from the strict-order label."
+    },
+    "race_not_established": "Rules §8 and KRA guidance: one re-start may follow a start failure; if the retry also fails, race is no-contest. A no-contest ruling means finish order is not accepted and purchased tickets for that race are refunded, even if horses crossed the finish line.",
+    "nonstarter": "Rules §9: single-horse WIN/PLC tickets on a nonstarter are invalid; combination tickets containing a nonstarter are invalid. KRA Jeju guidance describes refund/exchange; after valid start, a non-finisher is not refunded.",
+    "official_rank": "Use the final confirmed KRA order after steward review; unresolved objections or rank changes remain excluded until resolved.",
+    "historical_change": {
+      "new_mismatch_invalidation": "The Act §10(1)(3) runner-list mismatch ground and §10(7) post-confirmation payout protection were added 2022-12-27 and effective 2023-03-28.",
+      "amendment_url": "https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=000812&lsRvsGubun=all",
+      "applicability": "Do not apply this new mismatch ground retroactively to 2019-2022 races; use event-level historical KRA rulings where available."
+    }
+  },
+  "cohort_contract": {
+    "recommended_conservative_common_7_pool_sample": "Official valid/completed and roster-verified strict unique Top3 races with N_actual >= 8; this is a recommendation, not the active experiment's denominator.",
+    "active_f1_structural_cohort": {
+      "evaluation_races": 1779,
+      "horses": 17412,
+      "race_days": 269,
+      "actual_field_n_7_races": 36,
+      "plc_usable_by_actual_starter_lower_bound": 1743,
+      "other_six_pool_denominator": 1779,
+      "plc_field_rule": "For N_actual >= 8, use Top3 only as lower-bound inference conditional on starters being a subset of sales-opening roster. Set N_at_open=null, N_at_open_observed=false, N_at_open_lower_bound=8, plc_rule_basis=actual_starter_lower_bound.",
+      "small_field_rule": "The 36 N_actual=7 races have unknown PLC split absent opening-roster evidence; exclude only from PLC. Keep them for WIN/QNL/QPL/EXA/TLA/TRI, whose event definitions do not depend on the PLC split, subject to their own statutory minima.",
+      "scope_caveat": "Existing frozen cohort is a structural normal-finish/complete-field event sample. KRA official valid/completed status and actual ticket offering/settlement were not exhaustively audited for every race; do not describe this as full market reconstruction."
+    },
+    "required_exclusion_ledger_fields": [
+      "race_id",
+      "date",
+      "official_status_or_not_audited",
+      "N_at_open",
+      "N_at_open_observed",
+      "N_at_open_lower_bound",
+      "N_actual",
+      "pool_minimum_by_type",
+      "pool_available_or_unknown_by_type",
+      "pool_label_status_by_type",
+      "official_top3_and_tie_count",
+      "rank_change_or_DQ_status",
+      "Q_inclusion",
+      "pool_inclusion_by_type",
+      "exclusion_reason_codes",
+      "source_path_and_hash"
+    ],
+    "synthetic_branch": "If testing the 5-7 Top2 PLC rule synthetically, supply N_at_open explicitly and label the branch synthetic; do not substitute actual field size or mix it with observed cases."
+  },
+  "market_comparison": {
+    "posthoc_proxy": "If D is the final gross payout multiple, p*D-1 may be reported as a final-price ex-post expected-return proxy.",
+    "not_supported": "Final odds have no verified first-publication/purchase timestamp in the existing audit, so they cannot establish executable pre-purchase strategy ROI.",
+    "this_experiment": "No return or ROI analysis is run.",
+    "inverse_odds": "Normalizing reciprocal final odds across all tickets does not create a coherent one-winner distribution for overlapping PLC/QPL events.",
+    "future_comparison_requirements": [
+      "same race",
+      "same pre-purchase timestamp",
+      "full ticket roster and prices",
+      "same unit budget and combination count",
+      "same refund/settlement rules"
+    ]
+  },
+  "historical_scope_and_unresolved": [
+    "Current §4 is directly verified in the 2024-06-21 version. The official 1995 historical regulation also records the 5-7/8+ PLC split; this confirms that split in the two checked versions, not uninterrupted product availability or every intermediate amendment.",
+    "The 2009 full revision and current §4 retain the seven event definitions; the current article annotation shows 2013, 2020, and 2021 amendment dates. Historical Jeju pool offering must be verified race-by-race.",
+    "For 2019-2022, do not retroactively apply the runner-list mismatch invalidity rule first effective in 2023; original race-level invalidity/refund rulings are preferred.",
+    "Historical opening-roster counts, exact PLC split for N_actual < 8, and all historical pool availability/race committee decisions are not verified by this contract.",
+    "Ties are not modeled; payout table was read and verified, but the current Q contract excludes ties."
+  ],
+  "sources": [
+    {
+      "id": "rules_current_article_4",
+      "publisher": "국가법령정보센터",
+      "title": "한국마사회법 시행규칙 제4조 직접 조문 (2024-06-21 시행)",
+      "url": "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lspttninfSeq=122175",
+      "accessed_at": "2026-10-22",
+      "supports": "Seven bet event definitions, minimum starters, opening-roster PLC Top2/Top3 rule."
+    },
+    {
+      "id": "rules_current_full",
+      "publisher": "국가법령정보센터",
+      "title": "한국마사회법 시행규칙 현행본",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=263295",
+      "accessed_at": "2026-10-22",
+      "supports": "Rules §§4, 5, 8, 9 and current effective date."
+    },
+    {
+      "id": "rules_dead_heat_annex",
+      "publisher": "국가법령정보센터",
+      "title": "한국마사회법 시행규칙 별표: 환급금의 배분비율",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=140301657&gubun=",
+      "accessed_at": "2026-10-22",
+      "supports": "PLC and QPL tie allocation ratios and analogous fallback."
+    },
+    {
+      "id": "act_current",
+      "publisher": "국가법령정보센터",
+      "title": "한국마사회법 현행본",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=265371",
+      "accessed_at": "2026-10-22",
+      "supports": "Act §§8 and 10 for refund and invalid-ticket conditions."
+    },
+    {
+      "id": "act_2023_amendment",
+      "publisher": "국가법령정보센터",
+      "title": "한국마사회법 2022-12-27 개정문 및 연혁",
+      "url": "https://law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=000812&lsRvsGubun=all",
+      "accessed_at": "2026-10-22",
+      "supports": "Act §10(1)(3), §10(7), effective 2023-03-28 and applicability provision."
+    },
+    {
+      "id": "rules_1995",
+      "publisher": "국가법령정보센터",
+      "title": "한국마사회법 시행규칙 역사본 (1995-02-10 시행)",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=48904",
+      "accessed_at": "2026-10-22",
+      "supports": "Historical PLC 5-7/8+ breakpoint as confirmed in official historical version."
+    },
+    {
+      "id": "kra_2025_plan",
+      "publisher": "한국마사회",
+      "title": "2025년 경마시행 계획, p.67",
+      "url": "https://race.kra.co.kr/down/raceplan2025_20250103.pdf",
+      "accessed_at": "2026-10-22",
+      "supports": "Pool-specific launch / cancellation committee handling when statutory minimum starter thresholds are not met."
+    },
+    {
+      "id": "kra_jeju_withdrawal",
+      "publisher": "한국마사회 제주",
+      "title": "출전마 처분제도",
+      "url": "https://race.kra.co.kr/raceguide/RaceTakePartHorseCancleService.do?Act=06&Sub=3&meet=2",
+      "accessed_at": "2026-10-22",
+      "supports": "Withdrawals, race exclusion, start exclusion refund/exchange; no refund after valid start for non-finish."
+    },
+    {
+      "id": "kra_jeju_start",
+      "publisher": "한국마사회 제주",
+      "title": "출발시행제도",
+      "url": "https://race.kra.co.kr/startingData/raceImplementSystem.do?Act=06&Sub=8&meet=2",
+      "accessed_at": "2026-10-22",
+      "supports": "Start validity, one retry after failure, second failure treated as no-contest; valid-start non-finisher not refunded."
+    },
+    {
+      "id": "kra_race_not_established",
+      "publisher": "한국마사회 서울 안내 (공통 제도 설명)",
+      "title": "경주불성립 제도",
+      "url": "https://race.kra.co.kr/raceguide/RaceFailureRaceService.do?Act=05&Sub=3&meet=1",
+      "accessed_at": "2026-10-22",
+      "supports": "No-contest grounds, no accepted finish order and full refund; marked as general guidance rather than Jeju-specific."
+    },
+    {
+      "id": "kra_rank_change",
+      "publisher": "한국마사회 서울 안내 (공통 제도 설명)",
+      "title": "순위변경·실격 제도",
+      "url": "https://race.kra.co.kr/raceguide/RaceRankChangeService.do?Act=06&Sub=3&meet=1",
+      "accessed_at": "2026-10-22",
+      "supports": "Steward rank adjustments/disqualification before final rank confirmation; not overextended as a Jeju-specific rule."
+    },
+    {
+      "id": "local_pool_research",
+      "publisher": "local project source audit",
+      "title": "20261014_pool_dividend_frequency_v1 prior research",
+      "url": "../../20261014_pool_dividend_frequency_v1/PLAN.md",
+      "supports": "Candidate/result/quote linkage counts and prior actual-field PLC shortcut that does not establish sales-opening roster."
+    },
+    {
+      "id": "local_single_place_research",
+      "publisher": "local project source audit",
+      "title": "20261014_single_place_returns_v1 prior research",
+      "url": "../../20261014_single_place_returns_v1/PLAN.md",
+      "supports": "Prior PLC support gaps and absence of official first-publication timestamp for final odds."
+    }
+  ]
+}

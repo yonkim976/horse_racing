@@ -1,0 +1,593 @@
+{
+  "status": "RETROSPECTIVE_DEVELOPMENT_COMPARISON",
+  "study": "20261025_top5_direct_learning_v1",
+  "objective_id": "partial_event_gibbs_nll_additive_selection_head_v1",
+  "outcome": "all three actual Top3 horses are contained in the selected exact five-horse set",
+  "probability_claim": "none; the Gibbs positive-set mass is a stochastic training surrogate and is not deterministic coverage probability or calibrated probability",
+  "primary": {
+    "races": 1503,
+    "baseline_all_three_hits": 439,
+    "selector_all_three_hits": 435,
+    "baseline_all_three_rate": 0.29208250166334,
+    "selector_all_three_rate": 0.2894211576846307,
+    "selector_minus_baseline_rate": -0.0026613439787092482,
+    "selector_minus_baseline_percentage_points": -0.2661343978709248,
+    "both_hit": 404,
+    "baseline_only_lost": 35,
+    "selector_only_caught": 31,
+    "both_miss": 1033,
+    "selector_captured_top3_count_0_1_2_3": {
+      "0": 28,
+      "1": 272,
+      "2": 768,
+      "3": 435
+    },
+    "baseline_captured_top3_count_0_1_2_3": {
+      "0": 26,
+      "1": 279,
+      "2": 759,
+      "3": 439
+    },
+    "distance_m": [
+      900,
+      1000,
+      1110,
+      1200
+    ]
+  },
+  "full": {
+    "races": 1779,
+    "baseline_all_three_hits": 519,
+    "selector_all_three_hits": 520,
+    "baseline_all_three_rate": 0.2917369308600337,
+    "selector_all_three_rate": 0.2922990444069702,
+    "selector_minus_baseline_rate": 0.0005621135469364812,
+    "selector_minus_baseline_percentage_points": 0.056211354693648116,
+    "both_hit": 482,
+    "baseline_only_lost": 37,
+    "selector_only_caught": 38,
+    "both_miss": 1222,
+    "selector_captured_top3_count_0_1_2_3": {
+      "0": 30,
+      "1": 328,
+      "2": 901,
+      "3": 520
+    },
+    "baseline_captured_top3_count_0_1_2_3": {
+      "0": 29,
+      "1": 331,
+      "2": 900,
+      "3": 519
+    }
+  },
+  "primary_date_bootstrap_95ci": {
+    "seed": 20261011,
+    "draws": 2000,
+    "date_count": 269,
+    "date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+    "schedule_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "cluster": "race_date",
+    "interval_level": 0.95,
+    "quantile_method": "numpy.quantile(method='linear')",
+    "lower": -0.01343341952546293,
+    "upper": 0.007752692064066596,
+    "valid_replicates": 2000,
+    "replicates_with_zero_primary_races": 0
+  },
+  "label_free_choice_date_inventory_sha256": "e4aa73b866eac00b361d0354fdd62b7b2bd98915e003f250adc40a8df0a66b84",
+  "primary_success_gate": {
+    "rule": "primary selector-minus-baseline all-three rate > 0 and date-bootstrap 95% CI lower bound > 0",
+    "passed": false
+  },
+  "primary_by_year": {
+    "2024": {
+      "races": 499,
+      "baseline_all_three_hits": 140,
+      "selector_all_three_hits": 133,
+      "baseline_all_three_rate": 0.280561122244489,
+      "selector_all_three_rate": 0.2665330661322645,
+      "selector_minus_baseline_rate": -0.014028056112224449,
+      "selector_minus_baseline_percentage_points": -1.402805611222445,
+      "both_hit": 122,
+      "baseline_only_lost": 18,
+      "selector_only_caught": 11,
+      "both_miss": 348,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 13,
+        "1": 91,
+        "2": 262,
+        "3": 133
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 13,
+        "1": 92,
+        "2": 254,
+        "3": 140
+      }
+    },
+    "2025": {
+      "races": 559,
+      "baseline_all_three_hits": 164,
+      "selector_all_three_hits": 167,
+      "baseline_all_three_rate": 0.29338103756708406,
+      "selector_all_three_rate": 0.29874776386404295,
+      "selector_minus_baseline_rate": 0.005366726296958855,
+      "selector_minus_baseline_percentage_points": 0.5366726296958855,
+      "both_hit": 156,
+      "baseline_only_lost": 8,
+      "selector_only_caught": 11,
+      "both_miss": 384,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 7,
+        "1": 103,
+        "2": 282,
+        "3": 167
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 4,
+        "1": 104,
+        "2": 287,
+        "3": 164
+      }
+    },
+    "2026": {
+      "races": 445,
+      "baseline_all_three_hits": 135,
+      "selector_all_three_hits": 135,
+      "baseline_all_three_rate": 0.30337078651685395,
+      "selector_all_three_rate": 0.30337078651685395,
+      "selector_minus_baseline_rate": 0.0,
+      "selector_minus_baseline_percentage_points": 0.0,
+      "both_hit": 126,
+      "baseline_only_lost": 9,
+      "selector_only_caught": 9,
+      "both_miss": 301,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 8,
+        "1": 78,
+        "2": 224,
+        "3": 135
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 9,
+        "1": 83,
+        "2": 218,
+        "3": 135
+      }
+    }
+  },
+  "primary_by_distance": {
+    "900.0": {
+      "races": 251,
+      "baseline_all_three_hits": 74,
+      "selector_all_three_hits": 68,
+      "baseline_all_three_rate": 0.2948207171314741,
+      "selector_all_three_rate": 0.27091633466135456,
+      "selector_minus_baseline_rate": -0.02390438247011952,
+      "selector_minus_baseline_percentage_points": -2.3904382470119523,
+      "both_hit": 66,
+      "baseline_only_lost": 8,
+      "selector_only_caught": 2,
+      "both_miss": 175,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 3,
+        "1": 48,
+        "2": 132,
+        "3": 68
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 2,
+        "1": 49,
+        "2": 126,
+        "3": 74
+      }
+    },
+    "1000.0": {
+      "races": 508,
+      "baseline_all_three_hits": 155,
+      "selector_all_three_hits": 154,
+      "baseline_all_three_rate": 0.3051181102362205,
+      "selector_all_three_rate": 0.3031496062992126,
+      "selector_minus_baseline_rate": -0.001968503937007874,
+      "selector_minus_baseline_percentage_points": -0.1968503937007874,
+      "both_hit": 142,
+      "baseline_only_lost": 13,
+      "selector_only_caught": 12,
+      "both_miss": 341,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 10,
+        "1": 92,
+        "2": 252,
+        "3": 154
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 9,
+        "1": 101,
+        "2": 243,
+        "3": 155
+      }
+    },
+    "1110.0": {
+      "races": 482,
+      "baseline_all_three_hits": 136,
+      "selector_all_three_hits": 142,
+      "baseline_all_three_rate": 0.2821576763485477,
+      "selector_all_three_rate": 0.2946058091286307,
+      "selector_minus_baseline_rate": 0.012448132780082987,
+      "selector_minus_baseline_percentage_points": 1.2448132780082988,
+      "both_hit": 128,
+      "baseline_only_lost": 8,
+      "selector_only_caught": 14,
+      "both_miss": 332,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 11,
+        "1": 84,
+        "2": 245,
+        "3": 142
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 9,
+        "1": 83,
+        "2": 254,
+        "3": 136
+      }
+    },
+    "1200.0": {
+      "races": 262,
+      "baseline_all_three_hits": 74,
+      "selector_all_three_hits": 71,
+      "baseline_all_three_rate": 0.2824427480916031,
+      "selector_all_three_rate": 0.27099236641221375,
+      "selector_minus_baseline_rate": -0.011450381679389313,
+      "selector_minus_baseline_percentage_points": -1.1450381679389312,
+      "both_hit": 68,
+      "baseline_only_lost": 6,
+      "selector_only_caught": 3,
+      "both_miss": 185,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 4,
+        "1": 48,
+        "2": 139,
+        "3": 71
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 6,
+        "1": 46,
+        "2": 136,
+        "3": 74
+      }
+    }
+  },
+  "full_by_year": {
+    "2024": {
+      "races": 637,
+      "baseline_all_three_hits": 172,
+      "selector_all_three_hits": 169,
+      "baseline_all_three_rate": 0.27001569858712715,
+      "selector_all_three_rate": 0.2653061224489796,
+      "selector_minus_baseline_rate": -0.004709576138147566,
+      "selector_minus_baseline_percentage_points": -0.47095761381475665,
+      "both_hit": 153,
+      "baseline_only_lost": 19,
+      "selector_only_caught": 16,
+      "both_miss": 449,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 15,
+        "1": 121,
+        "2": 332,
+        "3": 169
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 15,
+        "1": 122,
+        "2": 328,
+        "3": 172
+      }
+    },
+    "2025": {
+      "races": 654,
+      "baseline_all_three_hits": 198,
+      "selector_all_three_hits": 202,
+      "baseline_all_three_rate": 0.30275229357798167,
+      "selector_all_three_rate": 0.308868501529052,
+      "selector_minus_baseline_rate": 0.0061162079510703364,
+      "selector_minus_baseline_percentage_points": 0.6116207951070336,
+      "both_hit": 189,
+      "baseline_only_lost": 9,
+      "selector_only_caught": 13,
+      "both_miss": 443,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 7,
+        "1": 125,
+        "2": 320,
+        "3": 202
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 5,
+        "1": 123,
+        "2": 328,
+        "3": 198
+      }
+    },
+    "2026": {
+      "races": 488,
+      "baseline_all_three_hits": 149,
+      "selector_all_three_hits": 149,
+      "baseline_all_three_rate": 0.305327868852459,
+      "selector_all_three_rate": 0.305327868852459,
+      "selector_minus_baseline_rate": 0.0,
+      "selector_minus_baseline_percentage_points": 0.0,
+      "both_hit": 140,
+      "baseline_only_lost": 9,
+      "selector_only_caught": 9,
+      "both_miss": 330,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 8,
+        "1": 82,
+        "2": 249,
+        "3": 149
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 9,
+        "1": 86,
+        "2": 244,
+        "3": 149
+      }
+    }
+  },
+  "full_by_distance": {
+    "800.0": {
+      "races": 152,
+      "baseline_all_three_hits": 42,
+      "selector_all_three_hits": 43,
+      "baseline_all_three_rate": 0.27631578947368424,
+      "selector_all_three_rate": 0.28289473684210525,
+      "selector_minus_baseline_rate": 0.006578947368421052,
+      "selector_minus_baseline_percentage_points": 0.6578947368421053,
+      "both_hit": 40,
+      "baseline_only_lost": 2,
+      "selector_only_caught": 3,
+      "both_miss": 107,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 0,
+        "1": 34,
+        "2": 75,
+        "3": 43
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 0,
+        "1": 33,
+        "2": 77,
+        "3": 42
+      }
+    },
+    "900.0": {
+      "races": 251,
+      "baseline_all_three_hits": 74,
+      "selector_all_three_hits": 68,
+      "baseline_all_three_rate": 0.2948207171314741,
+      "selector_all_three_rate": 0.27091633466135456,
+      "selector_minus_baseline_rate": -0.02390438247011952,
+      "selector_minus_baseline_percentage_points": -2.3904382470119523,
+      "both_hit": 66,
+      "baseline_only_lost": 8,
+      "selector_only_caught": 2,
+      "both_miss": 175,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 3,
+        "1": 48,
+        "2": 132,
+        "3": 68
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 2,
+        "1": 49,
+        "2": 126,
+        "3": 74
+      }
+    },
+    "1000.0": {
+      "races": 508,
+      "baseline_all_three_hits": 155,
+      "selector_all_three_hits": 154,
+      "baseline_all_three_rate": 0.3051181102362205,
+      "selector_all_three_rate": 0.3031496062992126,
+      "selector_minus_baseline_rate": -0.001968503937007874,
+      "selector_minus_baseline_percentage_points": -0.1968503937007874,
+      "both_hit": 142,
+      "baseline_only_lost": 13,
+      "selector_only_caught": 12,
+      "both_miss": 341,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 10,
+        "1": 92,
+        "2": 252,
+        "3": 154
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 9,
+        "1": 101,
+        "2": 243,
+        "3": 155
+      }
+    },
+    "1110.0": {
+      "races": 482,
+      "baseline_all_three_hits": 136,
+      "selector_all_three_hits": 142,
+      "baseline_all_three_rate": 0.2821576763485477,
+      "selector_all_three_rate": 0.2946058091286307,
+      "selector_minus_baseline_rate": 0.012448132780082987,
+      "selector_minus_baseline_percentage_points": 1.2448132780082988,
+      "both_hit": 128,
+      "baseline_only_lost": 8,
+      "selector_only_caught": 14,
+      "both_miss": 332,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 11,
+        "1": 84,
+        "2": 245,
+        "3": 142
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 9,
+        "1": 83,
+        "2": 254,
+        "3": 136
+      }
+    },
+    "1200.0": {
+      "races": 262,
+      "baseline_all_three_hits": 74,
+      "selector_all_three_hits": 71,
+      "baseline_all_three_rate": 0.2824427480916031,
+      "selector_all_three_rate": 0.27099236641221375,
+      "selector_minus_baseline_rate": -0.011450381679389313,
+      "selector_minus_baseline_percentage_points": -1.1450381679389312,
+      "both_hit": 68,
+      "baseline_only_lost": 6,
+      "selector_only_caught": 3,
+      "both_miss": 185,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 4,
+        "1": 48,
+        "2": 139,
+        "3": 71
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 6,
+        "1": 46,
+        "2": 136,
+        "3": 74
+      }
+    },
+    "1300.0": {
+      "races": 63,
+      "baseline_all_three_hits": 20,
+      "selector_all_three_hits": 22,
+      "baseline_all_three_rate": 0.31746031746031744,
+      "selector_all_three_rate": 0.3492063492063492,
+      "selector_minus_baseline_rate": 0.031746031746031744,
+      "selector_minus_baseline_percentage_points": 3.1746031746031744,
+      "both_hit": 20,
+      "baseline_only_lost": 0,
+      "selector_only_caught": 2,
+      "both_miss": 41,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 1,
+        "1": 9,
+        "2": 31,
+        "3": 22
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 2,
+        "1": 8,
+        "2": 33,
+        "3": 20
+      }
+    },
+    "1400.0": {
+      "races": 52,
+      "baseline_all_three_hits": 15,
+      "selector_all_three_hits": 17,
+      "baseline_all_three_rate": 0.28846153846153844,
+      "selector_all_three_rate": 0.3269230769230769,
+      "selector_minus_baseline_rate": 0.038461538461538464,
+      "selector_minus_baseline_percentage_points": 3.8461538461538463,
+      "both_hit": 15,
+      "baseline_only_lost": 0,
+      "selector_only_caught": 2,
+      "both_miss": 35,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 1,
+        "1": 12,
+        "2": 22,
+        "3": 17
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 1,
+        "1": 10,
+        "2": 26,
+        "3": 15
+      }
+    },
+    "1610.0": {
+      "races": 9,
+      "baseline_all_three_hits": 3,
+      "selector_all_three_hits": 3,
+      "baseline_all_three_rate": 0.3333333333333333,
+      "selector_all_three_rate": 0.3333333333333333,
+      "selector_minus_baseline_rate": 0.0,
+      "selector_minus_baseline_percentage_points": 0.0,
+      "both_hit": 3,
+      "baseline_only_lost": 0,
+      "selector_only_caught": 0,
+      "both_miss": 6,
+      "selector_captured_top3_count_0_1_2_3": {
+        "0": 0,
+        "1": 1,
+        "2": 5,
+        "3": 3
+      },
+      "baseline_captured_top3_count_0_1_2_3": {
+        "0": 0,
+        "1": 1,
+        "2": 5,
+        "3": 3
+      }
+    }
+  },
+  "training_label_checks": {
+    "2024": {
+      "status": "PASS",
+      "label_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "complete_rank_rule": "every training race has exactly field_n rows and finish_position values 1..field_n",
+      "top3_rule": "exactly three training rows per race have finish_position <= 3",
+      "evaluation_year_labels_accessed": false,
+      "label_preflight_sha256": "4475c8f7c9059135ee13de1cf186a505d4280d9913ddb6543fda7b26ce14d262"
+    },
+    "2025": {
+      "status": "PASS",
+      "label_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "complete_rank_rule": "every training race has exactly field_n rows and finish_position values 1..field_n",
+      "top3_rule": "exactly three training rows per race have finish_position <= 3",
+      "evaluation_year_labels_accessed": false,
+      "label_preflight_sha256": "4475c8f7c9059135ee13de1cf186a505d4280d9913ddb6543fda7b26ce14d262"
+    },
+    "2026": {
+      "status": "PASS",
+      "label_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "complete_rank_rule": "every training race has exactly field_n rows and finish_position values 1..field_n",
+      "top3_rule": "exactly three training rows per race have finish_position <= 3",
+      "evaluation_year_labels_accessed": false,
+      "label_preflight_sha256": "4475c8f7c9059135ee13de1cf186a505d4280d9913ddb6543fda7b26ce14d262"
+    }
+  },
+  "selection_changed_races": 304,
+  "fit_receipt_sha256": "f69de2ad555718ae5fa12c7b9c6773a9ad208e8a809f449369749cf4f2a912bd",
+  "choices_sha256": "eacbea0404a41dd70872a9936a9547804579b3e41ca13386e84924ec06899545",
+  "choices_receipt_sha256": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754",
+  "bootstrap_source_sha256": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+  "baseline_source_sha256": "c3fc8a2bf10d3fa1678ab3c5463209089021f51f6d0bf500fc2db6006fda13c1"
+}

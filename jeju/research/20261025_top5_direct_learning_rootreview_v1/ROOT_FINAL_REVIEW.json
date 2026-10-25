@@ -1,0 +1,140 @@
+{
+  "status": "COMPLETE_COMPUTATION_PASS_PERFORMANCE_NOT_CONFIRMED",
+  "decision": "Keep existing frozen F1_STYLE6 score Top5; retain directly learned selector as held research candidate.",
+  "actual_training_completed": true,
+  "selection_head_fits": 3,
+  "base_horse_model_refits": 0,
+  "base_horse_scores_changed": false,
+  "executor_model": "gpt-6-luna",
+  "executor_reasoning_effort": "xhigh",
+  "head_type": "additive linear selection head trained on partial-event likelihood of all three actual Top3 included in a five-set",
+  "feature_count": 11,
+  "lambda": 1.0,
+  "no_hyperparameter_search_or_restarts": true,
+  "primary": {
+    "distances_m": [
+      900,
+      1000,
+      1110,
+      1200
+    ],
+    "races": 1503,
+    "baseline_hits": 439,
+    "learned_hits": 435,
+    "baseline_percent": 29.208250166334,
+    "learned_percent": 28.942115768463072,
+    "delta_pp": -0.2661343978709248,
+    "date_ci95_pp": [
+      -1.343341952546293,
+      0.7752692064066596
+    ],
+    "caught": 31,
+    "lost": 35,
+    "changed_sets": 254
+  },
+  "full_secondary": {
+    "races": 1779,
+    "baseline_hits": 519,
+    "learned_hits": 520,
+    "baseline_percent": 29.17369308600337,
+    "learned_percent": 29.22990444069702,
+    "delta_pp": 0.056211354693648116,
+    "root_date_ci95_pp": [
+      -0.9034827065517602,
+      1.0089827569295462
+    ],
+    "caught": 38,
+    "lost": 37,
+    "changed_sets": 304
+  },
+  "primary_success_gate_passed": false,
+  "period_start": "2024-01-05",
+  "period_end": "2026-09-19",
+  "partial_2026": true,
+  "independent_future_holdout": false,
+  "learning_label_windows": {
+    "2024": [
+      2019,
+      2023,
+      2492
+    ],
+    "2025": [
+      2019,
+      2024,
+      3129
+    ],
+    "2026": [
+      2019,
+      2025,
+      3783
+    ]
+  },
+  "verification": {
+    "source_keys_T_minus_2_and_provider_dates": true,
+    "main_gradient_finite_difference_max_error": 7.595867546061896e-10,
+    "independent_train_preprocessing_max_mean_error_under": 4e-13,
+    "independent_train_objective_max_error_under": 4.1e-15,
+    "all_three_gradient_norms_below": 1e-06,
+    "all_choices_1779_reproduced": true,
+    "all_candidate_sets_411084_reenumerated": true,
+    "all_outcome_rows_1779_reproduced": true,
+    "all_metrics_subgroups_and_primary_CI_three_way_match": true,
+    "frozen_base_and_protected_artifacts_unchanged": true
+  },
+  "limitations": [
+    "This Gibbs successful-choice-mass training loss is a surrogate; it is not the calibrated success probability of the deterministic chosen five.",
+    "The additive head has no horse-pair or set interaction features; a joint training event does not create interactions.",
+    "Small input group has strong support-count collinearity; no individual coefficient causal interpretation.",
+    "Earlier evaluation years are legitimate training labels for later folds, never for their own target fold.",
+    "The historical evaluation period has been repeatedly examined; success would not have been prospective validation.",
+    "Date bootstrap conditions on fitted models; models are not refit in every bootstrap draw."
+  ],
+  "operating_registry_changed": false,
+  "database_opened_or_copied": false,
+  "evidence": {
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_SOURCE_AUDIT.json": {
+      "sha256": "b263703aae9e7d5eca2bda394d4c20de67144bcaf78e959f5add9efffc8310f8",
+      "bytes": 5025
+    },
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_OBJECTIVE_CONTROLS.json": {
+      "sha256": "3a6322a7e64306ce6d0191bb03df941861809b6396f0343cf5940c63e70c47c6",
+      "bytes": 509
+    },
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_FIT_CODE_CONTROLS.json": {
+      "sha256": "6de19fb8daf4935a1d4c79fb33af4a74a7d9659a98b14f6b12cb09efbeca6421",
+      "bytes": 765
+    },
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_FITTED_MODEL_AUDIT.json": {
+      "sha256": "d27083e4a09b8a755382a8c97ae55a601bca4f5458052d1a2d2124e838ff978b",
+      "bytes": 1997
+    },
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/ROOT_OUTCOME_RECOMPUTATION.json": {
+      "sha256": "c8d4e0c142136e20db2f83ab0e816646bc12e05629aac340e424c4a008dcd17e",
+      "bytes": 10857
+    },
+    "jeju/research/20261025_top5_direct_learning_rootreview_v1/THREE_WAY_RECONCILIATION.json": {
+      "sha256": "4d657e9f19c74353f90ad91195b46ea4d91cf0a09e0cd75868a9b6baacc80e6b",
+      "bytes": 2014
+    },
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/FIT_RECEIPT.json": {
+      "sha256": "f69de2ad555718ae5fa12c7b9c6773a9ad208e8a809f449369749cf4f2a912bd",
+      "bytes": 29543
+    },
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/CHOICES_RECEIPT.json": {
+      "sha256": "13ab7d8f6aadab64771c43a73fcd7e813a10eb7268be0dcc7680cdf2bd7f5754",
+      "bytes": 2503
+    },
+    "jeju/research/20261025_top5_direct_learning_v1/outputs/OUTCOME_RECEIPT.json": {
+      "sha256": "47e0dcb9317d0def945c209be402e5d7fc9e7a437e2ff50c509a166ceb6cb5a6",
+      "bytes": 1379
+    },
+    "jeju/research/20261025_top5_direct_learning_review_v1/REPLAYED_CHOICES_RECEIPT.json": {
+      "sha256": "03e0401eca3bc43bdc6b16b87185459ffa37e1c8027187ea464d67eb910fad0a",
+      "bytes": 4363
+    },
+    "jeju/research/20261025_top5_direct_learning_review_v1/REPLAYED_OUTCOME_RECEIPT.json": {
+      "sha256": "3a73316a644126e473f00d63e0633ad7cd3564288dfdd4cb716be4c8f7f8949e",
+      "bytes": 4044
+    }
+  }
+}

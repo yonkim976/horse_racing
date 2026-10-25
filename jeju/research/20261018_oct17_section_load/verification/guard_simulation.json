@@ -1,0 +1,188 @@
+{
+  "passed": true,
+  "database": "read-only lookup of existing API6 view definition; all guard cases ran in SQLite :memory:",
+  "actual_api6_raw_view_contract": {
+    "name": "api6_section_records_current",
+    "columns": [
+      "api_record_id",
+      "race_date",
+      "meet_code",
+      "race_number",
+      "payload_json",
+      "payload_sha256",
+      "source_artifact_id",
+      "record_index",
+      "collected_at_utc",
+      "artifact_sha256",
+      "raw_relative_path"
+    ],
+    "required_columns_present": [
+      "api_record_id",
+      "artifact_sha256",
+      "meet_code",
+      "payload_json",
+      "payload_sha256",
+      "race_date",
+      "race_number",
+      "raw_relative_path",
+      "record_index",
+      "source_artifact_id"
+    ]
+  },
+  "sql_source": "jeju/research/20261018_oct17_section_load/apply_sections.py",
+  "review_ddl": "api6_section_distance_reviews only",
+  "view_sql": "api6_section_points_current only; no drops or replacement of existing views",
+  "target_api6_raw_item": {
+    "date": 20261017,
+    "meet": "제주",
+    "race_number": 5,
+    "rcDist": 1110,
+    "api_distances_m": [
+      100,
+      300,
+      500,
+      700,
+      900,
+      1100
+    ]
+  },
+  "website_binding": {
+    "website_path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_05.html",
+    "website_page_sha256": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+    "website_distances_m": [
+      110,
+      310,
+      510,
+      710,
+      910,
+      1110
+    ],
+    "evidence_path": "jeju/research/20261018_oct17_sections_website_review/root_api_website_comparison.json",
+    "evidence_sha256": "92fed5cf0dea518d87d71cd6ffba0e4af09c7753b5641e8967f7530b31052566"
+  },
+  "cases": {
+    "baseline_source_bound_review": {
+      "passed": true,
+      "raw_api_distances_m": [
+        100,
+        300,
+        500,
+        700,
+        900,
+        1100
+      ],
+      "effective_distances_m": [
+        110,
+        310,
+        510,
+        710,
+        910,
+        1110
+      ],
+      "statuses": [
+        "website_corrected",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected"
+      ]
+    },
+    "review_missing_all": {
+      "passed": true,
+      "effective_distance_null_count": 6,
+      "statuses": [
+        "website_review_not_applied",
+        "website_review_not_applied",
+        "website_review_not_applied",
+        "website_review_not_applied",
+        "website_review_not_applied",
+        "website_review_not_applied"
+      ]
+    },
+    "review_missing_index_3": {
+      "passed": true,
+      "effective_distance_null_count": 1,
+      "statuses": [
+        "website_corrected",
+        "website_corrected",
+        "website_review_not_applied",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected"
+      ]
+    },
+    "payload_sha_changed": {
+      "passed": true,
+      "effective_distance_null_count": 6,
+      "statuses": [
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review"
+      ]
+    },
+    "page_sha_changed": {
+      "passed": true,
+      "effective_distance_null_count": 6,
+      "statuses": [
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review"
+      ]
+    },
+    "key_changed": {
+      "passed": true,
+      "effective_distance_null_count": 6,
+      "statuses": [
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review"
+      ]
+    },
+    "rcDist_changed": {
+      "passed": true,
+      "effective_distance_null_count": 6,
+      "statuses": [
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review"
+      ]
+    },
+    "raw_distance_changed": {
+      "passed": true,
+      "effective_distance_null_count": 1,
+      "statuses": [
+        "api_source_changed_since_review",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected",
+        "website_corrected"
+      ]
+    },
+    "artifact_id_changed": {
+      "passed": true,
+      "effective_distance_null_count": 6,
+      "statuses": [
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review",
+        "api_source_changed_since_review"
+      ]
+    }
+  }
+}

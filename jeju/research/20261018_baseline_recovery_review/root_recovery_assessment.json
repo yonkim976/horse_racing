@@ -1,0 +1,54 @@
+{
+  "cause_confirmed": "documented_storage_cleanup",
+  "deletion_started_kst": "2026-10-17T19:16:12.728633+09:00",
+  "deletion_finished_kst": "2026-10-17T19:16:39.989615+09:00",
+  "deleted_file": {
+    "path": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_core_refresh/baseline/jeju_native_core.sqlite3",
+    "device": 16777232,
+    "inode": 98979541,
+    "logical_bytes": 1912885248,
+    "allocated_bytes": 1913241600,
+    "mtime_ns": 1792168111835046148,
+    "status": "deleted",
+    "sha256": "1de4756d4cb8824706d803097fc5b99c93c4324524fcef0a6db77bcc4fa87035",
+    "exists_after": false
+  },
+  "deletion_receipt": "reports/storage_review_20261017/db_copy_deletion_receipt.json",
+  "deletion_receipt_sha256": "829e4ea13b81d1ac58689e684b54224fcb078f11fe59ea087bb0780220defd1d",
+  "expected_fixed_pair_sha256": "1de4756d4cb8824706d803097fc5b99c93c4324524fcef0a6db77bcc4fa87035",
+  "exact_baseline_file_exists": false,
+  "git_tracking": "ignored by jeju/.gitignore:6 *.sqlite3; no tracked baseline path",
+  "usable_recent_backup": {
+    "path": "jeju/research/20261017_core_refresh/rolling_backups/20261017T220226_4747d5bd/jeju_native_core.sqlite3",
+    "sha256": "3382a2ed783493b18741482409b1d2c3229af23320b056568e1fe08a3a4fc79d",
+    "bytes": 1980116992,
+    "matches_recorded_pair_sha": true,
+    "same_as_original_fixed_baseline": false,
+    "latest_dates": {
+      "race": "2026-10-16",
+      "daily_training": "2026-10-15"
+    },
+    "rider_type_counts": {
+      "교육생": 95,
+      "기수": 317152,
+      "기수후보생": 1696,
+      "미분류": 95055,
+      "조교보": 71889,
+      "조교사": 112201,
+      "조교승인": 107371,
+      "주로조교": 207454
+    },
+    "contains_all_186428_prior_role_supplements": true
+  },
+  "current_database": {
+    "path": "jeju/data/jeju_native_core.sqlite3",
+    "sha256": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f",
+    "matches_current_refresh_manifest": true
+  },
+  "trash_check": {
+    "status": "not_accessible",
+    "escalated_read_retry_exit_code": 1,
+    "error": "Operation not permitted (macOS)"
+  },
+  "database_write_or_restore_performed": false
+}

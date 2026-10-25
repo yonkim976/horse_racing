@@ -1,0 +1,73 @@
+{
+  "status": "PASS_NUMERIC_REPRODUCTION_NOT_MODEL_ACCEPTANCE",
+  "features_all_34_exact": true,
+  "runner_predictions": {
+    "rows": 852,
+    "errors": {
+      "score": 0.0,
+      "p_top3": 6.661338147750939e-16,
+      "log_loss": 1.0547118733938987e-15,
+      "brier": 4.718447854656915e-16
+    }
+  },
+  "race_metrics": {
+    "rows": 90,
+    "errors": {
+      "log_loss": 2.220446049250313e-16,
+      "brier": 1.1102230246251565e-16,
+      "trio_nll": 8.881784197001252e-16,
+      "six_combo_hit": 0.0,
+      "top3_capture": 0.0,
+      "top3_all3": 0.0,
+      "top4_capture": 0.0,
+      "top4_all3": 0.0,
+      "top5_capture": 0.0,
+      "top5_all3": 0.0,
+      "top6_capture": 0.0,
+      "top6_all3": 0.0
+    }
+  },
+  "tickets": {
+    "rows": 540,
+    "errors": {
+      "numbers": 0.0,
+      "probability": 6.938893903907228e-17,
+      "hit": 0.0
+    }
+  },
+  "bootstrap": {
+    "rows": 120000,
+    "errors": {
+      "delta": 4.163336342344337e-16
+    }
+  },
+  "concordance_races": 3,
+  "concordance_pairs": 4,
+  "all_6combo_hit_race_keys_identical": true,
+  "shared_hit_races": 7,
+  "primary_improvement_reproduced": false,
+  "small_sample_not_proof_of_inferiority": true,
+  "source_freeze_unchanged": true,
+  "protected_models_and_registry_unchanged": true,
+  "current_worker_outputs": {
+    "fresh_primary_date_bootstrap.parquet": "4d3154f8a6bbf605589cac7fee057218e91d36890967c83b5844973abff2eb1f",
+    "fresh_canonical_max6.parquet": "da82687330540fdd025bf930ff9daa2caad065cd750a80591e67d2796cf876e5",
+    "historical_source_rebuild.json": "b663338285a25126a3880dd3b2a223b96a033365cae7ea89c9ce24c7db9dde12",
+    "fresh_model_predictions.parquet": "3c9f58425f78e507a5f44df940a1e08de1a9886b9456ebae0e09c9679a10de80",
+    "root_dryrun_fresh_build.json": "d6d365442ab13451ebcee61f574e1b8ee58c3bcbab4e6209e99d52cd3de10fd0",
+    "fresh_trial4_build.json": "56f6522c0c04ad5daa47775f435b6a4b1565189bdb8703d084140578f9771a41",
+    "historical_reproduction.json": "82c716630d7c27754bd88f9e25662085e15a50529afebb68517361396081208d",
+    "fresh_trial_slots_root_dryrun.parquet": "54da238af726fb7e998d0f609d0a994c970600b7362d42a0b5930923d0d2c5c3",
+    "fresh_six_combination_summary.parquet": "8797ae7966794e261dd21a6745e65c7c54d1eafa41441355a971b48023f77cab",
+    "fresh_features_34_root_dryrun.parquet": "03b3fda950f6b3ab7e7bcdeed44c1ef616208080959d0e3ba0ea248175ca9720",
+    "fresh_raw_score_concordance.parquet": "8c163f80f6101f5d8085fa6111f7da95e491eb76ae18b1a76856a105dae87cde",
+    "fresh_paired_runner_losses.parquet": "102dc7aa2c4c318a357eabb4adc12054d24564eee1545935d47dab4e71dbc561",
+    "root_dryrun_fresh_features_30.parquet": "5d2de6ee5daf6a1b771c749eab1482537d5f1b23f66f64a831f7b277c9144321",
+    "fresh_scope_summary.json": "413b296b8c58874cfcf04b51ceb593b9d541406dd007b3112ab08655ad708cd2",
+    "fresh_paired_race_metrics.parquet": "076ad3528a26f63958ef65be307f79cfe6799a800197c183aa7db07114fdc6af",
+    "fresh_evaluation_receipt.json": "6015377e3534059ec2c942a608917e8df5fd2b454d3839b87f6c63b7361cd82b",
+    "fresh_race_metrics.parquet": "c4f5105fd91406433032599ff343853aa34ce627e47e8e17706704d1f9a03bb1"
+  },
+  "root_training_calls": 0,
+  "root_calibration_calls": 0
+}

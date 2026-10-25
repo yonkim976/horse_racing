@@ -1,0 +1,877 @@
+{
+  "title": "Jeju API6 1100/1110 distance and section-distance history audit",
+  "audit_scope": "Read-only audit of existing local DB and archived official source pages; no DB writes, raw-source edits, new network collection or refresh.",
+  "snapshot_status": {
+    "database_snapshot": "pre-2026-10-17-section-load",
+    "counts_scope": "64 rows / 18 API6 rcDist=1110 are the pre-load snapshot. Root apply report is the separate post-load authority; this file does not claim post-load counts."
+  },
+  "distance_semantics": {
+    "race_distance": "rcDist (API6) / race_distance_m (API4) is the overall race distance. This audit found no actual 1100m races in the reviewed API4/API6 sources; 1110m is the actual race distance in question.",
+    "section_distance": "API6 dist_1f..dist_6f are intermediate section-distance grid values. The 1100 value in dist_6f for an rcDist=1110 race is not a 1100m race distance.",
+    "known_1110_pattern_m": [
+      100,
+      300,
+      500,
+      700,
+      900,
+      1100
+    ]
+  },
+  "database_preload_snapshot": {
+    "db_path": "jeju/data/jeju_native_core.sqlite3",
+    "preload_db_sha256": "e8ae5f9b2447f75d9847e76d34eb35cbf77d95e85e4e2f86bed91df12df5ae9f",
+    "api6_table": "refresh_section_records",
+    "api6_current_raw_view": "api6_section_records_current",
+    "api6_record_type": "refresh_section_records",
+    "api6_rows": 64,
+    "api6_date_range": [
+      "2026-09-17",
+      "2026-10-16"
+    ],
+    "api6_rcDist_counts": {
+      "1100": 0,
+      "1110": 18
+    },
+    "api6_1110_grid_counts": {
+      "pattern_m": [
+        100,
+        300,
+        500,
+        700,
+        900,
+        1100
+      ],
+      "races": 18,
+      "pattern_rows": 18
+    },
+    "api6_1110_races": [
+      {
+        "race_date": "2026-09-17",
+        "race_number": 6,
+        "api_record_id": 274120
+      },
+      {
+        "race_date": "2026-09-17",
+        "race_number": 7,
+        "api_record_id": 274121
+      },
+      {
+        "race_date": "2026-09-18",
+        "race_number": 3,
+        "api_record_id": 274125
+      },
+      {
+        "race_date": "2026-09-18",
+        "race_number": 4,
+        "api_record_id": 274126
+      },
+      {
+        "race_date": "2026-09-18",
+        "race_number": 5,
+        "api_record_id": 274127
+      },
+      {
+        "race_date": "2026-09-18",
+        "race_number": 7,
+        "api_record_id": 274129
+      },
+      {
+        "race_date": "2026-09-19",
+        "race_number": 5,
+        "api_record_id": 274134
+      },
+      {
+        "race_date": "2026-10-02",
+        "race_number": 5,
+        "api_record_id": 274141
+      },
+      {
+        "race_date": "2026-10-03",
+        "race_number": 4,
+        "api_record_id": 274147
+      },
+      {
+        "race_date": "2026-10-03",
+        "race_number": 5,
+        "api_record_id": 274148
+      },
+      {
+        "race_date": "2026-10-05",
+        "race_number": 4,
+        "api_record_id": 274154
+      },
+      {
+        "race_date": "2026-10-09",
+        "race_number": 3,
+        "api_record_id": 274160
+      },
+      {
+        "race_date": "2026-10-09",
+        "race_number": 4,
+        "api_record_id": 274161
+      },
+      {
+        "race_date": "2026-10-10",
+        "race_number": 4,
+        "api_record_id": 274168
+      },
+      {
+        "race_date": "2026-10-10",
+        "race_number": 5,
+        "api_record_id": 274169
+      },
+      {
+        "race_date": "2026-10-10",
+        "race_number": 6,
+        "api_record_id": 274170
+      },
+      {
+        "race_date": "2026-10-16",
+        "race_number": 4,
+        "api_record_id": 274175
+      },
+      {
+        "race_date": "2026-10-16",
+        "race_number": 5,
+        "api_record_id": 274176
+      }
+    ],
+    "api6_source_artifact_counts": {
+      "operation": "raceDetailSectionRecord_1",
+      "total_artifacts": 14,
+      "contributing_artifacts": 9,
+      "contributing_rows": 64,
+      "later_artifacts_with_zero_new_refresh_rows": 5
+    },
+    "contributing_artifacts": [
+      {
+        "source_artifact_id": 5036,
+        "race_dates": [
+          "2026-09-17"
+        ],
+        "rows": 8,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20260917/page_0001.json",
+        "sha256": "810e882fffecb902de70f09a9a010e0d7b2fbf0d0477a57720e1fe5627a78a43",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5037,
+        "race_dates": [
+          "2026-09-18"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20260918/page_0001.json",
+        "sha256": "61120bc11a0cfa42662116523cef9c96dedac15dc4463efe917315762b42b790",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5038,
+        "race_dates": [
+          "2026-09-19"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20260919/page_0001.json",
+        "sha256": "015fa15e9cc1f3dd75bac8b54651f6511107af41a1ae41ec1eaeca183e5e7319",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5039,
+        "race_dates": [
+          "2026-10-02"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20261002/page_0001.json",
+        "sha256": "cdcb70a490979b967138bc91f4b401f92c435e0d5ff2131cadf02efaee764938",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5040,
+        "race_dates": [
+          "2026-10-03"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20261003/page_0001.json",
+        "sha256": "5ec8a69cec76e4e483eb77a3490becd6d6c2a575999e18a733b41648420c7115",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5041,
+        "race_dates": [
+          "2026-10-05"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20261005/page_0001.json",
+        "sha256": "af8c7edf9de3e91561a6817e94d05e218d2854a439b76cb6e3e018bb7392d8ca",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5042,
+        "race_dates": [
+          "2026-10-09"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20261009/page_0001.json",
+        "sha256": "f491ffe26a360fccf0b4fecff9684615a6fa01b4057cd31c1af908d7c3c48713",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5043,
+        "race_dates": [
+          "2026-10-10"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20261010/page_0001.json",
+        "sha256": "e89a190eaa29dced67bb717402578d3ce0fee9a819e4b80daccd3451950b99bc",
+        "rows_match_file_and_source_artifact_sha": true
+      },
+      {
+        "source_artifact_id": 5044,
+        "race_dates": [
+          "2026-10-16"
+        ],
+        "rows": 7,
+        "path": "jeju/research/20261017_core_refresh/collection/raw/section_records/20261016/page_0001.json",
+        "sha256": "97746bcfb8d18cfa2ced7f5b25e426a36f9b3b981c1912f8a372be93addb3bb7",
+        "rows_match_file_and_source_artifact_sha": true
+      }
+    ],
+    "zero_new_row_artifacts": [
+      {
+        "source_artifact_id": 5171,
+        "path": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/collection/raw/section_records/20261005/page_0001.json",
+        "sha256": "af8c7edf9de3e91561a6817e94d05e218d2854a439b76cb6e3e018bb7392d8ca",
+        "new_refresh_section_records": 0
+      },
+      {
+        "source_artifact_id": 5172,
+        "path": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/collection/raw/section_records/20261009/page_0001.json",
+        "sha256": "f491ffe26a360fccf0b4fecff9684615a6fa01b4057cd31c1af908d7c3c48713",
+        "new_refresh_section_records": 0
+      },
+      {
+        "source_artifact_id": 5173,
+        "path": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/collection/raw/section_records/20261010/page_0001.json",
+        "sha256": "e89a190eaa29dced67bb717402578d3ce0fee9a819e4b80daccd3451950b99bc",
+        "new_refresh_section_records": 0
+      },
+      {
+        "source_artifact_id": 5174,
+        "path": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/collection/raw/section_records/20261016/page_0001.json",
+        "sha256": "97746bcfb8d18cfa2ced7f5b25e426a36f9b3b981c1912f8a372be93addb3bb7",
+        "new_refresh_section_records": 0
+      },
+      {
+        "source_artifact_id": 5175,
+        "path": "jeju/research/20261017_core_refresh/runs/20261017T220226_4747d5bd/collection/raw/section_records/20261017/page_0001.json",
+        "sha256": "640c1da4ea90e6ffd55e7d69b9fec7afe03bdbd1b82b8ed662db4442fd6e2e5d",
+        "new_refresh_section_records": 0
+      }
+    ],
+    "api4_result_source": {
+      "table": "race_result_rows",
+      "filter": "meet_code=2",
+      "raw_distance_key": "payload_json.rcDist",
+      "normalized_distance_key": "race_distance_m",
+      "rcDist_and_normalized_exactly_equal": true,
+      "1110m": {
+        "runner_rows": 12945,
+        "races": 1289,
+        "first_date": "2011-04-23",
+        "last_date": "2026-10-17"
+      },
+      "1100m": {
+        "runner_rows": 0,
+        "races": 0
+      }
+    },
+    "api4_current_view": {
+      "view": "race_current",
+      "1110m": {
+        "runner_rows": 12578,
+        "races": 1253
+      },
+      "1100m": {
+        "runner_rows": 0,
+        "races": 0
+      },
+      "note": "Current profile-filtered/API4-derived eligible race view; count differs from race_result_rows."
+    },
+    "distance_and_section_views": {
+      "api6_section_records_current": "raw API6 race-level observations with payload/provenance; not merged into API4 horse rows",
+      "sections_current": "API4 horse-level section/placing quality view; it does not fold in API6",
+      "code_sources": [
+        "jeju/refresh/current_views.py",
+        "jeju/data/schema/jeju_native_core.sql"
+      ],
+      "effective_1110_distance_review_view": "api6_section_points_current (defined by jeju/data/schema/migrations/20261018_add_api6_section_distance_reviews.sql); the 10/17 5R six-point website review is separate from the raw API6 view."
+    }
+  },
+  "archived_api6_source": {
+    "source": "KRA API6_1 raceDetailSectionRecord_1 historical local archive (official files previously collected; this audit made no network request).",
+    "manifest_path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/run_manifest.json",
+    "manifest_sha256": "4c902dc70f9778be67d0bc5d1369edc9be77e9ba627267f8b90494058933de0e",
+    "archive_root": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z",
+    "years": [
+      {
+        "year": 2002,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2002/source_pages/page_0001.json",
+        "sha256": "3744f058f3bc71549e477f8abbf52a63f613e168587503a500543cc61f2568bf",
+        "rows": 890,
+        "date_examples": [
+          "20020112",
+          "20020113",
+          "20020119",
+          "20020120",
+          "20020126"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2003,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2003/source_pages/page_0001.json",
+        "sha256": "321d315f20dc02dfae132ba229dff0e337e96ecc1f7e1e49a2ce8959c09fa0c0",
+        "rows": 873,
+        "date_examples": [
+          "20030111",
+          "20030112",
+          "20030118",
+          "20030119",
+          "20030125"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2004,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2004/source_pages/page_0001.json",
+        "sha256": "c186ba65a62306adc07b2c26b63bb5be650222c28c3abf54a7df33c6fba4ce5a",
+        "rows": 846,
+        "date_examples": [
+          "20040110",
+          "20040111",
+          "20040117",
+          "20040118",
+          "20040131"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2005,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2005/source_pages/page_0001.json",
+        "sha256": "3ff621e07505a369d5707f495ac33f10bc08999921dd45f5c0b7de819befb56a",
+        "rows": 828,
+        "date_examples": [
+          "20050108",
+          "20050109",
+          "20050115",
+          "20050116",
+          "20050122"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2006,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2006/source_pages/page_0001.json",
+        "sha256": "76de2870866931818f9076afa8d05e9ac99f6efad632ff7d9df8795079c0c987",
+        "rows": 838,
+        "date_examples": [
+          "20060107",
+          "20060108",
+          "20060114",
+          "20060115",
+          "20060121"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2007,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2007/source_pages/page_0001.json",
+        "sha256": "a20e451fbc5d2c763214893ed32ff50d2d9b57b41d1f06581807cb86dca28c87",
+        "rows": 873,
+        "date_examples": [
+          "20070106",
+          "20070107",
+          "20070113",
+          "20070114",
+          "20070120"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2008,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2008/source_pages/page_0001.json",
+        "sha256": "15486da09ed83bf96d3bab31471a2acc95d0f419d7b5ea4d8e4c5843b9bd923a",
+        "rows": 875,
+        "date_examples": [
+          "20080105",
+          "20080106",
+          "20080112",
+          "20080113",
+          "20080119"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2009,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2009/source_pages/page_0001.json",
+        "sha256": "f2162362ecfa3198ce22fdacac91fdefe82c7bd381e27181a81f5bfe5327a791",
+        "rows": 865,
+        "date_examples": [
+          "20090110",
+          "20090111",
+          "20090117",
+          "20090118",
+          "20090131"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2010,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2010/source_pages/page_0001.json",
+        "sha256": "fd3acacf511b2a95dce54c3db059c0815b81f90d3200d086d1f9bd408ba98dd0",
+        "rows": 840,
+        "date_examples": [
+          "20100108",
+          "20100109",
+          "20100115",
+          "20100116",
+          "20100122"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2011,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2011/source_pages/page_0001.json",
+        "sha256": "f33d4a6ef2189d632c484098b5dd0dbbc039b4afd560454f9167db906ef6c627",
+        "rows": 852,
+        "date_examples": [
+          "20110107",
+          "20110108",
+          "20110114",
+          "20110115",
+          "20110121"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2012,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2012/source_pages/page_0001.json",
+        "sha256": "c7d067e5c594ecac3ee13bcec3e09f446fef9d4bf7de5373913a063dc905ea37",
+        "rows": 863,
+        "date_examples": [
+          "20120106",
+          "20120107",
+          "20120113",
+          "20120114",
+          "20120127"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2013,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2013/source_pages/page_0001.json",
+        "sha256": "c16f09bed7bffcbed0faad7ce20fe2ae483858c200c38e00768dfde83943b9de",
+        "rows": 851,
+        "date_examples": [
+          "20130111",
+          "20130112",
+          "20130118",
+          "20130119",
+          "20130125"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2014,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2014/source_pages/page_0001.json",
+        "sha256": "38009b40ab0a0dc64a1b1d9e5b62d4aac23635221881bdc686a58979c09b7958",
+        "rows": 855,
+        "date_examples": [
+          "20140110",
+          "20140111",
+          "20140117",
+          "20140118",
+          "20140124"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2015,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2015/source_pages/page_0001.json",
+        "sha256": "7fe2914198593cf9c0adcb52ea7a8e58bdee3909e028abb0ea140842fc6e6087",
+        "rows": 842,
+        "date_examples": [
+          "20150109",
+          "20150110",
+          "20150116",
+          "20150117",
+          "20150123"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2016,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2016/source_pages/page_0001.json",
+        "sha256": "e10c4ad6293df516c8a05d0bcb0667e2889772d41f20124320bc7d6cd71b3729",
+        "rows": 842,
+        "date_examples": [
+          "20160108",
+          "20160109",
+          "20160115",
+          "20160116",
+          "20160122"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2017,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2017/source_pages/page_0001.json",
+        "sha256": "f8bd82e47bd6610959304d3c7f9906198a57661005962c5855667b39d213d781",
+        "rows": 834,
+        "date_examples": [
+          "20170113",
+          "20170114",
+          "20170120",
+          "20170121",
+          "20170203"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2018,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2018/source_pages/page_0001.json",
+        "sha256": "9e8cc769d52c355a582860bc9d55a3a20339d8f9858b083e8b6812b3ef122c43",
+        "rows": 815,
+        "date_examples": [
+          "20180112",
+          "20180113",
+          "20180119",
+          "20180120",
+          "20180126"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2019,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2019/source_pages/page_0001.json",
+        "sha256": "99f79055a77b74e76e655927f6193a415c7dd48e9416a58e0884285010603bde",
+        "rows": 798,
+        "date_examples": [
+          "20190111",
+          "20190112",
+          "20190118",
+          "20190119",
+          "20190125"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2020,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2020/source_pages/page_0001.json",
+        "sha256": "9d4502989b9522d57915614740e8233397c3c911daa1801f65f3336685479748",
+        "rows": 464,
+        "date_examples": [
+          "20200103",
+          "20200104",
+          "20200110",
+          "20200111",
+          "20200117"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2021,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2021/source_pages/page_0001.json",
+        "sha256": "58ebc2afdde3daf113fbde63a8a7a90d360073c28087b2512e83821bf293b96d",
+        "rows": 589,
+        "date_examples": [
+          "20210108",
+          "20210115",
+          "20210122",
+          "20210129",
+          "20210205"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2022,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2022/source_pages/page_0001.json",
+        "sha256": "3765e36a8acc87ffcdee49a8e34cd67ea6f536ffc9dbb71008b4b24d33c180a4",
+        "rows": 685,
+        "date_examples": [
+          "20220107",
+          "20220108",
+          "20220114",
+          "20220115",
+          "20220121"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2023,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2023/source_pages/page_0001.json",
+        "sha256": "4489a26829e0e35777a97917a82242ab1947b8f8c6f4363c6b0e9f172145d78e",
+        "rows": 697,
+        "date_examples": [
+          "20230106",
+          "20230107",
+          "20230113",
+          "20230127",
+          "20230128"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2024,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2024/source_pages/page_0001.json",
+        "sha256": "baa0539e73fa958b916505410e1600428511b0e59716cb31a81f63caf32bf602",
+        "rows": 695,
+        "date_examples": [
+          "20240105",
+          "20240106",
+          "20240112",
+          "20240113",
+          "20240119"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2025,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2025/source_pages/page_0001.json",
+        "sha256": "9917c47c8f9b7c27a4895b75e8b623648d5ede080f901954e437b7bdfecb0c85",
+        "rows": 710,
+        "date_examples": [
+          "20250103",
+          "20250104",
+          "20250110",
+          "20250111",
+          "20250117"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      },
+      {
+        "year": 2026,
+        "path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2026/source_pages/page_0001.json",
+        "sha256": "8f56aebb36ddfdc31068899e9b43d54f0d666893000bbca358374bd54dc86f64",
+        "rows": 531,
+        "date_examples": [
+          "20260102",
+          "20260103",
+          "20260109",
+          "20260110",
+          "20260116"
+        ],
+        "verification": "build_foundation.py checks actual sha256 against this manifest before parsing"
+      }
+    ],
+    "summary": {
+      "years": 25,
+      "pages": 25,
+      "rows": 19651,
+      "row_date_field": "rcDate",
+      "rcDist_1110_rows": 1259,
+      "rcDist_1100_rows": 0,
+      "all_1110_grid_patterns_m": [
+        100,
+        300,
+        500,
+        700,
+        900,
+        1100,
+        0,
+        0,
+        0
+      ]
+    },
+    "file_vs_database": "This 25-page historical API6 archive is file evidence, not 19,651 rows in api_records. API4 race_result_rows are separate horse-level outcomes."
+  },
+  "foundation_grid_independent_check": {
+    "output_path": "jeju/research/20261007_foundation_v1/api6_distance_grids.json",
+    "output_sha256": "a78ff0b960559d614d10e55878c1fa1bdd4473e0e6530e0b6df799430a21634e",
+    "reproduction_path": "jeju/research/20261007_foundation_v1/reproduction_check/api6_distance_grids.json",
+    "reproduction_sha256": "a78ff0b960559d614d10e55878c1fa1bdd4473e0e6530e0b6df799430a21634e",
+    "outputs_equal": true,
+    "recipe_source": "jeju/research/20261007_foundation_v1/build_foundation.py: API6 is loaded separately from the 25-page archive; API6 event keys intersect quality-selected candidate keys and dates >= 2017-01-01; counts are by raw rcDist.",
+    "distance_1110": {
+      "distance_m": 1110,
+      "race_rows": 1062,
+      "distance_grid_layouts": [
+        {
+          "dist_1f_through_9f": [
+            100,
+            300,
+            500,
+            700,
+            900,
+            1100,
+            0,
+            0,
+            0
+          ],
+          "races": 1062
+        }
+      ]
+    },
+    "overlap_year_counts": {
+      "2017": 18,
+      "2018": 70,
+      "2019": 82,
+      "2020": 49,
+      "2021": 77,
+      "2022": 103,
+      "2023": 144,
+      "2024": 190,
+      "2025": 194,
+      "2026": 135
+    },
+    "interpretation": "The 1,062 count is the API6-archive 1110m race-key overlap with 2017-01-01 through 2026-09-19 API4 candidate history, not a DB API6 insert count."
+  },
+  "official_html_comparisons": {
+    "samples": [
+      {
+        "date": "2016-01-22",
+        "race_number": 7,
+        "race_distance_m": 1110,
+        "api_distance_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "website_distance_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "html_path": "jeju/research/20261002_section_remaining_review/website_html/20160122_7.html",
+        "html_sha256": "b287deb00abe037d474bf81cf79ec47fe91e734be92fb8c4abcd58aead7c2c8e",
+        "api6_path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2016/source_pages/page_0001.json",
+        "api6_page_sha256": "e10c4ad6293df516c8a05d0bcb0667e2889772d41f20124320bc7d6cd71b3729"
+      },
+      {
+        "date": "2021-01-08",
+        "race_number": 7,
+        "race_distance_m": 1110,
+        "api_distance_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "website_distance_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "html_path": "jeju/research/20261002_section_remaining_review/website_html/20210108_7.html",
+        "html_sha256": "fdeed223b6edd2c079ce9e1b615edbee9a29b25d2ca928b33bfda92a6e7b1f08",
+        "api6_path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2021/source_pages/page_0001.json",
+        "api6_page_sha256": "58ebc2afdde3daf113fbde63a8a7a90d360073c28087b2512e83821bf293b96d"
+      },
+      {
+        "date": "2021-03-12",
+        "race_number": 6,
+        "race_distance_m": 1110,
+        "api_distance_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "website_distance_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "html_path": "jeju/research/20261002_section_remaining_review/website_html/20210312_6.html",
+        "html_sha256": "21774de6a12804267b770c5d4a26d352269c76dcbb9831ce45b5130c4a117f4c",
+        "api6_path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2021/source_pages/page_0001.json",
+        "api6_page_sha256": "58ebc2afdde3daf113fbde63a8a7a90d360073c28087b2512e83821bf293b96d"
+      },
+      {
+        "date": "2021-09-03",
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "api_distance_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "website_distance_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "html_path": "jeju/research/20261002_section_remaining_review/website_html/20210903_5.html",
+        "html_sha256": "9f89677d7428a49b359d17064d7d53f0346577ca3569e66e0d24ce502840fe42",
+        "api6_path": "jeju/research/20260929_api_detail_sources/raw/full_year_sections_passing/20260929T143902.196014Z/detail_section/2021/source_pages/page_0001.json",
+        "api6_page_sha256": "58ebc2afdde3daf113fbde63a8a7a90d360073c28087b2512e83821bf293b96d"
+      },
+      {
+        "date": "2026-10-17",
+        "race_number": 5,
+        "race_distance_m": 1110,
+        "api_distance_m": [
+          100,
+          300,
+          500,
+          700,
+          900,
+          1100
+        ],
+        "website_distance_m": [
+          110,
+          310,
+          510,
+          710,
+          910,
+          1110
+        ],
+        "html_path": "jeju/research/20261018_oct17_sections_website_review/raw/20261017_05.html",
+        "html_sha256": "c1e52a671ec2eca41b5190e937959825502c9c8e2a32ea8598da1bec814edf92",
+        "api6_path": "jeju/research/20261018_oct17_sections_website_review/api_recheck/raw/section_records/20261017/page_0001.json",
+        "api6_page_sha256": "80de7db02fe04b7eb0431fb18b312fb92d121a538cf677f87d928b5ab86ce640",
+        "api6_response_record_count": 7,
+        "official_distance_checks": "pre-existing root_independent_verification.json: all 6 distance fields 100..1100 vs 110..1110; 39/39 interval times, 39/39 cumulative times, 29/29 nonempty group values match"
+      }
+    ],
+    "result": "All five saved official HTML examples show 110,310,510,710,910,1110 for 1110m races while API6 stores 100,300,500,700,900,1100. This supports the 10/17 5R six-cell review only; it does not authorize global inferred correction."
+  },
+  "duplicate_retry_files": [
+    {
+      "path": "jeju/research/20261002_section_remaining_review/api_retry/20261002T093327/API6_1_2025_page1.json",
+      "rows": 710,
+      "rcDist_1110": 194,
+      "sha256": "9917c47c8f9b7c27a4895b75e8b623648d5ede080f901954e437b7bdfecb0c85",
+      "relationship": "same content as archived API6 2025 page; do not double-count"
+    },
+    {
+      "path": "jeju/research/20261002_section_remaining_review/api_retry/20261002T093327/API6_1_2026_page1.json",
+      "rows": 531,
+      "rcDist_1110": 135,
+      "sha256": "8f56aebb36ddfdc31068899e9b43d54f0d666893000bbca358374bd54dc86f64",
+      "relationship": "same content as archived API6 2026 page through 2026-09-19; do not double-count"
+    }
+  ],
+  "scope_boundary": "No other historical 1110m API6 distance cell was corrected. The observed repeated grid and five small HTML comparisons do not establish a general +10m correction rule; preserve raw distances for all other races."
+}

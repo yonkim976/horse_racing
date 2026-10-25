@@ -1,0 +1,340 @@
+{
+  "review_status": "candidate_features_and_frozen_f1_replay_independently_verified",
+  "candidate_generation_and_replay_helpers_reused": false,
+  "model_refit_count": 0,
+  "candidate_model_fit_count": 0,
+  "temperature_optimization_count": 0,
+  "feature_checks": {
+    "base_49_input_columns_exactly_unchanged": true,
+    "exactly_6_additive_columns_in_fixed_order": [
+      "history_s1f_mean5_seconds",
+      "history_s1f_valid_n",
+      "history_g3f_mean5_seconds",
+      "history_g3f_valid_n",
+      "history_g1f_mean5_seconds",
+      "history_g1f_valid_n"
+    ],
+    "all_52155_target_ids_in_original_order": true,
+    "all_3_feature_means_and_valid_counts_match_independent_slot_reconstruction": {
+      "s1f": {
+        "valid_n_exact_match": true,
+        "mean_atol_1e-12_match": true,
+        "targets_with_valid_n_zero": 6624,
+        "targets_with_any_valid_time": 45531,
+        "absolute_mean_difference_max": 3.552713678800501e-15
+      },
+      "g3f": {
+        "valid_n_exact_match": true,
+        "mean_atol_1e-12_match": true,
+        "targets_with_valid_n_zero": 6617,
+        "targets_with_any_valid_time": 45538,
+        "absolute_mean_difference_max": 7.105427357601002e-15
+      },
+      "g1f": {
+        "valid_n_exact_match": true,
+        "mean_atol_1e-12_match": true,
+        "targets_with_valid_n_zero": 6623,
+        "targets_with_any_valid_time": 45532,
+        "absolute_mean_difference_max": 3.552713678800501e-15
+      }
+    },
+    "row_count": 52155,
+    "race_count": 5206
+  },
+  "frozen_f1_replay": {
+    "model_count": 3,
+    "rows": 17412,
+    "races": 1779,
+    "race_days": 269,
+    "six_set_rows": 10674,
+    "stored_trees_and_temperature_by_year": {
+      "2024": {
+        "saved_model_sha256": "f2373c48e0a6d415e64f577dc64c14d12d71f9b97ea5d3a0c78853f12870eb5d",
+        "saved_tree_count": 92,
+        "stored_temperature": 1.0146528611027281,
+        "runner_rows": 6329,
+        "races": 637,
+        "six_set_rows": 3822,
+        "frozen_f1_prediction_match": {
+          "rows": 6329,
+          "columns_compared": [
+            "api_record_id",
+            "race_id",
+            "race_date",
+            "year",
+            "distance_m",
+            "grade_raw",
+            "horse_id",
+            "horse_number",
+            "score",
+            "p_top3",
+            "y",
+            "log_loss",
+            "brier"
+          ],
+          "match": true
+        },
+        "candidate_replay_runner_match": {
+          "rows": 6329,
+          "columns_compared": [
+            "api_record_id",
+            "race_id",
+            "race_date",
+            "grade_raw",
+            "horse_id",
+            "variant",
+            "year",
+            "distance_m",
+            "horse_number",
+            "observed_starts",
+            "same_valid_times",
+            "field_n",
+            "score",
+            "p_top3",
+            "y",
+            "log_loss",
+            "brier"
+          ],
+          "match": true
+        },
+        "candidate_replay_race_match": {
+          "rows": 637,
+          "columns_compared": [
+            "race_id",
+            "race_date",
+            "variant",
+            "grade_raw",
+            "any_no_history",
+            "any_low_history",
+            "any_no_same_time",
+            "year",
+            "distance_m",
+            "field_n",
+            "log_loss",
+            "brier",
+            "trio_nll",
+            "six_combo_hit",
+            "six_combo_mass",
+            "top3_capture",
+            "top3_all3",
+            "top4_capture",
+            "top4_all3",
+            "top5_capture",
+            "top5_all3",
+            "top6_capture",
+            "top6_all3"
+          ],
+          "match": true
+        }
+      },
+      "2025": {
+        "saved_model_sha256": "b66ece1487c86ad1cd05aabed7f3781d84e89c24e6a3ebcb010f38b811009b9d",
+        "saved_tree_count": 200,
+        "stored_temperature": 1.0950570725726967,
+        "runner_rows": 6410,
+        "races": 654,
+        "six_set_rows": 3924,
+        "frozen_f1_prediction_match": {
+          "rows": 6410,
+          "columns_compared": [
+            "api_record_id",
+            "race_id",
+            "race_date",
+            "year",
+            "distance_m",
+            "grade_raw",
+            "horse_id",
+            "horse_number",
+            "score",
+            "p_top3",
+            "y",
+            "log_loss",
+            "brier"
+          ],
+          "match": true
+        },
+        "candidate_replay_runner_match": {
+          "rows": 6410,
+          "columns_compared": [
+            "api_record_id",
+            "race_id",
+            "race_date",
+            "grade_raw",
+            "horse_id",
+            "variant",
+            "year",
+            "distance_m",
+            "horse_number",
+            "observed_starts",
+            "same_valid_times",
+            "field_n",
+            "score",
+            "p_top3",
+            "y",
+            "log_loss",
+            "brier"
+          ],
+          "match": true
+        },
+        "candidate_replay_race_match": {
+          "rows": 654,
+          "columns_compared": [
+            "race_id",
+            "race_date",
+            "variant",
+            "grade_raw",
+            "any_no_history",
+            "any_low_history",
+            "any_no_same_time",
+            "year",
+            "distance_m",
+            "field_n",
+            "log_loss",
+            "brier",
+            "trio_nll",
+            "six_combo_hit",
+            "six_combo_mass",
+            "top3_capture",
+            "top3_all3",
+            "top4_capture",
+            "top4_all3",
+            "top5_capture",
+            "top5_all3",
+            "top6_capture",
+            "top6_all3"
+          ],
+          "match": true
+        }
+      },
+      "2026": {
+        "saved_model_sha256": "15654e60d6736aabc0ec0af60cbdf4478c05b8fb6227d826dd8aff0ef1f347a4",
+        "saved_tree_count": 200,
+        "stored_temperature": 0.9864064099027149,
+        "runner_rows": 4673,
+        "races": 488,
+        "six_set_rows": 2928,
+        "frozen_f1_prediction_match": {
+          "rows": 4673,
+          "columns_compared": [
+            "api_record_id",
+            "race_id",
+            "race_date",
+            "year",
+            "distance_m",
+            "grade_raw",
+            "horse_id",
+            "horse_number",
+            "score",
+            "p_top3",
+            "y",
+            "log_loss",
+            "brier"
+          ],
+          "match": true
+        },
+        "candidate_replay_runner_match": {
+          "rows": 4673,
+          "columns_compared": [
+            "api_record_id",
+            "race_id",
+            "race_date",
+            "grade_raw",
+            "horse_id",
+            "variant",
+            "year",
+            "distance_m",
+            "horse_number",
+            "observed_starts",
+            "same_valid_times",
+            "field_n",
+            "score",
+            "p_top3",
+            "y",
+            "log_loss",
+            "brier"
+          ],
+          "match": true
+        },
+        "candidate_replay_race_match": {
+          "rows": 488,
+          "columns_compared": [
+            "race_id",
+            "race_date",
+            "variant",
+            "grade_raw",
+            "any_no_history",
+            "any_low_history",
+            "any_no_same_time",
+            "year",
+            "distance_m",
+            "field_n",
+            "log_loss",
+            "brier",
+            "trio_nll",
+            "six_combo_hit",
+            "six_combo_mass",
+            "top3_capture",
+            "top3_all3",
+            "top4_capture",
+            "top4_all3",
+            "top5_capture",
+            "top5_all3",
+            "top6_capture",
+            "top6_all3"
+          ],
+          "match": true
+        }
+      }
+    },
+    "all_probabilities_losses_race_metrics_and_top6_sets_match_frozen_f1": true,
+    "all_replayed_outputs_match_candidate_replay": true
+  },
+  "outputs": {
+    "independent_f1_replayed_runner_predictions.parquet": "53abec1fbda051f374dc42cbc7cd25fb83143ed3343e5a65deb31359e779c9c2",
+    "independent_f1_replayed_race_metrics.csv": "19840bc00ac26221c4a25f49c58ccdada5c97d737d6ed107acc1351a11b510ab",
+    "independent_f1_replayed_six_combinations.csv": "9f3956f3b1ed81223d4a9d7a4df084a635127b4bec5515e5f2879f9ce0a73b66"
+  },
+  "references": {
+    "jeju/research/20261009_section_time_ablation_v1/outputs/features_f1s.parquet": {
+      "bytes": 5313838,
+      "sha256": "14714aefb08735fb637fb3c044c52a9f456b5c7781a0806a29213e6bb4f2deb1"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/candidate_feature_preflight.json": {
+      "bytes": 4853,
+      "sha256": "17341a5d696e7675f0848ca5b924397b32ecb81d7eaef5de7a2119cc6474fbd5"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/f1_reproduced_runner_predictions.parquet": {
+      "bytes": 876146,
+      "sha256": "04fc9f9a5ce45e8aee76028f10663d6d3c69646e120627f8fca3d545be49914f"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/f1_reproduced_race_metrics.csv": {
+      "bytes": 383856,
+      "sha256": "89e783d9c2022cf7a91f7effc39a359ebcf755541c8d33073c0ce795e3341c07"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/f1_reproduced_six_combinations.csv": {
+      "bytes": 540693,
+      "sha256": "f2661e7e3d50becd4aee8e01574dd247bf9dfca8fbee1b0a89e900ec5433dbba"
+    },
+    "jeju/research/20261009_section_time_ablation_v1/outputs/f1_saved_model_replay.json": {
+      "bytes": 1488,
+      "sha256": "18182877bb8ec3a5f73d2e72001b456e56783b4659603f840e84f974171c61e6"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/features.parquet": {
+      "bytes": 5043713,
+      "sha256": "1b28a8392a1447e693fed5988db74f13b5f8622adcb5d5c22143aea701502534"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/runner_predictions_canonical.parquet": {
+      "bytes": 2562317,
+      "sha256": "37a9567e87b91e3d3bc8b8bfafa1fdab2853239aac422734259b5f893b231440"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/race_metrics.csv": {
+      "bytes": 1150841,
+      "sha256": "afd4b96ef3048a59e95c4267f86bbcaaf915ad364ca1e895829327b9140e3473"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/six_combinations.csv": {
+      "bytes": 1606055,
+      "sha256": "e2310f0a643897136e898d43677b77c62660fbe49f47d29d3b95a1c104b92d68"
+    }
+  },
+  "review_code_sha256": "f384b278a4c82f581186b177ee1af8ca05907cd9f279a0c55547feea79ce4997"
+}

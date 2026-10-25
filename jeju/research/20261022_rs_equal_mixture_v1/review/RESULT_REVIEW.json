@@ -1,0 +1,151 @@
+{
+  "axis": {
+    "E_top3_hits": 1027,
+    "E_vs_R_relative_bootstrap_95ci": [
+      -0.021259521402089702,
+      0.030725014098535307
+    ],
+    "E_vs_R_relative_change": 0.003910068426197455,
+    "R_top3_hits": 1023,
+    "S_top3_hits": 1044,
+    "gate_or_adoption_driver": false,
+    "reference_target_hits_for_plus_10_percent": 1126
+  },
+  "blocking_findings": [],
+  "candidate_gate_pass": false,
+  "caveats": [
+    "This is one fixed 50:50 mixture only; failure does not invalidate other ensemble weights or designs.",
+    "2024–2026 outcomes were already reused in prior R/S studies; no independent future validation.",
+    "Bootstrap intervals condition on frozen predictions and do not include model-fitting uncertainty.",
+    "No market prices, purchase-time strategy, or ROI were evaluated.",
+    "The strict complete-finish cohort, publication timing, and actual purchase-time roster limitations remain.",
+    "The R-relative WIN axis result is descriptive and below the +10% reference target; it cannot replace proper-loss gates.",
+    "The E−S gate failure is not evidence of statistically significant worsening; the TRI NLL date-bootstrap interval crosses zero."
+  ],
+  "cohort": {
+    "dates": 269,
+    "pool_denominators": {
+      "EXA": 1779,
+      "PLC": 1743,
+      "QNL": 1779,
+      "QPL": 1779,
+      "TLA": 1779,
+      "TRI": 1779,
+      "WIN": 1779
+    },
+    "races": 1779,
+    "runners": 17412,
+    "years": {
+      "2024": 637,
+      "2025": 654,
+      "2026": 488
+    }
+  },
+  "decision": "HOLD_FIXED_50_50; retain S as research candidate and R/F1 as baseline; operational HY_R_FORM unchanged",
+  "gates": {
+    "E_minus_R": {
+      "TRI_Brier_point_le_0": true,
+      "TRI_NLL_bootstrap_upper_lt_0": true,
+      "WIN_Brier_point_le_0": true,
+      "WIN_NLL_point_le_0": true,
+      "comparison_pass": true,
+      "statistical_noninferiority_claimed": false
+    },
+    "E_minus_S": {
+      "TRI_Brier_point_le_0": false,
+      "TRI_NLL_bootstrap_upper_lt_0": false,
+      "WIN_Brier_point_le_0": false,
+      "WIN_NLL_point_le_0": false,
+      "comparison_pass": false,
+      "statistical_noninferiority_claimed": false
+    },
+    "candidate_gate_pass": false,
+    "overall_candidate_gate_pass": false
+  },
+  "hashes": {
+    "approval_sha256": "6f783c14f02d85ddcc637c0505cc8d8b8db02c4131ff7ab219a6aab115330634",
+    "code_bundle_sha256": "8e55b39a82da5a77cc5e6fe54de6d032dbf989d6f857d0130ae82eca793ab312",
+    "contract_sha256": "e3cd97f4c2081e23dc077bf20641e5012e39ece3a396b11fd6838bef971e13a8",
+    "engine_sha256": "1d8a7ecb23a8bc88624ffed3aaa92fd6d22416ce8b92fb28c90bbaa8eacb41b9",
+    "pair_bootstrap_sha256": "b9aad6a9d62ff9a7ce1e0d78092ee8add575aabbf6130204ad5c7c0a30094339",
+    "plan_sha256": "a9e22babaddc1b15e050caa77cce8240381a4c51b10153f5704eef779e7aa8ff",
+    "receipt_sha256": "959cd20c63300b9192dbced56b83aa16bed968557c41a4f138965de5c40f275f",
+    "report_sha256": "00fb3e81a279efec642c4107f048ea7613742a2110646a906c148c57a17660e0",
+    "result_verification_sha256": "1bde5d950251f3ba3f2870b9279c0c9115192b0ec102456634aa80e987438789",
+    "source_preflight_sha256": "d844258a458dce41501d21d91d6de44d59c522cef1c90c4e179a995decbedbde"
+  },
+  "headline_deltas": {
+    "E_minus_R": {
+      "TRI_Brier": -0.0003221500328908511,
+      "TRI_NLL": {
+        "date_bootstrap_95ci": [
+          -0.05395038348973285,
+          -0.033735128739641976
+        ],
+        "difference": -0.043707948740927
+      },
+      "WIN_Brier": -0.004735569127512044,
+      "WIN_NLL": -0.01803151939544117
+    },
+    "E_minus_S": {
+      "TRI_Brier": 7.627638904563788e-05,
+      "TRI_NLL": {
+        "date_bootstrap_95ci": [
+          -0.009198708344887943,
+          0.01026008559150456
+        ],
+        "difference": 0.00034323973295729746
+      },
+      "WIN_Brier": 0.000996663448708007,
+      "WIN_NLL": 0.003627047225324645
+    }
+  },
+  "independent_verification": {
+    "TRI_bootstrap_draws_compared": 4000,
+    "all_loss_axis_pair_bootstrap_draws_compared": 76000,
+    "bootstrap_scope": "fixed predictions on reused development period; no fitting uncertainty",
+    "gate_decisions": {
+      "E_minus_R": true,
+      "E_minus_S": false
+    },
+    "marginal_rows": 52236,
+    "max_all_pool_logloss_error": 3.552713678800501e-15,
+    "metric_and_selection_rows_each": 37251,
+    "new_fit_or_calibration": false,
+    "ordered_triples_reconstructed": 3625272,
+    "overall_gate_pass": false,
+    "pair_bootstrap_rows": 16,
+    "pair_count_PMFs": 21348,
+    "passed": true,
+    "protected_pins_unchanged": 6
+  },
+  "passed": true,
+  "report_scope": {
+    "candidate_distribution": "Fixed 0.5 Q_R + 0.5 Q_S over each provider’s normalized full-field ordered first-three PL distribution; not a complete finishing-order distribution.",
+    "ensemble_fits_or_weight_searches": 0,
+    "future_independent_validation": false,
+    "market_roi_evaluated": false,
+    "operational_model_promoted": false,
+    "pair_selection_diagnostics_descriptive_only": true,
+    "real_data_single_run_completed": true
+  },
+  "run_receipt": {
+    "artifact_count": 13,
+    "artifact_hash_size_row_check": "PASS",
+    "calibration_count": 0,
+    "fit_count": 0,
+    "one_shot_claim_status": "CONSUMED_SINGLE_RUN",
+    "report_receipt_gate_equality": true,
+    "run_count": 1,
+    "status": "COMPLETED_RESEARCH_ONLY",
+    "weight_search_count": 0
+  },
+  "status": "PASS_RESULT_REVIEW_CANDIDATE_HELD",
+  "storage": {
+    "experiment_cap_bytes": 25000000,
+    "run_receipt_bytes_before_receipt": 2977775,
+    "study_bytes_at_review": 3008429,
+    "within_cap": true
+  },
+  "study": "jeju/research/20261022_rs_equal_mixture_v1"
+}

@@ -1,0 +1,15 @@
+{
+  "contract_version": 1,
+  "status": "separate extension to the frozen core input contract; descriptive no-fit join",
+  "source": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+  "source_sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+  "target_key": "api_record_id; verify race_id parity",
+  "added_columns": {
+    "same_starts": "lifetime same-distance start count in saved feature table",
+    "same_valid_times": "lifetime valid same-distance time count in saved feature table",
+    "same_distance_last5_actual_n": "bounded support count among most recent five actual-history slots",
+    "same_distance_last5_normal_n": "bounded support count among most recent five normalized-history slots"
+  },
+  "interpretation": "same_starts/same_valid_times are not interchangeable with either bounded last-five count. These existing saved columns do not establish publication-time availability beyond the feature source's historical construction contract.",
+  "join_scope": "exact 17,412 target runners and 1,779 race cohort; no extrapolation to omitted historical rows"
+}

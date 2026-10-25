@@ -1,0 +1,86 @@
+{
+  "status": "PASS_supervisory_review_for_retrospective_publication_only",
+  "review_date": "2026-10-10",
+  "scope": "No new fitting or rule selection; review of fixed saved predictions, descriptive diagnosis and supplemental context. This is not an operational approval.",
+  "root_direct_checks": {
+    "source_hashes": 9,
+    "frozen_core_output_hashes": 13,
+    "cohort_races": 1779,
+    "runner_rows": 17412,
+    "race_dates": 269,
+    "date_counts_by_year": {
+      "2024": 98,
+      "2025": 98,
+      "2026": 73
+    },
+    "exact_six_tickets_both_arms_every_race": true,
+    "outcome_counts": {
+      "both_miss": 1322,
+      "both_hit": 373,
+      "gained": 50,
+      "lost": 34
+    },
+    "max_boundary_identity_error_from_rounded_csv": 9.804157485859832e-12,
+    "csv_identity_tolerance": 1e-10,
+    "v2_top3_schema_and_scope": "PASS",
+    "as_run_contract_bytes": "PASS",
+    "cross_tab_partitions": "PASS",
+    "report_links_except_not_yet_created_manifest": "PASS"
+  },
+  "reviewed_artifacts": [
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/README.md",
+      "sha256": "2de760d1ad805a2955a5af882ceaec1ba5e0cb258a6c6f0479fd14c4f2e8129a",
+      "bytes": 16998
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_v1/outputs/analysis_receipt.json",
+      "sha256": "207831dd0a253c516d86a45925c90c077533fbe94607c60128dc566660ed80f9",
+      "bytes": 6582
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_review_v1/outputs/independent_analysis_output_receipt.json",
+      "sha256": "dcd4af69388e211dc5742b9178827aac1dafea6bdd996638597e3d389f032285",
+      "bytes": 5730
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_review_v1/outputs/independent_supplemental_verification_receipt.json",
+      "sha256": "c1746292bcbc6bdb9003ed4375dfe73e390bff5cdaa68d41a7f6e907e17c2403",
+      "bytes": 3020
+    },
+    {
+      "path": "jeju/research/20261010_joint_gain_loss_context_v1/ARTIFACT_MANIFEST.json",
+      "sha256": "a051458bf4b06c87b4d3a8a377c4eb06c0b6aa6f0a0c231e90b208e8d14d697f",
+      "bytes": 2418
+    }
+  ],
+  "resolved_documentation_defects": [
+    "Yearly race-date counts corrected to98/98/73;17412 denotes starts rather than distinct horses.",
+    "Top3 supplemental cohort label corrected to84/50/34 and feature names restored in authoritative v2; superseded files preserved.",
+    "Available-history-range counts are not lifetime census; exact original as-run contract bytes archived and linked by correction receipt.",
+    "Date cutoff validation does not prove first-publication timing; same-event context kept retrospective."
+  ],
+  "interpretation": {
+    "net_gain": 16,
+    "hit_rate_delta_pp": 0.8993816750983699,
+    "mean_true_rank_gained": [
+      9.22,
+      4.88
+    ],
+    "mean_true_rank_lost": [
+      5.4411764705882355,
+      8.941176470588236
+    ],
+    "no_confirmed_deployable_condition": true,
+    "term_contributions": "Algebraic boundary contrasts; correlated style/support terms are not causal compatibility.",
+    "year_effects": "Annual parameter/calibration and cohort composition both vary; no attribution to distance or season alone.",
+    "uncertainty": "Reused historical cohort; pointwise subgroup intervals and thin cells, not confirmatory future validation."
+  },
+  "next_hypotheses": [
+    "Keep horse evaluation and six-ticket budget fixed; separately test style-mean and observation-count pair groups in controlled ablations.",
+    "Only after ablations, test shared/shrunken relationship strength with adequate distance support; fix train/calibration/evaluation boundaries and evaluate on untouched time."
+  ],
+  "operational_change": false,
+  "database_or_network_work_requested_or_executed_by_root": false,
+  "publication_authorization": "A manifest may finalize. Central publication authorization follows separately after final manifest integrity check."
+}

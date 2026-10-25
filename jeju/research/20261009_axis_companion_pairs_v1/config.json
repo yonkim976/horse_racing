@@ -1,0 +1,52 @@
+{
+  "species": "jeju",
+  "seed": 20261009,
+  "base_oof_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "evaluation_years": [
+    2024,
+    2025,
+    2026
+  ],
+  "variants": [
+    "score_pair",
+    "context_pair"
+  ],
+  "primary_pool_total": 7,
+  "secondary_pool_total": 6,
+  "tickets": 6,
+  "base_features": "R1_21",
+  "conditional_training": "Only historically chosen OOF rank1 axes that actually placed. All remaining runner pairs; one positive pair per eligible race. Actual axis placement is a label filter, never an input. All races retained at evaluation.",
+  "training": {
+    "objective": "binary",
+    "metric": "binary_logloss",
+    "learning_rate": 0.04,
+    "num_leaves": 15,
+    "min_data_in_leaf": 150,
+    "lambda_l2": 10.0,
+    "num_threads": 4,
+    "deterministic": true,
+    "force_col_wise": true,
+    "verbosity": -1,
+    "max_rounds": 200,
+    "early_stopping_rounds": 25
+  },
+  "temperature_bounds": [
+    0.35,
+    4.0
+  ],
+  "bootstrap_draws": 2000,
+  "baseline_policies": [
+    "fixed_axis_next4_all6",
+    "sum_score_pool7_best6",
+    "sum_score_pool6_best6"
+  ],
+  "promotion": false
+}

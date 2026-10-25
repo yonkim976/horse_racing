@@ -1,0 +1,30 @@
+{
+  "source_sha256": {
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "jeju/research/20261013_pair_payout_audit_v1/race_payouts.csv": "31f50ef13c26afb2c8a815299955b09afd6447ba2e20989fb8bf3e4279c7c49d",
+    "jeju/research/20261013_pair_payout_audit_v1/analyze.py": "0481c19a7e01f530d70a50bbe546e3f5a3d712615903b6b4f146d77099638cec",
+    "jeju/research/20261013_pair_qpl_roi_v1/race_returns.csv": "8e1b1a2485d6c625445315bd856d7988fa9da54e3de0bd10b2dac02086179afa",
+    "jeju/research/20261010_style_history_ablation_v1/outputs/report/canonical_six_combinations.csv": "9cd5e7e3fed202f1a709aee4a0d43a75850661fc17b691679c447b8c24182e71",
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/race_metrics.csv": "89820acf0dfafc749f394cf9e74a3b58a5ec890e2c746f890ad257eaf32ff115",
+    "jeju/research/20261010_joint_relationship_v1/outputs/report/all_triples.parquet": "13409e65353c0cb6dab14df97317cce24de913056ae464ee3524520759de681c",
+    "jeju/research/20261010_joint_relationship_v1/report.py": "eb7ec7a1075e452c3a091d273a274e3f5f41414f0aaa00d5d795bfee6ed9f832",
+    "jeju/research/20261010_joint_relationship_v1/joint_model.py": "cdb1115dfe797aad0bc71be25a21215909166eb1b644244e8d460f7e3da1cb92",
+    "jeju/research/20261010_pair_axis_v1/outputs/per_race_metrics.csv": "78b75895ddd82a72a406aa2b9d4fa889946d25e6a8d8c8f50069aac286b267c1"
+  },
+  "official_results": "Shared local races/racecourses/race_entries/race_results via pinned read-only audit helper",
+  "winning_payouts": "race_payouts.csv was rechecked against verified cached API301 rows and shared odds_snapshots",
+  "database": {
+    "path": "data/horse_racing.sqlite3",
+    "uri_mode": "ro",
+    "query_only": true
+  },
+  "ticket_policy_sources": {
+    "QNL": "each frozen pair selector's selected pair; exact official Top2 set only",
+    "TLA_joint": "saved report.py stable descending-energy rank list; rank 1 and ranks 1-6",
+    "TLA_F1": "saved canonical_six_combinations.csv variant F1; ranks 1 and 1-6",
+    "TLA_F1_STYLE6": "saved canonical_six_combinations.csv variant F1_STYLE6; ranks 1 and 1-6",
+    "TLA_pair_axis_K6_parity": "saved unrestricted_top_k K6 arrays match joint arrays in order for both arms across 1,779 races"
+  },
+  "calculation": "Decimal(final dividend odds × stake); losses return zero; ROI=(return-stake)/stake",
+  "no_network_no_fit": true
+}

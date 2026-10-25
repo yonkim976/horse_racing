@@ -1,0 +1,43 @@
+{
+  "status": "applied",
+  "applied_at_utc": "2026-10-17T08:51:53.413468+00:00",
+  "updated_rows": 19885,
+  "plan": "jeju/research/20261017_training_rider_website_completion/plan.jsonl",
+  "plan_sha256": "72cb4b41fcf3ebd1ee2e3b142286f0d58655857d578cf6404c7cd9dc0f172d3a",
+  "backup": "jeju/research/20261017_training_rider_website_completion/before_website_completion.sqlite3",
+  "backup_sha256": "945de9b5f6e6accd33bcfa3e396c565d98bf26b54651e98c85ecdf0960d98881",
+  "database_sha256_before": "53c42e9a7944da7d05b9f5bc56bc2defcdaa110704d92bd3b785df9e50527f96",
+  "database_sha256_after": "57593fe7156a78aa1e5f358fa97bfc9151c9be57779ffac46a8d29fba92e01d9",
+  "database_bytes_after": 1933811712,
+  "before_type_counts": {
+    "미분류": 301368,
+    "기수후보생": 1696,
+    "조교보": 71889,
+    "기수": 317152,
+    "조교승인": 107371,
+    "조교사": 112201,
+    "주로조교": 1236
+  },
+  "after_type_counts": {
+    "미분류": 281483,
+    "기수후보생": 1696,
+    "조교보": 71889,
+    "기수": 317152,
+    "조교승인": 107371,
+    "조교사": 112201,
+    "주로조교": 21121
+  },
+  "changed_columns": [
+    "rider_type",
+    "type_status",
+    "website_type",
+    "website_label_raw",
+    "website_jockey_name",
+    "website_source_path",
+    "website_sha256"
+  ],
+  "integrity_check": "ok",
+  "schema_changed": false,
+  "raw_training_rows_changed": false,
+  "idempotency": "Applied rows equal reviewed new assignment; no-op replay is verified separately."
+}

@@ -1,0 +1,150 @@
+{
+  "status": "COMPLETE_RETROSPECTIVE_GAIN_LOSS_DESCRIPTION_VERIFIED",
+  "executor_model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "new_model_fits": 0,
+  "new_selection_rule_applied": false,
+  "base_scores_or_head_changed": false,
+  "primary_period": [
+    "2024-01-05",
+    "2026-09-19"
+  ],
+  "partial_2026": true,
+  "primary_races": 1503,
+  "primary_changed": 254,
+  "primary_cases": {
+    "caught": 31,
+    "lost": 35,
+    "changed_both_hit": 45,
+    "changed_both_miss": 143
+  },
+  "findings": {
+    "score_z_gap_at_most_point1": {
+      "all_races": 430,
+      "changed": 177,
+      "caught": 23,
+      "lost": 27,
+      "ci95_delta_pp": [
+        -4.3486194858774985,
+        2.380952380952381
+      ]
+    },
+    "distance_caught_lost": {
+      "900": [
+        2,
+        8
+      ],
+      "1000": [
+        12,
+        13
+      ],
+      "1110": [
+        14,
+        8
+      ],
+      "1200": [
+        3,
+        6
+      ]
+    },
+    "year_caught_lost": {
+      "2024": [
+        11,
+        18
+      ],
+      "2025": [
+        11,
+        8
+      ],
+      "2026_partial": [
+        9,
+        9
+      ]
+    },
+    "profiles": "Both caught and lost additions generally had fewer past starts, fewer valid same-distance records, slower relative mean-time rank, and earlier historical S1F position than removals. This common pattern does not separate future successful vs harmful switches.",
+    "lost_removed_raw_rank_2_or_3_races": 5,
+    "changed_both_miss_outside_union_races": 129,
+    "changed_both_miss_outside_union_horses": 155,
+    "changed_both_miss_truth_inside_union_but_no_complete_5set": 14,
+    "fixed_condition_cells": 65,
+    "favorable_ci_lower_above_zero_cells": 0,
+    "adverse_ci_upper_below_zero_cells": 2,
+    "adverse_cells_are_same_four_lost_races": [
+      "2024-06-07_2_3",
+      "2024-06-08_2_4",
+      "2025-02-08_2_2",
+      "2025-08-08_2_7"
+    ]
+  },
+  "interpretation": {
+    "gained_lost_groups_outcome_selected": true,
+    "causal_explanation_identified": false,
+    "validated_switch_condition_identified": false,
+    "effective_discordant_count_66_not_1503": true,
+    "all_runners_were_considered_by_original_selector": true,
+    "union_failure_not_a_hard_candidate_pool_limit": true,
+    "positive_subset_CIs_unadjusted_and_descriptive": true,
+    "individual_energy_contributions_not_causal_importance": true
+  },
+  "next_priorities": [
+    {
+      "priority": 1,
+      "hypothesis": "Keep original horse scores fixed and compare a small keep-vs-switch learner targeting incremental all-three gain/loss relative to baseline; include cost of removing high-ranked runners and record support.",
+      "not_currently_validated": true
+    },
+    {
+      "priority": 2,
+      "hypothesis": "Test one pre-race interaction group: candidate historical early position with distance and the current field’s competing early-position profiles; retain supports and missingness.",
+      "not_currently_validated": true
+    },
+    {
+      "priority": 3,
+      "hypothesis": "Audit actual podium runners missed by both policies; distinguish information/ranking deficits from set assembly. The existing selector already considered every runner.",
+      "not_currently_validated": true
+    }
+  ],
+  "verification": {
+    "root_independent_checks": 2801,
+    "root_matched_condition_cells": 47,
+    "reviewer_matched_condition_cells": 65,
+    "reviewer_checked_primary_form_groups": 16,
+    "reviewer_checked_full_changed_races": 304,
+    "reviewer_checked_changed_runner_rows": 614,
+    "root_max_energy_difference": 1.8318679906315083e-15,
+    "no_operational_promotion": true
+  },
+  "evidence": {
+    "jeju/research/20261025_top5_direct_gain_loss_v1/outputs/ANALYSIS_RECEIPT.json": {
+      "sha256": "fc9d0a97dd489d64902a3c873d9a149da4e3624b9ad9dc7d64303dd7e5cb97ff",
+      "bytes": 10836
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_rootreview_v1/ROOT_COHORT_AUDIT.json": {
+      "sha256": "c78c7c4b10e44539a9618250f4c795695814ed15f80df24e469378ab7bd45e1a",
+      "bytes": 4374
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_rootreview_v1/ROOT_PLAN_REVIEW.json": {
+      "sha256": "56c6f646f05f25bf786676bcabc6e57a908d0a31bd4092ee7aac7ccb8bc3a2a4",
+      "bytes": 893
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_rootreview_v1/SOURCE_HASH_METADATA_CORRECTION.json": {
+      "sha256": "dfa60f6e7ced44f6c565be406a6cbd5e6784da74c5752d9dada608c7e8bd648d",
+      "bytes": 1083
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_rootreview_v1/ROOT_INDEPENDENT_DIAGNOSIS.json": {
+      "sha256": "2f188fd5856c95ba09be3b905ba01138eeab68211704196d7b4aed5403993eec",
+      "bytes": 564402
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_rootreview_v1/ROOT_MAIN_RECONCILIATION.json": {
+      "sha256": "ac5731da7fd8c2a801dacc01488d2eb85ee880f0c92ff604ab8bd5e78a81d9dd",
+      "bytes": 828
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_review_v1/VERIFICATION.json": {
+      "sha256": "45e140e7b1fa1302f9de101071a28a0b1e1c82d898cf2b7e2cb3be36016f7c99",
+      "bytes": 4284
+    },
+    "jeju/research/20261025_top5_direct_gain_loss_review_v1/FINAL_REVIEW_MANIFEST.json": {
+      "sha256": "fc5a0694d57213fa0f1072b784b2264cd140990981b86b83e85f8e8c7df397b2",
+      "bytes": 852
+    }
+  }
+}

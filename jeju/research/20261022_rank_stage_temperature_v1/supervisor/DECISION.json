@@ -1,0 +1,39 @@
+{
+  "decision": "HOLD",
+  "reason": "TRI improvement passes, but both preregistered WIN protection point checks fail versus RAW T=1.",
+  "overall_gate_pass": false,
+  "tri_gate_pass": true,
+  "win_protection_pass": false,
+  "independent_calculation_verification_pass": true,
+  "candidate_count": 1,
+  "scalar_optimizer_calls": 3,
+  "evaluation_passes": 1,
+  "post_result_refitting": false,
+  "evaluation_is_fresh_holdout": false,
+  "production_promotion": false,
+  "market_advantage_established": false,
+  "pre_purchase_odds_available": false,
+  "source_report": "experiment/outputs/report.json",
+  "source_report_sha256": "94cca5139551638bcbacd789714e689f2d666f92d7e3df0ff8a6b14e611d3a80",
+  "decomposition": {
+    "scope": "post-result diagnostic from independently reproduced mean race NLL; not an additional fit or a new success gate",
+    "comparison": "candidate minus COMMON",
+    "nll_first": -0.0026845698767585346,
+    "nll_second_given_first": 0.00024088982884187598,
+    "nll_third_given_first_two": -0.007691016339580177,
+    "nll_top3_set": 0.0007278394207969051,
+    "nll_order_given_top3_set": -0.01086253580829374,
+    "nll_ordered_top3": -0.010134696387496835,
+    "formula_stage_two": "EXA categorical NLL minus WIN categorical NLL",
+    "formula_stage_three": "TRI categorical NLL minus EXA categorical NLL",
+    "formula_order_given_set": "TRI categorical NLL minus TLA categorical NLL",
+    "not_exact_rank_marginal_loss": true
+  },
+  "next_hypothesis": {
+    "priority": "Preserve first-stage RAW winner probabilities exactly and modify only later conditional stages.",
+    "tested_in_this_study": false,
+    "inspired_by_reused_evaluation_results": true,
+    "requires_new_prespecified_comparison": true,
+    "fresh_period_still_required_for_generalization": true
+  }
+}

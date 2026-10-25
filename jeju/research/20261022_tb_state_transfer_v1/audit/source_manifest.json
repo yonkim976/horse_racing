@@ -1,0 +1,205 @@
+{
+  "study": "20261022_tb_state_transfer_v1",
+  "purpose": "source audit only; no fit/evaluation",
+  "db_policy": "jeju_native_core.sqlite3 opened mode=ro and PRAGMA query_only=ON for bounded candidate race-key SELECT only; no DB hash/copy",
+  "TB58C_completed_assets_baseline": "hash and size references for README/PLAN/state.py/train_models.py/joint.py/state_contract/state_features/results/training_complete/verification; later TB ablations excluded",
+  "sources": {
+    "thoroughbred/research/20261022_dynamic_race_model_v1/README.md": {
+      "bytes": 15103,
+      "sha256": "10ac51e3cd934d501170263066e0d9108eec89a3fb2838c4dade5ad279d8a144"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/PLAN.md": {
+      "bytes": 5321,
+      "sha256": "a7c2d790906724d16568693ee4a06e86d9833f68cf974335796d3c663ad6f5f4"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/state.py": {
+      "bytes": 8246,
+      "sha256": "6f7147499645e183a08a10bd394bdb37766cb61a8d36309ffb22bc47affc85d9"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/common.py": {
+      "bytes": 2649,
+      "sha256": "639305d430b9c3169b181f76c26b1c657e75b39460bfa2c7b5b6faaf9732afc4"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/train_models.py": {
+      "bytes": 5150,
+      "sha256": "8d4b549df6b3571dbf1d366bb788c886f7827fbcde6d36fdaaf2c3ca52d83ad2"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/joint.py": {
+      "bytes": 8463,
+      "sha256": "98cba57b251de2471eada4998a8d3101e9e1a91db218d7a050c0a7b92a715ef1"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/state_contract.json": {
+      "bytes": 1375,
+      "sha256": "3318f0a55589e054c3910ae0ca3eade0945c5d408b89e51240fe224c379d310a"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/state_features.parquet": {
+      "bytes": 29138203,
+      "sha256": "c352f3528392b9d94c50cd837808954a9774802ccdf2d5a1c9bb6efea5f6a0bc"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/results.json": {
+      "bytes": 440648,
+      "sha256": "9dd88095d0cea95937c4ab9bf939b5ff3951c39ad21221e2e46ad27c4d11a001"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/training_complete.json": {
+      "bytes": 261,
+      "sha256": "e7107beb9db237e1297da2d69738a9e8179557f6c79d99fb8b2998f81f69282d"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/verification.json": {
+      "bytes": 495,
+      "sha256": "c6109b2234e4208485ce46215606ac36bbe7091cf2e8c416d5b7509d5d978325"
+    },
+    "thoroughbred/research/20261022_dynamic_race_model_v1/outputs/input_manifest.json": {
+      "bytes": 3672,
+      "sha256": "a60e2ca6d42e33a7b898352647bdd0c4bcbc3408398fcf34cb4158748fbb5658"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet": {
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/race_inclusion_ledger.csv": {
+      "bytes": 423625,
+      "sha256": "959274837a1eafe627851b505e271402b5c969f2aa31d7195824dc0112f28eb5"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/features.parquet": {
+      "bytes": 3333847,
+      "sha256": "6f6540d4786ada0c0e288ff5defc0d4c665cc796a025a074f19f3d4fe218f12f"
+    },
+    "jeju/research/20261008_horse_profile_baseline_v1/run.py": {
+      "bytes": 23021,
+      "sha256": "40fcb2875c06beedd56044f8fe94cdedf6fc0e2c2db38a87a326234999255e68"
+    },
+    "jeju/data/horse_exclusions.json": {
+      "bytes": 349,
+      "sha256": "5a88a0f19880a5b19ed7bfdec5a2465cb6652cff4b91c5cbe255fff377bcf84a"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/CONTRACT.md": {
+      "bytes": 10477,
+      "sha256": "c10aac8f6faa6e841afd9ef829bfa0b29ada2dceabcbb5405fdfad9c12536bf9"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/prepare.py": {
+      "bytes": 45795,
+      "sha256": "ce30097723e7b0868b884f983fef58166869810c48ca4a2a3113f3045739b328"
+    },
+    "jeju/research/20261021_phase_pace_prediction_v1/PLAN.md": {
+      "bytes": 5990,
+      "sha256": "35659b1c1e5422bc5707de3dd777094ab33ccdbc1eb0945a48e5beca0f57a8c6"
+    },
+    "jeju/research/20261021_phase_pace_prediction_v1/README.md": {
+      "bytes": 17221,
+      "sha256": "c4c24110d353f3072e89404aaa969e05c68a04e0d12451cf4ec8028819ae3d9e"
+    },
+    "jeju/research/20261021_phase_pace_prediction_v1/build.py": {
+      "bytes": 13426,
+      "sha256": "0f2e6833f3f78262e072ec76cb021daac2265460a49d899478fe1f9229318624"
+    },
+    "jeju/research/20261021_phase_pace_prediction_v1/outputs/observations.parquet": {
+      "bytes": 5675665,
+      "sha256": "bcf056ea788f2637c17a6b404013a7718fa3ed6f2042f6693cf6f167dfaf83c7"
+    },
+    "jeju/research/20261021_phase_pace_prediction_v1/outputs/source_manifest.json": {
+      "bytes": 2788,
+      "sha256": "75d7b8ee982b7e85849a7241809a5f6c00e766d116bb1ac97bbf28a63bdd2bfe"
+    },
+    "jeju/research/20261022_dynamic_ability_pace_v1/supervisor/DESIGN_CONTRACT.md": {
+      "bytes": 12545,
+      "sha256": "4340b16fd628ec01cec35540d1f29dfb83c6923b795663d6a7824588bd4ad3e9"
+    },
+    "jeju/research/20261022_dynamic_ability_pace_v1/audit/SOURCE_REVIEW.md": {
+      "bytes": 5262,
+      "sha256": "91aa68426a8b8cef4771a1e9788c0ff3d4dcdfd2eefed9e13c4ae4bbcdf04818"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/meta.json": {
+      "bytes": 3719,
+      "sha256": "15acbf959654da82d2240027e7b7d768bb9226af18395dac9ec92a68a4471726"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/calibration_scores.parquet": {
+      "bytes": 99057,
+      "sha256": "360cc559b1ab19cde177e0bb23206fd36f123b707714fbcb63547fdb9bed05b2"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2024/evaluation_scores.parquet": {
+      "bytes": 96811,
+      "sha256": "b9541396c81e307f99f6c8eff4441594b181b9a0398120a4fa5f529add55cd60"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/meta.json": {
+      "bytes": 3735,
+      "sha256": "23c4b0684477f34fbb2e99c22d0037cd903d5459db369f084773ec25c640f4a8"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/calibration_scores.parquet": {
+      "bytes": 96795,
+      "sha256": "b092d28f0cbd45dd3a184a4a8ab89e9b5b5a78eef8068c45fda3de92734a3755"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2025/evaluation_scores.parquet": {
+      "bytes": 97876,
+      "sha256": "45247f00f286197067957d25ee46e0594f2ef0d26089c6b6081592272651eb12"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/meta.json": {
+      "bytes": 3770,
+      "sha256": "e9dbfe5226571cb29e34b352a4ad8808a735d70929e66b42efb41b3e807ff06d"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/calibration_scores.parquet": {
+      "bytes": 97900,
+      "sha256": "6a7ed320e59add698faafd9008c882dc8a83a84f9198094371525f4c4ebd37d8"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/evaluation_scores.parquet": {
+      "bytes": 71793,
+      "sha256": "0ccae2475fc1ea87ddf62b054572961ab32fed26b332070907853ebbd412989a"
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "jeju/research/20261022_tb_state_transfer_v1/supervisor/verify_states.py": {
+      "bytes": 7319,
+      "sha256": "06dc4b5f23e146bcb52475050cffb9e22cff56e6c10eda7be3498fb60f8b8fcb"
+    },
+    "jeju/research/20261022_tb_state_transfer_v1/supervisor/DESIGN_CONTRACT.md": {
+      "bytes": 11502,
+      "sha256": "7dc4b4f861e91e080a238e7ad85475fb50a9a5fa695896f554b131c9a6540092"
+    }
+  },
+  "history_eligibility_ledger": {
+    "path": "jeju/research/20261022_tb_state_transfer_v1/audit/history_eligibility.parquet",
+    "bytes": 354756,
+    "sha256": "0aeef4ba4e5c072d19993d4286023c68ee06fabaaf6b29fa651ffad95ee1b3ef",
+    "rows": 8431,
+    "candidate_source_rows": 82966,
+    "source_eligible_pre_db": 7066,
+    "full_roster_exact": 7066,
+    "history_update_eligible": 7066,
+    "history_date_min": "2010-01-08",
+    "history_date_max": "2026-09-19",
+    "evaluation_cohort_changed": false,
+    "source_rows_sha256_canonicalization": {
+      "scheme": "Canonical JSON Lines over SOURCE_COLUMNS in declared order",
+      "columns": [
+        "api_record_id",
+        "race_id",
+        "race_date",
+        "horse_id",
+        "horse_number",
+        "race_distance_m",
+        "finish_position",
+        "finish_time_seconds",
+        "started",
+        "valid_time"
+      ],
+      "sort": [
+        "api_record_id",
+        "horse_number",
+        "horse_id"
+      ],
+      "encoding": "UTF-8",
+      "json": "compact separators; unicode preserved; nulls JSON null; finite numeric values only",
+      "line_ending": "LF",
+      "serialization_status": "new canonical per-race hashes regenerated; previous per-race serialization was not specified and is not claimed verified"
+    }
+  },
+  "ledger_hash_history": {
+    "previous_csv_sha256": "b0676326eabf3297b52a750ea2cb64b9f165fd00bf6cc9887f75c7fb6a1ce516",
+    "previous_csv_bytes": 1087180,
+    "lossless_csv_to_parquet": "all 8,431 rows x 9 string cells compared equal before temporary CSV removal",
+    "previous_parquet_sha256_before_source_hash_regeneration": "264382cab2af471d8a8f88a5d1b6e3b1df7745acee2f722d8ee7beccd497581e",
+    "current_parquet_sha256": "0aeef4ba4e5c072d19993d4286023c68ee06fabaaf6b29fa651ffad95ee1b3ef",
+    "correction": "replace undocumented prior per-race source_rows_sha256 values with the explicit canonical serialization above; all other ledger cells and eligibility decisions unchanged"
+  }
+}

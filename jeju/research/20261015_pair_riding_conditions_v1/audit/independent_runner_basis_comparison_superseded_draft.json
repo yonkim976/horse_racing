@@ -1,0 +1,238 @@
+{
+  "status": "SUPERSEDED_DRAFT",
+  "scope": "read-only row-key and runner-feature comparison; no labels, fits, predictions, or performance metrics generated",
+  "target_labels_read_for_comparison": false,
+  "rows_builder": 42690,
+  "rows_independent": 42690,
+  "api_record_id_key_missing_or_duplicate": 0,
+  "key_comparisons": {
+    "race_id": {
+      "mismatch_rows": 0
+    },
+    "race_date": {
+      "mismatch_rows": 0
+    },
+    "horse_id": {
+      "mismatch_rows": 0
+    },
+    "horse_number": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "year": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "tminus2_cutoff_vs_history_cutoff": {
+      "mismatch_rows": 0
+    },
+    "previous_started_api_record_id": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "previous_started_date": {
+      "mismatch_rows": 0
+    }
+  },
+  "runner_value_comparisons": {
+    "previous_rider_retained": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "previous_rider_unknown": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_delta": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 6.461498003318411e-14,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_current_support_log1p": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_previous_support_log1p": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_delta_unavailable": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_current_rider_rides_log1p": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_current_rider_recency_log1p": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_current_rider_first_observed": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_current_rider_history_unavailable": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_current_support_n": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_previous_support_n": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_prior_started_n": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_current_rider_prior_n": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "horse_current_rider_recency_days": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 0.0,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    },
+    "rider365_current_R_diagnostic": {
+      "mismatch_rows": 0,
+      "max_absolute_difference": 5.1889048613418254e-14,
+      "tolerance": {
+        "rtol": 0.0,
+        "atol": 1e-12,
+        "equal_nan": true
+      }
+    }
+  },
+  "current_event_jockey_id_mismatch_rows": 0,
+  "mismatches": {
+    "keys": {},
+    "features": {},
+    "current_event_jockey_id_mismatch_rows": 0
+  },
+  "tolerance": {
+    "numeric_atol": 1e-12,
+    "rtol": 0.0,
+    "exact_text_and_boolean": true
+  },
+  "source_hashes": {
+    "jeju/research/20261015_pair_riding_conditions_v1/outputs/riding_conditions_runner_basis.parquet": "e6d3e09ccf1ac25c3699929242d5fec6c1b992862dacf64c9d118bc7dbfa112c",
+    "jeju/research/20261015_pair_riding_conditions_v1/outputs/source_started_event_rider.parquet": "d397002ebc4c80489d57b780fc8f349696d9a97e2b35d20d29d8158d6b3c86d7",
+    "jeju/research/20261015_pair_riding_conditions_v1/outputs/FEATURE_PREFLIGHT.json": "2aaaeaed171bf9068c3d5c6ebe9336b0edaf196c8ecbd1c35f94cce86f287e95",
+    "jeju/research/20261015_pair_riding_conditions_v1/outputs/SOURCE_CACHE_RECEIPT.json": "2e25146330b65f2c967dbd7c3898d34882e5400a6dd43a76fe93ddf4ddda1386",
+    "jeju/research/20261015_pair_riding_conditions_v1/ROOT_PROTECTED_INPUTS.json": "082ce5bab719d10e9120cbc5db6add624851aa9a79f8ad25bb5ceb0bbbab52ae",
+    "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_runner_features.parquet": "239dc061436f9750fcb30db4e5aebdbbc919be4a4fa24df345a982cfe94da9ed",
+    "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_prefit_receipt.json": "a5dd5bca55d1af50785865302ca1d149db522d00bb28ea52e41c5c2a4c1269dd",
+    "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_h1_duplicate_receipt.json": "40a4a8f1ef554d4273708604085a3d01480d4d36f5a9538dc89506e1bcf6afdf"
+  },
+  "builder_hashes_reported_by_feature_preflight": {
+    "runner_basis_sha256": "e6d3e09ccf1ac25c3699929242d5fec6c1b992862dacf64c9d118bc7dbfa112c",
+    "source_cache_sha256": "d397002ebc4c80489d57b780fc8f349696d9a97e2b35d20d29d8158d6b3c86d7",
+    "prepare_code_sha256": "36d04dfe1ef54968fff2b7d25b37a348d6cbe028c55b038d05cb31e3817b60ba",
+    "basis_code_sha256": "50978e033d99255dedfc6491f860b8a35859c82b4efaed948e9375a0f0450cfc"
+  },
+  "source_lock_sha256": "b9775349df553f88f2122e6a3b63028e62e6bbd28af8d645653da0a58ae1a78a",
+  "pinned_source_lock_sha256_current": "082ce5bab719d10e9120cbc5db6add624851aa9a79f8ad25bb5ceb0bbbab52ae",
+  "exact_duplicate_pair_columns_by_h1": [
+    {
+      "left": "previous_rider_unknown_count",
+      "right": "horse_current_rider_history_unavailable_count"
+    }
+  ],
+  "artifact_paths": {
+    "receipt": "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_runner_basis_comparison_receipt.json"
+  },
+  "superseded_by": "jeju/research/20261015_pair_riding_conditions_v1/audit/independent_runner_basis_comparison_receipt.json",
+  "superseded_reason": "This draft compared outputs/ rather than outputs_prefit_v2/ and incorrectly labeled ROOT_PROTECTED_INPUTS.json as the source lock. The correct source lock is SOURCE_HASHES.json; use only the v2 comparison receipt."
+}

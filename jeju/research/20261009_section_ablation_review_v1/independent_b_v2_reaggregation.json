@@ -1,0 +1,370 @@
+{
+  "review_status": "B_v2_56_cell_diagnostic_independently_reaggregated",
+  "candidate_diagnostic_functions_reused": false,
+  "model_fit_count": 0,
+  "date_bootstrap_recomputed": true,
+  "row_and_control_summary": {
+    "period_support": {
+      "2024_2025": {
+        "rows": 12739,
+        "races": 1291
+      },
+      "2026_partial": {
+        "rows": 4673,
+        "races": 488
+      }
+    },
+    "F1_label_counts_across_periods": {
+      "general": 13036,
+      "first_return_91_plus": 1730,
+      "second_after_return_le90": 1406,
+      "unknown": 1240
+    },
+    "coverage_control_partition_by_period": [
+      {
+        "period": "2024_2025",
+        "four_disjoint_S1_groups": 12739,
+        "all_f1_evaluation_rows": 12739,
+        "four_group_f1_predictions": 12739,
+        "all_f1_predictions": 12739,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "four_disjoint_S1_groups": 4673,
+        "all_f1_evaluation_rows": 4673,
+        "four_group_f1_predictions": 4673,
+        "all_f1_predictions": 4673,
+        "exact_partition_match": true
+      }
+    ],
+    "fixed_axis_support_partition_checks": [
+      {
+        "period": "2024_2025",
+        "S1_group": "first_return_91_plus",
+        "axis": "distance_m",
+        "cell_row_sum": 1211,
+        "coverage_row_total": 1211,
+        "cell_prediction_sum": 1211,
+        "coverage_prediction_total": 1211,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2024_2025",
+        "S1_group": "first_return_91_plus",
+        "axis": "observed_starts",
+        "cell_row_sum": 1211,
+        "coverage_row_total": 1211,
+        "cell_prediction_sum": 1211,
+        "coverage_prediction_total": 1211,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2024_2025",
+        "S1_group": "first_return_91_plus",
+        "axis": "previous_top3",
+        "cell_row_sum": 1211,
+        "coverage_row_total": 1211,
+        "cell_prediction_sum": 1211,
+        "coverage_prediction_total": 1211,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2024_2025",
+        "S1_group": "general",
+        "axis": "distance_m",
+        "cell_row_sum": 9674,
+        "coverage_row_total": 9674,
+        "cell_prediction_sum": 9674,
+        "coverage_prediction_total": 9674,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2024_2025",
+        "S1_group": "general",
+        "axis": "observed_starts",
+        "cell_row_sum": 9674,
+        "coverage_row_total": 9674,
+        "cell_prediction_sum": 9674,
+        "coverage_prediction_total": 9674,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2024_2025",
+        "S1_group": "general",
+        "axis": "previous_top3",
+        "cell_row_sum": 9674,
+        "coverage_row_total": 9674,
+        "cell_prediction_sum": 9674,
+        "coverage_prediction_total": 9674,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "first_return_91_plus",
+        "axis": "distance_m",
+        "cell_row_sum": 519,
+        "coverage_row_total": 519,
+        "cell_prediction_sum": 519,
+        "coverage_prediction_total": 519,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "first_return_91_plus",
+        "axis": "observed_starts",
+        "cell_row_sum": 519,
+        "coverage_row_total": 519,
+        "cell_prediction_sum": 519,
+        "coverage_prediction_total": 519,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "first_return_91_plus",
+        "axis": "previous_top3",
+        "cell_row_sum": 519,
+        "coverage_row_total": 519,
+        "cell_prediction_sum": 519,
+        "coverage_prediction_total": 519,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "general",
+        "axis": "distance_m",
+        "cell_row_sum": 3362,
+        "coverage_row_total": 3362,
+        "cell_prediction_sum": 3362,
+        "coverage_prediction_total": 3362,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "general",
+        "axis": "observed_starts",
+        "cell_row_sum": 3362,
+        "coverage_row_total": 3362,
+        "cell_prediction_sum": 3362,
+        "coverage_prediction_total": 3362,
+        "exact_partition_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "general",
+        "axis": "previous_top3",
+        "cell_row_sum": 3362,
+        "coverage_row_total": 3362,
+        "cell_prediction_sum": 3362,
+        "coverage_prediction_total": 3362,
+        "exact_partition_match": true
+      }
+    ],
+    "existing_S1_overall_control_sums": [
+      {
+        "period": "2024_2025",
+        "S1_group": "first_return_91_plus",
+        "F1_rows": 1211,
+        "races": 786,
+        "race_days": 194,
+        "residual_direct": 0.04096581375620746,
+        "residual_distance_cells_weighted": 0.04096581375620747,
+        "residual_existing_S1_reference": 0.0409658137562074,
+        "mean_probability_direct": 0.2554834017681526,
+        "mean_probability_existing_S1_reference": 0.2554834017681526,
+        "mean_brier_direct": 0.1943616641566489,
+        "mean_brier_distance_cells_weighted": 0.19436166415664893,
+        "all_control_values_match": true
+      },
+      {
+        "period": "2024_2025",
+        "S1_group": "general",
+        "F1_rows": 9674,
+        "races": 1280,
+        "race_days": 196,
+        "residual_direct": -0.008414094028111543,
+        "residual_distance_cells_weighted": -0.008414094028111543,
+        "residual_existing_S1_reference": -0.0084140940281115,
+        "mean_probability_direct": 0.30777320091254406,
+        "mean_probability_existing_S1_reference": 0.307773200912544,
+        "mean_brier_direct": 0.19104223989818497,
+        "mean_brier_distance_cells_weighted": 0.19104223989818497,
+        "all_control_values_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "first_return_91_plus",
+        "F1_rows": 519,
+        "races": 329,
+        "race_days": 72,
+        "residual_direct": 0.04973836139402161,
+        "residual_distance_cells_weighted": 0.04973836139402161,
+        "residual_existing_S1_reference": 0.0497383613940216,
+        "mean_probability_direct": 0.2546932378352655,
+        "mean_probability_existing_S1_reference": 0.2546932378352655,
+        "mean_brier_direct": 0.19931832276976758,
+        "mean_brier_distance_cells_weighted": 0.19931832276976758,
+        "all_control_values_match": true
+      },
+      {
+        "period": "2026_partial",
+        "S1_group": "general",
+        "F1_rows": 3362,
+        "races": 481,
+        "race_days": 73,
+        "residual_direct": -0.004922385806270073,
+        "residual_distance_cells_weighted": -0.004922385806270074,
+        "residual_existing_S1_reference": -0.00492238580627,
+        "mean_probability_direct": 0.3178313685546342,
+        "mean_probability_existing_S1_reference": 0.3178313685546342,
+        "mean_brier_direct": 0.1926349674556908,
+        "mean_brier_distance_cells_weighted": 0.1926349674556908,
+        "all_control_values_match": true
+      }
+    ],
+    "F1_probability_sum3_max_error": 2.6645352591003757e-15
+  },
+  "cell_matches": {
+    "rows": 56,
+    "exact_keys": true,
+    "numeric_tolerance": 1e-12
+  },
+  "generic_output_matches": {
+    "rows": 56,
+    "exact_keys": true,
+    "numeric_tolerance": 1e-12
+  },
+  "coverage_matches": {
+    "rows": 10,
+    "exact_keys": true,
+    "numeric_tolerance": 1e-12
+  },
+  "cell_key_inventory": {
+    "keys": [
+      "period",
+      "axis",
+      "level",
+      "S1_group"
+    ],
+    "unique_row_count": 56,
+    "expected_count": 56,
+    "unknown_previous_top3_rows": 4,
+    "first_return_zero_experience_structural_rows": 2
+  },
+  "version_history": {
+    "v2_unique_key_rows": 56,
+    "generic_is_byte_identical_to_v2": true,
+    "superseded_v1_rows": 60,
+    "duplicate_unknown_rows_recreated": 4,
+    "v1_reconstructed_bytes_match_exactly": true,
+    "v1_bytes": 8324,
+    "v1_sha256": "1355d5a88c4dbd7cb5d455ade695f91011ac0f1babba7030f78cc42f05634664"
+  },
+  "input_lock_review": {
+    "nested_entries_checked": 33,
+    "large_reused_db_digest_not_rehashed": [
+      "jeju/data/jeju_native_core.sqlite3"
+    ],
+    "database_current_size_matches_lock": true,
+    "approved_original_plan_snapshot": {
+      "bytes": 4837,
+      "sha256": "47d37c7eea51fd973439cf3ab2380d54ca8f78265b05dc85f90f91507ae8e943"
+    },
+    "approved_original_plan_matches_historical_lock": true,
+    "current_plan_sha256": "871fd49fd785e5ff8f39d0e75433019a9947ea37a489a8d81805c7b18a8e9eab",
+    "current_plan_matches_post_execution_root_approved_record": true,
+    "post_execution_clarification_root_approved": true,
+    "analysis_unchanged_attested_in_lock": true,
+    "plan_diff_additions": 1,
+    "plan_diff_deletions": 1,
+    "clarification_scope_only_no_cell_definition_change_claimed": true
+  },
+  "checks": {
+    "F1_recent_cohort_17412_1779_fully_joined": true,
+    "period_support_matches_fixed_expected_counts": true,
+    "candidate_v2_has_exact_56_unique_fixed_keys": true,
+    "all_56_cells_exactly_reaggregated_including_date_bootstrap_ci": true,
+    "coverage_table_exactly_reaggregated": true,
+    "four_s1_groups_partition_all_f1_rows_in_each_period": true,
+    "comparison_group_axes_reconcile_to_coverage": true,
+    "overall_s1_f1_residual_probability_brier_controls_match": true,
+    "first_return_zero_experience_cells_are_structural_zero": true,
+    "unknown_previous_top3_cells_present_once_per_key": true,
+    "v1_superseded_60_rows_reconstructed_with_expected_original_hash": true,
+    "generic_current_output_is_byte_identical_to_v2": true,
+    "current_outputs_match_verification_receipt_sha": true,
+    "input_source_locks_verified_except_reused_large_db_sha": true,
+    "approved_original_and_current_plan_hashes_separately_verified": true,
+    "no_new_model_fit": true
+  },
+  "outputs": {
+    "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_outputs/independent_b_v2_56_cells.csv": {
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    "jeju/research/20261009_section_ablation_review_v1/independent_b_v2_outputs/independent_b_v2_coverage.csv": {
+      "bytes": 500,
+      "sha256": "8d0a26734073da0a902667c931188da9d745bd94e4fa20c3efc13bcd8cb02f8d"
+    }
+  },
+  "references": {
+    "jeju/research/20261009_special_condition_audit_v1/outputs/condition_features.parquet": {
+      "bytes": 7396282,
+      "sha256": "418bb9651ab9b3f408939e821fb2adb69f57ef950db8eabeb3a98ff273b06aea"
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/outputs/runner_predictions.parquet": {
+      "bytes": 2562317,
+      "sha256": "37a9567e87b91e3d3bc8b8bfafa1fdab2853239aac422734259b5f893b231440"
+    },
+    "jeju/research/20261009_special_condition_audit_v1/outputs_f1_supplement/F1_condition_statistics.csv": {
+      "bytes": 58476,
+      "sha256": "817bccd33809fec3f9e5a41255c0b07d3054f186d59034f57ebba718b0f7157a"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/input_lock.json": {
+      "bytes": 3820,
+      "sha256": "c4d88e19c16efc7966e6d81d07368d030f15f10f5f5c83db669f875e6d1d81ab"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/APPROVAL_AND_EXECUTION_LOCK.json": {
+      "bytes": 2846,
+      "sha256": "d7ae088641cf98d8b72e6eee76fe1fce846e55565921a2c2d7af6f0285739167"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/PLAN.md": {
+      "bytes": 5179,
+      "sha256": "871fd49fd785e5ff8f39d0e75433019a9947ea37a489a8d81805c7b18a8e9eab"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/PLAN_approved_original.md": {
+      "bytes": 4837,
+      "sha256": "47d37c7eea51fd973439cf3ab2380d54ca8f78265b05dc85f90f91507ae8e943"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_residual_by_stratum_v2.csv": {
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_residual_by_stratum.csv": {
+      "bytes": 7886,
+      "sha256": "108b885ca02c7e627db357113386d3f027d328e3c69ab9b4e91cd3af4579f7d8"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_residual_by_stratum_v1_superseded.csv": {
+      "bytes": 8324,
+      "sha256": "1355d5a88c4dbd7cb5d455ade695f91011ac0f1babba7030f78cc42f05634664"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/F1_gap_group_coverage.csv": {
+      "bytes": 500,
+      "sha256": "8d0a26734073da0a902667c931188da9d745bd94e4fa20c3efc13bcd8cb02f8d"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/verification.json": {
+      "bytes": 4671,
+      "sha256": "7d9e9b96a5fa57cf6b6b658e57f2e013468d48ecdd2a3033d92bba7de7d06535"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/README.md": {
+      "bytes": 8314,
+      "sha256": "151735a22fd02d66fe8649cc76ca80f4e919257240f4d0c41bf2f0d77d5183d1"
+    },
+    "jeju/research/20261009_validation_scope_and_gap_diagnostics_v1/diagnose.py": {
+      "bytes": 19755,
+      "sha256": "9893724031f34fd9898c0dbcd3e2866c52e421d2c29e274a9a456c24e75f9222"
+    }
+  },
+  "verification_receipt_sha256": "7d9e9b96a5fa57cf6b6b658e57f2e013468d48ecdd2a3033d92bba7de7d06535",
+  "review_code_sha256": "b1e4d39c47589ad56b1ca7542144bf40441a2c0561419ed2af9637ba9cd77506"
+}

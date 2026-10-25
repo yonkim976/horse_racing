@@ -1,0 +1,712 @@
+{
+  "audit_status": "read_only_distance_specific_source_snapshot_complete",
+  "model_fit_or_score_computed": false,
+  "database_access": {
+    "uri_mode": "ro",
+    "sqlite_query_only": true,
+    "quality_view": "jeju_race_postrace_sections_quality_2026",
+    "quality_view_scan_count": 1,
+    "quality_view_sql_sha256": "3a8613957e1893731ced8ce3bd896260b58a011e74da1c74d8f9d61a638f36b0",
+    "snapshot_data_version": 1,
+    "whole_database_hash_claimed_unchanged": false,
+    "api4_fingerprint_scope": "all rows in candidate benchmark reference races plus all 52,155 F1 targets",
+    "api4_source_fingerprints_equal_before_after": true,
+    "quality_view_fingerprints_match_before_after": true
+  },
+  "inputs": {
+    "features.parquet": {
+      "path": "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet",
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "historical_lineage.parquet": {
+      "path": "jeju/research/20261009_finish_history_ablation_v1/outputs/historical_lineage.parquet",
+      "bytes": 2835001,
+      "sha256": "11665999d7adaa02d7cb9d1a1560ae2e68f6d03224cce688d8c34d40f8fcc955"
+    },
+    "source_snapshot.parquet": {
+      "path": "jeju/research/20261008_horse_profile_baseline_v1/outputs_v2/source_snapshot.parquet",
+      "bytes": 7453522,
+      "sha256": "c2307afe79c4ca3a1c4a1ab46159be93450ca03450f8fd51063dd2318ed49403"
+    }
+  },
+  "contract": {
+    "target_population": "all saved F1_STYLE6 rows, 52,155. The frozen upstream population already omits known-excluded horse 3005648; this audit applies no additional horse filter.",
+    "saved_last5_lineage": "exact saved last5_same_source_ids and last5_same_distance_start rows; retain invalid slots; T-2 inclusive; no reselect/backfill",
+    "reference_roster": "all started rows in frozen baseline source snapshot, meet_code=2, distances 900/1000/1110/1200, all dates in the snapshot. Known-excluded horse 3005648 is absent from the frozen baseline and current mask roster; no additional filter is applied.",
+    "reference_source_snapshot_date_range": [
+      "2002-07-06",
+      "2026-09-19"
+    ],
+    "intervals": {
+      "seg_1": {
+        "label": "S1F elapsed",
+        "formula": "S1F",
+        "endpoints": [
+          "s1f"
+        ],
+        "points": [
+          "s1f"
+        ]
+      },
+      "seg_2": {
+        "label": "S1F to 3C",
+        "formula": "C3 - S1F",
+        "endpoints": [
+          "s1f",
+          "c3"
+        ],
+        "points": [
+          "s1f",
+          "c3"
+        ]
+      },
+      "seg_3": {
+        "label": "3C to 4C",
+        "formula": "C4 - C3",
+        "endpoints": [
+          "c3",
+          "c4"
+        ],
+        "points": [
+          "c3",
+          "c4"
+        ]
+      },
+      "seg_4": {
+        "label": "4C to G1F crossing",
+        "formula": "T - G1F - C4",
+        "endpoints": [
+          "c4",
+          "g1f"
+        ],
+        "points": [
+          "c4",
+          "g1f"
+        ]
+      },
+      "seg_5": {
+        "label": "G1F elapsed",
+        "formula": "G1F",
+        "endpoints": [
+          "g1f"
+        ],
+        "points": [
+          "g1f"
+        ]
+      }
+    },
+    "nominal_lengths_by_distance": {
+      "900": [
+        200,
+        100,
+        200,
+        200,
+        200
+      ],
+      "1000": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "1110": [
+        210,
+        300,
+        200,
+        200,
+        200
+      ],
+      "1200": [
+        200,
+        400,
+        200,
+        200,
+        200
+      ]
+    },
+    "nominal_lengths_are_assumptions": true,
+    "raw_times_unchanged": true,
+    "reference_race_median_rule": "for each source event s and section, same-distance eligible prior race medians dated <= s race date minus two days; equal weight per eligible race; minimum 20 distinct races required; no current/future source race",
+    "reference_median_row_rule": "median over feature-eligible rows in the fixed frozen reference roster for that race and interval; race contributes one median regardless of eligible runner count. Seven old races have partial frozen roster coverage; their medians are snapshot-subset medians, not full-field medians, and are flagged.",
+    "quality_time_rule": "selected positive field time and status in ['api_positive_unreviewed', 'website_corrected']; positive finite segment delta; valid_time=True for reference/slot contributions",
+    "point_mask_rule": "full current DB started-roster exact API4 point ID/horse ID/program number coverage, race-consistent selected API303 record, exactly one selected API303 point row, fingerprint and quality status parity; unknown/missing/held values fail closed using inherited 1000m source-audit gate. Current DB-only rows are included for masks only and excluded from frozen reference medians.",
+    "api6_used": false,
+    "minimum_prior_races": 20,
+    "relative_sign": "benchmark mean of prior race medians minus actual source interval seconds; positive means faster than historical same-distance/section benchmark"
+  },
+  "counts": {
+    "baseline_f1_style6_rows": 52155,
+    "baseline_f1_style6_unique_api_record_ids": 52155,
+    "target_rows_4_distances": 38193,
+    "target_races_4_distances": 3788,
+    "target_rows_by_distance": {
+      "900": {
+        "target_rows": 8883,
+        "target_races": 890,
+        "target_date_min": "2017-01-13",
+        "target_date_max": "2026-09-19",
+        "saved_last5_slots": 25654,
+        "targets_with_slots": 7295,
+        "unique_source_records": 8163,
+        "unique_source_races": 1110,
+        "source_slot_date_min": "2010-04-17",
+        "source_slot_date_max": "2026-09-04",
+        "reference_roster_started_rows": 18222,
+        "reference_roster_races": 1887,
+        "reference_roster_date_min": "2003-01-12",
+        "reference_roster_date_max": "2026-09-19",
+        "reference_roster_rows_by_year": {
+          "2003": 11,
+          "2004": 95,
+          "2005": 403,
+          "2006": 612,
+          "2007": 756,
+          "2008": 860,
+          "2009": 987,
+          "2010": 716,
+          "2011": 716,
+          "2012": 605,
+          "2013": 681,
+          "2014": 522,
+          "2015": 611,
+          "2016": 929,
+          "2017": 1213,
+          "2018": 1525,
+          "2019": 984,
+          "2020": 652,
+          "2021": 633,
+          "2022": 1056,
+          "2023": 984,
+          "2024": 527,
+          "2025": 1135,
+          "2026": 1009
+        },
+        "reference_roster_races_by_year": {
+          "2003": 3,
+          "2004": 10,
+          "2005": 45,
+          "2006": 69,
+          "2007": 81,
+          "2008": 91,
+          "2009": 103,
+          "2010": 77,
+          "2011": 75,
+          "2012": 64,
+          "2013": 73,
+          "2014": 57,
+          "2015": 65,
+          "2016": 93,
+          "2017": 121,
+          "2018": 146,
+          "2019": 101,
+          "2020": 66,
+          "2021": 66,
+          "2022": 107,
+          "2023": 100,
+          "2024": 53,
+          "2025": 116,
+          "2026": 105
+        },
+        "relative_slot_rows_eligible": 127947
+      },
+      "1000": {
+        "target_rows": 14457,
+        "target_races": 1424,
+        "target_date_min": "2017-01-14",
+        "target_date_max": "2026-09-19",
+        "saved_last5_slots": 53828,
+        "targets_with_slots": 13060,
+        "unique_source_records": 14193,
+        "unique_source_races": 1607,
+        "source_slot_date_min": "2011-05-27",
+        "source_slot_date_max": "2026-09-05",
+        "reference_roster_started_rows": 19823,
+        "reference_roster_races": 1992,
+        "reference_roster_date_min": "2002-11-10",
+        "reference_roster_date_max": "2026-09-19",
+        "reference_roster_rows_by_year": {
+          "2002": 1,
+          "2003": 4,
+          "2005": 10,
+          "2006": 51,
+          "2007": 121,
+          "2008": 266,
+          "2009": 328,
+          "2010": 559,
+          "2011": 516,
+          "2012": 443,
+          "2013": 379,
+          "2014": 596,
+          "2015": 540,
+          "2016": 504,
+          "2017": 591,
+          "2018": 982,
+          "2019": 1517,
+          "2020": 969,
+          "2021": 1559,
+          "2022": 2353,
+          "2023": 2191,
+          "2024": 1785,
+          "2025": 2068,
+          "2026": 1490
+        },
+        "reference_roster_races_by_year": {
+          "2002": 1,
+          "2003": 4,
+          "2005": 1,
+          "2006": 6,
+          "2007": 13,
+          "2008": 28,
+          "2009": 35,
+          "2010": 60,
+          "2011": 55,
+          "2012": 47,
+          "2013": 39,
+          "2014": 63,
+          "2015": 57,
+          "2016": 47,
+          "2017": 52,
+          "2018": 97,
+          "2019": 145,
+          "2020": 96,
+          "2021": 151,
+          "2022": 227,
+          "2023": 223,
+          "2024": 180,
+          "2025": 209,
+          "2026": 156
+        },
+        "relative_slot_rows_eligible": 268791
+      },
+      "1110": {
+        "target_rows": 9999,
+        "target_races": 988,
+        "target_date_min": "2017-01-13",
+        "target_date_max": "2026-09-19",
+        "saved_last5_slots": 38023,
+        "targets_with_slots": 9100,
+        "unique_source_records": 9824,
+        "unique_source_races": 1101,
+        "source_slot_date_min": "2011-08-27",
+        "source_slot_date_max": "2026-09-05",
+        "reference_roster_started_rows": 12226,
+        "reference_roster_races": 1225,
+        "reference_roster_date_min": "2011-04-23",
+        "reference_roster_date_max": "2026-09-19",
+        "reference_roster_rows_by_year": {
+          "2011": 146,
+          "2012": 251,
+          "2013": 330,
+          "2014": 313,
+          "2015": 262,
+          "2016": 221,
+          "2017": 193,
+          "2018": 715,
+          "2019": 893,
+          "2020": 489,
+          "2021": 844,
+          "2022": 1082,
+          "2023": 1418,
+          "2024": 1872,
+          "2025": 1898,
+          "2026": 1299
+        },
+        "reference_roster_races_by_year": {
+          "2011": 15,
+          "2012": 27,
+          "2013": 36,
+          "2014": 34,
+          "2015": 28,
+          "2016": 21,
+          "2017": 18,
+          "2018": 70,
+          "2019": 82,
+          "2020": 49,
+          "2021": 77,
+          "2022": 103,
+          "2023": 144,
+          "2024": 190,
+          "2025": 195,
+          "2026": 136
+        },
+        "relative_slot_rows_eligible": 190003
+      },
+      "1200": {
+        "target_rows": 4854,
+        "target_races": 486,
+        "target_date_min": "2017-06-16",
+        "target_date_max": "2026-09-18",
+        "saved_last5_slots": 18350,
+        "targets_with_slots": 4387,
+        "unique_source_records": 4715,
+        "unique_source_races": 536,
+        "source_slot_date_min": "2012-06-29",
+        "source_slot_date_max": "2026-09-05",
+        "reference_roster_started_rows": 5589,
+        "reference_roster_races": 564,
+        "reference_roster_date_min": "2012-06-29",
+        "reference_roster_date_max": "2026-09-18",
+        "reference_roster_rows_by_year": {
+          "2012": 80,
+          "2013": 134,
+          "2014": 80,
+          "2015": 61,
+          "2016": 56,
+          "2017": 59,
+          "2018": 285,
+          "2019": 359,
+          "2020": 154,
+          "2021": 451,
+          "2022": 333,
+          "2023": 833,
+          "2024": 1055,
+          "2025": 818,
+          "2026": 831
+        },
+        "reference_roster_races_by_year": {
+          "2012": 8,
+          "2013": 15,
+          "2014": 8,
+          "2015": 6,
+          "2016": 5,
+          "2017": 6,
+          "2018": 29,
+          "2019": 32,
+          "2020": 15,
+          "2021": 40,
+          "2022": 32,
+          "2023": 84,
+          "2024": 107,
+          "2025": 88,
+          "2026": 89
+        },
+        "relative_slot_rows_eligible": 91303
+      }
+    },
+    "exact_last5_slots": 135855,
+    "targets_with_any_saved_slot": 33842,
+    "distinct_history_source_api_records": 36895,
+    "benchmark_reference_started_rows": 55860,
+    "benchmark_reference_races": 5668,
+    "benchmark_reference_date_min": "2002-11-10",
+    "benchmark_reference_date_max": "2026-09-19",
+    "full_candidate_event_rows_reconciled": 56275,
+    "full_started_roster_rows_reconciled": 55914,
+    "frozen_snapshot_partial_roster_race_n": 7,
+    "frozen_snapshot_partial_roster_races": [
+      {
+        "race_id": "2002-11-10_2_8",
+        "race_date": "2002-11-10",
+        "race_distance_m": 1000,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 10
+      },
+      {
+        "race_id": "2003-01-12_2_6",
+        "race_date": "2003-01-12",
+        "race_distance_m": 900,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 7
+      },
+      {
+        "race_id": "2003-03-15_2_7",
+        "race_date": "2003-03-15",
+        "race_distance_m": 1000,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 8
+      },
+      {
+        "race_id": "2003-03-29_2_5",
+        "race_date": "2003-03-29",
+        "race_distance_m": 900,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 9
+      },
+      {
+        "race_id": "2003-07-27_2_5",
+        "race_date": "2003-07-27",
+        "race_distance_m": 1000,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 10
+      },
+      {
+        "race_id": "2003-08-16_2_8",
+        "race_date": "2003-08-16",
+        "race_distance_m": 1000,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 8
+      },
+      {
+        "race_id": "2003-09-07_2_10",
+        "race_date": "2003-09-07",
+        "race_distance_m": 1000,
+        "frozen_reference_started_rows": 1,
+        "current_db_started_rows": 9
+      }
+    ],
+    "current_db_mask_only_rows": 54,
+    "known_excluded_horse_3005648_absent_from_saved_f1_style6": true,
+    "known_excluded_horse_3005648_absent_from_frozen_reference_roster": true,
+    "known_excluded_horse_3005648_absent_from_current_full_race_mask_roster": true,
+    "api4_quality_view_rows": 55860,
+    "quality_view_missing_full_race_starter_rows": 54,
+    "quality_view_missing_full_race_starter_ids": [
+      1213,
+      1214,
+      1215,
+      1216,
+      1217,
+      1218,
+      1219,
+      1220,
+      1221,
+      11247,
+      11248,
+      11249,
+      11250,
+      11251,
+      11252,
+      11253,
+      11255,
+      11843,
+      11844,
+      11845,
+      11846,
+      11847,
+      11848,
+      11850,
+      12075,
+      12076,
+      12077,
+      12078,
+      12079,
+      12080,
+      12081,
+      12082,
+      12083,
+      14915,
+      14916,
+      14917,
+      14918,
+      14919,
+      14921,
+      14922,
+      14923,
+      15288,
+      15289,
+      15290,
+      15292,
+      15293,
+      15294,
+      15295,
+      16682,
+      16684,
+      16685,
+      16686,
+      16687,
+      16688
+    ],
+    "quality_view_scoped_expected_rows": 55860,
+    "quality_view_scoped_returned_rows": 55860,
+    "scoped_api4_fingerprint_rows": 70237,
+    "point_masks_total": 22672,
+    "point_masks_clear": 22626,
+    "point_masks_by_point": {
+      "c3": {
+        "races": 5668,
+        "clear": 5659,
+        "blocked": 9
+      },
+      "c4": {
+        "races": 5668,
+        "clear": 5656,
+        "blocked": 12
+      },
+      "g1f": {
+        "races": 5668,
+        "clear": 5656,
+        "blocked": 12
+      },
+      "s1f": {
+        "races": 5668,
+        "clear": 5655,
+        "blocked": 13
+      }
+    },
+    "reference_interval_feature_eligible_by_segment": {
+      "seg_1": 55729,
+      "seg_2": 55709,
+      "seg_3": 55722,
+      "seg_4": 55706,
+      "seg_5": 55744
+    },
+    "reference_race_segment_medians_eligible": 28270,
+    "source_event_benchmarks_exists_by_segment": {
+      "seg_1": 4347,
+      "seg_2": 4347,
+      "seg_3": 4347,
+      "seg_4": 4347,
+      "seg_5": 4347
+    },
+    "target_last5_relative_rows": 679275,
+    "target_last5_relative_eligible": 678044,
+    "target_last5_relative_null_reasons": {
+      "<NULL>": 678044,
+      "source_interval_ineligible": 1151,
+      "fewer_than_20_prior_reference_races": 80
+    },
+    "status_domains": {
+      "s1f_time_status": {
+        "api_positive_unreviewed": 55844,
+        "api_unavailable_or_nonpositive": 14,
+        "website_corrected": 2
+      },
+      "c3_time_status": {
+        "api_positive_unreviewed": 55846,
+        "api_unavailable_or_nonpositive": 14
+      },
+      "c4_time_status": {
+        "api_positive_unreviewed": 55844,
+        "api_unavailable_or_nonpositive": 16
+      },
+      "g3f_time_status": {
+        "api_positive_unreviewed": 55839,
+        "api_unavailable_or_nonpositive": 21
+      },
+      "g1f_time_status": {
+        "api_positive_unreviewed": 55837,
+        "api_unavailable_or_nonpositive": 22,
+        "unresolved_official_website_anomaly": 1
+      },
+      "s1f_order_status": {
+        "api_positive_unreviewed": 55825,
+        "api_unavailable_or_nonpositive_or_sentinel": 14,
+        "unresolved_official_internal_conflict": 14,
+        "website_corrected": 7
+      },
+      "c3_order_status": {
+        "api_positive_unreviewed": 55841,
+        "api_unavailable_or_nonpositive_or_sentinel": 14,
+        "unresolved_official_internal_conflict": 5
+      },
+      "c4_order_status": {
+        "api_positive_unreviewed": 55818,
+        "unresolved_official_internal_conflict": 26,
+        "api_unavailable_or_nonpositive_or_sentinel": 16
+      },
+      "g1f_order_status": {
+        "api_positive_unreviewed": 55819,
+        "unresolved_official_internal_conflict": 21,
+        "api_unavailable_or_nonpositive_or_sentinel": 17,
+        "website_corrected": 3
+      },
+      "s1f_group_status": {
+        "api_group_unreviewed": 55800,
+        "unresolved_official_internal_conflict": 60
+      },
+      "c3_group_status": {
+        "api_group_unreviewed": 55839,
+        "unresolved_official_internal_conflict": 20,
+        "api_group_unavailable": 1
+      },
+      "c4_group_status": {
+        "api_group_unreviewed": 55811,
+        "unresolved_official_internal_conflict": 48,
+        "api_group_unavailable": 1
+      },
+      "g1f_group_status": {
+        "api_group_unreviewed": 55814,
+        "unresolved_official_internal_conflict": 46
+      }
+    }
+  },
+  "outputs": {
+    "target_f1_style6_features.parquet": {
+      "rows": 52155,
+      "bytes": 5476534,
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f"
+    },
+    "target_distance_roster.parquet": {
+      "rows": 38193,
+      "bytes": 796734,
+      "sha256": "65b9ecefd33cab1d6091ffdc00d75eb34abbd4124425dd54a9c014606b02952a"
+    },
+    "target_last5_lineage.parquet": {
+      "rows": 135855,
+      "bytes": 1733030,
+      "sha256": "a8afccbdd1ce399de7896ce659f97352c887495ddb074d8bbfe927546b7f631e"
+    },
+    "benchmark_reference_roster.parquet": {
+      "rows": 55860,
+      "bytes": 4775223,
+      "sha256": "50317f16a0f47ef821e8764a9c19c11d86134712265fcd1e69bd95dcaf0717d4"
+    },
+    "candidate_race_roster_reconciliation.parquet": {
+      "rows": 5668,
+      "bytes": 73339,
+      "sha256": "677cad83ef0913247628f74a016a97885a246973e5d73b2e879895fdc8d87911"
+    },
+    "mask_only_current_db_rows.parquet": {
+      "rows": 54,
+      "bytes": 10416,
+      "sha256": "8f6c6b4a29072135d8a97e153ff6195352465d3a779abaeecb4f7ed121cd4370"
+    },
+    "api4_quality_source_snapshot.parquet": {
+      "rows": 55860,
+      "bytes": 13391527,
+      "sha256": "de14b7e906ae3ee1a62695383b46e9ebcb3deccd15ec519a7ef6f641a391e739"
+    },
+    "source_race_point_quality_masks.parquet": {
+      "rows": 22672,
+      "bytes": 2501072,
+      "sha256": "0f0f6271fc9b1a7c4c314eb2df3b22ee7f611cdf461ed13b5def85ea19f603a4"
+    },
+    "source_point_order_status_evidence.parquet": {
+      "rows": 224884,
+      "bytes": 5281873,
+      "sha256": "eddee20f8e420f0a169304df3a867943d784a09ffbc9692572862f49cf6b7b1d"
+    },
+    "source_point_group_status_evidence.parquet": {
+      "rows": 22672,
+      "bytes": 997353,
+      "sha256": "8d2eefc411848797d791bf5a4801f7d1ef749b1d860f6cb359648e3c520757ec"
+    },
+    "reference_section_intervals.parquet": {
+      "rows": 55860,
+      "bytes": 1511356,
+      "sha256": "e85aee2062f2c01ee0b4475664fd44b55ba59651123425b168a6142ad33e5276"
+    },
+    "reference_race_segment_medians.parquet": {
+      "rows": 28340,
+      "bytes": 137535,
+      "sha256": "b1937448af8052bd68c72a8b2eb7c85cf02a8f6f9f41b0a47533cb357c95d35b"
+    },
+    "source_event_benchmark_stats.parquet": {
+      "rows": 21770,
+      "bytes": 307452,
+      "sha256": "535aa9be72fcb74cb2de8bf3bca195c18fb0ae2f92fbe0693e257c27826c2086"
+    },
+    "target_last5_relative_history.parquet": {
+      "rows": 679275,
+      "bytes": 8965097,
+      "sha256": "aec315a0133803dab0aedf1ddfa1cb6363d379eb56a97096d7a51c97b686b659"
+    },
+    "source_fingerprint_before_after.parquet": {
+      "rows": 70237,
+      "bytes": 22746393,
+      "sha256": "5c8cd9deb54065a6651e06616d4f631798defb37f2a4cc07573b81ead6904ba4"
+    },
+    "section_time_reviews.parquet": {
+      "rows": 3,
+      "bytes": 11406,
+      "sha256": "782286fc93fb6c8069eedddea26742741174147c59d11b9ad86b2ffd528e794f"
+    },
+    "nominal_segment_contract.csv": {
+      "rows": 20,
+      "bytes": 1532,
+      "sha256": "72486305951d832afd9e965674da87877f89fb4357e2b0b9b2768fa9d7cf4d06"
+    }
+  }
+}

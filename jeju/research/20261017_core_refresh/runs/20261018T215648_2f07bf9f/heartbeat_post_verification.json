@@ -1,0 +1,385 @@
+{
+  "passed": true,
+  "run_id": "20261018T215648_2f07bf9f",
+  "command_exit_code": 0,
+  "database_sha256": "48aaf97f8b78082ada77abb53f30046f38ce0aa8bc295767ceb80a5f0e4957b2",
+  "manifest_pair_verified": true,
+  "requested_range": {
+    "end": "2026-10-18",
+    "meet": 2,
+    "start": "2026-08-20"
+  },
+  "weekly_60_day_audit": true,
+  "api_pages_verified_by_family": {
+    "corner_rank": 21,
+    "daily_training": 19,
+    "horse_profile": 100,
+    "medical": 4,
+    "race_result": 60,
+    "running_trial": 2,
+    "section_records": 21,
+    "starting_exam": 1,
+    "starting_training_api": 8
+  },
+  "api_page_total": 236,
+  "all_operation_pagination_complete": true,
+  "source_failures": [],
+  "zero_row_section_partitions": [
+    {
+      "family": "corner_rank",
+      "date": "20260825",
+      "status": "missing_zero_rows"
+    },
+    {
+      "family": "corner_rank",
+      "date": "20260826",
+      "status": "missing_zero_rows"
+    },
+    {
+      "family": "section_records",
+      "date": "20260825",
+      "status": "missing_zero_rows"
+    },
+    {
+      "family": "section_records",
+      "date": "20260826",
+      "status": "missing_zero_rows"
+    }
+  ],
+  "zero_row_interpretation": "Only Aug25/26 known excluded replay dates; Oct17 already resolved and reported manually.",
+  "website_status": "complete",
+  "website_pages_sha_verified": 60,
+  "website_date_status_counts": {
+    "complete": 20,
+    "empty": 40
+  },
+  "protected_data_preservation": {
+    "api_records": {
+      "existing_rows": 285783,
+      "all_columns_unchanged": true
+    },
+    "source_artifacts": {
+      "existing_rows": 5195,
+      "all_columns_unchanged": true
+    },
+    "daily_training_rider_type_assignments": {
+      "existing_rows": 913228,
+      "all_columns_unchanged": true
+    },
+    "race_section_time_reviews": {
+      "existing_rows": 4,
+      "all_columns_unchanged": true
+    },
+    "race_section_order_reviews": {
+      "existing_rows": 14,
+      "all_columns_unchanged": true
+    },
+    "section_internal_conflict_reviews": {
+      "existing_rows": 90,
+      "all_columns_unchanged": true
+    },
+    "api6_section_distance_reviews": {
+      "existing_rows": 6,
+      "all_columns_unchanged": true
+    },
+    "starting_training_website_rows": {
+      "existing_rows": 295985,
+      "all_columns_unchanged": true
+    },
+    "website_training_artifacts": {
+      "existing_rows": 2536,
+      "all_columns_unchanged": true
+    }
+  },
+  "all_previous_view_sql_unchanged": true,
+  "excluded_horse_rows": {
+    "race_result_rows": 0,
+    "running_trial_rows": 0,
+    "daily_training_api_rows": 0,
+    "medical_api_rows": 0,
+    "starting_exam_api_rows": 0,
+    "horse_profile_observations": 0
+  },
+  "oct17_r5_distance_review_preserved": [
+    {
+      "furlong_index": 1,
+      "distance_m": 110,
+      "distance_status": "website_corrected"
+    },
+    {
+      "furlong_index": 2,
+      "distance_m": 310,
+      "distance_status": "website_corrected"
+    },
+    {
+      "furlong_index": 3,
+      "distance_m": 510,
+      "distance_status": "website_corrected"
+    },
+    {
+      "furlong_index": 4,
+      "distance_m": 710,
+      "distance_status": "website_corrected"
+    },
+    {
+      "furlong_index": 5,
+      "distance_m": 910,
+      "distance_status": "website_corrected"
+    },
+    {
+      "furlong_index": 6,
+      "distance_m": 1110,
+      "distance_status": "website_corrected"
+    }
+  ],
+  "integrity_check_production_and_staging": "ok",
+  "foreign_key_violations": 0,
+  "idempotent_replay_verified": true,
+  "current_views": {
+    "daily_training_api_rows_current": {
+      "rows": 913937,
+      "first": "2007-10-01",
+      "latest": "2026-10-17"
+    },
+    "daily_training_riders_current": {
+      "rows": 913937,
+      "first": "2007-10-01",
+      "latest": "2026-10-17"
+    },
+    "medical_api_rows_current": {
+      "rows": 12293,
+      "first": "2008-04-02",
+      "latest": "2026-10-17"
+    },
+    "starting_exam_api_rows_current": {
+      "rows": 10717,
+      "first": "2002-06-07",
+      "latest": "2026-10-15"
+    },
+    "starting_training_website_rows_current": {
+      "rows": 191357,
+      "first": "2007-10-17",
+      "latest": "2026-10-15"
+    },
+    "horse_profile_refresh_current": {
+      "rows": 4753,
+      "first": "2026-09-30",
+      "latest": "2026-10-18"
+    },
+    "race_current": {
+      "rows": 92977,
+      "first": "2002-07-06",
+      "latest": "2026-10-17"
+    },
+    "trial_current": {
+      "rows": 15831,
+      "first": "2002-06-12",
+      "latest": "2026-10-15"
+    },
+    "training_current": {
+      "rows": 913937,
+      "first": "2007-10-01",
+      "latest": "2026-10-17"
+    },
+    "starting_training_current": {
+      "rows": 191357,
+      "first": "2007-10-17",
+      "latest": "2026-10-15"
+    },
+    "medical_current": {
+      "rows": 12293,
+      "first": "2008-04-02",
+      "latest": "2026-10-17"
+    },
+    "exam_current": {
+      "rows": 10717,
+      "first": "2002-06-07",
+      "latest": "2026-10-15"
+    },
+    "sections_current": {
+      "rows": 92977,
+      "first": "2002-07-06",
+      "latest": "2026-10-17"
+    },
+    "starting_training_api_current": {
+      "rows": 1339,
+      "first": "2026-08-20",
+      "latest": "2026-10-15"
+    },
+    "api6_section_records_current": {
+      "rows": 137,
+      "first": "2026-08-21",
+      "latest": "2026-10-17"
+    }
+  },
+  "new_hold_review": [
+    {
+      "date": "2026-08-20",
+      "hold_id": 1,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260820_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260820.html",
+      "old_rows": 40,
+      "new_rows": 40,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-08-23",
+      "hold_id": 2,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260823_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260823.html",
+      "old_rows": 64,
+      "new_rows": 64,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-08-26",
+      "hold_id": 3,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260826_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260826.html",
+      "old_rows": 111,
+      "new_rows": 111,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-08-27",
+      "hold_id": 4,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260827_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260827.html",
+      "old_rows": 50,
+      "new_rows": 50,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-08-30",
+      "hold_id": 5,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260830_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260830.html",
+      "old_rows": 57,
+      "new_rows": 57,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-02",
+      "hold_id": 6,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260902_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260902.html",
+      "old_rows": 112,
+      "new_rows": 112,
+      "same_raw_row_multiset": false,
+      "old_only": [
+        {
+          "horse_id_raw": "3102587",
+          "기승자": "이동준",
+          "마명": "황금대장",
+          "비고": "양호",
+          "소속조": "8조",
+          "조교장소": "400M 출발지점",
+          "조번": "27"
+        }
+      ],
+      "new_only": [
+        {
+          "horse_id_raw": "3102587",
+          "기승자": "이동준",
+          "마명": "황금대장",
+          "비고": "양호",
+          "소속조": "8조",
+          "조교장소": "400M 출발지점",
+          "조번": "28"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "hold_id": 7,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260903_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260903.html",
+      "old_rows": 38,
+      "new_rows": 38,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-06",
+      "hold_id": 8,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260906_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260906.html",
+      "old_rows": 51,
+      "new_rows": 51,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-09",
+      "hold_id": 9,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260909_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260909.html",
+      "old_rows": 76,
+      "new_rows": 76,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-13",
+      "hold_id": 10,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260913_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260913.html",
+      "old_rows": 66,
+      "new_rows": 66,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-16",
+      "hold_id": 11,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260916_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260916.html",
+      "old_rows": 79,
+      "new_rows": 79,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-20",
+      "hold_id": 12,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260920_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260920.html",
+      "old_rows": 39,
+      "new_rows": 39,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    },
+    {
+      "date": "2026-09-27",
+      "hold_id": 13,
+      "old_html": "jeju/research/20261001_starting_training_website_load/collection/html/20260927_1.html",
+      "new_html": "jeju/research/20261017_core_refresh/runs/20261018T215648_2f07bf9f/website/website_starting_training/20261018T125801194940Z/html/20260927.html",
+      "old_rows": 41,
+      "new_rows": 41,
+      "same_raw_row_multiset": true,
+      "old_only": [],
+      "new_only": []
+    }
+  ],
+  "hold_interpretation": "13 HTML SHA changes held. 12 have identical parsed row multisets; 1 stable number change. Existing rows and all holds retained.",
+  "fixed_baseline_missing_previously_reported": true,
+  "requested_readme_present": false,
+  "post_verifier_initial_attempt": "KeyError actual_page_count for profile-selection operation; adapted to its declared selected-slice schema; no DB writes.",
+  "completed_at_utc": "2026-10-18T13:05:04.456667+00:00"
+}

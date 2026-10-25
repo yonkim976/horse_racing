@@ -1,0 +1,132 @@
+{
+  "status": "PASS_FROZEN_BEFORE_QUOTE_SELECTION",
+  "study": "20261017_order_head_value_comparison_v1",
+  "plan_sha256": "43917a7440c80717214b152419be77afcc9c4303e290e7d8e0802d2c2de203a4",
+  "analysis_code_sha256": "959365043dad6f27f8e3844aa97f8f7daacd65a150c1f7625946f73fb74290b8",
+  "prefit_manifest_sha256": "b519f78469ba4f4d9f46eb24d4aa549e2cd12067b3786111dd01c3c75f515ac9",
+  "ordered_joint_prediction_sha256": "7aa84de5dd3e2f659b5d5ffcc9dc005e948d4ace95c4b2aa2c786d9af17b028f",
+  "fit_approval_sha256": "5c78df755205eaa260849fa3267845ad69229975e8179e1588ce3e14e2387543",
+  "prediction_receipt_sha256": "1b8f1e9d8fa1374fb8515e75d08d477e77502504749d34fb21af054666a686c0",
+  "root_value_approval_sha256": "08e6778dce334015619477e76365cbfd0b1df18989a239dbab19c3f955dd4e11",
+  "fit_authorization": {
+    "status": "APPROVED",
+    "h1_fit_count": 3,
+    "h2_calibration_count": 3,
+    "production_changed": false
+  },
+  "frozen_prediction_receipt": {
+    "status": "PASS_FROZEN_BEFORE_EVALUATION_METRICS",
+    "artifact_path": "outputs/evaluation_ordered_joint.parquet",
+    "artifact_sha256": "7aa84de5dd3e2f659b5d5ffcc9dc005e948d4ace95c4b2aa2c786d9af17b028f",
+    "ordered_joint_sha256": "7aa84de5dd3e2f659b5d5ffcc9dc005e948d4ace95c4b2aa2c786d9af17b028f",
+    "artifact_bytes": 48386821,
+    "artifact_rows": 1208424,
+    "model_label": "F1_STYLE6_COND_ORDER_V1",
+    "prediction_schema": [
+      "evaluation_year",
+      "race_date",
+      "race_id",
+      "distance_m",
+      "field_n",
+      "horse_no_1",
+      "horse_no_2",
+      "horse_no_3",
+      "q_top3_set",
+      "p_conditional_order",
+      "p_ordered_joint",
+      "control_p_conditional_order",
+      "control_p_ordered_joint",
+      "uniform_p_conditional_order",
+      "uniform_p_ordered_joint",
+      "model_label"
+    ],
+    "evaluation_coverage_by_year": {
+      "2024": {
+        "races": 637,
+        "ordered_rows": 450408,
+        "runners": 6329
+      },
+      "2025": {
+        "races": 654,
+        "ordered_rows": 445104,
+        "runners": 6410
+      },
+      "2026": {
+        "races": 488,
+        "ordered_rows": 312912,
+        "runners": 4673
+      }
+    },
+    "common_2026_hy_cohort_races": 467,
+    "common_2026_hy_cohort_ids_included": true,
+    "fit_artifacts_sha256": "eb5c75963b24a6b9d0bf22cf14d567458e898ea0b6bc98afe1224da26a860568",
+    "fit_receipt_sha256": "27dd80c9b5238b2643fd391681614c226840fed099f16227e267edf98bc7791b",
+    "fit_source_lock_sha256": "5e433ac83f163ac48fe15e0383a4ac28f0d3543afd3db00833e24e1dc8eeed19",
+    "root_fit_approval_sha256": "5c78df755205eaa260849fa3267845ad69229975e8179e1588ce3e14e2387543",
+    "prefit_source_lock_sha256": "7285382f2731c59db3684f76dfa72682c0153663ece55426e3a1960c18c72d94",
+    "h1_fit_count": 3,
+    "h2_calibration_count": 3,
+    "q_tau_used_only_to_reconstruct_native_unordered_q": true,
+    "candidate_q_set_probabilities_and_top3_qpl_unchanged_by_construction": true,
+    "max_abs_q_mass_error": 7.771561172376096e-16,
+    "max_abs_candidate_joint_mass_error": 6.661338147750939e-16,
+    "max_abs_fixed_score_joint_mass_error": 7.771561172376096e-16,
+    "max_abs_uniform_joint_mass_error": 7.771561172376096e-16,
+    "max_abs_conditional_mass_error": 4.440892098500626e-16,
+    "max_abs_q_recovery_error": 5.551115123125783e-17,
+    "evaluation_labels_joined": false,
+    "evaluation_metrics_computed": false,
+    "market_odds_read": false,
+    "database_or_network_access": false,
+    "race_audit_sha256": "f2b2591fbbd47ce2f6c6e2918de6db9e11dec730072b2ac2ed46a23986423a50"
+  },
+  "root_value_approval": {
+    "status": "APPROVED",
+    "scope": "Secondary postrace comparison only: four ordered pools, ten frozen purchase policies, prior same 467 and TRI-complete/universal 222 cohorts, canonical TLA invariance diagnostic, no fit, tuning or promotion",
+    "comparison_plan_sha256": "43917a7440c80717214b152419be77afcc9c4303e290e7d8e0802d2c2de203a4",
+    "ordered_joint_sha256": "7aa84de5dd3e2f659b5d5ffcc9dc005e948d4ace95c4b2aa2c786d9af17b028f",
+    "fit_artifacts_sha256": "eb5c75963b24a6b9d0bf22cf14d567458e898ea0b6bc98afe1224da26a860568",
+    "fit_receipt_sha256": "27dd80c9b5238b2643fd391681614c226840fed099f16227e267edf98bc7791b",
+    "prediction_receipt_sha256": "1b8f1e9d8fa1374fb8515e75d08d477e77502504749d34fb21af054666a686c0",
+    "root_prediction_review_sha256": "2e7a208ac5c3ed26b1ea5c76d39dab03c5c2f6fe56bd11d8986c598f8958d629",
+    "root_fit_review_sha256": "fbb5e45ae45fcd20a3116636bc23083ba3414882facdda9996e0fc50be448214",
+    "analysis_code_sha256": "959365043dad6f27f8e3844aa97f8f7daacd65a150c1f7625946f73fb74290b8",
+    "production_changed": false,
+    "independent_prediction_check": {
+      "status": "PASS",
+      "races": 1779,
+      "ordered_rows": 1208424,
+      "max_probability_error": 4.0245584642661925e-16,
+      "ordered_joint_sha256": "7aa84de5dd3e2f659b5d5ffcc9dc005e948d4ace95c4b2aa2c786d9af17b028f",
+      "fits_refits": 0,
+      "coherence": true
+    }
+  },
+  "input_sha256": {
+    "config/prediction_model_registry.json": "944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b",
+    "jeju/models/current/HY_R_FORM.pkl": "f1b9531e068cab51dff906961d56f51c7c4b0e5a86f378c9aa1f03f159ec9706",
+    "src/horse_racing/analysis/jeju_hybrid_evaluation.py": "61409385b5748d2df6a34fcd4eca5bd453669c0421c024f34e55aca216050aa7",
+    "jeju/research/20261015_operating_postrace_value_comparison_v1/cohort.csv": "4f87d05e0f7e2db48f1029dbf1fc78c393ba3804eb20ccb8d28cf6e20e73983f",
+    "jeju/research/20261015_other_pools_postrace_value_v1/candidate_rows.csv": "74f35fbf3fe18fb29a6942b89a8d06c89e5aa7a3f6ba69c5c8471ebba7068682",
+    "jeju/research/20261015_other_pools_postrace_value_v1/candidate_quotes.csv": "96c6a2536520ca3ea33f6b255b04501972aef4f837c3ac694d1563a8148bce50",
+    "jeju/research/20261015_other_pools_postrace_value_v1/SOURCE_PREFLIGHT.json": "c6b6b20cdb6bb4ae6f3cfac63402dc53a5b7262b53fa356618bffd83df89554f",
+    "jeju/research/20261015_other_pools_postrace_value_v1/source_exclusions.csv": "cd48b73779a95f220db1408210f15d2dfce26060a9590bcd040ab7418bec0aee",
+    "jeju/research/20261015_other_pools_postrace_value_v1/SOURCE_MANIFEST.json": "9531cc71a5abf429bc3a24fbe63b2eba4b08d91bc479be95267f22aafd153fe3",
+    "jeju/research/20261014_single_place_returns_v1/source_audit/OFFICIAL_RUNNER_RESULTS.csv": "4ae6133d9d537f9ca6b351ed909a945b88a428cb4babcdf15659e266a68f2df6",
+    "jeju/research/20261015_research_other_pool_support_v1/tla_set_probabilities.parquet": "7c7bafcb315a9f9595e06aa1ee12ca0affbcf3abcc13426e90e079261d29b382",
+    "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.npy": "d141b0c3f9a463cbfc9d1f4c61228b58757c31aee4ec74b79f41c5baeadaccbd",
+    "jeju/research/20261011_pair_top3_direct_v1/outputs/date_bootstrap_schedule.json": "6bdcf550065a2e6bb5038fc8d02eb070f026ba0efe5d3ebf1c3530a4e53c397e",
+    "jeju/research/20261012_pair_jockey_id_v1/outputs/evaluation_pair_predictions.parquet": "0d41ee66149edfae79f2b422ba588c422686a328aad0122071183ee9db6768d6",
+    "jeju/research/20261017_conditional_order_head_v1/PLAN.md": "b5aeebeaadfd73e73e2d8bf97eb79a6bcaa82e0e5492f78cf0fe1aa52da02a80",
+    "jeju/research/20261017_conditional_order_head_v1/INPUT_CONTRACT.md": "4baf862c8a9c9a3f8643e76231f993174653fc48a29167c3b282558f0ca7276c",
+    "jeju/research/20261017_conditional_order_head_v1/outputs/PREFIT_SOURCE_LOCK.json": "7285382f2731c59db3684f76dfa72682c0153663ece55426e3a1960c18c72d94",
+    "jeju/research/20261017_conditional_order_head_v1/outputs/SOURCE_PREFLIGHT.json": "352980cf94b6d59825690418129d6bc0cc566aa4fc6841904a1fa4a9dd9d69fb"
+  },
+  "read_only": {
+    "database": false,
+    "network": false,
+    "registry_write": false,
+    "training_or_calibration": false,
+    "external_study_writes": false
+  }
+}

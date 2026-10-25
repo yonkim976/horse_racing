@@ -1,0 +1,61 @@
+{
+  "verification": "independent_website_completion_postapply_views",
+  "passed": true,
+  "phase": "postapply_views",
+  "read_only": true,
+  "query_only": true,
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "baseline": "/Users/kimyongjin/Desktop/horse_racing/jeju/research/20261017_training_rider_website_completion/before_website_completion.sqlite3",
+  "plan_sha256": "72cb4b41fcf3ebd1ee2e3b142286f0d58655857d578cf6404c7cd9dc0f172d3a",
+  "database_file_sha256_before_after": {
+    "live_before": {
+      "database": "57593fe7156a78aa1e5f358fa97bfc9151c9be57779ffac46a8d29fba92e01d9",
+      "wal": null,
+      "shm": null
+    },
+    "live_after": {
+      "database": "57593fe7156a78aa1e5f358fa97bfc9151c9be57779ffac46a8d29fba92e01d9",
+      "wal": null,
+      "shm": null
+    },
+    "backup_before": {
+      "database": "945de9b5f6e6accd33bcfa3e396c565d98bf26b54651e98c85ecdf0960d98881",
+      "wal": null,
+      "shm": null
+    },
+    "backup_after": {
+      "database": "945de9b5f6e6accd33bcfa3e396c565d98bf26b54651e98c85ecdf0960d98881",
+      "wal": null,
+      "shm": null
+    }
+  },
+  "schema_and_all_view_sql_unchanged": true,
+  "candidate_view_checks": {
+    "daily_training_rider_type_values": {
+      "candidate_ids_expected": 19885,
+      "candidate_ids_visible": 19885,
+      "row_population_basis": "source tables and assignment key set verified separately; view SQL unchanged"
+    },
+    "training_current": {
+      "candidate_ids_expected": 19885,
+      "candidate_ids_visible": 19885,
+      "row_population_basis": "source tables and assignment key set verified separately; view SQL unchanged"
+    }
+  },
+  "analysis_view_cutoff": {
+    "source_view": "daily_training_api_rows_analysis_2026",
+    "through_date": "2026-09-19",
+    "plan_ids_through_cutoff": 17052,
+    "plan_ids_after_cutoff": 2833,
+    "checked_by_unchanged_view_sql": true,
+    "analysis_view_materialization_skipped": true
+  },
+  "jockey_name_policy": "planned non-jockey rows have NULL website_jockey_name and NULL jockey_name in the current view",
+  "prior_evidence_union": {
+    "oct15_rows": 534,
+    "oct17_rows": 587,
+    "overlap": 337,
+    "union": 784
+  },
+  "failures": []
+}

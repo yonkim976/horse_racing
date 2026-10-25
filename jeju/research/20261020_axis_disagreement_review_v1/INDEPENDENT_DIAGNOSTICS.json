@@ -1,0 +1,225 @@
+{
+  "scope": "read-only fixed descriptive checks; no DB access, fitting, threshold search, or source modification",
+  "source_hashes": {
+    "jeju/research/20261010_style_history_ablation_v1/outputs/features.parquet": {
+      "sha256": "036939bd6d518a9e53d458a2f4eb2bf30bfecfa4bb80e21c78edd1f7f44f028f",
+      "size_bytes": 5476534
+    },
+    "jeju/research/20261020_model_axis_vs_win_favorite_v1/runner_ledger.csv": {
+      "sha256": "74cf94accac91a46e7965236aefcbed32e6acb65a9d248cb2ec04669b3941630",
+      "size_bytes": 7032584
+    },
+    "jeju/research/20261020_model_axis_vs_win_favorite_v1/selected_rows.csv": {
+      "sha256": "50f4e9b574e94ea36b54fe455f32da48b23d5b9087610b142acb3cdca489d907",
+      "size_bytes": 818776
+    },
+    "jeju/research/20261020_model_axis_vs_win_favorite_v1/manifest.json": {
+      "sha256": "692de78621647f7e2fd893a11f86805d5a1a584dabca73f4454a73f77ceb8d4e",
+      "size_bytes": 1856
+    }
+  },
+  "reviewed_definition_source_hashes": {
+    "jeju/research/20261008_horse_profile_baseline_v1/run.py": {
+      "sha256": "40fcb2875c06beedd56044f8fe94cdedf6fc0e2c2db38a87a326234999255e68",
+      "size_bytes": 23021
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/CONTRACT.md": {
+      "sha256": "c91dfd087d6e5d88279b9af4dd11fdc2182d0d4208e983619d4e61bba90c8524",
+      "size_bytes": 11388
+    },
+    "jeju/research/20261009_finish_history_ablation_v1/prepare.py": {
+      "sha256": "dbfe79bd6bc6339f9d029f06437ea05cca69ddb80cdac812d4c318eeab216a40",
+      "size_bytes": 19208
+    },
+    "jeju/research/20261010_style_history_ablation_v1/CONTRACT.md": {
+      "sha256": "c10aac8f6faa6e841afd9ef829bfa0b29ada2dceabcbb5405fdfad9c12536bf9",
+      "size_bytes": 10477
+    },
+    "jeju/research/20261010_style_history_ablation_v1/prepare.py": {
+      "sha256": "ce30097723e7b0868b884f983fef58166869810c48ca4a2a3113f3045739b328",
+      "size_bytes": 45795
+    },
+    "jeju/research/20261010_style_history_ablation_v1/outputs/F1_STYLE6_2026/meta.json": {
+      "sha256": "e9dbfe5226571cb29e34b352a4ad8808a735d70929e66b42efb41b3e807ff06d",
+      "size_bytes": 3770
+    }
+  },
+  "reviewed_main_artifact_hashes": {
+    "jeju/research/20261020_axis_disagreement_conditions_v1/analysis.py": {
+      "sha256": "6985233667276e4a98128e02e5f412c9ad0c75e18a6d32f130cc5e7f67506589",
+      "size_bytes": 61647
+    },
+    "jeju/research/20261020_axis_disagreement_conditions_v1/README.md": {
+      "sha256": "21b9d1386071c75131e8ad14178ba5f8db54d9d8990fb7c3a24ee3e96bf6e705",
+      "size_bytes": 12625
+    },
+    "jeju/research/20261020_axis_disagreement_conditions_v1/REPORT.json": {
+      "sha256": "7c838c607692f9aec16efc998cb063b72ebb4644bd70a974fbd928541b968401",
+      "size_bytes": 7741
+    },
+    "jeju/research/20261020_axis_disagreement_conditions_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "4ff5ecf8af3bdcfa798ec0b6cdc14d7f46546eed58ee1c85b1c16665d7ffd2b9",
+      "size_bytes": 2310
+    }
+  },
+  "disagreement_four_state_counts_n678": {
+    "model_only": 126,
+    "market_only": 248,
+    "both": 173,
+    "neither": 131
+  },
+  "favorite_valid_n5_zero": {
+    "n": 158,
+    "same_starts_all_zero": true,
+    "history_scope_counts": {
+      "other_distance_starts_only": 124,
+      "stored_observed_starts_zero": 34
+    },
+    "by_year_and_scope": [
+      {
+        "year": 2024,
+        "history_scope": "other_distance_starts_only",
+        "n": 44,
+        "model_only": 9,
+        "market_only": 17,
+        "both": 13,
+        "neither": 5,
+        "model_hit_n": 22,
+        "favorite_hit_n": 30
+      },
+      {
+        "year": 2025,
+        "history_scope": "other_distance_starts_only",
+        "n": 50,
+        "model_only": 12,
+        "market_only": 18,
+        "both": 14,
+        "neither": 6,
+        "model_hit_n": 26,
+        "favorite_hit_n": 32
+      },
+      {
+        "year": 2025,
+        "history_scope": "stored_observed_starts_zero",
+        "n": 13,
+        "model_only": 1,
+        "market_only": 8,
+        "both": 4,
+        "neither": 0,
+        "model_hit_n": 5,
+        "favorite_hit_n": 12
+      },
+      {
+        "year": 2026,
+        "history_scope": "other_distance_starts_only",
+        "n": 30,
+        "model_only": 6,
+        "market_only": 4,
+        "both": 15,
+        "neither": 5,
+        "model_hit_n": 21,
+        "favorite_hit_n": 19
+      },
+      {
+        "year": 2026,
+        "history_scope": "stored_observed_starts_zero",
+        "n": 21,
+        "model_only": 3,
+        "market_only": 11,
+        "both": 5,
+        "neither": 2,
+        "model_hit_n": 8,
+        "favorite_hit_n": 16
+      }
+    ],
+    "interpretation": "In this 678-row disagreement cohort, all 158 favorites with valid_n5=0 also have same_starts=0; 34 have stored observed_starts=0 (no prior start observed in this feature source), and 124 have prior starts only at other distances. Do not infer lifetime debut status, and do not call all 158 debutants."
+  },
+  "market_only_model_fixed_pool_topk": {
+    "n": 248,
+    "by_year_topk_distribution": [
+      {
+        "year": 2024,
+        "model_top_k": 3,
+        "n_market_only_races": 78,
+        "races_with_zero_actual_top3_in_topk": 6,
+        "races_with_one_actual_top3_in_topk": 50,
+        "races_with_two_actual_top3_in_topk": 22,
+        "races_with_three_actual_top3_in_topk": 0,
+        "races_with_at_least_one_actual_top3_in_topk": 72,
+        "races_with_all_actual_top3_in_topk": 0
+      },
+      {
+        "year": 2024,
+        "model_top_k": 5,
+        "n_market_only_races": 78,
+        "races_with_zero_actual_top3_in_topk": 0,
+        "races_with_one_actual_top3_in_topk": 21,
+        "races_with_two_actual_top3_in_topk": 42,
+        "races_with_three_actual_top3_in_topk": 15,
+        "races_with_at_least_one_actual_top3_in_topk": 78,
+        "races_with_all_actual_top3_in_topk": 15
+      },
+      {
+        "year": 2025,
+        "model_top_k": 3,
+        "n_market_only_races": 102,
+        "races_with_zero_actual_top3_in_topk": 13,
+        "races_with_one_actual_top3_in_topk": 64,
+        "races_with_two_actual_top3_in_topk": 25,
+        "races_with_three_actual_top3_in_topk": 0,
+        "races_with_at_least_one_actual_top3_in_topk": 89,
+        "races_with_all_actual_top3_in_topk": 0
+      },
+      {
+        "year": 2025,
+        "model_top_k": 5,
+        "n_market_only_races": 102,
+        "races_with_zero_actual_top3_in_topk": 1,
+        "races_with_one_actual_top3_in_topk": 30,
+        "races_with_two_actual_top3_in_topk": 49,
+        "races_with_three_actual_top3_in_topk": 22,
+        "races_with_at_least_one_actual_top3_in_topk": 101,
+        "races_with_all_actual_top3_in_topk": 22
+      },
+      {
+        "year": 2026,
+        "model_top_k": 3,
+        "n_market_only_races": 68,
+        "races_with_zero_actual_top3_in_topk": 11,
+        "races_with_one_actual_top3_in_topk": 35,
+        "races_with_two_actual_top3_in_topk": 22,
+        "races_with_three_actual_top3_in_topk": 0,
+        "races_with_at_least_one_actual_top3_in_topk": 57,
+        "races_with_all_actual_top3_in_topk": 0
+      },
+      {
+        "year": 2026,
+        "model_top_k": 5,
+        "n_market_only_races": 68,
+        "races_with_zero_actual_top3_in_topk": 2,
+        "races_with_one_actual_top3_in_topk": 17,
+        "races_with_two_actual_top3_in_topk": 34,
+        "races_with_three_actual_top3_in_topk": 15,
+        "races_with_at_least_one_actual_top3_in_topk": 66,
+        "races_with_all_actual_top3_in_topk": 15
+      }
+    ],
+    "all_rows": {
+      "top3_actual_count_distribution": {
+        "0": 30,
+        "1": 149,
+        "2": 69
+      },
+      "top5_actual_count_distribution": {
+        "0": 3,
+        "1": 68,
+        "2": 125,
+        "3": 52
+      },
+      "top3_at_least_one_race_n": 218,
+      "top5_at_least_one_race_n": 245,
+      "top5_all_three_race_n": 52
+    },
+    "interpretation": "Retrospective fixed-pool coverage diagnostic. Since these are market-only races, model rank 1 is a miss by construction; coverage of actual Top3 runners at ranks 2-5 distinguishes candidate-ordering errors from runners outside a short fixed candidate pool, but does not establish future reranker performance."
+  }
+}

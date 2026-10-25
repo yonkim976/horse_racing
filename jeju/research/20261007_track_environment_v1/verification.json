@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "database": "/Users/kimyongjin/Desktop/horse_racing/jeju/data/jeju_native_core.sqlite3",
+  "database_sha256": "a878a40fd5dc28e1385801c40136e506d9e3bc406e357e4158e5eb6883f5f21e",
+  "size_bytes": 1793323008,
+  "query_columns": [
+    "api_record_id",
+    "race_date",
+    "meet_code",
+    "race_number",
+    "horse_id",
+    "horse_number",
+    "race_distance_m",
+    "rank_class_raw",
+    "finish_position",
+    "finish_time_seconds",
+    "track_raw",
+    "carried_weight_kg",
+    "age_at_race_raw",
+    "sex_at_race_raw",
+    "api4_3_payload_sha256"
+  ],
+  "database_unchanged": true,
+  "checks": [
+    "complete unique ranks 1..N",
+    "unique horse and start number within race",
+    "race conditions consistent",
+    "not partial vs stored results",
+    "historical dates <= T-2",
+    "moisture group counts reconcile",
+    "unknown moisture not zero dry",
+    "DB hash/size/mtime unchanged"
+  ]
+}

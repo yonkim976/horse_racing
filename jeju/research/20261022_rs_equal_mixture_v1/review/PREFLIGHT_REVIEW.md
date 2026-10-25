@@ -1,0 +1,13 @@
+# R/S 50:50 mixture — preflight review
+
+**Review result: PASS for a single supervisor-approved research evaluation.** This is a code/source-contract review, not a result review. I ran only the synthetic unit test; no real-data mixture distribution, probability, or performance metric was computed.
+
+The frozen candidate is exactly `Q_E = 0.5 Q_R + 0.5 Q_S`, after applying each provider's pinned annual temperature and normalizing each full-field ordered Top-3 PL distribution. The event maps are sums over that mixture; no score, temperature, ticket-probability, or selected-subset averaging/re-normalization is present. F1 runner keys join the pinned R and S OOS score rows one-to-one. Each source provider retains its prior fit/calibration protocol and stored temperature.
+
+The reviewed cohort and legal pool denominators are pinned at 1,779 races / 17,412 runners / 269 dates; WIN, QNL, EXA, QPL, TLA, and TRI each have 1,779 races. PLC has 1,743 races; 36 actual-seven-runner races with unknown opening roster remain quarantined only for PLC. The frozen rule-contract hash and date-bootstrap schedule/receipt are checked in source preflight. The evaluation remains a reused retrospective development period, limited to complete normal-finish labels; it is not independent future validation.
+
+The code's fixed-weight path streams the exact R/S ordered triples for QNL/QPL hit-count distributions, retains the 0..3 PMF, uses the frozen tie rule, and produces race-equal paired pool losses and the pinned date bootstrap. The gate requires both E−S and E−R to meet the TRI NLL bootstrap upper-bound and TRI Brier criteria, with WIN NLL/Brier point protections. The report now exposes the combined research-candidate gate. These are internal research gates; they neither establish statistical WIN non-inferiority nor promote the operational model. No market or ROI claim is in scope.
+
+One initial blocker was found and fixed before this review: the fresh-preflight comparator had removed `created_at_utc` only from the saved object, so it would always fail. The frozen implementation now removes it from both objects; worker-reported source-preflight/fresh-guard checks pass. I independently ran the synthetic unittest under `-B` and it passed. The supervisor's separate synthetic math preflight reports four rosters passing with maximum errors below `9e-16`.
+
+**No blocking findings remain.** Supervisor may bind the approval to the hashes recorded in `PREFLIGHT_REVIEW.json`; this review itself did not execute or authorize the real evaluation. The result must still be independently checked before any adoption claim. Reused 2024–2026 data, unverified contemporaneous public/roster timing, and absent market evidence remain material interpretation limits.

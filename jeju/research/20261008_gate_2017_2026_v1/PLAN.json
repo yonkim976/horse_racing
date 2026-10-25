@@ -1,0 +1,80 @@
+{
+  "request": "2017~2026 기준 거리별 번호·내외측 유불리 재계산",
+  "fixed_before_effects": true,
+  "main_period": [
+    2017,
+    2026
+  ],
+  "cutoff": "2026-09-19",
+  "active_distances": [
+    800,
+    900,
+    1000,
+    1110,
+    1200,
+    1300,
+    1400,
+    1610
+  ],
+  "excluded_current_distance": 400,
+  "population": "Preserved quality-view extract; complete normal results; exactly ten runners numbered 1..10",
+  "groups": {
+    "inner": [
+      1,
+      2,
+      3
+    ],
+    "middle": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "outer": [
+      8,
+      9,
+      10
+    ]
+  },
+  "methods": "Same within-race ridge alpha1 regression and T-minus-2 exact-distance last-five histories as preserved study; time and Top3 targets; date-cluster primary and horse-cluster sensitivity intervals. Fixed period pooling, no recency weights. Event age retained for exact reproducibility; current 2026 profile age not treated as historical age.",
+  "periods": {
+    "2017_2026": [
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "2019_2025": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "2017_2018": [
+      2017,
+      2018
+    ],
+    "2024_2026": [
+      2024,
+      2025,
+      2026
+    ],
+    "2026_partial": [
+      2026
+    ]
+  },
+  "support": "At least30 races and20 dates to estimate; basic support100 races40 dates2years; remaining estimates limited. No extrapolation to other field sizes.",
+  "multiple_testing": "Per period, all estimated distances x3 group contrasts x2 targets BH; separate per-period family for all ten number effects x2 targets. Pointwise95% intervals.",
+  "verification": "Feature equivalence; reproduce previous main estimates; history horse/distance/T-minus-2; contrast arithmetic; missing effects for unsupported distances; source/DB hashes unchanged.",
+  "limitations": "Observational, posthoc pooled association; heterogeneous eras may have different gate effects; recent and yearly views retained; no predictive efficacy or causal claims; physical gate mapping unconfirmed.",
+  "preservation": "New folder only; DB and operational models unchanged"
+}

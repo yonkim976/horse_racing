@@ -1,0 +1,644 @@
+[
+  {
+    "url": "https://race.kra.co.kr/trainer/dailyDayTrainList.do?Act=10&Sub=3&meet=2",
+    "retrieved_at_utc": "2026-10-17T09:13:24.820819+00:00",
+    "http_status": 200,
+    "final_url": "https://race.kra.co.kr/trainer/dailyDayTrainList.do?Act=10&Sub=3&meet=2",
+    "content_type": "text/html; charset=EUC-KR",
+    "bytes": 27151,
+    "sha256": "f33143a661ae903dca0b30c6d438d8470066f638a816750cbad926947b2a2bfb",
+    "source_path": "jeju/research/20261017_older_training_rider_sources/homepage/menus/1.html",
+    "forms": [
+      {
+        "action": "/trainer/dailyDayTrainList.do?Act=10&Sub=3&meet=2",
+        "method": "post",
+        "fields": [
+          {
+            "tag": "input",
+            "name": "nTotPageRest",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "trDate",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "trYo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "pageIndex",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "meet",
+            "value": "2",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Act",
+            "value": "10",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Sub",
+            "value": "3",
+            "type": "hidden",
+            "options": []
+          }
+        ]
+      }
+    ],
+    "relevant_links": [
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "대상특별경주",
+        "href": "/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "대상특별경주",
+        "href": "/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "출전표변경",
+        "href": "/thisweekrace/ThisWeekChulmapyoChange.do",
+        "onclick": null
+      },
+      {
+        "text": "언론사용출전표",
+        "href": "/thisweekrace/MediaChulmapyo.do",
+        "onclick": null
+      },
+      {
+        "text": "조교사프로필",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "조교사성적별순위",
+        "href": "/trainer/trainerScoreYearRecord.do?Act=10&Sub=2&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "일일조교",
+        "href": "/trainer/dailyDayTrainList.do?Act=10&Sub=3&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "금주조교현황",
+        "href": "/trainer/thisWeekTrainList.do?Act=10&Sub=4&meet=2",
+        "onclick": null
+      }
+    ],
+    "inline_scripts": [
+      "\n\nfunction goPage1(trDate, trYo){\n    var form = document.form1;\n    form.trDate.value = trDate;\n    form.trYo.value = trYo;\n \n    // 조별 리스트 조회\n    form.action = \"dailyGroupTrainList.do\";\n    form.submit();\n}\n \nfunction goNext(kind){\n    var form = document.form1;\n    var pageNum = form.pageIndex.value;\n    var totPageRest = form.nTotPageRest.value;\n\n    if(pageNum == \"\"){\n        return;\n    }\n\n    if(kind == \"next\"){\n        if(\"false\" == \"true\"){\n            alert(\"마지막 조회 목록입니다.\");\n            return\n        }\n        pageNum = parseInt(pageNum) + 1;\n        form.pageIndex.value = pageNum;\n    }else{\n\n        if(pageNum == \"1\"){\n            alert(\"첫번째 조회 목록입니다.\");\n            return\n        }\n        pageNum = parseInt(pageNum) - 1;\n        form.pageIndex.value = pageNum;\n    }\n\n    form.action = \"dailyDayTrainListSelect.do\";\n    form.submit();\n}\n\n"
+    ],
+    "status": "saved"
+  },
+  {
+    "url": "https://race.kra.co.kr/trainer/thisWeekTrainList.do?Act=10&Sub=4&meet=2",
+    "retrieved_at_utc": "2026-10-17T09:13:25.009174+00:00",
+    "http_status": 200,
+    "final_url": "https://race.kra.co.kr/trainer/thisWeekTrainList.do?Act=10&Sub=4&meet=2",
+    "content_type": "text/html; charset=EUC-KR",
+    "bytes": 94975,
+    "sha256": "bf19fd7f9f3715b42ce06c0245e1a4a6f88a1fc40a3aa38bacfb0495dbe530e3",
+    "source_path": "jeju/research/20261017_older_training_rider_sources/homepage/menus/2.html",
+    "forms": [
+      {
+        "action": null,
+        "method": null,
+        "fields": [
+          {
+            "tag": "input",
+            "name": "hrNo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "gubun",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          }
+        ]
+      },
+      {
+        "action": "/trainer/thisWeekTrainList.do?Act=10&Sub=4&meet=2",
+        "method": "post",
+        "fields": [
+          {
+            "tag": "input",
+            "name": "hrNo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "gubun",
+            "value": "2",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Act",
+            "value": "10",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Sub",
+            "value": "4",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "meet",
+            "value": "2",
+            "type": "hidden",
+            "options": []
+          }
+        ]
+      },
+      {
+        "action": null,
+        "method": "post",
+        "fields": [
+          {
+            "tag": "input",
+            "name": "meet",
+            "value": "2",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "gubun",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          }
+        ]
+      }
+    ],
+    "relevant_links": [
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "대상특별경주",
+        "href": "/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "대상특별경주",
+        "href": "/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "출전표변경",
+        "href": "/thisweekrace/ThisWeekChulmapyoChange.do",
+        "onclick": null
+      },
+      {
+        "text": "언론사용출전표",
+        "href": "/thisweekrace/MediaChulmapyo.do",
+        "onclick": null
+      },
+      {
+        "text": "조교사프로필",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "조교사성적별순위",
+        "href": "/trainer/trainerScoreYearRecord.do?Act=10&Sub=2&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "일일조교",
+        "href": "/trainer/dailyDayTrainList.do?Act=10&Sub=3&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "금주조교현황",
+        "href": "/trainer/thisWeekTrainList.do?Act=10&Sub=4&meet=2",
+        "onclick": null
+      }
+    ],
+    "inline_scripts": [
+      "\n//레이어팝업\n$(document).ready(function(){\n    $(\"._LayerPop\").each(function(){\n\t    var hrNo = $(this).attr(\"data-hrNo\");\n\t    var gubun = $(this).attr(\"data-gubun\");\n\t    var meet = $(this).attr(\"data-meet\");\n\t    $(this).popup({\n\t        url: \"/trainer/thisWeekProfileTraineState.do\",\n    \t\tdata:{\n    \t\t    'hrNo':hrNo,\n    \t\t    'gubun':gubun,\n    \t\t\t'meet':meet\n    \t\t}});\n\t});\n});\n\nfunction goPage1(){\n    var form = document.form1;\n    form.action = \"nextWeekTrainList.do\";\n    form.submit();\n}\n\nfunction goPage2(hrno){\n    var form = document.form1;\n    form.hrNo.value = hrno;\n    form.action=\"/racehorse/profileHorseItem.do\";\n    form.submit();\n}\n\nfunction goExcel(){\n\tdocument.excelForm.action = '/trainer/thisWeekTrainListExcelView.do';\n\tdocument.excelForm.submit();\n}\n"
+    ],
+    "status": "saved"
+  },
+  {
+    "url": "https://race.kra.co.kr/chulmainfo/chulmaDetailInfoChulmapyo.do?Act=02&Sub=1&meet=2&rcDate=20260417&rcNo=1",
+    "retrieved_at_utc": "2026-10-17T09:13:25.411219+00:00",
+    "http_status": 200,
+    "final_url": "https://race.kra.co.kr/chulmainfo/chulmaDetailInfoChulmapyo.do?Act=02&Sub=1&meet=2&rcDate=20260417&rcNo=1",
+    "content_type": "text/html; charset=EUC-KR",
+    "bytes": 48529,
+    "sha256": "c7b07f96ef32be40cbdf2bc686cff3978c63f7fc78aa07ce8c017b5755d1071f",
+    "source_path": "jeju/research/20261017_older_training_rider_sources/homepage/menus/3.html",
+    "forms": [
+      {
+        "action": "/chulmainfo/chulmaDetailInfoChulmapyo.do?Act=02&Sub=1&meet=2&rcDate=20260417&rcNo=1",
+        "method": "post",
+        "fields": [
+          {
+            "tag": "input",
+            "name": "Sub",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Act",
+            "value": "02",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "meet",
+            "value": "2",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "hrNo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "jkNo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "trNo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "owNo",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "rcDate",
+            "value": "20260417",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "rcNo",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          }
+        ]
+      },
+      {
+        "action": "/chulmainfo/chulmaDetailInfoChulmapyo.do",
+        "method": "post",
+        "fields": [
+          {
+            "tag": "input",
+            "name": "meet",
+            "value": "2",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "rcDate",
+            "value": "20260417",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "rcNo",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "argOrderBy",
+            "value": "",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Act",
+            "value": "02",
+            "type": "hidden",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "name": "Sub",
+            "value": "1",
+            "type": "hidden",
+            "options": []
+          }
+        ]
+      }
+    ],
+    "relevant_links": [
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "대상특별경주",
+        "href": "/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=1",
+        "onclick": null
+      },
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "대상특별경주",
+        "href": "/chulmainfo/SeriesRaceOperationInfo.do?Act=05&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=3",
+        "onclick": null
+      },
+      {
+        "text": "출전정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "경마속보",
+        "href": "/raceFastreport/ChulmapyoChange.do?Act=03&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "조교사정보",
+        "href": "/trainer/profileTrainerList.do?Act=10&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "출전표변경",
+        "href": "/thisweekrace/ThisWeekChulmapyoChange.do",
+        "onclick": null
+      },
+      {
+        "text": "언론사용출전표",
+        "href": "/thisweekrace/MediaChulmapyo.do",
+        "onclick": null
+      },
+      {
+        "text": "출전상세정보",
+        "href": "/chulmainfo/ChulmaDetailInfoList.do?Act=02&Sub=1&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "금주의 진기록",
+        "href": "/chulmainfo/ContinueHorses.do?Act=02&Sub=2&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "출전내역",
+        "href": "/chulmainfo/Riding.do?Act=02&Sub=3&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "기승불가기수",
+        "href": "/chulmainfo/RidingBadJockey.do?Act=02&Sub=5&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "출전등록현황",
+        "href": "/chulmainfo/RegistStateList.do?Act=02&Sub=6&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "오늘의경주(PDF)",
+        "href": "/chulmainfo/ChulmainfoBoard.do?Act=02&Sub=7&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "Easy Race(PDF)",
+        "href": "/chulmainfo/ChulmainfoBoard.do?Act=02&Sub=11&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "경주로 현황",
+        "href": "/chulmainfo/trackView.do?Act=02&Sub=9&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "경주로 구조",
+        "href": "/chulmainfo/RacingcourseStructure.do?Act=02&Sub=10&meet=2",
+        "onclick": null
+      },
+      {
+        "text": "출전표",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoChulmapyo.do');"
+      },
+      {
+        "text": "진료현황",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoAccessoryState.do');"
+      },
+      {
+        "text": "체중",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoWeight.do');"
+      },
+      {
+        "text": "전적",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoRecord.do');"
+      },
+      {
+        "text": "해당거리전적",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoDistanceRecord.do');"
+      },
+      {
+        "text": "상대전적",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoMatchRecordList.do');"
+      },
+      {
+        "text": "조교현황",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoTrainState.do');"
+      },
+      {
+        "text": "말/기수 상관전적",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoRelationRecord.do');"
+      },
+      {
+        "text": "최근 10회 전적",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfo10Score.do');"
+      },
+      {
+        "text": "심판리포트",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoStewardsReport.do');"
+      },
+      {
+        "text": "출발조교현황",
+        "href": "#KRA",
+        "onclick": "goPageTab('/chulmainfo/chulmaDetailInfoStartingTrain.do');"
+      }
+    ],
+    "inline_scripts": [
+      "\nfunction nextPage(meet,rcDate,rcNo){\n    var form = document.form1;\n    form.meet.value = meet;\n    form.rcDate.value = rcDate;\n    form.rcNo.value = rcNo;\n    form.action = \"/chulmainfo/chulmaDetailInfoChulmapyo.do\";\n    form.submit();\n}\n\nfunction goList(){\n    var form = document.form1;\n    form.meet.value = 2;\n    form.action = \"/chulmainfo/ChulmaDetailInfoList.do\";\n    form.submit();\n}\n\n\nfunction goPage1(hrNo, meet){\n    var form = document.form1;\n    form.hrNo.value = hrNo;\n    form.meet.value = meet;\n    form.action = \"/racehorse/profileHorseItem.do\";\n    form.submit();\n}\n\nfunction goPage2(jkNo, meet){\n    var form = document.form1;\n    form.jkNo.value = jkNo;\n    form.meet.value = meet;\n    form.action = \"/jockey/ProfilePersonItem.do\";\n    form.submit();\n}\n\nfunction goPage3(trNo, meet){\n    var form = document.form1;\n    form.trNo.value = trNo;\n    form.meet.value = meet;\n    form.action = \"/trainer/profileTrainerPersonItem.do\";\n    form.submit();\n}\n\nfunction goPage4(owNo,meet){\n    var form = document.form1;\n    form.owNo.value = owNo;\n    form.meet.value = meet;\n    form.action = \"/owner/posessStateSoyuHorsesState.do\";\n    form.submit();\n}\n\nfunction goMessage(flag){\n    if(flag == '-1'){\n        alert(\"첫페이지 입니다.\");\n    }else{\n        alert(\"마지막 페이지 입니다.\");\n    }\n}\n\nfunction goSort(argOrderBy) {\n    var frm = document.getElementById(\"frm_sort\");\n    frm.argOrderBy.value = argOrderBy;\n    frm.submit();\n}\n"
+    ],
+    "status": "saved"
+  }
+]
