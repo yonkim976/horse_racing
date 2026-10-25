@@ -1,0 +1,917 @@
+{
+  "assembled_on": "2026-10-08",
+  "scope": "서울·부산·영천 주로·전개·게이트·주행심사 및 거리별 기록 기준·성별·연령 연구41개와 결정 문서 및 이전 참조 보고서",
+  "data_end": "2026-09-20",
+  "analysis_rerun": false,
+  "sources": [
+    {
+      "path": "thoroughbred/research/20261002_track_source_reconciliation/README.md",
+      "sha256": "f406eb9648ba2a9b94297a3863fb099ebd717a826d034717a3e2447cfe8d98e6"
+    },
+    {
+      "path": "thoroughbred/research/20261002_moisture_only/README.md",
+      "sha256": "409803a657a2eafe10b29af941eca7801b7753e490bc00591363792d5c81fbf6"
+    },
+    {
+      "path": "thoroughbred/research/20261002_moisture_distance_retrain/README.md",
+      "sha256": "667374d6247db4c26e7c10b96af47ff7830c7c49562b59885e5cdf5a7d239694"
+    },
+    {
+      "path": "thoroughbred/research/20261002_moisture_position/README.md",
+      "sha256": "6350566647163d64764c9e6b87964d5a1db62d079fac10a831904a5b76bff5c0"
+    },
+    {
+      "path": "thoroughbred/research/20261002_moisture_robust_grade/README.md",
+      "sha256": "06fdd19367e62cdc244cd6165105603df2e5cd3d47359d94c172a76e55ecdec0"
+    },
+    {
+      "path": "thoroughbred/research/20261002_moisture_strength_selection/README.md",
+      "sha256": "47864ce8faf6e6edff5a37116d135f7c2c0974ab69713544b2a68fa4dfa02939"
+    },
+    {
+      "path": "thoroughbred/research/20261002_moisture_section_strength/README.md",
+      "sha256": "813e6b8b26e663e8c16932072d072d339c26fadc28c53461dbd4b30ad6d2f0ad"
+    },
+    {
+      "path": "thoroughbred/research/20261002_gate_lateral_bias/README.md",
+      "sha256": "a254083d296a19a3556074d0891ef9af8c091219e0fe2326f0d00cd5930bc666"
+    },
+    {
+      "path": "thoroughbred/research/20261003_gate_lateral_time_windows/README.md",
+      "sha256": "5a700d7ddedc38c2ea8aa8858db5e911f6fc165ceeb96c55e84bb9e40f63e256"
+    },
+    {
+      "path": "thoroughbred/research/20261003_three_lateral_positions/README.md",
+      "sha256": "17e336357dfd938730c5e4c3599e53cae7fc3dde2048db6aa525a01077091278"
+    },
+    {
+      "path": "thoroughbred/research/20261003_joint_gate_lateral_smoothing/README.md",
+      "sha256": "fe7f808b9781cf1f743226ecae7c04ee6d56389b9a8e7ed1bdd0d445218c7257"
+    },
+    {
+      "path": "thoroughbred/docs/TRACK_MOISTURE_CORRECTION_DECISION_2026-10-02.md",
+      "sha256": "d4e7fb5bed01b899e48fdd6c043ea1f9f2018553887ab4414e8cf7d986773604"
+    },
+    {
+      "path": "thoroughbred/docs/TRACK_MOISTURE_SECTION_CORRECTION_STATUS_2026-10-02.md",
+      "sha256": "06ea49543e9fd8f740e50d62ee24043765382389ccc0342c002e5e500fb39089"
+    },
+    {
+      "path": "research/track_common_residual_20260928/FINAL_REPORT_KO.md",
+      "sha256": "db4a2d3fe981128891a278a0b96d3a5c8e6df6974d28d6504461d3d06dd43cfa"
+    },
+    {
+      "path": "thoroughbred/research/20261003_trial_time_baselines/README.md",
+      "sha256": "67febe11532540863a1db1661354b0d7665830d7515e945087471a4a6f71f563"
+    },
+    {
+      "path": "thoroughbred/research/20261003_sectional_pace_moisture/README.md",
+      "sha256": "58d7a9d1ab3d1f05fea3092db237339c658c3584afc8e7a932f58f102421cfbf"
+    },
+    {
+      "path": "thoroughbred/research/20261004_grade1200_sectional/README.md",
+      "sha256": "87ca1d29afcf921624dea11d20c9640ab5b60acefb91f743ee22929d3ad229e2"
+    },
+    {
+      "path": "thoroughbred/research/20261004_1200_benchmarks/README.md",
+      "sha256": "e0c5b7c512e1688551a585ff55a30381fbf9686a98f12d68d1e4fb03c57c1e53"
+    },
+    {
+      "path": "thoroughbred/research/20261004_seoul4c_finish/README.md",
+      "sha256": "3499654d991892a83938e5e9599554b4ee9cbee7eb8d1aa18fa119c3731a8adc"
+    },
+    {
+      "path": "thoroughbred/research/20261004_relative_speed_par_v1/README.md",
+      "sha256": "2f983e23857dd0c8b8169b3c6f4920a4a9f40fd155b4ba544629ff64b8782470"
+    },
+    {
+      "path": "thoroughbred/research/20261005_relative_load1200/README.md",
+      "sha256": "14dce5e1b1467276cc04bbce2be232bcd541ea0087655131bcea9c4d9c11e1a1"
+    },
+    {
+      "path": "thoroughbred/research/20261005_1300_benchmarks/README.md",
+      "sha256": "3e18e3ec9e98ea23b0bdaf57b86cdecf5825b397c5c73b00c3e21cfc87245c33"
+    },
+    {
+      "path": "thoroughbred/research/20261005_1400_benchmarks/README.md",
+      "sha256": "1ea2534036ac8371964fd7061424b071e8a480a3a4687db2f3b91110c8582272"
+    },
+    {
+      "path": "thoroughbred/research/20261006_1600_benchmarks/README.md",
+      "sha256": "ccc0c61473dba5c1cbe76faae7d298e61996cdf6a5893d7e0c5d260eeb2b0051"
+    },
+    {
+      "path": "thoroughbred/research/20261006_seoul1700_coverage/README.md",
+      "sha256": "4ba3898fe4efbe3630da3f1129f1e868bbea166b863c0865499887eec16e9dc3"
+    },
+    {
+      "path": "thoroughbred/research/20261006_1700_1800_benchmarks/1700/README.md",
+      "sha256": "6d52654b1fa0dfca6ed0e140307adc67e4c3fa739e0972130f168469cc8b02ce"
+    },
+    {
+      "path": "thoroughbred/research/20261006_1700_1800_benchmarks/1800/README.md",
+      "sha256": "ff3e60ca9f25d8b1d5672b119bc246568a7f2e0c6176f946f35d8eef46ec1e48"
+    },
+    {
+      "path": "thoroughbred/research/20261006_remaining_distance_benchmarks/1000/README.md",
+      "sha256": "5bebadce4b2f7d0f6f17e1ed52a1ef46bf0a82ef84eafe60b7940235f014ef84"
+    },
+    {
+      "path": "thoroughbred/research/20261006_remaining_distance_benchmarks/1900/README.md",
+      "sha256": "332c3c31bffd66bccaf02f31f42a53e35173692a6a3411f6c11d9f3775ee3f97"
+    },
+    {
+      "path": "thoroughbred/research/20261006_remaining_distance_benchmarks/2000/README.md",
+      "sha256": "e795974511da3fd5cb3c5b6e4f2543d84400ae4e4fb69d7558e8fdd146b7648e"
+    },
+    {
+      "path": "thoroughbred/research/20261006_remaining_distance_benchmarks/2200/README.md",
+      "sha256": "e9428281bf3ddc5282f1fabd4fb670ebdaae512531da1630afbe043febecbd7c"
+    },
+    {
+      "path": "thoroughbred/research/20261006_remaining_distance_benchmarks/2300/README.md",
+      "sha256": "d54a490772c55fad5623b0b29b06f722d5592d81121510692fab00cf5dc2c6ed"
+    },
+    {
+      "path": "thoroughbred/research/20261007_seasonal_same_moisture/README.md",
+      "sha256": "6089c75dbbfa94d72216e8880d3c513cc23feb16c615bbdb3933ae44defb99bb"
+    },
+    {
+      "path": "thoroughbred/research/20261007_monthly_same_moisture/README.md",
+      "sha256": "18731eb259d69f4eb5bc538b710b16587f8b807d04dc3d30d52fda5c2fafba76"
+    },
+    {
+      "path": "thoroughbred/research/20261007_era_record_trends/README.md",
+      "sha256": "2bce7fc3219e6a719045d8b8178bdcf4030085e8e90d8e3d25c040d9eb5f25f4"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_ability_gap/README.md",
+      "sha256": "2da6cfe836de2012729f1ab6836114b79656c926bdc3f52ad0a185723ee9491a"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_ability_gap/SOURCES.md",
+      "sha256": "e1fe2906404daa5c3461547cca4ec20a8b6e4ae34423f408e7191b3217230f21"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_ability_gap/PUBLICATION.md",
+      "sha256": "826ff34cf921251d58a6c707390072cce73030b16c509c4fd6f1b9395b46d068"
+    },
+    {
+      "path": "thoroughbred/research/20261007_age_curve_exit/README.md",
+      "sha256": "bb840d41f6d2edf9c5ff3218cc0614ccaf48d609edb6801def5157b5f3160756"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_weight_distance_followup/README.md",
+      "sha256": "44d137bad4cb1d9896e69848e01263b965b0617c28c5c0c7c105d829775b67e1"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_weight_distance_followup/SOURCES.md",
+      "sha256": "ea12f5dd1a3d9b17b8b06f6c954ab9b41a33714c4d0f8d3cbe8b513ff9da1860"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_weight_distance_followup/PUBLICATION.md",
+      "sha256": "7f4ff2b6fe5dabf4275a5524732c13e2e8454cb805c612f0a4ed1a5b60f99d9b"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_top5_followup/README.md",
+      "sha256": "aafc8e7c9d77bdc7e2fd7ee7ba00852a2f461f7ee3e2c61a5de3cc3562afeb1d"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_top5_followup/SOURCES.md",
+      "sha256": "5fd1dc6fbd54055b8bc15397f8dee21d8514f9da3fabb9eeda90bccbb599c378"
+    },
+    {
+      "path": "thoroughbred/research/20261007_sex_top5_followup/PUBLICATION.md",
+      "sha256": "f70f230be8da731d8645c0e9eea877c2dfe74b54f78c9d88e74da90c645bac41"
+    },
+    {
+      "path": "thoroughbred/research/20261007_track_correction_synthesis/README.md",
+      "sha256": "3156b351e2e78af57204d483ae8f1c9078d402ce8be4e03d4e2023cbf128e4e3"
+    },
+    {
+      "path": "thoroughbred/research/20261007_seoul1600_gate_comparison/README.md",
+      "sha256": "ffa752bdfc2cff03b52909fc900c96ae5a966bb9c363cc715123449134e45f21"
+    },
+    {
+      "path": "thoroughbred/research/20261007_busan_gate_comparison/README.md",
+      "sha256": "22b1ff30322766f36a4d6cabc991c37242ab28a01391df67e7b4cd404362b430"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_only_followup/README.md",
+      "sha256": "11577a8df9017c800b6fe774ed45b0af2fa51dc5d87632bc63d7e90a1f3dd3b0"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_only_followup/SOURCES.md",
+      "sha256": "83a50fcc84824565bededc4f12a75eab4467ee78619fe06a3513542020adfefb"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_only_followup/PUBLICATION.md",
+      "sha256": "01a71e728ded439789403fc03602215c491b6db24e80bf8011a45a4673f73061"
+    },
+    {
+      "path": "thoroughbred/research/20261008_record_normalization_seconds/README.md",
+      "sha256": "51896204524ce4e8ad021d146be120a102c094ff4a44b5c2df20c0083e65b568"
+    },
+    {
+      "path": "thoroughbred/research/20261008_record_normalization_seconds/SOURCES.md",
+      "sha256": "1b8678649991b8d3c4a5b6e28473153efda3d6aed2241711df10df278d0b94e8"
+    },
+    {
+      "path": "thoroughbred/research/20261008_record_normalization_seconds/PUBLICATION.md",
+      "sha256": "ac57372e5c1745eabc50942412b2405e28abea85b7c95fbc52a0a88453dbefc4"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_lateral_seconds/README.md",
+      "sha256": "24113a4d5c735949a6889646457c7549b195662516619e8bfd4b90676bde7da3"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_lateral_seconds/SOURCES.md",
+      "sha256": "4531fe9992f3e629bfe5c0c003d3c20d68edf4827f86c4a6b79fc9a895715371"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_lateral_seconds/PUBLICATION.md",
+      "sha256": "6dc2c79e6717ffb4602620647e03cb86f9ced9dd1ea2a60d3f61e94d90d3badb"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_load_time_loss/README.md",
+      "sha256": "6d6025d9370bde518a1392dcbf0b3a46e6adbbbe25e7423726101fb53cde5886"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_load_time_loss/SOURCES.md",
+      "sha256": "ebb8222464e78d21d285b3608f3ca3401a9cb656ae11bd4694aaac80df666a1b"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_load_time_loss/PUBLICATION.md",
+      "sha256": "729932a0e4bda1e5dcf928ce8c6dedb725d63601f67c4ab5a65513924d32a8e8"
+    },
+    {
+      "path": "thoroughbred/research/20261008_moisture_gate_seconds/README.md",
+      "sha256": "121056eb3d8edb8648030407446cf4b8f92e404d4c0a33cbc6029b9fdc9b06b2"
+    },
+    {
+      "path": "thoroughbred/research/20261008_moisture_gate_seconds/SOURCES.md",
+      "sha256": "4b4dcc151bc8b3bee01007321ff374a9e30a1ba276cce2027430b93fceb1f288"
+    },
+    {
+      "path": "thoroughbred/research/20261008_moisture_gate_seconds/PUBLICATION.md",
+      "sha256": "a7f87b41fd7b7717f42e4635f52723f745a1311428ad9019c988b639185d4551"
+    },
+    {
+      "path": "thoroughbred/research/20261008_carried_weight_correction/README.md",
+      "sha256": "2c3402e3b47d1e83cacdd5fd98a67e77b223725e14ba6b9f2a38969b2a539f2d"
+    },
+    {
+      "path": "thoroughbred/research/20261008_carried_weight_correction/SOURCES.md",
+      "sha256": "7ad7d70966b2a4dd879de84c257bed066aa59e132b3ffacbe4cfc08e83043962"
+    },
+    {
+      "path": "thoroughbred/research/20261008_carried_weight_correction/PUBLICATION.md",
+      "sha256": "5b6b17310bfd389d3dd1b45a81f298aa5b30cfdbd4c2138263db4505e6213c75"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_model_candidate_v1/README.md",
+      "sha256": "fb278594061f568e6942122e95461c3327dbb47367bee67e218578b778f73e8a"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_model_candidate_v1/SOURCES.md",
+      "sha256": "45d9c1d8e95cd356a81e588110bf0fc1eb8f099e45ce3aecd0f495b45bfe4bba"
+    },
+    {
+      "path": "thoroughbred/research/20261008_gate_model_candidate_v1/PUBLICATION.md",
+      "sha256": "f4e3450fa843c34cde6510b6aad8e4be742feebb41e431cf90403bee00170449"
+    },
+    {
+      "path": "thoroughbred/research/20261008_section_normalization_candidate_v1/README.md",
+      "sha256": "0e8ac415071c7011fab9ab4e2f3cc78311add1d57873743d155a687e4526da00"
+    },
+    {
+      "path": "thoroughbred/research/20261008_section_normalization_candidate_v1/SOURCES.md",
+      "sha256": "6b4a78e044c2ab9508b15f01e193ff82732eed1ae367a5b759fa12f1c95e6337"
+    },
+    {
+      "path": "thoroughbred/research/20261008_section_normalization_candidate_v1/PUBLICATION.md",
+      "sha256": "ebd9075791e96187cfdebd2f85f4d981407f681dc35bcf80fb821e43962c1581"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_weight_change_optimum/README.md",
+      "sha256": "7dba1c3dc377058d5329f137dec2e0e296dcd32a61dedb8c2250254616ba8488"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_weight_change_optimum/SOURCES.md",
+      "sha256": "c354a354f89f9dc8450911af7be868b18a99774e67fbc12f97dd606fc34a6639"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_weight_change_optimum/PUBLICATION.md",
+      "sha256": "7d316d783ad50fe31b9720b736e73fdf9083859da7f85301ce5b7a7dbf183455"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_mass_distance_finish/README.md",
+      "sha256": "14553eff03e89b503c281b7d800a00cfbe8b243067784f2a3ddf89fe10d8a635"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_mass_distance_finish/SOURCES.md",
+      "sha256": "09b8dd0ea7c3b76171549491bf3f5c4bb73ebf506bb908383ffe41e8d813a555"
+    },
+    {
+      "path": "thoroughbred/research/20261008_body_mass_distance_finish/PUBLICATION.md",
+      "sha256": "f2242eadaf9f59ea4459da37d88c3dd14d39d071a487f6f2108d722d9124337c"
+    },
+    {
+      "path": "thoroughbred/research/20261008_detached_tail_sensitivity/README.md",
+      "sha256": "cf14420dea03b5be1266399eb58d5e6f9736bd34ca3ac3cab132199b77077476"
+    },
+    {
+      "path": "thoroughbred/research/20261008_detached_tail_sensitivity/SOURCES.md",
+      "sha256": "69a1fe865919865fc4ae13fe469d92c7afd32add4da29081d082d8c39da11ccc"
+    },
+    {
+      "path": "thoroughbred/research/20261008_detached_tail_sensitivity/PUBLICATION.md",
+      "sha256": "91bade56aa36a62200a792a2e9583025c20b41d105811c3614470b29ed127d2e"
+    },
+    {
+      "path": "thoroughbred/research/20261008_horse_distance_aptitude/README.md",
+      "sha256": "4548a1c92b9df4393058ab23685a0b15438c64b65b02c1b44bc8525168ccd590"
+    },
+    {
+      "path": "thoroughbred/research/20261008_horse_distance_aptitude/SOURCES.md",
+      "sha256": "802d3209a293cddd972d1e3d729d9008aac10e211371e752d5f5036fbc88589b"
+    },
+    {
+      "path": "thoroughbred/research/20261008_horse_distance_aptitude/PUBLICATION.md",
+      "sha256": "e311d06687b19e9daf280bde15756250a77c56101691b47dec048a9a1711acee"
+    },
+    {
+      "path": "thoroughbred/research/20261008_environment_correction_atlas/README.md",
+      "sha256": "d2f353c660f25620f4a6f5f772177fb2a78068e9b19f724ea636190df86a465b"
+    },
+    {
+      "path": "thoroughbred/research/20261008_environment_correction_atlas/SOURCES.md",
+      "sha256": "73fed2e97831156a593c680ffbed5c697c511e97de46b535ef6362e8e856fe2e"
+    },
+    {
+      "path": "thoroughbred/research/20261008_environment_correction_atlas/PUBLICATION.md",
+      "sha256": "9a874cf64ef5e4e24982e9e02e62e7623c29bf5cb23a4531de5f7ceb1b47513d"
+    },
+    {
+      "path": "thoroughbred/research/20261008_running_style_foundation/README.md",
+      "sha256": "d9da0c317aa98e1c6a4247ab8328b41188c30ec09b644dd707439d41c7ab414b"
+    },
+    {
+      "path": "thoroughbred/research/20261008_running_style_foundation/SOURCES.md",
+      "sha256": "0b47e2763e917b10dbadb80b6f9d64d588b90d78efa8ebd84674968bfcf580ab"
+    },
+    {
+      "path": "thoroughbred/research/20261008_running_style_foundation/PUBLICATION.md",
+      "sha256": "cf8edce1464f457adb2644eaab04da94a8e0396135ec7beeeff5ff5247e4efcc"
+    },
+    {
+      "path": "thoroughbred/research/20261008_passing_group_style/README.md",
+      "sha256": "1d4cba97690feb9dc7496c39ef82a6651e295288f04d03a7d52302a63c18aa44"
+    },
+    {
+      "path": "thoroughbred/research/20261008_passing_group_style/SOURCES.md",
+      "sha256": "3abf6494027d9c8e5a3c2efd5468a73d8508e11d56f95e5d0411b422bf0d12f8"
+    },
+    {
+      "path": "thoroughbred/research/20261008_passing_group_style/PUBLICATION.md",
+      "sha256": "68e2798d921fea0c2666e08ea04075df8c0bcc2da454e41a2488977512801d24"
+    },
+    {
+      "path": "thoroughbred/research/20261008_horse_style_performance/README.md",
+      "sha256": "c53469dfd39fa1a5a5825d2d49ec8970f5d607d41ec792df9be7295dc654d080"
+    },
+    {
+      "path": "thoroughbred/research/20261008_horse_style_performance/SOURCES.md",
+      "sha256": "0085cbb6bf3a209ec6ca7b7e4bb894fcc9c9f4a4a9313384617a7c7bafc5a6d7"
+    },
+    {
+      "path": "thoroughbred/research/20261008_horse_style_performance/PUBLICATION.md",
+      "sha256": "b496b52713d1866fbdb67655e9699779170bd4b1057adee22c6d1e36e0331599"
+    },
+    {
+      "path": "thoroughbred/research/20261008_field_pace_prediction/README.md",
+      "sha256": "5c366972f69bc268b5fbdc26bb69f017ed0481e44521b9c217df443132288f8a"
+    },
+    {
+      "path": "thoroughbred/research/20261008_field_pace_prediction/SOURCES.md",
+      "sha256": "5cee16af6683574b6f812508168c7b4218af9eca0acb51011353eef2a77ace29"
+    },
+    {
+      "path": "thoroughbred/research/20261008_field_pace_prediction/PUBLICATION.md",
+      "sha256": "1c845be4bc4f5768a521406249730d0f8b0e288568a8c05f4548ec2e50696d26"
+    },
+    {
+      "path": "thoroughbred/research/20261008_bilateral_field_pace/README.md",
+      "sha256": "8212dc65c33468915cc6c1a72dcb744750c64959271f98ab6ff72d7edf781a82"
+    },
+    {
+      "path": "thoroughbred/research/20261008_bilateral_field_pace/SOURCES.md",
+      "sha256": "ec147a8a54e1d45da07807ae6c008a7504ad3663ebda5ca0fc15ed128effb6a5"
+    },
+    {
+      "path": "thoroughbred/research/20261008_bilateral_field_pace/PUBLICATION.md",
+      "sha256": "5ca17880c8544406c9390439c6545e89d1ea066bab6cd8a5cbfa02465c17a33a"
+    },
+    {
+      "path": "thoroughbred/research/20261008_pace_condition_validation/README.md",
+      "sha256": "a8f8f9f253daa374b3dcb0db2dbb95fda37f7965c6d902fccd963b146f32bcb6"
+    },
+    {
+      "path": "thoroughbred/research/20261008_pace_condition_validation/SOURCES.md",
+      "sha256": "e6aa22ea724a1b1e6717998676743eba5384d54b7a6605463f24c8a5439e7660"
+    },
+    {
+      "path": "thoroughbred/research/20261008_pace_condition_validation/PUBLICATION.md",
+      "sha256": "c2f7f6a71e20135c0c30a28bb20611f570128d9327c12712c6981aaed05373ca"
+    },
+    {
+      "path": "thoroughbred/research/20261008_middle_late_style_validation/README.md",
+      "sha256": "645128d24f552ef00158f51fcd5d64271977f795c66c3fdf70a4804d88b1fcbe"
+    },
+    {
+      "path": "thoroughbred/research/20261008_middle_late_style_validation/SOURCES.md",
+      "sha256": "ec3149c1d7029ef7d96a8a509705ad62d0714a08093d189aaabb40dca47873f8"
+    },
+    {
+      "path": "thoroughbred/research/20261008_middle_late_style_validation/PUBLICATION.md",
+      "sha256": "95cff4d611ab85cc5ff6baded4437091bac9bce50ba1b1427181c8246066e4ac"
+    },
+    {
+      "path": "thoroughbred/research/20261009_front_density_closer_benefit/README.md",
+      "sha256": "03a6763b15c3cafe758fc1604bc2cc680f9a9f2d4a457d66e1bb73dbf14fe3ca"
+    },
+    {
+      "path": "thoroughbred/research/20261009_front_density_closer_benefit/SOURCES.md",
+      "sha256": "d30bb17e0ca9239e9e8bf6d098c8f5f5b15874dbc4719b6d5995f93f7215e118"
+    },
+    {
+      "path": "thoroughbred/research/20261009_front_density_closer_benefit/PUBLICATION.md",
+      "sha256": "9975efe849a0a6281d006b8fcd3bd567c606ffc6b0dc1afe74d83f2d8a31f851"
+    },
+    {
+      "path": "thoroughbred/research/20261009_fast_late_nonpodium_future/README.md",
+      "sha256": "265ea4880df1326d424d99795f9c6ce05d8f34fc016ca95aa9032c3bb9a08ea1"
+    },
+    {
+      "path": "thoroughbred/research/20261009_fast_late_nonpodium_future/SOURCES.md",
+      "sha256": "993be5602d79a9b148d4017d3f451d78bffb2ec75156ff7e1af5b3fc062bf664"
+    },
+    {
+      "path": "thoroughbred/research/20261009_fast_late_nonpodium_future/PUBLICATION.md",
+      "sha256": "8d5efa8785353c61734683d141e60527a9fae369bd98ad70165f2d341775f0f0"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/29_AXIS_COMPANION_PAIRS.md",
+      "sha256": "7fd534c16007b1dabe899ec8f7ac8a1433ce33556b76a39d16cd6c6d25283298",
+      "bytes": 1556
+    },
+    {
+      "path": "thoroughbred/research/conclusions/README.md",
+      "sha256": "0a0a9c1bdcab88f777b04f0f595bb78ea185eaf6d91f7a729a637ace88d87712",
+      "bytes": 32533
+    },
+    {
+      "path": "thoroughbred/research/conclusions/SOURCES.md",
+      "sha256": "f7f862a56c91559f43b72fca217b764ffeb29edb06dd0f33919f0233cfded650",
+      "bytes": 35074
+    },
+    {
+      "path": "thoroughbred/research/20261009_axis_companion_pairs_v1/README.md",
+      "sha256": "097076ea21ab49c88a3485a0b0cb2111593cd7d7c6b9c1c8a3b519cf71da723f",
+      "bytes": 8672
+    },
+    {
+      "path": "thoroughbred/research/20261009_axis_companion_pairs_v1/PLAN.md",
+      "sha256": "fde09aae43884c5619d6dac5c748c36df57d9c4df2fc039a1afa1ee41984e620",
+      "bytes": 3706
+    },
+    {
+      "path": "thoroughbred/research/20261009_axis_companion_pairs_v1/outputs/decision.json",
+      "sha256": "bb083e73e4f9dce0a65aa05ba49a11e6fed6adbda001d2ef4a38ddfb4e8fb2cb",
+      "bytes": 602
+    },
+    {
+      "path": "thoroughbred/research/20261009_axis_companion_pairs_v1/outputs/final_verification.json",
+      "sha256": "36e3cb86140afcb08b21855902e6dcac6d3f8cbb1f3f535315218fe023f2f495",
+      "bytes": 1973
+    },
+    {
+      "path": "thoroughbred/research/20261009_axis_companion_pairs_v1/outputs/independent_statistics_verification.json",
+      "sha256": "dc7bd889846cc1a83abbb4c8955e9ac1ebc4cb15cf9bfc463bd1201662ebb870",
+      "bytes": 47190
+    }
+  ],
+  "conclusions": [
+    {
+      "path": "thoroughbred/research/conclusions/01_TRACK_MOISTURE.md",
+      "sha256": "a92f7ca24b725838ec396ba3dd8fe27d8acd30ae341be41dd697438c80209f3d"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/02A_SECTION_NORMALIZATION_CANDIDATE_V1.md",
+      "sha256": "5c5dba5afee948406b3bf945aaed947e56623378b5fb51054a9a31a5bfe6de44"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/02B_DETACHED_TAIL_BASELINE.md",
+      "sha256": "88cd0466bb26389ec7e838114e8282fd4ad0717f92a199debe90faeda3a35afd"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/02_SECTION_TIME.md",
+      "sha256": "2e0a9d57123b1f49b6303ee1a494d4881d460a1b1b4b000cd073baf2295be88e"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/03A_SEOUL1600_GATE.md",
+      "sha256": "cb4d7691302fe1af7fa3a6851ac6e023828934e2aa6782270c6cee0586906ef3"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/03B_BUSAN_GATE.md",
+      "sha256": "e0fc574931c4fb3a7d245c03dbb30a7972cee6193a6e57f737650d4a5c600404"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/03C_GATE_ONLY_FOLLOWUP.md",
+      "sha256": "6d39ca9e1a9b489cd4224edb519ad4ce8b1e14acce45a23918702839a9069475"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/03_GATE_POSITION.md",
+      "sha256": "12419b82f91a2e871aef278a2d3fa3848d8f66526db1c40d62e58ab894306950"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04A_TRACK_TOTAL_CORRECTION.md",
+      "sha256": "d6f64c88b5e0a47df73767d225aaa5d2e36d22d6aa8c43a913771433e1a666ec"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04B_RECORD_NORMALIZATION_SECONDS.md",
+      "sha256": "3fb6da50ef62d35e538ba78e43117e90fd5dfd8689795697a09cd51ec698216e"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04C_GATE_LATERAL_SECONDS.md",
+      "sha256": "6e5f2e024fa0dae111423e4804f11bc62f30d7a67e4acf5785211c4aadfc215f"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04D_MOISTURE_GATE_SECONDS.md",
+      "sha256": "1c1b93bd8a6a7a90df948da41360bac62cbf9ad1ab8d66db5ed144428da3a0d0"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04E_GATE_MODEL_CANDIDATE_V1.md",
+      "sha256": "e9004a33a8a9d38ca4f39dd687ba139f64227b456d73684ea2a4a9e281198716"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04F_ENVIRONMENT_CORRECTION_ATLAS.md",
+      "sha256": "8467cf2d81c1dcc36bca1b6cc7a9189ff8f447be82ba23447146d8f1ab50448a"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/04_JOINT_CORRECTION.md",
+      "sha256": "8afc1a10757709628336924e2aa3ff7d36d314c9b80506b4a4b762033986d5d1"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/05_TRIAL_TIME_BASELINES.md",
+      "sha256": "22bf59f33eebc8362a9bb9a8c714b0824b0177059de1395a76935b0f5152546a"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/06_SECTIONAL_PACE_MOISTURE.md",
+      "sha256": "c0cd95ecf5d9703e8d5dad32a4910dafb9a35aed819891abb30d723efd3d1e65"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/07_GRADE1200_SECTIONS.md",
+      "sha256": "a2f696dba62ce45ed628bbbe787b3fbad70533eafeca24983fbfaf6d0c8394ce"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/08_DISTANCE_RECORD_BENCHMARKS.md",
+      "sha256": "b6b30ff78dd03bf77f7cb60e59361e62738f905370de1e1eb85e814de811f525"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/09_SEOUL4C_FINISH.md",
+      "sha256": "f85e2de72066ff92adf3ecc74162847ad99f3458fb4b8124eca7e7a471938837"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/10_RELATIVE_SPEED_PAR.md",
+      "sha256": "c8e69d7a8897b608321852a5864ae308209708a90aaeff9e66c019ba9b0e311d"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/11A_BODY_LOAD_TIME.md",
+      "sha256": "9217e54321104483afdc2f9a45dd0c4876aed91569118c49d4c517de489995dc"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/11B_CARRIED_WEIGHT_CORRECTION.md",
+      "sha256": "700d08fbbe3eb89758f95a92372c45ef1ecf664c0fc5d74e81d9a170ee5a0431"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/11C_BODY_WEIGHT_CHANGE_OPTIMUM.md",
+      "sha256": "84eebe10ad46d35a10ba6ef93557025c520f31bf4499cea54641a6d7917a80fe"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/11D_BODY_MASS_DISTANCE_FINISH.md",
+      "sha256": "f180aa943e5262c5ef63e618516cb99fc97d51231f728eb4eaf2f3c53960aed7"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/11_RELATIVE_LOAD1200.md",
+      "sha256": "b2fcd8caad2dbda9f9687c8381798749d6a2f87a71c009a302626f5bd68e16fd"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/12_BENCHMARK1300.md",
+      "sha256": "297d3e984a4abfa82dd6808bd401c1b07a2a372f59403b87c171605d460ddc88"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/13_BENCHMARK1400.md",
+      "sha256": "dd60ad449bb45a1779c45a349bc61e9169929e3c6dc57406390dec8f1c8351ba"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/14_BENCHMARK1600.md",
+      "sha256": "7dbb86e112ec02451b803de298e900070bcc1706afd5af9a5271801f226a7e5c"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/15_BENCHMARK1700.md",
+      "sha256": "6075cb1ae2322ac669ab98c5b567f5b51d019d205131372265eef788bd9870c9"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/16_BENCHMARK1800.md",
+      "sha256": "5c45bb1a4c13763d7a462914f9cf73d48583850945230eb79764a6e40392836d"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/17_BENCHMARK1000.md",
+      "sha256": "f4f4315f118ae552fbe6c85aefbc3d7e8bc15b0c28ab93b259f71c5625f1a201"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/18_BENCHMARK1900.md",
+      "sha256": "f66c1078cb1888c344f4ff9013f7036dcc5b973199ef9bd3cf7ae90e0ed575c0"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/19_BENCHMARK2000.md",
+      "sha256": "a88d8f7dd47b59090d8f0786cc13eda886a087304226bfd319a3bd20e3a5ddcf"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/20_BENCHMARK2200.md",
+      "sha256": "83caad594d771d3fa80dcc4fa12db4db6c82bb59b0f4044fa6c4cc8d376b07a9"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/21_BENCHMARK2300.md",
+      "sha256": "021aab16062c7879f547dbb0b6876b933193d6f4d66b6351507bd06251962513"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/22_SEASONAL_SAME_MOISTURE.md",
+      "sha256": "f2cfb5b10e0c74f3c0275d75d5ea64b21ef620b29a2f61d1a577aaf3db27948d"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/23_MONTHLY_SAME_MOISTURE.md",
+      "sha256": "f7b8c583c0a5da086701cda3ba707c4d3e2e1f5137bd234f3345a858a099ee0f"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/24_ERA_RECORD_TRENDS.md",
+      "sha256": "f56b7571f120ddf4d6c2661bf9a9d1c48464940256da5c5381294eb7db867db0"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/25A_SEX_WEIGHT_DISTANCE.md",
+      "sha256": "edda96a52a52a29594e9e566d76ab41a675421e1f11b16e0107019adcccb77d0"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/25B_SEX_TOP5.md",
+      "sha256": "9bb19d7274031b1394dd9f1cd6c7f2ceb14d4b6b449c2afb069bdd164be0fd35"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/25_SEX_ABILITY_GAP.md",
+      "sha256": "862f37d6f83a4cb34aa1f19b86b32805115b15a9933e3f7ba86d9bb101b4c41c"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/26_AGE_CURVE_EXIT.md",
+      "sha256": "50899d293481aa04723d4e72387dc38652ca1f6386d0e6beeabbb091cea81aad"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/27_HORSE_DISTANCE_APTITUDE.md",
+      "sha256": "ff896e727f4f18b69f147c03742cc75d71e11c6fe8cf81e2713b7910d740a186"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/README.md",
+      "sha256": "4b4431444f88122d615f9bf5ed1773b6390792c0fee8c99f56957f223e9a8df2"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/SOURCES.md",
+      "sha256": "4fe520bc9f462d7fe36f17f792dffc454b874a3b3d00df3dbdc9b49fc2c72ecc"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28_RUNNING_STYLE_FOUNDATION.md",
+      "sha256": "252ca528389c546e570cb9ba9bc947d81c581f9973defd20a3f512fe9c331f50"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28A_PASSING_GROUP_STYLE.md",
+      "sha256": "6d48c9a48fc2437baf3d890030ff61f6faa0294d520a0e82662e6871ada572bd"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28B_HORSE_STYLE_PERFORMANCE.md",
+      "sha256": "9dc460f316ebd9f95f7aac5ae864a44953e292b55d92af89739234c3850316b5"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28C_FIELD_PACE_PREDICTION.md",
+      "sha256": "529266ce85ca2ec3035864bb4304a533f603645e57773e57cbfc7c6fea9c3f33"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28D_BILATERAL_FIELD_PACE.md",
+      "sha256": "507c41996b9ecb6b50666072342d1b92b9119cd808380948dea7bc0735f7105f"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28E_PACE_CONDITION_VALIDATION.md",
+      "sha256": "c8db21422ba5e6dda365745729098ad10534d9a4f8713aa6a9dcde6a06c7cf52"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28F_MIDDLE_LATE_STYLE_VALIDATION.md",
+      "sha256": "0a3e39a56b71e06f03eaee721ae2c9f347cb9c4178c20923ef0a74e1ff2c2305"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28G_FRONT_DENSITY_CLOSER_BENEFIT.md",
+      "sha256": "1140a0ec006f452dcc9066cc03e151756db8b3c23691c344a6280528ac1ef366"
+    },
+    {
+      "path": "thoroughbred/research/conclusions/28H_FAST_LATE_NONPODIUM_FUTURE.md",
+      "sha256": "897c67da80ed942ddf9300be1ff58a6fb00933f4172809d9584ac77ffcf57583"
+    }
+  ],
+  "data_end_by_study": {
+    "track_gate": "2026-09-20",
+    "trial_times": "2026-09-17",
+    "sectional_trial": "2026-09-17",
+    "sectional_race": "2026-09-20",
+    "grade1200_seoul": "2026-09-20",
+    "grade1200_busan": "2026-09-18",
+    "grade1200_yeongcheon": "2026-09-20",
+    "benchmarks1200_seoul": "2026-09-20",
+    "benchmarks1200_busan": "2026-09-18",
+    "seoul4c_1200": "2026-09-20",
+    "relative1200_seoul": "2026-09-20",
+    "relative1200_busan": "2026-09-18",
+    "relative_load1200_seoul": "2026-09-20",
+    "relative_load1200_busan": "2026-09-18",
+    "benchmarks1300_seoul": "2026-09-20",
+    "benchmarks1300_busan": "2026-09-18",
+    "benchmarks1400_seoul": "2026-09-20",
+    "benchmarks1400_busan": "2026-09-11",
+    "benchmarks1600_seoul": "2026-09-19",
+    "benchmarks1600_busan": "2026-09-18",
+    "seoul1700_coverage": "2026-09-20",
+    "benchmarks1700_seoul": "2026-09-20",
+    "benchmarks1800_seoul": "2026-09-20",
+    "benchmarks1800_busan": "2026-09-18",
+    "benchmarks1000_busan": "2026-09-18",
+    "benchmarks1000_seoul": "2026-09-19",
+    "benchmarks1900_busan": "2020-07-19",
+    "benchmarks1900_seoul": "2026-05-30",
+    "benchmarks2000_busan": "2026-08-16",
+    "benchmarks2000_seoul": "2026-09-20",
+    "benchmarks2200_busan": "2026-05-03",
+    "benchmarks2300_seoul": "2026-05-31",
+    "seasonal_seoul": "2026-09-20",
+    "seasonal_busan": "2026-09-18",
+    "sex_ability_gap_seoul": "2026-09-20",
+    "sex_ability_gap_busan": "2026-09-18",
+    "age_curve_exit_followup": "2026-09-18",
+    "20261007_sex_weight_distance_followup": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261007_sex_top5_followup": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_body_load_time_loss": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_carried_weight_correction": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_body_weight_change_optimum": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_body_mass_distance_finish": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_horse_distance_aptitude": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_running_style_foundation": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_passing_group_style": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_horse_style_performance": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_field_pace_prediction": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_bilateral_field_pace": {
+      "서울": "2026-09-20",
+      "부산": "2026-09-18"
+    },
+    "20261008_pace_condition_validation": {
+      "부산": "2025-12-28",
+      "서울": "2025-12-28",
+      "scope": "평가2024~2025; 기존 학습/자료 종료는28C/28D 계약 참조"
+    },
+    "20261008_middle_late_style_validation": {
+      "부산": "2026-09-18",
+      "서울": "2026-09-20",
+      "primary_evaluation": "2024~2025",
+      "followup": "2026부분"
+    },
+    "20261009_front_density_closer_benefit": {
+      "부산": "2026-09-18",
+      "서울": "2026-09-20",
+      "primary_evaluation": "2024~2025",
+      "followup": "2026부분"
+    },
+    "20261009_fast_late_nonpodium_future": {
+      "부산": "2026-09-18",
+      "서울": "2026-09-20",
+      "primary_index": "2024~2025",
+      "followup_index": "2026-01-01~2026-03-22",
+      "common_followup_end": "2026-09-18"
+    }
+  },
+  "new_trial_analysis_added": true,
+  "new_sectional_analysis_added": true,
+  "new_grade1200_analysis_added": true,
+  "new_distance_benchmarks_added": true,
+  "new_seoul4c_analysis_added": true,
+  "new_relative_speed_par_analysis_added": true,
+  "analysis_rerun_note": "이전 완료 연구 재실행 없음. 기존11거리 최종 품질 모집단을 새 계절 연구에서 합쳐 같은 연도/등급/함수율 숫자의 월별·계절별 차이를 독립 계산·검증. 기존 기준표·보정 결정·운영은 변경하지 않음.",
+  "new_relative_load_analysis_added": true,
+  "new_benchmarks1300_analysis_added": true,
+  "new_benchmarks1400_analysis_added": true,
+  "new_benchmarks1600_analysis_added": true,
+  "new_seoul1700_coverage_check_added": true,
+  "seoul1700_coverage_note": "국5·국6 출전 여부의 사전 표본 점검. 완료된21개 연구에1700m 시간 기준 연구를 추가 완료한 것은 아님.",
+  "new_benchmarks1700_analysis_added": true,
+  "new_benchmarks1800_analysis_added": true,
+  "new_remaining_distance_benchmarks_added": true,
+  "new_same_moisture_seasonal_analysis_added": true,
+  "monthly_followup_added": true,
+  "monthly_followup_note": "검증된 기존 월 회귀와 날짜 재표집 재사용. 월간 짝차이·완결2018~2025년 직접 매칭 새 계산. 이전 주제·원본·기준·보정·운영 변경 없음.",
+  "era_record_followup_added": true,
+  "era_record_followup_note": "검증된 기존11거리 모집단으로 시기 공통월·정확 층 비교 및 구성 통제·날짜 재표집을 새 수행. 기존 연구·기준·보정·운영 변경 없음.",
+  "sex_ability_gap_added": true,
+  "sex_ability_gap_note": "출전 당시 분류 원문 대조·조건부 기록·같은 경주 성과·마필/날짜 군집·시기 민감도. 관찰 연구, 성별 보정/운영 미채택.",
+  "age_curve_exit_added": true,
+  "age_curve_exit_note": "집단 연령곡선·동일 말 전환·중단 전 기록을 구분. 무출전은 퇴사와 다르며 새 보정 미채택.",
+  "sex_weight_distance_followup_added": true,
+  "sex_weight_distance_followup_note": "25번/기존32번 성별 연구의 후속. 마체중·거리 직접 대비·동반 출전 성과 새 계산. 기존 독립 연구 수·원 결과·기준·운영 변경 없음.",
+  "sex_top5_followup_added": true,
+  "sex_top5_followup_note": "기존 성별 연구의 추가 후속. 착순1~5위 선택 기록과 전체 출전자5위 이내 성과 분리. 기존 결과·기준·운영 변경 없음.",
+  "track_correction_synthesis_added": true,
+  "track_correction_synthesis_note": "기존 연구 종합. 새 계수 추정·채택·운영 변경 없음.",
+  "seoul1600_gate_followup_added": true,
+  "seoul1600_gate_followup_note": "기존 게이트 연구의 거리 간 직접 비교. 사후 10두 민감도 구분, 보정·운영 변경 없음.",
+  "busan_gate_followup_added": true,
+  "busan_gate_followup_note": "기존 게이트 연구의 부산 모든 거리 쌍 비교. 최근·12두 민감도, 보정·운영 변경 없음.",
+  "gate_only_followup_added": true,
+  "gate_only_followup_note": "기존 게이트 연구 후속. 번호별·기간별 관찰과 실제 현재 위치 없는 시간순 후보 비교. 새 보정 채택·운영 변경 없음.",
+  "record_normalization_seconds_added": true,
+  "record_normalization_seconds_note": "34번째 독립 연구. 완주시간의 함수율·월·게이트 추가량 후보 탐구. 실제 내외측 추가 적용·다음 경주 예측 검증·새 보정 채택·운영 변경 없음.",
+  "gate_lateral_seconds_added": true,
+  "gate_lateral_seconds_note": "35번째 독립 연구. 같은 경주/마군과 마필을 통제한 게이트·실제 위치의 초 단위 차이. 남은 시간의 계측 범위 유지, 새 보정 채택·운영 변경·다음 경주 예측 검증 없음.",
+  "body_load_time_followup_added": true,
+  "body_load_time_followup_note": "기존11번 후속. 말/경주 효과·체중×중량 직접 대비와 최근/선택 민감도. 인과 손실·운영 보정 미확정.",
+  "moisture_gate_seconds_added": true,
+  "moisture_gate_seconds_note": "36번째 연구. 상태별 게이트 초 차이와 건조 대비 상호작용. 새 보정·운영 변경·다음 경주 검증 없음.",
+  "carried_weight_correction_followup_added": true,
+  "carried_weight_correction_followup_note": "기존11번후속. 성별/체중분류 없는 단일kg 관찰평균과기간안정성. 고정보정채택보류,사전예측검증아님.",
+  "gate_model_candidate_v1_added": true,
+  "gate_model_candidate_v1_note": "36번 연구 적용 후속. 규칙으로 수축한 초 단위 시험 표·함수·후향 원장. 최적량·예측 개선·운영 반영 미확정, 독립 연구 수 유지.",
+  "section_candidate_v1_added": true,
+  "section_candidate_v1_note": "37번째 연구. 직접3구간과잔여값 구분, 기존 전체 v1 보존. 모델 시험 후보·운영 및 예측 검증 별도.",
+  "body_weight_change_optimum_followup_added": true,
+  "body_weight_change_optimum_followup_note": "기존11번후속. 원문증감·자기평균/과거5개편차·개인곡선 반복성. 절대/개인최적kg 미확정,보정/처방미채택.",
+  "body_mass_distance_finish_followup_added": true,
+  "body_mass_distance_finish_followup_note": "기존11번 후속. 절대체중 단거리 무거움/긴 거리 가벼움 불리함 미확인; 자기 기준 증가의 느린 관계와 거리 차이 구분. 극단 범주는 사후 탐색.",
+  "detached_tail_sensitivity_added": true,
+  "detached_tail_sensitivity_note": "38번째 연구. 전체/정제 조건부 기준 병기, 기존 보정표와 실제 기록 보존.",
+  "horse_distance_aptitude_added": true,
+  "horse_distance_aptitude_note": "39번째 독립 연구. 말 기본 수준과 거리 편차,과거 학습→2024/2025 평가. 임시 후보2,634두,개인 적정거리와추가 예측 이득 미확정.",
+  "environment_correction_atlas_added": true,
+  "environment_correction_atlas_note": "40번째 연구. 함수율 월 게이트 합산후보와내외측별도특성,기존채택보존.",
+  "running_style_foundation_added": true,
+  "running_style_foundation_note": "41번째 독립 연구. 공식 초반 위치와과거 분포·시간순 반복성. 최적 각질·변경 원인·강제 선행 실패의 인과효과 미확정.",
+  "passing_group_style_added": true,
+  "passing_group_style_note": "연구28 후속28A. 독립 연구 수 유지. 같은 첫 마군 선행권·선두1두/여러 두 구분. 최적 각질·경합·선행 실패 인과효과 미확정.",
+  "horse_style_performance_added": true,
+  "horse_style_performance_note": "연구28 후속28B. 평소/좋은 경기/최근 변화의 말별 표. 조건부 기록 설명 검증이며 개인 최적각질·전술 변경 인과효과·출전 전 예측개선은 미확정. 독립 연구 수와 운영 유지.",
+  "field_pace_prediction_added": true,
+  "field_pace_prediction_note": "연구28 후속28C. 과거 구간·편성·기수/조교사 이력의 시간순 초반 위치 및 후반 움직임 확률 연구. 직접 의도·실제 사전 공표시각·운영 반영 미확정. 독립 연구 수 유지.",
+  "bilateral_field_pace_added": true,
+  "bilateral_field_pace_note": "연구28 후속28D. 전원 네 각질·구간 이력과 게이트 안팎 상대 구성의 시간순 비교. 기수/조교사/교체 입력 모두 제외. 직접 의도·운영 반영 미확정, 독립 연구 수 유지.",
+  "pace_condition_validation_added": true,
+  "pace_condition_validation_note": "연구28 후속28E. 2024~2025 거리/실제 함수율별 저장 예측 성능, 조건 일치 차이와 선입 재현율 검증. 모형 재학습/입상 연결/운영 변경 없음.",
+  "middle_late_style_validation_added": true,
+  "middle_late_style_validation_note": "연구28 후속28F. 지역거리별 중간/후반 이동, 뒤쪽 과거회복 반복과 실제 회복, 앞선 확보 실패의 같은말 관측 비교. 인과손실·작전 의도·운영 반영 미확정, 새 학습0개.",
+  "front_density_closer_benefit_added": true,
+  "front_density_closer_benefit_note": "연구28 후속28G. 선행형수/실제첫마군수/S1F빠른3두와 뒤쪽형회복·입상. 관측연관성,입상가산점미확정,가법조정은사후탐색,새예측모델0개.",
+  "fast_late_nonpodium_future_added": true,
+  "fast_late_nonpodium_future_note": "연구28 후속28H. 부산600/400/200·서울600/200막판우수비입상과실제다음/3전입상. 원시연관있으나현재성적조정추가가치/2026재현미확정.180일만기·미래슬롯·재출전선택분리,새예측모델0.",
+  "updated_at": "2026-10-09"
+}

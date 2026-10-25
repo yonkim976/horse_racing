@@ -1,0 +1,188 @@
+{
+  "study_id": "20261008_bilateral_field_pace",
+  "followup": "28D",
+  "title": "출전마 전원과 게이트 안팎의 전개 예측",
+  "updated": "2026-10-08",
+  "status": "research_candidate",
+  "operational": false,
+  "deployed": false,
+  "intention_labels": false,
+  "prerace_publication_timestamps_audited": false,
+  "excluded": [
+    "jockey tendencies",
+    "trainer tendencies",
+    "jockey change flag"
+  ],
+  "roster_n": 159014,
+  "evaluation_n": 36638,
+  "evaluation_years": [
+    2024,
+    2025
+  ],
+  "feature_counts": {
+    "N": 157,
+    "A": 202,
+    "B": 297
+  },
+  "early_metrics": [
+    {
+      "model": "oldF",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "accuracy": 0.5152573830449261,
+      "brier": 0.6028879396091624,
+      "logloss": 1.0991407835588969
+    },
+    {
+      "model": "N",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "accuracy": 0.5150936186473061,
+      "brier": 0.6028991667161174,
+      "logloss": 1.0991066917449317
+    },
+    {
+      "model": "A",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "accuracy": 0.5149025601834162,
+      "brier": 0.6023974864875418,
+      "logloss": 1.0982677138755887
+    },
+    {
+      "model": "B",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "accuracy": 0.5146842076532562,
+      "brier": 0.6024401344846595,
+      "logloss": 1.098313555842724
+    }
+  ],
+  "early_comparisons": [
+    {
+      "comparison": "B-A",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "estimate": 4.264799711784521e-05,
+      "se": 0.0001382090434846,
+      "lower": -0.0002293526682825,
+      "upper": 0.0003146486625181,
+      "bh_q_three": 0.8335263478640136
+    },
+    {
+      "comparison": "A-N",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "estimate": -0.0005016802285756,
+      "se": 0.0002009439085043,
+      "lower": -0.0008971454994672,
+      "upper": -0.000106214957684,
+      "bh_q_three": 0.0392515210854519
+    },
+    {
+      "comparison": "N-oldF",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "estimate": 1.122710695499722e-05,
+      "se": 5.336910489078307e-05,
+      "lower": -9.380532562765124e-05,
+      "upper": 0.0001162595395376,
+      "bh_q_three": 0.8335263478640136
+    }
+  ],
+  "late_metrics": [
+    {
+      "task": "fade",
+      "window": "2024_2025",
+      "model": "N",
+      "n": 36609,
+      "prevalence": 0.147969078641864,
+      "brier": 0.1096803681216048,
+      "auc": 0.7669332675390512,
+      "low20_rate": 0.0217153783119366,
+      "high20_rate": 0.3632887189292543
+    },
+    {
+      "task": "fade",
+      "window": "2024_2025",
+      "model": "B",
+      "n": 36609,
+      "prevalence": 0.147969078641864,
+      "brier": 0.1097308850533868,
+      "auc": 0.7664372951405488,
+      "low20_rate": 0.0219885277246653,
+      "high20_rate": 0.3623326959847036
+    },
+    {
+      "task": "recovery",
+      "window": "2024_2025",
+      "model": "N",
+      "n": 36531,
+      "prevalence": 0.1994470449755002,
+      "brier": 0.1395053978867688,
+      "auc": 0.745760594881515,
+      "low20_rate": 0.0400985356507458,
+      "high20_rate": 0.4268509648282468
+    },
+    {
+      "task": "recovery",
+      "window": "2024_2025",
+      "model": "B",
+      "n": 36531,
+      "prevalence": 0.1994470449755002,
+      "brier": 0.1394636578073116,
+      "auc": 0.7456679461760368,
+      "low20_rate": 0.0407828110031476,
+      "high20_rate": 0.4245244286300807
+    }
+  ],
+  "late_comparisons": [
+    {
+      "task": "fade",
+      "window": "2024_2025",
+      "n": 36609,
+      "horses": 4403,
+      "dates": 296,
+      "estimate": 5.0516931782049205e-05,
+      "se": 4.997162019693132e-05,
+      "lower": -4.782912142834203e-05,
+      "upper": 0.0001488629849924,
+      "bh_q_two": 0.5348761188397789
+    },
+    {
+      "task": "recovery",
+      "window": "2024_2025",
+      "n": 36531,
+      "horses": 4403,
+      "dates": 296,
+      "estimate": -4.1740079457211817e-05,
+      "se": 6.718086904583729e-05,
+      "lower": -0.0001739545903308,
+      "upper": 9.047443141646129e-05,
+      "bh_q_two": 0.5348761188397789
+    }
+  ],
+  "case_runners": 21,
+  "case_rival_pairs": 200,
+  "scope": "Self-excluded whole roster and bilateral gate-side summaries; not joint paths, direct intent or causal pressure",
+  "links": {
+    "report": "README.md",
+    "sources": "SOURCES.md",
+    "examples": "outputs/example_cards.csv",
+    "rival_pairs": "outputs/example_rival_pairs.csv",
+    "verification": "outputs/verification.json"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "variants": [
+    "gate_front67",
+    "role_late89",
+    "full103"
+  ],
+  "venues": [
+    1,
+    3
+  ],
+  "years": [
+    2024,
+    2025,
+    2026
+  ],
+  "close_seconds": 0.15,
+  "front_threshold": 0.4,
+  "bootstrap_seed": 20261009,
+  "training": {
+    "objective": "binary",
+    "metric": "binary_logloss",
+    "learning_rate": 0.04,
+    "num_leaves": 15,
+    "min_data_in_leaf": 150,
+    "lambda_l2": 5.0,
+    "max_rounds": 200,
+    "early_stopping_rounds": 25,
+    "num_threads": 4,
+    "deterministic": true,
+    "force_col_wise": true,
+    "verbosity": -1
+  },
+  "seed": 20261004
+}

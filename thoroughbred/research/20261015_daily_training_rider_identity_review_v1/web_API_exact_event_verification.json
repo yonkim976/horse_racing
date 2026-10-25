@@ -1,0 +1,266 @@
+{
+  "status": "REVIEW",
+  "event_date": "2026-09-28",
+  "venues": {
+    "1": {
+      "web_rows": 647,
+      "exact_event_matched_rows": 646,
+      "web_role_only_rows": 342,
+      "web_person_name_rows": 304,
+      "web_name_matches_profile": 252,
+      "web_name_suffix_only_variation": 51,
+      "web_name_not_in_profile_candidates": 1
+    },
+    "3": {
+      "web_rows": 601,
+      "exact_event_matched_rows": 601,
+      "web_role_only_rows": 506,
+      "web_person_name_rows": 95,
+      "web_name_matches_profile": 95
+    }
+  },
+  "exact_event_rows": 1247,
+  "issues": [
+    {
+      "key": [
+        "1",
+        "0050963",
+        "07:14",
+        "07:31"
+      ],
+      "type": "stable_metadata_differs",
+      "API_stable": [
+        "22",
+        "4"
+      ],
+      "web_stable": [
+        "22조",
+        "36"
+      ]
+    },
+    {
+      "key": [
+        "1",
+        "0056215",
+        "07:45",
+        "07:56"
+      ],
+      "matching_API_rows": 0
+    },
+    {
+      "key": [
+        "3",
+        "0051489",
+        "06:56",
+        "07:12"
+      ],
+      "type": "stable_metadata_differs",
+      "API_stable": [
+        "1",
+        "39"
+      ],
+      "web_stable": [
+        "1조",
+        "50"
+      ]
+    },
+    {
+      "key": [
+        "3",
+        "0056008",
+        "08:07",
+        "08:22"
+      ],
+      "type": "stable_metadata_differs",
+      "API_stable": [
+        "20",
+        "16"
+      ],
+      "web_stable": [
+        "20조",
+        "35"
+      ]
+    },
+    {
+      "key": [
+        "3",
+        "0053039",
+        "07:02",
+        "07:13"
+      ],
+      "type": "stable_metadata_differs",
+      "API_stable": [
+        "26",
+        "36"
+      ],
+      "web_stable": [
+        "26조",
+        "28"
+      ]
+    },
+    {
+      "observation_id": "api18_1:api18-monthly-m1-202609-fresh-8667fb7f6c:7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed:p1:r1345",
+      "type": "web_person_name_vs_exact_ID_profile_conflict",
+      "web": "유승완",
+      "profile_names": [
+        "오수철"
+      ]
+    }
+  ],
+  "role_only_display_counts": {
+    "관": 829,
+    "조": 19
+  },
+  "original_API_page_sha256_verified": {
+    "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_1_202609_p1.json": "7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed",
+    "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_3_202609_p1.json": "121a576ae4ea9e7ab39de30f4f38164e8a4fe9d07461e2c47091d3b184fe452a"
+  },
+  "database_mode": "read_only",
+  "database_writes": false,
+  "example_rows": [
+    {
+      "observation_id": "api18_1:api18-monthly-m1-202609-fresh-8667fb7f6c:7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed:p1:r888",
+      "meet": "1",
+      "official_horse_id": "0057364",
+      "horse_name_raw": "선돌풍",
+      "training_date_raw": "20260928",
+      "stable_part_raw": "2",
+      "stable_number_raw": "2",
+      "trainer_name_raw": "문세영",
+      "rider_type_raw": "기수",
+      "rider_id_raw": "080434",
+      "started_at_raw": "20260928073900",
+      "ended_at_raw": "20260928075200",
+      "duration_seconds_raw": "780",
+      "raw_path": "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_1_202609_p1.json",
+      "raw_sha256": "7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed",
+      "source_row_no": 888,
+      "event_date": "2026-09-28",
+      "web_row_no": "2",
+      "web_rider_display_raw": "김철호",
+      "web_person_name_present": true,
+      "profile_name_candidates_by_exact_prNo": [
+        "김철호"
+      ],
+      "web_name_in_profile_exact_ID_candidates": true,
+      "web_name_differs_only_by_literal_suffix": false,
+      "web_display_suffix_raw": null,
+      "web_stable_raw": [
+        "2조",
+        "2"
+      ],
+      "stable_metadata_differs": false,
+      "source_HTML_sha256": "cc7a9df8c68e7393afe80685057003690a37934c59ac189ce87da56f1fb8208e",
+      "matching_rule": "meet+date+horse_official_ID+start_minute+end_minute; stable metadata compared separately",
+      "time_precision_note": "web shows HH:MM; source retains all seconds; unique candidate required"
+    },
+    {
+      "observation_id": "api18_1:api18-monthly-m1-202609-fresh-8667fb7f6c:7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed:p1:r885",
+      "meet": "1",
+      "official_horse_id": "0059224",
+      "horse_name_raw": "무빙볼케이노",
+      "training_date_raw": "20260928",
+      "stable_part_raw": "2",
+      "stable_number_raw": "3",
+      "trainer_name_raw": "문세영",
+      "rider_type_raw": "기수",
+      "rider_id_raw": "080405",
+      "started_at_raw": "20260928065500",
+      "ended_at_raw": "20260928070600",
+      "duration_seconds_raw": "660",
+      "raw_path": "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_1_202609_p1.json",
+      "raw_sha256": "7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed",
+      "source_row_no": 885,
+      "event_date": "2026-09-28",
+      "web_row_no": "3",
+      "web_rider_display_raw": "김용근",
+      "web_person_name_present": true,
+      "profile_name_candidates_by_exact_prNo": [
+        "김용근"
+      ],
+      "web_name_in_profile_exact_ID_candidates": true,
+      "web_name_differs_only_by_literal_suffix": false,
+      "web_display_suffix_raw": null,
+      "web_stable_raw": [
+        "2조",
+        "3"
+      ],
+      "stable_metadata_differs": false,
+      "source_HTML_sha256": "cc7a9df8c68e7393afe80685057003690a37934c59ac189ce87da56f1fb8208e",
+      "matching_rule": "meet+date+horse_official_ID+start_minute+end_minute; stable metadata compared separately",
+      "time_precision_note": "web shows HH:MM; source retains all seconds; unique candidate required"
+    },
+    {
+      "observation_id": "api18_1:api18-monthly-m3-202609-fresh-71e36fce47:121a576ae4ea9e7ab39de30f4f38164e8a4fe9d07461e2c47091d3b184fe452a:p1:r696",
+      "meet": "3",
+      "official_horse_id": "0053734",
+      "horse_name_raw": "벌마의거인",
+      "training_date_raw": "20260928",
+      "stable_part_raw": "1",
+      "stable_number_raw": "3",
+      "trainer_name_raw": "백광열",
+      "rider_type_raw": "기수",
+      "rider_id_raw": "080580",
+      "started_at_raw": "20260928063600",
+      "ended_at_raw": "20260928065700",
+      "duration_seconds_raw": "1260",
+      "raw_path": "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_3_202609_p1.json",
+      "raw_sha256": "121a576ae4ea9e7ab39de30f4f38164e8a4fe9d07461e2c47091d3b184fe452a",
+      "source_row_no": 696,
+      "event_date": "2026-09-28",
+      "web_row_no": "2",
+      "web_rider_display_raw": "전진구",
+      "web_person_name_present": true,
+      "profile_name_candidates_by_exact_prNo": [
+        "전진구"
+      ],
+      "web_name_in_profile_exact_ID_candidates": true,
+      "web_name_differs_only_by_literal_suffix": false,
+      "web_display_suffix_raw": null,
+      "web_stable_raw": [
+        "1조",
+        "3"
+      ],
+      "stable_metadata_differs": false,
+      "source_HTML_sha256": "d53b14b879980c02f741dbcfda7147f70d07a26e460d5c25c60144c43b5bbb97",
+      "matching_rule": "meet+date+horse_official_ID+start_minute+end_minute; stable metadata compared separately",
+      "time_precision_note": "web shows HH:MM; source retains all seconds; unique candidate required"
+    },
+    {
+      "observation_id": "api18_1:api18-monthly-m3-202609-fresh-71e36fce47:121a576ae4ea9e7ab39de30f4f38164e8a4fe9d07461e2c47091d3b184fe452a:p1:r711",
+      "meet": "3",
+      "official_horse_id": "0058203",
+      "horse_name_raw": "토함산소닉",
+      "training_date_raw": "20260928",
+      "stable_part_raw": "1",
+      "stable_number_raw": "6",
+      "trainer_name_raw": "백광열",
+      "rider_type_raw": "기수",
+      "rider_id_raw": "080607",
+      "started_at_raw": "20260928061100",
+      "ended_at_raw": "20260928062200",
+      "duration_seconds_raw": "660",
+      "raw_path": "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_3_202609_p1.json",
+      "raw_sha256": "121a576ae4ea9e7ab39de30f4f38164e8a4fe9d07461e2c47091d3b184fe452a",
+      "source_row_no": 711,
+      "event_date": "2026-09-28",
+      "web_row_no": "5",
+      "web_rider_display_raw": "윤형석",
+      "web_person_name_present": true,
+      "profile_name_candidates_by_exact_prNo": [
+        "윤형석"
+      ],
+      "web_name_in_profile_exact_ID_candidates": true,
+      "web_name_differs_only_by_literal_suffix": false,
+      "web_display_suffix_raw": null,
+      "web_stable_raw": [
+        "1조",
+        "6"
+      ],
+      "stable_metadata_differs": false,
+      "source_HTML_sha256": "d53b14b879980c02f741dbcfda7147f70d07a26e460d5c25c60144c43b5bbb97",
+      "matching_rule": "meet+date+horse_official_ID+start_minute+end_minute; stable metadata compared separately",
+      "time_precision_note": "web shows HH:MM; source retains all seconds; unique candidate required"
+    }
+  ]
+}

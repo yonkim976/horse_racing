@@ -123,3 +123,22 @@ DB 발행은 이 CLI의 기능이 아니다. 운영 모델 확인과 파일 생�
 [서울·부산1300m 기록 기준](research/20261005_1300_benchmarks/README.md): 등급×함수율40조합의 전체·구간·상하위·점수 기준과미지원60조합을정리했다.1300m로별도 검증했고 부산 국4의한 경주 잠정치를표시했다. [중앙 결론](research/conclusions/12_BENCHMARK1300.md)과게시 준비 JSON을보존했다.
 
 [서울·부산1400m 기록 기준](research/20261005_1400_benchmarks/README.md):100조합650구간행의 전체·상하위·구간·두 기록점수와소표본을 정리했다. 새 거리 자료로 별도 검증하고[중앙 결론](research/conclusions/13_BENCHMARK1400.md)과게시용 자료를 보존했다.
+
+[서울·부산1600m 기록 기준](research/20261006_1600_benchmarks/README.md):85조합560구간행과 서울15조합 참조 부재를 정리했다. 서울 추정은 시간순 오차 개선 미확인의 잠정 연구값이며, 부산 개선도 기록 기준 검증 범위다. [중앙 결론](research/conclusions/14_BENCHMARK1600.md)과 게시 준비 자료를 보존했다.
+
+[서울1700m·서울부산1800m 기록 기준](research/20261006_1700_1800_benchmarks/README.md):115조합735행의 전체·구간·상하위·두 기록점수를 새로 계산했다. 미지원35조합, 소표본과1700 숨긴 조합 한계·1800 서울 국5 검증 참조 부재를 구분했다. [중앙 결론](research/conclusions/README.md)과 게시 준비 자료·작업 용량을 보존했다.
+
+
+[실전1000·1900·2000·2200·2300m 기록 기준](research/20261006_remaining_distance_benchmarks/README.md): 남은5거리에서76조합489행을 별도 계산했다. 최근 참조 없는 등급과 전기간 상태 지원 없는2200 포화·2300 불량은 null이며1900/2200/2300은 잠정이다. [중앙 결론](research/conclusions/README.md), 게시 준비 자료와 전체 용량을 보존했다.
+
+
+[동일 함수율의 월별·계절별 기록 경향](research/20261007_seasonal_same_moisture/README.md):11거리151,074출전기록·13,928경주에서 같은 연도·등급·함수율 숫자를 비교했다. 건조1200/1400에서 여름이 빠른 방향이 남지만 희소 상태·장거리·기간별 크기 변화를 구분한다. [중앙 결론](research/conclusions/22_SEASONAL_SAME_MOISTURE.md)을 추가했으며 새 계절 보정은 채택하지 않았다.
+
+
+[동일 함수율의 월별 기록 특성](research/20261007_monthly_same_moisture/README.md): 계절 연구의 월효과를 세분화하고 같은 재표집 회차의 월간 차이·연도별 정확 매칭을 확인했다. 건조1200m 서울8~11월·부산6~8월이 빠른 방향이며 특정 한 달의 확정 우열은 구분한다. [중앙 결론](research/conclusions/23_MONTHLY_SAME_MOISTURE.md), 기존 기준·보정·운영 변경 없음.
+
+
+[2024년 전후 기록 변화](research/20261007_era_record_trends/README.md):같은 등급·정확 함수율·월의 공통층에서 최근과 과거를 비교했다.1200m 전체시간 차이는 작지만 서울의 중간/막판 배분 변화,부산1800m의 느린 방향이 관찰됐다. [중앙 결론](research/conclusions/24_ERA_RECORD_TRENDS.md)에 기간·표본 한계를 보존했고 시대 보정은 채택하지 않았다.
+
+
+[평균 연령 곡선과 출전 중단](research/20261007_age_curve_exit/README.md):2~4세 기록 향상 방향,4세 이후 변화의 불확실성과 잔존 선택,365일 무출전 전 기록을 함께 검증했다. [중앙 결론](research/conclusions/26_AGE_CURVE_EXIT.md)에 보존했으며 연령 보정·운영 변경은 하지 않았다.

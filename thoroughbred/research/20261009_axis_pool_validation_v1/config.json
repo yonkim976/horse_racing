@@ -1,0 +1,23 @@
+{
+  "primary_model": "month_gate_weight22",
+  "supporting_model": "style_history53",
+  "primary_policy": "axis_pool7",
+  "baseline": "axis_pool5",
+  "diagnostics": [
+    "axis_pool6",
+    "axis_all",
+    "global6"
+  ],
+  "development_period": "2024-01-01..2026-09-20",
+  "historical_sensitivity": "style_history53 only,2020..2023 prior-year OOF; NOT independent future validation",
+  "tickets": 6,
+  "bootstrap_seed": 20261009,
+  "bootstrap_draws": 2000,
+  "subgroup_support": {
+    "min_races": 100,
+    "min_days": 30
+  },
+  "fit_new_models": false,
+  "change_selection": false,
+  "production_change": false
+}

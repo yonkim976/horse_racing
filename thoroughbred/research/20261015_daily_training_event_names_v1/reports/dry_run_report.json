@@ -1,0 +1,59 @@
+{
+  "status": "dry_run_passed",
+  "applied": false,
+  "database_sha256_before": "16a5e0127a830dd1d95db2bfd1178fa4af8f43265d80de852dc2f409329c02f3",
+  "core_manifest_sha256_before": "b03854c7cfd4b55a2d8fa955f681d295dd83247db6ed505c74f1a7e89b249d26",
+  "source_manifests_before": 28,
+  "source_manifests_after_apply": 29,
+  "expected_new_table_rows": 31,
+  "expected_new_main_objects": 1,
+  "linked_view_rows": 5173033,
+  "checks": [
+    {
+      "name": "current_raw_rows_match_31_evidence_tuples",
+      "status": "passed",
+      "rows": 31
+    },
+    {
+      "name": "profile_mapping_unmatched_ledger_and_hold_scope_preserved",
+      "status": "passed",
+      "profile_links": 282,
+      "unmatched_ids": 70,
+      "other_unmatched_ids": 69
+    },
+    {
+      "name": "approved_31_names_status_ids_verification_and_provenance",
+      "status": "passed",
+      "rows": 31
+    },
+    {
+      "name": "raw_view_legacy_unmatched_and_source_manifest_counts",
+      "status": "passed",
+      "linked_rows": 5173033,
+      "legacy_unmatched_ids": 69,
+      "legacy_unmatched_rows": 190344,
+      "source_manifests": 28
+    },
+    {
+      "name": "songdang_sky_hold_priority_and_other_080608_links",
+      "status": "passed",
+      "held_observation": "api18_1:api18-monthly-m1-202609-fresh-8667fb7f6c:7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed:p1:r1345",
+      "other_080608_linked": 5866
+    }
+  ],
+  "input_hashes": {
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/080626_exact_event_evidence.jsonl": "24abce45e35e6f1ddb20a30fc5ca9cb349bd71002357795b4c98951424b99ad5",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/080626_verification.json": "85f61d32c8a5de25fdf42e635dfa2b78c5d46479f538863efe93c3390b0141d8",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/official_web/capture_manifest.jsonl": "92423d3fdd9b3c61b42eec9db2e8f92623e0b1aa27da843f88d1f689df521b01",
+    "thoroughbred/research/20261002_training_three_v1/recent_raw/daily_3_202609_p1.json": "121a576ae4ea9e7ab39de30f4f38164e8a4fe9d07461e2c47091d3b184fe452a",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/official_web/yeongnam_daily_20260904.html": "ef9c1c428a0b1727c8a4890371b3798f5f876ae1103454969241952c8780c2d2",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/official_web/yeongnam_daily_20260905.html": "1a9f923f83df50dca29120691f19dc22f9787857a4e3ae664c6f834a7945c7a8",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/official_web/yeongnam_daily_20260906.html": "2e36eff2e11770fa6d6b3c63e9e882014ab6944d2f820942f112e9c3817cd1f9",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/official_web/yeongnam_daily_20260909.html": "bd9aed276a131f74df7ec472c2981d8af78da951f7cb0ec70a6ca7f9100f58b4",
+    "thoroughbred/research/20261015_training_rider_roles_followup_v1/official_web/yeongnam_daily_20260910.html": "1dd1aa015e75da9e08ec037e9808e99a8b12c4e1d1cc8e7d2611ba76f5f90ce7",
+    "thoroughbred/research/20261015_daily_training_event_names_v1/input/input_manifest.json": "c6cb70cb8b5d1449700cd577ff0ad64c2a9bc9f07ad6451561dcb6cd36e3232d",
+    "thoroughbred/research/20261015_daily_training_event_names_v1/schema.sql": "f0f2733a41ba490a7e1ea800d394488e769ab80453aacbe78b683adfe79f3013",
+    "thoroughbred/research/20261015_daily_training_event_names_v1/load_daily_training_event_names.py": "f6e6ed1552e358ea770fc4fa8b39a5389c3360bc84a3c7bc4b3feb283b5d1f9b"
+  },
+  "database_mode": "read_only core attached to in-memory DuckDB; temporary schema only"
+}

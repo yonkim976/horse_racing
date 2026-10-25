@@ -1,0 +1,158 @@
+{
+  "audit_date": "2026-10-22",
+  "scope": "Thoroughbred Seoul/Busan data and evaluation-population audit; read-only source DB; no model training",
+  "candidate": {
+    "feature_path": "thoroughbred/research/20261009_gate_front_late_v1/outputs/features.parquet",
+    "feature_rows": 178497,
+    "feature_races": 16435,
+    "feature_date_range": ["2017-01-06", "2026-09-20"],
+    "prediction_path": "thoroughbred/research/20261009_gate_front_late_v1/outputs/runner_predictions.parquet",
+    "prediction_variant": "full103",
+    "target": 3,
+    "evaluation_date_range": ["2024-01-05", "2026-09-20"],
+    "evaluation_rows": 50754,
+    "evaluation_races": 4799,
+    "venues": {
+      "seoul": {"meet": 1, "rows": 29421, "races": 2838, "normal_finisher": 29328, "dnf": 90, "disqualified": 2, "ambiguous": 1},
+      "busan": {"meet": 3, "rows": 21333, "races": 1961, "normal_finisher": 21280, "dnf": 50, "disqualified": 1, "ambiguous": 2}
+    },
+    "normal_finisher_rule": "result_status == finished AND finish_order between 1 and 16 AND race_time_s > 0",
+    "ambiguous_rule": "result_status in {special_result, unmapped_special_98, void_or_unresulted} OR official_result_state == special_only_unresolved",
+    "status_total": {"finished_normal": 50608, "did_not_finish": 140, "disqualified": 3, "ambiguous_special_result": 3},
+    "within_evaluation_keys_extra_database_rows": {
+      "total": 697,
+      "seoul": {"race_excluded": 307, "scratched": 195, "start_excluded": 9},
+      "busan": {"race_excluded": 90, "scratched": 94, "start_excluded": 2},
+      "not_starters": true
+    },
+    "field_size_distribution": {
+      "6": 2,
+      "7": 32,
+      "8_to_16": 4765,
+      "races_at_most_7": 34,
+      "minimum": 6,
+      "maximum": 16
+    }
+  },
+  "yearly_coverage": [
+    {"year": 2017, "db_is_model_target_rows": 20829, "db_races": 1899, "feature_rows": 20530, "feature_races": 1894, "excluded_races": 5},
+    {"year": 2018, "db_is_model_target_rows": 20362, "db_races": 1906, "feature_rows": 19907, "feature_races": 1891, "excluded_races": 15},
+    {"year": 2019, "db_is_model_target_rows": 20956, "db_races": 1893, "feature_rows": 20559, "feature_races": 1880, "excluded_races": 13},
+    {"year": 2020, "db_is_model_target_rows": 12872, "db_races": 1103, "feature_rows": 12627, "feature_races": 1095, "excluded_races": 8},
+    {"year": 2021, "db_is_model_target_rows": 17633, "db_races": 1453, "feature_rows": 17332, "feature_races": 1446, "excluded_races": 7},
+    {"year": 2022, "db_is_model_target_rows": 18355, "db_races": 1679, "feature_rows": 18036, "feature_races": 1670, "excluded_races": 9},
+    {"year": 2023, "db_is_model_target_rows": 19174, "db_races": 1775, "feature_rows": 18752, "feature_races": 1760, "excluded_races": 15},
+    {"year": 2024, "db_is_model_target_rows": 18862, "db_races": 1774, "feature_rows": 18459, "feature_races": 1761, "excluded_races": 13},
+    {"year": 2025, "db_is_model_target_rows": 18993, "db_races": 1758, "feature_rows": 18657, "feature_races": 1750, "excluded_races": 8},
+    {"year": 2026, "db_is_model_target_rows": 13907, "db_races": 1295, "feature_rows": 13638, "feature_races": 1288, "excluded_races": 7, "partial_year": true}
+  ],
+  "cohort_exclusions": {
+    "source": "thoroughbred/research/20261003_baseline_v1/outputs/cohort_ledger.csv",
+    "since_2017": {"eligible": 16435, "nonunique_or_missing_top3": 98, "unknown_outcome": 2},
+    "rules_source": "thoroughbred/research/20261003_baseline_v1/run.py cohort_ledger() and prepare()",
+    "podium_deadheat_races": 98,
+    "podium_deadheat_rows": 196,
+    "deadheat_rank_races": {"rank_1": 22, "rank_2": 40, "rank_3": 36},
+    "evaluation_deadheat_omissions": {
+      "total": 28,
+      "seoul": 13,
+      "busan": 15,
+      "excluded_reason": "nonunique_or_missing_top3",
+      "keys": [
+        "3:20240121:5", "3:20240126:4", "3:20240225:2", "3:20240315:8", "3:20240505:2",
+        "3:20240901:2", "3:20240901:5", "3:20240906:1", "3:20241110:3", "3:20241206:6",
+        "3:20250302:6", "3:20250822:1", "3:20251228:2", "3:20260417:4", "3:20260424:5",
+        "1:20240225:5", "1:20240629:5", "1:20240707:7", "1:20250323:6", "1:20250413:2",
+        "1:20250518:4", "1:20250830:7", "1:20251206:2", "1:20260214:7", "1:20260228:8",
+        "1:20260314:9", "1:20260628:4", "1:20260725:7"
+      ]
+    },
+    "unknown_outcome_omissions": [
+      {"race_key": "1:20180602:5", "original_card_rows": 11, "starters": 10, "unknown_outcomes": 1, "status": "unknown_outcome"},
+      {"race_key": "1:20180729:9", "original_card_rows": 12, "starters": 11, "unknown_outcomes": 1, "status": "unknown_outcome"}
+    ],
+    "lower_rank_deadheat_included": {"rows": 70, "races": 35, "all_finish_order_at_least": 4}
+  },
+  "normalized_dataset_2017_plus": {
+    "path": "thoroughbred/data/dataset_20260929_v1/thoroughbred.duckdb",
+    "entry_result_rows_seoul_busan": 182675,
+    "is_model_target_rows_seoul_busan": 181943,
+    "status_counts": {
+      "finished": 179044,
+      "did_not_finish": 524,
+      "disqualified": 26,
+      "race_excluded": 1154,
+      "scratched": 997,
+      "start_excluded": 195,
+      "special_result": 3,
+      "unmapped_special_98": 12,
+      "void": 707,
+      "void_or_unresulted": 13
+    },
+    "by_venue": {
+      "seoul": {"finished": 104249, "did_not_finish": 336, "disqualified": 18, "race_excluded": 839, "scratched": 542, "start_excluded": 126, "special_result": 1, "unmapped_special_98": 12, "void": 500, "void_or_unresulted": 2, "total": 106625},
+      "busan": {"finished": 74795, "did_not_finish": 188, "disqualified": 8, "race_excluded": 315, "scratched": 455, "start_excluded": 69, "special_result": 2, "unmapped_special_98": 0, "void": 207, "void_or_unresulted": 11, "total": 76050}
+    },
+    "raw_status_mapping_source": [
+      "scripts/build_seoul_backfill.py",
+      "scripts/build_busan_history.py"
+    ],
+    "race_execution_scope": "Distinct race_id with entry_result.is_model_target=true for 2017+ Seoul/Busan; 16,535 DB keys versus 16,435 feature keys. The 2026 DB includes confirmed official_race scope where present."
+  },
+  "ambiguous_special_rows": [
+    {"race_key": "1:20260920:6", "program_no": 8, "horse_id": "0056413", "raw": "92", "status": "special_result", "finish_order": null, "race_time_s": null, "source_dataset": "operational_db_refresh_20260929", "source_row": 305564},
+    {"race_key": "3:20260918:2", "program_no": 1, "horse_id": "0056059", "raw": "92", "status": "special_result", "finish_order": null, "race_time_s": null, "source_dataset": "operational_db_refresh_20260929", "source_row": 305307},
+    {"race_key": "3:20260918:2", "program_no": 3, "horse_id": "0055711", "raw": "92", "status": "special_result", "finish_order": null, "race_time_s": null, "source_dataset": "operational_db_refresh_20260929", "source_row": 305311}
+  ],
+  "timing_and_leakage": {
+    "target_training_start": "2017-01-01",
+    "history_start": "2010-01-01",
+    "warmup_years": "2010-2016, history only",
+    "history_contract": "T-2, 730-day horizon, last five actual starts; missing slots are not backfilled with older observations",
+    "split": "year Y: initial train 2017..Y-3, validate/early-stop Y-2, refit through Y-2, calibrate Y-1, evaluate Y; group by whole race_key",
+    "random_runner_split": false,
+    "current_outcome_as_feature": false,
+    "target_poisoning_and_score_replay_verified": true,
+    "feature_publication_timestamps_verified": false,
+    "evaluation_is_reused_hindsight": true,
+    "2026_partial_year": true
+  },
+  "place_contract": {
+    "seoul_busan_official_local_rule_found": false,
+    "jeju_local_code_only": "src/horse_racing/web/jeju_wagers.py uses top 2 if n<=7, otherwise top 3; Jeju-specific, not authority for Seoul/Busan",
+    "candidate_prediction_target": "Top3 set; no stored direct Top2 model label contract",
+    "recommended_evaluation_contract": "Require official recognized-place list and settlement policy as explicit inputs; do not report PLC performance until sourced",
+    "evaluation_races_field_size_le_7": 34
+  },
+  "artifacts": {
+    "flags": {
+      "path": "thoroughbred/research/20261022_probability_comparison_v1/outputs/population_flags.parquet",
+      "rows": 50754,
+      "bytes": 677317,
+      "sha256": "008fb4b0447c38880cf490c7f6c88be8fc5435149fd41b1baa390cd75a7af26a",
+      "schema": ["race_key", "program_no", "horse_id", "meet", "race_date", "year", "candidate_outcome", "raw_score", "finish_raw", "finish_order", "result_status", "race_time_s", "official_result_state", "is_dead_heat", "is_model_target", "is_rank_label", "source_dataset", "normal_finisher", "ambiguous_flag"],
+      "join_keys": ["race_key", "program_no", "horse_id"],
+      "unmatched": 0,
+      "duplicate_keys": 0
+    },
+    "builder": {
+      "path": "thoroughbred/research/20261022_probability_comparison_v1/audit_population.py",
+      "sha256": "1ba1d0af51ef0f9d43c249c591830f7e63bba1fa51d41ae0b0707ad2722c156d",
+      "writes_only": "outputs/population_flags.parquet"
+    }
+  },
+  "source_hashes": {
+    "candidate_predictions_sha256": "dc6cf291a0a6de7f420e445b2f22567e7bfc2dc865a83bfbb3b5dc424065c458",
+    "candidate_features_sha256": "ce8c62f43a734c262f4b2437fc6702d46bda6edbbed9ce338b8e739a2cd5b513",
+    "candidate_input_manifest_sha256": "0b3def47dc5a27be1d672b9c92f359723bbe2a18322beed42e246f9861e60983",
+    "database_bytes": 552611840,
+    "database_mtime_utc": "2026-09-29T18:44:56.646005+00:00",
+    "database_joined_projection_sha256": "24197666fb5333ecd6cf939749de298dee73b358bff5f385b9d55c2e841ed39e",
+    "database_validation_sha256": "ee63e1f6978c3d790346deae042873e4434411c4cb418e28f8a0cc19c24e04a9",
+    "cohort_ledger_sha256": "c1d2765c60cdc491f0de685b7dc9dd8980b68b1801647ebdf49b2d0212bb20e9",
+    "cohort_data_audit_sha256": "0c773d2caeb653e939aa332ec35eff095bfc6a00d37b75537f0943f453149bee",
+    "cohort_source_database_path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "cohort_source_database_sha256": "c46286df4773a7ffcea4c7bc431e2cd2a8fc03a4c38fdaa4403bd8f39c2a1668",
+    "cohort_source_manifest_sha256": "6f9c194529709b3db4862ffba0aa34dcda4f58af54d5d322333d6af3ccff7e52"
+  }
+}

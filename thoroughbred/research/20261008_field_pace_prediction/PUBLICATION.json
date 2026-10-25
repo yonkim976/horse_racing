@@ -1,0 +1,262 @@
+{
+  "study_id": "20261008_field_pace_prediction",
+  "followup": "28C",
+  "title": "편성 안의 초반 위치와 후반 움직임 예측",
+  "updated": "2026-10-08",
+  "status": "research_candidate",
+  "operational": false,
+  "deploy_completed": false,
+  "regions": [
+    "서울",
+    "부산"
+  ],
+  "data_end_by_meet": {
+    "부산": "2026-09-18",
+    "서울": "2026-09-20"
+  },
+  "evaluation_years": [
+    2024,
+    2025
+  ],
+  "evaluation_n": 36638,
+  "roster_n": 159014,
+  "early_definition": "S1F passing groups; first group is all front-group horses, not sole leader",
+  "intention_labels": false,
+  "prerace_publication_timestamps_audited": false,
+  "early_metrics": [
+    {
+      "model": "B",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "races": 3465,
+      "accuracy": 0.3333697254216933,
+      "brier": 0.7183381698864386,
+      "logloss": 1.3132235004057276
+    },
+    {
+      "model": "H",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "races": 3465,
+      "accuracy": 0.4446476336044544,
+      "brier": 0.6707430508821478,
+      "logloss": 1.2433108094067005
+    },
+    {
+      "model": "P",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "races": 3465,
+      "accuracy": 0.4872263769856433,
+      "brier": 0.6248452171892005,
+      "logloss": 1.1404270492756954
+    },
+    {
+      "model": "S",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "races": 3465,
+      "accuracy": 0.4941317757519515,
+      "brier": 0.619812118185397,
+      "logloss": 1.13174631437656
+    },
+    {
+      "model": "F",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "races": 3465,
+      "accuracy": 0.5152573830449261,
+      "brier": 0.6028879396091624,
+      "logloss": 1.0991407835588969
+    },
+    {
+      "model": "J",
+      "window": "2024_2025",
+      "scope": "all",
+      "n": 36638,
+      "horses": 4405,
+      "races": 3465,
+      "accuracy": 0.5162399694306458,
+      "brier": 0.6004878566580006,
+      "logloss": 1.0944356906415884
+    }
+  ],
+  "early_comparisons": [
+    {
+      "window": "2024_2025",
+      "scope": "all",
+      "comparison": "S-P",
+      "estimate": -0.0050330990038033,
+      "se": 0.0004148769624064,
+      "lower": -0.0058495926788093,
+      "upper": -0.0042166053287973,
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "races": 3465,
+      "bh_q_four_comparisons": 1.2626626503282484e-27
+    },
+    {
+      "window": "2024_2025",
+      "scope": "all",
+      "comparison": "F-S",
+      "estimate": -0.0169241785762347,
+      "se": 0.0008669139149134,
+      "lower": -0.0186302982031133,
+      "upper": -0.0152180589493561,
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "races": 3465,
+      "bh_q_four_comparisons": 9.144518952379044e-55
+    },
+    {
+      "window": "2024_2025",
+      "scope": "all",
+      "comparison": "J-F",
+      "estimate": -0.0024000829511616,
+      "se": 0.0003377999764891,
+      "lower": -0.0030648861801014,
+      "upper": -0.0017352797222217,
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "races": 3465,
+      "bh_q_four_comparisons": 9.061734696789449e-12
+    },
+    {
+      "window": "2024_2025",
+      "scope": "all",
+      "comparison": "J-S",
+      "estimate": -0.0193242615273963,
+      "se": 0.0009371029864801,
+      "lower": -0.0211685159223669,
+      "upper": -0.0174800071324258,
+      "n": 36638,
+      "horses": 4405,
+      "dates": 296,
+      "races": 3465,
+      "bh_q_four_comparisons": 1.596781562963705e-58
+    }
+  ],
+  "late_metrics": [
+    {
+      "task": "fade",
+      "window": "2024_2025",
+      "model": "P",
+      "n": 36609,
+      "horses": 4403,
+      "prevalence": 0.147969078641864,
+      "brier": 0.1119085476857215,
+      "auc": 0.7500988269524526,
+      "average_precision": 0.3492181377250558,
+      "low20_n": 7322,
+      "low20_rate": 0.0266320677410543,
+      "high20_n": 7322,
+      "high20_rate": 0.3462168806337066
+    },
+    {
+      "task": "fade",
+      "window": "2024_2025",
+      "model": "J",
+      "n": 36609,
+      "horses": 4403,
+      "prevalence": 0.147969078641864,
+      "brier": 0.1095377450520349,
+      "auc": 0.7682343287920301,
+      "average_precision": 0.3750123760055417,
+      "low20_n": 7322,
+      "low20_rate": 0.0213056541928434,
+      "high20_n": 7322,
+      "high20_rate": 0.3647910406992625
+    },
+    {
+      "task": "recovery",
+      "window": "2024_2025",
+      "model": "P",
+      "n": 36531,
+      "horses": 4403,
+      "prevalence": 0.1994470449755002,
+      "brier": 0.1430359285080114,
+      "auc": 0.7238771480464974,
+      "average_precision": 0.3872871256960124,
+      "low20_n": 7307,
+      "low20_rate": 0.0510469412891747,
+      "high20_n": 7307,
+      "high20_rate": 0.4046804434104283
+    },
+    {
+      "task": "recovery",
+      "window": "2024_2025",
+      "model": "J",
+      "n": 36531,
+      "horses": 4403,
+      "prevalence": 0.1994470449755002,
+      "brier": 0.1391263949957195,
+      "auc": 0.7476053795429086,
+      "average_precision": 0.418324830246417,
+      "low20_n": 7307,
+      "low20_rate": 0.039414260298344,
+      "high20_n": 7307,
+      "high20_rate": 0.4275352401806487
+    }
+  ],
+  "grade_matched": [
+    {
+      "target": "strong5",
+      "cells": 24,
+      "high_mean": 0.3271654608087466,
+      "low_mean": 0.3586324383220574,
+      "estimate": -0.0314669775133107,
+      "se": 0.0293470629975919,
+      "lower": -0.0892239252804197,
+      "upper": 0.0262899702537981,
+      "n": 4033,
+      "high_n": 1337,
+      "low_n": 2696,
+      "horses": 994,
+      "dates": 295,
+      "bh_q_two_comparisons": 0.2844933934046637
+    },
+    {
+      "target": "repeat",
+      "cells": 24,
+      "high_mean": 0.4408427451917251,
+      "low_mean": 0.4725539078880792,
+      "estimate": -0.031711162696354,
+      "se": 0.0252408995156286,
+      "lower": -0.0813869109999792,
+      "upper": 0.017964585607271,
+      "n": 4033,
+      "high_n": 1337,
+      "low_n": 2696,
+      "horses": 994,
+      "dates": 295,
+      "bh_q_two_comparisons": 0.2844933934046637
+    }
+  ],
+  "links": {
+    "report": "README.md",
+    "sources": "SOURCES.md",
+    "verification": "outputs/verification.json",
+    "examples": "outputs/example_cards.csv",
+    "early_figure": "figures/early_prediction.png",
+    "late_figure": "figures/late_prediction.png"
+  },
+  "limitations": [
+    "Chronological retrospective experiment using final roster metadata; actual prepublication timestamps not audited",
+    "No direct tactical intention, reaction latency or collapse mechanism labels",
+    "Conditional observational grade overlap; no causal promotion effect",
+    "No operational forecast or win-probability validation"
+  ]
+}

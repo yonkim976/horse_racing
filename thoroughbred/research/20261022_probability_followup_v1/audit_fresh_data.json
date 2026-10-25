@@ -1,0 +1,285 @@
+{
+  "schema": "fresh_data_asof_audit_v1",
+  "audit_date": "2026-10-22",
+  "scope": {
+    "domain": "Thoroughbred",
+    "venues": [
+      "Seoul",
+      "Busan"
+    ],
+    "excluded_venue": "Jeju",
+    "filesystem_read_only": true,
+    "sqlite_access": "read-only",
+    "training_performed": false,
+    "candidate_performance_evaluation_performed": false,
+    "external_collection_performed": false,
+    "database_writes_performed": false
+  },
+  "frozen_research_dataset": {
+    "validation_path": "thoroughbred/data/dataset_20260929_v1/validation.json",
+    "history_start_date": "2010-01-01",
+    "model_target_start_date": "2017-01-01",
+    "latest_completed_race_date": "2026-09-20"
+  },
+  "detached_refresh_results": {
+    "run_report_path": "thoroughbred/refresh/runs/20261017_full_20261016/run_report.json",
+    "status": "dry_run_passed",
+    "run_id": "20261017_full_20261016",
+    "event_window": {
+      "start": "2026-08-18",
+      "end": "2026-10-16",
+      "public_through": "2026-10-24"
+    },
+    "active_database_written": false,
+    "failed_bundles": 0,
+    "new_event_rows_all_families": 43685,
+    "seoul_busan_result_rows_after_2026_09_20": 856,
+    "seoul_busan_races_after_2026_09_20": 79,
+    "result_capture_utc_range": [
+      "2026-10-16T16:34:55.707+00:00",
+      "2026-10-16T16:35:01.028+00:00"
+    ],
+    "races_by_date_and_venue": [
+      {
+        "date": "2026-10-02",
+        "venue": "Busan",
+        "meet": "3",
+        "races": 9,
+        "result_rows": 95
+      },
+      {
+        "date": "2026-10-03",
+        "venue": "Seoul",
+        "meet": "1",
+        "races": 10,
+        "result_rows": 109
+      },
+      {
+        "date": "2026-10-04",
+        "venue": "Seoul",
+        "meet": "1",
+        "races": 11,
+        "result_rows": 120
+      },
+      {
+        "date": "2026-10-05",
+        "venue": "Seoul",
+        "meet": "1",
+        "races": 10,
+        "result_rows": 109
+      },
+      {
+        "date": "2026-10-09",
+        "venue": "Busan",
+        "meet": "3",
+        "races": 9,
+        "result_rows": 92
+      },
+      {
+        "date": "2026-10-10",
+        "venue": "Seoul",
+        "meet": "1",
+        "races": 10,
+        "result_rows": 108
+      },
+      {
+        "date": "2026-10-11",
+        "venue": "Seoul",
+        "meet": "1",
+        "races": 11,
+        "result_rows": 121
+      },
+      {
+        "date": "2026-10-16",
+        "venue": "Busan",
+        "meet": "3",
+        "races": 9,
+        "result_rows": 102
+      }
+    ],
+    "normalized_result_files": [
+      {
+        "path": "thoroughbred/refresh/runs/20261017_full_20261016/normalized/race_results/c78fd374fdbd8b4c33e8.jsonl",
+        "bytes": 4184266,
+        "sha256": "73fbcfab83ab4737c168a5e4e0aa3b33d4ca8cda943681ca8d7abcb141b10db1"
+      },
+      {
+        "path": "thoroughbred/refresh/runs/20261017_full_20261016/normalized/race_results/2050661f695ef79e3c42.jsonl",
+        "bytes": 1639185,
+        "sha256": "feb195cdcfde7f5ff4dade7eb1363c24df660e92ef74dce7ef827ed939408862"
+      },
+      {
+        "path": "thoroughbred/refresh/runs/20261017_full_20261016/normalized/race_results/7966c82a1493aa192b09.jsonl",
+        "bytes": 7520631,
+        "sha256": "526a813be9f23f9ef7236f71d493c5bdaabdc7d6379e5663206edcca8692dff1"
+      }
+    ],
+    "run_report_sha256": "2dc68cdabaed2f209d167736765b590bb38304615c35b70eecad91477a1e466e",
+    "collection_sha256": "83e9b26821be32fb9fc51fff00d561a0caceec36c78b69b30e054801e28db301",
+    "asof_assessment": "All result captures are after the corresponding races; the refresh does not establish prediction-time card or feature availability."
+  },
+  "post_refresh_result_artifacts": {
+    "source_root": "data/research/score_point_updates_auto_20261022_091506_1792628106300346000",
+    "capture_date": "2026-10-22",
+    "capture_time_kst_approx": "09:15",
+    "events": [
+      {
+        "date": "2026-10-17",
+        "venue": "Seoul",
+        "races": 10,
+        "result_rows": 109,
+        "section_rows": 791,
+        "canonical_issues": 7,
+        "void_races": 0,
+        "post_race_receipt_uncovered_source_entries": 1,
+        "canonical_path": "data/research/score_point_updates_auto_20261022_091506_1792628106300346000/1_2026-10-17/canonical.json",
+        "canonical_sha256": "2317b92076074b5e69d1f623f0496c0df9f69cfc4906b985f0ca6002490493c3"
+      },
+      {
+        "date": "2026-10-18",
+        "venue": "Seoul",
+        "races": 11,
+        "result_rows": 120,
+        "section_rows": 897,
+        "canonical_issues": 1,
+        "void_races": 0,
+        "canonical_path": "data/research/score_point_updates_auto_20261022_091506_1792628106300346000/1_2026-10-18/canonical.json",
+        "canonical_sha256": "6ed81a76fceea3d9042076d6adf8043443a524e19eed14fc9807f40668e723b4"
+      }
+    ],
+    "latest_saved_result_dates": {
+      "Seoul": "2026-10-18",
+      "Busan": "2026-10-16"
+    },
+    "no_local_seoul_busan_race_day_partition_found": [
+      "2026-10-19",
+      "2026-10-20",
+      "2026-10-21"
+    ],
+    "source_warning": "These are post-race result/section snapshots. The 10/17 roster has one reported uncovered source entry; 10/17 and 10/18 canonical issue counts are nonzero."
+  },
+  "pre_race_prediction_archives": {
+    "race_count": 16,
+    "runner_count": 169,
+    "relation_to_79_refresh_races": "The 16 forecasted races on 10/02 and 10/09 are included in the 79-race detached result source; do not add these counts to that source total.",
+    "candidate_model_predictions_saved": false,
+    "archives": [
+      {
+        "date": "2026-10-02",
+        "venue": "Busan",
+        "scope": "Races 3-9",
+        "races": 7,
+        "runners": 77,
+        "path": "thoroughbred/predictions/20261002_busan_3_9_readonly_20261002T041207Z",
+        "model_profile": "thoroughbred-main-20260919-v1",
+        "frozen_at_utc": "2026-10-02T04:12:07.000635+00:00",
+        "generated_at_utc": "2026-10-02T04:14:14.720368+00:00",
+        "race_3_scheduled_start_kst": "2026-10-02T13:25:00+09:00",
+        "card_sha256": "260e604eb1c4251c2716bf557f60aebe0d0f358e19caf974ff713ebff71fc3f6",
+        "source_append_sha256": "792a3ed102d03e57bed50f12f484a165723d07d7dd2ddfa67931a61b5bcfa81f",
+        "prepared_features_path": "thoroughbred/predictions/20261002_busan_3_9_readonly_20261002T041207Z/prepared_features.parquet",
+        "prepared_features_rows": 77,
+        "prepared_features_columns": 183,
+        "prepared_features_bytes": 147109,
+        "prepared_features_sha256_audit_time": "b81b114d4ddaeec0cfa15526cb19c83c97b674ac59a33252079d59aa4070bf52",
+        "original_metadata_records_prepared_feature_hash": false,
+        "race_history_max_date": "2026-09-20",
+        "trial_history_max_date": "2026-10-01",
+        "history_cutoff": "strictly_before_2026-10-02"
+      },
+      {
+        "date": "2026-10-09",
+        "venue": "Busan",
+        "scope": "Races 1-9",
+        "races": 9,
+        "runners": 92,
+        "path": "thoroughbred/predictions/card_20261009_busan_manual_then_model",
+        "model_profile": "thoroughbred-main-20260919-v1",
+        "card_observed_at_utc": "2026-10-08T22:17:29.888000+00:00",
+        "feature_saved_at_kst": "2026-10-09T07:29:24+09:00",
+        "inference_started_at_utc": "2026-10-08T22:59:02.472840+00:00",
+        "inference_completed_at_utc": "2026-10-08T22:59:35.212760+00:00",
+        "race_1_scheduled_start_kst": "2026-10-09T11:15:00+09:00",
+        "card_sha256": "1336492a65af0cd0241919bf7ffd698141256f75d734317e2d129535b3c262c9",
+        "prepared_features_sha256": "6c52b551d6fc57e18440a43143330ae4164a53e893d7886daa021f1e4bffd103",
+        "full_manual_freeze_manifest_sha256": "3d7f483e6674cebd90fbc18160efda178d72409b258536d641f42f2b8286423a",
+        "prepared_features_rows": 92,
+        "prepared_features_columns": 185,
+        "history_cutoff": "strictly_before_2026-10-09",
+        "history_source_max_date": "2026-09-13",
+        "operational_result_rows_appended": 488,
+        "operational_result_races_appended": 45,
+        "operational_result_max_date": "2026-10-02",
+        "operational_trial_rows_appended": 77,
+        "operational_trial_max_date": "2026-10-01",
+        "target_day_results_included": false,
+        "results_and_odds_used": false,
+        "database_writes": 0,
+        "network_writes": 0,
+        "unavailable_inputs": [
+          "current body weight",
+          "track moisture/condition",
+          "Busan S1F under registered source contract"
+        ]
+      }
+    ]
+  },
+  "operational_sqlite_read_only": {
+    "path": "data/horse_racing.sqlite3",
+    "latest_linked_result_date": "2026-10-02",
+    "result_rows_for_2026_10_03_to_2026_10_05": 0,
+    "prediction_runs": [
+      {
+        "race_date": "2026-08-28",
+        "publication_mode": "live"
+      },
+      {
+        "race_date": "2026-09-04",
+        "publication_mode": "live"
+      }
+    ],
+    "settlement_rows": 0
+  },
+  "candidate_feature_contract_check": {
+    "contract_path": "thoroughbred/research/20261009_gate_front_late_v1/outputs/feature_contract.json",
+    "contracts": {
+      "style_history": 53,
+      "gate_front67": 67,
+      "role_late89": 89,
+      "full103": 103
+    },
+    "archived_input_columns": {
+      "2026-10-02": 183,
+      "2026-10-09": 185
+    },
+    "full103_direct_column_matches": {
+      "2026-10-02": 1,
+      "2026-10-09": 1
+    },
+    "direct_match_name": "distance_m",
+    "full103_columns_not_present_by_name": 102,
+    "immediately_scoreable_from_archived_frame": false,
+    "interpretation": "No drop-in column contract. Rebuilding would need candidate history/section/gate/role transformations and time-ordered auxiliary front predictions; availability from other raw snapshots has not been verified."
+  },
+  "independent_validation_assessment": {
+    "post_cutoff_labels_available": true,
+    "latest_local_label_date": "2026-10-18",
+    "post_cutoff_pre_race_candidate_predictions_saved": false,
+    "16_old_model_forecasts_precede_event_start": true,
+    "strict_blind_holdout_for_2026_10_21_candidates_certified": false,
+    "reason": "Outcomes from 10/02-10/18 were locally present before the 10/21 candidate work; forecast archives are from the old registered model and have a different feature contract. The local files do not prove candidate selection was blinded to those outcomes.",
+    "recommended_clean_test": "Freeze candidate code/model, complete input contract, roster/card hash, input hash, and prediction outputs before future Seoul/Busan races; settle only after the race."
+  },
+  "prior_population_audit": {
+    "flags_path": "thoroughbred/research/20261022_probability_comparison_v1/outputs/population_flags.parquet",
+    "rows": 50754,
+    "scope": "Prior evaluation through 2026-09-20",
+    "post_cutoff_note": "New canonical result snapshots contain raw all-starter/section data, but 10/17 has one uncovered source entry and the 10/17/18 canonical artifacts still have special-status/scratched issues."
+  },
+  "not_performed": [
+    "No candidate was scored on 10/02-10/18 outcomes.",
+    "No current models were trained or altered.",
+    "No prediction output was published.",
+    "No local source or database was written."
+  ]
+}

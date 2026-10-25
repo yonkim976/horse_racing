@@ -1,0 +1,2673 @@
+{
+  "title": "Busan odds-board-only retrospective profitability search",
+  "analysis_dates": {
+    "win_start": "2015-01-01",
+    "end": "2026-10-02",
+    "combo_start": "2025-01-03"
+  },
+  "feature_scope": "Final market prices and race-level price shape only; horse histories and model outputs are not read.",
+  "settlement_scope": "Official first-place result labels and final dividend multipliers; flat 100 KRW per ticket; gross return includes the displayed dividend; net ROI=gross return/stake-1.",
+  "win_sample": {
+    "eligible_races": 8323,
+    "excluded_races": {
+      "incomplete_or_invalid_win_odds": 164,
+      "missing_active_runner_result": 1
+    },
+    "eligible_races_by_year": {
+      "2015": 805,
+      "2016": 807,
+      "2017": 805,
+      "2018": 806,
+      "2019": 792,
+      "2020": 392,
+      "2021": 513,
+      "2022": 694,
+      "2023": 724,
+      "2024": 724,
+      "2025": 716,
+      "2026": 545
+    },
+    "price_timing": {
+      "all_win_snapshot_rows": 92014,
+      "all_win_races_with_quotes": 8488,
+      "observed_kst_date_before_race_date_count": 0,
+      "observed_kst_date_on_race_date_count": 280,
+      "observed_kst_date_after_race_date_count": 91734,
+      "all_win_min_observed_utc": "2026-08-21T13:26:08.217000+00:00",
+      "all_win_max_observed_utc": "2026-10-02T14:44:06.064000+00:00",
+      "scheduled_time_available_win_rows": 13810,
+      "observed_before_scheduled_count": 0,
+      "minimum_delay_after_scheduled_hours": 3.397,
+      "maximum_delay_after_scheduled_days": 595.488
+    }
+  },
+  "chronological_splits": {
+    "train": "2015-2022",
+    "validation": "2023",
+    "test": "2024-2026-10-02"
+  },
+  "win_market_rank_returns": {
+    "train_2015_2022": {
+      "1": {
+        "bets": 5614,
+        "races": 5614,
+        "weighted_hits": 2145.820094,
+        "hit_rate_pct": 38.223,
+        "mean_odds": 2.339,
+        "gross_return_pct": 78.98,
+        "net_roi_pct": -21.02
+      },
+      "2": {
+        "bets": 5614,
+        "races": 5614,
+        "weighted_hits": 1165.118518,
+        "hit_rate_pct": 20.754,
+        "mean_odds": 4.554,
+        "gross_return_pct": 83.497,
+        "net_roi_pct": -16.503
+      },
+      "3": {
+        "bets": 5614,
+        "races": 5614,
+        "weighted_hits": 725.039153,
+        "hit_rate_pct": 12.915,
+        "mean_odds": 7.045,
+        "gross_return_pct": 81.057,
+        "net_roi_pct": -18.943
+      },
+      "4": {
+        "bets": 5614,
+        "races": 5614,
+        "weighted_hits": 484.107839,
+        "hit_rate_pct": 8.623,
+        "mean_odds": 10.567,
+        "gross_return_pct": 77.163,
+        "net_roi_pct": -22.837
+      },
+      "5": {
+        "bets": 5614,
+        "races": 5614,
+        "weighted_hits": 329.061411,
+        "hit_rate_pct": 5.861,
+        "mean_odds": 15.431,
+        "gross_return_pct": 73.538,
+        "net_roi_pct": -26.462
+      }
+    },
+    "validation_2023": {
+      "1": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 273.5,
+        "hit_rate_pct": 37.776,
+        "mean_odds": 2.506,
+        "gross_return_pct": 85.96,
+        "net_roi_pct": -14.04
+      },
+      "2": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 126.5,
+        "hit_rate_pct": 17.472,
+        "mean_odds": 4.534,
+        "gross_return_pct": 73.343,
+        "net_roi_pct": -26.657
+      },
+      "3": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 97.5,
+        "hit_rate_pct": 13.467,
+        "mean_odds": 6.885,
+        "gross_return_pct": 81.195,
+        "net_roi_pct": -18.805
+      },
+      "4": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 78.0,
+        "hit_rate_pct": 10.773,
+        "mean_odds": 9.752,
+        "gross_return_pct": 94.102,
+        "net_roi_pct": -5.898
+      },
+      "5": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 50.5,
+        "hit_rate_pct": 6.975,
+        "mean_odds": 13.55,
+        "gross_return_pct": 87.445,
+        "net_roi_pct": -12.555
+      }
+    },
+    "test_2024_2026_partial": {
+      "1": {
+        "bets": 1985,
+        "races": 1985,
+        "weighted_hits": 722.5,
+        "hit_rate_pct": 36.398,
+        "mean_odds": 2.427,
+        "gross_return_pct": 81.607,
+        "net_roi_pct": -18.393
+      },
+      "2": {
+        "bets": 1985,
+        "races": 1985,
+        "weighted_hits": 408.0,
+        "hit_rate_pct": 20.554,
+        "mean_odds": 4.612,
+        "gross_return_pct": 86.552,
+        "net_roi_pct": -13.448
+      },
+      "3": {
+        "bets": 1985,
+        "races": 1985,
+        "weighted_hits": 258.5,
+        "hit_rate_pct": 13.023,
+        "mean_odds": 6.873,
+        "gross_return_pct": 80.383,
+        "net_roi_pct": -19.617
+      },
+      "4": {
+        "bets": 1985,
+        "races": 1985,
+        "weighted_hits": 184.5,
+        "hit_rate_pct": 9.295,
+        "mean_odds": 9.637,
+        "gross_return_pct": 80.136,
+        "net_roi_pct": -19.864
+      },
+      "5": {
+        "bets": 1985,
+        "races": 1985,
+        "weighted_hits": 134.5,
+        "hit_rate_pct": 6.776,
+        "mean_odds": 13.435,
+        "gross_return_pct": 83.758,
+        "net_roi_pct": -16.242
+      }
+    },
+    "year_2015": {
+      "1": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 329.5,
+        "hit_rate_pct": 40.932,
+        "mean_odds": 2.212,
+        "gross_return_pct": 79.435,
+        "net_roi_pct": -20.565
+      },
+      "2": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 170.5,
+        "hit_rate_pct": 21.18,
+        "mean_odds": 4.451,
+        "gross_return_pct": 82.863,
+        "net_roi_pct": -17.137
+      },
+      "3": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 103.0,
+        "hit_rate_pct": 12.795,
+        "mean_odds": 7.071,
+        "gross_return_pct": 76.839,
+        "net_roi_pct": -23.161
+      },
+      "4": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 65.5,
+        "hit_rate_pct": 8.137,
+        "mean_odds": 10.837,
+        "gross_return_pct": 73.304,
+        "net_roi_pct": -26.696
+      },
+      "5": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 44.0,
+        "hit_rate_pct": 5.466,
+        "mean_odds": 16.017,
+        "gross_return_pct": 72.683,
+        "net_roi_pct": -27.317
+      }
+    },
+    "year_2016": {
+      "1": {
+        "bets": 807,
+        "races": 807,
+        "weighted_hits": 329.0,
+        "hit_rate_pct": 40.768,
+        "mean_odds": 2.244,
+        "gross_return_pct": 81.388,
+        "net_roi_pct": -18.612
+      },
+      "2": {
+        "bets": 807,
+        "races": 807,
+        "weighted_hits": 159.5,
+        "hit_rate_pct": 19.765,
+        "mean_odds": 4.489,
+        "gross_return_pct": 75.192,
+        "net_roi_pct": -24.808
+      },
+      "3": {
+        "bets": 807,
+        "races": 807,
+        "weighted_hits": 105.5,
+        "hit_rate_pct": 13.073,
+        "mean_odds": 7.037,
+        "gross_return_pct": 78.519,
+        "net_roi_pct": -21.481
+      },
+      "4": {
+        "bets": 807,
+        "races": 807,
+        "weighted_hits": 71.0,
+        "hit_rate_pct": 8.798,
+        "mean_odds": 10.58,
+        "gross_return_pct": 81.171,
+        "net_roi_pct": -18.829
+      },
+      "5": {
+        "bets": 807,
+        "races": 807,
+        "weighted_hits": 44.0,
+        "hit_rate_pct": 5.452,
+        "mean_odds": 15.418,
+        "gross_return_pct": 69.343,
+        "net_roi_pct": -30.657
+      }
+    },
+    "year_2017": {
+      "1": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 332.833333,
+        "hit_rate_pct": 41.346,
+        "mean_odds": 2.329,
+        "gross_return_pct": 87.795,
+        "net_roi_pct": -12.205
+      },
+      "2": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 156.833333,
+        "hit_rate_pct": 19.482,
+        "mean_odds": 4.383,
+        "gross_return_pct": 77.652,
+        "net_roi_pct": -22.348
+      },
+      "3": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 95.333333,
+        "hit_rate_pct": 11.843,
+        "mean_odds": 6.772,
+        "gross_return_pct": 73.534,
+        "net_roi_pct": -26.466
+      },
+      "4": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 74.0,
+        "hit_rate_pct": 9.193,
+        "mean_odds": 10.296,
+        "gross_return_pct": 77.168,
+        "net_roi_pct": -22.832
+      },
+      "5": {
+        "bets": 805,
+        "races": 805,
+        "weighted_hits": 37.0,
+        "hit_rate_pct": 4.596,
+        "mean_odds": 14.924,
+        "gross_return_pct": 54.043,
+        "net_roi_pct": -45.957
+      }
+    },
+    "year_2018": {
+      "1": {
+        "bets": 806,
+        "races": 806,
+        "weighted_hits": 300.833333,
+        "hit_rate_pct": 37.324,
+        "mean_odds": 2.256,
+        "gross_return_pct": 75.174,
+        "net_roi_pct": -24.826
+      },
+      "2": {
+        "bets": 806,
+        "races": 806,
+        "weighted_hits": 175.833333,
+        "hit_rate_pct": 21.816,
+        "mean_odds": 4.636,
+        "gross_return_pct": 89.423,
+        "net_roi_pct": -10.577
+      },
+      "3": {
+        "bets": 806,
+        "races": 806,
+        "weighted_hits": 101.333333,
+        "hit_rate_pct": 12.572,
+        "mean_odds": 6.993,
+        "gross_return_pct": 80.062,
+        "net_roi_pct": -19.938
+      },
+      "4": {
+        "bets": 806,
+        "races": 806,
+        "weighted_hits": 73.0,
+        "hit_rate_pct": 9.057,
+        "mean_odds": 10.298,
+        "gross_return_pct": 77.996,
+        "net_roi_pct": -22.004
+      },
+      "5": {
+        "bets": 806,
+        "races": 806,
+        "weighted_hits": 60.0,
+        "hit_rate_pct": 7.444,
+        "mean_odds": 15.023,
+        "gross_return_pct": 94.206,
+        "net_roi_pct": -5.794
+      }
+    },
+    "year_2019": {
+      "1": {
+        "bets": 792,
+        "races": 792,
+        "weighted_hits": 305.833333,
+        "hit_rate_pct": 38.615,
+        "mean_odds": 2.287,
+        "gross_return_pct": 76.97,
+        "net_roi_pct": -23.03
+      },
+      "2": {
+        "bets": 792,
+        "races": 792,
+        "weighted_hits": 165.833333,
+        "hit_rate_pct": 20.939,
+        "mean_odds": 4.59,
+        "gross_return_pct": 86.332,
+        "net_roi_pct": -13.668
+      },
+      "3": {
+        "bets": 792,
+        "races": 792,
+        "weighted_hits": 100.333333,
+        "hit_rate_pct": 12.668,
+        "mean_odds": 7.171,
+        "gross_return_pct": 80.789,
+        "net_roi_pct": -19.211
+      },
+      "4": {
+        "bets": 792,
+        "races": 792,
+        "weighted_hits": 69.0,
+        "hit_rate_pct": 8.712,
+        "mean_odds": 10.787,
+        "gross_return_pct": 78.043,
+        "net_roi_pct": -21.957
+      },
+      "5": {
+        "bets": 792,
+        "races": 792,
+        "weighted_hits": 39.5,
+        "hit_rate_pct": 4.987,
+        "mean_odds": 15.634,
+        "gross_return_pct": 63.662,
+        "net_roi_pct": -36.338
+      }
+    },
+    "year_2020": {
+      "1": {
+        "bets": 392,
+        "races": 392,
+        "weighted_hits": 122.9557,
+        "hit_rate_pct": 31.366,
+        "mean_odds": 2.746,
+        "gross_return_pct": 72.559,
+        "net_roi_pct": -27.441
+      },
+      "2": {
+        "bets": 392,
+        "races": 392,
+        "weighted_hits": 75.029881,
+        "hit_rate_pct": 19.14,
+        "mean_odds": 5.045,
+        "gross_return_pct": 80.757,
+        "net_roi_pct": -19.243
+      },
+      "3": {
+        "bets": 392,
+        "races": 392,
+        "weighted_hits": 52.589405,
+        "hit_rate_pct": 13.416,
+        "mean_odds": 7.648,
+        "gross_return_pct": 100.996,
+        "net_roi_pct": 0.996
+      },
+      "4": {
+        "bets": 392,
+        "races": 392,
+        "weighted_hits": 33.658092,
+        "hit_rate_pct": 8.586,
+        "mean_odds": 11.72,
+        "gross_return_pct": 80.756,
+        "net_roi_pct": -19.244
+      },
+      "5": {
+        "bets": 392,
+        "races": 392,
+        "weighted_hits": 30.194997,
+        "hit_rate_pct": 7.703,
+        "mean_odds": 17.466,
+        "gross_return_pct": 105.88,
+        "net_roi_pct": 5.88
+      }
+    },
+    "year_2021": {
+      "1": {
+        "bets": 513,
+        "races": 513,
+        "weighted_hits": 185.364394,
+        "hit_rate_pct": 36.133,
+        "mean_odds": 2.503,
+        "gross_return_pct": 80.043,
+        "net_roi_pct": -19.957
+      },
+      "2": {
+        "bets": 513,
+        "races": 513,
+        "weighted_hits": 116.088636,
+        "hit_rate_pct": 22.629,
+        "mean_odds": 4.649,
+        "gross_return_pct": 89.803,
+        "net_roi_pct": -10.197
+      },
+      "3": {
+        "bets": 513,
+        "races": 513,
+        "weighted_hits": 66.949747,
+        "hit_rate_pct": 13.051,
+        "mean_odds": 7.366,
+        "gross_return_pct": 81.969,
+        "net_roi_pct": -18.031
+      },
+      "4": {
+        "bets": 513,
+        "races": 513,
+        "weighted_hits": 31.449747,
+        "hit_rate_pct": 6.131,
+        "mean_odds": 11.024,
+        "gross_return_pct": 69.376,
+        "net_roi_pct": -30.624
+      },
+      "5": {
+        "bets": 513,
+        "races": 513,
+        "weighted_hits": 31.866414,
+        "hit_rate_pct": 6.212,
+        "mean_odds": 16.002,
+        "gross_return_pct": 77.455,
+        "net_roi_pct": -22.545
+      }
+    },
+    "year_2022": {
+      "1": {
+        "bets": 694,
+        "races": 694,
+        "weighted_hits": 239.5,
+        "hit_rate_pct": 34.51,
+        "mean_odds": 2.414,
+        "gross_return_pct": 74.986,
+        "net_roi_pct": -25.014
+      },
+      "2": {
+        "bets": 694,
+        "races": 694,
+        "weighted_hits": 145.5,
+        "hit_rate_pct": 20.965,
+        "mean_odds": 4.463,
+        "gross_return_pct": 87.435,
+        "net_roi_pct": -12.565
+      },
+      "3": {
+        "bets": 694,
+        "races": 694,
+        "weighted_hits": 100.0,
+        "hit_rate_pct": 14.409,
+        "mean_odds": 6.677,
+        "gross_return_pct": 87.154,
+        "net_roi_pct": -12.846
+      },
+      "4": {
+        "bets": 694,
+        "races": 694,
+        "weighted_hits": 66.5,
+        "hit_rate_pct": 9.582,
+        "mean_odds": 9.627,
+        "gross_return_pct": 78.725,
+        "net_roi_pct": -21.275
+      },
+      "5": {
+        "bets": 694,
+        "races": 694,
+        "weighted_hits": 42.5,
+        "hit_rate_pct": 6.124,
+        "mean_odds": 14.029,
+        "gross_return_pct": 68.127,
+        "net_roi_pct": -31.873
+      }
+    },
+    "year_2023": {
+      "1": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 273.5,
+        "hit_rate_pct": 37.776,
+        "mean_odds": 2.506,
+        "gross_return_pct": 85.96,
+        "net_roi_pct": -14.04
+      },
+      "2": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 126.5,
+        "hit_rate_pct": 17.472,
+        "mean_odds": 4.534,
+        "gross_return_pct": 73.343,
+        "net_roi_pct": -26.657
+      },
+      "3": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 97.5,
+        "hit_rate_pct": 13.467,
+        "mean_odds": 6.885,
+        "gross_return_pct": 81.195,
+        "net_roi_pct": -18.805
+      },
+      "4": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 78.0,
+        "hit_rate_pct": 10.773,
+        "mean_odds": 9.752,
+        "gross_return_pct": 94.102,
+        "net_roi_pct": -5.898
+      },
+      "5": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 50.5,
+        "hit_rate_pct": 6.975,
+        "mean_odds": 13.55,
+        "gross_return_pct": 87.445,
+        "net_roi_pct": -12.555
+      }
+    },
+    "year_2024": {
+      "1": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 251.0,
+        "hit_rate_pct": 34.669,
+        "mean_odds": 2.537,
+        "gross_return_pct": 82.238,
+        "net_roi_pct": -17.762
+      },
+      "2": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 143.5,
+        "hit_rate_pct": 19.82,
+        "mean_odds": 4.619,
+        "gross_return_pct": 84.296,
+        "net_roi_pct": -15.704
+      },
+      "3": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 88.5,
+        "hit_rate_pct": 12.224,
+        "mean_odds": 6.779,
+        "gross_return_pct": 79.351,
+        "net_roi_pct": -20.649
+      },
+      "4": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 81.5,
+        "hit_rate_pct": 11.257,
+        "mean_odds": 9.173,
+        "gross_return_pct": 93.798,
+        "net_roi_pct": -6.202
+      },
+      "5": {
+        "bets": 724,
+        "races": 724,
+        "weighted_hits": 60.0,
+        "hit_rate_pct": 8.287,
+        "mean_odds": 12.777,
+        "gross_return_pct": 97.686,
+        "net_roi_pct": -2.314
+      }
+    },
+    "year_2025": {
+      "1": {
+        "bets": 716,
+        "races": 716,
+        "weighted_hits": 260.0,
+        "hit_rate_pct": 36.313,
+        "mean_odds": 2.392,
+        "gross_return_pct": 80.042,
+        "net_roi_pct": -19.958
+      },
+      "2": {
+        "bets": 716,
+        "races": 716,
+        "weighted_hits": 146.5,
+        "hit_rate_pct": 20.461,
+        "mean_odds": 4.544,
+        "gross_return_pct": 86.557,
+        "net_roi_pct": -13.443
+      },
+      "3": {
+        "bets": 716,
+        "races": 716,
+        "weighted_hits": 95.5,
+        "hit_rate_pct": 13.338,
+        "mean_odds": 6.865,
+        "gross_return_pct": 77.053,
+        "net_roi_pct": -22.947
+      },
+      "4": {
+        "bets": 716,
+        "races": 716,
+        "weighted_hits": 62.0,
+        "hit_rate_pct": 8.659,
+        "mean_odds": 9.8,
+        "gross_return_pct": 75.761,
+        "net_roi_pct": -24.239
+      },
+      "5": {
+        "bets": 716,
+        "races": 716,
+        "weighted_hits": 44.5,
+        "hit_rate_pct": 6.215,
+        "mean_odds": 13.523,
+        "gross_return_pct": 83.017,
+        "net_roi_pct": -16.983
+      }
+    },
+    "year_2026": {
+      "1": {
+        "bets": 545,
+        "races": 545,
+        "weighted_hits": 211.5,
+        "hit_rate_pct": 38.807,
+        "mean_odds": 2.325,
+        "gross_return_pct": 82.826,
+        "net_roi_pct": -17.174
+      },
+      "2": {
+        "bets": 545,
+        "races": 545,
+        "weighted_hits": 118.0,
+        "hit_rate_pct": 21.651,
+        "mean_odds": 4.692,
+        "gross_return_pct": 89.541,
+        "net_roi_pct": -10.459
+      },
+      "3": {
+        "bets": 545,
+        "races": 545,
+        "weighted_hits": 74.5,
+        "hit_rate_pct": 13.67,
+        "mean_odds": 7.008,
+        "gross_return_pct": 86.128,
+        "net_roi_pct": -13.872
+      },
+      "4": {
+        "bets": 545,
+        "races": 545,
+        "weighted_hits": 41.0,
+        "hit_rate_pct": 7.523,
+        "mean_odds": 10.041,
+        "gross_return_pct": 67.734,
+        "net_roi_pct": -32.266
+      },
+      "5": {
+        "bets": 545,
+        "races": 545,
+        "weighted_hits": 30.0,
+        "hit_rate_pct": 5.505,
+        "mean_odds": 14.192,
+        "gross_return_pct": 66.229,
+        "net_roi_pct": -33.771
+      }
+    }
+  },
+  "favorite_price_rule": {
+    "threshold_scan": [
+      {
+        "favorite_final_odds_at_most": 1.5,
+        "validation_2023": {
+          "bets": 79,
+          "races": 79,
+          "weighted_hits": 49.0,
+          "hit_rate_pct": 62.025,
+          "mean_odds": 1.361,
+          "gross_return_pct": 83.671,
+          "net_roi_pct": -16.329
+        },
+        "test_2024_2026": {
+          "bets": 222,
+          "races": 222,
+          "weighted_hits": 132.0,
+          "hit_rate_pct": 59.459,
+          "mean_odds": 1.378,
+          "gross_return_pct": 81.441,
+          "net_roi_pct": -18.559
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 2.0,
+        "validation_2023": {
+          "bets": 225,
+          "races": 225,
+          "weighted_hits": 120.0,
+          "hit_rate_pct": 53.333,
+          "mean_odds": 1.647,
+          "gross_return_pct": 86.267,
+          "net_roi_pct": -13.733
+        },
+        "test_2024_2026": {
+          "bets": 714,
+          "races": 714,
+          "weighted_hits": 325.5,
+          "hit_rate_pct": 45.588,
+          "mean_odds": 1.674,
+          "gross_return_pct": 74.118,
+          "net_roi_pct": -25.882
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 2.5,
+        "validation_2023": {
+          "bets": 397,
+          "races": 397,
+          "weighted_hits": 190.0,
+          "hit_rate_pct": 47.859,
+          "mean_odds": 1.933,
+          "gross_return_pct": 89.698,
+          "net_roi_pct": -10.302
+        },
+        "test_2024_2026": {
+          "bets": 1200,
+          "races": 1200,
+          "weighted_hits": 504.5,
+          "hit_rate_pct": 42.042,
+          "mean_odds": 1.925,
+          "gross_return_pct": 78.171,
+          "net_roi_pct": -21.829
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 3.0,
+        "validation_2023": {
+          "bets": 548,
+          "races": 548,
+          "weighted_hits": 230.0,
+          "hit_rate_pct": 41.971,
+          "mean_odds": 2.169,
+          "gross_return_pct": 85.374,
+          "net_roi_pct": -14.626
+        },
+        "test_2024_2026": {
+          "bets": 1580,
+          "races": 1580,
+          "weighted_hits": 622.5,
+          "hit_rate_pct": 39.399,
+          "mean_odds": 2.133,
+          "gross_return_pct": 80.18,
+          "net_roi_pct": -19.82
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 4.0,
+        "validation_2023": {
+          "bets": 700,
+          "races": 700,
+          "weighted_hits": 266.5,
+          "hit_rate_pct": 38.071,
+          "mean_odds": 2.437,
+          "gross_return_pct": 84.464,
+          "net_roi_pct": -15.536
+        },
+        "test_2024_2026": {
+          "bets": 1921,
+          "races": 1921,
+          "weighted_hits": 709.5,
+          "hit_rate_pct": 36.934,
+          "mean_odds": 2.362,
+          "gross_return_pct": 81.369,
+          "net_roi_pct": -18.631
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 5.0,
+        "validation_2023": {
+          "bets": 723,
+          "races": 723,
+          "weighted_hits": 273.5,
+          "hit_rate_pct": 37.828,
+          "mean_odds": 2.501,
+          "gross_return_pct": 86.079,
+          "net_roi_pct": -13.921
+        },
+        "test_2024_2026": {
+          "bets": 1983,
+          "races": 1983,
+          "weighted_hits": 722.0,
+          "hit_rate_pct": 36.409,
+          "mean_odds": 2.424,
+          "gross_return_pct": 81.553,
+          "net_roi_pct": -18.447
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 7.5,
+        "validation_2023": {
+          "bets": 724,
+          "races": 724,
+          "weighted_hits": 273.5,
+          "hit_rate_pct": 37.776,
+          "mean_odds": 2.506,
+          "gross_return_pct": 85.96,
+          "net_roi_pct": -14.04
+        },
+        "test_2024_2026": {
+          "bets": 1985,
+          "races": 1985,
+          "weighted_hits": 722.5,
+          "hit_rate_pct": 36.398,
+          "mean_odds": 2.427,
+          "gross_return_pct": 81.607,
+          "net_roi_pct": -18.393
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 10.0,
+        "validation_2023": {
+          "bets": 724,
+          "races": 724,
+          "weighted_hits": 273.5,
+          "hit_rate_pct": 37.776,
+          "mean_odds": 2.506,
+          "gross_return_pct": 85.96,
+          "net_roi_pct": -14.04
+        },
+        "test_2024_2026": {
+          "bets": 1985,
+          "races": 1985,
+          "weighted_hits": 722.5,
+          "hit_rate_pct": 36.398,
+          "mean_odds": 2.427,
+          "gross_return_pct": 81.607,
+          "net_roi_pct": -18.393
+        }
+      },
+      {
+        "favorite_final_odds_at_most": 15.0,
+        "validation_2023": {
+          "bets": 724,
+          "races": 724,
+          "weighted_hits": 273.5,
+          "hit_rate_pct": 37.776,
+          "mean_odds": 2.506,
+          "gross_return_pct": 85.96,
+          "net_roi_pct": -14.04
+        },
+        "test_2024_2026": {
+          "bets": 1985,
+          "races": 1985,
+          "weighted_hits": 722.5,
+          "hit_rate_pct": 36.398,
+          "mean_odds": 2.427,
+          "gross_return_pct": 81.607,
+          "net_roi_pct": -18.393
+        }
+      }
+    ],
+    "selected_on_validation": 2.5,
+    "selected_rule_validation": {
+      "bets": 397,
+      "races": 397,
+      "weighted_hits": 190.0,
+      "hit_rate_pct": 47.859,
+      "mean_odds": 1.933,
+      "gross_return_pct": 89.698,
+      "net_roi_pct": -10.302
+    },
+    "selected_rule_test": {
+      "bets": 1200,
+      "races": 1200,
+      "weighted_hits": 504.5,
+      "hit_rate_pct": 42.042,
+      "mean_odds": 1.925,
+      "gross_return_pct": 78.171,
+      "net_roi_pct": -21.829
+    },
+    "selected_rule_test_by_year": {
+      "2024": {
+        "bets": 401,
+        "races": 401,
+        "weighted_hits": 156.5,
+        "hit_rate_pct": 39.027,
+        "mean_odds": 1.947,
+        "gross_return_pct": 73.828,
+        "net_roi_pct": -26.172
+      },
+      "2025": {
+        "bets": 448,
+        "races": 448,
+        "weighted_hits": 192.0,
+        "hit_rate_pct": 42.857,
+        "mean_odds": 1.947,
+        "gross_return_pct": 80.58,
+        "net_roi_pct": -19.42
+      },
+      "2026": {
+        "bets": 351,
+        "races": 351,
+        "weighted_hits": 156.0,
+        "hit_rate_pct": 44.444,
+        "mean_odds": 1.873,
+        "gross_return_pct": 80.057,
+        "net_roi_pct": -19.943
+      }
+    }
+  },
+  "favorite_probability_gap_rule": {
+    "gap_definition": "100*(1/lowest_WIN_odds - 1/second_lowest_WIN_odds), percentage points; tied odds give 0",
+    "fixed_bins_pp": {
+      "small": "<11.11",
+      "medium": "11.11..27.91",
+      "large": ">27.91"
+    },
+    "summary": {
+      "train_2015_2022": {
+        "small": {
+          "bets": 1897,
+          "races": 1897,
+          "weighted_hits": 501.820094,
+          "hit_rate_pct": 26.453,
+          "mean_odds": 3.168,
+          "gross_return_pct": 78.558,
+          "net_roi_pct": -21.442
+        },
+        "medium": {
+          "bets": 1787,
+          "races": 1787,
+          "weighted_hits": 629.0,
+          "hit_rate_pct": 35.199,
+          "mean_odds": 2.285,
+          "gross_return_pct": 78.338,
+          "net_roi_pct": -21.662
+        },
+        "large": {
+          "bets": 1930,
+          "races": 1930,
+          "weighted_hits": 1015.0,
+          "hit_rate_pct": 52.591,
+          "mean_odds": 1.574,
+          "gross_return_pct": 79.99,
+          "net_roi_pct": -20.01
+        }
+      },
+      "validation_2023": {
+        "small": {
+          "bets": 293,
+          "races": 293,
+          "weighted_hits": 81.5,
+          "hit_rate_pct": 27.816,
+          "mean_odds": 3.175,
+          "gross_return_pct": 85.785,
+          "net_roi_pct": -14.215
+        },
+        "medium": {
+          "bets": 231,
+          "races": 231,
+          "weighted_hits": 86.0,
+          "hit_rate_pct": 37.229,
+          "mean_odds": 2.416,
+          "gross_return_pct": 87.879,
+          "net_roi_pct": -12.121
+        },
+        "large": {
+          "bets": 200,
+          "races": 200,
+          "weighted_hits": 106.0,
+          "hit_rate_pct": 53.0,
+          "mean_odds": 1.629,
+          "gross_return_pct": 84.0,
+          "net_roi_pct": -16.0
+        }
+      },
+      "test_2024_2026": {
+        "small": {
+          "bets": 724,
+          "races": 724,
+          "weighted_hits": 208.5,
+          "hit_rate_pct": 28.798,
+          "mean_odds": 3.148,
+          "gross_return_pct": 87.859,
+          "net_roi_pct": -12.141
+        },
+        "medium": {
+          "bets": 649,
+          "races": 649,
+          "weighted_hits": 230.0,
+          "hit_rate_pct": 35.439,
+          "mean_odds": 2.36,
+          "gross_return_pct": 82.203,
+          "net_roi_pct": -17.797
+        },
+        "large": {
+          "bets": 612,
+          "races": 612,
+          "weighted_hits": 284.0,
+          "hit_rate_pct": 46.405,
+          "mean_odds": 1.643,
+          "gross_return_pct": 73.578,
+          "net_roi_pct": -26.422
+        }
+      }
+    },
+    "best_validation_bucket": "medium",
+    "selected_bucket_test_by_year": {
+      "2024": {
+        "bets": 237,
+        "races": 237,
+        "weighted_hits": 80.0,
+        "hit_rate_pct": 33.755,
+        "mean_odds": 2.39,
+        "gross_return_pct": 80.38,
+        "net_roi_pct": -19.62
+      },
+      "2025": {
+        "bets": 241,
+        "races": 241,
+        "weighted_hits": 84.0,
+        "hit_rate_pct": 34.855,
+        "mean_odds": 2.34,
+        "gross_return_pct": 77.676,
+        "net_roi_pct": -22.324
+      },
+      "2026": {
+        "bets": 171,
+        "races": 171,
+        "weighted_hits": 66.0,
+        "hit_rate_pct": 38.596,
+        "mean_odds": 2.348,
+        "gross_return_pct": 91.111,
+        "net_roi_pct": -8.889
+      }
+    }
+  },
+  "runner_final_odds_bands": {
+    "train_2015_2022": [
+      {
+        "odds_bin": "1-1.5",
+        "bets": 673,
+        "races": 673,
+        "weighted_hits": 433.0,
+        "hit_rate_pct": 64.339,
+        "mean_odds": 1.299,
+        "gross_return_pct": 82.66,
+        "net_roi_pct": -17.34
+      },
+      {
+        "odds_bin": "1.5-2",
+        "bets": 1427,
+        "races": 1427,
+        "weighted_hits": 669.0,
+        "hit_rate_pct": 46.882,
+        "mean_odds": 1.704,
+        "gross_return_pct": 78.991,
+        "net_roi_pct": -21.009
+      },
+      {
+        "odds_bin": "2-3",
+        "bets": 3022,
+        "races": 3022,
+        "weighted_hits": 1020.0,
+        "hit_rate_pct": 33.752,
+        "mean_odds": 2.454,
+        "gross_return_pct": 81.827,
+        "net_roi_pct": -18.173
+      },
+      {
+        "odds_bin": "3-5",
+        "bets": 5715,
+        "races": 5715,
+        "weighted_hits": 1199.0,
+        "hit_rate_pct": 20.98,
+        "mean_odds": 3.928,
+        "gross_return_pct": 80.873,
+        "net_roi_pct": -19.127
+      },
+      {
+        "odds_bin": "5-10",
+        "bets": 10352,
+        "races": 10352,
+        "weighted_hits": 1179.0,
+        "hit_rate_pct": 11.389,
+        "mean_odds": 7.288,
+        "gross_return_pct": 78.831,
+        "net_roi_pct": -21.169
+      },
+      {
+        "odds_bin": "10-20",
+        "bets": 10779,
+        "races": 10779,
+        "weighted_hits": 631.0,
+        "hit_rate_pct": 5.854,
+        "mean_odds": 14.383,
+        "gross_return_pct": 80.993,
+        "net_roi_pct": -19.007
+      },
+      {
+        "odds_bin": ">=20",
+        "bets": 28646,
+        "races": 28646,
+        "weighted_hits": 490.0,
+        "hit_rate_pct": 1.711,
+        "mean_odds": 73.118,
+        "gross_return_pct": 71.112,
+        "net_roi_pct": -28.888
+      }
+    ],
+    "validation_2023": [
+      {
+        "odds_bin": "1-1.5",
+        "bets": 51,
+        "races": 51,
+        "weighted_hits": 33.0,
+        "hit_rate_pct": 64.706,
+        "mean_odds": 1.284,
+        "gross_return_pct": 82.549,
+        "net_roi_pct": -17.451
+      },
+      {
+        "odds_bin": "1.5-2",
+        "bets": 148,
+        "races": 148,
+        "weighted_hits": 71.0,
+        "hit_rate_pct": 47.973,
+        "mean_odds": 1.709,
+        "gross_return_pct": 81.081,
+        "net_roi_pct": -18.919
+      },
+      {
+        "odds_bin": "2-3",
+        "bets": 374,
+        "races": 374,
+        "weighted_hits": 131.0,
+        "hit_rate_pct": 35.027,
+        "mean_odds": 2.476,
+        "gross_return_pct": 84.412,
+        "net_roi_pct": -15.588
+      },
+      {
+        "odds_bin": "3-5",
+        "bets": 821,
+        "races": 821,
+        "weighted_hits": 171.0,
+        "hit_rate_pct": 20.828,
+        "mean_odds": 3.934,
+        "gross_return_pct": 80.183,
+        "net_roi_pct": -19.817
+      },
+      {
+        "odds_bin": "5-10",
+        "bets": 1454,
+        "races": 1454,
+        "weighted_hits": 168.0,
+        "hit_rate_pct": 11.554,
+        "mean_odds": 7.28,
+        "gross_return_pct": 80.784,
+        "net_roi_pct": -19.216
+      },
+      {
+        "odds_bin": "10-20",
+        "bets": 1586,
+        "races": 1586,
+        "weighted_hits": 95.0,
+        "hit_rate_pct": 5.99,
+        "mean_odds": 14.307,
+        "gross_return_pct": 79.161,
+        "net_roi_pct": -20.839
+      },
+      {
+        "odds_bin": ">=20",
+        "bets": 3395,
+        "races": 3395,
+        "weighted_hits": 57.0,
+        "hit_rate_pct": 1.679,
+        "mean_odds": 52.461,
+        "gross_return_pct": 64.174,
+        "net_roi_pct": -35.826
+      }
+    ],
+    "test_2024_2026": [
+      {
+        "odds_bin": "1-1.5",
+        "bets": 145,
+        "races": 145,
+        "weighted_hits": 87.0,
+        "hit_rate_pct": 60.0,
+        "mean_odds": 1.314,
+        "gross_return_pct": 78.138,
+        "net_roi_pct": -21.862
+      },
+      {
+        "odds_bin": "1.5-2",
+        "bets": 462,
+        "races": 462,
+        "weighted_hits": 198.0,
+        "hit_rate_pct": 42.857,
+        "mean_odds": 1.711,
+        "gross_return_pct": 72.489,
+        "net_roi_pct": -27.511
+      },
+      {
+        "odds_bin": "2-3",
+        "bets": 1028,
+        "races": 1028,
+        "weighted_hits": 361.0,
+        "hit_rate_pct": 35.117,
+        "mean_odds": 2.446,
+        "gross_return_pct": 85.058,
+        "net_roi_pct": -14.942
+      },
+      {
+        "odds_bin": "3-5",
+        "bets": 2058,
+        "races": 2058,
+        "weighted_hits": 463.0,
+        "hit_rate_pct": 22.498,
+        "mean_odds": 3.928,
+        "gross_return_pct": 86.361,
+        "net_roi_pct": -13.639
+      },
+      {
+        "odds_bin": "5-10",
+        "bets": 4101,
+        "races": 4101,
+        "weighted_hits": 472.0,
+        "hit_rate_pct": 11.509,
+        "mean_odds": 7.282,
+        "gross_return_pct": 80.088,
+        "net_roi_pct": -19.912
+      },
+      {
+        "odds_bin": "10-20",
+        "bets": 4251,
+        "races": 4251,
+        "weighted_hits": 242.0,
+        "hit_rate_pct": 5.693,
+        "mean_odds": 14.36,
+        "gross_return_pct": 79.068,
+        "net_roi_pct": -20.932
+      },
+      {
+        "odds_bin": ">=20",
+        "bets": 9525,
+        "races": 9525,
+        "weighted_hits": 165.0,
+        "hit_rate_pct": 1.732,
+        "mean_odds": 50.87,
+        "gross_return_pct": 64.502,
+        "net_roi_pct": -35.498
+      }
+    ]
+  },
+  "combo_sample": {
+    "eligible_races": 1256,
+    "eligible_races_by_year": {
+      "2025": 713,
+      "2026": 543
+    },
+    "excluded_races": {
+      "missing_or_dead_heat_top_three": 6
+    }
+  },
+  "combo_low_odds_rank_search": {
+    "TRI": {
+      "all_2025_2026": {
+        "races": 1256,
+        "races_by_year": {
+          "2025": 713,
+          "2026": 543
+        },
+        "missing_winner_quote_count": 9,
+        "per_price_rank": {
+          "1": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 33.0,
+            "hit_rate_pct": 2.627,
+            "mean_odds": 25.537,
+            "gross_return_pct": 46.951,
+            "net_roi_pct": -53.049
+          },
+          "2": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 34.0,
+            "hit_rate_pct": 2.707,
+            "mean_odds": 28.897,
+            "gross_return_pct": 63.75,
+            "net_roi_pct": -36.25
+          },
+          "3": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 27.0,
+            "hit_rate_pct": 2.15,
+            "mean_odds": 33.541,
+            "gross_return_pct": 61.218,
+            "net_roi_pct": -38.782
+          },
+          "4": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 18.0,
+            "hit_rate_pct": 1.433,
+            "mean_odds": 36.796,
+            "gross_return_pct": 40.382,
+            "net_roi_pct": -59.618
+          },
+          "5": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 31.5,
+            "hit_rate_pct": 2.508,
+            "mean_odds": 40.151,
+            "gross_return_pct": 84.857,
+            "net_roi_pct": -15.143
+          },
+          "6": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 19.5,
+            "hit_rate_pct": 1.553,
+            "mean_odds": 42.893,
+            "gross_return_pct": 57.882,
+            "net_roi_pct": -42.118
+          },
+          "7": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 17.5,
+            "hit_rate_pct": 1.393,
+            "mean_odds": 46.416,
+            "gross_return_pct": 57.508,
+            "net_roi_pct": -42.492
+          },
+          "8": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 15.5,
+            "hit_rate_pct": 1.234,
+            "mean_odds": 49.421,
+            "gross_return_pct": 56.123,
+            "net_roi_pct": -43.877
+          },
+          "9": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 17.0,
+            "hit_rate_pct": 1.354,
+            "mean_odds": 52.438,
+            "gross_return_pct": 60.159,
+            "net_roi_pct": -39.841
+          },
+          "10": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 14.5,
+            "hit_rate_pct": 1.154,
+            "mean_odds": 55.203,
+            "gross_return_pct": 52.353,
+            "net_roi_pct": -47.647
+          }
+        },
+        "top_k": {
+          "1": {
+            "races": 1256,
+            "bets": 1256,
+            "expected_hits": 33.0,
+            "hit_rate_pct": 2.627,
+            "mean_selected_odds": 25.537,
+            "mean_winning_dividend_odds_if_hit": 17.87,
+            "gross_payout_per_100w": 46.95,
+            "gross_return_pct": 46.951,
+            "net_roi_pct": -53.049
+          },
+          "2": {
+            "races": 1256,
+            "bets": 2512,
+            "expected_hits": 67.0,
+            "hit_rate_pct": 5.334,
+            "mean_selected_odds": 27.217,
+            "mean_winning_dividend_odds_if_hit": 20.752,
+            "gross_payout_per_100w": 55.35,
+            "gross_return_pct": 55.35,
+            "net_roi_pct": -44.65
+          },
+          "3": {
+            "races": 1256,
+            "bets": 3768,
+            "expected_hits": 94.0,
+            "hit_rate_pct": 7.484,
+            "mean_selected_odds": 29.325,
+            "mean_winning_dividend_odds_if_hit": 22.971,
+            "gross_payout_per_100w": 57.31,
+            "gross_return_pct": 57.306,
+            "net_roi_pct": -42.694
+          },
+          "4": {
+            "races": 1256,
+            "bets": 5024,
+            "expected_hits": 112.0,
+            "hit_rate_pct": 8.917,
+            "mean_selected_odds": 31.193,
+            "mean_winning_dividend_odds_if_hit": 23.808,
+            "gross_payout_per_100w": 53.08,
+            "gross_return_pct": 53.075,
+            "net_roi_pct": -46.925
+          },
+          "5": {
+            "races": 1256,
+            "bets": 6280,
+            "expected_hits": 143.5,
+            "hit_rate_pct": 11.425,
+            "mean_selected_odds": 32.984,
+            "mean_winning_dividend_odds_if_hit": 26.009,
+            "gross_payout_per_100w": 59.43,
+            "gross_return_pct": 59.432,
+            "net_roi_pct": -40.568
+          },
+          "6": {
+            "races": 1256,
+            "bets": 7536,
+            "expected_hits": 163.0,
+            "hit_rate_pct": 12.978,
+            "mean_selected_odds": 34.636,
+            "mean_winning_dividend_odds_if_hit": 27.358,
+            "gross_payout_per_100w": 59.17,
+            "gross_return_pct": 59.173,
+            "net_roi_pct": -40.827
+          },
+          "7": {
+            "races": 1256,
+            "bets": 8792,
+            "expected_hits": 180.5,
+            "hit_rate_pct": 14.371,
+            "mean_selected_odds": 36.319,
+            "mean_winning_dividend_odds_if_hit": 28.707,
+            "gross_payout_per_100w": 58.94,
+            "gross_return_pct": 58.935,
+            "net_roi_pct": -41.065
+          },
+          "8": {
+            "races": 1256,
+            "bets": 10048,
+            "expected_hits": 196.0,
+            "hit_rate_pct": 15.605,
+            "mean_selected_odds": 37.957,
+            "mean_winning_dividend_odds_if_hit": 30.033,
+            "gross_payout_per_100w": 58.58,
+            "gross_return_pct": 58.584,
+            "net_roi_pct": -41.416
+          },
+          "9": {
+            "races": 1256,
+            "bets": 11304,
+            "expected_hits": 213.0,
+            "hit_rate_pct": 16.959,
+            "mean_selected_odds": 39.566,
+            "mean_winning_dividend_odds_if_hit": 31.184,
+            "gross_payout_per_100w": 58.76,
+            "gross_return_pct": 58.759,
+            "net_roi_pct": -41.241
+          },
+          "10": {
+            "races": 1256,
+            "bets": 12560,
+            "expected_hits": 227.5,
+            "hit_rate_pct": 18.113,
+            "mean_selected_odds": 41.129,
+            "mean_winning_dividend_odds_if_hit": 32.086,
+            "gross_payout_per_100w": 58.12,
+            "gross_return_pct": 58.118,
+            "net_roi_pct": -41.882,
+            "actual_winner_quotes_missing": 9
+          }
+        },
+        "best_k_in_2025_validation": 5
+      },
+      "year_2025_validation": {
+        "races": 713,
+        "races_by_year": {
+          "2025": 713
+        },
+        "missing_winner_quote_count": 5,
+        "per_price_rank": {
+          "1": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 21.0,
+            "hit_rate_pct": 2.945,
+            "mean_odds": 26.32,
+            "gross_return_pct": 52.216,
+            "net_roi_pct": -47.784
+          },
+          "2": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 17.0,
+            "hit_rate_pct": 2.384,
+            "mean_odds": 29.744,
+            "gross_return_pct": 53.52,
+            "net_roi_pct": -46.48
+          },
+          "3": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 10.0,
+            "hit_rate_pct": 1.403,
+            "mean_odds": 34.651,
+            "gross_return_pct": 46.115,
+            "net_roi_pct": -53.885
+          },
+          "4": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 7.0,
+            "hit_rate_pct": 0.982,
+            "mean_odds": 37.907,
+            "gross_return_pct": 28.527,
+            "net_roi_pct": -71.473
+          },
+          "5": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 18.5,
+            "hit_rate_pct": 2.595,
+            "mean_odds": 41.334,
+            "gross_return_pct": 92.987,
+            "net_roi_pct": -7.013
+          },
+          "6": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 9.5,
+            "hit_rate_pct": 1.332,
+            "mean_odds": 44.146,
+            "gross_return_pct": 54.937,
+            "net_roi_pct": -45.063
+          },
+          "7": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 11.5,
+            "hit_rate_pct": 1.613,
+            "mean_odds": 47.611,
+            "gross_return_pct": 70.435,
+            "net_roi_pct": -29.565
+          },
+          "8": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 12.5,
+            "hit_rate_pct": 1.753,
+            "mean_odds": 50.589,
+            "gross_return_pct": 74.292,
+            "net_roi_pct": -25.708
+          },
+          "9": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 10.0,
+            "hit_rate_pct": 1.403,
+            "mean_odds": 53.634,
+            "gross_return_pct": 61.978,
+            "net_roi_pct": -38.022
+          },
+          "10": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 9.5,
+            "hit_rate_pct": 1.332,
+            "mean_odds": 56.319,
+            "gross_return_pct": 57.216,
+            "net_roi_pct": -42.784
+          }
+        },
+        "top_k": {
+          "1": {
+            "races": 713,
+            "bets": 713,
+            "expected_hits": 21.0,
+            "hit_rate_pct": 2.945,
+            "mean_selected_odds": 26.32,
+            "mean_winning_dividend_odds_if_hit": 17.729,
+            "gross_payout_per_100w": 52.22,
+            "gross_return_pct": 52.216,
+            "net_roi_pct": -47.784
+          },
+          "2": {
+            "races": 713,
+            "bets": 1426,
+            "expected_hits": 38.0,
+            "hit_rate_pct": 5.33,
+            "mean_selected_odds": 28.032,
+            "mean_winning_dividend_odds_if_hit": 19.839,
+            "gross_payout_per_100w": 52.87,
+            "gross_return_pct": 52.868,
+            "net_roi_pct": -47.132
+          },
+          "3": {
+            "races": 713,
+            "bets": 2139,
+            "expected_hits": 48.0,
+            "hit_rate_pct": 6.732,
+            "mean_selected_odds": 30.238,
+            "mean_winning_dividend_odds_if_hit": 22.556,
+            "gross_payout_per_100w": 50.62,
+            "gross_return_pct": 50.617,
+            "net_roi_pct": -49.383
+          },
+          "4": {
+            "races": 713,
+            "bets": 2852,
+            "expected_hits": 55.0,
+            "hit_rate_pct": 7.714,
+            "mean_selected_odds": 32.156,
+            "mean_winning_dividend_odds_if_hit": 23.384,
+            "gross_payout_per_100w": 45.09,
+            "gross_return_pct": 45.095,
+            "net_roi_pct": -54.905
+          },
+          "5": {
+            "races": 713,
+            "bets": 3565,
+            "expected_hits": 73.5,
+            "hit_rate_pct": 10.309,
+            "mean_selected_odds": 33.991,
+            "mean_winning_dividend_odds_if_hit": 26.518,
+            "gross_payout_per_100w": 54.67,
+            "gross_return_pct": 54.673,
+            "net_roi_pct": -45.327
+          },
+          "6": {
+            "races": 713,
+            "bets": 4278,
+            "expected_hits": 83.0,
+            "hit_rate_pct": 11.641,
+            "mean_selected_odds": 35.684,
+            "mean_winning_dividend_odds_if_hit": 28.202,
+            "gross_payout_per_100w": 54.72,
+            "gross_return_pct": 54.717,
+            "net_roi_pct": -45.283
+          },
+          "7": {
+            "races": 713,
+            "bets": 4991,
+            "expected_hits": 94.5,
+            "hit_rate_pct": 13.254,
+            "mean_selected_odds": 37.388,
+            "mean_winning_dividend_odds_if_hit": 30.085,
+            "gross_payout_per_100w": 56.96,
+            "gross_return_pct": 56.963,
+            "net_roi_pct": -43.037
+          },
+          "8": {
+            "races": 713,
+            "bets": 5704,
+            "expected_hits": 107.0,
+            "hit_rate_pct": 15.007,
+            "mean_selected_odds": 39.038,
+            "mean_winning_dividend_odds_if_hit": 31.521,
+            "gross_payout_per_100w": 59.13,
+            "gross_return_pct": 59.129,
+            "net_roi_pct": -40.871
+          },
+          "9": {
+            "races": 713,
+            "bets": 6417,
+            "expected_hits": 117.0,
+            "hit_rate_pct": 16.41,
+            "mean_selected_odds": 40.66,
+            "mean_winning_dividend_odds_if_hit": 32.603,
+            "gross_payout_per_100w": 59.45,
+            "gross_return_pct": 59.445,
+            "net_roi_pct": -40.555
+          },
+          "10": {
+            "races": 713,
+            "bets": 7130,
+            "expected_hits": 126.5,
+            "hit_rate_pct": 17.742,
+            "mean_selected_odds": 42.226,
+            "mean_winning_dividend_odds_if_hit": 33.38,
+            "gross_payout_per_100w": 59.22,
+            "gross_return_pct": 59.222,
+            "net_roi_pct": -40.778,
+            "actual_winner_quotes_missing": 5
+          }
+        },
+        "best_k_in_2025_validation": 9
+      },
+      "year_2026_test": {
+        "races": 543,
+        "races_by_year": {
+          "2026": 543
+        },
+        "missing_winner_quote_count": 4,
+        "per_price_rank": {
+          "1": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 12.0,
+            "hit_rate_pct": 2.21,
+            "mean_odds": 24.51,
+            "gross_return_pct": 40.037,
+            "net_roi_pct": -59.963
+          },
+          "2": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 17.0,
+            "hit_rate_pct": 3.131,
+            "mean_odds": 27.785,
+            "gross_return_pct": 77.182,
+            "net_roi_pct": -22.818
+          },
+          "3": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 17.0,
+            "hit_rate_pct": 3.131,
+            "mean_odds": 32.083,
+            "gross_return_pct": 81.05,
+            "net_roi_pct": -18.95
+          },
+          "4": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 11.0,
+            "hit_rate_pct": 2.026,
+            "mean_odds": 35.336,
+            "gross_return_pct": 55.948,
+            "net_roi_pct": -44.052
+          },
+          "5": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 13.0,
+            "hit_rate_pct": 2.394,
+            "mean_odds": 38.598,
+            "gross_return_pct": 74.18,
+            "net_roi_pct": -25.82
+          },
+          "6": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 10.0,
+            "hit_rate_pct": 1.842,
+            "mean_odds": 41.249,
+            "gross_return_pct": 61.75,
+            "net_roi_pct": -38.25
+          },
+          "7": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 6.0,
+            "hit_rate_pct": 1.105,
+            "mean_odds": 44.847,
+            "gross_return_pct": 40.534,
+            "net_roi_pct": -59.466
+          },
+          "8": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 3.0,
+            "hit_rate_pct": 0.552,
+            "mean_odds": 47.888,
+            "gross_return_pct": 32.265,
+            "net_roi_pct": -67.735
+          },
+          "9": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 7.0,
+            "hit_rate_pct": 1.289,
+            "mean_odds": 50.867,
+            "gross_return_pct": 57.772,
+            "net_roi_pct": -42.228
+          },
+          "10": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 5.0,
+            "hit_rate_pct": 0.921,
+            "mean_odds": 53.737,
+            "gross_return_pct": 45.967,
+            "net_roi_pct": -54.033
+          }
+        },
+        "top_k": {
+          "1": {
+            "races": 543,
+            "bets": 543,
+            "expected_hits": 12.0,
+            "hit_rate_pct": 2.21,
+            "mean_selected_odds": 24.51,
+            "mean_winning_dividend_odds_if_hit": 18.117,
+            "gross_payout_per_100w": 40.04,
+            "gross_return_pct": 40.037,
+            "net_roi_pct": -59.963
+          },
+          "2": {
+            "races": 543,
+            "bets": 1086,
+            "expected_hits": 29.0,
+            "hit_rate_pct": 5.341,
+            "mean_selected_odds": 26.147,
+            "mean_winning_dividend_odds_if_hit": 21.948,
+            "gross_payout_per_100w": 58.61,
+            "gross_return_pct": 58.61,
+            "net_roi_pct": -41.39
+          },
+          "3": {
+            "races": 543,
+            "bets": 1629,
+            "expected_hits": 46.0,
+            "hit_rate_pct": 8.471,
+            "mean_selected_odds": 28.126,
+            "mean_winning_dividend_odds_if_hit": 23.404,
+            "gross_payout_per_100w": 66.09,
+            "gross_return_pct": 66.09,
+            "net_roi_pct": -33.91
+          },
+          "4": {
+            "races": 543,
+            "bets": 2172,
+            "expected_hits": 57.0,
+            "hit_rate_pct": 10.497,
+            "mean_selected_odds": 29.928,
+            "mean_winning_dividend_odds_if_hit": 24.218,
+            "gross_payout_per_100w": 63.55,
+            "gross_return_pct": 63.554,
+            "net_roi_pct": -36.446
+          },
+          "5": {
+            "races": 543,
+            "bets": 2715,
+            "expected_hits": 70.0,
+            "hit_rate_pct": 12.891,
+            "mean_selected_odds": 31.662,
+            "mean_winning_dividend_odds_if_hit": 25.474,
+            "gross_payout_per_100w": 65.68,
+            "gross_return_pct": 65.68,
+            "net_roi_pct": -34.32
+          },
+          "6": {
+            "races": 543,
+            "bets": 3258,
+            "expected_hits": 80.0,
+            "hit_rate_pct": 14.733,
+            "mean_selected_odds": 33.26,
+            "mean_winning_dividend_odds_if_hit": 26.481,
+            "gross_payout_per_100w": 65.02,
+            "gross_return_pct": 65.025,
+            "net_roi_pct": -34.975
+          },
+          "7": {
+            "races": 543,
+            "bets": 3801,
+            "expected_hits": 86.0,
+            "hit_rate_pct": 15.838,
+            "mean_selected_odds": 34.915,
+            "mean_winning_dividend_odds_if_hit": 27.193,
+            "gross_payout_per_100w": 61.53,
+            "gross_return_pct": 61.526,
+            "net_roi_pct": -38.474
+          },
+          "8": {
+            "races": 543,
+            "bets": 4344,
+            "expected_hits": 89.0,
+            "hit_rate_pct": 16.39,
+            "mean_selected_odds": 36.537,
+            "mean_winning_dividend_odds_if_hit": 28.245,
+            "gross_payout_per_100w": 57.87,
+            "gross_return_pct": 57.868,
+            "net_roi_pct": -42.132
+          },
+          "9": {
+            "races": 543,
+            "bets": 4887,
+            "expected_hits": 96.0,
+            "hit_rate_pct": 17.68,
+            "mean_selected_odds": 38.129,
+            "mean_winning_dividend_odds_if_hit": 29.453,
+            "gross_payout_per_100w": 57.86,
+            "gross_return_pct": 57.858,
+            "net_roi_pct": -42.142
+          },
+          "10": {
+            "races": 543,
+            "bets": 5430,
+            "expected_hits": 101.0,
+            "hit_rate_pct": 18.6,
+            "mean_selected_odds": 39.69,
+            "mean_winning_dividend_odds_if_hit": 30.466,
+            "gross_payout_per_100w": 56.67,
+            "gross_return_pct": 56.669,
+            "net_roi_pct": -43.331,
+            "actual_winner_quotes_missing": 4
+          }
+        },
+        "best_k_in_2025_validation": 3
+      },
+      "selected_k_test_2026": {
+        "k_selected_on_2025": 9,
+        "test_2026": {
+          "races": 543,
+          "bets": 4887,
+          "expected_hits": 96.0,
+          "hit_rate_pct": 17.68,
+          "mean_selected_odds": 38.129,
+          "mean_winning_dividend_odds_if_hit": 29.453,
+          "gross_payout_per_100w": 57.86,
+          "gross_return_pct": 57.858,
+          "net_roi_pct": -42.142
+        }
+      }
+    },
+    "TLA": {
+      "all_2025_2026": {
+        "races": 1256,
+        "races_by_year": {
+          "2025": 713,
+          "2026": 543
+        },
+        "missing_winner_quote_count": 0,
+        "per_price_rank": {
+          "1": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 123.0,
+            "hit_rate_pct": 9.793,
+            "mean_odds": 8.316,
+            "gross_return_pct": 62.468,
+            "net_roi_pct": -37.532
+          },
+          "2": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 100.5,
+            "hit_rate_pct": 8.002,
+            "mean_odds": 11.227,
+            "gross_return_pct": 79.912,
+            "net_roi_pct": -20.088
+          },
+          "3": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 75.5,
+            "hit_rate_pct": 6.011,
+            "mean_odds": 13.411,
+            "gross_return_pct": 73.826,
+            "net_roi_pct": -26.174
+          },
+          "4": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 65.0,
+            "hit_rate_pct": 5.175,
+            "mean_odds": 15.926,
+            "gross_return_pct": 78.161,
+            "net_roi_pct": -21.839
+          },
+          "5": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 52.0,
+            "hit_rate_pct": 4.14,
+            "mean_odds": 18.338,
+            "gross_return_pct": 70.876,
+            "net_roi_pct": -29.124
+          },
+          "6": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 49.5,
+            "hit_rate_pct": 3.941,
+            "mean_odds": 20.729,
+            "gross_return_pct": 74.439,
+            "net_roi_pct": -25.561
+          },
+          "7": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 37.5,
+            "hit_rate_pct": 2.986,
+            "mean_odds": 23.117,
+            "gross_return_pct": 66.592,
+            "net_roi_pct": -33.408
+          },
+          "8": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 41.0,
+            "hit_rate_pct": 3.264,
+            "mean_odds": 25.435,
+            "gross_return_pct": 81.421,
+            "net_roi_pct": -18.579
+          },
+          "9": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 23.0,
+            "hit_rate_pct": 1.831,
+            "mean_odds": 27.83,
+            "gross_return_pct": 48.316,
+            "net_roi_pct": -51.684
+          },
+          "10": {
+            "bets": 1256,
+            "races": 1256,
+            "weighted_hits": 30.5,
+            "hit_rate_pct": 2.428,
+            "mean_odds": 30.196,
+            "gross_return_pct": 67.966,
+            "net_roi_pct": -32.034
+          }
+        },
+        "top_k": {
+          "1": {
+            "races": 1256,
+            "bets": 1256,
+            "expected_hits": 123.0,
+            "hit_rate_pct": 9.793,
+            "mean_selected_odds": 8.316,
+            "mean_winning_dividend_odds_if_hit": 6.379,
+            "gross_payout_per_100w": 62.47,
+            "gross_return_pct": 62.468,
+            "net_roi_pct": -37.532
+          },
+          "2": {
+            "races": 1256,
+            "bets": 2512,
+            "expected_hits": 223.5,
+            "hit_rate_pct": 17.795,
+            "mean_selected_odds": 9.771,
+            "mean_winning_dividend_odds_if_hit": 8.001,
+            "gross_payout_per_100w": 71.19,
+            "gross_return_pct": 71.19,
+            "net_roi_pct": -28.81
+          },
+          "3": {
+            "races": 1256,
+            "bets": 3768,
+            "expected_hits": 299.0,
+            "hit_rate_pct": 23.806,
+            "mean_selected_odds": 10.984,
+            "mean_winning_dividend_odds_if_hit": 9.082,
+            "gross_payout_per_100w": 72.07,
+            "gross_return_pct": 72.069,
+            "net_roi_pct": -27.931
+          },
+          "4": {
+            "races": 1256,
+            "bets": 5024,
+            "expected_hits": 364.0,
+            "hit_rate_pct": 28.981,
+            "mean_selected_odds": 12.22,
+            "mean_winning_dividend_odds_if_hit": 10.157,
+            "gross_payout_per_100w": 73.59,
+            "gross_return_pct": 73.592,
+            "net_roi_pct": -26.408
+          },
+          "5": {
+            "races": 1256,
+            "bets": 6280,
+            "expected_hits": 416.0,
+            "hit_rate_pct": 33.121,
+            "mean_selected_odds": 13.443,
+            "mean_winning_dividend_odds_if_hit": 11.028,
+            "gross_payout_per_100w": 73.05,
+            "gross_return_pct": 73.049,
+            "net_roi_pct": -26.951
+          },
+          "6": {
+            "races": 1256,
+            "bets": 7536,
+            "expected_hits": 465.5,
+            "hit_rate_pct": 37.062,
+            "mean_selected_odds": 14.658,
+            "mean_winning_dividend_odds_if_hit": 11.863,
+            "gross_payout_per_100w": 73.28,
+            "gross_return_pct": 73.28,
+            "net_roi_pct": -26.72
+          },
+          "7": {
+            "races": 1256,
+            "bets": 8792,
+            "expected_hits": 503.0,
+            "hit_rate_pct": 40.048,
+            "mean_selected_odds": 15.866,
+            "mean_winning_dividend_odds_if_hit": 12.642,
+            "gross_payout_per_100w": 72.32,
+            "gross_return_pct": 72.325,
+            "net_roi_pct": -27.675
+          },
+          "8": {
+            "races": 1256,
+            "bets": 10048,
+            "expected_hits": 544.0,
+            "hit_rate_pct": 43.312,
+            "mean_selected_odds": 17.062,
+            "mean_winning_dividend_odds_if_hit": 13.569,
+            "gross_payout_per_100w": 73.46,
+            "gross_return_pct": 73.462,
+            "net_roi_pct": -26.538
+          },
+          "9": {
+            "races": 1256,
+            "bets": 11304,
+            "expected_hits": 567.0,
+            "hit_rate_pct": 45.143,
+            "mean_selected_odds": 18.259,
+            "mean_winning_dividend_odds_if_hit": 14.089,
+            "gross_payout_per_100w": 70.67,
+            "gross_return_pct": 70.668,
+            "net_roi_pct": -29.332
+          },
+          "10": {
+            "races": 1256,
+            "bets": 12560,
+            "expected_hits": 597.5,
+            "hit_rate_pct": 47.572,
+            "mean_selected_odds": 19.452,
+            "mean_winning_dividend_odds_if_hit": 14.798,
+            "gross_payout_per_100w": 70.4,
+            "gross_return_pct": 70.398,
+            "net_roi_pct": -29.602,
+            "actual_winner_quotes_missing": 0
+          }
+        },
+        "best_k_in_2025_validation": 4
+      },
+      "year_2025_validation": {
+        "races": 713,
+        "races_by_year": {
+          "2025": 713
+        },
+        "missing_winner_quote_count": 0,
+        "per_price_rank": {
+          "1": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 61.0,
+            "hit_rate_pct": 8.555,
+            "mean_odds": 8.517,
+            "gross_return_pct": 54.797,
+            "net_roi_pct": -45.203
+          },
+          "2": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 59.0,
+            "hit_rate_pct": 8.275,
+            "mean_odds": 11.494,
+            "gross_return_pct": 85.708,
+            "net_roi_pct": -14.292
+          },
+          "3": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 45.5,
+            "hit_rate_pct": 6.381,
+            "mean_odds": 13.649,
+            "gross_return_pct": 76.942,
+            "net_roi_pct": -23.058
+          },
+          "4": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 38.5,
+            "hit_rate_pct": 5.4,
+            "mean_odds": 16.137,
+            "gross_return_pct": 84.649,
+            "net_roi_pct": -15.351
+          },
+          "5": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 30.5,
+            "hit_rate_pct": 4.278,
+            "mean_odds": 18.559,
+            "gross_return_pct": 76.003,
+            "net_roi_pct": -23.997
+          },
+          "6": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 28.0,
+            "hit_rate_pct": 3.927,
+            "mean_odds": 20.978,
+            "gross_return_pct": 75.393,
+            "net_roi_pct": -24.607
+          },
+          "7": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 18.5,
+            "hit_rate_pct": 2.595,
+            "mean_odds": 23.373,
+            "gross_return_pct": 58.71,
+            "net_roi_pct": -41.29
+          },
+          "8": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 27.0,
+            "hit_rate_pct": 3.787,
+            "mean_odds": 25.676,
+            "gross_return_pct": 97.062,
+            "net_roi_pct": -2.938
+          },
+          "9": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 14.0,
+            "hit_rate_pct": 1.964,
+            "mean_odds": 28.015,
+            "gross_return_pct": 51.999,
+            "net_roi_pct": -48.001
+          },
+          "10": {
+            "bets": 713,
+            "races": 713,
+            "weighted_hits": 19.5,
+            "hit_rate_pct": 2.735,
+            "mean_odds": 30.45,
+            "gross_return_pct": 78.015,
+            "net_roi_pct": -21.985
+          }
+        },
+        "top_k": {
+          "1": {
+            "races": 713,
+            "bets": 713,
+            "expected_hits": 61.0,
+            "hit_rate_pct": 8.555,
+            "mean_selected_odds": 8.517,
+            "mean_winning_dividend_odds_if_hit": 6.405,
+            "gross_payout_per_100w": 54.8,
+            "gross_return_pct": 54.797,
+            "net_roi_pct": -45.203
+          },
+          "2": {
+            "races": 713,
+            "bets": 1426,
+            "expected_hits": 120.0,
+            "hit_rate_pct": 16.83,
+            "mean_selected_odds": 10.005,
+            "mean_winning_dividend_odds_if_hit": 8.348,
+            "gross_payout_per_100w": 70.25,
+            "gross_return_pct": 70.252,
+            "net_roi_pct": -29.748
+          },
+          "3": {
+            "races": 713,
+            "bets": 2139,
+            "expected_hits": 165.5,
+            "hit_rate_pct": 23.212,
+            "mean_selected_odds": 11.22,
+            "mean_winning_dividend_odds_if_hit": 9.368,
+            "gross_payout_per_100w": 72.48,
+            "gross_return_pct": 72.482,
+            "net_roi_pct": -27.518
+          },
+          "4": {
+            "races": 713,
+            "bets": 2852,
+            "expected_hits": 204.0,
+            "hit_rate_pct": 28.612,
+            "mean_selected_odds": 12.449,
+            "mean_winning_dividend_odds_if_hit": 10.559,
+            "gross_payout_per_100w": 75.52,
+            "gross_return_pct": 75.524,
+            "net_roi_pct": -24.476
+          },
+          "5": {
+            "races": 713,
+            "bets": 3565,
+            "expected_hits": 234.5,
+            "hit_rate_pct": 32.889,
+            "mean_selected_odds": 13.671,
+            "mean_winning_dividend_odds_if_hit": 11.496,
+            "gross_payout_per_100w": 75.62,
+            "gross_return_pct": 75.62,
+            "net_roi_pct": -24.38
+          },
+          "6": {
+            "races": 713,
+            "bets": 4278,
+            "expected_hits": 262.5,
+            "hit_rate_pct": 36.816,
+            "mean_selected_odds": 14.889,
+            "mean_winning_dividend_odds_if_hit": 12.318,
+            "gross_payout_per_100w": 75.58,
+            "gross_return_pct": 75.582,
+            "net_roi_pct": -24.418
+          },
+          "7": {
+            "races": 713,
+            "bets": 4991,
+            "expected_hits": 281.0,
+            "hit_rate_pct": 39.411,
+            "mean_selected_odds": 16.101,
+            "mean_winning_dividend_odds_if_hit": 12.996,
+            "gross_payout_per_100w": 73.17,
+            "gross_return_pct": 73.172,
+            "net_roi_pct": -26.828
+          },
+          "8": {
+            "races": 713,
+            "bets": 5704,
+            "expected_hits": 308.0,
+            "hit_rate_pct": 43.198,
+            "mean_selected_odds": 17.298,
+            "mean_winning_dividend_odds_if_hit": 14.104,
+            "gross_payout_per_100w": 76.16,
+            "gross_return_pct": 76.158,
+            "net_roi_pct": -23.842
+          },
+          "9": {
+            "races": 713,
+            "bets": 6417,
+            "expected_hits": 322.0,
+            "hit_rate_pct": 45.161,
+            "mean_selected_odds": 18.489,
+            "mean_winning_dividend_odds_if_hit": 14.642,
+            "gross_payout_per_100w": 73.47,
+            "gross_return_pct": 73.474,
+            "net_roi_pct": -26.526
+          },
+          "10": {
+            "races": 713,
+            "bets": 7130,
+            "expected_hits": 341.5,
+            "hit_rate_pct": 47.896,
+            "mean_selected_odds": 19.685,
+            "mean_winning_dividend_odds_if_hit": 15.435,
+            "gross_payout_per_100w": 73.93,
+            "gross_return_pct": 73.928,
+            "net_roi_pct": -26.072,
+            "actual_winner_quotes_missing": 0
+          }
+        },
+        "best_k_in_2025_validation": 8
+      },
+      "year_2026_test": {
+        "races": 543,
+        "races_by_year": {
+          "2026": 543
+        },
+        "missing_winner_quote_count": 0,
+        "per_price_rank": {
+          "1": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 62.0,
+            "hit_rate_pct": 11.418,
+            "mean_odds": 8.051,
+            "gross_return_pct": 72.541,
+            "net_roi_pct": -27.459
+          },
+          "2": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 41.5,
+            "hit_rate_pct": 7.643,
+            "mean_odds": 10.877,
+            "gross_return_pct": 72.302,
+            "net_roi_pct": -27.698
+          },
+          "3": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 30.0,
+            "hit_rate_pct": 5.525,
+            "mean_odds": 13.098,
+            "gross_return_pct": 69.733,
+            "net_roi_pct": -30.267
+          },
+          "4": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 26.5,
+            "hit_rate_pct": 4.88,
+            "mean_odds": 15.649,
+            "gross_return_pct": 69.641,
+            "net_roi_pct": -30.359
+          },
+          "5": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 21.5,
+            "hit_rate_pct": 3.959,
+            "mean_odds": 18.048,
+            "gross_return_pct": 64.144,
+            "net_roi_pct": -35.856
+          },
+          "6": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 21.5,
+            "hit_rate_pct": 3.959,
+            "mean_odds": 20.401,
+            "gross_return_pct": 73.186,
+            "net_roi_pct": -26.814
+          },
+          "7": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 19.0,
+            "hit_rate_pct": 3.499,
+            "mean_odds": 22.78,
+            "gross_return_pct": 76.943,
+            "net_roi_pct": -23.057
+          },
+          "8": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 14.0,
+            "hit_rate_pct": 2.578,
+            "mean_odds": 25.119,
+            "gross_return_pct": 60.884,
+            "net_roi_pct": -39.116
+          },
+          "9": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 9.0,
+            "hit_rate_pct": 1.657,
+            "mean_odds": 27.586,
+            "gross_return_pct": 43.481,
+            "net_roi_pct": -56.519
+          },
+          "10": {
+            "bets": 543,
+            "races": 543,
+            "weighted_hits": 11.0,
+            "hit_rate_pct": 2.026,
+            "mean_odds": 29.863,
+            "gross_return_pct": 54.77,
+            "net_roi_pct": -45.23
+          }
+        },
+        "top_k": {
+          "1": {
+            "races": 543,
+            "bets": 543,
+            "expected_hits": 62.0,
+            "hit_rate_pct": 11.418,
+            "mean_selected_odds": 8.051,
+            "mean_winning_dividend_odds_if_hit": 6.353,
+            "gross_payout_per_100w": 72.54,
+            "gross_return_pct": 72.541,
+            "net_roi_pct": -27.459
+          },
+          "2": {
+            "races": 543,
+            "bets": 1086,
+            "expected_hits": 103.5,
+            "hit_rate_pct": 19.061,
+            "mean_selected_odds": 9.464,
+            "mean_winning_dividend_odds_if_hit": 7.599,
+            "gross_payout_per_100w": 72.42,
+            "gross_return_pct": 72.422,
+            "net_roi_pct": -27.578
+          },
+          "3": {
+            "races": 543,
+            "bets": 1629,
+            "expected_hits": 133.5,
+            "hit_rate_pct": 24.586,
+            "mean_selected_odds": 10.675,
+            "mean_winning_dividend_odds_if_hit": 8.728,
+            "gross_payout_per_100w": 71.53,
+            "gross_return_pct": 71.525,
+            "net_roi_pct": -28.475
+          },
+          "4": {
+            "races": 543,
+            "bets": 2172,
+            "expected_hits": 160.0,
+            "hit_rate_pct": 29.466,
+            "mean_selected_odds": 11.919,
+            "mean_winning_dividend_odds_if_hit": 9.646,
+            "gross_payout_per_100w": 71.05,
+            "gross_return_pct": 71.054,
+            "net_roi_pct": -28.946
+          },
+          "5": {
+            "races": 543,
+            "bets": 2715,
+            "expected_hits": 181.5,
+            "hit_rate_pct": 33.425,
+            "mean_selected_odds": 13.145,
+            "mean_winning_dividend_odds_if_hit": 10.422,
+            "gross_payout_per_100w": 69.67,
+            "gross_return_pct": 69.672,
+            "net_roi_pct": -30.328
+          },
+          "6": {
+            "races": 543,
+            "bets": 3258,
+            "expected_hits": 203.0,
+            "hit_rate_pct": 37.385,
+            "mean_selected_odds": 14.354,
+            "mean_winning_dividend_odds_if_hit": 11.276,
+            "gross_payout_per_100w": 70.26,
+            "gross_return_pct": 70.258,
+            "net_roi_pct": -29.742
+          },
+          "7": {
+            "races": 543,
+            "bets": 3801,
+            "expected_hits": 222.0,
+            "hit_rate_pct": 40.884,
+            "mean_selected_odds": 15.558,
+            "mean_winning_dividend_odds_if_hit": 12.193,
+            "gross_payout_per_100w": 71.21,
+            "gross_return_pct": 71.213,
+            "net_roi_pct": -28.787
+          },
+          "8": {
+            "races": 543,
+            "bets": 4344,
+            "expected_hits": 236.0,
+            "hit_rate_pct": 43.462,
+            "mean_selected_odds": 16.753,
+            "mean_winning_dividend_odds_if_hit": 12.87,
+            "gross_payout_per_100w": 69.92,
+            "gross_return_pct": 69.922,
+            "net_roi_pct": -30.078
+          },
+          "9": {
+            "races": 543,
+            "bets": 4887,
+            "expected_hits": 245.0,
+            "hit_rate_pct": 45.12,
+            "mean_selected_odds": 17.957,
+            "mean_winning_dividend_odds_if_hit": 13.361,
+            "gross_payout_per_100w": 66.98,
+            "gross_return_pct": 66.984,
+            "net_roi_pct": -33.016
+          },
+          "10": {
+            "races": 543,
+            "bets": 5430,
+            "expected_hits": 256.0,
+            "hit_rate_pct": 47.145,
+            "mean_selected_odds": 19.147,
+            "mean_winning_dividend_odds_if_hit": 13.949,
+            "gross_payout_per_100w": 65.76,
+            "gross_return_pct": 65.762,
+            "net_roi_pct": -34.238,
+            "actual_winner_quotes_missing": 0
+          }
+        },
+        "best_k_in_2025_validation": 1
+      },
+      "selected_k_test_2026": {
+        "k_selected_on_2025": 8,
+        "test_2026": {
+          "races": 543,
+          "bets": 4344,
+          "expected_hits": 236.0,
+          "hit_rate_pct": 43.462,
+          "mean_selected_odds": 16.753,
+          "mean_winning_dividend_odds_if_hit": 12.87,
+          "gross_payout_per_100w": 69.92,
+          "gross_return_pct": 69.922,
+          "net_roi_pct": -30.078
+        }
+      }
+    }
+  },
+  "limitations": [
+    "odds_snapshots are API301 confirmed dividends observed after the scheduled start; none of the Busan WIN observations precede scheduled start.",
+    "2026-10-09 local API301 probe returned no odds 2-16 minutes before scheduled start and returned odds about 10 minutes after for the probed Busan races.",
+    "All retrospective ROI results use post-race final dividends to rank selections, so they are leakage diagnostics, not achievable pre-race betting performance.",
+    "Historical time splits reduce threshold-selection bias but do not fix the post-race price availability problem; 2024-2026 have also been reviewed in earlier project work.",
+    "Equal-priced rank ties are shared equally; TRI/TLA dead-heat top-three results are excluded from the exact-combination sample; absent actual TRI prices are counted as misses."
+  ]
+}

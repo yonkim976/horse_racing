@@ -1,0 +1,100 @@
+{
+  "all_passed": true,
+  "checked_at_utc": "2026-10-14T16:00:50.230184+00:00",
+  "read_only": true,
+  "checks": {
+    "mapping_exact_ID_and_name_pairs": {
+      "passed": true,
+      "details": {
+        "mapping_rows": 282
+      }
+    },
+    "linked_and_unresolved_partition": {
+      "passed": true,
+      "details": {
+        "exact_official_profile_id_name_link": 1599487,
+        "pr_no_absent": 3383170,
+        "profile_id_unmatched": 190375,
+        "source_conflict_hold": 1
+      }
+    },
+    "no_unapproved_link_and_no_missing_linked_name": {
+      "passed": true,
+      "details": {
+        "violations": 0
+      }
+    },
+    "single_Songdang_Sky_event_held": {
+      "passed": true,
+      "details": {
+        "record": [
+          [
+            "송당스카이",
+            "2026-09-28",
+            "1",
+            "080608",
+            "오수철",
+            null,
+            null,
+            "유승완",
+            "source_conflict_hold"
+          ]
+        ]
+      }
+    },
+    "same_number_other_events_not_held": {
+      "passed": true,
+      "details": {
+        "other_080608_rows": 5866,
+        "incorrectly_held_or_named": 0
+      }
+    },
+    "no_view_row_multiplication": {
+      "passed": true,
+      "details": {
+        "duplicate_observation_ids": 0
+      }
+    },
+    "all_70_unmatched_numbers_and_metadata": {
+      "passed": true,
+      "details": {
+        "numbers": 70,
+        "rows": 190375
+      }
+    },
+    "unmatched_distinct_horse_counts": {
+      "passed": true,
+      "details": {
+        "mismatches": 0
+      }
+    },
+    "web_evidence_full_source_parity": {
+      "passed": true,
+      "details": {
+        "web_evidence_rows": 1247
+      }
+    },
+    "name_link_provenance_matches_profile_snapshot": {
+      "passed": true,
+      "details": {
+        "unmatched_provenance": 0
+      }
+    },
+    "raw_columns_retained_at_view_start": {
+      "passed": true,
+      "details": {
+        "raw_columns": 48,
+        "enriched_columns": 62
+      }
+    },
+    "manifest_database_sha": {
+      "passed": true,
+      "details": {
+        "database_sha256": "16a5e0127a830dd1d95db2bfd1178fa4af8f43265d80de852dc2f409329c02f3"
+      }
+    }
+  },
+  "database_sha256": "16a5e0127a830dd1d95db2bfd1178fa4af8f43265d80de852dc2f409329c02f3",
+  "verification_script_sha256": "06304ec6fde0ccf23563e595062242bcec42e22ad41a1dc277427c25f67fd9a5",
+  "root_expected_input_sha256": "01f0145fd1699e28a8341e7680a1c1b7394b2c2bff6c013d56813e2f03206277"
+}

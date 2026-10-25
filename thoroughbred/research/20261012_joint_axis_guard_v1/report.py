@@ -1,0 +1,135 @@
+"""Local publication of a fixed, unsuccessful anchor confirmation experiment."""
+import json
+import pandas as pd
+import run as e
+
+
+def table(headers,rows):
+    return '\n'.join(['| '+' | '.join(headers)+' |','| '+' | '.join(['---']*len(headers))+' |']+
+                     ['| '+' | '.join(map(str,row))+' |'for row in rows])
+
+
+def main():
+    e.check();assert json.loads((e.OUT/'verification.json').read_text())['status']=='verified'
+    m=pd.read_csv(e.OUT/'metrics.csv',dtype={'period':str}).set_index(['variant','period'])
+    diff=pd.read_csv(e.OUT/'paired_differences.csv',dtype={'period':str})
+    rows=[]
+    for period,label in [('2024','2024'),('2025','2025'),('2026','2026 ~09-20'),('all','합산')]:
+        a=m.loc[('frozen122',period)];b=m.loc[('joint_recent',period)]
+        z=diff[diff.variant.eq('joint_recent')&diff.reference.eq('frozen122')&diff.period.eq(period)&diff.metric.eq('axis_top3')].iloc[0]
+        rows.append([label,int(a.races),f'{a.axis_top3*100:.2f}%',f'{b.axis_top3*100:.2f}%',
+                     f'{int(z.net):+d}경주',f'{z.difference_pp:+.3f}',f'[{z.lo_pp:+.3f}, {z.hi_pp:+.3f}]'])
+    annual=table(['기간','경주','기존122 축입상','확인기준 적용','적중 순증감','차이%p','95%구간%p'],rows)
+    rows=[]
+    labels={'frozen103':'기존103','frozen122':'기존122','joint_only':'G3F·G1F 동반 확인',
+            'joint_supported':'+관측2회 이상','joint_recent':'+최근보정기록 확인(주후보)',
+            'recent_only':'최근기록만 확인(분리대조)'}
+    for v in e.VARIANTS:
+        rows.append([labels[v]]+[f'{m.loc[(v,p)].axis_top3*100:.2f}%'for p in ['2024','2025','2026','all']])
+    stages=table(['축 선택 방식','2024','2025','2026 ~09-20','합산'],rows)
+    rows=[]
+    for period,label in [('2024','2024'),('2025','2025'),('2026','2026 ~09-20'),('all','합산')]:
+        a=m.loc[('frozen122',period)];b=m.loc[('joint_recent',period)]
+        rows.append([label]+[f'{a[c]*100:.2f}% → {b[c]*100:.2f}%'for c in ['axis_top2','axis_win','quinella_one','axis_next3']])
+    secondary=table(['기간','축2위 이내','축 우승','복승1조합','축복승3조합'],rows)
+    b=pd.read_csv(e.OUT/'blocked_transitions.csv',dtype={'period':str});rows=[]
+    for period,label in [('2024','2024'),('2025','2025'),('2026','2026 ~09-20'),('all','합산')]:
+        q=b[b.period.eq(period)&b.variant.eq('joint_recent')&b.blocked].iloc[0]
+        rows.append([label,int(q.races),int(q.original_new_loss),int(q.original_new_gain),
+                     int(q.original_both_hit),int(q.original_both_miss),f'{int(-q.net_original_gain):+d}'])
+    losses=table(['기간','막은 축 변경','기존122 실패를 회복','기존122 적중을 상실','둘다 적중','둘다 실패','순증감'],rows)
+    body=f'''# G3F·G1F·관측 수·최근 기록으로 축 변경을 확인하면
+
+2026-10-12. 서울·부산 연구49. **기존122 모델보다 좋아지지 않았다.** 주후보의 축 입상은60.83→60.58%,2025는+10경주였지만2026은−19경주였다. 엄격한 확인 기준이 기존의 잘못된 승격과 유효한 승격을 함께 막았다. 모델 재학습이나 운영 반영은 하지 않았다.
+
+## 무엇을 시험했나
+
+기존103의 축A와122의 축B가 다를 때 B를 택하려면 다음을 모두 요구했다.
+
+- B가 과거 같은 출전에서 빠른 초반을 쓴 뒤 G3F·G1F가 모두 편성 평균 이상(keep_fast_g3≥0,keep_fast_g1≥0).
+- 이 공동관측이 최근5슬롯에2회 이상(keep_fast_n≥2).
+- A와B 모두 최근3전 보정기록의 유효수가2개 이상이며, B의 최근 평균 보정기록이 A보다 나쁘지 않을 것(지수는높을수록좋음).
+
+조건이 안 되면A를 유지한다. A=B면 그대로다. 선택 축만 맨 앞으로 이동하고 나머지 말은122순서를 유지했다. 복승1조합은 선택순위1·2위,축복승3조합은 축과선택순위2~4위각한조합이다. ‘새 축 확인’은 예측확률1위와 다른 선택을 할 수 있는 결정 단계이며,122개 확률모델의 재학습·확률교정이 아니다. 기준은 이번 성능을 보기 전에 PLAN에 고정했지만, 이미47·48의같은연도결과를보고시작한후향연구다. 현재착순·현재실제구간기록은선택함수에전달하지않았다.
+
+G3F/G1F는 같은 과거 사건을 공유하고, 상대구간 평균에n/(n+3)축소가 이미 적용돼 있다. 두구간은 겹치므로합산하지않았다. 관측이없으면결측·횟수를유지하며0점이나자동통과로바꾸지않았다. ‘최근기록확인’의 엄격한구체화로B≥A를사용했으며 이숫자기준을사용자가지정한것은아니다. 이것이 모든 가능한 공동학습 방식의 검증은 아니다.
+
+## 연도별 주결과
+
+{annual}
+
+같은9월20일까지로맞춘2025는58.53→59.32%(+10),2026은62.66→61.18%(−19)였다. 부분연도차이만으로반대방향을설명할수없다. 경주일군집bootstrap2,000회seed20261012이며반복후향·다중비교는보정하지않았다. 2026주지표하락구간은0을포함하지않았고,합산에서는명확한개선근거가없었다. 이번 결과에 맞춰 문턱을바꾸거나대조후보를주후보로교체하지않았다.
+
+## 어느 조건이 득실을 만들었나
+
+{stages}
+
+2025는 G3F·G1F 공동확인에서+6경주,관측2회 제한을더하면서−2,최근기록을더하면서+6으로합계+10이었다. 2026은각단계−9/−4/−6으로합계−19였다. 최근기록만확인하는대조도2026−17경주라서종반조건과결합하기전부터유효한승격을막았다.
+
+2025 ‘G3F는 평균이상이지만G1F만음수’인23개변경에는기존122새적중6/잘못된승격12가있어차단시+6이었다. 2026같은조건10개는새적중4/잘못된승격1로차단시−3이었다. 또2026공동종반이력결측6개에는새적중5/잘못된승격0이있었다. 표본이작고과거평균보다낮은G1F를반드시이번입상실패로볼수없다는사례다. G1F일반의예측가치가없다는결론은아니다.
+
+{losses}
+
+전체671개축교체중456개(67.96%)를막았고215개만허용했다. 2025에는167개를막아50개회복/40개상실,2026에는112개를막아20개회복/39개상실이었다. 2026부산은회복6/상실20=−14,6등급전체는회복4/상실18=−14였다. 부산과6등급은겹치므로합산하면안된다. 반면5등급에서는2025+10/2026+5로도움이됐지만이결과에맞춰5등급전용정책을채택하지않았다.
+
+2026‘최근기록추가’에서막은61개중6개는기록수부족,55개는충분한기록이있지만B평균이A보다낮았다. 이단계의추가적중회복12보다상실18이많았다. 기존축보다최근기록이낮아도구간특성·편성과결합해입상할말이있으며,각조건을일괄필수로두는방식은그말도제외한다.
+
+## 복승과 축의 다른 지표
+
+{secondary}
+
+합산복승1조합은583/4,799로동일했고새적중6개·상실6개가상쇄됐다. 축복승3조합은1,342→1,333로−9경주다. 막은456개중377개(82.68%)는122의1·2위말을서로바꾸는선택이라복승두말집합이그대로였다. 축입상개선과복승개선은같은문제가아니다. 기존103과비교한축입상은2024+7/2025−3/2026+1,합산+5였지만103의동결전체순위와이번선택후보의동반마122순위는다르므로복승비교는그차이도포함한다.
+
+## 해석과 다음 방향
+
+엄격한일괄통과기준을채택할근거는없다. G3F·G1F·관측수·최근기록의정보를함께쓰자는가설전체를기각한것도아니다. 이번시험이기각하는것은‘동반종반이모두평균이상/2회이상/최근기록도기존축이상이어야만바꾼다’는구체적선택방식이다.
+
+후속연구에서는G1F열세의크기·관측수·최근기록차이를연속입력으로쓰고,거리·등급·초반사용강도와결합해승격의확신을조정하는방식을과거자료만으로학습·검증할수있다. 부족한관측을일괄제외하는대신불확실성으로취급하는것도후보다. 이번결과를본뒤새문턱을찾아같은2026성과를개선이라고주장하지않는다. 운영·선택22·미래계약은변경하지않았다.
+
+## 검증과 한계
+
+고정12모델재추론원점수최대오차0,기존103/122지표정확재현,6후보×4,799=28,794개축·복승계산독립검증,정답변조불변/정답입력거부,단계포함관계,결측·관측수,35원자료·보호파일해시불변을확인했다. 새로운능력/전개모델0개,DB/외부수집/제주접근없음. 2017이후학습·이전워밍업·과거컷오프·보정기록은47에서상속했다. 기존부담중량시점검증한계,구간관측부족,미관측실제주행경로·전술·컨디션,부분연도,고정검증자료반복사용을해결한실험은아니다. 확률은변하지않으므로Brier나확률교정개선으로표현하지않았다.
+
+재현: `run.py` → `verify.py` → `diagnostics.py` → `report.py` → `finalize_inventory.py`. 결과후추가한진단은고정기준의탈락이유분해뿐이며후보선택이나기준변경에사용하지않았다.
+
+[고정 기준](outputs/policy_contract.json) · [연도별 지표](outputs/metrics.csv) · [짝비교·구간](outputs/paired_differences.csv) · [막은 변경의 득실](outputs/blocked_transitions.csv) · [단계별 득실](outputs/stage_changes.csv) · [탈락 이유](outputs/rejection_reasons.csv) · [변경671경주](outputs/proposed_switches.csv) · [지역·등급·거리별](outputs/conditions.csv) · [검증](outputs/verification.json) · [용량명세](outputs/artifact_inventory.json)
+'''
+    (e.HERE/'README.md').write_text(body)
+    pub='''# 종반·관측 수·최근 기록을 모두 확인하면 축이 좋아질까
+
+2026-10-12. 서울·부산 연구후보의 후향 시험. 운영 반영 아님.
+
+무엇을 알았는가: 기존122모델의축입상60.83%가공동확인후60.58%로낮아졌다. 2024는61.44→61.27%(−3경주),2025는58.86→59.43%(+10),2026-09-20은62.66→61.18%(−19). 합산차이−0.250%p의95%구간[−0.868,+0.383],2026은−1.475[−2.678,−0.305]%p였다. 복승1조합합산12.15%는동일,축복승3조합27.96→27.78%였다.
+
+기록을 어떻게 읽는가: 103기존축과122제안축이다를때,제안축의같은과거빠른초반사건G3F·G1F가모두평균이상/2회이상/최근보정기록도기존축이상일때만바꾸는선택단계다. 양쪽최근기록2개이상을요구하고미관측을0으로채우지않았다. 확률·122모델의학습은바뀌지않았다. G3F/G1F는겹치는구간이라합산하지않는다.
+
+사례: 2025에는잘못바꾼축50경주를회복하면서정상적인추가적중40개를잃어+10이었다. 2026에는회복20개보다상실39개가커−19였다. 2026부산−14/6등급전체−14는겹치는조건이다. G1F만음수인승격의차단도2025는+6,2026은−3으로엇갈렸다. 관측부족을일괄차단하면입상마도함께제외된다.
+
+어디까지 적용되는가: 4,799경주/6선택후보/고정12모델재추론오차0,현재정답을선택함수에전달하지않고28,794개축·복승결과를검증했다. 이미동일기간결과를본뒤시작한후향연구라독립미래검증이아니다. 이엄격한선택규칙은채택하지않고운영·선택22·미래계약을유지한다. G3F/G1F/표본/최근기록의연속적인공동학습은별도가설이다.
+
+[전체 보고서](README.md) · [연도별 지표](outputs/metrics.csv) · [변경 경주](outputs/proposed_switches.csv) · [검증](outputs/verification.json)
+'''
+    (e.HERE/'PUBLICATION.md').write_text(pub)
+    central=e.R/'conclusions/49_JOINT_AXIS_GUARD.md'
+    central.write_text(pub.replace('(README.md)',f'(../{e.HERE.name}/README.md)').replace('(outputs/',f'(../{e.HERE.name}/outputs/'))
+    marker='<!-- joint_axis_guard_v1_20261012 -->'
+    for name in ['README.md','conclusions/README.md','conclusions/SOURCES.md']:
+        path=e.R/name;link=f'{e.HERE.name}/README.md'if name=='README.md'else central.name
+        if marker not in path.read_text():
+            with path.open('a')as handle:
+                handle.write(f'\n\n{marker}\n[G3F·G1F·관측 수·최근 기록으로 축 변경 확인]({link}): 고정122 대비축입상60.83→60.58%. 2024−3/2025+10/2026−19경주. 복승1조합동일,축복승3조합−9. 12모델재현오차0,엄격확인규칙채택없음.\n')
+    e.save(e.OUT/'completion.json',dict(status='complete_verified_published_locally',races=4799,variants=6,
+         models_replayed=12,new_models=0,primary='joint_recent',reference='frozen122',
+         primary_axis_hit_net=-12,primary_2026_axis_hit_net=-19,policy_adopted=False,
+         production_changed=False,selected22_changed=False,future_contract_changed=False,
+         probability_changed=False,database_access=False,network_access=False,jeju_access=False))
+    manifest=e.R/'conclusions/source_manifest.json';source=json.loads(manifest.read_text())
+    own=[p for p in e.HERE.rglob('*')if p.is_file()and'__pycache__'not in p.parts and'publication_before'not in p.parts
+         and p.name not in ['publication_before.json','artifact_inventory.json']]
+    for path in own+[central]+[e.R/n for n in ['README.md','conclusions/README.md','conclusions/SOURCES.md']]:
+        key=str(path.relative_to(e.ROOT));source['sources']=[r for r in source['sources']if r['path']!=key]
+        source['sources'].append(dict(path=key,sha256=e.sha(path),bytes=path.stat().st_size))
+    e.save(manifest,source);e.check();print('Conclusion49 saved locally; no promotion')
+
+
+if __name__=='__main__':main()

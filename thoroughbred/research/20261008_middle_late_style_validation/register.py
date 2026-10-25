@@ -1,0 +1,25 @@
+"""Register follow-up 28F while preserving shared files and exact own deltas."""
+from pathlib import Path
+import json,hashlib,re
+H=Path(__file__).resolve().parent;R=H.parent;ROOT=H.parents[2];O=H/'outputs';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+initial={r['path']:r for r in json.loads((O/'baseline_inventory.json').read_text())['related_existing_files']};bp=O/'shared_edits_baseline.json';op=O/'shared_own_edits.json';before={};own={}
+def mutate(p,new,expected):
+    old=p.read_text();assert old==expected,'Concurrent edit: reread latest';name=str(p.relative_to(ROOT))
+    if name not in before:before[name]=dict(path=name,bytes=len(old.encode()),sha256=sha(p),outside_task_delta_before_edit=len(old.encode())-initial[name]['bytes']);own[name]=dict(path=name,own_delta_bytes=0)
+    if old!=new:assert p.read_text()==old;p.write_text(new);own[name]['own_delta_bytes']+=len(new.encode())-len(old.encode())
+    own[name]['own_final_bytes']=before[name]['bytes']+own[name]['own_delta_bytes'];bp.write_text(json.dumps(dict(recorded_immediately_before_each_own_edit=True,files=list(before.values())),ensure_ascii=False,indent=2)+'\n');op.write_text(json.dumps(dict(task_only_deltas_captured_at_each_mutation=True,files=list(own.values())),ensure_ascii=False,indent=2)+'\n')
+central=R/'conclusions/28F_MIDDLE_LATE_STYLE_VALIDATION.md';assert not central.exists();pub=(H/'PUBLICATION.md').read_text().split('\n\n');text='# 중반·종반의 실제 추입과 앞선 확보 실패\n\n2026-10-08 · 연구28 후속28F. 이전28C~28E를 보존하고 과거 성향 이후의 실제 중간/막판 전개와 앞선 확보 실패를 지역·거리별로 확인했다.\n\n'+'\n\n'.join(pub[1:])+f'\n\n중간 구간은S1F→G3F의 D−800m, 이후400/200m를 분리했다. 뒤쪽 성향+과거 회복 반복 후보와 단순 후미형을 구분했다. 같은 말·지역·정확거리·등급의 관측 성적 차이는 컨디션/편성/작전의 인과효과가 아니며 운영 가감점으로 사용하지 않는다. 독립 연구 수41 유지.\n\n[원 보고서](../{H.name}/README.md) · [출처](../{H.name}/SOURCES.md) · [중간/후반 구간](../{H.name}/outputs/regional_distance_phase_summary.csv) · [지역거리 회복](../{H.name}/outputs/regional_distance_closing_summary.csv) · [앞선 상태](../{H.name}/outputs/front_realization_metrics.csv) · [같은 말 비교](../{H.name}/outputs/matched_comparisons.csv) · [검증](../{H.name}/outputs/verification.json) · [게시요약](../{H.name}/PUBLICATION.md) · [용량](../{H.name}/outputs/artifact_inventory.json).\n'
+for target in ['README.md','outputs/regional_distance_closing_summary.csv','outputs/verification.json']:text=text.replace(']('+target+')',f'](../{H.name}/{target})')
+central.write_text(text);mark='<!-- middle_late_style_validation_v1 -->'
+p=R/'conclusions/README.md';old=p.read_text();assert mark not in old;count_before=max(int(n) for n in re.findall(r'^\| (\d+) \|',old,re.M));entry='| [중반·종반 추입과 앞선 실패](28F_MIDDLE_LATE_STYLE_VALIDATION.md) | 연구28 후속·지역거리별 진출시점·반복회복·같은 말의 앞선 이탈 성적 |\n';new=old.replace('| [원 보고서 목록]',entry+'| [원 보고서 목록]',1).rstrip()+f'\n\n[중반·종반 추입과 앞선 실패](../{H.name}/README.md) · [후속28F](28F_MIDDLE_LATE_STYLE_VALIDATION.md). 독립 연구 수 유지. '+mark+'\n';mutate(p,new,old);count_after=max(int(n) for n in re.findall(r'^\| (\d+) \|',new,re.M));assert count_before==count_after
+p=R/'README.md';old=p.read_text();mutate(p,old.rstrip()+f'\n\n[중반·종반의 실제 추입과 앞선 확보 실패]({H.name}/README.md): 연구28 후속28F. 뒤쪽 성향에 과거 막판회복 반복을 더하면 이후 회복률이 높았다. 지역·정확거리별 중간/후반400/마지막200m 이동, 선행·선입 확보 실패와 확보 후 후퇴, 같은 말·거리·등급의 관측 성적 차이를 분리했다. 인과손실·작전 의도·운영 반영은 미확정. [중앙28F](conclusions/28F_MIDDLE_LATE_STYLE_VALIDATION.md). '+mark+'\n',old)
+p=R/'conclusions/SOURCES.md';old=p.read_text();mutate(p,old.rstrip()+f'\n\n## 중반·종반 추입과 앞선 실패 후속28F\n\n[보고서](../{H.name}/README.md) · [중앙28F](28F_MIDDLE_LATE_STYLE_VALIDATION.md) · [원문/파생 해시](../{H.name}/SOURCES.md) · [검증](../{H.name}/outputs/verification.json) · [게시요약](../{H.name}/PUBLICATION.md) · [용량](../{H.name}/outputs/artifact_inventory.json). 기존159,014실전 명단의 공식S1F/G3F/G1F/결승과T−2 실제5슬롯을 재검증했다. 현재 결과를 과거 프로필에 넣지 않았다. 후미 성향/실제 추입/입상, 앞선 미확보/확보 후 후퇴, 같은 말 관측 차이/인과 손실을 구분한다. '+mark+'\n',old)
+p=R/'conclusions/source_manifest.json';old=p.read_text();m=json.loads(old)
+for key,files in [('sources',[H/'README.md',H/'SOURCES.md',H/'PUBLICATION.md']),('conclusions',[central,R/'conclusions/README.md',R/'conclusions/SOURCES.md'])]:
+    for f in files:
+        name=str(f.relative_to(ROOT));record=dict(path=name,sha256=sha(f));idx=next((i for i,x in enumerate(m[key]) if x['path']==name),None)
+        if idx is None:m[key].append(record)
+        else:m[key][idx]=record
+audit=json.loads((O/'source_audit.json').read_text());m['middle_late_style_validation_added']=True;m['middle_late_style_validation_note']='연구28 후속28F. 지역거리별 중간/후반 이동, 뒤쪽 과거회복 반복과 실제 회복, 앞선 확보 실패의 같은말 관측 비교. 인과손실·작전 의도·운영 반영 미확정, 새 학습0개.';m['data_end_by_study'][H.name]=audit['data_end_by_meet']|dict(primary_evaluation='2024~2025',followup='2026부분');mutate(p,json.dumps(m,ensure_ascii=False,indent=2)+'\n',old)
+p=R/'ARTIFACT_SIZE_LOG.md';old=p.read_text();mutate(p,old.rstrip()+'\n| 2026-10-08 | 중반·종반 추입과 앞선 실패 | 집계 중 | <!-- '+H.name+' -->\n',old)
+(O/'registration.json').write_text(json.dumps(dict(followup='28F',independent_study_count_before=count_before,independent_study_count_after=count_after,shared_files=5),ensure_ascii=False,indent=2)+'\n');print('Registered 28F',count_before,count_after)

@@ -1,0 +1,56 @@
+{
+  "checked_on_kst": "2026-10-17",
+  "database": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "connection_mode": "DuckDB read_only",
+  "requested_window": {
+    "start": "2026-08-18",
+    "end": "2026-10-16",
+    "inclusive_days": 60
+  },
+  "baseline_rows": {
+    "daily_training": {
+      "expected_source_rows": 38868,
+      "yielded_rows": 38868,
+      "count_equal": true
+    },
+    "start_training": {
+      "expected_source_rows": 3354,
+      "yielded_rows": 3354,
+      "count_equal": true
+    },
+    "swim_training": {
+      "expected_source_rows": 3179,
+      "yielded_rows": 3179,
+      "count_equal": true
+    },
+    "medical": {
+      "expected_source_rows": 15574,
+      "yielded_rows": 15574,
+      "count_equal": true
+    },
+    "starting_exam": {
+      "expected_source_rows": 455,
+      "yielded_rows": 455,
+      "count_equal": true
+    },
+    "total": 61430
+  },
+  "provenance_and_payload_checks": {
+    "iterator_errors": [],
+    "missing_or_empty_raw_payloads": 0,
+    "missing_source_files": 0,
+    "source_hashes_unverified_when_source_file_present": 0
+  },
+  "rider_080626_preservation": {
+    "daily_training_raw_rows": 31,
+    "event_name_supplement_rows": 31,
+    "event_name_supplement_distinct_observations": 31,
+    "supplement_date_start": "2026-09-04",
+    "supplement_date_end": "2026-09-10",
+    "unmatched_rider_id_ledger_rows": 70,
+    "other_unmatched_rider_ids": 69,
+    "global_profile_name_links_for_080626": 0,
+    "baseline_fields_with_inferred_rider_name": 0
+  },
+  "status": "passed"
+}

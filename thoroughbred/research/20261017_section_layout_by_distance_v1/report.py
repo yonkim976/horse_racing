@@ -1,0 +1,132 @@
+"""Preserve verified distance layouts and a publication-ready explanation."""
+import html
+import json
+import re
+
+import pandas as pd
+
+import run as e
+
+
+def table(headers, rows):
+    return '\n'.join(['| '+' | '.join(headers)+' |', '| '+' | '.join(['---']*len(headers))+' |']+
+                     ['| '+' | '.join(map(str, row))+' |' for row in rows])
+
+
+def main():
+    e.check()
+    v=json.loads((e.OUT/'verification.json').read_text());assert v['status']=='verified'
+    layout=pd.read_csv(e.OUT/'distance_layouts.csv')
+    central=e.R/'conclusions/57_SECTION_LAYOUT_BY_DISTANCE.md'
+    assert not central.exists() or e.HERE.name in central.read_text()
+    seoul=table(['거리m','계측 경계: 출발→…→결승','최대 구간수','완전 분할/전체 출전행'],[
+        [r.distance_m, r.points.replace('START','출발').replace('FIN','결승'),
+         f'{r.segments}'+(' 또는7' if r.distance_m==1800 else ''),
+         f'{r.detail_with_overlap_alternative:,}/{r.rows:,}']
+        for r in layout[layout.meet.eq(1)].itertuples()])
+    busan=table(['거리m','계측 경계: 출발→…→결승','인접 구간 길이m','구간수','완전 분할/전체 출전행'],[
+        [r.distance_m,r.points.replace('START','출발').replace('FIN','결승'),r.lengths_m,
+         r.segments,f'{r.detail_complete:,}/{r.rows:,}']
+        for r in layout[layout.meet.eq(3)].itertuples()])
+    body=f'''# 서울·부산 거리별 구간기록 세분화 범위
+
+2026-10-17. 연구57. **서울은 코너 누적시간을 이용해5~8개 시간 구간으로, 부산은 S1F와 결승 전 계측 지점을 합쳐5~8개 거리 확정 구간으로 나눌 수 있다. 서울 코너 사이의 정확한 미터 길이는 거리·주로별 별도 검증 전까지 미확정으로 남긴다.** 이번 작업은 원천 계측의 구조 감사이며 새 보정·모델 학습·운영 적용은 없다.
+
+## 대상과 계산
+
+보유 코어의 서울·부산2010~2026년 확정 출전 중 양수 완주시간과 숫자 착순1~30인324,665행을 확인했다. 거리 원문이 없는 부산10행은 별도 보존하고, 거리 확인324,655행·21개 지역거리 조합을 표에 넣었다. 자료묶음 종료 표시는2026-09-29지만 실제 경주 결과는2026-09-20까지다. 이상치 성능 필터를 적용한 학습 표본이 아니며 통과순위로 시간을 추정하지 않았다. 2010~2016은 기존 합의대로2017년 이후 학습을 위한 과거 이력 범위다.
+
+S1F는 출발200m, G3F는 결승 전600m, G1F는 결승 전200m 지점이다. 여기서 표의 G3F/G1F는 **해당 지점까지의 누적시간**이다. 마지막600m 기록은 `완주시간−G3F 누적시간`, 마지막200m는 `완주시간−G1F 누적시간`이다. 인접 구간시간은 `뒤 지점 누적시간−앞 지점 누적시간`으로 계산한다. 공식 원문에도 누적기록과3F-G/1F-G 마무리기록이 구분되어 있다. [마사회 경주기록 용어](https://race.kra.co.kr/raceScore/scoretableLayerExplanation.do?meet=1).
+
+두 지역 공통으로 거리 길이가 확정된 기본4분할은 다음과 같다. 경주거리D에 대해 **200 / D−800 / 400 / 200m**다.
+
+| 경계 | 길이 | 읽는 내용 |
+| --- | --- | --- |
+| 출발→S1F | 200m | 출발 뒤 초기 속도 |
+| S1F→G3F | D−800m | 초반 이후 중반 진행 |
+| G3F→G1F | 400m | 결승 전600~200m의 유지·가속 |
+| G1F→결승 | 200m | 마지막 마무리 |
+
+`G3F→G1F`는 마지막600m 안의 앞400m이지 **마지막400m가 아니다**. 마지막600/200과 그 안의 세부 구간은 서로 겹치므로 독립 점수처럼 합산하지 않는다.
+
+## 서울: 현재 계산 가능한 시간 구간
+
+{seoul}
+
+1000m S1F/3C,1600m S1F/2C,1700m S1F/1C는 동일 누적시간으로 중복 저장되는 경우가 있어 중복 경계를 제거했다. 두 값이 다른1000m44행·1700m13행은 완전 분할에서 제외하고 예외로 남겼다. 1600m2,696행은 모두 일치했다. 같은 물리적 지점이라는 가정을 모든 역사 자료에 일괄 적용하지 않는다.
+
+1800m는 원칙적으로8개지만480행은 S1F/1C 시간이 같아1C를 제거한7개 대안 분할이 유효했다. 다른2행의 시간 역순과 구분한다. 1100m는2013-08-31~2015-01-17의 과거 자료로, 현재 거리용 모델을 새로 학습할 수 있다는 뜻이 아니다.
+
+코너 지점이 끼면 두 지점 사이 **관측 시간 차**는 계산하지만 그 길이 및 m/s는 아직 확정하지 않는다. 공식 일반 설명의1C/2C/3C/4C=결승 전1680/1400/810/530m는 보존하되, 거리별 출발·내외주로·과거 원천의 계측 위치가 동일하다는 검증으로 대신하지 않는다. 특히 G3F→4C를 일괄70m로 정해 속도나 가속도를 계산하지 않는다. 서울4C는 부산G2F(결승 전400m)로 대체할 수 없다. 4C→결승 시간은 구할 수 있지만 이를 마지막400m라고 부르지 않는다.
+
+예를 들어 서울1200m는 `출발→S1F→3C→G3F→4C→G1F→결승`의6개 시간 구간이다. 정확 길이로 먼저 평가할 때는 `200+400+400+200m`의 공통4분할을 쓰고, 코너 구간은 같은 서울1200m 안에서 시간 기준을 별도로 만든다.
+
+## 부산: 현재 계산 가능한 거리 확정 구간
+
+부산은 G8F/G6F/G4F/G3F/G2F/G1F를 결승 전1600/1200/800/600/400/200m로 놓고 출발200m S1F를 합쳤다. F는 마사회 기록에서200m다. 계측점이 같은 위치라면 한 경계만 사용하고, 경주거리 밖의 지점은 제외한다. [마사회 구간기록 설명](https://race.kra.co.kr/raceScore/cornerRecordDesc.do).
+
+{busan}
+
+1200m는200m씩6개로 나뉜다. 1300m는 G6F가 출발 후100m이므로 첫200m를100+100으로, 그 뒤 G4F까지를300m로 나눈다. 1400m는 S1F→G4F가400m라 그 안의200m 지점은 보유 계측으로 나눌 수 없다. 1600m는 S1F를 활용해 앞400m를200+200으로 나눌 수 있지만 다음 G6F→G4F는400m 그대로다. 마지막600m는 모든 표 거리에서 G3F→G2F→G1F→결승의200m×3으로 나눌 수 있고, 마지막400m는 G2F→결승으로 직접 계산한다.
+
+1500m는2010-05-14~2015-04-17의 과거 거리다. 1900m 보유 마지막 기록은2020-07-19이며2200m는 전체15경주160행으로 소표본이다. 현재 개최거리나 현재 편성을 이 표가 보장하지 않는다.
+
+## 평가표에 권하는 구조와 하지 않은 추정
+
+1. 두 지역 공통 평가에는 초반200/중반/결승 전600~200/마지막200의4구간을 둔다. 마지막600m는 요약으로 함께 표시한다.
+2. 부산 상세 평가에는 표의 서로 겹치지 않는5~8구간과 마지막600m의200m×3 유지력을 둔다. 100·300·400m를200m 시간처럼 그대로 비교하지 않는다. 같은 지역·거리·구간 및 관측수 기준을 만든 뒤 비교한다.
+3. 서울 상세 평가에는 코너 사이 시간 차를 별도 열로 둔다. 같은 거리끼리 비교하고 정확 미터가 필요한 속도·가속도 점수는 검증 후 추가한다.
+4. 시간과 통과착순/통과조는 다른 관측이다. 말별 계측을 써야 하며 경주 선두의 전체 펄롱타임을 각 말에 복사하지 않는다. 구간이 없는 과거 출전은 결측으로 표시한다.
+
+미계측400m를 반으로 나누거나 등속 가정으로200m 기록을 생성하지 않았다. 부산의200m 간격 표지판이 있다고 해서 모든 표지판에서 각 말의 시간이 저장되는 것은 아니다. 평균 구간속도도 순간속도 또는 외측을 돈 실제 주행거리의 속도와 구분해야 한다. [부산 주로 구조](https://race.kra.co.kr/chulmainfo/RacingcourseStructure.do?Act=02&Sub=10&meet=3).
+
+## 검증과 범위
+
+전체 분할324,091행은 모든 인접시간이 양수이며 합이 완주시간과 일치했다. 이 밖에 서울1800m 중복 경계를 제거한480행을 대안으로 보존했다. 기본4분할은 누락·역순 검사를 따로 했다. 세부564행은 누락/역순/중복 불일치 등의 예외로 보존했으며 그 안에480개 대안도 포함된다. 부산 인접 길이 합은 경주거리와 일치한다. 이전 원문 대조 연구의 서울88,243행·부산62,831행과 모든 계측·완주시간을 독립 대조해 차이0이었다. 입력10개 해시, 거리·연도별 관측수, 중복, 거리 밖 값 제외, 서울 미확정 길이NULL을 검증했다.
+
+이번 확인은 계측값의 구조·산술 재현 검증이다. 개별 타이밍 장비의 오차, 주행 경로의 실제 거리, 외측 손실이나 예측 정확도 개선을 검증한 것은 아니다. 학습0·운영 변경0·DB 읽기 전용·제주 접근0을 유지했다. 웹사이트 게시용 요약만 준비했고 배포하지 않았다.
+
+재현: `run.py` → `verify.py` → `report.py` → `finalize_inventory.py`.
+
+[계획](PLAN.md) · [거리별 표](outputs/distance_layouts.csv) · [인접 구간·길이·관측수](outputs/adjacent_segments.csv) · [연도별 지원](outputs/yearly_support.csv) · [누적/마무리 필드](outputs/measurement_fields.csv) · [중복검사](outputs/alias_checks.csv) · [예외](outputs/checkpoint_exceptions.json) · [거리누락](outputs/missing_distance_rows.csv) · [공식출처](outputs/official_sources.json) · [검증](outputs/verification.json) · [용량](outputs/artifact_inventory.json)
+'''
+    (e.HERE/'README.md').write_text(body)
+    pub='''# 서울·부산 구간기록은 어디까지 나눌 수 있을까
+
+2026-10-17. 연구57. 보유 원천 계측 구조 확인이며 새 보정·모델 반영이 아니다.
+
+서울11개 거리와 부산10개 거리에서 계측 경계를 확인했다. 서울은 코너 누적시간 차로5~8개 시간 구간, 부산은 결승 전 펄롱 지점과 출발200m를 합쳐5~8개 거리 확정 구간을 만들 수 있다. 두 지역 공통의 확정길이4분할은200 / 경주거리−800 / 400 / 200m다.
+
+서울1200m는 출발→S1F→3C→G3F→4C→G1F→결승이다. 코너 간 시간은 계산하지만 정확 미터 길이는 거리·주로별 추가 검증 전까지 미확정으로 남긴다. 서울4C를 부산G2F로 취급하거나 미계측 마지막400m를 만들지 않는다.
+
+부산1200m는200m×6,1300m는100+100+300+200+200+200+200m다. 마지막600m는200m×3으로 나누어 유지·마무리를 비교할 수 있다. 계측점 사이400m를 임의로 반분하지 않는다. 누적시간과 마무리시간, 시간과 통과착순, 말별 시간과 경주 선두 펄롱타임을 구분한다.
+
+거리 확인324,655행, 완전 세부분할324,091행과 중복 제거 대안480행을 검증했다. 서울1100/부산1500은2015년까지의 과거 거리이며 소표본·결측을 표시한다. 기존 원문 대조151,074행과 시간 차이0. 예측 개선·운영 적용·배포는 이번 범위가 아니다.
+
+[전체 거리표와 설명](README.md) · [분할표](outputs/distance_layouts.csv) · [검증](outputs/verification.json)
+'''
+    (e.HERE/'PUBLICATION.md').write_text(pub)
+    central.write_text(pub.replace('(README.md)',f'(../{e.HERE.name}/README.md)').replace('(outputs/',f'(../{e.HERE.name}/outputs/')+'\n원연구: '+e.HERE.name+'\n')
+    marker='<!-- section_layout_by_distance_v1_20261017 -->'
+    for name in ['README.md','conclusions/README.md','conclusions/SOURCES.md']:
+        path=e.R/name;link=f'{e.HERE.name}/README.md' if name=='README.md' else central.name
+        if marker not in path.read_text():
+            with path.open('a') as f:f.write(f'\n\n{marker}\n[서울·부산 거리별 구간 세분화]({link}): 서울11/부산10거리, 서울5~8개 시간구간·부산5~8개 거리확정구간. 서울 코너 길이 미확정·중복 제거, 부산1200은200m×6/1300은100+100+300+200×4. 원문 대조151,074행 차이0. 새 모델·운영 변경 없음.\n')
+    e.save(e.OUT/'completion.json',dict(status='complete_verified_published_locally',distance_layouts=21,
+        new_models=0,production_changed=False,selected22_changed=False,future_contract_changed=False,
+        database_access='read_only',jeju_access=False,web_reads_only=True,deployed=False))
+    manifest=e.R/'conclusions/source_manifest.json';source=json.loads(manifest.read_text())
+    own=[p for p in e.HERE.rglob('*') if p.is_file() and '__pycache__' not in p.parts
+         and 'publication_before' not in p.parts and p.name not in ['publication_before.json','artifact_inventory.json']]
+    for path in own+[central]+[e.R/n for n in ['README.md','conclusions/README.md','conclusions/SOURCES.md']]:
+        key=str(path.relative_to(e.ROOT));source['sources']=[r for r in source['sources'] if r['path']!=key]
+        source['sources'].append(dict(path=key,sha256=e.sha(path),bytes=path.stat().st_size))
+    e.save(manifest,source)
+    for path in [e.HERE/'README.md',e.HERE/'PUBLICATION.md',central]:
+        for link in re.findall(r'\]\(([^)]+)\)',path.read_text()):
+            if not link.startswith(('https:','http:','#')) and not link.endswith('artifact_inventory.json'):
+                assert (path.parent/link).exists(),(path,link)
+    e.check();print('Research57 published locally; no model change')
+
+
+if __name__=='__main__':main()

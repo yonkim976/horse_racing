@@ -1,0 +1,417 @@
+{
+  "status": "dry_run_passed",
+  "applied": false,
+  "database_path": "thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+  "database_sha256_before": "c46286df4773a7ffcea4c7bc431e2cd2a8fc03a4c38fdaa4403bd8f39c2a1668",
+  "core_manifest_sha256_before": "6f9c194529709b3db4862ffba0aa34dcda4f58af54d5d322333d6af3ccff7e52",
+  "source_manifests_before": 27,
+  "main_objects_before": 208,
+  "expected_source_manifests_after_apply": 28,
+  "proposed_objects": [
+    {
+      "name": "rider_name_links",
+      "type": "BASE TABLE",
+      "rows": 282
+    },
+    {
+      "name": "rider_identity_conflict_holds",
+      "type": "BASE TABLE",
+      "rows": 1
+    },
+    {
+      "name": "rider_unmatched_ids",
+      "type": "BASE TABLE",
+      "rows": 70
+    },
+    {
+      "name": "rider_web_event_verification",
+      "type": "BASE TABLE",
+      "rows": 1247
+    },
+    {
+      "name": "daily_training_rider_linked",
+      "type": "VIEW",
+      "rows": 5173033
+    }
+  ],
+  "object_counts": {
+    "tables": 4,
+    "views": 1,
+    "total_new_objects": 5,
+    "expected_main_objects_after_apply": 213
+  },
+  "metrics": {
+    "counts": {
+      "daily_training_rows": 5173033,
+      "pr_no_absent_rows": 3383170,
+      "pr_no_present_rows": 1789863,
+      "distinct_pr_no_present": 352,
+      "profile_exact_ids": 282,
+      "profile_exact_candidate_rows": 1599488,
+      "profile_unmatched_ids": 70,
+      "profile_unmatched_rows": 190375,
+      "profile_exact_name_linked_rows_after_hold": 1599487,
+      "conflict_hold_rows": 1,
+      "web_exact_event_rows": 1247,
+      "web_exact_name_rows": 347,
+      "web_literal_suffix_rows": 51,
+      "web_person_name_conflicts": 1,
+      "web_role_only_rows": 848
+    },
+    "linked_view_rows": 5173033,
+    "identity_status_rows": {
+      "exact_official_profile_id_name_link": 1599487,
+      "pr_no_absent": 3383170,
+      "profile_id_unmatched": 190375,
+      "source_conflict_hold": 1
+    },
+    "source_event_date_min": "2010-01-02",
+    "source_event_date_max": "2026-09-28",
+    "unmatched_role_distribution": [
+      {
+        "rider_type_raw": "-",
+        "daily_training_rows": 62233,
+        "distinct_rider_ids": 52
+      },
+      {
+        "rider_type_raw": "기수",
+        "daily_training_rows": 31,
+        "distinct_rider_ids": 1
+      },
+      {
+        "rider_type_raw": "조교보",
+        "daily_training_rows": 128111,
+        "distinct_rider_ids": 62
+      }
+    ],
+    "unmatched_meet_distribution": [
+      {
+        "meet_raw": "1",
+        "daily_training_rows": 190344,
+        "distinct_rider_ids": 69
+      },
+      {
+        "meet_raw": "3",
+        "daily_training_rows": 31,
+        "distinct_rider_ids": 1
+      }
+    ],
+    "web_status_counts": {
+      "exact_event_web_name_conflicts_profile_hold": 1,
+      "exact_event_web_name_differs_by_literal_suffix": 51,
+      "exact_event_web_person_name_matches_profile": 347,
+      "exact_event_web_role_only_no_person_name": 848
+    },
+    "input_row_counts": {
+      "daily_training_rows": 5173033,
+      "daily_training_distinct_non_sentinel_pr_no": 352,
+      "name_link_candidates": 282,
+      "unmatched_pr_no": 70,
+      "conflict_holds": 1,
+      "web_event_verification_rows": 1247,
+      "unmatched_role_region_groups": 115
+    },
+    "source_main_objects_before": 208,
+    "source_manifests_before": 27
+  },
+  "root_independent_comparison": {
+    "status": "passed",
+    "expected_file": "thoroughbred/research/20261015_daily_training_rider_links_v1/root_expected_mapping_and_unmatched.json",
+    "expected_file_sha256": "01f0145fd1699e28a8341e7680a1c1b7394b2c2bff6c013d56813e2f03206277",
+    "mapping_rows_expected": 282,
+    "unmatched_rows_expected": 70,
+    "role_region_groups_expected": 115,
+    "mapping_unmatched_mismatches": 0,
+    "role_region_group_mismatches": 0
+  },
+  "input_hashes": {
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_name_links.json": "944d553c1fe63cb9df48f3c7bf1c28fb49ffecec406f1112fe1076d2f4d6f771",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_name_links.csv": "f429133b211c1d403504dd93bdefde01af35d30f24fac0359359e8244790ad8b",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_identity_conflict_holds.json": "5ee07419db2b8402189a7a35807a2e46dd3ca987de3fdb813be84f2c76767891",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_identity_conflict_holds.csv": "f9488a24847afc54068026b9f6d407152ea3e34c2a574735127e5bc72e932f71",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_ids.json": "5af35d021084d06a2d3a030440cc12f6b499cc5a6a8e214a331250888c587476",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_ids.csv": "fa0e7f52140eb55fd6e3ba6a6375f42a6b5e659dcbb37ae4d700a40a62e1b692",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_role_region_groups.json": "4af436dbdaac84b34433d3317756529c9db38d02b15d800f5fa8ca1551dbf4f2",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_role_region_groups.csv": "b5f202ab8ba2dc8a1f0c8e594b4274c37cb7d61e3161e5bb7247b4467735a5e7",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_by_meet.json": "b7e2bead16b25cf01a85015ca9374488cf90afec5c2bd6ee4445264b4bff9cd3",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_by_meet.csv": "3c5bf2df9d0d3242c545318ea799ae40a0b106e37080f6c9a358b0d178796d45",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_by_rider_type.json": "68e70db1eea24edeb9999e462b4f54c8cce5cdda51341047e493fd938c9447e1",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_unmatched_by_rider_type.csv": "4e6e4dc2f083059fc18035ad33c2121ad2a31dffeaea9574402b64db90b60c61",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_web_event_verification.json": "ce56d0824c948401be500ad27631d8c1b7f5ee8f49ad8d7a6e031783e5ac2d84",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_web_event_verification.csv": "91329c3824150659c182425ad8e5a202f190aafa441fb242fe26bd7cee541a7b",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/web_API_exact_event_rows.jsonl": "8c9e65f1cbe3e180382d20a84c5314101c6b30700fa7e206fbfaca861712d902",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/input/rider_link_input_manifest.json": "c70c979993cf2ff0f25fb81dcd0117c777642d969d4e05e6dc9f1375db153082",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/schema.sql": "9edc638467c810ad867517294545d132d28c0989998633b993a62fcfc4918f57",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/load_daily_training_rider_links.py": "11725df32a8f010c9493ec574ded6ce3f3af49de35dd299f55b869ee06a1f36f",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/root_expected_mapping_and_unmatched.json": "01f0145fd1699e28a8341e7680a1c1b7394b2c2bff6c013d56813e2f03206277",
+    "thoroughbred/research/20261015_daily_training_rider_identity_review_v1/summary.json": "3e8005f490246d43df0c16226e8707f51b36d28e685ed0be812b330e38de1099",
+    "thoroughbred/research/20261015_daily_training_rider_identity_review_v1/local_inventory/daily_training_rider_identity_inventory.json": "5526612d590efa03f494bfd882c73c6c4692b9d51b6616967b6ab12d0162328b",
+    "thoroughbred/research/20261015_daily_training_rider_identity_review_v1/web_API_exact_event_verification.json": "5fb7347b1fd4b9e5864072f37c987eb2c7f1eb85f6f24d4731858026f3794f48",
+    "thoroughbred/research/20261015_daily_training_rider_identity_review_v1/web_API_exact_event_rows.jsonl": "8c9e65f1cbe3e180382d20a84c5314101c6b30700fa7e206fbfaca861712d902",
+    "thoroughbred/research/20261015_daily_training_rider_identity_review_v1/official_web/capture_manifest.jsonl": "9da7da426e8d7329d04d9c6967053786c5037a68bafd5293045541146305db84"
+  },
+  "checks": [
+    {
+      "name": "daily_training_rows",
+      "status": "passed",
+      "expected": 5173033,
+      "actual": 5173033
+    },
+    {
+      "name": "pr_no_absent_rows",
+      "status": "passed",
+      "expected": 3383170,
+      "actual": 3383170
+    },
+    {
+      "name": "pr_no_present_rows",
+      "status": "passed",
+      "expected": 1789863,
+      "actual": 1789863
+    },
+    {
+      "name": "distinct_pr_no_present",
+      "status": "passed",
+      "expected": 352,
+      "actual": 352
+    },
+    {
+      "name": "profile_exact_ids",
+      "status": "passed",
+      "expected": 282,
+      "actual": 282
+    },
+    {
+      "name": "profile_exact_candidate_rows",
+      "status": "passed",
+      "expected": 1599488,
+      "actual": 1599488
+    },
+    {
+      "name": "profile_unmatched_ids",
+      "status": "passed",
+      "expected": 70,
+      "actual": 70
+    },
+    {
+      "name": "profile_unmatched_rows",
+      "status": "passed",
+      "expected": 190375,
+      "actual": 190375
+    },
+    {
+      "name": "profile_exact_name_linked_rows_after_hold",
+      "status": "passed",
+      "expected": 1599487,
+      "actual": 1599487
+    },
+    {
+      "name": "conflict_hold_rows",
+      "status": "passed",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "web_exact_event_rows",
+      "status": "passed",
+      "expected": 1247,
+      "actual": 1247
+    },
+    {
+      "name": "web_exact_name_rows",
+      "status": "passed",
+      "expected": 347,
+      "actual": 347
+    },
+    {
+      "name": "web_literal_suffix_rows",
+      "status": "passed",
+      "expected": 51,
+      "actual": 51
+    },
+    {
+      "name": "web_person_name_conflicts",
+      "status": "passed",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "web_role_only_rows",
+      "status": "passed",
+      "expected": 848,
+      "actual": 848
+    },
+    {
+      "name": "daily_training_observation_id_duplicates",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "web_event_observation_id_duplicates",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "all_profile_ids_are_exact_raw_string_matches",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "profile_name_source_capture_valid",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "mapping_rows_match_official_profile_snapshot",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "unmatched_ids_have_no_exact_profile_match",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "raw_prno_prgubun_trname_payload_and_hash_preserved",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "songdang_sky_single_observation_conflict_hold",
+      "status": "passed",
+      "expected": [
+        [
+          "api18_1:api18-monthly-m1-202609-fresh-8667fb7f6c:7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed:p1:r1345",
+          "080608",
+          "오수철",
+          "유승완",
+          "오수철",
+          null,
+          "080608",
+          null,
+          "exact_event_web_name_conflicts_profile_hold"
+        ]
+      ],
+      "actual": [
+        [
+          "api18_1:api18-monthly-m1-202609-fresh-8667fb7f6c:7c2ef0c7e449dc216e246dd4b6a05eeba3bc806e6239dea181603bf34f305bed:p1:r1345",
+          "080608",
+          "오수철",
+          "유승완",
+          "오수철",
+          null,
+          "080608",
+          null,
+          "exact_event_web_name_conflicts_profile_hold"
+        ]
+      ]
+    },
+    {
+      "name": "other_080608_rows_remain_linked",
+      "status": "passed",
+      "expected": 5866,
+      "actual": 5866
+    },
+    {
+      "name": "other_080608_rows_not_held",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "profile_unmatched_ids_disjoint_from_linked",
+      "status": "passed",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "prno_absent_status_rows",
+      "status": "passed",
+      "expected": 3383170,
+      "actual": 3383170
+    },
+    {
+      "name": "unmatched_role_distribution_rows",
+      "status": "passed",
+      "expected": 190375,
+      "actual": 190375
+    },
+    {
+      "name": "unmatched_meet_distribution_rows",
+      "status": "passed",
+      "expected": 190375,
+      "actual": 190375
+    },
+    {
+      "name": "linked_view_row_count_equals_raw",
+      "status": "passed",
+      "expected": 5173033,
+      "actual": 5173033
+    },
+    {
+      "name": "input_mapping_unmatched_counts",
+      "status": "passed",
+      "expected": {
+        "mapping": 282,
+        "unmatched": 70
+      },
+      "actual": {
+        "mapping": 282,
+        "unmatched": 70
+      }
+    },
+    {
+      "name": "source_main_object_count_before",
+      "status": "passed",
+      "expected": 208,
+      "actual": 208
+    },
+    {
+      "name": "source_manifest_rows_before",
+      "status": "passed",
+      "expected": 27,
+      "actual": 27
+    },
+    {
+      "name": "root_independent_mapping_and_unmatched_comparison",
+      "status": "passed",
+      "expected": "passed",
+      "actual": "passed"
+    },
+    {
+      "name": "root_independent_role_region_group_comparison",
+      "status": "passed",
+      "expected": "passed",
+      "actual": "passed"
+    }
+  ],
+  "backup_gate": {
+    "backup_directory": "thoroughbred/data/core_api_2010_20260929_v1/backups/20261015_before_daily_training_rider_links",
+    "backup_pair_attestation_required": true,
+    "apply_not_executed_by_this_run": true
+  },
+  "identity_limits": [
+    "Only exact official profile ID string matches receive a name candidate.",
+    "The profile name is a 2026-09-30 snapshot and does not infer historical role or status.",
+    "Raw prNo, prGubun, trName, source payload, and source hashes remain unchanged.",
+    "Only the single 송당스카이 conflict observation is held; other 080608 rows remain linked.",
+    "The literal (트) display suffix is retained verbatim in event evidence; it is not interpreted as a qualification.",
+    "The unmatched 70 IDs remain unresolved; no ID, name, owner, trainer, or role is guessed."
+  ],
+  "outputs": [
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/dry_run_report.json",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/root_expected_mapping_unmatched_comparison.csv",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/root_expected_role_region_comparison.csv",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/unmatched_rider_ids.csv",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/unmatched_role_region_groups.csv",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/unmatched_by_rider_type.csv",
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/unmatched_by_meet.csv"
+  ]
+}

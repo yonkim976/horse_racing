@@ -1,0 +1,116 @@
+# 의료 항목 주의 등급의 출처
+
+## 기존 통계와 사전
+
+- 통계 효과는 20261014_medical_item_outcomes의 41개 모형·33분류 결과를 그대로 참고했다. 원문별 직접 효과를 새로 추정하지 않았다.
+- 정확한 용어·판정 상태는 medical_v1 사전과 연구 코어의 원문 슬롯을 사용했다. 과거 파서 전용·문맥 필요·제외 판정은 보류했다.
+- 연구 코어는 읽기 전용이다. 원천별 관측 수는 중복을 포함하며 실제 방문 수가 아니다. 기존 DB 크기는 신규 용량에서 제외한다.
+
+## 전문 수의학 참고
+
+- [Fractures and athletic activity](https://www.merckvetmanual.com/horse-owners/bone-joint-and-muscle-disorders-in-horses/disorders-of-the-carpus-and-metacarpus-in-horses), 확인 2026-10-14: 골절의 부위·형태에 따라 운동 복귀가 다르므로 구조 손상 문구를 우선 검토한다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+- [Tendinitis in Horses](https://www.merckvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses), 확인 2026-10-14: 굴건 손상은 경주 복귀·재손상 우려와 관련돼 주행 검토 우선도가 높다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+- [Suspensory Desmitis in Horses](https://www.merckvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/suspensory-desmitis-in-horses), 확인 2026-10-14: 계인대 관련 손상의 운동 복귀는 위치·손상 상태에 따라 달라진다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+- [Exercise-Induced Pulmonary Hemorrhage in Horses](https://www.merckvetmanual.com/respiratory-system/respiratory-diseases-of-horses/exercise-induced-pulmonary-hemorrhage-in-horses), 확인 2026-10-14: 운동기인성 폐출혈은 경기력 저하와 관련될 수 있다. 비출혈 단독 표기는 같은 확정 진단이 아니다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+- [Laryngeal Hemiplegia in Horses](https://www.merckvetmanual.com/respiratory-system/respiratory-diseases-of-horses/laryngeal-hemiplegia-in-horses), 확인 2026-10-14: 후두 기능 저하는 운동 중 공기 흐름을 제한해 경기력과 관련될 수 있다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+- [Laminitis in Horses](https://www.merckvetmanual.com/musculoskeletal-system/disorders-of-the-foot-in-horses/laminitis-in-horses), 확인 2026-10-14: 제엽염은 지지·보행 기능과 관련되는 상태이므로 문구를 우선 검토한다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+- [Exertional Myopathies in Horses](https://www.merckvetmanual.com/musculoskeletal-system/myopathies-in-horses/exertional-myopathies-in-horses), 확인 2026-10-14: 운동성 근육질환은 운동 후 근육 기능 이상과 관련된다. 일반 근육통 문구와 구분한다. 개인별 중증도나 국내 효과의 근거로 확대하지 않는다.
+
+## 입력 보존 해시
+
+- `thoroughbred/research/20261014_medical_item_outcomes/PUBLICATION.md`: 1820 bytes; SHA-256 `1181834130c81728f7610203a0115955f9860a2c87c3d0ac4fbb879678d563e3`
+- `thoroughbred/research/20261014_medical_item_outcomes/SOURCES.md`: 6792 bytes; SHA-256 `ae9dc35610b4926f18d51406a326385154f444408e0ac42f6f663a0d03292a01`
+- `thoroughbred/research/20261014_medical_item_outcomes/finalize.py`: 9233 bytes; SHA-256 `7b9d023d6c39224cd90b12f7d97017d63769d871aad1e98b7892fe411c8b8df7`
+- `thoroughbred/research/20261014_medical_item_outcomes/README.md`: 12965 bytes; SHA-256 `1f0b4bbe0ed7391a948785c47d023d89660f1946785e93e9f06cbbfebb1668e5`
+- `thoroughbred/research/20261014_medical_item_outcomes/verify.py`: 6813 bytes; SHA-256 `7de1b0d68eb1c305a0751ef9d409239ae3c9d040a2e52c4f123258db48a456e7`
+- `thoroughbred/research/20261014_medical_item_outcomes/design.json`: 2318 bytes; SHA-256 `4cd80749652a54fe67c60dbd305b6dfc9a17690d955872c439b2c7d716cedb07`
+- `thoroughbred/research/20261014_medical_item_outcomes/report.py`: 21815 bytes; SHA-256 `7b69370859d105cc5d07e560104a7755416bd3d310ca41dc7f65273d2e39e428`
+- `thoroughbred/research/20261014_medical_item_outcomes/prepare.py`: 11403 bytes; SHA-256 `83a0ce0fc3f44c53c2deacad25587f6a4fa584d80a25ea4af314d000357764f9`
+- `thoroughbred/research/20261014_medical_item_outcomes/analyze.py`: 9917 bytes; SHA-256 `19b2cbf6c2c5e62f0f68be15cd4e1d2e878e4df451f6a95174d5489bbd8370ea`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/summary.json`: 544 bytes; SHA-256 `bca395bda99cb8265029c5c7eb107a827d5ad718aa2f073163b9d00e49ed16b8`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/race_history.parquet`: 9875762 bytes; SHA-256 `071958a2b4ed5635816f4b3304f4739d035fe40a17e4da8b62a76bf682de4d16`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/report.log`: 90 bytes; SHA-256 `7d600cec728fce3ba86650cfffac951a4d2d0da448fa442833e25aaa81d20a0d`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/artifact_inventory.json`: 10954 bytes; SHA-256 `7a378e616000da60d4ecff44de5ee9b94e2ca0df2d7a3cc059116e927dab633e`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/source_audit.json`: 715 bytes; SHA-256 `8fb7022cd5ef71eee7ae63865251f900042996ddb23bf3273b56717e1922f3e7`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/database_reference.json`: 251 bytes; SHA-256 `026235296b0a9abb09b4b2e4db1a619918fd8404a7277bc6f38bd12ca5d76e2b`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/landmark_rows.parquet`: 4231214 bytes; SHA-256 `e683c0d9284acc131e5ae504f188ca2570e3233a48128e425a15c55a16488449`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/exposure_counts.csv`: 5869 bytes; SHA-256 `f073f08899ed1d2cd805d48a7f434574a0d10394f156005ecaf02e3bdead20b8`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/run.log`: 5162 bytes; SHA-256 `34da4f3f6dad22a05f22ba113b1a01f3bfe5a454a3bdb2710cbd98c547247232`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/medical_associations.png`: 87284 bytes; SHA-256 `4b9d0f4071f6f4965891f341ccf9d53d8079eda944c9a68b3561f15afd527e22`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/final_review.json`: 607 bytes; SHA-256 `097d1b6e4e18cd9a836155f1e6889b48a34fe30f0ff5613c293ffcf9a945b8fe`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/item_summary.csv`: 44838 bytes; SHA-256 `fe54debad7893ffcf57f586e4dc9e466fedfdf1461815da9ca413efba8d61038`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/baseline.json`: 8333 bytes; SHA-256 `7671c69448e703f453eaf7f8ea18c57029a7108425cc56417c179a3ff5cf8f6b`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/followup_coverage.csv`: 390 bytes; SHA-256 `bbd5170daecac642f80525e6342e86ee1f6bdd8105abdb46c0f01cac9a8bf24a`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/artifact_size.md`: 277 bytes; SHA-256 `6e488469ecfe18bd61ad78312069ec4e88bfcff107f00250eb4fab1c8b4ba15c`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/adjusted_associations.csv`: 1879357 bytes; SHA-256 `5c1f178f87c1802d343794c8c77e70a62a513cd7ae064f0032aa2795c0b461aa`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/model_diagnostics.csv`: 8211 bytes; SHA-256 `ff8beb50c9aa3eabb246874e4228d5dd1bff2cfe49cdf977cc70c68d24c9c888`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/family_definitions.json`: 3934 bytes; SHA-256 `9298c9faaf0f157d5cb1c7512ceaeb74eab8eed06d991a78c043464b1d119f33`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/prepare.log`: 595 bytes; SHA-256 `b4f8ba5d6c264a612f011a3f80dfb03b6aade9f9a64dc140aef6575ebed94e22`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/annual_key_items.csv`: 127482 bytes; SHA-256 `93b4ec6f193a8558ce99662c76c8a79a3d9336aab085ad8fc0eb231775f45c5d`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/verification.json`: 503 bytes; SHA-256 `7d1f0f08c89a5add373ba8f0074dc196feb26245791d9a133fde6f6c42219885`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/raw_phrase_family_mapping.csv`: 26634 bytes; SHA-256 `0611fd071bbf5f6197e47614d21ad723b9b9bdbb7df161901646381d426618ba`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/medical_family_days.parquet`: 442774 bytes; SHA-256 `2850398e0216f2346f272f924b0a2efade8e264f2b179ccab07d27b7189f9303`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/verification.log`: 475 bytes; SHA-256 `649296d7cbfe21dd1603b08f35a7d2f5028598acdf7584b8c3d807c30da2bca4`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/key_gap_table.md`: 565 bytes; SHA-256 `36fc0eb8a3b39e5a0b702ca61adce2c3e49250c74630b7b180c9d27015177d31`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/8.npz`: 368556 bytes; SHA-256 `b29d931a7dfd1d7534c5aacf04e7967e9f3ee7db7cb89152de502aa4fe89bab1`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/9.npz`: 202030 bytes; SHA-256 `dc52965082c3c14a497f4b50da83d1749dc4237b7dd256ee9dc2a639a7ae520a`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/14.npz`: 2986802 bytes; SHA-256 `855cfa0460f5f8e68a23c5b1fc107d56772b7c1267d22e0a8d97da7da04dab15`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/28.npz`: 4470141 bytes; SHA-256 `e6aa7752ef8f14bfb95d2a727fdad0ea119b82735d3e9ca5eff263c1d8ff0bc8`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/29.npz`: 1105521 bytes; SHA-256 `9130004823f739f9fcfe5973067bd2de24ba0d0a96c70c419fc3c27124f085e9`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/15.npz`: 741285 bytes; SHA-256 `9b2395b3efabc72f9493fd65e6fa69040db553bf12196f150cf218d75f84457e`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/17.npz`: 699025 bytes; SHA-256 `97dfe995f16c14b21a36a001619fb4fa3303f673b41a30ab89467d932120f7a0`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/16.npz`: 404839 bytes; SHA-256 `9f88775993aab94c8bed4eede06d7526483df2bce0b21a799c90e3c4ae3c7038`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/12.npz`: 308881 bytes; SHA-256 `66e8d588ed5a5c8407e51a7a4e0b29e3e865afd6323ad532842b22581e3a2570`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/13.npz`: 169568 bytes; SHA-256 `a29c88724f2ff2e7f16c620c4ab11c317ccf965d85b0e707bf20f9d1ef51f5f2`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/39.npz`: 939842 bytes; SHA-256 `13e5c2d8d52cf6293e100af2f8b7b321715f75e237b4f6970cbd38a87e9ead86`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/11.npz`: 188252 bytes; SHA-256 `ca1926cd05855169923aa6fed5e0c2e82779b20364b5304590b073bdb3094e77`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/10.npz`: 343428 bytes; SHA-256 `f91ceb2f024a564687a7cc4f47b7f587fa365e4e4b1319b8837f6f192b8f0936`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/38.npz`: 566692 bytes; SHA-256 `c6114aa2bdf6e37602b4562692a5971ec00a4fc7335defd7293d5652dfab8f84`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/35.npz`: 1105426 bytes; SHA-256 `8137ed607897b0f1e958e173cc22f6fbbc2166e9af419c32c8a10135f2a475a2`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/21.npz`: 943378 bytes; SHA-256 `49f35da3962c210ccb4bf0d4ee6ef7a2daf5bc7c368119b172c6428cd0ac059d`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/20.npz`: 347216 bytes; SHA-256 `6255f66bb9e4a8676d2e3faf69d2f14b199192d5bfcc3c6297abcfa0b0aae540`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/34.npz`: 513157 bytes; SHA-256 `e861eff12f8ee86c8aca6d05ca866946676c79b2a927a148c8f32d5c3607ca8c`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/22.npz`: 235459 bytes; SHA-256 `5d5c7d04e099d0c7a35cfc639425bbb59b5f794b015312f434324b1097e81153`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/36.npz`: 603007 bytes; SHA-256 `1fe0604bcf281926b501b756c828e92e41289f939a0ea50e1ae917d1d4ebf439`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/37.npz`: 1038265 bytes; SHA-256 `8d4ce79c5689b6cdf93bc10e08aba7637ce5c0bcc59e090418a95542f08d7949`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/23.npz`: 129244 bytes; SHA-256 `85fa209f50670cf92ceb650f4e451cd5eb99b7ccf8db75467f532cc9d214a99e`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/27.npz`: 108380 bytes; SHA-256 `1335392b5a63f298e9de92122ed82af4b3ed6624f21f4aceec1ab30ce6c1b356`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/33.npz`: 939660 bytes; SHA-256 `6ccca3e5b447a7f05c882422314428f58b3ebd27d0d830ccae52954d87b544fc`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/32.npz`: 566642 bytes; SHA-256 `ef69ed89503c0fdeeb3ff6be3158c748a63add511bbfdebeaae1636910257843`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/26.npz`: 196666 bytes; SHA-256 `30e62c70764495c5e926fa7edeea8f550402d26f415649c7760d8bdf24d24c28`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/18.npz`: 381969 bytes; SHA-256 `e89abc76d2698bd4a288fbd79e91c30470c4c641ef5687b55a088ac6184889ae`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/30.npz`: 603089 bytes; SHA-256 `1279e358c338210c3c9aa74924084d7cd1122bade4072759318a530b7eac17f6`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/24.npz`: 218968 bytes; SHA-256 `5b42b63232abe211e3c2fb532a521ac1f1f72ab0caa38e089bb155e7d71b624a`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/25.npz`: 120364 bytes; SHA-256 `578dd9aeca7f3b29e85d414ac83f07180c64333656c4b54aa27b975491691fdb`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/31.npz`: 1038112 bytes; SHA-256 `6f21dc8684c5e86c3ddb802317afe2696e102d644815226249b1c5544b78fc29`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/19.npz`: 634946 bytes; SHA-256 `5719b33733e2652fd17933d67298b9470815184a30dc0db15416a83fb6e82a98`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/4.npz`: 566652 bytes; SHA-256 `3361b668643ff7499ebd0e94c8e8f0ce3534636b954c1ddceaf19fa102a943a1`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/5.npz`: 939744 bytes; SHA-256 `b02c307e751dae12954abc5409510ef550cea398941240e184ae28397e92e04a`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/7.npz`: 1492134 bytes; SHA-256 `67492d4cdafb6b4838c2fe6473fec7f81e51045c066773acf316107e5e4d6492`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/6.npz`: 513097 bytes; SHA-256 `454ef4a85731fb8da8aaedbb0724ca551647b42ba89a80c55dd1972cb242005d`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/40.npz`: 513257 bytes; SHA-256 `364c252e41a8efcba7a21580d042331eef5d584133a5edd4c69e30c5b9054091`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/2.npz`: 603119 bytes; SHA-256 `5b37e05c6cc49f8e7e76480968b47a9103f293dd9ed98de3cccf886fa450cac4`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/3.npz`: 1038192 bytes; SHA-256 `cc230a1f5f5b49206e90bc588db8675cb2a04dbe8556178573cf7293e2adbb17`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/1.npz`: 1105673 bytes; SHA-256 `12ba5f789a469e78dabc066561e57d55228bf7f1129f2ad8e4ea53ef05422b66`
+- `thoroughbred/research/20261014_medical_item_outcomes/outputs/models/0.npz`: 4470245 bytes; SHA-256 `3019515856a17bb9d57acbe657445b655d35e3b3f8608a5332f8cce4f0816c6d`
+- `thoroughbred/research/20261014_medical_record_feasibility/PUBLICATION.md`: 1546 bytes; SHA-256 `46e86e2c1b3de6f7c029ac88332ef442505d93ed3622802a741599f9ba349d20`
+- `thoroughbred/research/20261014_medical_record_feasibility/audit.py`: 4772 bytes; SHA-256 `eb596c87ce76c6f30c5b03fb0096fcb5c014c52410dc15d25053e82a1a6b148e`
+- `thoroughbred/research/20261014_medical_record_feasibility/SOURCES.md`: 935 bytes; SHA-256 `c58e4f2211e785bb06afbb280087b3063d94f9875e6440e72c5e7d65eed42a70`
+- `thoroughbred/research/20261014_medical_record_feasibility/README.md`: 7629 bytes; SHA-256 `6074c4770dd3d721942e34a2b3493ee81079b6eeb0ac2534fe9c262d6a0ed2d4`
+- `thoroughbred/research/20261014_medical_record_feasibility/register_finalize.py`: 6497 bytes; SHA-256 `ec49660e6e4f3267fa5122ab80ca6dc5ea15b6bcd1ee3a8ff2a17de5777e8dcd`
+- `thoroughbred/research/20261014_medical_record_feasibility/outputs/artifact_inventory.json`: 2701 bytes; SHA-256 `630e0c3a003094e46479b5be1248295fd24e0d3045db2d85d53d1e591e5393d0`
+- `thoroughbred/research/20261014_medical_record_feasibility/outputs/feasibility.json`: 7125 bytes; SHA-256 `45ffadd7be059499a59e350dd8a36975657b91423012a1cdfd583598f2ab0706`
+- `thoroughbred/research/20261014_medical_record_feasibility/outputs/baseline.json`: 1590 bytes; SHA-256 `ccab92eb49e7e9bea93d30c25019258f7de73c7f407029ab179b2c43ff09b33d`
+- `thoroughbred/research/20261014_medical_record_feasibility/outputs/artifact_size.md`: 247 bytes; SHA-256 `1924b2d06f222c921214231c536c526c8086b3a66e475c15a7c12cb7278a026b`
+- `thoroughbred/research/20261014_medical_record_feasibility/outputs/verification.json`: 487 bytes; SHA-256 `ff78d172a5c74718b2d96b2605570c516ad15a1da7b7b7ad7e1024af20efc41e`
+- `thoroughbred/research/20261002_medical_v1/dictionary/explanation_observations.parquet`: 157534 bytes; SHA-256 `57b6c6c612a73b32bfef165ae2e12c8f4309505e025f641d7f76f3c4e3e9181a`
+- `thoroughbred/research/20261002_medical_v1/dictionary/build_dictionary.py`: 47670 bytes; SHA-256 `4e10697fc66318fc16ec537624818c12aaf76c8aa0e44ef11f2788a5dc82e9fd`
+- `thoroughbred/research/20261002_medical_v1/dictionary/api33_source_rows.parquet`: 252942 bytes; SHA-256 `3e9e8e99f5a2f79e135f70f40f41d019df94c43556443a7d9d0fec7580c62a75`
+- `thoroughbred/research/20261002_medical_v1/dictionary/README.md`: 4437 bytes; SHA-256 `134599fd27b6dce1ded46f4a569292d0fb5e3be42c68aa44e73d37e954aa68b9`
+- `thoroughbred/research/20261002_medical_v1/dictionary/explanation_terms.parquet`: 72477 bytes; SHA-256 `7bfce6799b4f328dd6cfc2a6f0fdd11e8585568ee10b02610ba361f342dc7857`
+- `thoroughbred/research/20261002_medical_v1/dictionary/phrase_decisions.parquet`: 362145 bytes; SHA-256 `bc8eb16e757f7ee98587b16a7cb5e762ab5b1db04bf12c7fca249821d08810b4`
+- `thoroughbred/research/20261002_medical_v1/dictionary/manifest.json`: 12937 bytes; SHA-256 `08f85681b4125faea6be5912ad4b136c7199f25eb2ef3bad5ae856fb90b024ab`
+- `thoroughbred/research/20261002_medical_v1/dictionary/phrase_components.parquet`: 289639 bytes; SHA-256 `9d1e55d8ffb9dd2796b375385871a162a4533c66c305e0fbc4a332c79d6eb5bb`
+- `thoroughbred/research/20261002_medical_v1/dictionary/api33_terms.parquet`: 201047 bytes; SHA-256 `8766e10b60fc240d2277affc115bd3bdf57f8ff5f5e2c59c2f1103510ad05945`
+- `thoroughbred/research/20261002_medical_v1/dictionary/schema.json`: 9614 bytes; SHA-256 `8b5fbf61dd72b7234384ab41c3b97548f3f9f65078cb1415f6a9a180a9521963`
+- `research/medical_injury_race_impact_20260925/medical_term_meaning_catalog_20260928.csv`: 5521796 bytes; SHA-256 `e7a32a7b87460b6a2b55cac20688dc8e9e6918f899050fb2f845566c18994263`

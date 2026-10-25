@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-15",
+  "source_id_list": "thoroughbred/research/20261015_daily_training_rider_links_v1/reports/unmatched_rider_ids.csv",
+  "ids_checked": 69,
+  "id_prefixes": [
+    "090",
+    "091"
+  ],
+  "excluded_id": "080626 (separate owner review)",
+  "roots": [
+    "data/raw",
+    "data/research",
+    "docs/research_archive/source",
+    "thoroughbred/research"
+  ],
+  "extensions": [
+    ".json",
+    ".jsonl",
+    ".csv",
+    ".txt",
+    ".html",
+    ".xml"
+  ],
+  "excluded": [
+    "thoroughbred/research/20261015_daily_training_rider_links_v1/**",
+    "thoroughbred/research/20261015_daily_training_rider_identity_review_v1/**"
+  ],
+  "matching": "exact ID token with alphanumeric boundaries",
+  "ripgrep_ignore_rules_disabled": true,
+  "matching_lines": 0,
+  "data_raw_file_inventory": "only .gitkeep",
+  "identity_links_created": 0,
+  "database_writes": false
+}

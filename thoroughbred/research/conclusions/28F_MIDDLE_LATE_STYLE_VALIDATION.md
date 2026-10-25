@@ -1,0 +1,20 @@
+# 중반·종반의 실제 추입과 앞선 확보 실패
+
+2026-10-08 · 연구28 후속28F. 이전28C~28E를 보존하고 과거 성향 이후의 실제 중간/막판 전개와 앞선 확보 실패를 지역·거리별로 확인했다.
+
+초반에 뒤에서 뛰는 성향과 실제 막판 순위를 회복하는 성향은 구분할 수 있었다. 과거 뒤쪽 성향 중 최근5전에서 큰 막판회복이2회 이상인 후보는 다음 경주의 회복률36.2%,0~1회 집단은19.9%였다. 뒤쪽 출발만 보고 추입형으로 확정하면 안 된다.
+
+평소 선행형은 이번 초반에도 첫 마군을 확보했을 때3위 이내40.7%,선입으로 이동했을 때29.4%,중단·후미까지 밀렸을 때18.7%였다. 같은 말·지역·정확거리·등급 안에서도 선입 이동−9.16%p,뒤쪽 밀림−20.76%p의3위율 차이가 관측됐다. 앞선 실패가 부진을 일으킨 인과 손실이나 기수의 작전 의도를 확정한 값은 아니다.
+
+S1F→G3F→G1F→결승의 공식순위로 이동 시점을 확인한다. G3F는 결승600m 전이라 거리마다 출발 이후 위치가 다르다. 막판회복은 뒤쪽 절반에서 필드 상대위치0.25 이상 회복한 사건이며 우승/입상이나 기수의 의도가 아니다.
+
+구디는 과거 후미5회/막판회복3회였고 같은 고정 사례에서11→8→8→5로 실제 마지막200m에 진출했다. 반면 스타마타는 같은 과거 빈도에도 이번에는 첫 마군에 들어간 후3→5→7→9로 후퇴했다. 반복 성향은 경주마다 고정된 작전이 아니다.
+
+서울·부산2024~2025 전체37,345출전3,532경주4,425두, 회복 정답36,531출전이다. 지역·정확거리별 성향과 분모를 보존하고2026부분에서도 반복회복 후보34.6% 대 부족20.4%가 관측됐다.1000m 과거5전 지원 없음,1900m 주 기간 없음,2200/2300m 소표본을 표시한다. 선행실패의 관측 성적 차이를 인과손실로 보정하지 않는다. 운영/DB/배포 유지.
+
+[보고서](../20261008_middle_late_style_validation/README.md) · [지역·거리 회복표](../20261008_middle_late_style_validation/outputs/regional_distance_closing_summary.csv) · [검증](../20261008_middle_late_style_validation/outputs/verification.json).
+
+
+중간 구간은S1F→G3F의 D−800m, 이후400/200m를 분리했다. 뒤쪽 성향+과거 회복 반복 후보와 단순 후미형을 구분했다. 같은 말·지역·정확거리·등급의 관측 성적 차이는 컨디션/편성/작전의 인과효과가 아니며 운영 가감점으로 사용하지 않는다. 독립 연구 수41 유지.
+
+[원 보고서](../20261008_middle_late_style_validation/README.md) · [출처](../20261008_middle_late_style_validation/SOURCES.md) · [중간/후반 구간](../20261008_middle_late_style_validation/outputs/regional_distance_phase_summary.csv) · [지역거리 회복](../20261008_middle_late_style_validation/outputs/regional_distance_closing_summary.csv) · [앞선 상태](../20261008_middle_late_style_validation/outputs/front_realization_metrics.csv) · [같은 말 비교](../20261008_middle_late_style_validation/outputs/matched_comparisons.csv) · [검증](../20261008_middle_late_style_validation/outputs/verification.json) · [게시요약](../20261008_middle_late_style_validation/PUBLICATION.md) · [용량](../20261008_middle_late_style_validation/outputs/artifact_inventory.json).

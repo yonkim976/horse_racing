@@ -1,0 +1,11 @@
+{
+  "variants": ["baseline22", "raw_sections", "adjusted_sections", "style_history", "field_context", "pace_stack"],
+  "venues": [1, 3], "evaluation_years": [2024, 2025, 2026],
+  "targets": [3, 2], "seed": 20261004,
+  "bootstrap_seed": 20261009, "bootstrap_draws": 2000,
+  "temperature_bounds": [0.35, 4.0],
+  "training": {"objective": "binary", "metric": "binary_logloss", "learning_rate": 0.04,
+    "num_leaves": 15, "min_data_in_leaf": 150, "lambda_l2": 5.0,
+    "max_rounds": 200, "early_stopping_rounds": 25, "num_threads": 4,
+    "deterministic": true, "force_col_wise": true, "verbosity": -1}
+}

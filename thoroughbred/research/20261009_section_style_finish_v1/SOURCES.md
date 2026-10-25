@@ -1,0 +1,43 @@
+# 동결 원천
+
+모든 입력은 기존 로컬 연구 원장이다. 새 웹 수집/DB 갱신 없이 사용했다. 전체 입력은[매니페스트](outputs/input_manifest.json)에SHA256으로 보존했다.
+
+- `thoroughbred/research/20261009_section_style_finish_v1/run.py` — `d0a13690c1d6e5639ccbce04454aca8290e6fee1ee4aed03abb8c83022e9bcb6`
+- `thoroughbred/research/20261009_section_style_finish_v1/PLAN.md` — `e2c446d1bd3cbe6f73af1ce03af17edbbb8a10898680ea53ce24a3c3bb93b063`
+- `thoroughbred/research/20261009_section_style_finish_v1/config.json` — `97b3bb2bf401dc9aaa6d418056c85ef47d577abb3c636ba6cdf3988a8d1d76ff`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/features_month_gate_weight22.parquet` — `573c6469f6492f3cc2cfb48ce4a4c731004b41e228a01eef1fc873b04af54449`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/research_baseline_selection.json` — `9d82a4a57d97dc00aa145d30f697391acfda09b1d26327db1de2160d48ac07da`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/runner_predictions.parquet` — `1679205832278964bb64dbab4593ff4312cb82a01c6c0ebc57e8e12df2f98a29`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/race_metrics.csv` — `55bdff126746086917af6d7d4e814ef094438b9b010264d108e813e5a0a0f9e7`
+- `thoroughbred/research/20261003_pace_gate_moisture_v2/outputs/adjusted_records.parquet` — `602a85f547d1e67db5170a309a1fc628f9382f4d28adc4ac06d71e71c61dbd72`
+- `thoroughbred/research/20261008_field_pace_prediction/outputs/observations.parquet` — `aad80e15b84c5d99666902c744c2a7eb48cce2b12a092660a0050d898527a28a`
+- `thoroughbred/research/20261007_sex_ability_gap/outputs/population.parquet` — `043b3a1dcfe07a1cf225a6c8a870f362ce739207581a498ea5409fc556c6c346`
+- `thoroughbred/research/20261002_gate_lateral_bias/outputs/runners.parquet` — `a81852a14454fada52c26c1eb17e8c5f5d8eb839fd80c0a77104161f06a6b20e`
+- `thoroughbred/research/20261008_horse_profile_model_v1/run.py` — `cd18925f6ccd40fb64968a7834f7bf486c68ff78fe988106b0ca397f39020c5e`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/run.py` — `71ac9584e932c093d0af4e1c5b36478b7ac9a3beaf250a93f4cdc7f52aefc8a6`
+- `thoroughbred/research/20261008_section_normalization_candidate_v1/analyze.py` — `c471dda92628b12f2891b74bf77430a7d284b9a84a3f7f78825a55f3950c5a3b`
+- `thoroughbred/research/20261008_gate_model_candidate_v1/build.py` — `65f4840ac58928d197d0e59f778ee5c49686517e82b3800167ec9e8c4da72ab3`
+- `thoroughbred/research/20261008_moisture_gate_seconds/analyze.py` — `eee9bcc850b8dda7c9e7c96acd7c45bd214a4fb2ee263aa3e0efbf5eb576b15c`
+- `thoroughbred/research/20261008_gate_lateral_seconds/analyze.py` — `82b488a85bd87d3a0688f1b10101b77a859081d31dd5c5a335e3c3d07db0c592`
+- `thoroughbred/research/20261008_record_normalization_seconds/analyze.py` — `789944a11b4927385cbff11f5da11d7ad524639e47473e9037ec66fb89c57337`
+- `config/prediction_model_registry.json` — `944e4aad25c99d3d346dab23c7f7596c216d8722a548dea2c7c07abf9b10b70b`
+- `thoroughbred/research/20261004_close_contenders_v1/outputs/operating_runner_predictions.parquet` — `e49e260211a4547b2155f659e543f5cfbe3fcb70350f51fe4cc1d285b3161d64`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/3_2025_month_gate_weight22/top3.txt` — `dc736dc32aaaf9a4474959e245a50d976532bdb6c540b88154503240a926f456`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/3_2024_month_gate_weight22/top3.txt` — `1a080149017ad1520bb0110904e6ae8184922521637874d207d8ed816386312e`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/3_2026_month_gate_weight22/top3.txt` — `99bb1d0331de4a22fd22a51cf2e040b352a2bd6a8b49f31b5dcbd4edf9023310`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/1_2026_month_gate_weight22/top3.txt` — `c3897eda0f8bf30bc57a7fcfc71802ec704127f0bd51208225acc7fc2438ec67`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/1_2024_month_gate_weight22/top3.txt` — `2d5ef2f59424eea13c3eb507e1d9d9c20f1d2542ad916958f920b738f1e2cd0f`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/1_2025_month_gate_weight22/top3.txt` — `bc3a12354bcc1fb20c28cc06f7290b820f88a68147b880d0005190feeee983f5`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/3_2025_month_gate_weight22/metadata.json` — `d5379eca76fb6ab124ff2507ed043b6c548658034c35858d2b0829013af785e5`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/3_2024_month_gate_weight22/metadata.json` — `38095209848027bd14440f0a7678e4bc230edf603d112333ca2c877f742ec63c`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/3_2026_month_gate_weight22/metadata.json` — `c4097eeffaed4ad04efe5a58e11a5a8921f4b6191b794aa43c63cb4ee76e0d9b`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/1_2026_month_gate_weight22/metadata.json` — `19b4b8908a88aa2947a12f8f3a9a7ac025cb5f65704b42a5d26366b3012fb1d7`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/1_2024_month_gate_weight22/metadata.json` — `1315fd4452ea1b6a63531c4e6ef1bbdb1ede1c8b41cec0b5645e3296d32dedfa`
+- `thoroughbred/research/20261008_profile_carried_weight_v1/outputs/models/1_2025_month_gate_weight22/metadata.json` — `e994e457f3bf11ce216f4527f050d62a8493a6535de0bad2cfe01a2017919374`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2022/outlier_masks.parquet` — `39da09bcbf0dd2d168b94c903c9d8001d84babd85cd6c0b000e4e0a9f942fc26`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2025/outlier_masks.parquet` — `a373cc61125bd436a2507ec7388c7169befc9766d344e1f711a6e69d71b0f6db`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2024/outlier_masks.parquet` — `67ce75757d17d9db5964d0b919eb4b7ba1c3ff2104c41f74a73dbd71478a31b8`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2023/outlier_masks.parquet` — `37f1e029eb40de6baf7208e531230f0c513cd184cdd0087418a14ff8bc76066c`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2026/outlier_masks.parquet` — `03bd01eacb251869338b041046543e9e2f74e61823d29ed6afb6ca90ffb53012`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2021/outlier_masks.parquet` — `5cd5fa0fe65b7306786f9d85c70fc3b5ccd6cd3b573aeaabeb6cd2e3cb681e8d`
+- `thoroughbred/research/20261008_profile_environment_ablation_v1/outputs/coefficients/2020/outlier_masks.parquet` — `33f2efb074ad0c356a96c096e7d898db87136fbecb4b11d7df56fb390b6630a1`

@@ -1,0 +1,6 @@
+{
+  "stage": "before_first_base_fit",
+  "issue": "Existing TB cohort preserves 613 races containing non-normal finishes outside Top3. Requiring full 1..N ranks would change the frozen cohort.",
+  "resolution": "Require unique normal Top3=1,2,3 and preserve all other original runner/result codes. No data excluded, no model or evaluated performance inspected.",
+  "failed_preparation_preserved": "outputs_preparation_attempt1"
+}

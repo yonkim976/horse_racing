@@ -1,0 +1,146 @@
+{
+  "codex_automation_tomls": [],
+  "local_launchagents": [
+    {
+      "label": "com.horse-racing.live-race-day",
+      "schedule": null,
+      "interval": 120,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.catalog-trials",
+      "schedule": [
+        {
+          "Hour": 15,
+          "Minute": 10,
+          "Weekday": 4
+        },
+        {
+          "Hour": 19,
+          "Minute": 10,
+          "Weekday": 4
+        },
+        {
+          "Hour": 9,
+          "Minute": 10,
+          "Weekday": 5
+        }
+      ],
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.local-recovery",
+      "schedule": null,
+      "interval": 300,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.post-race-repair",
+      "schedule": [
+        {
+          "Hour": 9,
+          "Minute": 0
+        },
+        {
+          "Hour": 20,
+          "Minute": 30
+        }
+      ],
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.catalog-cards",
+      "schedule": [
+        {
+          "Hour": 15,
+          "Minute": 10,
+          "Weekday": 3
+        },
+        {
+          "Hour": 16,
+          "Minute": 10,
+          "Weekday": 3
+        }
+      ],
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.catalog-medical",
+      "schedule": [
+        {
+          "Hour": 18,
+          "Minute": 10
+        }
+      ],
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.catalog-profiles",
+      "schedule": [
+        {
+          "Hour": 17,
+          "Minute": 40,
+          "Weekday": 3
+        },
+        {
+          "Hour": 18,
+          "Minute": 40
+        }
+      ],
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.odds-probe-20261009",
+      "schedule": null,
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.log-rotation",
+      "schedule": {
+        "Hour": 3,
+        "Minute": 0
+      },
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.catalog-canonical",
+      "schedule": [
+        {
+          "Hour": 21,
+          "Minute": 0
+        },
+        {
+          "Hour": 9,
+          "Minute": 15
+        }
+      ],
+      "interval": null,
+      "program_name": "python",
+      "args_files": []
+    },
+    {
+      "label": "com.horse-racing.closing-dividends",
+      "schedule": null,
+      "interval": 900,
+      "program_name": "python",
+      "args_files": []
+    }
+  ],
+  "matching_research_core_schedules": []
+}

@@ -1,0 +1,35 @@
+{
+  "scope": {
+    "venue": "BUSAN",
+    "start_date": "2025-01-03",
+    "database_end_date": "2026-10-02",
+    "model_common_end_date": "2026-09-11"
+  },
+  "model_source": {
+    "active_profile": "thoroughbred-main-20260919-v1",
+    "A": "current_A: frozen historical runner Top-3 inclusion predictions",
+    "B": "current_B: frozen historical highest-probability unordered Top-3 set",
+    "C": "historical current_C ticket keys are not retained in this archive; TRI tests use all six orders of the B set, not C output",
+    "A_model_races": 1240,
+    "B_model_races": 1212,
+    "A_runner_label_mismatches_vs_settled_results": 0,
+    "B_top_set_hit_mismatches_vs_settled_results": 0
+  },
+  "settlement": {
+    "dividend_source": "latest stored odds_snapshots row per race, bet_type and selection_key",
+    "stored_sentinel_excluded": 9999.9,
+    "each_ticket_stake_krw": 100,
+    "first_snapshot_after_scheduled_start_hours": 3.3968861111111113,
+    "clear_top3_races": 1256,
+    "common_A_B_clean_top3_races": 1208,
+    "warning": "The stored snapshots are after scheduled start, so odds-conditioned selection is retrospective and not actionable as a pre-race backtest."
+  },
+  "A_win_calibration": {
+    "training_year": 2025,
+    "beta": 0.9825508611089733,
+    "training_races": 713,
+    "training_entries": 7870,
+    "training_log_loss": 1.9844710209972067
+  },
+  "confirmed_odds_are_not_model_features": true
+}

@@ -1,0 +1,384 @@
+{
+  "report_id": "20261015_daily_training_rider_identity_review_v1/local_inventory",
+  "created_date": "2026-10-15",
+  "purpose": "API18_1 daily training prNo/rider_type raw values, identifier shape, and direct official jockey ID overlap inventory.",
+  "scope": {
+    "source_database": "/Users/kimyongjin/Desktop/horse_racing/thoroughbred/data/core_api_2010_20260929_v1/thoroughbred_core.duckdb",
+    "database_window_as_supplied": "2010-01-01 through 2026-09-29",
+    "database_access": "DuckDB read_only=True; no writes made.",
+    "tables_read": [
+      "daily_training_raw",
+      "training_raw_observations (schema reviewed only)",
+      "person_reference_profile_snapshots",
+      "person_profile_page_manifest (schema reviewed)",
+      "entity_reference_roster",
+      "jockey_reference_ids_with_review (schema reviewed)"
+    ],
+    "identity_join_rule": "Exact string equality only: daily_training_raw.rider_id_raw = person_reference_profile_snapshots.official_id_raw_string where profile entity_type=jockey. The dash sentinel was excluded. No numeric cast, trimming, name join, or payload-derived identity was used.",
+    "raw_payload_identity_use": "No raw_payload_json/source_record_json was used to assign a name or ID. Names in examples come only from the official profile snapshot after exact ID equality."
+  },
+  "source_schema_review": {
+    "daily_training_raw_identifier_columns": [
+      "rider_id_raw",
+      "rider_type_raw"
+    ],
+    "other_person_name_column": "trainer_name_raw",
+    "has_rider_name_column": false,
+    "has_rider_entity_id_column": false,
+    "training_raw_observations_has_extracted_rider_id_column": false,
+    "person_reference_profile_snapshots_id_field": "official_id_raw_string",
+    "person_reference_profile_snapshots_name_fields": [
+      "name_snapshot",
+      "english_name_snapshot"
+    ],
+    "person_reference_profile_snapshots_has_separate_prNo_or_employee_number_field": false,
+    "profile_source_service": "API307/jockeyInfo",
+    "profile_source_files_referenced_by_database": [
+      {
+        "source_file": "data/raw/kra/entity_reference_profiles/20260930/API307_jockeyInfo/meet_1/page_0001.json",
+        "exists_under_repository": true
+      },
+      {
+        "source_file": "data/raw/kra/entity_reference_profiles/20260930/API307_jockeyInfo/meet_1/page_0002.json",
+        "exists_under_repository": true
+      },
+      {
+        "source_file": "data/raw/kra/entity_reference_profiles/20260930/API307_jockeyInfo/meet_3/page_0001.json",
+        "exists_under_repository": true
+      }
+    ],
+    "local_official_horse_profile_prNo_key_search": {
+      "searched_path": "data/raw/kra/horse_profiles/**/*.json",
+      "exact_json_key": "\"prNo\"",
+      "files_with_key": []
+    },
+    "local_API307_profile_payloads_available": true
+  },
+  "daily_training_identifier_inventory": {
+    "row_count": 5173033,
+    "event_date_min": "2010-01-02",
+    "event_date_max": "2026-09-28",
+    "dash_sentinel": {
+      "raw_value": "-",
+      "rows": 3383170,
+      "distinct_values": 1
+    },
+    "null_rows": 0,
+    "empty_or_whitespace_rows": 0,
+    "non_sentinel_rows": 1789863,
+    "non_sentinel_unique_ids": 352,
+    "non_sentinel_shapes": [
+      {
+        "trimmed_length": 6,
+        "digits_only": false,
+        "prefix": "08A",
+        "observations": 95,
+        "unique_ids": 36
+      },
+      {
+        "trimmed_length": 6,
+        "digits_only": true,
+        "prefix": null,
+        "observations": 1789768,
+        "unique_ids": 316
+      }
+    ],
+    "non_sentinel_prefix_crosscheck": [
+      {
+        "prefix": "080",
+        "digits_only": true,
+        "observations": 1599424,
+        "unique_ids": 247
+      },
+      {
+        "prefix": "08A",
+        "digits_only": false,
+        "observations": 95,
+        "unique_ids": 36
+      },
+      {
+        "prefix": "090",
+        "digits_only": true,
+        "observations": 74126,
+        "unique_ids": 29
+      },
+      {
+        "prefix": "091",
+        "digits_only": true,
+        "observations": 116218,
+        "unique_ids": 40
+      }
+    ]
+  },
+  "direct_official_jockey_profile_comparison": {
+    "official_profile_capture": [
+      {
+        "source_service": "API307/jockeyInfo",
+        "capture_date": "2026-09-30",
+        "snapshot_rows": 746,
+        "unique_official_ids": 746
+      }
+    ],
+    "comparison": {
+      "daily_non_sentinel_unique_ids": 352,
+      "exact_id_matches": 282,
+      "daily_rows_with_exact_profile_id_match": 1599488,
+      "unmatched_unique_ids": 70,
+      "daily_rows_without_profile_id_match": 190375,
+      "unique_id_match_rate_percent": 80.11,
+      "row_match_rate_percent_among_non_sentinel_rows": 89.36,
+      "profile_unique_jockey_ids": 746,
+      "comparison_to_race_trial_roster": {
+        "roster_unique_jockey_ids": 337,
+        "exact_id_overlap_with_daily_non_sentinel_ids": 280,
+        "daily_rows_with_roster_exact_id": 1599224,
+        "profile_matched_ids_not_in_roster": 2
+      }
+    },
+    "examples_exact_id_only": [
+      {
+        "official_id": "080014",
+        "profile_name_snapshot": "김귀배",
+        "daily_training_rows": 13257,
+        "observed_prGubun_raw_labels": [
+          "-",
+          "기수"
+        ]
+      },
+      {
+        "official_id": "080411",
+        "profile_name_snapshot": "조창욱",
+        "daily_training_rows": 25971,
+        "observed_prGubun_raw_labels": [
+          "-",
+          "기수",
+          "조교승인"
+        ]
+      },
+      {
+        "official_id": "08A126",
+        "profile_name_snapshot": "이건",
+        "daily_training_rows": 2,
+        "observed_prGubun_raw_labels": [
+          "기수"
+        ]
+      }
+    ],
+    "unmatched_identifier_examples": [
+      {
+        "raw_id": "091501",
+        "daily_training_rows": 12650,
+        "observed_prGubun_raw_labels": [
+          "-",
+          "조교보"
+        ]
+      },
+      {
+        "raw_id": "091318",
+        "daily_training_rows": 9981,
+        "observed_prGubun_raw_labels": [
+          "-",
+          "조교보"
+        ]
+      },
+      {
+        "raw_id": "090036",
+        "daily_training_rows": 7508,
+        "observed_prGubun_raw_labels": [
+          "-",
+          "조교보"
+        ]
+      }
+    ]
+  },
+  "prGubun_raw_label_comparison": [
+    {
+      "raw_label": "-",
+      "total_daily_rows": 1911604,
+      "dash_prNo_rows": 1556160,
+      "non_sentinel_prNo_rows": 355444,
+      "exact_profile_id_unique_ids": 152,
+      "exact_profile_id_rows": 293211,
+      "unmatched_non_sentinel_unique_ids": 52,
+      "unmatched_non_sentinel_rows": 62233
+    },
+    {
+      "raw_label": "기수",
+      "total_daily_rows": 1306151,
+      "dash_prNo_rows": 43,
+      "non_sentinel_prNo_rows": 1306108,
+      "exact_profile_id_unique_ids": 223,
+      "exact_profile_id_rows": 1306077,
+      "unmatched_non_sentinel_unique_ids": 1,
+      "unmatched_non_sentinel_rows": 31
+    },
+    {
+      "raw_label": "기수후보생",
+      "total_daily_rows": 2836,
+      "dash_prNo_rows": 2836,
+      "non_sentinel_prNo_rows": 0,
+      "exact_profile_id_unique_ids": 0,
+      "exact_profile_id_rows": 0,
+      "unmatched_non_sentinel_unique_ids": 0,
+      "unmatched_non_sentinel_rows": 0
+    },
+    {
+      "raw_label": "조교보",
+      "total_daily_rows": 318906,
+      "dash_prNo_rows": 190756,
+      "non_sentinel_prNo_rows": 128150,
+      "exact_profile_id_unique_ids": 23,
+      "exact_profile_id_rows": 39,
+      "unmatched_non_sentinel_unique_ids": 62,
+      "unmatched_non_sentinel_rows": 128111
+    },
+    {
+      "raw_label": "조교사",
+      "total_daily_rows": 80539,
+      "dash_prNo_rows": 80535,
+      "non_sentinel_prNo_rows": 4,
+      "exact_profile_id_unique_ids": 4,
+      "exact_profile_id_rows": 4,
+      "unmatched_non_sentinel_unique_ids": 0,
+      "unmatched_non_sentinel_rows": 0
+    },
+    {
+      "raw_label": "조교승인",
+      "total_daily_rows": 1552997,
+      "dash_prNo_rows": 1552840,
+      "non_sentinel_prNo_rows": 157,
+      "exact_profile_id_unique_ids": 63,
+      "exact_profile_id_rows": 157,
+      "unmatched_non_sentinel_unique_ids": 0,
+      "unmatched_non_sentinel_rows": 0
+    }
+  ],
+  "labels_on_same_exactly_matched_official_id_across_dataset": {
+    "counts": {
+      "exact_profile_ids": 282,
+      "ids_with_gisu_label": 223,
+      "ids_with_jogyobo_label": 23,
+      "ids_with_jogyoseungin_label": 63,
+      "ids_with_jogyosa_label": 4,
+      "ids_with_dash_label": 152,
+      "ids_with_both_gisu_and_jogyobo": 23,
+      "ids_with_both_gisu_and_jogyoseungin": 63,
+      "ids_with_both_gisu_and_jogyosa": 4,
+      "ids_with_both_jogyobo_and_jogyoseungin": 21
+    },
+    "label_set_distribution": [
+      {
+        "raw_label_set": [
+          "기수"
+        ],
+        "label_count": 1,
+        "unique_ids": 106
+      },
+      {
+        "raw_label_set": [
+          "-"
+        ],
+        "label_count": 1,
+        "unique_ids": 59
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수"
+        ],
+        "label_count": 2,
+        "unique_ids": 52
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수",
+          "조교승인"
+        ],
+        "label_count": 3,
+        "unique_ids": 22
+      },
+      {
+        "raw_label_set": [
+          "기수",
+          "조교승인"
+        ],
+        "label_count": 2,
+        "unique_ids": 18
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수",
+          "조교보",
+          "조교승인"
+        ],
+        "label_count": 4,
+        "unique_ids": 14
+      },
+      {
+        "raw_label_set": [
+          "기수",
+          "조교보",
+          "조교승인"
+        ],
+        "label_count": 3,
+        "unique_ids": 6
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수",
+          "조교사",
+          "조교승인"
+        ],
+        "label_count": 4,
+        "unique_ids": 2
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수",
+          "조교보"
+        ],
+        "label_count": 3,
+        "unique_ids": 1
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수",
+          "조교보",
+          "조교사"
+        ],
+        "label_count": 4,
+        "unique_ids": 1
+      },
+      {
+        "raw_label_set": [
+          "-",
+          "기수",
+          "조교보",
+          "조교사",
+          "조교승인"
+        ],
+        "label_count": 5,
+        "unique_ids": 1
+      }
+    ],
+    "interpretation_limit": "Overlap is across all training rows for an ID; it does not assert same date/event, employment status, or actual role during a particular workout."
+  },
+  "historical_name_consistency_check": {
+    "direct_roster_profile_ids": 280,
+    "ids_with_multiple_exact_raw_name_variants": 0,
+    "profile_snapshot_name_absent_from_historical_raw_names": 0,
+    "ids_with_name_ambiguous_across_multiple_official_ids": 16,
+    "comparison": "For the 280 daily prNo IDs exactly present in both API307 jockey profile snapshots and the official race/trial entity roster, compare API307 name_snapshot with that ID’s historical exact raw name set in entity_reference_roster. No daily training raw JSON/name text used.",
+    "interpretation_limit": "The roster showed one observed exact name per ID and it matched the captured profile name. This is limited to names observed in roster history and a 2026-09-30 profile snapshot; it does not establish the role held at a historical training date."
+  },
+  "conclusion": {
+    "name_link_feasibility": "A direct official name connection is locally feasible for 282 of the 352 non-sentinel prNo values (1,599,488 of 1,789,863 rows) by exact equality with API307 official jockey profile IDs and then reading name_snapshot.",
+    "role_status": "Keep name identity separate from training role: prGubun raw labels vary on IDs that directly match official jockey profiles, and unmatched IDs remain unresolved.",
+    "prNo_employee_number_semantics": "Not established from local profile payloads. Snapshot schema has no separate prNo/employee-number column; referenced API307 raw JSON files are absent locally. Official API documentation reviewed by the parent agent is needed to establish field semantics."
+  }
+}

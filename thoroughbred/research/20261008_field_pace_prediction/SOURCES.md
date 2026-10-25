@@ -1,0 +1,31 @@
+# 출처와 입력 감사
+
+2026-10-08. 새 수집 없이 기존 읽기 전용 자료3개와 원문18개를 대조했다. 각 원문 API4_3 응답의 출전 번호로 기수·조교사·연령을 확인했다.
+
+공식 정의: [한국마사회 경주성적표 설명](https://race.kra.co.kr/raceScore/scoretableLayerExplanation.do?meet=1). S1F는 출발 후200m, G3F/G1F는 결승 전600/200m 지점이며 3F-G/1F-G 시간과 통과 위치를 구분한다. 괄호로 묶인 마군의 좌우 순서는 착순 순위가 아니다.
+
+| 입력 | 바이트 | SHA-256 |
+|---|---:|---|
+| [roster.parquet](../20261008_horse_style_performance/outputs/roster.parquet) | 6068600 | `5c62e3ecc0548992a1c7db923966a513ebca7815dd0c6b37a2325a09168f70a5` |
+| [observed_styles.parquet](../20261008_running_style_foundation/outputs/observed_styles.parquet) | 8839775 | `27ac33774dafafee0d1981df0d767dd3578434afcc0a9e63a53e83bdab3af5a2` |
+| [population.parquet](../20261007_sex_ability_gap/outputs/population.parquet) | 7247611 | `043b3a1dcfe07a1cf225a6c8a870f362ce739207581a498ea5409fc556c6c346` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_1.json.gz) | 1563035 | `1f59511124ccc51595d230c43367c562714b824eb8906235fbaf5f2305847fbc` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2018/meet_3.json.gz) | 1184421 | `e65a72423e2ed660ab54af06432c6e5c716097dcc0276e87be53f6df9ccdd00f` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_1.json.gz) | 1608213 | `ae153667845171337aa1c37ee6a15da322abca9e6e4c4eaa3af76f65052fefdd` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2019/meet_3.json.gz) | 1260847 | `adb2cca8f24efa6932a36e32add5045b23254523ecd40729348ab79f455736ce` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_1.json.gz) | 986047 | `246826262ba50ec0605c84377b7c5381ab2d1634d9fb138974cffd0d83924e61` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2020/meet_3.json.gz) | 764501 | `4809c714011f7b10508a002c34ee0c9620f652cd8ca9d5e393b1a6ff738bf39a` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_1.json.gz) | 1366206 | `dfe0e1544ca4c8594e8ac3af58ab46a61f6ca8d191821ecea3f79c6a6e3ab1cc` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2021/meet_3.json.gz) | 1011886 | `f3964eadda846a624061e97684e9b3b5e02bae3a4c8bab02fba7bd726bd11eab` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_1.json.gz) | 1406627 | `6e7a49fef5c922b759cff1249614f900b2f0f757a7836b76c35e52cc4bb048ec` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2022/meet_3.json.gz) | 1053886 | `deda87da51aa2e08ededde1209efa491bcf5c776c8e2d90fa313581af919b4a1` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_1.json.gz) | 1462854 | `6b1e4ad1d5f5bbaed8dde60c16c54fb3f7f1ff149bc7b8261f1c042623b58e13` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2023/meet_3.json.gz) | 1109409 | `34d3b9e1515c660e4484ae90967602dc90623486114a133acc060602f1ab7c14` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_1.json.gz) | 1441741 | `57d3d689be03d2b6b02db533746d3c236a125fd532b3ffe41a06cc4352a0e4eb` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2024/meet_3.json.gz) | 1117076 | `a97d361760bd9f0f22ca0dc98204efb20e6ed90485bed643e82269ee72d85a4e` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2025/meet_1.json.gz) | 1463206 | `9c83304b29faa1cb1cb90d1e44a027ad3046ac071b4120bf3f6ebb7ad38382fb` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2025/meet_3.json.gz) | 1136732 | `5fc2fde4a6c91da4037ba7db6fbc874ea7ddf6c346d5d4ad9c09c89e311aa3dd` |
+| [meet_1.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2026/meet_1.json.gz) | 1112510 | `95fcf6b9ba8364f7edf2a6490e6fa864cfab21d1317c5d588b8faf76d97ba399` |
+| [meet_3.json.gz](../20260929_calendar_api_v1/raw/race_execution_probe/2026/meet_3.json.gz) | 848932 | `5c42bfd9a1d54e5eca0243d245f77791dfb54fe51738f86c5aa7d367e524550f` |
+
+기수·조교사는 최종 결과 원문의 실제 출전 식별자다. 당시 사전 공표시각·사후 정정·기수 변경 공표를 감사하지 않았다. 영상·작전 지시·진술 자료가 없어 직접 전술 의도 정답은 없다. 기존 연구 전체 기간의 공통 점수나 미래 기준은 사전 입력으로 사용하지 않았다.

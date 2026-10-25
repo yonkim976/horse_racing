@@ -1,0 +1,133 @@
+{
+  "title": "거리·함수율별 전개 예측 성능",
+  "followup": "28E",
+  "status": "research_candidate",
+  "evaluation_years": [
+    2024,
+    2025
+  ],
+  "n": 36638,
+  "races": 3465,
+  "horses": 4405,
+  "accuracy_B": 0.5146842076532562,
+  "accuracy_H": 0.4446476336044544,
+  "distance_bands": [
+    {
+      "label": "1000~1300m",
+      "n": 16845,
+      "races": 1583,
+      "accuracy": 0.5007420599584447
+    },
+    {
+      "label": "1400~1600m",
+      "n": 12245,
+      "races": 1162,
+      "accuracy": 0.5205389955083708
+    },
+    {
+      "label": "1700m이상",
+      "n": 7548,
+      "races": 720,
+      "accuracy": 0.5363010068892422
+    }
+  ],
+  "moisture_states": [
+    {
+      "label": "건조",
+      "n": 17788,
+      "races": 1674,
+      "accuracy": 0.5174274791994603
+    },
+    {
+      "label": "양호",
+      "n": 6424,
+      "races": 603,
+      "accuracy": 0.513854296388543
+    },
+    {
+      "label": "다습",
+      "n": 6558,
+      "races": 622,
+      "accuracy": 0.5036596523330283
+    },
+    {
+      "label": "포화",
+      "n": 4642,
+      "races": 447,
+      "accuracy": 0.515510555794916
+    },
+    {
+      "label": "불량",
+      "n": 1226,
+      "races": 119,
+      "accuracy": 0.5350734094616639
+    }
+  ],
+  "standardized_differences": [
+    {
+      "group": "moisture_state",
+      "a": "양호",
+      "b": "건조",
+      "coverage": 0.6967619362299686,
+      "estimate": -0.0085577750562488,
+      "lower": -0.0255619843949106,
+      "upper": 0.008446434282413,
+      "bh_q": 0.6053390780860269
+    },
+    {
+      "group": "moisture_state",
+      "a": "다습",
+      "b": "건조",
+      "coverage": 0.5785755360223446,
+      "estimate": -0.0008596229404413,
+      "lower": -0.018593271912203,
+      "upper": 0.0168740260313203,
+      "bh_q": 0.9239900523279762
+    },
+    {
+      "group": "moisture_state",
+      "a": "포화",
+      "b": "건조",
+      "coverage": 0.5553722692822113,
+      "estimate": -0.011815137849893,
+      "lower": -0.0323891961529924,
+      "upper": 0.0087589204532064,
+      "bh_q": 0.6053390780860269
+    },
+    {
+      "group": "moisture_state",
+      "a": "불량",
+      "b": "건조",
+      "coverage": 0.2151046597244136,
+      "estimate": 0.0180787700319214,
+      "lower": -0.0272902756587184,
+      "upper": 0.0634478157225613,
+      "bh_q": 0.6053390780860269
+    },
+    {
+      "group": "distance_band",
+      "a": "1400~1600m",
+      "b": "1000~1300m",
+      "coverage": 0.8025438294946717,
+      "estimate": -0.0065602007771337,
+      "lower": -0.0218891081672607,
+      "upper": 0.0087687066129932,
+      "bh_q": 0.6053390780860269
+    },
+    {
+      "group": "distance_band",
+      "a": "1700m이상",
+      "b": "1000~1300m",
+      "coverage": 0.5738121592260075,
+      "estimate": 0.0074675599135625,
+      "lower": -0.0145263206654004,
+      "upper": 0.0294614404925255,
+      "bh_q": 0.6053390780860269
+    }
+  ],
+  "fore_recall": 0.011135857461024499,
+  "operational_change": false,
+  "models_refitted": 0,
+  "current_moisture_is_input": false,
+  "new_finish_model_integration_tested": false
+}
