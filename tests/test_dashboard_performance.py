@@ -336,7 +336,7 @@ def test_home_reuses_calendar_index_and_fetches_only_requested_month(
     assert mobile_home.status_code == 200
     assert 'class="mobile-app mobile-home"' in mobile_home.text
     assert "data-easy-toggle" in mobile_home.text
-    assert "dashboard.js?v=34" in mobile_home.text
+    assert "dashboard.js?v=37" in mobile_home.text
 
     calendar_script = re.search(
         r'<script id="race-calendar-data"[^>]*>(.*?)</script>',

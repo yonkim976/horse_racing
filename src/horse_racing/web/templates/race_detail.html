@@ -12,7 +12,8 @@
 {% block content %}
 {% set detail_tabs = [] %}
 {% if page.racecourse_map %}{% set detail_tabs = detail_tabs + [('course', '경주로')] %}{% endif %}
-{% set detail_tabs = detail_tabs + [('result', '결과')] %}
+{% set entry_tab_label = '출전표' if page.status == 'scheduled' else '결과' %}
+{% set detail_tabs = detail_tabs + [('result', entry_tab_label)] %}
 {% if page.care %}{% set detail_tabs = detail_tabs + [('care', '조교·진료')] %}{% endif %}
 {% if page.has_sections %}{% set detail_tabs = detail_tabs + [('sections', '구간')] %}{% endif %}
 {% if page.dividends %}{% set detail_tabs = detail_tabs + [('dividends', '배당')] %}{% endif %}
@@ -97,8 +98,13 @@
 <section id="race-result" class="panel">
   <div class="panel-heading entries-heading">
     <div>
+      {% if page.status == 'scheduled' %}
+      <p class="panel-kicker">ENTRY CARD</p>
+      <h2>출전표</h2>
+      {% else %}
       <p class="panel-kicker">FINAL RESULT</p>
       <h2>출전마 및 결과</h2>
+      {% endif %}
     </div>
     <span>{{ page.entries | length }}두</span>
   </div>

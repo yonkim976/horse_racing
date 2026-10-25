@@ -67,7 +67,7 @@ def _category(path: str) -> str | None:
         return "detail"
     if path == "/horses/list":
         return "entity-list"
-    if path == "/":
+    if path in {"/", "/api/race-follow"}:
         return "dashboard"
     if path == "/api/calendar":
         return "calendar"
@@ -97,6 +97,8 @@ def _category(path: str) -> str | None:
 
 
 def _query_keys(path: str) -> frozenset[str] | None:
+    if path == "/api/race-follow":
+        return frozenset({"date", "meet"})
     if path == "/horses/list":
         return _ENTITY_KEYS
     if re.fullmatch(r"/(horses|jockeys|trainers|owners)/[^/]+", path):

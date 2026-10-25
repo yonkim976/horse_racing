@@ -682,7 +682,7 @@
     });
   }
 
-  async function loadDashboardRace(value, detailHref, pushHistory = true, allowDefault = false, updateSchedule = false) {
+  async function loadDashboardRace(value, detailHref, pushHistory = true, allowDefault = false, updateSchedule = false, automatic = false) {
     if (!(updateSchedule ? isDashboardVenueUrl(value) : isDashboardSelectionUrl(value, allowDefault))) {
       return false;
     }
@@ -698,8 +698,10 @@
     }
     const controller = new AbortController();
     dashboardSelectionController = controller;
+    const automaticTimeout = automatic ? setTimeout(() => controller.abort(), 8000) : null;
     const sequence = ++dashboardSelectionSequence;
     const raceId = target.searchParams.get("race_id");
+    if (raceId && !automatic) document.dispatchEvent(new CustomEvent("race-follow-pin"));
     const status = currentPanel.querySelector("[data-dashboard-detail-status]");
     if (status) {
       status.hidden = true;
@@ -709,7 +711,9 @@
     currentPanel.setAttribute("aria-busy", "true");
 
     try {
-      const response = await fetch(target.href, {
+      const fetchTarget = new URL(target.href);
+      if (DESKTOP_LAYOUT) fetchTarget.searchParams.set("layout", "desktop");
+      const response = await fetch(fetchTarget.href, {
         credentials: "same-origin",
         headers: { Accept: "text/html" },
         signal: controller.signal,
@@ -717,10 +721,10 @@
       if (!response.ok) {
         throw new Error("dashboard selection request failed");
       }
-      const responseUrl = new URL(response.url || target.href, window.location.href);
+      const responseUrl = new URL(response.url || fetchTarget.href, window.location.href);
       if (responseUrl.origin !== window.location.origin
         || responseUrl.pathname !== window.location.pathname
-        || !dashboardFiltersMatch(responseUrl, target)) {
+        || !dashboardFiltersMatch(responseUrl, fetchTarget)) {
         throw new Error("dashboard selection response location was invalid");
       }
       const html = await response.text();
@@ -789,10 +793,21 @@
       if (pushHistory) {
         window.history.pushState({ dashboardRaceSelection: true }, "", target.href);
       }
+      if (updateSchedule) {
+        const followData = parsed.querySelector("[data-race-follow-data]");
+        if (followData) document.dispatchEvent(new CustomEvent("race-follow-context", {
+          detail: { data: followData.textContent, url: target.href },
+        }));
+      }
       schedule.removeAttribute("aria-busy");
       previousPanel.removeAttribute("aria-busy");
       return true;
     } catch (error) {
+      if (automatic && sequence === dashboardSelectionSequence) {
+        schedule.removeAttribute("aria-busy");
+        currentPanel.removeAttribute("aria-busy");
+        return false;
+      }
       if (controller.signal.aborted || sequence !== dashboardSelectionSequence) {
         return false;
       }
@@ -805,11 +820,22 @@
       }
       return false;
     } finally {
+      if (automaticTimeout !== null) clearTimeout(automaticTimeout);
       if (sequence === dashboardSelectionSequence) {
         dashboardSelectionController = null;
       }
     }
   }
+
+  document.addEventListener("race-follow-select", async event => {
+    const { id, done } = event.detail;
+    const row = [...document.querySelectorAll("[data-dashboard-race-id]")]
+      .find(item => Number(item.dataset.dashboardRaceId) === id);
+    if (!row || !dashboardSelectionEnabled) { done(false); return; }
+    const loaded = await loadDashboardRace(row.dataset.href, row.dataset.raceDetailHref,
+      false, false, false, true);
+    done(loaded);
+  });
 
   document.addEventListener("click", (event) => {
     const venueLink = event.target instanceof Element
@@ -1409,6 +1435,14 @@
         (event) => {
           event.preventDefault();
           event.stopImmediatePropagation();
+          if (document.body.classList.contains("mobile-home")) {
+            const url = new URL(location.href);
+            url.hash = id;
+            history.replaceState(null, "", url);
+            document.dispatchEvent(new CustomEvent("race-follow-pin", {
+              detail: { id: Number(id.replace("round-", "")) },
+            }));
+          }
           lockedUntil = performance.now() + 800;
           setMobileRoundSelection(id, { reveal: true });
           scrollToMobileRound(id);
@@ -1428,8 +1462,10 @@
         return;
       }
       const clearance = mobileStickyClearance();
-      let current = sections[0];
-      sections.forEach((section) => {
+      const orderedSections = [...sections].sort((a, b) =>
+        a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+      let current = orderedSections[0];
+      orderedSections.forEach((section) => {
         if (section.getBoundingClientRect().top - clearance <= 12) {
           current = section;
         }
@@ -1453,6 +1489,12 @@
   }
 
   initMobileRoundJump();
+
+  document.addEventListener("race-follow-mobile-selected", event => {
+    const id = `round-${event.detail.id}`;
+    setMobileRoundSelection(id, { reveal: true });
+    scrollToMobileRound(id);
+  });
 
   if (document.body.classList.contains("mobile-home")) {
     if (history.scrollRestoration) {

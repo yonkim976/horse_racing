@@ -18,12 +18,13 @@
     </div>
     {% endif %}
   </div>
+  {% include "_race_follow.html" %}
   {% if by_time and timeline|length > 1 %}
   <nav class="mobile-round-jump" aria-label="시간순 경주">
     {% for race in timeline %}
     <a href="#round-{{ race.id }}" class="{% if race.is_current %}is-next active{% endif %}" {% if race.is_current %}aria-current="true"{% endif %}>
       <strong>{{ race.course_name }} {{ race.race_number }}R</strong>
-      <span>{% if race.status == 'completed' %}<span class="ma-finished-label">종료 · </span>{% elif race.is_current %}<span class="ma-next-label">예정 · </span>{% endif %}{{ race.start_time }}</span>
+      <span>{% if race.status == 'completed' %}<span class="ma-finished-label">종료 · </span>{% elif race.is_current %}<span class="ma-next-label">예정 · </span>{% endif %}<span data-race-follow-clock>{{ race.start_time }}</span></span>
     </a>
     {% endfor %}
   </nav>
@@ -55,7 +56,7 @@
             <span class="mobile-round-title">
               <strong class="mobile-race-no">{{ race.course_name }}</strong>
               <span class="mobile-round-race">{{ race.race_number }}R</span>
-              {% if race.status == 'completed' %}<span class="mobile-complete-tag">종료</span>{% elif race.is_current %}<span class="mobile-live-tag">예정</span>{% elif race.awaiting_result %}<span class="mobile-awaiting-tag">결과 대기</span>{% endif %}
+              {% if race.status == 'completed' %}<span class="mobile-complete-tag">종료</span>{% elif race.awaiting_result %}<span class="mobile-awaiting-tag">결과 대기</span>{% elif race.is_current %}<span class="mobile-live-tag">예정</span>{% endif %}
               {% if race.stakes_grade %}<span class="mobile-stakes-tag">{{ race.stakes_grade }} 대상경주</span>{% endif %}
               <span class="mobile-round-field">{{ race.runner_count }}두</span>
               <span class="mobile-round-analysis" aria-hidden="true">
@@ -65,7 +66,7 @@
               </span>
             </span>
             <span class="mobile-round-sub">
-              <span class="mobile-round-meta">{{ race.start_time }} · {{ race.race_label }} · {{ race.distance }}</span>
+              <span class="mobile-round-meta"><span data-race-follow-clock>{{ race.start_time }}</span> · {{ race.race_label }} · {{ race.distance }}</span>
               {% if race.prediction_state %}<span class="mobile-field-state" data-state="{{ race.prediction_state }}">{{ race.prediction_state }}</span>{% endif %}
             </span>
           </a>

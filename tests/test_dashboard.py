@@ -876,6 +876,10 @@ def test_scheduled_entry_table_has_preview_columns_and_completed_table_keeps_res
         assert 'title="최근 1개월 · 경주일 기준, 경주 당일 제외 · 수집된 조교 세션 수"' in head
         assert '<small>최근 1개월</small>' not in head
         assert "<장구&>" not in table
+    assert 'data-race-detail-tab="result"' in detail.text
+    assert ">출전표</a>" in detail.text
+    assert "출전마 및 결과" not in detail.text
+    assert "<h2>출전표</h2>" in detail.text
 
 
 def test_entry_table_truncates_owner_names_with_escaped_full_label(tmp_path: Path) -> None:
@@ -2595,7 +2599,7 @@ def test_mobile_puts_current_race_first_on_today(tmp_path: Path, monkeypatch) ->
         session.commit()
 
     monkeypatch.setattr("horse_racing.web.dashboard.today_seoul", lambda: date(2026, 8, 21))
-    monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: _seoul_ms(10, 36))
+    monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: _seoul_ms(10, 35) + 30_000)
     app = create_app(factory)
     with TestClient(app) as client:
         page = client.get("/?date=2026-08-21", headers=PHONE_HEADERS)
@@ -2615,8 +2619,10 @@ def test_mobile_puts_current_race_first_on_today(tmp_path: Path, monkeypatch) ->
     assert 'class="mobile-round is-current"' in default_home.text
 
 
-def test_default_race_focus_advances_five_minutes_after_start_regardless_of_status(
-    tmp_path: Path, monkeypatch
+@pytest.mark.parametrize("status", ["scheduled", "completed"])
+@pytest.mark.parametrize("layout", ["mobile", "desktop"])
+def test_default_race_focus_advances_one_minute_after_start_regardless_of_status(
+    tmp_path: Path, monkeypatch, status, layout
 ) -> None:
     factory = seeded_session(tmp_path)
     with factory() as session:
@@ -2629,7 +2635,7 @@ def test_default_race_focus_advances_five_minutes_after_start_regardless_of_stat
             grade="국6등급",
             race_name="일반",
             scheduled_at_ms=_seoul_ms(10, 35, day=22),
-            status="completed",
+            status=status,
         )
         second = Race(
             racecourse=seoul,
@@ -2648,18 +2654,29 @@ def test_default_race_focus_advances_five_minutes_after_start_regardless_of_stat
         session.commit()
 
     monkeypatch.setattr("horse_racing.web.dashboard.today_seoul", lambda: date(2026, 8, 22))
-    now_ms = _seoul_ms(10, 39, day=22) + 59_000
+    now_ms = _seoul_ms(10, 35, day=22) + 59_999
     monkeypatch.setattr("horse_racing.web.dashboard.now_seoul_ms", lambda: now_ms)
     with TestClient(create_app(factory)) as client:
-        before_cutoff = client.get("/?date=2026-08-22&meet=1", headers=PHONE_HEADERS)
-    now_ms = _seoul_ms(10, 40, day=22)
+        before_cutoff = client.get(f"/?date=2026-08-22&meet=1&layout={layout}")
+    now_ms = _seoul_ms(10, 36, day=22)
     with TestClient(create_app(factory)) as client:
-        after_cutoff = client.get("/?date=2026-08-22&meet=1", headers=PHONE_HEADERS)
+        after_cutoff = client.get(f"/?date=2026-08-22&meet=1&layout={layout}")
+        pinned = client.get(f"/?date=2026-08-22&meet=1&layout={layout}&race_id={first_id}")
 
-    current_before = before_cutoff.text.split('class="mobile-round is-current"', 1)[1]
-    current_after = after_cutoff.text.split('class="mobile-round is-current"', 1)[1]
-    assert f'id="round-{first_id}"' in current_before.split(">", 1)[0]
-    assert f'id="round-{second_id}"' in current_after.split(">", 1)[0]
+    from bs4 import BeautifulSoup
+    before = BeautifulSoup(before_cutoff.text, "html.parser")
+    after = BeautifulSoup(after_cutoff.text, "html.parser")
+    if layout == "mobile":
+        assert before.select_one('.mobile-round.is-current')["id"] == f"round-{first_id}"
+        assert after.select_one('.mobile-round.is-current')["id"] == f"round-{second_id}"
+    else:
+        assert before.select_one('[data-dashboard-detail]')["data-race-id"] == str(first_id)
+        assert after.select_one('[data-dashboard-detail]')["data-race-id"] == str(second_id)
+        assert BeautifulSoup(pinned.text, "html.parser").select_one('[data-dashboard-detail]')["data-race-id"] == str(first_id)
+    metadata = json.loads(after.select_one('[data-race-follow-data]').string)
+    assert metadata["graceMs"] == 60_000
+    assert len(metadata["races"]) == 2
+    assert "race-follow.js?v=3" in after_cutoff.text
 
 
 def test_mobile_home_flags_stakes_and_overdue_results(tmp_path: Path, monkeypatch) -> None:
@@ -2705,8 +2722,7 @@ def test_mobile_home_flags_stakes_and_overdue_results(tmp_path: Path, monkeypatc
     assert 'class="mobile-stakes-tag">G1 대상경주<' in stakes
     assert 'class="mobile-awaiting-tag">결과 대기<' in stakes
     current = round_block('class="mobile-round is-current"')
-    assert "mobile-awaiting-tag" not in current
-    assert 'class="mobile-live-tag">예정<' in current
+    assert 'class="mobile-awaiting-tag">결과 대기<' in current
     assert "예측 보는 법" in page.text
     assert "data-mobile-chrome" in page.text
     assert "data-chrome-filters" in page.text

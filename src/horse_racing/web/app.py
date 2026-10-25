@@ -38,10 +38,12 @@ from starlette.middleware.gzip import GZipMiddleware
 
 from horse_racing.web.crawler_policy import scanner_probe_reason
 from horse_racing.web.dashboard import (
+    RACE_START_FOCUS_GRACE_MS,
     CalendarIndex,
     calendar_month_options,
     load_calendar_index,
     load_dashboard,
+    load_race_follow_schedule,
 )
 from horse_racing.web.database import get_web_session_factory
 from horse_racing.web.distance_benchmarks import BENCHMARK_BANDS
@@ -54,6 +56,7 @@ from horse_racing.web.entities import (
     load_entity_official_id,
 )
 from horse_racing.web.feedback import create_feedback_router
+from horse_racing.web.formatting import now_seoul_ms, today_seoul
 from horse_racing.web.horse_directory import GRADE_LABELS as HORSE_GRADE_LABELS
 from horse_racing.web.horse_directory import ORIGIN_LABELS
 from horse_racing.web.insights import load_forecast_page
@@ -982,6 +985,26 @@ def create_app(
             request=request,
             name="mobile/home.html" if mobile_view else "dashboard.html",
             context={"active_nav": "races", "dashboard": data},
+        )
+
+    @app.get("/api/race-follow", include_in_schema=False)
+    def race_follow_schedule(
+        race_date: Annotated[date, Query(alias="date")],
+        meet: Annotated[int | None, Query(ge=1, le=4)] = None,
+    ) -> JSONResponse:
+        today = today_seoul()
+
+        def load():
+            with session_factory() as session:
+                return load_race_follow_schedule(session, race_date, meet)
+
+        # Only the current day is live. Shared short cache bounds polling DB work.
+        rows = cached(("race-follow", race_date, meet), load, ttl=10.0) if race_date == today else []
+        return JSONResponse(
+            {"date": race_date.isoformat(), "today": today.isoformat(),
+             "serverNow": now_seoul_ms(), "graceMs": RACE_START_FOCUS_GRACE_MS,
+             "races": rows},
+            headers={"Cache-Control": "no-store"},
         )
 
     @app.get("/api/calendar", include_in_schema=False)

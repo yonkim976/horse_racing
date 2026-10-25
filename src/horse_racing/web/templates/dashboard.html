@@ -3,6 +3,10 @@
 
 {% block title %}마필로그 | Mapilog 경마 분석 및 예측{% endblock %}
 {% block meta_description %}한국 경마 일정과 결과를 확인하고 출전마 기록과 예측 확률을 분석하는 마필로그 Mapilog{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/race-follow.css') }}?v=1">
+<script src="{{ url_for('static', path='/js/race-follow.js') }}?v=3" defer></script>
+{% endblock %}
 
 {% block content %}
 <section class="page-intro compact-intro">
@@ -13,6 +17,7 @@
 </section>
 
 {% with calendar=dashboard %}{% include "_race_calendar.html" %}{% endwith %}
+{% include "_race_follow.html" %}
 
 <section class="board-layout race-board">
   <article class="panel schedule-panel" data-dashboard-schedule aria-label="경주 일정">
@@ -66,7 +71,7 @@
                     </div>
                     <span>{{ race.distance }}</span>
                   </td>
-                  <td class="numeric">{{ race.start_time }}</td>
+                  <td class="numeric" data-race-follow-clock>{{ race.start_time }}</td>
                   <td>{{ race.condition_label }}</td>
                   <td class="numeric">{{ race.entry_count }}두</td>
                   <td>

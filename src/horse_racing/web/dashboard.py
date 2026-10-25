@@ -44,8 +44,8 @@ from horse_racing.web.insights import (
 )
 from horse_racing.web.race_scope import active_race_clause
 
-RACE_START_FOCUS_GRACE_MS = 5 * 60 * 1000
-_RESULT_GRACE_MS = 10 * 60 * 1000
+RACE_START_FOCUS_GRACE_MS = 60 * 1000
+_RESULT_GRACE_MS = RACE_START_FOCUS_GRACE_MS
 
 
 @dataclass(frozen=True, slots=True)
@@ -241,6 +241,7 @@ class DashboardData:
     completed_count: int
     scheduled_count: int
     meet_count: int
+    race_follow: dict
 
 
 def load_calendar_index(session: Session) -> CalendarIndex:
@@ -427,6 +428,16 @@ def load_dashboard(
         completed_count=completed_count,
         scheduled_count=scheduled_count,
         meet_count=meet_count,
+        race_follow={
+            "date": selected_date.isoformat() if selected_date else None,
+            "today": today_seoul().isoformat(),
+            "serverNow": now_seoul_ms(),
+            "graceMs": RACE_START_FOCUS_GRACE_MS,
+            "races": [
+                {"id": row.id, "start": row.scheduled_at_ms, "status": row.status}
+                for row in _sort_races_by_start(race_rows)
+            ],
+        },
     )
 
 
@@ -576,7 +587,7 @@ def _current_race_index(rows: list[RaceRow], now_ms: int) -> int | None:
     timed = [
         (index, row.scheduled_at_ms)
         for index, row in enumerate(rows)
-        if row.scheduled_at_ms is not None
+        if row.scheduled_at_ms is not None and row.status != "cancelled"
     ]
     if not timed:
         return None
@@ -610,12 +621,29 @@ def _order_mobile_races(
             is_current=row.id == current_id,
             awaiting_result=(
                 row.status == "scheduled"
-                and row.id != current_id
                 and row.scheduled_at_ms is not None
-                and row.scheduled_at_ms + _RESULT_GRACE_MS < now_ms
+                and row.scheduled_at_ms + _RESULT_GRACE_MS <= now_ms
             ),
         )
         for row in rotated
+    ]
+
+
+def load_race_follow_schedule(session: Session, day: date, meet: int | None) -> list[dict]:
+    """Small schedule-only read; no runner/result/forecast queries for the timer."""
+    statement = (
+        select(Race.id, Race.scheduled_at_ms, Race.status)
+        .join(Race.racecourse)
+        .where(active_race_clause(), Race.race_date_local == day)
+        .order_by(Race.scheduled_at_ms.asc().nulls_last(), Race.race_number,
+                  Racecourse.kra_meet_code, Race.id)
+        .limit(100)
+    )
+    if meet is not None:
+        statement = statement.where(Racecourse.kra_meet_code == meet)
+    return [
+        {"id": row.id, "start": row.scheduled_at_ms, "status": row.status}
+        for row in session.execute(statement)
     ]
 
 

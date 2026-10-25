@@ -1,0 +1,24 @@
+Mapilog home performance patch — 2026-10-03
+
+Scope
+- Cache the public race/trial date index in the web app's bounded TTL cache for 300 seconds. The cached value contains only shared date, status, and event flags; it is loaded with a short-lived database session and is not keyed by request, user, tenant, or database session identity.
+- Keep the initial home page's calendar payload to the selected month. The calendar requests another month from the bounded same-origin API only when the user moves there; the existing mobile home interactions and closest-date default remain unchanged.
+- Rank each horse's historical race rows by local race date and race ID, then return at most five rows per horse. For trial form, filter rows that cannot produce a displayed token before ranking, so each horse still gets up to five visible results.
+- Preserve race-form output for disqualified and 90-or-higher finish codes as a dash, and exclude null finish positions. Trial output follows the existing formatter's skipped judgements and valid mark/position rules. SQL removes the same Python strip whitespace set before filtering so padded codes do not consume a top-five rank.
+
+Safety and database boundary
+- No schema, index, migration, database write, model, or prediction change.
+- The SQL uses SQLAlchemy expressions and bound values; request values do not become SQL text.
+- Validation uses a seeded local SQLite fixture only. No Supabase connection or live database load test was run.
+- The calendar date cache is process-local, bounded to one 4 MiB entry, single-flight on a cache miss, and expires after five minutes. Each worker can perform one cold load after start or expiry.
+
+Verification
+- The dashboard performance test compares new recent-form results with the prior ordered Python implementation, including scratched/late 90+ rows, disqualification, null finishes, and skipped trial judgements. It records optimized result batches and checks that no horse contributes more than five rows.
+- A calendar helper check verifies selected-month filtering and preserves the existing descending date order.
+- The app-level integration check renders desktop and mobile home pages, verifies the initial month payload and bounded month API response, rejects invalid/repeated month parameters, and confirms the shared calendar index loader runs once across the home/API requests.
+- Manual browser verification confirmed that desktop previous-month navigation loads dates and reopening the calendar returns to the selected month; the 390 px mobile view retains today's/weekend dates, race-time order, and scheduled state.
+
+References
+- PostgreSQL window functions: https://www.postgresql.org/docs/current/functions-window.html
+- Supabase query optimization: https://supabase.com/docs/guides/database/query-optimization
+- Supabase breaking changes were checked at https://supabase.com/changelog?types=breaking-change; no schema or extension change is part of this patch.
